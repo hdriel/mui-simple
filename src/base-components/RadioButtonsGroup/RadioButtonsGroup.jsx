@@ -1,12 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
+import { useRadioGroup } from "@mui/material/RadioGroup";
 
 import {
   RadioGroup,
   RadioControlled,
   FormHelperText,
 } from "./RadioButtonsGroup.styled";
+
+function MyFormControlLabel(props) {
+  // https://mui.com/material-ui/react-radio-button/
+  const radioGroup = useRadioGroup();
+  let checked = false;
+
+  if (radioGroup) checked = radioGroup.value === props.value;
+
+  return <RadioControlled checked={checked} {...props} />;
+}
+
 const RadioButtonsGroup = ({
   row,
   value: selectedValue,
@@ -22,6 +34,11 @@ const RadioButtonsGroup = ({
   ...props
 }) => {
   const theme = useTheme();
+  const radioGroup = useRadioGroup();
+  let checked = false;
+  if (radioGroup) {
+    checked = radioGroup.value === props.value;
+  }
 
   return (
     <>
@@ -34,7 +51,7 @@ const RadioButtonsGroup = ({
         {...props}
       >
         {data?.map(({ value, label, disabled, ...radioProps }, index) => (
-          <RadioControlled
+          <MyFormControlLabel
             theme={theme}
             disableRipple={disableRipple}
             key={radioProps?.value ?? index}
