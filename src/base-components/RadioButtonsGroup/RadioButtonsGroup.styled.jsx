@@ -44,6 +44,7 @@ export const Radio = styled(
     />
   )
 )``;
+
 export const RadioControlled = styled(
   ({
     checked,
@@ -63,28 +64,21 @@ export const RadioControlled = styled(
       label={label}
       sx={{
         userSelect: "none",
-        ...(checked && {
-          ".MuiFormControlLabel-label": {
-            color:
-              color ??
-              _.get(theme, `palette.${muiColor}.main`) ??
-              _.get(theme, `palette.primary.main`),
-          },
-        }),
       }}
-      control={
-        <Radio
-          checked={checked}
-          color={color}
-          muiColor={muiColor}
-          value={value}
-          {...props}
-        />
-      }
+      {...props}
     />
-  )
-  // {
-  //   shouldForwardProp: (prop) =>
-  //     !["textColor", "muiColor", "fontSize", "helperText"].includes(prop),
-  // }
-)``;
+  ),
+  {
+    shouldForwardProp: (prop) =>
+      !["textColor", "muiColor", "fontSize", "helperText"].includes(prop),
+  }
+)(({ theme, color, muiColor, checked }) => ({
+  ...(checked && {
+    ".MuiFormControlLabel-label": {
+      color:
+        color ??
+        _.get(theme, `palette.${muiColor}.main`) ??
+        _.get(theme, `palette.primary.main`),
+    },
+  }),
+}));
