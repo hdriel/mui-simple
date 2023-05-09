@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
+import CircleIcon from "@mui/icons-material/Circle";
+import CircleTwoToneIcon from "@mui/icons-material/CircleTwoTone";
 
 import RadioButtonsGroup from "../RadioButtonsGroup";
 
@@ -34,6 +36,46 @@ const data = [
 ];
 
 export const Default = () => <RadioButtonsGroup />;
+
+export const IgnoreLabelColor = () => {
+  const [value, setValue] = useState(null);
+
+  return (
+    <RadioButtonsGroup
+      ignoreLabelColor
+      data={data}
+      name="gender"
+      value={value}
+      onChange={(event) => {
+        onChangeAction(event.target.value);
+        setValue(event.target.value);
+      }}
+      defaultValue={data[1]?.value}
+      size={"medium"}
+    />
+  );
+};
+
+export const CustomIcons = () => {
+  const [value, setValue] = useState(null);
+
+  return (
+    <RadioButtonsGroup
+      ignoreLabelColor
+      data={data}
+      name="gender"
+      icon={<CircleTwoToneIcon />}
+      checkedIcon={<CircleIcon />}
+      value={value}
+      onChange={(event) => {
+        onChangeAction(event.target.value);
+        setValue(event.target.value);
+      }}
+      defaultValue={data[1]?.value}
+      size={"medium"}
+    />
+  );
+};
 
 export const GroupInRow = () => {
   const [value, setValue] = useState(null);

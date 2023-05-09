@@ -17,11 +17,14 @@ const RadioButtonsGroup = ({
   onChange,
   color,
   muiColor,
+  icon,
+  checkedIcon,
   name,
   helperText,
   disableRipple,
   size,
   data,
+  ignoreLabelColor,
   ...props
 }) => {
   const theme = useTheme();
@@ -45,6 +48,7 @@ const RadioButtonsGroup = ({
             value={value}
             label={label}
             disabled={disabled}
+            ignoreLabelColor={ignoreLabelColor}
             {...radioProps}
             checked={selectedValue === value}
             control={
@@ -54,6 +58,8 @@ const RadioButtonsGroup = ({
                 color={color}
                 muiColor={muiColor}
                 disableRipple={disableRipple}
+                icon={icon}
+                checkedIcon={checkedIcon}
               />
             }
           />
@@ -69,7 +75,10 @@ RadioButtonsGroup.propTypes = {
   size: PropTypes.oneOf(["small", "medium"]),
   name: PropTypes.string,
   helperText: PropTypes.string,
+  ignoreLabelColor: PropTypes.bool,
   value: PropTypes.string,
+  icon: PropTypes.node,
+  checkedIcon: PropTypes.node,
   defaultValue: PropTypes.string,
   disableRipple: PropTypes.bool,
   data: PropTypes.arrayOf(
@@ -86,6 +95,9 @@ RadioButtonsGroup.defaultProps = {
   size: undefined,
   name: undefined,
   helperText: undefined,
+  ignoreLabelColor: false,
+  icon: undefined,
+  checkedIcon: undefined,
   value: undefined,
   defaultValue: undefined,
   disableRipple: true,

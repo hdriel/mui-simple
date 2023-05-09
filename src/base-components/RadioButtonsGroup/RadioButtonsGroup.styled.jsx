@@ -70,15 +70,22 @@ export const RadioControlled = styled(
   ),
   {
     shouldForwardProp: (prop) =>
-      !["textColor", "muiColor", "fontSize", "helperText"].includes(prop),
+      ![
+        "textColor",
+        "muiColor",
+        "fontSize",
+        "helperText",
+        "ignoreLabelColor",
+      ].includes(prop),
   }
-)(({ theme, color, muiColor, checked }) => ({
-  ...(checked && {
-    ".MuiFormControlLabel-label": {
-      color:
-        color ??
-        _.get(theme, `palette.${muiColor}.main`) ??
-        _.get(theme, `palette.primary.main`),
-    },
-  }),
+)(({ theme, color, muiColor, checked, ignoreLabelColor }) => ({
+  ...(!ignoreLabelColor &&
+    checked && {
+      ".MuiFormControlLabel-label": {
+        color:
+          color ??
+          _.get(theme, `palette.${muiColor}.main`) ??
+          _.get(theme, `palette.primary.main`),
+      },
+    }),
 }));
