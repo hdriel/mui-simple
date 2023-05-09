@@ -32,11 +32,11 @@ export const Switch = styled(
         ...props.sx,
       }}
     />
-  ),
-  {
-    shouldForwardProp: (prop) =>
-      !["textColor", "muiColor", "fontSize", "helperText"].includes(prop),
-  }
+  )
+  // {
+  //   shouldForwardProp: (prop) =>
+  //     !["textColor", "muiColor", "fontSize", "helperText"].includes(prop),
+  // }
 )`
   ${(props) => customColor(props)}
   &.MuiSwitch-root {
@@ -66,9 +66,9 @@ export const SwitchControlled = styled(
       control={<Switch color={color} {...props} />}
       label={label}
     />
-  ),
-  {
-    shouldForwardProp: (prop) =>
-      !["textColor", "muiColor", "fontSize", "helperText"].includes(prop),
-  }
+  )
+  // {
+  //   shouldForwardProp: (prop) =>
+  //     !["textColor", "muiColor", "fontSize", "helperText"].includes(prop),
+  // }
 )``;

@@ -27,6 +27,8 @@ export default {
   component: Switch,
 };
 
+const onChangeAction = action("onChange");
+
 export const Default = () => <Switch />;
 
 const Template = (args) => <Switch {...args} />;
@@ -67,7 +69,7 @@ export const Labeled = () => {
       checked={checked}
       onChange={(event) => {
         setChecked(event.target.checked);
-        action(event);
+        onChangeAction(event);
       }}
       label="include condition"
     />
@@ -81,7 +83,7 @@ export const NoLabeled = () => {
       checked={checked}
       onChange={(event) => {
         setChecked(event.target.checked);
-        action(event);
+        onChangeAction(event);
       }}
     />
   );
@@ -93,7 +95,7 @@ export const Checked = () => {
       checked={checked}
       onChange={(event) => {
         setChecked(event.target.checked);
-        action(event);
+        onChangeAction(event);
       }}
       label="test"
     />
@@ -107,7 +109,7 @@ export const Disabled = () => {
         checked={checked}
         onChange={(event) => {
           setChecked(event.target.checked);
-          action(event);
+          onChangeAction(event);
         }}
         label="disabled checkbox"
         disabled
@@ -116,7 +118,7 @@ export const Disabled = () => {
         checked={checked}
         onChange={(event) => {
           setChecked(event.target.checked);
-          action(event);
+          onChangeAction(event);
         }}
         disabled
       />
@@ -132,7 +134,7 @@ export const Required = () => {
       checked={checked}
       onChange={(event) => {
         setChecked(event.target.checked);
-        action(event);
+        onChangeAction(event);
       }}
       required
       label="required checkbox test"
@@ -150,13 +152,12 @@ export const Colored = () => {
       checked={checked}
       onChange={(event) => {
         setChecked(event.target.checked);
-        action(event);
+        onChangeAction(event);
       }}
       label="some colored checkbox"
       textColor={"#1062dc"}
       color={"#dc10c8"}
       defaultChecked
-      fontSize={"40px"}
     />
   );
 };
@@ -169,7 +170,7 @@ export const ThemeColor = () => {
       checked={checked}
       onChange={(event) => {
         setChecked(event.target.checked);
-        action(event);
+        onChangeAction(event);
       }}
       muiColor="secondary"
       label="some colored checkbox"
@@ -187,7 +188,7 @@ export const LabelPlacement = () => {
         checked={checked}
         onChange={(event) => {
           setChecked(event.target.checked);
-          action(event);
+          onChangeAction(event);
         }}
         labelPlacement="top"
         label="top label checkbox"
@@ -197,7 +198,7 @@ export const LabelPlacement = () => {
         checked={checked}
         onChange={(event) => {
           setChecked(event.target.checked);
-          action(event);
+          onChangeAction(event);
         }}
         labelPlacement="start"
         label="start label checkbox"
@@ -207,7 +208,7 @@ export const LabelPlacement = () => {
         checked={checked}
         onChange={(event) => {
           setChecked(event.target.checked);
-          action(event);
+          onChangeAction(event);
         }}
         labelPlacement="bottom"
         label="bottom label checkbox"
@@ -217,7 +218,7 @@ export const LabelPlacement = () => {
         checked={checked}
         onChange={(event) => {
           setChecked(event.target.checked);
-          action(event);
+          onChangeAction(event);
         }}
         labelPlacement="end"
         label="end label checkbox"
@@ -235,7 +236,7 @@ export const Sizes = () => {
         checked={checked}
         onChange={(event) => {
           setChecked(event.target.checked);
-          action(event);
+          onChangeAction(event);
         }}
         label="medium checkbox"
         size={"medium"}
@@ -244,7 +245,7 @@ export const Sizes = () => {
         checked={checked}
         onChange={(event) => {
           setChecked(event.target.checked);
-          action(event);
+          onChangeAction(event);
         }}
         label="small checkbox"
         size={"small"}
@@ -253,10 +254,10 @@ export const Sizes = () => {
         checked={checked}
         onChange={(event) => {
           setChecked(event.target.checked);
-          action(event);
+          onChangeAction(event);
         }}
         label="custom size checkbox"
-        fontSize={"40px"}
+        fontSize={"25px"}
         scale={2}
       />
     </>

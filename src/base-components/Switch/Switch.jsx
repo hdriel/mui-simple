@@ -24,6 +24,7 @@ const Switch = ({
   labelPlacement,
   helperText,
   error,
+  fontSize,
   ...props
 }) => {
   return (
@@ -31,10 +32,11 @@ const Switch = ({
       {label ? (
         <SwitchControlled
           label={label}
+          fontSize={fontSize}
+          textColor={textColor}
           name={name}
           size={size}
           color={color}
-          textColor={textColor}
           muiColor={muiColor}
           scale={scale}
           required={required}
@@ -51,7 +53,6 @@ const Switch = ({
           name={name}
           size={size}
           color={color}
-          textColor={textColor}
           muiColor={muiColor}
           scale={scale}
           defaultChecked={defaultChecked}
