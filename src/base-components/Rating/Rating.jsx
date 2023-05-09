@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Box as MuiBox, Rating as MuiRating } from "@mui/material";
+import React from "react";
+import { Box as MuiBox } from "@mui/material";
 import {
   Star as StarIcon,
   StarHalf as StarHalfIcon,
   StarBorder as StarBorderIcon,
 } from "@mui/icons-material";
 import PropTypes from "prop-types";
-import { useTheme, styled } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import ReactStars from "react-rating-stars-component";
 
 // RTL - not working well with mui

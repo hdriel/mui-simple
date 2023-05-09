@@ -1,4 +1,4 @@
-import React, { isValidElement, useEffect } from "react";
+import React, { isValidElement } from "react";
 import PropTypes from "prop-types";
 import { isForwardRef } from "react-is";
 import { Tooltip as MuiTooltip, Zoom } from "@mui/material";

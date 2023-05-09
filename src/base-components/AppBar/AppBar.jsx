@@ -10,7 +10,7 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 
-export default function MenuAppBar({}) {
+export default function MenuAppBar() {
   const theme = localStorage.getItem("theme");
   const [anchorEl, setAnchorEl] = React.useState(null);
 
