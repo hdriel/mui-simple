@@ -82,7 +82,7 @@ export const GroupInRow = () => {
 
   return (
     <RadioButtonsGroup
-      row
+      direction="row"
       data={data}
       name="gender"
       value={value}
@@ -101,7 +101,7 @@ export const GroupInColumn = () => {
 
   return (
     <RadioButtonsGroup
-      row={false}
+      direction="column"
       data={data}
       name="gender"
       value={value}

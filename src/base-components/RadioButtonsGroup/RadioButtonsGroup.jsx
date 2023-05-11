@@ -11,7 +11,7 @@ import {
 } from "./RadioButtonsGroup.styled";
 
 const RadioButtonsGroup = ({
-  row,
+  direction,
   value: selectedValue,
   defaultValue,
   onChange,
@@ -32,7 +32,7 @@ const RadioButtonsGroup = ({
   return (
     <>
       <RadioGroup
-        row={row}
+        row={direction}
         name={name}
         defaultValue={defaultValue}
         onChange={onChange}
@@ -72,6 +72,7 @@ const RadioButtonsGroup = ({
 
 RadioButtonsGroup.propTypes = {
   row: PropTypes.bool,
+  direction: PropTypes.oneOf(["row", "column"]),
   size: PropTypes.oneOf(["small", "medium"]),
   name: PropTypes.string,
   helperText: PropTypes.string,
@@ -91,7 +92,7 @@ RadioButtonsGroup.propTypes = {
 };
 
 RadioButtonsGroup.defaultProps = {
-  row: undefined,
+  direction: "column",
   size: undefined,
   name: undefined,
   helperText: undefined,
