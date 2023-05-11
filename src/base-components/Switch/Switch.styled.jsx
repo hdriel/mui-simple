@@ -1,48 +1,67 @@
 import React from "react";
+import _ from "lodash";
+import { styled, css } from "@mui/material/styles";
 import {
   FormControlLabel,
   FormHelperText as MuiFormHelperText,
   Switch as MuiSwitch,
+  Stack as MuiStack,
+  Typography as MuiTypography,
 } from "@mui/material";
-import { styled, css } from "@mui/material/styles";
-
-function customColor(props) {
-  if (!props.color) return css``;
-  const opacity = props.theme.palette?.action?.hoverOpacity;
-  const color = props.color;
-
-  return css`
-    & .MuiSwitch-switchBase.Mui-checked {
-      color: ${color};
-      &:hover { background-color: alpha(${color}, ${opacity}) },
-    },
-  & .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
-    background-color: ${color};
-  },`;
-}
+import { SWITCH_STYLES } from "./Switch.consts";
+import {
+  customColor,
+  antSwitchStyle,
+  androidSwitchStyle,
+  iosSwitchStyle,
+} from "./Switch.styles";
 
 export const FormHelperText = MuiFormHelperText;
 export const Switch = styled(
-  ({ checked, scale, color, muiColor, ...props }) => (
+  ({ switchStyle, checked, scale, color, muiColor, ...props }) => (
     <MuiSwitch
       {...props}
       color={muiColor}
       checked={checked}
-      sx={{
-        ...props.sx,
-      }}
+      focusVisibleClassName={
+        switchStyle === SWITCH_STYLES.IOS ? ".Mui-focusVisible" : ""
+      }
+      sx={{ ...props.sx }}
     />
+  ),
+  {
+    shouldForwardProp: (prop) =>
+      ![
+        "textColor",
+        "muiColor",
+        "fontSize",
+        "helperText",
+        "switchStyle",
+      ].includes(prop),
+  }
+)`
+  ${(props) => customColor(props)}
+  ${(props) => antSwitchStyle(props)}
+  ${(props) => androidSwitchStyle(props)}
+  ${(props) => iosSwitchStyle(props)}
+  &.MuiSwitch-root {
+    scale: ${(props) => props.scale};
+  }
+`;
+
+export const SwitchOnOff = styled(
+  ({ onLabel = "on", offLabel = "off", ...props }) => (
+    <MuiStack direction="row" spacing={0} alignItems="center">
+      <MuiTypography>{offLabel}</MuiTypography>
+      <Switch {...props} />
+      <MuiTypography>{onLabel}</MuiTypography>
+    </MuiStack>
   ),
   {
     shouldForwardProp: (prop) =>
       !["textColor", "muiColor", "fontSize", "helperText"].includes(prop),
   }
-)`
-  ${(props) => customColor(props)}
-  &.MuiSwitch-root {
-    scale: ${(props) => props.scale};
-  }
-`;
+)``;
 
 export const SwitchControlled = styled(
   ({
@@ -51,6 +70,7 @@ export const SwitchControlled = styled(
     disabled,
     labelPlacement,
     color,
+    labelPadding,
     label = "",
     ...props
   }) => (
@@ -61,14 +81,18 @@ export const SwitchControlled = styled(
       sx={{
         m: 0,
         userSelect: "none",
-        ".MuiFormControlLabel-label": { color, fontSize },
+        ".MuiFormControlLabel-label": {
+          color,
+          fontSize,
+          ...(labelPadding !== undefined && { paddingLeft: labelPadding }),
+        },
       }}
-      control={<Switch color={color} {...props} />}
       label={label}
+      {...props}
     />
   ),
   {
     shouldForwardProp: (prop) =>
-      !["textColor", "muiColor", "fontSize", "helperText"].includes(prop),
+      !["textColor", "muiColor", "fontSize"].includes(prop),
   }
 )``;
