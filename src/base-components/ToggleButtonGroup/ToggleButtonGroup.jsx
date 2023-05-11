@@ -4,7 +4,7 @@ import { ToggleButton as MuiToggleButton } from "@mui/material";
 import {
   FormHelperText,
   ToggleButton,
-  ToggleButtonGroup,
+  ToggleButtonGroup as MuiToggleButtonGroup,
 } from "./ToggleButtonGroup.styled";
 
 const ToggleButtonGroup = ({
@@ -26,7 +26,7 @@ const ToggleButtonGroup = ({
 }) => {
   return (
     <>
-      <ToggleButtonGroup
+      <MuiToggleButtonGroup
         row={direction}
         name={name}
         defaultValue={defaultValue}
@@ -45,7 +45,7 @@ const ToggleButtonGroup = ({
             checkedIcon={checkedIcon}
           />
         ))}
-      </ToggleButtonGroup>
+      </MuiToggleButtonGroup>
       {helperText && <FormHelperText>{helperText}</FormHelperText>}
     </>
   );

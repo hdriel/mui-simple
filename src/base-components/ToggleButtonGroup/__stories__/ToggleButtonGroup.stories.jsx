@@ -9,9 +9,13 @@ export default {
   component: ToggleButtonGroup,
 };
 
-const actions = {
-  onClick: action("onClick"),
-};
+const onChangeAction = action("onChange");
+const data = [
+  { label: "Female", value: "0" },
+  { label: "Male", value: "1" },
+  { label: "Other", value: "2" },
+  { label: "Other", value: "3", disabled: true },
+];
 
 export const Default = () => {
   return <ToggleButtonGroup {...actions} />;
