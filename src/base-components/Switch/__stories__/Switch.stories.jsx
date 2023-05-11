@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
 
 import Switch from "../Switch";
+import { SWITCH_STYLES } from "../Switch.consts";
+import { Stack } from "@mui/material";
 
 export default {
   title: "base-components/Switch",
@@ -144,6 +146,24 @@ export const Required = () => {
   );
 };
 
+export const OnOff = () => {
+  const [checked, setChecked] = useState(true);
+
+  return (
+    <Switch
+      checked={checked}
+      onChange={(event) => {
+        setChecked(event.target.checked);
+        action(event);
+      }}
+      label="test"
+      isOnOff
+      onLabel={"ON"}
+      offLabel={"OFF"}
+    />
+  );
+};
+
 export const Colored = () => {
   const [checked, setChecked] = useState(true);
 
@@ -261,5 +281,59 @@ export const Sizes = () => {
         scale={2}
       />
     </>
+  );
+};
+
+export const Styles = () => {
+  const [checked, setChecked] = useState(false);
+
+  return (
+    <Stack spacing={1}>
+      <Switch
+        checked={checked}
+        onChange={(event) => {
+          setChecked(event.target.checked);
+          action(event);
+        }}
+        label="ant style"
+        switchStyle={SWITCH_STYLES.ANT}
+      />
+      <Switch
+        checked={checked}
+        onChange={(event) => {
+          setChecked(event.target.checked);
+          action(event);
+        }}
+        label="android 12 style"
+        switchStyle={SWITCH_STYLES.ANDROID12}
+      />
+      <Switch
+        checked={checked}
+        onChange={(event) => {
+          setChecked(event.target.checked);
+          action(event);
+        }}
+        label="ios style"
+        switchStyle={SWITCH_STYLES.IOS}
+      />
+      <Switch
+        checked={checked}
+        onChange={(event) => {
+          setChecked(event.target.checked);
+          action(event);
+        }}
+        label="mui style"
+        switchStyle={SWITCH_STYLES.MUI}
+      />
+      <Switch
+        checked={checked}
+        onChange={(event) => {
+          setChecked(event.target.checked);
+          action(event);
+        }}
+        label="default style"
+        switchStyle={SWITCH_STYLES.DEFAULT}
+      />
+    </Stack>
   );
 };
