@@ -4,11 +4,21 @@ import {
   ToggleButton as MuiToggleButton,
   ToggleButtonGroup as MuiToggleButtonGroup,
   Paper as MuiPaper,
+  alpha,
+  Divider as MuiDivider,
 } from "@mui/material";
 
-export const ToggleButtonGroups = styled(({ ...props }) => (
-  <MuiPaper elevation={0} {...props} />
+export const Divider = styled(({ ...props }) => (
+  <MuiDivider flexItem orientation="vertical" {...props} />
 ))`
+  margin: ${(props) => props.theme.spacing(1, 0.5)};
+`;
+
+export const ToggleButtonGroups = styled(
+  ({ ...props }) => <MuiPaper elevation={0} {...props} />,
+  { shouldForwardProp: (propName) => !["fullWidth"].includes(propName) }
+)`
+  width: ${(props) => (props.fullWidth ? "100%" : "max-content")};
   display: flex;
   border: ${({ theme }) => `1px solid ${theme.palette.divider}`};
   flex-wrap: wrap;
@@ -31,7 +41,16 @@ export const ToggleButtonGroups = styled(({ ...props }) => (
 export const ToggleButtonGroup = styled(
   ({ ...props }) => <MuiToggleButtonGroup {...props} />,
   { shouldForwardProp: (propName) => !["customColor"].includes(propName) }
-)``; // customColor
+)`
+  & .Mui-selected,
+  & .MuiTouchRipple-root {
+    color: ${(props) => props.customColor};
+  }
+  & .Mui-selected {
+    background-color: ${(props) =>
+      props.customColor && alpha(props.customColor, 0.1)};
+  }
+`;
 
 export const ToggleButton = styled(
   ({ value, disabled, disableRipple, onChange, ...props }) => (

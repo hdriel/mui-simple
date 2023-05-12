@@ -73,7 +73,7 @@ const RadioButtonsGroup = ({
 RadioButtonsGroup.propTypes = {
   row: PropTypes.bool,
   direction: PropTypes.oneOf(["row", "column"]),
-  size: PropTypes.oneOf(["small", "medium"]),
+  size: PropTypes.oneOf(["small", "medium", "large"]),
   name: PropTypes.string,
   helperText: PropTypes.string,
   ignoreLabelColor: PropTypes.bool,
