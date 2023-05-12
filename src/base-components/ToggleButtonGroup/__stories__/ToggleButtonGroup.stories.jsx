@@ -241,6 +241,7 @@ export const Separate = () => {
           onChangeAction(newValue);
           setValue(newValue);
         }}
+        exclusive
         data={data1}
       />
       <ToggleButtonGroup
