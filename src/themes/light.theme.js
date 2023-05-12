@@ -1,7 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 
 export default createTheme({
-  direction: "rtl",
   palette: {
     primary: {
       main: "#00F100",

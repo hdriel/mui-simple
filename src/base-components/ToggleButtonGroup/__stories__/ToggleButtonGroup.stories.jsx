@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
 
 import ToggleButtonGroup from "../ToggleButtonGroup";
@@ -18,37 +18,102 @@ const data = [
 ];
 
 export const Default = () => {
-  return <ToggleButtonGroup {...actions} />;
+  return <ToggleButtonGroup onChange={onChangeAction} />;
 };
 
 export const Icon = () => {
-  return <ToggleButtonGroup {...actions}>Start Icon</ToggleButtonGroup>;
+  const [value, setValue] = useState(null);
+
+  return (
+    <ToggleButtonGroup
+      onChange={(event) => {
+        onChangeAction(event.target.value);
+        setValue(event.target.value);
+      }}
+    />
+  );
 };
 
 export const Text = () => {
-  return <ToggleButtonGroup {...actions}>Start Icon</ToggleButtonGroup>;
+  const [value, setValue] = useState(null);
+  return (
+    <ToggleButtonGroup
+      onChange={(event) => {
+        onChangeAction(event.target.value);
+        setValue(event.target.value);
+      }}
+    />
+  );
 };
 
 export const Menu = () => {
-  return <ToggleButtonGroup {...actions}>Start Icon</ToggleButtonGroup>;
+  const [value, setValue] = useState(null);
+  return (
+    <ToggleButtonGroup
+      onChange={(event) => {
+        onChangeAction(event.target.value);
+        setValue(event.target.value);
+      }}
+    />
+  );
 };
 
 export const Disabled = () => {
-  return <ToggleButtonGroup {...actions}>Start Icon</ToggleButtonGroup>;
+  const [value, setValue] = useState(null);
+  return (
+    <ToggleButtonGroup
+      onChange={(event) => {
+        onChangeAction(event.target.value);
+        setValue(event.target.value);
+      }}
+    />
+  );
 };
 
 export const Orientation = () => {
-  return <ToggleButtonGroup {...actions}>Start Icon</ToggleButtonGroup>;
+  const [value, setValue] = useState(null);
+  return (
+    <ToggleButtonGroup
+      onChange={(event) => {
+        onChangeAction(event.target.value);
+        setValue(event.target.value);
+      }}
+    />
+  );
 };
 
 export const MultipleSelection = () => {
-  return <ToggleButtonGroup {...actions}>Start Icon</ToggleButtonGroup>;
+  const [value, setValue] = useState(null);
+  return (
+    <ToggleButtonGroup
+      onChange={(event) => {
+        onChangeAction(event.target.value);
+        setValue(event.target.value);
+      }}
+    />
+  );
 };
 
 export const ExclusiveSelection = () => {
-  return <ToggleButtonGroup {...actions}>Start Icon</ToggleButtonGroup>;
+  const [value, setValue] = useState(null);
+  return (
+    <ToggleButtonGroup
+      onChange={(event) => {
+        onChangeAction(event.target.value);
+        setValue(event.target.value);
+      }}
+    />
+  );
 };
 
 export const Separate = () => {
-  return <ToggleButtonGroup {...actions}>Start Icon</ToggleButtonGroup>;
+  const [value, setValue] = useState(null);
+  return (
+    <ToggleButtonGroup
+      onChange={(event) => {
+        onChangeAction(event.target.value);
+        setValue(event.target.value);
+      }}
+    />
+  );
 };

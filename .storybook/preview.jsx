@@ -18,10 +18,10 @@ const preview = {
   },
   decorators: [
     (Story, context) => {
-      const { theme } = context.globals;
+      const { theme, direction } = context.globals;
 
       return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme} dir={direction}>
           <Story />
         </ThemeProvider>
       );
@@ -36,6 +36,16 @@ const preview = {
         icon: "paintbrush",
         items: [LightTheme.themeName, DarkTheme.themeName],
         title: "Theme",
+      },
+    },
+    direction: {
+      name: "Direction",
+      description: "direction theme",
+      defaultValue: "ltr",
+      toolbar: {
+        icon: "transfer", // https://storybook.js.org/docs/react/faq#what-icons-are-available-for-my-toolbar-or-my-addon
+        items: ["ltr", "rtl"],
+        title: "Direction",
       },
     },
   },

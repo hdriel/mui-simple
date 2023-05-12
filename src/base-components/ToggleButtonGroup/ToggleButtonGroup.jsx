@@ -46,7 +46,6 @@ const ToggleButtonGroup = ({
           />
         ))}
       </MuiToggleButtonGroup>
-      {helperText && <FormHelperText>{helperText}</FormHelperText>}
     </>
   );
 };
