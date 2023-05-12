@@ -14,6 +14,7 @@ const ToggleButtonGroup = ({
   disableRipple,
   enforceValueSet,
   data,
+  color,
   muiColor,
   ...props
 }) => {
@@ -43,6 +44,7 @@ const ToggleButtonGroup = ({
   return (
     <MuiToggleButtonGroup
       color={muiColor}
+      customColor={color}
       orientation={orientation}
       value={exclusive ? selectedValue : commonsValues}
       exclusive={exclusive}
@@ -80,6 +82,7 @@ ToggleButtonGroup.propTypes = {
   disableRipple: PropTypes.bool,
   onChange: PropTypes.func,
   muiColor: PropTypes.string,
+  color: PropTypes.string,
   enforceValueSet: PropTypes.bool,
   data: PropTypes.arrayOf(
     PropTypes.shape({
@@ -92,6 +95,7 @@ ToggleButtonGroup.propTypes = {
 
 ToggleButtonGroup.defaultProps = {
   muiColor: undefined,
+  color: undefined,
   orientation: undefined,
   size: undefined,
   exclusive: undefined,

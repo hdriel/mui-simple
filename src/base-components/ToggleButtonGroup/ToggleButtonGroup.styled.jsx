@@ -28,7 +28,10 @@ export const ToggleButtonGroups = styled(({ ...props }) => (
   }
 `;
 
-export const ToggleButtonGroup = styled(MuiToggleButtonGroup)``;
+export const ToggleButtonGroup = styled(
+  ({ ...props }) => <MuiToggleButtonGroup {...props} />,
+  { shouldForwardProp: (propName) => !["customColor"].includes(propName) }
+)``; // customColor
 
 export const ToggleButton = styled(
   ({ value, disabled, disableRipple, onChange, ...props }) => (

@@ -87,24 +87,25 @@ export const Text = () => {
 };
 
 export const EnforceValueSet = () => {
-  const [value, setValue] = useState([]);
+  const [value1, setValue1] = useState([]);
+  const [value2, setValue2] = useState([]);
 
   return (
     <Stack direction={"row"} spacing={2}>
       <ToggleButtonGroup
-        value={value}
+        value={value1}
         onChange={(newValue) => {
           onChangeAction(newValue);
-          setValue(newValue);
+          setValue1(newValue);
         }}
         data={data1}
         enforceValueSet
       />
       <ToggleButtonGroup
-        value={value}
+        value={value2}
         onChange={(newValue) => {
           onChangeAction(newValue);
-          setValue(newValue);
+          setValue2(newValue);
         }}
         data={data3}
         exclusive
@@ -123,6 +124,39 @@ export const Menu = () => {
         onChangeAction(newValue);
         setValue(newValue);
       }}
+      data={data2}
+    />
+  );
+};
+
+export const Colored = () => {
+  const [value, setValue] = useState([data3[0].value]);
+
+  return (
+    <ToggleButtonGroup
+      value={value}
+      onChange={(newValue) => {
+        onChangeAction(newValue);
+        setValue(newValue);
+      }}
+      color={"#10da00"}
+      data={data3}
+    />
+  );
+};
+
+export const Themed = () => {
+  const [value, setValue] = useState([data3[0].value]);
+
+  return (
+    <ToggleButtonGroup
+      value={value}
+      onChange={(newValue) => {
+        onChangeAction(newValue);
+        setValue(newValue);
+      }}
+      muiColor="secondary"
+      data={data3}
     />
   );
 };
@@ -241,6 +275,54 @@ export const Ripple = () => {
           setValue(newValue);
         }}
         data={[data2[0]]}
+      />
+    </Stack>
+  );
+};
+
+export const Size = () => {
+  const [value, setValue] = useState(null);
+
+  return (
+    <Stack direction="column" spacing={1}>
+      <ToggleButtonGroup
+        value={value}
+        onChange={(newValue) => {
+          onChangeAction(newValue);
+          setValue(newValue);
+        }}
+        disableRipple
+        size={"small"}
+        data={data1}
+      />
+      <ToggleButtonGroup
+        value={value}
+        onChange={(newValue) => {
+          onChangeAction(newValue);
+          setValue(newValue);
+        }}
+        disableRipple
+        size={"medium"}
+        data={data1}
+      />
+      <ToggleButtonGroup
+        value={value}
+        onChange={(newValue) => {
+          onChangeAction(newValue);
+          setValue(newValue);
+        }}
+        disableRipple
+        size={"large"}
+        data={data1}
+      />
+      <ToggleButtonGroup
+        value={value}
+        onChange={(newValue) => {
+          onChangeAction(newValue);
+          setValue(newValue);
+        }}
+        disableRipple
+        data={data1}
       />
     </Stack>
   );
