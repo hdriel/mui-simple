@@ -327,3 +327,53 @@ export const Size = () => {
     </Stack>
   );
 };
+
+export const MultiValue = () => {
+  const [value11, setValue11] = useState(null);
+  const [value12, setValue12] = useState(null);
+  const [value21, setValue21] = useState([]);
+  const [value22, setValue22] = useState([]);
+
+  return (
+    <Stack direction="column" spacing={1}>
+      <ToggleButtonGroup
+        value={value11}
+        onChange={(newValue) => {
+          onChangeAction(newValue);
+          setValue11(newValue);
+        }}
+        size={"small"}
+        data={data1}
+      />
+      <ToggleButtonGroup
+        value={value12}
+        onChange={(newValue) => {
+          onChangeAction(newValue);
+          setValue12(newValue);
+        }}
+        exclusive
+        size={"small"}
+        data={data1}
+      />
+      <ToggleButtonGroup
+        value={value21}
+        onChange={(newValue) => {
+          onChangeAction(newValue);
+          setValue21(newValue);
+        }}
+        size={"small"}
+        data={data1}
+      />
+      <ToggleButtonGroup
+        value={value22}
+        onChange={(newValue) => {
+          onChangeAction(newValue);
+          setValue22(newValue);
+        }}
+        exclusive
+        size={"small"}
+        data={data1}
+      />
+    </Stack>
+  );
+};
