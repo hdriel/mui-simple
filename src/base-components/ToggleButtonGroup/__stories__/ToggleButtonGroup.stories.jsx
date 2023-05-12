@@ -58,7 +58,7 @@ export const Default = () => {
 
 export const Icon = () => {
   const [value, setValue] = useState([]);
-  console.log("value", value);
+
   return (
     <ToggleButtonGroup
       value={value}
