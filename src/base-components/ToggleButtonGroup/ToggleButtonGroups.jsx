@@ -16,9 +16,10 @@ const ToggleButtonGroups = ({
     .concat(children)
     .filter((child) => child.type.name === ToggleButtonGroup.name)
     .map((child, index, arr) => [
-      React.cloneElement(child, { disableRipple }),
-      index !== arr.length - 1 ? <Divider /> : null,
+      React.cloneElement(child, { key: `TB${index}`, disableRipple }),
+      index !== arr.length - 1 ? <Divider key={`D${index}`} /> : null,
     ])
+    .flat()
     .filter(Boolean);
 
   return (

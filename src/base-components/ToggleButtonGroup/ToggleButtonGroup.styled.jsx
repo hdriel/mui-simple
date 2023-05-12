@@ -14,9 +14,10 @@ export const Divider = styled(({ ...props }) => (
   margin: ${(props) => props.theme.spacing(1, 0.5)};
 `;
 
-export const ToggleButtonGroups = styled(({ ...props }) => (
-  <MuiPaper elevation={0} {...props} />
-))`
+export const ToggleButtonGroups = styled(
+  ({ ...props }) => <MuiPaper elevation={0} {...props} />,
+  { shouldForwardProp: (propName) => !["fullWidth"].includes(propName) }
+)`
   width: ${(props) => (props.fullWidth ? "100%" : "max-content")};
   display: flex;
   border: ${({ theme }) => `1px solid ${theme.palette.divider}`};

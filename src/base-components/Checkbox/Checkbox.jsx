@@ -43,7 +43,7 @@ const Checkbox = ({
 
 Checkbox.propTypes = {
   label: PropTypes.string,
-  size: PropTypes.oneOf(["small", "medium"]),
+  size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.string,
   muiColor: PropTypes.string,
   checked: PropTypes.bool,

@@ -2,7 +2,13 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 
 import Button from "../Button";
-import { Delete as DeleteIcon, Send as SendIcon } from "@mui/icons-material";
+import ButtonGroup from "../ButtonGroup";
+import {
+  Delete as DeleteIcon,
+  Send as SendIcon,
+  Fingerprint as FingerprintIcon,
+} from "@mui/icons-material";
+import { Stack, Typography } from "@mui/material";
 
 export default {
   title: "base-components/Button",
@@ -17,39 +23,291 @@ export const Default = () => {
   return <Button {...actions} />;
 };
 
-export const StartIcon = () => {
+export const Icons = () => {
   return (
-    <Button {...actions} startIcon={<SendIcon />}>
-      Start Icon
-    </Button>
+    <Stack direction="row" spacing={3}>
+      <Button {...actions}>Label only</Button>;
+      <Button {...actions} startIcon={<SendIcon />}>
+        Start Icon
+      </Button>
+      <Button {...actions} muiColor="error" endIcon={<DeleteIcon />}>
+        End Icon
+      </Button>
+      <Button
+        {...actions}
+        color={"#D05010"}
+        iconOnlyCmp={<FingerprintIcon />}
+      />
+    </Stack>
   );
 };
 
-export const EndIcon = () => {
+export const variants = () => {
   return (
-    <Button {...actions} endIcon={<DeleteIcon />}>
-      End Icon
-    </Button>
+    <Stack direction="row" spacing={3}>
+      <Button {...actions} variant="text">
+        text
+      </Button>
+      <Button {...actions} variant="outlined">
+        outlined
+      </Button>
+      <Button {...actions} variant="contained">
+        contained
+      </Button>
+      <Button {...actions}>default</Button>
+    </Stack>
   );
 };
 
-export const Outlined = () => {
+export const DisableRipple = () => {
   return (
-    <Button {...actions} variant="outlined">
-      {" "}
-      outlined{" "}
-    </Button>
+    <Stack direction="column" spacing={3}>
+      <Stack direction="row" spacing={3}>
+        <Button {...actions} color={"#D05010"} disableRipple color="primary">
+          Disable Ripple
+        </Button>
+        <Button
+          {...actions}
+          color={"#D05010"}
+          disableRipple
+          iconOnlyCmp={<FingerprintIcon />}
+        />
+      </Stack>
+      <Stack direction="row" spacing={3}>
+        <Button {...actions} color="secondary">
+          Ripple
+        </Button>
+        <Button
+          {...actions}
+          color={"#D05010"}
+          iconOnlyCmp={<FingerprintIcon />}
+        />
+      </Stack>
+    </Stack>
   );
 };
 
-export const Label = () => {
-  return <Button {...actions}>Label only</Button>;
+export const ButtonLink = () => {
+  return (
+    <Stack direction={"column"} spacing={2}>
+      <Stack direction={"row"} spacing={2}>
+        <Button
+          {...actions}
+          disableRipple
+          disableElevation
+          variant="text"
+          link="https://chat.openai.com/"
+        >
+          Chat GTP
+        </Button>
+        <Button
+          {...actions}
+          color={"#D05010"}
+          iconOnlyCmp={<SendIcon />}
+          link="https://chat.openai.com/"
+        />
+      </Stack>
+      <Stack direction={"row"} spacing={2}>
+        <Button {...actions} variant="text">
+          normal button
+        </Button>
+        <Button
+          {...actions}
+          color={"#D05010"}
+          iconOnlyCmp={<FingerprintIcon />}
+        />
+      </Stack>
+    </Stack>
+  );
 };
 
-export const ExtraProps = () => {
+export const Elevation = () => {
   return (
-    <Button {...actions} disableRipple color="secondary">
-      Extra Props
-    </Button>
+    <Stack direction={"row"} spacing={2}>
+      <Button {...actions} disableElevation link="https://chat.openai.com/">
+        Disable Elevation
+      </Button>
+      <Button {...actions} link="https://chat.openai.com/">
+        Elevation
+      </Button>
+    </Stack>
+  );
+};
+
+export const Loading = () => {
+  return (
+    <Stack direction={"column"} spacing={2}>
+      <Stack direction={"row"} spacing={2}>
+        <Typography>Loading</Typography>
+        <Button
+          {...actions}
+          isLoading
+          disableElevation
+          startIcon={<SendIcon />}
+          loadingIconPosition="start"
+        >
+          Start Send Data
+        </Button>
+        <Button
+          {...actions}
+          isLoading
+          disableElevation
+          endIcon={<SendIcon />}
+          loadingIconPosition="end"
+        >
+          End Send Data
+        </Button>
+        <Button {...actions} isLoading disableElevation>
+          Send Data
+        </Button>
+      </Stack>
+      <Stack direction={"row"} spacing={2}>
+        <Typography>Loading Label</Typography>
+        <Button
+          {...actions}
+          isLoading
+          disableElevation
+          startIcon={<SendIcon />}
+          loadingIconPosition="start"
+          loadingLabel="Loading..."
+        >
+          Start Send Data
+        </Button>
+        <Button
+          {...actions}
+          isLoading
+          disableElevation
+          endIcon={<SendIcon />}
+          loadingIconPosition="end"
+          loadingLabel="Loading..."
+        >
+          End Send Data
+        </Button>
+        <Button
+          {...actions}
+          isLoading
+          disableElevation
+          loadingLabel="Loading..."
+        >
+          Send Data
+        </Button>
+      </Stack>
+      <Stack direction={"row"} spacing={2}>
+        <Typography>Size Small</Typography>
+        <Button
+          {...actions}
+          isLoading
+          disableElevation
+          startIcon={<SendIcon />}
+          loadingIconPosition="start"
+          loadingLabel="Loading..."
+          size="small"
+        >
+          Start Send Data
+        </Button>
+        <Button
+          {...actions}
+          isLoading
+          disableElevation
+          endIcon={<SendIcon />}
+          loadingIconPosition="end"
+          loadingLabel="Loading..."
+          size="small"
+        >
+          End Send Data
+        </Button>
+        <Button
+          {...actions}
+          isLoading
+          disableElevation
+          loadingLabel="Loading..."
+          size="small"
+        >
+          Send Data
+        </Button>
+      </Stack>
+      <Stack direction={"row"} spacing={2}>
+        <Typography>Size Medium</Typography>
+        <Button
+          {...actions}
+          isLoading
+          disableElevation
+          startIcon={<SendIcon />}
+          loadingIconPosition="start"
+          loadingLabel="Loading..."
+          size="medium"
+        >
+          Start Send Data
+        </Button>
+        <Button
+          {...actions}
+          isLoading
+          disableElevation
+          endIcon={<SendIcon />}
+          loadingIconPosition="end"
+          loadingLabel="Loading..."
+          size="medium"
+        >
+          End Send Data
+        </Button>
+        <Button
+          {...actions}
+          isLoading
+          disableElevation
+          loadingLabel="Loading..."
+          size="medium"
+        >
+          Send Data
+        </Button>
+      </Stack>
+      <Stack direction={"row"} spacing={2}>
+        <Typography>Size Large</Typography>
+        <Button
+          {...actions}
+          isLoading
+          disableElevation
+          startIcon={<SendIcon />}
+          loadingIconPosition="start"
+          loadingLabel="Loading..."
+          size="large"
+        >
+          Start Send Data
+        </Button>
+        <Button
+          {...actions}
+          isLoading
+          disableElevation
+          endIcon={<SendIcon />}
+          loadingIconPosition="end"
+          loadingLabel="Loading..."
+          size="large"
+        >
+          End Send Data
+        </Button>
+        <Button
+          {...actions}
+          isLoading
+          disableElevation
+          loadingLabel="Loading..."
+          size="large"
+        >
+          Send Data
+        </Button>
+      </Stack>
+    </Stack>
+  );
+};
+
+export const Grouped = () => {
+  return (
+    <ButtonGroup>
+      <Button {...actions} startIcon={<SendIcon />}>
+        Start Icon
+      </Button>
+      <Button {...actions} endIcon={<DeleteIcon />}>
+        End Icon
+      </Button>
+      <Button {...actions}>Test</Button>
+    </ButtonGroup>
   );
 };
