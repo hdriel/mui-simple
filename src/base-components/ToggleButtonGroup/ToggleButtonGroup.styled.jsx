@@ -4,6 +4,7 @@ import {
   ToggleButton as MuiToggleButton,
   ToggleButtonGroup as MuiToggleButtonGroup,
   Paper as MuiPaper,
+  alpha,
 } from "@mui/material";
 
 export const ToggleButtonGroups = styled(({ ...props }) => (
@@ -31,7 +32,16 @@ export const ToggleButtonGroups = styled(({ ...props }) => (
 export const ToggleButtonGroup = styled(
   ({ ...props }) => <MuiToggleButtonGroup {...props} />,
   { shouldForwardProp: (propName) => !["customColor"].includes(propName) }
-)``; // customColor
+)`
+  & .Mui-selected,
+  & .MuiTouchRipple-root {
+    color: ${(props) => props.customColor};
+  }
+  & .Mui-selected {
+    background-color: ${(props) =>
+      props.customColor && alpha(props.customColor, 0.1)};
+  }
+`;
 
 export const ToggleButton = styled(
   ({ value, disabled, disableRipple, onChange, ...props }) => (
