@@ -5,11 +5,19 @@ import {
   ToggleButtonGroup as MuiToggleButtonGroup,
   Paper as MuiPaper,
   alpha,
+  Divider as MuiDivider,
 } from "@mui/material";
+
+export const Divider = styled(({ ...props }) => (
+  <MuiDivider flexItem orientation="vertical" {...props} />
+))`
+  margin: ${(props) => props.theme.spacing(1, 0.5)};
+`;
 
 export const ToggleButtonGroups = styled(({ ...props }) => (
   <MuiPaper elevation={0} {...props} />
 ))`
+  width: ${(props) => (props.fullWidth ? "100%" : "max-content")};
   display: flex;
   border: ${({ theme }) => `1px solid ${theme.palette.divider}`};
   flex-wrap: wrap;
