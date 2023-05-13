@@ -234,3 +234,46 @@ export const Disable = () => {
     </Stack>
   );
 };
+
+export const Sizes = () => {
+  return (
+    <Stack spacing={3}>
+      <ButtonGroup variant="text" size="small">
+        <Button {...actions} startIcon={<SendIcon />}>
+          small
+        </Button>
+        <Button {...actions} endIcon={<DeleteIcon />}>
+          small
+        </Button>
+        <Button {...actions}>small</Button>
+      </ButtonGroup>
+      <ButtonGroup variant="contained" size="medium">
+        <Button {...actions} startIcon={<SendIcon />}>
+          medium
+        </Button>
+        <Button {...actions} endIcon={<DeleteIcon />}>
+          medium
+        </Button>
+        <Button {...actions}>medium</Button>
+      </ButtonGroup>
+      <ButtonGroup variant="outlined" size="large">
+        <Button {...actions} startIcon={<SendIcon />}>
+          large
+        </Button>
+        <Button {...actions} endIcon={<DeleteIcon />}>
+          large
+        </Button>
+        <Button {...actions}>large</Button>
+      </ButtonGroup>
+      <ButtonGroup variant="outlined">
+        <Button {...actions} startIcon={<SendIcon />}>
+          default
+        </Button>
+        <Button {...actions} endIcon={<DeleteIcon />}>
+          default
+        </Button>
+        <Button {...actions}>default</Button>
+      </ButtonGroup>
+    </Stack>
+  );
+};
