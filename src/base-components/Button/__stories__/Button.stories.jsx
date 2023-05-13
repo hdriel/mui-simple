@@ -11,7 +11,7 @@ import {
 import { Stack, Typography } from "@mui/material";
 
 export default {
-  title: "base-components/Button",
+  title: "Inputs/Button",
   component: Button,
 };
 

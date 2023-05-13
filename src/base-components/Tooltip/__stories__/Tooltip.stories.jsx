@@ -6,7 +6,7 @@ import Button from "../../Button/Button";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  title: "base-components/Tooltip",
+  title: "Data-Display/Tooltip",
   component: Tooltip,
 };
 

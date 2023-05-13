@@ -6,7 +6,7 @@ import { SWITCH_STYLES } from "../Switch.consts";
 import { Stack } from "@mui/material";
 
 export default {
-  title: "base-components/Switch",
+  title: "Inputs/Switch",
   parameters: {
     controls: {
       exclude: /^(onChange)$/g,

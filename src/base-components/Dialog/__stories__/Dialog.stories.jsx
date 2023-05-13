@@ -23,7 +23,7 @@ import { Person as PersonIcon, Add as AddIcon } from "@mui/icons-material";
 import Dialog, { DialogContentText } from "../Dialog";
 
 export default {
-  title: "base-components/Dialog",
+  title: "Feedback/Dialog",
   component: Dialog,
   decorators: [
     (Story) => (

@@ -3,7 +3,7 @@ import { action } from "@storybook/addon-actions";
 import Rating from "../Rating";
 
 export default {
-  title: "base-components/Rating",
+  title: "Inputs/Rating",
   component: Rating,
 };
 

@@ -18,7 +18,7 @@ import ToggleButtonGroup from "../ToggleButtonGroup";
 import ToggleButtonGroups from "../ToggleButtonGroups";
 
 export default {
-  title: "base-components/ToggleButtonGroup",
+  title: "Inputs/ToggleButtonGroup",
   component: ToggleButtonGroup,
 };
 

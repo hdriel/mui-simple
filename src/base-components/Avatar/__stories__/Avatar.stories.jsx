@@ -5,7 +5,7 @@ import { Send as SendIcon } from "@mui/icons-material";
 import Avatar from "../Avatar";
 
 export default {
-  title: "base-components/Avatar",
+  title: "Data-Display/Avatar",
   component: Avatar,
 };
 

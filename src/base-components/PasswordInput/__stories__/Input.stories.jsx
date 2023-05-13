@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PasswordInput from "../PasswordInput";
 
 export default {
-  title: "base-components/PasswordInput",
+  title: "Inputs/PasswordInput",
   component: PasswordInput,
 };
 

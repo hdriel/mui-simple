@@ -3,7 +3,7 @@ import Input from "../Input";
 import { Clear as ClearIcon } from "@mui/icons-material";
 
 export default {
-  title: "base-components/Input",
+  title: "Inputs/Input",
   component: Input,
 };
 

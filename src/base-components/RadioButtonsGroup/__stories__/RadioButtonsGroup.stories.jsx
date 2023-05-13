@@ -6,7 +6,7 @@ import CircleTwoToneIcon from "@mui/icons-material/CircleTwoTone";
 import RadioButtonsGroup from "../RadioButtonsGroup";
 
 export default {
-  title: "base-components/RadioButtonsGroup",
+  title: "Inputs/RadioButtonsGroup",
   parameters: {
     controls: { exclude: /^(onChange)$/g },
   },
