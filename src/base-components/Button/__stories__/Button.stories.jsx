@@ -2,7 +2,6 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 
 import Button from "../Button";
-import ButtonGroup from "../ButtonGroup";
 import {
   Delete as DeleteIcon,
   Send as SendIcon,
