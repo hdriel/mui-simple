@@ -22,21 +22,22 @@ const Button = ({
   loadingIconPosition,
   loadingLabel,
   size,
-  iconOnlyCmp,
+  icon,
   children,
   ...props
 }) => {
-  if (iconOnlyCmp || (isLoading && !loadingLabel && !startIcon && !endIcon)) {
+  if (icon || (isLoading && !loadingLabel && !startIcon && !endIcon)) {
     return (
       <MuiIconButton
         color={muiColor}
-        style={{ color: color }}
+        customColor={color}
+        style={{ color }}
         size={size}
         disableRipple={disableRipple}
         onClick={onClick}
         href={link}
       >
-        {isLoading ? spinner : iconOnlyCmp}
+        {isLoading ? spinner : icon}
       </MuiIconButton>
     );
   }
@@ -86,12 +87,12 @@ Button.propTypes = {
   loadingIconPosition: PropTypes.oneOf(["start", "end"]),
   loadingLabel: PropTypes.string,
   disableElevation: PropTypes.bool,
-  iconOnlyCmp: PropTypes.node,
+  icon: PropTypes.node,
   size: PropTypes.oneOf(["small", "medium", "large"]),
 };
 
 Button.defaultProps = {
-  variant: "contained",
+  variant: undefined, // stay it undefined for supporting ButtonGroup component variant
   disabled: false,
   startIcon: undefined,
   endIcon: undefined,
@@ -104,7 +105,7 @@ Button.defaultProps = {
   loadingIconPosition: undefined,
   loadingLabel: undefined,
   disableElevation: undefined,
-  iconOnlyCmp: undefined,
+  icon: undefined,
   size: undefined,
 };
 

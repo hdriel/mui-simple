@@ -12,19 +12,21 @@ const ButtonGroup = ({
   size,
   orientation,
   disableElevation,
+  disableRipple,
+  fullWidth,
   children,
   ...props
 }) => {
   const buttons = []
-    .concat(children)
+    .concat(children ?? [])
     .filter((child) => child.type.name === Button.name)
-    .map((child, index, arr) =>
-      React.cloneElement(child, {
+    .map((child, index, arr) => {
+      return React.cloneElement(child, {
         key: `B${index}`,
-        disabled,
         disableElevation,
-      })
-    )
+        ...{ color: child.props.color ?? color },
+      });
+    })
     .filter(Boolean);
 
   return (
@@ -32,9 +34,13 @@ const ButtonGroup = ({
       variant={variant}
       disabled={disabled}
       color={muiColor}
+      customColor={color}
       size={size}
       orientation={orientation}
       disableElevation={disableElevation}
+      disableRipple={disableRipple}
+      fullWidth={fullWidth}
+      {...props}
     >
       {buttons}
     </MuiButtonGroup>
@@ -49,14 +55,20 @@ ButtonGroup.propTypes = {
   size: PropTypes.oneOf(["small", "medium", "large"]),
   orientation: PropTypes.oneOf(["horizontal", "vertical"]),
   disableElevation: PropTypes.bool,
+  disableRipple: PropTypes.bool,
+  fullWidth: PropTypes.bool,
 };
 
 ButtonGroup.defaultProps = {
-  variant: "contained",
+  variant: undefined,
   disabled: false,
+  color: undefined,
+  muiColor: undefined,
   size: undefined,
   orientation: undefined,
   disableElevation: undefined,
+  disableRipple: undefined,
+  fullWidth: undefined,
 };
 
 export default ButtonGroup;

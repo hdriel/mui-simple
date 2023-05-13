@@ -33,11 +33,7 @@ export const Icons = () => {
       <Button {...actions} muiColor="error" endIcon={<DeleteIcon />}>
         End Icon
       </Button>
-      <Button
-        {...actions}
-        color={"#D05010"}
-        iconOnlyCmp={<FingerprintIcon />}
-      />
+      <Button {...actions} color={"#D05010"} icon={<FingerprintIcon />} />
     </Stack>
   );
 };
@@ -63,25 +59,21 @@ export const DisableRipple = () => {
   return (
     <Stack direction="column" spacing={3}>
       <Stack direction="row" spacing={3}>
-        <Button {...actions} color={"#D05010"} disableRipple color="primary">
+        <Button {...actions} disableRipple color="primary">
           Disable Ripple
         </Button>
         <Button
           {...actions}
           color={"#D05010"}
           disableRipple
-          iconOnlyCmp={<FingerprintIcon />}
+          icon={<FingerprintIcon />}
         />
       </Stack>
       <Stack direction="row" spacing={3}>
         <Button {...actions} color="secondary">
           Ripple
         </Button>
-        <Button
-          {...actions}
-          color={"#D05010"}
-          iconOnlyCmp={<FingerprintIcon />}
-        />
+        <Button {...actions} color={"#D05010"} icon={<FingerprintIcon />} />
       </Stack>
     </Stack>
   );
@@ -103,7 +95,7 @@ export const ButtonLink = () => {
         <Button
           {...actions}
           color={"#D05010"}
-          iconOnlyCmp={<SendIcon />}
+          icon={<SendIcon />}
           link="https://chat.openai.com/"
         />
       </Stack>
@@ -111,11 +103,7 @@ export const ButtonLink = () => {
         <Button {...actions} variant="text">
           normal button
         </Button>
-        <Button
-          {...actions}
-          color={"#D05010"}
-          iconOnlyCmp={<FingerprintIcon />}
-        />
+        <Button {...actions} color={"#D05010"} icon={<FingerprintIcon />} />
       </Stack>
     </Stack>
   );
@@ -130,6 +118,57 @@ export const Elevation = () => {
       <Button {...actions} link="https://chat.openai.com/">
         Elevation
       </Button>
+    </Stack>
+  );
+};
+
+export const Themed = () => {
+  return (
+    <Stack direction={"column"} spacing={2}>
+      <Stack direction={"row"} spacing={2}>
+        <Button {...actions} variant="contained">
+          Default (Primary)
+        </Button>
+        <Button {...actions} variant="outlined">
+          Default (Primary)
+        </Button>
+        <Button {...actions} variant="text">
+          Default (Primary)
+        </Button>
+        <Button {...actions} icon={<SendIcon />} />
+      </Stack>
+      <Stack direction={"row"} spacing={2}>
+        <Button {...actions} variant="contained" muiColor="secondary">
+          Secondary
+        </Button>
+        <Button {...actions} variant="outlined" muiColor="secondary">
+          Secondary
+        </Button>
+        <Button {...actions} variant="text" muiColor="secondary">
+          Secondary
+        </Button>
+        <Button {...actions} icon={<SendIcon />} muiColor="secondary" />
+      </Stack>
+    </Stack>
+  );
+};
+
+export const Colored = () => {
+  return (
+    <Stack direction={"row"} spacing={2}>
+      <Button {...actions} variant="contained" color={"#df01fd"}>
+        Secondary
+      </Button>
+      <Button {...actions} variant="outlined" color={"#df01fd"}>
+        Secondary
+      </Button>
+      <Button {...actions} variant="text" color={"#df01fd"}>
+        Secondary
+      </Button>
+      <Button {...actions} variant="text" color={"#df01fd"}>
+        Secondary
+      </Button>
+      <Button {...actions} color={"#df01fd"} icon={<SendIcon />} />
     </Stack>
   );
 };
@@ -295,19 +334,5 @@ export const Loading = () => {
         </Button>
       </Stack>
     </Stack>
-  );
-};
-
-export const Grouped = () => {
-  return (
-    <ButtonGroup>
-      <Button {...actions} startIcon={<SendIcon />}>
-        Start Icon
-      </Button>
-      <Button {...actions} endIcon={<DeleteIcon />}>
-        End Icon
-      </Button>
-      <Button {...actions}>Test</Button>
-    </ButtonGroup>
   );
 };
