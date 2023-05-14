@@ -72,7 +72,7 @@ function horizontalStyle(props) {
     & .MuiDivider-wrapper {
       ${getCustomColorStyle({ color })};
     }
-    
+
     &::before,
     &::after {
       ${getCustomBorderStyle({
