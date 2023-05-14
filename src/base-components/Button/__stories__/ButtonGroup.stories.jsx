@@ -3,12 +3,8 @@ import { action } from "@storybook/addon-actions";
 
 import Button from "../Button";
 import ButtonGroup from "../ButtonGroup";
-import {
-  Delete as DeleteIcon,
-  Send as SendIcon,
-  Fingerprint as FingerprintIcon,
-} from "@mui/icons-material";
-import { Stack, Typography } from "@mui/material";
+import { Delete as DeleteIcon, Send as SendIcon } from "@mui/icons-material";
+import { Stack } from "@mui/material";
 
 export default {
   title: "Inputs/ButtonGroup",

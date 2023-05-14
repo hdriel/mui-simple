@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { action } from "@storybook/addon-actions";
 import { Mail as MainIcon } from "@mui/icons-material";
 import { Stack, Button, Box } from "@mui/material";
 
