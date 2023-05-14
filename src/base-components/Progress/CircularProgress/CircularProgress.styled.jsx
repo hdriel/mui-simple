@@ -1,15 +1,10 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
 import {
-  LinearProgress as MuiLinearProgress,
   CircularProgress as MuiCircularProgress,
   Box as MuiBox,
   Typography as MuiTypography,
 } from "@mui/material";
-
-export const LinearProgress = styled(MuiLinearProgress, {
-  shouldForwardProp: (propName) => !["customColor"].includes(propName),
-})``;
 
 const BoxWrapper = styled(MuiBox)`
   position: relative;

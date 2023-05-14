@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { CircularProgress as MuiCircularProgress } from "./Progress.styled";
+import { LinearProgress as MuiLinearProgress } from "./LinearProgress.styled";
 
-export default function CircularProgress({
+export default function LinearProgress({
   muiColor,
   customColor,
   value,
+  valueBuffer,
   showProgress,
   thickness,
   size,
@@ -13,36 +14,43 @@ export default function CircularProgress({
   ...props
 }) {
   return (
-    <MuiCircularProgress
+    <MuiLinearProgress
       color={muiColor}
       customColor={customColor}
-      variant={value ? "determinate" : undefined}
+      variant={
+        valueBuffer !== undefined
+          ? "buffer"
+          : value !== undefined
+          ? "determinate"
+          : undefined
+      }
       value={value}
+      valueBuffer={valueBuffer}
       thickness={thickness}
-      size={size}
       showProgress={showProgress}
-      disableShrink={disableShrink}
       {...props}
     />
   );
 }
 
-CircularProgress.propTypes = {
+LinearProgress.propTypes = {
   muiColor: PropTypes.string,
   customColor: PropTypes.string,
-  variant: PropTypes.oneOf(["determinate", "indeterminate"]),
+  variant: PropTypes.oneOf(["buffer", "query", "determinate", "indeterminate"]),
   value: PropTypes.number,
+  valueBuffer: PropTypes.number,
   thickness: PropTypes.number,
   size: PropTypes.number,
   showProgress: PropTypes.bool,
   disableShrink: PropTypes.bool,
 };
 
-CircularProgress.defaultProps = {
+LinearProgress.defaultProps = {
   muiColor: undefined,
   customColor: undefined,
   variant: undefined,
   value: undefined,
+  valueBuffer: undefined,
   thickness: undefined,
   size: undefined,
   showProgress: true,
