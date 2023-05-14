@@ -70,6 +70,79 @@ export const Variant = () => {
   );
 };
 
+export const Thickness = () => {
+  return (
+    <Stack spacing={4}>
+      <Stack direction="row" spacing={4}>
+        <CircularProgress
+          {...actions}
+          variant="determinate"
+          value={10}
+          thickness={1}
+        />
+        <CircularProgress
+          {...actions}
+          variant="determinate"
+          value={20}
+          thickness={2}
+        />
+        <CircularProgress
+          {...actions}
+          variant="determinate"
+          value={30}
+          thickness={3}
+        />
+        <CircularProgress
+          {...actions}
+          variant="determinate"
+          value={40}
+          thickness={4}
+        />
+        <CircularProgress
+          {...actions}
+          variant="determinate"
+          value={50}
+          thickness={5}
+        />
+        <CircularProgress
+          {...actions}
+          variant="determinate"
+          value={60}
+          thickness={6}
+        />
+        <CircularProgress
+          {...actions}
+          variant="determinate"
+          value={70}
+          thickness={7}
+        />
+        <CircularProgress
+          {...actions}
+          variant="determinate"
+          value={80}
+          thickness={8}
+        />
+        <CircularProgress
+          {...actions}
+          variant="determinate"
+          value={90}
+          thickness={9}
+        />
+        <CircularProgress
+          {...actions}
+          variant="determinate"
+          value={100}
+          thickness={10}
+        />
+        <CircularProgress {...actions} variant="indeterminate" />
+      </Stack>
+      <Stack direction="row" spacing={4}>
+        <CircularProgress {...actions} />
+      </Stack>
+    </Stack>
+  );
+};
+
 export const ShowProgress = () => {
   const [progress, setProgress] = React.useState(10);
 
