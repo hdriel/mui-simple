@@ -42,16 +42,17 @@ function verticalStyle(props) {
   const color = _.get(props, `theme.palette.${muiColor}.main`, customColor);
 
   return css`
+    & .MuiDivider-wrapper {
+      ${getCustomColorStyle({ color })};     
+    }
+    
     &::before,
     &::after {
       ${getCustomBorderStyle({
         color,
         thicknessValue,
         borderPosition: "border-left",
-      })}
-    & .MuiDivider-wrapper {
-      ${getCustomColorStyle({ color })};     
-    }
+      })}   
   `;
 }
 
@@ -68,6 +69,10 @@ function horizontalStyle(props) {
   const color = _.get(props, `theme.palette.${muiColor}.main`, customColor);
 
   return css`
+    & .MuiDivider-wrapper {
+      ${getCustomColorStyle({ color })};
+    }
+    
     &::before,
     &::after {
       ${getCustomBorderStyle({
@@ -75,9 +80,6 @@ function horizontalStyle(props) {
         thicknessValue,
         borderPosition: "border-top",
       })}
-    }
-    & .MuiDivider-wrapper {
-      ${getCustomColorStyle({ color })};
     }
   `;
 }
