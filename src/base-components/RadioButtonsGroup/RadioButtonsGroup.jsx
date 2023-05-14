@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
-import { useRadioGroup } from "@mui/material/RadioGroup";
 
 import {
   RadioGroup,

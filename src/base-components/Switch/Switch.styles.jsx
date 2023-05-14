@@ -1,13 +1,6 @@
-import React from "react";
 import _ from "lodash";
-import { styled, css } from "@mui/material/styles";
-import {
-  FormControlLabel,
-  FormHelperText as MuiFormHelperText,
-  Switch as MuiSwitch,
-  Stack as MuiStack,
-  Typography as MuiTypography,
-} from "@mui/material";
+import { css } from "@mui/material/styles";
+
 import { SWITCH_STYLES } from "./Switch.consts";
 
 export function customColor(props) {

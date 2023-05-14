@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import Button from "./Button";
 import { ButtonGroup as MuiButtonGroup } from "./Button.styled";
-import { Divider } from "../ToggleButtonGroup/ToggleButtonGroup.styled";
 
 const ButtonGroup = ({
   variant,
