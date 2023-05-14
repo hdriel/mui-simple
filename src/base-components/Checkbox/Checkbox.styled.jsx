@@ -1,11 +1,11 @@
 import React from "react";
+import { styled } from "@mui/material/styles";
 
 import {
   Checkbox as MuiCheckbox,
   FormControlLabel,
   FormHelperText,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
 
 export const Checkbox = styled(
   ({
@@ -24,7 +24,7 @@ export const Checkbox = styled(
         required={required}
         disabled={disabled}
         labelPlacement={labelPlacement}
-        sx={{ m: 0, userSelect: 'none', }}
+        sx={{ m: 0, userSelect: "none" }}
         control={
           <MuiCheckbox
             {...props}

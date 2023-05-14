@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { CircularProgress } from "@mui/material";
+import CircularProgress from "../Progress/CircularProgress/CircularProgress";
 import {
   Button as MuiButton,
   IconButton as MuiIconButton,
 } from "./Button.styled";
 
-const spinner = <CircularProgress color="inherit" size={"15px"} />;
+const spinner = <CircularProgress muiColor="inherit" size={15} />;
 
 const Button = ({
   variant,
