@@ -28,12 +28,21 @@ const CenterBoxContent = styled(MuiBox)`
 `;
 
 export const CircularProgress = styled(
-  ({ showProgress, variant, value, ...props }) => (
+  ({ theme, showProgress, variant, value, ...props }) => (
     <BoxWrapper>
       <MuiCircularProgress
         value={value}
         variant={value && variant === undefined ? "determinate" : variant}
         {...props}
+      />
+      <MuiCircularProgress
+        value={100}
+        variant={"determinate"}
+        sx={{
+          position: "absolute",
+          left: 0,
+          color: "rgba(0,0,0,0.1)",
+        }}
       />
       <CenterBoxContent>
         <MuiTypography variant="caption" component="div" color="text.secondary">
@@ -49,4 +58,5 @@ export const CircularProgress = styled(
   &.MuiCircularProgress-root {
     color: ${(props) => props.customColor};
   }
+  //animation-duration: 760ms;
 `;

@@ -30,9 +30,11 @@ export const Themed = () => {
 
 export const Colored = () => {
   return (
-    <CircularProgress {...actions} customColor={"#12bfb0"}>
-      Colored
-    </CircularProgress>
+    <Stack direction="row" spacing={4}>
+      <CircularProgress {...actions} customColor={"#12bfb0"} />
+      <CircularProgress {...actions} customColor={"#081499"} />
+      <CircularProgress {...actions} customColor={"#d98f53"} />
+    </Stack>
   );
 };
 
