@@ -23,19 +23,18 @@ export const Open = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <>
+    <div>
       <Button onClick={() => setOpen(true)}>Show backdrop</Button>
       <Backdrop
         open={open}
-        onClick={() => {
-          debugger;
+        onClick={(event) => {
           setOpen(false);
+          actions.onClick(event);
         }}
-        {...actions}
       >
         <CircularProgress muiColor="inherit" />
       </Backdrop>
-    </>
+    </div>
   );
 };
 
