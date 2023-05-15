@@ -23,6 +23,7 @@ const Button = ({
   loadingLabel,
   size,
   icon,
+  fullWidth,
   children,
   ...props
 }) => {
@@ -66,6 +67,7 @@ const Button = ({
       disableRipple={disableRipple}
       customColor={color}
       size={size}
+      fullWidth={fullWidth}
       {...props}
     >
       {content}
@@ -75,6 +77,7 @@ const Button = ({
 
 Button.propTypes = {
   variant: PropTypes.oneOf(["contained", "outlined", "text"]),
+  fullWidth: PropTypes.bool,
   disabled: PropTypes.bool,
   startIcon: PropTypes.node,
   endIcon: PropTypes.node,
@@ -93,7 +96,8 @@ Button.propTypes = {
 
 Button.defaultProps = {
   variant: undefined, // stay it undefined for supporting ButtonGroup component variant
-  disabled: false,
+  fullWidth: undefined,
+  disabled: undefined,
   startIcon: undefined,
   endIcon: undefined,
   onClick: undefined,
