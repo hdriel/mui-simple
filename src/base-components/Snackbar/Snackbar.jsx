@@ -83,13 +83,15 @@ export default function Snackbar({
       }
       message={message}
       fullWidth={fullWidth}
-      // TransitionComponent={transition}
-      // transitionDuration={animationDuration}
-      // TransitionProps={animationProps}
+      TransitionComponent={transition}
+      transitionDuration={
+        animationDuration ?? (animation !== "slide" ? 1000 : undefined)
+      }
+      TransitionProps={animationProps}
       {...props}
-      action={action}
+      action={action} // 'action' end after props, to prevent bugs from storybook, that any props has storybook action field
     >
-      {variant && (
+      {["success", "error", "warning", "info"].includes(variant) && (
         <MuiAlert onClose={onClose} severity={variant}>
           {props.children ?? message}
         </MuiAlert>
