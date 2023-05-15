@@ -4,7 +4,7 @@ export default createTheme({
   palette: {
     primary: {
       main: "#00F100",
-      contrastText: "#000000",
+      contrastText: "#173e24",
     },
     background: {
       hadriel: "#F0F0F0",
