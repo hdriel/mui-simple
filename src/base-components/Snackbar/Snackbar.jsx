@@ -92,7 +92,7 @@ export default function Snackbar({
       action={action} // 'action' end after props, to prevent bugs from storybook, that any props has storybook action field
     >
       {["success", "error", "warning", "info"].includes(variant) && (
-        <MuiAlert onClose={onClose} severity={variant}>
+        <MuiAlert onClose={onClose} severity={variant} action={action}>
           {props.children ?? message}
         </MuiAlert>
       )}

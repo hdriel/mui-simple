@@ -122,6 +122,18 @@ export const Actions = () => {
           <Button muiColor="inherit" size="small" icon={<SendIcon />} />,
         ]}
       />
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        open
+        message={"alert with actions"}
+        variant="success"
+        messageId={"1"}
+        onClose={actions.onClose}
+        actions={[
+          "undo",
+          <Button muiColor="inherit" size="small" icon={<SendIcon />} />,
+        ]}
+      />
     </Stack>
   );
 };
