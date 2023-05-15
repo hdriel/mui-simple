@@ -9,6 +9,7 @@ import {
 export const Button = styled(MuiButton, {
   shouldForwardProp: (propName) => !["customColor"].includes(propName),
 })`
+  width: ${(props) => (props.fullWidth ? "100%" : "max-content")};
   &:not(.MuiButton-contained) {
     color: ${(props) => props.customColor} !important;
     border-color: ${(props) =>

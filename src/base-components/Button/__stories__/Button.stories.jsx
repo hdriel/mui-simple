@@ -22,6 +22,19 @@ export const Default = () => {
   return <Button {...actions} />;
 };
 
+export const FullWidth = () => {
+  return (
+    <Stack spacing={3}>
+      <Button {...actions} fullWidth variant="contained">
+        Full Width
+      </Button>
+      <Button {...actions} variant="contained">
+        Not Full Width
+      </Button>
+    </Stack>
+  );
+};
+
 export const Icons = () => {
   return (
     <Stack direction="row" spacing={3}>
