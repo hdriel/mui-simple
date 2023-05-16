@@ -1,6 +1,13 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import { Slider as MuiSlider, SliderLabel, Box, Grid } from "./Slider.styled";
+import {
+  Slider as MuiSlider,
+  AirbnbThumbComponent,
+  SliderLabel,
+  Box,
+  Grid,
+} from "./Slider.styled";
+import { SLIDER_STYLES } from "./Slider.consts";
 
 export default function Slider({
   startIcon,
@@ -20,6 +27,7 @@ export default function Slider({
   trackBarLinePosition,
   orientation,
   inputCmp,
+  sliderStyle,
   ...props
 }) {
   const rangeProps = useMemo(() => {
@@ -79,6 +87,13 @@ export default function Slider({
               trackBarLinePosition === "none" ? false : trackBarLinePosition
             }
             {...rangeProps}
+            slots={{
+              thumb:
+                sliderStyle === SLIDER_STYLES.AIRBNB
+                  ? AirbnbThumbComponent
+                  : undefined,
+            }}
+            sliderStyle={sliderStyle}
             {...props}
           />
         </Grid>
@@ -107,6 +122,7 @@ Slider.propTypes = {
   disableSwap: PropTypes.bool,
   chooseFromMarksList: PropTypes.bool,
   inputCmp: PropTypes.node,
+  sliderStyle: PropTypes.oneOf(Object.values(SLIDER_STYLES)),
   trackBarLinePosition: PropTypes.oneOf(["none", "inverted", "normal"]),
   marks: PropTypes.oneOfType([
     PropTypes.bool,
@@ -144,6 +160,7 @@ Slider.defaultProps = {
   trackBarLinePosition: undefined,
   displayValue: undefined,
   disableSwap: undefined,
+  sliderStyle: undefined,
   inputCmp: undefined,
   marks: undefined,
   range: undefined,

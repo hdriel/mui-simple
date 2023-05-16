@@ -8,6 +8,7 @@ import { Stack } from "@mui/material";
 import MuiInput from "@mui/material/Input";
 import { styled } from "@mui/material/styles";
 import Slider from "../Slider";
+import { SLIDER_STYLES } from "../Slider.consts";
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -83,6 +84,35 @@ export const ThemedAndColored = () => {
       <Slider muiColor="error" label="error" />
       <Slider label="Default" />
       <Slider label="#D050CC" customColor="#D050CC" />
+    </Stack>
+  );
+};
+
+export const SliderStyle = () => {
+  return (
+    <Stack>
+      <Slider
+        label={SLIDER_STYLES.IOS}
+        defaultValue={50}
+        sliderStyle={SLIDER_STYLES.IOS}
+      />
+      <Slider
+        label={SLIDER_STYLES.PRETTO}
+        defaultValue={50}
+        sliderStyle={SLIDER_STYLES.PRETTO}
+      />
+      <Slider
+        label={SLIDER_STYLES.AIRBNB}
+        defaultValue={50}
+        sliderStyle={SLIDER_STYLES.AIRBNB}
+      />
+      <Slider
+        label={SLIDER_STYLES.TOOLTIP_VALUE}
+        defaultValue={50}
+        sliderStyle={SLIDER_STYLES.TOOLTIP_VALUE}
+      />
+      <Slider label="custom style" defaultValue={50} customColor={"#D050CC"} />
+      <Slider label="default" defaultValue={50} />
     </Stack>
   );
 };
