@@ -1,5 +1,9 @@
-import { Alert as MuiAlert, AlertTitle as MuiAlertTitle } from "@mui/material";
-import { styled, alpha } from "@mui/material/styles";
+import {
+  Alert as MuiAlert,
+  AlertTitle as MuiAlertTitle,
+  alpha,
+} from "@mui/material";
+import { styled, css } from "@mui/material/styles";
 
 export const Alert = styled(MuiAlert, {
   shouldForwardProp: (propName) => !["customColor"].includes(propName),
@@ -8,6 +12,15 @@ export const Alert = styled(MuiAlert, {
   & .MuiAlert-message {
     color: ${(props) => props.customColor};
   }
+
+  ${(props) =>
+    !props.title &&
+    css`
+      & .MuiAlert-action {
+        align-items: center;
+      }
+    `}
+
   &.MuiPaper-root {
     background-color: ${(props) =>
       props.customColor && alpha(props.customColor, 0.15)};

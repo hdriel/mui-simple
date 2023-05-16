@@ -46,6 +46,7 @@ export default function Alert({
       icon={icon}
       color={muiColor}
       customColor={customColor}
+      title={title}
       {...props}
       action={actionCmp} // 'action' end after props, to prevent bugs from storybook, that any props has storybook action field
     >
@@ -64,9 +65,15 @@ Alert.propTypes = {
   customColor: PropTypes.string,
   actions: PropTypes.oneOfType([
     PropTypes.node,
-    PropTypes.arrayOf(PropTypes.node),
     PropTypes.shape({ label: PropTypes.string, onClick: PropTypes.func }),
     PropTypes.string,
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([
+        PropTypes.node,
+        PropTypes.shape({ label: PropTypes.string, onClick: PropTypes.func }),
+        PropTypes.string,
+      ])
+    ),
   ]),
 };
 

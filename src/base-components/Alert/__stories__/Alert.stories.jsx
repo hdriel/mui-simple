@@ -60,7 +60,7 @@ export const SeverityVariant = () => {
       ]
         .map((alerts, index) => {
           return React.isValidElement(alerts)
-            ? alerts
+            ? React.cloneElement(alerts, { key: index })
             : alerts.map(({ variant, severity }, index) => (
                 <Alert
                   key={`${variant}-${severity}`}
@@ -158,7 +158,7 @@ export const Title = () => {
       ]
         .map((alerts, index) => {
           return React.isValidElement(alerts)
-            ? alerts
+            ? React.cloneElement(alerts, { key: index })
             : alerts.map(({ variant, severity }, index) => (
                 <Alert
                   key={`${variant}-${severity}`}
