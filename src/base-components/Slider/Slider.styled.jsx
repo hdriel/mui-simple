@@ -1,32 +1,47 @@
-import {
-  Slider as MuiSlider,
-  Typography as MuiTypography,
-  alpha,
-} from "@mui/material";
+import { Typography as MuiTypography } from "@mui/material";
+import MuiSlider, { SliderThumb } from "@mui/material/Slider";
+
 import { styled } from "@mui/material/styles";
+import {
+  sliderStyleIOS,
+  sliderStylePretto,
+  sliderStyleAirBNB,
+  sliderStyleCustomColor,
+} from "./Slider.styles";
+import React from "react";
+import Tooltip from "../Tooltip/Tooltip";
 export { Grid, Box } from "@mui/material";
+
+export function ValueLabelComponent(props) {
+  const { children, value } = props;
+
+  return (
+    <Tooltip enterTouchDelay={0} placement="top" title={value} arrow={false}>
+      {children}
+    </Tooltip>
+  );
+}
+
+export function AirbnbThumbComponent(props) {
+  const { children, ...other } = props;
+  return (
+    <SliderThumb {...other}>
+      {children}
+      <span className="airbnb-bar" />
+      <span className="airbnb-bar" />
+      <span className="airbnb-bar" />
+    </SliderThumb>
+  );
+}
 
 export const Slider = styled(MuiSlider, {
   shouldForwardProp: (propName) =>
-    !["startIcon", "endIcon", "customColor"].includes(propName),
+    !["startIcon", "endIcon", "customColor", "sliderStyle"].includes(propName),
 })`
-  & .MuiSlider-track,
-  & .MuiSlider-rail,
-  & .MuiSlider-thumb {
-    color: ${(props) => props.customColor};
-  }
-
-  & .MuiSlider-thumb:hover,
-  & .Mui-focusVisible {
-    box-shadow: ${(props) =>
-      props.customColor && `0px 0px 0px 8px ${alpha(props.customColor, 0.16)}`};
-  }
-
-  & .MuiSlider-thumb.Mui-active {
-    box-shadow: ${(props) =>
-      props.customColor &&
-      `0px 0px 0px 14px ${alpha(props.customColor, 0.16)}`};
-  }
+  ${sliderStyleIOS}
+  ${sliderStylePretto}
+  ${sliderStyleAirBNB}
+  ${sliderStyleCustomColor}
 `;
 
 export const SliderLabel = styled(({ ...props }) => (
