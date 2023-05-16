@@ -9,7 +9,18 @@ import {
   sliderStyleCustomColor,
 } from "./Slider.styles";
 import React from "react";
+import Tooltip from "../Tooltip/Tooltip";
 export { Grid, Box } from "@mui/material";
+
+export function ValueLabelComponent(props) {
+  const { children, value } = props;
+
+  return (
+    <Tooltip enterTouchDelay={0} placement="top" title={value} arrow={false}>
+      {children}
+    </Tooltip>
+  );
+}
 
 export function AirbnbThumbComponent(props) {
   const { children, ...other } = props;

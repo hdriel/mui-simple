@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {
   Slider as MuiSlider,
   AirbnbThumbComponent,
+  ValueLabelComponent,
   SliderLabel,
   Box,
   Grid,
@@ -88,6 +89,10 @@ export default function Slider({
             }
             {...rangeProps}
             slots={{
+              valueLabel:
+                sliderStyle === SLIDER_STYLES.TOOLTIP_VALUE
+                  ? ValueLabelComponent
+                  : undefined,
               thumb:
                 sliderStyle === SLIDER_STYLES.AIRBNB
                   ? AirbnbThumbComponent
