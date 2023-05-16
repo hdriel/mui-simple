@@ -43,11 +43,12 @@ export default function Slider({
     }
   }, [range, marks, chooseFromMarksList]);
 
+  const height = orientation === "vertical" ? "inherit" : "max-content";
   return (
     <Box
       sx={{
         mb: 1,
-        height: "inherit",
+        height,
         ...(orientation === "vertical" && { width: "max-content" }),
       }}
     >
@@ -57,7 +58,7 @@ export default function Slider({
         spacing={2}
         alignItems="center"
         direction={orientation === "vertical" ? "column-reverse" : "row"}
-        sx={{ height: "inherit" }}
+        sx={{ height }}
       >
         <Grid item>{startIcon}</Grid>
         <Grid item xs sx={{ height: "inherit" }}>

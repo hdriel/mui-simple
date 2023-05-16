@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
 import {
   VolumeDown as VolumeDownIcon,
@@ -39,38 +39,35 @@ const actions = {
 export const Default = () => {
   return <RangeSlider {...actions} />;
 };
-export const DisableSwap = () => {
-  const [value1, setValue1] = React.useState(30);
-  const [value2, setValue2] = React.useState(40);
-  const handleChangeValue1 = (event, newValue) => setValue1(newValue);
-  const handleChangeValue2 = (event, newValue) => setValue2(newValue);
 
+function useValue(v1 = 0, v2 = 0) {
+  const [fromValue, setFromValue] = React.useState(v1);
+  const [toValue, setToValue] = React.useState(v2);
+  const onChangeFromValue = (event, newValue) => setFromValue(newValue);
+  const onChangeToValue = (event, newValue) => setToValue(newValue);
+
+  return {
+    fromValue,
+    toValue,
+    onChangeFromValue,
+    onChangeToValue,
+  };
+}
+
+export const DisableSwap = () => {
   return (
     <Stack spacing={3}>
-      <RangeSlider
-        label="swap"
-        fromValue={value1}
-        toValue={value2}
-        onChangeFromValue={handleChangeValue1}
-        onChangeToValue={handleChangeValue2}
-        minDistance={10}
-      />
+      <RangeSlider label="swap" {...useValue(30, 50)} minDistance={10} />
       <RangeSlider
         label="DisableSwap - locking"
         disableSwap="locking"
-        fromValue={value1}
-        toValue={value2}
-        onChangeFromValue={handleChangeValue1}
-        onChangeToValue={handleChangeValue2}
+        {...useValue(30, 50)}
         minDistance={10}
       />
       <RangeSlider
         label="DisableSwap - trailing"
         disableSwap="trailing"
-        fromValue={value1}
-        toValue={value2}
-        onChangeFromValue={handleChangeValue1}
-        onChangeToValue={handleChangeValue2}
+        {...useValue(30, 50)}
         minDistance={10}
       />
     </Stack>
@@ -80,19 +77,19 @@ export const DisableSwap = () => {
 export const ThemedAndColored = () => {
   return (
     <Stack>
-      <RangeSlider muiColor="primary" label="primary" displayValue={[10, 50]} />
+      <RangeSlider muiColor="primary" label="primary" defaultValue={[10, 50]} />
       <RangeSlider
         muiColor="secondary"
         label="secondary"
-        displayValue={[10, 50]}
+        defaultValue={[10, 50]}
       />
-      <RangeSlider muiColor="info" label="info" displayValue={[10, 50]} />
-      <RangeSlider muiColor="error" label="error" displayValue={[10, 50]} />
-      <RangeSlider label="Default" displayValue={[10, 50]} />
+      <RangeSlider muiColor="info" label="info" defaultValue={[10, 50]} />
+      <RangeSlider muiColor="error" label="error" defaultValue={[10, 50]} />
+      <RangeSlider label="Default" defaultValue={[10, 50]} />
       <RangeSlider
         label="#D050CC"
         customColor="#D050CC"
-        displayValue={[10, 50]}
+        defaultValue={[10, 50]}
       />
     </Stack>
   );
@@ -160,24 +157,15 @@ export const RangesObject = () => {
         displayValue="on"
       />
       <RangeSlider
-        label="max: 50, step: 8"
+        label="min: 10, max: 50, step: 2"
         range={{
           min: 10,
-          max: 20,
+          max: 50,
           step: 2,
           marks: [
-            {
-              label: "12L",
-              value: 12,
-            },
-            {
-              label: "16L",
-              value: 16,
-            },
-            {
-              label: "18M",
-              value: 18,
-            },
+            { label: "12L", value: 12 },
+            { label: "16L", value: 16 },
+            { label: "18M", value: 18 },
           ],
         }}
         defaultValue={[40, 90]}
@@ -192,31 +180,31 @@ export const RangesArray = () => {
       <RangeSlider
         label="[min: 150, max: 200, step: 2.5, marks: true]"
         range={[150, 200, 2.5, true]}
-        defaultValue={180}
+        defaultValue={[170, 180]}
         displayValue="on"
       />
       <RangeSlider
         label="[50, undefined, 15, true]"
         range={[50, undefined, 15, true]}
-        defaultValue={80}
+        defaultValue={[60, 75]}
         displayValue="on"
       />
       <RangeSlider
         label="[undefined, 50, 10, true]"
         range={[undefined, 50, 10, true]}
-        defaultValue={50}
+        defaultValue={[30, 40]}
         displayValue="on"
       />
       <RangeSlider
         label="[-50, 50, 10, true]"
         range={[-50, 50, 10, true]}
-        defaultValue={0}
+        defaultValue={[-15, -5]}
         displayValue="on"
       />
       <RangeSlider
         label="[undefined, undefined, 10, true]"
         range={[undefined, undefined, 10, true]}
-        defaultValue={90}
+        defaultValue={[12, 18]}
         displayValue="on"
       />
     </Stack>
@@ -226,7 +214,7 @@ export const RangesArray = () => {
 export const Marks = () => {
   return (
     <Stack spacing={3}>
-      <RangeSlider marks defaultValue={50} displayValue="on" />
+      <RangeSlider marks defaultValue={[25, 40]} displayValue="on" />
       <RangeSlider
         marks={[
           { label: "0", value: 0 },
@@ -234,7 +222,7 @@ export const Marks = () => {
           { label: "25-hi", value: 25 },
           { label: "60C", value: 60 },
         ]}
-        defaultValue={180}
+        defaultValue={[25, 40]}
         displayValue="on"
       />
       <RangeSlider
@@ -246,7 +234,7 @@ export const Marks = () => {
           { label: "60C", value: 60 },
         ]}
         chooseFromMarksList
-        defaultValue={180}
+        defaultValue={[25, 40]}
         displayValue="on"
       />
     </Stack>
@@ -256,23 +244,18 @@ export const Marks = () => {
 export const Disabled = () => {
   return (
     <Stack spacing={3}>
-      <RangeSlider defaultValue={40} />
-      <RangeSlider defaultValue={40} disabled />
+      <RangeSlider defaultValue={[25, 40]} />
+      <RangeSlider defaultValue={[25, 40]} disabled />
     </Stack>
   );
 };
 
 export const ValueLabelFormat = () => {
-  const [value, setValue] = React.useState(30);
-  const handleChange = (event, newValue) => setValue(newValue);
-
   return (
     <Stack spacing={3}>
-      <RangeSlider defaultValue={40} valueLabelFormat={(n) => `${n}MB`} />
+      <RangeSlider defaultValue={[25, 30]} valueLabelFormat={(n) => `${n}MB`} />
       <RangeSlider
-        defaultValue={40}
-        value={value}
-        onChange={handleChange}
+        defaultValue={[25, 30]}
         valueLabelFormat={(n) => (n >= 50 ? `${n} UP` : `${n} DOWN`)}
       />
     </Stack>
@@ -280,32 +263,29 @@ export const ValueLabelFormat = () => {
 };
 
 export const TrackBarPosition = () => {
-  const [value, setValue] = React.useState(30);
-  const handleChange = (event, newValue) => setValue(newValue);
-
   return (
     <Stack spacing={3}>
       <RangeSlider
         label={"normal"}
-        defaultValue={40}
+        defaultValue={[30, 60]}
         valueLabelFormat={(n) => `${n} Normal`}
         trackBarLinePosition="normal"
       />
       <RangeSlider
         label={"inverted"}
-        defaultValue={40}
+        defaultValue={[30, 60]}
         valueLabelFormat={(n) => `${n} opposite`}
         trackBarLinePosition="inverted"
       />
       <RangeSlider
         label={"none"}
-        defaultValue={40}
+        defaultValue={[30, 60]}
         valueLabelFormat={(n) => `${n} none`}
         trackBarLinePosition={"none"}
       />
       <RangeSlider
         label={"false"}
-        defaultValue={40}
+        defaultValue={[30, 60]}
         valueLabelFormat={(n) => `${n} false`}
         trackBarLinePosition={false}
       />
@@ -323,15 +303,19 @@ export const Orientation = () => {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1em" }}>
       <RangeSlider
+        startIcon={<VolumeDownIcon />}
+        endIcon={<VolumeUpIcon />}
         label="horizontal"
-        defaultValue={40}
+        defaultValue={[30, 60]}
         orientation="horizontal"
         marks={marks}
       />
       <div style={{ height: 300 }}>
         <RangeSlider
+          startIcon={<VolumeDownIcon />}
+          endIcon={<VolumeUpIcon />}
           label="vertical"
-          defaultValue={40}
+          defaultValue={[30, 60]}
           orientation="vertical"
           marks={marks}
         />
@@ -340,76 +324,125 @@ export const Orientation = () => {
   );
 };
 
+function useHandlerInputChange(handler, event) {
+  const v = event.target.value;
+  const value = v === "" ? "" : Number(v);
+  handler(event, value);
+}
 export const InputField = () => {
+  const { fromValue, onChangeFromValue, onChangeToValue, toValue } = useValue(
+    30,
+    50
+  );
+
   const [value, setValue] = React.useState(30);
   const handleChange = (event, newValue) => {
     setValue(newValue);
     action("onChangeInput")(newValue);
   };
-  const handleInputChange = (event) => {
-    const v = event.target.value;
-    setValue(v === "" ? "" : Number(v));
-    action("onChangeInput")(v);
-  };
+  const handleInputChangeFrom = useHandlerInputChange.bind(
+    null,
+    onChangeFromValue
+  );
+  const handleInputChangeTo = useHandlerInputChange.bind(null, onChangeToValue);
 
   const handleBlur = () => {
-    if (value < 0) {
-      setValue(0);
-      action("onChangeInput")(0);
-    } else if (value > 100) {
-      setValue(100);
-      action("onChangeInput")(100);
+    if (fromValue < 0) {
+      onChangeFromValue(0);
+      action("onChangeFromValue")(0);
+    } else if (toValue > 100) {
+      onChangeToValue(100);
+      action("onChangeToValue")(100);
     }
   };
 
   return (
     <>
       <RangeSlider
-        defaultValue={40}
+        defaultValue={[40, 60]}
         startIcon={<VolumeUpIcon />}
         endIcon={<VolumeDownIcon />}
       />
       <RangeSlider
-        defaultValue={40}
+        defaultValue={[40, 60]}
         startIcon={<VolumeUpIcon />}
-        value={value}
-        onChange={handleChange}
+        fromValue={fromValue}
+        onChangeFromValue={onChangeFromValue}
+        onChangeToValue={onChangeToValue}
+        toValue={toValue}
         inputCmp={
-          <Input
-            value={value}
-            size="small"
-            onChange={handleInputChange}
-            onBlur={handleBlur}
-            inputProps={{
-              step: 10,
-              min: 0,
-              max: 100,
-              type: "number",
-            }}
-          />
+          <>
+            <Input
+              value={fromValue}
+              size="small"
+              onChange={handleInputChangeFrom}
+              onBlur={handleBlur}
+              inputProps={{
+                step: 10,
+                min: 0,
+                max: 100,
+                type: "number",
+              }}
+            />
+            <Input
+              value={toValue}
+              size="small"
+              onChange={handleInputChangeTo}
+              onBlur={handleBlur}
+              inputProps={{
+                step: 10,
+                min: 0,
+                max: 100,
+                type: "number",
+              }}
+            />
+          </>
         }
       />
       <RangeSlider
-        defaultValue={40}
+        defaultValue={[40, 60]}
         startIcon={<VolumeUpIcon />}
         endIcon={<VolumeDownIcon />}
-        value={value}
-        onChange={handleChange}
+        fromValue={fromValue}
+        onChangeFromValue={onChangeFromValue}
+        onChangeToValue={onChangeToValue}
+        toValue={toValue}
         inputCmp={
-          <Input
-            value={value}
-            size="small"
-            onChange={handleInputChange}
-            onBlur={handleBlur}
-            inputProps={{
-              step: 10,
-              min: 0,
-              max: 100,
-              type: "number",
-            }}
-          />
+          <>
+            <Input
+              value={fromValue}
+              size="small"
+              onChange={handleInputChangeFrom}
+              onBlur={handleBlur}
+              inputProps={{
+                step: 10,
+                min: 0,
+                max: 100,
+                type: "number",
+              }}
+            />
+            <Input
+              value={toValue}
+              size="small"
+              onChange={handleInputChangeTo}
+              onBlur={handleBlur}
+              inputProps={{
+                step: 10,
+                min: 0,
+                max: 100,
+                type: "number",
+              }}
+            />
+          </>
         }
       />
     </>
   );
+};
+
+export const MultiValue = () => {
+  const [value, setValue] = useState([30, 60, 90, 100]);
+  const onChange = (event, newValue) => setValue(newValue);
+
+  return <RangeSlider label="MultiValue" value={value} onChange={onChange} />;
 };

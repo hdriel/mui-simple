@@ -10,7 +10,6 @@ export default function RangeSlider({
   startIcon,
   endIcon,
   label,
-  onChange,
   disabled,
   size,
   displayValue,
@@ -34,14 +33,14 @@ export default function RangeSlider({
     const [fromNewValue, toNewValue] = newValue;
 
     if (activeThumb === 0) {
-      onChangeFromValue(
+      onChangeFromValue?.(
         event,
         Math.min(fromNewValue, toNewValue - minDistance)
       );
-      onChangeToValue(event, toNewValue);
+      onChangeToValue?.(event, toNewValue);
     } else {
-      onChangeFromValue(event, fromValue);
-      onChangeToValue(event, Math.max(toNewValue, fromValue + minDistance));
+      onChangeFromValue?.(event, fromValue);
+      onChangeToValue?.(event, Math.max(toNewValue, fromValue + minDistance));
     }
   };
 
@@ -55,38 +54,35 @@ export default function RangeSlider({
     if (toNewValue - fromNewValue < minDistance) {
       if (activeThumb === 0) {
         const clamped = Math.min(fromNewValue, max - minDistance);
-        onChangeFromValue(event, clamped);
-        onChangeToValue(event, clamped + minDistance);
+        onChangeFromValue?.(event, clamped);
+        onChangeToValue?.(event, clamped + minDistance);
       } else {
         const clamped = Math.max(toNewValue, minDistance);
-        onChangeFromValue(event, clamped - minDistance);
-        onChangeToValue(event, clamped);
+        onChangeFromValue?.(event, clamped - minDistance);
+        onChangeToValue?.(event, clamped);
       }
     } else {
-      onChangeFromValue(event, Math.min(...newValue));
-      onChangeToValue(event, Math.max(...newValue));
+      onChangeFromValue?.(event, Math.min(...newValue));
+      onChangeToValue?.(event, Math.max(...newValue));
     }
   };
 
   const handleChange = (event, newValue) => {
     if (!Array.isArray(newValue)) return;
-    onChangeFromValue(event, Math.min(...newValue));
-    onChangeToValue(event, Math.max(...newValue));
+    onChangeFromValue?.(event, Math.min(...newValue));
+    onChangeToValue?.(event, Math.max(...newValue));
   };
 
-  const value = [fromValue, toValue];
+  const value =
+    fromValue !== undefined && toValue !== undefined
+      ? [fromValue, toValue]
+      : undefined;
 
   return (
     <Slider
       startIcon={startIcon}
       endIcon={endIcon}
       label={label}
-      onChange={
-        {
-          locking: handleChangeLocking,
-          trailing: handleChangeTrailing,
-        }[disableSwap] ?? handleChange
-      }
       disabled={disabled}
       size={size}
       displayValue={displayValue}
@@ -103,8 +99,14 @@ export default function RangeSlider({
       color={muiColor}
       track={trackBarLinePosition === "none" ? false : trackBarLinePosition}
       disableSwap={disableSwap !== undefined}
-      {...props}
       value={value}
+      onChange={
+        {
+          locking: handleChangeLocking,
+          trailing: handleChangeTrailing,
+        }[disableSwap] ?? handleChange
+      }
+      {...props}
     />
   );
 }
