@@ -36,6 +36,7 @@ export const Switch = styled(
         "fontSize",
         "helperText",
         "switchStyle",
+        "labelPlacement",
       ].includes(prop),
   }
 )`

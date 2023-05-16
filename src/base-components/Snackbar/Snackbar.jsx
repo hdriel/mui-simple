@@ -39,11 +39,16 @@ export default function Snackbar({
             ? [<Button muiColor="inherit" size="small" icon={<CloseIcon />} />]
             : []
         )
-        ?.map((action) =>
+        ?.map((action, index) =>
           React.isValidElement(action) ? (
-            action
+            React.cloneElement(action, { key: index })
           ) : (
-            <Button {...action}>{action?.label ?? action}</Button>
+            <Button
+              key={index}
+              {...(typeof action === "object" ? action : undefined)}
+            >
+              {action?.label ?? action}
+            </Button>
           )
         ),
     [actions]
@@ -74,7 +79,6 @@ export default function Snackbar({
         return onClose?.(event, reason);
       }}
       key={messageId}
-      onExited={onExited}
       anchorOrigin={
         (vertical || horizontal) && {
           vertical: vertical ?? "top",
@@ -91,11 +95,11 @@ export default function Snackbar({
       {...props}
       action={action} // 'action' end after props, to prevent bugs from storybook, that any props has storybook action field
     >
-      {["success", "error", "warning", "info"].includes(variant) && (
+      {["success", "error", "warning", "info"].includes(variant) ? (
         <MuiAlert onClose={onClose} severity={variant} action={action}>
           {props.children ?? message}
         </MuiAlert>
-      )}
+      ) : null}
     </MuiSnackbar>
   );
 }
@@ -107,7 +111,6 @@ Snackbar.propTypes = {
   resumeHideDuration: PropTypes.number,
   onClose: PropTypes.func,
   onClickAway: PropTypes.func,
-  onExited: PropTypes.func,
   vertical: PropTypes.oneOf(["top", "bottom"]),
   horizontal: PropTypes.oneOf(["left", "center", "right"]),
   message: PropTypes.string,
@@ -129,7 +132,6 @@ Snackbar.defaultProps = {
   resumeHideDuration: undefined,
   onClose: undefined,
   onClickAway: undefined,
-  onExited: undefined,
   vertical: undefined,
   horizontal: undefined,
   message: undefined,

@@ -31,7 +31,7 @@ const RadioButtonsGroup = ({
   return (
     <>
       <RadioGroup
-        row={direction}
+        row={direction === "row"}
         name={name}
         defaultValue={defaultValue}
         onChange={onChange}
