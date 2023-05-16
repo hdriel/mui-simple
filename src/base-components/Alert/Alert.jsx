@@ -10,28 +10,33 @@ export default function Alert({
   icon,
   muiColor,
   customColor,
-  action,
+  actions,
   title,
-  actionLabel,
   children,
   ...props
 }) {
   const actionCmp = useMemo(() => {
     const actionList = []
-      .concat(action, actionLabel)
+      .concat(actions)
       .filter(Boolean)
-      .map((action) => {
-        return typeof action === "string" ? (
-          <Button muiColor="inherit" size="small">
-            {action}
-          </Button>
+      .map((action, index) => {
+        return React.isValidElement(action) ? (
+          React.cloneElement(action, { key: index })
         ) : (
-          action
+          <Button
+            key={index}
+            muiColor="inherit"
+            size="small"
+            onClick={(event) => action?.onClick?.(event) ?? onClose?.(event)}
+            {...(typeof action === "object" ? action : undefined)}
+          >
+            {action?.label ?? action}
+          </Button>
         );
       });
 
     return actionList.length ? actionList : undefined;
-  }, [action, actionLabel]);
+  }, [actions]);
 
   return (
     <MuiAlert
@@ -57,8 +62,12 @@ Alert.propTypes = {
   icon: PropTypes.node,
   muiColor: PropTypes.string,
   customColor: PropTypes.string,
-  actionLabel: PropTypes.string,
-  action: PropTypes.node,
+  actions: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.shape({ label: PropTypes.string, onClick: PropTypes.func }),
+    PropTypes.string,
+  ]),
 };
 
 Alert.defaultProps = {
@@ -68,6 +77,5 @@ Alert.defaultProps = {
   icon: undefined,
   muiColor: undefined,
   customColor: undefined,
-  actionLabel: undefined,
-  action: undefined,
+  actions: undefined,
 };

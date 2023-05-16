@@ -1,6 +1,10 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import { Send as SendIcon, Delete as DeleteIcon } from "@mui/icons-material";
+import {
+  Send as SendIcon,
+  Delete as DeleteIcon,
+  Mail as MailIcon,
+} from "@mui/icons-material";
 import { Stack } from "@mui/material";
 
 import Alert from "../Alert";
@@ -21,7 +25,7 @@ export default {
   ],
 };
 
-const onCloseHandler = action("onClick");
+const onCloseHandler = action("onClose");
 
 export const Default = () => {
   return <Alert />;
@@ -102,7 +106,17 @@ export const Action = () => {
     <Stack spacing={3}>
       <Alert>default alert without onClose handler</Alert>
       <Alert onClose={onCloseHandler}>onClose action handler only</Alert>
-      <Alert actionLabel="test">action label prop</Alert>
+      <Alert actions={"nothing"}>action label prop</Alert>
+      <Alert
+        onClose={onCloseHandler}
+        actions={[
+          "OK",
+          { label: "undo", onClick: action("undo") },
+          <Button icon={<MailIcon />} onClick={action("MailIcon")} />,
+        ]}
+      >
+        action label prop
+      </Alert>
       <Alert
         action={[
           <Button icon={<SendIcon />} />,
