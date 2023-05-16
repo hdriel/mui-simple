@@ -312,6 +312,8 @@ export const Orientation = () => {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1em" }}>
       <Slider
+        startIcon={<VolumeDownIcon />}
+        endIcon={<VolumeUpIcon />}
         label="horizontal"
         defaultValue={40}
         orientation="horizontal"
@@ -319,6 +321,8 @@ export const Orientation = () => {
       />
       <div style={{ height: 300 }}>
         <Slider
+          startIcon={<VolumeDownIcon />}
+          endIcon={<VolumeUpIcon />}
           label="vertical"
           defaultValue={40}
           orientation="vertical"

@@ -27,45 +27,66 @@ export default function RangeSlider({
   inputCmp,
   ...props
 }) {
-  const handleChange1 = (event, newValue, activeThumb) => {
+  minDistance = minDistance ?? 0;
+
+  const handleChangeLocking = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) return;
+    const [fromNewValue, toNewValue] = newValue;
 
     if (activeThumb === 0) {
-      onChangeFromValue(Math.min(newValue[0], toValue - minDistance));
-      onChangeToValue(toValue);
+      onChangeFromValue(
+        event,
+        Math.min(fromNewValue, toNewValue - minDistance)
+      );
+      onChangeToValue(event, toNewValue);
     } else {
-      onChangeFromValue(fromValue);
-      onChangeToValue(Math.max(newValue[1], fromValue + minDistance));
+      onChangeFromValue(event, fromValue);
+      onChangeToValue(event, Math.max(toNewValue, fromValue + minDistance));
     }
   };
 
-  const [value2, setValue2] = React.useState([20, 37]);
+  const handleChangeTrailing = (event, newValue, activeThumb) => {
+    if (!Array.isArray(newValue)) return;
+    const [fromNewValue, toNewValue] = newValue;
 
-  const handleChange2 = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
+    const max =
+      (Array.isArray(range) ? range[1] : range?.max) ?? props.max ?? 100;
 
-    if (newValue[1] - newValue[0] < minDistance) {
+    if (toNewValue - fromNewValue < minDistance) {
       if (activeThumb === 0) {
-        const clamped = Math.min(newValue[0], 100 - minDistance);
-        setValue2([clamped, clamped + minDistance]);
+        const clamped = Math.min(fromNewValue, max - minDistance);
+        onChangeFromValue(event, clamped);
+        onChangeToValue(event, clamped + minDistance);
       } else {
-        const clamped = Math.max(newValue[1], minDistance);
-        setValue2([clamped - minDistance, clamped]);
+        const clamped = Math.max(toNewValue, minDistance);
+        onChangeFromValue(event, clamped - minDistance);
+        onChangeToValue(event, clamped);
       }
     } else {
-      setValue2(newValue);
+      onChangeFromValue(event, Math.min(...newValue));
+      onChangeToValue(event, Math.max(...newValue));
     }
   };
+
+  const handleChange = (event, newValue) => {
+    if (!Array.isArray(newValue)) return;
+    onChangeFromValue(event, Math.min(...newValue));
+    onChangeToValue(event, Math.max(...newValue));
+  };
+
+  const value = [fromValue, toValue];
 
   return (
     <Slider
       startIcon={startIcon}
       endIcon={endIcon}
       label={label}
-      value={[fromValue, toValue]}
-      onChange={onChange}
+      onChange={
+        {
+          locking: handleChangeLocking,
+          trailing: handleChangeTrailing,
+        }[disableSwap] ?? handleChange
+      }
       disabled={disabled}
       size={size}
       displayValue={displayValue}
@@ -81,14 +102,16 @@ export default function RangeSlider({
       valueLabelDisplay={displayValue ?? (disabled ? "on" : "auto")}
       color={muiColor}
       track={trackBarLinePosition === "none" ? false : trackBarLinePosition}
-      disableSwap={disableSwap}
+      disableSwap={disableSwap !== undefined}
       {...props}
+      value={value}
     />
   );
 }
 
 RangeSlider.propTypes = {
-  fromValue: PropTypes.arrayOf(PropTypes.number),
+  fromValue: PropTypes.number,
+  toValue: PropTypes.number,
   onChangeFromValue: PropTypes.func,
   onChangeToValue: PropTypes.func,
   startIcon: PropTypes.node,
@@ -102,7 +125,6 @@ RangeSlider.propTypes = {
   size: PropTypes.oneOf(["small", "medium"]),
   displayValue: PropTypes.oneOf(["auto", "off", "on"]),
   valueLabelFormat: PropTypes.func,
-  disableSwap: PropTypes.bool,
   chooseFromMarksList: PropTypes.bool,
   inputCmp: PropTypes.node,
   trackBarLinePosition: PropTypes.oneOf(["none", "inverted", "normal"]),
@@ -126,13 +148,13 @@ RangeSlider.propTypes = {
       ]),
     }),
   ]),
+  disableSwap: PropTypes.oneOf(["locking", "trailing"]),
   minDistance: PropTypes.number,
 };
 
 RangeSlider.defaultProps = {
   startIcon: undefined,
   endIcon: undefined,
-  value: undefined,
   label: undefined,
   muiColor: undefined,
   customColor: undefined,
@@ -147,4 +169,5 @@ RangeSlider.defaultProps = {
   inputCmp: undefined,
   marks: undefined,
   range: undefined,
+  minDistance: 1,
 };

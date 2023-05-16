@@ -44,12 +44,19 @@ export default function Slider({
   }, [range, marks, chooseFromMarksList]);
 
   return (
-    <Box sx={{ mb: 1, height: "inherit" }}>
+    <Box
+      sx={{
+        mb: 1,
+        height: "inherit",
+        ...(orientation === "vertical" && { width: "max-content" }),
+      }}
+    >
       <SliderLabel>{label}</SliderLabel>
       <Grid
         container
         spacing={2}
         alignItems="center"
+        direction={orientation === "vertical" ? "column-reverse" : "row"}
         sx={{ height: "inherit" }}
       >
         <Grid item>{startIcon}</Grid>
@@ -83,7 +90,7 @@ export default function Slider({
 Slider.propTypes = {
   startIcon: PropTypes.node,
   endIcon: PropTypes.node,
-  value: PropTypes.oneOf([
+  value: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.arrayOf(PropTypes.number),
   ]),
@@ -125,7 +132,6 @@ Slider.propTypes = {
 Slider.defaultProps = {
   startIcon: undefined,
   endIcon: undefined,
-  value: undefined,
   label: undefined,
   muiColor: undefined,
   customColor: undefined,

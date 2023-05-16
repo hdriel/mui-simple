@@ -7,7 +7,7 @@ import {
 import { Stack } from "@mui/material";
 import MuiInput from "@mui/material/Input";
 import { styled } from "@mui/material/styles";
-import Slider from "../Slider";
+import RangeSlider from "../RangeSlider";
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -15,7 +15,7 @@ const Input = styled(MuiInput)`
 
 export default {
   title: "Inputs/RangeSlider",
-  component: Slider,
+  component: RangeSlider,
   decorators: [
     (Story) => (
       <div
@@ -37,38 +37,41 @@ const actions = {
 };
 
 export const Default = () => {
-  return <Slider {...actions} />;
+  return <RangeSlider {...actions} />;
 };
-
-export const VolumeExample = () => {
-  const [value, setValue] = React.useState([30, 50]);
-  const handleChange = (event, newValue) => setValue(newValue);
+export const DisableSwap = () => {
+  const [value1, setValue1] = React.useState(30);
+  const [value2, setValue2] = React.useState(40);
+  const handleChangeValue1 = (event, newValue) => setValue1(newValue);
+  const handleChangeValue2 = (event, newValue) => setValue2(newValue);
 
   return (
     <Stack spacing={3}>
-      <Slider
-        label={"Volume"}
-        startIcon={<VolumeDownIcon />}
-        endIcon={<VolumeUpIcon />}
-        value={value}
-        onChange={handleChange}
-        {...actions}
+      <RangeSlider
+        label="swap"
+        fromValue={value1}
+        toValue={value2}
+        onChangeFromValue={handleChangeValue1}
+        onChangeToValue={handleChangeValue2}
+        minDistance={10}
       />
-      <Slider
-        startIcon={<VolumeDownIcon />}
-        endIcon={<VolumeUpIcon />}
-        value={value}
-        onChange={handleChange}
-        {...actions}
+      <RangeSlider
+        label="DisableSwap - locking"
+        disableSwap="locking"
+        fromValue={value1}
+        toValue={value2}
+        onChangeFromValue={handleChangeValue1}
+        onChangeToValue={handleChangeValue2}
+        minDistance={10}
       />
-      <Slider
-        label={"Volume"}
-        startIcon={<VolumeDownIcon />}
-        endIcon={<VolumeUpIcon />}
-        value={45}
-        onChange={handleChange}
-        disabled
-        {...actions}
+      <RangeSlider
+        label="DisableSwap - trailing"
+        disableSwap="trailing"
+        fromValue={value1}
+        toValue={value2}
+        onChangeFromValue={handleChangeValue1}
+        onChangeToValue={handleChangeValue2}
+        minDistance={10}
       />
     </Stack>
   );
@@ -77,12 +80,20 @@ export const VolumeExample = () => {
 export const ThemedAndColored = () => {
   return (
     <Stack>
-      <Slider muiColor="primary" label="primary" displayValue={[10, 50]} />
-      <Slider muiColor="secondary" label="secondary" displayValue={[10, 50]} />
-      <Slider muiColor="info" label="info" displayValue={[10, 50]} />
-      <Slider muiColor="error" label="error" displayValue={[10, 50]} />
-      <Slider label="Default" displayValue={[10, 50]} />
-      <Slider label="#D050CC" customColor="#D050CC" displayValue={[10, 50]} />
+      <RangeSlider muiColor="primary" label="primary" displayValue={[10, 50]} />
+      <RangeSlider
+        muiColor="secondary"
+        label="secondary"
+        displayValue={[10, 50]}
+      />
+      <RangeSlider muiColor="info" label="info" displayValue={[10, 50]} />
+      <RangeSlider muiColor="error" label="error" displayValue={[10, 50]} />
+      <RangeSlider label="Default" displayValue={[10, 50]} />
+      <RangeSlider
+        label="#D050CC"
+        customColor="#D050CC"
+        displayValue={[10, 50]}
+      />
     </Stack>
   );
 };
@@ -90,9 +101,9 @@ export const ThemedAndColored = () => {
 export const Sized = () => {
   return (
     <Stack spacing={3}>
-      <Slider label="small" defaultValue={[45, 80]} size="small" />
-      <Slider label="medium" defaultValue={[80, 100]} size="medium" />
-      <Slider label="default" />
+      <RangeSlider label="small" defaultValue={[45, 80]} size="small" />
+      <RangeSlider label="medium" defaultValue={[80, 100]} size="medium" />
+      <RangeSlider label="default" />
     </Stack>
   );
 };
@@ -100,29 +111,29 @@ export const Sized = () => {
 export const ValueLabel = () => {
   return (
     <Stack spacing={3}>
-      <Slider label="auto" displayValue="auto" defaultValue={[45, 50]} />
-      <Slider label="on" displayValue="on" defaultValue={[80, 90]} />
-      <Slider label="off" displayValue="off" defaultValue={[45, 60]} />
-      <Slider label="default" defaultValue={[20, 50]} />
-      <Slider
+      <RangeSlider label="auto" displayValue="auto" defaultValue={[45, 50]} />
+      <RangeSlider label="on" displayValue="on" defaultValue={[80, 90]} />
+      <RangeSlider label="off" displayValue="off" defaultValue={[45, 60]} />
+      <RangeSlider label="default" defaultValue={[20, 50]} />
+      <RangeSlider
         label="disabled-auto"
         displayValue="auto"
         defaultValue={[45, 80]}
         disabled
       />
-      <Slider
+      <RangeSlider
         label="disabled-on"
         displayValue="on"
         defaultValue={[50, 80]}
         disabled
       />
-      <Slider
+      <RangeSlider
         label="disabled-off"
         displayValue="off"
         defaultValue={[45, 49]}
         disabled
       />
-      <Slider label="disabled-default" defaultValue={[5, 45]} disabled />
+      <RangeSlider label="disabled-default" defaultValue={[5, 45]} disabled />
     </Stack>
   );
 };
@@ -130,25 +141,25 @@ export const ValueLabel = () => {
 export const RangesObject = () => {
   return (
     <Stack spacing={3}>
-      <Slider
+      <RangeSlider
         label="min: 150, max: 200, step: 2.5"
         range={{ min: 150, max: 200, step: 2.5, marks: true }}
         defaultValue={[160, 180]}
         displayValue="on"
       />
-      <Slider
+      <RangeSlider
         label="min: 50, step: 15"
         range={{ min: 50, step: 15, marks: true }}
         defaultValue={[65, 90]}
         displayValue="on"
       />
-      <Slider
+      <RangeSlider
         label="max: 50, step: 10"
         range={{ max: 50, step: 10, marks: true }}
         defaultValue={[10, 100]}
         displayValue="on"
       />
-      <Slider
+      <RangeSlider
         label="max: 50, step: 8"
         range={{
           min: 10,
@@ -178,31 +189,31 @@ export const RangesObject = () => {
 export const RangesArray = () => {
   return (
     <Stack spacing={3}>
-      <Slider
+      <RangeSlider
         label="[min: 150, max: 200, step: 2.5, marks: true]"
         range={[150, 200, 2.5, true]}
         defaultValue={180}
         displayValue="on"
       />
-      <Slider
+      <RangeSlider
         label="[50, undefined, 15, true]"
         range={[50, undefined, 15, true]}
         defaultValue={80}
         displayValue="on"
       />
-      <Slider
+      <RangeSlider
         label="[undefined, 50, 10, true]"
         range={[undefined, 50, 10, true]}
         defaultValue={50}
         displayValue="on"
       />
-      <Slider
+      <RangeSlider
         label="[-50, 50, 10, true]"
         range={[-50, 50, 10, true]}
         defaultValue={0}
         displayValue="on"
       />
-      <Slider
+      <RangeSlider
         label="[undefined, undefined, 10, true]"
         range={[undefined, undefined, 10, true]}
         defaultValue={90}
@@ -215,8 +226,8 @@ export const RangesArray = () => {
 export const Marks = () => {
   return (
     <Stack spacing={3}>
-      <Slider marks defaultValue={50} displayValue="on" />
-      <Slider
+      <RangeSlider marks defaultValue={50} displayValue="on" />
+      <RangeSlider
         marks={[
           { label: "0", value: 0 },
           { label: "100", value: 100 },
@@ -226,7 +237,7 @@ export const Marks = () => {
         defaultValue={180}
         displayValue="on"
       />
-      <Slider
+      <RangeSlider
         label={"chooseFromMarksList"}
         marks={[
           { label: "0", value: 0 },
@@ -245,8 +256,8 @@ export const Marks = () => {
 export const Disabled = () => {
   return (
     <Stack spacing={3}>
-      <Slider defaultValue={40} />
-      <Slider defaultValue={40} disabled />
+      <RangeSlider defaultValue={40} />
+      <RangeSlider defaultValue={40} disabled />
     </Stack>
   );
 };
@@ -257,8 +268,8 @@ export const ValueLabelFormat = () => {
 
   return (
     <Stack spacing={3}>
-      <Slider defaultValue={40} valueLabelFormat={(n) => `${n}MB`} />
-      <Slider
+      <RangeSlider defaultValue={40} valueLabelFormat={(n) => `${n}MB`} />
+      <RangeSlider
         defaultValue={40}
         value={value}
         onChange={handleChange}
@@ -274,25 +285,25 @@ export const TrackBarPosition = () => {
 
   return (
     <Stack spacing={3}>
-      <Slider
+      <RangeSlider
         label={"normal"}
         defaultValue={40}
         valueLabelFormat={(n) => `${n} Normal`}
         trackBarLinePosition="normal"
       />
-      <Slider
+      <RangeSlider
         label={"inverted"}
         defaultValue={40}
         valueLabelFormat={(n) => `${n} opposite`}
         trackBarLinePosition="inverted"
       />
-      <Slider
+      <RangeSlider
         label={"none"}
         defaultValue={40}
         valueLabelFormat={(n) => `${n} none`}
         trackBarLinePosition={"none"}
       />
-      <Slider
+      <RangeSlider
         label={"false"}
         defaultValue={40}
         valueLabelFormat={(n) => `${n} false`}
@@ -311,14 +322,14 @@ const marks = [
 export const Orientation = () => {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1em" }}>
-      <Slider
+      <RangeSlider
         label="horizontal"
         defaultValue={40}
         orientation="horizontal"
         marks={marks}
       />
       <div style={{ height: 300 }}>
-        <Slider
+        <RangeSlider
           label="vertical"
           defaultValue={40}
           orientation="vertical"
@@ -353,12 +364,12 @@ export const InputField = () => {
 
   return (
     <>
-      <Slider
+      <RangeSlider
         defaultValue={40}
         startIcon={<VolumeUpIcon />}
         endIcon={<VolumeDownIcon />}
       />
-      <Slider
+      <RangeSlider
         defaultValue={40}
         startIcon={<VolumeUpIcon />}
         value={value}
@@ -378,7 +389,7 @@ export const InputField = () => {
           />
         }
       />
-      <Slider
+      <RangeSlider
         defaultValue={40}
         startIcon={<VolumeUpIcon />}
         endIcon={<VolumeDownIcon />}
