@@ -17,6 +17,7 @@ export default function Slider({
   muiColor,
   customColor,
   chooseFromMarksList,
+  trackBarLinePosition,
   orientation,
   disableSwap,
   inputCmp,
@@ -54,7 +55,9 @@ export default function Slider({
             color={muiColor}
             customColor={customColor}
             orientation={orientation}
-            track={"inverted"}
+            track={
+              trackBarLinePosition === "none" ? false : trackBarLinePosition
+            }
             {...rangeProps}
             step={chooseFromMarksList ? null : rangeProps?.step}
             {...props}
@@ -85,6 +88,7 @@ Slider.propTypes = {
   disableSwap: PropTypes.bool,
   chooseFromMarksList: PropTypes.bool,
   inputCmp: PropTypes.node,
+  trackBarLinePosition: PropTypes.oneOf(["none", "inverted", "normal"]),
   marks: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.arrayOf(
@@ -119,6 +123,7 @@ Slider.defaultProps = {
   disabled: undefined,
   orientation: undefined,
   size: undefined,
+  trackBarLinePosition: undefined,
   displayValue: undefined,
   disableSwap: undefined,
   inputCmp: undefined,

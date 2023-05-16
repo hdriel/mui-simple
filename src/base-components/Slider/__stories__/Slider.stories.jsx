@@ -268,6 +268,41 @@ export const ValueLabelFormat = () => {
     </Stack>
   );
 };
+
+export const TrackBarPosition = () => {
+  const [value, setValue] = React.useState(30);
+  const handleChange = (event, newValue) => setValue(newValue);
+
+  return (
+    <Stack spacing={3}>
+      <Slider
+        label={"normal"}
+        defaultValue={40}
+        valueLabelFormat={(n) => `${n} Normal`}
+        trackBarLinePosition="normal"
+      />
+      <Slider
+        label={"inverted"}
+        defaultValue={40}
+        valueLabelFormat={(n) => `${n} opposite`}
+        trackBarLinePosition="inverted"
+      />
+      <Slider
+        label={"none"}
+        defaultValue={40}
+        valueLabelFormat={(n) => `${n} none`}
+        trackBarLinePosition={"none"}
+      />
+      <Slider
+        label={"false"}
+        defaultValue={40}
+        valueLabelFormat={(n) => `${n} false`}
+        trackBarLinePosition={false}
+      />
+    </Stack>
+  );
+};
+
 export const Orientation = () => {
   return (
     <>
