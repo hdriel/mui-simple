@@ -1,12 +1,15 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import { Slider as MuiSlider, SliderLabel, Box, Grid } from "./Slider.styled";
+import Slider from "./Slider";
 
 export default function RangeSlider({
+  fromValue,
+  toValue,
+  onChangeFromValue,
+  onChangeToValue,
   startIcon,
   endIcon,
   label,
-  value,
   onChange,
   disabled,
   size,
@@ -20,64 +23,76 @@ export default function RangeSlider({
   trackBarLinePosition,
   orientation,
   disableSwap,
+  minDistance,
   inputCmp,
   ...props
 }) {
-  const rangeProps = useMemo(() => {
-    if (!range) return undefined;
-    if (Array.isArray(range)) {
-      const [min, max, step, marks] = range; // default min = 0, max = 100, marks = false
-      return { min, max, step, marks };
+  const handleChange1 = (event, newValue, activeThumb) => {
+    if (!Array.isArray(newValue)) return;
+
+    if (activeThumb === 0) {
+      onChangeFromValue(Math.min(newValue[0], toValue - minDistance));
+      onChangeToValue(toValue);
     } else {
-      const { min, max, step, marks } = range ?? {}; // default min = 0, max = 100, marks = false
-      return { min, max, step, marks };
+      onChangeFromValue(fromValue);
+      onChangeToValue(Math.max(newValue[1], fromValue + minDistance));
     }
-  }, [range]);
+  };
+
+  const [value2, setValue2] = React.useState([20, 37]);
+
+  const handleChange2 = (event, newValue, activeThumb) => {
+    if (!Array.isArray(newValue)) {
+      return;
+    }
+
+    if (newValue[1] - newValue[0] < minDistance) {
+      if (activeThumb === 0) {
+        const clamped = Math.min(newValue[0], 100 - minDistance);
+        setValue2([clamped, clamped + minDistance]);
+      } else {
+        const clamped = Math.max(newValue[1], minDistance);
+        setValue2([clamped - minDistance, clamped]);
+      }
+    } else {
+      setValue2(newValue);
+    }
+  };
 
   return (
-    <Box sx={{ mb: 1, height: "inherit" }}>
-      <SliderLabel>{label}</SliderLabel>
-      <Grid
-        container
-        spacing={2}
-        alignItems="center"
-        sx={{ height: "inherit" }}
-      >
-        <Grid item>{startIcon}</Grid>
-        <Grid item xs sx={{ height: "inherit" }}>
-          <MuiSlider
-            startIcon={startIcon}
-            endIcon={endIcon}
-            label={label}
-            size={size}
-            disabled={disabled}
-            value={value}
-            onChange={onChange}
-            valueLabelDisplay={displayValue ?? (disabled ? "on" : "auto")}
-            valueLabelFormat={valueLabelFormat}
-            marks={marks}
-            disableSwap={disableSwap}
-            color={muiColor}
-            customColor={customColor}
-            orientation={orientation}
-            track={
-              trackBarLinePosition === "none" ? false : trackBarLinePosition
-            }
-            {...rangeProps}
-            step={chooseFromMarksList ? null : rangeProps?.step}
-            {...props}
-          />
-        </Grid>
-        <Grid item>{inputCmp ?? endIcon}</Grid>
-      </Grid>
-    </Box>
+    <Slider
+      startIcon={startIcon}
+      endIcon={endIcon}
+      label={label}
+      value={[fromValue, toValue]}
+      onChange={onChange}
+      disabled={disabled}
+      size={size}
+      displayValue={displayValue}
+      valueLabelFormat={valueLabelFormat}
+      range={range}
+      marks={marks}
+      muiColor={muiColor}
+      customColor={customColor}
+      chooseFromMarksList={chooseFromMarksList}
+      trackBarLinePosition={trackBarLinePosition}
+      orientation={orientation}
+      inputCmp={inputCmp}
+      valueLabelDisplay={displayValue ?? (disabled ? "on" : "auto")}
+      color={muiColor}
+      track={trackBarLinePosition === "none" ? false : trackBarLinePosition}
+      disableSwap={disableSwap}
+      {...props}
+    />
   );
 }
 
 RangeSlider.propTypes = {
+  fromValue: PropTypes.arrayOf(PropTypes.number),
+  onChangeFromValue: PropTypes.func,
+  onChangeToValue: PropTypes.func,
   startIcon: PropTypes.node,
   endIcon: PropTypes.node,
-  value: PropTypes.arrayOf(PropTypes.number),
   label: PropTypes.string,
   muiColor: PropTypes.string,
   customColor: PropTypes.string,
@@ -111,6 +126,7 @@ RangeSlider.propTypes = {
       ]),
     }),
   ]),
+  minDistance: PropTypes.number,
 };
 
 RangeSlider.defaultProps = {

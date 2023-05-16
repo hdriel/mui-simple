@@ -19,20 +19,29 @@ export default function Slider({
   chooseFromMarksList,
   trackBarLinePosition,
   orientation,
-  disableSwap,
   inputCmp,
   ...props
 }) {
   const rangeProps = useMemo(() => {
     if (!range) return undefined;
     if (Array.isArray(range)) {
-      const [min, max, step, marks] = range; // default min = 0, max = 100, marks = false
-      return { min, max, step, marks };
+      const [min, max, step, marksRange] = range; // default min = 0, max = 100, marks = false
+      return {
+        min,
+        max,
+        step: chooseFromMarksList ? null : step,
+        marks: marks ?? marksRange,
+      };
     } else {
-      const { min, max, step, marks } = range ?? {}; // default min = 0, max = 100, marks = false
-      return { min, max, step, marks };
+      const { min, max, step, marks: marksRange } = range ?? {}; // default min = 0, max = 100, marks = false
+      return {
+        min,
+        max,
+        step: chooseFromMarksList ? null : step,
+        marks: marks ?? marksRange,
+      };
     }
-  }, [range]);
+  }, [range, marks, chooseFromMarksList]);
 
   return (
     <Box sx={{ mb: 1, height: "inherit" }}>
@@ -55,8 +64,6 @@ export default function Slider({
             onChange={onChange}
             valueLabelDisplay={displayValue ?? (disabled ? "on" : "auto")}
             valueLabelFormat={valueLabelFormat}
-            marks={marks}
-            disableSwap={disableSwap}
             color={muiColor}
             customColor={customColor}
             orientation={orientation}
@@ -64,7 +71,6 @@ export default function Slider({
               trackBarLinePosition === "none" ? false : trackBarLinePosition
             }
             {...rangeProps}
-            step={chooseFromMarksList ? null : rangeProps?.step}
             {...props}
           />
         </Grid>
@@ -77,7 +83,10 @@ export default function Slider({
 Slider.propTypes = {
   startIcon: PropTypes.node,
   endIcon: PropTypes.node,
-  value: PropTypes.number,
+  value: PropTypes.oneOf([
+    PropTypes.number,
+    PropTypes.arrayOf(PropTypes.number),
+  ]),
   label: PropTypes.string,
   muiColor: PropTypes.string,
   customColor: PropTypes.string,
