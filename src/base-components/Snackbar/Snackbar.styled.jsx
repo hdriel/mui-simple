@@ -3,6 +3,8 @@ import { styled } from "@mui/material/styles";
 export { Fade, Grow, Slide } from "@mui/material";
 export const Alert = styled(MuiAlert)``;
 
-export const Snackbar = styled(MuiSnackbar)`
+export const Snackbar = styled(MuiSnackbar, {
+  shouldForwardProp: (propName) => !["fullWidth"].includes(propName),
+})`
   width: 100%;
 `;

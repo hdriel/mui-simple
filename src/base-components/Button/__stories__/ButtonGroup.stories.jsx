@@ -100,25 +100,25 @@ export const Themed = () => {
 export const Colored = () => {
   return (
     <Stack spacing={3}>
-      <ButtonGroup variant="text" color={"#0a3e99"}>
+      <ButtonGroup variant="text" customColor={"#0a3e99"}>
         <Button {...actions} startIcon={<SendIcon />}>
           Start Icon
         </Button>
-        <Button {...actions} endIcon={<DeleteIcon />} color={"#ca00ca"}>
+        <Button {...actions} endIcon={<DeleteIcon />} customColor={"#ca00ca"}>
           End Icon
         </Button>
         <Button {...actions}>Test</Button>
       </ButtonGroup>
-      <ButtonGroup variant="contained" color={"#0a3e99"}>
+      <ButtonGroup variant="contained" customColor={"#0a3e99"}>
         <Button {...actions} startIcon={<SendIcon />}>
           Start Icon
         </Button>
-        <Button {...actions} endIcon={<DeleteIcon />} color={"#ca00ca"}>
+        <Button {...actions} endIcon={<DeleteIcon />} customColor={"#ca00ca"}>
           End Icon
         </Button>
         <Button {...actions}>Test</Button>
       </ButtonGroup>
-      <ButtonGroup variant="outlined" color={"#0a3e99"}>
+      <ButtonGroup variant="outlined" customColor={"#0a3e99"}>
         <Button {...actions} startIcon={<SendIcon />}>
           Start Icon
         </Button>

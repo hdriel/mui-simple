@@ -72,9 +72,10 @@ export const Variant = () => {
         { vertical: "bottom", horizontal: "right", variant: "error" },
         { vertical: "top", horizontal: "left", variant: "warning" },
         { vertical: "top", horizontal: "center", variant: "info" },
-        { vertical: "top", horizontal: "right", variant: "none" },
+        { vertical: "top", horizontal: "right", variant: null },
       ].map(({ vertical, horizontal, variant }) => (
         <Snackbar
+          key={`${vertical} - ${horizontal}`}
           anchorOrigin={{ vertical, horizontal }}
           open
           variant={variant}
@@ -98,6 +99,7 @@ export const AnchorPosition = () => {
         { vertical: "top", horizontal: "right" },
       ].map(({ vertical, horizontal }) => (
         <Snackbar
+          key={`${vertical} - ${horizontal}`}
           anchorOrigin={{ vertical, horizontal }}
           open
           message={`${vertical} - ${horizontal}`}
@@ -180,7 +182,7 @@ export const Animation = () => {
           animation: "fade",
           // animationDuration: 1000,
         },
-        { vertical: "top", horizontal: "left", slideDirection: "bottom" },
+        { vertical: "top", horizontal: "left", slideDirection: "down" },
         { vertical: "top", horizontal: "center", slideDirection: "left" },
         { vertical: "top", horizontal: "right", slideDirection: "right" },
       ].map(
@@ -192,6 +194,7 @@ export const Animation = () => {
           animationDuration,
         }) => (
           <Snackbar
+            key={`${vertical} - ${horizontal}`}
             anchorOrigin={{ vertical, horizontal }}
             open={open}
             message={`${vertical} - ${horizontal}`}

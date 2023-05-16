@@ -97,9 +97,6 @@ export const Sized = () => {
       <Chip {...actions} size="medium">
         medium
       </Chip>
-      <Chip {...actions} size="large">
-        large
-      </Chip>
       <Chip {...actions}>>Default</Chip>
     </Stack>
   );

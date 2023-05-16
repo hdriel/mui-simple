@@ -25,7 +25,9 @@ export const Button = styled(MuiButton, {
   }
 `;
 
-export const IconButton = styled(MuiIconButton)``;
+export const IconButton = styled(MuiIconButton, {
+  shouldForwardProp: (propName) => !["customColor"].includes(propName),
+})``;
 
 export const ButtonGroup = styled(MuiButtonGroup, {
   shouldForwardProp: (propName) => !["customColor"].includes(propName),

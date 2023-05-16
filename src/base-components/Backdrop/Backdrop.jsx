@@ -16,14 +16,14 @@ export default function Backdrop({ open, color, onClick, ...props }) {
 
 Backdrop.propTypes = {
   onClick: PropTypes.func,
-  open: PropTypes.bool,
+  open: PropTypes.bool.isRequired,
   color: PropTypes.string,
   invisible: PropTypes.bool,
 };
 
 Backdrop.defaultProps = {
   onClick: undefined,
-  open: undefined,
+  open: false,
   color: "#fff",
   invisible: undefined,
 };

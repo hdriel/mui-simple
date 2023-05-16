@@ -16,7 +16,7 @@ const Button = ({
   onClick,
   link,
   muiColor,
-  color,
+  customColor,
   disableRipple,
   isLoading,
   loadingIconPosition,
@@ -31,8 +31,8 @@ const Button = ({
     return (
       <MuiIconButton
         color={muiColor}
-        customColor={color}
-        style={{ color }}
+        customColor={customColor}
+        style={{ color: customColor }}
         size={size}
         disableRipple={disableRipple}
         onClick={onClick}
@@ -65,7 +65,7 @@ const Button = ({
       href={link}
       color={muiColor}
       disableRipple={disableRipple}
-      customColor={color}
+      customColor={customColor}
       size={size}
       fullWidth={fullWidth}
       {...props}
@@ -84,7 +84,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
   link: PropTypes.string,
   muiColor: PropTypes.string,
-  color: PropTypes.string,
+  customColor: PropTypes.string,
   disableRipple: PropTypes.bool,
   isLoading: PropTypes.bool,
   loadingIconPosition: PropTypes.oneOf(["start", "end"]),
@@ -103,7 +103,7 @@ Button.defaultProps = {
   onClick: undefined,
   link: undefined,
   muiColor: undefined,
-  color: undefined,
+  customColor: undefined,
   disableRipple: undefined,
   isLoading: undefined,
   loadingIconPosition: undefined,

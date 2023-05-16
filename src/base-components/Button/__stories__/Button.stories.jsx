@@ -38,19 +38,19 @@ export const FullWidth = () => {
 export const Icons = () => {
   return (
     <Stack direction="row" spacing={3}>
-      <Button {...actions}>Label only</Button>;
+      <Button {...actions}>Label only</Button>
       <Button {...actions} startIcon={<SendIcon />}>
         Start Icon
       </Button>
       <Button {...actions} muiColor="error" endIcon={<DeleteIcon />}>
         End Icon
       </Button>
-      <Button {...actions} color={"#D05010"} icon={<FingerprintIcon />} />
+      <Button {...actions} customColor={"#D05010"} icon={<FingerprintIcon />} />
     </Stack>
   );
 };
 
-export const variants = () => {
+export const Variants = () => {
   return (
     <Stack direction="row" spacing={3}>
       <Button {...actions} variant="text">
@@ -71,21 +71,25 @@ export const DisableRipple = () => {
   return (
     <Stack direction="column" spacing={3}>
       <Stack direction="row" spacing={3}>
-        <Button {...actions} disableRipple color="primary">
+        <Button {...actions} disableRipple muiColor="primary">
           Disable Ripple
         </Button>
         <Button
           {...actions}
-          color={"#D05010"}
+          customColor={"#D05010"}
           disableRipple
           icon={<FingerprintIcon />}
         />
       </Stack>
       <Stack direction="row" spacing={3}>
-        <Button {...actions} color="secondary">
+        <Button {...actions} muiColor="secondary">
           Ripple
         </Button>
-        <Button {...actions} color={"#D05010"} icon={<FingerprintIcon />} />
+        <Button
+          {...actions}
+          customColor={"#D05010"}
+          icon={<FingerprintIcon />}
+        />
       </Stack>
     </Stack>
   );
@@ -106,7 +110,7 @@ export const ButtonLink = () => {
         </Button>
         <Button
           {...actions}
-          color={"#D05010"}
+          customColor={"#D05010"}
           icon={<SendIcon />}
           link="https://chat.openai.com/"
         />
@@ -115,7 +119,11 @@ export const ButtonLink = () => {
         <Button {...actions} variant="text">
           normal button
         </Button>
-        <Button {...actions} color={"#D05010"} icon={<FingerprintIcon />} />
+        <Button
+          {...actions}
+          customColor={"#D05010"}
+          icon={<FingerprintIcon />}
+        />
       </Stack>
     </Stack>
   );
@@ -168,19 +176,19 @@ export const Themed = () => {
 export const Colored = () => {
   return (
     <Stack direction={"row"} spacing={2}>
-      <Button {...actions} variant="contained" color={"#df01fd"}>
+      <Button {...actions} variant="contained" customColor={"#df01fd"}>
         Secondary
       </Button>
-      <Button {...actions} variant="outlined" color={"#df01fd"}>
+      <Button {...actions} variant="outlined" customColor={"#df01fd"}>
         Secondary
       </Button>
-      <Button {...actions} variant="text" color={"#df01fd"}>
+      <Button {...actions} variant="text" customColor={"#df01fd"}>
         Secondary
       </Button>
-      <Button {...actions} variant="text" color={"#df01fd"}>
+      <Button {...actions} variant="text" customColor={"#df01fd"}>
         Secondary
       </Button>
-      <Button {...actions} color={"#df01fd"} icon={<SendIcon />} />
+      <Button {...actions} customColor={"#df01fd"} icon={<SendIcon />} />
     </Stack>
   );
 };
