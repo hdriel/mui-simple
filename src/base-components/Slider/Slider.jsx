@@ -11,10 +11,12 @@ export default function Slider({
   disabled,
   size,
   displayValue,
+  valueLabelFormat,
   range,
   marks,
   muiColor,
   customColor,
+  chooseFromMarksList,
   orientation,
   disableSwap,
   inputCmp,
@@ -45,20 +47,20 @@ export default function Slider({
             disabled={disabled}
             value={value}
             onChange={onChange}
-            valueLabelDisplay={displayValue}
+            valueLabelDisplay={displayValue ?? (disabled ? "on" : "auto")}
+            valueLabelFormat={valueLabelFormat}
             marks={marks}
             disableSwap={disableSwap}
             color={muiColor}
             customColor={customColor}
             orientation={orientation}
-            {...props}
+            track={"inverted"}
             {...rangeProps}
+            step={chooseFromMarksList ? null : rangeProps?.step}
+            {...props}
           />
         </Grid>
-        <Grid item>
-          {endIcon}
-          {inputCmp}
-        </Grid>
+        <Grid item>{inputCmp ?? endIcon}</Grid>
       </Grid>
     </Box>
   );
@@ -79,7 +81,9 @@ Slider.propTypes = {
   orientation: PropTypes.oneOf(["vertical", "horizontal"]),
   size: PropTypes.oneOf(["small", "medium"]),
   displayValue: PropTypes.oneOf(["auto", "off", "on"]),
+  valueLabelFormat: PropTypes.func,
   disableSwap: PropTypes.bool,
+  chooseFromMarksList: PropTypes.bool,
   inputCmp: PropTypes.node,
   marks: PropTypes.oneOfType([
     PropTypes.bool,
@@ -107,9 +111,17 @@ Slider.defaultProps = {
   startIcon: undefined,
   endIcon: undefined,
   value: undefined,
+  label: undefined,
+  muiColor: undefined,
+  customColor: undefined,
   onChange: undefined,
+  valueLabelFormat: undefined,
   disabled: undefined,
+  orientation: undefined,
   size: undefined,
-  valueLabelDisplay: "auto",
+  displayValue: undefined,
+  disableSwap: undefined,
+  inputCmp: undefined,
+  marks: undefined,
   range: undefined,
 };
