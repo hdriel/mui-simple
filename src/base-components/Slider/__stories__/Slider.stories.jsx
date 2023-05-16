@@ -305,10 +305,12 @@ export const TrackBarPosition = () => {
 
 export const Orientation = () => {
   return (
-    <>
-      <Slider defaultValue={40} orientation="horizontal" />
-      <Slider defaultValue={40} orientation="vertical" />
-    </>
+    <div style={{ display: "flex", flexDirection: "column", gap: "1em" }}>
+      <Slider label="horizontal" defaultValue={40} orientation="horizontal" />
+      <div style={{ height: 300 }}>
+        <Slider label="vertical" defaultValue={40} orientation="vertical" />
+      </div>
+    </div>
   );
 };
 

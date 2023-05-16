@@ -35,11 +35,16 @@ export default function Slider({
   }, [range]);
 
   return (
-    <Box sx={{ mb: 1 }}>
+    <Box sx={{ mb: 1, height: "inherit" }}>
       <SliderLabel>{label}</SliderLabel>
-      <Grid container spacing={2} alignItems="center">
+      <Grid
+        container
+        spacing={2}
+        alignItems="center"
+        sx={{ height: "inherit" }}
+      >
         <Grid item>{startIcon}</Grid>
-        <Grid item xs>
+        <Grid item xs sx={{ height: "inherit" }}>
           <MuiSlider
             startIcon={startIcon}
             endIcon={endIcon}
