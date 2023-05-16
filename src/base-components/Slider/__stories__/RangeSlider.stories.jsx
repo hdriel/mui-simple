@@ -14,7 +14,7 @@ const Input = styled(MuiInput)`
 `;
 
 export default {
-  title: "Inputs/Slider",
+  title: "Inputs/RangeSlider",
   component: Slider,
   decorators: [
     (Story) => (
@@ -41,7 +41,7 @@ export const Default = () => {
 };
 
 export const VolumeExample = () => {
-  const [value, setValue] = React.useState(30);
+  const [value, setValue] = React.useState([30, 50]);
   const handleChange = (event, newValue) => setValue(newValue);
 
   return (
@@ -77,12 +77,12 @@ export const VolumeExample = () => {
 export const ThemedAndColored = () => {
   return (
     <Stack>
-      <Slider muiColor="primary" label="primary" />
-      <Slider muiColor="secondary" label="secondary" />
-      <Slider muiColor="info" label="info" />
-      <Slider muiColor="error" label="error" />
-      <Slider label="Default" />
-      <Slider label="#D050CC" customColor="#D050CC" />
+      <Slider muiColor="primary" label="primary" displayValue={[10, 50]} />
+      <Slider muiColor="secondary" label="secondary" displayValue={[10, 50]} />
+      <Slider muiColor="info" label="info" displayValue={[10, 50]} />
+      <Slider muiColor="error" label="error" displayValue={[10, 50]} />
+      <Slider label="Default" displayValue={[10, 50]} />
+      <Slider label="#D050CC" customColor="#D050CC" displayValue={[10, 50]} />
     </Stack>
   );
 };
@@ -90,8 +90,8 @@ export const ThemedAndColored = () => {
 export const Sized = () => {
   return (
     <Stack spacing={3}>
-      <Slider label="small" defaultValue={45} size="small" />
-      <Slider label="medium" defaultValue={80} size="medium" />
+      <Slider label="small" defaultValue={[45, 80]} size="small" />
+      <Slider label="medium" defaultValue={[80, 100]} size="medium" />
       <Slider label="default" />
     </Stack>
   );
@@ -100,29 +100,29 @@ export const Sized = () => {
 export const ValueLabel = () => {
   return (
     <Stack spacing={3}>
-      <Slider label="auto" displayValue="auto" defaultValue={45} />
-      <Slider label="on" displayValue="on" defaultValue={80} />
-      <Slider label="off" displayValue="off" defaultValue={45} />
-      <Slider label="default" defaultValue={80} />
+      <Slider label="auto" displayValue="auto" defaultValue={[45, 50]} />
+      <Slider label="on" displayValue="on" defaultValue={[80, 90]} />
+      <Slider label="off" displayValue="off" defaultValue={[45, 60]} />
+      <Slider label="default" defaultValue={[20, 50]} />
       <Slider
         label="disabled-auto"
         displayValue="auto"
-        defaultValue={45}
+        defaultValue={[45, 80]}
         disabled
       />
       <Slider
         label="disabled-on"
         displayValue="on"
-        defaultValue={80}
+        defaultValue={[50, 80]}
         disabled
       />
       <Slider
         label="disabled-off"
         displayValue="off"
-        defaultValue={45}
+        defaultValue={[45, 49]}
         disabled
       />
-      <Slider label="disabled-default" defaultValue={45} disabled />
+      <Slider label="disabled-default" defaultValue={[5, 45]} disabled />
     </Stack>
   );
 };
@@ -133,19 +133,19 @@ export const RangesObject = () => {
       <Slider
         label="min: 150, max: 200, step: 2.5"
         range={{ min: 150, max: 200, step: 2.5, marks: true }}
-        defaultValue={180}
+        defaultValue={[160, 180]}
         displayValue="on"
       />
       <Slider
         label="min: 50, step: 15"
         range={{ min: 50, step: 15, marks: true }}
-        defaultValue={65}
+        defaultValue={[65, 90]}
         displayValue="on"
       />
       <Slider
         label="max: 50, step: 10"
         range={{ max: 50, step: 10, marks: true }}
-        defaultValue={100}
+        defaultValue={[10, 100]}
         displayValue="on"
       />
       <Slider
@@ -169,7 +169,7 @@ export const RangesObject = () => {
             },
           ],
         }}
-        defaultValue={40}
+        defaultValue={[40, 90]}
         displayValue="on"
       />
     </Stack>

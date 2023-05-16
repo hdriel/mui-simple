@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import { Slider as MuiSlider, SliderLabel, Box, Grid } from "./Slider.styled";
 
-export default function Slider({
+export default function RangeSlider({
   startIcon,
   endIcon,
   label,
@@ -74,10 +74,10 @@ export default function Slider({
   );
 }
 
-Slider.propTypes = {
+RangeSlider.propTypes = {
   startIcon: PropTypes.node,
   endIcon: PropTypes.node,
-  value: PropTypes.number,
+  value: PropTypes.arrayOf(PropTypes.number),
   label: PropTypes.string,
   muiColor: PropTypes.string,
   customColor: PropTypes.string,
@@ -113,7 +113,7 @@ Slider.propTypes = {
   ]),
 };
 
-Slider.defaultProps = {
+RangeSlider.defaultProps = {
   startIcon: undefined,
   endIcon: undefined,
   value: undefined,
