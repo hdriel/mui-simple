@@ -303,12 +303,28 @@ export const TrackBarPosition = () => {
   );
 };
 
+const marks = [
+  { value: 0, label: "0°C" },
+  { value: 20, label: "20°C" },
+  { value: 37, label: "37°C" },
+  { value: 100, label: "100°C" },
+];
 export const Orientation = () => {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1em" }}>
-      <Slider label="horizontal" defaultValue={40} orientation="horizontal" />
+      <Slider
+        label="horizontal"
+        defaultValue={40}
+        orientation="horizontal"
+        marks={marks}
+      />
       <div style={{ height: 300 }}>
-        <Slider label="vertical" defaultValue={40} orientation="vertical" />
+        <Slider
+          label="vertical"
+          defaultValue={40}
+          orientation="vertical"
+          marks={marks}
+        />
       </div>
     </div>
   );
