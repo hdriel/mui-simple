@@ -1,10 +1,6 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import {
-  Slider as MuiSlider,
-  SliderWrapper,
-  SliderLabel,
-} from "./Slider.styled";
+import { Slider as MuiSlider, SliderLabel, Box, Grid } from "./Slider.styled";
 
 export default function Slider({
   startIcon,
@@ -21,6 +17,7 @@ export default function Slider({
   customColor,
   orientation,
   disableSwap,
+  inputCmp,
   ...props
 }) {
   const rangeProps = useMemo(() => {
@@ -35,24 +32,35 @@ export default function Slider({
   }, [range]);
 
   return (
-    <SliderWrapper sx={{ mb: 1 }}>
-      {label && <SliderLabel>{label}</SliderLabel>}
-      {startIcon}
-      <MuiSlider
-        size={size}
-        disabled={disabled}
-        value={value}
-        onChange={onChange}
-        valueLabelDisplay={displayValue}
-        marks={marks}
-        disableSwap={disableSwap}
-        color={muiColor}
-        customColor={customColor}
-        orientation={orientation}
-        {...rangeProps}
-      />
-      {endIcon}
-    </SliderWrapper>
+    <Box sx={{ mb: 1 }}>
+      <SliderLabel>{label}</SliderLabel>
+      <Grid container spacing={2} alignItems="center">
+        <Grid item>{startIcon}</Grid>
+        <Grid item xs>
+          <MuiSlider
+            startIcon={startIcon}
+            endIcon={endIcon}
+            label={label}
+            size={size}
+            disabled={disabled}
+            value={value}
+            onChange={onChange}
+            valueLabelDisplay={displayValue}
+            marks={marks}
+            disableSwap={disableSwap}
+            color={muiColor}
+            customColor={customColor}
+            orientation={orientation}
+            {...props}
+            {...rangeProps}
+          />
+        </Grid>
+        <Grid item>
+          {endIcon}
+          {inputCmp}
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
 
@@ -72,6 +80,7 @@ Slider.propTypes = {
   size: PropTypes.oneOf(["small", "medium"]),
   displayValue: PropTypes.oneOf(["auto", "off", "on"]),
   disableSwap: PropTypes.bool,
+  inputCmp: PropTypes.node,
   marks: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.arrayOf(
