@@ -210,7 +210,7 @@ export const TextStyles = () => {
         { sub: true, size: "5px" },
         { monospace: true },
       ].map((styleProps) => (
-        <Typography border {...styleProps}>
+        <Typography border autoWidth {...styleProps}>
           {JSON.stringify(styleProps).slice(1, -1)}
         </Typography>
       ))}

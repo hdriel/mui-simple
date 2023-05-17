@@ -28,9 +28,11 @@ function ellipsisRows(props) {
 }
 
 const Border = styled(
-  ({ width, rows, ...props }) => <Box sx={{ width }} {...props} />,
+  ({ width, autoWidth, rows, ...props }) => <Box {...props} />,
   { shouldForwardProp: (propName) => !["noWrap"].includes(propName) }
 )`
+  width: ${(props) =>
+    props.width ?? (props.autoWidth ? "max-content" : "100%")};
   display: flex;
   border: ${(props) =>
     props.border && typeof props.border === "boolean"
@@ -41,11 +43,17 @@ const Border = styled(
 `;
 
 export const Typography = styled(
-  ({ noWrap, border, width = "100%", rows, children, ...props }) =>
+  ({ noWrap, border, width, rows, autoWidth, children, ...props }) =>
     noWrap ? (
       <MuiTypography {...props}>{children}&nbsp;</MuiTypography>
     ) : (
-      <Border width={width} rows={rows} border={border} noWrap={noWrap}>
+      <Border
+        width={width}
+        rows={rows}
+        border={border}
+        noWrap={noWrap}
+        autoWidth={autoWidth}
+      >
         <MuiTypography {...props}>{children}&nbsp;</MuiTypography>
       </Border>
     ),

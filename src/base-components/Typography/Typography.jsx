@@ -93,6 +93,8 @@ Typography.propTypes = {
   sub: PropTypes.bool,
   monospace: PropTypes.bool,
   lineHeight: PropTypes.number,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  autoWidth: PropTypes.bool,
 };
 
 Typography.defaultProps = {
@@ -116,4 +118,6 @@ Typography.defaultProps = {
   sub: undefined,
   monospace: undefined,
   lineHeight: undefined,
+  width: undefined,
+  autoWidth: true,
 };
