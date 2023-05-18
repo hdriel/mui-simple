@@ -12,6 +12,9 @@ function ellipsisRow1(props) {
     display: -webkit-box !important;
     -webkit-line-clamp: ${props.rows};
     -webkit-box-orient: vertical;
+    & > * {
+      white-space: unset !important;
+    }
   `;
 }
 
@@ -27,6 +30,9 @@ function ellipsisRows(props) {
     display: -webkit-box !important;
     -webkit-line-clamp: ${props.rows};
     -webkit-box-orient: vertical;
+    & > * {
+      white-space: unset !important;
+    }
   `;
 }
 
@@ -39,6 +45,7 @@ export const Border = styled(Box, {
     props.border && typeof props.border === "boolean"
       ? "1px solid black"
       : props.border};
+
   ${ellipsisRows}
   ${ellipsisRow1}
 `;
@@ -80,4 +87,9 @@ export const Typography = styled(MuiTypography, {
           font-family: monospace;
         `
       : undefined};
+  white-space: normal;
+
+  &:has(:not(:empty)) {
+    display: inherit;
+  }
 `;

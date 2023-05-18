@@ -3,10 +3,6 @@ import { Stack, Box } from "@mui/material";
 
 import Typography from "../Typography";
 
-const Border = ({ width, ...props }) => (
-  <Box sx={{ width, border: "1px solid black" }} {...props} />
-);
-
 export default {
   title: "Data-Display/Typography",
   component: Typography,
@@ -16,9 +12,9 @@ export default {
         style={{
           padding: "0.5em",
           height: "300px",
-          width: "300px",
+          // width: "300px",
           border: "1px dashed black",
-          resize: "both",
+          // resize: "both",
           overflow: "auto",
         }}
       >
@@ -39,12 +35,7 @@ export const Rows = () => {
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry.
       </Typography>
-    </Stack>
-  );
-};
-
-/*
-<Typography rows={2} width={"90%"} border>
+      <Typography rows={2} width={"90%"} border>
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
         since the 1500s, when an unknown printer took a galley of types simply
@@ -57,14 +48,16 @@ export const Rows = () => {
         scrambled it to make a type specimen book. It has survived not only five
         centuries, but also the leap into electr
       </Typography>
-      <Typography rows={false} width={"80%"} border>
+      <Typography rows={0} width={"80%"}>
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
         since the 1500s, when an unknown printer took a galley of type and
         scrambled it to make a type specimen book. It has survived not only five
         centuries, but also the leap into electr
       </Typography>
- */
+    </Stack>
+  );
+};
 
 export const Align = () => {
   return (

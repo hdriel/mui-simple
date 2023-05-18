@@ -92,7 +92,6 @@ export default function Typography({
     return (childrenAsTooltip ? children : diffTooltip) || undefined;
   }, [isEllipsis, tooltip]);
 
-  console.log("tooltipMessage", tooltipMessage);
   const cmp = typographyProps.noWrap ? (
     <MuiTypography ref={ref} {...typographyProps}>
       {children}&nbsp;
@@ -120,7 +119,7 @@ Typography.propTypes = {
   alignLeft: PropTypes.bool,
   alignRight: PropTypes.bool,
   gutterBottom: PropTypes.bool,
-  rows: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
+  rows: PropTypes.number,
   wrap: PropTypes.bool,
   paragraph: PropTypes.bool,
   component: PropTypes.string,

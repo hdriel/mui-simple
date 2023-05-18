@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 
 export default function useElementSize(resize = false) {
   const ref = useRef(null);
@@ -6,26 +6,28 @@ export default function useElementSize(resize = false) {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
 
-  useEffect(() => {
+  const handleResize = useCallback(() => {
     if (ref.current) {
-      setWidth(ref.current?.clientWidth ?? 0);
-      setHeight(ref.current?.clientHeight ?? 0);
+      const { width, height } = ref.current?.getBoundingClientRect() ?? {};
+      setWidth(width);
+      setHeight(height);
     }
   }, [ref.current]);
 
   useEffect(() => {
-    function handleWindowResize() {
-      setWidth(ref.current?.clientWidth ?? 0);
-      setHeight(ref.current?.clientHeight ?? 0);
+    handleResize();
+  }, [handleResize]);
+
+  useEffect(() => {
+    if (resize && ref.current) {
+      window.addEventListener("resize", handleResize);
     }
-    if (resize && ref.current)
-      window.addEventListener("resize", handleWindowResize);
 
     return () => {
       if (resize && ref.current)
-        window.removeEventListener("resize", handleWindowResize);
+        window.removeEventListener("resize", handleResize);
     };
-  }, [ref.current, resize]);
+  }, [handleResize, resize]);
 
   return [ref, { width, height }];
 }
