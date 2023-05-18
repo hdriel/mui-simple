@@ -10,7 +10,13 @@ const SKELETON_VARIANT = {
   ROUNDED: "rounded",
   NONE: undefined,
 };
-export default function Skeleton({ loading, children, ...props }) {
+export default function Skeleton({
+  loading,
+  animation,
+  variant,
+  children,
+  ...props
+}) {
   const [ref, { width, height }] = useElementSize(true);
   const [mounted, setMounted] = useState(false);
 
@@ -41,28 +47,45 @@ export default function Skeleton({ loading, children, ...props }) {
     ? null
     : children;
 
-  const type = children?.type?.name ?? "string";
-  const avatarProps = { width, height, variant: SKELETON_VARIANT.ROUNDED };
+  const type = children?.type?.name ?? children?.type?.render?.name ?? "string";
+  const avatarProps = { animation, width, height, variant };
 
-  switch (type) {
-    case "Avatar":
-      avatarProps.variant = SKELETON_VARIANT.CIRCULAR;
-      break;
-    case "Typography":
-      avatarProps.variant = SKELETON_VARIANT.TEXT;
-      break;
-    default:
-      avatarProps.variant = SKELETON_VARIANT.ROUNDED;
-      break;
+  if (avatarProps.variant === undefined) {
+    console.log("type", type);
+    switch (type) {
+      case "Avatar":
+        avatarProps.variant = SKELETON_VARIANT.CIRCULAR;
+        break;
+      case "Typography":
+      case "string":
+        avatarProps.variant = SKELETON_VARIANT.TEXT;
+        break;
+      case "CardMedia":
+        avatarProps.variant = SKELETON_VARIANT.RECTANGULAR;
+        break;
+      default:
+        debugger;
+        avatarProps.variant = SKELETON_VARIANT.ROUNDED;
+        break;
+    }
+    console.log("variant", avatarProps.variant);
   }
 
-  return <MuiSkeleton {...avatarProps}>{component}</MuiSkeleton>;
+  return (
+    <MuiSkeleton {...avatarProps} {...props}>
+      {component}
+    </MuiSkeleton>
+  );
 }
 
 Skeleton.propTypes = {
   loading: PropTypes.bool,
+  animation: PropTypes.oneOf(["pulse", "wave", false]),
+  variant: PropTypes.oneOf(["circular", "rectangular", "rounded", "text"]),
 };
 
 Skeleton.defaultProps = {
   loading: undefined,
+  animation: undefined,
+  variant: undefined,
 };
