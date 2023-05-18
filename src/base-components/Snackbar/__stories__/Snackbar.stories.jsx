@@ -67,13 +67,36 @@ export const Variant = () => {
   return (
     <Stack>
       {[
-        { vertical: "bottom", horizontal: "left", variant: undefined },
-        { vertical: "bottom", horizontal: "center", variant: "success" },
-        { vertical: "bottom", horizontal: "right", variant: "error" },
-        { vertical: "top", horizontal: "left", variant: "warning" },
-        { vertical: "top", horizontal: "center", variant: "info" },
-        { vertical: "top", horizontal: "right", variant: null },
-      ].map(({ vertical, horizontal, variant }) => (
+        {
+          vertical: "bottom",
+          horizontal: "left",
+          variant: undefined,
+          title: "title",
+        },
+        {
+          vertical: "bottom",
+          horizontal: "center",
+          variant: "success",
+        },
+        {
+          vertical: "bottom",
+          horizontal: "right",
+          variant: "error",
+        },
+        {
+          vertical: "top",
+          horizontal: "left",
+          variant: "warning",
+          title: "title",
+        },
+        {
+          vertical: "top",
+          horizontal: "center",
+          variant: "info",
+          title: "title",
+        },
+        { vertical: "top", horizontal: "right", variant: null, title: "title" },
+      ].map(({ vertical, horizontal, variant, ...props }) => (
         <Snackbar
           key={`${vertical} - ${horizontal}`}
           anchorOrigin={{ vertical, horizontal }}
@@ -81,6 +104,7 @@ export const Variant = () => {
           variant={variant}
           message={`${variant ?? "default"}`}
           messageId={`${vertical} - ${horizontal}`}
+          {...props}
         />
       ))}
     </Stack>

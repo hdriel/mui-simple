@@ -1,14 +1,9 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import {
-  Alert as MuiAlert,
-  Snackbar as MuiSnackbar,
-  Grow,
-  Fade,
-  Slide,
-} from "./Snackbar.styled";
+import { Snackbar as MuiSnackbar, Grow, Fade, Slide } from "./Snackbar.styled";
 import Button from "../Button/Button";
 import { Close as CloseIcon } from "@mui/icons-material";
+import Alert from "../Alert/Alert";
 
 export default function Snackbar({
   open,
@@ -20,6 +15,7 @@ export default function Snackbar({
   vertical,
   horizontal,
   variant,
+  title,
   message,
   messageId,
   actions,
@@ -61,9 +57,10 @@ export default function Snackbar({
       </Slide>
     );
     const GrowTransition = (props) => <Grow {...props}>{props.children}</Grow>;
+    const FadeTransition = (props) => <Grow {...props}>{props.children}</Grow>;
 
     return {
-      fade: Fade,
+      fade: FadeTransition,
       slide: SlideTransition,
       grow: GrowTransition,
     }[animation ?? "slide"];
@@ -86,6 +83,7 @@ export default function Snackbar({
         }
       }
       message={message}
+      title={title}
       fullWidth={fullWidth}
       TransitionComponent={transition}
       transitionDuration={
@@ -96,9 +94,14 @@ export default function Snackbar({
       action={action} // 'action' end after props, to prevent bugs from storybook, that any props has storybook action field
     >
       {["success", "error", "warning", "info"].includes(variant) ? (
-        <MuiAlert onClose={onClose} severity={variant} action={action}>
+        <Alert
+          onClose={onClose}
+          severity={variant}
+          action={action}
+          title={title}
+        >
           {props.children ?? message}
-        </MuiAlert>
+        </Alert>
       ) : null}
     </MuiSnackbar>
   );
@@ -113,8 +116,9 @@ Snackbar.propTypes = {
   onClickAway: PropTypes.func,
   vertical: PropTypes.oneOf(["top", "bottom"]),
   horizontal: PropTypes.oneOf(["left", "center", "right"]),
-  message: PropTypes.string,
   variant: PropTypes.oneOf(["success", "error", "warning", "info"]),
+  title: PropTypes.string,
+  message: PropTypes.string,
   messageId: PropTypes.string,
   actions: PropTypes.oneOfType([
     PropTypes.node,
@@ -134,6 +138,7 @@ Snackbar.defaultProps = {
   onClickAway: undefined,
   vertical: undefined,
   horizontal: undefined,
+  title: undefined,
   message: undefined,
   messageId: undefined,
   action: undefined,

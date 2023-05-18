@@ -8,6 +8,12 @@ import { styled, css } from "@mui/material/styles";
 export const Alert = styled(MuiAlert, {
   shouldForwardProp: (propName) => !["customColor"].includes(propName),
 })`
+  &.MuiAlert-root {
+    min-width: 200px;
+  }
+  width: ${(props) =>
+    typeof props.width === "number" ? `${props.width}px` : props.width};
+
   & .MuiAlert-icon,
   & .MuiAlert-message {
     color: ${(props) => props.customColor};
