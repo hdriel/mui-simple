@@ -39,8 +39,8 @@ export const Border = styled(Box, {
     props.border && typeof props.border === "boolean"
       ? "1px solid black"
       : props.border};
-  ${ellipsisRow1}
   ${ellipsisRows}
+  ${ellipsisRow1}
 `;
 
 export const Typography = styled(MuiTypography, {
