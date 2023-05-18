@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { Box, Typography as MuiTypography } from "@mui/material";
 import { styled, css } from "@mui/material/styles";
 
@@ -7,8 +7,11 @@ function ellipsisRow1(props) {
 
   return css`
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: normal;
     overflow: hidden;
+    display: -webkit-box !important;
+    -webkit-line-clamp: ${props.rows};
+    -webkit-box-orient: vertical;
   `;
 }
 
@@ -20,19 +23,17 @@ function ellipsisRows(props) {
   return css`
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: normal;
     display: -webkit-box !important;
     -webkit-line-clamp: ${props.rows};
     -webkit-box-orient: vertical;
-    white-space: normal;
   `;
 }
 
-const Border = styled(
-  ({ width, autoWidth, rows, ...props }) => <Box {...props} />,
-  { shouldForwardProp: (propName) => !["noWrap"].includes(propName) }
-)`
-  width: ${(props) =>
-    props.width ?? (props.autoWidth ? "max-content" : "100%")};
+export const Border = styled(Box, {
+  shouldForwardProp: (propName) => !["autoWidth", "noWrap"].includes(propName),
+})`
+  width: ${(props) => props.width ?? (props.autoWidth ? "auto" : "100%")};
   display: flex;
   border: ${(props) =>
     props.border && typeof props.border === "boolean"
@@ -42,38 +43,22 @@ const Border = styled(
   ${ellipsisRows}
 `;
 
-export const Typography = styled(
-  ({ noWrap, border, width, rows, autoWidth, children, ...props }) =>
-    noWrap ? (
-      <MuiTypography {...props}>{children}&nbsp;</MuiTypography>
-    ) : (
-      <Border
-        width={width}
-        rows={rows}
-        border={border}
-        noWrap={noWrap}
-        autoWidth={autoWidth}
-      >
-        <MuiTypography {...props}>{children}&nbsp;</MuiTypography>
-      </Border>
-    ),
-  {
-    shouldForwardProp: (propName) =>
-      ![
-        "fontSize",
-        "customColor",
-        "bold",
-        "italic",
-        "underline",
-        "strike",
-        "charsCase",
-        "sup",
-        "sub",
-        "monospace",
-        "lineHeight",
-      ].includes(propName),
-  }
-)`
+export const Typography = styled(MuiTypography, {
+  shouldForwardProp: (propName) =>
+    ![
+      "fontSize",
+      "customColor",
+      "bold",
+      "italic",
+      "underline",
+      "strike",
+      "charsCase",
+      "sup",
+      "sub",
+      "monospace",
+      "lineHeight",
+    ].includes(propName),
+})`
   width: 100%;
   color: ${(props) => props.customColor};
   font-weight: ${(props) =>

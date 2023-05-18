@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useLayoutEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { Typography as MuiTypography } from "./Typography.styled";
+import { Border, Typography as MuiTypography } from "./Typography.styled";
+import Tooltip from "../Tooltip/Tooltip";
 
 export default function Typography({
   alignCenter,
@@ -8,10 +9,8 @@ export default function Typography({
   alignLeft,
   alignRight,
   gutterBottom,
-  rows,
   paragraph,
   component,
-  border,
   muiColor,
   customColor,
   wrap,
@@ -25,8 +24,18 @@ export default function Typography({
   sub,
   monospace,
   lineHeight,
+  tooltip,
+  children,
+  width,
+  rows,
+  border,
+  noWrap,
+  autoWidth,
   ...props
 }) {
+  const ref = useRef(null);
+  const [showTooltip, setShowTooltip] = useState(false);
+
   let align;
   switch (true) {
     case alignCenter:
@@ -46,30 +55,69 @@ export default function Typography({
       break;
   }
 
-  return (
-    <MuiTypography
-      align={align}
-      noWrap={!wrap || !rows}
-      rows={rows}
-      gutterBottom={gutterBottom}
-      paragraph={paragraph}
-      component={component}
-      border={border}
-      color={muiColor}
-      customColor={customColor}
-      fontSize={size}
-      bold={bold}
-      italic={italic}
-      underline={underline}
-      strike={strike}
-      charsCase={charsCase}
-      sup={sup}
-      sub={sub}
-      monospace={monospace}
-      lineHeight={lineHeight}
-      {...props}
-    />
+  useLayoutEffect(() => {
+    const show = ref.current?.offsetWidth < ref.current?.scrollWidth;
+    console.log("show", show);
+    if (show !== showTooltip) setShowTooltip(show);
+  });
+
+  const typographyProps = {
+    align: align,
+    noWrap: !wrap || !rows,
+    rows: typeof rows === "boolean" ? +rows : rows,
+    gutterBottom: gutterBottom,
+    paragraph: paragraph,
+    component: component,
+    border: border,
+    color: muiColor,
+    customColor: customColor,
+    fontSize: size,
+    bold: bold,
+    italic: italic,
+    underline: underline,
+    strike: strike,
+    charsCase: charsCase,
+    sup: sup,
+    sub: sub,
+    monospace: monospace,
+    lineHeight: lineHeight,
+  };
+
+  const tooltipMessage = useMemo(
+    () =>
+      showTooltip && tooltip
+        ? typeof tooltip === "boolean"
+          ? children
+          : tooltip
+        : undefined,
+    [showTooltip, tooltip]
   );
+
+  const cmp = typographyProps.noWrap ? (
+    <MuiTypography
+      title={tooltipMessage}
+      ref={ref}
+      {...typographyProps}
+      {...props}
+    >
+      {children}&nbsp;
+    </MuiTypography>
+  ) : (
+    <Border
+      ref={ref}
+      width={width}
+      rows={rows}
+      border={border}
+      noWrap={noWrap}
+      autoWidth={autoWidth}
+    >
+      <MuiTypography ref={ref} {...typographyProps} {...props}>
+        {children}&nbsp;
+      </MuiTypography>
+    </Border>
+  );
+
+  return <Tooltip title={tooltipMessage}>{cmp}</Tooltip>;
 }
 
 Typography.propTypes = {
@@ -95,6 +143,7 @@ Typography.propTypes = {
   lineHeight: PropTypes.number,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   autoWidth: PropTypes.bool,
+  tooltip: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 
 Typography.defaultProps = {
@@ -120,4 +169,5 @@ Typography.defaultProps = {
   lineHeight: undefined,
   width: undefined,
   autoWidth: true,
+  tooltip: undefined,
 };
