@@ -39,7 +39,9 @@ function ellipsisRows(props) {
 export const Border = styled(Box, {
   shouldForwardProp: (propName) => !["autoWidth", "noWrap"].includes(propName),
 })`
-  width: ${(props) => props.width ?? (props.autoWidth ? "auto" : "100%")};
+  width: ${(props) =>
+    (typeof props.width === "number" ? `${props.width}px` : props.width) ??
+    (props.autoWidth ? "auto" : "100%")};
   display: flex;
   border: ${(props) =>
     props.border && typeof props.border === "boolean"

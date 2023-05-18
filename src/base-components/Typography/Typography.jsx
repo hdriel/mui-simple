@@ -39,6 +39,7 @@ export default function Typography({
   border,
   noWrap,
   autoWidth,
+  showTooltipOnEllipsis,
   ...props
 }) {
   const [ref, isEllipsis] = useEllipsisActive();
@@ -86,11 +87,17 @@ export default function Typography({
   };
 
   const tooltipMessage = useMemo(() => {
-    const childrenAsTooltip = tooltip && typeof tooltip === "boolean";
-    const diffTooltip = tooltip && typeof tooltip === "string";
-    if (!isEllipsis) return undefined;
-    return (childrenAsTooltip ? children : diffTooltip) || undefined;
-  }, [isEllipsis, tooltip]);
+    const childrenAsTooltip =
+      typeof tooltip === "boolean" && tooltip ? children : undefined;
+    const diffTooltip =
+      typeof tooltip === "string" && tooltip ? tooltip : undefined;
+
+    if (showTooltipOnEllipsis && !isEllipsis) return undefined;
+    if (showTooltipOnEllipsis === undefined && tooltip === true) {
+      return diffTooltip ?? childrenAsTooltip;
+    }
+    return diffTooltip ?? childrenAsTooltip;
+  }, [showTooltipOnEllipsis, isEllipsis, tooltip]);
 
   const cmp = typographyProps.noWrap ? (
     <MuiTypography ref={ref} {...typographyProps}>
@@ -137,6 +144,7 @@ Typography.propTypes = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   autoWidth: PropTypes.bool,
   tooltip: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  showTooltipOnEllipsis: PropTypes.bool,
 };
 
 Typography.defaultProps = {
@@ -163,4 +171,5 @@ Typography.defaultProps = {
   width: undefined,
   autoWidth: true,
   tooltip: true,
+  showTooltipOnEllipsis: true,
 };

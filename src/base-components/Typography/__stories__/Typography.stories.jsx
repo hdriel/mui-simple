@@ -213,3 +213,46 @@ export const TextStyles = () => {
     </Stack>
   );
 };
+
+export const Tooltip = () => {
+  return (
+    <Stack spacing={3}>
+      <Typography muiColor="primary" width={400} tooltip showTooltipOnEllipsis>
+        this text not show tooltip because not long enough
+      </Typography>
+      <Typography muiColor="primary" width={200} tooltip showTooltipOnEllipsis>
+        this text show tooltip because is long enough
+      </Typography>
+      <Typography
+        muiColor="primary"
+        width={200}
+        tooltip="custom tooltip message"
+        showTooltipOnEllipsis
+      >
+        this text show custom tooltip message
+      </Typography>
+      <Typography
+        muiColor="primary"
+        width={400}
+        tooltip
+        showTooltipOnEllipsis={false}
+      >
+        this text show tooltip also when not ellipsis
+      </Typography>
+      <Typography muiColor="primary">
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the industry's standard dummy text ever
+        since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five
+        centuries, but also the leap into electr
+      </Typography>
+      <Typography muiColor="primary" border>
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the industry's standard dummy text ever
+        since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five
+        centuries, but also the leap into electr
+      </Typography>
+    </Stack>
+  );
+};
