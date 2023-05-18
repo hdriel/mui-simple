@@ -1,7 +1,15 @@
-import React, { useLayoutEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import PropTypes from "prop-types";
 import { Border, Typography as MuiTypography } from "./Typography.styled";
 import Tooltip from "../Tooltip/Tooltip";
+import useElementSize from "../../hooks/useElementSize";
+import { useEllipsisActive } from "../../hooks/useEllipsisActive";
 
 export default function Typography({
   alignCenter,
@@ -33,8 +41,7 @@ export default function Typography({
   autoWidth,
   ...props
 }) {
-  const ref = useRef(null);
-  const [showTooltip, setShowTooltip] = useState(false);
+  const [ref, isEllipsis] = useEllipsisActive();
 
   let align;
   switch (true) {
@@ -54,12 +61,6 @@ export default function Typography({
       align = "inherit";
       break;
   }
-
-  useLayoutEffect(() => {
-    const show = ref.current?.offsetWidth < ref.current?.scrollWidth;
-    console.log("show", show);
-    if (show !== showTooltip) setShowTooltip(show);
-  });
 
   const typographyProps = {
     align: align,
@@ -81,37 +82,30 @@ export default function Typography({
     sub: sub,
     monospace: monospace,
     lineHeight: lineHeight,
+    ...props,
   };
 
-  const tooltipMessage = useMemo(
-    () =>
-      showTooltip && tooltip
-        ? typeof tooltip === "boolean"
-          ? children
-          : tooltip
-        : undefined,
-    [showTooltip, tooltip]
-  );
+  const tooltipMessage = useMemo(() => {
+    const childrenAsTooltip = tooltip && typeof tooltip === "boolean";
+    const diffTooltip = tooltip && typeof tooltip === "string";
+    if (!isEllipsis) return undefined;
+    return (childrenAsTooltip ? children : diffTooltip) || undefined;
+  }, [isEllipsis, tooltip]);
 
+  console.log("tooltipMessage", tooltipMessage);
   const cmp = typographyProps.noWrap ? (
-    <MuiTypography
-      title={tooltipMessage}
-      ref={ref}
-      {...typographyProps}
-      {...props}
-    >
+    <MuiTypography ref={ref} {...typographyProps}>
       {children}&nbsp;
     </MuiTypography>
   ) : (
     <Border
-      ref={ref}
       width={width}
       rows={rows}
       border={border}
       noWrap={noWrap}
       autoWidth={autoWidth}
     >
-      <MuiTypography ref={ref} {...typographyProps} {...props}>
+      <MuiTypography ref={ref} {...typographyProps}>
         {children}&nbsp;
       </MuiTypography>
     </Border>
@@ -169,5 +163,5 @@ Typography.defaultProps = {
   lineHeight: undefined,
   width: undefined,
   autoWidth: true,
-  tooltip: undefined,
+  tooltip: true,
 };
