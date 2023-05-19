@@ -2,26 +2,55 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Breadcrumbs as MuiBreadcrumbs } from "./Breadcrumbs.styled";
 import Link from "../Link/Link";
+import Chip from "../Chip/Chip";
+import Typography from "../Typography/Typography";
 
-export default function Breadcrumbs({ maxItems, separator, links, ...props }) {
+export default function Breadcrumbs({
+  maxItems,
+  size,
+  separator,
+  customColor,
+  muiColor,
+  links,
+  chip,
+  children,
+  ...props
+}) {
   return (
-    <MuiBreadcrumbs maxItems={maxItems} separator={separator}>
-      {links?.map((link) =>
-        typeof link === "string" ? (
-          <Link muiColor={"inherit"} underline={"none"}>
+    <MuiBreadcrumbs
+      size={size}
+      maxItems={maxItems}
+      separator={separator}
+      {...props}
+    >
+      {links?.map((link, index) => {
+        const Cmp = chip ? Chip : Link;
+
+        return typeof link === "string" ? (
+          <Typography
+            key={`${link}-${index}`}
+            muiColor={muiColor ?? "inherit"}
+            customColor={customColor}
+            tooltip={false}
+            size={size}
+          >
             {link}
-          </Link>
+          </Typography>
         ) : (
-          <Link
+          <Cmp
             {...link}
-            muiColor={link?.muiColor ?? "inherit"}
+            key={`${link?.label}-${index}`}
+            muiColor={link?.muiColor ?? muiColor ?? "inherit"}
+            customColor={link?.customColor ?? customColor}
             underline={link?.underline ?? "hover"}
+            size={link?.size ?? size}
           >
             {link?.icon}
             {link?.label}
-          </Link>
-        )
-      )}
+          </Cmp>
+        );
+      })}
+      {children}
     </MuiBreadcrumbs>
   );
 }
@@ -29,23 +58,28 @@ export default function Breadcrumbs({ maxItems, separator, links, ...props }) {
 Breadcrumbs.propTypes = {
   maxItems: PropTypes.number,
   separator: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   links: PropTypes.arrayOf(
     PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.shape({
+        url: PropTypes.string,
         label: PropTypes.string,
         icon: PropTypes.node,
         underline: PropTypes.oneOf(["always", "hover", "none"]),
         muiColor: PropTypes.string,
-        link: PropTypes.string,
+        customColor: PropTypes.string,
         onClick: PropTypes.func,
       }),
     ])
   ),
+  chip: PropTypes.bool,
 };
 
 Breadcrumbs.defaultProps = {
   maxItems: undefined,
   separator: undefined,
+  size: undefined,
   links: undefined,
+  chip: undefined,
 };
