@@ -73,6 +73,10 @@ export const Typography = styled(MuiTypography, {
   font-weight: ${(props) =>
     props.bold && typeof props.bold === "boolean" ? "bold" : props.bold};
 
+  font-size: ${(props) =>
+    typeof props.fontSize === "number"
+      ? `${props.fontSize}px`
+      : props.fontSize};
   font-style: ${(props) => (props.italic ? "italic" : undefined)};
   text-decoration: ${(props) => (props.underline ? "underline" : undefined)};
   text-decoration: ${(props) => (props.strike ? "line-through" : undefined)};
