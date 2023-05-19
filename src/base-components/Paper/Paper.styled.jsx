@@ -25,9 +25,15 @@ function imageStyle(props) {
 
 export const Paper = styled(MuiPaper, {
   shouldForwardProp: (propName) =>
-    !["customColor", "textColor", "imageSrc", "imageOpacity"].includes(
-      propName
-    ),
+    ![
+      "muiColor",
+      "customColor",
+      "textColor",
+      "imageSrc",
+      "imageOpacity",
+      "imageOpacity",
+      "imageLayout",
+    ].includes(propName),
 })`
   width: ${(props) =>
     typeof props.width === "number" ? `${props.width}px` : props.width};

@@ -40,7 +40,7 @@ Paper.propTypes = {
   square: PropTypes.bool,
   muiColor: PropTypes.bool,
   customColor: PropTypes.bool,
-  textColor: PropTypes.bool,
+  textColor: PropTypes.string,
   imageSrc: PropTypes.string,
   imageOpacity: PropTypes.number,
   imageLayout: PropTypes.oneOfType([
