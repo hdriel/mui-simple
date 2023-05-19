@@ -39,7 +39,7 @@ export const Elevation = () => {
       }}
     >
       {Array.from({ length: 25 }, (_, i) => i).map((elevation) => (
-        <Paper height={60} width={125} elevation={elevation}>
+        <Paper key={elevation} height={60} width={125} elevation={elevation}>
           {`elevation=${elevation}`}
         </Paper>
       ))}

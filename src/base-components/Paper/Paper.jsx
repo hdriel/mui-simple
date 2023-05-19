@@ -18,7 +18,7 @@ export default function Paper({
 }) {
   return (
     <MuiPaper
-      elevation={elevation}
+      elevation={variant !== "outlined" ? elevation : undefined}
       variant={variant}
       square={square}
       width={width}
@@ -38,8 +38,8 @@ Paper.propTypes = {
   elevation: PropTypes.oneOf(Array.from({ length: 25 }, (_, i) => i)), // 0-24
   variant: PropTypes.oneOf(["elevation", "outlined"]),
   square: PropTypes.bool,
-  muiColor: PropTypes.bool,
-  customColor: PropTypes.bool,
+  muiColor: PropTypes.string,
+  customColor: PropTypes.string,
   textColor: PropTypes.string,
   imageSrc: PropTypes.string,
   imageOpacity: PropTypes.number,
