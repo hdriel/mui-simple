@@ -1,4 +1,6 @@
 import React from "react";
+import { action } from "@storybook/addon-actions";
+
 import {
   Send as SendIcon,
   Whatshot as WhatshotIcon,
@@ -267,6 +269,41 @@ export const Icons = () => {
             label: "New Collection",
             url: "#",
             icon: <WhatshotIcon fontSize="small" />,
+          },
+          "Belts",
+        ]}
+      />
+    </Stack>
+  );
+};
+
+export const Chips = () => {
+  return (
+    <Stack spacing={2}>
+      <Breadcrumbs
+        chips={[
+          "Home",
+          {
+            label: "Home",
+            startIcon: <SendIcon fontSize="small" />,
+            muiColor: "secondary",
+            onClick: action("onClickChip"),
+          },
+          {
+            label: "Catalog",
+            url: "#",
+            startIcon: <HomeIcon fontSize="small" />,
+            onDelete: action("onDeleteChip"),
+            customColor: "#c3e529",
+          },
+          "Accessories",
+          {
+            label: "New Collection",
+            url: "#",
+            startIcon: <WhatshotIcon fontSize="small" />,
+            endIcon: <SendIcon fontSize="small" />,
+            onClick: action("onClickChip"),
+            onDelete: action("onDeleteChip"),
           },
           "Belts",
         ]}

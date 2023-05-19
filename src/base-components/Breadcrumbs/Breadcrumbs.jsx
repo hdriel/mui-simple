@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import { Breadcrumbs as MuiBreadcrumbs } from "./Breadcrumbs.styled";
 import Link from "../Link/Link";
 import Chip from "../Chip/Chip";
 import Typography from "../Typography/Typography";
+import { useTheme, emphasize } from "@mui/material/styles";
 
 export default function Breadcrumbs({
   maxItems,
@@ -12,7 +13,8 @@ export default function Breadcrumbs({
   customColor,
   muiColor,
   links,
-  chip,
+  chips,
+  chipBreadCrumbsStyle,
   children,
   ...props
 }) {
@@ -24,8 +26,6 @@ export default function Breadcrumbs({
       {...props}
     >
       {links?.map((link, index) => {
-        const Cmp = chip ? Chip : Link;
-
         return typeof link === "string" ? (
           <Typography
             key={`${link}-${index}`}
@@ -37,7 +37,7 @@ export default function Breadcrumbs({
             {link}
           </Typography>
         ) : (
-          <Cmp
+          <Link
             {...link}
             key={`${link?.label}-${index}`}
             muiColor={link?.muiColor ?? muiColor ?? "inherit"}
@@ -47,7 +47,41 @@ export default function Breadcrumbs({
           >
             {link?.icon}
             {link?.label}
-          </Cmp>
+          </Link>
+        );
+      })}
+      {chips?.map((chip, index) => {
+        return typeof chip === "string" ? (
+          <Typography
+            key={`${chip}-${index}`}
+            muiColor={muiColor ?? "inherit"}
+            customColor={customColor}
+            tooltip={false}
+            size={size}
+            wrap={false}
+          >
+            {chip}
+          </Typography>
+        ) : (
+          <Chip
+            {...chip}
+            key={`${chip?.label}-${index}`}
+            muiColor={
+              chipBreadCrumbsStyle ? undefined : chip?.muiColor ?? muiColor
+            }
+            customColor={
+              chipBreadCrumbsStyle
+                ? undefined
+                : chip?.customColor ?? customColor
+            }
+            size={chip?.size ?? size}
+            label={chip?.label}
+            startIcon={chip?.startIcon}
+            endIcon={chip?.endIcon}
+            onClick={chip?.onClick}
+            onDelete={chip?.onDelete ?? (chip?.endIcon && (() => {}))}
+            breadCrumbsStyle={chipBreadCrumbsStyle}
+          />
         );
       })}
       {children}
@@ -73,7 +107,21 @@ Breadcrumbs.propTypes = {
       }),
     ])
   ),
-  chip: PropTypes.bool,
+  chips: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({
+        url: PropTypes.string,
+        label: PropTypes.string,
+        startIcon: PropTypes.node,
+        endIcon: PropTypes.node,
+        muiColor: PropTypes.string,
+        customColor: PropTypes.string,
+        onClick: PropTypes.func,
+      }),
+    ])
+  ),
+  chipBreadCrumbsStyle: PropTypes.bool,
 };
 
 Breadcrumbs.defaultProps = {
@@ -81,5 +129,6 @@ Breadcrumbs.defaultProps = {
   separator: undefined,
   size: undefined,
   links: undefined,
-  chip: undefined,
+  chips: undefined,
+  chipBreadCrumbsStyle: true,
 };

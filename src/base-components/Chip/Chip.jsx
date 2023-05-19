@@ -15,6 +15,7 @@ export default function Chip({
   multiLine,
   size,
   width,
+  breadCrumbsStyle,
   children,
   ...props
 }) {
@@ -32,6 +33,7 @@ export default function Chip({
       size={size}
       deleteIcon={endIcon}
       multiLine={multiLine}
+      breadCrumbsStyle={breadCrumbsStyle}
       {...linkProps}
       {...props}
     />
@@ -51,6 +53,7 @@ Chip.propTypes = {
   muiColor: PropTypes.string,
   multiLine: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium"]),
+  breadCrumbsStyle: PropTypes.bool,
 };
 
 Chip.defaultProps = {
@@ -66,4 +69,5 @@ Chip.defaultProps = {
   muiColor: undefined,
   multiLine: undefined,
   size: undefined,
+  breadCrumbsStyle: undefined,
 };
