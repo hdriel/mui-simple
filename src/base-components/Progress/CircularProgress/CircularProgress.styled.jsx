@@ -23,16 +23,18 @@ const CenterBoxContent = styled(MuiBox)`
 `;
 
 export const CircularProgress = styled(
-  ({ theme, showProgress, variant, value, ...props }) => (
+  ({ theme, size, showProgress, variant, value, ...props }) => (
     <BoxWrapper>
       <MuiCircularProgress
         value={value}
         variant={value && variant === undefined ? "determinate" : variant}
+        size={size}
         {...props}
       />
       <MuiCircularProgress
         value={100}
         variant={"determinate"}
+        size={size}
         sx={{
           position: "absolute",
           left: 0,
