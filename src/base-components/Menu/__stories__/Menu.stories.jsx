@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { action } from "@storybook/addon-actions";
-// import { Send as SendIcon } from "@mui/icons-material";
-import { Stack } from "@mui/material";
+import {
+  ContentCut as ContentCutIcon,
+  ContentCopy as ContentCopyIcon,
+  ContentPaste as ContentPasteIcon,
+  Cloud as CloudIcon,
+} from "@mui/icons-material";
 
 import Menu from "../Menu";
+import Button from "../../Button/Button";
 
 export default {
   title: "Navigation/Menu",
@@ -11,6 +16,7 @@ export default {
 };
 
 const actions = {
+  onClose: action("onClose"),
   onClick: action("onClick"),
 };
 
@@ -18,57 +24,87 @@ export const Default = () => {
   return <Menu {...actions} />;
 };
 
-export const Variant = () => {
-  return (
-    <Stack>
-      <Menu {...actions} variant="text">
-        text
-      </Menu>
-      <Menu {...actions} variant="outlined">
-        outlined
-      </Menu>
-      <Menu {...actions} variant="contained">
-        contained
-      </Menu>
-    </Stack>
-  );
-};
+export const ButtonChildren = () => {
+  const [open, setOpen] = useState(false);
 
-export const Themed = () => {
-  return (
-    <Stack>
-      <Menu {...actions} muiColor="primary">
-        primary
-      </Menu>
-      <Menu {...actions} muiColor="secondary">
-        secondary
-      </Menu>
-      <Menu {...actions}>Default</Menu>
-    </Stack>
-  );
-};
+  const onClickHandler = () => setOpen(true);
 
-export const Colored = () => {
   return (
-    <Menu {...actions} color={"#D050CC"}>
-      Colored
+    <Menu
+      {...actions}
+      onClose={(event) => {
+        actions.onClose(event);
+        setOpen(false);
+      }}
+      options={[
+        { id: "o1", label: "Profile", onClick: action("onClickOption") },
+        { id: "o2", label: "My account", onClick: action("onClickOption") },
+        {
+          id: "o3",
+          label: "Logout",
+          onClick: action("onClickOption"),
+        },
+        {
+          id: "o3",
+          label: "return false",
+          onClick: () => {
+            action("onClickOption");
+            return false;
+          },
+        },
+      ]}
+      open={open}
+    >
+      <Button onClick={onClickHandler}>Dashboard</Button>
     </Menu>
   );
 };
 
-export const Sized = () => {
+export const IconMenu = () => {
+  console.warn(
+    "Failed prop type: MUI: The `anchorEl` prop provided to the component is invalid."
+  );
+
   return (
-    <Stack>
-      <Menu {...actions} size="small">
-        small
-      </Menu>
-      <Menu {...actions} size="medium">
-        medium
-      </Menu>
-      <Menu {...actions} size="large">
-        large
-      </Menu>
-      <Menu {...actions}>>Default</Menu>
-    </Stack>
+    <Menu
+      {...actions}
+      width={320}
+      open
+      options={[
+        {
+          id: "o1",
+          label: "Cut",
+          onClick: action("onClickOption"),
+          icon: <ContentCutIcon />,
+          shortcut: "Ctrl+X",
+        },
+        {
+          id: "o2",
+          label: "Copy",
+          onClick: action("onClickOption"),
+          icon: <ContentCopyIcon />,
+          shortcut: "Ctrl+C",
+        },
+        {
+          id: "o3",
+          label: "Logout",
+          onClick: action("onClickOption"),
+          icon: <ContentPasteIcon />,
+          shortcut: "Ctrl+V",
+        },
+        {
+          divider: true,
+        },
+        {
+          id: "o4",
+          label: "Paste",
+          onClick: () => {
+            action("onClickOption");
+            return false;
+          },
+          icon: <CloudIcon />,
+        },
+      ]}
+    />
   );
 };

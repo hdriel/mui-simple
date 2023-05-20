@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { Paper as MuiPaper } from "@mui/material";
 import { styled, css } from "@mui/material/styles";
+import { numberToPx } from "../../utils/helpers";
 
 function imageStyle(props) {
   if (!props.imageSrc) return css``;
@@ -35,11 +36,9 @@ export const Paper = styled(MuiPaper, {
       "imageLayout",
     ].includes(propName),
 })`
-  width: ${(props) =>
-    typeof props.width === "number" ? `${props.width}px` : props.width};
+  width: ${(props) => numberToPx(props.width)};
 
-  height: ${(props) =>
-    typeof props.height === "number" ? `${props.height}px` : props.height};
+  height: ${(props) => numberToPx(props.height)};
 
   background-color: ${(props) =>
     _.get(props, `theme.palette.${props.muiColor}.main`, props.customColor)};
