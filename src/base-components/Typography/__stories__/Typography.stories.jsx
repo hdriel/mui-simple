@@ -31,24 +31,24 @@ export const Default = () => {
 export const Rows = () => {
   return (
     <Stack spacing={3}>
-      <Typography rows={1} border>
+      <Typography tooltip rows={1} border>
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry.
       </Typography>
-      <Typography rows={2} width={"90%"} border>
+      <Typography tooltip rows={2} width={"90%"} border>
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
         since the 1500s, when an unknown printer took a galley of types simply
         dummy text of the printing and typesetting industry.
       </Typography>
-      <Typography rows={4} width={"90%"} border>
+      <Typography tooltip rows={4} width={"90%"} border>
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
         since the 1500s, when an unknown printer took a galley of type and
         scrambled it to make a type specimen book. It has survived not only five
         centuries, but also the leap into electr
       </Typography>
-      <Typography rows={0} width={"80%"}>
+      <Typography tooltip rows={0} width={"80%"}>
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
         since the 1500s, when an unknown printer took a galley of type and
@@ -59,6 +59,9 @@ export const Rows = () => {
   );
 };
 
+/*
+
+ */
 export const Align = () => {
   return (
     <Stack spacing={3}>
@@ -133,13 +136,13 @@ export const Component = () => {
   return (
     <Stack spacing={3}>
       <Typography border component={"p"}>
-        component={"p"}
+        {`component={"p"}`}
       </Typography>
       <Typography border component={"span"}>
-        component={"span"}
+        {`component={"span"}`}
       </Typography>
       <Typography border component={"a"} href={"#"}>
-        component={"a"}
+        {`component={"a"}`}
       </Typography>
     </Stack>
   );
