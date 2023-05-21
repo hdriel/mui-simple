@@ -20,6 +20,7 @@ export default function SpeedDial({
   onClose,
   onOpen,
   open,
+  showOnBackdrop,
   ...props
 }) {
   return (
@@ -37,7 +38,7 @@ export default function SpeedDial({
       icon={icon && <SpeedDialIcon openIcon={openIcon} icon={icon} />}
       {...props}
     >
-      <Backdrop open={open} />
+      {showOnBackdrop && <Backdrop open={open} />}
       {actions?.map((action) => (
         <MuiSpeedDialAction
           key={action.name}
@@ -71,6 +72,7 @@ SpeedDial.propTypes = {
   onClose: PropTypes.func,
   onOpen: PropTypes.func,
   open: PropTypes.bool,
+  showOnBackdrop: PropTypes.bool,
 };
 
 SpeedDial.defaultProps = {
@@ -86,4 +88,5 @@ SpeedDial.defaultProps = {
   onClose: undefined,
   onOpen: undefined,
   open: undefined,
+  showOnBackdrop: undefined,
 };
