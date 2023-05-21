@@ -6,7 +6,7 @@ import {
   SpeedDialIcon,
 } from "./SpeedDial.styled";
 // import Backdrop from "../Backdrop/Backdrop";
-import { Backdrop } from "@mui/material";
+import { Backdrop, darken } from "@mui/material";
 
 export default function SpeedDial({
   customColor,
@@ -27,13 +27,27 @@ export default function SpeedDial({
   showTooltip,
   ...props
 }) {
+  const getCustomColor = (suffix) =>
+    customColor
+      ? suffix.includes("dark")
+        ? darken(customColor, 0.2)
+        : customColor
+      : undefined;
+
+  const getMuiColor = (suffix) =>
+    muiColor
+      ? muiColor?.endsWith(suffix)
+        ? muiColor
+        : `${muiColor}${suffix}`
+      : undefined;
+
+  const color = (suffix) => getCustomColor(suffix) ?? getMuiColor(suffix);
+
   return (
     <>
       {showOnBackdrop && <Backdrop open={open} />}
       <MuiSpeedDial
         ariaLabel={props.ariaLabel ?? ""}
-        customColor={customColor}
-        muiColor={muiColor}
         top={top}
         bottom={bottom}
         right={right}
@@ -45,6 +59,12 @@ export default function SpeedDial({
         open={open}
         showTooltip={showTooltip}
         icon={<SpeedDialIcon openIcon={openIcon} icon={icon} />}
+        FabProps={{
+          sx: {
+            bgcolor: color(".main"),
+            "&:hover": { bgcolor: color(".dark") },
+          },
+        }}
         {...props}
       >
         {actions?.map((action) => (
