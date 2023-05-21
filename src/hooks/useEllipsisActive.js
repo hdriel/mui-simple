@@ -1,7 +1,25 @@
 import React, { useEffect, useState } from "react";
 import useElementSize from "./useElementSize";
 
-function addParagraphToWindow(text) {
+export function useEllipsisActive({ active, text, maxRows }) {
+  const [ref, { width: widthText }] = useElementSize(active);
+  const [isEllipsis, setIsEllipsis] = useState(false);
+
+  useEffect(() => {
+    if (active) {
+      const { offsetWidth } = getOriginalTextWidth(text);
+      const rows = getElementRowCount(ref.current);
+      const isEllipsis = !!(maxRows
+        ? rows > maxRows
+        : rows <= 1 && widthText && offsetWidth + 4 >= widthText);
+      setIsEllipsis(isEllipsis);
+    }
+  }, [widthText]);
+
+  return [ref, isEllipsis];
+}
+
+function getOriginalTextWidth(text) {
   const element = document.createElement("span");
   element.textContent = text;
   document.body.appendChild(element);
@@ -15,20 +33,4 @@ function getElementRowCount(element) {
   const { height } = element.getBoundingClientRect();
   const rowCount = Math.round(height / lineHeight);
   return rowCount;
-}
-
-export function useEllipsisActive(text, maxRows) {
-  const [ref, { width: widthText }] = useElementSize(true);
-  const [isEllipsis, setIsEllipsis] = useState(false);
-
-  useEffect(() => {
-    const { offsetWidth } = addParagraphToWindow(text);
-    const rows = getElementRowCount(ref.current);
-    const isEllipsis = !!(maxRows
-      ? rows > maxRows
-      : rows <= 1 && widthText && offsetWidth + 4 >= widthText);
-    setIsEllipsis(isEllipsis);
-  }, [widthText]);
-
-  return [ref, isEllipsis];
 }
