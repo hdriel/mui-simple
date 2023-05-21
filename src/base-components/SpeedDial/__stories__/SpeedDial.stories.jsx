@@ -54,10 +54,16 @@ export const Direction = () => {
   ];
   return (
     <>
-      <SpeedDial actions={actions} direction="left" bottom={16} right={16} />
-      <SpeedDial actions={actions} direction="up" bottom={80} right={16} />
-      <SpeedDial actions={actions} direction="down" top={16} left={16} />
-      <SpeedDial actions={actions} direction="right" top={16} left={80} />
+      <SpeedDial
+        actions={actions}
+        direction="left"
+        bottom={16}
+        right={16}
+        open
+      />
+      <SpeedDial actions={actions} direction="up" bottom={80} right={16} open />
+      <SpeedDial actions={actions} direction="down" top={16} left={16} open />
+      <SpeedDial actions={actions} direction="right" top={16} left={80} open />
     </>
   );
 };

@@ -43,6 +43,7 @@ export default function SpeedDial({
         onClose={onClose}
         onOpen={onOpen}
         open={open}
+        showTooltip={showTooltip}
         icon={<SpeedDialIcon openIcon={openIcon} icon={icon} />}
         {...props}
       >
