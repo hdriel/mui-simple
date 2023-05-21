@@ -12,10 +12,10 @@ import { styled } from "@mui/material/styles";
 import { numberToPx } from "../../utils/helpers";
 import Paper from "../Paper/Paper";
 
-export const Menu = styled(({ ...props }) => (
+export const Menu = styled(({ elevation, ...props }) => (
   <MuiMenu
     PaperProps={{
-      elevation: 0,
+      elevation,
       sx: {
         overflow: "visible",
         filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
