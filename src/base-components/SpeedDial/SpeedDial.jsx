@@ -5,7 +5,8 @@ import {
   SpeedDialAction as MuiSpeedDialAction,
   SpeedDialIcon,
 } from "./SpeedDial.styled";
-import Backdrop from "../Backdrop/Backdrop";
+// import Backdrop from "../Backdrop/Backdrop";
+import { Backdrop } from "@mui/material";
 
 export default function SpeedDial({
   customColor,
@@ -14,8 +15,8 @@ export default function SpeedDial({
   bottom,
   right,
   left,
+  icon,
   openIcon,
-  closeIcon,
   hidden,
   direction,
   actions,
@@ -23,36 +24,39 @@ export default function SpeedDial({
   onOpen,
   open,
   showOnBackdrop,
+  showTooltip,
   ...props
 }) {
   return (
-    <MuiSpeedDial
-      ariaLabel={props.ariaLabel ?? ""}
-      customColor={customColor}
-      muiColor={muiColor}
-      top={top}
-      bottom={bottom}
-      right={right}
-      left={left}
-      hidden={hidden}
-      direction={direction}
-      onClose={onClose}
-      onOpen={onOpen}
-      open={open}
-      icon={openIcon && <SpeedDialIcon openIcon={closeIcon} icon={openIcon} />}
-      {...props}
-    >
+    <>
       {showOnBackdrop && <Backdrop open={open} />}
-      {actions?.map((action) => (
-        <MuiSpeedDialAction
-          key={action.name}
-          icon={action.icon}
-          tooltipTitle={action.name}
-          tooltipOpen={action.showTooltip}
-          onClick={action.onClick?.()}
-        />
-      ))}
-    </MuiSpeedDial>
+      <MuiSpeedDial
+        ariaLabel={props.ariaLabel ?? ""}
+        customColor={customColor}
+        muiColor={muiColor}
+        top={top}
+        bottom={bottom}
+        right={right}
+        left={left}
+        hidden={hidden}
+        direction={direction}
+        onClose={onClose}
+        onOpen={onOpen}
+        open={open}
+        icon={<SpeedDialIcon openIcon={openIcon} icon={icon} />}
+        {...props}
+      >
+        {actions?.map((action) => (
+          <MuiSpeedDialAction
+            key={action.name}
+            icon={action.icon}
+            tooltipTitle={action.name}
+            tooltipOpen={showTooltip}
+            onClick={() => action.onClick?.()}
+          />
+        ))}
+      </MuiSpeedDial>
+    </>
   );
 }
 
@@ -60,6 +64,7 @@ SpeedDial.propTypes = {
   customColor: PropTypes.string,
   muiColor: PropTypes.string,
   hidden: PropTypes.bool,
+  showTooltip: PropTypes.bool,
   icon: PropTypes.node,
   openIcon: PropTypes.node,
   top: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -83,8 +88,9 @@ SpeedDial.propTypes = {
 
 SpeedDial.defaultProps = {
   hidden: undefined,
-  openIcon: <SpeedDialIcon />,
-  closeIcon: undefined,
+  showTooltip: true,
+  icon: undefined,
+  openIcon: undefined,
   actions: [],
   top: undefined,
   bottom: undefined,

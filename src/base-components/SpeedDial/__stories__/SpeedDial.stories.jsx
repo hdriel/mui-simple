@@ -128,25 +128,46 @@ export const ThemedAndColored = () => {
 };
 
 export const CloseIcon = () => {
-  const [hidden, setHidden] = useState(false);
   const actions = [
     { icon: <FileCopyIcon />, name: "Copy" },
-    { icon: <SaveIcon />, name: "Save" },
-    { icon: <PrintIcon />, name: "Print" },
     { icon: <ShareIcon />, name: "Share" },
   ];
   return (
     <>
-      <Button onClick={() => setHidden(!hidden)}>
-        {hidden ? "Show" : "Hidden"}
-      </Button>
       <SpeedDial
-        closeIcon={<EditIcon />}
-        hidden={hidden}
+        icon={<SaveIcon />}
+        openIcon={<EditIcon />}
         actions={actions}
         direction="left"
         bottom={16}
         right={16}
+      />
+    </>
+  );
+};
+
+export const Backdrop = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const actions = [
+    { icon: <FileCopyIcon />, name: "Copy" },
+    { icon: <ShareIcon />, name: "Share" },
+  ];
+  return (
+    <>
+      <SpeedDial
+        showOnBackdrop
+        icon={<SaveIcon />}
+        openIcon={<EditIcon />}
+        actions={actions}
+        direction="up"
+        bottom={16}
+        right={16}
+        open={open}
+        onClose={handleClose}
+        onOpen={handleOpen}
       />
     </>
   );
