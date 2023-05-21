@@ -20,6 +20,7 @@ export default function Menu({
   onClose,
   onClick,
   anchorPosition,
+  elevation,
   children,
   ...props
 }) {
@@ -61,6 +62,7 @@ export default function Menu({
     <>
       {buttonCmp ?? children}
       <MuiMenu
+        elevation={elevation}
         width={width}
         id={id}
         anchorEl={anchorEl}
@@ -106,6 +108,7 @@ Menu.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func,
   onClick: PropTypes.func,
+  elevation: PropTypes.oneOf(Array.from({ length: 25 }, (_, i) => i)), // 0-24
   options: PropTypes.arrayOf(
     PropTypes.oneOfType([
       PropTypes.shape({
@@ -133,6 +136,7 @@ Menu.propTypes = {
 };
 
 Menu.defaultProps = {
+  elevation: undefined,
   width: undefined,
   open: undefined,
   onClose: undefined,
