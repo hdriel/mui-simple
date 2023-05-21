@@ -1,12 +1,13 @@
-import React from "react";
+import React, { cloneElement, isValidElement, useState } from "react";
 import PropTypes from "prop-types";
 import { Check as CheckIcon } from "@mui/icons-material";
 import {
-  Menu as MuiMenu,
-  MenuList,
-  MenuItem,
   ListItemIcon,
   ListItemText,
+  MenuItem,
+  MenuList,
+  Popper as MuiPopper,
+  Menu as MuiMenu,
 } from "./Menu.styled";
 import Typography from "../Typography/Typography";
 import Divider from "../Divider/Divider";
@@ -22,7 +23,7 @@ export default function Menu({
   children,
   ...props
 }) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClose = () => {
     const res = onClose?.();
@@ -40,8 +41,8 @@ export default function Menu({
 
   const buttonChildren = children?.[0] ?? children;
   const buttonCmp =
-    React.isValidElement(buttonChildren) &&
-    React.cloneElement(buttonChildren, {
+    isValidElement(buttonChildren) &&
+    cloneElement(buttonChildren, {
       onClick: (event, ...args) => {
         setAnchorEl(event?.currentTarget);
         buttonChildren.props.onClick(event, ...args);
@@ -66,8 +67,7 @@ export default function Menu({
         open={open ?? false}
         onClose={handleClose}
         onClick={handleClose}
-        anchorOrigin={position}
-        transformOrigin={position}
+        {...(position && { anchorOrigin: position, transformOrigin: position })}
         {...props}
       >
         {options?.map(({ divider, ...option }, index) =>
