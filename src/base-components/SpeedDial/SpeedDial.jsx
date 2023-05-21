@@ -1,19 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
-import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 import {
   SpeedDial as MuiSpeedDial,
   SpeedDialAction as MuiSpeedDialAction,
+  SpeedDialIcon,
 } from "./SpeedDial.styled";
 import Backdrop from "../Backdrop/Backdrop";
 
 export default function SpeedDial({
+  customColor,
+  muiColor,
   top,
   bottom,
   right,
   left,
-  icon,
   openIcon,
+  closeIcon,
   hidden,
   direction,
   actions,
@@ -26,6 +28,8 @@ export default function SpeedDial({
   return (
     <MuiSpeedDial
       ariaLabel={props.ariaLabel ?? ""}
+      customColor={customColor}
+      muiColor={muiColor}
       top={top}
       bottom={bottom}
       right={right}
@@ -35,7 +39,7 @@ export default function SpeedDial({
       onClose={onClose}
       onOpen={onOpen}
       open={open}
-      icon={icon && <SpeedDialIcon openIcon={openIcon} icon={icon} />}
+      icon={openIcon && <SpeedDialIcon openIcon={closeIcon} icon={openIcon} />}
       {...props}
     >
       {showOnBackdrop && <Backdrop open={open} />}
@@ -53,6 +57,8 @@ export default function SpeedDial({
 }
 
 SpeedDial.propTypes = {
+  customColor: PropTypes.string,
+  muiColor: PropTypes.string,
   hidden: PropTypes.bool,
   icon: PropTypes.node,
   openIcon: PropTypes.node,
@@ -76,9 +82,9 @@ SpeedDial.propTypes = {
 };
 
 SpeedDial.defaultProps = {
-  hidden: <SpeedDialIcon />,
-  icon: undefined,
-  openIcon: undefined,
+  hidden: undefined,
+  openIcon: <SpeedDialIcon />,
+  closeIcon: undefined,
   actions: [],
   top: undefined,
   bottom: undefined,
