@@ -2,13 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Backdrop as MuiBackdrop } from "./Backdrop.styled";
 
-export default function Backdrop({ open, color, onClick, ...props }) {
+export default function Backdrop({
+  open,
+  color,
+  onClick,
+  invisible,
+  ...props
+}) {
   return (
     <MuiBackdrop
       color={color}
       open={open}
       onClick={onClick}
-      invisible
+      invisible={invisible}
       {...props}
     />
   );

@@ -38,7 +38,12 @@ export default function Typography({
   ...props
 }) {
   const ellipsisMaxRows = !wrap || !rows ? 0 : +rows;
-  const [ref, isEllipsis] = useEllipsisActive(children, ellipsisMaxRows);
+  const [ref, isEllipsis] = useEllipsisActive({
+    active: showTooltipOnEllipsis && tooltip !== false,
+    text: children,
+    maxRows: ellipsisMaxRows,
+    noWrap: !wrap || !rows,
+  });
 
   let align;
   switch (true) {
