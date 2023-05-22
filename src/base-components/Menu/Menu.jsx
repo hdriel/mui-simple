@@ -8,18 +8,24 @@ import {
   MenuList,
   Popper as MuiPopper,
   Menu as MuiMenu,
+  MenuWrapper,
 } from "./Menu.styled";
 import Typography from "../Typography/Typography";
 import Divider from "../Divider/Divider";
+import { Grow } from "@mui/material";
 
 export default function Menu({
   width,
+  maxHeight,
   id,
+  disableRipple,
   open,
+  dense,
   options,
   onClose,
   onClick,
   anchorPosition,
+  anchorElement,
   elevation,
   children,
   ...props
@@ -28,16 +34,12 @@ export default function Menu({
 
   const handleClose = () => {
     const res = onClose?.();
-    if (res === undefined || res === true) {
-      setAnchorEl(null);
-    }
+    if (res === undefined || res === true) setAnchorEl(null);
   };
 
   const handleClick = (option) => {
     const res = (option?.onClick ?? onClick)?.(option?.id);
-    if (res === undefined || res === true) {
-      handleClose();
-    }
+    if (res === undefined || res === true) handleClose();
   };
 
   const buttonChildren = children?.[0] ?? children;
@@ -61,53 +63,69 @@ export default function Menu({
   return (
     <>
       {buttonCmp ?? children}
-      <MuiMenu
-        elevation={elevation}
-        width={width}
-        id={id}
-        anchorEl={anchorEl}
-        open={open ?? false}
-        onClose={handleClose}
-        onClick={handleClose}
-        {...(position && { anchorOrigin: position, transformOrigin: position })}
-        {...props}
-      >
-        {options?.map(({ divider, ...option }, index) =>
-          divider ? (
-            <Divider key={index} variant="fullWidth" {...option} />
-          ) : (
-            <MenuItem
-              key={`${index}-${option.id}`}
-              onClick={() => handleClick(option)}
-            >
-              {option.icon || option.check ? (
-                <ListItemIcon>
-                  {(React.isValidElement(option.icon) &&
-                    React.cloneElement(option.icon, { fontSize: "small" })) ||
-                    (option.check && <CheckIcon />)}
-                </ListItemIcon>
-              ) : null}
+      <MenuWrapper>
+        <MuiMenu
+          elevation={elevation}
+          width={width}
+          maxHeight={maxHeight}
+          id={id}
+          anchorEl={anchorElement ?? anchorEl}
+          open={open ?? false}
+          onClose={handleClose}
+          onClick={handleClose}
+          {...(position && {
+            anchorOrigin: position,
+            transformOrigin: position,
+          })}
+          TransitionComponent={Grow}
+          {...props}
+        >
+          <MenuList dense={dense}>
+            {options?.map(({ divider, ...option }, index) =>
+              divider ? (
+                <Divider key={index} variant="fullWidth" {...option} />
+              ) : (
+                <MenuItem
+                  key={`${index}-${option.id}`}
+                  onClick={() => handleClick(option)}
+                  disableRipple={disableRipple}
+                >
+                  {option.icon || option.check ? (
+                    <ListItemIcon>
+                      {(React.isValidElement(option.icon) &&
+                        React.cloneElement(option.icon, {
+                          fontSize: "small",
+                        })) ||
+                        (option.check && <CheckIcon />)}
+                    </ListItemIcon>
+                  ) : null}
 
-              <ListItemText>{option.label}</ListItemText>
-              {option.shortcut ? (
-                <Typography variant="body2" muiColor="text.secondary">
-                  {option.shortcut}
-                </Typography>
-              ) : null}
-            </MenuItem>
-          )
-        )}
-      </MuiMenu>
+                  <ListItemText>{option.label}</ListItemText>
+                  {option.shortcut ? (
+                    <Typography variant="body2" muiColor="text.secondary">
+                      {option.shortcut}
+                    </Typography>
+                  ) : null}
+                </MenuItem>
+              )
+            )}
+          </MenuList>
+        </MuiMenu>
+      </MenuWrapper>
     </>
   );
 }
 
 Menu.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   id: PropTypes.string,
+  dense: PropTypes.bool,
+  disableRipple: PropTypes.bool,
   open: PropTypes.bool,
   onClose: PropTypes.func,
   onClick: PropTypes.func,
+  anchorElement: PropTypes.object,
   elevation: PropTypes.oneOf(Array.from({ length: 25 }, (_, i) => i)), // 0-24
   options: PropTypes.arrayOf(
     PropTypes.oneOfType([
@@ -136,10 +154,15 @@ Menu.propTypes = {
 };
 
 Menu.defaultProps = {
-  elevation: undefined,
   width: undefined,
+  maxHeight: undefined,
+  id: undefined,
+  dense: undefined,
   open: undefined,
   onClose: undefined,
   onClick: undefined,
+  elevation: undefined,
   options: undefined,
+  anchorPosition: undefined,
+  anchorElement: undefined,
 };

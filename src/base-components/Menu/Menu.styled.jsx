@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Menu as MuiMenu,
   MenuList as MuiMenuList,
@@ -7,44 +8,58 @@ import {
   Popper as MuiPopper,
   ClickAwayListener,
   Grow,
+  Box,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { numberToPx } from "../../utils/helpers";
 import Paper from "../Paper/Paper";
 
-export const Menu = styled(({ elevation, ...props }) => (
+export const ContextMenuWrapper = styled(Box)`
+  width: 100%;
+  height: 100%;
+`;
+
+export const MenuWrapper = styled(Box)`
+  position: relative;
+  overflow: visible;
+  margin-top: 1.5px;
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 14px;
+    width: 10px;
+    height: 10px;
+    background-color: ${(props) => props.theme.palette.background.paper};
+    transform: translateY(-50%) rotate(45deg);
+    z-index: 0;
+  }
+`;
+
+export const Menu = styled(({ width, maxHeight, elevation, ...props }) => (
   <MuiMenu
     PaperProps={{
       elevation,
       sx: {
-        overflow: "visible",
+        width,
+        maxHeight,
+        overflowY: "auto",
         filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-        mt: 1.5,
         "& .MuiAvatar-root": {
           width: 32,
           height: 32,
           ml: -0.5,
           mr: 1,
         },
-        "&:before": {
-          content: '""',
-          display: "block",
-          position: "absolute",
-          top: 0,
-          right: 14,
-          width: 10,
-          height: 10,
-          bgcolor: "background.paper",
-          transform: "translateY(-50%) rotate(45deg)",
-          zIndex: 0,
-        },
       },
     }}
     {...props}
   />
 ))`
-  width: ${(props) => numberToPx(props.width)};
   max-width: 100%;
+  & .MuiList-root:focus-visible {
+    outline: none;
+  }
 `;
 export const MenuList = styled(MuiMenuList)``;
 export const MenuItem = styled(MuiMenuItem)``;

@@ -108,3 +108,55 @@ export const IconMenu = () => {
     />
   );
 };
+
+export const ContextMenu = () => {
+  return (
+    <ContextMenu
+      options={[
+        {
+          id: "o1",
+          label: "Cut",
+          onClick: action("onClickOption"),
+          icon: <ContentCutIcon />,
+          shortcut: "Ctrl+X",
+        },
+        {
+          id: "o2",
+          label: "Copy",
+          onClick: action("onClickOption"),
+          icon: <ContentCopyIcon />,
+          shortcut: "Ctrl+C",
+        },
+        {
+          id: "o3",
+          label: "Logout",
+          onClick: action("onClickOption"),
+          icon: <ContentPasteIcon />,
+          shortcut: "Ctrl+V",
+        },
+        {
+          divider: true,
+        },
+        {
+          id: "o4",
+          label: "Paste",
+          onClick: () => {
+            action("onClickOption");
+            return false;
+          },
+          icon: <CloudIcon />,
+        },
+      ]}
+    >
+      <div
+        style={{
+          width: "500px",
+          height: "500px",
+          backgroundColor: "rgba(0,0,0,0.07)",
+        }}
+      >
+        context menu text
+      </div>
+    </ContextMenu>
+  );
+};
