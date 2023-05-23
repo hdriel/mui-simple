@@ -29,3 +29,11 @@ export function stringToColor(string) {
 
   return color;
 }
+
+export function numberToPx(field) {
+  return typeof field === "number" ? `${field}px` : field;
+}
+
+export function isDefined(value) {
+  return value !== undefined && value !== null;
+}

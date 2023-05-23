@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { Divider as MuiDivider } from "@mui/material";
 import { styled, css } from "@mui/material/styles";
+import { numberToPx } from "../../utils/helpers";
 
 function getCustomBorderStyle({ color, thicknessValue, borderPosition }) {
   const customColorStyle =
@@ -35,9 +36,7 @@ function verticalStyle(props) {
   const { thickness, muiColor, customColor } = props;
 
   const thicknessValue =
-    thickness !== undefined && typeof thickness === "number"
-      ? `${thickness}px`
-      : thickness || "thin";
+    (thickness !== undefined && numberToPx(thickness)) || "thin";
 
   const color = _.get(props, `theme.palette.${muiColor}.main`, customColor);
 
@@ -62,9 +61,7 @@ function horizontalStyle(props) {
   const { thickness, muiColor, customColor } = props;
 
   const thicknessValue =
-    thickness !== undefined && typeof thickness === "number"
-      ? `${thickness}px`
-      : thickness || "thin";
+    (thickness !== undefined && numberToPx(thickness)) || "thin";
 
   const color = _.get(props, `theme.palette.${muiColor}.main`, customColor);
 

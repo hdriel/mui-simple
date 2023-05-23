@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import { Box, Typography as MuiTypography } from "@mui/material";
 import { styled, css } from "@mui/material/styles";
+import { numberToPx } from "../../utils/helpers";
 
 function ellipsisRow1(props) {
   if (props.noWrap || props.rows !== 1) return css``;
@@ -40,8 +41,7 @@ export const Border = styled(Box, {
   shouldForwardProp: (propName) => !["autoWidth", "noWrap"].includes(propName),
 })`
   width: ${(props) =>
-    (typeof props.width === "number" ? `${props.width}px` : props.width) ??
-    (props.autoWidth ? "auto" : "100%")};
+    numberToPx(props.width) ?? (props.autoWidth ? "auto" : "100%")};
   display: flex;
   border: ${(props) =>
     props.border && typeof props.border === "boolean"
@@ -73,10 +73,7 @@ export const Typography = styled(MuiTypography, {
   font-weight: ${(props) =>
     props.bold && typeof props.bold === "boolean" ? "bold" : props.bold};
 
-  font-size: ${(props) =>
-    typeof props.fontSize === "number"
-      ? `${props.fontSize}px`
-      : props.fontSize};
+  font-size: ${(props) => numberToPx(props.fontSize)};
   font-style: ${(props) => (props.italic ? "italic" : undefined)};
   text-decoration: ${(props) => (props.underline ? "underline" : undefined)};
   text-decoration: ${(props) => (props.strike ? "line-through" : undefined)};

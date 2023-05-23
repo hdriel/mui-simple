@@ -8,6 +8,7 @@ import {
   linearProgressClasses,
   alpha,
 } from "@mui/material";
+import { numberToPx } from "../../../utils/helpers";
 
 const ContentWrapper = styled(MuiBox)`
   display: flex;
@@ -61,12 +62,7 @@ export const LinearProgress = styled(
     background-color: ${(props) => props.customColor};
   }
 
-  height: ${(props) =>
-    `${
-      typeof props.thickness === "number"
-        ? `${props.thickness}px`
-        : props.thickness
-    }` || "5px"};
+  height: ${(props) => `${numberToPx(props.thickness)}` || "5px"};
   border-radius: 5px;
 
   &.${linearProgressClasses.colorPrimary} {

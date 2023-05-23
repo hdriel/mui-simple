@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import CircularProgress from "../Progress/CircularProgress/CircularProgress";
 import {
@@ -8,72 +8,79 @@ import {
 
 const spinner = <CircularProgress muiColor="inherit" size={15} />;
 
-const Button = ({
-  variant,
-  disabled,
-  startIcon,
-  endIcon,
-  onClick,
-  link,
-  muiColor,
-  customColor,
-  disableRipple,
-  isLoading,
-  loadingIconPosition,
-  loadingLabel,
-  size,
-  icon,
-  fullWidth,
-  children,
-  ...props
-}) => {
-  if (icon || (isLoading && !loadingLabel && !startIcon && !endIcon)) {
+const Button = forwardRef(
+  (
+    {
+      variant,
+      disabled,
+      startIcon,
+      endIcon,
+      onClick,
+      link,
+      muiColor,
+      customColor,
+      disableRipple,
+      isLoading,
+      loadingIconPosition,
+      loadingLabel,
+      size,
+      icon,
+      fullWidth,
+      children,
+      ...props
+    },
+    ref
+  ) => {
+    if (icon || (isLoading && !loadingLabel && !startIcon && !endIcon)) {
+      return (
+        <MuiIconButton
+          ref={ref}
+          color={muiColor}
+          customColor={customColor}
+          style={{ color: customColor }}
+          size={size}
+          disableRipple={disableRipple}
+          onClick={onClick}
+          href={link}
+        >
+          {isLoading ? spinner : icon}
+        </MuiIconButton>
+      );
+    }
+
+    const startIconCmp = isLoading
+      ? loadingIconPosition === "start" && startIcon && spinner
+      : startIcon;
+
+    const endIconCmp = isLoading
+      ? loadingIconPosition === "end" && endIcon && spinner
+      : endIcon;
+
+    const content = isLoading
+      ? loadingLabel || (!startIconCmp && !endIconCmp && children) || children
+      : children;
+
     return (
-      <MuiIconButton
-        color={muiColor}
-        customColor={customColor}
-        style={{ color: customColor }}
-        size={size}
-        disableRipple={disableRipple}
+      <MuiButton
+        ref={ref}
+        variant={variant}
+        disabled={isLoading || disabled}
+        startIcon={startIconCmp}
+        endIcon={endIconCmp}
         onClick={onClick}
         href={link}
+        color={muiColor}
+        disableRipple={disableRipple}
+        customColor={customColor}
+        size={size}
+        fullWidth={fullWidth}
+        {...props}
       >
-        {isLoading ? spinner : icon}
-      </MuiIconButton>
+        {content}
+      </MuiButton>
     );
   }
-
-  const startIconCmp = isLoading
-    ? loadingIconPosition === "start" && startIcon && spinner
-    : startIcon;
-
-  const endIconCmp = isLoading
-    ? loadingIconPosition === "end" && endIcon && spinner
-    : endIcon;
-
-  const content = isLoading
-    ? loadingLabel || (!startIconCmp && !endIconCmp && children) || children
-    : children;
-
-  return (
-    <MuiButton
-      variant={variant}
-      disabled={isLoading || disabled}
-      startIcon={startIconCmp}
-      endIcon={endIconCmp}
-      onClick={onClick}
-      href={link}
-      color={muiColor}
-      disableRipple={disableRipple}
-      customColor={customColor}
-      size={size}
-      fullWidth={fullWidth}
-      {...props}
-    >
-      {content}
-    </MuiButton>
-  );
-};
+);
 
 Button.propTypes = {
   variant: PropTypes.oneOf(["contained", "outlined", "text"]),

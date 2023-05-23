@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Border, Typography as MuiTypography } from "./Typography.styled";
 import Tooltip from "../Tooltip/Tooltip";
 import { useEllipsisActive } from "../../hooks/useEllipsisActive";
+import { TOOLTIP_PLACEMENTS } from "../Tooltip/Tooltip.consts";
 
 export default function Typography({
   alignCenter,
@@ -26,6 +27,7 @@ export default function Typography({
   monospace,
   lineHeight,
   tooltip,
+  tooltipPlacement,
   children,
   width,
   rows,
@@ -127,7 +129,11 @@ export default function Typography({
     </Border>
   );
 
-  return <Tooltip title={tooltipMessage}>{cmp}</Tooltip>;
+  return (
+    <Tooltip title={tooltipMessage} placement={tooltipPlacement}>
+      {cmp}
+    </Tooltip>
+  );
 }
 
 Typography.propTypes = {
@@ -155,6 +161,7 @@ Typography.propTypes = {
   autoWidth: PropTypes.bool,
   tooltip: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   showTooltipOnEllipsis: PropTypes.bool,
+  tooltipPlacement: PropTypes.oneOf(TOOLTIP_PLACEMENTS),
 };
 
 Typography.defaultProps = {
