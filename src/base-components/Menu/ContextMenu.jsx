@@ -9,14 +9,11 @@ export default function ContextMenu({ children, ...props }) {
 
   const handleContextMenu = (event) => {
     event.preventDefault();
-    setContextMenu(
-      contextMenu === null
-        ? { mouseX: event.clientX + 2, mouseY: event.clientY - 6 }
-        : // repeated contextmenu when it is already open closes it with Chrome 84 on Ubuntu
-          // Other native context menus might behave different.
-          // With this behavior we prevent contextmenu from the backdrop to re-locale existing context menus.
-          null
-    );
+    const { clientX: mouseX, clientY: mouseY } = event;
+    setContextMenu(contextMenu === null ? { mouseX, mouseY } : null);
+    // repeated contextmenu when it is already open closes it with Chrome 84 on Ubuntu
+    // Other native context menus might behave different.
+    // With this behavior we prevent contextmenu from the backdrop to re-locale existing context menus.
   };
 
   return (
@@ -27,6 +24,7 @@ export default function ContextMenu({ children, ...props }) {
       {children}
       <Menu
         {...props}
+        width={250}
         open={contextMenu !== null}
         contextMenu={contextMenu}
         onClose={() => {

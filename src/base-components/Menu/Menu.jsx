@@ -56,12 +56,10 @@ export default function Menu({
     if (res === undefined || res === true) handleClose();
   };
 
-  console.log("boundingChildren", boundingChildren);
-  console.log("anchorProps", anchorProps);
   return (
     <>
       {boundingChildren}
-      {anchorProps.anchorEl && (
+      {(anchorProps.anchorEl || contextMenu) && (
         <MenuWrapper>
           <MuiMenu
             elevation={elevation}
