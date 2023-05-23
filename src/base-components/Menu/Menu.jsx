@@ -1,18 +1,18 @@
-import React, { cloneElement, isValidElement, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Check as CheckIcon } from "@mui/icons-material";
 import {
   ListItemIcon,
   ListItemText,
+  Menu as MuiMenu,
   MenuItem,
   MenuList,
-  Popper as MuiPopper,
-  Menu as MuiMenu,
   MenuWrapper,
 } from "./Menu.styled";
 import Typography from "../Typography/Typography";
 import Divider from "../Divider/Divider";
-import { Grow } from "@mui/material";
+import { Fade, Grow } from "@mui/material";
+import { useAnchorProps, useChildrenComponentBinding } from "./Menu.hooks";
 
 export default function Menu({
   width,
@@ -25,12 +25,26 @@ export default function Menu({
   onClose,
   onClick,
   anchorPosition,
-  anchorElement,
+  anchorElementRef,
+  boundChildrenId,
+  boundChildrenIndex,
+  contextMenu,
   elevation,
   children,
   ...props
 }) {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const { anchorProps, setAnchorEl } = useAnchorProps({
+    contextMenu,
+    anchorElementRef,
+    anchorPosition,
+  });
+  const boundingChildren = useChildrenComponentBinding({
+    boundChildrenId,
+    boundChildrenIndex,
+    children,
+    setAnchorEl,
+    anchorElementRef,
+  });
 
   const handleClose = () => {
     const res = onClose?.();
@@ -42,76 +56,58 @@ export default function Menu({
     if (res === undefined || res === true) handleClose();
   };
 
-  const buttonChildren = children?.[0] ?? children;
-  const buttonCmp =
-    isValidElement(buttonChildren) &&
-    cloneElement(buttonChildren, {
-      onClick: (event, ...args) => {
-        setAnchorEl(event?.currentTarget);
-        buttonChildren.props.onClick(event, ...args);
-      },
-    });
-
-  const position =
-    anchorPosition?.vertical || anchorPosition?.horizontal
-      ? {
-          vertical: anchorPosition.vertical ?? "bottom",
-          horizontal: anchorPosition.horizontal ?? "left",
-        }
-      : undefined;
-
+  console.log("boundingChildren", boundingChildren);
+  console.log("anchorProps", anchorProps);
   return (
     <>
-      {buttonCmp ?? children}
-      <MenuWrapper>
-        <MuiMenu
-          elevation={elevation}
-          width={width}
-          maxHeight={maxHeight}
-          id={id}
-          anchorEl={anchorElement ?? anchorEl}
-          open={open ?? false}
-          onClose={handleClose}
-          onClick={handleClose}
-          {...(position && {
-            anchorOrigin: position,
-            transformOrigin: position,
-          })}
-          TransitionComponent={Grow}
-          {...props}
-        >
-          <MenuList dense={dense}>
-            {options?.map(({ divider, ...option }, index) =>
-              divider ? (
-                <Divider key={index} variant="fullWidth" {...option} />
-              ) : (
-                <MenuItem
-                  key={`${index}-${option.id}`}
-                  onClick={() => handleClick(option)}
-                  disableRipple={disableRipple}
-                >
-                  {option.icon || option.check ? (
-                    <ListItemIcon>
-                      {(React.isValidElement(option.icon) &&
-                        React.cloneElement(option.icon, {
-                          fontSize: "small",
-                        })) ||
-                        (option.check && <CheckIcon />)}
-                    </ListItemIcon>
-                  ) : null}
+      {boundingChildren}
+      {anchorProps.anchorEl && (
+        <MenuWrapper>
+          <MuiMenu
+            elevation={elevation}
+            width={width}
+            maxHeight={maxHeight}
+            id={id}
+            open={open ?? false}
+            onClose={handleClose}
+            onClick={handleClose}
+            TransitionComponent={Grow}
+            {...anchorProps}
+            {...props}
+          >
+            <MenuList dense={dense}>
+              {options?.map(({ divider, ...option }, index) =>
+                divider ? (
+                  <Divider key={index} variant="fullWidth" {...option} />
+                ) : (
+                  <MenuItem
+                    key={`${index}-${option.id}`}
+                    onClick={() => handleClick(option)}
+                    disableRipple={disableRipple}
+                  >
+                    {option.icon || option.check ? (
+                      <ListItemIcon>
+                        {(React.isValidElement(option.icon) &&
+                          React.cloneElement(option.icon, {
+                            fontSize: "small",
+                          })) ||
+                          (option.check && <CheckIcon />)}
+                      </ListItemIcon>
+                    ) : null}
 
-                  <ListItemText>{option.label}</ListItemText>
-                  {option.shortcut ? (
-                    <Typography variant="body2" muiColor="text.secondary">
-                      {option.shortcut}
-                    </Typography>
-                  ) : null}
-                </MenuItem>
-              )
-            )}
-          </MenuList>
-        </MuiMenu>
-      </MenuWrapper>
+                    <ListItemText>{option.label}</ListItemText>
+                    {option.shortcut ? (
+                      <Typography variant="body2" muiColor="text.secondary">
+                        {option.shortcut}
+                      </Typography>
+                    ) : null}
+                  </MenuItem>
+                )
+              )}
+            </MenuList>
+          </MuiMenu>
+        </MenuWrapper>
+      )}
     </>
   );
 }
@@ -119,13 +115,16 @@ export default function Menu({
 Menu.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  boundChildrenId: PropTypes.string,
+  boundChildrenIndex: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
   id: PropTypes.string,
   dense: PropTypes.bool,
   disableRipple: PropTypes.bool,
   open: PropTypes.bool,
   onClose: PropTypes.func,
   onClick: PropTypes.func,
-  anchorElement: PropTypes.object,
+  anchorElementRef: PropTypes.object,
+  contextMenu: PropTypes.object,
   elevation: PropTypes.oneOf(Array.from({ length: 25 }, (_, i) => i)), // 0-24
   options: PropTypes.arrayOf(
     PropTypes.oneOfType([
@@ -157,12 +156,15 @@ Menu.defaultProps = {
   width: undefined,
   maxHeight: undefined,
   id: undefined,
+  boundChildrenId: undefined,
+  boundChildrenIndex: 0,
   dense: undefined,
   open: undefined,
   onClose: undefined,
   onClick: undefined,
   elevation: undefined,
   options: undefined,
+  contextMenu: undefined,
   anchorPosition: undefined,
-  anchorElement: undefined,
+  anchorElementRef: undefined,
 };

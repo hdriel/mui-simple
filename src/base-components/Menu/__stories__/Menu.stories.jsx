@@ -5,10 +5,17 @@ import {
   ContentCopy as ContentCopyIcon,
   ContentPaste as ContentPasteIcon,
   Cloud as CloudIcon,
+  FormatAlignLeft as FormatAlignLeftIcon,
+  FormatAlignCenter as FormatAlignCenterIcon,
+  FormatAlignRight as FormatAlignRightIcon,
+  FormatAlignJustify as FormatAlignJustifyIcon,
 } from "@mui/icons-material";
 
 import Menu from "../Menu";
 import Button from "../../Button/Button";
+import ToggleButtonGroups from "../../ToggleButtonGroup/ToggleButtonGroups";
+import ToggleButtonGroup from "../../ToggleButtonGroup/ToggleButtonGroup";
+import { Stack } from "@mui/material";
 
 export default {
   title: "Navigation/Menu",
@@ -24,139 +31,166 @@ export const Default = () => {
   return <Menu {...actions} />;
 };
 
-export const ButtonChildren = () => {
-  const [open, setOpen] = useState(false);
-
-  const onClickHandler = () => setOpen(true);
-
+export const ChildCmpBinding = () => {
+  const anchorRef = useRef(null);
+  const [open1, setOpen1] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
+  const onClickHandler = (bindAction) => bindAction(true);
+  const options = [
+    { id: "o1", label: "Profile", onClick: action("onClickOption") },
+    { id: "o2", label: "My account", onClick: action("onClickOption") },
+    {
+      id: "o3",
+      label: "Logout",
+      onClick: action("onClickOption"),
+    },
+    {
+      id: "o3",
+      label: "return false",
+      onClick: () => {
+        action("onClickOption");
+        return false;
+      },
+    },
+  ];
   return (
-    <Menu
-      {...actions}
-      onClose={(event) => {
-        actions.onClose(event);
-        setOpen(false);
-      }}
-      options={[
-        { id: "o1", label: "Profile", onClick: action("onClickOption") },
-        { id: "o2", label: "My account", onClick: action("onClickOption") },
-        {
-          id: "o3",
-          label: "Logout",
-          onClick: action("onClickOption"),
-        },
-        {
-          id: "o3",
-          label: "return false",
-          onClick: () => {
-            action("onClickOption");
-            return false;
-          },
-        },
-      ]}
-      open={open}
-    >
-      <Button onClick={onClickHandler}>Dashboard</Button>
-    </Menu>
+    <Stack direction="row" spacing={5}>
+      <Menu
+        {...actions}
+        options={options}
+        open={open1}
+        onClose={(event) => {
+          actions.onClose(event);
+          setOpen1(false);
+        }}
+      >
+        <Button onClick={onClickHandler.bind(null, setOpen1)}>
+          Default boundChildrenIndex=0
+        </Button>
+      </Menu>
+      <Menu
+        {...actions}
+        options={options}
+        open={open2}
+        boundChildrenIndex={false}
+        onClose={(event) => {
+          actions.onClose(event);
+          setOpen2(false);
+        }}
+      >
+        <Button onClick={onClickHandler.bind(null, setOpen2)}>
+          boundChildrenIndex false
+        </Button>
+      </Menu>
+      <Menu
+        {...actions}
+        options={options}
+        open={open3}
+        boundChildrenIndex={false}
+        anchorElementRef={anchorRef}
+        onClose={(event) => {
+          actions.onClose(event);
+          setOpen3(false);
+        }}
+      >
+        <Button ref={anchorRef} onClick={onClickHandler.bind(null, setOpen3)}>
+          anchorElementRef
+        </Button>
+      </Menu>
+    </Stack>
   );
 };
 
 export const IconMenu = () => {
-  console.warn(
-    "Failed prop type: MUI: The `anchorEl` prop provided to the component is invalid."
-  );
+  const options = [
+    {
+      id: "o1",
+      label: "Cut",
+      icon: <ContentCutIcon />,
+      onClick: action("onClickOption"),
+      shortcut: "Ctrl+X",
+    },
+    {
+      id: "o2",
+      label: "Copy",
+      icon: <ContentCopyIcon />,
+      onClick: action("onClickOption"),
+      shortcut: "Ctrl+C",
+    },
+    {
+      id: "o3",
+      label: "Logout",
+      icon: <ContentPasteIcon />,
+      onClick: action("onClickOption"),
+      shortcut: "Ctrl+V",
+    },
+    {
+      divider: true,
+    },
+    {
+      id: "o4",
+      label: "Paste",
+      icon: <CloudIcon />,
+      onClick: () => {
+        action("onClickOption");
+        return false;
+      },
+    },
+  ];
+  const [boundChildrenId, setBoundChildrenId] = useState(null);
+  const [boundChildrenIndex, setBoundChildrenIndex] = useState(null);
 
   return (
-    <Menu
-      {...actions}
-      width={320}
-      open
-      options={[
-        {
-          id: "o1",
-          label: "Cut",
-          onClick: action("onClickOption"),
-          icon: <ContentCutIcon />,
-          shortcut: "Ctrl+X",
-        },
-        {
-          id: "o2",
-          label: "Copy",
-          onClick: action("onClickOption"),
-          icon: <ContentCopyIcon />,
-          shortcut: "Ctrl+C",
-        },
-        {
-          id: "o3",
-          label: "Logout",
-          onClick: action("onClickOption"),
-          icon: <ContentPasteIcon />,
-          shortcut: "Ctrl+V",
-        },
-        {
-          divider: true,
-        },
-        {
-          id: "o4",
-          label: "Paste",
-          onClick: () => {
-            action("onClickOption");
-            return false;
-          },
-          icon: <CloudIcon />,
-        },
-      ]}
-    />
-  );
-};
+    <>
+      <ToggleButtonGroups>
+        <ToggleButtonGroup
+          value={String(boundChildrenIndex)}
+          onChange={(newValue) => {
+            setBoundChildrenIndex(+newValue);
+          }}
+          exclusive
+          data={[
+            { value: "0", component: <span>first child</span> },
+            { value: "1", component: <span>second child</span> },
+          ]}
+        />
+        <ToggleButtonGroup
+          value={boundChildrenId}
+          exclusive
+          onChange={(newValue) => {
+            setBoundChildrenId(newValue);
+          }}
+          data={[
+            { value: "div-id-1", component: <span>first div</span> },
+            { value: "div-id-2", component: <span>second div</span> },
+          ]}
+        />
+      </ToggleButtonGroups>
 
-export const ContextMenu = () => {
-  return (
-    <ContextMenu
-      options={[
-        {
-          id: "o1",
-          label: "Cut",
-          onClick: action("onClickOption"),
-          icon: <ContentCutIcon />,
-          shortcut: "Ctrl+X",
-        },
-        {
-          id: "o2",
-          label: "Copy",
-          onClick: action("onClickOption"),
-          icon: <ContentCopyIcon />,
-          shortcut: "Ctrl+C",
-        },
-        {
-          id: "o3",
-          label: "Logout",
-          onClick: action("onClickOption"),
-          icon: <ContentPasteIcon />,
-          shortcut: "Ctrl+V",
-        },
-        {
-          divider: true,
-        },
-        {
-          id: "o4",
-          label: "Paste",
-          onClick: () => {
-            action("onClickOption");
-            return false;
-          },
-          icon: <CloudIcon />,
-        },
-      ]}
-    >
-      <div
-        style={{
-          width: "500px",
-          height: "500px",
-          backgroundColor: "rgba(0,0,0,0.07)",
-        }}
+      <Menu
+        {...actions}
+        boundChildrenId={boundChildrenId}
+        boundChildrenIndex={boundChildrenIndex}
+        width={320}
+        open
+        options={options}
       >
-        context menu text
-      </div>
-    </ContextMenu>
+        <div
+          id="div-id-1"
+          style={{ width: "100px", height: "100px", border: "1px solid black" }}
+        ></div>
+        Text
+        <div
+          id="div-id-2"
+          style={{
+            marginLeft: "150px",
+            width: "100px",
+            height: "100px",
+            border: "1px solid black",
+          }}
+        ></div>
+      </Menu>
+    </>
   );
 };

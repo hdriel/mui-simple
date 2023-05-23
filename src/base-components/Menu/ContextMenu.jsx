@@ -28,12 +28,7 @@ export default function ContextMenu({ children, ...props }) {
       <Menu
         {...props}
         open={contextMenu !== null}
-        anchorReference="anchorPosition"
-        anchorPosition={
-          contextMenu !== null
-            ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
-            : undefined
-        }
+        contextMenu={contextMenu}
         onClose={() => {
           props.onClose?.();
           handleClose();
