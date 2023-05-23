@@ -8,6 +8,10 @@ import {
 } from "./Accordion.styled";
 import Typography from "../Typography/Typography";
 import Button from "../Button/Button";
+import {
+  ArrowForwardIosSharp as ArrowForwardIosSharpIcon,
+  ExpandMore as ExpandMoreIcon,
+} from "@mui/icons-material";
 
 export default function Accordion({
   id,
@@ -22,6 +26,8 @@ export default function Accordion({
   hideLabel,
   muiColor,
   customColor,
+  unmountDetailsOnClose,
+  useCustomStyle,
   children,
   ...props
 }) {
@@ -33,9 +39,21 @@ export default function Accordion({
       disabled={disabled}
       expanded={expanded}
       onChange={(event, isExpanded) => onChange?.(isExpanded ? id : false)}
+      useCustomStyle={useCustomStyle}
+      TransitionProps={{ unmountOnExit: unmountDetailsOnClose }}
       {...props}
     >
-      <AccordionSummary id={id}>
+      <AccordionSummary
+        id={id}
+        useCustomStyle={useCustomStyle}
+        expandIcon={
+          useCustomStyle ? (
+            <ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />
+          ) : (
+            <ExpandMoreIcon />
+          )
+        }
+      >
         <Typography
           tooltip={false}
           wrap={!secondaryLabel}
@@ -49,7 +67,7 @@ export default function Accordion({
           </Typography>
         )}
       </AccordionSummary>
-      <AccordionDetails>
+      <AccordionDetails useCustomStyle={useCustomStyle}>
         {details && (
           <>
             <Typography
@@ -93,6 +111,8 @@ Accordion.propTypes = {
   hideLabel: PropTypes.string,
   muiColor: PropTypes.string,
   customColor: PropTypes.string,
+  unmountDetailsOnClose: PropTypes.bool,
+  useCustomStyle: PropTypes.bool,
 };
 
 Accordion.defaultProps = {
@@ -106,6 +126,8 @@ Accordion.defaultProps = {
   detailsMaxRows: undefined,
   showMoreLabel: "Show More",
   hideLabel: "Hide",
-  muiColor: undefined,
+  muiColor: "info",
   customColor: undefined,
+  unmountDetailsOnClose: true,
+  useCustomStyle: false,
 };

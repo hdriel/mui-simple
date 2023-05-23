@@ -159,3 +159,46 @@ export const Themed = () => {
     </Stack>
   );
 };
+
+export const CustomStyle = () => {
+  return (
+    <div>
+      <Accordion
+        id={"panel11"}
+        label={"Details String Prop"}
+        details={
+          "Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros, vitae egestas augue. Duis vel est augue."
+        }
+        detailsMaxRows={2}
+        useCustomStyle
+      />
+      <Accordion
+        id={"panel12"}
+        label={"Details String Prop"}
+        details={
+          "Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros, vitae egestas augue. Duis vel est augue."
+        }
+        detailsMaxRows={2}
+        useCustomStyle
+      />
+
+      <Accordion
+        id={"panel21"}
+        label={"Details String Prop"}
+        details={
+          "Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros, vitae egestas augue. Duis vel est augue."
+        }
+        detailsMaxRows={2}
+      />
+
+      <Accordion
+        id={"panel22"}
+        label={"Details String Prop"}
+        details={
+          "Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros, vitae egestas augue. Duis vel est augue."
+        }
+        detailsMaxRows={2}
+      />
+    </div>
+  );
+};
