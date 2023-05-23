@@ -178,13 +178,19 @@ export const IconMenu = () => {
       >
         <div
           id="div-id-1"
-          style={{ width: "100px", height: "100px", border: "1px solid black" }}
+          style={{
+            margin: "1em",
+            width: "100px",
+            height: "100px",
+            border: "1px solid black",
+          }}
         ></div>
         Text
         <div
           id="div-id-2"
           style={{
-            marginLeft: "150px",
+            marginTop: "-135px",
+            marginLeft: "200px",
             width: "100px",
             height: "100px",
             border: "1px solid black",
