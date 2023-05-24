@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
 // import { Send as SendIcon } from "@mui/icons-material";
 import { Stack } from "@mui/material";
@@ -69,6 +69,60 @@ export const BasicAccordion = () => {
             details={details}
             disabled={disabled}
             detailsMaxRows={detailsMaxRows}
+          />
+        )
+      )}
+    </div>
+  );
+};
+
+export const Expanded = () => {
+  const [expanded, setExpended] = useState(false);
+  const onChange = (accordionId) => {
+    console.log("onChangeHandler", accordionId);
+    setExpended(accordionId);
+  };
+
+  const accordionProps = [
+    {
+      id: "panel0",
+      label: "Accordion 0",
+      details:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
+    },
+    {
+      id: "panel1",
+      label: "Accordion 1",
+      details:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
+      detailsMaxRows: 1,
+    },
+    {
+      id: "panel2",
+      label: "Accordion 2",
+      details:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.",
+      detailsMaxRows: 2,
+    },
+    {
+      id: "panel3",
+      label: "Disabled Accordion",
+      details: undefined,
+      disabled: true,
+    },
+  ];
+  return (
+    <div>
+      {accordionProps.map(
+        ({ id, label, details, disabled, detailsMaxRows }, index) => (
+          <Accordion
+            key={id}
+            id={id}
+            label={label}
+            details={details}
+            disabled={disabled}
+            detailsMaxRows={detailsMaxRows}
+            {...(index && { expanded, onChange })}
           />
         )
       )}

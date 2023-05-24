@@ -37,7 +37,7 @@ export default function Accordion({
   return (
     <MuiAccordion
       disabled={disabled}
-      expanded={expanded}
+      expanded={typeof expanded === "string" ? expanded === id : expanded}
       onChange={(event, isExpanded) => onChange?.(isExpanded ? id : false)}
       useCustomStyle={useCustomStyle}
       TransitionProps={{ unmountOnExit: unmountDetailsOnClose }}
@@ -100,7 +100,7 @@ export default function Accordion({
 
 Accordion.propTypes = {
   id: PropTypes.string,
-  expanded: PropTypes.bool,
+  expanded: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
   label: PropTypes.string,
@@ -128,6 +128,6 @@ Accordion.defaultProps = {
   hideLabel: "Hide",
   muiColor: "info",
   customColor: undefined,
-  unmountDetailsOnClose: true,
+  unmountDetailsOnClose: false,
   useCustomStyle: false,
 };
