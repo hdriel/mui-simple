@@ -1,4 +1,3 @@
-import React, { forwardRef } from "react";
 import { Box, Typography as MuiTypography } from "@mui/material";
 import { styled, css } from "@mui/material/styles";
 import { numberToPx } from "../../utils/helpers";

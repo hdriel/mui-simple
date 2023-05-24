@@ -1,7 +1,5 @@
 import React from "react";
-import { action } from "@storybook/addon-actions";
-// import { Send as SendIcon } from "@mui/icons-material";
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 
 import Paper from "../Paper";
 

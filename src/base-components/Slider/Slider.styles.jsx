@@ -1,4 +1,4 @@
-import { styled, css } from "@mui/material/styles";
+import { css } from "@mui/material/styles";
 import { alpha } from "@mui/material";
 import _ from "lodash";
 import { SLIDER_STYLES } from "./Slider.consts";

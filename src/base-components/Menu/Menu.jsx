@@ -11,7 +11,7 @@ import {
 } from "./Menu.styled";
 import Typography from "../Typography/Typography";
 import Divider from "../Divider/Divider";
-import { Fade, Grow } from "@mui/material";
+import { Grow } from "@mui/material";
 import { useAnchorProps, useChildrenComponentBinding } from "./Menu.hooks";
 
 export default function Menu({

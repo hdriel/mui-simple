@@ -1,5 +1,4 @@
 import React from "react";
-import { action } from "@storybook/addon-actions";
 import {
   Send as SendIcon,
   Inbox as InboxIcon,
@@ -11,7 +10,6 @@ import {
   Comment as CommentIcon,
   Phone as PhoneIcon,
 } from "@mui/icons-material";
-import { Stack } from "@mui/material";
 
 import List from "../List";
 import Button from "../../Button/Button";

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
 import { Stack } from "@mui/material";
-import { Delete as DeleteIcon, Send as SendIcon } from "@mui/icons-material";
+import { Send as SendIcon } from "@mui/icons-material";
 import Button from "../../Button/Button";
 
 import Snackbar from "../Snackbar";

@@ -10,7 +10,7 @@ import {
   Collapse as MuiCollapse,
 } from "@mui/material";
 import { TransitionGroup } from "react-transition-group";
-import { styled, css } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import MuiDivider from "../Divider/Divider";
 
 export const Divider = MuiDivider;

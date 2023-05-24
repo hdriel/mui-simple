@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useElementSize from "./useElementSize";
 
 export function useEllipsisActive({ active, text, maxRows }) {
@@ -14,6 +14,7 @@ export function useEllipsisActive({ active, text, maxRows }) {
         : rows <= 1 && widthText && offsetWidth + 4 >= widthText);
       setIsEllipsis(isEllipsis);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [widthText]);
 
   return [ref, isEllipsis];

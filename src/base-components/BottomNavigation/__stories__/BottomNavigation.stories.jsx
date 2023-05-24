@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
 import {
-  Send as SendIcon,
   Restore as RestoreIcon,
   Favorite as FavoriteIcon,
   LocationOn as LocationOnIcon,

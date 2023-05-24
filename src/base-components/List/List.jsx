@@ -106,7 +106,6 @@ export default function List({
                     item.disablePadding ?? disablePaddingItems ?? true
                   }
                   disableGutters={item.disableGutters ?? disableGuttersItems}
-                  secondaryAction={itemProps.actions}
                   alignItems={itemProps.align ?? alignItems}
                 >
                   <ListItemWrapper
@@ -150,6 +149,10 @@ export default function List({
                         <ExpandMoreIcon />
                       )
                     ) : undefined}
+
+                    <ListItemSecondaryAction>
+                      {itemProps.actions}
+                    </ListItemSecondaryAction>
                   </ListItemWrapper>
                   <Collapse in={isOpen} timeout="auto" unmountOnExit>
                     <List

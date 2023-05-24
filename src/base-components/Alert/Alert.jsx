@@ -41,7 +41,7 @@ const Alert = forwardRef(
         });
 
       return actionList.length ? actionList : undefined;
-    }, [actions]);
+    }, [actions, onClose]);
 
     return (
       <MuiAlert

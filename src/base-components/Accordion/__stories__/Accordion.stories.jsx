@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { action } from "@storybook/addon-actions";
-// import { Send as SendIcon } from "@mui/icons-material";
 import { Stack } from "@mui/material";
 
 import Accordion from "../Accordion";
