@@ -1,11 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { Stack } from "@mui/material";
 
 import {
   Pagination as MuiPagination,
   PaginationItem,
 } from "./Pagination.styled";
+import Typography from "../Typography/Typography";
+import { isDefined } from "../../utils/helpers";
 
 // function useSearchParam(pageParamFieldName) {
 //   if (!pageParamFieldName) return;
@@ -16,6 +19,8 @@ import {
 // }
 
 export default function Pagination({
+  orientation,
+  label,
   muiColor,
   customColor,
   totalPages,
@@ -23,10 +28,10 @@ export default function Pagination({
   disabledPages,
   variant,
   size,
-  previousIcon,
-  nextIcon,
-  firstIcon,
-  lastIcon,
+  prevIconCmpCB,
+  nextIconCmpCB,
+  firstIconCmpCB,
+  lastIconCmpCB,
   showFirstButton,
   showLastButton,
   page,
@@ -34,15 +39,12 @@ export default function Pagination({
   maxPagesVisible,
   maxBoundaryPagesVisible,
   pageToLink,
-  pageParamFieldName,
   ...props
 }) {
-  // const usePageParam = useSearchParam(pageParamFieldName);
-
   const pageToLinkHandler = (page) => {
     switch (typeof pageToLink) {
       case "function":
-        return pageToLink(page);
+        return pageToLink?.(page);
       case "string":
         return pageToLink.replaceAll(/\{page\}/gi, page);
       default:
@@ -51,40 +53,65 @@ export default function Pagination({
   };
 
   return (
-    <MuiPagination
-      color={muiColor}
-      customColor={customColor}
-      count={totalPages}
-      disabled={disabled}
-      variant={variant}
-      size={size}
-      showFirstButton={showFirstButton}
-      showLastButton={showLastButton}
-      siblingCount={maxPagesVisible}
-      boundaryCount={maxBoundaryPagesVisible}
-      page={page}
-      onChange={(event, nextPage) => onChange?.(nextPage)}
-      renderItem={(item) => (
-        <PaginationItem
-          disabled={disabledPages?.includes(item.page)}
-          selected={item.page === page}
-          component={pageToLink ? Link : undefined}
-          to={pageToLink ? pageToLinkHandler.bind(null, item.page) : undefined}
-          slots={{
-            first: firstIcon,
-            last: lastIcon,
-            previous: previousIcon,
-            next: nextIcon,
-          }}
-          {...item}
-        />
+    <Stack
+      spacing={1}
+      sx={{ width: orientation === "vertical" ? "min-content" : "max-content" }}
+    >
+      {label && (
+        <Typography wrap={false}>
+          {label?.replaceAll(/\{page\}/gi, page)}
+        </Typography>
       )}
-      {...props}
-    />
+      <MuiPagination
+        color={muiColor}
+        customColor={customColor}
+        count={totalPages}
+        disabled={disabled}
+        variant={variant}
+        size={size}
+        showFirstButton={
+          showFirstButton === undefined && page && page > 1
+            ? true
+            : showFirstButton
+        }
+        showLastButton={
+          showLastButton === undefined && page && page < totalPages
+            ? true
+            : showLastButton
+        }
+        siblingCount={maxPagesVisible ? maxPagesVisible : undefined}
+        boundaryCount={
+          maxBoundaryPagesVisible ? maxBoundaryPagesVisible : undefined
+        }
+        page={page}
+        onChange={(event, nextPage) => onChange?.(nextPage)}
+        renderItem={(item) => {
+          return (
+            <PaginationItem
+              {...item}
+              disabled={item.disabled || disabledPages?.includes(item.page)}
+              component={pageToLink ? "a" : undefined}
+              to={
+                pageToLink ? pageToLinkHandler.bind(null, item.page) : undefined
+              }
+              slots={{
+                first: firstIconCmpCB,
+                previous: prevIconCmpCB,
+                next: nextIconCmpCB,
+                last: lastIconCmpCB,
+              }}
+            />
+          );
+        }}
+        {...props}
+      />
+    </Stack>
   );
 }
 
 Pagination.propTypes = {
+  orientation: PropTypes.oneOf(["horizontal", "vertical"]),
+  label: PropTypes.string,
   muiColor: PropTypes.string,
   customColor: PropTypes.string,
   disabled: PropTypes.bool,
@@ -92,10 +119,10 @@ Pagination.propTypes = {
   variant: PropTypes.oneOf(["outlined", "text"]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
   shape: PropTypes.oneOf(["circular", "rounded"]),
-  previousIcon: PropTypes.node,
-  nextIcon: PropTypes.node,
-  firstIcon: PropTypes.node,
-  lastIcon: PropTypes.node,
+  prevIconCmpCB: PropTypes.node,
+  nextIconCmpCB: PropTypes.node,
+  firstIconCmpCB: PropTypes.node,
+  lastIconCmpCB: PropTypes.node,
   showFirstButton: PropTypes.bool,
   showLastButton: PropTypes.bool,
   totalPages: PropTypes.number,
@@ -103,11 +130,12 @@ Pagination.propTypes = {
   maxBoundaryPagesVisible: PropTypes.number,
   page: PropTypes.number,
   onChange: PropTypes.func,
-  pageParamFieldName: PropTypes.string,
   pageToLink: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
 };
 
 Pagination.defaultProps = {
+  orientation: "horizontal",
+  label: undefined,
   muiColor: undefined,
   customColor: undefined,
   disabled: undefined,
@@ -116,15 +144,14 @@ Pagination.defaultProps = {
   shape: "rounded",
   showFirstButton: undefined,
   showLastButton: undefined,
-  previousIcon: undefined,
-  nextIcon: undefined,
-  firstIcon: undefined,
-  lastIcon: undefined,
+  prevIconCmpCB: undefined,
+  nextIconCmpCB: undefined,
+  firstIconCmpCB: undefined,
+  lastIconCmpCB: undefined,
   totalPages: undefined,
   maxPagesVisible: undefined,
   maxBoundaryPagesVisible: undefined,
   page: undefined,
   onChange: undefined,
   pageToLink: undefined,
-  pageParamFieldName: undefined,
 };

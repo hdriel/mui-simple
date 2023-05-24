@@ -32,6 +32,7 @@ export default function Skeleton({
       ref.current = null;
       setMounted(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
   if (!loading) return children;
