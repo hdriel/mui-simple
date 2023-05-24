@@ -33,7 +33,7 @@ const ListItemWrapper = ({
   const onClickHandler = onClick?.bind(null, index, item.onClick);
   const itemButton =
     alignItems !== "flex-start" &&
-    itemProps.align !== "flex-start" &&
+    item.align !== "flex-start" &&
     (item.link ??
       item.onClick ??
       item.selected ??
