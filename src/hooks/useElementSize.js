@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 
 export default function useElementSize(resize = false) {
   const ref = useRef(null);
@@ -12,20 +12,20 @@ export default function useElementSize(resize = false) {
       setWidth(width);
       setHeight(height);
     }
-  }, [ref.current]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     handleResize();
   }, [handleResize]);
 
   useEffect(() => {
-    if (resize && ref.current) {
+    if (resize) {
       window.addEventListener("resize", handleResize);
     }
 
     return () => {
-      if (resize && ref.current)
-        window.removeEventListener("resize", handleResize);
+      if (resize) window.removeEventListener("resize", handleResize);
     };
   }, [handleResize, resize]);
 

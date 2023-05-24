@@ -370,11 +370,6 @@ export const InputField = () => {
     50
   );
 
-  const [value, setValue] = React.useState(30);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    action("onChangeInput")(newValue);
-  };
   const handleInputChangeFrom = useHandlerInputChange.bind(
     null,
     onChangeFromValue

@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import { Snackbar as MuiSnackbar, Grow, Fade, Slide } from "./Snackbar.styled";
+import { Snackbar as MuiSnackbar, Grow, Slide } from "./Snackbar.styled";
 import Button from "../Button/Button";
 import { Close as CloseIcon } from "@mui/icons-material";
 import Alert from "../Alert/Alert";
@@ -47,7 +47,7 @@ export default function Snackbar({
             </Button>
           )
         ),
-    [actions]
+    [actions, onClose]
   );
 
   const transition = useMemo(() => {

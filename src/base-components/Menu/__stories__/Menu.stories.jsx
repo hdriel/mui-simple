@@ -5,10 +5,6 @@ import {
   ContentCopy as ContentCopyIcon,
   ContentPaste as ContentPasteIcon,
   Cloud as CloudIcon,
-  FormatAlignLeft as FormatAlignLeftIcon,
-  FormatAlignCenter as FormatAlignCenterIcon,
-  FormatAlignRight as FormatAlignRightIcon,
-  FormatAlignJustify as FormatAlignJustifyIcon,
 } from "@mui/icons-material";
 
 import Menu from "../Menu";

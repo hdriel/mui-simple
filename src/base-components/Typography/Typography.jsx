@@ -110,7 +110,7 @@ export default function Typography({
 
     const result = customTooltip ?? childrenTooltip ?? defaultTooltip;
     return Array.isArray(result) ? result.join("") : result;
-  }, [showTooltipOnEllipsis, isEllipsis, tooltip]);
+  }, [showTooltipOnEllipsis, isEllipsis, tooltip, children]);
 
   const cmp = typographyProps.noWrap ? (
     <MuiTypography ref={ref} {...typographyProps}>
@@ -132,6 +132,7 @@ export default function Typography({
 
   useEffect(() => {
     onEllipsisChange?.(isEllipsis);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEllipsis]);
 
   return (

@@ -1,4 +1,4 @@
-import { cloneElement, isValidElement, useMemo, useRef, useState } from "react";
+import { cloneElement, isValidElement, useMemo, useState } from "react";
 import { isDefined } from "../../utils/helpers";
 
 export function useChildrenComponentBinding({
@@ -61,6 +61,7 @@ export function useAnchorProps({
     }
 
     return {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [anchorElementRef?.current, anchorEl, contextMenu, anchorPosition]);
 
   return { anchorProps, setAnchorEl };

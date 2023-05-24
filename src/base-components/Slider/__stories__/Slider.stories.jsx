@@ -299,9 +299,6 @@ export const ValueLabelFormat = () => {
 };
 
 export const TrackBarPosition = () => {
-  const [value, setValue] = React.useState(30);
-  const handleChange = (event, newValue) => setValue(newValue);
-
   return (
     <Stack spacing={3}>
       <Slider

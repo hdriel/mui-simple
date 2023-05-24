@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Skeleton as MuiSkeleton } from "./Skeleton.styled";
 import useElementSize from "../../hooks/useElementSize";
@@ -24,7 +24,8 @@ export default function Skeleton({
     if (!mounted && ref.current) {
       setMounted(!mounted && ref.current);
     }
-  }, [ref.current]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mounted, ref.current]);
 
   useEffect(() => {
     if (!loading) {

@@ -3,7 +3,6 @@ import {
   BottomNavigationAction as MuiBottomNavigationAction,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { numberToPx } from "../../utils/helpers";
 import Paper from "../Paper/Paper";
 import _ from "lodash";
 

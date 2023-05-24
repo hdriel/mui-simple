@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { action } from "@storybook/addon-actions";
 import FileCopyIcon from "@mui/icons-material/FileCopyOutlined";
 import SaveIcon from "@mui/icons-material/Save";
 import PrintIcon from "@mui/icons-material/Print";

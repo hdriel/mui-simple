@@ -1,13 +1,5 @@
 import React from "react";
-import { action } from "@storybook/addon-actions";
 import {
-  Send as SendIcon,
-  Inbox as InboxIcon,
-  Drafts as DraftsIcon,
-  StarBorder as StarBorderIcon,
-  Image as ImageIcon,
-  Work as WorkIcon,
-  BeachAccess as BeachAccessIcon,
   Wifi as WifiIcon,
   Bluetooth as BluetoothIcon,
 } from "@mui/icons-material";

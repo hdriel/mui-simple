@@ -1,10 +1,9 @@
-import React, { useMemo } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Breadcrumbs as MuiBreadcrumbs } from "./Breadcrumbs.styled";
 import Link from "../Link/Link";
 import Chip from "../Chip/Chip";
 import Typography from "../Typography/Typography";
-import { useTheme, emphasize } from "@mui/material/styles";
 
 export default function Breadcrumbs({
   maxItems,
