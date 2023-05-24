@@ -25,6 +25,7 @@ export default function List({
   width,
   dense,
   enableSubtitle,
+  disablePaddingItems,
   disablePadding,
   title,
   items,
@@ -58,7 +59,11 @@ export default function List({
           return (
             <>
               {listItem && (
-                <ListItem disablePadding>
+                <ListItem
+                  disablePadding
+                  disableGutters={item.disablePadding ?? disablePaddingItems}
+                  secondaryAction={itemProps.actions}
+                >
                   <ListItemButton
                     component={itemProps.link ? "a" : undefined}
                     href={itemProps.link}
@@ -76,6 +81,7 @@ export default function List({
                       </ListItemAvatar>
                     )}
                     <ListItemText
+                      inset={itemProps.inset}
                       primary={itemProps.title}
                       secondary={
                         enableSubtitle ? (
@@ -132,6 +138,7 @@ List.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   dense: PropTypes.bool,
   disablePadding: PropTypes.bool,
+  disablePaddingItems: PropTypes.bool,
   enableSubtitle: PropTypes.bool,
   title: PropTypes.string,
   items: PropTypes.arrayOf(
@@ -140,12 +147,15 @@ List.propTypes = {
       PropTypes.shape({
         divider: PropTypes.object,
         selected: PropTypes.bool,
+        inset: PropTypes.bool,
+        disablePadding: PropTypes.bool,
         startIcon: PropTypes.node,
         avatar: PropTypes.object,
         title: PropTypes.string,
         subtitle: PropTypes.string,
         link: PropTypes.string,
         items: PropTypes.array,
+        actions: PropTypes.array,
       }),
     ])
   ),
