@@ -7,6 +7,7 @@ import {
   PaginationItem,
 } from "./Pagination.styled";
 import Typography from "../Typography/Typography";
+import { isDefined } from "../../utils/helpers";
 
 // function useSearchParam(pageParamFieldName) {
 //   if (!pageParamFieldName) return;
@@ -44,9 +45,11 @@ export default function Pagination({
       case "function":
         return pageToLink?.(page);
       case "string":
-        return pageToLink.replaceAll(/\{page\}/gi, page);
+        return isDefined(page)
+          ? pageToLink.replaceAll(/\{page\}/gi, page)
+          : undefined;
       default:
-        return false;
+        return undefined;
     }
   };
 
@@ -57,7 +60,7 @@ export default function Pagination({
     >
       {label && (
         <Typography wrap={false}>
-          {label?.replaceAll(/\{page\}/gi, page)}
+          {isDefined(page) ? label?.replaceAll(/\{page\}/gi, page) : label}
         </Typography>
       )}
       <MuiPagination

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Stack } from "@mui/material";
 import {
   Send as SendIcon,
@@ -206,10 +206,22 @@ export const PageToLink = () => {
           key={p}
           totalPages={20}
           size="medium"
-          label={`Page To Link  replace 'string-to-path...{page}...' ${p}`}
+          label={`Page To Link  replace 'string-to-path...\{page\}...' ${p}`}
           pageToLink="/pagination/{page}"
         />
       ))}
     </Stack>
+  );
+};
+
+export const Controlled = () => {
+  const [page, setPage] = useState(0);
+  return (
+    <Pagination
+      totalPages={10}
+      label="controlled, page: {page}"
+      page={page}
+      onChange={setPage}
+    />
   );
 };
