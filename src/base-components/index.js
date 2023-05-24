@@ -27,6 +27,7 @@ export { default as CheckList } from "./List/CheckList";
 export { default as Menu } from "./Menu/Menu";
 export { default as ContextMenu } from "./Menu/ContextMenu";
 
+export { default as Pagination } from "./Pagination/Pagination";
 export { default as Paper } from "./Paper/Paper";
 export { default as PasswordInput } from "./PasswordInput/PasswordInput";
 export { default as CircularProgress } from "./Progress/CircularProgress/CircularProgress";
