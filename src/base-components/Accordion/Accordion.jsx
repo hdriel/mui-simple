@@ -80,6 +80,7 @@ export default function Accordion({
             {isEllipsis && detailsMaxRows ? (
               <ShowMoreWrapper>
                 <Button
+                  variant="text"
                   muiColor={muiColor}
                   customColor={customColor}
                   disableRipple
