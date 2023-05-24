@@ -19,11 +19,50 @@ import {
 import Avatar from "../Avatar/Avatar";
 import Typography from "../Typography/Typography";
 
+const ListItemWrapper = ({
+  item,
+  index,
+  onClick,
+  buttonItems,
+  alignItems,
+  children,
+  ...props
+}) => {
+  if (!item) return children;
+
+  const onClickHandler = onClick?.bind(null, index, item.onClick);
+  const itemButton =
+    alignItems !== "flex-start" &&
+    itemProps.align !== "flex-start" &&
+    (item.link ??
+      item.onClick ??
+      item.selected ??
+      item.items?.length ??
+      item.buttonItem ??
+      buttonItems);
+
+  return itemButton ? (
+    <ListItemButton
+      component={item.link ? "a" : undefined}
+      href={item.link}
+      onClick={item.items?.length ? onClickHandler : item.onClick}
+      selected={item.selected}
+      {...props}
+    >
+      {children}
+    </ListItemButton>
+  ) : (
+    children
+  );
+};
+
 export default function List({
   useTransition,
   component,
   width,
   dense,
+  buttonItems,
+  alignItems,
   enableSubtitle,
   disablePaddingItems,
   disablePadding,
@@ -32,9 +71,10 @@ export default function List({
   ...props
 }) {
   const [open, setOpen] = useState({});
-  const onClick = (index) => {
+  const onClick = (index, cb, event) => {
     open[index] = open[index] === undefined ? true : !open[index];
     setOpen(open);
+    cb?.(event);
   };
 
   return (
@@ -53,24 +93,24 @@ export default function List({
             typeof item === "string" ? { title: item } : item || {};
 
           const isOpen = open[index];
-          const onClickHandler = onClick.bind(null, index);
           const listItem = !!Object.keys(itemProps).length;
 
           return (
             <>
               {listItem && (
                 <ListItem
+                  key={index}
                   disablePadding
                   disableGutters={item.disablePadding ?? disablePaddingItems}
                   secondaryAction={itemProps.actions}
+                  alignItems={itemProps.align ?? alignItems}
                 >
-                  <ListItemButton
-                    component={itemProps.link ? "a" : undefined}
-                    href={itemProps.link}
-                    onClick={
-                      itemProps.items?.length ? onClickHandler : undefined
-                    }
-                    selected={itemProps.selected}
+                  <ListItemWrapper
+                    index={index}
+                    item={itemProps}
+                    onClick={onClick}
+                    buttonItems={buttonItems}
+                    alignItems={alignItems}
                   >
                     {itemProps.startIcon && (
                       <ListItemIcon>{itemProps.startIcon}</ListItemIcon>
@@ -84,7 +124,7 @@ export default function List({
                       inset={itemProps.inset}
                       primary={itemProps.title}
                       secondary={
-                        enableSubtitle ? (
+                        enableSubtitle && itemProps.subtitle ? (
                           <Typography
                             rows={2}
                             component="span"
@@ -103,7 +143,7 @@ export default function List({
                         <ExpandMoreIcon />
                       )
                     ) : undefined}
-                  </ListItemButton>
+                  </ListItemWrapper>
                   <Collapse in={isOpen} timeout="auto" unmountOnExit>
                     <List
                       items={itemProps.items}
@@ -115,7 +155,8 @@ export default function List({
               )}
               {divider && (
                 <Divider
-                  variant={itemProps.avatar ? "inset" : undefined}
+                  key={index}
+                  variant="fullWidth"
                   {...divider}
                   component="li"
                 />
@@ -137,10 +178,12 @@ List.propTypes = {
   component: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   dense: PropTypes.bool,
+  buttonItems: PropTypes.bool,
   disablePadding: PropTypes.bool,
   disablePaddingItems: PropTypes.bool,
   enableSubtitle: PropTypes.bool,
   title: PropTypes.string,
+  alignItems: PropTypes.oneOf(["flex-start"]),
   items: PropTypes.arrayOf(
     PropTypes.oneOfType([
       PropTypes.string,
@@ -156,6 +199,7 @@ List.propTypes = {
         link: PropTypes.string,
         items: PropTypes.array,
         actions: PropTypes.array,
+        align: PropTypes.oneOf(["flex-start"]),
       }),
     ])
   ),
@@ -164,8 +208,10 @@ List.propTypes = {
 List.defaultProps = {
   useTransition: true,
   dense: undefined,
+  buttonItems: true,
   enableSubtitle: true,
   disablePadding: true,
+  alignItems: undefined,
   component: "nav",
   width: undefined,
   title: undefined,
