@@ -65,6 +65,7 @@ export default function List({
   alignItems,
   enableSubtitle,
   disablePaddingItems,
+  disableGuttersItems,
   disablePadding,
   title,
   items,
@@ -87,11 +88,12 @@ export default function List({
       subheader={<ListSubheader component="div">{title}</ListSubheader>}
       {...props}
     >
-      {items
-        ?.map((item, index) => {
-          const { divider, ...itemProps } =
+      {
+        items?.map((item, index) => {
+          const { divider, alignControl, controlType, ...itemProps } =
             typeof item === "string" ? { title: item } : item || {};
 
+          const isControl = ["checkbox", "switch"].includes(controlType);
           const isOpen = open[index];
           const listItem = !!Object.keys(itemProps).length;
 
@@ -99,9 +101,11 @@ export default function List({
             <>
               {listItem && (
                 <ListItem
-                  key={index}
-                  disablePadding
-                  disableGutters={item.disablePadding ?? disablePaddingItems}
+                  key={`i-${index}`}
+                  disablePadding={
+                    item.disablePadding ?? disablePaddingItems ?? true
+                  }
+                  disableGutters={item.disableGutters ?? disableGuttersItems}
                   secondaryAction={itemProps.actions}
                   alignItems={itemProps.align ?? alignItems}
                 >
@@ -112,9 +116,12 @@ export default function List({
                     buttonItems={buttonItems}
                     alignItems={alignItems}
                   >
-                    {itemProps.startIcon && (
-                      <ListItemIcon>{itemProps.startIcon}</ListItemIcon>
-                    )}
+                    {itemProps.startIcon &&
+                      (isControl && alignControl === "start" ? (
+                        itemProps.startIcon
+                      ) : (
+                        <ListItemIcon>{itemProps.startIcon}</ListItemIcon>
+                      ))}
                     {itemProps.avatar && (
                       <ListItemAvatar>
                         <Avatar {...itemProps.avatar} />
@@ -155,7 +162,7 @@ export default function List({
               )}
               {divider && (
                 <Divider
-                  key={index}
+                  key={`d-${index}`}
                   variant="fullWidth"
                   {...divider}
                   component="li"
@@ -164,11 +171,12 @@ export default function List({
             </>
           );
         })
-        .map((cmp, key) => (
-          <Collapse in key={key}>
-            {cmp}
-          </Collapse>
-        ))}
+        // .map((cmp, key) => (
+        //   <Collapse in key={key}>
+        //     {cmp}
+        //   </Collapse>
+        // ))
+      }
     </MuiList>
   );
 }
@@ -181,6 +189,7 @@ List.propTypes = {
   buttonItems: PropTypes.bool,
   disablePadding: PropTypes.bool,
   disablePaddingItems: PropTypes.bool,
+  disableGuttersItems: PropTypes.bool,
   enableSubtitle: PropTypes.bool,
   title: PropTypes.string,
   alignItems: PropTypes.oneOf(["flex-start"]),
@@ -188,10 +197,11 @@ List.propTypes = {
     PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.shape({
-        divider: PropTypes.object,
+        divider: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
         selected: PropTypes.bool,
         inset: PropTypes.bool,
         disablePadding: PropTypes.bool,
+        disableGutters: PropTypes.bool,
         startIcon: PropTypes.node,
         avatar: PropTypes.object,
         title: PropTypes.string,

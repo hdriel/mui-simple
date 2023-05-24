@@ -26,7 +26,7 @@ export default {
           width: "400px",
           height: "500px",
           padding: "0.5em",
-          border: "1px dashed black",
+          backgroundColor: "#E7EBF0",
         }}
       >
         <Story />
@@ -139,5 +139,12 @@ export const AlignAvatarListItems = () => {
     },
   ];
 
-  return <List buttonItems={false} alignItems="flex-start" items={items} />;
+  return (
+    <List
+      buttonItems={false}
+      alignItems="flex-start"
+      items={items}
+      disablePaddingItems={false}
+    />
+  );
 };

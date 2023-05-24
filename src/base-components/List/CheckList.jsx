@@ -3,38 +3,70 @@ import PropTypes from "prop-types";
 
 import List from "./List";
 import Checkbox from "../Checkbox/Checkbox";
+import Switch from "../Switch/Switch";
 
-export default function CheckList({ align, items, ...props }) {
+export default function CheckList({
+  controlType,
+  alignCheck,
+  items,
+  ...props
+}) {
   const checklistItems = items?.map((item) => {
-    const checkbox = (
-      <Checkbox
-        edge={align}
-        checked={item.checked}
-        tabIndex={-1}
-        disableRipple
-      />
-    );
-
-    switch (align) {
-      case "start":
-        item.icon = checkbox;
-        break;
-      case "end":
-        item.actions = [].concat(item.actions).push(checkbox);
-        break;
+    if (
+      item &&
+      Object.keys(item ?? {}).length === 1 &&
+      item.hasOwnProperty("divider")
+    ) {
+      return item;
     }
-    return { ...item };
+
+    item = typeof item === "string" ? { title: item } : item || {};
+
+    let alignControl = alignCheck !== undefined ? alignCheck : undefined;
+    let checkbox;
+    switch (controlType) {
+      case "switch":
+        alignControl = alignControl !== undefined ? alignControl : "end";
+        checkbox = (
+          <Switch edge={alignCheck} checked={item?.checked} tabIndex={-1} />
+        );
+        break;
+
+      case "checkbox":
+      default:
+        alignControl = alignControl !== undefined ? alignControl : "start";
+        checkbox = (
+          <Checkbox
+            edge={alignCheck}
+            checked={item?.checked}
+            tabIndex={-1}
+            disableRipple
+          />
+        );
+    }
+
+    switch (alignControl) {
+      case "end":
+        item.actions = [].concat(item.actions);
+        item.actions.push(checkbox);
+        break;
+      case "start":
+      default:
+        item.startIcon = checkbox;
+    }
+
+    return { ...item, controlType, alignControl };
   });
 
   return <List {...props} items={checklistItems} />;
 }
 
 CheckList.propTypes = {
-  switch: PropTypes.bool,
-  align: PropTypes.oneOf(["start", "end"]),
+  controlType: PropTypes.oneOf(["checkbox", "switch"]),
+  alignCheck: PropTypes.oneOf(["start", "end"]),
 };
 
 CheckList.defaultProps = {
-  switch: false,
-  align: "start",
+  controlType: "checkbox",
+  alignCheck: undefined,
 };

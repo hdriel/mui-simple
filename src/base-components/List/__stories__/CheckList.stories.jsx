@@ -8,6 +8,8 @@ import {
   Image as ImageIcon,
   Work as WorkIcon,
   BeachAccess as BeachAccessIcon,
+  Wifi as WifiIcon,
+  Bluetooth as BluetoothIcon,
 } from "@mui/icons-material";
 
 import CheckList from "../CheckList";
@@ -22,7 +24,7 @@ export default {
           width: "400px",
           height: "500px",
           padding: "0.5em",
-          border: "1px dashed black",
+          backgroundColor: "#E7EBF0",
         }}
       >
         <Story />
@@ -35,69 +37,68 @@ export const Default = () => {
   return <CheckList />;
 };
 
-export const BasicList = () => {
+export const CheckboxListAlignStart = () => {
+  const items = [
+    { title: "Line item 1", checked: true },
+    { title: "Line item 2", checked: false },
+    { divider: true },
+    { title: "Line item 3" },
+    "Line item 4",
+  ];
+
+  return (
+    <CheckList
+      items={items}
+      alignCheck="start"
+      controlType="checkbox"
+      sx={{ minWidth: 35 }}
+    />
+  );
+};
+
+export const CheckboxListAlignEnd = () => {
   const items = [
     {
-      startIcon: <InboxIcon />,
-      title: "Inbox",
+      checked: true,
+      avatar: { image: "/1.jpg" },
+      title: "Line item 1",
     },
     {
-      startIcon: <DraftsIcon />,
-      title: "Drafts",
+      checked: false,
+      avatar: { image: "/2.jpg" },
+      title: "Line item 2",
     },
+    { avatar: { image: "/3.jpg" }, title: "Line item 3" },
     {
       divider: true,
     },
-    { title: "Trash" },
-    "Spam",
+    "Line item 4",
+    { title: "Line item 5", subtitle: "inset title", inset: true },
   ];
 
-  return <CheckList items={items} />;
+  return <CheckList items={items} alignCheck="end" controlType="checkbox" />;
 };
-
-export const NestedList = () => {
+export const SwitchListAlignEnd = () => {
   const items = [
     {
-      startIcon: <SendIcon />,
-      title: "Sent mail",
+      checked: true,
+      startIcon: <WifiIcon />,
+      title: "Wi-Fi",
     },
     {
-      startIcon: <DraftsIcon />,
-      title: "Drafts",
-    },
-    {
-      startIcon: <InboxIcon />,
-      title: "Inbox",
-      items: [
-        {
-          startIcon: <StarBorderIcon />,
-          title: "Starred",
-        },
-      ],
+      startIcon: <BluetoothIcon />,
+      title: "Bluetooth",
     },
   ];
 
-  return <CheckList title="Nested List Items" items={items} />;
-};
-
-export const FolderList = () => {
-  const items = [
-    {
-      title: "Photos",
-      subtitle: "Jan 9, 2014",
-      avatar: { icon: <ImageIcon /> },
-    },
-    {
-      title: "Work",
-      subtitle: "Jan 7, 2014",
-      avatar: { icon: <WorkIcon /> },
-    },
-    {
-      title: "Vacation",
-      subtitle: "July 20, 2014",
-      avatar: { icon: <BeachAccessIcon /> },
-    },
-  ];
-
-  return <CheckList items={items} />;
+  return (
+    <CheckList
+      buttonItems={false}
+      disablePaddingItems={false}
+      title="Setting"
+      items={items}
+      alignCheck="end"
+      controlType="switch"
+    />
+  );
 };
