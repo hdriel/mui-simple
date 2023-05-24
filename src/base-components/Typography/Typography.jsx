@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import { Border, Typography as MuiTypography } from "./Typography.styled";
 import Tooltip from "../Tooltip/Tooltip";
@@ -35,6 +35,7 @@ export default function Typography({
   noWrap,
   autoWidth,
   showTooltipOnEllipsis,
+  onEllipsisChange,
   ...props
 }) {
   const ellipsisMaxRows = !wrap || !rows ? 0 : +rows;
@@ -129,6 +130,10 @@ export default function Typography({
     </Border>
   );
 
+  useEffect(() => {
+    onEllipsisChange?.(isEllipsis);
+  }, [isEllipsis]);
+
   return (
     <Tooltip title={tooltipMessage} placement={tooltipPlacement}>
       {cmp}
@@ -162,6 +167,7 @@ Typography.propTypes = {
   tooltip: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   showTooltipOnEllipsis: PropTypes.bool,
   tooltipPlacement: PropTypes.oneOf(TOOLTIP_PLACEMENTS),
+  onEllipsisChange: PropTypes.func,
 };
 
 Typography.defaultProps = {
@@ -189,4 +195,5 @@ Typography.defaultProps = {
   autoWidth: true,
   tooltip: undefined,
   showTooltipOnEllipsis: true,
+  onEllipsisChange: undefined,
 };
