@@ -203,6 +203,7 @@ export const PageToLink = () => {
     <Stack spacing={5}>
       {Array.from({ length: 3 }, (_, i) => i).map((p) => (
         <Pagination
+          key={p}
           totalPages={20}
           size="medium"
           label={`Page To Link  replace 'string-to-path...{page}...' ${p}`}

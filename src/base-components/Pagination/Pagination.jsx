@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { Stack } from "@mui/material";
 
 import {
@@ -8,7 +7,6 @@ import {
   PaginationItem,
 } from "./Pagination.styled";
 import Typography from "../Typography/Typography";
-import { isDefined } from "../../utils/helpers";
 
 // function useSearchParam(pageParamFieldName) {
 //   if (!pageParamFieldName) return;
@@ -89,11 +87,10 @@ export default function Pagination({
           return (
             <PaginationItem
               {...item}
+              customColor={"#10ddc0"}
               disabled={item.disabled || disabledPages?.includes(item.page)}
               component={pageToLink ? "a" : undefined}
-              to={
-                pageToLink ? pageToLinkHandler.bind(null, item.page) : undefined
-              }
+              href={pageToLink ? pageToLinkHandler(item.page) : undefined}
               slots={{
                 first: firstIconCmpCB,
                 previous: prevIconCmpCB,
