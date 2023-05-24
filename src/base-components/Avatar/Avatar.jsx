@@ -54,7 +54,7 @@ Avatar.propTypes = {
   username: PropTypes.string,
   image: PropTypes.string,
   size: PropTypes.string,
-  icon: PropTypes.string,
+  icon: PropTypes.node,
   variant: PropTypes.oneOf(["circular", "rounded", "square"]),
   fallbackImage: PropTypes.string,
   onClick: PropTypes.func,
