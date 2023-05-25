@@ -1,9 +1,19 @@
 import React, { useState } from "react";
 import { Stack } from "@mui/material";
-import { Menu as MenuIcon, Close as CloseIcon } from "@mui/icons-material";
+import {
+  Menu as MenuIcon,
+  Close as CloseIcon,
+  Send as SendIcon,
+  Delete as DeleteIcon,
+  Fingerprint as FingerprintIcon,
+} from "@mui/icons-material";
 
 import AppBar from "../AppBar";
 import Button from "../../Button/Button";
+import Avatar from "../../Avatar/Avatar";
+import Typography from "../../Typography/Typography";
+import Menu from "../../Menu/Menu";
+import { action } from "@storybook/addon-actions";
 
 export default {
   title: "Surfaces/AppBar",
@@ -27,7 +37,7 @@ export const Default = () => {
   return <AppBar />;
 };
 
-export const Menu = () => {
+export const MenuToolbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menu = (
     <Button
@@ -49,7 +59,89 @@ export const Menu = () => {
 export const Title = () => {
   return (
     <Stack spacing={3}>
-      <AppBar title="My Mui Component" />;
+      <AppBar title="My Mui Component" />
+      <AppBar
+        menu={true}
+        title={
+          <>
+            <Avatar image={"/1.jpg"} />
+            <Typography wrap={false}>Hello world</Typography>
+          </>
+        }
+      />
+      <AppBar />
     </Stack>
+  );
+};
+
+export const Actions = () => {
+  return (
+    <Stack spacing={3}>
+      <AppBar
+        menu={true}
+        title={
+          <>
+            <Avatar image={"/1.jpg"} />
+            <Typography wrap={false}>Hello world</Typography>
+          </>
+        }
+      >
+        <Button>Label only</Button>
+        <Button startIcon={<SendIcon />}>Start Icon</Button>
+        <Button muiColor="error" endIcon={<DeleteIcon />}>
+          End Icon
+        </Button>
+        <Button customColor={"#D05010"} icon={<FingerprintIcon />} />
+        <Button color="inherit">Login</Button>
+      </AppBar>
+      <AppBar menu={true}>
+        <Button>Label only</Button>
+        <Button startIcon={<SendIcon />}>Start Icon</Button>
+        <Button muiColor="error" endIcon={<DeleteIcon />}>
+          End Icon
+        </Button>
+        <Button customColor={"#D05010"} icon={<FingerprintIcon />} />
+        <Button color="inherit">Login</Button>
+      </AppBar>
+      <AppBar>
+        <Button>Label only</Button>
+        <Button startIcon={<SendIcon />}>Start Icon</Button>
+        <Button muiColor="error" endIcon={<DeleteIcon />}>
+          End Icon
+        </Button>
+        <Button customColor={"#D05010"} icon={<FingerprintIcon />} />
+        <Button color="inherit">Login</Button>
+      </AppBar>
+    </Stack>
+  );
+};
+
+export const ActionMenu = () => {
+  const [open, setOpen] = useState(false);
+
+  const options = [
+    { id: "o1", label: "Profile", onClick: action("onClickOption") },
+    { id: "o2", label: "My account", onClick: action("onClickOption") },
+    {
+      id: "o3",
+      label: "Logout",
+      onClick: action("onClickOption"),
+    },
+    {
+      id: "o3",
+      label: "return false",
+      onClick: (event) => {
+        action("onClickOption")(event);
+        return false;
+      },
+    },
+  ];
+
+  return (
+    <AppBar menu={true} title="Hello World">
+      <Menu options={options} open={open} onClose={() => setOpen(false)}>
+        <Avatar image={"/1.jpg"} onClick={() => setOpen(true)} />
+      </Menu>
+    </AppBar>
   );
 };

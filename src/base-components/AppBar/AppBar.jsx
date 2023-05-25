@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { Box } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { AppBar as MuiAppBar, Toolbar } from "./AppBar.styled";
+import { AppBar as MuiAppBar, TitleWrapper, Toolbar } from "./AppBar.styled";
 import Button from "../Button/Button";
 import Typography from "../Typography/Typography";
 
@@ -24,18 +24,15 @@ export default function AppBar({ menu, title, children, ...props }) {
     <MuiAppBar position="static" {...props}>
       <Toolbar>
         {menuIcon}
-        {isValidElement(title)
-          ? title
-          : title && (
-              <Typography
-                variant="h6"
-                component="div"
-                sx={{ flexGrow: 1 }}
-                wrap={false}
-              >
-                {title}
-              </Typography>
-            )}
+        <TitleWrapper sx={{ flexGrow: 1 }}>
+          {isValidElement(title)
+            ? title
+            : title && (
+                <Typography variant="h6" component="div" wrap={false}>
+                  {title}
+                </Typography>
+              )}
+        </TitleWrapper>
         <Box>{children}</Box>
       </Toolbar>
     </MuiAppBar>
