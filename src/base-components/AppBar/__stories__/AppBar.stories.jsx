@@ -14,6 +14,7 @@ import Avatar from "../../Avatar/Avatar";
 import Typography from "../../Typography/Typography";
 import Menu from "../../Menu/Menu";
 import { action } from "@storybook/addon-actions";
+import { ThemeProvider } from "../../../themes";
 
 export default {
   title: "Surfaces/AppBar",
@@ -143,5 +144,27 @@ export const ActionMenu = () => {
         <Avatar image={"/1.jpg"} onClick={() => setOpen(true)} />
       </Menu>
     </AppBar>
+  );
+};
+
+export const ThemedAndColored = () => {
+  return (
+    <Stack spacing={3}>
+      <ThemeProvider theme={"light"}>
+        <AppBar menu title="light primary" muiColor="primary" />
+      </ThemeProvider>
+      <ThemeProvider theme={"dark"}>
+        <AppBar menu title="dark primary" muiColor="primary" />
+        <AppBar
+          menu
+          title="dark primary with enableColorOnDark"
+          muiColor="primary"
+          enableColorOnDark
+        />
+      </ThemeProvider>
+      <AppBar menu title="#86950d" customColor={"#86950d"} />
+      <AppBar menu title="default" />
+      <AppBar />
+    </Stack>
   );
 };
