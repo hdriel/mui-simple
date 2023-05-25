@@ -7,7 +7,8 @@ import {
 } from "@mui/material";
 
 export const Button = styled(MuiButton, {
-  shouldForwardProp: (propName) => !["customColor"].includes(propName),
+  shouldForwardProp: (propName) =>
+    !["disableElevation", "customColor"].includes(propName),
 })`
   width: ${(props) => (props.fullWidth ? "100%" : "max-content")};
   &:not(.MuiButton-contained) {
@@ -26,7 +27,8 @@ export const Button = styled(MuiButton, {
 `;
 
 export const IconButton = styled(MuiIconButton, {
-  shouldForwardProp: (propName) => !["customColor"].includes(propName),
+  shouldForwardProp: (propName) =>
+    !["disableElevation", "customColor"].includes(propName),
 })``;
 
 export const ButtonGroup = styled(MuiButtonGroup, {

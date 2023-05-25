@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import { Stack } from "@mui/material";
+import { Menu as MenuIcon, Close as CloseIcon } from "@mui/icons-material";
 
 import AppBar from "../AppBar";
+import Button from "../../Button/Button";
 
 export default {
   title: "Surfaces/AppBar",
@@ -22,4 +25,31 @@ export default {
 
 export const Default = () => {
   return <AppBar />;
+};
+
+export const Menu = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menu = (
+    <Button
+      muiColor="inherit"
+      icon={menuOpen ? <CloseIcon /> : <MenuIcon />}
+      onClick={() => setMenuOpen(!menuOpen)}
+    />
+  );
+
+  return (
+    <Stack spacing={3}>
+      <AppBar menu={menu} />
+      <AppBar menu={true} />
+      <AppBar />
+    </Stack>
+  );
+};
+
+export const Title = () => {
+  return (
+    <Stack spacing={3}>
+      <AppBar title="My Mui Component" />;
+    </Stack>
+  );
 };
