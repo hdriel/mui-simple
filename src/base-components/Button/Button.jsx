@@ -42,6 +42,7 @@ const Button = forwardRef(
           disableRipple={disableRipple}
           onClick={onClick}
           href={link}
+          {...props}
         >
           {isLoading ? spinner : icon}
         </MuiIconButton>
