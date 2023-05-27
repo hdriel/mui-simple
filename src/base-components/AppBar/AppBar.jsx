@@ -81,6 +81,7 @@ export default function AppBar({
             <Box>{actions}</Box>
           </Toolbar>
         </MuiAppBar>
+        {/*  @todo: add drawer here by children as content + drawerProps AppBar field */}
       </OnScrollEventWrapper>
       {!isBottom && (
         <Toolbar
@@ -91,6 +92,8 @@ export default function AppBar({
     </>
   );
 }
+// @todo: consider to all logo field and position like start / center
+// @todo: what about responsive way ?
 
 AppBar.propTypes = {
   menu: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
