@@ -7,7 +7,6 @@ import { AppBar as MuiAppBar, TitleWrapper, Toolbar } from "./AppBar.styled";
 import Button from "../Button/Button";
 import Typography from "../Typography/Typography";
 import OnScrollEventWrapper from "./OnScrollEventWrapper";
-import { ScrollTop } from "./ScrollTop";
 
 export default function AppBar({
   menu,
@@ -25,9 +24,14 @@ export default function AppBar({
   disablePadding,
   scrollToTop,
   scrollToTopProps,
+  actions,
   children,
   ...props
 }) {
+  const isBottom = position === "fixed-bottom";
+  const positionProps = isBottom ? { top: "auto", bottom: 0 } : {};
+  position = isBottom ? "fixed" : position;
+
   const menuIcon = isValidElement(menu)
     ? cloneElement(menu, { edge: "start", size: "large" })
     : menu && (
@@ -47,12 +51,16 @@ export default function AppBar({
         elevationScroll={elevationScroll}
         hideOnScroll={hideOnScroll}
         elevation={elevation}
+        scrollToTop={scrollToTop}
+        {...scrollToTopProps}
+        scrollToId={toolbarId ?? "#back-to-top-anchor"}
       >
         <MuiAppBar
           position={hideOnScroll || elevationScroll ? "fixed" : position}
           color={muiColor}
           customColor={customColor}
           enableColorOnDark={enableColorOnDark}
+          sx={{ ...(isBottom && { top: "auto", bottom: 0 }), ...props.sx }}
           {...props}
         >
           <Toolbar
@@ -70,19 +78,16 @@ export default function AppBar({
                     </Typography>
                   )}
             </TitleWrapper>
-            <Box>{children}</Box>
+            <Box>{actions}</Box>
           </Toolbar>
         </MuiAppBar>
       </OnScrollEventWrapper>
-      <Toolbar variant={"dense"} id={toolbarId ?? "back-to-top-anchor"} />
-      {scrollToTop ? (
-        <ScrollTop
-          {...scrollToTopProps}
-          scrollToId={toolbarId ?? "back-to-top-anchor"}
-        >
-          {isValidElement(scrollToTop) ? scrollToTop : undefined}
-        </ScrollTop>
-      ) : undefined}
+      {!isBottom && (
+        <Toolbar
+          variant={dense ? "dense" : undefined}
+          id={toolbarId ?? "back-to-top-anchor"}
+        />
+      )}
     </>
   );
 }
@@ -90,7 +95,7 @@ export default function AppBar({
 AppBar.propTypes = {
   menu: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  position: PropTypes.oneOf(["fixed", "sticky", "static"]),
+  position: PropTypes.oneOf(["fixed", "fixed-bottom", "sticky", "static"]),
   muiColor: PropTypes.string,
   customColor: PropTypes.string,
   enableColorOnDark: PropTypes.bool,
@@ -103,6 +108,7 @@ AppBar.propTypes = {
   elevation: PropTypes.oneOf(Array.from({ length: 25 }, (_, i) => i)), // 0-24
   scrollToTop: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
   scrollToTopProps: PropTypes.object,
+  actions: PropTypes.node,
 };
 
 AppBar.defaultProps = {
@@ -119,6 +125,6 @@ AppBar.defaultProps = {
   dense: undefined,
   disablePadding: undefined,
   elevation: undefined,
-  scrollToTop: false,
+  scrollToTop: undefined,
   scrollToTopProps: undefined,
 };

@@ -24,7 +24,7 @@ export default {
       <div
         id="story"
         style={{
-          height: "500px",
+          height: "800px",
           backgroundColor: "#f5f2f2",
           overflow: "auto",
         }}
@@ -35,24 +35,8 @@ export default {
   ],
 };
 
-const decorators = [
-  (Story) => (
-    <div
-      id="story"
-      style={{
-        height: "500px",
-        width: "800px",
-        backgroundColor: "#e2e2e2",
-        overflow: "auto",
-      }}
-    >
-      <Story />
-    </div>
-  ),
-];
-
-export const Default = () => {
-  return <AppBar />;
+export const Default = (props) => {
+  return <AppBar {...props} />;
 };
 
 export const MenuToolbar = () => {
@@ -67,9 +51,9 @@ export const MenuToolbar = () => {
 
   return (
     <Stack spacing={3}>
-      <AppBar menu={menu} />
-      <AppBar menu={true} />
-      <AppBar />
+      <AppBar position="static" menu={menu} />
+      <AppBar position="static" menu />
+      <AppBar position="static" />
     </Stack>
   );
 };
@@ -77,9 +61,10 @@ export const MenuToolbar = () => {
 export const Title = () => {
   return (
     <Stack spacing={3}>
-      <AppBar title="My Mui Component" />
+      <AppBar position="static" title="My Mui Component" />
       <AppBar
-        menu={true}
+        position="static"
+        menu
         title={
           <>
             <Avatar image={"/1.jpg"} />
@@ -87,7 +72,58 @@ export const Title = () => {
           </>
         }
       />
-      <AppBar />
+      <AppBar position="static" />
+    </Stack>
+  );
+};
+
+export const Dense = () => {
+  return (
+    <Stack spacing={3}>
+      <AppBar
+        position="static"
+        menu
+        dense
+        title={
+          <>
+            <Avatar image={"/1.jpg"} />
+            <Typography wrap={false}>With Dense</Typography>
+          </>
+        }
+      />
+      <AppBar
+        position="static"
+        menu
+        title={
+          <>
+            <Avatar image={"/1.jpg"} />
+            <Typography wrap={false}>Without Dense</Typography>
+          </>
+        }
+      />
+      <AppBar
+        position="static"
+        menu
+        disablePadding
+        title={
+          <>
+            <Avatar image={"/1.jpg"} />
+            <Typography wrap={false}>Disable Padding</Typography>
+          </>
+        }
+      />
+      <AppBar
+        position="static"
+        menu
+        dense
+        disablePadding
+        title={
+          <>
+            <Avatar image={"/1.jpg"} />
+            <Typography wrap={false}>Dense & Disable Padding</Typography>
+          </>
+        }
+      />
     </Stack>
   );
 };
@@ -96,40 +132,50 @@ export const Actions = () => {
   return (
     <Stack spacing={3}>
       <AppBar
-        menu={true}
+        position="static"
+        menu
         title={
           <>
             <Avatar image={"/1.jpg"} />
             <Typography wrap={false}>Hello world</Typography>
           </>
         }
-      >
-        <Button>Label only</Button>
-        <Button startIcon={<SendIcon />}>Start Icon</Button>
-        <Button muiColor="error" endIcon={<DeleteIcon />}>
-          End Icon
-        </Button>
-        <Button customColor={"#D05010"} icon={<FingerprintIcon />} />
-        <Button color="inherit">Login</Button>
-      </AppBar>
-      <AppBar menu={true}>
-        <Button>Label only</Button>
-        <Button startIcon={<SendIcon />}>Start Icon</Button>
-        <Button muiColor="error" endIcon={<DeleteIcon />}>
-          End Icon
-        </Button>
-        <Button customColor={"#D05010"} icon={<FingerprintIcon />} />
-        <Button color="inherit">Login</Button>
-      </AppBar>
-      <AppBar>
-        <Button>Label only</Button>
-        <Button startIcon={<SendIcon />}>Start Icon</Button>
-        <Button muiColor="error" endIcon={<DeleteIcon />}>
-          End Icon
-        </Button>
-        <Button customColor={"#D05010"} icon={<FingerprintIcon />} />
-        <Button color="inherit">Login</Button>
-      </AppBar>
+        actions={[
+          <Button>Label only</Button>,
+          <Button startIcon={<SendIcon />}>Start Icon</Button>,
+          <Button muiColor="error" endIcon={<DeleteIcon />}>
+            , End Icon
+          </Button>,
+          <Button customColor={"#D05010"} icon={<FingerprintIcon />} />,
+          <Button color="inherit">Login</Button>,
+        ]}
+      />
+      <AppBar
+        position="static"
+        menu
+        actions={[
+          <Button>Label only</Button>,
+          <Button startIcon={<SendIcon />}>Start Icon</Button>,
+          <Button muiColor="error" endIcon={<DeleteIcon />}>
+            , End Icon
+          </Button>,
+          <Button customColor={"#D05010"} icon={<FingerprintIcon />} />,
+          <Button color="inherit">Login</Button>,
+        ]}
+      />
+
+      <AppBar
+        position="static"
+        actions={[
+          <Button>Label only</Button>,
+          <Button startIcon={<SendIcon />}>Start Icon</Button>,
+          <Button muiColor="error" endIcon={<DeleteIcon />}>
+            , End Icon
+          </Button>,
+          <Button customColor={"#D05010"} icon={<FingerprintIcon />} />,
+          <Button color="inherit">Login</Button>,
+        ]}
+      />
     </Stack>
   );
 };
@@ -156,11 +202,15 @@ export const ActionMenu = () => {
   ];
 
   return (
-    <AppBar menu={true} title="Hello World">
-      <Menu options={options} open={open} onClose={() => setOpen(false)}>
-        <Avatar image={"/1.jpg"} onClick={() => setOpen(true)} />
-      </Menu>
-    </AppBar>
+    <AppBar
+      menu
+      title="Hello World"
+      actions={
+        <Menu options={options} open={open} onClose={() => setOpen(false)}>
+          <Avatar image={"/1.jpg"} onClick={() => setOpen(true)} />
+        </Menu>
+      }
+    />
   );
 };
 
@@ -168,20 +218,31 @@ export const ThemedAndColored = () => {
   return (
     <Stack spacing={3}>
       <ThemeProvider theme={"light"}>
-        <AppBar menu title="light primary" muiColor="primary" />
+        <AppBar
+          position="static"
+          menu
+          title="light primary"
+          muiColor="primary"
+        />
       </ThemeProvider>
       <ThemeProvider theme={"dark"}>
-        <AppBar menu title="dark primary" muiColor="primary" />
         <AppBar
+          position="static"
+          menu
+          title="dark primary"
+          muiColor="primary"
+        />
+        <AppBar
+          position="static"
           menu
           title="dark primary with enableColorOnDark"
           muiColor="primary"
           enableColorOnDark
         />
       </ThemeProvider>
-      <AppBar menu title="#86950d" customColor={"#86950d"} />
-      <AppBar menu title="default" />
-      <AppBar />
+      <AppBar position="static" menu title="#86950d" customColor={"#86950d"} />
+      <AppBar position="static" menu title="default" />
+      <AppBar position="static" />
     </Stack>
   );
 };
@@ -203,7 +264,7 @@ export const Scroller = () => {
         />
         <Container>
           <Box sx={{ my: 2 }}>
-            {[...new Array(20)]
+            {[...new Array(30)]
               .map(
                 () => `Cras mattis consectetur purus sit amet fermentum.
 Cras justo odio, dapibus ac facilisis in, egestas eget quam.
@@ -234,7 +295,7 @@ export const ElevationScroll = () => {
         />
         <Container>
           <Box sx={{ my: 2 }}>
-            {[...new Array(20)]
+            {[...new Array(30)]
               .map(
                 () => `Cras mattis consectetur purus sit amet fermentum.
 Cras justo odio, dapibus ac facilisis in, egestas eget quam.
@@ -265,7 +326,40 @@ export const HideOnScroll = () => {
         />
         <Container>
           <Box sx={{ my: 2 }}>
-            {[...new Array(20)]
+            {[...new Array(30)]
+              .map(
+                () => `Cras mattis consectetur purus sit amet fermentum.
+Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
+              )
+              .join("\n")}
+          </Box>
+        </Container>
+      </>
+    )
+  );
+};
+
+export const BottomAppBar = () => {
+  const [scrollElement, setScrollElement] = useState();
+  useEffect(() => {
+    setScrollElement(document.getElementById("story"));
+  }, []);
+
+  return (
+    scrollElement && (
+      <>
+        <AppBar
+          position="fixed-bottom"
+          title="Bottom App Bar"
+          elevationScroll
+          scrollElement={scrollElement}
+          scrollToTop
+        />
+        <Container>
+          <Box sx={{ my: 2 }}>
+            {[...new Array(30)]
               .map(
                 () => `Cras mattis consectetur purus sit amet fermentum.
 Cras justo odio, dapibus ac facilisis in, egestas eget quam.
