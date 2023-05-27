@@ -1,83 +1,133 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
+import React, { cloneElement, isValidElement } from "react";
+import PropTypes from "prop-types";
+
+import { Box } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import LightModeIcon from "@mui/icons-material/LightMode";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
+import { AppBar as MuiAppBar, TitleWrapper, Toolbar } from "./AppBar.styled";
+import Button from "../Button/Button";
+import Typography from "../Typography/Typography";
+import OnScrollEventWrapper from "./OnScrollEventWrapper";
 
-export default function MenuAppBar() {
-  const theme = localStorage.getItem("theme");
-  const [anchorEl, setAnchorEl] = React.useState(null);
+export default function AppBar({
+  menu,
+  title,
+  muiColor,
+  customColor,
+  position,
+  enableColorOnDark,
+  scrollElement,
+  toolbarId,
+  elevationScroll,
+  elevation,
+  hideOnScroll,
+  dense,
+  disablePadding,
+  scrollToTop,
+  scrollToTopProps,
+  actions,
+  children,
+  ...props
+}) {
+  const isBottom = position === "fixed-bottom";
+  const positionProps = isBottom ? { top: "auto", bottom: 0 } : {};
+  position = isBottom ? "fixed" : position;
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = (theme) => {
-    setAnchorEl(null);
-    localStorage.setItem("theme", theme);
-    window.location.reload();
-  };
+  const menuIcon = isValidElement(menu)
+    ? cloneElement(menu, { edge: "start", size: "large" })
+    : menu && (
+        <Button
+          muiColor="inherit"
+          edge="start"
+          size="large"
+          icon={<MenuIcon />}
+          sx={{ mr: 2 }}
+        />
+      );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
+    <>
+      <OnScrollEventWrapper
+        scrollElement={scrollElement}
+        elevationScroll={elevationScroll}
+        hideOnScroll={hideOnScroll}
+        elevation={elevation}
+        scrollToTop={scrollToTop}
+        {...scrollToTopProps}
+        scrollToId={toolbarId ?? "#back-to-top-anchor"}
+      >
+        <MuiAppBar
+          position={hideOnScroll || elevationScroll ? "fixed" : position}
+          color={muiColor}
+          customColor={customColor}
+          enableColorOnDark={enableColorOnDark}
+          sx={{ ...(isBottom && { top: "auto", bottom: 0 }), ...props.sx }}
+          {...props}
+        >
+          <Toolbar
             color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
+            variant={dense ? "dense" : undefined}
+            disableGutters={disablePadding}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            My Mui Component
-          </Typography>
-          <div>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleMenu}
-              color="inherit"
-            >
-              {theme === "light" ? <LightModeIcon /> : <DarkModeIcon />}
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={() => handleClose("light")} sx={{ gap: 0.5 }}>
-                <LightModeIcon />
-                Light
-              </MenuItem>
-              <MenuItem onClick={() => handleClose("dark")} sx={{ gap: 0.5 }}>
-                <DarkModeIcon />
-                Dark
-              </MenuItem>
-            </Menu>
-          </div>
-        </Toolbar>
-      </AppBar>
-    </Box>
+            {menuIcon}
+            <TitleWrapper sx={{ flexGrow: 1 }}>
+              {isValidElement(title)
+                ? title
+                : title && (
+                    <Typography variant="h6" component="div" wrap={false}>
+                      {title}
+                    </Typography>
+                  )}
+            </TitleWrapper>
+            <Box>{actions}</Box>
+          </Toolbar>
+        </MuiAppBar>
+        {/*  @todo: add drawer here by children as content + drawerProps AppBar field */}
+      </OnScrollEventWrapper>
+      {!isBottom && (
+        <Toolbar
+          variant={dense ? "dense" : undefined}
+          id={toolbarId ?? "back-to-top-anchor"}
+        />
+      )}
+    </>
   );
 }
+// @todo: consider to all logo field and position like start / center
+// @todo: what about responsive way ?
+
+AppBar.propTypes = {
+  menu: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  position: PropTypes.oneOf(["fixed", "fixed-bottom", "sticky", "static"]),
+  muiColor: PropTypes.string,
+  customColor: PropTypes.string,
+  enableColorOnDark: PropTypes.bool,
+  toolbarId: PropTypes.string,
+  scrollElement: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+  elevationScroll: PropTypes.bool,
+  hideOnScroll: PropTypes.bool,
+  dense: PropTypes.bool,
+  disablePadding: PropTypes.bool,
+  elevation: PropTypes.oneOf(Array.from({ length: 25 }, (_, i) => i)), // 0-24
+  scrollToTop: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
+  scrollToTopProps: PropTypes.object,
+  actions: PropTypes.node,
+};
+
+AppBar.defaultProps = {
+  menu: undefined,
+  position: "fixed",
+  title: undefined,
+  muiColor: undefined,
+  customColor: undefined,
+  enableColorOnDark: undefined,
+  scrollElement: undefined,
+  toolbarId: undefined,
+  elevationScroll: undefined,
+  hideOnScroll: undefined,
+  dense: undefined,
+  disablePadding: undefined,
+  elevation: undefined,
+  scrollToTop: undefined,
+  scrollToTopProps: undefined,
+};

@@ -1,43 +1,58 @@
 import "./App.css";
-import React, { useState } from "react";
-import { Box, Typography } from "@mui/material";
+import React from "react";
+import {
+  Box,
+  Container,
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  Typography,
+  useScrollTrigger,
+  Slide,
+} from "@mui/material";
 
-import { Button, Tooltip, AppBar } from "./base-components";
-import { RatingDialog } from "./components";
-
-function App() {
-  const [open, setOpen] = useState(false);
-  const [isFeedback, setIsFeedback] = useState(false);
-
-  const onCloseHandler = ({ rating, reason }) => {
-    if (reason !== undefined) setIsFeedback(true);
-
-    console.table({ rating, reason });
-    setOpen(false);
-  };
+function HideOnScroll(props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+  });
 
   return (
-    <>
-      <AppBar />
-      <Box
-        sx={{
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "background.hadriel",
-        }}
-      >
-        {isFeedback ? (
-          <Typography>Thanks for your feedback</Typography>
-        ) : (
-          <Tooltip title="Given a feedback dialog">
-            <Button onClick={() => setOpen(!open)}>Feedback</Button>
-          </Tooltip>
-        )}
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
 
-        <RatingDialog open={open} onClose={onCloseHandler} />
-      </Box>
+function App() {
+  return (
+    <>
+      <CssBaseline />
+      <HideOnScroll>
+        <AppBar>
+          <Toolbar>
+            <Typography variant="h6" component="div">
+              Scroll to hide App bar
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </HideOnScroll>
+      <Toolbar />
+      <Container>
+        <Box sx={{ my: 2 }}>
+          {[...new Array(40)]
+            .map(
+              () => `Cras mattis consectetur purus sit amet fermentum.
+Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
+            )
+            .join("\n")}
+        </Box>
+      </Container>
     </>
   );
 }

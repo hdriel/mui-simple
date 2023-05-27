@@ -51,9 +51,12 @@ export default function Menu({
     if (res === undefined || res === true) setAnchorEl(null);
   };
 
-  const handleClick = (option) => {
+  const handleClick = (event, option) => {
+    event.stopPropagation();
     const res = (option?.onClick ?? onClick)?.(option?.id);
-    if (res === undefined || res === true) handleClose();
+    if (res === undefined || res === true) {
+      handleClose();
+    }
   };
 
   return (
@@ -80,7 +83,7 @@ export default function Menu({
                 ) : (
                   <MenuItem
                     key={`${index}-${option.id}`}
-                    onClick={() => handleClick(option)}
+                    onClick={(event) => handleClick(event, option)}
                     disableRipple={disableRipple}
                   >
                     {option.icon || option.check ? (
