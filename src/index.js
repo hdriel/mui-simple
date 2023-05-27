@@ -2,23 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import "./index.css";
-import App from "./App";
+// import App from "./App";
+import App from "./MyAppBar";
+// import App from "./example";
 import reportWebVitals from "./reportWebVitals";
 
 import { ThemeProvider } from "./themes";
-import { DevSupport } from "@react-buddy/ide-toolbox";
-import { ComponentPreviews, useInitial } from "./dev";
+import { CssBaseline } from "@mui/material";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <CssBaseline />
     <ThemeProvider>
-      <DevSupport
-        ComponentPreviews={ComponentPreviews}
-        useInitialHook={useInitial}
-      >
-        <App />
-      </DevSupport>
+      <App />
     </ThemeProvider>
   </React.StrictMode>
 );

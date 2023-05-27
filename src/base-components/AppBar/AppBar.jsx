@@ -6,19 +6,25 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { AppBar as MuiAppBar, TitleWrapper, Toolbar } from "./AppBar.styled";
 import Button from "../Button/Button";
 import Typography from "../Typography/Typography";
-import ElevationScroll from "./ElevationScroll";
-import HideOnScroll from "./HideOnScroll";
+import OnScrollEventWrapper from "./OnScrollEventWrapper";
+import { ScrollTop } from "./ScrollTop";
 
 export default function AppBar({
-  toolbarId,
   menu,
   title,
   muiColor,
   customColor,
-  enableColorOnDark,
-  elevationScroll,
-  hideOnScroll,
   position,
+  enableColorOnDark,
+  scrollElement,
+  toolbarId,
+  elevationScroll,
+  elevation,
+  hideOnScroll,
+  dense,
+  disablePadding,
+  scrollToTop,
+  scrollToTopProps,
   children,
   ...props
 }) {
@@ -34,39 +40,51 @@ export default function AppBar({
         />
       );
 
-  const appBarCmp = (
-    <MuiAppBar
-      position={position}
-      color={muiColor}
-      customColor={customColor}
-      enableColorOnDark={enableColorOnDark}
-      {...props}
-    >
-      <Toolbar id={toolbarId} color="inherit">
-        {menuIcon}
-        <TitleWrapper sx={{ flexGrow: 1 }}>
-          {isValidElement(title)
-            ? title
-            : title && (
-                <Typography variant="h6" component="div" wrap={false}>
-                  {title}
-                </Typography>
-              )}
-        </TitleWrapper>
-        <Box>{children}</Box>
-      </Toolbar>
-    </MuiAppBar>
+  return (
+    <>
+      <OnScrollEventWrapper
+        scrollElement={scrollElement}
+        elevationScroll={elevationScroll}
+        hideOnScroll={hideOnScroll}
+        elevation={elevation}
+      >
+        <MuiAppBar
+          position={hideOnScroll || elevationScroll ? "fixed" : position}
+          color={muiColor}
+          customColor={customColor}
+          enableColorOnDark={enableColorOnDark}
+          {...props}
+        >
+          <Toolbar
+            color="inherit"
+            variant={dense ? "dense" : undefined}
+            disableGutters={disablePadding}
+          >
+            {menuIcon}
+            <TitleWrapper sx={{ flexGrow: 1 }}>
+              {isValidElement(title)
+                ? title
+                : title && (
+                    <Typography variant="h6" component="div" wrap={false}>
+                      {title}
+                    </Typography>
+                  )}
+            </TitleWrapper>
+            <Box>{children}</Box>
+          </Toolbar>
+        </MuiAppBar>
+      </OnScrollEventWrapper>
+      <Toolbar variant={"dense"} id={toolbarId ?? "back-to-top-anchor"} />
+      {scrollToTop ? (
+        <ScrollTop
+          {...scrollToTopProps}
+          scrollToId={toolbarId ?? "back-to-top-anchor"}
+        >
+          {isValidElement(scrollToTop) ? scrollToTop : undefined}
+        </ScrollTop>
+      ) : undefined}
+    </>
   );
-
-  if (elevationScroll) {
-    return <ElevationScroll>{appBarCmp}</ElevationScroll>;
-  }
-
-  if (hideOnScroll) {
-    return <HideOnScroll>{appBarCmp}</HideOnScroll>;
-  }
-
-  return appBarCmp;
 }
 
 AppBar.propTypes = {
@@ -77,18 +95,30 @@ AppBar.propTypes = {
   customColor: PropTypes.string,
   enableColorOnDark: PropTypes.bool,
   toolbarId: PropTypes.string,
+  scrollElement: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   elevationScroll: PropTypes.bool,
   hideOnScroll: PropTypes.bool,
+  dense: PropTypes.bool,
+  disablePadding: PropTypes.bool,
+  elevation: PropTypes.oneOf(Array.from({ length: 25 }, (_, i) => i)), // 0-24
+  scrollToTop: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
+  scrollToTopProps: PropTypes.object,
 };
 
 AppBar.defaultProps = {
   menu: undefined,
-  position: "static",
+  position: "fixed",
   title: undefined,
   muiColor: undefined,
   customColor: undefined,
   enableColorOnDark: undefined,
+  scrollElement: undefined,
   toolbarId: undefined,
   elevationScroll: undefined,
-  HideOnScroll: undefined,
+  hideOnScroll: undefined,
+  dense: undefined,
+  disablePadding: undefined,
+  elevation: undefined,
+  scrollToTop: false,
+  scrollToTopProps: undefined,
 };

@@ -10,12 +10,10 @@ export const ThemeProvider = ({ dir, theme, children }) => {
   let muiTheme;
 
   switch (themeLS) {
-    case "light":
-      muiTheme = lightTheme;
-      break;
     case "dark":
       muiTheme = darkTheme;
       break;
+    case "light":
     default:
       muiTheme = lightTheme;
       break;

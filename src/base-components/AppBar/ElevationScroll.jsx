@@ -2,15 +2,13 @@ import React, { cloneElement } from "react";
 import PropTypes from "prop-types";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 
-export default function ElevationScroll(props) {
-  const { children, window } = props;
-
+export default function ElevationScroll({ children }) {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
-    target: window ? window() : undefined,
   });
 
+  console.log("trigger", trigger);
   return cloneElement(children, { elevation: trigger ? 4 : 0 });
 }
 

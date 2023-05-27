@@ -15,13 +15,21 @@ export function ScrollTop({
   top,
   children,
   window,
+  target,
   ...props
 }) {
-  bottom = ![left, right, top, bottom].some(isDefined) ? bottom : 16;
-  right = ![left, right, top, bottom].some(isDefined) ? right : 16;
+  bottom = ![left, right, top, bottom].some((pos) => isDefined(pos))
+    ? bottom
+    : 16;
+  right = ![left, right, top, bottom].some((pos) => isDefined(pos))
+    ? right
+    : 16;
+  console.log([left, right, top, bottom]);
+  console.log("bottom", bottom);
+  console.log("right", right);
 
   const trigger = useScrollTrigger({
-    target: window ? window() : undefined,
+    target: target?.current ?? (window ? window() : undefined),
     disableHysteresis: true,
     threshold: 100,
   });

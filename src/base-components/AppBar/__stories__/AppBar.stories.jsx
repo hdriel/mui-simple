@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Stack } from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
+import { Stack, Box, Container } from "@mui/material";
 import {
   Menu as MenuIcon,
   Close as CloseIcon,
@@ -22,10 +22,11 @@ export default {
   decorators: [
     (Story) => (
       <div
+        id="story"
         style={{
           height: "500px",
-          width: "800px",
-          backgroundColor: "#e2e2e2",
+          backgroundColor: "#f5f2f2",
+          overflow: "auto",
         }}
       >
         <Story />
@@ -33,6 +34,22 @@ export default {
     ),
   ],
 };
+
+const decorators = [
+  (Story) => (
+    <div
+      id="story"
+      style={{
+        height: "500px",
+        width: "800px",
+        backgroundColor: "#e2e2e2",
+        overflow: "auto",
+      }}
+    >
+      <Story />
+    </div>
+  ),
+];
 
 export const Default = () => {
   return <AppBar />;
@@ -166,5 +183,99 @@ export const ThemedAndColored = () => {
       <AppBar menu title="default" />
       <AppBar />
     </Stack>
+  );
+};
+
+export const Scroller = () => {
+  const [scrollElement, setScrollElement] = useState();
+  useEffect(() => {
+    setScrollElement(document.getElementById("story"));
+  }, []);
+
+  return (
+    scrollElement && (
+      <>
+        <AppBar
+          title="Elevation Scroll"
+          elevationScroll
+          scrollElement={scrollElement}
+          scrollToTop
+        />
+        <Container>
+          <Box sx={{ my: 2 }}>
+            {[...new Array(20)]
+              .map(
+                () => `Cras mattis consectetur purus sit amet fermentum.
+Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
+              )
+              .join("\n")}
+          </Box>
+        </Container>
+      </>
+    )
+  );
+};
+
+export const ElevationScroll = () => {
+  const [scrollElement, setScrollElement] = useState();
+  useEffect(() => {
+    setScrollElement(document.getElementById("story"));
+  }, []);
+
+  return (
+    scrollElement && (
+      <>
+        <AppBar
+          title="Elevation Scroll"
+          elevationScroll
+          scrollElement={scrollElement}
+        />
+        <Container>
+          <Box sx={{ my: 2 }}>
+            {[...new Array(20)]
+              .map(
+                () => `Cras mattis consectetur purus sit amet fermentum.
+Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
+              )
+              .join("\n")}
+          </Box>
+        </Container>
+      </>
+    )
+  );
+};
+
+export const HideOnScroll = () => {
+  const [scrollElement, setScrollElement] = useState();
+  useEffect(() => {
+    setScrollElement(document.getElementById("story"));
+  }, []);
+
+  return (
+    scrollElement && (
+      <>
+        <AppBar
+          title="hide On Scroll"
+          hideOnScroll
+          scrollElement={scrollElement}
+        />
+        <Container>
+          <Box sx={{ my: 2 }}>
+            {[...new Array(20)]
+              .map(
+                () => `Cras mattis consectetur purus sit amet fermentum.
+Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
+              )
+              .join("\n")}
+          </Box>
+        </Container>
+      </>
+    )
   );
 };
