@@ -1,7 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { visuallyHidden } from "@mui/utils";
-// import { useTheme, lighten } from '@mui/material/styles';
 
 import { SORT } from "../Table.utils";
 import {

@@ -1,1 +1,1 @@
-export { default as TableData } from './components/EnhancedTable';
+export * from "./components/EnhancedTable";

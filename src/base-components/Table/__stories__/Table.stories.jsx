@@ -2,12 +2,12 @@ import React from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies,no-unused-vars
 import { action } from "@storybook/addon-actions";
 
-import { TableData } from "../Table";
+import Table from "../Table";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: "Data-Display/Table",
-  component: TableData,
+  component: Table,
   argTypes: {},
   decorators: [(Story) => <Story />],
 };
@@ -86,20 +86,20 @@ const dummyProps = {
 };
 
 export function Default() {
-  return <TableData />;
+  return <Table />;
 }
 
 export function FullData() {
-  return <TableData {...dummyProps} time={43} />;
+  return <Table {...dummyProps} time={43} />;
 }
 
 export function Pagination() {
-  return <TableData {...dummyProps} time={43} />;
+  return <Table {...dummyProps} time={43} />;
 }
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 function Template(args) {
-  return <TableData {...args} />;
+  return <Table {...args} />;
 }
 
 export const Custom = Template.bind({});

@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 
-import { SORT } from "#src/components-base/TableData/TabelData.utils";
+import { SORT } from "../Table.utils";
 import { EnhancedTableToolbar } from "./EnhancedTableToolbar";
 import { EnhancedTableHead } from "./EnhancedTableHead";
 import {
