@@ -87,23 +87,20 @@ export default function AppBar({
             <Box>{actions}</Box>
           </Toolbar>
         </MuiAppBar>
-
-        {drawerProps && (
-          <Drawer
-            open={drawerOpen}
-            openFromDirection="left"
-            variant="permanent"
-            {...drawerProps}
-            toggleDrawer={(open) => {
-              toggleDrawer(open);
-              drawerProps?.toggleDrawer?.(open);
-            }}
-          >
-            <Toolbar variant={dense ? "dense" : undefined} />
-            {children}
-          </Drawer>
-        )}
       </OnScrollEventWrapper>
+      <Drawer
+        open={drawerOpen}
+        openFromDirection="left"
+        variant="permanent"
+        {...drawerProps}
+        toggleDrawer={(open) => {
+          toggleDrawer(open);
+          drawerProps?.toggleDrawer?.(open);
+        }}
+      >
+        <Toolbar variant={dense ? "dense" : undefined} />
+        {children}
+      </Drawer>
       {!isBottom && (
         <Toolbar
           variant={dense ? "dense" : undefined}

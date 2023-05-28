@@ -1,14 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTheme } from "@mui/material/styles";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+
 import {
   Drawer as MuiDrawer,
   ContentWrapper,
   SwipeableDrawer,
   DrawerHeader,
 } from "./Drawer.styled";
-import { useTheme } from "@mui/material/styles";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Button from "../Button/Button";
 import Divider from "../Divider/Divider";
 
@@ -24,6 +25,8 @@ export default function Drawer({
   children,
   ...props
 }) {
+  return null;
+
   const theme = useTheme();
   const isMiniPersistent = variant === "mini-persistent";
   variant = isMiniPersistent ? "persistent" : variant;
@@ -54,7 +57,7 @@ export default function Drawer({
     <DrawerCmp
       variant={variant}
       anchor={openFromDirection}
-      open={open}
+      open={open ?? false}
       onClose={toggleDrawer?.(false)}
       ModalProps={{ keepMounted }}
       isMiniPersistent={isMiniPersistent}
