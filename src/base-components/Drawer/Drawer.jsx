@@ -57,16 +57,11 @@ export default function Drawer({
       anchor={openFromDirection}
       open={open}
       onClose={toggleDrawer?.(false)}
-      // ModalProps={{ keepMounted }}
-      // isMiniPersistent={isMiniPersistent}
-      // drawerWidth={drawerWidth}
+      ModalProps={{ keepMounted }}
+      isMiniPersistent={isMiniPersistent}
+      drawerWidth={drawerWidth}
     >
-      {children}
-    </DrawerCmp>
-  );
-}
-/*
- <DrawerHeader anchor={openFromDirection}>
+      <DrawerHeader anchor={openFromDirection}>
         <Button
           onClick={toggleDrawer?.(false)}
           icon={
@@ -83,10 +78,11 @@ export default function Drawer({
         onClick={toggleDrawer?.(false)}
         onKeyDown={toggleDrawer?.(false)}
       >
-        test test test
         {children}
       </ContentWrapper>
-* */
+    </DrawerCmp>
+  );
+}
 
 Drawer.propTypes = {
   openFromDirection: PropTypes.oneOf(["left", "right", "top", "bottom"]),

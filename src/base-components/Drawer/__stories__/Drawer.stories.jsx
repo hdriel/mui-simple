@@ -14,7 +14,7 @@ import {
   BeachAccess as BeachAccessIcon,
 } from "@mui/icons-material";
 
-import Drawer from "../DrawerTest";
+import Drawer from "../Drawer";
 import Button from "../../Button/Button";
 import List from "../../List/List";
 import Divider from "../../Divider/Divider";

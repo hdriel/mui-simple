@@ -8,12 +8,11 @@ import { drawerStyles } from "./Drawer.styles";
 
 export const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (propName) =>
-    !["drawerWidth", "isMiniPersistent", "open"].includes(propName),
+    !["drawerWidth", "isMiniPersistent"].includes(propName),
 })(drawerStyles);
 
 export const SwipeableDrawer = styled(MuiSwipeableDrawer, {
-  shouldForwardProp: (propName) =>
-    !["isMiniPersistent", "open"].includes(propName),
+  shouldForwardProp: (propName) => !["isMiniPersistent"].includes(propName),
 })(drawerStyles);
 
 export const ContentWrapper = styled(
