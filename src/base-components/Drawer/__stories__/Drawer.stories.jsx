@@ -28,8 +28,8 @@ export const Default = (props) => {
   return <Drawer {...props} />;
 };
 
-const list = ({ toggleDrawer, anchor }) => (
-  <>
+const list = ({} = {}) => (
+  <div>
     <List
       items={[
         {
@@ -46,7 +46,7 @@ const list = ({ toggleDrawer, anchor }) => (
         { title: "Trash" },
         "Spam",
       ]}
-    ></List>
+    />
     <Divider variant="fullWidth" />
     <List
       items={[
@@ -70,7 +70,7 @@ const list = ({ toggleDrawer, anchor }) => (
         },
       ]}
     />
-  </>
+  </div>
 );
 
 export const TemporaryDrawer = () => {
@@ -104,7 +104,7 @@ export const TemporaryDrawer = () => {
             open={state[anchor]}
             toggleDrawer={toggleDrawer(anchor, false)}
           >
-            {list({ toggleDrawer, anchor })}
+            {list()}
           </Drawer>
         </React.Fragment>
       ))}
