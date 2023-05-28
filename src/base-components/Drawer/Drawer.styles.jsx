@@ -26,10 +26,10 @@ export function drawerStyles({
   drawerWidth = 240,
 }) {
   return {
-    // width: drawerWidth,
-    // flexShrink: 0,
-    // whiteSpace: "nowrap",
-    // boxSizing: "border-box",
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: "nowrap",
+    boxSizing: "border-box",
     ...(isMiniPersistent &&
       open && {
         ...openedMixin(theme, drawerWidth),

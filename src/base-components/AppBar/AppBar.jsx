@@ -98,21 +98,22 @@ export default function AppBar({
           id={toolbarId ?? "back-to-top-anchor"}
         />
       )}
-      <Drawer
-        open={drawerOpen}
-        openDirection="left"
-        variant="persistent"
-        swipeable={false}
-        drawerWidth={240}
-        {...drawerProps}
-        toggleDrawer={(open) => {
-          toggleDrawer(open);
-          drawerProps?.toggleDrawer?.(open);
-        }}
-      >
-        <Toolbar variant={dense ? "dense" : undefined} />
-        {children}
-      </Drawer>
+      {drawerProps && Object.keys(drawerProps).length && (
+        <Drawer
+          open={drawerOpen}
+          openDirection={drawerProps.openDirection ?? "left"}
+          variant={drawerProps.variant ?? "temporary"}
+          swipeable={drawerProps.swipeable ?? false}
+          drawerWidth={drawerProps.drawerWidth ?? 240}
+          {...drawerProps}
+          toggleDrawer={(open) => {
+            toggleDrawer(open);
+            drawerProps?.toggleDrawer?.(open);
+          }}
+        >
+          {children}
+        </Drawer>
+      )}
     </>
   );
 }

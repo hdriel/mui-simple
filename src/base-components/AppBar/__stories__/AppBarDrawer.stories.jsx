@@ -99,16 +99,18 @@ export const OpenDirection = () => {
     { value: "left", component: "LEFT" },
     { value: "right", component: "RIGHT" },
     { value: "bottom", component: "BOTTOM" },
-    { value: "up", component: "UP" },
+    { value: "top", component: "TOP" },
   ];
 
   return (
     <Stack spacing={3}>
       <AppBar
-        menu
+        {...(anchor && {
+          menu: anchor ? true : undefined,
+          drawerProps: { openDirection: anchor },
+        })}
         position="fixed"
         title={`${anchor} direction`}
-        drawerProps={{ openDirection: anchor }}
         actions={
           <ToggleButtonGroup
             value={anchor}

@@ -66,6 +66,8 @@ export default function Drawer({
       </DrawerHeader>
       <Divider variant="fullWidth" />
       <ContentWrapper
+        drawerWidth={drawerWidth}
+        anchor={openDirection}
         onClick={toggleDrawer?.(false)}
         onKeyDown={toggleDrawer?.(false)}
       >
