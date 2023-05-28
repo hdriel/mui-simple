@@ -1,11 +1,8 @@
-import * as React from "react";
+import React, { cloneElement, isValidElement } from "react";
 import PropTypes from "prop-types";
-import useScrollTrigger from "@mui/material/useScrollTrigger";
-import Slide from "@mui/material/Slide";
-import { cloneElement, isValidElement } from "react";
-import { Box, Fade } from "@mui/material";
-import Fab from "../FloatingActionButton/FloatingActionButton";
+import { Box, Fade, useScrollTrigger, Slide } from "@mui/material";
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from "@mui/icons-material";
+import Fab from "../FloatingActionButton/FloatingActionButton";
 import { isDefined } from "../../utils/helpers";
 
 export default function OnScrollEventWrapper({
@@ -76,12 +73,9 @@ export default function OnScrollEventWrapper({
   return (
     <>
       {hideOnScroll ? (
-        <Slide
-          appear={false}
-          direction="down"
-          in={!trigger}
-          children={content}
-        />
+        <Slide appear={false} direction="down" in={!trigger}>
+          {content}
+        </Slide>
       ) : (
         content
       )}
