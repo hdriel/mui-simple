@@ -1,12 +1,14 @@
-import React, { cloneElement, isValidElement } from "react";
+import React, { cloneElement, isValidElement, useState } from "react";
 import PropTypes from "prop-types";
-
 import { Box } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+
 import { AppBar as MuiAppBar, TitleWrapper, Toolbar } from "./AppBar.styled";
+import OnScrollEventWrapper from "./OnScrollEventWrapper";
+
 import Button from "../Button/Button";
 import Typography from "../Typography/Typography";
-import OnScrollEventWrapper from "./OnScrollEventWrapper";
+import Drawer from "../Drawer/Drawer";
 
 export default function AppBar({
   menu,
@@ -25,11 +27,14 @@ export default function AppBar({
   scrollToTop,
   scrollToTopProps,
   actions,
+  drawerProps,
   children,
   ...props
 }) {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const toggleDrawer = (open) => setDrawerOpen(open);
+
   const isBottom = position === "fixed-bottom";
-  const positionProps = isBottom ? { top: "auto", bottom: 0 } : {};
   position = isBottom ? "fixed" : position;
 
   const menuIcon = isValidElement(menu)
@@ -41,6 +46,7 @@ export default function AppBar({
           size="large"
           icon={<MenuIcon />}
           sx={{ mr: 2 }}
+          onClick={() => toggleDrawer(true)}
         />
       );
 
@@ -81,7 +87,24 @@ export default function AppBar({
             <Box>{actions}</Box>
           </Toolbar>
         </MuiAppBar>
-        {/*  @todo: add drawer here by children as content + drawerProps AppBar field */}
+
+        {drawerProps && (
+          <Drawer
+            open={drawerOpen}
+            openFromDirection="left"
+            swipeable
+            keepMounted
+            variant="permanent"
+            {...drawerProps}
+            toggleDrawer={(open) => {
+              toggleDrawer(open);
+              drawerProps.toggleDrawer?.(open);
+            }}
+          >
+            <Toolbar variant={dense ? "dense" : undefined} />
+            {children}
+          </Drawer>
+        )}
       </OnScrollEventWrapper>
       {!isBottom && (
         <Toolbar
@@ -112,6 +135,7 @@ AppBar.propTypes = {
   scrollToTop: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
   scrollToTopProps: PropTypes.object,
   actions: PropTypes.node,
+  drawerProps: Drawer.propTypes,
 };
 
 AppBar.defaultProps = {
@@ -130,4 +154,5 @@ AppBar.defaultProps = {
   elevation: undefined,
   scrollToTop: undefined,
   scrollToTopProps: undefined,
+  drawerProps: undefined,
 };
