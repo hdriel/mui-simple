@@ -4,7 +4,7 @@ import {
   SwipeableDrawer as MuiSwipeableDrawer,
   Box,
 } from "@mui/material";
-import { openedMixin, closedMixin, drawerStyles } from "./Drawer.styles";
+import { drawerStyles } from "./Drawer.styles";
 
 export const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (propName) =>

@@ -42,7 +42,7 @@ export default function OnScrollEventWrapper({
       scrollToId &&
       (event.target.ownerDocument || document).querySelector(scrollToId);
 
-    if (anchor) anchor.scrollIntoView({ behavior: "smooth", block: "center" });
+    anchor?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   bottom = [top, bottom].some(isDefined) ? bottom : 16;

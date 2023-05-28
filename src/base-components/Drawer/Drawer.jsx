@@ -41,19 +41,28 @@ export default function Drawer({
 
   const DrawerCmp = swipeable ? SwipeableDrawer : MuiDrawer;
 
+  console.table({
+    variant,
+    openFromDirection,
+    open,
+    isMiniPersistent,
+    keepMounted,
+    drawerWidth,
+  });
+
   return (
     <DrawerCmp
       variant={variant}
       anchor={openFromDirection}
       open={open}
-      onClose={toggleDrawer(false)}
+      onClose={toggleDrawer?.(false)}
       ModalProps={{ keepMounted }}
       isMiniPersistent={isMiniPersistent}
       drawerWidth={drawerWidth}
     >
       <DrawerHeader anchor={openFromDirection}>
         <Button
-          onClick={toggleDrawer(false)}
+          onClick={toggleDrawer?.(false)}
           icon={
             theme.direction === "ltr" ? (
               <ChevronLeftIcon />
@@ -65,8 +74,8 @@ export default function Drawer({
       </DrawerHeader>
       <Divider variant="fullWidth" />
       <ContentWrapper
-        onClick={toggleDrawer(false)}
-        onKeyDown={toggleDrawer(false)}
+        onClick={toggleDrawer?.(false)}
+        onKeyDown={toggleDrawer?.(false)}
       >
         {children}
       </ContentWrapper>

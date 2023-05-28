@@ -92,13 +92,11 @@ export default function AppBar({
           <Drawer
             open={drawerOpen}
             openFromDirection="left"
-            swipeable
-            keepMounted
             variant="permanent"
             {...drawerProps}
             toggleDrawer={(open) => {
               toggleDrawer(open);
-              drawerProps.toggleDrawer?.(open);
+              drawerProps?.toggleDrawer?.(open);
             }}
           >
             <Toolbar variant={dense ? "dense" : undefined} />
@@ -135,7 +133,7 @@ AppBar.propTypes = {
   scrollToTop: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
   scrollToTopProps: PropTypes.object,
   actions: PropTypes.node,
-  drawerProps: Drawer.propTypes,
+  drawerProps: PropTypes.object,
 };
 
 AppBar.defaultProps = {
