@@ -100,7 +100,7 @@ export default function AppBar({
       )}
       <Drawer
         open={drawerOpen}
-        openFromDirection="left"
+        openDirection="left"
         variant="persistent"
         swipeable={false}
         drawerWidth={240}

@@ -6,6 +6,12 @@ import {
   Send as SendIcon,
   Delete as DeleteIcon,
   Fingerprint as FingerprintIcon,
+  Inbox as InboxIcon,
+  Drafts as DraftsIcon,
+  Image as ImageIcon,
+  Comment as CommentIcon,
+  Work as WorkIcon,
+  BeachAccess as BeachAccessIcon,
 } from "@mui/icons-material";
 
 import AppBar from "../AppBar";
@@ -15,6 +21,9 @@ import Typography from "../../Typography/Typography";
 import Menu from "../../Menu/Menu";
 import { action } from "@storybook/addon-actions";
 import { ThemeProvider } from "../../../themes";
+import List from "../../List/List";
+import Divider from "../../Divider/Divider";
+import ToggleButtonGroup from "../../ToggleButtonGroup/ToggleButtonGroup";
 
 export default {
   title: "Surfaces/AppBarDrawer",
@@ -35,19 +44,82 @@ export default {
   ],
 };
 
+const list = ({} = {}) => (
+  <>
+    <List
+      items={[
+        {
+          startIcon: <InboxIcon />,
+          title: "Inbox",
+        },
+        {
+          startIcon: <DraftsIcon />,
+          title: "Drafts",
+        },
+        {
+          divider: true,
+        },
+        { title: "Trash" },
+        "Spam",
+      ]}
+    ></List>
+    <Divider variant="fullWidth" />
+    <List
+      items={[
+        {
+          title: "Photos",
+          subtitle: "Jan 9, 2014",
+          avatar: { icon: <ImageIcon /> },
+          actions: [<Button icon={<CommentIcon />} />],
+        },
+        {
+          title: "Work",
+          subtitle: "Jan 7, 2014",
+          avatar: { icon: <WorkIcon /> },
+          actions: [<Button icon={<SendIcon />} />],
+        },
+        {
+          title: "Vacation",
+          subtitle: "July 20, 2014",
+          avatar: { icon: <BeachAccessIcon /> },
+          actions: [<Button icon={<SendIcon />} />],
+        },
+      ]}
+    />
+  </>
+);
+
 export const Default = (props) => {
   return <AppBar {...props} />;
 };
 
-export const OpenFromDirection = () => {
+export const OpenDirection = () => {
+  const [anchor, setAnchor] = useState("left");
+  const data = [
+    { value: "left", component: "LEFT" },
+    { value: "right", component: "RIGHT" },
+    { value: "bottom", component: "BOTTOM" },
+    { value: "up", component: "UP" },
+  ];
+
   return (
     <Stack spacing={3}>
       <AppBar
         menu
-        position="static"
-        title="left direction"
-        drawerProps={{ openFromDirection: "left" }}
-      />
+        position="fixed"
+        title={`${anchor} direction`}
+        drawerProps={{ openDirection: anchor }}
+        actions={
+          <ToggleButtonGroup
+            value={anchor}
+            exclusive
+            onChange={(value) => setAnchor(value)}
+            data={data}
+          />
+        }
+      >
+        {list()}
+      </AppBar>
     </Stack>
   );
 };

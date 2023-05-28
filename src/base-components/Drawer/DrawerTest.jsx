@@ -15,7 +15,7 @@ export default function Drawer({
   swipeable,
   variant,
   keepMounted,
-  openFromDirection,
+  openDirection,
   toggleDrawer: _toggleDrawer,
   drawerWidth,
   children,
@@ -37,7 +37,7 @@ export default function Drawer({
 
   console.table({
     variant,
-    openFromDirection,
+    openDirection,
     open,
     isMiniPersistent,
     keepMounted,
@@ -45,11 +45,7 @@ export default function Drawer({
   });
 
   return (
-    <MuiDrawer
-      anchor={openFromDirection}
-      open={open}
-      onClose={toggleDrawer(false)}
-    >
+    <MuiDrawer anchor={openDirection} open={open} onClose={toggleDrawer(false)}>
       {children}
     </MuiDrawer>
   );
@@ -78,7 +74,7 @@ export default function Drawer({
 * */
 
 Drawer.propTypes = {
-  openFromDirection: PropTypes.oneOf(["left", "right", "top", "bottom"]),
+  openDirection: PropTypes.oneOf(["left", "right", "top", "bottom"]),
   variant: PropTypes.oneOf([
     "permanent",
     "mini-persistent",
@@ -94,7 +90,7 @@ Drawer.propTypes = {
 };
 
 Drawer.defaultProps = {
-  openFromDirection: undefined,
+  openDirection: undefined,
   variant: undefined,
   open: undefined,
   swipeable: undefined,

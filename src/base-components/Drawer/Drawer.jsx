@@ -19,7 +19,7 @@ export default function Drawer({
   swipeable,
   variant,
   keepMounted,
-  openFromDirection,
+  openDirection,
   toggleDrawer: _toggleDrawer,
   drawerWidth,
   children,
@@ -42,26 +42,17 @@ export default function Drawer({
 
   const DrawerCmp = swipeable ? SwipeableDrawer : MuiDrawer;
 
-  console.table({
-    variant,
-    openFromDirection,
-    open,
-    isMiniPersistent,
-    keepMounted,
-    drawerWidth,
-  });
-
   return (
     <DrawerCmp
       variant={variant}
-      anchor={openFromDirection}
+      anchor={openDirection}
       open={open}
       onClose={toggleDrawer?.(false)}
       ModalProps={{ keepMounted }}
       isMiniPersistent={isMiniPersistent}
       drawerWidth={drawerWidth}
     >
-      <DrawerHeader anchor={openFromDirection}>
+      <DrawerHeader anchor={openDirection}>
         <Button
           onClick={toggleDrawer?.(false)}
           icon={
@@ -85,7 +76,7 @@ export default function Drawer({
 }
 
 Drawer.propTypes = {
-  openFromDirection: PropTypes.oneOf(["left", "right", "top", "bottom"]),
+  openDirection: PropTypes.oneOf(["left", "right", "top", "bottom"]),
   variant: PropTypes.oneOf([
     "permanent",
     "mini-persistent",
@@ -101,7 +92,7 @@ Drawer.propTypes = {
 };
 
 Drawer.defaultProps = {
-  openFromDirection: undefined,
+  openDirection: undefined,
   variant: undefined,
   open: undefined,
   swipeable: undefined,

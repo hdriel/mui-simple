@@ -16,16 +16,16 @@ export const SwipeableDrawer = styled(MuiSwipeableDrawer, {
 })(drawerStyles);
 
 export const ContentWrapper = styled(
-  ({ openFromDirection, ...props }) => (
+  ({ openDirection, ...props }) => (
     <Box
       sx={{
-        width: ["top", "bottom"].includes(openFromDirection) ? "auto" : 250,
+        width: ["up", "bottom"].includes(openDirection) ? "auto" : 250,
       }}
       role="presentation"
       {...props}
     />
   ),
-  { shouldForwardProp: (propName) => !["openFromDirection"].includes(propName) }
+  { shouldForwardProp: (propName) => !["openDirection"].includes(propName) }
 )``;
 
 export const DrawerHeader = styled("div")(({ theme, anchor }) => ({

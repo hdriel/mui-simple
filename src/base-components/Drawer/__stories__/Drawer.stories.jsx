@@ -99,7 +99,7 @@ export const TemporaryDrawer = () => {
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
           <Drawer
-            openFromDirection={anchor}
+            openDirection={anchor}
             variant="temporary"
             open={state[anchor]}
             toggleDrawer={toggleDrawer(anchor, false)}
