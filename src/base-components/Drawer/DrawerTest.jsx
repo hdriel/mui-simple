@@ -1,15 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
+import { Drawer as MuiDrawer } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-import {
-  Drawer as MuiDrawer,
-  ContentWrapper,
-  SwipeableDrawer,
-  DrawerHeader,
-} from "./Drawer.styled";
+import { ContentWrapper, SwipeableDrawer, DrawerHeader } from "./Drawer.styled";
 import Button from "../Button/Button";
 import Divider from "../Divider/Divider";
 
@@ -25,7 +21,6 @@ export default function Drawer({
   children,
   ...props
 }) {
-  const theme = useTheme();
   const isMiniPersistent = variant === "mini-persistent";
   variant = isMiniPersistent ? "persistent" : variant;
 
@@ -40,8 +35,6 @@ export default function Drawer({
     _toggleDrawer?.(open);
   };
 
-  const DrawerCmp = swipeable ? SwipeableDrawer : MuiDrawer;
-
   console.table({
     variant,
     openFromDirection,
@@ -52,17 +45,13 @@ export default function Drawer({
   });
 
   return (
-    <DrawerCmp
-      variant={variant}
+    <MuiDrawer
       anchor={openFromDirection}
       open={open}
-      onClose={toggleDrawer?.(false)}
-      // ModalProps={{ keepMounted }}
-      // isMiniPersistent={isMiniPersistent}
-      // drawerWidth={drawerWidth}
+      onClose={toggleDrawer(false)}
     >
       {children}
-    </DrawerCmp>
+    </MuiDrawer>
   );
 }
 /*

@@ -32,13 +32,17 @@ export default function AppBar({
   ...props
 }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const toggleDrawer = (open) => setDrawerOpen(open);
+  const toggleDrawer = (open) => setDrawerOpen((v) => !v);
 
   const isBottom = position === "fixed-bottom";
   position = isBottom ? "fixed" : position;
 
   const menuIcon = isValidElement(menu)
-    ? cloneElement(menu, { edge: "start", size: "large" })
+    ? cloneElement(menu, {
+        edge: "start",
+        size: "large",
+        onClick: () => toggleDrawer(true),
+      })
     : menu && (
         <Button
           muiColor="inherit"
@@ -88,10 +92,18 @@ export default function AppBar({
           </Toolbar>
         </MuiAppBar>
       </OnScrollEventWrapper>
+      {!isBottom && (
+        <Toolbar
+          variant={dense ? "dense" : undefined}
+          id={toolbarId ?? "back-to-top-anchor"}
+        />
+      )}
       <Drawer
         open={drawerOpen}
         openFromDirection="left"
-        variant="permanent"
+        variant="persistent"
+        swipeable={false}
+        drawerWidth={240}
         {...drawerProps}
         toggleDrawer={(open) => {
           toggleDrawer(open);
@@ -101,12 +113,6 @@ export default function AppBar({
         <Toolbar variant={dense ? "dense" : undefined} />
         {children}
       </Drawer>
-      {!isBottom && (
-        <Toolbar
-          variant={dense ? "dense" : undefined}
-          id={toolbarId ?? "back-to-top-anchor"}
-        />
-      )}
     </>
   );
 }

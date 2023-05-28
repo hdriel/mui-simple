@@ -6,7 +6,7 @@ import { AppBar } from "./base-components";
 function App() {
   return (
     <>
-      <AppBar title={"App bar"} elevationScroll />
+      <AppBar menu title={"App bar"} elevationScroll />
       <Container>
         <Box sx={{ my: 2 }}>
           {[...new Array(40)]
