@@ -27,6 +27,7 @@ export default function Drawer({
 }) {
   const theme = useTheme();
   const isMiniPersistent = variant === "mini-persistent";
+  console.log("isMiniPersistent", isMiniPersistent);
   variant = isMiniPersistent ? "persistent" : variant;
 
   const toggleDrawer = (open) => (event) => {

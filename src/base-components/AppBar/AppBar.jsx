@@ -10,6 +10,8 @@ import Button from "../Button/Button";
 import Typography from "../Typography/Typography";
 import Drawer from "../Drawer/Drawer";
 
+const DEFAULT_DRAWER_WIDTH = 240;
+
 export default function AppBar({
   menu,
   title,
@@ -32,6 +34,8 @@ export default function AppBar({
   ...props
 }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const drawerWidth = drawerProps?.drawerWidth ?? DEFAULT_DRAWER_WIDTH;
+
   const toggleDrawer = (open) => setDrawerOpen((v) => !v);
 
   const isBottom = position === "fixed-bottom";
@@ -66,6 +70,7 @@ export default function AppBar({
         scrollToId={toolbarId ?? "#back-to-top-anchor"}
       >
         <MuiAppBar
+          drawerWidth={drawerOpen ? drawerWidth : 0}
           position={hideOnScroll || elevationScroll ? "fixed" : position}
           color={muiColor}
           customColor={customColor}
@@ -104,7 +109,7 @@ export default function AppBar({
           openDirection={drawerProps.openDirection ?? "left"}
           variant={drawerProps.variant ?? "temporary"}
           swipeable={drawerProps.swipeable ?? false}
-          drawerWidth={drawerProps.drawerWidth ?? 240}
+          drawerWidth={drawerWidth}
           {...drawerProps}
           toggleDrawer={(open) => {
             toggleDrawer(open);

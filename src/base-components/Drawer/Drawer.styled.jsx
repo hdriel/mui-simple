@@ -12,7 +12,8 @@ export const Drawer = styled(MuiDrawer, {
 })(drawerStyles);
 
 export const SwipeableDrawer = styled(MuiSwipeableDrawer, {
-  shouldForwardProp: (propName) => !["isMiniPersistent"].includes(propName),
+  shouldForwardProp: (propName) =>
+    !["drawerWidth", "isMiniPersistent"].includes(propName),
 })(drawerStyles);
 
 export const ContentWrapper = styled(

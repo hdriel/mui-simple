@@ -62,7 +62,7 @@ const list = ({} = {}) => (
         { title: "Trash" },
         "Spam",
       ]}
-    ></List>
+    />
     <Divider variant="fullWidth" />
     <List
       items={[
@@ -116,6 +116,39 @@ export const OpenDirection = () => {
             value={anchor}
             exclusive
             onChange={(value) => setAnchor(value)}
+            data={data}
+          />
+        }
+      >
+        {list()}
+      </AppBar>
+    </Stack>
+  );
+};
+
+export const Variant = () => {
+  const data = [
+    { value: "permanent", component: "permanent" },
+    { value: "mini-persistent", component: "mini-persistent" },
+    { value: "persistent", component: "persistent" },
+    { value: "temporary", component: "temporary" },
+  ];
+  const [variant, setVariant] = useState(data[0].value);
+
+  return (
+    <Stack spacing={3}>
+      <AppBar
+        {...(variant && {
+          menu: variant ? true : undefined,
+          drawerProps: { openDirection: "left", variant },
+        })}
+        position="fixed"
+        title={`${variant} direction`}
+        actions={
+          <ToggleButtonGroup
+            value={variant}
+            exclusive
+            onChange={(value) => setVariant(value)}
             data={data}
           />
         }

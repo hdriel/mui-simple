@@ -111,3 +111,45 @@ export const TemporaryDrawer = () => {
     </div>
   );
 };
+
+export const Variant = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [state, setState] = React.useState({
+    permanent: false,
+    "mini-persistent": false,
+    persistent: false,
+    temporary: false,
+  });
+
+  const toggleDrawer = (variant, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setMenuOpen(open);
+    setState({ ...state, [variant]: open });
+  };
+
+  return (
+    <div>
+      {["permanent", "mini-persistent", "persistent", "temporary"].map(
+        (variant) => (
+          <React.Fragment key={variant}>
+            <Button onClick={toggleDrawer(variant, true)}>{variant}</Button>
+            <Drawer
+              openDirection={"right"}
+              variant={variant}
+              open={menuOpen}
+              toggleDrawer={toggleDrawer(variant, false)}
+            >
+              {list()}
+            </Drawer>
+          </React.Fragment>
+        )
+      )}
+    </div>
+  );
+};
