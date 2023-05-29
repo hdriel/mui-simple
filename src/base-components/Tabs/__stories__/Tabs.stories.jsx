@@ -18,7 +18,14 @@ export const Variant = () => {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: "1em" }}>
-      <Tabs value={value} onChange={(event, newValue) => setValue(newValue)}>
+      <Tabs
+        value={value}
+        onChange={(...args) => {
+          console.log(...args);
+          debugger;
+          setValue(...args);
+        }}
+      >
         <Tab value="1" label="Item One">
           Content One
         </Tab>

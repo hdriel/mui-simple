@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
 
 import { Tabs as MuiTabs, Box } from "./Tabs.styled";
-import Tab from "./Tab";
+import TabItem from "./TabItem";
 import TabPanel from "./TabPanel";
 
 export default function Tabs({
@@ -28,15 +28,18 @@ export default function Tabs({
     .concat(children)
     .filter((child) => isValidElement(child) && child.type?.name === "Tab");
 
-  const tabPanels = filteredChildren.map((child) => (
-    <TabPanel {...child.props} open={child.props.value === value}>
-      {child.props.children}
-    </TabPanel>
-  ));
+  const tabPanels = filteredChildren.map(
+    ({ props: { children: tabChildren, ...tabProps } }, index) => (
+      <TabPanel key={index} {...tabProps} open={tabProps.value === value}>
+        {tabChildren}
+      </TabPanel>
+    )
+  );
 
   const tabs = filteredChildren.map(({ props }, index) => {
     return (
-      <Tab
+      <TabItem
+        key={index}
         iconPosition={props.iconPosition}
         label={props.label}
         value={String(props.value ?? index)}
@@ -51,13 +54,23 @@ export default function Tabs({
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Box
+        sx={{
+          ...(orientation === "horizontal" && {
+            borderBottom: 1,
+            borderColor: "divider",
+          }),
+        }}
+      >
         <MuiTabs
           indicatorColor={muiColor}
           centered={centered}
           muiColor={muiColor}
           muiTextColor={muiTextColor}
-          onChange={onChange}
+          onChange={(event, newValue) => {
+            debugger;
+            onChange?.(event, newValue);
+          }}
           orientation={orientation}
           variant={
             visibleScrollButtons ?? visibleScrollbar ? "scrollable" : variant
@@ -78,6 +91,7 @@ export default function Tabs({
           {tabs}
         </MuiTabs>
       </Box>
+
       {swipeable ? (
         <SwipeableViews
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
@@ -86,9 +100,7 @@ export default function Tabs({
         >
           {tabPanels}
         </SwipeableViews>
-      ) : (
-        tabPanels
-      )}
+      ) : null}
     </Box>
   );
 }

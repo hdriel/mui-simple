@@ -1,12 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Box } from "./Tabs.styled";
+import { Tab as MuiTab } from "./Tabs.styled";
 
-export default function Tab({ props }) {
-  return <Box {...props} />;
+export default function TabItem({
+  link,
+  onClick,
+  value,
+  open,
+  children,
+  ...props
+}) {
+  return (
+    <MuiTab
+      role="tabpanel"
+      hidden={!open}
+      id={`simple-tabpanel-${value}`}
+      aria-labelledby={`simple-tab-${value}`}
+      component={link ? "a" : undefined}
+      href={link}
+      onClick={(event) => {
+        event.preventDefault();
+        onClick?.(event);
+      }}
+      {...props}
+    >
+      {open && { children }}
+    </MuiTab>
+  );
 }
 
-Tab.propTypes = {
+TabItem.propTypes = {
   iconPosition: PropTypes.oneOf(["bottom", "end", "start", "top"]),
   label: PropTypes.string,
   value: PropTypes.string,
@@ -19,7 +42,7 @@ Tab.propTypes = {
   onClick: PropTypes.func,
 };
 
-Tab.defaultProps = {
+TabItem.defaultProps = {
   iconPosition: undefined,
   label: undefined,
   value: undefined,
