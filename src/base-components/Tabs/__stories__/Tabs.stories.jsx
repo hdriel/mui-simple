@@ -117,6 +117,7 @@ export const Variant = () => {
             key={index}
             value={tabProps.value}
             label={tabProps.label + tabProps.value}
+            sx={{ backgroundColor: "red" }}
           >
             Content {index + 1}
           </Tab>

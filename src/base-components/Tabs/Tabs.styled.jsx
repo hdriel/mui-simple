@@ -29,9 +29,7 @@ export const TabPanel = styled(MuiBox, {
 })`
   width: 100%;
   height: 100%;
-  background-color: #61dafb;
-`;
-
-export const Box = styled(MuiBox)`
   flex-grow: 1;
 `;
+
+export const Box = MuiBox;
