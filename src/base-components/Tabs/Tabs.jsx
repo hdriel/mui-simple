@@ -128,7 +128,6 @@ Tabs.propTypes = {
   centered: PropTypes.bool,
   customColor: PropTypes.string,
   muiColor: PropTypes.string,
-  muiTextColor: PropTypes.string,
   onChange: PropTypes.func,
   orientation: PropTypes.oneOf(["horizontal", "vertical"]),
   variant: PropTypes.oneOf(["fullWidth", "scrollable", "standard"]),
@@ -142,8 +141,8 @@ Tabs.propTypes = {
 
 Tabs.defaultProps = {
   centered: undefined,
+  customColor: undefined,
   muiColor: undefined,
-  muiTextColor: undefined,
   onChange: undefined,
   orientation: undefined,
   variant: undefined,
