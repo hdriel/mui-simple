@@ -43,6 +43,9 @@ export const Default = () => {
 };
 
 export const Variant = () => {
+  const data0 = [{ value: "reverse", component: "reverse" }];
+  const [reverse, setReverse] = useState();
+
   const data1 = [
     { value: "horizontal", component: "horizontal" },
     { value: "vertical", component: "vertical" },
@@ -69,6 +72,13 @@ export const Variant = () => {
     >
       <Stack direction="row" spacing={3}>
         <ToggleButtonGroup
+          value={reverse}
+          exclusive
+          onChange={(value) => setReverse(value)}
+          data={data0}
+        />
+
+        <ToggleButtonGroup
           value={orientation}
           exclusive
           onChange={(value) => setOrientation(value)}
@@ -82,6 +92,7 @@ export const Variant = () => {
         />
       </Stack>
       <Tabs
+        reverse={reverse}
         verticalMaxFixedHeight={400}
         variant={variant}
         orientation={orientation}

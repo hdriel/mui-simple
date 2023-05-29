@@ -21,6 +21,7 @@ export default function Tabs({
   autoNavigateByArrowKeyboard,
   verticalMaxFixedHeight,
   verticalTabWidth,
+  reverse,
   children,
   ...props
 }) {
@@ -72,9 +73,9 @@ export default function Tabs({
       sx={{
         width: "100%",
         display: "flex",
-        flexDirection: "column",
+        flexDirection: reverse ? "column-reverse" : "column",
         ...(orientation === "vertical" && {
-          flexDirection: "row",
+          flexDirection: reverse ? "row-reverse" : "row",
           maxHeight: verticalMaxFixedHeight ?? "inherit",
         }),
       }}
