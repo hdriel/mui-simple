@@ -10,6 +10,10 @@ export const Tab = styled(MuiTab, {
     !["iconPosition", "disableRipple"].includes(propName),
 })``;
 
-export const TabPanel = MuiBox;
+export const TabPanel = styled(MuiBox)`
+  width: 100%;
+  height: 100%;
+  background-color: #61dafb;
+`;
 
 export const Box = MuiBox;

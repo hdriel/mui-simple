@@ -19,6 +19,7 @@ export default function Tabs({
   visibleScrollButtons,
   swipeable,
   autoNavigateByArrowKeyboard,
+  maxHeightPX,
   children,
   ...props
 }) {
@@ -62,41 +63,51 @@ export default function Tabs({
   const handleChange = (event, tabId) => onChange?.(tabId);
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Box
+    <Box
+      sx={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        ...(orientation === "vertical" && {
+          flexDirection: "row",
+          maxHeight: maxHeightPX ?? "inherit",
+        }),
+      }}
+    >
+      <MuiTabs
+        indicatorColor={muiColor}
+        centered={centered}
+        color={muiColor}
+        muiTextColor={muiTextColor}
+        onChange={handleChange}
+        orientation={orientation}
+        variant={
+          orientation === "vertical" ||
+          visibleScrollButtons !== undefined ||
+          visibleScrollbar
+            ? "scrollable"
+            : variant
+        }
+        value={value}
+        selectionFollowsFocus={autoNavigateByArrowKeyboard}
+        visibleScrollbar={visibleScrollbar}
+        allowScrollButtonsMobile
+        scrollButtons={visibleScrollButtons}
         sx={{
+          ...(orientation === "vertical" && {
+            borderRight: 1,
+            borderColor: "divider",
+            minWidth: "fit-content;",
+          }),
           ...(orientation === "horizontal" && {
-            borderBottom: 1,
+            borderBottom: 5,
             borderColor: "divider",
           }),
         }}
+        {...props}
       >
-        <MuiTabs
-          indicatorColor={muiColor}
-          centered={centered}
-          color={muiColor}
-          muiTextColor={muiTextColor}
-          onChange={handleChange}
-          orientation={orientation}
-          variant={
-            visibleScrollButtons ?? visibleScrollbar ? "scrollable" : variant
-          }
-          value={value}
-          selectionFollowsFocus={autoNavigateByArrowKeyboard}
-          visibleScrollbar={visibleScrollbar}
-          allowScrollButtonsMobile
-          scrollButtons={visibleScrollButtons}
-          sx={{
-            ...(orientation === "vertical" && {
-              borderRight: 1,
-              borderColor: "divider",
-            }),
-          }}
-          {...props}
-        >
-          {tabs}
-        </MuiTabs>
-      </Box>
+        {tabs}
+      </MuiTabs>
 
       {swipeable ? (
         <SwipeableViews
@@ -106,6 +117,7 @@ export default function Tabs({
             const tabId = filteredChildren[tabIndex]?.props.value;
             onChange(tabId);
           }}
+          style={{ width: "100%", height: "100%" }}
         >
           {tabPanels}
         </SwipeableViews>
@@ -128,6 +140,7 @@ Tabs.propTypes = {
   visibleScrollButtons: PropTypes.oneOf(["auto", false, true]),
   swipeable: PropTypes.bool,
   autoNavigateByArrowKeyboard: PropTypes.bool,
+  maxHeightPX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 Tabs.defaultProps = {
@@ -139,7 +152,8 @@ Tabs.defaultProps = {
   variant: undefined,
   value: undefined,
   visibleScrollbar: undefined,
-  visibleScrollButtons: undefined,
-  swipeable: true,
+  visibleScrollButtons: true,
+  swipeable: undefined,
   autoNavigateByArrowKeyboard: undefined,
+  maxHeightPX: undefined,
 };
