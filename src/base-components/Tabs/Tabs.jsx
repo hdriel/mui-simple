@@ -42,7 +42,7 @@ export default function Tabs({
         key={index}
         iconPosition={props.iconPosition}
         label={props.label}
-        value={String(props.value ?? index)}
+        value={String(props.value ?? index).toString()}
         open={props.value === value}
         wrapped={props.wrapped}
         disabled={props.disabled}

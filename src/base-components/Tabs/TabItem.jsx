@@ -18,10 +18,14 @@ export default function TabItem({
       aria-labelledby={`simple-tab-${value}`}
       component={link ? "a" : undefined}
       href={link}
-      onClick={(event) => {
-        event.preventDefault();
-        onClick?.(event);
-      }}
+      onClick={
+        link
+          ? (event, value) => {
+              event.preventDefault();
+              onClick?.(event, value);
+            }
+          : undefined
+      }
       {...props}
     >
       {open && { children }}
