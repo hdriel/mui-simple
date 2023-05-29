@@ -21,12 +21,12 @@ export const Tabs = styled(MuiTabs, {
   }
 `;
 
-export const Tab = styled(MuiTab, {
+export const Tab = styled(MuiTab)``;
+
+export const TabPanel = styled(MuiBox, {
   shouldForwardProp: (propName) =>
     !["iconPosition", "disableRipple"].includes(propName),
-})``;
-
-export const TabPanel = styled(MuiBox)`
+})`
   width: 100%;
   height: 100%;
   background-color: #61dafb;

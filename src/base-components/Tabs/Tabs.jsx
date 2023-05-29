@@ -19,7 +19,8 @@ export default function Tabs({
   visibleScrollButtons,
   swipeable,
   autoNavigateByArrowKeyboard,
-  maxHeightPX,
+  verticalMaxFixedHeight,
+  verticalTabWidth,
   children,
   ...props
 }) {
@@ -52,6 +53,8 @@ export default function Tabs({
         disabled={props.disabled}
         disableRipple={props.disableRipple}
         icon={props.icon}
+        tooltipProps={props.tooltipProps}
+        orientation={orientation}
       />
     );
   });
@@ -61,6 +64,8 @@ export default function Tabs({
     .indexOf(value);
 
   const handleChange = (event, tabId) => onChange?.(tabId);
+  const isScrollableVariant =
+    orientation === "vertical" || visibleScrollbar || variant === "scrollable";
 
   return (
     <Box
@@ -70,20 +75,16 @@ export default function Tabs({
         flexDirection: "column",
         ...(orientation === "vertical" && {
           flexDirection: "row",
-          maxHeight: maxHeightPX ?? "inherit",
+          maxHeight: verticalMaxFixedHeight ?? "inherit",
         }),
       }}
     >
       <MuiTabs
-        centered={centered}
+        centered={isScrollableVariant ? undefined : centered}
         customColor={muiColor ?? customColor}
         onChange={handleChange}
         orientation={orientation}
-        variant={
-          orientation === "vertical" || visibleScrollbar
-            ? "scrollable"
-            : variant
-        }
+        variant={isScrollableVariant ? "scrollable" : variant}
         value={value}
         selectionFollowsFocus={autoNavigateByArrowKeyboard}
         visibleScrollbar={visibleScrollbar}
@@ -93,10 +94,11 @@ export default function Tabs({
           ...(orientation === "vertical" && {
             borderRight: 1,
             borderColor: "divider",
-            minWidth: "fit-content;",
+            minWidth: "fit-content",
+            width: verticalTabWidth,
           }),
-          ...(orientation === "horizontal" && {
-            borderBottom: 5,
+          ...((orientation === undefined || orientation === "horizontal") && {
+            borderBottom: 1,
             borderColor: "divider",
           }),
         }}
@@ -136,7 +138,12 @@ Tabs.propTypes = {
   visibleScrollButtons: PropTypes.oneOf(["auto", false, true]),
   swipeable: PropTypes.bool,
   autoNavigateByArrowKeyboard: PropTypes.bool,
-  maxHeightPX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  verticalMaxFixedHeight: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  verticalTabWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  reverse: PropTypes.bool,
 };
 
 Tabs.defaultProps = {
@@ -151,5 +158,7 @@ Tabs.defaultProps = {
   visibleScrollButtons: true,
   swipeable: undefined,
   autoNavigateByArrowKeyboard: undefined,
-  maxHeightPX: undefined,
+  verticalMaxFixedHeight: undefined,
+  verticalTabWidth: undefined,
+  reverse: undefined,
 };

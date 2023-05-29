@@ -17,6 +17,7 @@ Tab.propTypes = {
   icon: PropTypes.node,
   link: PropTypes.string,
   onClick: PropTypes.func,
+  tooltip: PropTypes.string,
 };
 
 Tab.defaultProps = {
@@ -30,4 +31,5 @@ Tab.defaultProps = {
   icon: undefined,
   link: undefined,
   onClick: undefined,
+  tooltip: undefined,
 };
