@@ -12,6 +12,7 @@ export default function TabItem({
 }) {
   return (
     <MuiTab
+      value={value}
       role="tabpanel"
       hidden={!open}
       id={`simple-tabpanel-${value}`}
@@ -27,9 +28,7 @@ export default function TabItem({
           : undefined
       }
       {...props}
-    >
-      {open && { children }}
-    </MuiTab>
+    />
   );
 }
 

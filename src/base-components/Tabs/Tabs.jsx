@@ -1,4 +1,4 @@
-import React, { isValidElement } from "react";
+import React, { isValidElement, Children } from "react";
 import SwipeableViews from "react-swipeable-views";
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
@@ -28,17 +28,20 @@ export default function Tabs({
     .concat(children)
     .filter((child) => isValidElement(child) && child.type?.name === "Tab");
 
-  const tabPanels = filteredChildren.map(
-    ({ props: { children: tabChildren, ...tabProps } }, index) => (
-      <TabPanel key={index} {...tabProps} open={tabProps.value === value}>
-        {tabChildren}
-      </TabPanel>
-    )
-  );
+  const tabPanels = filteredChildren.map(({ props }, index) => (
+    <TabPanel
+      key={index}
+      index={index}
+      dir={theme.direction}
+      {...props}
+      open={props.value === value}
+    />
+  ));
 
   const tabs = filteredChildren.map(({ props }, index) => {
     return (
       <TabItem
+        children={undefined}
         key={index}
         iconPosition={props.iconPosition}
         label={props.label}
@@ -51,6 +54,12 @@ export default function Tabs({
       />
     );
   });
+
+  const activeTabIndex = filteredChildren
+    .map((child) => child.props.value)
+    .indexOf(value);
+
+  const handleChange = (event, tabId) => onChange?.(tabId);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -65,12 +74,9 @@ export default function Tabs({
         <MuiTabs
           indicatorColor={muiColor}
           centered={centered}
-          muiColor={muiColor}
+          color={muiColor}
           muiTextColor={muiTextColor}
-          onChange={(event, newValue) => {
-            debugger;
-            onChange?.(event, newValue);
-          }}
+          onChange={handleChange}
           orientation={orientation}
           variant={
             visibleScrollButtons ?? visibleScrollbar ? "scrollable" : variant
@@ -95,12 +101,17 @@ export default function Tabs({
       {swipeable ? (
         <SwipeableViews
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-          index={value}
-          onChangeIndex={onChange}
+          index={activeTabIndex}
+          onChangeIndex={(event, tabIndex) => {
+            const tabId = filteredChildren[tabIndex]?.props.value;
+            onChange(tabId);
+          }}
         >
           {tabPanels}
         </SwipeableViews>
-      ) : null}
+      ) : (
+        tabPanels
+      )}
     </Box>
   );
 }
@@ -129,6 +140,6 @@ Tabs.defaultProps = {
   value: undefined,
   visibleScrollbar: undefined,
   visibleScrollButtons: undefined,
-  swipeable: undefined,
+  swipeable: true,
   autoNavigateByArrowKeyboard: undefined,
 };
