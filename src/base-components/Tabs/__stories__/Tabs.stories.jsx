@@ -21,8 +21,8 @@ export default {
       >
         <div
           style={{
-            height: "400px",
-            width: "600px",
+            height: "500px",
+            width: "800px",
             backgroundColor: "white",
           }}
         >
@@ -77,7 +77,7 @@ export const Variant = () => {
         />
       </Stack>
       <Tabs
-        maxHeightPX={325}
+        maxHeightPX={400}
         variant={variant}
         orientation={orientation}
         value={value}

@@ -82,9 +82,7 @@ export default function Tabs({
         onChange={handleChange}
         orientation={orientation}
         variant={
-          orientation === "vertical" ||
-          visibleScrollButtons !== undefined ||
-          visibleScrollbar
+          orientation === "vertical" || visibleScrollbar
             ? "scrollable"
             : variant
         }
