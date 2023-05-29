@@ -109,3 +109,65 @@ export const Variant = () => {
     </Box>
   );
 };
+
+export const Centered = () => {
+  const data1 = [{ value: "centered", component: "centered" }];
+  const [centered, setCentered] = useState("centered");
+
+  const data2 = [
+    { value: "fullWidth", component: "fullWidth" },
+    { value: "scrollable", component: "scrollable" },
+    { value: "standard", component: "standard" },
+  ];
+  const [variant, setVariant] = useState("standard");
+
+  const [value, setValue] = useState("one");
+  const onChangeHandler = (tabId) => setValue(tabId);
+
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "1em",
+      }}
+    >
+      <Stack direction="row" spacing={3}>
+        <ToggleButtonGroup
+          value={centered}
+          exclusive
+          onChange={(value) => setCentered(value)}
+          data={data1}
+        />
+        <ToggleButtonGroup
+          value={variant}
+          exclusive
+          onChange={(value) => setVariant(value)}
+          data={data2}
+        />
+      </Stack>
+      <Tabs
+        maxHeightPX={400}
+        variant={variant}
+        centered={centered}
+        value={value}
+        onChange={(newValue) => onChangeHandler(newValue)}
+      >
+        {[
+          { value: "one", label: "Item " },
+          { value: "two", label: "Item " },
+          { value: "three", label: "Item " },
+          { value: "four", label: "Item " },
+        ].map((tabProps, index) => (
+          <Tab
+            key={index}
+            value={tabProps.value}
+            label={tabProps.label + tabProps.value}
+          >
+            Content {index + 1}
+          </Tab>
+        ))}
+      </Tabs>
+    </Box>
+  );
+};
