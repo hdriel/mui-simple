@@ -10,7 +10,7 @@ import TabPanel from "./TabPanel";
 export default function Tabs({
   centered,
   muiColor,
-  muiTextColor,
+  customColor,
   onChange,
   orientation,
   variant,
@@ -75,10 +75,8 @@ export default function Tabs({
       }}
     >
       <MuiTabs
-        indicatorColor={muiColor}
         centered={centered}
-        color={muiColor}
-        muiTextColor={muiTextColor}
+        customColor={muiColor ?? customColor}
         onChange={handleChange}
         orientation={orientation}
         variant={
@@ -128,6 +126,7 @@ export default function Tabs({
 
 Tabs.propTypes = {
   centered: PropTypes.bool,
+  customColor: PropTypes.string,
   muiColor: PropTypes.string,
   muiTextColor: PropTypes.string,
   onChange: PropTypes.func,

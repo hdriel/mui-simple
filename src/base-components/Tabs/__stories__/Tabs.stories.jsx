@@ -171,3 +171,43 @@ export const Centered = () => {
     </Box>
   );
 };
+
+export const ThemedAndColored = () => {
+  const [value, setValue] = useState("one");
+  const onChangeHandler = (tabId) => setValue(tabId);
+
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "1em",
+      }}
+    >
+      {["primary", "secondary", "info", "success", "warning", "error"].map(
+        (muiColor) => (
+          <Tabs
+            muiColor={muiColor}
+            muiTextColor={muiColor}
+            maxHeightPX={400}
+            value={value}
+            onChange={(newValue) => onChangeHandler(newValue)}
+          >
+            {[
+              { value: "one", label: "Item " },
+              { value: "two", label: "Item " },
+              { value: "three", label: "Item " },
+              { value: "four", label: "Item " },
+            ].map((tabProps, index) => (
+              <Tab
+                key={index}
+                value={tabProps.value}
+                label={tabProps.label + tabProps.value}
+              />
+            ))}
+          </Tabs>
+        )
+      )}
+    </Box>
+  );
+};
