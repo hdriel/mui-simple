@@ -1,8 +1,11 @@
-import React, { cloneElement, isValidElement } from "react";
+import React, { isValidElement } from "react";
 import SwipeableViews from "react-swipeable-views";
 import PropTypes from "prop-types";
+import { useTheme } from "@mui/material/styles";
 
-import { Tab, Tabs as MuiTabs, Box } from "./Tabs.styled";
+import { Tabs as MuiTabs, Box } from "./Tabs.styled";
+import Tab from "./Tab";
+import TabPanel from "./TabPanel";
 
 export default function Tabs({
   centered,
@@ -19,26 +22,32 @@ export default function Tabs({
   children,
   ...props
 }) {
-  const content = []
-    .concat(children)
-    .filter((child) => isValidElement(child) && child.name === "Tab")
-    .map((child) =>
-      cloneElement(child, { ...child.props, open: child.props.value === value })
-    );
+  const theme = useTheme();
 
-  const tabs = content
-    .map((child) => child.props)
-    .map((props) => ({
-      iconPosition: props.iconPosition,
-      label: props.label,
-      value: props.value,
-      open: props.value === value,
-      wrapped: props.wrapped,
-      disabled: props.disabled,
-      disableRipple: props.disableRipple,
-      icon: props.icon,
-    }))
-    .map((tabProps) => <Tab {...tabProps} />);
+  const filteredChildren = []
+    .concat(children)
+    .filter((child) => isValidElement(child) && child.type?.name === "Tab");
+
+  const tabPanels = filteredChildren.map((child) => (
+    <TabPanel {...child.props} open={child.props.value === value}>
+      {child.props.children}
+    </TabPanel>
+  ));
+
+  const tabs = filteredChildren.map(({ props }, index) => {
+    return (
+      <Tab
+        iconPosition={props.iconPosition}
+        label={props.label}
+        value={String(props.value ?? index)}
+        open={props.value === value}
+        wrapped={props.wrapped}
+        disabled={props.disabled}
+        disableRipple={props.disableRipple}
+        icon={props.icon}
+      />
+    );
+  });
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -73,12 +82,12 @@ export default function Tabs({
         <SwipeableViews
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
           index={value}
-          onChangeIndex={handleChangeIndex}
+          onChangeIndex={onChange}
         >
-          {children}
+          {tabPanels}
         </SwipeableViews>
       ) : (
-        children
+        tabPanels
       )}
     </Box>
   );
@@ -91,7 +100,7 @@ Tabs.propTypes = {
   onChange: PropTypes.func,
   orientation: PropTypes.oneOf(["horizontal", "vertical"]),
   variant: PropTypes.oneOf(["fullWidth", "scrollable", "standard"]),
-  value: PropTypes.number,
+  value: PropTypes.string,
   visibleScrollbar: PropTypes.bool,
   visibleScrollButtons: PropTypes.oneOf(["auto", false, true]),
   swipeable: PropTypes.bool,

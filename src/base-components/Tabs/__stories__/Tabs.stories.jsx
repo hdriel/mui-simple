@@ -1,74 +1,34 @@
-import React from "react";
-import { action } from "@storybook/addon-actions";
-// import { Send as SendIcon } from "@mui/icons-material";
-import { Stack } from "@mui/material";
+import React, { useState } from "react";
+import { Box } from "@mui/material";
 
-import Tabs from "../TEMPLATE";
+import Tabs from "../Tabs";
+import Tab from "../Tab";
 
 export default {
-  title: "TEMPLATE/TEMPLATE",
+  title: "Navigation/Tabs",
   component: Tabs,
 };
 
-const actions = {
-  onClick: action("onClick"),
-};
-
 export const Default = () => {
-  return <Tabs {...actions} />;
+  return <Tabs />;
 };
 
 export const Variant = () => {
-  return (
-    <Stack>
-      <Tabs {...actions} variant="text">
-        text
-      </Tabs>
-      <Tabs {...actions} variant="outlined">
-        outlined
-      </Tabs>
-      <Tabs {...actions} variant="contained">
-        contained
-      </Tabs>
-    </Stack>
-  );
-};
+  const [value, setValue] = useState("1");
 
-export const Themed = () => {
   return (
-    <Stack>
-      <Tabs {...actions} muiColor="primary">
-        primary
+    <Box sx={{ display: "flex", flexDirection: "column", gap: "1em" }}>
+      <Tabs value={value} onChange={(event, newValue) => setValue(newValue)}>
+        <Tab value="1" label="Item One">
+          Content One
+        </Tab>
+        <Tab value="2" label="Item Two">
+          Content Tow
+        </Tab>
+        <Tab value="3" label="Item Three">
+          Content Three
+        </Tab>
       </Tabs>
-      <Tabs {...actions} muiColor="secondary">
-        secondary
-      </Tabs>
-      <Tabs {...actions}>Default</Tabs>
-    </Stack>
-  );
-};
-
-export const Colored = () => {
-  return (
-    <Tabs {...actions} color={"#D050CC"}>
-      Colored
-    </Tabs>
-  );
-};
-
-export const Sized = () => {
-  return (
-    <Stack>
-      <Tabs {...actions} size="small">
-        small
-      </Tabs>
-      <Tabs {...actions} size="medium">
-        medium
-      </Tabs>
-      <Tabs {...actions} size="large">
-        large
-      </Tabs>
-      <Tabs {...actions}>>Default</Tabs>
-    </Stack>
+    </Box>
   );
 };

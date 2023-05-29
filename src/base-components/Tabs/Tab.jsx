@@ -1,10 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { TabPanel } from "./Tabs.styled";
+import { Tab as MuiTab } from "./Tabs.styled";
 
-function Tab({ link, onClick, value, open, children, ...props }) {
+export default function Tab({
+  link,
+  onClick,
+  value,
+  open,
+  children,
+  ...props
+}) {
   return (
-    <TabPanel
+    <MuiTab
       role="tabpanel"
       hidden={!open}
       id={`simple-tabpanel-${value}`}
@@ -18,14 +25,14 @@ function Tab({ link, onClick, value, open, children, ...props }) {
       {...props}
     >
       {open && { children }}
-    </TabPanel>
+    </MuiTab>
   );
 }
 
 Tab.propTypes = {
   iconPosition: PropTypes.oneOf(["bottom", "end", "start", "top"]),
   label: PropTypes.string,
-  value: PropTypes.number,
+  value: PropTypes.string,
   open: PropTypes.bool,
   wrapped: PropTypes.bool,
   disabled: PropTypes.bool,
