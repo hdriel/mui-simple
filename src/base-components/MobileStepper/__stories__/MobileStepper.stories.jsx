@@ -113,9 +113,11 @@ export const DirectionRLT = () => {
         }
       >
         <div>
-          For each ad campaign that you create, you can control how much you're
+          {`For each ad campaign that you create, you can control how much you're
           willing to spend on clicks and conversions, which networks and
-          geographical locations you want your ads to show on, and more.
+          geographical locations you want your ads to show on, and more.`.repeat(
+            20
+          )}
         </div>
         <div>
           An ad group contains one or more ads which target a shared set of

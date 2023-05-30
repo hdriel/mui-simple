@@ -33,6 +33,8 @@ export default function MobileStepper({
   autoPlayInterval,
   infiniteLoop,
   swipeable,
+  height,
+  maxWidth,
   children,
   ...props
 }) {
@@ -149,7 +151,7 @@ export default function MobileStepper({
   }, [autoPlay]);
 
   return (
-    <Box sx={{ maxWidth: 400, flexGrow: 1, position: "relative" }}>
+    <Box sx={{ maxWidth, flexGrow: 1, position: "relative" }}>
       <Paper
         square
         elevation={0}
@@ -168,11 +170,13 @@ export default function MobileStepper({
 
       <Box
         sx={{
-          height: 255,
-          maxWidth: 400,
+          height,
+          minHeight: height,
+          maxWidth,
           width: "100%",
           boxSizing: "border-box",
-          overflow: "hidden",
+          overflowX: "hidden",
+          overflowY: "auto",
         }}
       >
         {swipeable && autoPlayState && (
@@ -180,9 +184,9 @@ export default function MobileStepper({
             autoplay={autoPlayState}
             interval={autoPlayInterval}
             axis={isLTR ? "x" : "x-reverse"}
+            enableMouseEvents
             index={activeStep}
             onChangeIndex={(step) => {
-              console.log("step", step, maxSteps);
               if (step === maxSteps - 1 && !infiniteLoop) {
                 setTimeout(
                   () => setAutoPlayState(false),
@@ -191,7 +195,6 @@ export default function MobileStepper({
               }
               handleNext(step - 1);
             }}
-            enableMouseEvents
           >
             {[].concat(children)}
           </AutoPlaySwipeableViews>
@@ -199,18 +202,9 @@ export default function MobileStepper({
         {swipeable && !autoPlayState && (
           <SwipeableViews
             axis={isLTR ? "x" : "x-reverse"}
-            index={activeStep}
-            onChangeIndex={(step) => {
-              console.log("step", step, maxSteps);
-              if (step === maxSteps - 1 && !infiniteLoop) {
-                setTimeout(
-                  () => setAutoPlayState(false),
-                  [autoPlayInterval - 10]
-                );
-              }
-              handleNext(step - 1);
-            }}
             enableMouseEvents
+            index={activeStep}
+            onChangeIndex={(step) => handleNext(step - 1)}
           >
             {[].concat(children)}
           </SwipeableViews>
@@ -265,6 +259,8 @@ MobileStepper.propTypes = {
     skip: PropTypes.string,
     optional: PropTypes.string,
   }),
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 MobileStepper.defaultProps = {
@@ -283,4 +279,6 @@ MobileStepper.defaultProps = {
   labels: undefined,
   variant: undefined,
   position: "static",
+  height: 255,
+  maxWidth: 400,
 };
