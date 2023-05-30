@@ -15,6 +15,7 @@ import {
 
 export default function MobileStepper({
   variant,
+  position,
   steps: _steps,
   stepIndex: activeStep,
   muiColor,
@@ -69,7 +70,6 @@ export default function MobileStepper({
   const maxSteps = steps.length;
 
   const [backIconProp, nextIconProp] = useMemo(() => {
-    debugger;
     if (forceFixedDirection && !isLTR) {
       return [
         { endIcon: <KeyboardArrowRightIcon /> },
@@ -139,7 +139,7 @@ export default function MobileStepper({
   );
 
   return (
-    <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
+    <Box sx={{ maxWidth: 400, flexGrow: 1, position: "relative" }}>
       <Paper
         square
         elevation={0}
@@ -170,7 +170,7 @@ export default function MobileStepper({
         forceFixedDirection={forceFixedDirection}
         variant={variant}
         steps={maxSteps}
-        position="static"
+        position={position}
         activeStep={activeStep}
         nextButton={!forceFixedDirection || isLTR ? nextButton : backButton}
         backButton={!forceFixedDirection || isLTR ? backButton : nextButton}
@@ -182,6 +182,7 @@ export default function MobileStepper({
 
 MobileStepper.propTypes = {
   variant: PropTypes.oneOf(["text", "dots", "progress"]),
+  position: PropTypes.oneOf(["bottom", "static", "top"]),
   steps: PropTypes.arrayOf(
     PropTypes.oneOfType([
       PropTypes.string,
@@ -221,5 +222,6 @@ MobileStepper.defaultProps = {
   onDone: undefined,
   stepsIndexSkipped: undefined,
   labels: undefined,
-  variant: "progress",
+  variant: undefined,
+  position: "static",
 };
