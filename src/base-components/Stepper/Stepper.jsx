@@ -12,15 +12,19 @@ import {
 export default function Stepper({
   optionalLabel,
   steps: _steps,
+  stepIndex: activeStep,
   stepsBottomLabel,
   muiColor,
   customColor,
+  onReset,
+  onNext,
+  onBack,
+  onSkip,
+  stepsIndexSkipped,
+  allCompletedCmp,
   children,
   ...props
 }) {
-  const [activeStep, setActiveStep] = useState(0);
-  const [skipped, setSkipped] = useState(new Set());
-
   const steps = useMemo(
     () =>
       _steps?.map((step) => {
@@ -31,10 +35,11 @@ export default function Stepper({
               muiColor:
                 step.muiColor ?? muiColor ?? (step.error ? "error" : undefined),
               customColorValue: step.customColor ?? customColor,
-              optional:
-                step.optional && typeof step.optional === "string"
+              optional: step.optional
+                ? typeof step.optional === "string"
                   ? step.optional
-                  : optionalLabel,
+                  : optionalLabel
+                : false,
             };
       }),
     [_steps]
@@ -49,42 +54,13 @@ export default function Stepper({
     [optionalLabel]
   );
 
-  const isStepOptional = (index) => steps[index]?.optional;
-  const isStepSkipped = (step) => skipped.has(step);
+  const isStepOptional = (index) => steps?.[index]?.optional;
+  const isStepSkipped = (index) => stepsIndexSkipped?.includes(index);
+  const handleNext = () => onNext?.(activeStep);
+  const handleBack = () => onBack?.(activeStep);
+  const handleSkip = () => isStepOptional(activeStep) && onSkip?.(activeStep);
+  const handleReset = () => onReset?.();
 
-  const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
-
-  const handleReset = () => setActiveStep(0);
-
-  debugger;
   return (
     <Box sx={{ width: "100%" }}>
       <MuiStepper
@@ -100,7 +76,7 @@ export default function Stepper({
             >
               <StepLabel
                 error={step.error}
-                icon={step.icon}
+                // StepIconComponent={step.icon}
                 muiColor={step.muiColor}
                 customColor={step.customColor}
                 optional={
@@ -118,9 +94,7 @@ export default function Stepper({
 
       {activeStep === steps?.length ? (
         <>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography>
+          <Box sx={{ mt: 2, mb: 1 }}>{allCompletedCmp}</Box>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Box sx={{ flex: "1 1 auto" }} />
             <Button onClick={handleReset}>Reset</Button>
@@ -128,8 +102,8 @@ export default function Stepper({
         </>
       ) : (
         <>
-          {children}
-          <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+          <Box sx={{ mt: 2, mb: 1 }}>{[].concat(children)[activeStep]}</Box>
+
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Button
               color="inherit"
@@ -175,6 +149,12 @@ Stepper.propTypes = {
   stepsBottomLabel: PropTypes.bool,
   muiColor: PropTypes.string,
   customColor: PropTypes.string,
+  onReset: PropTypes.func,
+  onNext: PropTypes.func,
+  onBack: PropTypes.func,
+  onSkip: PropTypes.func,
+  stepsIndexSkipped: PropTypes.arrayOf(PropTypes.number),
+  allCompletedCmp: PropTypes.node,
 };
 
 Stepper.defaultProps = {
@@ -183,4 +163,10 @@ Stepper.defaultProps = {
   stepsBottomLabel: undefined,
   muiColor: undefined,
   customColor: undefined,
+  onReset: undefined,
+  onNext: undefined,
+  onBack: undefined,
+  onSkip: undefined,
+  stepsIndexSkipped: undefined,
+  allCompletedCmp: undefined,
 };
