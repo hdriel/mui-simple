@@ -34,15 +34,6 @@ const actions = {
   onClick: action("onClick"),
 };
 
-const steps = [
-  { label: "Select campaign settings", optional: true, error: true },
-  {
-    label: "Create an ad group",
-    muiColor: "secondary",
-  },
-  "Create an ad",
-];
-
 export const Default = () => {
   return <MobileStepper {...actions} />;
 };
@@ -103,7 +94,6 @@ export const DirectionRLT = () => {
       <MobileStepper
         {...actions}
         {...stepperProps}
-        direction={"rtl"}
         steps={steps}
         orientation="vertical"
         allCompletedCmp={
@@ -165,7 +155,6 @@ export const AutoScrollImages = () => {
       <MobileStepper
         {...actions}
         {...stepperProps}
-        direction={"ltr"}
         steps={steps}
         orientation="vertical"
       >

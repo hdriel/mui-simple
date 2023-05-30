@@ -28,7 +28,6 @@ export default function MobileStepper({
   onDone,
   stepsIndexSkipped,
   labels,
-  direction,
   autoPlay,
   autoPlayInterval,
   infiniteLoop,
@@ -40,7 +39,7 @@ export default function MobileStepper({
 }) {
   const theme = useTheme();
   const [autoPlayState, setAutoPlayState] = useState(autoPlay);
-  const isLTR = direction === "ltr";
+  const isLTR = theme.direction === "ltr";
   const forceFixedDirection = variant === "text";
 
   const LABELS = {
@@ -163,9 +162,7 @@ export default function MobileStepper({
           bgcolor: "background.default",
         }}
       >
-        <Typography>
-          {direction?.toUpperCase() + " " + steps[activeStep % maxSteps]?.label}
-        </Typography>
+        <Typography>{steps[activeStep % maxSteps]?.label}</Typography>
       </Paper>
 
       <Box
