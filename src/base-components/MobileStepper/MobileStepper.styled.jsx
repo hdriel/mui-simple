@@ -3,7 +3,11 @@ import {
   MobileStepper as MuiMobileStepper,
   Box as MuiBox,
 } from "@mui/material";
-import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
+import {
+  KeyboardArrowLeft,
+  KeyboardArrowRight,
+  Check,
+} from "@mui/icons-material";
 
 import MuiButton from "../Button/Button";
 import MuiTypography from "../Typography/Typography";
@@ -33,3 +37,4 @@ export const Typography = MuiTypography;
 
 export const KeyboardArrowLeftIcon = KeyboardArrowLeft;
 export const KeyboardArrowRightIcon = KeyboardArrowRight;
+export const CheckIcon = Check;

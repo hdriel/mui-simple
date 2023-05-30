@@ -10,6 +10,7 @@ import {
   Box,
   KeyboardArrowLeftIcon,
   KeyboardArrowRightIcon,
+  CheckIcon,
 } from "./MobileStepper.styled";
 
 export default function MobileStepper({
@@ -65,6 +66,7 @@ export default function MobileStepper({
       }) ?? [],
     [_steps]
   );
+  const maxSteps = steps.length;
 
   const [backIconProp, nextIconProp] = useMemo(() => {
     debugger;
@@ -97,18 +99,31 @@ export default function MobileStepper({
         ];
   }, [isLTR]);
 
-  const nextButton = (
-    <Button
-      size="small"
-      onClick={handleNext}
-      disabled={activeStep === steps.length - 1}
-      muiColor={muiColor}
-      customColor={customColor}
-      {...nextIconProp}
-    >
-      {LABELS.next}
-    </Button>
-  );
+  const nextButton =
+    activeStep === maxSteps - 1 ? (
+      <Button
+        size="small"
+        onClick={onDone}
+        muiColor={muiColor}
+        customColor={customColor}
+        {...nextIconProp}
+        startIcon={nextIconProp.endIcon ? <CheckIcon /> : undefined}
+        endIcon={nextIconProp.startIcon ? <CheckIcon /> : undefined}
+      >
+        {LABELS.done}
+      </Button>
+    ) : (
+      <Button
+        size="small"
+        onClick={handleNext}
+        disabled={activeStep === maxSteps - 1}
+        muiColor={muiColor}
+        customColor={customColor}
+        {...nextIconProp}
+      >
+        {LABELS.next}
+      </Button>
+    );
 
   const backButton = (
     <Button
@@ -154,7 +169,7 @@ export default function MobileStepper({
       <MuiMobileStepper
         forceFixedDirection={forceFixedDirection}
         variant={variant}
-        steps={steps.length}
+        steps={maxSteps}
         position="static"
         activeStep={activeStep}
         nextButton={!forceFixedDirection || isLTR ? nextButton : backButton}
