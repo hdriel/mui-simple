@@ -13,6 +13,8 @@ export default function Stepper({
   optionalLabel,
   steps: _steps,
   stepsBottomLabel,
+  muiColor,
+  customColor,
   children,
   ...props
 }) {
@@ -24,13 +26,26 @@ export default function Stepper({
       _steps?.map((step) => {
         return typeof step === "string"
           ? { label: step, optional: false }
-          : step;
+          : {
+              ...step,
+              muiColor:
+                step.muiColor ?? muiColor ?? (step.error ? "error" : undefined),
+              customColorValue: step.customColor ?? customColor,
+              optional:
+                step.optional && typeof step.optional === "string"
+                  ? step.optional
+                  : optionalLabel,
+            };
       }),
     [_steps]
   );
 
-  const optionalCmp = useMemo(
-    () => <Typography variant="caption">{optionalLabel}</Typography>,
+  const DefaultOptionalCmp = useMemo(
+    (props) => (
+      <Typography variant="caption" {...props}>
+        {optionalLabel}
+      </Typography>
+    ),
     [optionalLabel]
   );
 
@@ -84,7 +99,15 @@ export default function Stepper({
               completed={isStepSkipped(index) ? false : undefined}
             >
               <StepLabel
-                optional={isStepOptional(index) ? optionalCmp : undefined}
+                error={step.error}
+                icon={step.icon}
+                muiColor={step.muiColor}
+                customColor={step.customColor}
+                optional={
+                  isStepOptional(index) ? (
+                    <Typography variant="caption">{step.optional}</Typography>
+                  ) : undefined
+                }
               >
                 {step.label}
               </StepLabel>
@@ -140,16 +163,24 @@ Stepper.propTypes = {
       PropTypes.string,
       PropTypes.shape({
         label: PropTypes.string,
-        optional: PropTypes.bool,
+        optional: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+        muiColor: PropTypes.string,
+        customColor: PropTypes.string,
+        error: PropTypes.bool,
+        icon: PropTypes.node,
       }),
     ])
   ),
   optionalLabel: PropTypes.string,
   stepsBottomLabel: PropTypes.bool,
+  muiColor: PropTypes.string,
+  customColor: PropTypes.string,
 };
 
 Stepper.defaultProps = {
   steps: undefined,
   optionalLabel: "Optional",
   stepsBottomLabel: undefined,
+  muiColor: undefined,
+  customColor: undefined,
 };

@@ -29,8 +29,8 @@ const actions = {
 };
 
 const steps = [
-  { label: "Select campaign settings", optional: true },
-  "Create an ad group",
+  { label: "Select campaign settings", optional: true, error: true },
+  { label: "Create an ad group", muiColor: "secondary" },
   "Create an ad",
 ];
 
