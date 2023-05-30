@@ -18,9 +18,10 @@ export const ThemeProvider = ({ dir, theme, children }) => {
       muiTheme = lightTheme;
       break;
   }
+  muiTheme.direction = dir;
 
   return (
-    <DirectionWrapper direction={dir || muiTheme.direction}>
+    <DirectionWrapper direction={muiTheme.direction}>
       <MuiThemeProvider theme={muiTheme}>{children}</MuiThemeProvider>
     </DirectionWrapper>
   );
