@@ -12,6 +12,7 @@ import {
 export default function Stepper({
   optionalLabel,
   steps: _steps,
+  stepsBottomLabel,
   children,
   ...props
 }) {
@@ -71,7 +72,11 @@ export default function Stepper({
   debugger;
   return (
     <Box sx={{ width: "100%" }}>
-      <MuiStepper activeStep={activeStep} {...props}>
+      <MuiStepper
+        activeStep={activeStep}
+        alternativeLabel={stepsBottomLabel}
+        {...props}
+      >
         {steps?.map((step, index) => {
           return (
             <Step
@@ -140,9 +145,11 @@ Stepper.propTypes = {
     ])
   ),
   optionalLabel: PropTypes.string,
+  stepsBottomLabel: PropTypes.bool,
 };
 
 Stepper.defaultProps = {
   steps: undefined,
   optionalLabel: "Optional",
+  stepsBottomLabel: undefined,
 };
