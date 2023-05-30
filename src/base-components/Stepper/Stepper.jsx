@@ -6,6 +6,7 @@ import {
   Stepper as MuiStepper,
   Step,
   StepLabel,
+  StepContent,
   Box,
 } from "./Stepper.styled";
 
@@ -16,15 +17,25 @@ export default function Stepper({
   stepsBottomLabel,
   muiColor,
   customColor,
-  onReset,
+  orientation,
   onNext,
   onBack,
   onSkip,
+  onDone,
   stepsIndexSkipped,
   allCompletedCmp,
+  labels,
   children,
   ...props
 }) {
+  const LABELS = {
+    next: labels?.next || "Next",
+    back: labels?.back || "Back",
+    skip: labels?.skip || "Skip",
+    done: labels?.done || "Done",
+    optional: labels?.optional || "Optional",
+  };
+
   const steps = useMemo(
     () =>
       _steps?.map((step) => {
@@ -58,14 +69,14 @@ export default function Stepper({
   const isStepSkipped = (index) => stepsIndexSkipped?.includes(index);
   const handleNext = () => onNext?.(activeStep);
   const handleBack = () => onBack?.(activeStep);
-  const handleSkip = () => isStepOptional(activeStep) && onSkip?.(activeStep);
-  const handleReset = () => onReset?.();
+  const handleSkip = (index) => isStepOptional(index) && onSkip?.(index);
 
   return (
     <Box sx={{ width: "100%" }}>
       <MuiStepper
         activeStep={activeStep}
         alternativeLabel={stepsBottomLabel}
+        orientation={orientation}
         {...props}
       >
         {steps?.map((step, index) => {
@@ -87,6 +98,53 @@ export default function Stepper({
               >
                 {step.label}
               </StepLabel>
+              {orientation === "vertical" && (
+                <StepContent>
+                  {[].concat(children)[index]}
+                  <Box
+                    sx={{
+                      mb: 2,
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <div>
+                      <Button
+                        variant="contained"
+                        onClick={handleNext}
+                        muiColor={step.muiColor}
+                        customColor={step.customColor}
+                        sx={{ mt: 1, mr: 1 }}
+                      >
+                        {index === steps.length - 1 ? LABELS.done : LABELS.next}
+                      </Button>
+                      {index !== 0 && (
+                        <Button
+                          color="inherit"
+                          disabled={index === 0}
+                          onClick={handleBack}
+                          sx={{ mt: 1, mr: 1 }}
+                        >
+                          {LABELS.back}
+                        </Button>
+                      )}
+                    </div>
+                    <div>
+                      {isStepOptional(index) && (
+                        <Button
+                          onClick={() => handleSkip(index)}
+                          muiColor={step.muiColor}
+                          customColor={step.customColor}
+                          sx={{ mt: 1, mr: 1 }}
+                        >
+                          {LABELS.skip}
+                        </Button>
+                      )}
+                    </div>
+                  </Box>
+                </StepContent>
+              )}
             </Step>
           );
         })}
@@ -97,35 +155,41 @@ export default function Stepper({
           <Box sx={{ mt: 2, mb: 1 }}>{allCompletedCmp}</Box>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={handleReset}>Reset</Button>
+            <Button onClick={onDone}>Done</Button>
           </Box>
         </>
       ) : (
-        <>
-          <Box sx={{ mt: 2, mb: 1 }}>{[].concat(children)[activeStep]}</Box>
+        (orientation === undefined || orientation === "horizontal") && (
+          <>
+            <Box sx={{ mt: 2, mb: 1 }}>{[].concat(children)[activeStep]}</Box>
 
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Button
-              color="inherit"
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              sx={{ mr: 1 }}
-            >
-              Back
-            </Button>
-
-            <Box sx={{ flex: "1 1 auto" }} />
-            {isStepOptional(activeStep) && (
-              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                Skip
+            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+              <Button
+                color="inherit"
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                sx={{ mr: 1 }}
+              >
+                {LABELS.back}
               </Button>
-            )}
 
-            <Button onClick={handleNext}>
-              {activeStep === steps?.length - 1 ? "Finish" : "Next"}
-            </Button>
-          </Box>
-        </>
+              <Box sx={{ flex: "1 1 auto" }} />
+              {isStepOptional(activeStep) && (
+                <Button
+                  color="inherit"
+                  onClick={() => handleSkip(activeStep)}
+                  sx={{ mr: 1 }}
+                >
+                  {LABELS.skip}
+                </Button>
+              )}
+
+              <Button onClick={handleNext}>
+                {activeStep === steps?.length - 1 ? LABELS.done : LABELS.next}
+              </Button>
+            </Box>
+          </>
+        )
       )}
     </Box>
   );
@@ -145,6 +209,7 @@ Stepper.propTypes = {
       }),
     ])
   ),
+  orientation: PropTypes.oneOf(["horizontal", "vertical"]),
   optionalLabel: PropTypes.string,
   stepsBottomLabel: PropTypes.bool,
   muiColor: PropTypes.string,
@@ -153,8 +218,16 @@ Stepper.propTypes = {
   onNext: PropTypes.func,
   onBack: PropTypes.func,
   onSkip: PropTypes.func,
+  onDone: PropTypes.func,
   stepsIndexSkipped: PropTypes.arrayOf(PropTypes.number),
   allCompletedCmp: PropTypes.node,
+  labels: {
+    next: PropTypes.string,
+    back: PropTypes.string,
+    done: PropTypes.string,
+    skip: PropTypes.string,
+    optional: PropTypes.string,
+  },
 };
 
 Stepper.defaultProps = {
@@ -163,10 +236,13 @@ Stepper.defaultProps = {
   stepsBottomLabel: undefined,
   muiColor: undefined,
   customColor: undefined,
+  orientation: undefined,
   onReset: undefined,
   onNext: undefined,
   onBack: undefined,
   onSkip: undefined,
+  onDone: undefined,
   stepsIndexSkipped: undefined,
   allCompletedCmp: undefined,
+  labels: undefined,
 };

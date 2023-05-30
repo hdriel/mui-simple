@@ -6,7 +6,7 @@ export const useSimpleStepper = () => {
 
   return {
     stepIndex: activeStep,
-    onReset: (index) => {
+    onReset: () => {
       setSkipSteps([]);
       setActiveStep(0);
     },

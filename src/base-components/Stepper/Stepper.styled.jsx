@@ -5,6 +5,7 @@ import {
   Step as MuiStep,
   StepLabel as MuiStepLabel,
   Stepper as MuiStepper,
+  StepContent as MuiStepContent,
 } from "@mui/material";
 
 import MuiTypography from "../Typography/Typography";
@@ -15,7 +16,11 @@ export const Typography = MuiTypography;
 export const Button = MuiButton;
 
 export const Stepper = MuiStepper;
+
 export const Step = MuiStep;
+
+export const StepContent = MuiStepContent;
+
 export const StepLabel = styled(MuiStepLabel, {
   shouldForwardProp: (propName) =>
     !["muiColor", "customColor"].includes(propName),

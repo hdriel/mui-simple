@@ -62,6 +62,7 @@ export const SimpleStepper = () => {
       {...actions}
       {...stepperProps}
       steps={steps}
+      onDone={stepperProps.onReset}
       allCompletedCmp={
         <Typography sx={{ mt: 2, mb: 1 }}>
           All steps completed - you&apos;re finished
@@ -75,7 +76,7 @@ export const SimpleStepper = () => {
   );
 };
 
-export const HorizontalStepper = () => {
+export const StepsBottomLabelStepper = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [skipSteps, setSkipSteps] = useState([]);
 
@@ -97,6 +98,7 @@ export const HorizontalStepper = () => {
         setSkipSteps((a) => (a.includes(index) ? a : [...a, index]));
         setActiveStep(index + 1);
       }}
+      onDone={() => {}}
       stepsIndexSkipped={skipSteps}
       stepsBottomLabel
       allCompletedCmp={
@@ -108,6 +110,48 @@ export const HorizontalStepper = () => {
       <div>Step A</div>
       <div>Step B</div>
       <div>Step C</div>
+    </Stepper>
+  );
+};
+
+export const VerticalStepper = () => {
+  const stepperProps = useSimpleStepper();
+  const steps = [
+    { label: "Select campaign settings", optional: true },
+    {
+      label: "Create an ad group",
+      muiColor: "secondary",
+    },
+    "Create an ad",
+  ];
+
+  return (
+    <Stepper
+      {...actions}
+      {...stepperProps}
+      steps={steps}
+      orientation="vertical"
+      allCompletedCmp={
+        <Typography sx={{ mt: 2, mb: 1 }}>
+          All steps completed - you&apos;re finished
+        </Typography>
+      }
+    >
+      <div>
+        For each ad campaign that you create, you can control how much you're
+        willing to spend on clicks and conversions, which networks and
+        geographical locations you want your ads to show on, and more.
+      </div>
+      <div>
+        An ad group contains one or more ads which target a shared set of
+        keywords.
+      </div>
+      <div>
+        Try out different ad text to see what brings in the most customers, and
+        learn how to enhance your ads using features like ad extensions. If you
+        run into any problems with your ads, find out how to tell if they're
+        running and how to resolve approval issues.
+      </div>
     </Stepper>
   );
 };
