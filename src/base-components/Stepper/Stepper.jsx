@@ -50,20 +50,11 @@ export default function Stepper({
               optional: step.optional
                 ? typeof step.optional === "string"
                   ? step.optional
-                  : optionalLabel
+                  : LABELS.optional
                 : false,
             };
       }),
     [_steps]
-  );
-
-  const DefaultOptionalCmp = useMemo(
-    (props) => (
-      <Typography variant="caption" {...props}>
-        {optionalLabel}
-      </Typography>
-    ),
-    [optionalLabel]
   );
 
   const isStepOptional = (index) => steps?.[index]?.optional;
@@ -210,8 +201,8 @@ Stepper.propTypes = {
       }),
     ])
   ),
+  stepIndex: PropTypes.number,
   orientation: PropTypes.oneOf(["horizontal", "vertical"]),
-  optionalLabel: PropTypes.string,
   stepsBottomLabel: PropTypes.bool,
   muiColor: PropTypes.string,
   customColor: PropTypes.string,
@@ -223,18 +214,18 @@ Stepper.propTypes = {
   stepsIndexSkipped: PropTypes.arrayOf(PropTypes.number),
   allCompletedCmp: PropTypes.node,
   unmountOnExit: PropTypes.bool,
-  labels: {
+  labels: PropTypes.shape({
     next: PropTypes.string,
     back: PropTypes.string,
     done: PropTypes.string,
     skip: PropTypes.string,
     optional: PropTypes.string,
-  },
+  }),
 };
 
 Stepper.defaultProps = {
   steps: undefined,
-  optionalLabel: "Optional",
+  stepIndex: undefined,
   stepsBottomLabel: undefined,
   muiColor: undefined,
   customColor: undefined,
