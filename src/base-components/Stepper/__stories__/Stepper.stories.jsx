@@ -1,0 +1,157 @@
+import React, { useState } from "react";
+import { action } from "@storybook/addon-actions";
+import {
+  AddLocation as AddLocationIcon,
+  Send as SendIcon,
+} from "@mui/icons-material";
+// import { Stack } from "@mui/material";
+
+import Stepper from "../Stepper";
+import { Typography } from "../Stepper.styled";
+import { useSimpleStepper } from "../Stepper.utils";
+
+export default {
+  title: "Navigation/Stepper",
+  component: Stepper,
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          height: "450px",
+          width: "550px",
+          backgroundColor: "rgba(255,255,255,0.8)",
+          border: "1px solid black",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+};
+
+const actions = {
+  onClick: action("onClick"),
+};
+
+const steps = [
+  { label: "Select campaign settings", optional: true, error: true },
+  {
+    label: "Create an ad group",
+    muiColor: "secondary",
+  },
+  "Create an ad",
+];
+
+export const Default = () => {
+  return <Stepper {...actions} />;
+};
+
+export const SimpleStepper = () => {
+  const stepperProps = useSimpleStepper();
+  const steps = [
+    { label: "Select campaign settings", optional: true },
+    {
+      label: "Create an ad group",
+      muiColor: "secondary",
+    },
+    "Create an ad",
+  ];
+
+  return (
+    <Stepper
+      {...actions}
+      {...stepperProps}
+      steps={steps}
+      onDone={stepperProps.onReset}
+      allCompletedCmp={
+        <Typography sx={{ mt: 2, mb: 1 }}>
+          All steps completed - you&apos;re finished
+        </Typography>
+      }
+    >
+      <div>Step A</div>
+      <div>Step B</div>
+      <div>Step C</div>
+    </Stepper>
+  );
+};
+
+export const StepsBottomLabelStepper = () => {
+  const [activeStep, setActiveStep] = useState(0);
+  const [skipSteps, setSkipSteps] = useState([]);
+
+  return (
+    <Stepper
+      {...actions}
+      steps={steps}
+      stepIndex={activeStep}
+      onReset={(index) => {
+        setSkipSteps([]);
+        setActiveStep(0);
+      }}
+      onNext={(index) => {
+        setSkipSteps((a) => a.filter((i) => i !== index));
+        setActiveStep(index + 1);
+      }}
+      onBack={(index) => setActiveStep(index - 1)}
+      onSkip={(index) => {
+        setSkipSteps((a) => (a.includes(index) ? a : [...a, index]));
+        setActiveStep(index + 1);
+      }}
+      onDone={() => {}}
+      stepsIndexSkipped={skipSteps}
+      stepsBottomLabel
+      allCompletedCmp={
+        <Typography sx={{ mt: 2, mb: 1 }}>
+          All steps completed - you&apos;re finished
+        </Typography>
+      }
+    >
+      <div>Step A</div>
+      <div>Step B</div>
+      <div>Step C</div>
+    </Stepper>
+  );
+};
+
+export const VerticalStepper = () => {
+  const stepperProps = useSimpleStepper();
+  const steps = [
+    { label: "Select campaign settings", optional: true },
+    {
+      label: "Create an ad group",
+      muiColor: "secondary",
+    },
+    "Create an ad",
+  ];
+
+  return (
+    <Stepper
+      {...actions}
+      {...stepperProps}
+      steps={steps}
+      orientation="vertical"
+      allCompletedCmp={
+        <Typography sx={{ mt: 2, mb: 1 }}>
+          All steps completed - you&apos;re finished
+        </Typography>
+      }
+    >
+      <div>
+        For each ad campaign that you create, you can control how much you're
+        willing to spend on clicks and conversions, which networks and
+        geographical locations you want your ads to show on, and more.
+      </div>
+      <div>
+        An ad group contains one or more ads which target a shared set of
+        keywords.
+      </div>
+      <div>
+        Try out different ad text to see what brings in the most customers, and
+        learn how to enhance your ads using features like ad extensions. If you
+        run into any problems with your ads, find out how to tell if they're
+        running and how to resolve approval issues.
+      </div>
+    </Stepper>
+  );
+};

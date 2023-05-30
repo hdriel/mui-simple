@@ -15,6 +15,7 @@ export { default as Chip } from "./Chip/Chip";
 
 export { default as Dialog } from "./Dialog/Dialog";
 export { default as Divider } from "./Divider/Divider";
+export { default as Drawer } from "./Drawer/Drawer";
 
 export { default as Fab } from "./FloatingActionButton/FloatingActionButton";
 
@@ -35,13 +36,21 @@ export { default as LinearProgress } from "./Progress/LinearProgress/LinearProgr
 
 export { default as RadioButtonsGroup } from "./RadioButtonsGroup/RadioButtonsGroup";
 export { default as Rating } from "./Rating/Rating";
+export { default as RippleBox } from "./RippleBox/RippleBox";
 
 export { default as Skeleton } from "./Skeleton/Skeleton";
 export { default as Slider } from "./Slider/Slider";
-export { default as Snackbar } from "./Snackbar/Snackbar";
 export { default as RangeSlider } from "./Slider/RangeSlider";
+export { default as Snackbar } from "./Snackbar/Snackbar";
+export { default as SpeedDial } from "./SpeedDial/SpeedDial";
+export { default as Stepper } from "./Stepper/Stepper";
+export { useSimpleStepper } from "./Stepper/Stepper.utils";
 export { default as Switch } from "./Switch/Switch";
 
+export { Tabel } from "./Table/Table";
+export { default as Tabs } from "./Tabs/Tabs";
+export { default as Tab } from "./Tabs/Tab";
 export { default as ToggleButtonGroup } from "./ToggleButtonGroup/ToggleButtonGroup";
 export { default as ToggleButtonGroups } from "./ToggleButtonGroup/ToggleButtonGroups";
 export { default as Tooltip } from "./Tooltip/Tooltip";
+export { default as Typography } from "./Typography/Typography";

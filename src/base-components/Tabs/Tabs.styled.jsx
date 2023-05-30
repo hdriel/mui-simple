@@ -1,9 +1,10 @@
 import _ from "lodash";
-import { styled } from "@mui/material/styles";
+import { styled, css } from "@mui/material/styles";
 import { Tabs as MuiTabs, Tab as MuiTab, Box as MuiBox } from "@mui/material";
 
 export const Tabs = styled(MuiTabs, {
-  shouldForwardProp: (propName) => !["customColor"].includes(propName),
+  shouldForwardProp: (propName) =>
+    !["fillActiveTab", "customColor"].includes(propName),
 })`
   & .MuiTabs-indicator {
     background-color: ${(props) =>
@@ -13,11 +14,22 @@ export const Tabs = styled(MuiTabs, {
   }
   & .MuiTab-root {
     &.Mui-selected {
-      color: ${(props) =>
-        _.get(props, `theme.palette.${props.customColor}.main`) ??
-        _.get(props, `theme.palette.${props.customColor}`) ??
-        props.customColor};
-    }
+       ${(props) => {
+         const color =
+           _.get(props, `theme.palette.${props.customColor}.main`) ??
+           _.get(props, `theme.palette.${props.customColor}`) ??
+           props.customColor ??
+           _.get(props, `theme.palette.primary.main`);
+
+         return props.fillActiveTab
+           ? css`
+               background-color: ${color};
+               color: #ffffff; // TODO: GET CONTRAST COLOR
+             `
+           : css`
+               color: ${color};
+             `;
+       }}
   }
 `;
 

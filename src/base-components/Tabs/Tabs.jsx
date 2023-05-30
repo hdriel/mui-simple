@@ -9,6 +9,7 @@ import TabPanel from "./TabPanel";
 
 export default function Tabs({
   centered,
+  fillActiveTab,
   muiColor,
   customColor,
   onChange,
@@ -83,6 +84,7 @@ export default function Tabs({
       <MuiTabs
         centered={isScrollableVariant ? undefined : centered}
         customColor={muiColor ?? customColor}
+        fillActiveTab={fillActiveTab}
         onChange={handleChange}
         orientation={orientation}
         variant={isScrollableVariant ? "scrollable" : variant}
@@ -130,6 +132,7 @@ export default function Tabs({
 Tabs.propTypes = {
   centered: PropTypes.bool,
   customColor: PropTypes.string,
+  fillActiveTab: PropTypes.bool,
   muiColor: PropTypes.string,
   onChange: PropTypes.func,
   orientation: PropTypes.oneOf(["horizontal", "vertical"]),
@@ -150,6 +153,7 @@ Tabs.propTypes = {
 Tabs.defaultProps = {
   centered: undefined,
   customColor: undefined,
+  fillActiveTab: true,
   muiColor: undefined,
   onChange: undefined,
   orientation: undefined,
