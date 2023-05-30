@@ -1,3 +1,6 @@
+import SwipeableViews from "react-swipeable-views";
+import { autoPlay } from "react-swipeable-views-utils";
+
 import { styled, css } from "@mui/material/styles";
 import {
   MobileStepper as MuiMobileStepper,
@@ -38,3 +41,5 @@ export const Typography = MuiTypography;
 export const KeyboardArrowLeftIcon = KeyboardArrowLeft;
 export const KeyboardArrowRightIcon = KeyboardArrowRight;
 export const CheckIcon = Check;
+
+export const AutoPlaySwipeableViews = autoPlay(SwipeableViews);

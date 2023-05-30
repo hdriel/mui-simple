@@ -8,6 +8,7 @@ import {
   Button,
   Typography,
   Box,
+  AutoPlaySwipeableViews,
   KeyboardArrowLeftIcon,
   KeyboardArrowRightIcon,
   CheckIcon,
@@ -44,8 +45,8 @@ export default function MobileStepper({
 
   const isStepOptional = (index) => steps?.[index]?.optional;
   const isStepSkipped = (index) => stepsIndexSkipped?.includes(index);
-  const handleNext = () => onNext?.(activeStep);
-  const handleBack = () => onBack?.(activeStep);
+  const handleNext = (step) => onNext?.(step);
+  const handleBack = (step) => onBack?.(step);
   const handleSkip = (index) => isStepOptional(index) && onSkip?.(index);
 
   const steps = useMemo(
@@ -115,7 +116,7 @@ export default function MobileStepper({
     ) : (
       <Button
         size="small"
-        onClick={handleNext}
+        onClick={() => handleNext(activeStep)}
         disabled={activeStep === maxSteps - 1}
         muiColor={muiColor}
         customColor={customColor}
@@ -128,7 +129,7 @@ export default function MobileStepper({
   const backButton = (
     <Button
       size="small"
-      onClick={handleBack}
+      onClick={() => handleBack(activeStep)}
       disabled={activeStep === 0}
       muiColor={muiColor}
       customColor={customColor}
@@ -152,19 +153,27 @@ export default function MobileStepper({
         }}
       >
         <Typography>
-          {direction?.toUpperCase() + " " + steps[activeStep]?.label}
+          {direction?.toUpperCase() + " " + steps[activeStep % maxSteps]?.label}
         </Typography>
       </Paper>
+
       <Box
         sx={{
           height: 255,
           maxWidth: 400,
           width: "100%",
-          p: 2,
           boxSizing: "border-box",
+          overflow: "hidden",
         }}
       >
-        {[].concat(children)[activeStep]}
+        <AutoPlaySwipeableViews
+          axis={isLTR ? "x" : "x-reverse"}
+          index={activeStep}
+          onChangeIndex={(step) => handleNext(step)}
+          enableMouseEvents
+        >
+          {[].concat(children)}
+        </AutoPlaySwipeableViews>
       </Box>
       <MuiMobileStepper
         forceFixedDirection={forceFixedDirection}
@@ -203,13 +212,13 @@ MobileStepper.propTypes = {
   onSkip: PropTypes.func,
   onDone: PropTypes.func,
   stepsIndexSkipped: PropTypes.arrayOf(PropTypes.number),
-  labels: {
+  labels: PropTypes.shape({
     next: PropTypes.string,
     back: PropTypes.string,
     done: PropTypes.string,
     skip: PropTypes.string,
     optional: PropTypes.string,
-  },
+  }),
 };
 
 MobileStepper.defaultProps = {

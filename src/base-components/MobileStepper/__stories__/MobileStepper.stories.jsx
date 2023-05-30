@@ -4,7 +4,7 @@ import {
   AddLocation as AddLocationIcon,
   Send as SendIcon,
 } from "@mui/icons-material";
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 
 import MobileStepper from "../MobileStepper";
 import { Typography } from "../MobileStepper.styled";
@@ -66,11 +66,6 @@ export const DirectionLTR = () => {
         direction={"ltr"}
         steps={steps}
         orientation="vertical"
-        allCompletedCmp={
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography>
-        }
       >
         <div>
           For each ad campaign that you create, you can control how much you're
@@ -91,6 +86,7 @@ export const DirectionLTR = () => {
     </DirectionWrapper>
   );
 };
+
 export const DirectionRLT = () => {
   const stepperProps = useSimpleStepper();
   const steps = [
@@ -131,6 +127,54 @@ export const DirectionRLT = () => {
           If you run into any problems with your ads, find out how to tell if
           they're running and how to resolve approval issues.
         </div>
+      </MobileStepper>
+    </DirectionWrapper>
+  );
+};
+
+export const AutoScrollImages = () => {
+  const stepperProps = useSimpleStepper();
+
+  const steps = [
+    {
+      label: "San Francisco – Oakland Bay Bridge, United States",
+      imgPath:
+        "https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60",
+    },
+    {
+      label: "Bird",
+      imgPath:
+        "https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60",
+    },
+    {
+      label: "Bali, Indonesia",
+      imgPath:
+        "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250",
+    },
+    {
+      label: "Goč, Serbia",
+      imgPath:
+        "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
+    },
+  ];
+
+  return (
+    <DirectionWrapper direction={"ltr"}>
+      <MobileStepper
+        {...actions}
+        {...stepperProps}
+        direction={"ltr"}
+        steps={steps}
+        orientation="vertical"
+      >
+        {steps.map((step, index) => (
+          <Box
+            component={"img"}
+            key={index}
+            src={step.imgPath}
+            alt={step.label}
+          />
+        ))}
       </MobileStepper>
     </DirectionWrapper>
   );

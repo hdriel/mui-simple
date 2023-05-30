@@ -214,13 +214,13 @@ Stepper.propTypes = {
   stepsIndexSkipped: PropTypes.arrayOf(PropTypes.number),
   allCompletedCmp: PropTypes.node,
   unmountOnExit: PropTypes.bool,
-  labels: {
+  labels: PropTypes.shape({
     next: PropTypes.string,
     back: PropTypes.string,
     done: PropTypes.string,
     skip: PropTypes.string,
     optional: PropTypes.string,
-  },
+  }),
 };
 
 Stepper.defaultProps = {
