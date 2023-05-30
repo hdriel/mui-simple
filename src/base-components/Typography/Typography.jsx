@@ -36,6 +36,7 @@ export default function Typography({
   autoWidth,
   showTooltipOnEllipsis,
   onEllipsisChange,
+  sx,
   ...props
 }) {
   const ellipsisMaxRows = !wrap || !rows ? 0 : +rows;
@@ -113,7 +114,7 @@ export default function Typography({
   }, [showTooltipOnEllipsis, isEllipsis, tooltip, children]);
 
   const cmp = typographyProps.noWrap ? (
-    <MuiTypography ref={ref} {...typographyProps}>
+    <MuiTypography ref={ref} sx={sx} {...typographyProps}>
       {children}&nbsp;
     </MuiTypography>
   ) : (
@@ -123,6 +124,7 @@ export default function Typography({
       border={border}
       noWrap={noWrap}
       autoWidth={autoWidth}
+      sx={sx}
     >
       <MuiTypography ref={ref} {...typographyProps}>
         {children}&nbsp;

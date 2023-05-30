@@ -1,74 +1,43 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
 // import { Send as SendIcon } from "@mui/icons-material";
-import { Stack } from "@mui/material";
+// import { Stack } from "@mui/material";
 
 import Stepper from "../Stepper";
 
 export default {
   title: "Navigation/Stepper",
   component: Stepper,
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          height: "450px",
+          width: "550px",
+          backgroundColor: "rgba(255,255,255,0.8)",
+          border: "1px solid black",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 const actions = {
   onClick: action("onClick"),
 };
 
+const steps = [
+  { label: "Select campaign settings", optional: true },
+  "Create an ad group",
+  "Create an ad",
+];
+
 export const Default = () => {
   return <Stepper {...actions} />;
 };
 
-export const Variant = () => {
-  return (
-    <Stack>
-      <Stepper {...actions} variant="text">
-        text
-      </Stepper>
-      <Stepper {...actions} variant="outlined">
-        outlined
-      </Stepper>
-      <Stepper {...actions} variant="contained">
-        contained
-      </Stepper>
-    </Stack>
-  );
-};
-
-export const Themed = () => {
-  return (
-    <Stack>
-      <Stepper {...actions} muiColor="primary">
-        primary
-      </Stepper>
-      <Stepper {...actions} muiColor="secondary">
-        secondary
-      </Stepper>
-      <Stepper {...actions}>Default</Stepper>
-    </Stack>
-  );
-};
-
-export const Colored = () => {
-  return (
-    <Stepper {...actions} color={"#D050CC"}>
-      Colored
-    </Stepper>
-  );
-};
-
-export const Sized = () => {
-  return (
-    <Stack>
-      <Stepper {...actions} size="small">
-        small
-      </Stepper>
-      <Stepper {...actions} size="medium">
-        medium
-      </Stepper>
-      <Stepper {...actions} size="large">
-        large
-      </Stepper>
-      <Stepper {...actions}>>Default</Stepper>
-    </Stack>
-  );
+export const HorizontalStepper = () => {
+  return <Stepper {...actions} steps={steps} />;
 };
