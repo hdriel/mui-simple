@@ -25,6 +25,7 @@ export default function Stepper({
   stepsIndexSkipped,
   allCompletedCmp,
   labels,
+  unmountOnExit,
   children,
   ...props
 }) {
@@ -99,7 +100,7 @@ export default function Stepper({
                 {step.label}
               </StepLabel>
               {orientation === "vertical" && (
-                <StepContent>
+                <StepContent TransitionProps={{ unmountOnExit }}>
                   {[].concat(children)[index]}
                   <Box
                     sx={{
@@ -221,6 +222,7 @@ Stepper.propTypes = {
   onDone: PropTypes.func,
   stepsIndexSkipped: PropTypes.arrayOf(PropTypes.number),
   allCompletedCmp: PropTypes.node,
+  unmountOnExit: PropTypes.bool,
   labels: {
     next: PropTypes.string,
     back: PropTypes.string,
@@ -245,4 +247,5 @@ Stepper.defaultProps = {
   stepsIndexSkipped: undefined,
   allCompletedCmp: undefined,
   labels: undefined,
+  unmountOnExit: true,
 };
