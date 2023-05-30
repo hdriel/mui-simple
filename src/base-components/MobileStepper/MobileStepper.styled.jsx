@@ -1,4 +1,4 @@
-import SwipeableViews from "react-swipeable-views";
+import SwipeableViewsBase from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 
 import { styled, css } from "@mui/material/styles";
@@ -42,4 +42,5 @@ export const KeyboardArrowLeftIcon = KeyboardArrowLeft;
 export const KeyboardArrowRightIcon = KeyboardArrowRight;
 export const CheckIcon = Check;
 
-export const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+export const AutoPlaySwipeableViews = autoPlay(SwipeableViewsBase);
+export const SwipeableViews = SwipeableViewsBase;

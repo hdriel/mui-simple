@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
 
@@ -9,6 +9,7 @@ import {
   Typography,
   Box,
   AutoPlaySwipeableViews,
+  SwipeableViews,
   KeyboardArrowLeftIcon,
   KeyboardArrowRightIcon,
   CheckIcon,
@@ -28,13 +29,17 @@ export default function MobileStepper({
   stepsIndexSkipped,
   labels,
   direction,
+  autoPlay,
+  autoPlayInterval,
+  infiniteLoop,
+  swipeable,
   children,
   ...props
 }) {
   const theme = useTheme();
+  const [autoPlayState, setAutoPlayState] = useState(autoPlay);
   const isLTR = direction === "ltr";
   const forceFixedDirection = variant === "text";
-  console.log("isLTR", isLTR);
 
   const LABELS = {
     next: labels?.next || "Next",
@@ -139,6 +144,10 @@ export default function MobileStepper({
     </Button>
   );
 
+  useEffect(() => {
+    setAutoPlayState(autoPlay);
+  }, [autoPlay]);
+
   return (
     <Box sx={{ maxWidth: 400, flexGrow: 1, position: "relative" }}>
       <Paper
@@ -166,14 +175,47 @@ export default function MobileStepper({
           overflow: "hidden",
         }}
       >
-        <AutoPlaySwipeableViews
-          axis={isLTR ? "x" : "x-reverse"}
-          index={activeStep}
-          onChangeIndex={(step) => handleNext(step)}
-          enableMouseEvents
-        >
-          {[].concat(children)}
-        </AutoPlaySwipeableViews>
+        {swipeable && autoPlayState && (
+          <AutoPlaySwipeableViews
+            autoplay={autoPlayState}
+            interval={autoPlayInterval}
+            axis={isLTR ? "x" : "x-reverse"}
+            index={activeStep}
+            onChangeIndex={(step) => {
+              console.log("step", step, maxSteps);
+              if (step === maxSteps - 1 && !infiniteLoop) {
+                setTimeout(
+                  () => setAutoPlayState(false),
+                  [autoPlayInterval - 10]
+                );
+              }
+              handleNext(step - 1);
+            }}
+            enableMouseEvents
+          >
+            {[].concat(children)}
+          </AutoPlaySwipeableViews>
+        )}
+        {swipeable && !autoPlayState && (
+          <SwipeableViews
+            axis={isLTR ? "x" : "x-reverse"}
+            index={activeStep}
+            onChangeIndex={(step) => {
+              console.log("step", step, maxSteps);
+              if (step === maxSteps - 1 && !infiniteLoop) {
+                setTimeout(
+                  () => setAutoPlayState(false),
+                  [autoPlayInterval - 10]
+                );
+              }
+              handleNext(step - 1);
+            }}
+            enableMouseEvents
+          >
+            {[].concat(children)}
+          </SwipeableViews>
+        )}
+        {!swipeable && [].concat(children)[activeStep % maxSteps]}
       </Box>
       <MuiMobileStepper
         forceFixedDirection={forceFixedDirection}
@@ -190,6 +232,10 @@ export default function MobileStepper({
 }
 
 MobileStepper.propTypes = {
+  swipeable: PropTypes.bool,
+  autoPlay: PropTypes.bool,
+  autoPlayInterval: PropTypes.number,
+  infiniteLoop: PropTypes.bool,
   variant: PropTypes.oneOf(["text", "dots", "progress"]),
   position: PropTypes.oneOf(["bottom", "static", "top"]),
   steps: PropTypes.arrayOf(
@@ -222,6 +268,10 @@ MobileStepper.propTypes = {
 };
 
 MobileStepper.defaultProps = {
+  swipeable: true,
+  autoPlay: undefined,
+  autoPlayInterval: undefined,
+  infiniteLoop: undefined,
   steps: undefined,
   muiColor: undefined,
   customColor: undefined,
