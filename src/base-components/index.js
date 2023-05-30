@@ -44,6 +44,7 @@ export { default as RangeSlider } from "./Slider/RangeSlider";
 export { default as Snackbar } from "./Snackbar/Snackbar";
 export { default as SpeedDial } from "./SpeedDial/SpeedDial";
 export { default as Stepper } from "./Stepper/Stepper";
+export { default as MobileStepper } from "./MobileStepper/MobileStepper";
 export { useSimpleStepper } from "./Stepper/Stepper.utils";
 export { default as Switch } from "./Switch/Switch";
 
