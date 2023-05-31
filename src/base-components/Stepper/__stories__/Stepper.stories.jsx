@@ -275,6 +275,82 @@ export const QontoStepper = () => {
     },
     "Create an ad",
   ];
+
+  return (
+    <>
+      <ToggleButtonGroups>
+        <ToggleButtonGroup
+          value={orientation}
+          exclusive
+          onChange={(value) => setOrientation(value)}
+          data={data1}
+        />
+        <ToggleButtonGroup
+          value={stepsBottomLabel}
+          exclusive
+          onChange={(value) => setStepsBottomLabel(value)}
+          data={data2}
+        />
+      </ToggleButtonGroups>
+
+      <Stepper
+        {...actions}
+        {...stepperProps}
+        qontoStyle
+        steps={steps}
+        stepsBottomLabel={stepsBottomLabel}
+        orientation={orientation}
+        allCompletedCmp={
+          <Typography sx={{ mt: 2, mb: 1 }}>
+            All steps completed - you&apos;re finished
+          </Typography>
+        }
+      >
+        <div>
+          For each ad campaign that you create, you can control how much you're
+          willing to spend on clicks and conversions, which networks and
+          geographical locations you want your ads to show on, and more.
+        </div>
+        <div>
+          An ad group contains one or more ads which target a shared set of
+          keywords.
+        </div>
+        <div>
+          Try out different ad text to see what brings in the most customers,
+          and learn how to enhance your ads using features like ad extensions.
+          If you run into any problems with your ads, find out how to tell if
+          they're running and how to resolve approval issues.
+        </div>
+      </Stepper>
+    </>
+  );
+};
+
+export const QontoCustomStepper = () => {
+  const data1 = [
+    { value: "horizontal", component: "horizontal" },
+    { value: "vertical", component: "vertical" },
+  ];
+  const [orientation, setOrientation] = useState("horizontal");
+
+  const data2 = [{ value: true, component: "alternative labels" }];
+  const [stepsBottomLabel, setStepsBottomLabel] = useState(true);
+
+  const stepperProps = useSimpleStepper();
+  const steps = [
+    {
+      label: "Select campaign settings",
+      optional: true,
+      icon: <AddLocationIcon />,
+    },
+    {
+      label: "Create an ad group",
+      muiColor: "secondary",
+      icon: <SendIcon />,
+    },
+    "Create an ad",
+  ];
+
   const customStyleProps = {
     fontSize: 35,
     background: "#D0DD0D",

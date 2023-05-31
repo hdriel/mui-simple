@@ -79,8 +79,23 @@ export const ConnectorStepIconRoot = styled("div")(
 );
 
 export const StepConnector = styled(MuiStepConnector)(
-  ({ theme, orientation, background, lineColor, lineWidth = 3 }) => {
-    const bgColor = lineColor ?? background;
+  ({
+    theme,
+    orientation,
+    background,
+    lineColor,
+    lineWidth = 3,
+    muiColor,
+    customColor,
+  }) => {
+    const bgColor =
+      lineColor ??
+      background ??
+      _.get(theme, `palette.${muiColor}.main`) ??
+      _.get(theme, `palette.${muiColor}`) ??
+      customColor ??
+      _.get(theme, `palette.primary.main`);
+
     const bgColorProp = bgColor?.includes("gradient")
       ? { backgroundImage: bgColor }
       : { background: bgColor };
@@ -109,8 +124,22 @@ export const StepConnector = styled(MuiStepConnector)(
 );
 
 export const QontoConnector = styled(MuiStepConnector)(
-  ({ theme, fontSize, background, lineColor, lineWidth = 3 }) => {
-    const color = lineColor ?? background;
+  ({
+    theme,
+    fontSize,
+    background,
+    lineColor,
+    lineWidth = 3,
+    muiColor,
+    customColor,
+  }) => {
+    const color =
+      lineColor ??
+      background ??
+      _.get(theme, `palette.${muiColor}.main`) ??
+      _.get(theme, `palette.${muiColor}`) ??
+      customColor ??
+      _.get(theme, `palette.primary.main`);
 
     return {
       [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -139,21 +168,40 @@ export const QontoConnector = styled(MuiStepConnector)(
 );
 
 export const QontoStepIconRoot = styled("div")(
-  ({ theme, ownerState, background, padding = 10, fontSize = 25 }) => ({
-    color: theme.palette.mode === "dark" ? theme.palette.grey[700] : "#eaeaf0",
-    display: "flex",
-    height: 22,
-    alignItems: "center",
-    ...(ownerState.active && { color: background }),
-    "& .QontoStepIcon-completedIcon": {
-      color: background,
-      zIndex: 1,
-    },
-    "& .QontoStepIcon-circle": {
-      width: numberToPx(padding),
-      height: numberToPx(padding),
-      borderRadius: "50%",
-      backgroundColor: "currentColor",
-    },
-  })
+  ({
+    theme,
+    ownerState,
+    background,
+    padding = 10,
+    fontSize = 25,
+    customColor,
+    muiColor,
+  }) => {
+    const backgroundColor =
+      background ??
+      _.get(theme, `palette.${muiColor}.main`) ??
+      _.get(theme, `palette.${muiColor}`) ??
+      customColor ??
+      _.get(theme, `palette.primary.main`);
+
+    return {
+      color:
+        theme.palette.mode === "dark" ? theme.palette.grey[700] : "#eaeaf0",
+      display: "flex",
+      height: 22,
+      alignItems: "center",
+      ...(ownerState.active && { color: backgroundColor }),
+      "& .QontoStepIcon-completedIcon": {
+        color: backgroundColor,
+        zIndex: 1,
+      },
+      "& .QontoStepIcon-circle": {
+        color: backgroundColor,
+        width: numberToPx(padding),
+        height: numberToPx(padding),
+        borderRadius: "50%",
+        backgroundColor: "currentColor",
+      },
+    };
+  }
 );
