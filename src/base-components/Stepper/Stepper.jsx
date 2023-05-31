@@ -1,5 +1,9 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import PropTypes from "prop-types";
+import Check from "@mui/icons-material/Check";
+import SettingsIcon from "@mui/icons-material/Settings";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import VideoLabelIcon from "@mui/icons-material/VideoLabel";
 import {
   Typography,
   Button,
@@ -8,6 +12,8 @@ import {
   StepLabel,
   StepContent,
   Box,
+  StepConnector,
+  ConnectorStepIconRoot,
 } from "./Stepper.styled";
 
 export default function Stepper({
@@ -57,18 +63,52 @@ export default function Stepper({
     [_steps]
   );
 
+  const icons = useMemo(
+    () =>
+      steps
+        .map((step) => step.icon)
+        .reduce(
+          (obj, icon) => ({ ...obj, [Object.keys(obj).length + 1]: icon }),
+          {}
+        ),
+    [steps]
+  );
+  const iconListSize = Object.values(icons).filter(Boolean).length;
+
+  const ConnectorStepIconMemo = useMemo(() => {
+    return iconListSize
+      ? function ConnectorStepIcon({ icon, active, completed, className }) {
+          return (
+            <ConnectorStepIconRoot
+              ownerState={{ completed, active }}
+              className={className}
+            >
+              {icons?.[String(icon)] ?? icon}
+            </ConnectorStepIconRoot>
+          );
+        }
+      : undefined;
+  }, [icons, iconListSize]);
+
   const isStepOptional = (index) => steps?.[index]?.optional;
   const isStepSkipped = (index) => stepsIndexSkipped?.includes(index);
   const handleNext = () => onNext?.(activeStep);
   const handleBack = () => onBack?.(activeStep);
   const handleSkip = (index) => isStepOptional(index) && onSkip?.(index);
 
+  console.log("Object.keys(icons).length", iconListSize, icons);
+
   return (
     <Box sx={{ width: "100%" }}>
       <MuiStepper
         activeStep={activeStep}
         alternativeLabel={stepsBottomLabel}
-        orientation={orientation}
+        orientation={orientation ?? ""}
+        connector={
+          iconListSize ? (
+            <StepConnector orientation={orientation ?? ""} />
+          ) : undefined
+        }
         {...props}
       >
         {steps?.map((step, index) => {
@@ -79,7 +119,7 @@ export default function Stepper({
             >
               <StepLabel
                 error={step.error}
-                // StepIconComponent={step.icon}
+                StepIconComponent={ConnectorStepIconMemo}
                 muiColor={step.muiColor}
                 customColor={step.customColor}
                 optional={
@@ -150,36 +190,34 @@ export default function Stepper({
               <Button onClick={onDone}>Done</Button>
             </Box>
           </>
-        ) : (
-          (orientation === undefined || orientation === "horizontal") && (
-            <>
-              <Box sx={{ mt: 2, mb: 1 }}>{[].concat(children)[activeStep]}</Box>
+        ) : orientation === "vertical" ? undefined : (
+          <>
+            <Box sx={{ mt: 2, mb: 1 }}>{[].concat(children)[activeStep]}</Box>
 
-              <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+              <Button
+                color="inherit"
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                sx={{ mr: 1 }}
+              >
+                {LABELS.back}
+              </Button>
+
+              <Box sx={{ flex: "1 1 auto" }} />
+              {isStepOptional(activeStep) && (
                 <Button
                   color="inherit"
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
+                  onClick={() => handleSkip(activeStep)}
                   sx={{ mr: 1 }}
                 >
-                  {LABELS.back}
+                  {LABELS.skip}
                 </Button>
+              )}
 
-                <Box sx={{ flex: "1 1 auto" }} />
-                {isStepOptional(activeStep) && (
-                  <Button
-                    color="inherit"
-                    onClick={() => handleSkip(activeStep)}
-                    sx={{ mr: 1 }}
-                  >
-                    {LABELS.skip}
-                  </Button>
-                )}
-
-                <Button onClick={handleNext}>{LABELS.next}</Button>
-              </Box>
-            </>
-          )
+              <Button onClick={handleNext}>{LABELS.next}</Button>
+            </Box>
+          </>
         )
       ) : undefined}
     </Box>
