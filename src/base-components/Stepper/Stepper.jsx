@@ -1,5 +1,7 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, cloneElement, isValidElement } from "react";
 import PropTypes from "prop-types";
+import CheckIcon from "@mui/icons-material/Check";
+
 import {
   Typography,
   Button,
@@ -8,7 +10,12 @@ import {
   StepLabel,
   StepContent,
   Box,
+  StepConnector,
+  ConnectorStepIconRoot,
+  QontoStepIconRoot,
+  QontoConnector,
 } from "./Stepper.styled";
+import { numberToPx } from "../../utils/helpers";
 
 export default function Stepper({
   optionalLabel,
@@ -26,6 +33,8 @@ export default function Stepper({
   allCompletedCmp,
   labels,
   unmountOnExit,
+  qontoStyle,
+  customStyleProps,
   children,
   ...props
 }) {
@@ -53,9 +62,96 @@ export default function Stepper({
                   : LABELS.optional
                 : false,
             };
-      }),
+      }) ?? [],
     [_steps]
   );
+
+  const icons = useMemo(
+    () =>
+      steps
+        .map((step) => step.icon)
+        .reduce(
+          (obj, icon) => ({ ...obj, [Object.keys(obj).length + 1]: icon }),
+          {}
+        ),
+    [steps]
+  );
+  const iconListSize = Object.values(icons).filter(Boolean).length;
+  const isCustomStyleUsed = Object.values(customStyleProps ?? {}).filter(
+    Boolean
+  ).length;
+
+  const ConnectorStepIconMemo = useMemo(() => {
+    return !qontoStyle && (iconListSize || isCustomStyleUsed)
+      ? function ConnectorStepIcon({ icon, active, completed, className }) {
+          return (
+            <ConnectorStepIconRoot
+              ownerState={{ completed, active }}
+              className={className}
+              background={customStyleProps?.background}
+              fontSize={customStyleProps?.fontSize}
+              padding={customStyleProps?.padding}
+            >
+              {icons?.[String(icon)] ?? icon}
+            </ConnectorStepIconRoot>
+          );
+        }
+      : undefined;
+  }, [
+    icons,
+    iconListSize,
+    qontoStyle,
+    isCustomStyleUsed,
+    customStyleProps?.background,
+    customStyleProps?.fontSize,
+    customStyleProps?.padding,
+  ]);
+
+  const QontoStepIconMemo = useMemo(() => {
+    return qontoStyle
+      ? function ConnectorStepIcon({ icon, active, completed, className }) {
+          const dotIcon = isValidElement(customStyleProps?.dotIcon) ? (
+            cloneElement(customStyleProps.dotIcon, {})
+          ) : (
+            <div className="QontoStepIcon-circle" />
+          );
+
+          const checkIcon = isValidElement(customStyleProps?.checkIcon) ? (
+            cloneElement(customStyleProps.checkIcon, {
+              className: "QontoStepIcon-completedIcon",
+            })
+          ) : (
+            <CheckIcon
+              className="QontoStepIcon-completedIcon"
+              sx={{ fontSize: customStyleProps?.fontSize ?? "22px" }}
+            />
+          );
+
+          return (
+            <QontoStepIconRoot
+              ownerState={{ active }}
+              className={className}
+              background={customStyleProps?.background}
+              padding={customStyleProps?.padding}
+              fontSize={customStyleProps?.fontSize}
+              muiColor={muiColor}
+              customColor={customColor}
+            >
+              {completed ? checkIcon : customStyleProps?.dotIcon ?? dotIcon}
+            </QontoStepIconRoot>
+          );
+        }
+      : undefined;
+  }, [
+    qontoStyle,
+    customStyleProps?.background,
+    customStyleProps?.padding,
+    customStyleProps?.fontSize,
+    customStyleProps?.dotIcon,
+    customStyleProps?.checkIcon,
+    muiColor,
+    customColor,
+  ]);
 
   const isStepOptional = (index) => steps?.[index]?.optional;
   const isStepSkipped = (index) => stepsIndexSkipped?.includes(index);
@@ -68,7 +164,24 @@ export default function Stepper({
       <MuiStepper
         activeStep={activeStep}
         alternativeLabel={stepsBottomLabel}
-        orientation={orientation}
+        orientation={orientation ?? ""}
+        connector={
+          qontoStyle ? (
+            <QontoConnector
+              orientation={orientation ?? ""}
+              muiColor={muiColor}
+              customColor={customColor}
+              {...customStyleProps}
+            />
+          ) : iconListSize || isCustomStyleUsed ? (
+            <StepConnector
+              orientation={orientation ?? ""}
+              muiColor={muiColor}
+              customColor={customColor}
+              {...customStyleProps}
+            />
+          ) : undefined
+        }
         {...props}
       >
         {steps?.map((step, index) => {
@@ -79,7 +192,7 @@ export default function Stepper({
             >
               <StepLabel
                 error={step.error}
-                // StepIconComponent={step.icon}
+                StepIconComponent={QontoStepIconMemo || ConnectorStepIconMemo}
                 muiColor={step.muiColor}
                 customColor={step.customColor}
                 optional={
@@ -109,7 +222,7 @@ export default function Stepper({
                         customColor={step.customColor}
                         sx={{ mt: 1, mr: 1 }}
                       >
-                        {index === steps.length - 1 ? LABELS.done : LABELS.next}
+                        {LABELS.next}
                       </Button>
                       {index !== 0 && (
                         <Button
@@ -141,17 +254,16 @@ export default function Stepper({
           );
         })}
       </MuiStepper>
-
-      {activeStep === steps?.length ? (
-        <>
-          <Box sx={{ mt: 2, mb: 1 }}>{allCompletedCmp}</Box>
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={onDone}>Done</Button>
-          </Box>
-        </>
-      ) : (
-        (orientation === undefined || orientation === "horizontal") && (
+      {steps?.length ? (
+        activeStep === steps?.length ? (
+          <>
+            <Box sx={{ mt: 2, mb: 1 }}>{allCompletedCmp}</Box>
+            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+              <Box sx={{ flex: "1 1 auto" }} />
+              <Button onClick={onDone}>Done</Button>
+            </Box>
+          </>
+        ) : orientation === "vertical" ? undefined : (
           <>
             <Box sx={{ mt: 2, mb: 1 }}>{[].concat(children)[activeStep]}</Box>
 
@@ -176,13 +288,11 @@ export default function Stepper({
                 </Button>
               )}
 
-              <Button onClick={handleNext}>
-                {activeStep === steps?.length - 1 ? LABELS.done : LABELS.next}
-              </Button>
+              <Button onClick={handleNext}>{LABELS.next}</Button>
             </Box>
           </>
         )
-      )}
+      ) : undefined}
     </Box>
   );
 }
@@ -221,6 +331,16 @@ Stepper.propTypes = {
     skip: PropTypes.string,
     optional: PropTypes.string,
   }),
+  qontoStyle: PropTypes.bool,
+  customStyleProps: PropTypes.shape({
+    fontSize: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+    background: PropTypes.string,
+    lineColor: PropTypes.string,
+    padding: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+    lineWidth: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+    checkIcon: PropTypes.node,
+    dotIcon: PropTypes.node,
+  }),
 };
 
 Stepper.defaultProps = {
@@ -239,4 +359,6 @@ Stepper.defaultProps = {
   allCompletedCmp: undefined,
   labels: undefined,
   unmountOnExit: true,
+  qontoStyle: undefined,
+  customStyleProps: undefined,
 };
