@@ -72,8 +72,7 @@ export const ComplexInteraction = () => {
       avatar={<Avatar username="R" />}
       title="Shrimp and Chorizo Paella"
       subtitle="September 14, 2016"
-      optionsMenu={options}
-      optionsMenuProps={{ width: 320 }}
+      optionsMenu={{ options, width: 320 }}
       image="/paella.jpg"
       actions={[{ icon: <FavoriteIcon /> }, { icon: <ShareIcon /> }]}
     >
@@ -121,8 +120,12 @@ export const Media = () => {
   return (
     <Card
       maxWidth={345}
-      image="/contemplative-reptile.jpg"
-      imageTitle="green iguana"
+      image={{
+        src: "/contemplative-reptile.jpg",
+        title: "green iguana",
+        alt: "image",
+        width: 151,
+      }}
       actions={[
         { label: "Share", size: "small" },
         { label: "Learn More", size: "small" },
@@ -139,27 +142,10 @@ export const Media = () => {
   );
 };
 
-export const Colored = () => {
+export const UIControls = () => {
   return (
-    <Card {...actions} color={"#D050CC"}>
-      Colored
+    <Card image={{ src: "/live-from-space.jpg", width: 151 }} horizontalLayout>
+      small
     </Card>
-  );
-};
-
-export const Sized = () => {
-  return (
-    <Stack>
-      <Card {...actions} size="small">
-        small
-      </Card>
-      <Card {...actions} size="medium">
-        medium
-      </Card>
-      <Card {...actions} size="large">
-        large
-      </Card>
-      <Card {...actions}>>Default</Card>
-    </Stack>
   );
 };
