@@ -32,6 +32,7 @@ export default function Stepper({
   allCompletedCmp,
   labels,
   unmountOnExit,
+  customStyle,
   children,
   ...props
 }) {
@@ -74,29 +75,40 @@ export default function Stepper({
     [steps]
   );
   const iconListSize = Object.values(icons).filter(Boolean).length;
+  const isCustomStyleUsed = Object.values(customStyle ?? {}).filter(
+    Boolean
+  ).length;
 
   const ConnectorStepIconMemo = useMemo(() => {
-    return iconListSize
+    return iconListSize || isCustomStyleUsed
       ? function ConnectorStepIcon({ icon, active, completed, className }) {
           return (
             <ConnectorStepIconRoot
               ownerState={{ completed, active }}
               className={className}
+              background={customStyle?.background}
+              fontSize={customStyle?.fontSize}
+              padding={customStyle?.padding}
             >
               {icons?.[String(icon)] ?? icon}
             </ConnectorStepIconRoot>
           );
         }
       : undefined;
-  }, [icons, iconListSize]);
+  }, [
+    icons,
+    iconListSize,
+    isCustomStyleUsed,
+    customStyle?.background,
+    customStyle?.fontSize,
+    customStyle?.padding,
+  ]);
 
   const isStepOptional = (index) => steps?.[index]?.optional;
   const isStepSkipped = (index) => stepsIndexSkipped?.includes(index);
   const handleNext = () => onNext?.(activeStep);
   const handleBack = () => onBack?.(activeStep);
   const handleSkip = (index) => isStepOptional(index) && onSkip?.(index);
-
-  console.log("Object.keys(icons).length", iconListSize, icons);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -105,8 +117,8 @@ export default function Stepper({
         alternativeLabel={stepsBottomLabel}
         orientation={orientation ?? ""}
         connector={
-          iconListSize ? (
-            <StepConnector orientation={orientation ?? ""} />
+          iconListSize || isCustomStyleUsed ? (
+            <StepConnector orientation={orientation ?? ""} {...customStyle} />
           ) : undefined
         }
         {...props}
@@ -258,6 +270,13 @@ Stepper.propTypes = {
     skip: PropTypes.string,
     optional: PropTypes.string,
   }),
+  customStyle: PropTypes.shape({
+    fontSize: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+    background: PropTypes.string,
+    lineColor: PropTypes.string,
+    padding: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+    lineWidth: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  }),
 };
 
 Stepper.defaultProps = {
@@ -276,4 +295,5 @@ Stepper.defaultProps = {
   allCompletedCmp: undefined,
   labels: undefined,
   unmountOnExit: true,
+  customStyle: undefined,
 };

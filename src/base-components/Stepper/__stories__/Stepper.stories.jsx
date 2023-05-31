@@ -134,6 +134,15 @@ export const VerticalStepper = () => {
       {...actions}
       {...stepperProps}
       steps={steps}
+      customStyle={{
+        fontSize: 25,
+        background:
+          "linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)",
+        lineColor:
+          "linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)",
+        padding: 3,
+        lineWidth: 5,
+      }}
       orientation="vertical"
       allCompletedCmp={
         <Typography sx={{ mt: 2, mb: 1 }}>
@@ -184,6 +193,13 @@ export const CustomStepper = () => {
     },
     "Create an ad",
   ];
+  const customStyle = {
+    fontSize: 25,
+    background: "#D0DD0D",
+    lineColor: "#124962",
+    padding: 3,
+    lineWidth: 5,
+  };
 
   return (
     <>
@@ -207,6 +223,7 @@ export const CustomStepper = () => {
         {...stepperProps}
         steps={steps}
         stepsBottomLabel={stepsBottomLabel}
+        customStyle={customStyle}
         orientation={orientation}
         allCompletedCmp={
           <Typography sx={{ mt: 2, mb: 1 }}>
