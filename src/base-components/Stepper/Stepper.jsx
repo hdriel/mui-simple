@@ -109,7 +109,7 @@ export default function Stepper({
                         customColor={step.customColor}
                         sx={{ mt: 1, mr: 1 }}
                       >
-                        {index === steps.length - 1 ? LABELS.done : LABELS.next}
+                        {LABELS.next}
                       </Button>
                       {index !== 0 && (
                         <Button
@@ -141,48 +141,47 @@ export default function Stepper({
           );
         })}
       </MuiStepper>
-
-      {activeStep === steps?.length ? (
-        <>
-          <Box sx={{ mt: 2, mb: 1 }}>{allCompletedCmp}</Box>
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={onDone}>Done</Button>
-          </Box>
-        </>
-      ) : (
-        (orientation === undefined || orientation === "horizontal") && (
+      {steps?.length ? (
+        activeStep === steps?.length ? (
           <>
-            <Box sx={{ mt: 2, mb: 1 }}>{[].concat(children)[activeStep]}</Box>
-
+            <Box sx={{ mt: 2, mb: 1 }}>{allCompletedCmp}</Box>
             <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              <Button
-                color="inherit"
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                sx={{ mr: 1 }}
-              >
-                {LABELS.back}
-              </Button>
-
               <Box sx={{ flex: "1 1 auto" }} />
-              {isStepOptional(activeStep) && (
-                <Button
-                  color="inherit"
-                  onClick={() => handleSkip(activeStep)}
-                  sx={{ mr: 1 }}
-                >
-                  {LABELS.skip}
-                </Button>
-              )}
-
-              <Button onClick={handleNext}>
-                {activeStep === steps?.length - 1 ? LABELS.done : LABELS.next}
-              </Button>
+              <Button onClick={onDone}>Done</Button>
             </Box>
           </>
+        ) : (
+          (orientation === undefined || orientation === "horizontal") && (
+            <>
+              <Box sx={{ mt: 2, mb: 1 }}>{[].concat(children)[activeStep]}</Box>
+
+              <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                <Button
+                  color="inherit"
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  sx={{ mr: 1 }}
+                >
+                  {LABELS.back}
+                </Button>
+
+                <Box sx={{ flex: "1 1 auto" }} />
+                {isStepOptional(activeStep) && (
+                  <Button
+                    color="inherit"
+                    onClick={() => handleSkip(activeStep)}
+                    sx={{ mr: 1 }}
+                  >
+                    {LABELS.skip}
+                  </Button>
+                )}
+
+                <Button onClick={handleNext}>{LABELS.next}</Button>
+              </Box>
+            </>
+          )
         )
-      )}
+      ) : undefined}
     </Box>
   );
 }
