@@ -70,6 +70,6 @@ Avatar.defaultProps = {
   variant: "circular",
   fallbackImage: undefined,
   onClick: undefined,
-  showTooltip: true,
+  showTooltip: false,
   tooltipPlacement: undefined,
 };

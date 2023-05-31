@@ -5,7 +5,10 @@ export function getCapitalLetters(str) {
       .filter((v) => !!v)
       .map((word) => word[0].toUpperCase()) ?? undefined;
 
-  return chars && [chars[0], chars.slice(-1)];
+  if (!chars) return undefined;
+
+  const [firstChar, secondChar] = [chars?.[0], chars?.slice(-1)];
+  return chars.length > 1 ? [firstChar, secondChar] : [firstChar];
 }
 
 export function stringToColor(string) {

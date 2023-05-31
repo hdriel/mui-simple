@@ -21,7 +21,18 @@ export const CardContent = MuiCardContent;
 export const CardHeader = MuiCardHeader;
 export const CardMedia = MuiCardMedia;
 export const Collapse = MuiCollapse;
+export const Box = MuiBox;
 
 export const Paper = MuiPaper;
 export const Typography = MuiTypography;
 export const Button = MuiButton;
+
+export const ExpandMore = styled(({ expand, icon, ...props }) => (
+  <Button icon={icon} {...props} />
+))(({ theme, expand }) => ({
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
