@@ -79,15 +79,7 @@ export const ConnectorStepIconRoot = styled("div")(
 );
 
 export const StepConnector = styled(MuiStepConnector)(
-  ({
-    theme,
-    orientation,
-    fontSize,
-    background,
-    lineColor,
-    padding,
-    lineWidth = 3,
-  }) => {
+  ({ theme, orientation, background, lineColor, lineWidth = 3 }) => {
     const bgColor = lineColor ?? background;
     const bgColorProp = bgColor?.includes("gradient")
       ? { backgroundImage: bgColor }
@@ -115,4 +107,53 @@ export const StepConnector = styled(MuiStepConnector)(
     };
   }
 );
-//  backgroundImage: "linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)",
+
+export const QontoConnector = styled(MuiStepConnector)(
+  ({ theme, fontSize, background, lineColor, lineWidth = 3 }) => {
+    const color = lineColor ?? background;
+
+    return {
+      [`&.${stepConnectorClasses.alternativeLabel}`]: {
+        top: 10,
+        left: "calc(-50% + 16px)",
+        right: "calc(50% + 16px)",
+      },
+      [`&.${stepConnectorClasses.active}`]: {
+        [`& .${stepConnectorClasses.line}`]: {
+          borderColor: color,
+        },
+      },
+      [`&.${stepConnectorClasses.completed}`]: {
+        [`& .${stepConnectorClasses.line}`]: {
+          borderColor: color,
+        },
+      },
+      [`& .${stepConnectorClasses.line}`]: {
+        borderColor:
+          theme.palette.mode === "dark" ? theme.palette.grey[800] : "#eaeaf0",
+        borderTopWidth: lineWidth,
+        borderRadius: 1,
+      },
+    };
+  }
+);
+
+export const QontoStepIconRoot = styled("div")(
+  ({ theme, ownerState, background, padding = 10, fontSize = 25 }) => ({
+    color: theme.palette.mode === "dark" ? theme.palette.grey[700] : "#eaeaf0",
+    display: "flex",
+    height: 22,
+    alignItems: "center",
+    ...(ownerState.active && { color: background }),
+    "& .QontoStepIcon-completedIcon": {
+      color: background,
+      zIndex: 1,
+    },
+    "& .QontoStepIcon-circle": {
+      width: numberToPx(padding),
+      height: numberToPx(padding),
+      borderRadius: "50%",
+      backgroundColor: "currentColor",
+    },
+  })
+);
