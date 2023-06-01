@@ -1,8 +1,8 @@
-import React, { useRef } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import moment from "moment";
+import { useTheme } from "@mui/material/styles";
 
-import { SORT } from "../Table.utils";
+import { extractColors, SORT } from "../Table.utils";
 import { EnhancedTableToolbar } from "./EnhancedTableToolbar";
 import { EnhancedTableHead } from "./EnhancedTableHead";
 import {
@@ -14,21 +14,48 @@ import {
   Table,
   Paper,
   TablePagination,
-  Tooltip,
-  Image,
 } from "../Table.styled";
+import EnhancedTableRow from "./EnhancedTableRow";
+import { usePaginationDetails, useSelection } from "../Table.hooks";
 
 export default function EnhancedTable({
+  elevation,
+  stickyHeader,
+  helperText,
+  maxHeight,
+  dense,
   title,
   pagination,
   onChange,
   orderBy,
-  rows,
+  data,
   columns,
   onClickRow,
   actions,
+  selectionMode,
+  selectedActions,
+  selectedLabel,
+  paginationProps,
+  paginationAlign,
+  PaginationComponent,
+  tableColor,
+  headerColor,
+  evenRowsColor,
+  oddRowsColor,
 }) {
-  const { total, rowsPerPage, page } = pagination ?? {};
+  const theme = useTheme();
+  const { handleSelectAllClick, isSelected, selected, handleSelect } =
+    useSelection({ data });
+
+  const {
+    total,
+    rowsPerPage,
+    rowsPerPageList,
+    page,
+    emptyRows,
+    sliceFrom,
+    sliceTo,
+  } = usePaginationDetails(data, pagination);
 
   // eslint-disable-next-line no-unused-vars
   const handleClick = (event, rowId, rowData) => onClickRow?.(rowId, rowData);
@@ -44,6 +71,8 @@ export default function EnhancedTable({
   };
 
   const handleChangePage = (event, newPage) => {
+    if (typeof event === "number") newPage = event;
+
     const config = { orderBy, pagination: { ...pagination, page: newPage } };
     onChange?.(config);
   };
@@ -54,78 +83,66 @@ export default function EnhancedTable({
     onChange?.(config);
   };
 
-  // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows?.length ?? 0) : 0;
+  const colorProps = extractColors({ theme: theme, colors: tableColor });
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar title={title} actions={actions} />
+      <Paper
+        elevation={elevation}
+        sx={{ width: "100%", mb: 2, overflow: "hidden", ...colorProps }}
+      >
+        {(title || actions?.length) && (
+          <EnhancedTableToolbar
+            title={title}
+            actions={actions}
+            selectedActions={selectedActions}
+            selectedLabel={selectedLabel}
+            data={data}
+            selected={selected}
+          />
+        )}
 
-        <TableContainer>
+        <TableContainer sx={{ maxHeight: maxHeight }}>
           <Table
+            stickyHeader={stickyHeader}
             sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size="medium"
+            size={dense ? "small" : "medium"}
           >
+            {helperText && <caption>{helperText}</caption>}
             <EnhancedTableHead
+              numSelected={selected.length}
               columns={columns}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
+              headerColor={headerColor}
+              rowCount={data.length}
+              onSelectAllClick={handleSelectAllClick}
+              selectionMode={selectionMode}
             />
 
             <TableBody>
-              {rows?.slice(0, rowsPerPage).map((row, index) => (
-                <TableRow
-                  hover
-                  onClick={(event) => handleClick(event, row)}
-                  role="checkbox"
-                  aria-checked={false}
-                  tabIndex={-1}
-                  key={row._id ?? index}
-                  sx={{ cursor: onClickRow ? "pointer" : "default" }}
+              {data?.slice(sliceFrom, sliceTo).map((row, index) => (
+                <EnhancedTableRow
+                  key={index}
+                  columns={columns}
+                  handleClick={handleClick}
+                  index={index}
+                  selectionMode={selectionMode}
+                  evenRowsColor={evenRowsColor}
+                  oddRowsColor={oddRowsColor}
+                  onSelect={(event) => {
+                    handleSelect(event, row.id ?? index);
+                    if (!row.id) console.warn("Missing id field in row", row);
+                  }}
+                  selected={isSelected(row.id ?? index)}
                 >
-                  {columns?.map((column, colIndex) => {
-                    const fieldValue =
-                      typeof column.field === "function"
-                        ? column.field(row)
-                        : row[column.field];
-
-                    return (
-                      <TableCell
-                        key={column.field}
-                        id={`enhanced-table-checkbox-${colIndex}`}
-                        align={column.align}
-                      >
-                        <Tooltip title={column.tooltip?.(row)}>
-                          <Box>
-                            {/* eslint-disable-next-line no-nested-ternary */}
-                            {column.dateFormat && fieldValue ? (
-                              moment(fieldValue).format(column.dateFormat)
-                            ) : column.image !== undefined && fieldValue ? (
-                              <Image
-                                src={fieldValue}
-                                alt={`${column.field}`}
-                                style={{
-                                  width: column.image.width,
-                                  height: column.image.height,
-                                }}
-                              />
-                            ) : (
-                              fieldValue
-                            )}
-                          </Box>
-                        </Tooltip>
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
+                  {row}
+                </EnhancedTableRow>
               ))}
 
               {emptyRows > 0 && (
                 <TableRow style={{ height: 40 * emptyRows }}>
-                  <TableCell colSpan={6} />
+                  <TableCell colSpan={columns?.length || undefined} />
                 </TableRow>
               )}
             </TableBody>
@@ -133,15 +150,33 @@ export default function EnhancedTable({
         </TableContainer>
 
         {pagination && (
-          <TablePagination
-            component="div"
-            rowsPerPageOptions={[5, 10, 20]}
-            count={total}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
+          <Box
+            sx={{
+              p: 2,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: paginationAlign ?? "end",
+            }}
+          >
+            {PaginationComponent ? (
+              <PaginationComponent
+                totalPages={total}
+                page={page}
+                onChange={handleChangePage}
+                {...paginationProps}
+              />
+            ) : (
+              <TablePagination
+                component="div"
+                rowsPerPageOptions={rowsPerPageList}
+                count={total}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
+            )}
+          </Box>
         )}
       </Paper>
     </Box>
@@ -149,46 +184,110 @@ export default function EnhancedTable({
 }
 
 EnhancedTable.propTypes = {
+  elevation: PropTypes.number,
+  stickyHeader: PropTypes.bool,
+  dense: PropTypes.bool,
+  maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  selectedLabel: PropTypes.string,
+  selectionMode: PropTypes.bool,
   title: PropTypes.string,
-  pagination: PropTypes.shape({
-    total: PropTypes.number,
-    rowsPerPage: PropTypes.number,
-    page: PropTypes.number,
-  }),
+  helperText: PropTypes.string,
   onChange: PropTypes.func,
   onClickRow: PropTypes.func,
   // eslint-disable-next-line react/forbid-prop-types
   orderBy: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
-  rows: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.arrayOf(PropTypes.object),
+  pagination: PropTypes.shape({
+    total: PropTypes.number,
+    rowsPerPage: PropTypes.number,
+    page: PropTypes.number,
+  }),
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       field: PropTypes.string,
       numeric: PropTypes.bool,
+      format: PropTypes.func,
       disablePadding: PropTypes.bool,
       label: PropTypes.string,
       align: PropTypes.oneOf(["right", "center", "left", "justify", "inherit"]),
+      dateFormat: PropTypes.string,
+      props: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+      cmp: PropTypes.any,
+      image: PropTypes.shape({
+        width: PropTypes.number,
+        height: PropTypes.number,
+        avatar: PropTypes.bool,
+      }),
     })
   ),
   actions: PropTypes.arrayOf(
     PropTypes.shape({
       tooltip: PropTypes.string,
-      onClick: PropTypes.func,
-      icon: PropTypes.node,
+      Cmp: PropTypes.node,
     })
   ),
+  selectedActions: PropTypes.arrayOf(
+    PropTypes.shape({
+      tooltip: PropTypes.string,
+      Cmp: PropTypes.node,
+    })
+  ),
+  PaginationComponent: PropTypes.node,
+  paginationProps: PropTypes.object,
+  paginationAlign: PropTypes.oneOf(["start", "center", "end"]),
+  tableColor: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      background: PropTypes.string,
+      color: PropTypes.string,
+    }),
+  ]),
+  headerColor: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      background: PropTypes.string,
+      color: PropTypes.string,
+    }),
+  ]),
+  evenRowsColor: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      background: PropTypes.string,
+      color: PropTypes.string,
+    }),
+  ]),
+  oddRowsColor: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      background: PropTypes.string,
+      color: PropTypes.string,
+    }),
+  ]),
 };
 
 EnhancedTable.defaultProps = {
-  title: "Tabel",
+  elevation: 10,
+  dense: undefined,
+  selectionMode: undefined,
+  selectedLabel: undefined,
+  title: undefined,
   orderBy: undefined,
   pagination: undefined,
   onChange: undefined,
   onClickRow: undefined,
-  rows: [],
+  data: [],
   columns: [],
   actions: [],
+  PaginationComponent: undefined,
+  paginationProps: undefined,
+  paginationAlign: undefined,
+  headerColor: undefined,
+  evenRowsColor: undefined,
+  oddRowsColor: undefined,
 };
+
+// sx={{ backgroundColor: lighten(theme.palette.primary.main, 0.7), color: 'black' }}
 
 // <TableCell component="th" id={labelId} scope="row" padding="none">{row.name}</TableCell>
 // <TableCell align="right">{row.protein}</TableCell>

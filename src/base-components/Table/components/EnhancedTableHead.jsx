@@ -9,8 +9,18 @@ import {
   TableRow,
   TableSortLabel,
 } from "../Table.styled";
+import Checkbox from "../../Checkbox/Checkbox";
 
-export function EnhancedTableHead({ columns, orderBy, onRequestSort }) {
+export function EnhancedTableHead({
+  columns,
+  orderBy,
+  onRequestSort,
+  headerColor,
+  numSelected,
+  onSelectAllClick,
+  rowCount,
+  selectionMode,
+}) {
   // const theme = useTheme();
   const createSortHandler = (property) => (event) =>
     onRequestSort(event, property);
@@ -18,12 +28,24 @@ export function EnhancedTableHead({ columns, orderBy, onRequestSort }) {
   return (
     <TableHead>
       <TableRow>
-        {columns.map((headCell) => {
+        {selectionMode && (
+          <TableCell padding="checkbox">
+            <Checkbox
+              color="primary"
+              indeterminate={numSelected > 0 && numSelected < rowCount}
+              checked={rowCount > 0 && numSelected === rowCount}
+              onChange={onSelectAllClick}
+            />
+          </TableCell>
+        )}
+
+        {columns?.map((headCell) => {
           const isActiveOrderBy = orderBy[headCell.id] !== undefined;
           const orderByDir = isActiveOrderBy && !!orderBy[headCell.id];
           let orderByValue = SORT.UP;
-          if (isActiveOrderBy && orderBy[headCell.id])
+          if (isActiveOrderBy && orderBy[headCell.id]) {
             orderByValue = orderBy[headCell.id];
+          }
 
           return (
             <TableCell
@@ -31,7 +53,7 @@ export function EnhancedTableHead({ columns, orderBy, onRequestSort }) {
               align={headCell.numeric ? "right" : "left"}
               padding={headCell.disablePadding ? "none" : "normal"}
               sortDirection={orderByDir}
-              // sx={{ backgroundColor: lighten(theme.palette.primary.main, 0.7), color: 'black' }}
+              colors={headerColor}
             >
               <TableSortLabel
                 active={isActiveOrderBy}
@@ -50,7 +72,7 @@ export function EnhancedTableHead({ columns, orderBy, onRequestSort }) {
 
 EnhancedTableHead.propTypes = {
   onRequestSort: PropTypes.func,
-  orderBy: PropTypes.string,
+  orderBy: PropTypes.object,
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       field: PropTypes.string,
@@ -60,10 +82,18 @@ EnhancedTableHead.propTypes = {
       align: PropTypes.oneOf(["right", "center", "left", "justify", "inherit"]),
     })
   ),
+  headerColor: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      background: PropTypes.string,
+      color: PropTypes.string,
+    }),
+  ]),
 };
 
 EnhancedTableHead.defaultProps = {
   onRequestSort: undefined,
   orderBy: "",
   columns: [],
+  headerColor: undefined,
 };
