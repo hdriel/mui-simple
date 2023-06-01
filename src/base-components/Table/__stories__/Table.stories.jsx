@@ -109,6 +109,18 @@ export function FullData() {
   );
 }
 
+export function VariantData() {
+  return (
+    <Table
+      {...actions}
+      title="Full Data"
+      orderBy={{ s: "asc" }}
+      columns={HEAD_CELLS}
+      data={ROWS}
+    />
+  );
+}
+
 export function Pagination() {
   const [page, setPage] = useState(2);
   const [rowPerPage, setRowPerPage] = useState(5);
