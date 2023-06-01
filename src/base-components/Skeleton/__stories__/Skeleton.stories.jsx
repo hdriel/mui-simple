@@ -24,7 +24,7 @@ export default {
       <div
         style={{
           width: "500px",
-          height: "500px",
+          height: "max-content",
           padding: "0.5em",
           border: "1px dashed black",
         }}
