@@ -110,7 +110,7 @@ export function Pagination() {
   return (
     <Table
       {...actions}
-      title="Full Data"
+      title="Table Pagination"
       orderBy={{ s: "asc" }}
       pagination={{ total: ROWS.length, page: 1, rowsPerPage: 13 }}
       columns={HEAD_CELLS}
