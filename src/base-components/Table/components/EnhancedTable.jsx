@@ -179,9 +179,18 @@ EnhancedTable.propTypes = {
     PropTypes.shape({
       field: PropTypes.string,
       numeric: PropTypes.bool,
+      format: PropTypes.func,
       disablePadding: PropTypes.bool,
       label: PropTypes.string,
       align: PropTypes.oneOf(["right", "center", "left", "justify", "inherit"]),
+      dateFormat: PropTypes.string,
+      props: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+      Cmp: PropTypes.node,
+      image: PropTypes.shape({
+        width: PropTypes.number,
+        height: PropTypes.number,
+        avatar: PropTypes.bool,
+      }),
     })
   ),
   actions: PropTypes.arrayOf(

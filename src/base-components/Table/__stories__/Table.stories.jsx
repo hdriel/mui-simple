@@ -282,8 +282,13 @@ export function HelperText() {
             field: "age",
             align: "center",
             label: "Age",
-            numeric: true,
             tooltip: "great age!",
+          },
+          {
+            field: "stars",
+            align: "right",
+            label: "Stars",
+            numeric: true,
           },
           {
             field: "birthday",
@@ -305,14 +310,16 @@ export function HelperText() {
             age: 18,
             birthday: new Date(1990, 9, 29, 20, 30).getTime(),
             name: "Hadriel Benjo",
+            stars: 9833520,
             description:
               "Hoping to reinvent yourself or just planning to be a bit more casual? It's hard to choose the perfect nickname. We'll find you a range of options including diminutives, alliteration, descriptive names, rhyming nicknames and even some computer generated words, which may or may not be helpful!",
           },
           {
             avatar: "/2.jpg",
-            age: 15,
+            age: 1015,
             birthday: new Date(1982, 9, 29, 20, 30).getTime(),
             name: "Kennedy Palmer",
+            stars: 1403500365,
             description:
               "Faucibus scelerisque eleifend donec pretium vulputate sapien nec. Ultricies mi eget mauris pharetra. Id semper risus in hendrerit gravida. Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Ac turpis egestas sed tempus urna et pharetra pharetra massa. Velit scelerisque in dictum non consectetur a erat nam. Quam nulla porttitor massa id. Pulvinar neque laoreet suspendisse interdum consectetur libero. Lorem sed risus ultricies tristique nulla aliquet. In pellentesque massa placerat duis ultricies lacus sed.",
           },

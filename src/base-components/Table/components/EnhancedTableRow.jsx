@@ -39,6 +39,11 @@ function getRowContent({ column, data }) {
     );
   } else {
     content = fieldValue;
+    content =
+      typeof column.format === "function"
+        ? column.format(content, data)
+        : content;
+    content = column.numeric ? content?.toLocaleString("en-US") : content;
   }
 
   const tooltip =
@@ -94,6 +99,7 @@ EnhancedTableRow.propTypes = {
     PropTypes.shape({
       field: PropTypes.string,
       numeric: PropTypes.bool,
+      format: PropTypes.func,
       disablePadding: PropTypes.bool,
       label: PropTypes.string,
       align: PropTypes.oneOf(["right", "center", "left", "justify", "inherit"]),
