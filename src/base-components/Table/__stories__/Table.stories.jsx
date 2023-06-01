@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies,no-unused-vars
 import { action } from "@storybook/addon-actions";
 import { Home as HomeIcon } from "@mui/icons-material";
 
 import { Table } from "../Table";
 import MuiPagination from "../../Pagination/Pagination";
+import { isDefined } from "../../../utils/helpers";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -109,25 +110,38 @@ export function FullData() {
 }
 
 export function Pagination() {
+  const [page, setPage] = useState(2);
+  const [rowPerPage, setRowPerPage] = useState(5);
+
   return (
     <Table
       {...actions}
       title="Table Pagination"
       orderBy={{ s: "asc" }}
-      pagination={{ total: ROWS.length, page: 2, rowsPerPage: 5 }}
+      pagination={{ total: ROWS.length, page, rowsPerPage: rowPerPage }}
       columns={HEAD_CELLS}
       data={ROWS}
+      onChange={({ pagination }) => {
+        if (isDefined(pagination.page)) {
+          setPage(pagination.page);
+        }
+        if (isDefined(pagination.rowPerPage)) {
+          setRowPerPage(pagination.rowPerPage);
+        }
+      }}
     />
   );
 }
 
 export function CustomPagination() {
+  const [page, setPage] = useState(2);
+
   return (
     <Table
       {...actions}
       title="Table Pagination"
       orderBy={{ s: "asc" }}
-      pagination={{ total: ROWS.length, page: 2, rowsPerPage: 5 }}
+      pagination={{ total: ROWS.length, page, rowsPerPage: 5 }}
       columns={HEAD_CELLS}
       data={ROWS}
       paginationAlign="center"
@@ -136,6 +150,9 @@ export function CustomPagination() {
         shape: "circle",
         muiColor: "secondary",
         firstIconCmpCB: HomeIcon,
+      }}
+      onChange={({ pagination }) => {
+        if (isDefined(pagination.page)) setPage(pagination.page);
       }}
     />
   );

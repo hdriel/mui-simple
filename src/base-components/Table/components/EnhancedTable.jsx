@@ -55,6 +55,8 @@ export default function EnhancedTable({
   };
 
   const handleChangePage = (event, newPage) => {
+    if (typeof event === "number") newPage = event;
+
     const config = { orderBy, pagination: { ...pagination, page: newPage } };
     onChange?.(config);
   };
