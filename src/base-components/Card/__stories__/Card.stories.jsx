@@ -74,13 +74,14 @@ export const ComplexInteraction = () => {
       },
     },
   ];
+
   return (
     <Card
       maxWidth={350}
       avatar={<Avatar username="R" />}
       title="Shrimp and Chorizo Paella"
       subtitle="September 14, 2016"
-      optionsMenu={{ options, width: 320 }}
+      optionsMenu={{ options, width: 200 }}
       image="/paella.jpg"
       actions={[{ icon: <FavoriteIcon /> }, { icon: <ShareIcon /> }]}
     >

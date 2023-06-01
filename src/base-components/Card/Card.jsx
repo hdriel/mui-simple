@@ -70,10 +70,10 @@ export default function Card({
           subheader={subtitle}
           action={
             options?.length ? (
-              <Menu options={options} {...optionsProps} open>
+              <Menu options={options} {...optionsProps}>
                 <Button icon={<MoreVertIcon />} />
               </Menu>
-            ) : undefined
+            ) : null
           }
         />
       )}

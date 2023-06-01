@@ -7,6 +7,7 @@ export function useChildrenComponentBinding({
   children,
   setAnchorEl,
   anchorElementRef,
+  onClickControlled,
 }) {
   const elementChildren = [].concat(children);
   let validIndex = 0;
@@ -21,6 +22,7 @@ export function useChildrenComponentBinding({
             boundChildrenIndex === validIndex++)) && {
           onClick: (event, ...args) => {
             setAnchorEl(event?.currentTarget);
+            onClickControlled?.(event);
             child.props.onClick?.(event, ...args);
           },
         }),
