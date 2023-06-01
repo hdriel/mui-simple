@@ -2,7 +2,7 @@ import React from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies,no-unused-vars
 import { action } from "@storybook/addon-actions";
 
-import Table from "../Table";
+import { Table } from "../Table";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
