@@ -16,34 +16,35 @@ import {
   Paper as MuiPaper,
   Checkbox as MuiCheckbox,
   IconButton as MuiIconButton,
-  Tooltip as MuiTooltip,
   FormControlLabel as MuiFormControlLabel,
   Switch as MuiSwitch,
 } from "@mui/material";
+
+import MuiTooltip from "../Tooltip/Tooltip";
 
 import { Delete, FilterList } from "@mui/icons-material";
 
 export const DeleteIcon = Delete;
 export const FilterListIcon = FilterList;
 
-export const Box = styled(MuiBox)``;
-export const Table = styled(MuiTable)``;
-export const TableBody = styled(MuiTableBody)``;
+export const Box = MuiBox;
+export const Table = MuiTable;
+export const TableBody = MuiTableBody;
 export const TableCell = styled(MuiTableCell)`
   padding-left: 1em;
   padding-right: 1em;
 `;
-export const TableContainer = styled(MuiTableContainer)``;
-export const TableHead = styled(MuiTableHead)``;
-export const TablePagination = styled(MuiTablePagination)``;
-export const TableRow = styled(MuiTableRow)``;
-export const TableSortLabel = styled(MuiTableSortLabel)``;
-export const Toolbar = styled(MuiToolbar)``;
-export const Typography = styled(MuiTypography)``;
-export const Paper = styled(MuiPaper)``;
-export const Checkbox = styled(MuiCheckbox)``;
-export const IconButton = styled(MuiIconButton)``;
-export const Tooltip = styled(MuiTooltip)``;
-export const FormControlLabel = styled(MuiFormControlLabel)``;
-export const Switch = styled(MuiSwitch)``;
-export const Image = styled(MuiImage)``;
+export const TableContainer = MuiTableContainer;
+export const TableHead = MuiTableHead;
+export const TablePagination = MuiTablePagination;
+export const TableRow = MuiTableRow;
+export const TableSortLabel = MuiTableSortLabel;
+export const Toolbar = MuiToolbar;
+export const Typography = MuiTypography;
+export const Paper = MuiPaper;
+export const Checkbox = MuiCheckbox;
+export const IconButton = MuiIconButton;
+export const Tooltip = MuiTooltip;
+export const FormControlLabel = MuiFormControlLabel;
+export const Switch = MuiSwitch;
+export const Image = MuiImage;

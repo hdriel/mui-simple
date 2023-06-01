@@ -18,12 +18,13 @@ export function EnhancedTableHead({ columns, orderBy, onRequestSort }) {
   return (
     <TableHead>
       <TableRow>
-        {columns.map((headCell) => {
+        {columns?.map((headCell) => {
           const isActiveOrderBy = orderBy[headCell.id] !== undefined;
           const orderByDir = isActiveOrderBy && !!orderBy[headCell.id];
           let orderByValue = SORT.UP;
-          if (isActiveOrderBy && orderBy[headCell.id])
+          if (isActiveOrderBy && orderBy[headCell.id]) {
             orderByValue = orderBy[headCell.id];
+          }
 
           return (
             <TableCell
@@ -50,7 +51,7 @@ export function EnhancedTableHead({ columns, orderBy, onRequestSort }) {
 
 EnhancedTableHead.propTypes = {
   onRequestSort: PropTypes.func,
-  orderBy: PropTypes.string,
+  orderBy: PropTypes.object,
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       field: PropTypes.string,

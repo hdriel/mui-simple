@@ -1,8 +1,7 @@
-import React, { useRef } from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import moment from "moment";
 
-import { SORT } from "../Table.utils";
+import { SORT, usePaginationDetails } from "../Table.utils";
 import { EnhancedTableToolbar } from "./EnhancedTableToolbar";
 import { EnhancedTableHead } from "./EnhancedTableHead";
 import {
@@ -17,18 +16,20 @@ import {
   Tooltip,
   Image,
 } from "../Table.styled";
+import EnhancedTableRow from "./EnhancedTableRow";
 
 export default function EnhancedTable({
   title,
   pagination,
   onChange,
   orderBy,
-  rows,
+  data,
   columns,
   onClickRow,
   actions,
 }) {
-  const { total, rowsPerPage, page } = pagination ?? {};
+  const { total, rowsPerPage, page, emptyRows, sliceFrom, sliceTo } =
+    usePaginationDetails(data, pagination);
 
   // eslint-disable-next-line no-unused-vars
   const handleClick = (event, rowId, rowData) => onClickRow?.(rowId, rowData);
@@ -54,21 +55,23 @@ export default function EnhancedTable({
     onChange?.(config);
   };
 
-  // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows?.length ?? 0) : 0;
+  console.table({
+    emptyRows,
+    page,
+    rowsPerPage,
+    total,
+    rows: data?.length,
+  });
 
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar title={title} actions={actions} />
+        {(title || actions?.length) && (
+          <EnhancedTableToolbar title={title} actions={actions} />
+        )}
 
         <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size="medium"
-          >
+          <Table sx={{ minWidth: 750 }} size="medium">
             <EnhancedTableHead
               columns={columns}
               orderBy={orderBy}
@@ -76,56 +79,20 @@ export default function EnhancedTable({
             />
 
             <TableBody>
-              {rows?.slice(0, rowsPerPage).map((row, index) => (
-                <TableRow
-                  hover
-                  onClick={(event) => handleClick(event, row)}
-                  role="checkbox"
-                  aria-checked={false}
-                  tabIndex={-1}
-                  key={row._id ?? index}
-                  sx={{ cursor: onClickRow ? "pointer" : "default" }}
+              {data?.slice(sliceFrom, sliceTo).map((row, index) => (
+                <EnhancedTableRow
+                  key={index}
+                  columns={columns}
+                  handleClick={handleClick}
+                  index={index}
                 >
-                  {columns?.map((column, colIndex) => {
-                    const fieldValue =
-                      typeof column.field === "function"
-                        ? column.field(row)
-                        : row[column.field];
-
-                    return (
-                      <TableCell
-                        key={column.field}
-                        id={`enhanced-table-checkbox-${colIndex}`}
-                        align={column.align}
-                      >
-                        <Tooltip title={column.tooltip?.(row)}>
-                          <Box>
-                            {/* eslint-disable-next-line no-nested-ternary */}
-                            {column.dateFormat && fieldValue ? (
-                              moment(fieldValue).format(column.dateFormat)
-                            ) : column.image !== undefined && fieldValue ? (
-                              <Image
-                                src={fieldValue}
-                                alt={`${column.field}`}
-                                style={{
-                                  width: column.image.width,
-                                  height: column.image.height,
-                                }}
-                              />
-                            ) : (
-                              fieldValue
-                            )}
-                          </Box>
-                        </Tooltip>
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
+                  {row}
+                </EnhancedTableRow>
               ))}
 
               {emptyRows > 0 && (
                 <TableRow style={{ height: 40 * emptyRows }}>
-                  <TableCell colSpan={6} />
+                  <TableCell colSpan={columns?.length || undefined} />
                 </TableRow>
               )}
             </TableBody>
@@ -133,6 +100,7 @@ export default function EnhancedTable({
         </TableContainer>
 
         {pagination && (
+          // TODO: ADD CUSTOM PAGINATION HERE FROM MY PAGINATION COMPONENT
           <TablePagination
             component="div"
             rowsPerPageOptions={[5, 10, 20]}
@@ -150,17 +118,17 @@ export default function EnhancedTable({
 
 EnhancedTable.propTypes = {
   title: PropTypes.string,
-  pagination: PropTypes.shape({
-    total: PropTypes.number,
-    rowsPerPage: PropTypes.number,
-    page: PropTypes.number,
-  }),
   onChange: PropTypes.func,
   onClickRow: PropTypes.func,
   // eslint-disable-next-line react/forbid-prop-types
   orderBy: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
-  rows: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.arrayOf(PropTypes.object),
+  pagination: PropTypes.shape({
+    total: PropTypes.number,
+    rowsPerPage: PropTypes.number,
+    page: PropTypes.number,
+  }),
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       field: PropTypes.string,
@@ -180,12 +148,12 @@ EnhancedTable.propTypes = {
 };
 
 EnhancedTable.defaultProps = {
-  title: "Tabel",
+  title: undefined,
   orderBy: undefined,
   pagination: undefined,
   onChange: undefined,
   onClickRow: undefined,
-  rows: [],
+  data: [],
   columns: [],
   actions: [],
 };

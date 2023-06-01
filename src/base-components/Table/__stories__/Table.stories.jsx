@@ -14,34 +14,34 @@ export default {
 
 const HEAD_CELLS = [
   {
-    id: "name",
+    field: "name",
     numeric: false,
     disablePadding: true,
     label: "Dessert (100g serving)",
   },
   {
-    id: "calories",
+    field: "calories",
     numeric: true,
     disablePadding: false,
     label: "Calories",
     align: "right",
   },
   {
-    id: "fat",
+    field: "fat",
     numeric: true,
     disablePadding: false,
     label: "Fat (g)",
     align: "right",
   },
   {
-    id: "carbs",
+    field: "carbs",
     numeric: true,
     disablePadding: false,
     label: "Carbs (g)",
     align: "right",
   },
   {
-    id: "protein",
+    field: "protein",
     numeric: true,
     disablePadding: false,
     label: "Protein (g)",
@@ -85,16 +85,38 @@ const dummyProps = {
   columns: HEAD_CELLS,
 };
 
+const actions = {
+  onChange: action("onChange"),
+  onClickRow: action("onClickRow"),
+};
+
 export function Default() {
   return <Table />;
 }
 
 export function FullData() {
-  return <Table {...dummyProps} time={43} />;
+  return (
+    <Table
+      {...actions}
+      title="Full Data"
+      orderBy={{ s: "asc" }}
+      columns={HEAD_CELLS}
+      data={ROWS}
+    />
+  );
 }
 
 export function Pagination() {
-  return <Table {...dummyProps} time={43} />;
+  return (
+    <Table
+      {...actions}
+      title="Full Data"
+      orderBy={{ s: "asc" }}
+      pagination={{ total: ROWS.length, page: 1, rowsPerPage: 13 }}
+      columns={HEAD_CELLS}
+      data={ROWS}
+    />
+  );
 }
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
