@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import moment from "moment";
 
 import { TableCell, TableRow, Tooltip, Image } from "../Table.styled";
+import Avatar from "../../Avatar/Avatar";
+import Typography from "../../Typography/Typography";
 
 function getRowContent({ column, data }) {
   const fieldValue =
@@ -10,26 +12,49 @@ function getRowContent({ column, data }) {
       ? column.field(data)
       : data[column.field];
 
-  let content;
+  const props =
+    typeof column.props === "function" ? column.props(data) : column.props;
 
+  const CustomCmp = column.Cmp;
+  if (CustomCmp) {
+    return <CustomCmp {...props}>{fieldValue}</CustomCmp>;
+  }
+
+  let content;
   if (column.dateFormat && fieldValue) {
     content = moment(fieldValue).format(column.dateFormat);
   } else if (column.image && fieldValue) {
-    content = (
+    const { width, height, avatar } =
+      typeof column.image === "boolean" ? {} : column.image ?? {};
+
+    content = avatar ? (
+      <Avatar image={fieldValue} {...props} />
+    ) : (
       <Image
         src={fieldValue}
         alt={`${column.field}`}
-        style={{
-          width: column.image.width,
-          height: column.image.height,
-        }}
+        style={{ width, height }}
+        {...props}
       />
     );
   } else {
     content = fieldValue;
   }
 
-  return content;
+  const tooltip =
+    typeof column.tooltip === "function"
+      ? column.tooltip?.(data)
+      : column.tooltip;
+
+  const wrapped = ["number", "string"].includes(typeof content) ? (
+    <Typography rows={2} {...props}>
+      {content}
+    </Typography>
+  ) : (
+    content
+  );
+
+  return <Tooltip title={tooltip}>{wrapped}</Tooltip>;
 }
 export default function EnhancedTableRow({
   columns,
@@ -54,9 +79,7 @@ export default function EnhancedTableRow({
           id={`enhanced-table-checkbox-${colIndex}`}
           align={column.align}
         >
-          <Tooltip title={column.tooltip?.(data)}>
-            {getRowContent({ column, data })}
-          </Tooltip>
+          {getRowContent({ column, data })}
         </TableCell>
       ))}
     </TableRow>
@@ -71,6 +94,14 @@ EnhancedTableRow.propTypes = {
       disablePadding: PropTypes.bool,
       label: PropTypes.string,
       align: PropTypes.oneOf(["right", "center", "left", "justify", "inherit"]),
+      dateFormat: PropTypes.string,
+      props: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+      Cmp: PropTypes.node,
+      image: PropTypes.shape({
+        width: PropTypes.number,
+        height: PropTypes.number,
+        avatar: PropTypes.bool,
+      }),
     })
   ),
   handleClick: PropTypes.func,
