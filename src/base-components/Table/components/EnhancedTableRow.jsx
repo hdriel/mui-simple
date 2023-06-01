@@ -43,6 +43,8 @@ function getRowContent({ column, data }) {
       typeof column.format === "function"
         ? column.format(content, data)
         : content;
+
+    // numberVariable.toLocaleString('en-US')  1324171354 => 1,324,171,354
     content = column.numeric ? content?.toLocaleString("en-US") : content;
   }
 
@@ -86,6 +88,8 @@ export default function EnhancedTableRow({
           id={`enhanced-table-checkbox-${colIndex}`}
           align={column.align}
           colors={index % 2 === 0 ? evenRowsColor : oddRowsColor}
+          rowSpan={data._rowSpan}
+          colSpan={data.colSpan}
         >
           {getRowContent({ column, data })}
         </TableCell>
