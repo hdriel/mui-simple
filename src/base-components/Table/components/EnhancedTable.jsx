@@ -20,6 +20,9 @@ import EnhancedTableRow from "./EnhancedTableRow";
 import { useTheme } from "@mui/material/styles";
 
 export default function EnhancedTable({
+  stickyHeader,
+  helperText,
+  maxHeight,
   dense,
   title,
   pagination,
@@ -79,13 +82,18 @@ export default function EnhancedTable({
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2, ...colorProps }}>
+      <Paper sx={{ width: "100%", mb: 2, overflow: "hidden", ...colorProps }}>
         {(title || actions?.length) && (
           <EnhancedTableToolbar title={title} actions={actions} />
         )}
 
-        <TableContainer>
-          <Table sx={{ minWidth: 750 }} size={dense ? "small" : "medium"}>
+        <TableContainer sx={{ maxHeight: maxHeight }}>
+          <Table
+            stickyHeader={stickyHeader}
+            sx={{ minWidth: 750 }}
+            size={dense ? "small" : "medium"}
+          >
+            {helperText && <caption>{helperText}</caption>}
             <EnhancedTableHead
               columns={columns}
               orderBy={orderBy}
@@ -151,8 +159,11 @@ export default function EnhancedTable({
 }
 
 EnhancedTable.propTypes = {
+  stickyHeader: PropTypes.bool,
   dense: PropTypes.bool,
+  maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   title: PropTypes.string,
+  helperText: PropTypes.string,
   onChange: PropTypes.func,
   onClickRow: PropTypes.func,
   // eslint-disable-next-line react/forbid-prop-types
