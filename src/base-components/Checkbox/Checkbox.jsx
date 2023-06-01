@@ -60,7 +60,7 @@ Checkbox.propTypes = {
 
 Checkbox.defaultProps = {
   label: undefined,
-  size: "small",
+  size: "medium",
   color: undefined,
   muiColor: undefined,
   checked: undefined,

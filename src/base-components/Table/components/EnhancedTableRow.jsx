@@ -1,10 +1,11 @@
-import React from "react";
+import React, { cloneElement, isValidElement } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 
 import { TableCell, TableRow, Tooltip, Image } from "../Table.styled";
 import Avatar from "../../Avatar/Avatar";
 import Typography from "../../Typography/Typography";
+import Checkbox from "../../Checkbox/Checkbox";
 
 function getRowContent({ column, data }) {
   const fieldValue =
@@ -15,9 +16,11 @@ function getRowContent({ column, data }) {
   const props =
     typeof column.props === "function" ? column.props(data) : column.props;
 
-  const CustomCmp = column.Cmp;
+  const CustomCmp =
+    isValidElement(column.cmp) && cloneElement(column.cmp, { ...props });
+
   if (CustomCmp) {
-    return <CustomCmp {...props}>{fieldValue}</CustomCmp>;
+    return <CustomCmp>{fieldValue}</CustomCmp>;
   }
 
   let content;
@@ -69,6 +72,9 @@ export default function EnhancedTableRow({
   index,
   evenRowsColor,
   oddRowsColor,
+  onSelect,
+  selected,
+  selectionMode,
   children,
 }) {
   const data = children ?? {};
@@ -82,6 +88,12 @@ export default function EnhancedTableRow({
       tabIndex={-1}
       sx={{ cursor: handleClick ? "pointer" : "default" }}
     >
+      {selectionMode && (
+        <TableCell padding="checkbox">
+          <Checkbox color="primary" checked={selected} onChange={onSelect} />
+        </TableCell>
+      )}
+
       {columns?.map((column, colIndex) => (
         <TableCell
           key={column.field}
@@ -109,7 +121,7 @@ EnhancedTableRow.propTypes = {
       align: PropTypes.oneOf(["right", "center", "left", "justify", "inherit"]),
       dateFormat: PropTypes.string,
       props: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-      Cmp: PropTypes.node,
+      cmp: PropTypes.any,
       image: PropTypes.shape({
         width: PropTypes.number,
         height: PropTypes.number,

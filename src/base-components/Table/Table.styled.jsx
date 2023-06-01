@@ -13,7 +13,6 @@ import {
   TableSortLabel as MuiTableSortLabel,
   Toolbar as MuiToolbar,
   Typography as MuiTypography,
-  Paper as MuiPaper,
   Checkbox as MuiCheckbox,
   IconButton as MuiIconButton,
   FormControlLabel as MuiFormControlLabel,
@@ -21,15 +20,17 @@ import {
 } from "@mui/material";
 
 import MuiTooltip from "../Tooltip/Tooltip";
+import MuiButton from "../Button/Button";
+import MuiPaper from "../Paper/Paper";
 
 import { Delete, FilterList } from "@mui/icons-material";
-import _ from "lodash";
 import { extractColors } from "./Table.utils";
 
 export const DeleteIcon = Delete;
 export const FilterListIcon = FilterList;
 
 export const Box = MuiBox;
+export const Button = MuiButton;
 export const Table = MuiTable;
 export const TableBody = MuiTableBody;
 export const TableCell = styled(MuiTableCell)`

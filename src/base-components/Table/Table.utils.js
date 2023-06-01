@@ -1,8 +1,6 @@
-import { useMemo } from "react";
 import _ from "lodash";
-import { css } from "@mui/material/styles";
 
-function getDataRange({ rows, total, page, rowsPerPage }) {
+export function getDataRange({ rows, total, page, rowsPerPage }) {
   // case that got full data as total
   if (rows === total) {
     const from = page <= 1 ? 0 : (page - 1) * rowsPerPage;
@@ -11,52 +9,6 @@ function getDataRange({ rows, total, page, rowsPerPage }) {
 
   // case that got partial data from server pagination side
   return [0, rowsPerPage];
-}
-export function usePaginationDetails(
-  data = [],
-  { total: _total, rowsPerPage: _rowsPerPage, page: _page } = {}
-) {
-  const rows = data?.length ?? 0;
-  const total = _total ?? rows;
-  const rowsPerPage = _rowsPerPage ?? data.length;
-  const page = _page ?? 0;
-
-  const [sliceFrom, sliceTo] = getDataRange({ rows, total, page, rowsPerPage });
-
-  // Avoid a layout jump when reaching the last page with empty data.
-  const emptyRows = useMemo(
-    () => {
-      if (rows === total) {
-        const totalRowsTillPrevPage = page <= 1 ? 0 : (page - 1) * rowsPerPage;
-
-        return (
-          rowsPerPage - Math.min(rowsPerPage, rows - totalRowsTillPrevPage)
-        );
-      } else {
-        return rows >= rowsPerPage ? 0 : rowsPerPage - rows;
-      }
-    },
-    [page, rowsPerPage, rows],
-    []
-  );
-
-  const rowsPerPageList = useMemo(
-    () =>
-      [...new Set([5, 10, 20, rowsPerPage])]
-        .filter(Boolean)
-        .sort((a, b) => a - b),
-    [rowsPerPage]
-  );
-
-  return {
-    total,
-    rowsPerPage,
-    page,
-    emptyRows,
-    sliceFrom,
-    sliceTo,
-    rowsPerPageList,
-  };
 }
 
 export function createData(name, calories, fat, carbs, protein) {

@@ -1,7 +1,8 @@
-import React, { useMemo } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import { useTheme } from "@mui/material/styles";
 
-import { extractColors, SORT, usePaginationDetails } from "../Table.utils";
+import { extractColors, SORT } from "../Table.utils";
 import { EnhancedTableToolbar } from "./EnhancedTableToolbar";
 import { EnhancedTableHead } from "./EnhancedTableHead";
 import {
@@ -13,13 +14,12 @@ import {
   Table,
   Paper,
   TablePagination,
-  Tooltip,
-  Image,
 } from "../Table.styled";
 import EnhancedTableRow from "./EnhancedTableRow";
-import { useTheme } from "@mui/material/styles";
+import { usePaginationDetails, useSelection } from "../Table.hooks";
 
 export default function EnhancedTable({
+  elevation,
   stickyHeader,
   helperText,
   maxHeight,
@@ -32,6 +32,9 @@ export default function EnhancedTable({
   columns,
   onClickRow,
   actions,
+  selectionMode,
+  selectedActions,
+  selectedLabel,
   paginationProps,
   paginationAlign,
   PaginationComponent,
@@ -41,6 +44,8 @@ export default function EnhancedTable({
   oddRowsColor,
 }) {
   const theme = useTheme();
+  const { handleSelectAllClick, isSelected, selected, handleSelect } =
+    useSelection({ data });
 
   const {
     total,
@@ -82,9 +87,19 @@ export default function EnhancedTable({
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2, overflow: "hidden", ...colorProps }}>
+      <Paper
+        elevation={elevation}
+        sx={{ width: "100%", mb: 2, overflow: "hidden", ...colorProps }}
+      >
         {(title || actions?.length) && (
-          <EnhancedTableToolbar title={title} actions={actions} />
+          <EnhancedTableToolbar
+            title={title}
+            actions={actions}
+            selectedActions={selectedActions}
+            selectedLabel={selectedLabel}
+            data={data}
+            selected={selected}
+          />
         )}
 
         <TableContainer sx={{ maxHeight: maxHeight }}>
@@ -95,10 +110,14 @@ export default function EnhancedTable({
           >
             {helperText && <caption>{helperText}</caption>}
             <EnhancedTableHead
+              numSelected={selected.length}
               columns={columns}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
               headerColor={headerColor}
+              rowCount={data.length}
+              onSelectAllClick={handleSelectAllClick}
+              selectionMode={selectionMode}
             />
 
             <TableBody>
@@ -108,8 +127,14 @@ export default function EnhancedTable({
                   columns={columns}
                   handleClick={handleClick}
                   index={index}
+                  selectionMode={selectionMode}
                   evenRowsColor={evenRowsColor}
                   oddRowsColor={oddRowsColor}
+                  onSelect={(event) => {
+                    handleSelect(event, row.id ?? index);
+                    if (!row.id) console.warn("Missing id field in row", row);
+                  }}
+                  selected={isSelected(row.id ?? index)}
                 >
                   {row}
                 </EnhancedTableRow>
@@ -159,9 +184,12 @@ export default function EnhancedTable({
 }
 
 EnhancedTable.propTypes = {
+  elevation: PropTypes.number,
   stickyHeader: PropTypes.bool,
   dense: PropTypes.bool,
   maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  selectedLabel: PropTypes.string,
+  selectionMode: PropTypes.bool,
   title: PropTypes.string,
   helperText: PropTypes.string,
   onChange: PropTypes.func,
@@ -185,7 +213,7 @@ EnhancedTable.propTypes = {
       align: PropTypes.oneOf(["right", "center", "left", "justify", "inherit"]),
       dateFormat: PropTypes.string,
       props: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-      Cmp: PropTypes.node,
+      cmp: PropTypes.any,
       image: PropTypes.shape({
         width: PropTypes.number,
         height: PropTypes.number,
@@ -196,8 +224,13 @@ EnhancedTable.propTypes = {
   actions: PropTypes.arrayOf(
     PropTypes.shape({
       tooltip: PropTypes.string,
-      onClick: PropTypes.func,
-      icon: PropTypes.node,
+      Cmp: PropTypes.node,
+    })
+  ),
+  selectedActions: PropTypes.arrayOf(
+    PropTypes.shape({
+      tooltip: PropTypes.string,
+      Cmp: PropTypes.node,
     })
   ),
   PaginationComponent: PropTypes.node,
@@ -234,7 +267,10 @@ EnhancedTable.propTypes = {
 };
 
 EnhancedTable.defaultProps = {
+  elevation: 10,
   dense: undefined,
+  selectionMode: undefined,
+  selectedLabel: undefined,
   title: undefined,
   orderBy: undefined,
   pagination: undefined,
