@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 
-import { SORT, usePaginationDetails } from "../Table.utils";
+import { extractColors, SORT, usePaginationDetails } from "../Table.utils";
 import { EnhancedTableToolbar } from "./EnhancedTableToolbar";
 import { EnhancedTableHead } from "./EnhancedTableHead";
 import {
@@ -17,8 +17,10 @@ import {
   Image,
 } from "../Table.styled";
 import EnhancedTableRow from "./EnhancedTableRow";
+import { useTheme } from "@mui/material/styles";
 
 export default function EnhancedTable({
+  dense,
   title,
   pagination,
   onChange,
@@ -30,7 +32,13 @@ export default function EnhancedTable({
   paginationProps,
   paginationAlign,
   PaginationComponent,
+  tableColor,
+  headerColor,
+  evenRowsColor,
+  oddRowsColor,
 }) {
+  const theme = useTheme();
+
   const {
     total,
     rowsPerPage,
@@ -67,19 +75,22 @@ export default function EnhancedTable({
     onChange?.(config);
   };
 
+  const colorProps = extractColors({ theme: theme, colors: tableColor });
+
   return (
     <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
+      <Paper sx={{ width: "100%", mb: 2, ...colorProps }}>
         {(title || actions?.length) && (
           <EnhancedTableToolbar title={title} actions={actions} />
         )}
 
         <TableContainer>
-          <Table sx={{ minWidth: 750 }} size="medium">
+          <Table sx={{ minWidth: 750 }} size={dense ? "small" : "medium"}>
             <EnhancedTableHead
               columns={columns}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
+              headerColor={headerColor}
             />
 
             <TableBody>
@@ -89,6 +100,8 @@ export default function EnhancedTable({
                   columns={columns}
                   handleClick={handleClick}
                   index={index}
+                  evenRowsColor={evenRowsColor}
+                  oddRowsColor={oddRowsColor}
                 >
                   {row}
                 </EnhancedTableRow>
@@ -138,6 +151,7 @@ export default function EnhancedTable({
 }
 
 EnhancedTable.propTypes = {
+  dense: PropTypes.bool,
   title: PropTypes.string,
   onChange: PropTypes.func,
   onClickRow: PropTypes.func,
@@ -169,9 +183,38 @@ EnhancedTable.propTypes = {
   PaginationComponent: PropTypes.node,
   paginationProps: PropTypes.object,
   paginationAlign: PropTypes.oneOf(["start", "center", "end"]),
+  tableColor: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      background: PropTypes.string,
+      color: PropTypes.string,
+    }),
+  ]),
+  headerColor: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      background: PropTypes.string,
+      color: PropTypes.string,
+    }),
+  ]),
+  evenRowsColor: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      background: PropTypes.string,
+      color: PropTypes.string,
+    }),
+  ]),
+  oddRowsColor: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      background: PropTypes.string,
+      color: PropTypes.string,
+    }),
+  ]),
 };
 
 EnhancedTable.defaultProps = {
+  dense: undefined,
   title: undefined,
   orderBy: undefined,
   pagination: undefined,
@@ -180,7 +223,15 @@ EnhancedTable.defaultProps = {
   data: [],
   columns: [],
   actions: [],
+  PaginationComponent: undefined,
+  paginationProps: undefined,
+  paginationAlign: undefined,
+  headerColor: undefined,
+  evenRowsColor: undefined,
+  oddRowsColor: undefined,
 };
+
+// sx={{ backgroundColor: lighten(theme.palette.primary.main, 0.7), color: 'black' }}
 
 // <TableCell component="th" id={labelId} scope="row" padding="none">{row.name}</TableCell>
 // <TableCell align="right">{row.protein}</TableCell>

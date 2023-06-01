@@ -1,4 +1,6 @@
 import { useMemo } from "react";
+import _ from "lodash";
+import { css } from "@mui/material/styles";
 
 function getDataRange({ rows, total, page, rowsPerPage }) {
   // case that got full data as total
@@ -152,3 +154,25 @@ export const HEAD_CELLS = [
     align: "right",
   },
 ];
+
+export function extractColors({ theme, colors }) {
+  const { background, color } =
+    typeof colors === "object" ? colors : { background: colors };
+
+  const isThemeColor = !!(
+    color === undefined &&
+    (_.get(theme, `palette.${background}.main`) ??
+      _.get(theme, `palette.${background}`))
+  );
+
+  const textColor = isThemeColor
+    ? _.get(theme, `palette.${background}.contrastText`)
+    : _.get(theme, `palette.${color}.main`) ??
+      _.get(theme, `palette.${color}`, color);
+
+  const bgColor =
+    _.get(theme, `palette.${background}.main`) ??
+    _.get(theme, `palette.${background}`, background);
+
+  return { color: textColor, backgroundColor: bgColor };
+}

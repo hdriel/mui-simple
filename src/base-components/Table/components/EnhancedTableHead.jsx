@@ -10,7 +10,12 @@ import {
   TableSortLabel,
 } from "../Table.styled";
 
-export function EnhancedTableHead({ columns, orderBy, onRequestSort }) {
+export function EnhancedTableHead({
+  columns,
+  orderBy,
+  onRequestSort,
+  headerColor,
+}) {
   // const theme = useTheme();
   const createSortHandler = (property) => (event) =>
     onRequestSort(event, property);
@@ -32,7 +37,7 @@ export function EnhancedTableHead({ columns, orderBy, onRequestSort }) {
               align={headCell.numeric ? "right" : "left"}
               padding={headCell.disablePadding ? "none" : "normal"}
               sortDirection={orderByDir}
-              // sx={{ backgroundColor: lighten(theme.palette.primary.main, 0.7), color: 'black' }}
+              colors={headerColor}
             >
               <TableSortLabel
                 active={isActiveOrderBy}
@@ -61,10 +66,18 @@ EnhancedTableHead.propTypes = {
       align: PropTypes.oneOf(["right", "center", "left", "justify", "inherit"]),
     })
   ),
+  headerColor: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      background: PropTypes.string,
+      color: PropTypes.string,
+    }),
+  ]),
 };
 
 EnhancedTableHead.defaultProps = {
   onRequestSort: undefined,
   orderBy: "",
   columns: [],
+  headerColor: undefined,
 };

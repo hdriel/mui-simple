@@ -1,6 +1,6 @@
 import { Image as MuiImage } from "mui-image";
 
-import { styled } from "@mui/material/styles";
+import { styled, css } from "@mui/material/styles";
 import {
   Box as MuiBox,
   Table as MuiTable,
@@ -23,6 +23,8 @@ import {
 import MuiTooltip from "../Tooltip/Tooltip";
 
 import { Delete, FilterList } from "@mui/icons-material";
+import _ from "lodash";
+import { extractColors } from "./Table.utils";
 
 export const DeleteIcon = Delete;
 export const FilterListIcon = FilterList;
@@ -33,6 +35,18 @@ export const TableBody = MuiTableBody;
 export const TableCell = styled(MuiTableCell)`
   padding-left: 1em;
   padding-right: 1em;
+
+  ${(props) => {
+    const { color, backgroundColor } = extractColors({
+      theme: props.theme,
+      colors: props.colors,
+    });
+
+    return css`
+      color: ${color};
+      background-color: ${backgroundColor};
+    `;
+  }};
 `;
 export const TableContainer = MuiTableContainer;
 export const TableHead = MuiTableHead;

@@ -60,6 +60,8 @@ export default function EnhancedTableRow({
   columns,
   handleClick,
   index,
+  evenRowsColor,
+  oddRowsColor,
   children,
 }) {
   const data = children ?? {};
@@ -78,6 +80,7 @@ export default function EnhancedTableRow({
           key={column.field}
           id={`enhanced-table-checkbox-${colIndex}`}
           align={column.align}
+          colors={index % 2 === 0 ? evenRowsColor : oddRowsColor}
         >
           {getRowContent({ column, data })}
         </TableCell>
@@ -106,7 +109,20 @@ EnhancedTableRow.propTypes = {
   ),
   handleClick: PropTypes.func,
   index: PropTypes.number,
-  data: PropTypes.object,
+  evenRowsColor: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      background: PropTypes.string,
+      color: PropTypes.string,
+    }),
+  ]),
+  oddRowsColor: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      background: PropTypes.string,
+      color: PropTypes.string,
+    }),
+  ]),
 };
 
 EnhancedTableRow.defaultProps = {
