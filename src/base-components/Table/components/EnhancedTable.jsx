@@ -27,9 +27,19 @@ export default function EnhancedTable({
   columns,
   onClickRow,
   actions,
+  paginationProps,
+  paginationAlign,
+  PaginationComponent,
 }) {
-  const { total, rowsPerPage, page, emptyRows, sliceFrom, sliceTo } =
-    usePaginationDetails(data, pagination);
+  const {
+    total,
+    rowsPerPage,
+    rowsPerPageList,
+    page,
+    emptyRows,
+    sliceFrom,
+    sliceTo,
+  } = usePaginationDetails(data, pagination);
 
   // eslint-disable-next-line no-unused-vars
   const handleClick = (event, rowId, rowData) => onClickRow?.(rowId, rowData);
@@ -54,14 +64,6 @@ export default function EnhancedTable({
     const config = { orderBy, pagination: { ...pagination, rowPerPage } };
     onChange?.(config);
   };
-
-  console.table({
-    emptyRows,
-    page,
-    rowsPerPage,
-    total,
-    rows: data?.length,
-  });
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -100,16 +102,33 @@ export default function EnhancedTable({
         </TableContainer>
 
         {pagination && (
-          // TODO: ADD CUSTOM PAGINATION HERE FROM MY PAGINATION COMPONENT
-          <TablePagination
-            component="div"
-            rowsPerPageOptions={[5, 10, 20]}
-            count={total}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
+          <Box
+            sx={{
+              p: 2,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: paginationAlign ?? "end",
+            }}
+          >
+            {PaginationComponent ? (
+              <PaginationComponent
+                totalPages={total}
+                page={page}
+                onChange={handleChangePage}
+                {...paginationProps}
+              />
+            ) : (
+              <TablePagination
+                component="div"
+                rowsPerPageOptions={rowsPerPageList}
+                count={total}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
+            )}
+          </Box>
         )}
       </Paper>
     </Box>
@@ -145,6 +164,9 @@ EnhancedTable.propTypes = {
       icon: PropTypes.node,
     })
   ),
+  PaginationComponent: PropTypes.node,
+  paginationProps: PropTypes.object,
+  paginationAlign: PropTypes.oneOf(["start", "center", "end"]),
 };
 
 EnhancedTable.defaultProps = {

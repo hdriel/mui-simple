@@ -1,8 +1,10 @@
 import React from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies,no-unused-vars
 import { action } from "@storybook/addon-actions";
+import { Home as HomeIcon } from "@mui/icons-material";
 
 import { Table } from "../Table";
+import MuiPagination from "../../Pagination/Pagination";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -112,9 +114,29 @@ export function Pagination() {
       {...actions}
       title="Table Pagination"
       orderBy={{ s: "asc" }}
-      pagination={{ total: ROWS.length, page: 1, rowsPerPage: 13 }}
+      pagination={{ total: ROWS.length, page: 2, rowsPerPage: 5 }}
       columns={HEAD_CELLS}
       data={ROWS}
+    />
+  );
+}
+
+export function CustomPagination() {
+  return (
+    <Table
+      {...actions}
+      title="Table Pagination"
+      orderBy={{ s: "asc" }}
+      pagination={{ total: ROWS.length, page: 2, rowsPerPage: 5 }}
+      columns={HEAD_CELLS}
+      data={ROWS}
+      paginationAlign="center"
+      PaginationComponent={MuiPagination}
+      paginationProps={{
+        shape: "circle",
+        muiColor: "secondary",
+        firstIconCmpCB: HomeIcon,
+      }}
     />
   );
 }

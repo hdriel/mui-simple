@@ -38,7 +38,23 @@ export function usePaginationDetails(
     []
   );
 
-  return { total, rowsPerPage, page, emptyRows, sliceFrom, sliceTo };
+  const rowsPerPageList = useMemo(
+    () =>
+      [...new Set([5, 10, 20, rowsPerPage])]
+        .filter(Boolean)
+        .sort((a, b) => a - b),
+    [rowsPerPage]
+  );
+
+  return {
+    total,
+    rowsPerPage,
+    page,
+    emptyRows,
+    sliceFrom,
+    sliceTo,
+    rowsPerPageList,
+  };
 }
 
 export function createData(name, calories, fat, carbs, protein) {
