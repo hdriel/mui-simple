@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Check as CheckIcon } from "@mui/icons-material";
 import {
@@ -33,6 +33,8 @@ export default function Menu({
   children,
   ...props
 }) {
+  const [openControlled, setOpenControlled] = useState(false);
+
   const { anchorProps, setAnchorEl } = useAnchorProps({
     contextMenu,
     anchorElementRef,
@@ -44,19 +46,21 @@ export default function Menu({
     children,
     setAnchorEl,
     anchorElementRef,
+    onClickControlled:
+      open === undefined ? () => setOpenControlled(true) : undefined,
   });
 
-  const handleClose = () => {
+  const handleClose = (event) => {
+    setOpenControlled(false);
     const res = onClose?.();
     if (res === undefined || res === true) setAnchorEl(null);
   };
 
   const handleClick = (event, option) => {
     event.stopPropagation();
+    setOpenControlled(false);
     const res = (option?.onClick ?? onClick)?.(option?.id);
-    if (res === undefined || res === true) {
-      handleClose();
-    }
+    if (res === undefined || res === true) handleClose();
   };
 
   return (
@@ -69,9 +73,9 @@ export default function Menu({
             width={width}
             maxHeight={maxHeight}
             id={id}
-            open={open ?? false}
+            open={open ?? openControlled}
             onClose={handleClose}
-            onClick={handleClose}
+            onClick={handleClick}
             TransitionComponent={Grow}
             {...anchorProps}
             {...props}
