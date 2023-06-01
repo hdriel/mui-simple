@@ -1,21 +1,29 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
 
-// import { Send as SendIcon } from "@mui/icons-material";
-import { Stack } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import { Stack, Box } from "@mui/material";
 
-import Card from "../Card";
-import Avatar from "../../Avatar/Avatar";
 import {
   Cloud as CloudIcon,
   ContentCopy as ContentCopyIcon,
   ContentCut as ContentCutIcon,
   ContentPaste as ContentPasteIcon,
+  Favorite as FavoriteIcon,
+  Share as ShareIcon,
+  SkipPrevious as SkipPreviousIcon,
+  PlayArrow as PlayArrowIcon,
+  SkipNext as SkipNextIcon,
 } from "@mui/icons-material";
+
+// import { Send as SendIcon } from "@mui/icons-material";
+
+import Card from "../Card";
+import Avatar from "../../Avatar/Avatar";
+
 import CardContentExpended from "../CardContentExpended";
 import Typography from "../../Typography/Typography";
+import Button from "../../Button/Button";
 
 export default {
   title: "Surfaces/Card",
@@ -124,7 +132,6 @@ export const Media = () => {
         src: "/contemplative-reptile.jpg",
         title: "green iguana",
         alt: "image",
-        width: 151,
       }}
       actions={[
         { label: "Share", size: "small" },
@@ -143,9 +150,68 @@ export const Media = () => {
 };
 
 export const UIControls = () => {
+  const theme = useTheme();
+  let [prevIcon, nextIcon] = [<SkipPreviousIcon />, <SkipNextIcon />];
+  if (theme.direction === "rtl") {
+    [prevIcon, nextIcon] = [nextIcon, prevIcon];
+  }
+  const artist = (
+    <>
+      <Typography component="div" variant="h5">
+        Live From Space
+      </Typography>
+      <Typography variant="subtitle1" color="text.secondary" component="div">
+        Mac Miller
+      </Typography>
+    </>
+  );
+
   return (
-    <Card image={{ src: "/live-from-space.jpg", width: 151 }} horizontalLayout>
-      small
-    </Card>
+    <Stack spacing={3}>
+      <Card
+        image={{ src: "/live-from-space.jpg", width: 151 }}
+        flexDirection="row-reverse"
+      >
+        <Box
+          sx={{ height: "inherit", display: "flex", flexDirection: "column" }}
+        >
+          {artist}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              mt: "auto",
+            }}
+          >
+            <Button icon={prevIcon} />
+            <Button icon={<PlayArrowIcon sx={{ height: 38, width: 38 }} />} />
+            <Button icon={nextIcon} />
+          </Box>
+        </Box>
+      </Card>
+      <Card
+        image={{ src: "/live-from-space.jpg", width: 151 }}
+        flexDirection="row-reverse"
+        title="Live From Space"
+        subtitle="Mac Miller"
+        contentPadding={0}
+      >
+        <Box
+          sx={{ height: "inherit", display: "flex", flexDirection: "column" }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              pl: 1,
+            }}
+          >
+            <Button icon={prevIcon} />
+            <Button icon={<PlayArrowIcon sx={{ height: 38, width: 38 }} />} />
+            <Button icon={nextIcon} />
+          </Box>
+        </Box>
+      </Card>
+    </Stack>
   );
 };

@@ -28,7 +28,9 @@ export default function Card({
   imageTitle,
   width,
   maxWidth,
-  horizontalLayout,
+  flexDirection,
+  mediaOnTop,
+  contentPadding,
   children,
   ...props
 }) {
@@ -36,6 +38,10 @@ export default function Card({
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => setExpanded(!expanded);
+  mediaOnTop =
+    mediaOnTop === undefined && ["row", "row-reverse"].includes(flexDirection)
+      ? true
+      : mediaOnTop;
 
   children = [].concat(children);
   const cardContentExpendedIndex = children.findIndex(
@@ -57,23 +63,25 @@ export default function Card({
 
   return (
     <MuiCard {...props} sx={{ maxWidth, width }}>
-      {title && (
+      {!mediaOnTop && title && (
         <CardHeader
           avatar={avatar}
           title={title}
           subheader={subtitle}
           action={
-            <Menu options={options} {...optionsProps} open>
-              <Button icon={<MoreVertIcon />} />
-            </Menu>
+            options?.length ? (
+              <Menu options={options} {...optionsProps} open>
+                <Button icon={<MoreVertIcon />} />
+              </Menu>
+            ) : undefined
           }
         />
       )}
       <Box
         sx={{
-          ...(horizontalLayout && {
+          ...(flexDirection && {
             display: "flex",
-            flexDirection: "row-reverse",
+            flexDirection: flexDirection,
           }),
         }}
       >
@@ -88,7 +96,29 @@ export default function Card({
         )}
 
         <Box>
-          <CardContent>{children}</CardContent>
+          {mediaOnTop && title && (
+            <CardHeader
+              avatar={avatar}
+              title={title}
+              subheader={subtitle}
+              action={
+                options?.length ? (
+                  <Menu options={options} {...optionsProps} open>
+                    <Button icon={<MoreVertIcon />} />
+                  </Menu>
+                ) : undefined
+              }
+            />
+          )}
+          <CardContent
+            sx={{
+              height: mediaOnTop && title ? "auto" : "100%",
+              boxSizing: "border-box",
+              padding: contentPadding,
+            }}
+          >
+            {children}
+          </CardContent>
 
           <CardActions disableSpacing>
             {actions?.filter(Boolean).map((action, index) =>
@@ -162,7 +192,14 @@ Card.propTypes = {
   ]),
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  horizontalLayout: PropTypes.bool,
+  mediaOnTop: PropTypes.bool,
+  contentPadding: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  flexDirection: PropTypes.oneOf([
+    "row",
+    "row-reverse",
+    "column",
+    "column-reverse",
+  ]),
 };
 
 Card.defaultProps = {
@@ -173,7 +210,9 @@ Card.defaultProps = {
   actions: undefined,
   avatar: undefined,
   image: undefined,
-  width: undefined,
-  maxWidth: undefined,
-  horizontalLayout: undefined,
+  width: "auto",
+  maxWidth: "max-content",
+  mediaOnTop: undefined,
+  contentPadding: undefined,
+  flexDirection: undefined,
 };
