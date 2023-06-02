@@ -104,7 +104,7 @@ export default function EnhancedTable({
       >
         {(title ||
           actions?.length ||
-          selectedActions.length ||
+          selectedActions?.length ||
           filterActionCmp) && (
           <EnhancedTableToolbar
             title={title}
@@ -130,7 +130,7 @@ export default function EnhancedTable({
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
               headerColor={headerColor}
-              rowCount={data.length}
+              rowCount={data?.length}
               onSelectAllClick={handleSelectAllClick}
               selectionMode={selectionMode}
             />

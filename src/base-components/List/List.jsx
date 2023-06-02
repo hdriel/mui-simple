@@ -18,6 +18,7 @@ import {
 } from "./List.styled";
 import Avatar from "../Avatar/Avatar";
 import Typography from "../Typography/Typography";
+import DraggableList from "../DraggableList/DraggableList";
 
 const ListItemWrapper = ({
   item,
@@ -66,6 +67,8 @@ const List = ({
   enableSubtitle,
   disablePaddingItems,
   disableGuttersItems,
+  dragAndDropItems,
+  onListOrderChange,
   disablePadding,
   title,
   items,
@@ -82,6 +85,12 @@ const List = ({
     cb?.(event);
   };
 
+  const dataList = items?.map((item, index) =>
+    typeof item === "string"
+      ? { title: item, id: String(index) }
+      : { ...item, id: item.id ?? String(index) }
+  );
+
   return (
     <MuiList
       useTransition={useTransition}
@@ -93,99 +102,103 @@ const List = ({
       {...props}
     >
       {
-        items?.map((item, index) => {
-          const { divider, alignControl, controlType, ...itemProps } =
-            typeof item === "string" ? { title: item } : item || {};
+        <DraggableList
+          dataList={dataList}
+          droppableClassName="list-item"
+          disabled={!dragAndDropItems}
+          onChange={onListOrderChange}
+          renderValue={(item, index) => {
+            const { divider, alignControl, controlType, ...itemProps } =
+              typeof item === "string" ? { title: item } : item || {};
+            const isControl = ["checkbox", "switch"].includes(controlType);
+            const isOpen = open[index];
+            const listItem = !!Object.keys(itemProps).length;
 
-          const isControl = ["checkbox", "switch"].includes(controlType);
-          const isOpen = open[index];
-          const listItem = !!Object.keys(itemProps).length;
-
-          return (
-            <>
-              {listItem && (
-                <ListItem
-                  key={`i-${index}`}
-                  disablePadding={
-                    item.disablePadding ?? disablePaddingItems ?? true
-                  }
-                  disableGutters={item.disableGutters ?? disableGuttersItems}
-                  alignItems={itemProps.align ?? alignItems}
-                >
-                  <ListItemWrapper
-                    index={index}
-                    item={itemProps}
-                    onClick={onClick}
-                    buttonItems={buttonItems}
-                    alignItems={alignItems}
+            return (
+              <div style={{ width: "100%" }}>
+                {listItem && (
+                  <ListItem
+                    key={`i-${index}`}
+                    disablePadding={
+                      item.disablePadding ?? disablePaddingItems ?? true
+                    }
+                    disableGutters={item.disableGutters ?? disableGuttersItems}
+                    alignItems={itemProps.align ?? alignItems}
                   >
-                    {itemProps.startIcon &&
-                      (isControl && alignControl === "start" ? (
-                        itemProps.startIcon
-                      ) : (
-                        <ListItemIcon>{itemProps.startIcon}</ListItemIcon>
-                      ))}
-                    {itemProps.avatar && (
-                      <ListItemAvatar>
-                        <Avatar {...itemProps.avatar} />
-                      </ListItemAvatar>
-                    )}
-                    <ListItemText
-                      inset={itemProps.inset ?? insetItems}
-                      primary={itemProps.title}
-                      secondary={
-                        enableSubtitle && itemProps.subtitle ? (
-                          <Typography
-                            rows={2}
-                            component="span"
-                            variant="body2"
-                            muiColor="text.primary"
-                          >
-                            {itemProps.subtitle}
-                          </Typography>
-                        ) : undefined
-                      }
-                    />
-                    {itemProps.items?.length ? (
-                      isOpen ? (
-                        <ExpandLessIcon />
-                      ) : (
-                        <ExpandMoreIcon />
-                      )
-                    ) : undefined}
+                    <ListItemWrapper
+                      index={index}
+                      item={itemProps}
+                      onClick={onClick}
+                      buttonItems={buttonItems}
+                      alignItems={alignItems}
+                    >
+                      {itemProps.startIcon &&
+                        (isControl && alignControl === "start" ? (
+                          itemProps.startIcon
+                        ) : (
+                          <ListItemIcon>{itemProps.startIcon}</ListItemIcon>
+                        ))}
+                      {itemProps.avatar && (
+                        <ListItemAvatar>
+                          <Avatar {...itemProps.avatar} />
+                        </ListItemAvatar>
+                      )}
+                      <ListItemText
+                        inset={itemProps.inset ?? insetItems}
+                        primary={itemProps.title}
+                        secondary={
+                          enableSubtitle && itemProps.subtitle ? (
+                            <Typography
+                              rows={2}
+                              component="span"
+                              variant="body2"
+                              muiColor="text.primary"
+                            >
+                              {itemProps.subtitle}
+                            </Typography>
+                          ) : undefined
+                        }
+                      />
+                      {itemProps.items?.length ? (
+                        isOpen ? (
+                          <ExpandLessIcon />
+                        ) : (
+                          <ExpandMoreIcon />
+                        )
+                      ) : undefined}
 
-                    <ListItemSecondaryAction>
-                      {itemProps.actions}
-                    </ListItemSecondaryAction>
-                  </ListItemWrapper>
+                      <ListItemSecondaryAction>
+                        {itemProps.actions}
+                      </ListItemSecondaryAction>
+                    </ListItemWrapper>
 
-                  <Collapse
-                    in={isOpen && itemProps.items?.length}
-                    timeout="auto"
-                    unmountOnExit
-                    addEndListener={undefined}
-                  >
-                    <List items={itemProps.items} />
-                    <Divider variant="fullWidth" {...divider} component="li" />
-                  </Collapse>
-                </ListItem>
-              )}
-              {divider && (
-                <Divider
-                  key={`d-${index}`}
-                  variant="fullWidth"
-                  {...divider}
-                  component="li"
-                />
-              )}
-            </>
-          );
-        })
-        // .map((cmp, key) => (
-        //   <Collapse in key={key}>
-        //     {cmp}
-        //   </Collapse>
-        // ))
+                    <Collapse
+                      in={isOpen && itemProps.items?.length}
+                      timeout="auto"
+                      unmountOnExit
+                      addEndListener={undefined}
+                    >
+                      <List items={itemProps.items} />
+                      <Divider
+                        variant="fullWidth"
+                        {...divider}
+                        component="li"
+                      />
+                    </Collapse>
+                  </ListItem>
+                )}
+                {divider && (
+                  <Divider
+                    key={`d-${index}`}
+                    variant="fullWidth"
+                    {...divider}
+                    component="li"
+                  />
+                )}
+              </div>
+            );
+          }}
+        />
       }
     </MuiList>
   );
@@ -200,10 +213,12 @@ List.propTypes = {
   disablePadding: PropTypes.bool,
   disablePaddingItems: PropTypes.bool,
   disableGuttersItems: PropTypes.bool,
+  dragAndDropItems: PropTypes.bool,
   enableSubtitle: PropTypes.bool,
   title: PropTypes.string,
   alignItems: PropTypes.oneOf(["flex-start"]),
   insetItems: PropTypes.bool,
+  onListOrderChange: PropTypes.func,
   items: PropTypes.arrayOf(
     PropTypes.oneOfType([
       PropTypes.string,
@@ -232,6 +247,7 @@ List.defaultProps = {
   buttonItems: true,
   enableSubtitle: true,
   disablePadding: true,
+  dragAndDropItems: false,
   alignItems: undefined,
   component: "nav",
   width: undefined,

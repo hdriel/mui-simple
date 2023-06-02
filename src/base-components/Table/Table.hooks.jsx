@@ -9,6 +9,7 @@ import { getDataRange } from "./Table.utils";
 import CheckList from "../List/CheckList";
 import Menu from "../Menu/Menu";
 import Checkbox from "../Checkbox/Checkbox";
+import Button from "../Button/Button";
 
 export function usePaginationDetails(
   data = [],
@@ -96,9 +97,10 @@ export function useSelection({ data }) {
 
 function getColumn(row, column) {
   const isString = typeof column === "string";
-  const field = isString ? column : column.field;
+  const field = isString ? column : column?.field;
 
   return {
+    id: field,
     field: field,
     label: isString ? column : column.label,
     numeric: isString
@@ -124,13 +126,17 @@ function getColumn(row, column) {
 }
 
 export function useFilterColumns({ data, columns: _columns, hide }) {
+  const [columnsState, setColumnsState] = useState(_columns);
+
   const columns = useMemo(
     () =>
-      (_columns ?? Object.keys(data?.[0] ?? {}))?.map((column) =>
+      (columnsState ?? Object.keys(data?.[0] ?? {}))?.map((column) =>
         getColumn(data?.[0] ?? {}, column)
       ) ?? [],
-    [_columns]
+    [columnsState]
   );
+
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const [filters, setFilters] = useState(
     columns?.reduce(
@@ -148,11 +154,8 @@ export function useFilterColumns({ data, columns: _columns, hide }) {
   );
 
   const filteredColumns = useMemo(
-    () =>
-      Object.keys(filters)
-        .filter((field) => filters[field])
-        .map((field) => columns.find((column) => field === column.field)),
-    [filters]
+    () => columns.filter((column) => filters[column.field]),
+    [filters, columns]
   );
 
   const onClickFilterItem = (field) => (event) => {
@@ -162,24 +165,38 @@ export function useFilterColumns({ data, columns: _columns, hide }) {
 
   const cmp = !hide && (
     <Menu
+      open={menuOpen}
+      onClick={() => false}
+      onClose={() => setMenuOpen(false)}
       alternativeContent={
         <CheckList
           title="columns"
           items={columns?.map((column) => ({
+            id: column.id,
             title: column.label ?? column.field,
             checked: filters[column.field] ?? false,
             onClick: onClickFilterItem(column.field),
           }))}
+          dragAndDropItems
+          onListOrderChange={(fields) => {
+            const ids = fields.map(({ id }) => id);
+            const state = ids.map((id) =>
+              columnsState.find((column) => column.field === id)
+            );
+            setColumnsState(state);
+          }}
         />
       }
     >
-      <Checkbox
-        color={"rgba(0, 0, 0, 0.87)"}
-        checkedIcon={<FilterAltOffIcon />}
-        icon={<FilterAltIcon />}
-        checked={checked}
-        tooltipProps={{ title: "Filter Columns" }}
-      />
+      <div onClick={() => setMenuOpen((o) => !o)}>
+        <Checkbox
+          color={"rgba(0, 0, 0, 0.87)"}
+          checkedIcon={<FilterAltOffIcon />}
+          icon={<FilterAltIcon />}
+          checked={checked}
+          tooltipProps={{ title: "Filter Columns" }}
+        />
+      </div>
     </Menu>
   );
 
