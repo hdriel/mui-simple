@@ -33,10 +33,7 @@ const Checkbox = ({
       required={required}
       disabled={disabled}
       checked={checked}
-      onChange={(event, ...args) => {
-        event.stopPropagation();
-        onChange?.(event, ...args);
-      }}
+      onChange={onChange}
       labelPlacement={labelPlacement}
       helperText={helperText}
       fontSize={fontSize}

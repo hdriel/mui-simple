@@ -20,7 +20,7 @@ export function useEllipsisActive({ active, text, maxRows }) {
   return [ref, isEllipsis];
 }
 
-function getOriginalTextWidth(text) {
+export function getOriginalTextWidth(text) {
   const element = document.createElement("span");
   element.textContent = text;
   document.body.appendChild(element);

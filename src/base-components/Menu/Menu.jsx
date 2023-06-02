@@ -16,6 +16,7 @@ import { useAnchorProps, useChildrenComponentBinding } from "./Menu.hooks";
 
 export default function Menu({
   width,
+  height,
   maxHeight,
   id,
   disableRipple,
@@ -71,6 +72,7 @@ export default function Menu({
         <MenuWrapper>
           <MuiMenu
             elevation={elevation}
+            height={height}
             width={width}
             maxHeight={maxHeight}
             id={id}

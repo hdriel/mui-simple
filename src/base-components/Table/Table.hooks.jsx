@@ -2,14 +2,13 @@ import React, { useMemo, useState } from "react";
 import {
   FilterAltOff as FilterAltOffIcon,
   FilterAlt as FilterAltIcon,
-  FilterList as FilterListIcon,
+  DragHandle as DragHandleIcon,
 } from "@mui/icons-material";
-
 import { getDataRange } from "./Table.utils";
 import CheckList from "../List/CheckList";
 import Menu from "../Menu/Menu";
 import Checkbox from "../Checkbox/Checkbox";
-import Button from "../Button/Button";
+import { getOriginalTextWidth } from "../../hooks/useEllipsisActive";
 
 export function usePaginationDetails(
   data = [],
@@ -125,6 +124,17 @@ function getColumn(row, column) {
   };
 }
 
+function getMenuWidth(fields) {
+  const sized = fields?.map((field) => field?.length ?? 0) ?? [0];
+  const index = Math.max(...sized);
+  const maxWord = fields[sized.indexOf(index)];
+  const { offsetWidth, scrollWidth } = getOriginalTextWidth(maxWord ?? "");
+  const checkboxPadding = 50;
+  const draggalbePadding = 50;
+  const spaceItemsPadding = 15;
+  return checkboxPadding + draggalbePadding + offsetWidth + spaceItemsPadding;
+}
+
 export function useFilterColumns({ data, columns: _columns, hide }) {
   const [columnsState, setColumnsState] = useState(_columns);
 
@@ -148,6 +158,15 @@ export function useFilterColumns({ data, columns: _columns, hide }) {
     )
   );
 
+  const [menuWidth, menuHeight] = useMemo(() => {
+    const fields = columnsState.map((column) => column.label);
+    const width = getMenuWidth(fields);
+    const height = (fields?.length ?? 1) * 75;
+
+    console.log(width, height);
+    return [width, height];
+  }, [columnsState]);
+
   const checked = useMemo(
     () => Object.values(filters).filter(Boolean).length === columns.length,
     [filters]
@@ -165,6 +184,8 @@ export function useFilterColumns({ data, columns: _columns, hide }) {
 
   const cmp = !hide && (
     <Menu
+      width={menuWidth}
+      height={menuHeight}
       open={menuOpen}
       onClick={() => false}
       onClose={() => setMenuOpen(false)}
@@ -176,6 +197,7 @@ export function useFilterColumns({ data, columns: _columns, hide }) {
             title: column.label ?? column.field,
             checked: filters[column.field] ?? false,
             onClick: onClickFilterItem(column.field),
+            actions: [<DragHandleIcon />],
           }))}
           dragAndDropItems
           onListOrderChange={(fields) => {
