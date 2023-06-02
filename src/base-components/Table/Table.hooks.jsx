@@ -147,6 +147,14 @@ export function useFilterColumns({ data, columns: _columns, hide }) {
     [filters]
   );
 
+  const filteredColumns = useMemo(
+    () =>
+      Object.keys(filters)
+        .filter((field) => filters[field])
+        .map((field) => columns.find((column) => field === column.field)),
+    [filters]
+  );
+
   const onClickFilterItem = (field) => (event) => {
     event.stopPropagation();
     setFilters((o) => ({ ...o, [field]: !o[field] }));
@@ -156,6 +164,7 @@ export function useFilterColumns({ data, columns: _columns, hide }) {
     <Menu
       alternativeContent={
         <CheckList
+          title="columns"
           items={columns?.map((column) => ({
             title: column.label ?? column.field,
             checked: filters[column.field] ?? false,
@@ -174,5 +183,5 @@ export function useFilterColumns({ data, columns: _columns, hide }) {
     </Menu>
   );
 
-  return [columns.filter((column) => filters[column.field]), cmp];
+  return [filteredColumns, cmp];
 }
