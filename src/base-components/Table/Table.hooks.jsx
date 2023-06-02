@@ -1,14 +1,17 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   FilterAltOff as FilterAltOffIcon,
   FilterAlt as FilterAltIcon,
   DragHandle as DragHandleIcon,
+  LibraryAddCheck as LibraryAddCheckIcon,
+  CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon,
 } from "@mui/icons-material";
 import { getDataRange } from "./Table.utils";
 import CheckList from "../List/CheckList";
 import Menu from "../Menu/Menu";
 import Checkbox from "../Checkbox/Checkbox";
 import { getOriginalTextWidth } from "../../hooks/useEllipsisActive";
+import { action } from "@storybook/addon-actions";
 
 export function usePaginationDetails(
   data = [],
@@ -223,4 +226,24 @@ export function useFilterColumns({ data, columns: _columns, hide }) {
   );
 
   return [filteredColumns, cmp];
+}
+
+export function useSelectionMode({ selectionMode: _selectionMode, hide }) {
+  const [selectionMode, setSelectionMode] = useState(_selectionMode);
+
+  useEffect(() => {
+    setSelectionMode(_selectionMode);
+  }, [_selectionMode]);
+
+  const cmp = !hide && (
+    <Checkbox
+      checkedIcon={<LibraryAddCheckIcon />}
+      icon={<CheckBoxOutlineBlankIcon />}
+      checked={selectionMode}
+      onClick={(event) => setSelectionMode(!selectionMode)}
+      tooltipProps={{ title: "Enable Selection Mode" }}
+    />
+  );
+
+  return [selectionMode, cmp];
 }

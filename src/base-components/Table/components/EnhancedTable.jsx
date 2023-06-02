@@ -20,6 +20,7 @@ import {
   useFilterColumns,
   usePaginationDetails,
   useSelection,
+  useSelectionMode,
 } from "../Table.hooks";
 
 export default function EnhancedTable({
@@ -33,11 +34,12 @@ export default function EnhancedTable({
   onChange,
   orderBy,
   addFilterColumnsAction,
+  addSelectionModeAction,
   data,
   columns: _columns,
   onClickRow,
   actions,
-  selectionMode,
+  selectionMode: _selectionMode,
   selectedActions,
   selectedLabel,
   paginationProps,
@@ -66,6 +68,11 @@ export default function EnhancedTable({
     data,
     columns: _columns,
     hide: !addFilterColumnsAction,
+  });
+
+  const [selectionMode, selectionModeCmp] = useSelectionMode({
+    selectionMode: _selectionMode,
+    hide: !addSelectionModeAction,
   });
 
   // eslint-disable-next-line no-unused-vars
@@ -110,6 +117,7 @@ export default function EnhancedTable({
             title={title}
             actions={actions}
             filterAction={filterActionCmp}
+            selectionModeAction={selectionModeCmp}
             selectedActions={selectedActions}
             selectedLabel={selectedLabel}
             data={data}
@@ -206,6 +214,7 @@ EnhancedTable.propTypes = {
   selectedLabel: PropTypes.string,
   selectionMode: PropTypes.bool,
   addFilterColumnsAction: PropTypes.bool,
+  addSelectionModeAction: PropTypes.bool,
   title: PropTypes.string,
   helperText: PropTypes.string,
   onChange: PropTypes.func,
@@ -290,6 +299,8 @@ EnhancedTable.defaultProps = {
   title: undefined,
   orderBy: undefined,
   pagination: undefined,
+  addFilterColumnsAction: false,
+  addSelectionModeAction: true,
   onChange: undefined,
   onClickRow: undefined,
   data: undefined,
