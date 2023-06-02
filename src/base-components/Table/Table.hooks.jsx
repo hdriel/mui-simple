@@ -127,8 +127,8 @@ function getColumn(row, column) {
 function getMenuWidth(fields) {
   const sized = fields?.map((field) => field?.length ?? 0) ?? [0];
   const index = Math.max(...sized);
-  const maxWord = fields[sized.indexOf(index)];
-  const { offsetWidth, scrollWidth } = getOriginalTextWidth(maxWord ?? "");
+  const maxWord = fields?.[sized.indexOf(index)] ?? "";
+  const { offsetWidth, scrollWidth } = getOriginalTextWidth(maxWord);
   const checkboxPadding = 50;
   const draggalbePadding = 50;
   const spaceItemsPadding = 15;
@@ -159,7 +159,7 @@ export function useFilterColumns({ data, columns: _columns, hide }) {
   );
 
   const [menuWidth, menuHeight] = useMemo(() => {
-    const fields = columnsState.map((column) => column.label);
+    const fields = columnsState?.map((column) => column.label);
     const width = getMenuWidth(fields);
     const height = (fields?.length ?? 1) * 75;
 
