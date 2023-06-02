@@ -174,22 +174,8 @@ export function SelectionMode() {
       orderBy={{ age: "asc" }}
       columns={PERSON_COLUMNS}
       data={PERSON_DATA.slice(0, 2)}
-      actions={[
-        {
-          tooltip: "enable select mode",
-          cmp: (
-            <Checkbox
-              checkedIcon={<LibraryAddCheckIcon />}
-              icon={<CheckBoxOutlineBlankIcon />}
-              checked={selectionMode}
-              onClick={(event, data) => {
-                action("onSelectModeClick")(event, data);
-                setSelectionMode(!selectionMode);
-              }}
-            />
-          ),
-        },
-      ]}
+      addSelectionModeAction
+      selectionMode
       selectedActions={[
         {
           tooltip: "delete",
@@ -203,14 +189,11 @@ export function SelectionMode() {
           ),
         },
       ]}
-      selectionMode={selectionMode}
     />
   );
 }
 
 export function FilterAction() {
-  const [selectionMode, setSelectionMode] = useState(false);
-
   return (
     <Table
       {...actions}
@@ -219,23 +202,8 @@ export function FilterAction() {
       orderBy={{ age: "asc" }}
       columns={PERSON_COLUMNS}
       addFilterColumnsAction
+      addSelectionModeAction
       data={PERSON_DATA.slice(0, 2)}
-      actions={[
-        {
-          tooltip: "enable select mode",
-          cmp: (
-            <Checkbox
-              checkedIcon={<LibraryAddCheckIcon />}
-              icon={<CheckBoxOutlineBlankIcon />}
-              checked={selectionMode}
-              onClick={(event, data) => {
-                action("onSelectModeClick")(event, data);
-                setSelectionMode(!selectionMode);
-              }}
-            />
-          ),
-        },
-      ]}
       selectedActions={[
         {
           tooltip: "delete",
@@ -249,7 +217,6 @@ export function FilterAction() {
           ),
         },
       ]}
-      selectionMode={selectionMode}
     />
   );
 }
