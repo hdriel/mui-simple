@@ -49,6 +49,7 @@ export default function EnhancedTable({
   headerColor,
   evenRowsColor,
   oddRowsColor,
+  LABELS,
 }) {
   const theme = useTheme();
   const { handleSelectAllClick, isSelected, selected, handleSelect } =
@@ -68,11 +69,14 @@ export default function EnhancedTable({
     data,
     columns: _columns,
     hide: !addFilterColumnsAction,
+    tooltip: LABELS.FILTER_TOOLTIP,
+    title: LABELS.FILTER_NENU_TITLE,
   });
 
   const [selectionMode, selectionModeCmp] = useSelectionMode({
     selectionMode: _selectionMode,
     hide: !addSelectionModeAction,
+    tooltip: LABELS.SELECTION_MODE_TOOLTIP,
   });
 
   // eslint-disable-next-line no-unused-vars
@@ -289,6 +293,10 @@ EnhancedTable.propTypes = {
       color: PropTypes.string,
     }),
   ]),
+  LABELS: PropTypes.shape({
+    FILTER_TOOLTIP: PropTypes.string,
+    SELECTION_MODE_TOOLTIP: PropTypes.string,
+  }),
 };
 
 EnhancedTable.defaultProps = {
@@ -312,9 +320,9 @@ EnhancedTable.defaultProps = {
   headerColor: undefined,
   evenRowsColor: undefined,
   oddRowsColor: undefined,
+  LABELS: {
+    FILTER_TOOLTIP: "Filter Columns",
+    FILTER_NENU_TITLE: "Columns",
+    SELECTION_MODE_TOOLTIP: "Enable Selection Mode",
+  },
 };
-
-// sx={{ backgroundColor: lighten(theme.palette.primary.main, 0.7), color: 'black' }}
-
-// <TableCell component="th" id={labelId} scope="row" padding="none">{row.name}</TableCell>
-// <TableCell align="right">{row.protein}</TableCell>

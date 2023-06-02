@@ -138,7 +138,13 @@ function getMenuWidth(fields) {
   return checkboxPadding + draggalbePadding + offsetWidth + spaceItemsPadding;
 }
 
-export function useFilterColumns({ data, columns: _columns, hide }) {
+export function useFilterColumns({
+  data,
+  columns: _columns,
+  hide,
+  tooltip,
+  title,
+}) {
   const [columnsState, setColumnsState] = useState(_columns);
 
   const columns = useMemo(
@@ -193,7 +199,8 @@ export function useFilterColumns({ data, columns: _columns, hide }) {
       onClose={() => setMenuOpen(false)}
       alternativeContent={
         <CheckList
-          title="columns"
+          title={title}
+          tooltipProps={{ title: tooltip }}
           items={columns?.map((column) => ({
             id: column.id,
             title: column.label ?? column.field,
@@ -227,7 +234,11 @@ export function useFilterColumns({ data, columns: _columns, hide }) {
   return [filteredColumns, cmp];
 }
 
-export function useSelectionMode({ selectionMode: _selectionMode, hide }) {
+export function useSelectionMode({
+  selectionMode: _selectionMode,
+  hide,
+  tooltip,
+}) {
   const [selectionMode, setSelectionMode] = useState(_selectionMode ?? false);
 
   useEffect(() => {
@@ -240,7 +251,7 @@ export function useSelectionMode({ selectionMode: _selectionMode, hide }) {
       icon={<CheckBoxOutlineBlankIcon />}
       checked={selectionMode}
       onClick={(event) => setSelectionMode(!selectionMode)}
-      tooltipProps={{ title: "Enable Selection Mode" }}
+      tooltipProps={{ title: tooltip }}
     />
   );
 
