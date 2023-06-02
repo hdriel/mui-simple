@@ -5,6 +5,7 @@ import {
   Button as MuiButton,
   IconButton as MuiIconButton,
 } from "./Button.styled";
+import Tooltip from "../Tooltip/Tooltip";
 
 const spinner = <CircularProgress muiColor="inherit" size={15} />;
 
@@ -26,6 +27,7 @@ const Button = forwardRef(
       size,
       icon,
       fullWidth,
+      tooltipProps,
       children,
       ...props
     },
@@ -33,19 +35,21 @@ const Button = forwardRef(
   ) => {
     if (icon || (isLoading && !loadingLabel && !startIcon && !endIcon)) {
       return (
-        <MuiIconButton
-          ref={ref}
-          color={muiColor}
-          customColor={customColor}
-          style={{ color: customColor }}
-          size={size}
-          disableRipple={disableRipple}
-          onClick={onClick}
-          href={link}
-          {...props}
-        >
-          {isLoading ? spinner : icon}
-        </MuiIconButton>
+        <Tooltip {...tooltipProps}>
+          <MuiIconButton
+            ref={ref}
+            color={muiColor}
+            customColor={customColor}
+            style={{ color: customColor }}
+            size={size}
+            disableRipple={disableRipple}
+            onClick={onClick}
+            href={link}
+            {...props}
+          >
+            {isLoading ? spinner : icon}
+          </MuiIconButton>
+        </Tooltip>
       );
     }
 
@@ -62,23 +66,25 @@ const Button = forwardRef(
       : children;
 
     return (
-      <MuiButton
-        ref={ref}
-        variant={variant}
-        disabled={isLoading || disabled}
-        startIcon={startIconCmp}
-        endIcon={endIconCmp}
-        onClick={onClick}
-        href={link}
-        color={muiColor}
-        disableRipple={disableRipple}
-        customColor={customColor}
-        size={size}
-        fullWidth={fullWidth}
-        {...props}
-      >
-        {content}
-      </MuiButton>
+      <Tooltip {...tooltipProps}>
+        <MuiButton
+          ref={ref}
+          variant={variant}
+          disabled={isLoading || disabled}
+          startIcon={startIconCmp}
+          endIcon={endIconCmp}
+          onClick={onClick}
+          href={link}
+          color={muiColor}
+          disableRipple={disableRipple}
+          customColor={customColor}
+          size={size}
+          fullWidth={fullWidth}
+          {...props}
+        >
+          {content}
+        </MuiButton>
+      </Tooltip>
     );
   }
 );
@@ -100,6 +106,7 @@ Button.propTypes = {
   disableElevation: PropTypes.bool,
   icon: PropTypes.node,
   size: PropTypes.oneOf(["small", "medium", "large"]),
+  tooltipProps: PropTypes.object,
 };
 
 Button.defaultProps = {
@@ -119,6 +126,7 @@ Button.defaultProps = {
   disableElevation: undefined,
   icon: undefined,
   size: undefined,
+  tooltipProps: undefined,
 };
 
 export default Button;

@@ -16,6 +16,7 @@ import { useAnchorProps, useChildrenComponentBinding } from "./Menu.hooks";
 
 export default function Menu({
   width,
+  height,
   maxHeight,
   id,
   disableRipple,
@@ -30,6 +31,7 @@ export default function Menu({
   boundChildrenIndex,
   contextMenu,
   elevation,
+  alternativeContent,
   children,
   ...props
 }) {
@@ -70,6 +72,7 @@ export default function Menu({
         <MenuWrapper>
           <MuiMenu
             elevation={elevation}
+            height={height}
             width={width}
             maxHeight={maxHeight}
             id={id}
@@ -80,36 +83,38 @@ export default function Menu({
             {...anchorProps}
             {...props}
           >
-            <MenuList dense={dense}>
-              {options?.map(({ divider, ...option }, index) =>
-                divider ? (
-                  <Divider key={index} variant="fullWidth" {...option} />
-                ) : (
-                  <MenuItem
-                    key={`${index}-${option.id}`}
-                    onClick={(event) => handleClick(event, option)}
-                    disableRipple={disableRipple}
-                  >
-                    {option.icon || option.check ? (
-                      <ListItemIcon>
-                        {(React.isValidElement(option.icon) &&
-                          React.cloneElement(option.icon, {
-                            fontSize: "small",
-                          })) ||
-                          (option.check && <CheckIcon />)}
-                      </ListItemIcon>
-                    ) : null}
+            {alternativeContent || (
+              <MenuList dense={dense}>
+                {options?.map(({ divider, ...option }, index) =>
+                  divider ? (
+                    <Divider key={index} variant="fullWidth" {...option} />
+                  ) : (
+                    <MenuItem
+                      key={`${index}-${option.id}`}
+                      onClick={(event) => handleClick(event, option)}
+                      disableRipple={disableRipple}
+                    >
+                      {option.icon || option.check ? (
+                        <ListItemIcon>
+                          {(React.isValidElement(option.icon) &&
+                            React.cloneElement(option.icon, {
+                              fontSize: "small",
+                            })) ||
+                            (option.check && <CheckIcon />)}
+                        </ListItemIcon>
+                      ) : null}
 
-                    <ListItemText>{option.label}</ListItemText>
-                    {option.shortcut ? (
-                      <Typography variant="body2" muiColor="text.secondary">
-                        {option.shortcut}
-                      </Typography>
-                    ) : null}
-                  </MenuItem>
-                )
-              )}
-            </MenuList>
+                      <ListItemText>{option.label}</ListItemText>
+                      {option.shortcut ? (
+                        <Typography variant="body2" muiColor="text.secondary">
+                          {option.shortcut}
+                        </Typography>
+                      ) : null}
+                    </MenuItem>
+                  )
+                )}
+              </MenuList>
+            )}
           </MuiMenu>
         </MenuWrapper>
       )}
@@ -123,6 +128,7 @@ Menu.propTypes = {
   boundChildrenId: PropTypes.string,
   boundChildrenIndex: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
   id: PropTypes.string,
+  alternativeContent: PropTypes.any,
   dense: PropTypes.bool,
   disableRipple: PropTypes.bool,
   open: PropTypes.bool,

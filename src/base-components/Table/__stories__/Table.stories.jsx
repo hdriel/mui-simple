@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies,no-unused-vars
 import { action } from "@storybook/addon-actions";
-import { Home as HomeIcon } from "@mui/icons-material";
 import { Stack } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import LibraryAddCheckIcon from "@mui/icons-material/LibraryAddCheck";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import FilterListIcon from "@mui/icons-material/FilterList";
+
+import {
+  Home as HomeIcon,
+  Delete as DeleteIcon,
+  LibraryAddCheck as LibraryAddCheckIcon,
+  CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon,
+} from "@mui/icons-material";
 
 import { Table } from "../Table";
 import MuiPagination from "../../Pagination/Pagination";
@@ -15,12 +17,11 @@ import Switch from "../../Switch/Switch";
 import {
   FITNESS_COLUMNS,
   FITNESS_DATA,
-  VariantDataColumns,
-  VariantDataRows,
+  PERSON_COLUMNS,
+  PERSON_DATA,
 } from "./Table.mocks";
 import { Button } from "../Table.styled";
 import Checkbox from "../../Checkbox/Checkbox";
-import CheckList from "../../List/CheckList";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -136,8 +137,8 @@ export function VariantData() {
         dense={dense}
         title="Variant Data"
         orderBy={{ age: "asc" }}
-        columns={VariantDataColumns}
-        data={VariantDataRows}
+        columns={PERSON_COLUMNS}
+        data={PERSON_DATA}
       />
     </Stack>
   );
@@ -155,8 +156,8 @@ export function HelperText() {
         dense={dense}
         title="Variant Data"
         orderBy={{ age: "asc" }}
-        columns={VariantDataColumns}
-        data={VariantDataRows.slice(0, 2)}
+        columns={PERSON_COLUMNS}
+        data={PERSON_DATA.slice(0, 2)}
       />
     </Stack>
   );
@@ -171,8 +172,8 @@ export function SelectionMode() {
       helperText="A basic table example with a caption"
       title="Selection Table by action"
       orderBy={{ age: "asc" }}
-      columns={VariantDataColumns}
-      data={VariantDataRows.slice(0, 2)}
+      columns={PERSON_COLUMNS}
+      data={PERSON_DATA.slice(0, 2)}
       actions={[
         {
           tooltip: "enable select mode",
@@ -209,9 +210,6 @@ export function SelectionMode() {
 
 export function FilterAction() {
   const [selectionMode, setSelectionMode] = useState(false);
-  const [filterColumns, setFilterColumns] = useState(
-    VariantDataColumns.map((column) => column.field)
-  );
 
   return (
     <Table
@@ -219,10 +217,9 @@ export function FilterAction() {
       helperText="A basic table example with a caption"
       title="Selection Table by action"
       orderBy={{ age: "asc" }}
-      columns={VariantDataColumns.filter((column) =>
-        filterColumns.includes(column.field)
-      )}
-      data={VariantDataRows.slice(0, 2)}
+      columns={PERSON_COLUMNS}
+      addFilterColumnsAction
+      data={PERSON_DATA.slice(0, 2)}
       actions={[
         {
           tooltip: "enable select mode",
@@ -237,10 +234,6 @@ export function FilterAction() {
               }}
             />
           ),
-        },
-        {
-          tooltip: "filter column",
-          cmp: null,
         },
       ]}
       selectedActions={[
@@ -257,6 +250,33 @@ export function FilterAction() {
         },
       ]}
       selectionMode={selectionMode}
+    />
+  );
+}
+
+export function generateColumnStrList() {
+  return (
+    <Table
+      {...actions}
+      helperText="A basic table example with a caption"
+      title="generate column from string list"
+      columns={PERSON_COLUMNS.map((c) => c.field)}
+      orderBy={{ age: "asc" }}
+      addFilterColumnsAction
+      data={PERSON_DATA.slice(0, 3)}
+    />
+  );
+}
+
+export function generateAutoColumns() {
+  return (
+    <Table
+      {...actions}
+      helperText="A basic table example with a caption"
+      title="Generate Auto Columns from json data"
+      orderBy={{ age: "asc" }}
+      addFilterColumnsAction
+      data={PERSON_DATA.slice(0, 3)}
     />
   );
 }

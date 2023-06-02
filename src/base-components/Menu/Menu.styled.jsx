@@ -36,26 +36,29 @@ export const MenuWrapper = styled(Box)`
   }
 `;
 
-export const Menu = styled(({ width, maxHeight, elevation, ...props }) => (
-  <MuiMenu
-    PaperProps={{
-      elevation,
-      sx: {
-        width,
-        maxHeight,
-        overflowY: "auto",
-        filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-        "& .MuiAvatar-root": {
-          width: 32,
-          height: 32,
-          ml: -0.5,
-          mr: 1,
+export const Menu = styled(
+  ({ height, width, maxHeight, elevation, ...props }) => (
+    <MuiMenu
+      PaperProps={{
+        elevation,
+        sx: {
+          height,
+          width,
+          maxHeight,
+          overflowY: "auto",
+          filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+          "& .MuiAvatar-root": {
+            width: 32,
+            height: 32,
+            ml: -0.5,
+            mr: 1,
+          },
         },
-      },
-    }}
-    {...props}
-  />
-))`
+      }}
+      {...props}
+    />
+  )
+)`
   max-width: 100%;
   & .MuiList-root:focus-visible {
     outline: none;

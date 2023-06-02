@@ -77,6 +77,10 @@ export const NestedList = () => {
         },
       ],
     },
+    {
+      startIcon: <PhoneIcon />,
+      title: "Recents",
+    },
   ];
 
   return <List title="Nested List Items" items={items} />;
