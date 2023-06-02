@@ -1,14 +1,17 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   FilterAltOff as FilterAltOffIcon,
   FilterAlt as FilterAltIcon,
   DragHandle as DragHandleIcon,
+  LibraryAddCheck as LibraryAddCheckIcon,
+  CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon,
 } from "@mui/icons-material";
 import { getDataRange } from "./Table.utils";
 import CheckList from "../List/CheckList";
 import Menu from "../Menu/Menu";
 import Checkbox from "../Checkbox/Checkbox";
 import { getOriginalTextWidth } from "../../hooks/useEllipsisActive";
+import { action } from "@storybook/addon-actions";
 
 export function usePaginationDetails(
   data = [],
@@ -127,15 +130,21 @@ function getColumn(row, column) {
 function getMenuWidth(fields) {
   const sized = fields?.map((field) => field?.length ?? 0) ?? [0];
   const index = Math.max(...sized);
-  const maxWord = fields[sized.indexOf(index)];
-  const { offsetWidth, scrollWidth } = getOriginalTextWidth(maxWord ?? "");
+  const maxWord = fields?.[sized.indexOf(index)] ?? "";
+  const { offsetWidth, scrollWidth } = getOriginalTextWidth(maxWord);
   const checkboxPadding = 50;
   const draggalbePadding = 50;
   const spaceItemsPadding = 15;
   return checkboxPadding + draggalbePadding + offsetWidth + spaceItemsPadding;
 }
 
-export function useFilterColumns({ data, columns: _columns, hide }) {
+export function useFilterColumns({
+  data,
+  columns: _columns,
+  hide,
+  tooltip,
+  title,
+}) {
   const [columnsState, setColumnsState] = useState(_columns);
 
   const columns = useMemo(
@@ -159,11 +168,10 @@ export function useFilterColumns({ data, columns: _columns, hide }) {
   );
 
   const [menuWidth, menuHeight] = useMemo(() => {
-    const fields = columnsState.map((column) => column.label);
+    const fields = columnsState?.map((column) => column.label);
     const width = getMenuWidth(fields);
     const height = (fields?.length ?? 1) * 75;
 
-    console.log(width, height);
     return [width, height];
   }, [columnsState]);
 
@@ -191,7 +199,8 @@ export function useFilterColumns({ data, columns: _columns, hide }) {
       onClose={() => setMenuOpen(false)}
       alternativeContent={
         <CheckList
-          title="columns"
+          title={title}
+          tooltipProps={{ title: tooltip }}
           items={columns?.map((column) => ({
             id: column.id,
             title: column.label ?? column.field,
@@ -223,4 +232,28 @@ export function useFilterColumns({ data, columns: _columns, hide }) {
   );
 
   return [filteredColumns, cmp];
+}
+
+export function useSelectionMode({
+  selectionMode: _selectionMode,
+  hide,
+  tooltip,
+}) {
+  const [selectionMode, setSelectionMode] = useState(_selectionMode ?? false);
+
+  useEffect(() => {
+    setSelectionMode(_selectionMode);
+  }, [_selectionMode]);
+
+  const cmp = !hide && (
+    <Checkbox
+      checkedIcon={<LibraryAddCheckIcon />}
+      icon={<CheckBoxOutlineBlankIcon />}
+      checked={selectionMode}
+      onClick={(event) => setSelectionMode(!selectionMode)}
+      tooltipProps={{ title: tooltip }}
+    />
+  );
+
+  return [selectionMode, cmp];
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Checkbox as MuiCheckbox } from "./Checkbox.styled";
+import Tooltip from "../Tooltip/Tooltip";
 
 const Checkbox = ({
   label,
@@ -17,28 +18,31 @@ const Checkbox = ({
   disabled,
   labelPlacement,
   helperText,
+  tooltipProps,
   fontSize,
   ...props
 }) => {
   return (
-    <MuiCheckbox
-      label={label}
-      size={size}
-      color={color}
-      textColor={textColor}
-      muiColor={muiColor}
-      icon={icon}
-      checkedIcon={checkedIcon}
-      defaultChecked={defaultChecked}
-      required={required}
-      disabled={disabled}
-      checked={checked}
-      onChange={onChange}
-      labelPlacement={labelPlacement}
-      helperText={helperText}
-      fontSize={fontSize}
-      {...props}
-    />
+    <Tooltip {...tooltipProps}>
+      <MuiCheckbox
+        label={label}
+        size={size}
+        color={color}
+        textColor={textColor}
+        muiColor={muiColor}
+        icon={icon}
+        checkedIcon={checkedIcon}
+        defaultChecked={defaultChecked}
+        required={required}
+        disabled={disabled}
+        checked={checked}
+        onChange={onChange}
+        labelPlacement={labelPlacement}
+        helperText={helperText}
+        fontSize={fontSize}
+        {...props}
+      />
+    </Tooltip>
   );
 };
 

@@ -20,6 +20,7 @@ import {
   useFilterColumns,
   usePaginationDetails,
   useSelection,
+  useSelectionMode,
 } from "../Table.hooks";
 
 export default function EnhancedTable({
@@ -33,11 +34,12 @@ export default function EnhancedTable({
   onChange,
   orderBy,
   addFilterColumnsAction,
+  addSelectionModeAction,
   data,
   columns: _columns,
   onClickRow,
   actions,
-  selectionMode,
+  selectionMode: _selectionMode,
   selectedActions,
   selectedLabel,
   paginationProps,
@@ -47,6 +49,7 @@ export default function EnhancedTable({
   headerColor,
   evenRowsColor,
   oddRowsColor,
+  LABELS,
 }) {
   const theme = useTheme();
   const { handleSelectAllClick, isSelected, selected, handleSelect } =
@@ -66,6 +69,14 @@ export default function EnhancedTable({
     data,
     columns: _columns,
     hide: !addFilterColumnsAction,
+    tooltip: LABELS.FILTER_TOOLTIP,
+    title: LABELS.FILTER_NENU_TITLE,
+  });
+
+  const [selectionMode, selectionModeCmp] = useSelectionMode({
+    selectionMode: _selectionMode,
+    hide: !addSelectionModeAction,
+    tooltip: LABELS.SELECTION_MODE_TOOLTIP,
   });
 
   // eslint-disable-next-line no-unused-vars
@@ -110,6 +121,7 @@ export default function EnhancedTable({
             title={title}
             actions={actions}
             filterAction={filterActionCmp}
+            selectionModeAction={selectionModeCmp}
             selectedActions={selectedActions}
             selectedLabel={selectedLabel}
             data={data}
@@ -206,6 +218,7 @@ EnhancedTable.propTypes = {
   selectedLabel: PropTypes.string,
   selectionMode: PropTypes.bool,
   addFilterColumnsAction: PropTypes.bool,
+  addSelectionModeAction: PropTypes.bool,
   title: PropTypes.string,
   helperText: PropTypes.string,
   onChange: PropTypes.func,
@@ -280,6 +293,10 @@ EnhancedTable.propTypes = {
       color: PropTypes.string,
     }),
   ]),
+  LABELS: PropTypes.shape({
+    FILTER_TOOLTIP: PropTypes.string,
+    SELECTION_MODE_TOOLTIP: PropTypes.string,
+  }),
 };
 
 EnhancedTable.defaultProps = {
@@ -290,6 +307,8 @@ EnhancedTable.defaultProps = {
   title: undefined,
   orderBy: undefined,
   pagination: undefined,
+  addFilterColumnsAction: undefined,
+  addSelectionModeAction: undefined,
   onChange: undefined,
   onClickRow: undefined,
   data: undefined,
@@ -301,9 +320,9 @@ EnhancedTable.defaultProps = {
   headerColor: undefined,
   evenRowsColor: undefined,
   oddRowsColor: undefined,
+  LABELS: {
+    FILTER_TOOLTIP: "Filter Columns",
+    FILTER_NENU_TITLE: "Columns",
+    SELECTION_MODE_TOOLTIP: "Enable Selection Mode",
+  },
 };
-
-// sx={{ backgroundColor: lighten(theme.palette.primary.main, 0.7), color: 'black' }}
-
-// <TableCell component="th" id={labelId} scope="row" padding="none">{row.name}</TableCell>
-// <TableCell align="right">{row.protein}</TableCell>
