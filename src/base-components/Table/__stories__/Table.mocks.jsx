@@ -61,7 +61,7 @@ export const FITNESS_DATA = [
   { name: "Oreo", calories: 437, fat: 18.0, carbs: 63, protein: 4.0 },
 ];
 
-export const VariantDataColumns = [
+export const PERSON_COLUMNS = [
   {
     field: "avatar",
     align: "center",
@@ -75,6 +75,13 @@ export const VariantDataColumns = [
     label: "Age",
     numeric: true,
     tooltip: "great age!",
+  },
+  {
+    field: "stars",
+    align: "center",
+    label: "Stars",
+    numeric: true,
+    hide: true,
   },
   {
     field: "birthday",
@@ -91,11 +98,12 @@ export const VariantDataColumns = [
   },
 ];
 
-export const VariantDataRows = [
+export const PERSON_DATA = [
   {
     avatar: "/1.jpg",
     age: 18,
     birthday: new Date(1990, 9, 29, 20, 30).getTime(),
+    stars: 12015045,
     name: "Hadriel Benjo",
     description:
       "Hoping to reinvent yourself or just planning to be a bit more casual? It's hard to choose the perfect nickname. We'll find you a range of options including diminutives, alliteration, descriptive names, rhyming nicknames and even some computer generated words, which may or may not be helpful!",
@@ -104,6 +112,7 @@ export const VariantDataRows = [
     avatar: "/2.jpg",
     age: 15,
     birthday: new Date(1982, 9, 29, 20, 30).getTime(),
+    stars: 40015,
     name: "Kennedy Palmer",
     description:
       "Faucibus scelerisque eleifend donec pretium vulputate sapien nec. Ultricies mi eget mauris pharetra. Id semper risus in hendrerit gravida. Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Ac turpis egestas sed tempus urna et pharetra pharetra massa. Velit scelerisque in dictum non consectetur a erat nam. Quam nulla porttitor massa id. Pulvinar neque laoreet suspendisse interdum consectetur libero. Lorem sed risus ultricies tristique nulla aliquet. In pellentesque massa placerat duis ultricies lacus sed.",
@@ -112,6 +121,7 @@ export const VariantDataRows = [
     avatar: "/3.jpg",
     age: 20,
     birthday: new Date(2003, 9, 29, 20, 30).getTime(),
+    stars: 15,
     name: "Gray Richards",
     description:
       "Aliquet nec ullamcorper sit amet risus nullam. Senectus et netus et malesuada fames ac turpis egestas integer. Arcu ac tortor dignissim convallis aenean et tortor at risus. In est ante in nibh. Est placerat in egestas erat imperdiet sed euismod nisi porta. Tellus elementum sagittis vitae et. Viverra orci sagittis eu volutpat odio facilisis. Nec feugiat in fermentum posuere",
@@ -120,6 +130,7 @@ export const VariantDataRows = [
     avatar: "/4.jpg",
     age: 28,
     birthday: new Date(1990, 9, 29, 20, 30).getTime(),
+    stars: 1e5,
     name: "Ramos Bradley",
     description: "Sollicitudin tempor id eu nisl nunc mi ipsum",
   },
@@ -128,6 +139,7 @@ export const VariantDataRows = [
     age: 10,
     birthday: new Date(1975, 9, 29, 20, 30).getTime(),
     name: "Duncan Mcdonald",
+    stars: 15015,
     description:
       "egestas pretium aenean. Bibendum enim facilisis gravida neque. Porta non pulvinar neque laoreet. Nullam vehicula ipsum a arcu cursus. Tortor condimentum lacinia quis vel. Ultricies mi eget mauris pharetra et. Sit amet nisl suscipit adipiscing bibendum est ultricies integer. ",
   },
@@ -135,6 +147,7 @@ export const VariantDataRows = [
     avatar: "/6.jpg",
     age: 18,
     birthday: new Date(1999, 9, 29, 20, 30).getTime(),
+    stars: 450480,
     name: "Jordan Rose",
     description:
       "Accumsan sit amet nulla facilisi morbi. Amet dictum sit amet justo donec enim diam vulputate ut. Pellentesque habitant morbi tristique senectus. Velit aliquet sagittis id consectetur purus ut. Consequat id porta nibh venenatis cras sed felis eget. Viverra orci sagittis eu volutpat odio facilisis mauris. Egestas quis ipsum suspendisse ultrices gravida dictum fusce. Ornare aenean euismod elementum nisi quis. Aenean pharetra magna ac placerat vestibulum lectus. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere.",

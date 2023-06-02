@@ -63,6 +63,7 @@ export default function EnhancedTable({
   } = usePaginationDetails(data, pagination);
 
   const [columns, filterActionCmp] = useFilterColumns({
+    data,
     columns: _columns,
     hide: !addFilterColumnsAction,
   });
@@ -291,9 +292,9 @@ EnhancedTable.defaultProps = {
   pagination: undefined,
   onChange: undefined,
   onClickRow: undefined,
-  data: [],
-  columns: [],
-  actions: [],
+  data: undefined,
+  columns: undefined,
+  actions: undefined,
   PaginationComponent: undefined,
   paginationProps: undefined,
   paginationAlign: undefined,

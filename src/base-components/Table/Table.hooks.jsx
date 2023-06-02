@@ -1,9 +1,14 @@
 import React, { useMemo, useState } from "react";
+import {
+  FilterAltOff as FilterAltOffIcon,
+  FilterAlt as FilterAltIcon,
+  FilterList as FilterListIcon,
+} from "@mui/icons-material";
+
 import { getDataRange } from "./Table.utils";
 import CheckList from "../List/CheckList";
-import { Button } from "./Table.styled";
-import FilterListIcon from "@mui/icons-material/FilterList";
 import Menu from "../Menu/Menu";
+import Checkbox from "../Checkbox/Checkbox";
 
 export function usePaginationDetails(
   data = [],
@@ -89,7 +94,44 @@ export function useSelection({ data }) {
   return { selected, isSelected, handleSelectAllClick, handleSelect };
 }
 
-export function useFilterColumns({ columns, hide }) {
+function getColumn(row, column) {
+  const isString = typeof column === "string";
+  const field = isString ? column : column.field;
+
+  return {
+    field: field,
+    label: isString ? column : column.label,
+    numeric: isString
+      ? typeof row?.[field] === "number" ?? false
+      : column.numeric,
+    disablePadding: isString ? false : column.disablePadding ?? false,
+    align: isString
+      ? typeof row?.[field] === "number"
+        ? "right"
+        : "left"
+      : column.align,
+    format: undefined,
+    dateFormat: undefined,
+    props: undefined,
+    cmp: undefined,
+    image: isString
+      ? /\.(jpg|jpeg|png|gif|bmp|tiff|svg|webp|ico|heic|jp2)$/i.test?.(
+          row?.[field] ?? ""
+        )
+      : column.image,
+    ...(typeof column === "object" && column),
+  };
+}
+
+export function useFilterColumns({ data, columns: _columns, hide }) {
+  const columns = useMemo(
+    () =>
+      (_columns ?? Object.keys(data?.[0] ?? {}))?.map((column) =>
+        getColumn(data?.[0] ?? {}, column)
+      ) ?? [],
+    [_columns]
+  );
+
   const [filters, setFilters] = useState(
     columns?.reduce(
       (obj, column) => ({
@@ -98,6 +140,11 @@ export function useFilterColumns({ columns, hide }) {
       }),
       {}
     )
+  );
+
+  const checked = useMemo(
+    () => Object.values(filters).filter(Boolean).length === columns.length,
+    [filters]
   );
 
   const onClickFilterItem = (field) => (event) => {
@@ -117,8 +164,11 @@ export function useFilterColumns({ columns, hide }) {
         />
       }
     >
-      <Button
-        icon={<FilterListIcon />}
+      <Checkbox
+        color={"rgba(0, 0, 0, 0.87)"}
+        checkedIcon={<FilterAltOffIcon />}
+        icon={<FilterAltIcon />}
+        checked={checked}
         tooltipProps={{ title: "Filter Columns" }}
       />
     </Menu>
