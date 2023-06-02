@@ -166,7 +166,6 @@ export function useFilterColumns({ data, columns: _columns, hide }) {
     const width = getMenuWidth(fields);
     const height = (fields?.length ?? 1) * 75;
 
-    console.log(width, height);
     return [width, height];
   }, [columnsState]);
 
@@ -229,7 +228,7 @@ export function useFilterColumns({ data, columns: _columns, hide }) {
 }
 
 export function useSelectionMode({ selectionMode: _selectionMode, hide }) {
-  const [selectionMode, setSelectionMode] = useState(_selectionMode);
+  const [selectionMode, setSelectionMode] = useState(_selectionMode ?? false);
 
   useEffect(() => {
     setSelectionMode(_selectionMode);
