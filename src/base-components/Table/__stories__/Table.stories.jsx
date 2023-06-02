@@ -21,6 +21,7 @@ import {
 import { Button } from "../Table.styled";
 import Checkbox from "../../Checkbox/Checkbox";
 import CheckList from "../../List/CheckList";
+import Menu from "../../Menu/Menu";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -222,6 +223,7 @@ export function FilterAction() {
       columns={VariantDataColumns.filter((column) =>
         filterColumns.includes(column.field)
       )}
+      addFilterColumnsAction
       data={VariantDataRows.slice(0, 2)}
       actions={[
         {
@@ -237,10 +239,6 @@ export function FilterAction() {
               }}
             />
           ),
-        },
-        {
-          tooltip: "filter column",
-          cmp: null,
         },
       ]}
       selectedActions={[

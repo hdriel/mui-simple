@@ -140,18 +140,3 @@ export const VariantDataRows = [
       "Accumsan sit amet nulla facilisi morbi. Amet dictum sit amet justo donec enim diam vulputate ut. Pellentesque habitant morbi tristique senectus. Velit aliquet sagittis id consectetur purus ut. Consequat id porta nibh venenatis cras sed felis eget. Viverra orci sagittis eu volutpat odio facilisis mauris. Egestas quis ipsum suspendisse ultrices gravida dictum fusce. Ornare aenean euismod elementum nisi quis. Aenean pharetra magna ac placerat vestibulum lectus. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere.",
   },
 ];
-
-// export const ACTIONS = {
-//   DELETE: {
-//     Cmp: <Button icon={<DeleteIcon />} />,
-//     tooltip: "delete",
-//   },
-//   FILTER: {
-//     Cmp: <Button icon={<FilterListIcon />} />,
-//     tooltip: "Filter list",
-//   },
-//   SELECT: {
-//     Cmp: <Button icon={<LibraryAddCheckIcon />} />,
-//     tooltip: "Enable select mode",
-//   },
-// };

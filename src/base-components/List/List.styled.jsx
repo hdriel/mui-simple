@@ -23,10 +23,23 @@ export const List = styled(({ useTransition, children, ...props }) => (
       { children }
     )}
   </MuiList>
-))``;
-export const ListItem = MuiListItem;
+))`
+  width: 100%;
+`;
+
+export const ListItem = styled(MuiListItem)`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  & .MuiCollapse-root {
+    width: 100%;
+  }
+`;
 export const ListItemAvatar = MuiListItemAvatar;
-export const ListItemButton = MuiListItemButton;
+export const ListItemButton = styled(MuiListItemButton)`
+  width: 100%;
+`;
 export const ListItemIcon = MuiListItemIcon;
 export const ListItemSecondaryAction = MuiListItemSecondaryAction;
 export const ListItemText = MuiListItemText;

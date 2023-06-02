@@ -8,6 +8,7 @@ export function EnhancedTableToolbar({
   selected,
   data,
   title,
+  filterAction,
   selectedActions,
   actions,
 }) {
@@ -67,6 +68,7 @@ export function EnhancedTableToolbar({
             })}
           </Tooltip>
         ))}
+      {!numSelected && filterAction}
     </Toolbar>
   );
 }

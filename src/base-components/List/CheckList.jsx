@@ -28,7 +28,12 @@ export default function CheckList({
       case "switch":
         alignControl = alignControl !== undefined ? alignControl : "end";
         checkbox = (
-          <Switch edge={alignCheck} checked={item?.checked} tabIndex={-1} />
+          <Switch
+            {...item}
+            edge={alignCheck}
+            checked={item?.checked}
+            tabIndex={-1}
+          />
         );
         break;
 
@@ -37,6 +42,7 @@ export default function CheckList({
         alignControl = alignControl !== undefined ? alignControl : "start";
         checkbox = (
           <Checkbox
+            {...item}
             edge={alignCheck}
             checked={item?.checked}
             tabIndex={-1}

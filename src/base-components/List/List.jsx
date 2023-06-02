@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { cloneElement, useState } from "react";
 import PropTypes from "prop-types";
 import {
   ExpandLess as ExpandLessIcon,
@@ -56,7 +56,7 @@ const ListItemWrapper = ({
   );
 };
 
-export default function List({
+const List = ({
   useTransition,
   component,
   width,
@@ -69,12 +69,16 @@ export default function List({
   disablePadding,
   title,
   items,
+  insetItems,
   ...props
-}) {
+}) => {
   const [open, setOpen] = useState({});
   const onClick = (index, cb, event) => {
-    open[index] = open[index] === undefined ? true : !open[index];
-    setOpen(open);
+    event.stopPropagation();
+    setOpen((o) => ({
+      ...o,
+      [index]: o[index] === undefined ? true : !o[index],
+    }));
     cb?.(event);
   };
 
@@ -127,7 +131,7 @@ export default function List({
                       </ListItemAvatar>
                     )}
                     <ListItemText
-                      inset={itemProps.inset}
+                      inset={itemProps.inset ?? insetItems}
                       primary={itemProps.title}
                       secondary={
                         enableSubtitle && itemProps.subtitle ? (
@@ -154,12 +158,15 @@ export default function List({
                       {itemProps.actions}
                     </ListItemSecondaryAction>
                   </ListItemWrapper>
-                  <Collapse in={isOpen} timeout="auto" unmountOnExit>
-                    <List
-                      items={itemProps.items}
-                      component={"div"}
-                      useTransition={false}
-                    />
+
+                  <Collapse
+                    in={isOpen && itemProps.items?.length}
+                    timeout="auto"
+                    unmountOnExit
+                    addEndListener={undefined}
+                  >
+                    <List items={itemProps.items} />
+                    <Divider variant="fullWidth" {...divider} component="li" />
                   </Collapse>
                 </ListItem>
               )}
@@ -182,7 +189,7 @@ export default function List({
       }
     </MuiList>
   );
-}
+};
 
 List.propTypes = {
   useTransition: PropTypes.bool,
@@ -196,6 +203,7 @@ List.propTypes = {
   enableSubtitle: PropTypes.bool,
   title: PropTypes.string,
   alignItems: PropTypes.oneOf(["flex-start"]),
+  insetItems: PropTypes.bool,
   items: PropTypes.arrayOf(
     PropTypes.oneOfType([
       PropTypes.string,
@@ -230,3 +238,5 @@ List.defaultProps = {
   title: undefined,
   items: [],
 };
+
+export default List;

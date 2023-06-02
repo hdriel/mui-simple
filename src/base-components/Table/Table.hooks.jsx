@@ -1,5 +1,9 @@
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { getDataRange } from "./Table.utils";
+import CheckList from "../List/CheckList";
+import { Button } from "./Table.styled";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import Menu from "../Menu/Menu";
 
 export function usePaginationDetails(
   data = [],
@@ -83,4 +87,42 @@ export function useSelection({ data }) {
   };
 
   return { selected, isSelected, handleSelectAllClick, handleSelect };
+}
+
+export function useFilterColumns({ columns, hide }) {
+  const [filters, setFilters] = useState(
+    columns?.reduce(
+      (obj, column) => ({
+        ...obj,
+        [column.field]: column.hide === undefined ? true : !column.hide,
+      }),
+      {}
+    )
+  );
+
+  const onClickFilterItem = (field) => (event) => {
+    event.stopPropagation();
+    setFilters((o) => ({ ...o, [field]: !o[field] }));
+  };
+
+  const cmp = !hide && (
+    <Menu
+      alternativeContent={
+        <CheckList
+          items={columns?.map((column) => ({
+            title: column.label ?? column.field,
+            checked: filters[column.field] ?? false,
+            onClick: onClickFilterItem(column.field),
+          }))}
+        />
+      }
+    >
+      <Button
+        icon={<FilterListIcon />}
+        tooltipProps={{ title: "Filter Columns" }}
+      />
+    </Menu>
+  );
+
+  return [columns.filter((column) => filters[column.field]), cmp];
 }

@@ -16,7 +16,11 @@ import {
   TablePagination,
 } from "../Table.styled";
 import EnhancedTableRow from "./EnhancedTableRow";
-import { usePaginationDetails, useSelection } from "../Table.hooks";
+import {
+  useFilterColumns,
+  usePaginationDetails,
+  useSelection,
+} from "../Table.hooks";
 
 export default function EnhancedTable({
   elevation,
@@ -28,8 +32,9 @@ export default function EnhancedTable({
   pagination,
   onChange,
   orderBy,
+  addFilterColumnsAction,
   data,
-  columns,
+  columns: _columns,
   onClickRow,
   actions,
   selectionMode,
@@ -56,6 +61,11 @@ export default function EnhancedTable({
     sliceFrom,
     sliceTo,
   } = usePaginationDetails(data, pagination);
+
+  const [columns, filterActionCmp] = useFilterColumns({
+    columns: _columns,
+    hide: !addFilterColumnsAction,
+  });
 
   // eslint-disable-next-line no-unused-vars
   const handleClick = (event, rowId, rowData) => onClickRow?.(rowId, rowData);
@@ -91,10 +101,14 @@ export default function EnhancedTable({
         elevation={elevation}
         sx={{ width: "100%", mb: 2, overflow: "hidden", ...colorProps }}
       >
-        {(title || actions?.length) && (
+        {(title ||
+          actions?.length ||
+          selectedActions.length ||
+          filterActionCmp) && (
           <EnhancedTableToolbar
             title={title}
             actions={actions}
+            filterAction={filterActionCmp}
             selectedActions={selectedActions}
             selectedLabel={selectedLabel}
             data={data}
@@ -190,6 +204,7 @@ EnhancedTable.propTypes = {
   maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   selectedLabel: PropTypes.string,
   selectionMode: PropTypes.bool,
+  addFilterColumnsAction: PropTypes.bool,
   title: PropTypes.string,
   helperText: PropTypes.string,
   onChange: PropTypes.func,
