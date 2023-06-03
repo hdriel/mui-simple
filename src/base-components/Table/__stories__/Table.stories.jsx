@@ -279,7 +279,7 @@ export function CustomPagination() {
     <Table
       {...actions}
       title="Table Pagination"
-      orderBy={{ s: "asc" }}
+      orderBy={{ [FITNESS_COLUMNS[1].field]: "desc" }}
       pagination={{ total: FITNESS_DATA.length, page, rowsPerPage: 5 }}
       columns={FITNESS_COLUMNS}
       data={FITNESS_DATA}
@@ -290,7 +290,7 @@ export function CustomPagination() {
         muiColor: "secondary",
         firstIconCmpCB: HomeIcon,
       }}
-      onChange={({ pagination }) => {
+      onChangePagination={({ pagination }) => {
         if (isDefined(pagination.page)) setPage(pagination.page);
       }}
     />

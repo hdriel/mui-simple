@@ -23,7 +23,6 @@ export function EnhancedTableHead({
   rowCount,
   selectionMode,
 }) {
-  // const theme = useTheme();
   const createSortHandler = (property) => (event) =>
     onRequestSort(event, property);
 
@@ -42,11 +41,12 @@ export function EnhancedTableHead({
         )}
 
         {columns?.map((headCell) => {
-          const isActiveOrderBy = orderBy[headCell.id] !== undefined;
-          const orderByDir = isActiveOrderBy && !!orderBy[headCell.id];
+          const orderByColumn = orderBy?.[headCell.field];
+          const isActiveOrderBy = orderByColumn !== undefined;
+          const orderByDir = isActiveOrderBy && !!orderByColumn;
           let orderByValue = SORT.UP;
-          if (isActiveOrderBy && orderBy[headCell.id]) {
-            orderByValue = orderBy[headCell.id];
+          if (isActiveOrderBy && orderByColumn) {
+            orderByValue = orderByColumn;
           }
 
           return (

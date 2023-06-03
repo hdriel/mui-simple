@@ -34,6 +34,7 @@ import {
   useSelection,
   useSelectionMode,
 } from "../Table.hooks";
+import { EnhancedTablePagination } from "./EnhancedTablePagination";
 
 export default function EnhancedTable({
   elevation,
@@ -63,18 +64,15 @@ export default function EnhancedTable({
   LABELS,
 }) {
   const theme = useTheme();
+  const colorProps = extractColors({ theme: theme, colors: tableColor });
+
   const { handleSelectAllClick, isSelected, selected, handleSelect } =
     useSelection({ data });
 
-  const {
-    total,
-    rowsPerPage,
-    rowsPerPageList,
-    page,
-    emptyRows,
-    sliceFrom,
-    sliceTo,
-  } = usePaginationDetails(data, pagination);
+  const { emptyRows, sliceFrom, sliceTo } = usePaginationDetails(
+    data,
+    pagination
+  );
 
   const [columns, filterActionCmp] = useFilterColumns({
     data,
@@ -102,21 +100,6 @@ export default function EnhancedTable({
     };
     onChangePagination?.(config);
   };
-
-  const handleChangePage = (event, newPage) => {
-    if (typeof event === "number") newPage = event;
-
-    const config = { orderBy, pagination: { ...pagination, page: newPage } };
-    onChangePagination?.(config);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    const rowPerPage = parseInt(event.target.value, 10);
-    const config = { orderBy, pagination: { ...pagination, rowPerPage } };
-    onChangePagination?.(config);
-  };
-
-  const colorProps = extractColors({ theme: theme, colors: tableColor });
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -187,35 +170,15 @@ export default function EnhancedTable({
           </Table>
         </TableContainer>
 
-        {pagination && (
-          <Box
-            sx={{
-              p: 2,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: paginationAlign ?? "end",
-            }}
-          >
-            {PaginationComponent ? (
-              <PaginationComponent
-                totalPages={total}
-                page={page}
-                onChange={handleChangePage}
-                {...paginationProps}
-              />
-            ) : (
-              <TablePagination
-                component="div"
-                rowsPerPageOptions={rowsPerPageList}
-                count={total}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-              />
-            )}
-          </Box>
-        )}
+        <EnhancedTablePagination
+          pagination={pagination}
+          onChangePagination={onChangePagination}
+          data={data}
+          paginationProps={paginationProps}
+          paginationAlign={paginationAlign}
+          PaginationComponent={PaginationComponent}
+          orderBy={orderBy}
+        />
       </Paper>
     </Box>
   );
