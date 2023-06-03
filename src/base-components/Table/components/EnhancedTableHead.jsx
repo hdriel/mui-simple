@@ -71,17 +71,3 @@ export function EnhancedTableHead({
     </TableHead>
   );
 }
-
-EnhancedTableHead.propTypes = {
-  onRequestSort: PropTypes.func,
-  orderBy: PropTypes.object,
-  columns: PropTypes.arrayOf(PT_column),
-  headerColor: PT_colors,
-};
-
-EnhancedTableHead.defaultProps = {
-  onRequestSort: undefined,
-  orderBy: "",
-  columns: [],
-  headerColor: undefined,
-};

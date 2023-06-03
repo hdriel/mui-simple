@@ -1,8 +1,6 @@
 import React, { cloneElement, isValidElement } from "react";
-import PropTypes from "prop-types";
 import moment from "moment";
 
-import { PT_colors, PT_column } from "../Table.propTypes";
 import {
   TableCell,
   TableRow,
@@ -115,21 +113,3 @@ export default function EnhancedTableRow({
     </TableRow>
   );
 }
-
-EnhancedTableRow.propTypes = {
-  columns: PropTypes.arrayOf(PT_column),
-  handleClick: PropTypes.func,
-  index: PropTypes.number,
-  evenRowsColor: PT_colors,
-  oddRowsColor: PT_colors,
-};
-
-EnhancedTableRow.defaultProps = {
-  columns: undefined,
-  handleClick: undefined,
-  index: undefined,
-  data: undefined,
-};
-
-// <TableCell component="th" id={labelId} scope="row" padding="none">{row.name}</TableCell>
-// <TableCell align="right">{row.protein}</TableCell>

@@ -103,7 +103,7 @@ export function FullData() {
 }
 
 export function StickyHeader() {
-  const [stickyHeader, setStickyHeader] = useState(false);
+  const [stickyHeader, setStickyHeader] = useState(true);
 
   return (
     <Stack spacing={2}>

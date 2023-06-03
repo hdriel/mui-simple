@@ -43,7 +43,7 @@ export default function EnhancedTable({
   dense,
   title,
   pagination,
-  onChange,
+  onChangePagination,
   orderBy,
   addFilterColumnsAction,
   addSelectionModeAction,
@@ -53,7 +53,6 @@ export default function EnhancedTable({
   actions,
   selectionMode: _selectionMode,
   selectedActions,
-  selectedLabel,
   paginationProps,
   paginationAlign,
   PaginationComponent,
@@ -101,20 +100,20 @@ export default function EnhancedTable({
       pagination,
       orderBy: { ...orderBy, [property]: isAsc ? SORT.DOWN : SORT.UP },
     };
-    onChange?.(config);
+    onChangePagination?.(config);
   };
 
   const handleChangePage = (event, newPage) => {
     if (typeof event === "number") newPage = event;
 
     const config = { orderBy, pagination: { ...pagination, page: newPage } };
-    onChange?.(config);
+    onChangePagination?.(config);
   };
 
   const handleChangeRowsPerPage = (event) => {
     const rowPerPage = parseInt(event.target.value, 10);
     const config = { orderBy, pagination: { ...pagination, rowPerPage } };
-    onChange?.(config);
+    onChangePagination?.(config);
   };
 
   const colorProps = extractColors({ theme: theme, colors: tableColor });
@@ -135,7 +134,7 @@ export default function EnhancedTable({
             filterAction={filterActionCmp}
             selectionModeAction={selectionModeCmp}
             selectedActions={selectedActions}
-            selectedLabel={selectedLabel}
+            selectedLabel={LABELS.NUM_SELECTED}
             data={data}
             selected={selected}
           />
@@ -201,7 +200,7 @@ export default function EnhancedTable({
               <PaginationComponent
                 totalPages={total}
                 page={page}
-                onChange={handleChangePage}
+                onChangePagination={handleChangePage}
                 {...paginationProps}
               />
             ) : (
@@ -233,12 +232,8 @@ EnhancedTable.propTypes = {
   addSelectionModeAction: PropTypes.bool,
   title: PropTypes.string,
   helperText: PropTypes.string,
-  onChange: PropTypes.func,
+  onChangePagination: PropTypes.func,
   onClickRow: PropTypes.func,
-  // eslint-disable-next-line react/forbid-prop-types
-  orderBy: PropTypes.object,
-  // eslint-disable-next-line react/forbid-prop-types
-  data: PropTypes.arrayOf(PropTypes.object),
   pagination: PT_pagination,
   columns: PropTypes.arrayOf(PT_column),
   actions: PropTypes.arrayOf(PT_action),
@@ -254,26 +249,32 @@ EnhancedTable.propTypes = {
     FILTER_TOOLTIP: PropTypes.string,
     SELECTION_MODE_TOOLTIP: PropTypes.string,
   }),
+  // eslint-disable-next-line react/forbid-prop-types
+  orderBy: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
+  data: PropTypes.arrayOf(PropTypes.object),
 };
 
 EnhancedTable.defaultProps = {
   elevation: 10,
+  stickyHeader: true,
   dense: undefined,
+  maxHeight: undefined,
   selectionMode: undefined,
-  selectedLabel: undefined,
-  title: undefined,
-  orderBy: undefined,
-  pagination: undefined,
   addFilterColumnsAction: undefined,
   addSelectionModeAction: undefined,
-  onChange: undefined,
+  title: undefined,
+  helperText: undefined,
+  onChangePagination: undefined,
   onClickRow: undefined,
-  data: undefined,
+  pagination: undefined,
   columns: undefined,
   actions: undefined,
+  selectedActions: undefined,
   PaginationComponent: undefined,
   paginationProps: undefined,
   paginationAlign: undefined,
+  tableColor: undefined,
   headerColor: undefined,
   evenRowsColor: undefined,
   oddRowsColor: undefined,
@@ -281,5 +282,8 @@ EnhancedTable.defaultProps = {
     FILTER_TOOLTIP: "Filter Columns",
     FILTER_NENU_TITLE: "Columns",
     SELECTION_MODE_TOOLTIP: "Enable Selection Mode",
+    NUM_SELECTED: "{n} selected",
   },
+  orderBy: undefined,
+  data: undefined,
 };

@@ -87,7 +87,7 @@ export const PERSON_COLUMNS = [
     field: "birthday",
     align: "center",
     label: "birthday",
-    dateFormat: "YYYY/MM/DD hh:mm a",
+    dateFormat: "YYYY/MM/DD",
   },
   {
     field: "description",
