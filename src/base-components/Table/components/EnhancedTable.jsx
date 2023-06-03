@@ -200,7 +200,7 @@ export default function EnhancedTable({
               <PaginationComponent
                 totalPages={total}
                 page={page}
-                onChangePagination={handleChangePage}
+                onChange={handleChangePage}
                 {...paginationProps}
               />
             ) : (

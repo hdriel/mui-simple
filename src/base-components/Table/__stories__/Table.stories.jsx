@@ -256,11 +256,11 @@ export function Pagination() {
     <Table
       {...actions}
       title="Table Pagination"
-      orderBy={{ s: "asc" }}
       pagination={{ total: FITNESS_DATA.length, page, rowsPerPage: rowPerPage }}
       columns={FITNESS_COLUMNS}
       data={FITNESS_DATA}
-      onChange={({ pagination }) => {
+      onChangePagination={({ pagination }) => {
+        debugger;
         if (isDefined(pagination.page)) {
           setPage(pagination.page);
         }
