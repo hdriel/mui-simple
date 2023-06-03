@@ -2,10 +2,16 @@ import React, { cloneElement, isValidElement } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 
-import { TableCell, TableRow, Tooltip, Image } from "../Table.styled";
-import Avatar from "../../Avatar/Avatar";
-import Typography from "../../Typography/Typography";
-import Checkbox from "../../Checkbox/Checkbox";
+import { PT_colors, PT_column } from "../Table.propTypes";
+import {
+  TableCell,
+  TableRow,
+  Tooltip,
+  Image,
+  Checkbox,
+  Avatar,
+  Typography,
+} from "../Table.styled";
 
 function getRowContent({ column, data }) {
   const fieldValue =
@@ -111,40 +117,11 @@ export default function EnhancedTableRow({
 }
 
 EnhancedTableRow.propTypes = {
-  columns: PropTypes.arrayOf(
-    PropTypes.shape({
-      field: PropTypes.string,
-      numeric: PropTypes.bool,
-      format: PropTypes.func,
-      disablePadding: PropTypes.bool,
-      label: PropTypes.string,
-      align: PropTypes.oneOf(["right", "center", "left", "justify", "inherit"]),
-      dateFormat: PropTypes.string,
-      props: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-      cmp: PropTypes.any,
-      image: PropTypes.shape({
-        width: PropTypes.number,
-        height: PropTypes.number,
-        avatar: PropTypes.bool,
-      }),
-    })
-  ),
+  columns: PropTypes.arrayOf(PT_column),
   handleClick: PropTypes.func,
   index: PropTypes.number,
-  evenRowsColor: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      background: PropTypes.string,
-      color: PropTypes.string,
-    }),
-  ]),
-  oddRowsColor: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      background: PropTypes.string,
-      color: PropTypes.string,
-    }),
-  ]),
+  evenRowsColor: PT_colors,
+  oddRowsColor: PT_colors,
 };
 
 EnhancedTableRow.defaultProps = {

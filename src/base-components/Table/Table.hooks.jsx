@@ -115,7 +115,12 @@ function getColumn(row, column) {
         : "left"
       : column.align,
     format: undefined,
-    dateFormat: undefined,
+    dateFormat: isString
+      ? typeof row?.[field] === "number" &&
+        !new Date(row?.[field]).toISOString().startsWith("1970-01-01T")
+        ? "DD/MM/YYYY HH:mm a"
+        : undefined
+      : undefined,
     props: undefined,
     cmp: undefined,
     image: isString
@@ -155,6 +160,15 @@ export function useFilterColumns({
     [columnsState]
   );
 
+  const isSameData = useMemo(
+    () => JSON.stringify(columns) === JSON.stringify(columnsState),
+    [columns, columnsState]
+  );
+
+  useEffect(() => {
+    if (!isSameData) setColumnsState(columns);
+  }, [isSameData]);
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   const [filters, setFilters] = useState(
@@ -168,12 +182,12 @@ export function useFilterColumns({
   );
 
   const [menuWidth, menuHeight] = useMemo(() => {
-    const fields = columnsState?.map((column) => column.label);
+    const fields = columns?.map((column) => column.label);
     const width = getMenuWidth(fields);
-    const height = (fields?.length ?? 1) * 75;
+    const height = (fields?.length ?? 1) * 61.2 + (title ? 48 : 0);
 
     return [width, height];
-  }, [columnsState]);
+  }, [columns]);
 
   const checked = useMemo(
     () => Object.values(filters).filter(Boolean).length === columns.length,
@@ -200,20 +214,17 @@ export function useFilterColumns({
       alternativeContent={
         <CheckList
           title={title}
-          tooltipProps={{ title: tooltip }}
           items={columns?.map((column) => ({
             id: column.id,
             title: column.label ?? column.field,
             checked: filters[column.field] ?? false,
             onClick: onClickFilterItem(column.field),
             actions: [<DragHandleIcon />],
+            data: column,
           }))}
           dragAndDropItems
-          onListOrderChange={(fields) => {
-            const ids = fields.map(({ id }) => id);
-            const state = ids.map((id) =>
-              columnsState.find((column) => column.field === id)
-            );
+          onListOrderChange={(items) => {
+            const state = items.map((item) => item.data);
             setColumnsState(state);
           }}
         />
@@ -225,7 +236,7 @@ export function useFilterColumns({
           checkedIcon={<FilterAltOffIcon />}
           icon={<FilterAltIcon />}
           checked={checked}
-          tooltipProps={{ title: "Filter Columns" }}
+          tooltipProps={{ title: tooltip }}
         />
       </div>
     </Menu>

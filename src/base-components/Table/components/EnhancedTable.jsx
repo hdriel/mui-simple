@@ -2,9 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
 
-import { extractColors, SORT } from "../Table.utils";
 import { EnhancedTableToolbar } from "./EnhancedTableToolbar";
 import { EnhancedTableHead } from "./EnhancedTableHead";
+import EnhancedTableRow from "./EnhancedTableRow";
+
+import {
+  PT_elevation,
+  PT_action,
+  PT_column,
+  PT_pagination,
+  PT_sizeUnit,
+  PT_colors,
+} from "../Table.propTypes";
+
+import { extractColors, SORT } from "../Table.utils";
+
 import {
   TableCell,
   Box,
@@ -15,7 +27,7 @@ import {
   Paper,
   TablePagination,
 } from "../Table.styled";
-import EnhancedTableRow from "./EnhancedTableRow";
+
 import {
   useFilterColumns,
   usePaginationDetails,
@@ -211,10 +223,10 @@ export default function EnhancedTable({
 }
 
 EnhancedTable.propTypes = {
-  elevation: PropTypes.number,
+  elevation: PT_elevation,
   stickyHeader: PropTypes.bool,
   dense: PropTypes.bool,
-  maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  maxHeight: PT_sizeUnit,
   selectedLabel: PropTypes.string,
   selectionMode: PropTypes.bool,
   addFilterColumnsAction: PropTypes.bool,
@@ -227,72 +239,17 @@ EnhancedTable.propTypes = {
   orderBy: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
   data: PropTypes.arrayOf(PropTypes.object),
-  pagination: PropTypes.shape({
-    total: PropTypes.number,
-    rowsPerPage: PropTypes.number,
-    page: PropTypes.number,
-  }),
-  columns: PropTypes.arrayOf(
-    PropTypes.shape({
-      field: PropTypes.string,
-      numeric: PropTypes.bool,
-      format: PropTypes.func,
-      disablePadding: PropTypes.bool,
-      label: PropTypes.string,
-      align: PropTypes.oneOf(["right", "center", "left", "justify", "inherit"]),
-      dateFormat: PropTypes.string,
-      props: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-      cmp: PropTypes.any,
-      image: PropTypes.shape({
-        width: PropTypes.number,
-        height: PropTypes.number,
-        avatar: PropTypes.bool,
-      }),
-    })
-  ),
-  actions: PropTypes.arrayOf(
-    PropTypes.shape({
-      tooltip: PropTypes.string,
-      Cmp: PropTypes.node,
-    })
-  ),
-  selectedActions: PropTypes.arrayOf(
-    PropTypes.shape({
-      tooltip: PropTypes.string,
-      Cmp: PropTypes.node,
-    })
-  ),
+  pagination: PT_pagination,
+  columns: PropTypes.arrayOf(PT_column),
+  actions: PropTypes.arrayOf(PT_action),
+  selectedActions: PropTypes.arrayOf(PT_action),
   PaginationComponent: PropTypes.node,
   paginationProps: PropTypes.object,
   paginationAlign: PropTypes.oneOf(["start", "center", "end"]),
-  tableColor: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      background: PropTypes.string,
-      color: PropTypes.string,
-    }),
-  ]),
-  headerColor: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      background: PropTypes.string,
-      color: PropTypes.string,
-    }),
-  ]),
-  evenRowsColor: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      background: PropTypes.string,
-      color: PropTypes.string,
-    }),
-  ]),
-  oddRowsColor: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      background: PropTypes.string,
-      color: PropTypes.string,
-    }),
-  ]),
+  tableColor: PT_colors,
+  headerColor: PT_colors,
+  evenRowsColor: PT_colors,
+  oddRowsColor: PT_colors,
   LABELS: PropTypes.shape({
     FILTER_TOOLTIP: PropTypes.string,
     SELECTION_MODE_TOOLTIP: PropTypes.string,

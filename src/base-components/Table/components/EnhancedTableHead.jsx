@@ -1,15 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { PT_column, PT_colors } from "../Table.propTypes";
+
 import { SORT } from "../Table.utils";
+
 import {
   TableHead,
   TableCell,
-  Box,
   TableRow,
   TableSortLabel,
+  Checkbox,
 } from "../Table.styled";
-import Checkbox from "../../Checkbox/Checkbox";
 
 export function EnhancedTableHead({
   columns,
@@ -73,22 +75,8 @@ export function EnhancedTableHead({
 EnhancedTableHead.propTypes = {
   onRequestSort: PropTypes.func,
   orderBy: PropTypes.object,
-  columns: PropTypes.arrayOf(
-    PropTypes.shape({
-      field: PropTypes.string,
-      numeric: PropTypes.bool,
-      disablePadding: PropTypes.bool,
-      label: PropTypes.string,
-      align: PropTypes.oneOf(["right", "center", "left", "justify", "inherit"]),
-    })
-  ),
-  headerColor: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      background: PropTypes.string,
-      color: PropTypes.string,
-    }),
-  ]),
+  columns: PropTypes.arrayOf(PT_column),
+  headerColor: PT_colors,
 };
 
 EnhancedTableHead.defaultProps = {
