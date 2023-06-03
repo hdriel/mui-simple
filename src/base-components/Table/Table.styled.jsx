@@ -1,5 +1,4 @@
 import { Image as MuiImage } from "mui-image";
-
 import { styled, css } from "@mui/material/styles";
 import {
   Box as MuiBox,
@@ -12,22 +11,22 @@ import {
   TableRow as MuiTableRow,
   TableSortLabel as MuiTableSortLabel,
   Toolbar as MuiToolbar,
-  Typography as MuiTypography,
-  Checkbox as MuiCheckbox,
-  IconButton as MuiIconButton,
-  FormControlLabel as MuiFormControlLabel,
-  Switch as MuiSwitch,
 } from "@mui/material";
 
+import MuiCheckbox from "../Checkbox/Checkbox";
+import MuiAvatar from "../Avatar/Avatar";
+import MuiTypography from "../Typography/Typography";
 import MuiTooltip from "../Tooltip/Tooltip";
 import MuiButton from "../Button/Button";
 import MuiPaper from "../Paper/Paper";
-
-import { Delete, FilterList } from "@mui/icons-material";
 import { extractColors } from "./Table.utils";
 
-export const DeleteIcon = Delete;
-export const FilterListIcon = FilterList;
+export const Typography = MuiTypography;
+export const Avatar = MuiAvatar;
+export const Paper = MuiPaper;
+export const Checkbox = MuiCheckbox;
+export const Tooltip = MuiTooltip;
+export const Image = MuiImage;
 
 export const Box = MuiBox;
 export const Button = MuiButton;
@@ -55,11 +54,3 @@ export const TablePagination = MuiTablePagination;
 export const TableRow = MuiTableRow;
 export const TableSortLabel = MuiTableSortLabel;
 export const Toolbar = MuiToolbar;
-export const Typography = MuiTypography;
-export const Paper = MuiPaper;
-export const Checkbox = MuiCheckbox;
-export const IconButton = MuiIconButton;
-export const Tooltip = MuiTooltip;
-export const FormControlLabel = MuiFormControlLabel;
-export const Switch = MuiSwitch;
-export const Image = MuiImage;

@@ -11,7 +11,6 @@ import CheckList from "../List/CheckList";
 import Menu from "../Menu/Menu";
 import Checkbox from "../Checkbox/Checkbox";
 import { getOriginalTextWidth } from "../../hooks/useEllipsisActive";
-import { action } from "@storybook/addon-actions";
 
 export function usePaginationDetails(
   data = [],
@@ -25,21 +24,15 @@ export function usePaginationDetails(
   const [sliceFrom, sliceTo] = getDataRange({ rows, total, page, rowsPerPage });
 
   // Avoid a layout jump when reaching the last page with empty data.
-  const emptyRows = useMemo(
-    () => {
-      if (rows === total) {
-        const totalRowsTillPrevPage = page <= 1 ? 0 : (page - 1) * rowsPerPage;
+  const emptyRows = useMemo(() => {
+    if (rows === total) {
+      const totalRowsTillPrevPage = page <= 1 ? 0 : (page - 1) * rowsPerPage;
 
-        return (
-          rowsPerPage - Math.min(rowsPerPage, rows - totalRowsTillPrevPage)
-        );
-      } else {
-        return rows >= rowsPerPage ? 0 : rowsPerPage - rows;
-      }
-    },
-    [page, rowsPerPage, rows],
-    []
-  );
+      return rowsPerPage - Math.min(rowsPerPage, rows - totalRowsTillPrevPage);
+    } else {
+      return rows >= rowsPerPage ? 0 : rowsPerPage - rows;
+    }
+  }, [total, page, rowsPerPage, rows]);
 
   const rowsPerPageList = useMemo(
     () =>
@@ -115,7 +108,12 @@ function getColumn(row, column) {
         : "left"
       : column.align,
     format: undefined,
-    dateFormat: undefined,
+    dateFormat: isString
+      ? typeof row?.[field] === "number" &&
+        !new Date(row?.[field]).toISOString().startsWith("1970-01-01T")
+        ? "DD/MM/YYYY HH:mm a"
+        : undefined
+      : undefined,
     props: undefined,
     cmp: undefined,
     image: isString
@@ -131,7 +129,7 @@ function getMenuWidth(fields) {
   const sized = fields?.map((field) => field?.length ?? 0) ?? [0];
   const index = Math.max(...sized);
   const maxWord = fields?.[sized.indexOf(index)] ?? "";
-  const { offsetWidth, scrollWidth } = getOriginalTextWidth(maxWord);
+  const { offsetWidth } = getOriginalTextWidth(maxWord);
   const checkboxPadding = 50;
   const draggalbePadding = 50;
   const spaceItemsPadding = 15;
@@ -152,8 +150,19 @@ export function useFilterColumns({
       (columnsState ?? Object.keys(data?.[0] ?? {}))?.map((column) =>
         getColumn(data?.[0] ?? {}, column)
       ) ?? [],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [columnsState]
   );
+
+  const isSameData = useMemo(
+    () => JSON.stringify(columns) === JSON.stringify(columnsState),
+    [columns, columnsState]
+  );
+
+  useEffect(() => {
+    if (!isSameData) setColumnsState(columns);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSameData]);
 
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -168,16 +177,16 @@ export function useFilterColumns({
   );
 
   const [menuWidth, menuHeight] = useMemo(() => {
-    const fields = columnsState?.map((column) => column.label);
+    const fields = columns?.map((column) => column.label);
     const width = getMenuWidth(fields);
-    const height = (fields?.length ?? 1) * 75;
+    const height = (fields?.length ?? 1) * 61.2 + (title ? 48 : 0);
 
     return [width, height];
-  }, [columnsState]);
+  }, [columns, title]);
 
   const checked = useMemo(
     () => Object.values(filters).filter(Boolean).length === columns.length,
-    [filters]
+    [filters, columns.length]
   );
 
   const filteredColumns = useMemo(
@@ -200,20 +209,17 @@ export function useFilterColumns({
       alternativeContent={
         <CheckList
           title={title}
-          tooltipProps={{ title: tooltip }}
           items={columns?.map((column) => ({
             id: column.id,
             title: column.label ?? column.field,
             checked: filters[column.field] ?? false,
             onClick: onClickFilterItem(column.field),
             actions: [<DragHandleIcon />],
+            data: column,
           }))}
           dragAndDropItems
-          onListOrderChange={(fields) => {
-            const ids = fields.map(({ id }) => id);
-            const state = ids.map((id) =>
-              columnsState.find((column) => column.field === id)
-            );
+          onListOrderChange={(items) => {
+            const state = items.map((item) => item.data);
             setColumnsState(state);
           }}
         />
@@ -225,7 +231,7 @@ export function useFilterColumns({
           checkedIcon={<FilterAltOffIcon />}
           icon={<FilterAltIcon />}
           checked={checked}
-          tooltipProps={{ title: "Filter Columns" }}
+          tooltipProps={{ title: tooltip }}
         />
       </div>
     </Menu>

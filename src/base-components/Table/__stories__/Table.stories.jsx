@@ -3,12 +3,7 @@ import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
 import { Stack } from "@mui/material";
 
-import {
-  Home as HomeIcon,
-  Delete as DeleteIcon,
-  LibraryAddCheck as LibraryAddCheckIcon,
-  CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon,
-} from "@mui/icons-material";
+import { Home as HomeIcon, Delete as DeleteIcon } from "@mui/icons-material";
 
 import { Table } from "../Table";
 import MuiPagination from "../../Pagination/Pagination";
@@ -21,7 +16,6 @@ import {
   PERSON_DATA,
 } from "./Table.mocks";
 import { Button } from "../Table.styled";
-import Checkbox from "../../Checkbox/Checkbox";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -103,7 +97,7 @@ export function FullData() {
 }
 
 export function StickyHeader() {
-  const [stickyHeader, setStickyHeader] = useState(false);
+  const [stickyHeader, setStickyHeader] = useState(true);
 
   return (
     <Stack spacing={2}>
@@ -164,8 +158,6 @@ export function HelperText() {
 }
 
 export function SelectionMode() {
-  const [selectionMode, setSelectionMode] = useState(false);
-
   return (
     <Table
       {...actions}
@@ -256,11 +248,11 @@ export function Pagination() {
     <Table
       {...actions}
       title="Table Pagination"
-      orderBy={{ s: "asc" }}
       pagination={{ total: FITNESS_DATA.length, page, rowsPerPage: rowPerPage }}
       columns={FITNESS_COLUMNS}
       data={FITNESS_DATA}
-      onChange={({ pagination }) => {
+      onChangePagination={({ pagination }) => {
+        debugger;
         if (isDefined(pagination.page)) {
           setPage(pagination.page);
         }
@@ -279,18 +271,18 @@ export function CustomPagination() {
     <Table
       {...actions}
       title="Table Pagination"
-      orderBy={{ s: "asc" }}
+      orderBy={{ [FITNESS_COLUMNS[1].field]: "desc" }}
       pagination={{ total: FITNESS_DATA.length, page, rowsPerPage: 5 }}
       columns={FITNESS_COLUMNS}
       data={FITNESS_DATA}
       paginationAlign="center"
       PaginationComponent={MuiPagination}
       paginationProps={{
-        shape: "circle",
+        shape: "circular",
         muiColor: "secondary",
         firstIconCmpCB: HomeIcon,
       }}
-      onChange={({ pagination }) => {
+      onChangePagination={({ pagination }) => {
         if (isDefined(pagination.page)) setPage(pagination.page);
       }}
     />

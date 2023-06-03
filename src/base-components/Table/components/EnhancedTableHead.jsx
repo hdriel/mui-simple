@@ -1,15 +1,14 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import { SORT } from "../Table.utils";
+
 import {
   TableHead,
   TableCell,
-  Box,
   TableRow,
   TableSortLabel,
+  Checkbox,
 } from "../Table.styled";
-import Checkbox from "../../Checkbox/Checkbox";
 
 export function EnhancedTableHead({
   columns,
@@ -21,7 +20,6 @@ export function EnhancedTableHead({
   rowCount,
   selectionMode,
 }) {
-  // const theme = useTheme();
   const createSortHandler = (property) => (event) =>
     onRequestSort(event, property);
 
@@ -40,11 +38,16 @@ export function EnhancedTableHead({
         )}
 
         {columns?.map((headCell) => {
-          const isActiveOrderBy = orderBy[headCell.id] !== undefined;
-          const orderByDir = isActiveOrderBy && !!orderBy[headCell.id];
+          const orderByColumn = orderBy?.[headCell.field];
+          const isActiveOrderBy = orderByColumn !== undefined;
+          const orderByDir = isActiveOrderBy
+            ? orderByColumn
+              ? "asc"
+              : "desc"
+            : false;
           let orderByValue = SORT.UP;
-          if (isActiveOrderBy && orderBy[headCell.id]) {
-            orderByValue = orderBy[headCell.id];
+          if (isActiveOrderBy && orderByColumn) {
+            orderByValue = orderByColumn;
           }
 
           return (
@@ -69,31 +72,3 @@ export function EnhancedTableHead({
     </TableHead>
   );
 }
-
-EnhancedTableHead.propTypes = {
-  onRequestSort: PropTypes.func,
-  orderBy: PropTypes.object,
-  columns: PropTypes.arrayOf(
-    PropTypes.shape({
-      field: PropTypes.string,
-      numeric: PropTypes.bool,
-      disablePadding: PropTypes.bool,
-      label: PropTypes.string,
-      align: PropTypes.oneOf(["right", "center", "left", "justify", "inherit"]),
-    })
-  ),
-  headerColor: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      background: PropTypes.string,
-      color: PropTypes.string,
-    }),
-  ]),
-};
-
-EnhancedTableHead.defaultProps = {
-  onRequestSort: undefined,
-  orderBy: "",
-  columns: [],
-  headerColor: undefined,
-};

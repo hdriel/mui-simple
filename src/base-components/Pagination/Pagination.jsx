@@ -90,7 +90,6 @@ export default function Pagination({
           return (
             <PaginationItem
               {...item}
-              customColor={"#10ddc0"}
               disabled={item.disabled || disabledPages?.includes(item.page)}
               component={pageToLink ? "a" : undefined}
               href={pageToLink ? pageToLinkHandler(item.page) : undefined}
@@ -119,10 +118,10 @@ Pagination.propTypes = {
   variant: PropTypes.oneOf(["outlined", "text"]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
   shape: PropTypes.oneOf(["circular", "rounded"]),
-  prevIconCmpCB: PropTypes.node,
-  nextIconCmpCB: PropTypes.node,
-  firstIconCmpCB: PropTypes.node,
-  lastIconCmpCB: PropTypes.node,
+  prevIconCmpCB: PropTypes.any,
+  nextIconCmpCB: PropTypes.any,
+  firstIconCmpCB: PropTypes.any,
+  lastIconCmpCB: PropTypes.any,
   showFirstButton: PropTypes.bool,
   showLastButton: PropTypes.bool,
   totalPages: PropTypes.number,

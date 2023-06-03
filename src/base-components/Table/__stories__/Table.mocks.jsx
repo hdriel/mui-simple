@@ -1,5 +1,3 @@
-import React from "react";
-
 import Typography from "../../Typography/Typography";
 
 export const FITNESS_COLUMNS = [
@@ -87,14 +85,14 @@ export const PERSON_COLUMNS = [
     field: "birthday",
     align: "center",
     label: "birthday",
-    dateFormat: "YYYY/MM/DD hh:mm a",
+    dateFormat: "YYYY/MM/DD",
   },
   {
     field: "description",
     align: "left",
     label: "Description",
     Cmp: Typography,
-    props: (row) => ({ rows: 2 }),
+    props: (_row) => ({ rows: 2 }),
   },
 ];
 

@@ -7,7 +7,6 @@ import {
   BackpackOutlined as BackpackOutlinedIcon,
 } from "@mui/icons-material";
 import Pagination from "../Pagination";
-import PropTypes from "prop-types";
 
 export default {
   title: "Navigation/Pagination",
@@ -206,7 +205,7 @@ export const PageToLink = () => {
           key={p}
           totalPages={20}
           size="medium"
-          label={`Page To Link  replace 'string-to-path...\{page\}...' ${p}`}
+          label={`Page To Link  replace 'string-to-path...{page}...' ${p}`}
           pageToLink="/pagination/{page}"
         />
       ))}
