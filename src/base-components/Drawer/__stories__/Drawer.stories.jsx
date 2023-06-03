@@ -1,11 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Stack, Box, Container } from "@mui/material";
+import React, { useState } from "react";
 import {
-  Menu as MenuIcon,
-  Close as CloseIcon,
   Send as SendIcon,
-  Delete as DeleteIcon,
-  Fingerprint as FingerprintIcon,
   Inbox as InboxIcon,
   Drafts as DraftsIcon,
   Image as ImageIcon,
@@ -28,7 +23,7 @@ export const Default = (props) => {
   return <Drawer {...props} />;
 };
 
-const list = ({} = {}) => (
+const list = () => (
   <div>
     <List
       items={[
@@ -74,7 +69,6 @@ const list = ({} = {}) => (
 );
 
 export const TemporaryDrawer = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [state, setState] = React.useState({
     top: false,
     left: false,

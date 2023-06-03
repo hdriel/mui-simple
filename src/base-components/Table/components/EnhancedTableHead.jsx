@@ -1,7 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
-
-import { PT_column, PT_colors } from "../Table.propTypes";
 
 import { SORT } from "../Table.utils";
 
@@ -43,7 +40,11 @@ export function EnhancedTableHead({
         {columns?.map((headCell) => {
           const orderByColumn = orderBy?.[headCell.field];
           const isActiveOrderBy = orderByColumn !== undefined;
-          const orderByDir = isActiveOrderBy && !!orderByColumn;
+          const orderByDir = isActiveOrderBy
+            ? orderByColumn
+              ? "asc"
+              : "desc"
+            : false;
           let orderByValue = SORT.UP;
           if (isActiveOrderBy && orderByColumn) {
             orderByValue = orderByColumn;

@@ -11,7 +11,6 @@ import {
   CardHeader,
   CardContent,
   Collapse,
-  CardActionArea,
   ExpandMore,
   Box,
 } from "./Card.styled";
@@ -34,7 +33,6 @@ export default function Card({
   children,
   ...props
 }) {
-  const [openMenu, setOpenMenu] = React.useState(false);
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => setExpanded(!expanded);

@@ -3,12 +3,7 @@ import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
 import { Stack } from "@mui/material";
 
-import {
-  Home as HomeIcon,
-  Delete as DeleteIcon,
-  LibraryAddCheck as LibraryAddCheckIcon,
-  CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon,
-} from "@mui/icons-material";
+import { Home as HomeIcon, Delete as DeleteIcon } from "@mui/icons-material";
 
 import { Table } from "../Table";
 import MuiPagination from "../../Pagination/Pagination";
@@ -21,7 +16,6 @@ import {
   PERSON_DATA,
 } from "./Table.mocks";
 import { Button } from "../Table.styled";
-import Checkbox from "../../Checkbox/Checkbox";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -164,8 +158,6 @@ export function HelperText() {
 }
 
 export function SelectionMode() {
-  const [selectionMode, setSelectionMode] = useState(false);
-
   return (
     <Table
       {...actions}
@@ -286,7 +278,7 @@ export function CustomPagination() {
       paginationAlign="center"
       PaginationComponent={MuiPagination}
       paginationProps={{
-        shape: "circle",
+        shape: "circular",
         muiColor: "secondary",
         firstIconCmpCB: HomeIcon,
       }}

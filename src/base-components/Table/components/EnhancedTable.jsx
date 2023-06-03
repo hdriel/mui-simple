@@ -25,7 +25,6 @@ import {
   TableBody,
   Table,
   Paper,
-  TablePagination,
 } from "../Table.styled";
 
 import {
@@ -201,7 +200,7 @@ EnhancedTable.propTypes = {
   columns: PropTypes.arrayOf(PT_column),
   actions: PropTypes.arrayOf(PT_action),
   selectedActions: PropTypes.arrayOf(PT_action),
-  PaginationComponent: PropTypes.node,
+  PaginationComponent: PropTypes.any,
   paginationProps: PropTypes.object,
   paginationAlign: PropTypes.oneOf(["start", "center", "end"]),
   tableColor: PT_colors,

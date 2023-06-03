@@ -36,7 +36,7 @@ export { default as LinearProgress } from "./Progress/LinearProgress/LinearProgr
 
 export { default as RadioButtonsGroup } from "./RadioButtonsGroup/RadioButtonsGroup";
 export { default as Rating } from "./Rating/Rating";
-export { default as RippleBox } from "./RippleBox/RippleBox";
+export { RippleBox } from "./RippleBox/RippleBox";
 
 export { default as Skeleton } from "./Skeleton/Skeleton";
 export { default as Slider } from "./Slider/Slider";

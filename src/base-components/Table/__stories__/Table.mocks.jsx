@@ -1,5 +1,3 @@
-import React from "react";
-
 import Typography from "../../Typography/Typography";
 
 export const FITNESS_COLUMNS = [
@@ -94,7 +92,7 @@ export const PERSON_COLUMNS = [
     align: "left",
     label: "Description",
     Cmp: Typography,
-    props: (row) => ({ rows: 2 }),
+    props: (_row) => ({ rows: 2 }),
   },
 ];
 

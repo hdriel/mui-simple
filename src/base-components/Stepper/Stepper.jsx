@@ -15,7 +15,6 @@ import {
   QontoStepIconRoot,
   QontoConnector,
 } from "./Stepper.styled";
-import { numberToPx } from "../../utils/helpers";
 
 export default function Stepper({
   optionalLabel,
@@ -63,6 +62,7 @@ export default function Stepper({
                 : false,
             };
       }) ?? [],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [_steps]
   );
 

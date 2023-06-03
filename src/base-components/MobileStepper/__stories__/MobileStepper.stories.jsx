@@ -1,15 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { action } from "@storybook/addon-actions";
-import {
-  AddLocation as AddLocationIcon,
-  Send as SendIcon,
-} from "@mui/icons-material";
-import { Box, Stack } from "@mui/material";
+import { Box } from "@mui/material";
 
 import MobileStepper from "../MobileStepper";
 import { Typography } from "../MobileStepper.styled";
 import { useSimpleStepper } from "../../Stepper/Stepper.utils";
-import { ThemeProvider } from "../../../themes";
 import { DirectionWrapper } from "../../../wrappers/direction.wrapper";
 
 export default {

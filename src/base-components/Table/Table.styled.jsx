@@ -1,5 +1,4 @@
 import { Image as MuiImage } from "mui-image";
-import { Delete, FilterList } from "@mui/icons-material";
 import { styled, css } from "@mui/material/styles";
 import {
   Box as MuiBox,
@@ -20,8 +19,14 @@ import MuiTypography from "../Typography/Typography";
 import MuiTooltip from "../Tooltip/Tooltip";
 import MuiButton from "../Button/Button";
 import MuiPaper from "../Paper/Paper";
-
 import { extractColors } from "./Table.utils";
+
+export const Typography = MuiTypography;
+export const Avatar = MuiAvatar;
+export const Paper = MuiPaper;
+export const Checkbox = MuiCheckbox;
+export const Tooltip = MuiTooltip;
+export const Image = MuiImage;
 
 export const Box = MuiBox;
 export const Button = MuiButton;
@@ -49,9 +54,3 @@ export const TablePagination = MuiTablePagination;
 export const TableRow = MuiTableRow;
 export const TableSortLabel = MuiTableSortLabel;
 export const Toolbar = MuiToolbar;
-export const Typography = MuiTypography;
-export const Avatar = MuiAvatar;
-export const Paper = MuiPaper;
-export const Checkbox = MuiCheckbox;
-export const Tooltip = MuiTooltip;
-export const Image = MuiImage;

@@ -11,7 +11,6 @@ import CheckList from "../List/CheckList";
 import Menu from "../Menu/Menu";
 import Checkbox from "../Checkbox/Checkbox";
 import { getOriginalTextWidth } from "../../hooks/useEllipsisActive";
-import { action } from "@storybook/addon-actions";
 
 export function usePaginationDetails(
   data = [],
@@ -25,21 +24,15 @@ export function usePaginationDetails(
   const [sliceFrom, sliceTo] = getDataRange({ rows, total, page, rowsPerPage });
 
   // Avoid a layout jump when reaching the last page with empty data.
-  const emptyRows = useMemo(
-    () => {
-      if (rows === total) {
-        const totalRowsTillPrevPage = page <= 1 ? 0 : (page - 1) * rowsPerPage;
+  const emptyRows = useMemo(() => {
+    if (rows === total) {
+      const totalRowsTillPrevPage = page <= 1 ? 0 : (page - 1) * rowsPerPage;
 
-        return (
-          rowsPerPage - Math.min(rowsPerPage, rows - totalRowsTillPrevPage)
-        );
-      } else {
-        return rows >= rowsPerPage ? 0 : rowsPerPage - rows;
-      }
-    },
-    [page, rowsPerPage, rows],
-    []
-  );
+      return rowsPerPage - Math.min(rowsPerPage, rows - totalRowsTillPrevPage);
+    } else {
+      return rows >= rowsPerPage ? 0 : rowsPerPage - rows;
+    }
+  }, [total, page, rowsPerPage, rows]);
 
   const rowsPerPageList = useMemo(
     () =>
@@ -136,7 +129,7 @@ function getMenuWidth(fields) {
   const sized = fields?.map((field) => field?.length ?? 0) ?? [0];
   const index = Math.max(...sized);
   const maxWord = fields?.[sized.indexOf(index)] ?? "";
-  const { offsetWidth, scrollWidth } = getOriginalTextWidth(maxWord);
+  const { offsetWidth } = getOriginalTextWidth(maxWord);
   const checkboxPadding = 50;
   const draggalbePadding = 50;
   const spaceItemsPadding = 15;
@@ -157,6 +150,7 @@ export function useFilterColumns({
       (columnsState ?? Object.keys(data?.[0] ?? {}))?.map((column) =>
         getColumn(data?.[0] ?? {}, column)
       ) ?? [],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [columnsState]
   );
 
@@ -167,6 +161,7 @@ export function useFilterColumns({
 
   useEffect(() => {
     if (!isSameData) setColumnsState(columns);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSameData]);
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -187,11 +182,11 @@ export function useFilterColumns({
     const height = (fields?.length ?? 1) * 61.2 + (title ? 48 : 0);
 
     return [width, height];
-  }, [columns]);
+  }, [columns, title]);
 
   const checked = useMemo(
     () => Object.values(filters).filter(Boolean).length === columns.length,
-    [filters]
+    [filters, columns.length]
   );
 
   const filteredColumns = useMemo(

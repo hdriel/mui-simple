@@ -4,7 +4,6 @@ import {
   AddLocation as AddLocationIcon,
   Send as SendIcon,
 } from "@mui/icons-material";
-// import { Stack } from "@mui/material";
 
 import Stepper from "../Stepper";
 import { Typography } from "../Stepper.styled";
@@ -12,7 +11,6 @@ import { useSimpleStepper } from "../Stepper.utils";
 import ToggleButtonGroup, {
   ToggleButtonGroups,
 } from "../../ToggleButtonGroup/ToggleButtonGroup";
-import { Stack } from "@mui/material";
 
 export default {
   title: "Navigation/Stepper",

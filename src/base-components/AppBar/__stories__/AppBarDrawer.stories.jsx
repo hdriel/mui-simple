@@ -1,11 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Stack, Box, Container } from "@mui/material";
+import React, { useState } from "react";
+import { Stack } from "@mui/material";
 import {
-  Menu as MenuIcon,
-  Close as CloseIcon,
   Send as SendIcon,
-  Delete as DeleteIcon,
-  Fingerprint as FingerprintIcon,
   Inbox as InboxIcon,
   Drafts as DraftsIcon,
   Image as ImageIcon,
@@ -16,11 +12,6 @@ import {
 
 import AppBar from "../AppBar";
 import Button from "../../Button/Button";
-import Avatar from "../../Avatar/Avatar";
-import Typography from "../../Typography/Typography";
-import Menu from "../../Menu/Menu";
-import { action } from "@storybook/addon-actions";
-import { ThemeProvider } from "../../../themes";
 import List from "../../List/List";
 import Divider from "../../Divider/Divider";
 import ToggleButtonGroup from "../../ToggleButtonGroup/ToggleButtonGroup";
@@ -44,7 +35,7 @@ export default {
   ],
 };
 
-const list = ({} = {}) => (
+const list = () => (
   <>
     <List
       items={[

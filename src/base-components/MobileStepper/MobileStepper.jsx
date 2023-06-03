@@ -49,11 +49,11 @@ export default function MobileStepper({
     done: labels?.done || "Done",
   };
 
-  const isStepOptional = (index) => steps?.[index]?.optional;
-  const isStepSkipped = (index) => stepsIndexSkipped?.includes(index);
   const handleNext = (step) => onNext?.(step);
   const handleBack = (step) => onBack?.(step);
-  const handleSkip = (index) => isStepOptional(index) && onSkip?.(index);
+  // const isStepOptional = (index) => steps?.[index]?.optional;
+  // const isStepSkipped = (index) => stepsIndexSkipped?.includes(index);
+  // const handleSkip = (index) => isStepOptional(index) && onSkip?.(index);
 
   const steps = useMemo(
     () =>
@@ -72,6 +72,7 @@ export default function MobileStepper({
                 : false,
             };
       }) ?? [],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [_steps]
   );
   const maxSteps = steps.length;
@@ -104,7 +105,7 @@ export default function MobileStepper({
             ),
           },
         ];
-  }, [isLTR]);
+  }, [forceFixedDirection, isLTR]);
 
   const nextButton =
     activeStep === maxSteps - 1 ? (
