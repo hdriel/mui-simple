@@ -4,7 +4,6 @@ import {
   FilterAlt as FilterAltIcon,
   DragHandle as DragHandleIcon,
   LibraryAddCheck as LibraryAddCheckIcon,
-  CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon,
 } from "@mui/icons-material";
 import { Checkbox, Tooltip } from "./Table.styled";
 
@@ -163,9 +162,10 @@ export function useFilterColumns({
       onClose={() => setMenuOpen(false)}
       alternativeContent={
         <CheckList
+          droppableId="filter-menu"
           title={title}
           items={columns?.map((column) => ({
-            id: column.id,
+            id: column.field,
             title: column.label ?? column.field,
             checked: filters[column.field] ?? false,
             onClick: onClickFilterItem(column.field),

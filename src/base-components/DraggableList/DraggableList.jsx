@@ -37,7 +37,7 @@ export default function DraggableList({
           >
             {dataList?.map((data, index) => (
               <Draggable
-                key={data?.id ?? data ?? `${index}`}
+                key={`${data?.id} ${index}`}
                 draggableId={data?.id ?? data ?? `${index}`}
                 index={index}
                 isDragDisabled={
