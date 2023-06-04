@@ -6,11 +6,11 @@ import {
   LibraryAddCheck as LibraryAddCheckIcon,
   CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon,
 } from "@mui/icons-material";
-import { getDataRange } from "./Table.utils";
+import { Checkbox, Tooltip } from "./Table.styled";
+
+import { getColumn, getDataRange, getMenuWidth } from "./Table.utils";
 import CheckList from "../List/CheckList";
 import Menu from "../Menu/Menu";
-import Checkbox from "../Checkbox/Checkbox";
-import { getOriginalTextWidth } from "../../hooks/useEllipsisActive";
 
 export function usePaginationDetails(
   data = [],
@@ -88,52 +88,6 @@ export function useSelection({ data }) {
   };
 
   return { selected, isSelected, handleSelectAllClick, handleSelect };
-}
-
-function getColumn(row, column) {
-  const isString = typeof column === "string";
-  const field = isString ? column : column?.field;
-
-  return {
-    id: field,
-    field: field,
-    label: isString ? column : column.label,
-    numeric: isString
-      ? typeof row?.[field] === "number" ?? false
-      : column.numeric,
-    disablePadding: isString ? false : column.disablePadding ?? false,
-    align: isString
-      ? typeof row?.[field] === "number"
-        ? "right"
-        : "left"
-      : column.align,
-    format: undefined,
-    dateFormat: isString
-      ? typeof row?.[field] === "number" &&
-        !new Date(row?.[field]).toISOString().startsWith("1970-01-01T")
-        ? "DD/MM/YYYY HH:mm a"
-        : undefined
-      : undefined,
-    props: undefined,
-    cmp: undefined,
-    image: isString
-      ? /\.(jpg|jpeg|png|gif|bmp|tiff|svg|webp|ico|heic|jp2)$/i.test?.(
-          row?.[field] ?? ""
-        )
-      : column.image,
-    ...(typeof column === "object" && column),
-  };
-}
-
-function getMenuWidth(fields) {
-  const sized = fields?.map((field) => field?.length ?? 0) ?? [0];
-  const index = Math.max(...sized);
-  const maxWord = fields?.[sized.indexOf(index)] ?? "";
-  const { offsetWidth } = getOriginalTextWidth(maxWord);
-  const checkboxPadding = 50;
-  const draggalbePadding = 50;
-  const spaceItemsPadding = 15;
-  return checkboxPadding + draggalbePadding + offsetWidth + spaceItemsPadding;
 }
 
 export function useFilterColumns({
@@ -226,13 +180,14 @@ export function useFilterColumns({
       }
     >
       <div onClick={() => setMenuOpen((o) => !o)}>
-        <Checkbox
-          color={"rgba(0, 0, 0, 0.87)"}
-          checkedIcon={<FilterAltOffIcon />}
-          icon={<FilterAltIcon />}
-          checked={checked}
-          tooltipProps={{ title: tooltip }}
-        />
+        <Tooltip title={tooltip}>
+          <Checkbox
+            color={"rgba(0, 0, 0, 0.87)"}
+            checkedIcon={<FilterAltOffIcon />}
+            icon={<FilterAltIcon />}
+            checked={checked}
+          />
+        </Tooltip>
       </div>
     </Menu>
   );
@@ -252,13 +207,14 @@ export function useSelectionMode({
   }, [_selectionMode]);
 
   const cmp = !hide && (
-    <Checkbox
-      checkedIcon={<LibraryAddCheckIcon />}
-      icon={<CheckBoxOutlineBlankIcon />}
-      checked={selectionMode}
-      onClick={(event) => setSelectionMode(!selectionMode)}
-      tooltipProps={{ title: tooltip }}
-    />
+    <Tooltip title={tooltip}>
+      <Checkbox
+        checkedIcon={<LibraryAddCheckIcon />}
+        icon={<LibraryAddCheckIcon />}
+        checked={selectionMode}
+        onClick={(_event) => setSelectionMode(!selectionMode)}
+      />
+    </Tooltip>
   );
 
   return [selectionMode, cmp];
