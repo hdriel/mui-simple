@@ -28,6 +28,7 @@ import {
 } from "../Table.styled";
 
 import {
+  useData,
   useFilterColumns,
   usePaginationDetails,
   useSelection,
@@ -47,7 +48,7 @@ export default function EnhancedTable({
   orderBy,
   addFilterColumnsAction,
   addSelectionModeAction,
-  data,
+  data: _data,
   columns: _columns,
   onClickRow,
   actions,
@@ -66,15 +67,18 @@ export default function EnhancedTable({
   const colorProps = extractColors({ theme: theme, colors: tableColor });
 
   const { handleSelectAllClick, isSelected, selected, handleSelect } =
-    useSelection({ data });
+    useSelection({ data: _data });
 
-  const { emptyRows, sliceFrom, sliceTo } = usePaginationDetails(
-    data,
-    pagination
-  );
+  const { emptyRows, sliceFrom, sliceTo, handleRequestSort } =
+    usePaginationDetails({
+      rows: _data?.length ?? 0,
+      pagination,
+      orderBy,
+      onChangePagination,
+    });
 
   const [columns, filterActionCmp] = useFilterColumns({
-    data,
+    firstItem: _data?.[0],
     columns: _columns,
     hide: !addFilterColumnsAction,
     tooltip: LABELS.FILTER_TOOLTIP,
@@ -87,18 +91,7 @@ export default function EnhancedTable({
     tooltip: LABELS.SELECTION_MODE_TOOLTIP,
   });
 
-  // eslint-disable-next-line no-unused-vars
-  const handleClick = (event, rowId, rowData) => onClickRow?.(rowId, rowData);
-
-  const handleRequestSort = (event, property) => {
-    const orderDir = orderBy?.[property] ?? SORT.UP;
-    const isAsc = orderBy?.[property] && orderDir === SORT.UP;
-    const config = {
-      pagination,
-      orderBy: { ...orderBy, [property]: isAsc ? SORT.DOWN : SORT.UP },
-    };
-    onChangePagination?.(config);
-  };
+  const { data } = useData({ columns, orderBy, data: _data });
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -145,7 +138,9 @@ export default function EnhancedTable({
                 <EnhancedTableRow
                   key={index}
                   columns={columns}
-                  handleClick={handleClick}
+                  handleClick={(event, rowId, rowData) =>
+                    onClickRow?.(rowId, rowData)
+                  }
                   index={index}
                   selectionMode={selectionMode}
                   evenRowsColor={evenRowsColor}

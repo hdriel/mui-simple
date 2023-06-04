@@ -7,18 +7,21 @@ import {
 } from "@mui/icons-material";
 import { Checkbox, Tooltip } from "./Table.styled";
 
-import { getColumn, getDataRange, getMenuWidth } from "./Table.utils";
+import { getColumn, getDataRange, getMenuWidth, SORT } from "./Table.utils";
 import CheckList from "../List/CheckList";
 import Menu from "../Menu/Menu";
 import { isDefined } from "../../utils/helpers";
 
-export function usePaginationDetails(
-  data = [],
-  { total: _total, rowsPerPage: _rowsPerPage, page: _page } = {}
-) {
-  const rows = data?.length ?? 0;
+export function usePaginationDetails({
+  rows = 0,
+  pagination = {},
+  onChangePagination,
+  orderBy,
+}) {
+  const { total: _total, rowsPerPage: _rowsPerPage, page: _page } = pagination;
+
   const total = _total ?? rows;
-  const rowsPerPage = _rowsPerPage ?? data.length;
+  const rowsPerPage = _rowsPerPage ?? rows;
   const page = _page ?? 0;
 
   const [sliceFrom, sliceTo] = getDataRange({ rows, total, page, rowsPerPage });
@@ -42,6 +45,16 @@ export function usePaginationDetails(
     [rowsPerPage]
   );
 
+  const handleRequestSort = (event, property) => {
+    const orderDir = orderBy?.[property] ?? SORT.UP;
+    const isAsc = orderBy?.[property] && orderDir === SORT.UP;
+    const config = {
+      pagination: { total, rowsPerPage, page },
+      orderBy: { ...orderBy, [property]: isAsc ? SORT.DOWN : SORT.UP },
+    };
+    onChangePagination?.(config);
+  };
+
   return {
     total,
     rowsPerPage,
@@ -50,6 +63,7 @@ export function usePaginationDetails(
     sliceFrom,
     sliceTo,
     rowsPerPageList,
+    handleRequestSort,
   };
 }
 
@@ -91,7 +105,7 @@ export function useSelection({ data }) {
 }
 
 export function useFilterColumns({
-  data,
+  firstItem = {},
   columns: _columns,
   hide,
   tooltip,
@@ -101,8 +115,8 @@ export function useFilterColumns({
 
   const columns = useMemo(
     () =>
-      (columnsState ?? Object.keys(data?.[0] ?? {}))?.map((column) =>
-        getColumn(data?.[0] ?? {}, column)
+      (columnsState ?? Object.keys(firstItem))?.map((column) =>
+        getColumn(firstItem, column)
       ) ?? [],
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [columnsState]
@@ -219,4 +233,10 @@ export function useSelectionMode({
   );
 
   return [selectionMode, cmp];
+}
+
+export function useData({ columns, data: _data = [], orderBy }) {
+  const [data, setData] = useState(_data);
+
+  return { data };
 }
