@@ -94,7 +94,11 @@ export default function EnhancedTableRow({
     >
       {selectionMode && (
         <TableCell padding="checkbox">
-          <Checkbox color="primary" checked={selected} onChange={onSelect} />
+          <Checkbox
+            color="primary"
+            checked={selected ?? false}
+            onChange={onSelect}
+          />
         </TableCell>
       )}
 

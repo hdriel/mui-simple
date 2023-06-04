@@ -11,6 +11,7 @@ import { Checkbox, Tooltip } from "./Table.styled";
 import { getColumn, getDataRange, getMenuWidth } from "./Table.utils";
 import CheckList from "../List/CheckList";
 import Menu from "../Menu/Menu";
+import { isDefined } from "../../utils/helpers";
 
 export function usePaginationDetails(
   data = [],
@@ -203,7 +204,7 @@ export function useSelectionMode({
   const [selectionMode, setSelectionMode] = useState(_selectionMode ?? false);
 
   useEffect(() => {
-    setSelectionMode(_selectionMode);
+    if (isDefined(_selectionMode)) setSelectionMode(_selectionMode);
   }, [_selectionMode]);
 
   const cmp = !hide && (
