@@ -10,7 +10,7 @@ export const Default = () => {
   return <InputFile />;
 };
 
-export const Color = () => {
+export const File = () => {
   const [value, setValue] = useState(undefined);
 
   return (

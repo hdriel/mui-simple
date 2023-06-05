@@ -10,7 +10,7 @@ export const Default = () => {
   return <InputEmail />;
 };
 
-export const Color = () => {
+export const Email = () => {
   const [value, setValue] = useState("test@test.com");
 
   return (

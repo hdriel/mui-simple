@@ -3,7 +3,7 @@ import TextField from "../TextField";
 import { Clear as ClearIcon } from "@mui/icons-material";
 
 export default {
-  title: "Inputs/Inputs/TextField",
+  title: "Inputs/TextField",
   component: TextField,
 };
 

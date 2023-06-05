@@ -10,7 +10,7 @@ export const Default = () => {
   return <InputSearch />;
 };
 
-export const Color = () => {
+export const Search = () => {
   const [value, setValue] = useState("Hello World");
 
   return (

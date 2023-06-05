@@ -10,7 +10,7 @@ export const Default = () => {
   return <InputPhone />;
 };
 
-export const Color = () => {
+export const Phone = () => {
   const [value, setValue] = useState("050-000-0000");
 
   return (

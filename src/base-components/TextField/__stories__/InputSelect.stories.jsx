@@ -10,7 +10,7 @@ export const Default = () => {
   return <InputSelect />;
 };
 
-export const Color = () => {
+export const Select = () => {
   const [value, setValue] = useState();
 
   return (

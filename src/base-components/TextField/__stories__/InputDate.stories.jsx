@@ -10,7 +10,7 @@ export const Default = () => {
   return <InputDate />;
 };
 
-export const Color = () => {
+export const Date = () => {
   const [value, setValue] = useState(new Date());
 
   return (

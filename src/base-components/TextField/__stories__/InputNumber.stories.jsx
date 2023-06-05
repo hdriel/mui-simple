@@ -10,7 +10,7 @@ export const Default = () => {
   return <InputNumber />;
 };
 
-export const Color = () => {
+export const Number = () => {
   const [value, setValue] = useState(0);
 
   return (
