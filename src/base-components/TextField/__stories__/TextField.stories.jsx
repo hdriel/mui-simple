@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TextField from "../TextField";
 import { Clear as ClearIcon } from "@mui/icons-material";
+import { Stack } from "@mui/material";
 
 export default {
   title: "Inputs/TextField",
@@ -194,5 +195,59 @@ export const MuiltipleInputs = () => {
         />
       </div>
     </>
+  );
+};
+
+export const ThemedAndColored = () => {
+  const [value, setValue] = useState("Hello World");
+
+  return (
+    <Stack spacing={2}>
+      <TextField
+        label={"default color"}
+        variant="outlined"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <TextField
+        color="secondary"
+        label="default color"
+        variant="outlined"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+
+      {[
+        "primary",
+        "secondary",
+        "info",
+        "warning",
+        "success",
+        "error",
+        "primary.dark",
+        "secondary.dark",
+        "info.dark",
+        "warning.dark",
+        "success.dark",
+        "error.dark",
+        "#014299",
+        "#4a4a02",
+        "#ff59f3",
+        "REDS", // text invalid color
+      ].map((customColor, index, arr) => (
+        <TextField
+          key={customColor}
+          label={`${customColor} color`}
+          startCmp={index % 2 === 0 && "COLOR:"}
+          endCmp={index % 4 === 0 && <ClearIcon />}
+          variant="outlined"
+          activeColor={arr[index - 1]}
+          colorLabel={customColor}
+          colorText={arr[index + 1]}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+      ))}
+    </Stack>
   );
 };

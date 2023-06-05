@@ -1,3 +1,6 @@
+import _ from "lodash";
+import { alpha, darken, lighten } from "@mui/material";
+
 export function getCapitalLetters(str) {
   const chars =
     str
@@ -40,3 +43,32 @@ export function numberToPx(field) {
 export function isDefined(value) {
   return value !== undefined && value !== null;
 }
+
+export function getCustomColor(
+  props,
+  {
+    field = undefined,
+    muiLevel = "main",
+    opacity = 1,
+    darken: _darken,
+    lighten: _lighten,
+  } = {}
+) {
+  const customColor = props?.[field] ?? props?.customColor;
+  if (!customColor) return undefined;
+
+  let color =
+    _.get(props, `theme.palette.${customColor}.${muiLevel}`) ??
+    _.get(props, `theme.palette.${customColor}`) ??
+    customColor;
+
+  if (!isValidColor(color)) return undefined;
+
+  color = isDefined(opacity) ? alpha(color, opacity) : color;
+  color = isDefined(_darken) ? darken(color, _darken) : color;
+  color = isDefined(_lighten) ? alpha(color, _lighten) : color;
+
+  return color;
+}
+
+const isValidColor = (color) => CSS.supports("color", color);

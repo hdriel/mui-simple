@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import InputAdornment from "@mui/material/InputAdornment";
-import MuiTextField from "@mui/material/TextField";
+import { TextField as MuiTextField } from "./TextField.styled";
+import { getCustomColor } from "../../utils/helpers";
+import { useTheme } from "@mui/material/styles";
 
 function TextField({
   label,
@@ -24,6 +26,9 @@ function TextField({
   margin,
   focused,
   helperText,
+  colorText,
+  colorLabel,
+  activeColor,
   ...props
 }) {
   return (
@@ -44,7 +49,11 @@ function TextField({
       rows={rows}
       autoComplete={autoComplete}
       type={type}
+      colorText={colorText}
+      colorLabel={colorLabel}
+      activeColor={activeColor}
       InputProps={{
+        ...props.InputProps,
         readOnly,
         ...(startCmp && {
           startAdornment: (
@@ -57,6 +66,8 @@ function TextField({
           ),
         }),
       }}
+      InputLabelProps={{ ...props.InputLabelProps }}
+      FormHelperTextProps={{ ...props.FormHelperTextProps }}
       variant={variant}
       {...props}
     />
