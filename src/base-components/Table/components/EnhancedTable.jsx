@@ -33,6 +33,7 @@ import {
   usePaginationDetails,
   useSelection,
   useSelectionMode,
+  useSortColumns,
 } from "../Table.hooks";
 import { EnhancedTablePagination } from "./EnhancedTablePagination";
 
@@ -45,6 +46,7 @@ export default function EnhancedTable({
   title,
   pagination,
   onChangePagination,
+  onChangeSortColumns,
   orderBy,
   addFilterColumnsAction,
   addSelectionModeAction,
@@ -65,24 +67,33 @@ export default function EnhancedTable({
 }) {
   const theme = useTheme();
   const colorProps = extractColors({ theme: theme, colors: tableColor });
+  const rows = _data?.length ?? 0;
+  const [firstItem] = _data ?? [];
 
   const { handleSelectAllClick, isSelected, selected, handleSelect } =
     useSelection({ data: _data });
 
-  const { emptyRows, sliceFrom, sliceTo, handleRequestSort } =
+  const { emptyRows, sliceFrom, sliceTo, independentData, page } =
     usePaginationDetails({
-      rows: _data?.length ?? 0,
+      rows,
       pagination,
       orderBy,
       onChangePagination,
     });
 
   const [columns, filterActionCmp] = useFilterColumns({
-    firstItem: _data?.[0],
+    firstItem,
     columns: _columns,
     hide: !addFilterColumnsAction,
     tooltip: LABELS.FILTER_TOOLTIP,
     title: LABELS.FILTER_NENU_TITLE,
+  });
+
+  const { handleRequestSort, sortColumns } = useSortColumns({
+    firstItem,
+    columns,
+    orderBy,
+    onChangeSortColumns,
   });
 
   const [selectionMode, selectionModeCmp] = useSelectionMode({
@@ -91,7 +102,16 @@ export default function EnhancedTable({
     tooltip: LABELS.SELECTION_MODE_TOOLTIP,
   });
 
-  const { data } = useData({ columns, orderBy, data: _data });
+  const data = useData({
+    page,
+    independentData,
+    sortColumns,
+    sliceFrom,
+    sliceTo,
+    data: _data,
+  });
+
+  console.log("page", page);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -110,7 +130,7 @@ export default function EnhancedTable({
             selectionModeAction={selectionModeCmp}
             selectedActions={selectedActions}
             selectedLabel={LABELS.NUM_SELECTED}
-            data={data}
+            data={_data}
             selected={selected}
           />
         )}
@@ -125,16 +145,17 @@ export default function EnhancedTable({
             <EnhancedTableHead
               numSelected={selected.length}
               columns={columns}
+              sortColumns={sortColumns}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
               headerColor={headerColor}
-              rowCount={data?.length}
+              rowCount={rows}
               onSelectAllClick={handleSelectAllClick}
               selectionMode={selectionMode}
             />
 
             <TableBody>
-              {data?.slice(sliceFrom, sliceTo).map((row, index) => (
+              {data.map((row, index) => (
                 <EnhancedTableRow
                   key={index}
                   columns={columns}
@@ -167,7 +188,7 @@ export default function EnhancedTable({
         <EnhancedTablePagination
           pagination={pagination}
           onChangePagination={onChangePagination}
-          data={data}
+          rows={rows}
           paginationProps={paginationProps}
           paginationAlign={paginationAlign}
           PaginationComponent={PaginationComponent}

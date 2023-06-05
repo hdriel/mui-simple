@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SORT } from "../Table.utils";
+import { SORT, SORT_VALUE } from "../Table.consts";
 
 import {
   TableHead,
@@ -12,6 +12,7 @@ import {
 
 export function EnhancedTableHead({
   columns,
+  sortColumns,
   orderBy,
   onRequestSort,
   headerColor,
@@ -20,8 +21,8 @@ export function EnhancedTableHead({
   rowCount,
   selectionMode,
 }) {
-  const createSortHandler = (property) => (event) =>
-    onRequestSort(event, property);
+  const createSortHandler = (property, nextState) => (event) =>
+    onRequestSort(event, property, nextState);
 
   return (
     <TableHead>
@@ -38,30 +39,29 @@ export function EnhancedTableHead({
         )}
 
         {columns?.map((headCell) => {
-          const orderByColumn = orderBy?.[headCell.field];
-          const isActiveOrderBy = orderByColumn !== undefined;
-          const orderByDir = isActiveOrderBy
-            ? orderByColumn
-              ? "asc"
-              : "desc"
-            : false;
-          let orderByValue = SORT.UP;
-          if (isActiveOrderBy && orderByColumn) {
-            orderByValue = orderByColumn;
-          }
+          const sortColumn = sortColumns.find(
+            (sortColumn) => sortColumn.field === headCell.field
+          );
+          const { orderBy } = sortColumn ?? {};
+          const isActiveOrderBy = [SORT.DOWN, SORT.UP].includes(orderBy);
+          const nextState = {
+            false: SORT.UP,
+            [SORT.UP]: SORT.DOWN,
+            [SORT.DOWN]: false,
+          }[orderBy];
 
           return (
             <TableCell
               key={headCell.field}
               align={headCell.numeric ? "right" : "left"}
               padding={headCell.disablePadding ? "none" : "normal"}
-              sortDirection={orderByDir}
+              sortDirection={SORT_VALUE[orderBy]}
               colors={headerColor}
             >
               <TableSortLabel
                 active={isActiveOrderBy}
-                direction={orderByValue === SORT.UP ? "asc" : "desc"}
-                onClick={createSortHandler(headCell.id)}
+                direction={orderBy === SORT.UP ? "asc" : "desc"}
+                onClick={createSortHandler(headCell.field, nextState)}
               >
                 {headCell.label}
               </TableSortLabel>

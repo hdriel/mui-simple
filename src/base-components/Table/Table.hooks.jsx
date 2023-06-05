@@ -7,20 +7,21 @@ import {
 } from "@mui/icons-material";
 import { Checkbox, Tooltip } from "./Table.styled";
 
-import { getColumn, getDataRange, getMenuWidth, SORT } from "./Table.utils";
+import { getColumn, getDataRange, getMenuWidth } from "./Table.utils";
 import CheckList from "../List/CheckList";
 import Menu from "../Menu/Menu";
 import { isDefined } from "../../utils/helpers";
+import { SORT } from "./Table.consts";
 
 export function usePaginationDetails({
   rows = 0,
   pagination = {},
   onChangePagination,
-  orderBy,
 }) {
   const { total: _total, rowsPerPage: _rowsPerPage, page: _page } = pagination;
 
   const total = _total ?? rows;
+  const independentData = total === rows;
   const rowsPerPage = _rowsPerPage ?? rows;
   const page = _page ?? 0;
 
@@ -28,14 +29,14 @@ export function usePaginationDetails({
 
   // Avoid a layout jump when reaching the last page with empty data.
   const emptyRows = useMemo(() => {
-    if (rows === total) {
+    if (independentData) {
       const totalRowsTillPrevPage = page <= 1 ? 0 : (page - 1) * rowsPerPage;
 
       return rowsPerPage - Math.min(rowsPerPage, rows - totalRowsTillPrevPage);
     } else {
       return rows >= rowsPerPage ? 0 : rowsPerPage - rows;
     }
-  }, [total, page, rowsPerPage, rows]);
+  }, [independentData, page, rowsPerPage, rows]);
 
   const rowsPerPageList = useMemo(
     () =>
@@ -45,17 +46,8 @@ export function usePaginationDetails({
     [rowsPerPage]
   );
 
-  const handleRequestSort = (event, property) => {
-    const orderDir = orderBy?.[property] ?? SORT.UP;
-    const isAsc = orderBy?.[property] && orderDir === SORT.UP;
-    const config = {
-      pagination: { total, rowsPerPage, page },
-      orderBy: { ...orderBy, [property]: isAsc ? SORT.DOWN : SORT.UP },
-    };
-    onChangePagination?.(config);
-  };
-
   return {
+    independentData,
     total,
     rowsPerPage,
     page,
@@ -63,7 +55,6 @@ export function usePaginationDetails({
     sliceFrom,
     sliceTo,
     rowsPerPageList,
-    handleRequestSort,
   };
 }
 
@@ -235,8 +226,79 @@ export function useSelectionMode({
   return [selectionMode, cmp];
 }
 
-export function useData({ columns, data: _data = [], orderBy }) {
-  const [data, setData] = useState(_data);
+export function useSortColumns({
+  firstItem,
+  columns,
+  orderBy: _orderBy = [],
+  onChangeSortColumns,
+}) {
+  const [sortColumns, setSortColumns] = useState(
+    columns?.map(
+      (column) =>
+        ({
+          field: column.field,
+          orderBy: [SORT.DOWN, SORT.UP].includes(column.orderBy)
+            ? column.orderBy
+            : false,
+          type: typeof firstItem[column.field],
+        } ?? [])
+    )
+  );
 
-  return { data };
+  const handleRequestSort = (event, property, orderBy) => {
+    const sortColumnIndex = sortColumns.findIndex(
+      ({ field }) => field === property
+    );
+    if (sortColumnIndex === -1) return;
+
+    const [sortColumn] = sortColumns.splice(sortColumnIndex, 1);
+    sortColumn.orderBy = orderBy;
+    sortColumns.push(sortColumn);
+
+    setSortColumns([...sortColumns]);
+
+    onChangeSortColumns?.(
+      sortColumns
+        .filter((sortColumn) => sortColumn.orderBy)
+        .reduce((obj, sc) => ({ ...obj, [sc.field]: sc.orderBy }), {})
+    );
+  };
+
+  return { sortColumns, handleRequestSort };
+}
+
+export function useData({
+  page,
+  independentData,
+  sortColumns,
+  data: _data = [],
+  sliceFrom = 0,
+  sliceTo,
+}) {
+  const sortedData = useMemo(() => {
+    let data = _data ?? [];
+    if (independentData) {
+      sortColumns
+        .filter((sortColumn) => sortColumn.orderBy)
+        .forEach((sortColumn) => {
+          data = data.sort((item1, item2) => {
+            const [a, b] =
+              sortColumn.orderBy === SORT.UP
+                ? [item1[sortColumn.field], item2[sortColumn.field]]
+                : [item2[sortColumn.field], item1[sortColumn.field]];
+
+            return sortColumn.type === "number"
+              ? a - b
+              : `${a}`.localeCompare(`${b}`);
+          });
+        });
+    }
+
+    data = data.slice(sliceFrom, sliceTo);
+    console.log("data", data);
+
+    return data;
+  }, [_data, sortColumns, sliceFrom, sliceTo, page]);
+
+  return sortedData;
 }

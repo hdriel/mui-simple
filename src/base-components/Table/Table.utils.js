@@ -12,8 +12,6 @@ export function getDataRange({ rows, total, page, rowsPerPage }) {
   return [0, rowsPerPage];
 }
 
-export const SORT = { UP: "1", DOWN: "-1" };
-
 export function extractColors({ theme, colors }) {
   const { background, color } =
     typeof colors === "object" ? colors : { background: colors };
