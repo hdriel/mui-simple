@@ -4,6 +4,15 @@ import InputNumber from "../InputNumber";
 export default {
   title: "Inputs/Inputs/InputNumber",
   component: InputNumber,
+  decorators: [
+    (Story) => (
+      <div
+        style={{ width: "450px", padding: "1em", border: "1px dashed black" }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export const Default = () => {

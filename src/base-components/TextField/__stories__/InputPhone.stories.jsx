@@ -4,6 +4,15 @@ import InputPhone from "../InputPhone";
 export default {
   title: "Inputs/Inputs/InputPhone",
   component: InputPhone,
+  decorators: [
+    (Story) => (
+      <div
+        style={{ width: "450px", padding: "1em", border: "1px dashed black" }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export const Default = () => {

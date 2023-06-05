@@ -5,6 +5,15 @@ import { Clear as ClearIcon } from "@mui/icons-material";
 export default {
   title: "Inputs/TextField",
   component: TextField,
+  decorators: [
+    (Story) => (
+      <div
+        style={{ width: "450px", padding: "1em", border: "1px dashed black" }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export const Default = () => {
