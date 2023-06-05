@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { getOriginalTextWidth } from "../../hooks/useEllipsisActive";
+import { SORT } from "./Table.consts";
 
 export function getDataRange({ rows, total, page, rowsPerPage }) {
   // case that got full data as total
@@ -111,4 +112,12 @@ export function stableSort(array, comparator) {
     return a[1] - b[1];
   });
   return stabilizedThis.map((el) => el[0]);
+}
+
+export function getNextOrderBy(orderBy) {
+  return {
+    false: SORT.UP,
+    [SORT.UP]: SORT.DOWN,
+    [SORT.DOWN]: false,
+  }[orderBy];
 }

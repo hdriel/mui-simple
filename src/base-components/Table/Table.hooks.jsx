@@ -4,10 +4,19 @@ import {
   FilterAlt as FilterAltIcon,
   DragHandle as DragHandleIcon,
   LibraryAddCheck as LibraryAddCheckIcon,
+  SortByAlpha as SortByAlphaIcon,
+  North as NorthIcon,
+  South as SouthIcon,
+  ImportExport as ImportExportIcon,
 } from "@mui/icons-material";
-import { Checkbox, Tooltip } from "./Table.styled";
 
-import { getColumn, getDataRange, getMenuWidth } from "./Table.utils";
+import { Checkbox, Tooltip } from "./Table.styled";
+import {
+  getColumn,
+  getDataRange,
+  getMenuWidth,
+  getNextOrderBy,
+} from "./Table.utils";
 import CheckList from "../List/CheckList";
 import Menu from "../Menu/Menu";
 import { isDefined } from "../../utils/helpers";
@@ -111,20 +120,13 @@ export function useFilterColumns({
         getColumn(firstItem, column)
       ) ?? [],
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [columnsState]
+    [firstItem]
   );
 
   const isSameData = useMemo(
     () => JSON.stringify(columns) === JSON.stringify(columnsState),
-    [columns, columnsState]
+    [columns]
   );
-
-  useEffect(() => {
-    if (!isSameData) setColumnsState(columns);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSameData]);
-
-  const [menuOpen, setMenuOpen] = useState(false);
 
   const [filters, setFilters] = useState(
     columns?.reduce(
@@ -135,6 +137,8 @@ export function useFilterColumns({
       {}
     )
   );
+
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const [menuWidth, menuHeight] = useMemo(() => {
     const fields = columns?.map((column) => column.label);
@@ -158,6 +162,11 @@ export function useFilterColumns({
     event.stopPropagation();
     setFilters((o) => ({ ...o, [field]: !o[field] }));
   };
+
+  useEffect(() => {
+    if (!isSameData) setColumnsState(columns);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSameData]);
 
   const cmp = !hide && (
     <Menu
@@ -231,7 +240,10 @@ export function useSortColumns({
   firstItem,
   columns,
   orderBy: _orderBy = [],
+  hide,
   onChangeSortColumns,
+  title,
+  tooltip,
 }) {
   const [sortColumns, setSortColumns] = useState(
     columns?.map(
@@ -241,6 +253,7 @@ export function useSortColumns({
           orderBy: [SORT.DOWN, SORT.UP].includes(column.orderBy)
             ? column.orderBy
             : false,
+          label: column.label,
           type: typeof firstItem[column.field],
         } ?? [])
     )
@@ -265,7 +278,72 @@ export function useSortColumns({
     );
   };
 
-  return { sortColumns, handleRequestSort };
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const [menuWidth, menuHeight] = useMemo(() => {
+    const fields = sortColumns?.map((column) => column.label);
+    const width = getMenuWidth(fields);
+    const height = (fields?.length ?? 1) * 61.2 + (title ? 48 : 5);
+
+    return [width, height];
+  }, [sortColumns, title]);
+
+  const onClickItem = (field, orderBy) => (event) => {
+    event.stopPropagation();
+    const sortColumn = sortColumns.find((sc) => sc.field === field);
+    if (!sortColumn) return;
+    sortColumn.orderBy = orderBy;
+    setSortColumns([...sortColumns]);
+  };
+
+  const cmp = !hide && (
+    <Menu
+      width={menuWidth}
+      height={menuHeight}
+      open={menuOpen}
+      onClick={() => false}
+      onClose={() => setMenuOpen(false)}
+      alternativeContent={
+        <CheckList
+          droppableId="filter-menu"
+          title={title}
+          items={sortColumns?.map((column) => ({
+            id: column.field,
+            title: column.label ?? column.field,
+            checked: sortColumns.orderBy === SORT.UP,
+            checkedIcon: <SouthIcon />,
+            icon:
+              sortColumns.orderBy === SORT.DOWN ? (
+                <NorthIcon />
+              ) : (
+                <ImportExportIcon />
+              ),
+            onClick: onClickItem(column.field, column.orderBy),
+            actions: [<DragHandleIcon />],
+            data: column,
+          }))}
+          dragAndDropItems
+          onListOrderChange={(items) => {
+            const state = items.map((item) => item.data);
+            setSortColumns(state);
+          }}
+        />
+      }
+    >
+      <div onClick={() => setMenuOpen((o) => !o)}>
+        <Tooltip title={tooltip}>
+          <Checkbox
+            color={"rgba(0, 0, 0, 0.87)"}
+            checkedIcon={<SortByAlphaIcon />}
+            icon={<SortByAlphaIcon />}
+            checked={sortColumns.some((sortColumn) => sortColumn.orderBy)}
+          />
+        </Tooltip>
+      </div>
+    </Menu>
+  );
+
+  return { sortColumns, handleRequestSort, cmp };
 }
 
 export function useData({

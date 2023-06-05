@@ -11,6 +11,7 @@ export function EnhancedTableToolbar({
   title,
   filterAction,
   selectionModeAction,
+  sortColumnsAction,
   selectedActions,
   actions,
 }) {
@@ -71,6 +72,7 @@ export function EnhancedTableToolbar({
           </Tooltip>
         ))}
       {!numSelected && selectionModeAction}
+      {!numSelected && sortColumnsAction}
       {!numSelected && filterAction}
     </Toolbar>
   );

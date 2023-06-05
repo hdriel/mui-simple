@@ -89,7 +89,11 @@ export default function EnhancedTable({
     title: LABELS.FILTER_NENU_TITLE,
   });
 
-  const { handleRequestSort, sortColumns } = useSortColumns({
+  const {
+    handleRequestSort,
+    sortColumns,
+    cmp: sortColumnsAction,
+  } = useSortColumns({
     firstItem,
     columns,
     orderBy,
@@ -128,6 +132,7 @@ export default function EnhancedTable({
             actions={actions}
             filterAction={filterActionCmp}
             selectionModeAction={selectionModeCmp}
+            sortColumnsAction={sortColumnsAction}
             selectedActions={selectedActions}
             selectedLabel={LABELS.NUM_SELECTED}
             data={_data}

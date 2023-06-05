@@ -9,6 +9,7 @@ import {
   TableSortLabel,
   Checkbox,
 } from "../Table.styled";
+import { getNextOrderBy } from "../Table.utils";
 
 export function EnhancedTableHead({
   columns,
@@ -44,11 +45,7 @@ export function EnhancedTableHead({
           );
           const { orderBy } = sortColumn ?? {};
           const isActiveOrderBy = [SORT.DOWN, SORT.UP].includes(orderBy);
-          const nextState = {
-            false: SORT.UP,
-            [SORT.UP]: SORT.DOWN,
-            [SORT.DOWN]: false,
-          }[orderBy];
+          const nextState = getNextOrderBy(orderBy);
 
           return (
             <TableCell
