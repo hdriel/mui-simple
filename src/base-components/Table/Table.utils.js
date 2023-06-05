@@ -4,7 +4,7 @@ import { getOriginalTextWidth } from "../../hooks/useEllipsisActive";
 export function getDataRange({ rows, total, page, rowsPerPage }) {
   // case that got full data as total
   if (rows === total) {
-    const from = page <= 0 ? 0 : page * rowsPerPage;
+    const from = page * rowsPerPage;
     return [from, from + rowsPerPage];
   }
 
