@@ -26,6 +26,7 @@ export function usePaginationDetails({
   const page = _page ?? 0;
 
   const [sliceFrom, sliceTo] = getDataRange({ rows, total, page, rowsPerPage });
+  console.log("sliceFrom, sliceTo", sliceFrom, sliceTo);
 
   // Avoid a layout jump when reaching the last page with empty data.
   const emptyRows = useMemo(() => {
