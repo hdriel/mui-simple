@@ -48,6 +48,7 @@ export default function EnhancedTable({
   onChangePagination,
   onChangeSortColumns,
   orderBy,
+  addSortColumnsAction,
   addFilterColumnsAction,
   addSelectionModeAction,
   data: _data,
@@ -59,6 +60,7 @@ export default function EnhancedTable({
   paginationProps,
   paginationAlign,
   PaginationComponent,
+  actionColor,
   tableColor,
   headerColor,
   evenRowsColor,
@@ -66,7 +68,12 @@ export default function EnhancedTable({
   LABELS,
 }) {
   const theme = useTheme();
-  const colorProps = extractColors({ theme: theme, colors: tableColor });
+  const colorProps = extractColors({ theme, colors: tableColor });
+  const actionColorProps =
+    extractColors({ theme, colors: actionColor }) ??
+    (colorProps?.color && {
+      background: colorProps?.color,
+    });
   const rows = _data?.length ?? 0;
   const [firstItem] = _data ?? [];
 
@@ -87,6 +94,7 @@ export default function EnhancedTable({
     hide: !addFilterColumnsAction,
     tooltip: LABELS.FILTER_TOOLTIP,
     title: LABELS.FILTER_NENU_TITLE,
+    colors: actionColorProps,
   });
 
   const {
@@ -96,14 +104,17 @@ export default function EnhancedTable({
   } = useSortColumns({
     firstItem,
     columns,
+    hide: !addSortColumnsAction,
     orderBy,
     onChangeSortColumns,
+    colors: actionColorProps,
   });
 
   const [selectionMode, selectionModeCmp] = useSelectionMode({
     selectionMode: _selectionMode,
     hide: !addSelectionModeAction,
     tooltip: LABELS.SELECTION_MODE_TOOLTIP,
+    colors: actionColorProps,
   });
 
   const data = useData({
@@ -114,8 +125,6 @@ export default function EnhancedTable({
     sliceTo,
     data: _data,
   });
-
-  console.log("page", page);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -137,6 +146,7 @@ export default function EnhancedTable({
             selectedLabel={LABELS.NUM_SELECTED}
             data={_data}
             selected={selected}
+            colorProps={colorProps}
           />
         )}
 
@@ -153,10 +163,11 @@ export default function EnhancedTable({
               sortColumns={sortColumns}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
-              headerColor={headerColor}
+              headerColor={headerColor ?? colorProps}
               rowCount={rows}
               onSelectAllClick={handleSelectAllClick}
               selectionMode={selectionMode}
+              actionColor={actionColorProps}
             />
 
             <TableBody>
@@ -171,6 +182,7 @@ export default function EnhancedTable({
                   selectionMode={selectionMode}
                   evenRowsColor={evenRowsColor}
                   oddRowsColor={oddRowsColor}
+                  actionColor={actionColorProps}
                   onSelect={(event) => {
                     handleSelect(event, row.id ?? index);
                     if (!row.id) console.warn("Missing id field in row", row);
@@ -211,6 +223,7 @@ EnhancedTable.propTypes = {
   maxHeight: PT_sizeUnit,
   selectedLabel: PropTypes.string,
   selectionMode: PropTypes.bool,
+  addSortColumnsAction: PropTypes.bool,
   addFilterColumnsAction: PropTypes.bool,
   addSelectionModeAction: PropTypes.bool,
   title: PropTypes.string,
@@ -244,6 +257,7 @@ EnhancedTable.defaultProps = {
   dense: undefined,
   maxHeight: undefined,
   selectionMode: undefined,
+  addSortColumnsAction: undefined,
   addFilterColumnsAction: undefined,
   addSelectionModeAction: undefined,
   title: undefined,

@@ -17,6 +17,7 @@ export function EnhancedTableHead({
   orderBy,
   onRequestSort,
   headerColor,
+  actionColor,
   numSelected,
   onSelectAllClick,
   rowCount,
@@ -29,9 +30,9 @@ export function EnhancedTableHead({
     <TableHead>
       <TableRow>
         {selectionMode && (
-          <TableCell padding="checkbox">
+          <TableCell padding="checkbox" colors={headerColor}>
             <Checkbox
-              color="primary"
+              muiColor={"error"}
               indeterminate={numSelected > 0 && numSelected < rowCount}
               checked={rowCount > 0 && numSelected === rowCount}
               onChange={onSelectAllClick}

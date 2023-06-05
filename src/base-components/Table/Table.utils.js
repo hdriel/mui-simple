@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { getOriginalTextWidth } from "../../hooks/useEllipsisActive";
 import { SORT } from "./Table.consts";
+import { isDefined } from "../../utils/helpers";
 
 export function getDataRange({ rows, total, page, rowsPerPage }) {
   // case that got full data as total
@@ -32,7 +33,9 @@ export function extractColors({ theme, colors }) {
     _.get(theme, `palette.${background}.main`) ??
     _.get(theme, `palette.${background}`, background);
 
-  return { color: textColor, backgroundColor: bgColor };
+  return isDefined(textColor) || isDefined(bgColor)
+    ? { color: textColor, background: bgColor }
+    : undefined;
 }
 
 export function getColumn(row, column) {

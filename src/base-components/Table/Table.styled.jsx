@@ -37,14 +37,15 @@ export const TableCell = styled(MuiTableCell)`
   padding-right: 1em;
 
   ${(props) => {
-    const { color, backgroundColor } = extractColors({
-      theme: props.theme,
-      colors: props.colors,
-    });
+    const { color, background } =
+      extractColors({
+        theme: props.theme,
+        colors: props.colors,
+      }) ?? {};
 
     return css`
       color: ${color};
-      background-color: ${backgroundColor};
+      background-color: ${background};
     `;
   }};
 `;

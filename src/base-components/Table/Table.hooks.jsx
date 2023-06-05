@@ -35,7 +35,6 @@ export function usePaginationDetails({
   const page = _page ?? 0;
 
   const [sliceFrom, sliceTo] = getDataRange({ rows, total, page, rowsPerPage });
-  console.log("sliceFrom, sliceTo", sliceFrom, sliceTo);
 
   // Avoid a layout jump when reaching the last page with empty data.
   const emptyRows = useMemo(() => {
@@ -111,6 +110,7 @@ export function useFilterColumns({
   hide,
   tooltip,
   title,
+  colors,
 }) {
   const [columnsState, setColumnsState] = useState(_columns);
 
@@ -198,7 +198,7 @@ export function useFilterColumns({
       <div onClick={() => setMenuOpen((o) => !o)}>
         <Tooltip title={tooltip}>
           <Checkbox
-            color={"rgba(0, 0, 0, 0.87)"}
+            color={colors?.background}
             checkedIcon={<FilterAltOffIcon />}
             icon={<FilterAltIcon />}
             checked={checked}
@@ -215,7 +215,9 @@ export function useSelectionMode({
   selectionMode: _selectionMode,
   hide,
   tooltip,
+  colors,
 }) {
+  console.log("useSelectionMode.colors?.background", colors?.background);
   const [selectionMode, setSelectionMode] = useState(_selectionMode ?? false);
 
   useEffect(() => {
@@ -225,6 +227,7 @@ export function useSelectionMode({
   const cmp = !hide && (
     <Tooltip title={tooltip}>
       <Checkbox
+        color={colors?.background}
         checkedIcon={<LibraryAddCheckIcon />}
         icon={<LibraryAddCheckIcon />}
         checked={selectionMode}
@@ -244,6 +247,7 @@ export function useSortColumns({
   onChangeSortColumns,
   title,
   tooltip,
+  colors,
 }) {
   const [sortColumns, setSortColumns] = useState(
     columns?.map(
@@ -260,15 +264,9 @@ export function useSortColumns({
   );
 
   const handleRequestSort = (event, property, orderBy) => {
-    const sortColumnIndex = sortColumns.findIndex(
-      ({ field }) => field === property
-    );
-    if (sortColumnIndex === -1) return;
-
-    const [sortColumn] = sortColumns.splice(sortColumnIndex, 1);
+    const sortColumn = sortColumns.find(({ field }) => field === property);
+    if (sortColumn === -1) return;
     sortColumn.orderBy = orderBy;
-    sortColumns.push(sortColumn);
-
     setSortColumns([...sortColumns]);
 
     onChangeSortColumns?.(
@@ -310,15 +308,16 @@ export function useSortColumns({
           items={sortColumns?.map((column) => ({
             id: column.field,
             title: column.label ?? column.field,
-            checked: sortColumns.orderBy === SORT.UP,
-            checkedIcon: <SouthIcon />,
+            color: "rgba(0, 0, 0, 0.87)",
+            checked: column.orderBy === SORT.UP,
+            checkedIcon: <NorthIcon />,
             icon:
-              sortColumns.orderBy === SORT.DOWN ? (
-                <NorthIcon />
+              column.orderBy === SORT.DOWN ? (
+                <SouthIcon />
               ) : (
                 <ImportExportIcon />
               ),
-            onClick: onClickItem(column.field, column.orderBy),
+            onClick: onClickItem(column.field, getNextOrderBy(column.orderBy)),
             actions: [<DragHandleIcon />],
             data: column,
           }))}
@@ -333,10 +332,10 @@ export function useSortColumns({
       <div onClick={() => setMenuOpen((o) => !o)}>
         <Tooltip title={tooltip}>
           <Checkbox
-            color={"rgba(0, 0, 0, 0.87)"}
+            color={colors?.background}
             checkedIcon={<SortByAlphaIcon />}
             icon={<SortByAlphaIcon />}
-            checked={sortColumns.some((sortColumn) => sortColumn.orderBy)}
+            checked={sortColumns.some((column) => column.orderBy)}
           />
         </Tooltip>
       </div>
@@ -374,7 +373,6 @@ export function useData({
     }
 
     data = data.slice(sliceFrom, sliceTo);
-    console.log("data", data);
 
     return data;
   }, [_data, sortColumns, sliceFrom, sliceTo, page]);

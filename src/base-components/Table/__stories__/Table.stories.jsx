@@ -193,6 +193,7 @@ export function FilterAction() {
       title="Selection Table by action"
       orderBy={{ age: "asc" }}
       columns={PERSON_COLUMNS}
+      addSortColumnsAction
       addFilterColumnsAction
       addSelectionModeAction
       data={PERSON_DATA.slice(0, 2)}
