@@ -34,7 +34,7 @@ import {
   useSelection,
   useSelectionMode,
   useSortColumns,
-} from "../Table.hooks";
+} from "../hooks/Table.hooks";
 import { EnhancedTablePagination } from "./EnhancedTablePagination";
 
 export default function EnhancedTable({

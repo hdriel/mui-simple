@@ -10,17 +10,17 @@ import {
   ImportExport as ImportExportIcon,
 } from "@mui/icons-material";
 
-import { Checkbox, Tooltip } from "./Table.styled";
+import { Checkbox, Tooltip } from "../Table.styled";
 import {
   getColumn,
   getDataRange,
   getMenuWidth,
   getNextOrderBy,
-} from "./Table.utils";
-import CheckList from "../List/CheckList";
-import Menu from "../Menu/Menu";
-import { isDefined } from "../../utils/helpers";
-import { SORT } from "./Table.consts";
+} from "../Table.utils";
+import CheckList from "../../List/CheckList";
+import Menu from "../../Menu/Menu";
+import { isDefined } from "../../../utils/helpers";
+import { SORT } from "../Table.consts";
 
 export function usePaginationDetails({
   rows = 0,

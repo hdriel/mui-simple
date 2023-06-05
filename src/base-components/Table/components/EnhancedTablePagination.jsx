@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, TablePagination } from "../Table.styled";
-import { usePaginationDetails } from "../Table.hooks";
+import { usePaginationDetails } from "../hooks/Table.hooks";
 
 export function EnhancedTablePagination({
   onChangePagination,
