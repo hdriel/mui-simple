@@ -93,7 +93,7 @@ export default function EnhancedTable({
     columns: _columns,
     hide: !addFilterColumnsAction,
     tooltip: LABELS.FILTER_TOOLTIP,
-    title: LABELS.FILTER_NENU_TITLE,
+    title: LABELS.FILTER_MENU_TITLE,
     colors: actionColorProps,
   });
 
@@ -107,6 +107,7 @@ export default function EnhancedTable({
     hide: !addSortColumnsAction,
     orderBy,
     onChangeSortColumns,
+    title: LABELS.SORT_MENU_TITLE,
     colors: actionColorProps,
   });
 
@@ -277,7 +278,8 @@ EnhancedTable.defaultProps = {
   oddRowsColor: undefined,
   LABELS: {
     FILTER_TOOLTIP: "Filter Columns",
-    FILTER_NENU_TITLE: "Columns",
+    FILTER_MENU_TITLE: "Filter Columns order",
+    SORT_MENU_TITLE: "Sort Columns order",
     SELECTION_MODE_TOOLTIP: "Enable Selection Mode",
     NUM_SELECTED: "{n} selected",
   },

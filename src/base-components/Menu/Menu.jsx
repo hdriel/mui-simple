@@ -18,6 +18,7 @@ export default function Menu({
   width,
   height,
   maxHeight,
+  arrow,
   id,
   disableRipple,
   open,
@@ -69,7 +70,7 @@ export default function Menu({
     <>
       {boundingChildren}
       {(anchorProps.anchorEl || contextMenu) && (
-        <MenuWrapper>
+        <MenuWrapper arrow={arrow}>
           <MuiMenu
             elevation={elevation}
             height={height}
@@ -130,6 +131,7 @@ Menu.propTypes = {
   id: PropTypes.string,
   alternativeContent: PropTypes.any,
   dense: PropTypes.bool,
+  arrow: PropTypes.bool,
   disableRipple: PropTypes.bool,
   open: PropTypes.bool,
   onClose: PropTypes.func,
