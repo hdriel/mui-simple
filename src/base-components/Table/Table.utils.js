@@ -73,7 +73,7 @@ export function getColumn(row, column) {
   };
 }
 
-export function getMenuWidth(fields) {
+function getMenuWidth(fields) {
   const sized = fields?.map((field) => field?.length ?? 0) ?? [0];
   const index = Math.max(...sized);
   const maxWord = fields?.[sized.indexOf(index)] ?? "";
@@ -123,4 +123,12 @@ export function getNextOrderBy(orderBy) {
     [SORT.UP]: SORT.DOWN,
     [SORT.DOWN]: false,
   }[orderBy];
+}
+
+export function getMenuSizes({ columns, title }) {
+  const fields = columns?.map((column) => column.label);
+  const width = getMenuWidth(fields);
+  const height = (fields?.length ?? 1) * 62 + (title ? 48 : 5);
+
+  return [width, height];
 }

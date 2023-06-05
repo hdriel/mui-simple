@@ -48,6 +48,7 @@ const ListItemWrapper = ({
       href={item.link}
       onClick={item.items?.length ? onClickHandler : item.onClick}
       selected={item.selected}
+      padding={item.padding}
       {...props}
     >
       {children}
