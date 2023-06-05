@@ -2,6 +2,41 @@
   "name": "my-mui-cmp",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "predeploy": "npm run build-storybook",
+    "deploy": "gh-pages -d storybook-static"
+  },
+  "eslintConfig": {
+    "extends": [ "react-app", "react-app/jest" ],
+    "overrides": [
+      {
+        "files": [ "**/*.stories.*" ],
+        "rules": { "import/no-anonymous-default-export": "off" }
+      },
+      {
+        "files": [ "**/*.stories.*" ],
+        "rules": { "import/no-anonymous-default-export": "off" }
+      }
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.0",
     "@emotion/react": "^11.10.6",
@@ -27,52 +62,6 @@
     "react-swipeable-views-utils": "^0.14.0",
     "react-transition-group": "^4.4.5",
     "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "predeploy": "npm run build-storybook",
-    "deploy": "gh-pages -d storybook-static"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      },
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "devDependencies": {
     "@emotion/cache": "^11.10.7",

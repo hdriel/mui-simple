@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import InputAdornment from "@mui/material/InputAdornment";
-import TextField from "@mui/material/TextField";
+import MuiTextField from "@mui/material/TextField";
 
-function Input({
+function TextField({
   label,
   id,
   name,
@@ -27,7 +27,7 @@ function Input({
   ...props
 }) {
   return (
-    <TextField
+    <MuiTextField
       fullWidth={fullWidth}
       label={label}
       id={id}
@@ -63,7 +63,7 @@ function Input({
   );
 }
 
-Input.propTypes = {
+TextField.propTypes = {
   label: PropTypes.string,
   id: PropTypes.string,
   name: PropTypes.string,
@@ -86,7 +86,7 @@ Input.propTypes = {
   endCmp: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 
-Input.defaultProps = {
+TextField.defaultProps = {
   label: undefined,
   id: undefined,
   name: undefined,
@@ -109,4 +109,4 @@ Input.defaultProps = {
   endCmp: undefined,
 };
 
-export default Input;
+export default TextField;

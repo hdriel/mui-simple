@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import Input from "../Input";
+import TextField from "../TextField";
 import { Clear as ClearIcon } from "@mui/icons-material";
 
 export default {
-  title: "Inputs/Input",
-  component: Input,
+  title: "Inputs/Inputs/TextField",
+  component: TextField,
 };
 
 export const Default = () => {
-  return <Input />;
+  return <TextField />;
 };
 
 export const StartIcon = () => {
   return (
-    <Input
+    <TextField
       label="Start Icon Input"
       startCmp="kg"
       variant="outlined"
@@ -24,13 +24,17 @@ export const StartIcon = () => {
 
 export const EndIcon = () => {
   return (
-    <Input label="End Icon Input" endCmp={<ClearIcon />} variant="standard" />
+    <TextField
+      label="End Icon Input"
+      endCmp={<ClearIcon />}
+      variant="standard"
+    />
   );
 };
 
 export const Password = () => {
   return (
-    <Input
+    <TextField
       label="End Icon Input"
       endCmp={<ClearIcon />}
       variant="standard"
@@ -43,7 +47,7 @@ export const Disabled = () => {
   const [value, setValue] = useState("Hello world");
 
   return (
-    <Input
+    <TextField
       label="Disabled Input"
       disabled
       value={value}
@@ -56,7 +60,7 @@ export const ReadOnly = () => {
   const [value, setValue] = useState("Hello world");
 
   return (
-    <Input
+    <TextField
       label="Read Only Input"
       readOnly
       value={value}
@@ -69,7 +73,7 @@ export const Multiline = () => {
   const [value, setValue] = useState("Hello world");
 
   return (
-    <Input
+    <TextField
       label="Multiline input"
       value={value}
       onChange={(e) => setValue(e.target.value)}
@@ -83,7 +87,7 @@ export const Required = () => {
   const [value, setValue] = useState("Hello world");
 
   return (
-    <Input
+    <TextField
       label="username"
       required
       value={value}
@@ -96,7 +100,7 @@ export const Error = () => {
   const [value, setValue] = useState("3#%32");
 
   return (
-    <Input
+    <TextField
       label="username"
       error
       helperText="Invalid username"
@@ -110,7 +114,7 @@ export const HelperText = () => {
   const [value, setValue] = useState("Test");
 
   return (
-    <Input
+    <TextField
       label="username"
       helperText="username for credentials"
       value={value}
@@ -121,7 +125,7 @@ export const HelperText = () => {
 
 export const NotFullwith = () => {
   return (
-    <Input
+    <TextField
       fullWidth={false}
       label="End Icon Input"
       endCmp={<ClearIcon />}
@@ -132,7 +136,7 @@ export const NotFullwith = () => {
 
 export const Focused = () => {
   return (
-    <Input
+    <TextField
       fullWidth={false}
       label="auto focused input"
       variant="outlined"
@@ -147,14 +151,14 @@ export const MuiltipleInputs = () => {
   return (
     <>
       <div style={{ display: "flex", gap: "16px" }}>
-        <Input
+        <TextField
           fullWidth={false}
           label="First Input"
           endCmp={<ClearIcon />}
           variant="standard"
           helperText={" "}
         />
-        <Input
+        <TextField
           fullWidth={false}
           label="Second Input"
           endCmp={<ClearIcon onClick={() => setValue("")} />}
@@ -166,14 +170,14 @@ export const MuiltipleInputs = () => {
         />
       </div>
       <div style={{ display: "flex", gap: "16px" }}>
-        <Input
+        <TextField
           fullWidth={false}
           label="First Input"
           endCmp={<ClearIcon />}
           variant="standard"
           error
         />
-        <Input
+        <TextField
           fullWidth={false}
           label="Second Input"
           endCmp={<ClearIcon />}

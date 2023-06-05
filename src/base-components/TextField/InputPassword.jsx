@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Input from "../Input/Input";
+import Input from "./TextField";
 import { IconButton } from "@mui/material";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 
-export default function PasswordInput(props) {
+export default function InputPassword(props) {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -24,5 +24,5 @@ export default function PasswordInput(props) {
   );
 }
 
-PasswordInput.propTypes = Input.propTypes;
-PasswordInput.defaultProps = Input.defaultProps;
+InputPassword.propTypes = Input.propTypes;
+InputPassword.defaultProps = Input.defaultProps;

@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import PasswordInput from "../PasswordInput";
+import InputPassword from "../InputPassword";
 
 export default {
-  title: "Inputs/PasswordInput",
-  component: PasswordInput,
+  title: "Inputs/Inputs/InputPassword",
+  component: InputPassword,
 };
 
 export const Default = () => {
-  return <PasswordInput />;
+  return <InputPassword />;
 };
 
 export const Password = () => {
   const [value, setValue] = useState("Hello world");
 
   return (
-    <PasswordInput
+    <InputPassword
       label="Password"
       value={value}
       onChange={(e) => setValue(e.target.value)}
