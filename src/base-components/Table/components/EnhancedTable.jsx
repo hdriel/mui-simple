@@ -28,11 +28,13 @@ import {
 } from "../Table.styled";
 
 import {
+  useData,
   useFilterColumns,
   usePaginationDetails,
   useSelection,
   useSelectionMode,
-} from "../Table.hooks";
+  useSortColumns,
+} from "../hooks";
 import { EnhancedTablePagination } from "./EnhancedTablePagination";
 
 export default function EnhancedTable({
@@ -44,10 +46,12 @@ export default function EnhancedTable({
   title,
   pagination,
   onChangePagination,
+  onChangeSortColumns,
   orderBy,
+  addSortColumnsAction,
   addFilterColumnsAction,
   addSelectionModeAction,
-  data,
+  data: _data,
   columns: _columns,
   onClickRow,
   actions,
@@ -56,6 +60,7 @@ export default function EnhancedTable({
   paginationProps,
   paginationAlign,
   PaginationComponent,
+  actionColor,
   tableColor,
   headerColor,
   evenRowsColor,
@@ -63,42 +68,64 @@ export default function EnhancedTable({
   LABELS,
 }) {
   const theme = useTheme();
-  const colorProps = extractColors({ theme: theme, colors: tableColor });
+  const colorProps = extractColors({ theme, colors: tableColor });
+  const actionColorProps =
+    extractColors({ theme, colors: actionColor }) ??
+    (colorProps?.color && {
+      background: colorProps?.color,
+    });
+  const rows = _data?.length ?? 0;
+  const [firstItem] = _data ?? [];
 
   const { handleSelectAllClick, isSelected, selected, handleSelect } =
-    useSelection({ data });
+    useSelection({ data: _data });
 
-  const { emptyRows, sliceFrom, sliceTo } = usePaginationDetails(
-    data,
-    pagination
-  );
+  const { emptyRows, sliceFrom, sliceTo, independentData, page } =
+    usePaginationDetails({
+      rows,
+      pagination,
+      orderBy,
+      onChangePagination,
+    });
 
   const [columns, filterActionCmp] = useFilterColumns({
-    data,
+    firstItem,
     columns: _columns,
     hide: !addFilterColumnsAction,
     tooltip: LABELS.FILTER_TOOLTIP,
-    title: LABELS.FILTER_NENU_TITLE,
+    title: LABELS.FILTER_MENU_TITLE,
+    colors: actionColorProps,
+  });
+
+  const {
+    handleRequestSort,
+    sortColumns,
+    cmp: sortColumnsAction,
+  } = useSortColumns({
+    firstItem,
+    columns,
+    hide: !addSortColumnsAction,
+    orderBy,
+    onChangeSortColumns,
+    title: LABELS.SORT_MENU_TITLE,
+    colors: actionColorProps,
   });
 
   const [selectionMode, selectionModeCmp] = useSelectionMode({
     selectionMode: _selectionMode,
     hide: !addSelectionModeAction,
     tooltip: LABELS.SELECTION_MODE_TOOLTIP,
+    colors: actionColorProps,
   });
 
-  // eslint-disable-next-line no-unused-vars
-  const handleClick = (event, rowId, rowData) => onClickRow?.(rowId, rowData);
-
-  const handleRequestSort = (event, property) => {
-    const orderDir = orderBy?.[property] ?? SORT.UP;
-    const isAsc = orderBy?.[property] && orderDir === SORT.UP;
-    const config = {
-      pagination,
-      orderBy: { ...orderBy, [property]: isAsc ? SORT.DOWN : SORT.UP },
-    };
-    onChangePagination?.(config);
-  };
+  const data = useData({
+    page,
+    independentData,
+    sortColumns,
+    sliceFrom,
+    sliceTo,
+    data: _data,
+  });
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -115,10 +142,12 @@ export default function EnhancedTable({
             actions={actions}
             filterAction={filterActionCmp}
             selectionModeAction={selectionModeCmp}
+            sortColumnsAction={sortColumnsAction}
             selectedActions={selectedActions}
             selectedLabel={LABELS.NUM_SELECTED}
-            data={data}
+            data={_data}
             selected={selected}
+            colorProps={colorProps}
           />
         )}
 
@@ -132,24 +161,29 @@ export default function EnhancedTable({
             <EnhancedTableHead
               numSelected={selected.length}
               columns={columns}
+              sortColumns={sortColumns}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
-              headerColor={headerColor}
-              rowCount={data?.length}
+              headerColor={headerColor ?? colorProps}
+              rowCount={rows}
               onSelectAllClick={handleSelectAllClick}
               selectionMode={selectionMode}
+              actionColor={actionColorProps}
             />
 
             <TableBody>
-              {data?.slice(sliceFrom, sliceTo).map((row, index) => (
+              {data.map((row, index) => (
                 <EnhancedTableRow
                   key={index}
                   columns={columns}
-                  handleClick={handleClick}
+                  handleClick={(event, rowId, rowData) =>
+                    onClickRow?.(rowId, rowData)
+                  }
                   index={index}
                   selectionMode={selectionMode}
                   evenRowsColor={evenRowsColor}
                   oddRowsColor={oddRowsColor}
+                  actionColor={actionColorProps}
                   onSelect={(event) => {
                     handleSelect(event, row.id ?? index);
                     if (!row.id) console.warn("Missing id field in row", row);
@@ -172,7 +206,7 @@ export default function EnhancedTable({
         <EnhancedTablePagination
           pagination={pagination}
           onChangePagination={onChangePagination}
-          data={data}
+          rows={rows}
           paginationProps={paginationProps}
           paginationAlign={paginationAlign}
           PaginationComponent={PaginationComponent}
@@ -190,6 +224,7 @@ EnhancedTable.propTypes = {
   maxHeight: PT_sizeUnit,
   selectedLabel: PropTypes.string,
   selectionMode: PropTypes.bool,
+  addSortColumnsAction: PropTypes.bool,
   addFilterColumnsAction: PropTypes.bool,
   addSelectionModeAction: PropTypes.bool,
   title: PropTypes.string,
@@ -223,6 +258,7 @@ EnhancedTable.defaultProps = {
   dense: undefined,
   maxHeight: undefined,
   selectionMode: undefined,
+  addSortColumnsAction: undefined,
   addFilterColumnsAction: undefined,
   addSelectionModeAction: undefined,
   title: undefined,
@@ -242,7 +278,8 @@ EnhancedTable.defaultProps = {
   oddRowsColor: undefined,
   LABELS: {
     FILTER_TOOLTIP: "Filter Columns",
-    FILTER_NENU_TITLE: "Columns",
+    FILTER_MENU_TITLE: "Filter Columns order",
+    SORT_MENU_TITLE: "Sort Columns order",
     SELECTION_MODE_TOOLTIP: "Enable Selection Mode",
     NUM_SELECTED: "{n} selected",
   },

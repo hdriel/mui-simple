@@ -11,8 +11,10 @@ export function EnhancedTableToolbar({
   title,
   filterAction,
   selectionModeAction,
+  sortColumnsAction,
   selectedActions,
   actions,
+  colorProps,
 }) {
   const numSelected = selected?.length ?? 0;
   const filteredActions = (numSelected > 0 ? selectedActions : actions) || [];
@@ -25,7 +27,7 @@ export function EnhancedTableToolbar({
         ...(numSelected > 0 && {
           bgcolor: (theme) =>
             alpha(
-              theme.palette.primary.main,
+              colorProps?.background ?? theme.palette.primary.main,
               theme.palette.action.activatedOpacity
             ),
         }),
@@ -71,6 +73,7 @@ export function EnhancedTableToolbar({
           </Tooltip>
         ))}
       {!numSelected && selectionModeAction}
+      {!numSelected && sortColumnsAction}
       {!numSelected && filterAction}
     </Toolbar>
   );

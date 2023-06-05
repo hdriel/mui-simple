@@ -10,7 +10,7 @@ import {
   Grow,
   Box,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { styled, css } from "@mui/material/styles";
 import Paper from "../Paper/Paper";
 
 export const ContextMenuWrapper = styled(Box)`
@@ -22,17 +22,22 @@ export const MenuWrapper = styled(Box)`
   position: relative;
   overflow: visible;
   margin-top: 1.5px;
+
   &::before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 14px;
-    width: 10px;
-    height: 10px;
-    background-color: ${(props) => props.theme.palette.background.paper};
-    transform: translateY(-50%) rotate(45deg);
-    z-index: 0;
+    ${(props) =>
+      props.arrow &&
+      css`
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 14px;
+        width: 10px;
+        height: 10px;
+        background-color: ${props.theme.palette.background.paper};
+        transform: translateY(-50%) rotate(45deg);
+        z-index: 0;
+      `}
   }
 `;
 

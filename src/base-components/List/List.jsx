@@ -48,6 +48,7 @@ const ListItemWrapper = ({
       href={item.link}
       onClick={item.items?.length ? onClickHandler : item.onClick}
       selected={item.selected}
+      padding={item.padding}
       {...props}
     >
       {children}
@@ -73,6 +74,7 @@ const List = ({
   title,
   items,
   insetItems,
+  droppableId,
   ...props
 }) => {
   const [open, setOpen] = useState({});
@@ -93,6 +95,7 @@ const List = ({
 
   return (
     <MuiList
+      id={droppableId}
       useTransition={useTransition}
       disablePadding={disablePadding}
       dense={dense}
@@ -104,7 +107,7 @@ const List = ({
       {
         <DraggableList
           dataList={dataList}
-          droppableClassName="list-item"
+          droppableClassName={droppableId}
           disabled={!dragAndDropItems}
           onChange={onListOrderChange}
           renderValue={(item, index) => {
@@ -115,7 +118,7 @@ const List = ({
             const listItem = !!Object.keys(itemProps).length;
 
             return (
-              <div style={{ width: "100%" }}>
+              <div style={{ width: "100%" }} key={index}>
                 {listItem && (
                   <ListItem
                     key={`i-${index}`}
@@ -215,6 +218,7 @@ List.propTypes = {
   disableGuttersItems: PropTypes.bool,
   dragAndDropItems: PropTypes.bool,
   enableSubtitle: PropTypes.bool,
+  droppableId: PropTypes.string,
   title: PropTypes.string,
   alignItems: PropTypes.oneOf(["flex-start"]),
   insetItems: PropTypes.bool,

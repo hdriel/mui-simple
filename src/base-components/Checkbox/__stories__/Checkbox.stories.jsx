@@ -15,8 +15,9 @@ export default {
       <div
         style={{
           padding: "1em",
-          height: "98vh",
-          width: "98vw",
+          height: "100px",
+          width: "90%",
+          overflow: "hidden",
         }}
       >
         <Story />

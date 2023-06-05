@@ -39,6 +39,7 @@ export const ListItem = styled(MuiListItem)`
 export const ListItemAvatar = MuiListItemAvatar;
 export const ListItemButton = styled(MuiListItemButton)`
   width: 100%;
+  padding: ${(props) => props.padding};
 `;
 export const ListItemIcon = MuiListItemIcon;
 export const ListItemSecondaryAction = MuiListItemSecondaryAction;

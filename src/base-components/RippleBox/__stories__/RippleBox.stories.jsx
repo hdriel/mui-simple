@@ -27,7 +27,14 @@ const dummyProps = {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 function Template(args) {
-  return <RippleBox {...args} />;
+  return (
+    <RippleBox
+      {...args}
+      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+    >
+      Hello World
+    </RippleBox>
+  );
 }
 
 export const Custom = Template.bind({});

@@ -1,20 +1,22 @@
 import React from "react";
 import { Box, TablePagination } from "../Table.styled";
-import { usePaginationDetails } from "../Table.hooks";
+import { usePaginationDetails } from "../hooks";
 
 export function EnhancedTablePagination({
   onChangePagination,
-  data,
+  rows,
   pagination,
   paginationProps,
   paginationAlign,
   PaginationComponent,
   orderBy,
 }) {
-  const { total, rowsPerPage, rowsPerPageList, page } = usePaginationDetails(
-    data,
-    pagination
-  );
+  const { total, rowsPerPage, rowsPerPageList, page } = usePaginationDetails({
+    pagination,
+    orderBy,
+    rows,
+    onChangePagination,
+  });
 
   const handleChangePage = (event, newPage) => {
     if (typeof event === "number") newPage = event;

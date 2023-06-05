@@ -70,6 +70,7 @@ export default function CheckList({
 CheckList.propTypes = {
   controlType: PropTypes.oneOf(["checkbox", "switch"]),
   alignCheck: PropTypes.oneOf(["start", "end"]),
+  droppableId: PropTypes.string,
 };
 
 CheckList.defaultProps = {

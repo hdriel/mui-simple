@@ -76,6 +76,7 @@ export default function EnhancedTableRow({
   index,
   evenRowsColor,
   oddRowsColor,
+  actionColor,
   onSelect,
   selected,
   selectionMode,
@@ -94,7 +95,11 @@ export default function EnhancedTableRow({
     >
       {selectionMode && (
         <TableCell padding="checkbox">
-          <Checkbox color="primary" checked={selected} onChange={onSelect} />
+          <Checkbox
+            muiColor={"error"}
+            checked={selected ?? false}
+            onChange={onSelect}
+          />
         </TableCell>
       )}
 
