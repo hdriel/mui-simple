@@ -117,7 +117,13 @@ Slider.propTypes = {
   ]),
   label: PropTypes.string,
   muiColor: PropTypes.string,
-  customColor: PropTypes.string,
+  customColor: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      track: PropTypes.string,
+      thumb: PropTypes.string,
+    }),
+  ]),
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
   orientation: PropTypes.oneOf(["vertical", "horizontal"]),

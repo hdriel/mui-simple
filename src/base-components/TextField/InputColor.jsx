@@ -17,6 +17,7 @@ import { Box } from "./TextField.styled";
 const VALUE_FORMAT = { hex: "rgba", rgba: "hsl", hsl: "hex" };
 
 export default function InputColor({
+  variant,
   value,
   disabled,
   copyMessage,
@@ -68,15 +69,31 @@ export default function InputColor({
 
   useEffect(() => {
     const boxWidth = ref.current?.clientWidth;
-    const inputWidth = boxWidth - 100;
+    const padding =
+      { filled: 102, standard: 82, outlined: 108 }[variant] ?? 100;
+    const inputWidth = boxWidth - padding;
     if (inputWidth > 0) setWidth(inputWidth);
   }, []);
+
+  let sliderPositions;
+  switch (variant) {
+    case "filled":
+      sliderPositions = { bottom: "-8px", left: "5px" };
+      break;
+    case "standard":
+      sliderPositions = { bottom: "-11px", left: "-5px" };
+      break;
+    case "outlined":
+    default:
+      sliderPositions = { bottom: "0", left: "0.5em" };
+  }
 
   return (
     <Box sx={{ position: "relative", width: "100%" }} ref={ref}>
       <Input
         activeColor={showContrastColor ? "#636363" : activeColor}
         {...props}
+        variant={variant}
         disabled={disabled}
         type="color"
         endCmp={
@@ -106,16 +123,14 @@ export default function InputColor({
         }
       />
       {showOpacitySlider && (
-        <Box
-          sx={{
-            position: "absolute",
-            top: "0.5em",
-            left: "0.5em",
-            width: width,
-          }}
-        >
+        <Box sx={{ position: "absolute", width: width, ...sliderPositions }}>
           <Slider
-            customColor={value}
+            customColor={{
+              track: showContrastColor
+                ? "rgba(0,0,0,0.2)"
+                : "rgba(255,255,255,0.2)",
+              thumb: showContrastColor ? "#000000" : "#FFFFFF",
+            }}
             value={opacity}
             disabled={disabled}
             onChange={handleChange}

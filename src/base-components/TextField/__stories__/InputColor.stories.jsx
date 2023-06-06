@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import InputColor from "../InputColor";
+import { Stack } from "@mui/material";
 
 export default {
   title: "Inputs/Inputs/InputColor",
@@ -23,10 +24,16 @@ export const Color = () => {
   const [value, setValue] = useState("#000000");
 
   return (
-    <InputColor
-      label="Color"
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-    />
+    <Stack spacing={4}>
+      {["filled", "standard", "outlined"].map((variant) => (
+        <InputColor
+          key={variant}
+          label="Color"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          variant={variant}
+        />
+      ))}
+    </Stack>
   );
 };

@@ -6,22 +6,29 @@ import { SLIDER_STYLES } from "./Slider.consts";
 export function sliderStyleCustomColor(props) {
   if (props.sliderStyle || !props.customColor) return css``;
 
+  const { track: trackColor, thumb: thumbColor } =
+    typeof props.customColor === "string"
+      ? { thumb: props.customColor, track: props.customColor }
+      : props.customColor ?? {};
+
   return css`
     & .MuiSlider-track,
-    & .MuiSlider-rail,
+    & .MuiSlider-rail {
+      color: ${trackColor} !important;
+    }
     & .MuiSlider-thumb {
-      color: ${props.customColor} !important;
+      color: ${thumbColor} !important;
     }
 
     & .MuiSlider-thumb:hover,
     & .Mui-focusVisible {
-      box-shadow: ${props.customColor &&
-      `0px 0px 0px 8px ${alpha(props.customColor, 0.16)}`} !important;
+      box-shadow: ${thumbColor &&
+      `0px 0px 0px 8px ${alpha(thumbColor, 0.16)}`} !important;
     }
 
     & .MuiSlider-thumb.Mui-active {
-      box-shadow: ${props.customColor &&
-      `0px 0px 0px 14px ${alpha(props.customColor, 0.16)}`} !important;
+      box-shadow: ${thumbColor &&
+      `0px 0px 0px 14px ${alpha(thumbColor, 0.16)}`} !important;
     }
   `;
 }
