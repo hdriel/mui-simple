@@ -1,7 +1,9 @@
 import { styled, css } from "@mui/material/styles";
 
-import MuiTextField from "@mui/material/TextField";
+import { TextField as MuiTextField, Box as MuiBox } from "@mui/material";
 import { getCustomColor } from "../../utils/helpers";
+
+export const Box = MuiBox;
 
 export const TextField = styled(MuiTextField, {
   shouldForwardProp: (propName) =>

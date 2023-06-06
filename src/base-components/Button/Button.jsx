@@ -17,6 +17,7 @@ const Button = forwardRef(
       startIcon,
       endIcon,
       onClick,
+      onRightClick,
       link,
       muiColor,
       customColor,
@@ -33,6 +34,11 @@ const Button = forwardRef(
     },
     ref
   ) => {
+    const onRightClickHandler = (e) => {
+      e.preventDefault();
+      onRightClick?.(e);
+    };
+
     if (icon || (isLoading && !loadingLabel && !startIcon && !endIcon)) {
       return (
         <Tooltip {...tooltipProps}>
@@ -42,8 +48,15 @@ const Button = forwardRef(
             customColor={customColor}
             style={{ color: customColor }}
             size={size}
-            disableRipple={disableRipple}
-            onClick={onClick}
+            disableRipple={disabled ? true : disableRipple}
+            onClick={disabled ? undefined : onClick}
+            onContextMenu={
+              disabled
+                ? undefined
+                : onRightClick
+                ? onRightClickHandler
+                : props.onContextMenu
+            }
             href={link}
             {...props}
           >
@@ -74,6 +87,9 @@ const Button = forwardRef(
           startIcon={startIconCmp}
           endIcon={endIconCmp}
           onClick={onClick}
+          onContextMenu={
+            onRightClick ? onRightClickHandler : props.onContextMenu
+          }
           href={link}
           color={muiColor}
           disableRipple={disableRipple}
@@ -96,6 +112,7 @@ Button.propTypes = {
   startIcon: PropTypes.node,
   endIcon: PropTypes.node,
   onClick: PropTypes.func,
+  onRightClick: PropTypes.func,
   link: PropTypes.string,
   muiColor: PropTypes.string,
   customColor: PropTypes.string,
@@ -116,6 +133,7 @@ Button.defaultProps = {
   startIcon: undefined,
   endIcon: undefined,
   onClick: undefined,
+  onRightClick: undefined,
   link: undefined,
   muiColor: undefined,
   customColor: undefined,

@@ -66,9 +66,22 @@ export function getCustomColor(
 
   color = isDefined(opacity) ? alpha(color, opacity) : color;
   color = isDefined(_darken) ? darken(color, _darken) : color;
-  color = isDefined(_lighten) ? alpha(color, _lighten) : color;
+  color = isDefined(_lighten) ? lighten(color, _lighten) : color;
 
   return color;
 }
 
 const isValidColor = (color) => CSS.supports("color", color);
+
+export const copyToClipboard = (value) => {
+  if (!value) return false;
+
+  const textField = document.createElement("textarea");
+  textField.innerText = value;
+  document.body.appendChild(textField);
+  textField.select();
+  document.execCommand("copy");
+  textField.remove();
+
+  return true;
+};

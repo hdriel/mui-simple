@@ -13,15 +13,26 @@
     "deploy": "gh-pages -d storybook-static"
   },
   "eslintConfig": {
-    "extends": [ "react-app", "react-app/jest" ],
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
     "overrides": [
       {
-        "files": [ "**/*.stories.*" ],
-        "rules": { "import/no-anonymous-default-export": "off" }
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
       },
       {
-        "files": [ "**/*.stories.*" ],
-        "rules": { "import/no-anonymous-default-export": "off" }
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
       }
     ]
   },
@@ -46,6 +57,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "color": "^4.2.3",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "mui-image": "^1.0.7",

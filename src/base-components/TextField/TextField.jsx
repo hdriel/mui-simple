@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import InputAdornment from "@mui/material/InputAdornment";
 import { TextField as MuiTextField } from "./TextField.styled";
-import { getCustomColor } from "../../utils/helpers";
-import { useTheme } from "@mui/material/styles";
 
 function TextField({
   label,
@@ -86,7 +84,7 @@ TextField.propTypes = {
   value: PropTypes.string,
   focused: PropTypes.bool,
   margin: PropTypes.oneOf(["normal", "dense"]),
-  type: PropTypes.oneOf(["text", "number", "password"]),
+  type: PropTypes.string,
   multiline: PropTypes.bool,
   maxRows: PropTypes.number,
   rows: PropTypes.number,
