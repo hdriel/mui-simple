@@ -1,8 +1,13 @@
 import { styled, css } from "@mui/material/styles";
 
-import { TextField as MuiTextField, Box as MuiBox } from "@mui/material";
+import {
+  TextField as MuiTextField,
+  Box as MuiBox,
+  Stack as MuiStack,
+} from "@mui/material";
 import { getCustomColor } from "../../utils/helpers";
 
+export const Stack = MuiStack;
 export const Box = MuiBox;
 
 export const TextField = styled(MuiTextField, {

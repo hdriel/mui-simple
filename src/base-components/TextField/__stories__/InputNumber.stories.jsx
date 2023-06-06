@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import InputNumber from "../InputNumber";
+import { Stack } from "@mui/material";
 
 export default {
   title: "Inputs/Inputs/InputNumber",
@@ -23,10 +24,34 @@ export const Number = () => {
   const [value, setValue] = useState(0);
 
   return (
-    <InputNumber
-      label="Number"
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-    />
+    <Stack spacing={4}>
+      {["filled", "standard", "outlined"].map((variant) => (
+        <InputNumber
+          key={variant}
+          label="Number"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          variant={variant}
+        />
+      ))}
+    </Stack>
+  );
+};
+
+export const CmpNumber = () => {
+  const [value, setValue] = useState(0);
+
+  return (
+    <Stack spacing={4}>
+      {["filled", "standard", "outlined"].map((variant) => (
+        <InputNumber
+          key={variant}
+          label="Number"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          variant={variant}
+        />
+      ))}
+    </Stack>
   );
 };

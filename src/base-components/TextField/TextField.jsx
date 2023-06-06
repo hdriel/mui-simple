@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import InputAdornment from "@mui/material/InputAdornment";
-import { TextField as MuiTextField } from "./TextField.styled";
+import { TextField as MuiTextField, Stack } from "./TextField.styled";
 
 function TextField({
   label,
@@ -27,9 +27,12 @@ function TextField({
   colorText,
   colorLabel,
   activeColor,
+  startCmpExternal,
+  endCmpExternal,
+  cmpSpacing,
   ...props
 }) {
-  return (
+  const component = (
     <MuiTextField
       fullWidth={fullWidth}
       label={label}
@@ -70,6 +73,18 @@ function TextField({
       {...props}
     />
   );
+
+  if (startCmpExternal || endCmpExternal) {
+    return (
+      <Stack direction="row" spacing={cmpSpacing} alignItems="center">
+        {startCmpExternal}
+        {component}
+        {endCmpExternal}
+      </Stack>
+    );
+  }
+
+  return component;
 }
 
 TextField.propTypes = {
@@ -92,7 +107,10 @@ TextField.propTypes = {
   helperText: PropTypes.string,
   variant: PropTypes.oneOf(["filled", "standard", "outlined"]),
   startCmp: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  startCmpExternal: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   endCmp: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  endCmpExternal: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  cmpSpacing: PropTypes.number,
 };
 
 TextField.defaultProps = {
@@ -115,7 +133,10 @@ TextField.defaultProps = {
   helperText: undefined,
   variant: "outlined",
   startCmp: undefined,
+  startCmpExternal: undefined,
   endCmp: undefined,
+  endCmpExternal: undefined,
+  cmpSpacing: 2,
 };
 
 export default TextField;
