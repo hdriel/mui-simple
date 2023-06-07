@@ -33,7 +33,7 @@ function TextField({
   startCmpExternal,
   endCmpExternal,
   cmpSpacing,
-  hideActionOnEmpty,
+  hideStartActionsOnEmpty,
   ...props
 }) {
   const [isFocused, setIsFocused] = useState(false);
@@ -41,7 +41,8 @@ function TextField({
     setIsFocused(true);
     onFocus?.(e);
   };
-  const showActions = !hideActionOnEmpty || value || (!value && isFocused);
+  const showActions =
+    !hideStartActionsOnEmpty || value || (!value && isFocused);
 
   const component = (
     <ClickAwayListener onClickAway={() => setIsFocused(false)}>
@@ -76,12 +77,11 @@ function TextField({
                 <InputAdornment position="start">{startCmp}</InputAdornment>
               ),
             }),
-          ...(showActions &&
-            endCmp && {
-              endAdornment: (
-                <InputAdornment position="end">{endCmp}</InputAdornment>
-              ),
-            }),
+          ...(endCmp && {
+            endAdornment: (
+              <InputAdornment position="end">{endCmp}</InputAdornment>
+            ),
+          }),
         }}
         InputLabelProps={{ ...props.InputLabelProps }}
         FormHelperTextProps={{ ...props.FormHelperTextProps }}
@@ -128,7 +128,7 @@ TextField.propTypes = {
   endCmp: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   endCmpExternal: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   cmpSpacing: PropTypes.number,
-  hideActionOnEmpty: PropTypes.bool,
+  hideStartActionsOnEmpty: PropTypes.bool,
 };
 
 TextField.defaultProps = {
@@ -155,7 +155,7 @@ TextField.defaultProps = {
   endCmp: undefined,
   endCmpExternal: undefined,
   cmpSpacing: 2,
-  hideActionOnEmpty: true,
+  hideStartActionsOnEmpty: true,
 };
 
 export default TextField;

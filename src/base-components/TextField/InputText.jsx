@@ -23,7 +23,7 @@ export default function InputText({
           {endCmp}
         </span>
       }
-      hideActionOnEmpty={!limitIndicator}
+      hideStartActionsOnEmpty={!limitIndicator}
       type="text"
     />
   );
