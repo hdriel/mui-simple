@@ -23,7 +23,7 @@ export default function InputColor({
   copyMessage,
   opacityLabel,
   customColor,
-  copyToClipboard: _copyToClipboard,
+  copyAction,
   ...props
 }) {
   const colorActive = value;
@@ -107,7 +107,7 @@ export default function InputColor({
                   placement: "top",
                 }}
               />
-              {_copyToClipboard ? (
+              {copyAction ? (
                 <Button
                   onClick={handleClick}
                   customColor={showContrastColor ? "#636363" : value}
@@ -161,6 +161,6 @@ InputColor.defaultProps = {
   value: "#000000",
   customColor: undefined,
   copyMessage: "Copied to clipboard",
-  copyToClipboard: true,
+  copyAction: true,
   opacityLabel: "opacity",
 };

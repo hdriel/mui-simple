@@ -85,3 +85,34 @@ export const copyToClipboard = (value) => {
 
   return true;
 };
+
+const NUMBERS = "0123456789";
+const LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
+const UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const SYMBOL = "!@#$%^&*()";
+
+export function generatePassword({
+  length = 12,
+  numbers = true,
+  lowercase = true,
+  uppercase = true,
+  symbol = true,
+} = {}) {
+  const chars = [
+    numbers && NUMBERS,
+    lowercase && LOWERCASE,
+    uppercase && UPPERCASE,
+    symbol && SYMBOL,
+  ]
+    .filter(Boolean)
+    .join("");
+
+  let password = "";
+
+  for (let i = 0; i <= length; i++) {
+    const randomNumber = Math.floor(Math.random() * chars.length);
+    password += chars.substring(randomNumber, randomNumber + 1);
+  }
+
+  return password;
+}
