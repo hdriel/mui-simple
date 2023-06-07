@@ -121,7 +121,7 @@ InputPassword.propTypes = {
 };
 
 InputPassword.defaultProps = {
-  showPasswordAction: false,
+  showPasswordAction: true,
   generateRandomAction: true,
   copyAction: true,
   generateRandom: 8,
