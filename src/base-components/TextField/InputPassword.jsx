@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import Input from "./TextField";
-import { IconButton } from "@mui/material";
+import PropTypes from "prop-types";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 
-export default function InputPassword(props) {
+import Input from "./TextField";
+import Button from "../Button/Button";
+
+export default function InputPassword({ showPasswordAction, ...props }) {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -11,18 +13,22 @@ export default function InputPassword(props) {
     <Input
       {...props}
       endCmp={
-        <IconButton
-          aria-label="toggle password visibility"
-          onClick={handleClickShowPassword}
-          edge="end"
-        >
-          {showPassword ? <VisibilityOff /> : <Visibility />}
-        </IconButton>
+        showPasswordAction ? (
+          <Button
+            icon={showPassword ? <VisibilityOff /> : <Visibility />}
+            onClick={handleClickShowPassword}
+            edge="end"
+          />
+        ) : undefined
       }
       type={showPassword ? "text" : "password"}
     />
   );
 }
 
-InputPassword.propTypes = Input.propTypes;
-InputPassword.defaultProps = Input.defaultProps;
+InputPassword.propTypes = {
+  showPasswordAction: PropTypes.bool,
+};
+InputPassword.defaultProps = {
+  showPasswordAction: true,
+};
