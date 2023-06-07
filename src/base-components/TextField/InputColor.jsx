@@ -6,6 +6,7 @@ import {
   Opacity as OpacityIcon,
   ContentCopy as ContentCopyIcon,
 } from "@mui/icons-material";
+import { ClickAwayListener } from "@mui/material";
 
 import Input from "./TextField";
 import Button from "../Button/Button";
@@ -35,9 +36,6 @@ export default function InputColor({
   const [opacity, setOpacity] = useState(100);
 
   const [showOpacitySlider, setShowOpacitySlider] = useState(false);
-  const [setShowOpacitySliderDebounce] = useState(() =>
-    debounce(setShowOpacitySlider, 1000, { leading: false, trailing: true })
-  );
 
   const opacityLabelTooltip = (opacity) => `${opacityLabel}: ${opacity / 100}`;
   const [valueLabel, showContrastColor] = useMemo(() => {
@@ -57,10 +55,7 @@ export default function InputColor({
 
   const showOpacityHandler = () => setShowOpacitySlider(!showOpacitySlider);
 
-  const handleChange = (event, newValue) => {
-    setOpacity(newValue);
-    setShowOpacitySliderDebounce(false);
-  };
+  const handleChange = (event, newValue) => setOpacity(newValue);
 
   const handleClick = () => {
     const copied = copyToClipboard(valueLabel);
@@ -68,7 +63,7 @@ export default function InputColor({
   };
 
   useEffect(() => {
-    const boxWidth = ref.current?.clientWidth;
+    const boxWidth = ref.current?.clientWidth ?? 0;
     const padding =
       { filled: 102, standard: 82, outlined: 108 }[variant] ?? 100;
     const inputWidth = boxWidth - padding;
@@ -89,62 +84,68 @@ export default function InputColor({
   }
 
   return (
-    <Box sx={{ position: "relative", width: "100%" }} ref={ref}>
-      <Input
-        colorActive={showContrastColor ? "#636363" : colorActive}
-        {...props}
-        variant={variant}
-        disabled={disabled}
-        type="color"
-        endCmp={
-          <>
-            <Button
-              disabled={disabled}
-              onClick={showOpacityHandler}
-              customColor={showContrastColor ? "#636363" : value}
-              icon={<OpacityIcon />}
-              tooltipProps={{
-                title: opacityLabelTooltip(opacity),
-                placement: "top",
-              }}
-            />
-            {_copyToClipboard ? (
+    <ClickAwayListener
+      onClickAway={() => {
+        setShowOpacitySlider(false);
+      }}
+    >
+      <Box sx={{ position: "relative", width: "100%" }} ref={ref}>
+        <Input
+          colorActive={showContrastColor ? "#636363" : colorActive}
+          {...props}
+          variant={variant}
+          disabled={disabled}
+          type="color"
+          endCmp={
+            <>
               <Button
-                onClick={handleClick}
+                disabled={disabled}
+                onClick={showOpacityHandler}
                 customColor={showContrastColor ? "#636363" : value}
-                icon={<ContentCopyIcon />}
-                onRightClick={() => setValueFormat(VALUE_FORMAT[valueFormat])}
-                tooltipProps={{ title: valueLabel, placement: "top" }}
+                icon={<OpacityIcon />}
+                tooltipProps={{
+                  title: opacityLabelTooltip(opacity),
+                  placement: "top",
+                }}
               />
-            ) : (
-              valueLabel
-            )}
-          </>
-        }
-      />
-      {showOpacitySlider && (
-        <Box sx={{ position: "absolute", width: width, ...sliderPositions }}>
-          <Slider
-            customColor={{
-              track: showContrastColor
-                ? "rgba(0,0,0,0.2)"
-                : "rgba(255,255,255,0.2)",
-              thumb: showContrastColor ? "#000000" : "#FFFFFF",
-            }}
-            value={opacity}
-            disabled={disabled}
-            onChange={handleChange}
-            valueLabelFormat={opacityLabelTooltip}
-          />
-        </Box>
-      )}
-      <Snackbar
-        open={showAlert}
-        onClose={() => setShowAlert(false)}
-        autoHideDuration={1500}
-        message={copyMessage}
-      />
-    </Box>
+              {_copyToClipboard ? (
+                <Button
+                  onClick={handleClick}
+                  customColor={showContrastColor ? "#636363" : value}
+                  icon={<ContentCopyIcon />}
+                  onRightClick={() => setValueFormat(VALUE_FORMAT[valueFormat])}
+                  tooltipProps={{ title: valueLabel, placement: "top" }}
+                />
+              ) : (
+                valueLabel
+              )}
+            </>
+          }
+        />
+        {showOpacitySlider && (
+          <Box sx={{ position: "absolute", width: width, ...sliderPositions }}>
+            <Slider
+              customColor={{
+                track: showContrastColor
+                  ? "rgba(0,0,0,0.2)"
+                  : "rgba(255,255,255,0.2)",
+                thumb: showContrastColor ? "#000000" : "#FFFFFF",
+              }}
+              value={opacity}
+              disabled={disabled}
+              onChange={handleChange}
+              valueLabelFormat={opacityLabelTooltip}
+            />
+          </Box>
+        )}
+        <Snackbar
+          open={showAlert}
+          onClose={() => setShowAlert(false)}
+          autoHideDuration={1500}
+          message={copyMessage}
+        />
+      </Box>
+    </ClickAwayListener>
   );
 }
 
