@@ -1,37 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { NumericFormat } from "react-number-format";
+import { styled } from "@mui/material/styles";
 
 import Input from "./TextField";
 import { isDefined } from "../../utils/helpers";
-import { styled } from "@mui/material/styles";
 
-export const TextField = styled(
-  (props) => {
-    const { name, onBlur, onChange, max, min } = props;
-    const onBlurHandler = (e) => {
-      const value = +e.target.value.replaceAll(/,/gi, "");
+export const TextField = styled((props) => <Input {...props} type="text" />, {
+  shouldForwardProp: (propName) =>
+    !["patternChar", "allowEmptyFormatting", "thousandSeparator"].includes(
+      propName
+    ),
+})``;
 
-      if (isDefined(min) && value < min) {
-        e.target.value = min;
-        onChange?.(e);
-      } else if (isDefined(max) && value > max) {
-        e.target.value = max;
-        onChange?.(e);
-      }
-
-      onBlur?.(e);
-    };
-
-    return <Input {...props} onBlur={onBlurHandler} type="text" />;
-  },
-  {
-    shouldForwardProp: (propName) =>
-      !["patternChar", "allowEmptyFormatting", "thousandSeparator"].includes(
-        propName
-      ),
-  }
-)``;
+function isValidNumberByRange(value, min, max) {
+  const isMinValid = isDefined(min) ? value >= min : true;
+  const isMaxValid = isDefined(max) ? value <= max : true;
+  return isMinValid && isMaxValid;
+}
 
 export default function InputNumber({
   value,
@@ -55,6 +41,20 @@ export default function InputNumber({
   onChange,
   ...props
 }) {
+  const onBlurHandler = (e) => {
+    const value = +e.target.value.replaceAll(/,/gi, "");
+
+    if (isDefined(min) && value < min) {
+      e.target.value = min;
+      onChange?.(e);
+    } else if (isDefined(max) && value > max) {
+      e.target.value = max;
+      onChange?.(e);
+    }
+
+    onBlur?.(e);
+  };
+
   return (
     <NumericFormat
       {...props}
@@ -87,6 +87,7 @@ export default function InputNumber({
       autoComplete="off"
       decimalScale={decimalScale}
       fixedDecimalScale={fixedDecimalScale}
+      onBlur={onBlurHandler}
       customInput={TextField}
       type="number"
       onFocus={(e) => e.target.select()}
@@ -95,10 +96,12 @@ export default function InputNumber({
         onChange?.({ target: { name, value } });
       }}
       // isAllowed={(values) => {
-      //   const { floatValue: value } = values;
-      //   const isMinValid = isDefined(min) ? value >= min : true;
-      //   const isMaxValid = isDefined(max) ? value <= max : true;
-      //   return isMinValid && isMaxValid;
+      //   const { floatValue: nextValue } = values;
+      //   const isValid = isValidNumberByRange(value, min, max);
+      //   if (!isValid || nextValue < value) {
+      //     return true;
+      //   }
+      //   return isValidNumberByRange(nextValue, min, max);
       // }}
     />
   );

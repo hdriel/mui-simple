@@ -49,10 +49,7 @@ export const RangeNumber = () => {
           key={variant}
           label="Number Range"
           value={value}
-          onChange={(e) => {
-            console.log("onChange", e.target.value);
-            setValue(e.target.value);
-          }}
+          onChange={(e) => setValue(e.target.value)}
           variant={variant}
           min={10}
           max={20}
