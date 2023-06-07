@@ -26,7 +26,7 @@ function TextField({
   helperText,
   colorText,
   colorLabel,
-  activeColor,
+  colorActive,
   startCmpExternal,
   endCmpExternal,
   cmpSpacing,
@@ -52,7 +52,7 @@ function TextField({
       type={type}
       colorText={colorText}
       colorLabel={colorLabel}
-      activeColor={activeColor}
+      colorActive={colorActive}
       InputProps={{
         ...props.InputProps,
         readOnly,

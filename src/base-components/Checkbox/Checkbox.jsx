@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Checkbox as MuiCheckbox } from "./Checkbox.styled";
-import Tooltip from "../Tooltip/Tooltip";
 
 const Checkbox = ({
   label,

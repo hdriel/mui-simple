@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 
 import { SORT } from "../Table.consts";
 
@@ -32,7 +32,8 @@ export function useData({
     data = data.slice(sliceFrom, sliceTo);
 
     return data;
-  }, [_data, sortColumns, sliceFrom, sliceTo, page]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_data, sortColumns, sliceFrom, sliceTo, page, independentData]);
 
   return sortedData;
 }

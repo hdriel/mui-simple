@@ -241,7 +241,7 @@ export const ThemedAndColored = () => {
           startCmp={index % 2 === 0 && "COLOR:"}
           endCmp={index % 4 === 0 && <ClearIcon />}
           variant="outlined"
-          activeColor={arr[index - 1]}
+          colorActive={arr[index - 1]}
           colorLabel={customColor}
           colorText={arr[index + 1]}
           value={value}

@@ -26,7 +26,7 @@ export default function InputColor({
   copyToClipboard: _copyToClipboard,
   ...props
 }) {
-  const activeColor = value;
+  const colorActive = value;
   const ref = useRef(null);
   const [width, setWidth] = useState(100);
 
@@ -73,7 +73,7 @@ export default function InputColor({
       { filled: 102, standard: 82, outlined: 108 }[variant] ?? 100;
     const inputWidth = boxWidth - padding;
     if (inputWidth > 0) setWidth(inputWidth);
-  }, []);
+  }, [variant]);
 
   let sliderPositions;
   switch (variant) {
@@ -91,7 +91,7 @@ export default function InputColor({
   return (
     <Box sx={{ position: "relative", width: "100%" }} ref={ref}>
       <Input
-        activeColor={showContrastColor ? "#636363" : activeColor}
+        colorActive={showContrastColor ? "#636363" : colorActive}
         {...props}
         variant={variant}
         disabled={disabled}

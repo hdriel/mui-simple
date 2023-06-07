@@ -15,7 +15,7 @@ import {
   PT_colors,
 } from "../Table.propTypes";
 
-import { extractColors, SORT } from "../Table.utils";
+import { extractColors } from "../Table.utils";
 
 import {
   TableCell,
