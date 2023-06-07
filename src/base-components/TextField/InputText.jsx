@@ -4,8 +4,8 @@ import Input from "./TextField";
 
 export default function InputText({
   value,
-  limitFrom,
-  limit,
+  showLimitIndicatorFrom,
+  limitIndicator,
   endCmp,
   ...props
 }) {
@@ -13,13 +13,15 @@ export default function InputText({
   return (
     <Input
       {...props}
+      value={value}
       endCmp={
-        <>
-          {(!limitFrom || limitFrom < count) && limit
-            ? `${count}/${limit}`
+        <span style={{ ...(count > limitIndicator && { color: "red" }) }}>
+          {(!showLimitIndicatorFrom || showLimitIndicatorFrom < count) &&
+          limitIndicator
+            ? `${count} / ${limitIndicator}`
             : ""}
           {endCmp}
-        </>
+        </span>
       }
       type="text"
     />
@@ -27,11 +29,11 @@ export default function InputText({
 }
 
 InputText.propTypes = {
-  limit: PropTypes.number,
-  limitFrom: PropTypes.number,
+  limitIndicator: PropTypes.number,
+  showLimitIndicatorFrom: PropTypes.number,
 };
 
 InputText.defaultProps = {
-  limit: undefined,
-  limitFrom: undefined,
+  limitIndicator: undefined,
+  showLimitIndicatorFrom: undefined,
 };

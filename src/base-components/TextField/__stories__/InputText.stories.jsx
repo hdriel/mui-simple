@@ -34,14 +34,14 @@ export const Limit = () => {
         label="Time"
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        limit={50}
+        limitIndicator={20}
       />
       <InputText
         label="Time"
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        limitFrom={5}
-        limit={50}
+        showLimitIndicatorFrom={5}
+        limitIndicator={20}
       />
     </Stack>
   );
