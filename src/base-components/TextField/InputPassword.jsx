@@ -86,7 +86,6 @@ export default function InputPassword({
             </>
           }
           type={showPassword ? "text" : "password"}
-          hideStartActionsOnEmpty={false}
         />
         <Snackbar
           open={showAlert}
