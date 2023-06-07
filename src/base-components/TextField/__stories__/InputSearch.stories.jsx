@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import InputSearch from "../InputSearch";
+import { Stack } from "@mui/material";
 
 export default {
   title: "Inputs/Inputs/InputSearch",
@@ -23,10 +24,16 @@ export const Search = () => {
   const [value, setValue] = useState("Hello World");
 
   return (
-    <InputSearch
-      label="Search"
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-    />
+    <Stack spacing={4}>
+      {["filled", "standard", "outlined"].map((variant) => (
+        <InputSearch
+          key={variant}
+          label="Search"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          variant={variant}
+        />
+      ))}
+    </Stack>
   );
 };

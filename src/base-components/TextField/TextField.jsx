@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import InputAdornment from "@mui/material/InputAdornment";
 import { TextField as MuiTextField, Stack } from "./TextField.styled";
+import { ClickAwayListener } from "@mui/material";
 
 function TextField({
   label,
@@ -9,6 +10,8 @@ function TextField({
   name,
   variant,
   onChange,
+  onFocus,
+  onBlur,
   value,
   startCmp,
   endCmp,
@@ -30,48 +33,62 @@ function TextField({
   startCmpExternal,
   endCmpExternal,
   cmpSpacing,
+  hideActionOnEmpty,
   ...props
 }) {
+  const [isFocused, setIsFocused] = useState(false);
+  const onFocusHandler = (e) => {
+    setIsFocused(true);
+    onFocus?.(e);
+  };
+  const showActions = !hideActionOnEmpty || value || (!value && isFocused);
+
   const component = (
-    <MuiTextField
-      fullWidth={fullWidth}
-      label={label}
-      id={id}
-      name={name}
-      error={error}
-      helperText={helperText}
-      onChange={onChange}
-      required={required}
-      value={value}
-      margin={margin}
-      focused={focused}
-      multiline={multiline}
-      maxRows={maxRows}
-      rows={rows}
-      autoComplete={autoComplete}
-      type={type}
-      colorText={colorText}
-      colorLabel={colorLabel}
-      colorActive={colorActive}
-      InputProps={{
-        ...props.InputProps,
-        readOnly,
-        ...(startCmp && {
-          startAdornment: (
-            <InputAdornment position="start">{startCmp}</InputAdornment>
-          ),
-        }),
-        ...(endCmp && {
-          endAdornment: (
-            <InputAdornment position="end">{endCmp}</InputAdornment>
-          ),
-        }),
-      }}
-      InputLabelProps={{ ...props.InputLabelProps }}
-      FormHelperTextProps={{ ...props.FormHelperTextProps }}
-      variant={variant}
-      {...props}
-    />
+    <ClickAwayListener onClickAway={() => setIsFocused(false)}>
+      <MuiTextField
+        fullWidth={fullWidth}
+        label={label}
+        id={id}
+        name={name}
+        error={error}
+        helperText={helperText}
+        onChange={onChange}
+        required={required}
+        value={value}
+        margin={margin}
+        focused={focused}
+        multiline={multiline}
+        maxRows={maxRows}
+        rows={rows}
+        autoComplete={autoComplete}
+        type={type}
+        onFocus={onFocusHandler}
+        onBlur={onBlur}
+        colorText={colorText}
+        colorLabel={colorLabel}
+        colorActive={colorActive}
+        InputProps={{
+          ...props.InputProps,
+          readOnly,
+          ...(showActions &&
+            startCmp && {
+              startAdornment: (
+                <InputAdornment position="start">{startCmp}</InputAdornment>
+              ),
+            }),
+          ...(showActions &&
+            endCmp && {
+              endAdornment: (
+                <InputAdornment position="end">{endCmp}</InputAdornment>
+              ),
+            }),
+        }}
+        InputLabelProps={{ ...props.InputLabelProps }}
+        FormHelperTextProps={{ ...props.FormHelperTextProps }}
+        variant={variant}
+        {...props}
+      />
+    </ClickAwayListener>
   );
 
   if (startCmpExternal || endCmpExternal) {
@@ -111,6 +128,7 @@ TextField.propTypes = {
   endCmp: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   endCmpExternal: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   cmpSpacing: PropTypes.number,
+  hideActionOnEmpty: PropTypes.bool,
 };
 
 TextField.defaultProps = {
@@ -137,6 +155,7 @@ TextField.defaultProps = {
   endCmp: undefined,
   endCmpExternal: undefined,
   cmpSpacing: 2,
+  hideActionOnEmpty: true,
 };
 
 export default TextField;
