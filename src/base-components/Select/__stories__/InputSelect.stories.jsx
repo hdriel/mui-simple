@@ -33,7 +33,7 @@ export const Select = () => {
       {["filled", "standard", "outlined"].map((variant, index) => (
         <InputSelect
           key={variant}
-          label="Color"
+          label="Favorite language"
           value={value}
           onChange={(e) => setValue(e.target.value)}
           variant={variant}
