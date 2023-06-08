@@ -1,8 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { ClickAwayListener, Box } from "@mui/material";
 import InputPattern from "./InputPattern";
-import placeholder from "lodash/fp/placeholder";
 import { ContentCopy as ContentCopyIcon } from "@mui/icons-material";
 import Button from "../Button/Button";
 import { copyToClipboard } from "../../utils/helpers";

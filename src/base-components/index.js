@@ -29,7 +29,7 @@ export { default as InputEmail } from "./TextField/InputEmail";
 export { default as InputNumber } from "./TextField/InputNumber";
 export { default as InputPassword } from "./TextField/InputPassword";
 export { default as InputPhone } from "./TextField/InputPhone";
-export { default as InputSelect } from "./TextField/InputSelect";
+export { default as InputSelect } from "./Select/InputSelect";
 export { default as InputText } from "./TextField/InputText";
 export { default as InputTime } from "./TextField/InputTime";
 

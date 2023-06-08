@@ -4,7 +4,6 @@ import { IMaskMixin } from "react-imask";
 import { ClickAwayListener, Box } from "@mui/material";
 
 import Input from "./TextField";
-import placeholder from "lodash/fp/placeholder";
 import { isDefined } from "../../utils/helpers";
 
 const MaskedInput = IMaskMixin(
@@ -67,6 +66,7 @@ export default function InputPattern({
         onChange?.({ target: { name, value } });
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOnFocus]);
 
   return (

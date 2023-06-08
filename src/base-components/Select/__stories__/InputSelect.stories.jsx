@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import InputSelect from "../InputSelect";
+import { Stack } from "@mui/material";
 
 export default {
   title: "Inputs/Inputs/InputSelect",
@@ -20,13 +21,21 @@ export const Default = () => {
 };
 
 export const Select = () => {
+  const options = ["javascript", "python", "C#", "C++"];
   const [value, setValue] = useState();
 
   return (
-    <InputSelect
-      label="Select"
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-    />
+    <Stack spacing={4}>
+      {["filled", "standard", "outlined"].map((variant) => (
+        <InputSelect
+          key={variant}
+          label="Color"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          variant={variant}
+          options={options}
+        />
+      ))}
+    </Stack>
   );
 };
