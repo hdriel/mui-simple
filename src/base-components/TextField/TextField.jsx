@@ -34,6 +34,8 @@ function TextField({
   endCmpExternal,
   cmpSpacing,
   hideStartActionsOnEmpty,
+  alignActions,
+  alignActionsExternal,
   ...props
 }) {
   const [isFocused, setIsFocused] = useState(false);
@@ -82,6 +84,7 @@ function TextField({
               <InputAdornment position="end">{endCmp}</InputAdornment>
             ),
           }),
+          sx: { alignItems: alignActions },
         }}
         InputLabelProps={{ ...props.InputLabelProps }}
         FormHelperTextProps={{ ...props.FormHelperTextProps }}
@@ -93,7 +96,11 @@ function TextField({
 
   if (startCmpExternal || endCmpExternal) {
     return (
-      <Stack direction="row" spacing={cmpSpacing} alignItems="center">
+      <Stack
+        direction="row"
+        spacing={cmpSpacing}
+        alignItems={alignActionsExternal}
+      >
         {startCmpExternal}
         {component}
         {endCmpExternal}
@@ -129,6 +136,8 @@ TextField.propTypes = {
   endCmpExternal: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   cmpSpacing: PropTypes.number,
   hideStartActionsOnEmpty: PropTypes.bool,
+  alignActions: PropTypes.string,
+  alignActionsExternal: PropTypes.string,
 };
 
 TextField.defaultProps = {
@@ -156,6 +165,8 @@ TextField.defaultProps = {
   endCmpExternal: undefined,
   cmpSpacing: 2,
   hideStartActionsOnEmpty: true,
+  alignActions: "baseline",
+  alignActionsExternal: "baseline",
 };
 
 export default TextField;

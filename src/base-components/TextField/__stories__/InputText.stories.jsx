@@ -29,12 +29,15 @@ export const Limit = () => {
         label="Time"
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        multiline
       />
       <InputText
         label="Time"
         value={value}
         onChange={(e) => setValue(e.target.value)}
         limitIndicator={20}
+        multiline
+        rows={2}
       />
       <InputText
         label="Time"
@@ -42,6 +45,8 @@ export const Limit = () => {
         onChange={(e) => setValue(e.target.value)}
         showLimitIndicatorFrom={5}
         limitIndicator={20}
+        multiline
+        maxRows={2}
       />
     </Stack>
   );
