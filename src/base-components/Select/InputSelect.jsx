@@ -99,6 +99,8 @@ export default function InputSelect({
       </Stack>
     );
   }
+
+  return component;
 }
 
 InputSelect.propTypes = {
