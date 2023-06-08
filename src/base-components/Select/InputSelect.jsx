@@ -12,9 +12,11 @@ import {
   Stack,
   Box,
   ListSubheader,
+  ListItemText,
 } from "./InputSelect.styled";
 import { getCustomColor } from "../../utils/helpers";
 import { useTheme } from "@mui/material/styles";
+import Checkbox from "../Checkbox/Checkbox";
 
 export default function InputSelect({
   label,
@@ -52,6 +54,7 @@ export default function InputSelect({
   optionsPlaceholder,
   optionNullable,
   groupBy,
+  checkbox,
   ...props
 }) {
   const theme = useTheme();
@@ -86,7 +89,10 @@ export default function InputSelect({
             value={option.value}
             disabled={option.disabled}
           >
-            {option.label}
+            {checkbox && (
+              <Checkbox checked={value?.indexOf?.(option.value) > -1} />
+            )}
+            <ListItemText primary={option.label} secondary={option.subtitle} />
           </MenuItem>
         ))
       );
@@ -250,7 +256,9 @@ InputSelect.propTypes = {
       PropTypes.string,
       PropTypes.shape({
         label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+        subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
         disabled: PropTypes.bool,
+        chipProps: PropTypes.object,
         value: PropTypes.oneOfType([
           PropTypes.string,
           PropTypes.number,
@@ -268,6 +276,7 @@ InputSelect.propTypes = {
   optionNullable: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   optionsPlaceholder: PropTypes.string,
   groupBy: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  checkbox: PropTypes.bool,
 };
 
 InputSelect.defaultProps = {
@@ -303,4 +312,5 @@ InputSelect.defaultProps = {
   optionNullable: undefined,
   optionsPlaceholder: undefined,
   groupBy: undefined, // (option) => option?.label[0].toUpperCase()
+  checkbox: undefined, // (option) => option?.label[0].toUpperCase()
 };

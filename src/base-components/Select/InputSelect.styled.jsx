@@ -9,6 +9,7 @@ import {
   MenuItem as MuiMenuItem,
   FormHelperText as MuiFormHelperText,
   ListSubheader as MuiListSubheader,
+  ListItemText as MuiListItemText,
 } from "@mui/material";
 import { getCustomColor } from "../../utils/helpers";
 
@@ -19,6 +20,8 @@ export const Box = MuiBox;
 export const MenuItem = MuiMenuItem;
 
 export const ListSubheader = MuiListSubheader;
+
+export const ListItemText = MuiListItemText;
 
 export const FormControl = styled(MuiFormControl, {
   shouldForwardProp: (propName) =>
