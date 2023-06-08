@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import PropTypes from "prop-types";
+import _ from "lodash";
 import { ClickAwayListener } from "@mui/material";
 
 import {
@@ -10,6 +11,7 @@ import {
   MenuItem,
   Stack,
   Box,
+  ListSubheader,
 } from "./InputSelect.styled";
 import { getCustomColor } from "../../utils/helpers";
 import { useTheme } from "@mui/material/styles";
@@ -47,24 +49,51 @@ export default function InputSelect({
   disabled,
   renderValue,
   options: _options,
-  noneSelectionLabel,
+  optionsPlaceholder,
+  optionNullable,
+  groupBy,
   ...props
 }) {
   const theme = useTheme();
   const [isFocused, setIsFocused] = useState(false);
 
-  const options = useMemo(
-    () =>
+  const options = useMemo(() => {
+    const obj = _.groupBy(
       []
         .concat(_options)
         ?.filter(Boolean)
         .map((option) => {
           return typeof option === "string"
-            ? { value: option, label: option }
+            ? { value: option, label: option, disabled: false }
             : option;
         }),
-    [_options]
-  );
+      groupBy ?? ""
+    );
+
+    const components = [];
+
+    Object.keys(obj).forEach((category) => {
+      if (category !== "undefined") {
+        components.push(
+          <ListSubheader key={category}>{category}</ListSubheader>
+        );
+      }
+
+      components.push(
+        ...obj[category].map((option, index) => (
+          <MenuItem
+            key={index + option.value}
+            value={option.value}
+            disabled={option.disabled}
+          >
+            {option.label}
+          </MenuItem>
+        ))
+      );
+    });
+
+    return components;
+  }, [_options]);
 
   const menuColor = _colorActive ?? _colorLabel;
 
@@ -147,17 +176,21 @@ export default function InputSelect({
             );
           }}
         >
-          {options?.length && noneSelectionLabel ? (
-            <MenuItem value="">
-              <em>{noneSelectionLabel}</em>
+          {options?.length && optionsPlaceholder ? (
+            <MenuItem disabled value="">
+              <em>{optionsPlaceholder}</em>
             </MenuItem>
           ) : undefined}
 
-          {options?.map((option, index) => (
-            <MenuItem key={index} value={option.value}>
-              {option.label}
+          {options?.length && optionNullable ? (
+            <MenuItem value="">
+              <em style={{ minHeight: "24px" }}>
+                {typeof optionNullable === "string" ? optionNullable : " "}
+              </em>
             </MenuItem>
-          ))}
+          ) : undefined}
+
+          {options}
         </Select>
         {helperText && <FormHelperText>{helperText}</FormHelperText>}
       </FormControl>
@@ -214,6 +247,7 @@ InputSelect.propTypes = {
       PropTypes.string,
       PropTypes.shape({
         label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+        disabled: PropTypes.bool,
         value: PropTypes.oneOfType([
           PropTypes.string,
           PropTypes.number,
@@ -228,7 +262,9 @@ InputSelect.propTypes = {
   colorText: PropTypes.string,
   colorLabel: PropTypes.string,
   colorActive: PropTypes.string,
-  noneSelectionLabel: PropTypes.string,
+  optionNullable: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  optionsPlaceholder: PropTypes.string,
+  groupBy: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 };
 
 InputSelect.defaultProps = {
@@ -261,5 +297,7 @@ InputSelect.defaultProps = {
   colorText: undefined,
   colorLabel: undefined,
   colorActive: undefined,
-  noneSelectionLabel: "None",
+  optionNullable: undefined,
+  optionsPlaceholder: undefined,
+  groupBy: undefined, // (option) => option?.label[0].toUpperCase()
 };

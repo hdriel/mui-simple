@@ -38,7 +38,7 @@ export const Select = () => {
           onChange={(e) => setValue(e.target.value)}
           variant={variant}
           options={options}
-          noneSelectionLabel={index ? "None Selection" : null}
+          optionNullable={index === 1 ? "None Selection" : !!index}
           startCmp={
             <Button
               icon={<AirplayIcon />}

@@ -8,13 +8,17 @@ import {
   InputLabel as MuiInputLabel,
   MenuItem as MuiMenuItem,
   FormHelperText as MuiFormHelperText,
+  ListSubheader as MuiListSubheader,
 } from "@mui/material";
 import { getCustomColor } from "../../utils/helpers";
 
 export const Stack = MuiStack;
+
 export const Box = MuiBox;
 
 export const MenuItem = MuiMenuItem;
+
+export const ListSubheader = MuiListSubheader;
 
 export const FormControl = styled(MuiFormControl, {
   shouldForwardProp: (propName) =>
