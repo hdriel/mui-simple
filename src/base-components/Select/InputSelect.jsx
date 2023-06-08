@@ -227,6 +227,9 @@ InputSelect.propTypes = {
     PropTypes.string,
     PropTypes.number,
     PropTypes.bool,
+    PropTypes.arrayOf(
+      PropTypes.shape([PropTypes.string, PropTypes.number, PropTypes.bool])
+    ),
   ]),
   focused: PropTypes.bool,
   margin: PropTypes.oneOf(["normal", "dense"]),
