@@ -36,6 +36,7 @@ function TextField({
   hideStartActionsOnEmpty,
   alignActions,
   alignActionsExternal,
+  disabled,
   ...props
 }) {
   const [isFocused, setIsFocused] = useState(false);
@@ -67,6 +68,7 @@ function TextField({
         type={type}
         onFocus={onFocusHandler}
         onBlur={onBlur}
+        disabled={disabled}
         colorText={colorText}
         colorLabel={colorLabel}
         colorActive={colorActive}
@@ -138,6 +140,10 @@ TextField.propTypes = {
   hideStartActionsOnEmpty: PropTypes.bool,
   alignActions: PropTypes.string,
   alignActionsExternal: PropTypes.string,
+  disabled: PropTypes.string,
+  colorText: PropTypes.string,
+  colorLabel: PropTypes.string,
+  colorActive: PropTypes.string,
 };
 
 TextField.defaultProps = {
@@ -167,6 +173,10 @@ TextField.defaultProps = {
   hideStartActionsOnEmpty: true,
   alignActions: "baseline",
   alignActionsExternal: "baseline",
+  disabled: undefined,
+  colorText: undefined,
+  colorLabel: undefined,
+  colorActive: undefined,
 };
 
 export default TextField;

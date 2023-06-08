@@ -33,12 +33,12 @@ export const TextField = styled(MuiTextField, {
       & input {
         color: ${colorText} !important;
       }
-      & label{
+      & label {
         color: ${colorLabel};
       }
       & label.Mui-focused {
         color: ${colorActive};
-      } 
+      }
       & .MuiInputBase-root:after {
         border-bottom-color: ${colorActive};
       }
@@ -58,6 +58,7 @@ export const TextField = styled(MuiTextField, {
         &.Mui-focused fieldset {
           border-color: ${colorActive};
         }
+      }
     `;
   }}
 `;

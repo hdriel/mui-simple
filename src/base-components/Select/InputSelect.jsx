@@ -6,9 +6,12 @@ import {
   Select,
   FormControl,
   InputLabel,
+  FormHelperText,
   MenuItem,
   Stack,
+  Box,
 } from "./InputSelect.styled";
+import InputAdornment from "@mui/material/InputAdornment";
 
 export default function InputSelect({
   label,
@@ -28,6 +31,7 @@ export default function InputSelect({
   error,
   margin,
   focused,
+  size,
   helperText,
   colorText,
   colorLabel,
@@ -38,7 +42,11 @@ export default function InputSelect({
   hideStartActionsOnEmpty,
   alignActions,
   alignActionsExternal,
+  autoWidth,
+  disabled,
+  renderValue,
   options: _options,
+  noneSelectionLabel,
   ...props
 }) {
   const [isFocused, setIsFocused] = useState(false);
@@ -59,29 +67,75 @@ export default function InputSelect({
     setIsFocused(true);
     onFocus?.(e);
   };
-  // const showActions =
-  //   !hideStartActionsOnEmpty || value || (!value && isFocused);
+
+  const showActions =
+    !hideStartActionsOnEmpty || value || (!value && isFocused);
 
   const component = (
     <ClickAwayListener onClickAway={() => setIsFocused(false)}>
-      <FormControl fullWidth={fullWidth}>
-        <InputLabel>{label}</InputLabel>
+      <FormControl
+        fullWidth={fullWidth}
+        variant={variant}
+        size={size}
+        error={error}
+        disabled={disabled}
+        required={required}
+        colorText={colorText}
+        colorLabel={colorLabel}
+        colorActive={colorActive}
+      >
+        {label && <InputLabel>{label}</InputLabel>}
         <Select
+          {...props}
           id={id}
           name={name}
           value={value}
           label={label}
           onChange={onChange}
-          required={required}
           onBlur={onBlur}
           onFocus={onFocusHandler}
+          autoWidth={autoWidth}
+          inputProps={{ readOnly }}
+          renderValue={() => {
+            const rValue = renderValue?.(value) ?? value;
+
+            return (
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                    gap: 2,
+                  }}
+                >
+                  {showActions && startCmp}
+                  {rValue}
+                </Box>
+                {endCmp}
+              </Box>
+            );
+          }}
         >
+          {options?.length && noneSelectionLabel ? (
+            <MenuItem value="">
+              <em>{noneSelectionLabel}</em>
+            </MenuItem>
+          ) : undefined}
+
           {options?.map((option, index) => (
             <MenuItem key={index} value={option.value}>
               {option.label}
             </MenuItem>
           ))}
         </Select>
+        {helperText && <FormHelperText>{helperText}</FormHelperText>}
       </FormControl>
     </ClickAwayListener>
   );
@@ -115,6 +169,7 @@ InputSelect.propTypes = {
   value: PropTypes.string,
   focused: PropTypes.bool,
   margin: PropTypes.oneOf(["normal", "dense"]),
+  size: PropTypes.oneOf(["medium", "small"]),
   autoComplete: PropTypes.string,
   helperText: PropTypes.string,
   variant: PropTypes.oneOf(["filled", "standard", "outlined"]),
@@ -139,6 +194,13 @@ InputSelect.propTypes = {
       }),
     ])
   ),
+  autoWidth: PropTypes.bool,
+  renderValue: PropTypes.func,
+  disabled: PropTypes.func,
+  colorText: PropTypes.string,
+  colorLabel: PropTypes.string,
+  colorActive: PropTypes.string,
+  noneSelectionLabel: PropTypes.string,
 };
 
 InputSelect.defaultProps = {
@@ -156,6 +218,7 @@ InputSelect.defaultProps = {
   autoComplete: "off",
   helperText: undefined,
   variant: "outlined",
+  size: "medium",
   startCmp: undefined,
   startCmpExternal: undefined,
   endCmp: undefined,
@@ -165,4 +228,10 @@ InputSelect.defaultProps = {
   alignActions: "baseline",
   alignActionsExternal: "baseline",
   options: undefined,
+  autoWidth: undefined,
+  renderValue: undefined,
+  colorText: "#0DC0D0",
+  colorLabel: "secondary",
+  colorActive: "warning",
+  noneSelectionLabel: "None",
 };

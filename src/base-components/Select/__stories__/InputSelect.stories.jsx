@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import InputSelect from "../InputSelect";
 import { Stack } from "@mui/material";
-
+import {
+  FormatColorFill as FormatColorFillIcon,
+  Airplay as AirplayIcon,
+} from "@mui/icons-material";
+import Button from "../../Button/Button";
 export default {
   title: "Inputs/Inputs/InputSelect",
   component: InputSelect,
@@ -26,7 +30,7 @@ export const Select = () => {
 
   return (
     <Stack spacing={4}>
-      {["filled", "standard", "outlined"].map((variant) => (
+      {["filled", "standard", "outlined"].map((variant, index) => (
         <InputSelect
           key={variant}
           label="Color"
@@ -34,6 +38,31 @@ export const Select = () => {
           onChange={(e) => setValue(e.target.value)}
           variant={variant}
           options={options}
+          noneSelectionLabel={index ? "None Selection" : null}
+          startCmp={
+            <Button
+              icon={<AirplayIcon />}
+              onClick={(e) => e.stopPropagation()}
+            />
+          }
+          startCmpExternal={
+            <Button
+              icon={<AirplayIcon />}
+              onClick={(e) => e.stopPropagation()}
+            />
+          }
+          endCmp={
+            <Button
+              icon={<FormatColorFillIcon />}
+              onClick={(e) => e.stopPropagation()}
+            />
+          }
+          endCmpExternal={
+            <Button
+              icon={<FormatColorFillIcon />}
+              onClick={(e) => e.stopPropagation()}
+            />
+          }
         />
       ))}
     </Stack>
