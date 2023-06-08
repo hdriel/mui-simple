@@ -20,8 +20,9 @@ export const Default = () => {
 };
 
 export const Phone = () => {
-  const [value, setValue] = useState("050-000-0000");
+  const [value, setValue] = useState("");
 
+  console.log("Phone value", value);
   return (
     <InputPhone
       label="Phone"

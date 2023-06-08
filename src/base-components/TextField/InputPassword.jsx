@@ -32,7 +32,8 @@ export default function InputPassword({
   const [showPassword, setShowPassword] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleClickCopyToClipboard = (value) => {
+  const handleClickCopyToClipboard = () => {
+    console.log("handleClickCopyToClipboard", value);
     const copied = copyToClipboard(value);
     setShowAlert(copied);
   };

@@ -83,11 +83,7 @@ export default function InputColor({
   }
 
   return (
-    <ClickAwayListener
-      onClickAway={() => {
-        setShowOpacitySlider(false);
-      }}
-    >
+    <ClickAwayListener onClickAway={() => setShowOpacitySlider(false)}>
       <Box sx={{ position: "relative", width: "100%" }} ref={ref}>
         <Input
           colorActive={showContrastColor ? "#636363" : colorActive}
