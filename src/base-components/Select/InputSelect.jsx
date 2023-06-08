@@ -12,6 +12,8 @@ import {
   Box,
 } from "./InputSelect.styled";
 import InputAdornment from "@mui/material/InputAdornment";
+import { getCustomColor } from "../../utils/helpers";
+import { useTheme } from "@mui/material/styles";
 
 export default function InputSelect({
   label,
@@ -33,9 +35,9 @@ export default function InputSelect({
   focused,
   size,
   helperText,
-  colorText,
-  colorLabel,
-  colorActive,
+  colorText: _colorText,
+  colorLabel: _colorLabel,
+  colorActive: _colorActive,
   startCmpExternal,
   endCmpExternal,
   cmpSpacing,
@@ -49,6 +51,7 @@ export default function InputSelect({
   noneSelectionLabel,
   ...props
 }) {
+  const theme = useTheme();
   const [isFocused, setIsFocused] = useState(false);
 
   const options = useMemo(
@@ -63,6 +66,19 @@ export default function InputSelect({
         }),
     [_options]
   );
+
+  const menuColor = _colorActive ?? _colorLabel;
+
+  const menuColorText = getCustomColor({ theme, customColor: _colorText });
+  const menuColorSelected = getCustomColor(
+    { theme, customColor: menuColor },
+    { lighten: 0.8 }
+  );
+  const menuColorHover = getCustomColor(
+    { theme, customColor: menuColor },
+    { lighten: 0.6 }
+  );
+
   const onFocusHandler = (e) => {
     setIsFocused(true);
     onFocus?.(e);
@@ -80,9 +96,9 @@ export default function InputSelect({
         error={error}
         disabled={disabled}
         required={required}
-        colorText={colorText}
-        colorLabel={colorLabel}
-        colorActive={colorActive}
+        colorText={_colorText}
+        colorLabel={_colorLabel}
+        colorActive={_colorActive}
       >
         {label && <InputLabel>{label}</InputLabel>}
         <Select
@@ -96,11 +112,20 @@ export default function InputSelect({
           onFocus={onFocusHandler}
           autoWidth={autoWidth}
           inputProps={{ readOnly }}
+          MenuProps={{
+            sx: {
+              "&& .MuiMenuItem-root": { color: menuColorText },
+              "&& .MuiMenuItem-root:hover": { backgroundColor: menuColorHover },
+              "&& .Mui-selected": { backgroundColor: menuColorSelected },
+              "&& .Mui-selected:hover": { backgroundColor: menuColorSelected },
+            },
+          }}
           renderValue={() => {
             const rValue = renderValue?.(value) ?? value;
 
             return (
               <Box
+                className="content-body"
                 sx={{
                   display: "flex",
                   alignItems: "center",
@@ -230,8 +255,8 @@ InputSelect.defaultProps = {
   options: undefined,
   autoWidth: undefined,
   renderValue: undefined,
-  colorText: "#0DC0D0",
-  colorLabel: "secondary",
-  colorActive: "warning",
+  colorText: undefined,
+  colorLabel: undefined,
+  colorActive: undefined,
   noneSelectionLabel: "None",
 };

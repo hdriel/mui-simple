@@ -30,7 +30,7 @@ export const FormControl = styled(MuiFormControl, {
     const colorActive = getCustomColor(props, { field: "colorActive" });
 
     return css`
-      & input {
+      & .content-body {
         color: ${colorText} !important;
       }
 
@@ -39,11 +39,11 @@ export const FormControl = styled(MuiFormControl, {
       }
 
       & label.Mui-focused {
-        color: ${colorActive};
+        color: ${colorActive ?? colorLabel};
       }
 
       & .MuiInputBase-root:after {
-        border-bottom-color: ${colorActive};
+        border-bottom-color: ${colorActive ?? colorLabel};
       }
 
       & .MuiInput-underline:after {
@@ -64,12 +64,9 @@ export const FormControl = styled(MuiFormControl, {
         }
 
         &.Mui-focused fieldset {
-          border-color: ${colorActive};
+          border-color: ${colorActive ?? colorLabel};
         }
       }
-
-      & .MuiMenuItem-root.Mui-selected {
-        background-color: ${colorActive};
     `;
   }}
 `;
@@ -77,45 +74,4 @@ export const FormControl = styled(MuiFormControl, {
 export const InputLabel = MuiInputLabel;
 export const FormHelperText = MuiFormHelperText;
 
-export const Select = styled(MuiSelect)`
-  ${(props) => {
-    const colorText = getCustomColor(props, { field: "colorText" });
-    const colorLabel = getCustomColor(props, { field: "colorLabel" });
-    const hoverColorLabel = getCustomColor(props, {
-      field: "colorLabel",
-      darken: 0.3,
-    });
-    const colorActive = getCustomColor(props, { field: "colorActive" });
-
-    return css`
-      & input {
-        color: ${colorText} !important;
-      }
-      & label{
-        color: ${colorLabel};
-      }
-      & label.Mui-focused {
-        color: ${colorActive};
-      } 
-      & .MuiInputBase-root:after {
-        border-bottom-color: ${colorActive};
-      }
-      & .MuiInput-underline:after {
-        border-bottom-color: ${colorLabel};
-      }
-      & .MuiInputBase-root .MuiFilledInput-root:after {
-        border-bottom-color: ${colorLabel};
-      }
-      & .MuiOutlinedInput-root {
-        & fieldset {
-          border-color: ${colorLabel};
-        }
-        &:hover fieldset {
-          border-color: ${hoverColorLabel};
-        }
-        &.Mui-focused fieldset {
-          border-color: ${colorActive};
-        }
-    `;
-  }}
-`;
+export const Select = MuiSelect;

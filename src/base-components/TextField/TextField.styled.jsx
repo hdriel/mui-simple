@@ -37,10 +37,10 @@ export const TextField = styled(MuiTextField, {
         color: ${colorLabel};
       }
       & label.Mui-focused {
-        color: ${colorActive};
+        color: ${colorActive ?? colorLabel};
       }
       & .MuiInputBase-root:after {
-        border-bottom-color: ${colorActive};
+        border-bottom-color: ${colorActive ?? colorLabel};
       }
       & .MuiInput-underline:after {
         border-bottom-color: ${colorLabel};
@@ -56,7 +56,7 @@ export const TextField = styled(MuiTextField, {
           border-color: ${hoverColorLabel};
         }
         &.Mui-focused fieldset {
-          border-color: ${colorActive};
+          border-color: ${colorActive ?? colorLabel};
         }
       }
     `;
