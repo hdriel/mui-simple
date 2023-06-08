@@ -43,7 +43,7 @@ export const Mask = () => {
         label="Time"
         value={value.time}
         onChange={(e) => dispatch({ type: "time", value: e.target.value })}
-        mask="H:M"
+        mask="HH:MM"
         blocks={{
           HH: {
             mask: IMask.MaskedRange,
