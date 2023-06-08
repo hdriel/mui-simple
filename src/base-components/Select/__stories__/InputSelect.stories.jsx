@@ -26,7 +26,7 @@ export const Default = () => {
 
 export const Select = () => {
   const options = ["javascript", "python", "C#", "C++"];
-  const [value, setValue] = useState();
+  const [value, setValue] = useState("");
 
   return (
     <Stack spacing={4}>

@@ -11,7 +11,6 @@ import {
   Stack,
   Box,
 } from "./InputSelect.styled";
-import InputAdornment from "@mui/material/InputAdornment";
 import { getCustomColor } from "../../utils/helpers";
 import { useTheme } from "@mui/material/styles";
 
