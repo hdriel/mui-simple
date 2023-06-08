@@ -19,7 +19,19 @@ export { default as Drawer } from "./Drawer/Drawer";
 
 export { default as Fab } from "./FloatingActionButton/FloatingActionButton";
 
-export { default as Input } from "./Input/Input";
+export { default as TextField } from "./TextField/TextField";
+export { default as InputFile } from "./TextField/InputFile";
+export { default as InputSearch } from "./TextField/InputSearch";
+export { default as InputColor } from "./TextField/InputColor";
+export { default as InputDate } from "./TextField/InputDate";
+export { default as InputDateTime } from "./TextField/InputDateTime";
+export { default as InputEmail } from "./TextField/InputEmail";
+export { default as InputNumber } from "./TextField/InputNumber";
+export { default as InputPassword } from "./TextField/InputPassword";
+export { default as InputPhone } from "./TextField/InputPhone";
+export { default as InputSelect } from "./Select/InputSelect";
+export { default as InputText } from "./TextField/InputText";
+export { default as InputTime } from "./TextField/InputTime";
 
 export { default as Link } from "./Link/Link";
 export { default as List } from "./List/List";
@@ -30,7 +42,6 @@ export { default as ContextMenu } from "./Menu/ContextMenu";
 
 export { default as Pagination } from "./Pagination/Pagination";
 export { default as Paper } from "./Paper/Paper";
-export { default as PasswordInput } from "./PasswordInput/PasswordInput";
 export { default as CircularProgress } from "./Progress/CircularProgress/CircularProgress";
 export { default as LinearProgress } from "./Progress/LinearProgress/LinearProgress";
 

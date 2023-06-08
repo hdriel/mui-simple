@@ -29,6 +29,8 @@ export default function Slider({
   orientation,
   inputCmp,
   sliderStyle,
+  removePadding,
+  disablePadding,
   ...props
 }) {
   const rangeProps = useMemo(() => {
@@ -63,13 +65,22 @@ export default function Slider({
     >
       <SliderLabel>{label}</SliderLabel>
       <Grid
-        container
-        spacing={2}
-        alignItems="center"
-        direction={orientation === "vertical" ? "column-reverse" : "row"}
-        sx={{ height }}
+        {...(!disablePadding && {
+          container: true,
+          spacing: 2,
+          alignItems: "center",
+          direction: orientation === "vertical" ? "column-reverse" : "row",
+        })}
+        sx={{
+          height,
+          ...(disablePadding && {
+            display: "flex",
+            alignItems: "center",
+            gap: "1em",
+          }),
+        }}
       >
-        <Grid item>{startIcon}</Grid>
+        {startIcon && <Grid item>{startIcon}</Grid>}
         <Grid item xs sx={{ height: "inherit" }}>
           <MuiSlider
             startIcon={startIcon}
@@ -102,7 +113,7 @@ export default function Slider({
             {...props}
           />
         </Grid>
-        <Grid item>{inputCmp ?? endIcon}</Grid>
+        {(inputCmp || endIcon) && <Grid item>{inputCmp ?? endIcon}</Grid>}
       </Grid>
     </Box>
   );
@@ -117,7 +128,13 @@ Slider.propTypes = {
   ]),
   label: PropTypes.string,
   muiColor: PropTypes.string,
-  customColor: PropTypes.string,
+  customColor: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      track: PropTypes.string,
+      thumb: PropTypes.string,
+    }),
+  ]),
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
   orientation: PropTypes.oneOf(["vertical", "horizontal"]),
@@ -129,6 +146,7 @@ Slider.propTypes = {
   inputCmp: PropTypes.node,
   sliderStyle: PropTypes.oneOf(Object.values(SLIDER_STYLES)),
   trackBarLinePosition: PropTypes.oneOf(["none", "inverted", "normal"]),
+  disablePadding: PropTypes.bool,
   marks: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.arrayOf(
@@ -160,6 +178,7 @@ Slider.defaultProps = {
   onChange: undefined,
   valueLabelFormat: undefined,
   disabled: undefined,
+  disablePadding: undefined,
   orientation: undefined,
   size: undefined,
   trackBarLinePosition: undefined,

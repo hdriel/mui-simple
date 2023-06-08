@@ -1,3 +1,6 @@
+import _ from "lodash";
+import { alpha, darken, lighten } from "@mui/material";
+
 export function getCapitalLetters(str) {
   const chars =
     str
@@ -39,4 +42,77 @@ export function numberToPx(field) {
 
 export function isDefined(value) {
   return value !== undefined && value !== null;
+}
+
+export function getCustomColor(
+  props,
+  {
+    field = undefined,
+    muiLevel = "main",
+    opacity = 1,
+    darken: _darken,
+    lighten: _lighten,
+  } = {}
+) {
+  const customColor = props?.[field] ?? props?.customColor;
+  if (!customColor) return undefined;
+
+  let color =
+    _.get(props, `theme.palette.${customColor}.${muiLevel}`) ??
+    _.get(props, `theme.palette.${customColor}`) ??
+    customColor;
+
+  if (!isValidColor(color)) return undefined;
+
+  color = isDefined(opacity) ? alpha(color, opacity) : color;
+  color = isDefined(_darken) ? darken(color, _darken) : color;
+  color = isDefined(_lighten) ? lighten(color, _lighten) : color;
+
+  return color;
+}
+
+const isValidColor = (color) => CSS.supports("color", color);
+
+export const copyToClipboard = (value) => {
+  if (!value) return false;
+
+  const textField = document.createElement("textarea");
+  textField.innerText = value;
+  document.body.appendChild(textField);
+  textField.select();
+  document.execCommand("copy");
+  textField.remove();
+
+  return true;
+};
+
+const NUMBERS = "0123456789";
+const LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
+const UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const SYMBOL = "!@#$%^&*()";
+
+export function generatePassword({
+  length = 12,
+  numbers = true,
+  lowercase = true,
+  uppercase = true,
+  symbol = true,
+} = {}) {
+  const chars = [
+    numbers && NUMBERS,
+    lowercase && LOWERCASE,
+    uppercase && UPPERCASE,
+    symbol && SYMBOL,
+  ]
+    .filter(Boolean)
+    .join("");
+
+  let password = "";
+
+  for (let i = 0; i <= length; i++) {
+    const randomNumber = Math.floor(Math.random() * chars.length);
+    password += chars.substring(randomNumber, randomNumber + 1);
+  }
+
+  return password;
 }

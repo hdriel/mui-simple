@@ -1,19 +1,29 @@
 import React, { useState } from "react";
-import Input from "../Input";
+import TextField from "../TextField";
 import { Clear as ClearIcon } from "@mui/icons-material";
+import { Stack } from "@mui/material";
 
 export default {
-  title: "Inputs/Input",
-  component: Input,
+  title: "Inputs/TextField",
+  component: TextField,
+  decorators: [
+    (Story) => (
+      <div
+        style={{ width: "450px", padding: "1em", border: "1px dashed black" }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export const Default = () => {
-  return <Input />;
+  return <TextField />;
 };
 
 export const StartIcon = () => {
   return (
-    <Input
+    <TextField
       label="Start Icon Input"
       startCmp="kg"
       variant="outlined"
@@ -24,13 +34,17 @@ export const StartIcon = () => {
 
 export const EndIcon = () => {
   return (
-    <Input label="End Icon Input" endCmp={<ClearIcon />} variant="standard" />
+    <TextField
+      label="End Icon Input"
+      endCmp={<ClearIcon />}
+      variant="standard"
+    />
   );
 };
 
 export const Password = () => {
   return (
-    <Input
+    <TextField
       label="End Icon Input"
       endCmp={<ClearIcon />}
       variant="standard"
@@ -43,7 +57,7 @@ export const Disabled = () => {
   const [value, setValue] = useState("Hello world");
 
   return (
-    <Input
+    <TextField
       label="Disabled Input"
       disabled
       value={value}
@@ -56,7 +70,7 @@ export const ReadOnly = () => {
   const [value, setValue] = useState("Hello world");
 
   return (
-    <Input
+    <TextField
       label="Read Only Input"
       readOnly
       value={value}
@@ -69,7 +83,7 @@ export const Multiline = () => {
   const [value, setValue] = useState("Hello world");
 
   return (
-    <Input
+    <TextField
       label="Multiline input"
       value={value}
       onChange={(e) => setValue(e.target.value)}
@@ -83,7 +97,7 @@ export const Required = () => {
   const [value, setValue] = useState("Hello world");
 
   return (
-    <Input
+    <TextField
       label="username"
       required
       value={value}
@@ -96,7 +110,7 @@ export const Error = () => {
   const [value, setValue] = useState("3#%32");
 
   return (
-    <Input
+    <TextField
       label="username"
       error
       helperText="Invalid username"
@@ -110,7 +124,7 @@ export const HelperText = () => {
   const [value, setValue] = useState("Test");
 
   return (
-    <Input
+    <TextField
       label="username"
       helperText="username for credentials"
       value={value}
@@ -121,7 +135,7 @@ export const HelperText = () => {
 
 export const NotFullwith = () => {
   return (
-    <Input
+    <TextField
       fullWidth={false}
       label="End Icon Input"
       endCmp={<ClearIcon />}
@@ -132,7 +146,7 @@ export const NotFullwith = () => {
 
 export const Focused = () => {
   return (
-    <Input
+    <TextField
       fullWidth={false}
       label="auto focused input"
       variant="outlined"
@@ -147,14 +161,14 @@ export const MuiltipleInputs = () => {
   return (
     <>
       <div style={{ display: "flex", gap: "16px" }}>
-        <Input
+        <TextField
           fullWidth={false}
           label="First Input"
           endCmp={<ClearIcon />}
           variant="standard"
           helperText={" "}
         />
-        <Input
+        <TextField
           fullWidth={false}
           label="Second Input"
           endCmp={<ClearIcon onClick={() => setValue("")} />}
@@ -166,14 +180,14 @@ export const MuiltipleInputs = () => {
         />
       </div>
       <div style={{ display: "flex", gap: "16px" }}>
-        <Input
+        <TextField
           fullWidth={false}
           label="First Input"
           endCmp={<ClearIcon />}
           variant="standard"
           error
         />
-        <Input
+        <TextField
           fullWidth={false}
           label="Second Input"
           endCmp={<ClearIcon />}
@@ -181,5 +195,59 @@ export const MuiltipleInputs = () => {
         />
       </div>
     </>
+  );
+};
+
+export const ThemedAndColored = () => {
+  const [value, setValue] = useState("Hello World");
+
+  return (
+    <Stack spacing={2}>
+      <TextField
+        label={"default color"}
+        variant="outlined"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <TextField
+        color="secondary"
+        label="default color"
+        variant="outlined"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+
+      {[
+        "primary",
+        "secondary",
+        "info",
+        "warning",
+        "success",
+        "error",
+        "primary.dark",
+        "secondary.dark",
+        "info.dark",
+        "warning.dark",
+        "success.dark",
+        "error.dark",
+        "#014299",
+        "#4a4a02",
+        "#ff59f3",
+        "REDS", // text invalid color
+      ].map((customColor, index, arr) => (
+        <TextField
+          key={customColor}
+          label={`${customColor} color`}
+          startCmp={index % 2 === 0 && "COLOR:"}
+          endCmp={index % 4 === 0 && <ClearIcon />}
+          variant="outlined"
+          colorActive={arr[index - 1]}
+          colorLabel={customColor}
+          colorText={arr[index + 1]}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+      ))}
+    </Stack>
   );
 };
