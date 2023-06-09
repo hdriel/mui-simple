@@ -24,7 +24,7 @@ export const Default = () => {
 
 export const MultipleSelect = () => {
   const options = ["javascript", "python", "C#", "C++"];
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState([]);
 
   return (
     <Stack spacing={4}>
@@ -36,7 +36,7 @@ export const MultipleSelect = () => {
           onChange={(e) => setValue(e.target.value)}
           variant={variant}
           options={options}
-          optionNullable={index === 1 ? "None Selection" : !!index}
+          nullable={index === 1 ? "None Selection" : !!index}
         />
       ))}
     </Stack>

@@ -46,7 +46,7 @@ function multiLineStyle(props) {
 
 export const Chip = styled(MuiChip, {
   shouldForwardProp: (propName) =>
-    !["customColor", "multiLine"].includes(propName),
+    !["customColor", "multiLine", "breadCrumbsStyle"].includes(propName),
 })`
   width: ${(props) => props.width ?? "auto"};
   ${multiLineStyle}

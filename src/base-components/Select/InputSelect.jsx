@@ -1,6 +1,5 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import _ from "lodash";
 import { ClickAwayListener } from "@mui/material";
 
 import {
@@ -8,16 +7,14 @@ import {
   FormControl,
   InputLabel,
   FormHelperText,
-  MenuItem,
   Stack,
   Box,
-  ListSubheader,
-  ListItemText,
 } from "./InputSelect.styled";
 import { getCustomColor } from "../../utils/helpers";
 import { useTheme } from "@mui/material/styles";
-import Checkbox from "../Checkbox/Checkbox";
+import { useOptions, useOptionsConverter } from "./InputSelect.hooks";
 
+const emptyObjectRef = [];
 export default function InputSelect({
   label,
   id,
@@ -51,55 +48,30 @@ export default function InputSelect({
   disabled,
   renderValue,
   options: _options,
-  optionsPlaceholder,
-  optionNullable,
+  convertedOptions: _convertedOptions,
+  placeholderOption,
+  nullable,
   groupBy,
   checkbox,
+  max,
+  selectAll,
+  selectAllOption,
   ...props
 }) {
   const theme = useTheme();
   const [isFocused, setIsFocused] = useState(false);
 
-  const options = useMemo(() => {
-    const obj = _.groupBy(
-      []
-        .concat(_options)
-        ?.filter(Boolean)
-        .map((option) => {
-          return typeof option === "string"
-            ? { value: option, label: option, disabled: false }
-            : option;
-        }),
-      groupBy ?? ""
-    );
+  const optionsObj = useOptionsConverter({
+    options: _convertedOptions ? emptyObjectRef : _options,
+    groupBy,
+  });
 
-    const components = [];
-
-    Object.keys(obj).forEach((category) => {
-      if (category !== "undefined") {
-        components.push(
-          <ListSubheader key={category}>{category}</ListSubheader>
-        );
-      }
-
-      components.push(
-        ...obj[category].map((option, index) => (
-          <MenuItem
-            key={index + option.value}
-            value={option.value}
-            disabled={option.disabled}
-          >
-            {checkbox && (
-              <Checkbox checked={value?.indexOf?.(option.value) > -1} />
-            )}
-            <ListItemText primary={option.label} secondary={option.subtitle} />
-          </MenuItem>
-        ))
-      );
-    });
-
-    return components;
-  }, [_options]);
+  const options = useOptions({
+    placeholder: placeholderOption,
+    convertedOptions: _convertedOptions ?? optionsObj,
+    checkbox,
+    nullable: !selectAll && nullable,
+  });
 
   const menuColor = _colorActive ?? _colorLabel;
 
@@ -182,21 +154,10 @@ export default function InputSelect({
             );
           }}
         >
-          {options?.length && optionsPlaceholder ? (
-            <MenuItem disabled value="">
-              <em>{optionsPlaceholder}</em>
-            </MenuItem>
-          ) : undefined}
-
-          {options?.length && optionNullable ? (
-            <MenuItem value="">
-              <em style={{ minHeight: "24px" }}>
-                {typeof optionNullable === "string" ? optionNullable : " "}
-              </em>
-            </MenuItem>
-          ) : undefined}
-
-          {options}
+          {options.length ? selectAllOption : undefined}
+          {options.map((option) =>
+            typeof option === "function" ? option({ value, max }) : option
+          )}
         </Select>
         {helperText && <FormHelperText>{helperText}</FormHelperText>}
       </FormControl>
@@ -234,7 +195,7 @@ InputSelect.propTypes = {
     PropTypes.number,
     PropTypes.bool,
     PropTypes.arrayOf(
-      PropTypes.shape([PropTypes.string, PropTypes.number, PropTypes.bool])
+      PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
     ),
   ]),
   focused: PropTypes.bool,
@@ -273,8 +234,8 @@ InputSelect.propTypes = {
   colorText: PropTypes.string,
   colorLabel: PropTypes.string,
   colorActive: PropTypes.string,
-  optionNullable: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  optionsPlaceholder: PropTypes.string,
+  nullable: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  placeholderOption: PropTypes.string,
   groupBy: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   checkbox: PropTypes.bool,
 };
@@ -309,8 +270,8 @@ InputSelect.defaultProps = {
   colorText: undefined,
   colorLabel: undefined,
   colorActive: undefined,
-  optionNullable: undefined,
-  optionsPlaceholder: undefined,
+  nullable: undefined,
+  placeholderOption: undefined,
   groupBy: undefined, // (option) => option?.label[0].toUpperCase()
   checkbox: undefined, // (option) => option?.label[0].toUpperCase()
 };
