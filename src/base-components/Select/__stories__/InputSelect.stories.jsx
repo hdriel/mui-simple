@@ -38,7 +38,8 @@ export const Select = () => {
           onChange={(e) => setValue(e.target.value)}
           variant={variant}
           options={options}
-          optionNullable={index === 1 ? "None Selection" : !!index}
+          nullable={index === 1 ? "None Selection" : !!index}
+          placeholderOption={index !== 0 ? "Choose from list:" : ""}
           startCmp={
             <Button
               icon={<AirplayIcon />}

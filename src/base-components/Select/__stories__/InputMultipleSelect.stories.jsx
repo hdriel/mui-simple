@@ -3,6 +3,11 @@ import { Stack } from "@mui/material";
 
 import InputMultipleSelect from "../InputMultipleSelect";
 import Button from "../../Button/Button";
+import InputSelect from "../InputSelect";
+import {
+  Airplay as AirplayIcon,
+  FormatColorFill as FormatColorFillIcon,
+} from "@mui/icons-material";
 
 export default {
   title: "Inputs/Inputs/InputMultipleSelect",
@@ -24,7 +29,7 @@ export const Default = () => {
 
 export const MultipleSelect = () => {
   const options = ["javascript", "python", "C#", "C++"];
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState([]);
 
   return (
     <Stack spacing={4}>
@@ -36,7 +41,32 @@ export const MultipleSelect = () => {
           onChange={(e) => setValue(e.target.value)}
           variant={variant}
           options={options}
-          optionNullable={index === 1 ? "None Selection" : !!index}
+          nullable={index === 1 ? "None Selection" : !!index}
+          placeholderOption={index !== 0 ? "Choose from list:" : ""}
+          // startCmp={
+          //   <Button
+          //     icon={<AirplayIcon />}
+          //     onClick={(e) => e.stopPropagation()}
+          //   />
+          // }
+          // endCmp={
+          //   <Button
+          //     icon={<FormatColorFillIcon />}
+          //     onClick={(e) => e.stopPropagation()}
+          //   />
+          // }
+          startCmpExternal={
+            <Button
+              icon={<AirplayIcon />}
+              onClick={(e) => e.stopPropagation()}
+            />
+          }
+          endCmpExternal={
+            <Button
+              icon={<FormatColorFillIcon />}
+              onClick={(e) => e.stopPropagation()}
+            />
+          }
         />
       ))}
     </Stack>
