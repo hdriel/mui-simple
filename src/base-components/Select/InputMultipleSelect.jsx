@@ -121,7 +121,8 @@ export default function InputMultipleSelect({
               disableGutters={true}
               itemProps={{
                 title: selectAllState
-                  ? typeof checkboxMarker !== "boolean" && !checkboxMarker
+                  ? !isDefined(checkboxMarker) ||
+                    (typeof checkboxMarker === "boolean" && checkboxMarker)
                     ? LABELS.HIDE_ALL
                     : LABELS.SELECT_ALL
                   : LABELS.SELECT_ALL,
@@ -162,7 +163,7 @@ InputMultipleSelect.defaultProps = {
   value: undefined,
   renderValue: (value) => value.join(", "),
   chips: true,
-  checkboxMarker: true, // <CheckIcon />,
+  checkboxMarker: undefined, // <CheckIcon />,
   max: undefined,
   selectedIndicator: true,
   selectAll: true,
