@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Box } from "@mui/material";
 
@@ -8,7 +8,6 @@ import { isDefined } from "../../utils/helpers";
 import Checkbox from "../Checkbox/Checkbox";
 import { ListItemText, MenuItem } from "./InputSelect.styled";
 import { useOptionsConverter } from "./InputSelect.hooks";
-import Divider from "../Divider/Divider";
 
 const renderValuesAsChips = (selected) => (
   <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
@@ -17,6 +16,8 @@ const renderValuesAsChips = (selected) => (
     ))}
   </Box>
 );
+
+const SELECTED_ALL_SYMBOL = Symbol("SELECTED_ALL");
 
 export default function InputMultipleSelect({
   value,
@@ -33,18 +34,39 @@ export default function InputMultipleSelect({
   LABELS,
   ...props
 }) {
+  const convertedOptions = useOptionsConverter({ options: options, groupBy });
+  const isAllValuesSelected =
+    Object.values(convertedOptions)
+      .flat()
+      .filter((option) => !option.disabled).length === value.length;
+  const [selectAllState, setSelectAllState] = useState(isAllValuesSelected);
+  const [_, setClickAll] = useState(false);
+
   const n = value?.length;
   const label =
     selectedIndicator && n
       ? `${_label} ${LABELS.SELECTED_ITEMS?.replace("{n}", n)}`
       : _label;
 
-  const [selectAllState, setSelectAllState] = useState(false);
-  const convertedOptions = useOptionsConverter({ options: options, groupBy });
+  const onClickMenuItemHandler = useCallback(
+    (event) => {
+      setClickAll((clickAll) => {
+        if (!clickAll) {
+          const values = event.target.value;
+          if (!isDefined(max) || values?.length <= max) {
+            onChange?.(event);
+          }
+          return false;
+        }
 
-  const onClickHandler = (event) => {
-    event.stopPropagation();
+        return false;
+      });
+    },
+    [max]
+  );
 
+  const handleSelectAllChange = () => {
+    setClickAll(true);
     setSelectAllState((state) => {
       const showAll = !state;
       const allValues = showAll
@@ -59,6 +81,10 @@ export default function InputMultipleSelect({
     });
   };
 
+  useEffect(() => {
+    if (isAllValuesSelected && !selectAllState) handleSelectAllChange();
+  }, [isAllValuesSelected]);
+
   return (
     <InputSelect
       value={[].concat(value).filter(Boolean)}
@@ -66,24 +92,21 @@ export default function InputMultipleSelect({
       max={max}
       label={label}
       renderValue={chips ? renderValuesAsChips : renderValue}
-      onChange={(event, ...args) => {
-        const values = event.target.value;
-        if (!isDefined(max) || values?.length <= max) {
-          onChange?.(event, ...args);
-        }
-      }}
+      onChange={onClickMenuItemHandler}
       checkbox
       selectAll={selectAll}
       options={options}
       convertedOptions={convertedOptions}
       selectAllOption={
-        !isDefined(max) &&
-        selectAll && (
-          <MenuItem onClick={onClickHandler}>
+        !isDefined(max) && selectAll ? (
+          <MenuItem onClick={handleSelectAllChange}>
             <Checkbox checked={selectAllState} />
-            <ListItemText primary={LABELS.SELECT_ALL} />
+            <ListItemText
+              primary={selectAllState ? LABELS.HIDE_ALL : LABELS.SELECT_ALL}
+              primaryTypographyProps={{ style: { fontWeight: "bold" } }}
+            />
           </MenuItem>
-        )
+        ) : undefined
       }
       {...props}
     />
