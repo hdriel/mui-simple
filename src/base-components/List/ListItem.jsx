@@ -106,7 +106,7 @@ const ListItem = ({
           secondary={
             enableSubtitle && itemProps.subtitle ? (
               <Typography
-                rows={2}
+                rows={itemProps.rows ?? 2}
                 component="span"
                 variant="body2"
                 muiColor="text.primary"
