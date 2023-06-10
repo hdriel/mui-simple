@@ -162,7 +162,7 @@ InputMultipleSelect.defaultProps = {
   value: undefined,
   renderValue: (value) => value.join(", "),
   chips: true,
-  checkboxMarker: undefined, // <CheckIcon />,
+  checkboxMarker: <CheckIcon />,
   max: undefined,
   selectedIndicator: true,
   selectAll: true,
