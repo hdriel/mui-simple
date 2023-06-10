@@ -145,7 +145,7 @@ InputMultipleSelect.defaultProps = {
   renderValue: (value) => value.join(", "),
   chips: true,
   max: undefined,
-  selectedIndicator: undefined,
+  selectedIndicator: true,
   selectAll: true,
   LABELS: {
     SELECT_ALL: "Select All",
