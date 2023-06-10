@@ -117,8 +117,7 @@ export default function InputMultipleSelect({
             )}
 
             <ListItem
-              disablePadding={undefined}
-              disableGutters={true}
+              disableGutters
               itemProps={{
                 title: selectAllState
                   ? !isDefined(checkboxMarker) ||
@@ -130,8 +129,8 @@ export default function InputMultipleSelect({
                 bold: true,
               }}
               buttonItems
-              alignItems={"flex-start"}
-              isControl={true}
+              alignItems="flex-start"
+              isControl
               enableSubtitle
             />
           </MenuItem>
