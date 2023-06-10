@@ -237,7 +237,6 @@ InputSelect.propTypes = {
   nullable: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   placeholderOption: PropTypes.string,
   groupBy: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  checkbox: PropTypes.bool,
 };
 
 InputSelect.defaultProps = {
@@ -273,5 +272,4 @@ InputSelect.defaultProps = {
   nullable: undefined,
   placeholderOption: undefined,
   groupBy: undefined, // (option) => option?.label[0].toUpperCase()
-  checkbox: undefined, // (option) => option?.label[0].toUpperCase()
 };

@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   List as MuiList,
   ListItem as MuiListItem,
@@ -27,7 +29,9 @@ export const List = styled(({ useTransition, children, ...props }) => (
   width: 100%;
 `;
 
-export const ListItem = styled(MuiListItem)`
+export const ListItem = styled(MuiListItem, {
+  shouldForwardProp: (propName) => !["flexDirectionItems"].includes(propName),
+})`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -40,6 +44,7 @@ export const ListItemAvatar = MuiListItemAvatar;
 export const ListItemButton = styled(MuiListItemButton)`
   width: 100%;
   padding: ${(props) => props.padding};
+  flex-direction: ${(props) => props.flexDirection ?? "row"};
 `;
 export const ListItemIcon = MuiListItemIcon;
 export const ListItemSecondaryAction = MuiListItemSecondaryAction;

@@ -11,7 +11,6 @@ export default function Snackbar({
   resumeHideDuration,
   onClose,
   onClickAway,
-  onExited,
   vertical,
   horizontal,
   variant,

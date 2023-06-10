@@ -1,8 +1,10 @@
 import React, { useMemo } from "react";
 import _ from "lodash";
-import { ListItemText, ListSubheader, MenuItem } from "./InputSelect.styled";
+import { ListSubheader, MenuItem } from "./InputSelect.styled";
 import Checkbox from "../Checkbox/Checkbox";
 import { isDefined } from "../../utils/helpers";
+import ListItem from "../List/ListItem";
+import { Home as HomeIcon } from "@mui/icons-material";
 
 export const useOptionsConverter = ({ options: _options, groupBy }) => {
   const options = useMemo(
@@ -51,10 +53,24 @@ export const useOptions = ({
                 (!selected && isDefined(max) && value?.length >= max)
               }
             >
-              {checkbox && <Checkbox checked={selected} />}
-              <ListItemText
-                primary={option.label}
-                secondary={option.subtitle}
+              {typeof checkbox === "boolean" && checkbox && (
+                <Checkbox checked={selected} />
+              )}
+
+              <ListItem
+                disablePadding={undefined}
+                disableGutters={true}
+                index={0}
+                itemProps={{
+                  title: option.label,
+                  subtitle: option.subtitle,
+                  actions:
+                    selected && typeof checkbox !== "boolean" && checkbox,
+                }}
+                buttonItems
+                alignItems={"flex-start"}
+                isControl={true}
+                enableSubtitle
               />
             </MenuItem>
           );

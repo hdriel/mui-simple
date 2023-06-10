@@ -1,62 +1,15 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import {
-  ExpandLess as ExpandLessIcon,
-  ExpandMore as ExpandMoreIcon,
-} from "@mui/icons-material";
+
 import {
   Divider,
   List as MuiList,
-  ListItem,
   ListSubheader,
-  ListItemText,
   Collapse,
-  ListItemAvatar,
-  ListItemButton,
-  ListItemIcon,
-  ListItemSecondaryAction,
 } from "./List.styled";
-import Avatar from "../Avatar/Avatar";
-import Typography from "../Typography/Typography";
+import MuiListItem from "./ListItem";
 import DraggableList from "../DraggableList/DraggableList";
-
-const ListItemWrapper = ({
-  item,
-  index,
-  onClick,
-  buttonItems,
-  alignItems,
-  children,
-  ...props
-}) => {
-  if (!item) return children;
-
-  const onClickHandler = onClick?.bind(null, index, item.onClick);
-  const itemButton =
-    alignItems !== "flex-start" &&
-    item.align !== "flex-start" &&
-    (item.link ??
-      item.onClick ??
-      item.selected ??
-      item.items?.length ??
-      item.buttonItem ??
-      buttonItems);
-
-  return itemButton ? (
-    <ListItemButton
-      component={item.link ? "a" : undefined}
-      href={item.link}
-      onClick={item.items?.length ? onClickHandler : item.onClick}
-      selected={item.selected}
-      padding={item.padding}
-      {...props}
-    >
-      {children}
-    </ListItemButton>
-  ) : (
-    children
-  );
-};
+import { Box } from "@mui/material";
 
 const List = ({
   useTransition,
@@ -69,6 +22,7 @@ const List = ({
   disablePaddingItems,
   disableGuttersItems,
   dragAndDropItems,
+  flexDirectionItems,
   onListOrderChange,
   disablePadding,
   title,
@@ -118,77 +72,43 @@ const List = ({
             const listItem = !!Object.keys(itemProps).length;
 
             return (
-              <div style={{ width: "100%" }} key={index}>
+              <div style={{ width: "100%" }} key={`i-${index}`}>
                 {listItem && (
-                  <ListItem
-                    key={`i-${index}`}
+                  <MuiListItem
                     disablePadding={
                       item.disablePadding ?? disablePaddingItems ?? true
                     }
                     disableGutters={item.disableGutters ?? disableGuttersItems}
                     alignItems={itemProps.align ?? alignItems}
+                    index={index}
+                    itemProps={itemProps}
+                    onClick={onClick}
+                    buttonItems={buttonItems}
+                    isControl={isControl}
+                    alignControl={alignControl}
+                    insetItems={insetItems}
+                    enableSubtitle={enableSubtitle}
+                    isOpen={isOpen}
+                    flexDirectionItems={flexDirectionItems}
                   >
-                    <ListItemWrapper
-                      index={index}
-                      item={itemProps}
-                      onClick={onClick}
-                      buttonItems={buttonItems}
-                      alignItems={alignItems}
-                    >
-                      {itemProps.startIcon &&
-                        (isControl && alignControl === "start" ? (
-                          itemProps.startIcon
-                        ) : (
-                          <ListItemIcon>{itemProps.startIcon}</ListItemIcon>
-                        ))}
-                      {itemProps.avatar && (
-                        <ListItemAvatar>
-                          <Avatar {...itemProps.avatar} />
-                        </ListItemAvatar>
-                      )}
-                      <ListItemText
-                        inset={itemProps.inset ?? insetItems}
-                        primary={itemProps.title}
-                        secondary={
-                          enableSubtitle && itemProps.subtitle ? (
-                            <Typography
-                              rows={2}
-                              component="span"
-                              variant="body2"
-                              muiColor="text.primary"
-                            >
-                              {itemProps.subtitle}
-                            </Typography>
-                          ) : undefined
-                        }
-                      />
-                      {itemProps.items?.length ? (
-                        isOpen ? (
-                          <ExpandLessIcon />
-                        ) : (
-                          <ExpandMoreIcon />
-                        )
-                      ) : undefined}
-
-                      <ListItemSecondaryAction>
-                        {itemProps.actions}
-                      </ListItemSecondaryAction>
-                    </ListItemWrapper>
-
                     <Collapse
-                      in={isOpen && itemProps.items?.length}
+                      in={!!(isOpen && itemProps.items?.length)}
                       timeout="auto"
                       unmountOnExit
                       addEndListener={undefined}
                     >
-                      <List items={itemProps.items} />
-                      <Divider
-                        variant="fullWidth"
-                        {...divider}
-                        component="li"
-                      />
+                      {isOpen && itemProps.items?.length ? (
+                        <Box>
+                          <List items={itemProps.items} />
+                          <Divider
+                            variant="fullWidth"
+                            {...divider}
+                            component="li"
+                          />
+                        </Box>
+                      ) : undefined}
                     </Collapse>
-                  </ListItem>
+                  </MuiListItem>
                 )}
                 {divider && (
                   <Divider
@@ -223,6 +143,7 @@ List.propTypes = {
   alignItems: PropTypes.oneOf(["flex-start"]),
   insetItems: PropTypes.bool,
   onListOrderChange: PropTypes.func,
+  flexDirectionItems: PropTypes.oneOf(["row", "column"]),
   items: PropTypes.arrayOf(
     PropTypes.oneOfType([
       PropTypes.string,
@@ -249,6 +170,7 @@ List.defaultProps = {
   useTransition: true,
   dense: undefined,
   buttonItems: true,
+  flexDirectionItems: undefined,
   enableSubtitle: true,
   disablePadding: true,
   dragAndDropItems: false,

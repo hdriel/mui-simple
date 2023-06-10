@@ -3,7 +3,7 @@ import { Stack } from "@mui/material";
 
 import InputMultipleSelect from "../InputMultipleSelect";
 import Button from "../../Button/Button";
-import InputSelect from "../InputSelect";
+
 import {
   Airplay as AirplayIcon,
   FormatColorFill as FormatColorFillIcon,

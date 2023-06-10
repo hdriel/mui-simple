@@ -2,13 +2,15 @@ import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Box } from "@mui/material";
 import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
+import CheckIcon from "@mui/icons-material/Check";
 
 import InputSelect from "./InputSelect";
 import Chip from "../Chip/Chip";
 import { isDefined } from "../../utils/helpers";
 import Checkbox from "../Checkbox/Checkbox";
-import { ListItemText, MenuItem } from "./InputSelect.styled";
+import { MenuItem } from "./InputSelect.styled";
 import { useOptionsConverter } from "./InputSelect.hooks";
+import ListItem from "../List/ListItem";
 
 const renderValuesAsChips = (selected) => (
   <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
@@ -17,8 +19,6 @@ const renderValuesAsChips = (selected) => (
     ))}
   </Box>
 );
-
-const SELECTED_ALL_SYMBOL = Symbol("SELECTED_ALL");
 
 export default function InputMultipleSelect({
   value,
@@ -33,6 +33,7 @@ export default function InputMultipleSelect({
   options,
   groupBy,
   LABELS,
+  checkboxMarker,
   ...props
 }) {
   const convertedOptions = useOptionsConverter({ options: options, groupBy });
@@ -97,24 +98,40 @@ export default function InputMultipleSelect({
       label={label}
       renderValue={chips ? renderValuesAsChips : renderValue}
       onChange={onClickMenuItemHandler}
-      checkbox
+      checkbox={checkboxMarker}
       selectAll={selectAll}
       options={options}
       convertedOptions={convertedOptions}
       selectAllOption={
         !isDefined(max) && selectAll ? (
           <MenuItem onClick={handleSelectAllChange}>
-            <Checkbox
-              checked={selectAllState}
-              checkedIcon={
-                selectedValuesLen === value?.length ? undefined : (
-                  <IndeterminateCheckBoxIcon />
-                )
-              }
-            />
-            <ListItemText
-              primary={selectAllState ? LABELS.HIDE_ALL : LABELS.SELECT_ALL}
-              primaryTypographyProps={{ style: { fontWeight: "bold" } }}
+            {typeof checkboxMarker === "boolean" && checkboxMarker && (
+              <Checkbox
+                checked={selectAllState}
+                checkedIcon={
+                  selectedValuesLen === value?.length ? undefined : (
+                    <IndeterminateCheckBoxIcon />
+                  )
+                }
+              />
+            )}
+
+            <ListItem
+              disablePadding={undefined}
+              disableGutters={true}
+              itemProps={{
+                title: selectAllState
+                  ? typeof checkboxMarker !== "boolean" && !checkboxMarker
+                    ? LABELS.HIDE_ALL
+                    : LABELS.SELECT_ALL
+                  : LABELS.SELECT_ALL,
+                actions: selectAllState && checkboxMarker,
+                bold: true,
+              }}
+              buttonItems
+              alignItems={"flex-start"}
+              isControl={true}
+              enableSubtitle
             />
           </MenuItem>
         ) : undefined
@@ -130,6 +147,7 @@ InputMultipleSelect.propTypes = {
   ),
   renderValue: PropTypes.func,
   chips: PropTypes.bool,
+  checkboxMarker: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
   max: PropTypes.number,
   selectedIndicator: PropTypes.bool,
   selectAll: PropTypes.bool,
@@ -144,6 +162,7 @@ InputMultipleSelect.defaultProps = {
   value: undefined,
   renderValue: (value) => value.join(", "),
   chips: true,
+  checkboxMarker: true, // <CheckIcon />,
   max: undefined,
   selectedIndicator: true,
   selectAll: true,
