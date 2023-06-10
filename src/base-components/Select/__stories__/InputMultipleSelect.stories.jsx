@@ -3,6 +3,7 @@ import { Stack } from "@mui/material";
 
 import InputMultipleSelect from "../InputMultipleSelect";
 import Button from "../../Button/Button";
+import InputSelect from "../InputSelect";
 
 export default {
   title: "Inputs/Inputs/InputMultipleSelect",
@@ -37,6 +38,8 @@ export const MultipleSelect = () => {
           variant={variant}
           options={options}
           nullable={index === 1 ? "None Selection" : !!index}
+          nullable={index === 1 ? "None Selection" : !!index}
+          placeholderOption={index !== 0 ? "Choose from list:" : ""}
         />
       ))}
     </Stack>

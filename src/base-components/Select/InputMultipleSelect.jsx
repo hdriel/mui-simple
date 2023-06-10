@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Box } from "@mui/material";
+import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
 
 import InputSelect from "./InputSelect";
 import Chip from "../Chip/Chip";
@@ -103,7 +104,14 @@ export default function InputMultipleSelect({
       selectAllOption={
         !isDefined(max) && selectAll ? (
           <MenuItem onClick={handleSelectAllChange}>
-            <Checkbox checked={selectAllState} />
+            <Checkbox
+              checked={selectAllState}
+              checkedIcon={
+                selectedValuesLen === value?.length ? undefined : (
+                  <IndeterminateCheckBoxIcon />
+                )
+              }
+            />
             <ListItemText
               primary={selectAllState ? LABELS.HIDE_ALL : LABELS.SELECT_ALL}
               primaryTypographyProps={{ style: { fontWeight: "bold" } }}
