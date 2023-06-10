@@ -63,7 +63,7 @@ export const useOptions = ({
     });
 
     if (components.length > 0) {
-      if (nullable) {
+      if (nullable && typeof nullable === "string") {
         components.unshift(
           <MenuItem key={key++} value="">
             <em style={{ minHeight: "24px" }}>
@@ -77,6 +77,16 @@ export const useOptions = ({
         components.unshift(
           <MenuItem key={key++} value="" disabled>
             <em>{placeholder}</em>
+          </MenuItem>
+        );
+      }
+
+      if (nullable && typeof nullable === "boolean") {
+        components.unshift(
+          <MenuItem key={key++} value="">
+            <em style={{ minHeight: "24px" }}>
+              {typeof nullable === "string" ? nullable : " "}
+            </em>
           </MenuItem>
         );
       }
