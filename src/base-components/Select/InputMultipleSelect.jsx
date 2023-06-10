@@ -35,11 +35,10 @@ export default function InputMultipleSelect({
   ...props
 }) {
   const convertedOptions = useOptionsConverter({ options: options, groupBy });
-  const isAllValuesSelected =
-    Object.values(convertedOptions)
-      .flat()
-      .filter((option) => !option.disabled).length === value.length;
-  const [selectAllState, setSelectAllState] = useState(isAllValuesSelected);
+  const selectedValuesLen = Object.values(convertedOptions)
+    .flat()
+    .filter((option) => !option.disabled).length;
+  const [selectAllState, setSelectAllState] = useState(false);
   const [_, setClickAll] = useState(false);
 
   const n = value?.length;
@@ -56,7 +55,6 @@ export default function InputMultipleSelect({
           if (!isDefined(max) || values?.length <= max) {
             onChange?.(event);
           }
-          return false;
         }
 
         return false;
@@ -65,8 +63,8 @@ export default function InputMultipleSelect({
     [max]
   );
 
-  const handleSelectAllChange = () => {
-    setClickAll(true);
+  const handleSelectAllChange = (event, isClickedOnSelectAllOption = true) => {
+    if (isClickedOnSelectAllOption) setClickAll(true);
     setSelectAllState((state) => {
       const showAll = !state;
       const allValues = showAll
@@ -82,8 +80,13 @@ export default function InputMultipleSelect({
   };
 
   useEffect(() => {
-    if (isAllValuesSelected && !selectAllState) handleSelectAllChange();
-  }, [isAllValuesSelected]);
+    if (
+      (selectedValuesLen === value?.length && !selectAllState) ||
+      (value?.length === 0 && selectAllState)
+    ) {
+      handleSelectAllChange(null, false);
+    }
+  }, [selectedValuesLen, value?.length]);
 
   return (
     <InputSelect
