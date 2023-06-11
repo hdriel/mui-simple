@@ -6,6 +6,7 @@ import {
   Box,
   Autocomplete as MuiAutocomplete,
 } from "./InputAutocomplete.styled";
+import TextField from "../TextField/TextField";
 
 export default function InputAutocomplete({
   label,
@@ -21,36 +22,79 @@ export default function InputAutocomplete({
   fullWidth,
   required,
   readOnly,
+  type,
+  multiline,
+  maxRows,
+  rows,
   autoComplete,
   error,
   margin,
   focused,
-  size,
   helperText,
-  colorText: _colorText,
-  colorLabel: _colorLabel,
-  colorActive: _colorActive,
+  colorText,
+  colorLabel,
+  colorActive,
   startCmpExternal,
   endCmpExternal,
   cmpSpacing,
   hideStartActionsOnEmpty,
   alignActions,
   alignActionsExternal,
-  autoWidth,
   disabled,
-  renderValue,
   options: _options,
-  convertedOptions: _convertedOptions,
-  placeholderOption,
-  nullable,
-  groupBy,
-  checkbox,
-  max,
-  selectAll,
-  selectAllOption,
+  renderOption,
   ...props
 }) {
-  const component = <MuiAutocomplete />;
+  const options =
+    _options?.map((option) => {
+      return typeof option === "string"
+        ? { label: option, id: option }
+        : { ...option };
+    }) ?? [];
+
+  const inputProps = {
+    label,
+    id,
+    name,
+    variant,
+    onChange,
+    onFocus,
+    onBlur,
+    value,
+    startCmp,
+    endCmp,
+    fullWidth,
+    required,
+    readOnly,
+    type,
+    error,
+    margin,
+    focused,
+    helperText,
+    colorText,
+    colorLabel,
+    colorActive,
+    cmpSpacing,
+    hideStartActionsOnEmpty,
+    alignActions,
+    alignActionsExternal,
+    disabled,
+    ...props,
+  };
+
+  const component = (
+    <MuiAutocomplete
+      disablePortal
+      options={options}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} {...inputProps} />}
+      renderOption={
+        typeof renderOption === "function"
+          ? (props, option) => renderOption(props, option)
+          : undefined
+      }
+    />
+  );
 
   if (startCmpExternal || endCmpExternal) {
     return (
@@ -78,17 +122,13 @@ InputAutocomplete.propTypes = {
   required: PropTypes.bool,
   readOnly: PropTypes.bool,
   onChange: PropTypes.func,
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.bool,
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
-    ),
-  ]),
+  value: PropTypes.string,
   focused: PropTypes.bool,
   margin: PropTypes.oneOf(["normal", "dense"]),
-  size: PropTypes.oneOf(["medium", "small"]),
+  type: PropTypes.string,
+  multiline: PropTypes.bool,
+  maxRows: PropTypes.number,
+  rows: PropTypes.number,
   autoComplete: PropTypes.string,
   helperText: PropTypes.string,
   variant: PropTypes.oneOf(["filled", "standard", "outlined"]),
@@ -100,31 +140,10 @@ InputAutocomplete.propTypes = {
   hideStartActionsOnEmpty: PropTypes.bool,
   alignActions: PropTypes.string,
   alignActionsExternal: PropTypes.string,
-  options: PropTypes.arrayOf(
-    PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.shape({
-        label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-        subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-        disabled: PropTypes.bool,
-        chipProps: PropTypes.object,
-        value: PropTypes.oneOfType([
-          PropTypes.string,
-          PropTypes.number,
-          PropTypes.bool,
-        ]),
-      }),
-    ])
-  ),
-  autoWidth: PropTypes.bool,
-  renderValue: PropTypes.func,
-  disabled: PropTypes.func,
+  disabled: PropTypes.bool,
   colorText: PropTypes.string,
   colorLabel: PropTypes.string,
   colorActive: PropTypes.string,
-  nullable: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  placeholderOption: PropTypes.string,
-  groupBy: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 };
 
 InputAutocomplete.defaultProps = {
@@ -138,11 +157,14 @@ InputAutocomplete.defaultProps = {
   onChange: undefined,
   focused: undefined,
   value: undefined,
+  type: "text",
   margin: undefined,
+  multiline: undefined,
+  maxRows: undefined,
+  rows: undefined,
   autoComplete: "off",
   helperText: undefined,
   variant: "outlined",
-  size: "medium",
   startCmp: undefined,
   startCmpExternal: undefined,
   endCmp: undefined,
@@ -150,14 +172,9 @@ InputAutocomplete.defaultProps = {
   cmpSpacing: 2,
   hideStartActionsOnEmpty: true,
   alignActions: "baseline",
-  alignActionsExternal: "baseline",
-  options: undefined,
-  autoWidth: undefined,
-  renderValue: undefined,
+  alignActionsExternal: "center",
+  disabled: undefined,
   colorText: undefined,
   colorLabel: undefined,
   colorActive: undefined,
-  nullable: undefined,
-  placeholderOption: undefined,
-  groupBy: undefined, // (option) => option?.label[0].toUpperCase()
 };

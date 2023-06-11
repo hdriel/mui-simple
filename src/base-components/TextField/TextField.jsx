@@ -140,7 +140,7 @@ TextField.propTypes = {
   hideStartActionsOnEmpty: PropTypes.bool,
   alignActions: PropTypes.string,
   alignActionsExternal: PropTypes.string,
-  disabled: PropTypes.string,
+  disabled: PropTypes.bool,
   colorText: PropTypes.string,
   colorLabel: PropTypes.string,
   colorActive: PropTypes.string,

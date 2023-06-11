@@ -4,7 +4,6 @@ import { ListSubheader, MenuItem } from "./InputSelect.styled";
 import Checkbox from "../Checkbox/Checkbox";
 import { isDefined } from "../../utils/helpers";
 import ListItem from "../List/ListItem";
-import { Home as HomeIcon } from "@mui/icons-material";
 
 export const useOptionsConverter = ({ options: _options, groupBy }) => {
   const options = useMemo(
