@@ -2,7 +2,6 @@ import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 
 import {
-  Stack,
   Autocomplete as MuiAutocomplete,
   GroupHeader,
   GroupItems,
@@ -18,7 +17,6 @@ export default function InputAutocomplete({
   variant,
   onFocus,
   onBlur,
-  fullWidth,
   required,
   margin,
   focused,
@@ -35,7 +33,7 @@ export default function InputAutocomplete({
   helperText,
   error,
   // } = {},
-
+  width,
   label,
   onChange,
   value,
@@ -100,7 +98,7 @@ export default function InputAutocomplete({
     variant,
     onFocus,
     onBlur,
-    fullWidth,
+    fullWidth: true,
     required,
     margin,
     focused,
@@ -133,9 +131,13 @@ export default function InputAutocomplete({
       readOnly={readOnly}
       autoComplete={autoComplete}
       options={options}
-      sx={{ width: 300 }}
+      sx={{ width: width }}
       autoHighlight={autoHighlight}
-      getOptionLabel={getOptionLabel}
+      getOptionLabel={
+        typeof getOptionLabel === "string"
+          ? (option) => option[getOptionLabel]
+          : getOptionLabel
+      }
       onChange={onChange}
       renderInput={(params) => <TextField {...params} {...inputProps} />}
       groupBy={
@@ -166,7 +168,7 @@ InputAutocomplete.propTypes = {
   label: PropTypes.string,
   id: PropTypes.string,
   name: PropTypes.string,
-  fullWidth: PropTypes.bool,
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   error: PropTypes.bool,
   required: PropTypes.bool,
   onChange: PropTypes.func,
@@ -188,7 +190,7 @@ InputAutocomplete.propTypes = {
   colorLabel: PropTypes.string,
   colorActive: PropTypes.string,
 
-  getOptionLabel: PropTypes.func,
+  getOptionLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   groupBy: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   sortBy: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   sortDir: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
@@ -210,7 +212,6 @@ InputAutocomplete.propTypes = {
 InputAutocomplete.defaultProps = {
   id: undefined,
   name: undefined,
-  fullWidth: true,
   error: undefined,
   required: undefined,
   onChange: undefined,
@@ -229,7 +230,7 @@ InputAutocomplete.defaultProps = {
   colorActive: "primary",
 
   label: undefined,
-  getOptionLabel: (option) => option.label,
+  getOptionLabel: "label",
   groupBy: undefined,
   sortBy: undefined,
   sortDir: true,

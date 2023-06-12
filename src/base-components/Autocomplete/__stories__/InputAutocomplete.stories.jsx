@@ -172,7 +172,7 @@ export const GroupedByCategories = () => {
           groupBy={(option) => option.firstLetter}
           sortBy="title"
           getOptionLabel={(option) => option.title}
-          sx={{ width: 300 }}
+          width={400}
         />
       ))}
     </Stack>
@@ -193,7 +193,7 @@ export const DisabledOptions = () => {
           label="Disabled options"
           options={_options}
           getOptionLabel={(option) => option.time}
-          sx={{ width: 300 }}
+          width={200}
         />
       ))}
     </Stack>
