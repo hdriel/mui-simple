@@ -1,116 +1,165 @@
-import React from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 
 import {
   Stack,
-  Box,
   Autocomplete as MuiAutocomplete,
+  GroupHeader,
+  GroupItems,
 } from "./InputAutocomplete.styled";
 import TextField from "../TextField/TextField";
+import { getCustomColor } from "../../utils/helpers";
+import useTheme from "@mui/material/styles/useTheme";
 
 export default function InputAutocomplete({
-  label,
+  // inputProps: {
   id,
   name,
   variant,
-  onChange,
   onFocus,
   onBlur,
-  value,
-  startCmp,
-  endCmp,
   fullWidth,
   required,
-  readOnly,
-  type,
-  multiline,
-  maxRows,
-  rows,
-  autoComplete,
-  error,
   margin,
   focused,
-  helperText,
   colorText,
   colorLabel,
   colorActive,
   startCmpExternal,
   endCmpExternal,
   cmpSpacing,
-  hideStartActionsOnEmpty,
   alignActions,
   alignActionsExternal,
+  hideStartActionsOnEmpty,
   disabled,
+  helperText,
+  error,
+  // } = {},
+
+  label,
+  onChange,
+  value,
+  autoComplete,
   options: _options,
   renderOption,
+  getOptionLabel,
+  groupBy,
+  sortBy,
+  sortDir,
+  freeSolo,
+  disablePortal,
+  disableClearable,
+  disableCloseOnSelect,
+  clearOnPressEscape,
+  includeInputInList,
+  openOnFocus,
+  disableListWrap,
+  autoHighlight,
+  blurOnSelect,
+  selectOnFocus,
+  readOnly,
   ...props
 }) {
-  const options =
-    _options?.map((option) => {
+  const theme = useTheme();
+  const options = useMemo(() => {
+    let result = _options?.map((option) => {
       return typeof option === "string"
         ? { label: option, id: option }
         : { ...option };
-    }) ?? [];
+    });
+
+    if (sortBy)
+      result =
+        result.sort((a, b) => {
+          const optionFieldA =
+            typeof sortBy === "function" ? sortBy(a) : a[sortBy];
+
+          const optionFieldB =
+            typeof sortBy === "function" ? sortBy(b) : b[sortBy];
+
+          const asc = typeof sortDir === "boolean" ? sortDir : sortDir > 0;
+          const [A, B] = asc
+            ? [optionFieldA, optionFieldB]
+            : [optionFieldB, optionFieldA];
+
+          return typeof optionFieldA === "string" ? A.localeCompare(B) : A - B;
+        }) ?? [];
+
+    return result;
+  }, [sortBy, sortDir, _options]);
+
+  const color = getCustomColor({
+    theme,
+    customColor: colorActive ?? colorLabel,
+  });
 
   const inputProps = {
-    label,
     id,
     name,
+    label,
     variant,
-    onChange,
     onFocus,
     onBlur,
-    value,
-    startCmp,
-    endCmp,
     fullWidth,
     required,
-    readOnly,
-    type,
-    error,
     margin,
     focused,
-    helperText,
     colorText,
     colorLabel,
     colorActive,
+    startCmpExternal,
+    endCmpExternal,
     cmpSpacing,
-    hideStartActionsOnEmpty,
     alignActions,
     alignActionsExternal,
-    disabled,
-    ...props,
+    hideStartActionsOnEmpty,
+    helperText,
+    error,
   };
 
-  const component = (
+  return (
     <MuiAutocomplete
-      disablePortal
+      disablePortal={disablePortal}
+      freeSolo={readOnly || freeSolo}
+      disableClearable={disableClearable}
+      disableCloseOnSelect={disableCloseOnSelect}
+      clearOnEscape={clearOnPressEscape}
+      includeInputInList={includeInputInList}
+      openOnFocus={openOnFocus}
+      disableListWrap={disableListWrap}
+      blurOnSelect={blurOnSelect}
+      selectOnFocus={selectOnFocus}
+      disabled={disabled}
+      readOnly={readOnly}
+      autoComplete={autoComplete}
       options={options}
       sx={{ width: 300 }}
+      autoHighlight={autoHighlight}
+      getOptionLabel={getOptionLabel}
+      onChange={onChange}
       renderInput={(params) => <TextField {...params} {...inputProps} />}
+      groupBy={
+        typeof groupBy === "function" ? groupBy : (option) => option[groupBy]
+      }
       renderOption={
         typeof renderOption === "function"
           ? (props, option) => renderOption(props, option)
           : undefined
       }
+      getOptionDisabled={(option) => option.disabled}
+      renderGroup={
+        groupBy
+          ? (params) => (
+              <li key={params.key}>
+                <GroupHeader color={color}>{params.group}</GroupHeader>
+                <GroupItems>{params.children}</GroupItems>
+              </li>
+            )
+          : undefined
+      }
+      {...props}
     />
   );
-
-  if (startCmpExternal || endCmpExternal) {
-    return (
-      <Stack
-        direction="row"
-        spacing={cmpSpacing}
-        alignItems={alignActionsExternal}
-      >
-        {startCmpExternal}
-        {component}
-        {endCmpExternal}
-      </Stack>
-    );
-  }
-
-  return component;
 }
 
 InputAutocomplete.propTypes = {
@@ -120,16 +169,10 @@ InputAutocomplete.propTypes = {
   fullWidth: PropTypes.bool,
   error: PropTypes.bool,
   required: PropTypes.bool,
-  readOnly: PropTypes.bool,
   onChange: PropTypes.func,
   value: PropTypes.string,
   focused: PropTypes.bool,
   margin: PropTypes.oneOf(["normal", "dense"]),
-  type: PropTypes.string,
-  multiline: PropTypes.bool,
-  maxRows: PropTypes.number,
-  rows: PropTypes.number,
-  autoComplete: PropTypes.string,
   helperText: PropTypes.string,
   variant: PropTypes.oneOf(["filled", "standard", "outlined"]),
   startCmp: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
@@ -144,37 +187,64 @@ InputAutocomplete.propTypes = {
   colorText: PropTypes.string,
   colorLabel: PropTypes.string,
   colorActive: PropTypes.string,
+
+  getOptionLabel: PropTypes.func,
+  groupBy: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  sortBy: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  sortDir: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
+  autoComplete: PropTypes.bool,
+  freeSolo: PropTypes.bool,
+  disablePortal: PropTypes.bool,
+  disableClearableSolo: PropTypes.bool,
+  disableCloseOnSelect: PropTypes.bool,
+  clearOnPressEscape: PropTypes.bool,
+  includeInputInList: PropTypes.bool,
+  openOnFocus: PropTypes.bool,
+  disableListWrap: PropTypes.bool,
+  autoHighlight: PropTypes.bool,
+  blurOnSelect: PropTypes.bool,
+  selectOnFocus: PropTypes.bool,
+  readOnly: PropTypes.bool,
 };
 
 InputAutocomplete.defaultProps = {
-  label: undefined,
   id: undefined,
   name: undefined,
   fullWidth: true,
   error: undefined,
   required: undefined,
-  readOnly: undefined,
   onChange: undefined,
   focused: undefined,
   value: undefined,
-  type: "text",
   margin: undefined,
-  multiline: undefined,
-  maxRows: undefined,
-  rows: undefined,
-  autoComplete: "off",
   helperText: undefined,
   variant: "outlined",
-  startCmp: undefined,
   startCmpExternal: undefined,
-  endCmp: undefined,
   endCmpExternal: undefined,
-  cmpSpacing: 2,
-  hideStartActionsOnEmpty: true,
-  alignActions: "baseline",
-  alignActionsExternal: "center",
-  disabled: undefined,
+  cmpSpacing: undefined,
+  hideStartActionsOnEmpty: undefined,
+  alignActionsExternal: "baseline",
   colorText: undefined,
   colorLabel: undefined,
-  colorActive: undefined,
+  colorActive: "primary",
+
+  label: undefined,
+  getOptionLabel: (option) => option.label,
+  groupBy: undefined,
+  sortBy: undefined,
+  sortDir: true,
+  freeSolo: undefined,
+  autoComplete: false,
+  disablePortal: true,
+  disableClearable: undefined,
+  disableCloseOnSelect: true,
+  clearOnPressEscape: true,
+  includeInputInList: true,
+  openOnFocus: true,
+  disableListWrap: true,
+  autoHighlight: true,
+  blurOnSelect: true,
+  selectOnFocus: false,
+  disabled: undefined,
+  readOnly: undefined,
 };
