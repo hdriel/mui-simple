@@ -1,19 +1,23 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 
+import useTheme from "@mui/material/styles/useTheme";
 import {
   Autocomplete as MuiAutocomplete,
   GroupHeader,
   GroupItems,
+  renderHighlightOptionCB,
 } from "./InputAutocomplete.styled";
+
 import TextField from "../TextField/TextField";
 import { getCustomColor } from "../../utils/helpers";
-import useTheme from "@mui/material/styles/useTheme";
+import Chip from "../Chip/Chip";
 
 export default function InputAutocomplete({
   // inputProps: {
   id,
   name,
+  placeholder,
   variant,
   onFocus,
   onBlur,
@@ -34,13 +38,14 @@ export default function InputAutocomplete({
   error,
   // } = {},
   width,
+  size,
   label,
   onChange,
   value,
   autoComplete,
   options: _options,
   renderOption,
-  getOptionLabel,
+  getOptionLabel: _getOptionLabel,
   groupBy,
   sortBy,
   sortDir,
@@ -56,6 +61,11 @@ export default function InputAutocomplete({
   blurOnSelect,
   selectOnFocus,
   readOnly,
+  highlightField,
+  highlightSearchResults,
+  filterSelectedOptions,
+  multiple,
+  chipProps,
   ...props
 }) {
   const theme = useTheme();
@@ -91,14 +101,19 @@ export default function InputAutocomplete({
     customColor: colorActive ?? colorLabel,
   });
 
+  const getOptionLabel =
+    typeof _getOptionLabel === "function"
+      ? _getOptionLabel
+      : (option) => option[_getOptionLabel];
+
   const inputProps = {
     id,
     name,
+    placeholder,
     label,
     variant,
     onFocus,
     onBlur,
-    fullWidth: true,
     required,
     margin,
     focused,
@@ -131,21 +146,24 @@ export default function InputAutocomplete({
       readOnly={readOnly}
       autoComplete={autoComplete}
       options={options}
+      size={size}
       sx={{ width: width }}
       autoHighlight={autoHighlight}
-      getOptionLabel={
-        typeof getOptionLabel === "string"
-          ? (option) => option[getOptionLabel]
-          : getOptionLabel
-      }
+      getOptionLabel={getOptionLabel}
+      filterSelectedOptions={filterSelectedOptions}
+      multiple={multiple}
       onChange={onChange}
-      renderInput={(params) => <TextField {...params} {...inputProps} />}
+      renderInput={(params) => (
+        <TextField {...params} {...inputProps} fullWidth />
+      )}
       groupBy={
         typeof groupBy === "function" ? groupBy : (option) => option[groupBy]
       }
       renderOption={
         typeof renderOption === "function"
           ? (props, option) => renderOption(props, option)
+          : highlightSearchResults
+          ? renderHighlightOptionCB(highlightField ?? getOptionLabel)
           : undefined
       }
       getOptionDisabled={(option) => option.disabled}
@@ -159,6 +177,20 @@ export default function InputAutocomplete({
             )
           : undefined
       }
+      renderTags={
+        multiple
+          ? (value, getTagProps) =>
+              value.map((option, index) => (
+                <Chip
+                  label={option}
+                  {...getTagProps({ index })}
+                  {...(typeof chipProps === "function"
+                    ? chipProps(option)
+                    : chipProps)}
+                />
+              ))
+          : undefined
+      }
       {...props}
     />
   );
@@ -167,6 +199,7 @@ export default function InputAutocomplete({
 InputAutocomplete.propTypes = {
   label: PropTypes.string,
   id: PropTypes.string,
+  placeholder: PropTypes.string,
   name: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   error: PropTypes.bool,
@@ -190,6 +223,8 @@ InputAutocomplete.propTypes = {
   colorLabel: PropTypes.string,
   colorActive: PropTypes.string,
 
+  renderOption: PropTypes.func,
+  size: PropTypes.oneOf(["small", "medium"]),
   getOptionLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   groupBy: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   sortBy: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -207,11 +242,17 @@ InputAutocomplete.propTypes = {
   blurOnSelect: PropTypes.bool,
   selectOnFocus: PropTypes.bool,
   readOnly: PropTypes.bool,
+  highlightSearchResults: PropTypes.bool,
+  highlightField: PropTypes.string,
+  multiple: PropTypes.bool,
+  filterSelectedOptions: PropTypes.bool,
+  chipProps: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 };
 
 InputAutocomplete.defaultProps = {
   id: undefined,
   name: undefined,
+  placeholder: undefined,
   error: undefined,
   required: undefined,
   onChange: undefined,
@@ -228,6 +269,7 @@ InputAutocomplete.defaultProps = {
   colorText: undefined,
   colorLabel: undefined,
   colorActive: "primary",
+  size: undefined,
 
   label: undefined,
   getOptionLabel: "label",
@@ -235,7 +277,7 @@ InputAutocomplete.defaultProps = {
   sortBy: undefined,
   sortDir: true,
   freeSolo: undefined,
-  autoComplete: false,
+  autoComplete: true,
   disablePortal: true,
   disableClearable: undefined,
   disableCloseOnSelect: true,
@@ -248,4 +290,9 @@ InputAutocomplete.defaultProps = {
   selectOnFocus: false,
   disabled: undefined,
   readOnly: undefined,
+  highlightSearchResults: true,
+  highlightField: undefined,
+  multiple: undefined,
+  filterSelectedOptions: true,
+  chipProps: undefined,
 };

@@ -1,4 +1,7 @@
+import React from "react";
 import { styled, lighten, darken } from "@mui/material/styles";
+import parse from "autosuggest-highlight/parse";
+import match from "autosuggest-highlight/match";
 
 import {
   Autocomplete as MuiAutocomplete,
@@ -26,3 +29,26 @@ export const GroupHeader = styled("div")(({ theme, color }) => ({
 export const GroupItems = styled("ul")`
   padding: 0;
 `;
+
+export const renderHighlightOptionCB =
+  (_field) =>
+  (props, option, { inputValue }) => {
+    const optionValue = typeof _field === "function" ? _field(option) : _field;
+    const matches = match(optionValue, inputValue);
+    const parts = parse(optionValue, matches);
+
+    return (
+      <li {...props}>
+        <div>
+          {parts.map((part, index) => (
+            <span
+              key={index}
+              style={{ fontWeight: part.highlight ? 700 : 400 }}
+            >
+              {part.text}
+            </span>
+          ))}
+        </div>
+      </li>
+    );
+  };
