@@ -19,8 +19,6 @@ export default function InputAutocompleteMultiple({
   readOnly,
   ...props
 }) {
-  const multiple = true;
-
   const getOptionLabel = useMemo(
     () =>
       typeof _getOptionLabel === "function"

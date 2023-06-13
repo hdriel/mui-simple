@@ -8,7 +8,6 @@ import {
   top100Films,
   top100FilmsWithFirstLetters,
 } from "./InputAutocomplete.mocks";
-import { Close as CloseIcon } from "@mui/icons-material";
 
 export default {
   title: "Inputs/Inputs/InputAutocompleteMultiple",
