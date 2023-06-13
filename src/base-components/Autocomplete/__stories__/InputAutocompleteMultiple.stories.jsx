@@ -8,6 +8,7 @@ import {
   top100Films,
   top100FilmsWithFirstLetters,
 } from "./InputAutocomplete.mocks";
+import Chip from "../../Chip/Chip";
 
 export default {
   title: "Inputs/Inputs/InputAutocompleteMultiple",
@@ -32,7 +33,7 @@ export const FilmOptions = () => {
 
   return (
     <Stack spacing={4}>
-      {["filled", "standard", "outlined"].map((variant) => (
+      {["filled", "standard", "outlined"].map((variant, index) => (
         <InputAutocompleteMultiple
           key={variant}
           label="Movie"
@@ -41,6 +42,8 @@ export const FilmOptions = () => {
           getOptionLabel={(option) => option.title}
           variant={variant}
           options={top100Films}
+          chipProps={{ rounded: false }}
+          checkboxStyle={!!index}
         />
       ))}
     </Stack>

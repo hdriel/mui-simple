@@ -16,6 +16,7 @@ export default function Chip({
   size,
   width,
   breadCrumbsStyle,
+  rounded,
   children,
   ...props
 }) {
@@ -34,6 +35,7 @@ export default function Chip({
       deleteIcon={endIcon}
       multiLine={multiLine}
       breadCrumbsStyle={breadCrumbsStyle}
+      rounded={rounded}
       {...linkProps}
       {...props}
     />
@@ -54,6 +56,7 @@ Chip.propTypes = {
   multiLine: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium"]),
   breadCrumbsStyle: PropTypes.bool,
+  rounded: PropTypes.bool,
 };
 
 Chip.defaultProps = {
@@ -70,4 +73,5 @@ Chip.defaultProps = {
   multiLine: undefined,
   size: undefined,
   breadCrumbsStyle: undefined,
+  rounded: true,
 };
