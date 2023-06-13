@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-import { Autocomplete as MuiAutocomplete } from "./InputAutocomplete.styled";
+import MuiAutocomplete from "./InputAutocomplete";
 import CircularProgress from "../Progress/CircularProgress/CircularProgress";
 import { sleep } from "../../utils/helpers";
 
@@ -49,9 +49,6 @@ export default function InputAutoCompleteAsync({
       open={open}
       onOpen={() => setOpen(true)}
       onClose={() => setOpen(false)}
-      isOptionEqualToValue={(option, value) =>
-        getOptionLabel?.(option) === getOptionLabel?.(value)
-      }
       getOptionLabel={getOptionLabel}
       options={options}
       loading={loading}

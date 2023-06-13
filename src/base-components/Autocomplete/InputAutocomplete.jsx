@@ -42,7 +42,8 @@ export default function InputAutocomplete({
   size,
   label,
   onChange,
-  value,
+  selectedOption,
+  setSelectedOption,
   autoComplete,
   options: _options,
   renderOption,
@@ -173,9 +174,15 @@ export default function InputAutocomplete({
       getOptionLabel={getOptionLabel}
       filterSelectedOptions={filterSelectedOptions}
       multiple={multiple}
-      value={value}
-      onChange={onChange}
+      value={selectedOption}
+      onChange={setSelectedOption}
       filterOptions={filterOptions}
+      isOptionEqualToValue={
+        getOptionLabel
+          ? (option, value) =>
+              getOptionLabel?.(option) === getOptionLabel?.(value)
+          : undefined
+      }
       renderInput={(params) => (
         <TextField {...params} {...inputProps} fullWidth />
       )}
@@ -227,8 +234,6 @@ InputAutocomplete.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   error: PropTypes.bool,
   required: PropTypes.bool,
-  onChange: PropTypes.func,
-  value: PropTypes.oneOfType([PropTypes.any, PropTypes.array]),
   focused: PropTypes.bool,
   margin: PropTypes.oneOf(["normal", "dense"]),
   helperText: PropTypes.string,
@@ -263,6 +268,8 @@ InputAutocomplete.propTypes = {
   groupBy: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   sortBy: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   sortDir: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
+  selectedOption: PropTypes.any,
+  setSelectedOption: PropTypes.func,
   autoComplete: PropTypes.bool,
   freeSolo: PropTypes.bool,
   disablePortal: PropTypes.bool,
@@ -291,7 +298,6 @@ InputAutocomplete.defaultProps = {
   required: undefined,
   onChange: undefined,
   focused: undefined,
-  value: undefined,
   margin: undefined,
   helperText: undefined,
   variant: "outlined",
@@ -313,7 +319,9 @@ InputAutocomplete.defaultProps = {
   sortDir: true,
   freeSolo: undefined,
   autoComplete: true,
-  disablePortal: true,
+  selectedOption: undefined,
+  setSelectedOption: undefined,
+  disablePortal: undefined,
   disableClearable: undefined,
   disableCloseOnSelect: true,
   clearOnPressEscape: true,

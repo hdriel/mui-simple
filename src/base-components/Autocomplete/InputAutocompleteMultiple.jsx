@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Autocomplete as MuiAutocomplete } from "./InputAutocomplete.styled";
+import MuiAutocomplete from "./InputAutocomplete";
 import Chip from "../Chip/Chip";
 
 export default function InputAutocompleteMultiple({
-  value,
+  selectedOptions,
+  setSelectedOptions,
   multiple,
   filterSelectedOptions,
   chipProps,
@@ -13,8 +14,9 @@ export default function InputAutocompleteMultiple({
 }) {
   return (
     <MuiAutocomplete
-      value={value}
-      multiple={multiple}
+      selectedOption={selectedOptions}
+      setSelectedOption={setSelectedOptions}
+      multiple
       filterSelectedOptions={filterSelectedOptions}
       renderTags={
         multiple
@@ -36,15 +38,15 @@ export default function InputAutocompleteMultiple({
 }
 
 InputAutocompleteMultiple.propTypes = {
-  value: PropTypes.array,
-  multiple: PropTypes.bool,
+  selectedOptions: PropTypes.arrayOf(PropTypes.any),
+  setSelectedOptions: PropTypes.func,
   filterSelectedOptions: PropTypes.bool,
   chipProps: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 };
 
 InputAutocompleteMultiple.defaultProps = {
-  value: undefined,
-  multiple: undefined,
+  selectedOptions: [],
+  setSelectedOptions: undefined,
   filterSelectedOptions: true,
   chipProps: undefined,
 };
