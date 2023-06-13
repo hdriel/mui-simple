@@ -237,6 +237,9 @@ InputAutocomplete.propTypes = {
   focused: PropTypes.bool,
   margin: PropTypes.oneOf(["normal", "dense"]),
   helperText: PropTypes.string,
+  options: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.any])
+  ),
   variant: PropTypes.oneOf(["filled", "standard", "outlined"]),
   startCmp: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   startCmpExternal: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
@@ -311,6 +314,7 @@ InputAutocomplete.defaultProps = {
   colorActive: "primary",
   size: undefined,
 
+  options: [],
   label: undefined,
   filterOptions: undefined,
   getOptionLabel: "label",

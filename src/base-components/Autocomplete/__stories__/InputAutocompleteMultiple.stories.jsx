@@ -62,22 +62,27 @@ export const CountrySelect = () => {
           options={countries}
           autoHighlight
           getOptionLabel={(option) => option.label}
-          renderOption={(props, option) => (
-            <Box
-              component="li"
-              sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-              {...props}
-            >
-              <img
-                loading="lazy"
-                width="20"
-                src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                alt=""
-              />
-              {option.label} ({option.code}) +{option.phone}
-            </Box>
-          )}
+          renderOption={(props, option) => {
+            return (
+              <Box
+                sx={{
+                  width: "100%",
+                  backgroundColor: "unset !important",
+                  "& > img": { mr: 2, flexShrink: 0 },
+                }}
+                {...props}
+              >
+                <img
+                  loading="lazy"
+                  width="20"
+                  src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+                  srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+                  alt=""
+                />
+                {option.label} ({option.code}) +{option.phone}
+              </Box>
+            );
+          }}
         />
       ))}
     </Stack>
@@ -121,11 +126,11 @@ export const DisabledOptions = () => {
           key={variant}
           variant={variant}
           id="grouped-demo"
-          label="Disabled options"
+          label="Disabled time options"
           selectedOptions={selectedOptions}
           setSelectedOptions={(e, options) => setSelectedOptions(options)}
           options={_options}
-          getOptionLabel={(option) => option.time}
+          getOptionLabel="time"
           width={200}
         />
       ))}

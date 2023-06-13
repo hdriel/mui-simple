@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 
 import MuiAutocomplete from "./InputAutocomplete";
@@ -13,8 +13,18 @@ export default function InputAutocompleteMultiple({
   filterSelectedOptions,
   chipProps,
   renderOption,
+  checkboxStyle,
+  getOptionLabel: _getOptionLabel,
   ...props
 }) {
+  const getOptionLabel = useMemo(
+    () =>
+      typeof _getOptionLabel === "function"
+        ? _getOptionLabel
+        : (option) => option[_getOptionLabel] || "",
+    [_getOptionLabel]
+  );
+
   return (
     <MuiAutocomplete
       selectedOption={[].concat(selectedOptions)}
@@ -23,12 +33,23 @@ export default function InputAutocompleteMultiple({
       disableCloseOnSelect
       limitTags={limitTags}
       filterSelectedOptions={filterSelectedOptions}
-      renderOption={(props, option, { selected }) => (
-        <li {...props}>
-          <Checkbox style={{ marginRight: 8 }} checked={selected} />
-          {renderOption?.(option) ?? option.title}
-        </li>
-      )}
+      getOptionLabel={getOptionLabel}
+      renderOption={
+        checkboxStyle
+          ? (props, option, { selected }) => (
+              <li {...props}>
+                <Checkbox
+                  style={{ marginRight: 2 }}
+                  checked={selected}
+                  edge="start"
+                />
+                {renderOption?.(props, option, { selected }) ??
+                  getOptionLabel?.(option) ??
+                  option}
+              </li>
+            )
+          : undefined
+      }
       renderTags={
         multiple
           ? (value, getTagProps) =>
@@ -55,6 +76,7 @@ InputAutocompleteMultiple.propTypes = {
   chipProps: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   limitTags: PropTypes.number,
   renderOption: PropTypes.func,
+  checkboxStyle: PropTypes.bool,
 };
 
 InputAutocompleteMultiple.defaultProps = {
@@ -64,4 +86,5 @@ InputAutocompleteMultiple.defaultProps = {
   chipProps: undefined,
   limitTags: undefined,
   renderOption: undefined,
+  checkboxStyle: true,
 };

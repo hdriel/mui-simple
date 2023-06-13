@@ -10,11 +10,12 @@ export default function InputAutoCompleteAsync({
   endCmp: _endCmp,
   sleep: _sleep,
   getOptionsPromise,
+  getOptionsPromiseParams,
   ...props
 }) {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState([]);
-  const loading = open && options.length === 0;
+  const loading = open && options?.length === 0;
 
   useEffect(() => {
     let active = true;
@@ -22,7 +23,9 @@ export default function InputAutoCompleteAsync({
     if (!loading) return undefined;
 
     (async () => {
-      const options = getOptionsPromise ? await getOptionsPromise() : [];
+      const options = getOptionsPromise
+        ? await getOptionsPromise(...getOptionsPromiseParams)
+        : [];
       if (_sleep) await sleep(_sleep);
       if (active) setOptions([...options]);
     })();
@@ -30,7 +33,8 @@ export default function InputAutoCompleteAsync({
     return () => {
       active = false;
     };
-  }, [loading]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [...[].concat(getOptionsPromiseParams)]);
 
   useEffect(() => {
     if (!open) setOptions([]);
