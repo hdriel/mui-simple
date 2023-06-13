@@ -230,7 +230,7 @@ InputSelect.propTypes = {
   ),
   autoWidth: PropTypes.bool,
   renderValue: PropTypes.func,
-  disabled: PropTypes.func,
+  disabled: PropTypes.bool,
   colorText: PropTypes.string,
   colorLabel: PropTypes.string,
   colorActive: PropTypes.string,

@@ -41,7 +41,7 @@ export default function InputMultipleSelect({
     .flat()
     .filter((option) => !option.disabled).length;
   const [selectAllState, setSelectAllState] = useState(false);
-  const [_, setClickAll] = useState(false);
+  const [, setClickAll] = useState(false);
 
   const n = value?.length;
   const label =
@@ -62,6 +62,7 @@ export default function InputMultipleSelect({
         return false;
       });
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [max]
   );
 
@@ -88,7 +89,8 @@ export default function InputMultipleSelect({
     ) {
       handleSelectAllChange(null, false);
     }
-  }, [selectedValuesLen, value?.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedValuesLen, value?.length, selectAllState]);
 
   return (
     <InputSelect

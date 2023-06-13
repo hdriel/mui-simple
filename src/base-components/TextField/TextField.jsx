@@ -13,8 +13,6 @@ function TextField({
   onFocus,
   onBlur,
   value,
-  startCmp,
-  endCmp,
   fullWidth,
   required,
   readOnly,
@@ -30,6 +28,8 @@ function TextField({
   colorText,
   colorLabel,
   colorActive,
+  startCmp,
+  endCmp,
   startCmpExternal,
   endCmpExternal,
   cmpSpacing,
@@ -40,10 +40,12 @@ function TextField({
   ...props
 }) {
   const [isFocused, setIsFocused] = useState(false);
+
   const onFocusHandler = (e) => {
     setIsFocused(true);
     onFocus?.(e);
   };
+
   const showActions =
     !hideStartActionsOnEmpty || value || (!value && isFocused);
 
@@ -140,7 +142,7 @@ TextField.propTypes = {
   hideStartActionsOnEmpty: PropTypes.bool,
   alignActions: PropTypes.string,
   alignActionsExternal: PropTypes.string,
-  disabled: PropTypes.string,
+  disabled: PropTypes.bool,
   colorText: PropTypes.string,
   colorLabel: PropTypes.string,
   colorActive: PropTypes.string,

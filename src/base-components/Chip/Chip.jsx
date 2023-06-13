@@ -16,6 +16,8 @@ export default function Chip({
   size,
   width,
   breadCrumbsStyle,
+  rounded,
+  disabled,
   children,
   ...props
 }) {
@@ -31,9 +33,11 @@ export default function Chip({
       customColor={color}
       color={muiColor}
       size={size}
+      disabled={disabled}
       deleteIcon={endIcon}
       multiLine={multiLine}
       breadCrumbsStyle={breadCrumbsStyle}
+      rounded={rounded}
       {...linkProps}
       {...props}
     />
@@ -47,6 +51,7 @@ Chip.propTypes = {
   onDelete: PropTypes.func,
   link: PropTypes.string,
   avatar: PropTypes.node,
+  disabled: PropTypes.bool,
   startIcon: PropTypes.node,
   endIcon: PropTypes.node,
   customColor: PropTypes.string,
@@ -54,6 +59,7 @@ Chip.propTypes = {
   multiLine: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium"]),
   breadCrumbsStyle: PropTypes.bool,
+  rounded: PropTypes.bool,
 };
 
 Chip.defaultProps = {
@@ -63,6 +69,7 @@ Chip.defaultProps = {
   onDelete: undefined,
   link: undefined,
   avatar: undefined,
+  disabled: undefined,
   startIcon: undefined,
   endIcon: undefined,
   customColor: undefined,
@@ -70,4 +77,5 @@ Chip.defaultProps = {
   multiLine: undefined,
   size: undefined,
   breadCrumbsStyle: undefined,
+  rounded: true,
 };
