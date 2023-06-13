@@ -30,6 +30,7 @@ export default function InputAutocomplete({
   colorActive,
   startCmpExternal,
   endCmpExternal,
+  endCmp,
   cmpSpacing,
   alignActions,
   alignActionsExternal,
@@ -150,6 +151,7 @@ export default function InputAutocomplete({
     hideStartActionsOnEmpty,
     helperText,
     error,
+    endCmp,
   };
 
   return (

@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { Box, Stack } from "@mui/material";
-import {
-  FormatColorFill as FormatColorFillIcon,
-  Airplay as AirplayIcon,
-} from "@mui/icons-material";
 
 import InputAutocompleteAsync from "../InputAutoCompleteAsync";
-import Button from "../../Button/Button";
 import {
   countries,
   timeSlots,
@@ -32,20 +27,8 @@ export const Default = () => {
   return <InputAutocompleteAsync />;
 };
 
-const iconsProps = {
-  startCmpExternal: (
-    <Button icon={<AirplayIcon />} onClick={(e) => e.stopPropagation()} />
-  ),
-  endCmpExternal: (
-    <Button
-      icon={<FormatColorFillIcon />}
-      onClick={(e) => e.stopPropagation()}
-    />
-  ),
-};
-
 export const FilmOptions = () => {
-  const [value, setValue] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null);
 
   return (
     <Stack spacing={4}>
@@ -53,12 +36,12 @@ export const FilmOptions = () => {
         <InputAutocompleteAsync
           key={variant}
           label="Movie"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          selectedOption={selectedOption}
+          setSelectedOption={(e, option) => setSelectedOption(option)}
+          fetchOptionsOnFocus
+          getOptionsPromise={async () => top100Films}
           getOptionLabel={(option) => option.title}
           variant={variant}
-          options={top100Films}
-          {...iconsProps}
         />
       ))}
     </Stack>
@@ -66,7 +49,7 @@ export const FilmOptions = () => {
 };
 
 export const CountrySelect = () => {
-  const [value, setValue] = useState("");
+  const [selectedOption, setSelectedOption] = useState(null);
 
   return (
     <Stack spacing={4}>
@@ -74,10 +57,11 @@ export const CountrySelect = () => {
         <InputAutocompleteAsync
           key={variant}
           label="Choose a country"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          selectedOption={selectedOption}
+          setSelectedOption={(e, option) => setSelectedOption(option)}
           variant={variant}
-          options={countries}
+          fetchOptionsOnFocus
+          getOptionsPromise={async () => countries}
           autoHighlight
           getOptionLabel={(option) => option.label}
           renderOption={(props, option) => (
@@ -96,65 +80,6 @@ export const CountrySelect = () => {
               {option.label} ({option.code}) +{option.phone}
             </Box>
           )}
-          {...iconsProps}
-        />
-      ))}
-    </Stack>
-  );
-};
-
-export const ControllableStates = () => {
-  const options = [
-    { id: 123, label: "Option 1" },
-    { id: 222, label: "Option 2" },
-  ];
-  const [value, setValue] = React.useState(options[0]);
-  const [inputValue, setInputValue] = React.useState("");
-
-  return (
-    <Stack spacing={4}>
-      {["filled" /*, "standard", "outlined"*/].map((variant, index) => (
-        <InputAutocompleteAsync
-          key={variant}
-          label="Controllable"
-          variant={variant}
-          options={options}
-          value={value}
-          onChange={(event, newValue) => {
-            console.log("onChange", newValue);
-            setValue(newValue);
-          }}
-          inputValue={inputValue}
-          onInputChange={(event, newInputValue) => {
-            console.log("onInputChange", newInputValue);
-            setInputValue(newInputValue);
-          }}
-          autoHighlight
-          getOptionLabel={(option) => option.label}
-          {...iconsProps}
-        />
-      ))}
-    </Stack>
-  );
-};
-
-export const HelperText = () => {
-  const options = [
-    { id: 123, label: "Option 1" },
-    { id: 222, label: "Option 2" },
-  ];
-
-  return (
-    <Stack spacing={4}>
-      {["filled", "standard", "outlined"].map((variant) => (
-        <InputAutocompleteAsync
-          key={variant}
-          label="Input Helper Text"
-          variant={variant}
-          options={options}
-          helperText="choose some option"
-          error={Math.random() * 10 > 5}
-          {...iconsProps}
         />
       ))}
     </Stack>
@@ -162,6 +87,8 @@ export const HelperText = () => {
 };
 
 export const GroupedByCategories = () => {
+  const [selectedOption, setSelectedOption] = useState(null);
+
   return (
     <Stack spacing={4}>
       {["filled", "standard", "outlined"].map((variant) => (
@@ -169,7 +96,10 @@ export const GroupedByCategories = () => {
           key={variant}
           id="grouped-demo"
           label="With categories"
-          options={top100FilmsWithFirstLetters}
+          selectedOption={selectedOption}
+          setSelectedOption={(e, option) => setSelectedOption(option)}
+          fetchOptionsOnFocus
+          getOptionsPromise={async () => top100FilmsWithFirstLetters}
           groupBy={(option) => option.firstLetter}
           sortBy="title"
           getOptionLabel={(option) => option.title}
@@ -181,9 +111,12 @@ export const GroupedByCategories = () => {
 };
 
 export const DisabledOptions = () => {
+  const [selectedOption, setSelectedOption] = useState(null);
+
   const _options = timeSlots
     .slice(0)
     .map((option, index) => ({ time: option, disabled: index % 4 === 0 }));
+
   return (
     <Stack spacing={4}>
       {["filled", "standard", "outlined"].map((variant) => (
@@ -192,7 +125,10 @@ export const DisabledOptions = () => {
           variant={variant}
           id="grouped-demo"
           label="Disabled options"
-          options={_options}
+          selectedOption={selectedOption}
+          setSelectedOption={(e, option) => setSelectedOption(option)}
+          fetchOptionsOnFocus
+          getOptionsPromise={async () => _options}
           getOptionLabel={(option) => option.time}
           width={200}
         />

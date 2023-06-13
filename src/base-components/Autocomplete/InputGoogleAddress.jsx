@@ -31,9 +31,7 @@ const renderMapAddressOption = (props, option) => {
           {parts.map((part, index) => (
             <span
               key={index}
-              style={{
-                fontWeight: part.highlight ? 700 : 400,
-              }}
+              style={{ fontWeight: part.highlight ? 700 : 400 }}
             >
               {part.text}
             </span>

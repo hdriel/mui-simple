@@ -7,45 +7,45 @@ import { sleep } from "../../utils/helpers";
 
 export default function InputAutoCompleteAsync({
   getOptionLabel,
-  endCmp: _endCmp,
   sleep: _sleep,
   getOptionsPromise,
-  getOptionsPromiseParams,
+  getOptionsCallback,
+  fetchOptionsOnFocus,
   ...props
 }) {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState([]);
-  const loading = open && options?.length === 0;
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     let active = true;
+    if (!open || options.length) return undefined;
 
-    if (!loading) return undefined;
-
-    (async () => {
-      const options = getOptionsPromise
-        ? await getOptionsPromise(...getOptionsPromiseParams)
-        : [];
-      if (_sleep) await sleep(_sleep);
-      if (active) setOptions([...options]);
-    })();
+    if (getOptionsPromise) {
+      setLoading(true);
+      getOptionsPromise()
+        .then(async (options) => {
+          await sleep(_sleep);
+          return options;
+        })
+        .then(async (options) => getOptionsCallback?.() ?? [...options])
+        .then((options) => active && setOptions(options))
+        .finally(() => setLoading(false));
+    }
 
     return () => {
       active = false;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [...[].concat(getOptionsPromiseParams)]);
+  }, [open, getOptionsPromise]);
 
   useEffect(() => {
-    if (!open) setOptions([]);
-  }, [open]);
+    if (!open && fetchOptionsOnFocus) setOptions([]);
+  }, [open, fetchOptionsOnFocus]);
 
-  const endCmp = (
-    <>
-      {loading ? <CircularProgress color="inherit" size={20} /> : null}
-      {_endCmp}
-    </>
-  );
+  const endCmp = loading ? (
+    <CircularProgress color="inherit" size={20} />
+  ) : null;
 
   return (
     <MuiAutocomplete
@@ -65,10 +65,12 @@ InputAutoCompleteAsync.propTypes = {
   getOptionLabel: PropTypes.func,
   getOptionsPromise: PropTypes.func,
   sleep: PropTypes.number,
+  fetchOptionsOnFocus: PropTypes.bool,
 };
 
 InputAutoCompleteAsync.defaultProps = {
   getOptionLabel: undefined,
   getOptionsPromise: undefined,
-  sleep: 1e3, // 1e3 For demo purposes.
+  sleep: 1e3,
+  fetchOptionsOnFocus: undefined,
 };

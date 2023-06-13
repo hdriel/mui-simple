@@ -9,8 +9,6 @@ import {
   Stack as MuiStack,
 } from "@mui/material";
 
-import { Close as CloseIcon } from "@mui/icons-material";
-
 export const Autocomplete = MuiAutocomplete;
 
 export const Box = MuiBox;
