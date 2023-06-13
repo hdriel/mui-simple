@@ -8,7 +8,7 @@ import {
   top100Films,
   top100FilmsWithFirstLetters,
 } from "./InputAutocomplete.mocks";
-import Chip from "../../Chip/Chip";
+import { Close as CloseIcon } from "@mui/icons-material";
 
 export default {
   title: "Inputs/Inputs/InputAutocompleteMultiple",
@@ -29,7 +29,14 @@ export const Default = () => {
 };
 
 export const FilmOptions = () => {
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const options = [
+    { ...top100Films[0], disabled: true },
+    ...top100Films.slice(1),
+  ];
+  const [selectedOptions, setSelectedOptions] = useState([
+    options[0],
+    options[1],
+  ]);
 
   return (
     <Stack spacing={4}>
@@ -41,8 +48,7 @@ export const FilmOptions = () => {
           setSelectedOptions={(e, options) => setSelectedOptions(options)}
           getOptionLabel={(option) => option.title}
           variant={variant}
-          options={top100Films}
-          chipProps={{ rounded: false }}
+          options={options}
           checkboxStyle={!!index}
         />
       ))}
