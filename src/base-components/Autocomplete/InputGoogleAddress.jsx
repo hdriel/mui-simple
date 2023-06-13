@@ -7,16 +7,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 import { Autocomplete as MuiAutocomplete } from "./InputAutocomplete.styled";
 import TextField from "../TextField/TextField";
-
-function loadScript(src, position, id) {
-  if (!position) return;
-
-  const script = document.createElement("script");
-  script.setAttribute("async", "");
-  script.setAttribute("id", id);
-  script.src = src;
-  position.appendChild(script);
-}
+import { loadScript } from "../../utils/helpers";
 
 const autocompleteService = { current: null };
 
@@ -110,7 +101,11 @@ export default function InputGoogleAddress({
   }, [optionValue, inputValue, fetch]);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && !loaded.current) {
+    if (
+      typeof window !== "undefined" &&
+      !loaded.current &&
+      GOOGLE_MAPS_API_KEY
+    ) {
       if (!document.querySelector("#google-maps")) {
         loadScript(
           `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places`,

@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 
 import useTheme from "@mui/material/styles/useTheme";
+import { createFilterOptions } from "@mui/material";
 import {
   Autocomplete as MuiAutocomplete,
   GroupHeader,
@@ -66,6 +67,7 @@ export default function InputAutocomplete({
   filterSelectedOptions,
   multiple,
   chipProps,
+  filterOptions: _filterOptions,
   ...props
 }) {
   const theme = useTheme();
@@ -101,10 +103,28 @@ export default function InputAutocomplete({
     customColor: colorActive ?? colorLabel,
   });
 
-  const getOptionLabel =
-    typeof _getOptionLabel === "function"
-      ? _getOptionLabel
-      : (option) => option[_getOptionLabel];
+  const getOptionLabel = useMemo(
+    () =>
+      typeof _getOptionLabel === "function"
+        ? _getOptionLabel
+        : (option) => option[_getOptionLabel],
+    [_getOptionLabel]
+  );
+
+  const filterOptions = useMemo(() => {
+    return typeof _filterOptions === "function"
+      ? _filterOptions
+      : Object.keys(_filterOptions ?? {}).length
+      ? createFilterOptions({
+          ignoreAccents: _filterOptions.ignoreAccents,
+          ignoreCase: _filterOptions.ignoreCase,
+          limit: _filterOptions.limitResultOptions,
+          matchFrom: _filterOptions.matchFrom,
+          stringify: _filterOptions.stringify ?? getOptionLabel,
+          trim: _filterOptions.trim,
+        })
+      : undefined;
+  }, [_filterOptions, getOptionLabel]);
 
   const inputProps = {
     id,
@@ -153,6 +173,7 @@ export default function InputAutocomplete({
       filterSelectedOptions={filterSelectedOptions}
       multiple={multiple}
       onChange={onChange}
+      filterOptions={filterOptions}
       renderInput={(params) => (
         <TextField {...params} {...inputProps} fullWidth />
       )}
@@ -224,6 +245,17 @@ InputAutocomplete.propTypes = {
   colorActive: PropTypes.string,
 
   renderOption: PropTypes.func,
+  filterOptions: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({
+      ignoreAccents: PropTypes.bool,
+      ignoreCase: PropTypes.bool,
+      limitResultOptions: PropTypes.number,
+      matchFrom: PropTypes.oneOf(["any", "start"]),
+      stringify: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+      trim: PropTypes.bool,
+    }),
+  ]),
   size: PropTypes.oneOf(["small", "medium"]),
   getOptionLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   groupBy: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -272,6 +304,7 @@ InputAutocomplete.defaultProps = {
   size: undefined,
 
   label: undefined,
+  filterOptions: undefined,
   getOptionLabel: "label",
   groupBy: undefined,
   sortBy: undefined,

@@ -116,3 +116,17 @@ export function generatePassword({
 
   return password;
 }
+
+export function sleep(delay = 0) {
+  return new Promise((resolve) => setTimeout(resolve, delay));
+}
+
+export function loadScript(src, element, id) {
+  if (!element) return;
+
+  const script = document.createElement("script");
+  script.setAttribute("async", "");
+  script.setAttribute("id", id);
+  script.src = src;
+  element.appendChild(script);
+}
