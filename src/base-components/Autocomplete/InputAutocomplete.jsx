@@ -68,6 +68,7 @@ export default function InputAutocomplete({
   multiple,
   chipProps,
   filterOptions: _filterOptions,
+  sx,
   ...props
 }) {
   const theme = useTheme();
@@ -107,7 +108,7 @@ export default function InputAutocomplete({
     () =>
       typeof _getOptionLabel === "function"
         ? _getOptionLabel
-        : (option) => option[_getOptionLabel],
+        : (option) => option[_getOptionLabel] || "",
     [_getOptionLabel]
   );
 
@@ -167,11 +168,12 @@ export default function InputAutocomplete({
       autoComplete={autoComplete}
       options={options}
       size={size}
-      sx={{ width: width }}
+      sx={{ ...sx, width }}
       autoHighlight={autoHighlight}
       getOptionLabel={getOptionLabel}
       filterSelectedOptions={filterSelectedOptions}
       multiple={multiple}
+      value={value}
       onChange={onChange}
       filterOptions={filterOptions}
       renderInput={(params) => (
@@ -226,7 +228,7 @@ InputAutocomplete.propTypes = {
   error: PropTypes.bool,
   required: PropTypes.bool,
   onChange: PropTypes.func,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.any, PropTypes.array]),
   focused: PropTypes.bool,
   margin: PropTypes.oneOf(["normal", "dense"]),
   helperText: PropTypes.string,

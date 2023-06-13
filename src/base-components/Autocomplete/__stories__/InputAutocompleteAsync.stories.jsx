@@ -4,9 +4,9 @@ import {
   FormatColorFill as FormatColorFillIcon,
   Airplay as AirplayIcon,
 } from "@mui/icons-material";
-import Button from "../../Button/Button";
 
-import InputAutocomplete from "../InputAutocomplete";
+import InputAutocompleteAsync from "../InputAutoCompleteAsync";
+import Button from "../../Button/Button";
 import {
   countries,
   timeSlots,
@@ -15,8 +15,8 @@ import {
 } from "./InputAutocomplete.mocks";
 
 export default {
-  title: "Inputs/Inputs/InputAutocomplete",
-  component: InputAutocomplete,
+  title: "Inputs/Inputs/InputAutocompleteAsync",
+  component: InputAutocompleteAsync,
   decorators: [
     (Story) => (
       <div
@@ -29,7 +29,7 @@ export default {
 };
 
 export const Default = () => {
-  return <InputAutocomplete />;
+  return <InputAutocompleteAsync />;
 };
 
 const iconsProps = {
@@ -50,7 +50,7 @@ export const FilmOptions = () => {
   return (
     <Stack spacing={4}>
       {["filled", "standard", "outlined"].map((variant) => (
-        <InputAutocomplete
+        <InputAutocompleteAsync
           key={variant}
           label="Movie"
           value={value}
@@ -71,7 +71,7 @@ export const CountrySelect = () => {
   return (
     <Stack spacing={4}>
       {["filled", "standard", "outlined"].map((variant, index) => (
-        <InputAutocomplete
+        <InputAutocompleteAsync
           key={variant}
           label="Choose a country"
           value={value}
@@ -114,7 +114,7 @@ export const ControllableStates = () => {
   return (
     <Stack spacing={4}>
       {["filled" /*, "standard", "outlined"*/].map((variant, index) => (
-        <InputAutocomplete
+        <InputAutocompleteAsync
           key={variant}
           label="Controllable"
           variant={variant}
@@ -147,7 +147,7 @@ export const HelperText = () => {
   return (
     <Stack spacing={4}>
       {["filled", "standard", "outlined"].map((variant) => (
-        <InputAutocomplete
+        <InputAutocompleteAsync
           key={variant}
           label="Input Helper Text"
           variant={variant}
@@ -165,7 +165,7 @@ export const GroupedByCategories = () => {
   return (
     <Stack spacing={4}>
       {["filled", "standard", "outlined"].map((variant) => (
-        <InputAutocomplete
+        <InputAutocompleteAsync
           key={variant}
           id="grouped-demo"
           label="With categories"
@@ -187,7 +187,7 @@ export const DisabledOptions = () => {
   return (
     <Stack spacing={4}>
       {["filled", "standard", "outlined"].map((variant) => (
-        <InputAutocomplete
+        <InputAutocompleteAsync
           key={variant}
           variant={variant}
           id="grouped-demo"
