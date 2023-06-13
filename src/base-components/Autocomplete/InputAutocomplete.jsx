@@ -191,7 +191,7 @@ export default function InputAutocomplete({
       }
       renderOption={
         typeof renderOption === "function"
-          ? (props, option) => renderOption(props, option)
+          ? (props, option, ...args) => renderOption(props, option, ...args)
           : highlightSearchResults
           ? renderHighlightOptionCB(highlightField ?? getOptionLabel)
           : undefined
