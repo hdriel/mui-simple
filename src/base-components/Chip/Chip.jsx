@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Chip as MuiChip } from "./Chip.styled";
+import { useCustomColor } from "../../utils/helpers";
 
 export default function Chip({
   label,
@@ -10,17 +11,22 @@ export default function Chip({
   link,
   startIcon,
   endIcon,
-  muiColor,
   color,
+  textColor: _textColor,
   multiLine,
   size,
   width,
   breadCrumbsStyle,
   rounded,
   disabled,
+  minWidth,
   children,
+  sx,
   ...props
 }) {
+  const [customColor, muiColor] = useCustomColor(color);
+  const [textColor] = useCustomColor(_textColor);
+
   const linkProps = link && { href: link, component: "a", clickable: true };
   return (
     <MuiChip
@@ -30,7 +36,8 @@ export default function Chip({
       onDelete={onDelete}
       avatar={avatar}
       icon={startIcon}
-      customColor={color}
+      customColor={muiColor ? undefined : customColor}
+      textColor={muiColor ? undefined : textColor}
       color={muiColor}
       size={size}
       disabled={disabled}
@@ -38,6 +45,7 @@ export default function Chip({
       multiLine={multiLine}
       breadCrumbsStyle={breadCrumbsStyle}
       rounded={rounded}
+      sx={{ ...sx, minWidth }}
       {...linkProps}
       {...props}
     />
@@ -54,12 +62,12 @@ Chip.propTypes = {
   disabled: PropTypes.bool,
   startIcon: PropTypes.node,
   endIcon: PropTypes.node,
-  customColor: PropTypes.string,
-  muiColor: PropTypes.string,
+  color: PropTypes.string,
   multiLine: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium"]),
   breadCrumbsStyle: PropTypes.bool,
   rounded: PropTypes.bool,
+  minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 Chip.defaultProps = {
@@ -72,10 +80,10 @@ Chip.defaultProps = {
   disabled: undefined,
   startIcon: undefined,
   endIcon: undefined,
-  customColor: undefined,
-  muiColor: undefined,
+  color: undefined,
   multiLine: undefined,
   size: undefined,
   breadCrumbsStyle: undefined,
   rounded: true,
+  minWidth: undefined,
 };
