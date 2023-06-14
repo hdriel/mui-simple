@@ -65,10 +65,12 @@ export const Typography = styled(MuiTypography, {
       "sub",
       "monospace",
       "lineHeight",
+      "bgColor",
     ].includes(propName),
 })`
   width: 100%;
   color: ${(props) => props.customColor};
+  background-color: ${(props) => props.bgColor};
   font-weight: ${(props) =>
     props.bold && typeof props.bold === "boolean" ? "bold" : props.bold};
 

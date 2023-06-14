@@ -61,20 +61,22 @@ export function getCustomColor(
   } = {}
 ) {
   const customColor = props?.[field] ?? props?.customColor;
-  if (!customColor) return undefined;
+  if (!customColor) return [];
+  if (customColor === "inherit") return [undefined, "inherit"];
 
   let color =
     _.get(props, `theme.palette.${customColor}.${muiLevel}`) ??
     _.get(props, `theme.palette.${customColor}`) ??
     customColor;
 
-  if (!isValidColor(color)) return undefined;
+  if (!isValidColor(color)) return [];
+  const isMuiColor = color && color !== customColor;
 
   color = isDefined(opacity) ? alpha(color, opacity) : color;
   color = isDefined(_darken) ? darken(color, _darken) : color;
   color = isDefined(_lighten) ? lighten(color, _lighten) : color;
 
-  return color;
+  return [color, isMuiColor ? customColor : undefined];
 }
 
 const isValidColor = (color) => CSS.supports("color", color);

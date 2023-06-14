@@ -4,6 +4,7 @@ import { Border, Typography as MuiTypography } from "./Typography.styled";
 import Tooltip from "../Tooltip/Tooltip";
 import { useEllipsisActive } from "../../hooks/useEllipsisActive";
 import { TOOLTIP_PLACEMENTS } from "../Tooltip/Tooltip.consts";
+import { useCustomColor } from "../../utils/helpers";
 
 export default function Typography({
   alignCenter,
@@ -13,8 +14,8 @@ export default function Typography({
   gutterBottom,
   paragraph,
   component,
-  muiColor,
-  customColor,
+  color,
+  bgColor,
   wrap,
   size,
   bold,
@@ -39,6 +40,9 @@ export default function Typography({
   sx,
   ...props
 }) {
+  const [customColor, muiColor] = useCustomColor(color);
+  const [customBGColor] = useCustomColor(bgColor);
+
   const ellipsisMaxRows = !wrap || !rows ? 0 : +rows;
   const [ref, isEllipsis] = useEllipsisActive({
     active: showTooltipOnEllipsis && tooltip !== false,
@@ -76,6 +80,7 @@ export default function Typography({
     border: border,
     color: muiColor,
     customColor: customColor,
+    bgColor: customBGColor,
     fontSize: size,
     bold: bold,
     italic: italic,

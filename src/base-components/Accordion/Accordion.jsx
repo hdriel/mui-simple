@@ -28,17 +28,16 @@ export default function Accordion({
   unmountDetailsOnClose,
   useCustomStyle,
   bgColor: _bgColor,
-  textColor: _textColor,
   titleColor: _titleColor,
+  textColor,
   buttonsColor,
   children,
   ...props
 }) {
   const [showMore, setShowMore] = useState(false);
   const [isEllipsis, setIsEllipsis] = useState(false);
-  const bgColor = useCustomColor(_bgColor);
-  const textColor = useCustomColor(_textColor);
-  const titleColor = useCustomColor(_titleColor);
+  const [bgColor] = useCustomColor(_bgColor);
+  const [titleColor] = useCustomColor(_titleColor);
 
   return (
     <MuiAccordion
@@ -69,7 +68,6 @@ export default function Accordion({
             ...(secondaryLabel && {
               width: "33%",
               flexShrink: 0,
-              color: textColor,
             }),
           }}
         >
@@ -88,7 +86,7 @@ export default function Accordion({
               wrap={showMore ? false : !!detailsMaxRows}
               rows={showMore ? undefined : detailsMaxRows}
               onEllipsisChange={(value) => setIsEllipsis(value)}
-              sx={{ color: textColor }}
+              color={textColor}
             >
               {details}
             </Typography>
