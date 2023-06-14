@@ -183,7 +183,7 @@ export const Colored = () => {
         orientation="horizontal"
         label={<Chip label="secondary" />}
         textAlign="center"
-        muiColor={"secondary"}
+        color={"secondary"}
       />
 
       <Box sx={{ my: 1, display: "flex" }}>
@@ -195,7 +195,7 @@ export const Colored = () => {
           variant="fullWidth"
           orientation="vertical"
           textAlign="left"
-          muiColor={"primary"}
+          color={"primary"}
         >
           2nd
         </Divider>
@@ -243,7 +243,7 @@ export const Thickness = () => {
         orientation="horizontal"
         label={<Chip label="secondary" />}
         textAlign="center"
-        muiColor={"secondary"}
+        color={"secondary"}
         thickness={4}
       />
       <Divider
@@ -251,7 +251,7 @@ export const Thickness = () => {
         orientation="horizontal"
         label={"secondary"}
         textAlign="left"
-        muiColor={"secondary"}
+        color={"secondary"}
         thickness={4}
       />
       <Divider
@@ -273,7 +273,7 @@ export const Thickness = () => {
           variant="fullWidth"
           orientation="vertical"
           textAlign="left"
-          muiColor={"primary"}
+          color={"primary"}
           thickness={3}
         >
           primary
