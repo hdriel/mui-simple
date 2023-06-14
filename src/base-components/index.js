@@ -63,7 +63,7 @@ export { default as SpeedDial } from "./SpeedDial/SpeedDial";
 export { default as Stepper } from "./Stepper/Stepper";
 export { default as MobileStepper } from "./Stepper/MobileStepper";
 export { useSimpleStepper } from "./Stepper/Stepper.utils";
-export { default as Switch } from "./Switch/Switch";
+export { default as Switch } from "./Switch/Switch"; // fixing this component muiColor not working
 
 export { Table } from "./Table/Table"; // fixing this component change styled getCustomColor to useCustomColor
 export { default as Tabs } from "./Tabs/Tabs";
