@@ -155,7 +155,7 @@ export const Themed = () => {
         onChangeAction(newValue);
         setValue(newValue);
       }}
-      muiColor="secondary"
+      color="secondary"
       data={data3}
     />
   );

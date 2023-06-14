@@ -33,7 +33,10 @@ export default function Slider({
   disablePadding,
   ...props
 }) {
-  const [customColor, muiColor] = useCustomColor(color);
+  let [customColor, muiColor] = useCustomColor(color);
+  let [track] = useCustomColor(color?.track);
+  let [thumb] = useCustomColor(color?.thumb);
+  customColor = customColor || { track, thumb };
 
   const rangeProps = useMemo(() => {
     if (!range) return undefined;

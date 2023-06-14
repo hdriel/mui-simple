@@ -32,9 +32,7 @@ export default function Tooltip({
             color,
             fontSize,
             lineHeight,
-            "& .MuiTooltip-arrow": {
-              color: bgcolor,
-            },
+            "& .MuiTooltip-arrow": { color: bgcolor },
           },
         },
       }}

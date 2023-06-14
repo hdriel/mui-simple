@@ -79,20 +79,16 @@ export const DisableSwap = () => {
 export const ThemedAndColored = () => {
   return (
     <Stack>
-      <RangeSlider muiColor="primary" label="primary" defaultValue={[10, 50]} />
+      <RangeSlider color="primary" label="primary" defaultValue={[10, 50]} />
       <RangeSlider
-        muiColor="secondary"
+        color="secondary"
         label="secondary"
         defaultValue={[10, 50]}
       />
-      <RangeSlider muiColor="info" label="info" defaultValue={[10, 50]} />
-      <RangeSlider muiColor="error" label="error" defaultValue={[10, 50]} />
+      <RangeSlider color="info" label="info" defaultValue={[10, 50]} />
+      <RangeSlider color="error" label="error" defaultValue={[10, 50]} />
       <RangeSlider label="Default" defaultValue={[10, 50]} />
-      <RangeSlider
-        label="#D050CC"
-        customColor="#D050CC"
-        defaultValue={[10, 50]}
-      />
+      <RangeSlider label="#D050CC" color="#D050CC" defaultValue={[10, 50]} />
     </Stack>
   );
 };
@@ -120,11 +116,7 @@ export const SliderStyle = () => {
         defaultValue={[25, 75]}
         sliderStyle={SLIDER_STYLES.TOOLTIP_VALUE}
       />
-      <Slider
-        label="custom style"
-        defaultValue={[25, 75]}
-        customColor={"#D050CC"}
-      />
+      <Slider label="custom style" defaultValue={[25, 75]} color={"#D050CC"} />
       <Slider label="default" defaultValue={[25, 75]} />
     </Stack>
   );

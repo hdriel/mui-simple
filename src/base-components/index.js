@@ -65,10 +65,10 @@ export { default as MobileStepper } from "./Stepper/MobileStepper";
 export { useSimpleStepper } from "./Stepper/Stepper.utils";
 export { default as Switch } from "./Switch/Switch";
 
-export { Table } from "./Table/Table";
+export { Table } from "./Table/Table"; // fixing this component change styled getCustomColor to useCustomColor
 export { default as Tabs } from "./Tabs/Tabs";
 export { default as Tab } from "./Tabs/Tab";
 export { default as ToggleButtonGroup } from "./ToggleButtonGroup/ToggleButtonGroup";
-export { default as ToggleButtonGroups } from "./ToggleButtonGroup/ToggleButtonGroups";
+export { default as ToggleButtonGroups } from "./ToggleButtonGroup/ToggleButtonGroups"; // fixing this component the selected custom color still gray
 export { default as Tooltip } from "./Tooltip/Tooltip";
 export { default as Typography } from "./Typography/Typography";

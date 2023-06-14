@@ -78,12 +78,12 @@ export const VolumeExample = () => {
 export const ThemedAndColored = () => {
   return (
     <Stack>
-      <Slider muiColor="primary" label="primary" />
-      <Slider muiColor="secondary" label="secondary" />
-      <Slider muiColor="info" label="info" />
-      <Slider muiColor="error" label="error" />
+      <Slider color="primary" label="primary" />
+      <Slider color="secondary" label="secondary" />
+      <Slider color="info" label="info" />
+      <Slider color="error" label="error" />
       <Slider label="Default" />
-      <Slider label="#D050CC" customColor="#D050CC" />
+      <Slider color="#D050CC" abel="#D050CC" />
     </Stack>
   );
 };
@@ -111,7 +111,11 @@ export const SliderStyle = () => {
         defaultValue={50}
         sliderStyle={SLIDER_STYLES.TOOLTIP_VALUE}
       />
-      <Slider label="custom style" defaultValue={50} customColor={"#D050CC"} />
+      <Slider
+        label="custom style"
+        defaultValue={50}
+        color={{ track: "#000000", thumb: "#D050CC" }}
+      />
       <Slider label="default" defaultValue={50} />
     </Stack>
   );

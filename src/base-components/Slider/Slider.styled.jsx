@@ -16,7 +16,12 @@ export function ValueLabelComponent(props) {
   const { children, value } = props;
 
   return (
-    <Tooltip enterTouchDelay={0} placement="top" title={value} arrow={false}>
+    <Tooltip
+      enterTouchDelay={0}
+      placement="top"
+      title={`${value}`}
+      arrow={false}
+    >
       {children}
     </Tooltip>
   );
