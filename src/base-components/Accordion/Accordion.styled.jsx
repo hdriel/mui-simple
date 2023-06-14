@@ -65,9 +65,16 @@ function customStyleSummary(props) {
 }
 export const AccordionSummary = styled(
   ({ label, ...props }) => <MuiAccordionSummary {...props} />,
-  { shouldForwardProp: (propName) => !["useCustomStyle"].includes(propName) }
+  {
+    shouldForwardProp: (propName) =>
+      !["useCustomStyle", "bgColor", "titleColor"].includes(propName),
+  }
 )`
-  ${customStyleSummary}
+  ${customStyleSummary};
+  &.MuiAccordionSummary-root {
+    background-color: ${(props) => props.bgColor};
+    color: ${(props) => props.titleColor};
+  }
 `;
 
 function customStyleDetails(props) {
