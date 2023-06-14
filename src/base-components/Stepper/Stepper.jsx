@@ -15,14 +15,14 @@ import {
   QontoStepIconRoot,
   QontoConnector,
 } from "./Stepper.styled";
+import { useCustomColor } from "../../utils/helpers";
 
 export default function Stepper({
   optionalLabel,
   steps: _steps,
   stepIndex: activeStep,
   stepsBottomLabel,
-  muiColor,
-  customColor,
+  color,
   orientation,
   onNext,
   onBack,
@@ -37,6 +37,8 @@ export default function Stepper({
   children,
   ...props
 }) {
+  const [customColor, muiColor] = useCustomColor(color);
+
   const LABELS = {
     next: labels?.next || "Next",
     back: labels?.back || "Back",
@@ -52,8 +54,7 @@ export default function Stepper({
           ? { label: step, optional: false }
           : {
               ...step,
-              muiColor:
-                step.muiColor ?? muiColor ?? (step.error ? "error" : undefined),
+              color: step.color ?? color ?? (step.error ? "error" : undefined),
               customColorValue: step.customColor ?? customColor,
               optional: step.optional
                 ? typeof step.optional === "string"
@@ -218,8 +219,7 @@ export default function Stepper({
                       <Button
                         variant="contained"
                         onClick={handleNext}
-                        muiColor={step.muiColor}
-                        customColor={step.customColor}
+                        color={step.color}
                         sx={{ mt: 1, mr: 1 }}
                       >
                         {LABELS.next}
@@ -239,8 +239,7 @@ export default function Stepper({
                       {isStepOptional(index) && (
                         <Button
                           onClick={() => handleSkip(index)}
-                          muiColor={step.muiColor}
-                          customColor={step.customColor}
+                          color={step.color}
                           sx={{ mt: 1, mr: 1 }}
                         >
                           {LABELS.skip}
@@ -304,8 +303,7 @@ Stepper.propTypes = {
       PropTypes.shape({
         label: PropTypes.string,
         optional: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-        muiColor: PropTypes.string,
-        customColor: PropTypes.string,
+        color: PropTypes.string,
         error: PropTypes.bool,
         icon: PropTypes.node,
       }),
@@ -314,8 +312,7 @@ Stepper.propTypes = {
   stepIndex: PropTypes.number,
   orientation: PropTypes.oneOf(["horizontal", "vertical"]),
   stepsBottomLabel: PropTypes.bool,
-  muiColor: PropTypes.string,
-  customColor: PropTypes.string,
+  color: PropTypes.string,
   onReset: PropTypes.func,
   onNext: PropTypes.func,
   onBack: PropTypes.func,
@@ -347,8 +344,7 @@ Stepper.defaultProps = {
   steps: undefined,
   stepIndex: undefined,
   stepsBottomLabel: undefined,
-  muiColor: undefined,
-  customColor: undefined,
+  color: undefined,
   orientation: undefined,
   onReset: undefined,
   onNext: undefined,

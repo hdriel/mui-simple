@@ -8,7 +8,7 @@ import {
 import Tooltip from "../Tooltip/Tooltip";
 import { useCustomColor } from "../../utils/helpers";
 
-const spinner = <CircularProgress muiColor="inherit" size={15} />;
+const spinner = <CircularProgress color="inherit" size={15} />;
 
 const Button = forwardRef(
   (

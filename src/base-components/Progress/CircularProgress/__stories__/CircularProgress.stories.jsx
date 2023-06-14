@@ -17,10 +17,10 @@ export const Default = () => {
 export const Themed = () => {
   return (
     <Stack>
-      <CircularProgress {...actions} muiColor="primary">
+      <CircularProgress {...actions} color="primary">
         primary
       </CircularProgress>
-      <CircularProgress {...actions} muiColor="secondary">
+      <CircularProgress {...actions} color="secondary">
         secondary
       </CircularProgress>
       <CircularProgress {...actions}>Default</CircularProgress>
@@ -31,9 +31,9 @@ export const Themed = () => {
 export const Colored = () => {
   return (
     <Stack direction="row" spacing={4}>
-      <CircularProgress {...actions} customColor={"#12bfb0"} />
-      <CircularProgress {...actions} customColor={"#081499"} />
-      <CircularProgress {...actions} customColor={"#d98f53"} />
+      <CircularProgress {...actions} color={"#12bfb0"} />
+      <CircularProgress {...actions} color={"#081499"} />
+      <CircularProgress {...actions} color={"#d98f53"} />
     </Stack>
   );
 };

@@ -37,10 +37,7 @@ const actions = {
 
 const steps = [
   { label: "Select campaign settings", optional: true, error: true },
-  {
-    label: "Create an ad group",
-    muiColor: "secondary",
-  },
+  { label: "Create an ad group", color: "secondary" },
   "Create an ad",
 ];
 
@@ -52,10 +49,7 @@ export const SimpleStepper = () => {
   const stepperProps = useSimpleStepper();
   const steps = [
     { label: "Select campaign settings", optional: true },
-    {
-      label: "Create an ad group",
-      muiColor: "secondary",
-    },
+    { label: "Create an ad group", color: "secondary" },
     "Create an ad",
   ];
 
@@ -120,10 +114,7 @@ export const VerticalStepper = () => {
   const stepperProps = useSimpleStepper();
   const steps = [
     { label: "Select campaign settings", optional: true },
-    {
-      label: "Create an ad group",
-      muiColor: "secondary",
-    },
+    { label: "Create an ad group", color: "secondary" },
     "Create an ad",
   ];
 
@@ -186,7 +177,7 @@ export const CustomStepper = () => {
     },
     {
       label: "Create an ad group",
-      muiColor: "secondary",
+      color: "secondary",
       icon: <SendIcon />,
     },
     "Create an ad",
@@ -268,7 +259,7 @@ export const QontoStepper = () => {
     },
     {
       label: "Create an ad group",
-      muiColor: "secondary",
+      color: "secondary",
       icon: <SendIcon />,
     },
     "Create an ad",
@@ -343,7 +334,7 @@ export const QontoCustomStepper = () => {
     },
     {
       label: "Create an ad group",
-      muiColor: "secondary",
+      color: "secondary",
       icon: <SendIcon />,
     },
     "Create an ad",

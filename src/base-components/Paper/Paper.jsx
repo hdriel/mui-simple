@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Paper as MuiPaper } from "./Paper.styled";
+import { useCustomColor } from "../../utils/helpers";
 
 export default function Paper({
   width,
@@ -8,14 +9,16 @@ export default function Paper({
   elevation,
   variant,
   square,
-  muiColor,
-  customColor,
-  textColor,
+  color,
+  textColor: _textColor,
   imageSrc,
   imageOpacity,
   imageLayout,
   ...props
 }) {
+  const [customColor, muiColor] = useCustomColor(color);
+  const [textColor] = useCustomColor(_textColor);
+
   return (
     <MuiPaper
       elevation={variant !== "outlined" ? elevation : undefined}
@@ -38,8 +41,7 @@ Paper.propTypes = {
   elevation: PropTypes.oneOf(Array.from({ length: 25 }, (_, i) => i)), // 0-24
   variant: PropTypes.oneOf(["elevation", "outlined"]),
   square: PropTypes.bool,
-  muiColor: PropTypes.string,
-  customColor: PropTypes.string,
+  color: PropTypes.string,
   textColor: PropTypes.string,
   imageSrc: PropTypes.string,
   imageOpacity: PropTypes.number,
@@ -63,8 +65,7 @@ Paper.defaultProps = {
   elevation: undefined,
   variant: undefined,
   square: undefined,
-  muiColor: undefined,
-  customColor: undefined,
+  color: undefined,
   textColor: undefined,
   imageSrc: undefined,
   imageOpacity: 0.5,

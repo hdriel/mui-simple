@@ -100,7 +100,7 @@ export const ThemedAndColored = () => {
         height={125}
         variant="outlined"
         elevation={20}
-        muiColor={"primary"}
+        color={"primary"}
         textColor={"#8800ff"}
       >
         primary
@@ -110,7 +110,7 @@ export const ThemedAndColored = () => {
         height={125}
         variant="elevation"
         elevation={20}
-        muiColor={"secondary"}
+        color={"secondary"}
       >
         secondary
       </Paper>
@@ -121,7 +121,7 @@ export const ThemedAndColored = () => {
         width={125}
         height={125}
         elevation={20}
-        customColor={"#1d01cd"}
+        color={"#1d01cd"}
         textColor={"#00ff0d"}
       >
         custom #1d01cd

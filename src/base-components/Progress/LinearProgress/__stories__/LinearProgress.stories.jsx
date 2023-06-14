@@ -17,8 +17,8 @@ export const Default = () => {
 export const Themed = () => {
   return (
     <Stack spacing={3}>
-      <LinearProgress {...actions} muiColor="primary" />
-      <LinearProgress {...actions} muiColor="secondary" />
+      <LinearProgress {...actions} color="primary" />
+      <LinearProgress {...actions} color="secondary" />
       <LinearProgress {...actions} />
     </Stack>
   );
@@ -27,9 +27,9 @@ export const Themed = () => {
 export const Colored = () => {
   return (
     <Stack spacing={4}>
-      <LinearProgress {...actions} customColor={"#12bfb0"} />
-      <LinearProgress {...actions} muiColor={"error"} />
-      <LinearProgress {...actions} customColor={"#d98f53"} />
+      <LinearProgress {...actions} color={"#12bfb0"} />
+      <LinearProgress {...actions} color={"error"} />
+      <LinearProgress {...actions} color={"#d98f53"} />
     </Stack>
   );
 };

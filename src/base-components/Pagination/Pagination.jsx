@@ -7,7 +7,7 @@ import {
   PaginationItem,
 } from "./Pagination.styled";
 import Typography from "../Typography/Typography";
-import { isDefined } from "../../utils/helpers";
+import { isDefined, useCustomColor } from "../../utils/helpers";
 
 // function useSearchParam(pageParamFieldName) {
 //   if (!pageParamFieldName) return;
@@ -20,8 +20,7 @@ import { isDefined } from "../../utils/helpers";
 export default function Pagination({
   orientation,
   label,
-  muiColor,
-  customColor,
+  color,
   totalPages,
   disabled,
   disabledPages,
@@ -40,6 +39,8 @@ export default function Pagination({
   pageToLink,
   ...props
 }) {
+  const [customColor, muiColor] = useCustomColor(color);
+
   const pageToLinkHandler = (page) => {
     switch (typeof pageToLink) {
       case "function":
@@ -65,7 +66,7 @@ export default function Pagination({
       )}
       <MuiPagination
         color={muiColor}
-        customColor={customColor}
+        customColor={muiColor ? undefined : customColor}
         count={totalPages}
         disabled={disabled}
         variant={variant}
@@ -111,8 +112,7 @@ export default function Pagination({
 Pagination.propTypes = {
   orientation: PropTypes.oneOf(["horizontal", "vertical"]),
   label: PropTypes.string,
-  muiColor: PropTypes.string,
-  customColor: PropTypes.string,
+  color: PropTypes.string,
   disabled: PropTypes.bool,
   disabledPages: PropTypes.arrayOf(PropTypes.number),
   variant: PropTypes.oneOf(["outlined", "text"]),
@@ -135,8 +135,7 @@ Pagination.propTypes = {
 Pagination.defaultProps = {
   orientation: "horizontal",
   label: undefined,
-  muiColor: undefined,
-  customColor: undefined,
+  color: undefined,
   disabled: undefined,
   variant: undefined,
   size: undefined,
