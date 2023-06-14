@@ -20,7 +20,7 @@ const Button = forwardRef(
       onClick,
       onRightClick,
       link,
-      color: _color,
+      color,
       disableRipple,
       isLoading,
       loadingIconPosition,
@@ -37,7 +37,7 @@ const Button = forwardRef(
     },
     ref
   ) => {
-    const [customColor, muiColor] = useCustomColor(_color);
+    const [customColor, muiColor] = useCustomColor(color);
 
     const onRightClickHandler = (e) => {
       e.preventDefault();
@@ -49,7 +49,7 @@ const Button = forwardRef(
         <Tooltip {...tooltipProps}>
           <MuiIconButton
             ref={ref}
-            sx={{ minWidth, color: !muiColor && customColor, ...sx }}
+            sx={{ minWidth, color: muiColor ? undefined : customColor, ...sx }}
             color={muiColor}
             size={size}
             disableRipple={disabled ? true : disableRipple}
@@ -96,7 +96,7 @@ const Button = forwardRef(
           }
           href={link}
           disableRipple={disableRipple}
-          customColor={!muiColor && customColor}
+          customColor={muiColor ? undefined : customColor}
           color={muiColor}
           size={size}
           fullWidth={fullWidth}

@@ -4,12 +4,12 @@ import {
   BottomNavigation as MuiBottomNavigation,
   BottomNavigationAction,
 } from "./BottomNavigation.styled";
+import { useCustomColor } from "../../utils/helpers";
 
 export default function BottomNavigation({
   width,
   showLabels,
-  muiColor,
-  customColor,
+  color,
   value,
   onChange,
   actions,
@@ -19,10 +19,12 @@ export default function BottomNavigation({
   fixedToBottom,
   ...props
 }) {
+  const [customColor, muiColor] = useCustomColor(color);
+
   return (
     <MuiBottomNavigation
       muiColor={muiColor}
-      customColor={customColor}
+      customColor={muiColor ? undefined : customColor}
       width={width}
       showLabels={showLabels}
       value={value}

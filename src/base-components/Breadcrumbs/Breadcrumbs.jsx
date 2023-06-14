@@ -4,19 +4,21 @@ import { Breadcrumbs as MuiBreadcrumbs } from "./Breadcrumbs.styled";
 import Link from "../Link/Link";
 import Chip from "../Chip/Chip";
 import Typography from "../Typography/Typography";
+import { useCustomColor } from "../../utils/helpers";
 
 export default function Breadcrumbs({
   maxItems,
   size,
   separator,
-  customColor,
-  muiColor,
+  color,
   links,
   chips,
   chipBreadCrumbsStyle,
   children,
   ...props
 }) {
+  const [customColor, muiColor] = useCustomColor(color);
+
   return (
     <MuiBreadcrumbs
       size={size}
@@ -89,6 +91,7 @@ export default function Breadcrumbs({
 }
 
 Breadcrumbs.propTypes = {
+  color: PropTypes.string,
   maxItems: PropTypes.number,
   separator: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -124,6 +127,7 @@ Breadcrumbs.propTypes = {
 };
 
 Breadcrumbs.defaultProps = {
+  color: undefined,
   maxItems: undefined,
   separator: undefined,
   size: undefined,

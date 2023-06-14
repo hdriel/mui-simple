@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Badge as MuiBadge } from "./Badge.styled";
+import { useCustomColor } from "../../utils/helpers";
 
 export default function Badge({
   variant,
-  muiColor,
   color,
   content,
   hide,
@@ -15,10 +15,11 @@ export default function Badge({
   horizontal,
   ...props
 }) {
+  const [customColor, muiColor] = useCustomColor(color);
   return (
     <MuiBadge
-      color={muiColor ?? (color ? undefined : "primary")}
-      customColor={color}
+      color={muiColor}
+      customColor={muiColor ? undefined : customColor}
       badgeContent={content}
       variant={variant}
       invisible={hide}
@@ -37,7 +38,6 @@ export default function Badge({
 }
 
 Badge.propTypes = {
-  muiColor: PropTypes.string,
   color: PropTypes.string,
   content: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   variant: PropTypes.oneOf(["dot"]),
@@ -50,7 +50,6 @@ Badge.propTypes = {
 };
 
 Badge.defaultProps = {
-  muiColor: undefined,
   color: undefined,
   content: 0,
   variant: undefined,
