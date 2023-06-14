@@ -47,9 +47,7 @@ export function isDefined(value) {
 
 export function useCustomColor(color, options) {
   const theme = useTheme();
-  const convertedColor = getCustomColor({ theme, customColor: color }, options);
-  console.log(convertedColor);
-  return convertedColor;
+  return getCustomColor({ theme, customColor: color }, options);
 }
 
 export function getCustomColor(
