@@ -77,18 +77,15 @@ export const SeverityVariant = () => {
   );
 };
 
-export const Themed = () => {
+export const ThemedAndColored = () => {
   return (
     <Stack spacing={3}>
-      <Alert muiColor="primary">primary</Alert>
-      <Alert muiColor="secondary">secondary</Alert>
       <Alert>Default</Alert>
+      <Alert color="primary">primary</Alert>
+      <Alert color="secondary">secondary</Alert>
+      <Alert color={"#8b8800"}>Colored</Alert>;
     </Stack>
   );
-};
-
-export const Colored = () => {
-  return <Alert customColor={"#8b8800"}>Colored</Alert>;
 };
 
 export const Icon = () => {

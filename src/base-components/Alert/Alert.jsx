@@ -2,6 +2,7 @@ import React, { forwardRef, useMemo } from "react";
 import PropTypes from "prop-types";
 import { Alert as MuiAlert, AlertTitle } from "./Alert.styled";
 import Button from "../Button/Button";
+import { useCustomColor } from "../../utils/helpers";
 
 const Alert = forwardRef(
   (
@@ -10,8 +11,7 @@ const Alert = forwardRef(
       variant,
       onClose,
       icon,
-      muiColor,
-      customColor,
+      color,
       actions,
       title,
       width,
@@ -20,6 +20,8 @@ const Alert = forwardRef(
     },
     ref
   ) => {
+    const customColor = useCustomColor(color);
+
     const actionCmp = useMemo(() => {
       const actionList = []
         .concat(actions)
@@ -50,7 +52,6 @@ const Alert = forwardRef(
         variant={variant}
         onClose={onClose}
         icon={icon}
-        color={muiColor}
         customColor={customColor}
         title={title}
         width={width}
@@ -69,8 +70,7 @@ Alert.propTypes = {
   variant: PropTypes.oneOf(["filled", "outlined", "standard"]),
   onClose: PropTypes.func,
   icon: PropTypes.node,
-  muiColor: PropTypes.string,
-  customColor: PropTypes.string,
+  color: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   actions: PropTypes.oneOfType([
     PropTypes.node,
@@ -92,8 +92,7 @@ Alert.defaultProps = {
   width: undefined,
   onClose: undefined,
   icon: undefined,
-  muiColor: undefined,
-  customColor: undefined,
+  color: undefined,
   actions: undefined,
 };
 
