@@ -1,7 +1,10 @@
 export { default as Accordion } from "./Accordion/Accordion";
 export { default as Alert } from "./Alert/Alert";
 export { default as AppBar } from "./AppBar/AppBar";
-export { default as Autocomplete } from "./Autocomplete/InputAutocomplete";
+export { default as InputAutocomplete } from "./Autocomplete/InputAutocomplete";
+export { default as InputAutoCompleteAsync } from "./Autocomplete/InputAutoCompleteAsync";
+export { default as InputAutocompleteMultiple } from "./Autocomplete/InputAutocompleteMultiple";
+export { default as InputGoogleAddress } from "./Autocomplete/InputGoogleAddress";
 export { default as Avatar } from "./Avatar/Avatar";
 
 export { default as Backdrop } from "./Backdrop/Backdrop";
