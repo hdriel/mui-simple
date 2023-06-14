@@ -42,10 +42,10 @@ export const Icons = () => {
       <Button {...actions} startIcon={<SendIcon />}>
         Start Icon
       </Button>
-      <Button {...actions} muiColor="error" endIcon={<DeleteIcon />}>
+      <Button {...actions} color="error" endIcon={<DeleteIcon />}>
         End Icon
       </Button>
-      <Button {...actions} customColor={"#D05010"} icon={<FingerprintIcon />} />
+      <Button {...actions} color={"#D05010"} icon={<FingerprintIcon />} />
     </Stack>
   );
 };
@@ -71,25 +71,21 @@ export const DisableRipple = () => {
   return (
     <Stack direction="column" spacing={3}>
       <Stack direction="row" spacing={3}>
-        <Button {...actions} disableRipple muiColor="primary">
+        <Button {...actions} disableRipple color="primary">
           Disable Ripple
         </Button>
         <Button
           {...actions}
-          customColor={"#D05010"}
+          color={"#D05010"}
           disableRipple
           icon={<FingerprintIcon />}
         />
       </Stack>
       <Stack direction="row" spacing={3}>
-        <Button {...actions} muiColor="secondary">
+        <Button {...actions} color="secondary">
           Ripple
         </Button>
-        <Button
-          {...actions}
-          customColor={"#D05010"}
-          icon={<FingerprintIcon />}
-        />
+        <Button {...actions} color={"#D05010"} icon={<FingerprintIcon />} />
       </Stack>
     </Stack>
   );
@@ -110,7 +106,7 @@ export const ButtonLink = () => {
         </Button>
         <Button
           {...actions}
-          customColor={"#D05010"}
+          color={"#D05010"}
           icon={<SendIcon />}
           link="https://chat.openai.com/"
         />
@@ -119,11 +115,7 @@ export const ButtonLink = () => {
         <Button {...actions} variant="text">
           normal button
         </Button>
-        <Button
-          {...actions}
-          customColor={"#D05010"}
-          icon={<FingerprintIcon />}
-        />
+        <Button {...actions} color={"#D05010"} icon={<FingerprintIcon />} />
       </Stack>
     </Stack>
   );
