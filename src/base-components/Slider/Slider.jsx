@@ -9,6 +9,7 @@ import {
   Grid,
 } from "./Slider.styled";
 import { SLIDER_STYLES } from "./Slider.consts";
+import { useCustomColor } from "../../utils/helpers";
 
 export default function Slider({
   startIcon,
@@ -22,8 +23,7 @@ export default function Slider({
   valueLabelFormat,
   range,
   marks,
-  muiColor,
-  customColor,
+  color,
   chooseFromMarksList,
   trackBarLinePosition,
   orientation,
@@ -33,6 +33,8 @@ export default function Slider({
   disablePadding,
   ...props
 }) {
+  const [customColor, muiColor] = useCustomColor(color);
+
   const rangeProps = useMemo(() => {
     if (!range) return undefined;
     if (Array.isArray(range)) {
@@ -93,7 +95,7 @@ export default function Slider({
             valueLabelDisplay={displayValue ?? (disabled ? "on" : "auto")}
             valueLabelFormat={valueLabelFormat}
             color={muiColor}
-            customColor={customColor}
+            customColor={muiColor ? undefined : customColor}
             orientation={orientation}
             track={
               trackBarLinePosition === "none" ? false : trackBarLinePosition
@@ -127,8 +129,7 @@ Slider.propTypes = {
     PropTypes.arrayOf(PropTypes.number),
   ]),
   label: PropTypes.string,
-  muiColor: PropTypes.string,
-  customColor: PropTypes.oneOfType([
+  color: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.shape({
       track: PropTypes.string,
@@ -173,8 +174,7 @@ Slider.defaultProps = {
   startIcon: undefined,
   endIcon: undefined,
   label: undefined,
-  muiColor: undefined,
-  customColor: undefined,
+  color: undefined,
   onChange: undefined,
   valueLabelFormat: undefined,
   disabled: undefined,
