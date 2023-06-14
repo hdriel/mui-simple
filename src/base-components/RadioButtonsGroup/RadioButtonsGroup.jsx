@@ -8,6 +8,7 @@ import {
   Radio,
   FormHelperText,
 } from "./RadioButtonsGroup.styled";
+import { useCustomColor } from "../../utils/helpers";
 
 const RadioButtonsGroup = ({
   direction,
@@ -15,7 +16,6 @@ const RadioButtonsGroup = ({
   defaultValue,
   onChange,
   color,
-  muiColor,
   icon,
   checkedIcon,
   name,
@@ -27,6 +27,7 @@ const RadioButtonsGroup = ({
   ...props
 }) => {
   const theme = useTheme();
+  const [customColor, muiColor] = useCustomColor(color);
 
   return (
     <>
@@ -42,7 +43,7 @@ const RadioButtonsGroup = ({
           <RadioControlled
             theme={theme}
             key={radioProps?.value ?? index}
-            color={color}
+            color={muiColor ? undefined : customColor}
             muiColor={muiColor}
             value={value}
             label={label}
@@ -54,7 +55,7 @@ const RadioButtonsGroup = ({
               <Radio
                 checked={selectedValue === value}
                 size={size}
-                color={color}
+                color={muiColor ? undefined : customColor}
                 muiColor={muiColor}
                 disableRipple={disableRipple}
                 icon={icon}
@@ -73,6 +74,7 @@ RadioButtonsGroup.propTypes = {
   row: PropTypes.bool,
   direction: PropTypes.oneOf(["row", "column"]),
   size: PropTypes.oneOf(["small", "medium", "large"]),
+  color: PropTypes.string,
   name: PropTypes.string,
   helperText: PropTypes.string,
   ignoreLabelColor: PropTypes.bool,
@@ -93,6 +95,7 @@ RadioButtonsGroup.propTypes = {
 RadioButtonsGroup.defaultProps = {
   direction: "column",
   size: undefined,
+  color: undefined,
   name: undefined,
   helperText: undefined,
   ignoreLabelColor: false,

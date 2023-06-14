@@ -141,7 +141,7 @@ export const Themed = () => {
     <RadioButtonsGroup
       data={data}
       name="gender"
-      muiColor={"secondary"}
+      color={"secondary"}
       value={value}
       onChange={(event) => {
         onChangeAction(event.target.value);
