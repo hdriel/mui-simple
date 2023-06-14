@@ -12,6 +12,8 @@ import {
   ArrowForwardIosSharp as ArrowForwardIosSharpIcon,
   ExpandMore as ExpandMoreIcon,
 } from "@mui/icons-material";
+import { getCustomColor } from "../../utils/helpers";
+import { useTheme } from "@mui/material/styles";
 
 export default function Accordion({
   id,
@@ -24,8 +26,7 @@ export default function Accordion({
   detailsMaxRows,
   showMoreLabel,
   hideLabel,
-  muiColor,
-  customColor,
+  color,
   unmountDetailsOnClose,
   useCustomStyle,
   children,
@@ -81,8 +82,7 @@ export default function Accordion({
               <ShowMoreWrapper>
                 <Button
                   variant="text"
-                  muiColor={muiColor}
-                  customColor={customColor}
+                  color={color}
                   disableRipple
                   onClick={() => setShowMore((v) => !v)}
                   sx={{ float: "right" }}
@@ -110,7 +110,6 @@ Accordion.propTypes = {
   detailsMaxRows: PropTypes.number,
   showMoreLabel: PropTypes.string,
   hideLabel: PropTypes.string,
-  muiColor: PropTypes.string,
   customColor: PropTypes.string,
   unmountDetailsOnClose: PropTypes.bool,
   useCustomStyle: PropTypes.bool,
@@ -127,7 +126,6 @@ Accordion.defaultProps = {
   detailsMaxRows: undefined,
   showMoreLabel: "Show More",
   hideLabel: "Hide",
-  muiColor: "info",
   customColor: undefined,
   unmountDetailsOnClose: false,
   useCustomStyle: false,

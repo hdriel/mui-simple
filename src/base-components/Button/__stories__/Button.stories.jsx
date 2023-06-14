@@ -142,53 +142,33 @@ export const Elevation = () => {
   );
 };
 
-export const Themed = () => {
+export const ThemedAndColored = () => {
   return (
-    <Stack direction={"column"} spacing={2}>
-      <Stack direction={"row"} spacing={2}>
-        <Button {...actions} variant="contained">
-          Default (Primary)
-        </Button>
-        <Button {...actions} variant="outlined">
-          Default (Primary)
-        </Button>
-        <Button {...actions} variant="text">
-          Default (Primary)
-        </Button>
-        <Button {...actions} icon={<SendIcon />} />
-      </Stack>
-      <Stack direction={"row"} spacing={2}>
-        <Button {...actions} variant="contained" muiColor="secondary">
-          Secondary
-        </Button>
-        <Button {...actions} variant="outlined" muiColor="secondary">
-          Secondary
-        </Button>
-        <Button {...actions} variant="text" muiColor="secondary">
-          Secondary
-        </Button>
-        <Button {...actions} icon={<SendIcon />} muiColor="secondary" />
-      </Stack>
-    </Stack>
-  );
-};
-
-export const Colored = () => {
-  return (
-    <Stack direction={"row"} spacing={2}>
-      <Button {...actions} variant="contained" customColor={"#df01fd"}>
-        Secondary
-      </Button>
-      <Button {...actions} variant="outlined" customColor={"#df01fd"}>
-        Secondary
-      </Button>
-      <Button {...actions} variant="text" customColor={"#df01fd"}>
-        Secondary
-      </Button>
-      <Button {...actions} variant="text" customColor={"#df01fd"}>
-        Secondary
-      </Button>
-      <Button {...actions} customColor={"#df01fd"} icon={<SendIcon />} />
+    <Stack direction="column" spacing={2}>
+      {[
+        undefined,
+        "primary",
+        "secondary",
+        "info",
+        "success",
+        "error",
+        "#df01fd",
+      ].map((color, index) => (
+        <Stack key={index} direction="row" spacing={2}>
+          {["contained", "outlined", "text"].map((variant) => (
+            <Button
+              {...actions}
+              key={variant}
+              variant={variant}
+              color={color}
+              sx={{ minWidth: 200 }}
+            >
+              {color ?? "Default"}
+            </Button>
+          ))}
+          <Button {...actions} icon={<SendIcon />} color={color} />
+        </Stack>
+      ))}
     </Stack>
   );
 };

@@ -6,6 +6,7 @@ import {
   IconButton as MuiIconButton,
 } from "./Button.styled";
 import Tooltip from "../Tooltip/Tooltip";
+import { useCustomColor } from "../../utils/helpers";
 
 const spinner = <CircularProgress muiColor="inherit" size={15} />;
 
@@ -19,8 +20,7 @@ const Button = forwardRef(
       onClick,
       onRightClick,
       link,
-      muiColor,
-      customColor,
+      color: _color,
       disableRipple,
       isLoading,
       loadingIconPosition,
@@ -29,11 +29,16 @@ const Button = forwardRef(
       icon,
       fullWidth,
       tooltipProps,
+      uppercase,
+      minWidth,
+      sx,
       children,
       ...props
     },
     ref
   ) => {
+    const color = useCustomColor(_color);
+
     const onRightClickHandler = (e) => {
       e.preventDefault();
       onRightClick?.(e);
@@ -44,9 +49,7 @@ const Button = forwardRef(
         <Tooltip {...tooltipProps}>
           <MuiIconButton
             ref={ref}
-            color={muiColor}
-            customColor={customColor}
-            style={{ color: customColor }}
+            sx={{ minWidth, color, ...sx }}
             size={size}
             disableRipple={disabled ? true : disableRipple}
             onClick={disabled ? undefined : onClick}
@@ -91,11 +94,15 @@ const Button = forwardRef(
             onRightClick ? onRightClickHandler : props.onContextMenu
           }
           href={link}
-          color={muiColor}
           disableRipple={disableRipple}
-          customColor={customColor}
+          customColor={color}
           size={size}
           fullWidth={fullWidth}
+          sx={{
+            minWidth,
+            ...(!uppercase && { textTransform: "none" }),
+            ...sx,
+          }}
           {...props}
         >
           {content}
@@ -114,8 +121,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
   onRightClick: PropTypes.func,
   link: PropTypes.string,
-  muiColor: PropTypes.string,
-  customColor: PropTypes.string,
+  color: PropTypes.string,
   disableRipple: PropTypes.bool,
   isLoading: PropTypes.bool,
   loadingIconPosition: PropTypes.oneOf(["start", "end"]),
@@ -124,6 +130,8 @@ Button.propTypes = {
   icon: PropTypes.node,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   tooltipProps: PropTypes.object,
+  uppercase: PropTypes.bool,
+  minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 Button.defaultProps = {
@@ -135,8 +143,7 @@ Button.defaultProps = {
   onClick: undefined,
   onRightClick: undefined,
   link: undefined,
-  muiColor: undefined,
-  customColor: undefined,
+  color: undefined,
   disableRipple: undefined,
   isLoading: undefined,
   loadingIconPosition: undefined,
@@ -145,6 +152,8 @@ Button.defaultProps = {
   icon: undefined,
   size: undefined,
   tooltipProps: undefined,
+  uppercase: true,
+  minWidth: undefined,
 };
 
 export default Button;

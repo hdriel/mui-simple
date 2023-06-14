@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { alpha, darken, lighten } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 export function getCapitalLetters(str) {
   const chars =
@@ -42,6 +43,13 @@ export function numberToPx(field) {
 
 export function isDefined(value) {
   return value !== undefined && value !== null;
+}
+
+export function useCustomColor(color, options) {
+  const theme = useTheme();
+  const convertedColor = getCustomColor({ theme, customColor: color }, options);
+  console.log(convertedColor);
+  return convertedColor;
 }
 
 export function getCustomColor(

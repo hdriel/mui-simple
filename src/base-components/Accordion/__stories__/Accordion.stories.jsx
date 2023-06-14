@@ -204,8 +204,8 @@ export const CustomDetails = () => {
 export const Themed = () => {
   return (
     <Stack>
-      <Accordion muiColor="primary">primary</Accordion>
-      <Accordion muiColor="secondary">secondary</Accordion>
+      <Accordion color="primary.dark">primary</Accordion>
+      <Accordion color="secondary">secondary</Accordion>
       <Accordion>Default</Accordion>
       <Accordion color={"#D050CC"}>Colored</Accordion>;
     </Stack>
