@@ -192,7 +192,7 @@ export const ThemeColor = () => {
         setChecked(event.target.checked);
         onChangeAction(event);
       }}
-      muiColor="secondary"
+      color="secondary"
       label="some colored checkbox"
       defaultChecked
     />

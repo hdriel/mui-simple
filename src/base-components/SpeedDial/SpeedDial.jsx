@@ -69,8 +69,7 @@ export default function SpeedDial({
 }
 
 SpeedDial.propTypes = {
-  customColor: PropTypes.string,
-  muiColor: PropTypes.string,
+  color: PropTypes.string,
   hidden: PropTypes.bool,
   showTooltip: PropTypes.bool,
   icon: PropTypes.node,
@@ -95,6 +94,7 @@ SpeedDial.propTypes = {
 };
 
 SpeedDial.defaultProps = {
+  color: undefined,
   hidden: undefined,
   showTooltip: true,
   icon: undefined,

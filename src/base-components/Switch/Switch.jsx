@@ -7,14 +7,14 @@ import {
   SwitchOnOff,
 } from "./Switch.styled";
 import { SWITCH_STYLES } from "./Switch.consts";
+import { useCustomColor } from "../../utils/helpers";
 
 const Switch = ({
   label,
   name,
   size,
+  textColor: _textColor,
   color,
-  textColor,
-  muiColor,
   scale,
   checked,
   onChange,
@@ -33,11 +33,14 @@ const Switch = ({
   switchStyle,
   ...props
 }) => {
+  const [customColor, muiColor] = useCustomColor(color);
+  const [textColor] = useCustomColor(_textColor);
+
   const switchControlCmp = isOnOff ? (
     <SwitchOnOff
       name={name}
       size={size}
-      color={color}
+      color={muiColor ? undefined : customColor}
       textColor={textColor}
       muiColor={muiColor}
       scale={scale}
@@ -56,7 +59,7 @@ const Switch = ({
     <MuiSwitch
       name={name}
       size={size}
-      color={color}
+      color={muiColor ? undefined : customColor}
       textColor={textColor}
       muiColor={muiColor}
       scale={scale}
@@ -75,7 +78,7 @@ const Switch = ({
       label={label}
       name={name}
       size={size}
-      color={color}
+      color={muiColor ? undefined : customColor}
       textColor={textColor}
       muiColor={muiColor}
       scale={scale}
@@ -111,7 +114,6 @@ Switch.propTypes = {
   label: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.string,
-  muiColor: PropTypes.string,
   scale: PropTypes.number,
   checked: PropTypes.bool,
   defaultChecked: PropTypes.bool,
@@ -129,7 +131,6 @@ Switch.defaultProps = {
   label: undefined,
   size: "medium",
   color: undefined,
-  muiColor: undefined,
   scale: undefined,
   checked: undefined,
   defaultChecked: undefined,
