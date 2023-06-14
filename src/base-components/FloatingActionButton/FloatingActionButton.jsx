@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Fab as MuiFab } from "./FloatingActionButton.styled";
+import { useCustomColor } from "../../utils/helpers";
 
 export default function Fab({
   disabled,
@@ -8,10 +9,11 @@ export default function Fab({
   link,
   size,
   variant,
-  customColor,
-  muiColor,
+  color,
   ...props
 }) {
+  const [customColor, muiColor] = useCustomColor(color);
+
   return (
     <MuiFab
       disabled={disabled}
@@ -19,7 +21,7 @@ export default function Fab({
       href={link}
       size={size}
       variant={variant}
-      customColor={customColor}
+      customColor={muiColor ? undefined : customColor}
       color={muiColor}
       {...props}
     />
@@ -32,8 +34,7 @@ Fab.propTypes = {
   link: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   variant: PropTypes.oneOf(["extended", "circular", "round"]),
-  customColor: PropTypes.string,
-  muiColor: PropTypes.string,
+  color: PropTypes.string,
 };
 
 Fab.defaultProps = {
@@ -42,6 +43,5 @@ Fab.defaultProps = {
   link: undefined,
   size: undefined,
   variant: undefined,
-  customColor: undefined,
-  muiColor: undefined,
+  color: undefined,
 };

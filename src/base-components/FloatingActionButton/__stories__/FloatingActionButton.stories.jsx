@@ -41,33 +41,29 @@ export const Variant = () => {
   );
 };
 
-export const Themed = () => {
+export const ThemedAndColored = () => {
   return (
     <Stack spacing={4}>
-      <Fab {...actions} muiColor="primary">
-        <FavoriteIcon />
-      </Fab>
-      <Fab {...actions} muiColor="secondary">
-        <EditIcon />
-      </Fab>
-      <Fab {...actions}>
-        <NavigationIcon />
-      </Fab>
+      {[
+        undefined,
+        "primary",
+        "secondary",
+        "info",
+        "success",
+        "error",
+        "#df01fd",
+      ].map((color, index) => (
+        <Fab key={`${index}-${color}`} {...actions} color={color}>
+          <FavoriteIcon />
+        </Fab>
+      ))}
     </Stack>
-  );
-};
-
-export const Colored = () => {
-  return (
-    <Fab {...actions} customColor={"#50bdd0"}>
-      #D050CC
-    </Fab>
   );
 };
 
 export const Link = () => {
   return (
-    <Fab {...actions} customColor={"#924700"} link="https://chat.openai.com/">
+    <Fab {...actions} color={"#924700"} link="https://chat.openai.com/">
       <SendIcon />
     </Fab>
   );
@@ -76,10 +72,10 @@ export const Link = () => {
 export const DisableRipple = () => {
   return (
     <Stack spacing={4}>
-      <Fab {...actions} muiColor="info" disableRipple>
+      <Fab {...actions} color="info" disableRipple>
         <AddIcon />
       </Fab>
-      <Fab {...actions} muiColor="info" disableRipple={false}>
+      <Fab {...actions} color="info" disableRipple={false}>
         <AddIcon />
       </Fab>
     </Stack>
@@ -89,10 +85,10 @@ export const DisableRipple = () => {
 export const Disable = () => {
   return (
     <Stack direction={"row"} spacing={4}>
-      <Fab {...actions} muiColor="warn" disabled>
+      <Fab {...actions} color="warn" disabled>
         <AddIcon />
       </Fab>
-      <Fab {...actions} muiColor="warn">
+      <Fab {...actions} color="warn">
         <AddIcon />
       </Fab>
     </Stack>
