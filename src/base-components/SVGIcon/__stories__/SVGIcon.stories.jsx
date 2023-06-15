@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
-// import { Send as SendIcon } from "@mui/icons-material";
 import filledIcons from "./filled-icons.json";
 import outlinedIcons from "./outlined-icons.json";
 import roundedIcons from "./rounded-icons.json";
@@ -16,7 +15,7 @@ import InputColor from "../../TextField/InputColor";
 import Slider from "../../Slider/Slider";
 
 export default {
-  title: "TEMPLATE/SVGIcon",
+  title: "Data-Display/Icons",
   component: SVGIcon,
 };
 
