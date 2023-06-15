@@ -23,9 +23,6 @@ export function antSwitchStyle(props) {
 
   const { theme, color, muiColor } = props;
   const { palette: { mode } = {}, transitions } = theme ?? {};
-  const scolor =
-    _.get(theme, `palette.${muiColor}.main`, color) ??
-    _.get(theme, `palette.primary.main`);
 
   return css`
     width: 28px;
@@ -47,7 +44,7 @@ export function antSwitchStyle(props) {
         color: #fff;
         & + .MuiSwitch-track {
           opacity: 1;
-          background-color: ${scolor};
+          background-color: ${color};
         }
       }
     }
@@ -73,9 +70,6 @@ export function androidSwitchStyle(props) {
   if (props.switchStyle !== SWITCH_STYLES.ANDROID12) return css``;
 
   const { theme, color, muiColor } = props;
-  const scolor =
-    _.get(theme, `palette.${muiColor}.main`, color) ??
-    _.get(theme, `palette.primary.main`);
 
   return css`
     padding: 8px;
@@ -92,13 +86,13 @@ export function androidSwitchStyle(props) {
       &:before {
         left: 12px;
         background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 24 24"><path fill="${encodeURIComponent(
-          theme.palette.getContrastText(scolor)
+          theme.palette.getContrastText(color)
         )}" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"/></svg>');
       },
       &:after {
         right: 12px;
         background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 24 24"><path fill="${encodeURIComponent(
-          "white" // theme.palette.getContrastText(scolor)
+          "white" // theme.palette.getContrastText(color)
         )}" d="M19,13H5V11H19V13Z" /></svg>'); 
       },
   },
@@ -116,9 +110,6 @@ export function iosSwitchStyle(props) {
   if (props.switchStyle !== SWITCH_STYLES.IOS) return css``;
 
   const { theme, color, muiColor } = props;
-  const scolor =
-    _.get(theme, `palette.${muiColor}.main`, color) ??
-    _.get(theme, `palette.primary.main`);
 
   return css`
     width: 42px;
@@ -132,7 +123,7 @@ export function iosSwitchStyle(props) {
         transform: translateX(16px);
         color: #fff;
         & + .MuiSwitch-track {
-          background-color: ${scolor};
+          background-color: ${color};
           opacity: 1;
           border: 0;
         }
@@ -141,7 +132,7 @@ export function iosSwitchStyle(props) {
         }
       }
       &.Mui-focusVisible .MuiSwitch-thumb {
-        color: ${scolor};
+        color: ${color};
         border: 6px solid #fff;
       }
       &.Mui-disabled .MuiSwitch-thumb {
