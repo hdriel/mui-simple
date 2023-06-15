@@ -1,22 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { LinearProgress as MuiLinearProgress } from "./LinearProgress.styled";
+import { useCustomColor } from "../../../utils/helpers";
 
 export default function LinearProgress({
-  muiColor,
-  customColor,
   value,
   valueBuffer,
   showProgress,
   thickness,
   size,
   disableShrink,
+  color,
   ...props
 }) {
+  const [customColor, muiColor] = useCustomColor(color);
+
   return (
     <MuiLinearProgress
       color={muiColor}
-      customColor={customColor}
+      customColor={muiColor ? undefined : customColor}
       variant={
         valueBuffer !== undefined
           ? "buffer"
@@ -34,8 +36,7 @@ export default function LinearProgress({
 }
 
 LinearProgress.propTypes = {
-  muiColor: PropTypes.string,
-  customColor: PropTypes.string,
+  color: PropTypes.string,
   variant: PropTypes.oneOf(["buffer", "query", "determinate", "indeterminate"]),
   value: PropTypes.number,
   valueBuffer: PropTypes.number,
@@ -46,8 +47,7 @@ LinearProgress.propTypes = {
 };
 
 LinearProgress.defaultProps = {
-  muiColor: undefined,
-  customColor: undefined,
+  color: undefined,
   variant: undefined,
   value: undefined,
   valueBuffer: undefined,

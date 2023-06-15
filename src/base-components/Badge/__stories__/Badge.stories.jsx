@@ -19,27 +19,24 @@ export const Default = () => {
   );
 };
 
-export const Themed = () => {
+export const ThemedAndColored = () => {
   return (
     <Stack direction="row" spacing={3}>
-      <Badge {...actions} content={1} muiColor="primary">
-        <MainIcon />
-      </Badge>
-      <Badge {...actions} content={2} muiColor="secondary">
-        <MainIcon />
-      </Badge>
-      <Badge {...actions} content={"default"}>
-        <MainIcon />
-      </Badge>
+      {[
+        undefined,
+        "primary",
+        "secondary",
+        "info",
+        "success",
+        "warning",
+        "error",
+        "#d05e00",
+      ].map((color, index) => (
+        <Badge key={index} {...actions} content={1} color={color}>
+          <MainIcon />
+        </Badge>
+      ))}
     </Stack>
-  );
-};
-
-export const Colored = () => {
-  return (
-    <Badge {...actions} content={"color"} color={"#d05e00"}>
-      <MainIcon />
-    </Badge>
   );
 };
 

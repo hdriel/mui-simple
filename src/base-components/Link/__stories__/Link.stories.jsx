@@ -25,10 +25,10 @@ export const Variant = () => {
 export const ThemedAncColored = () => {
   return (
     <Stack spacing={3}>
-      <Link muiColor="primary">primary</Link>
-      <Link muiColor="secondary">secondary</Link>
+      <Link color="primary">primary</Link>
+      <Link color="secondary">secondary</Link>
       <Link>#10d0dd</Link>
-      <Link customColor={"#10d0dd"}>Default</Link>
+      <Link color={"#10d0dd"}>Default</Link>
     </Stack>
   );
 };

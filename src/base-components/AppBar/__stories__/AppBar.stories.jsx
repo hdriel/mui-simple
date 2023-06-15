@@ -43,7 +43,7 @@ export const MenuToolbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menu = (
     <Button
-      muiColor="inherit"
+      color="inherit"
       icon={menuOpen ? <CloseIcon /> : <MenuIcon />}
       onClick={() => setMenuOpen(!menuOpen)}
     />
@@ -143,10 +143,10 @@ export const Actions = () => {
         actions={[
           <Button>Label only</Button>,
           <Button startIcon={<SendIcon />}>Start Icon</Button>,
-          <Button muiColor="error" endIcon={<DeleteIcon />}>
+          <Button color="error" endIcon={<DeleteIcon />}>
             , End Icon
           </Button>,
-          <Button customColor={"#D05010"} icon={<FingerprintIcon />} />,
+          <Button color={"#D05010"} icon={<FingerprintIcon />} />,
           <Button color="inherit">Login</Button>,
         ]}
       />
@@ -156,10 +156,10 @@ export const Actions = () => {
         actions={[
           <Button>Label only</Button>,
           <Button startIcon={<SendIcon />}>Start Icon</Button>,
-          <Button muiColor="error" endIcon={<DeleteIcon />}>
+          <Button color="error" endIcon={<DeleteIcon />}>
             , End Icon
           </Button>,
-          <Button customColor={"#D05010"} icon={<FingerprintIcon />} />,
+          <Button color={"#D05010"} icon={<FingerprintIcon />} />,
           <Button color="inherit">Login</Button>,
         ]}
       />
@@ -169,10 +169,10 @@ export const Actions = () => {
         actions={[
           <Button>Label only</Button>,
           <Button startIcon={<SendIcon />}>Start Icon</Button>,
-          <Button muiColor="error" endIcon={<DeleteIcon />}>
+          <Button color="error" endIcon={<DeleteIcon />}>
             , End Icon
           </Button>,
-          <Button customColor={"#D05010"} icon={<FingerprintIcon />} />,
+          <Button color={"#D05010"} icon={<FingerprintIcon />} />,
           <Button color="inherit">Login</Button>,
         ]}
       />
@@ -218,29 +218,19 @@ export const ThemedAndColored = () => {
   return (
     <Stack spacing={3}>
       <ThemeProvider theme={"light"}>
-        <AppBar
-          position="static"
-          menu
-          title="light primary"
-          muiColor="primary"
-        />
+        <AppBar position="static" menu title="light primary" color="primary" />
       </ThemeProvider>
       <ThemeProvider theme={"dark"}>
-        <AppBar
-          position="static"
-          menu
-          title="dark primary"
-          muiColor="primary"
-        />
+        <AppBar position="static" menu title="dark primary" color="primary" />
         <AppBar
           position="static"
           menu
           title="dark primary with enableColorOnDark"
-          muiColor="primary"
+          color="primary"
           enableColorOnDark
         />
       </ThemeProvider>
-      <AppBar position="static" menu title="#86950d" customColor={"#86950d"} />
+      <AppBar position="static" menu title="#86950d" color={"#86950d"} />
       <AppBar position="static" menu title="default" />
       <AppBar position="static" />
     </Stack>

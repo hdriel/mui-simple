@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { getOriginalTextWidth } from "../../hooks/useEllipsisActive";
 import { SORT } from "./Table.consts";
-import { isDefined } from "../../utils/helpers";
+import { getCustomColor, isDefined } from "../../utils/helpers";
 
 export function getDataRange({ rows, total, page, rowsPerPage }) {
   // case that got full data as total
@@ -15,23 +15,21 @@ export function getDataRange({ rows, total, page, rowsPerPage }) {
 }
 
 export function extractColors({ theme, colors }) {
-  const { background, color } =
+  const { background: _background, color: _color } =
     typeof colors === "object" ? colors : { background: colors };
 
-  const isThemeColor = !!(
-    color === undefined &&
-    (_.get(theme, `palette.${background}.main`) ??
-      _.get(theme, `palette.${background}`))
-  );
+  const [color] = getCustomColor({ theme, customColor: _color });
+  const [, isThemeColor] = getCustomColor({
+    theme,
+    customColor: color === undefined && _background,
+  });
+  const [background] = getCustomColor({ theme, customColor: _background });
 
   const textColor = isThemeColor
     ? _.get(theme, `palette.${background}.contrastText`)
-    : _.get(theme, `palette.${color}.main`) ??
-      _.get(theme, `palette.${color}`, color);
+    : color;
 
-  const bgColor =
-    _.get(theme, `palette.${background}.main`) ??
-    _.get(theme, `palette.${background}`, background);
+  const bgColor = background;
 
   return isDefined(textColor) || isDefined(bgColor)
     ? { color: textColor, background: bgColor }

@@ -37,10 +37,7 @@ const actions = {
 
 const steps = [
   { label: "Select campaign settings", optional: true, error: true },
-  {
-    label: "Create an ad group",
-    muiColor: "secondary",
-  },
+  { label: "Create an ad group", color: "secondary" },
   "Create an ad",
 ];
 
@@ -52,10 +49,7 @@ export const SimpleStepper = () => {
   const stepperProps = useSimpleStepper();
   const steps = [
     { label: "Select campaign settings", optional: true },
-    {
-      label: "Create an ad group",
-      muiColor: "secondary",
-    },
+    { label: "Create an ad group", color: "secondary" },
     "Create an ad",
   ];
 
@@ -120,10 +114,7 @@ export const VerticalStepper = () => {
   const stepperProps = useSimpleStepper();
   const steps = [
     { label: "Select campaign settings", optional: true },
-    {
-      label: "Create an ad group",
-      muiColor: "secondary",
-    },
+    { label: "Create an ad group", color: "secondary" },
     "Create an ad",
   ];
 
@@ -186,7 +177,7 @@ export const CustomStepper = () => {
     },
     {
       label: "Create an ad group",
-      muiColor: "secondary",
+      color: "secondary",
       icon: <SendIcon />,
     },
     "Create an ad",
@@ -201,7 +192,7 @@ export const CustomStepper = () => {
 
   return (
     <>
-      <ToggleButtonGroups>
+      <ToggleButtonGroups sx={{ mb: 4 }}>
         <ToggleButtonGroup
           value={orientation}
           exclusive
@@ -268,7 +259,7 @@ export const QontoStepper = () => {
     },
     {
       label: "Create an ad group",
-      muiColor: "secondary",
+      color: "secondary",
       icon: <SendIcon />,
     },
     "Create an ad",
@@ -276,7 +267,7 @@ export const QontoStepper = () => {
 
   return (
     <>
-      <ToggleButtonGroups>
+      <ToggleButtonGroups sx={{ mb: 4 }}>
         <ToggleButtonGroup
           value={orientation}
           exclusive
@@ -295,6 +286,7 @@ export const QontoStepper = () => {
         {...actions}
         {...stepperProps}
         qontoStyle
+        color="secondary"
         steps={steps}
         stepsBottomLabel={stepsBottomLabel}
         orientation={orientation}
@@ -343,7 +335,7 @@ export const QontoCustomStepper = () => {
     },
     {
       label: "Create an ad group",
-      muiColor: "secondary",
+      color: "secondary",
       icon: <SendIcon />,
     },
     "Create an ad",
@@ -361,7 +353,7 @@ export const QontoCustomStepper = () => {
 
   return (
     <>
-      <ToggleButtonGroups>
+      <ToggleButtonGroups sx={{ mb: 4 }}>
         <ToggleButtonGroup
           value={orientation}
           exclusive

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Stack } from "@mui/material";
 
-import InputAutocompleteAsync from "../InputAutocompleteAsync";
+import InputAutocompleteMultipleAsync from "../InputAutocompleteMultipleAsync";
 import {
   countries,
   timeSlots,
@@ -10,8 +10,8 @@ import {
 } from "./InputAutocomplete.mocks";
 
 export default {
-  title: "Inputs/Inputs/InputAutocompleteAsync",
-  component: InputAutocompleteAsync,
+  title: "Inputs/Inputs/InputAutocompleteMultipleAsync",
+  component: InputAutocompleteMultipleAsync,
   decorators: [
     (Story) => (
       <div
@@ -24,20 +24,27 @@ export default {
 };
 
 export const Default = () => {
-  return <InputAutocompleteAsync />;
+  return <InputAutocompleteMultipleAsync />;
 };
 
 export const FilmOptions = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const options = [
+    { ...top100Films[0], disabled: true },
+    ...top100Films.slice(1),
+  ];
+  const [selectedOptions, setSelectedOptions] = useState([
+    options[0],
+    options[1],
+  ]);
 
   return (
     <Stack spacing={4}>
       {["filled", "standard", "outlined"].map((variant) => (
-        <InputAutocompleteAsync
+        <InputAutocompleteMultipleAsync
           key={variant}
           label="Movie"
-          selectedOption={selectedOption}
-          setSelectedOption={(e, option) => setSelectedOption(option)}
+          selectedOptions={selectedOptions}
+          setSelectedOptions={(e, option) => setSelectedOptions(option)}
           fetchOptionsOnFocus
           getOptionsPromise={async () => top100Films}
           getOptionLabel={(option) => option.title}
@@ -49,16 +56,16 @@ export const FilmOptions = () => {
 };
 
 export const CountrySelect = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
   return (
     <Stack spacing={4}>
       {["filled", "standard", "outlined"].map((variant, index) => (
-        <InputAutocompleteAsync
+        <InputAutocompleteMultipleAsync
           key={variant}
           label="Choose a country"
-          selectedOption={selectedOption}
-          setSelectedOption={(e, option) => setSelectedOption(option)}
+          selectedOptions={selectedOptions}
+          setSelectedOptions={(e, option) => setSelectedOptions(option)}
           variant={variant}
           fetchOptionsOnFocus
           getOptionsPromise={async () => countries}
@@ -87,17 +94,17 @@ export const CountrySelect = () => {
 };
 
 export const GroupedByCategories = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
   return (
     <Stack spacing={4}>
       {["filled", "standard", "outlined"].map((variant) => (
-        <InputAutocompleteAsync
+        <InputAutocompleteMultipleAsync
           key={variant}
           id="grouped-demo"
           label="With categories"
-          selectedOption={selectedOption}
-          setSelectedOption={(e, option) => setSelectedOption(option)}
+          selectedOptions={selectedOptions}
+          setSelectedOptions={(e, option) => setSelectedOptions(option)}
           fetchOptionsOnFocus
           getOptionsPromise={async () => top100FilmsWithFirstLetters}
           groupBy={(option) => option.firstLetter}
@@ -111,7 +118,7 @@ export const GroupedByCategories = () => {
 };
 
 export const DisabledOptions = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
   const _options = timeSlots
     .slice(0)
@@ -120,16 +127,16 @@ export const DisabledOptions = () => {
   return (
     <Stack spacing={4}>
       {["filled", "standard", "outlined"].map((variant) => (
-        <InputAutocompleteAsync
+        <InputAutocompleteMultipleAsync
           key={variant}
           variant={variant}
           id="grouped-demo"
           label="Disabled options"
-          selectedOption={selectedOption}
-          setSelectedOption={(e, option) => setSelectedOption(option)}
+          selectedOptions={selectedOptions}
+          setSelectedOptions={(e, options) => setSelectedOptions(options)}
           fetchOptionsOnFocus
           getOptionsPromise={async () => _options}
-          getOptionLabel={(option) => option.time}
+          getOptionLabel="time"
           width={200}
         />
       ))}

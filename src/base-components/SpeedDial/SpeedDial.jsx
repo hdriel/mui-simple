@@ -6,11 +6,11 @@ import {
   SpeedDialIcon,
 } from "./SpeedDial.styled";
 // import Backdrop from "../Backdrop/Backdrop";
-import { Backdrop, darken } from "@mui/material";
+import { Backdrop } from "@mui/material";
+import { useCustomColor } from "../../utils/helpers";
 
 export default function SpeedDial({
-  customColor,
-  muiColor,
+  color,
   top,
   bottom,
   right,
@@ -27,21 +27,8 @@ export default function SpeedDial({
   showTooltip,
   ...props
 }) {
-  const getCustomColor = (suffix) =>
-    customColor
-      ? suffix.includes("dark")
-        ? darken(customColor, 0.2)
-        : customColor
-      : undefined;
-
-  const getMuiColor = (suffix) =>
-    muiColor
-      ? muiColor?.endsWith(suffix)
-        ? muiColor
-        : `${muiColor}${suffix}`
-      : undefined;
-
-  const color = (suffix) => getCustomColor(suffix) ?? getMuiColor(suffix);
+  const [customColor] = useCustomColor(color);
+  const [customColorHover] = useCustomColor(color, { darken: 0.2 });
 
   return (
     <>
@@ -61,8 +48,8 @@ export default function SpeedDial({
         icon={<SpeedDialIcon openIcon={openIcon} icon={icon} />}
         FabProps={{
           sx: {
-            bgcolor: color(".main"),
-            "&:hover": { bgcolor: color(".dark") },
+            bgcolor: customColor,
+            "&:hover": { bgcolor: customColorHover },
           },
         }}
         {...props}
@@ -82,8 +69,7 @@ export default function SpeedDial({
 }
 
 SpeedDial.propTypes = {
-  customColor: PropTypes.string,
-  muiColor: PropTypes.string,
+  color: PropTypes.string,
   hidden: PropTypes.bool,
   showTooltip: PropTypes.bool,
   icon: PropTypes.node,
@@ -108,6 +94,7 @@ SpeedDial.propTypes = {
 };
 
 SpeedDial.defaultProps = {
+  color: undefined,
   hidden: undefined,
   showTooltip: true,
   icon: undefined,

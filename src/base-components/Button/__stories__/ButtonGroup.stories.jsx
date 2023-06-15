@@ -5,6 +5,7 @@ import Button from "../Button";
 import ButtonGroup from "../ButtonGroup";
 import { Delete as DeleteIcon, Send as SendIcon } from "@mui/icons-material";
 import { Stack } from "@mui/material";
+import Divider from "../../Divider/Divider";
 
 export default {
   title: "Inputs/ButtonGroup",
@@ -63,70 +64,41 @@ export const Variant = () => {
   );
 };
 
-export const Themed = () => {
+export const ThemedAndColored = () => {
   return (
-    <Stack spacing={3}>
-      <ButtonGroup variant="text" muiColor="secondary">
-        <Button {...actions} startIcon={<SendIcon />}>
-          Start Icon
-        </Button>
-        <Button {...actions} endIcon={<DeleteIcon />} muiColor="error">
-          End Icon
-        </Button>
-        <Button {...actions}>Test</Button>
-      </ButtonGroup>
-      <ButtonGroup variant="contained" muiColor="secondary">
-        <Button {...actions} startIcon={<SendIcon />}>
-          Start Icon
-        </Button>
-        <Button {...actions} endIcon={<DeleteIcon />} muiColor="error">
-          End Icon
-        </Button>
-        <Button {...actions}>Test</Button>
-      </ButtonGroup>
-      <ButtonGroup variant="outlined" muiColor="secondary">
-        <Button {...actions} startIcon={<SendIcon />}>
-          Start Icon
-        </Button>
-        <Button {...actions} endIcon={<DeleteIcon />}>
-          End Icon
-        </Button>
-        <Button {...actions}>Test</Button>
-      </ButtonGroup>
-    </Stack>
-  );
-};
-
-export const Colored = () => {
-  return (
-    <Stack spacing={3}>
-      <ButtonGroup variant="text" customColor={"#0a3e99"}>
-        <Button {...actions} startIcon={<SendIcon />}>
-          Start Icon
-        </Button>
-        <Button {...actions} endIcon={<DeleteIcon />} customColor={"#ca00ca"}>
-          End Icon
-        </Button>
-        <Button {...actions}>Test</Button>
-      </ButtonGroup>
-      <ButtonGroup variant="contained" customColor={"#0a3e99"}>
-        <Button {...actions} startIcon={<SendIcon />}>
-          Start Icon
-        </Button>
-        <Button {...actions} endIcon={<DeleteIcon />} customColor={"#ca00ca"}>
-          End Icon
-        </Button>
-        <Button {...actions}>Test</Button>
-      </ButtonGroup>
-      <ButtonGroup variant="outlined" customColor={"#0a3e99"}>
-        <Button {...actions} startIcon={<SendIcon />}>
-          Start Icon
-        </Button>
-        <Button {...actions} endIcon={<DeleteIcon />}>
-          End Icon
-        </Button>
-        <Button {...actions}>Test</Button>
-      </ButtonGroup>
+    <Stack direction="column" spacing={4}>
+      {[
+        undefined,
+        "primary",
+        "secondary",
+        "info",
+        "success",
+        "error",
+        "#df01fd",
+      ].map((color, colorIndex, arr) => (
+        <Stack key={`${colorIndex}-${color}`} direction="column" spacing={2}>
+          {["text", "contained", "outlined"].map((variant, index) => (
+            <>
+              <Stack key={`${variant}-${color}`} direction="column" spacing={2}>
+                <ButtonGroup variant={variant} color={color}>
+                  <Button {...actions} startIcon={<SendIcon />}>
+                    Start Icon
+                  </Button>
+                  <Button
+                    {...actions}
+                    endIcon={<DeleteIcon />}
+                    color={arr[colorIndex - 1]}
+                  >
+                    End Icon
+                  </Button>
+                  <Button {...actions}>Test</Button>
+                </ButtonGroup>
+              </Stack>
+            </>
+          ))}
+          <Divider />
+        </Stack>
+      ))}
     </Stack>
   );
 };

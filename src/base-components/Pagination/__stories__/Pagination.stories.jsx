@@ -20,12 +20,12 @@ export const Default = () => {
 export const ThemedAndColored = () => {
   return (
     <Stack spacing={5}>
-      <Pagination muiColor="primary" totalPages={10} label="primary" />
-      <Pagination muiColor="secondary" totalPages={10} label="secondary" />
-      <Pagination muiColor="info" totalPages={10} label="info" />
-      <Pagination muiColor="warning" totalPages={10} label="warning" />
-      <Pagination muiColor="error" totalPages={10} label="error" />
-      <Pagination customColor={"#D050CC"} totalPages={10} label="#D050CC" />;
+      <Pagination color="primary" totalPages={10} label="primary" />
+      <Pagination color="secondary" totalPages={10} label="secondary" />
+      <Pagination color="info" totalPages={10} label="info" />
+      <Pagination color="warning" totalPages={10} label="warning" />
+      <Pagination color="error" totalPages={10} label="error" />
+      <Pagination color={"#D050CC"} totalPages={10} label="#D050CC" />;
       <Pagination totalPages={10} label="default" />
     </Stack>
   );

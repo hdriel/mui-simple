@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
+import { styled, css } from "@mui/material/styles";
 import {
   ToggleButton as MuiToggleButton,
   ToggleButtonGroup as MuiToggleButtonGroup,
@@ -42,13 +42,23 @@ export const ToggleButtonGroup = styled(
   ({ ...props }) => <MuiToggleButtonGroup {...props} />,
   { shouldForwardProp: (propName) => !["customColor"].includes(propName) }
 )`
+  & .MuiToggleButton-root:hover {
+    background-color: ${(props) =>
+      props.customColor && alpha(props.customColor, 0.2)};
+  }
+
   & .Mui-selected,
   & .MuiTouchRipple-root {
     color: ${(props) => props.customColor};
   }
+
   & .Mui-selected {
-    background-color: ${(props) =>
-      props.customColor && alpha(props.customColor, 0.1)};
+    ${(props) => {
+      const color = props.customColor && alpha(props.customColor, 0.2);
+      return css`
+        background-color: ${color ? `${color} !important` : ""};
+      `;
+    }}
   }
 `;
 

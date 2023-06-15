@@ -17,7 +17,7 @@ export default {
       <div
         style={{
           padding: "0.5em",
-          height: "300px",
+          height: "auto",
           width: "300px",
           border: "1px solid black",
         }}
@@ -182,6 +182,37 @@ export const Colored = () => {
   );
 };
 
+export const ThemedAndColor = () => {
+  const [checked, setChecked] = useState(true);
+
+  return (
+    <Stack direction="column" spacing={2}>
+      {[
+        undefined,
+        "primary",
+        "secondary",
+        "info",
+        "success",
+        "error",
+        "#df01fd",
+      ].map((color, index, arr) => (
+        <Switch
+          key={index}
+          checked={checked}
+          onChange={(event) => {
+            setChecked(event.target.checked);
+            onChangeAction(event);
+          }}
+          label="some colored checkbox"
+          textColor={arr[index + 1]}
+          color={color}
+          defaultChecked
+        />
+      ))}
+    </Stack>
+  );
+};
+
 export const ThemeColor = () => {
   const [checked, setChecked] = useState(true);
 
@@ -192,7 +223,7 @@ export const ThemeColor = () => {
         setChecked(event.target.checked);
         onChangeAction(event);
       }}
-      muiColor="secondary"
+      color="secondary"
       label="some colored checkbox"
       defaultChecked
     />

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Divider as MuiDivider } from "./Divider.styled";
+import { useCustomColor } from "../../utils/helpers";
 
 export default function Divider({
   orientation,
@@ -12,10 +13,11 @@ export default function Divider({
   label,
   thickness,
   color,
-  muiColor,
   children,
   ...props
 }) {
+  const [customColor, muiColor] = useCustomColor(color);
+
   const content = [label]
     .concat(children ?? [])
     .map((child, index) => {
@@ -23,7 +25,6 @@ export default function Divider({
         ? React.cloneElement(child, {
             key: `DC${index}`,
             ...{ color: child.props.color ?? color },
-            ...{ muiColor: child.props.muiColor ?? muiColor },
           })
         : child;
     })
@@ -38,7 +39,7 @@ export default function Divider({
       variant={variant}
       component={component}
       thickness={thickness}
-      customColor={color}
+      customColor={muiColor ? undefined : customColor}
       muiColor={muiColor}
       {...props}
     >
@@ -57,7 +58,6 @@ Divider.propTypes = {
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   thickness: PropTypes.number,
   color: PropTypes.string,
-  muiColor: PropTypes.string,
 };
 
 Divider.defaultProps = {
@@ -70,5 +70,4 @@ Divider.defaultProps = {
   label: undefined,
   thickness: undefined,
   color: undefined,
-  muiColor: undefined,
 };

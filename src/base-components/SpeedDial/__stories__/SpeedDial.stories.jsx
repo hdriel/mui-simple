@@ -39,9 +39,7 @@ export const Basic = () => {
     { icon: <PrintIcon />, name: "Print" },
     { icon: <ShareIcon />, name: "Share" },
   ];
-  return (
-    <SpeedDial actions={actions} muiColor="primary" bottom={16} right={16} />
-  );
+  return <SpeedDial actions={actions} color="primary" bottom={16} right={16} />;
 };
 
 export const Direction = () => {
@@ -105,28 +103,28 @@ export const ThemedAndColored = () => {
         direction="left"
         bottom={15}
         right={16}
-        muiColor="primary"
+        color="primary"
       />
       <SpeedDial
         actions={actions}
         direction="left"
         bottom={80}
         right={16}
-        muiColor="secondary"
+        color="secondary"
       />
       <SpeedDial
         actions={actions}
         direction="left"
         bottom={150}
         right={16}
-        muiColor="error"
+        color="error"
       />
       <SpeedDial
         actions={actions}
         direction="left"
         bottom={220}
         right={16}
-        customColor={"#058460"}
+        color={"#058460"}
       />
     </>
   );

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Avatar as MuiAvatar } from "@mui/material";
-import { getCapitalLetters, stringToColor } from "../../utils/helpers";
+import {
+  getCapitalLetters,
+  stringToColor,
+  useCustomColor,
+} from "../../utils/helpers";
 import Tooltip from "../Tooltip/Tooltip";
 import { TOOLTIP_PLACEMENTS } from "../Tooltip/Tooltip.consts";
 
@@ -20,6 +24,7 @@ export default function Avatar({
 }) {
   const [url, setUrl] = useState(image);
   const [fallbackSet, setFallbackSet] = useState(false);
+  const [customColor] = useCustomColor(color);
 
   const errorHandler = () => {
     if (fallbackSet) {
@@ -31,7 +36,7 @@ export default function Avatar({
   };
 
   const background =
-    color ?? (url && !username ? undefined : stringToColor(username));
+    customColor ?? (url && !username ? undefined : stringToColor(username));
 
   return (
     <Tooltip title={showTooltip ? username : ""} placement={tooltipPlacement}>

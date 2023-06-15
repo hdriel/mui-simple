@@ -1,39 +1,44 @@
-import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
-import TouchRipple from '@mui/material/ButtonBase/TouchRipple';
-import { useTheme } from '@mui/material';
+import React, { useRef } from "react";
+import PropTypes from "prop-types";
+import TouchRipple from "@mui/material/ButtonBase/TouchRipple";
 
-import { Wrapper } from './RippleBox.styled';
+import { Wrapper } from "./RippleBox.styled";
+import { useCustomColor } from "../../utils/helpers";
 
 export function RippleBox({ color, children }) {
-    const theme = useTheme();
-    const rippleRef = useRef(null);
+  const [customColor, muiColor] = useCustomColor(color ?? "primary");
 
-    const onRippleStart = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        rippleRef.current.start(e);
-    };
+  const rippleRef = useRef(null);
 
-    const onRippleStop = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        rippleRef.current.stop(e);
-    };
+  const onRippleStart = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    rippleRef.current.start(e);
+  };
 
-    return (
-        <Wrapper color={color || theme.palette.primary.main} onMouseDown={onRippleStart} onMouseUp={onRippleStop}>
-            {children}
-            <TouchRipple ref={rippleRef} center={false} />
-        </Wrapper>
-    );
+  const onRippleStop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    rippleRef.current.stop(e);
+  };
+
+  return (
+    <Wrapper
+      color={muiColor ?? customColor}
+      onMouseDown={onRippleStart}
+      onMouseUp={onRippleStop}
+    >
+      {children}
+      <TouchRipple ref={rippleRef} center={false} />
+    </Wrapper>
+  );
 }
 
 RippleBox.propTypes = {
-    color: PropTypes.string,
-    children: PropTypes.node.isRequired,
+  color: PropTypes.string,
+  children: PropTypes.node.isRequired,
 };
 
 RippleBox.defaultProps = {
-    color: undefined,
+  color: undefined,
 };

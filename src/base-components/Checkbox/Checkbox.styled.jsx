@@ -15,8 +15,9 @@ export const Checkbox = styled(
     helperText,
     label = "",
     fontSize,
-    color,
+    customColor,
     muiColor,
+    sx,
     ...props
   }) => (
     <>
@@ -27,13 +28,16 @@ export const Checkbox = styled(
         sx={{ m: 0, userSelect: "none" }}
         control={
           <MuiCheckbox
-            {...props}
             color={muiColor}
             sx={{
-              ...props.sx,
+              ...sx,
               ...(fontSize && { "& .MuiSvgIcon-root": { fontSize } }),
-              ...(color && { color, "&.Mui-checked": { color } }),
+              ...(customColor && {
+                color: customColor,
+                "&.Mui-checked": { color: customColor },
+              }),
             }}
+            {...props}
           />
         }
         label={label}
@@ -43,6 +47,6 @@ export const Checkbox = styled(
   ),
   {
     shouldForwardProp: (prop) =>
-      !["textColor", "muiColor", "fontSize", "helperText"].includes(prop),
+      !["textColor", "fontSize", "helperText"].includes(prop),
   }
 )``;

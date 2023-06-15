@@ -9,14 +9,14 @@ import OnScrollEventWrapper from "./OnScrollEventWrapper";
 import Button from "../Button/Button";
 import Typography from "../Typography/Typography";
 import Drawer from "../Drawer/Drawer";
+import { useCustomColor } from "../../utils/helpers";
 
 const DEFAULT_DRAWER_WIDTH = 240;
 
 export default function AppBar({
   menu,
   title,
-  muiColor,
-  customColor,
+  color,
   position,
   enableColorOnDark,
   scrollElement,
@@ -35,6 +35,7 @@ export default function AppBar({
 }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const drawerWidth = drawerProps?.drawerWidth ?? DEFAULT_DRAWER_WIDTH;
+  const customColor = useCustomColor(color);
 
   const toggleDrawer = (open) => setDrawerOpen((v) => !v);
 
@@ -49,7 +50,7 @@ export default function AppBar({
       })
     : menu && (
         <Button
-          muiColor="inherit"
+          // muiColor="inherit"
           edge="start"
           size="large"
           icon={<MenuIcon />}
@@ -72,7 +73,6 @@ export default function AppBar({
         <MuiAppBar
           drawerWidth={drawerOpen ? drawerWidth : 0}
           position={hideOnScroll || elevationScroll ? "fixed" : position}
-          color={muiColor}
           customColor={customColor}
           enableColorOnDark={enableColorOnDark}
           sx={{ ...(isBottom && { top: "auto", bottom: 0 }), ...props.sx }}
@@ -129,8 +129,7 @@ AppBar.propTypes = {
   menu: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   position: PropTypes.oneOf(["fixed", "fixed-bottom", "sticky", "static"]),
-  muiColor: PropTypes.string,
-  customColor: PropTypes.string,
+  color: PropTypes.string,
   enableColorOnDark: PropTypes.bool,
   toolbarId: PropTypes.string,
   scrollElement: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
@@ -149,8 +148,7 @@ AppBar.defaultProps = {
   menu: undefined,
   position: "fixed",
   title: undefined,
-  muiColor: undefined,
-  customColor: undefined,
+  color: undefined,
   enableColorOnDark: undefined,
   scrollElement: undefined,
   toolbarId: undefined,

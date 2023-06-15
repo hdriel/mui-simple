@@ -5,13 +5,11 @@ import MuiAutocomplete from "./InputAutocomplete";
 import CircularProgress from "../Progress/CircularProgress/CircularProgress";
 import { sleep } from "../../utils/helpers";
 
-export default function InputAutoCompleteAsync({
-  getOptionLabel,
-  sleep: _sleep,
+export function useAutoCompleteAsync({
   getOptionsPromise,
+  sleep: _sleep,
   getOptionsCallback,
   fetchOptionsOnFocus,
-  ...props
 }) {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState([]);
@@ -47,28 +45,29 @@ export default function InputAutoCompleteAsync({
     <CircularProgress color="inherit" size={20} />
   ) : null;
 
-  return (
-    <MuiAutocomplete
-      {...props}
-      open={open}
-      onOpen={() => setOpen(true)}
-      onClose={() => setOpen(false)}
-      getOptionLabel={getOptionLabel}
-      options={options}
-      loading={loading}
-      endCmp={endCmp}
-    />
-  );
+  return {
+    onOpen: () => setOpen(true),
+    onClose: () => setOpen(false),
+    options,
+    open,
+    loading,
+    endCmp,
+  };
 }
 
-InputAutoCompleteAsync.propTypes = {
+export default function InputAutocompleteAsync({ ...props }) {
+  const asyncProps = useAutoCompleteAsync(props);
+  return <MuiAutocomplete {...props} {...asyncProps} />;
+}
+
+InputAutocompleteAsync.propTypes = {
   getOptionLabel: PropTypes.func,
   getOptionsPromise: PropTypes.func,
   sleep: PropTypes.number,
   fetchOptionsOnFocus: PropTypes.bool,
 };
 
-InputAutoCompleteAsync.defaultProps = {
+InputAutocompleteAsync.defaultProps = {
   getOptionLabel: undefined,
   getOptionsPromise: undefined,
   sleep: 1e3,

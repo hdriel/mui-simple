@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Checkbox as MuiCheckbox } from "./Checkbox.styled";
+import { useCustomColor } from "../../utils/helpers";
 
 const Checkbox = ({
   label,
   size,
   color,
-  textColor,
-  muiColor,
+  textColor: _textColor,
   checked,
   onChange,
   icon,
@@ -20,13 +20,16 @@ const Checkbox = ({
   fontSize,
   ...props
 }) => {
+  const [customColor, muiColor] = useCustomColor(color);
+  const [textColor] = useCustomColor(_textColor);
+
   return (
     <MuiCheckbox
       label={label}
       size={size}
-      color={color}
-      textColor={textColor}
+      customColor={muiColor ? undefined : customColor}
       muiColor={muiColor}
+      textColor={textColor}
       icon={icon}
       checkedIcon={checkedIcon}
       defaultChecked={defaultChecked}
@@ -46,7 +49,6 @@ Checkbox.propTypes = {
   label: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   color: PropTypes.string,
-  muiColor: PropTypes.string,
   checked: PropTypes.bool,
   icon: PropTypes.node,
   checkedIcon: PropTypes.node,
@@ -62,7 +64,6 @@ Checkbox.defaultProps = {
   label: undefined,
   size: "medium",
   color: undefined,
-  muiColor: undefined,
   checked: undefined,
   icon: undefined,
   checkedIcon: undefined,

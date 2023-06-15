@@ -14,14 +14,14 @@ import {
   KeyboardArrowRightIcon,
   CheckIcon,
 } from "./MobileStepper.styled";
+import { useCustomColor } from "../../utils/helpers";
 
 export default function MobileStepper({
   variant,
   position,
   steps: _steps,
   stepIndex: activeStep,
-  muiColor,
-  customColor,
+  color,
   onNext,
   onBack,
   onSkip,
@@ -37,6 +37,8 @@ export default function MobileStepper({
   children,
   ...props
 }) {
+  const [customColor] = useCustomColor(color);
+
   const theme = useTheme();
   const [autoPlayState, setAutoPlayState] = useState(autoPlay);
   const isLTR = theme.direction === "ltr";
@@ -62,8 +64,7 @@ export default function MobileStepper({
           ? { label: step, optional: false }
           : {
               ...step,
-              muiColor:
-                step.muiColor ?? muiColor ?? (step.error ? "error" : undefined),
+              color: step.color ?? color ?? (step.error ? "error" : undefined),
               customColorValue: step.customColor ?? customColor,
               optional: step.optional
                 ? typeof step.optional === "string"
@@ -112,7 +113,7 @@ export default function MobileStepper({
       <Button
         size="small"
         onClick={onDone}
-        muiColor={muiColor}
+        color={color}
         customColor={customColor}
         {...nextIconProp}
         startIcon={nextIconProp.endIcon ? <CheckIcon /> : undefined}
@@ -125,7 +126,7 @@ export default function MobileStepper({
         size="small"
         onClick={() => handleNext(activeStep)}
         disabled={activeStep === maxSteps - 1}
-        muiColor={muiColor}
+        color={color}
         customColor={customColor}
         {...nextIconProp}
       >
@@ -138,7 +139,7 @@ export default function MobileStepper({
       size="small"
       onClick={() => handleBack(activeStep)}
       disabled={activeStep === 0}
-      muiColor={muiColor}
+      color={color}
       customColor={customColor}
       {...backIconProp}
     >
@@ -236,15 +237,13 @@ MobileStepper.propTypes = {
       PropTypes.shape({
         label: PropTypes.string,
         optional: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-        muiColor: PropTypes.string,
-        customColor: PropTypes.string,
+        color: PropTypes.string,
         error: PropTypes.bool,
         icon: PropTypes.node,
       }),
     ])
   ),
-  muiColor: PropTypes.string,
-  customColor: PropTypes.string,
+  color: PropTypes.string,
   onNext: PropTypes.func,
   onBack: PropTypes.func,
   onSkip: PropTypes.func,
@@ -267,8 +266,7 @@ MobileStepper.defaultProps = {
   autoPlayInterval: undefined,
   infiniteLoop: undefined,
   steps: undefined,
-  muiColor: undefined,
-  customColor: undefined,
+  color: undefined,
   onNext: undefined,
   onBack: undefined,
   onSkip: undefined,

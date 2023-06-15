@@ -211,8 +211,7 @@ export const ThemedAndColored = () => {
         "error",
       ].map((color, index) => (
         <Tabs
-          muiColor={index ? color : undefined}
-          customColor={index ? undefined : color}
+          color={color}
           verticalMaxFixedHeight={400}
           value={value}
           onChange={(newValue) => onChangeHandler(newValue)}

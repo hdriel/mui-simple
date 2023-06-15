@@ -201,13 +201,26 @@ export const CustomDetails = () => {
   );
 };
 
-export const Themed = () => {
+export const ThemedAndColored = () => {
   return (
     <Stack>
-      <Accordion muiColor="primary">primary</Accordion>
-      <Accordion muiColor="secondary">secondary</Accordion>
-      <Accordion>Default</Accordion>
-      <Accordion color={"#D050CC"}>Colored</Accordion>;
+      <Accordion
+        label={"custom colors"}
+        bgColor="primary.dark"
+        titleColor={"#FFFFFF"}
+        textColor="secondary"
+        details={`bgColor="primary.dark" titleColor="#FFFFFF" textColor="secondary"`}
+      />
+      <Accordion label={"custom title color"} titleColor="secondary">
+        titleColor="secondary"
+      </Accordion>
+      <Accordion label={"default colors"}>Default</Accordion>
+      <Accordion
+        label={"custom text color"}
+        textColor={"#D050CC"}
+        details={`textColor="#D050CC"`}
+      />
+      ;
     </Stack>
   );
 };

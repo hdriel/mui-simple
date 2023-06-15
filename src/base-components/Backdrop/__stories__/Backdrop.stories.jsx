@@ -31,7 +31,7 @@ export const Open = () => {
           actions.onClick(event);
         }}
       >
-        <CircularProgress muiColor="inherit" />
+        <CircularProgress color="inherit" />
       </Backdrop>
     </div>
   );

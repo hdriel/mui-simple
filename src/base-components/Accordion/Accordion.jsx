@@ -12,6 +12,7 @@ import {
   ArrowForwardIosSharp as ArrowForwardIosSharpIcon,
   ExpandMore as ExpandMoreIcon,
 } from "@mui/icons-material";
+import { useCustomColor } from "../../utils/helpers";
 
 export default function Accordion({
   id,
@@ -24,15 +25,19 @@ export default function Accordion({
   detailsMaxRows,
   showMoreLabel,
   hideLabel,
-  muiColor,
-  customColor,
   unmountDetailsOnClose,
   useCustomStyle,
+  bgColor: _bgColor,
+  titleColor: _titleColor,
+  textColor,
+  buttonsColor,
   children,
   ...props
 }) {
   const [showMore, setShowMore] = useState(false);
   const [isEllipsis, setIsEllipsis] = useState(false);
+  const [bgColor] = useCustomColor(_bgColor);
+  const [titleColor] = useCustomColor(_titleColor);
 
   return (
     <MuiAccordion
@@ -46,6 +51,8 @@ export default function Accordion({
       <AccordionSummary
         id={id}
         useCustomStyle={useCustomStyle}
+        bgColor={bgColor}
+        titleColor={titleColor}
         expandIcon={
           useCustomStyle ? (
             <ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />
@@ -57,7 +64,12 @@ export default function Accordion({
         <Typography
           tooltip={false}
           wrap={!secondaryLabel}
-          sx={{ ...(secondaryLabel && { width: "33%", flexShrink: 0 }) }}
+          sx={{
+            ...(secondaryLabel && {
+              width: "33%",
+              flexShrink: 0,
+            }),
+          }}
         >
           {label}
         </Typography>
@@ -74,6 +86,7 @@ export default function Accordion({
               wrap={showMore ? false : !!detailsMaxRows}
               rows={showMore ? undefined : detailsMaxRows}
               onEllipsisChange={(value) => setIsEllipsis(value)}
+              color={textColor}
             >
               {details}
             </Typography>
@@ -81,8 +94,7 @@ export default function Accordion({
               <ShowMoreWrapper>
                 <Button
                   variant="text"
-                  muiColor={muiColor}
-                  customColor={customColor}
+                  color={buttonsColor}
                   disableRipple
                   onClick={() => setShowMore((v) => !v)}
                   sx={{ float: "right" }}
@@ -110,8 +122,10 @@ Accordion.propTypes = {
   detailsMaxRows: PropTypes.number,
   showMoreLabel: PropTypes.string,
   hideLabel: PropTypes.string,
-  muiColor: PropTypes.string,
-  customColor: PropTypes.string,
+  bgColor: PropTypes.string,
+  textColor: PropTypes.string,
+  titleColor: PropTypes.string,
+  buttonsColor: PropTypes.string,
   unmountDetailsOnClose: PropTypes.bool,
   useCustomStyle: PropTypes.bool,
 };
@@ -127,8 +141,10 @@ Accordion.defaultProps = {
   detailsMaxRows: undefined,
   showMoreLabel: "Show More",
   hideLabel: "Hide",
-  muiColor: "info",
-  customColor: undefined,
+  bgColor: undefined,
+  textColor: undefined,
+  titleColor: undefined,
+  buttonsColor: undefined,
   unmountDetailsOnClose: false,
   useCustomStyle: false,
 };

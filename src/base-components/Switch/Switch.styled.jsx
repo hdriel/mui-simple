@@ -17,10 +17,9 @@ import {
 
 export const FormHelperText = MuiFormHelperText;
 export const Switch = styled(
-  ({ switchStyle, checked, scale, color, muiColor, ...props }) => (
+  ({ switchStyle, checked, color, scale, ...props }) => (
     <MuiSwitch
       {...props}
-      color={muiColor}
       checked={checked}
       focusVisibleClassName={
         switchStyle === SWITCH_STYLES.IOS ? ".Mui-focusVisible" : ""
@@ -32,7 +31,6 @@ export const Switch = styled(
     shouldForwardProp: (prop) =>
       ![
         "textColor",
-        "muiColor",
         "fontSize",
         "helperText",
         "switchStyle",

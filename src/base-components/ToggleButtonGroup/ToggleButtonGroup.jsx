@@ -4,6 +4,7 @@ import {
   ToggleButton,
   ToggleButtonGroup as MuiToggleButtonGroup,
 } from "./ToggleButtonGroup.styled";
+import { useCustomColor } from "../../utils/helpers";
 
 const ToggleButtonGroup = ({
   value: selectedValue,
@@ -15,9 +16,10 @@ const ToggleButtonGroup = ({
   enforceValueSet,
   data,
   color,
-  muiColor,
   ...props
 }) => {
+  const [customColor, muiColor] = useCustomColor(color);
+
   const commonsValues = [].concat(selectedValue);
 
   function onChangeHandler(event, newValues) {
@@ -44,7 +46,7 @@ const ToggleButtonGroup = ({
   return (
     <MuiToggleButtonGroup
       color={muiColor}
-      customColor={color}
+      customColor={muiColor ? undefined : customColor}
       orientation={orientation}
       value={exclusive ? selectedValue : commonsValues}
       exclusive={exclusive}
@@ -81,7 +83,6 @@ ToggleButtonGroup.propTypes = {
   fullWidth: PropTypes.bool,
   disableRipple: PropTypes.bool,
   onChange: PropTypes.func,
-  muiColor: PropTypes.string,
   color: PropTypes.string,
   enforceValueSet: PropTypes.bool,
   data: PropTypes.arrayOf(
@@ -94,7 +95,6 @@ ToggleButtonGroup.propTypes = {
 };
 
 ToggleButtonGroup.defaultProps = {
-  muiColor: undefined,
   color: undefined,
   orientation: undefined,
   size: undefined,

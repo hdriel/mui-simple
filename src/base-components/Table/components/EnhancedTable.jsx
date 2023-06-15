@@ -37,6 +37,8 @@ import {
 } from "../hooks";
 import { EnhancedTablePagination } from "./EnhancedTablePagination";
 
+const DEFAULT_EMPTY_ROW_HEIGHT = 57;
+
 export default function EnhancedTable({
   elevation,
   stickyHeader,
@@ -195,8 +197,13 @@ export default function EnhancedTable({
               ))}
 
               {emptyRows > 0 && (
-                <TableRow style={{ height: 40 * emptyRows }}>
-                  <TableCell colSpan={columns?.length || undefined} />
+                <TableRow
+                  style={{ height: DEFAULT_EMPTY_ROW_HEIGHT * emptyRows }}
+                >
+                  <TableCell
+                    colSpan={columns?.length || undefined}
+                    rowSpan={emptyRows}
+                  />
                 </TableRow>
               )}
             </TableBody>

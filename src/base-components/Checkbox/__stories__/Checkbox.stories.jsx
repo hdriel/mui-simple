@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
 
 import Checkbox from "../Checkbox";
+import { Stack } from "@mui/material";
 
 export default {
   title: "Inputs/Checkbox",
@@ -15,7 +16,7 @@ export default {
       <div
         style={{
           padding: "1em",
-          height: "100px",
+          height: "auto",
           width: "90%",
           overflow: "hidden",
         }}
@@ -34,7 +35,7 @@ Default.decorators = [
       style={{
         padding: "1em",
         width: "200px",
-        height: "200px",
+        height: "auto",
       }}
     >
       <Story />
@@ -79,7 +80,7 @@ Custom.decorators = [
       style={{
         padding: "1em",
         width: "300px",
-        height: "300px",
+        height: "auto",
       }}
     >
       <Story />
@@ -158,35 +159,32 @@ export const Required = () => {
   );
 };
 
-export const Colored = () => {
-  const [checked, setChecked] = useState(false);
+export const ThemedAndColor = () => {
+  const [checked, setChecked] = useState(true);
 
   return (
-    <Checkbox
-      checked={checked}
-      onChange={(event) => {
-        setChecked(event.target.checked);
-        action(event);
-      }}
-      label="some colored checkbox"
-      color={"#10dc50"}
-    />
-  );
-};
-
-export const ThemeColor = () => {
-  const [checked, setChecked] = useState(false);
-
-  return (
-    <Checkbox
-      checked={checked}
-      onChange={(event) => {
-        setChecked(event.target.checked);
-        action(event);
-      }}
-      muiColor="secondary"
-      label="some colored checkbox"
-    />
+    <Stack direction="column" spacing={2}>
+      {[
+        undefined,
+        "primary",
+        "secondary",
+        "info",
+        "success",
+        "error",
+        "#df01fd",
+      ].map((color, index) => (
+        <Checkbox
+          key={index}
+          checked={checked}
+          onChange={(event) => {
+            setChecked(event.target.checked);
+            action(event);
+          }}
+          color={color}
+          label={`${index + 1} : ${color}`}
+        />
+      ))}
+    </Stack>
   );
 };
 

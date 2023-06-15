@@ -66,25 +66,36 @@ export const Variant = () => {
   );
 };
 
-export const Themed = () => {
+export const ThemedAndColored = () => {
   return (
-    <Stack direction="row" spacing={3}>
-      <Chip {...actions} muiColor="primary">
-        primary
-      </Chip>
-      <Chip {...actions} muiColor="secondary">
-        secondary
-      </Chip>
-      <Chip {...actions}>Default</Chip>
+    <Stack direction="column" spacing={3}>
+      {[
+        undefined,
+        "primary",
+        "secondary",
+        "info",
+        "success",
+        "error",
+        "#df01fd",
+      ]
+        .map((color, index) => (
+          <Stack direction="row" spacing={3} key={`${color}`}>
+            {["outlined", "text"].map((variant) => (
+              <Chip
+                key={`${color}-${variant}`}
+                {...actions}
+                color={color}
+                textColor={color ? "#FFFFFF" : undefined}
+                variant={variant}
+                minWidth={150}
+              >
+                {variant + " " + color}
+              </Chip>
+            ))}
+          </Stack>
+        ))
+        .flat()}
     </Stack>
-  );
-};
-
-export const Colored = () => {
-  return (
-    <Chip {...actions} color={"#D050CC"}>
-      Colored
-    </Chip>
   );
 };
 

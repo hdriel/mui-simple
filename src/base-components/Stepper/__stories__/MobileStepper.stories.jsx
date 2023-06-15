@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 
 import MobileStepper from "../MobileStepper";
 import { Typography } from "../MobileStepper.styled";
-import { useSimpleStepper } from "../../Stepper/Stepper.utils";
+import { useSimpleStepper } from "../Stepper.utils";
 import { DirectionWrapper } from "../../../wrappers/direction.wrapper";
 
 export default {

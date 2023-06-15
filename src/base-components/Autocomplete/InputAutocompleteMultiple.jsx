@@ -16,7 +16,9 @@ export default function InputAutocompleteMultiple({
   renderOption,
   checkboxStyle,
   getOptionLabel: _getOptionLabel,
+  options,
   readOnly,
+  raiseSelectedToTop, // todo: implement this
   ...props
 }) {
   const getOptionLabel = useMemo(
@@ -26,6 +28,16 @@ export default function InputAutocompleteMultiple({
         : (option) => option[_getOptionLabel] || "",
     [_getOptionLabel]
   );
+
+  let totalSelectedOptions = 0;
+  if (raiseSelectedToTop) {
+    options.forEach((option) => {
+      option.selected = !!selectedOptions.find(
+        (so) => getOptionLabel(so) === getOptionLabel(option)
+      );
+      totalSelectedOptions += option.selected ? 1 : 0;
+    });
+  }
 
   return (
     <MuiAutocomplete
@@ -41,11 +53,13 @@ export default function InputAutocompleteMultiple({
         }
       }}
       multiple
+      raiseSelectedToTop={totalSelectedOptions}
       disableCloseOnSelect
       limitTags={limitTags}
       filterSelectedOptions={filterSelectedOptions}
       getOptionLabel={getOptionLabel}
       readOnly={readOnly}
+      options={options}
       renderOption={(props, option, { selected }) => (
         <li {...props}>
           {checkboxStyle && (
@@ -100,6 +114,7 @@ InputAutocompleteMultiple.propTypes = {
   renderOption: PropTypes.func,
   checkboxStyle: PropTypes.bool,
   readOnly: PropTypes.bool,
+  raiseSelectedToTop: PropTypes.bool,
 };
 
 InputAutocompleteMultiple.defaultProps = {
@@ -111,4 +126,5 @@ InputAutocompleteMultiple.defaultProps = {
   renderOption: undefined,
   checkboxStyle: true,
   readOnly: undefined,
+  raiseSelectedToTop: undefined,
 };

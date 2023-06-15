@@ -96,10 +96,12 @@ export const Align = () => {
 export const ThemedAndColored = () => {
   return (
     <Stack spacing={3}>
-      <Typography muiColor="primary">primary</Typography>
-      <Typography muiColor="secondary">secondary</Typography>
+      <Typography color="primary">primary</Typography>
+      <Typography color="secondary">secondary</Typography>
       <Typography>Default</Typography>
-      <Typography customColor={"#D050CC"}>Colored: "#D050CC"</Typography>
+      <Typography color={"#D050CC"} bgColor={"#10D0DD"} padding={2}>
+        Colored: "#D050CC"
+      </Typography>
     </Stack>
   );
 };
@@ -166,8 +168,8 @@ export const Variant = () => {
         "overline",
         "subtitle1",
         "subtitle2",
-      ].map((variant) => (
-        <Typography border variant={variant}>
+      ].map((variant, index) => (
+        <Typography key={index} border variant={variant}>
           {variant}
         </Typography>
       ))}
@@ -208,8 +210,8 @@ export const TextStyles = () => {
         { sup: true, size: "5px" },
         { sub: true, size: "5px" },
         { monospace: true },
-      ].map((styleProps) => (
-        <Typography border autoWidth {...styleProps}>
+      ].map((styleProps, index) => (
+        <Typography key={index} border autoWidth {...styleProps}>
           {JSON.stringify(styleProps).slice(1, -1)}
         </Typography>
       ))}
@@ -220,14 +222,14 @@ export const TextStyles = () => {
 export const Tooltip = () => {
   return (
     <Stack spacing={3}>
-      <Typography muiColor="primary" width={400} tooltip showTooltipOnEllipsis>
+      <Typography color="primary" width={400} tooltip showTooltipOnEllipsis>
         this text not show tooltip because not long enough
       </Typography>
-      <Typography muiColor="primary" width={200} tooltip showTooltipOnEllipsis>
+      <Typography color="primary" width={200} tooltip showTooltipOnEllipsis>
         this text show tooltip because is long enough
       </Typography>
       <Typography
-        muiColor="primary"
+        color="primary"
         width={200}
         tooltip="custom tooltip message"
         showTooltipOnEllipsis
@@ -235,21 +237,21 @@ export const Tooltip = () => {
         this text show custom tooltip message
       </Typography>
       <Typography
-        muiColor="primary"
+        color="primary"
         width={400}
         tooltip
         showTooltipOnEllipsis={false}
       >
         this text show tooltip also when not ellipsis
       </Typography>
-      <Typography muiColor="primary">
+      <Typography color="primary">
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
         since the 1500s, when an unknown printer took a galley of type and
         scrambled it to make a type specimen book. It has survived not only five
         centuries, but also the leap into electr
       </Typography>
-      <Typography muiColor="primary" border>
+      <Typography color="primary" border>
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
         since the 1500s, when an unknown printer took a galley of type and

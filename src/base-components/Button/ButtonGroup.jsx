@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import Button from "./Button";
 import { ButtonGroup as MuiButtonGroup } from "./Button.styled";
+import { useCustomColor } from "../../utils/helpers";
 
 const ButtonGroup = ({
   variant,
   disabled,
-  customColor,
-  muiColor,
+  color,
   size,
   orientation,
   disableElevation,
@@ -16,6 +16,8 @@ const ButtonGroup = ({
   children,
   ...props
 }) => {
+  const [customColor, muiColor] = useCustomColor(color);
+
   const buttons = []
     .concat(children ?? [])
     .filter((child) => child.type.name === Button.name)
@@ -23,7 +25,7 @@ const ButtonGroup = ({
       return React.cloneElement(child, {
         key: `B${index}`,
         disableElevation,
-        ...{ customColor: child.props.customColor ?? customColor },
+        ...{ color: child.props.color ?? color },
       });
     })
     .filter(Boolean);
@@ -33,7 +35,7 @@ const ButtonGroup = ({
       variant={variant}
       disabled={disabled}
       color={muiColor}
-      customColor={customColor}
+      customColor={muiColor ? undefined : customColor}
       size={size}
       orientation={orientation}
       disableElevation={disableElevation}
@@ -50,7 +52,6 @@ ButtonGroup.propTypes = {
   variant: PropTypes.oneOf(["contained", "outlined", "text"]),
   disabled: PropTypes.bool,
   color: PropTypes.string,
-  muiColor: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   orientation: PropTypes.oneOf(["horizontal", "vertical"]),
   disableElevation: PropTypes.bool,
@@ -61,8 +62,7 @@ ButtonGroup.propTypes = {
 ButtonGroup.defaultProps = {
   variant: undefined,
   disabled: false,
-  customColor: undefined,
-  muiColor: undefined,
+  color: undefined,
   size: undefined,
   orientation: undefined,
   disableElevation: undefined,

@@ -7,19 +7,13 @@ export const Tabs = styled(MuiTabs, {
     !["fillActiveTab", "customColor"].includes(propName),
 })`
   & .MuiTabs-indicator {
-    background-color: ${(props) =>
-      _.get(props, `theme.palette.${props.customColor}.main`) ??
-      _.get(props, `theme.palette.${props.customColor}`) ??
-      props.customColor};
+    background-color: ${(props) => props.customColor};
   }
   & .MuiTab-root {
     &.Mui-selected {
        ${(props) => {
          const color =
-           _.get(props, `theme.palette.${props.customColor}.main`) ??
-           _.get(props, `theme.palette.${props.customColor}`) ??
-           props.customColor ??
-           _.get(props, `theme.palette.primary.main`);
+           props.customColor ?? _.get(props, `theme.palette.primary.main`);
 
          return props.fillActiveTab
            ? css`

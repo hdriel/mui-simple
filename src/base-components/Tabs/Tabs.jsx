@@ -6,12 +6,12 @@ import { useTheme } from "@mui/material/styles";
 import { Tabs as MuiTabs, Box } from "./Tabs.styled";
 import TabItem from "./TabItem";
 import TabPanel from "./TabPanel";
+import { useCustomColor } from "../../utils/helpers";
 
 export default function Tabs({
   centered,
   fillActiveTab,
-  muiColor,
-  customColor,
+  color,
   onChange,
   orientation,
   variant,
@@ -26,6 +26,8 @@ export default function Tabs({
   children,
   ...props
 }) {
+  const [customColor] = useCustomColor(color);
+
   const theme = useTheme();
 
   const filteredChildren = []
@@ -83,7 +85,7 @@ export default function Tabs({
     >
       <MuiTabs
         centered={isScrollableVariant ? undefined : centered}
-        customColor={muiColor ?? customColor}
+        customColor={customColor}
         fillActiveTab={fillActiveTab}
         onChange={handleChange}
         orientation={orientation}
@@ -131,9 +133,8 @@ export default function Tabs({
 
 Tabs.propTypes = {
   centered: PropTypes.bool,
-  customColor: PropTypes.string,
   fillActiveTab: PropTypes.bool,
-  muiColor: PropTypes.string,
+  color: PropTypes.string,
   onChange: PropTypes.func,
   orientation: PropTypes.oneOf(["horizontal", "vertical"]),
   variant: PropTypes.oneOf(["fullWidth", "scrollable", "standard"]),
@@ -152,9 +153,8 @@ Tabs.propTypes = {
 
 Tabs.defaultProps = {
   centered: undefined,
-  customColor: undefined,
   fillActiveTab: true,
-  muiColor: undefined,
+  color: undefined,
   onChange: undefined,
   orientation: undefined,
   variant: undefined,
