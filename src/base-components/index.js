@@ -65,7 +65,7 @@ export { default as MobileStepper } from "./Stepper/MobileStepper";
 export { useSimpleStepper } from "./Stepper/Stepper.utils";
 export { default as Switch } from "./Switch/Switch";
 
-export { Table } from "./Table/Table"; // fixing this component change styled getCustomColor to useCustomColor
+export { Table } from "./Table/Table";
 export { default as Tabs } from "./Tabs/Tabs";
 export { default as Tab } from "./Tabs/Tab";
 export { default as ToggleButtonGroup } from "./ToggleButtonGroup/ToggleButtonGroup";

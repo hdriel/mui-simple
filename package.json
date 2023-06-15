@@ -59,6 +59,7 @@
     "@testing-library/user-event": "^13.5.0",
     "autosuggest-highlight": "^3.3.4",
     "color": "^4.2.3",
+    "colornames": "^1.1.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "mui-image": "^1.0.7",

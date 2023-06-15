@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { alpha, darken, lighten } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+const toHex = require("colornames");
 
 export function getCapitalLetters(str) {
   const chars =
@@ -67,6 +68,7 @@ export function getCustomColor(
   let color =
     _.get(props, `theme.palette.${customColor}.${muiLevel}`) ??
     _.get(props, `theme.palette.${customColor}`) ??
+    toHex(customColor) ??
     customColor;
 
   if (!isValidColor(color)) return [];
