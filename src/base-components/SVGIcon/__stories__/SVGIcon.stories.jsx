@@ -99,9 +99,9 @@ export const MuiIconNames = () => {
   );
 };
 
-export const Size = () => {
-  const [width, setWidth] = useState(50);
-  const [height, setHeight] = useState(50);
+export const WidthAndHeight = () => {
+  const [width, setWidth] = useState(100);
+  const [height, setHeight] = useState(100);
 
   return (
     <Grid container spacing={3} sx={{ width: 500 }}>
@@ -116,19 +116,21 @@ export const Size = () => {
               height: 500,
             }}
           >
-            <SVGIcon
-              muiIconName="Home"
-              color={"red"}
-              width={width * 10}
-              height={height * 10}
-            />
+            <Box sx={{ border: "1px dashed black" }}>
+              <SVGIcon
+                muiIconName="Home"
+                color={"red"}
+                width={width}
+                height={height}
+              />
+            </Box>
           </Box>
           <Slider
             orientation="vertical"
             value={height}
             onChange={(e) => setHeight(e.target.value)}
-            min={10}
-            max={100}
+            min={100}
+            max={500}
             sx={{ height: 500 }}
           />
         </Stack>
@@ -137,35 +139,44 @@ export const Size = () => {
         <Slider
           value={width}
           onChange={(e) => setWidth(e.target.value)}
-          min={10}
-          max={100}
+          min={100}
+          max={500}
         />
       </Grid>
     </Grid>
   );
 };
 
-export const Colored = () => {
-  return (
-    <SVGIcon {...actions} color={"#D050CC"}>
-      Colored
-    </SVGIcon>
-  );
-};
-
 export const Sized = () => {
+  const [size, setSize] = useState(100);
+
   return (
-    <Stack>
-      <SVGIcon {...actions} size="small">
-        small
-      </SVGIcon>
-      <SVGIcon {...actions} size="medium">
-        medium
-      </SVGIcon>
-      <SVGIcon {...actions} size="large">
-        large
-      </SVGIcon>
-      <SVGIcon {...actions}>>Default</SVGIcon>
-    </Stack>
+    <Grid container spacing={3} sx={{ width: 500 }}>
+      <Grid item xs flex>
+        <Stack direction="row">
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              height: 500,
+            }}
+          >
+            <Box sx={{ border: "1px dashed black" }}>
+              <SVGIcon muiIconName="Home" color="red" size={size} />
+            </Box>
+          </Box>
+        </Stack>
+      </Grid>
+      <Grid item xs={12}>
+        <Slider
+          value={size}
+          onChange={(e) => setSize(e.target.value)}
+          min={100}
+          max={500}
+        />
+      </Grid>
+    </Grid>
   );
 };

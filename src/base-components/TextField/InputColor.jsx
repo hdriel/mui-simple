@@ -1,12 +1,5 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { toHex } from "colornames";
 import Color from "color";
 import {
   Opacity as OpacityIcon,
@@ -20,7 +13,6 @@ import Snackbar from "../Snackbar/Snackbar";
 import { copyToClipboard } from "../../utils/helpers";
 import Slider from "../Slider/Slider";
 import { Box } from "./TextField.styled";
-import debounce from "lodash/debounce";
 
 const VALUE_FORMAT = { hex: "rgba", rgba: "hsl", hsl: "hex" };
 
