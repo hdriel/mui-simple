@@ -192,7 +192,7 @@ export const CustomStepper = () => {
 
   return (
     <>
-      <ToggleButtonGroups>
+      <ToggleButtonGroups sx={{ mb: 4 }}>
         <ToggleButtonGroup
           value={orientation}
           exclusive
@@ -267,7 +267,7 @@ export const QontoStepper = () => {
 
   return (
     <>
-      <ToggleButtonGroups>
+      <ToggleButtonGroups sx={{ mb: 4 }}>
         <ToggleButtonGroup
           value={orientation}
           exclusive
@@ -286,6 +286,7 @@ export const QontoStepper = () => {
         {...actions}
         {...stepperProps}
         qontoStyle
+        color="secondary"
         steps={steps}
         stepsBottomLabel={stepsBottomLabel}
         orientation={orientation}
@@ -352,7 +353,7 @@ export const QontoCustomStepper = () => {
 
   return (
     <>
-      <ToggleButtonGroups>
+      <ToggleButtonGroups sx={{ mb: 4 }}>
         <ToggleButtonGroup
           value={orientation}
           exclusive

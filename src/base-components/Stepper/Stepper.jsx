@@ -15,7 +15,8 @@ import {
   QontoStepIconRoot,
   QontoConnector,
 } from "./Stepper.styled";
-import { useCustomColor } from "../../utils/helpers";
+import { getCustomColor, useCustomColor } from "../../utils/helpers";
+import { useTheme } from "@mui/material/styles";
 
 export default function Stepper({
   optionalLabel,
@@ -37,7 +38,8 @@ export default function Stepper({
   children,
   ...props
 }) {
-  const [customColor, muiColor] = useCustomColor(color);
+  const theme = useTheme();
+  const [customColor] = useCustomColor(color);
 
   const LABELS = {
     next: labels?.next || "Next",
@@ -50,12 +52,18 @@ export default function Stepper({
   const steps = useMemo(
     () =>
       _steps?.map((step) => {
+        const [stepColor] = getCustomColor({ theme, customColor: step?.color });
+        const [errorColor] = getCustomColor({
+          theme,
+          customColor: step?.error,
+        });
+        const scolor = stepColor ?? color ?? errorColor;
+
         return typeof step === "string"
           ? { label: step, optional: false }
           : {
               ...step,
-              color: step.color ?? color ?? (step.error ? "error" : undefined),
-              customColorValue: step.customColor ?? customColor,
+              color: scolor,
               optional: step.optional
                 ? typeof step.optional === "string"
                   ? step.optional
@@ -114,7 +122,7 @@ export default function Stepper({
           const dotIcon = isValidElement(customStyleProps?.dotIcon) ? (
             cloneElement(customStyleProps.dotIcon, {})
           ) : (
-            <div className="QontoStepIcon-circle" />
+            <div className="QontoStepIcon-circle" color={color} />
           );
 
           const checkIcon = isValidElement(customStyleProps?.checkIcon) ? (
@@ -135,8 +143,7 @@ export default function Stepper({
               background={customStyleProps?.background}
               padding={customStyleProps?.padding}
               fontSize={customStyleProps?.fontSize}
-              muiColor={muiColor}
-              customColor={customColor}
+              color={customColor}
             >
               {completed ? checkIcon : customStyleProps?.dotIcon ?? dotIcon}
             </QontoStepIconRoot>
@@ -150,7 +157,6 @@ export default function Stepper({
     customStyleProps?.fontSize,
     customStyleProps?.dotIcon,
     customStyleProps?.checkIcon,
-    muiColor,
     customColor,
   ]);
 
@@ -170,15 +176,13 @@ export default function Stepper({
           qontoStyle ? (
             <QontoConnector
               orientation={orientation ?? ""}
-              muiColor={muiColor}
-              customColor={customColor}
+              color={customColor}
               {...customStyleProps}
             />
           ) : iconListSize || isCustomStyleUsed ? (
             <StepConnector
               orientation={orientation ?? ""}
-              muiColor={muiColor}
-              customColor={customColor}
+              color={customColor}
               {...customStyleProps}
             />
           ) : undefined
@@ -194,8 +198,7 @@ export default function Stepper({
               <StepLabel
                 error={step.error}
                 StepIconComponent={QontoStepIconMemo || ConnectorStepIconMemo}
-                muiColor={step.muiColor}
-                customColor={step.customColor}
+                color={step.color}
                 optional={
                   isStepOptional(index) ? (
                     <Typography variant="caption">{step.optional}</Typography>

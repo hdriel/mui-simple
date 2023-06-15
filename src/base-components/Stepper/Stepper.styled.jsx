@@ -32,16 +32,12 @@ export const Step = MuiStep;
 export const StepContent = MuiStepContent;
 
 export const StepLabel = styled(MuiStepLabel, {
-  shouldForwardProp: (propName) =>
-    !["muiColor", "customColor"].includes(propName),
+  shouldForwardProp: (propName) => ![].includes(propName),
 })`
   & .MuiStepIcon-root.Mui-active,
   & .MuiStepIcon-root.Mui-completed,
   & .MuiStepLabel-label.Mui-active {
-    color: ${(props) =>
-      _.get(props, `theme.palette.${props.muiColor}.main`) ??
-      _.get(props, `theme.palette.${props.muiColor}`) ??
-      props.customColor};
+    color: ${(props) => props.color};
 
     .MuiStepIcon-text {
       fill: #ffffff;
@@ -79,22 +75,9 @@ export const ConnectorStepIconRoot = styled("div")(
 );
 
 export const StepConnector = styled(MuiStepConnector)(
-  ({
-    theme,
-    orientation,
-    background,
-    lineColor,
-    lineWidth = 3,
-    muiColor,
-    customColor,
-  }) => {
+  ({ theme, orientation, background, lineColor, lineWidth = 3, color }) => {
     const bgColor =
-      lineColor ??
-      background ??
-      _.get(theme, `palette.${muiColor}.main`) ??
-      _.get(theme, `palette.${muiColor}`) ??
-      customColor ??
-      _.get(theme, `palette.primary.main`);
+      lineColor ?? background ?? color ?? _.get(theme, `palette.primary.main`);
 
     const bgColorProp = bgColor?.includes("gradient")
       ? { backgroundImage: bgColor }
@@ -130,16 +113,10 @@ export const QontoConnector = styled(MuiStepConnector)(
     background,
     lineColor,
     lineWidth = 3,
-    muiColor,
-    customColor,
+    color: _color,
   }) => {
     const color =
-      lineColor ??
-      background ??
-      _.get(theme, `palette.${muiColor}.main`) ??
-      _.get(theme, `palette.${muiColor}`) ??
-      customColor ??
-      _.get(theme, `palette.primary.main`);
+      lineColor ?? background ?? _color ?? _.get(theme, `palette.primary.main`);
 
     return {
       [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -168,21 +145,9 @@ export const QontoConnector = styled(MuiStepConnector)(
 );
 
 export const QontoStepIconRoot = styled("div")(
-  ({
-    theme,
-    ownerState,
-    background,
-    padding = 10,
-    fontSize = 25,
-    customColor,
-    muiColor,
-  }) => {
+  ({ theme, ownerState, background, padding = 10, fontSize = 25, color }) => {
     const backgroundColor =
-      background ??
-      _.get(theme, `palette.${muiColor}.main`) ??
-      _.get(theme, `palette.${muiColor}`) ??
-      customColor ??
-      _.get(theme, `palette.primary.main`);
+      background ?? color ?? _.get(theme, `palette.primary.main`);
 
     return {
       color:
