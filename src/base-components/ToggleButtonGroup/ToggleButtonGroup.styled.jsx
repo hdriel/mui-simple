@@ -53,12 +53,13 @@ export const ToggleButtonGroup = styled(
   }
 
   & .Mui-selected {
-    background-color: ${(props) => {
+    ${(props) => {
       const color = props.customColor && alpha(props.customColor, 0.2);
       return css`
-        color: ${color ? `${color} !important` : ""};
+        background-color: ${color ? `${color} !important` : ""};
       `;
     }}
+  }
 `;
 
 export const ToggleButton = styled(

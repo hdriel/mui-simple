@@ -69,6 +69,6 @@ export { Table } from "./Table/Table"; // fixing this component change styled ge
 export { default as Tabs } from "./Tabs/Tabs";
 export { default as Tab } from "./Tabs/Tab";
 export { default as ToggleButtonGroup } from "./ToggleButtonGroup/ToggleButtonGroup";
-export { default as ToggleButtonGroups } from "./ToggleButtonGroup/ToggleButtonGroups"; // fixing this component the selected custom color still gray
+export { default as ToggleButtonGroups } from "./ToggleButtonGroup/ToggleButtonGroups";
 export { default as Tooltip } from "./Tooltip/Tooltip";
 export { default as Typography } from "./Typography/Typography";
