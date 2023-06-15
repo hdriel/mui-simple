@@ -37,7 +37,7 @@ export default function MobileStepper({
   children,
   ...props
 }) {
-  const [customColor, muiColor] = useCustomColor(color);
+  const [customColor] = useCustomColor(color);
 
   const theme = useTheme();
   const [autoPlayState, setAutoPlayState] = useState(autoPlay);

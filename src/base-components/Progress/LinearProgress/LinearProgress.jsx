@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { LinearProgress as MuiLinearProgress } from "./LinearProgress.styled";
 import { useCustomColor } from "../../../utils/helpers";
-import { CircularProgress as MuiCircularProgress } from "../CircularProgress/CircularProgress.styled";
 
 export default function LinearProgress({
   value,

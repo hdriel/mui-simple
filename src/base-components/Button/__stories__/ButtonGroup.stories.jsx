@@ -5,7 +5,6 @@ import Button from "../Button";
 import ButtonGroup from "../ButtonGroup";
 import { Delete as DeleteIcon, Send as SendIcon } from "@mui/icons-material";
 import { Stack } from "@mui/material";
-import Checkbox from "../../Checkbox/Checkbox";
 import Divider from "../../Divider/Divider";
 
 export default {

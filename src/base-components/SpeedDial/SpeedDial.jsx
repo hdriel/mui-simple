@@ -6,7 +6,7 @@ import {
   SpeedDialIcon,
 } from "./SpeedDial.styled";
 // import Backdrop from "../Backdrop/Backdrop";
-import { Backdrop, darken } from "@mui/material";
+import { Backdrop } from "@mui/material";
 import { useCustomColor } from "../../utils/helpers";
 
 export default function SpeedDial({
