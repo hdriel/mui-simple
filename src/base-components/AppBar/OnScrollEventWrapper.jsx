@@ -85,7 +85,7 @@ export default function OnScrollEventWrapper({
 }
 
 OnScrollEventWrapper.propTypes = {
-  scrollElement: PropTypes.node,
+  scrollElement: PropTypes.any,
   elevationScroll: PropTypes.bool,
   hideOnScroll: PropTypes.bool,
   elevation: PropTypes.oneOf(Array.from({ length: 25 }, (_, i) => i)), // 0-24
