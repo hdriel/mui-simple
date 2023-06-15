@@ -180,3 +180,37 @@ export const Sized = () => {
     </Grid>
   );
 };
+
+export const SVGFile = () => {
+  const [size, setSize] = useState(100);
+
+  return (
+    <Grid container spacing={3} sx={{ width: 500 }}>
+      <Grid item xs flex>
+        <Stack direction="row">
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              height: 500,
+            }}
+          >
+            <Box sx={{ border: "1px dashed black" }}>
+              <SVGIcon iconSrc="/hashtag-icon.svg" color="green" size={size} />
+            </Box>
+          </Box>
+        </Stack>
+      </Grid>
+      <Grid item xs={12}>
+        <Slider
+          value={size}
+          onChange={(e) => setSize(e.target.value)}
+          min={100}
+          max={500}
+        />
+      </Grid>
+    </Grid>
+  );
+};
