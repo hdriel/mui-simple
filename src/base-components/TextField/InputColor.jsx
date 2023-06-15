@@ -63,9 +63,7 @@ export default function InputColor({
   }, [valueFormat, value, opacity]);
 
   const handleOnChange = debounceDelay
-    ? debounce((event) => {
-        onChange(event);
-      }, debounceDelay)
+    ? debounce(onChange, debounceDelay)
     : onChange;
 
   const showOpacityHandler = () => setShowOpacitySlider(!showOpacitySlider);

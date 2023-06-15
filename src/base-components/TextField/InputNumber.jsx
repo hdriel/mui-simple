@@ -55,9 +55,15 @@ export default function InputNumber({
   const showSliderHandler = (forceValue) => {
     setShowSlider((v) => forceValue ?? !v);
   };
+
+  const handleOnChange = debounceDelay
+    ? debounce(onChange, debounceDelay)
+    : onChange;
+
   const handleChangeSlider = (event, newValue) => {
     onChange({ target: { name, value: newValue } });
   };
+
   const [sliderLabelDebounce] = useState(() =>
     debounce(
       (v) => {
@@ -69,12 +75,6 @@ export default function InputNumber({
       { leading: false, trailing: true }
     )
   );
-  const onChangeDebounced = debounceDelay
-    ? debounce(onChange, debounceDelay, {
-        leading: false,
-        trailing: true,
-      })
-    : undefined;
 
   const onBlurHandler = (e) => {
     const value = +(e.target.value?.replaceAll?.(/,/gi, "") ?? 0);
@@ -156,7 +156,7 @@ export default function InputNumber({
           onValueChange={(values) => {
             const { floatValue: value } = values;
             const event = { target: { name, value } };
-            onChangeDebounced?.(event) ?? onChange?.(event);
+            handleOnChange(event);
           }}
         />
         {showSlider && (
