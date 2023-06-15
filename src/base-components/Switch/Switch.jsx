@@ -33,7 +33,7 @@ const Switch = ({
   switchStyle,
   ...props
 }) => {
-  const [customColor, muiColor] = useCustomColor(color);
+  const [customColor] = useCustomColor(color);
   const [textColor] = useCustomColor(_textColor);
 
   const switchControlCmp = isOnOff ? (

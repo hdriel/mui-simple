@@ -63,6 +63,7 @@ export function getCustomColor(
 ) {
   const customColor = props?.[field] ?? props?.customColor;
   if (!customColor) return [];
+  if (Array.isArray(customColor)) return customColor;
   if (customColor === "inherit") return [undefined, "inherit"];
 
   let color =

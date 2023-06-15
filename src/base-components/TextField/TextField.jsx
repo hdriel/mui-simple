@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import InputAdornment from "@mui/material/InputAdornment";
 import { TextField as MuiTextField, Stack } from "./TextField.styled";
 import { ClickAwayListener } from "@mui/material";
+import debounce from "lodash/debounce";
 
 function TextField({
   label,
@@ -37,6 +38,7 @@ function TextField({
   alignActions,
   alignActionsExternal,
   disabled,
+  debounceDelay,
   ...props
 }) {
   const [isFocused, setIsFocused] = useState(false);
@@ -49,6 +51,10 @@ function TextField({
   const showActions =
     !hideStartActionsOnEmpty || value || (!value && isFocused);
 
+  const handleOnChange = debounceDelay
+    ? debounce(onChange, debounceDelay)
+    : onChange;
+
   const component = (
     <ClickAwayListener onClickAway={() => setIsFocused(false)}>
       <MuiTextField
@@ -58,7 +64,7 @@ function TextField({
         name={name}
         error={error}
         helperText={helperText}
-        onChange={onChange}
+        onChange={handleOnChange}
         required={required}
         value={value}
         margin={margin}
@@ -116,6 +122,7 @@ function TextField({
 }
 
 TextField.propTypes = {
+  debounceDelay: PropTypes.number,
   label: PropTypes.string,
   id: PropTypes.string,
   name: PropTypes.string,

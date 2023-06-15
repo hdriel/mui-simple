@@ -1,4 +1,3 @@
-import _ from "lodash";
 import { css } from "@mui/material/styles";
 
 import { SWITCH_STYLES } from "./Switch.consts";
@@ -21,7 +20,7 @@ export function customColor(props) {
 export function antSwitchStyle(props) {
   if (props.switchStyle !== SWITCH_STYLES.ANT) return css``;
 
-  const { theme, color, muiColor } = props;
+  const { theme, color } = props;
   const { palette: { mode } = {}, transitions } = theme ?? {};
 
   return css`
@@ -69,7 +68,7 @@ export function antSwitchStyle(props) {
 export function androidSwitchStyle(props) {
   if (props.switchStyle !== SWITCH_STYLES.ANDROID12) return css``;
 
-  const { theme, color, muiColor } = props;
+  const { theme, color } = props;
 
   return css`
     padding: 8px;
@@ -109,7 +108,7 @@ export function androidSwitchStyle(props) {
 export function iosSwitchStyle(props) {
   if (props.switchStyle !== SWITCH_STYLES.IOS) return css``;
 
-  const { theme, color, muiColor } = props;
+  const { theme, color } = props;
 
   return css`
     width: 42px;

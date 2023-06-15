@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { toHex } from "colornames";
 import Color from "color";
 import {
   Opacity as OpacityIcon,
@@ -25,6 +24,8 @@ export default function InputColor({
   opacityLabel,
   customColor,
   copyAction,
+  debounceDelay,
+  onChange,
   ...props
 }) {
   const colorActive = value;
@@ -92,6 +93,8 @@ export default function InputColor({
           variant={variant}
           disabled={disabled}
           type="color"
+          debounceDelay={debounceDelay}
+          onChange={onChange}
           endCmp={
             <>
               <Button

@@ -158,6 +158,7 @@ export default function Stepper({
     customStyleProps?.dotIcon,
     customStyleProps?.checkIcon,
     customColor,
+    color,
   ]);
 
   const isStepOptional = (index) => steps?.[index]?.optional;

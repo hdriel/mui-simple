@@ -15,6 +15,7 @@ const ToggleButtonGroup = ({
   disableRipple,
   enforceValueSet,
   data,
+  fullWidth,
   color,
   ...props
 }) => {

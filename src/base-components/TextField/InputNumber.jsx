@@ -44,6 +44,7 @@ export default function InputNumber({
   sliderTooltip,
   sliderLabel,
   selectAllOnFocus,
+  debounceDelay,
   ...props
 }) {
   const theme = useTheme();
@@ -54,9 +55,15 @@ export default function InputNumber({
   const showSliderHandler = (forceValue) => {
     setShowSlider((v) => forceValue ?? !v);
   };
+
+  const handleOnChange = debounceDelay
+    ? debounce(onChange, debounceDelay)
+    : onChange;
+
   const handleChangeSlider = (event, newValue) => {
     onChange({ target: { name, value: newValue } });
   };
+
   const [sliderLabelDebounce] = useState(() =>
     debounce(
       (v) => {
@@ -85,7 +92,7 @@ export default function InputNumber({
     onBlur?.(e);
   };
 
-  const color = getCustomColor({ theme, customColor: colorActive });
+  const [color] = getCustomColor({ theme, customColor: colorActive });
 
   return (
     <ClickAwayListener
@@ -148,7 +155,8 @@ export default function InputNumber({
           }}
           onValueChange={(values) => {
             const { floatValue: value } = values;
-            onChange?.({ target: { name, value } });
+            const event = { target: { name, value } };
+            handleOnChange(event);
           }}
         />
         {showSlider && (

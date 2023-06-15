@@ -10,11 +10,13 @@ export default function InputSearch({
   label,
   placeholder,
   searchIcon,
+  debounceDelay,
   ...props
 }) {
   return (
     <Input
       {...props}
+      debounceDelay={debounceDelay}
       value={value}
       placeholder={placeholder}
       label={label}
