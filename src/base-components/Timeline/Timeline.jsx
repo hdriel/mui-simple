@@ -1,16 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  Timeline as MuiTimeline,
-  TimelineConnector,
-  TimelineContent,
-  TimelineDot,
-  TimelineItem,
-  TimelineSeparator,
-} from "./Timeline.styled";
+import { Timeline as MuiTimeline } from "./Timeline.styled";
+import TimelineItem from "./TimelineItem";
 
-export default function Timeline({ test, ...props }) {
-  return <MuiTimeline></MuiTimeline>;
+export default function Timeline({ position, steps, ...props }) {
+  return (
+    <MuiTimeline position={position}>
+      {steps.map((step) => (
+        <TimelineItem {...step} />
+      ))}
+    </MuiTimeline>
+  );
 }
 
 Timeline.propTypes = {

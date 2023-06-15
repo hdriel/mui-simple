@@ -6,6 +6,7 @@ import {
   TimelineConnector as MuiTimelineConnector,
   TimelineContent as MuiTimelineContent,
   TimelineDot as MuiTimelineDot,
+  TimelineOppositeContent as MuiTimelineOppositeContent,
 } from "@mui/lab";
 
 export const Timeline = MuiTimeline;
@@ -14,3 +15,4 @@ export const TimelineSeparator = MuiTimelineSeparator;
 export const TimelineConnector = MuiTimelineConnector;
 export const TimelineContent = MuiTimelineContent;
 export const TimelineDot = MuiTimelineDot;
+export const TimelineOppositeContent = MuiTimelineOppositeContent;
