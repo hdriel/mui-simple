@@ -18,8 +18,7 @@ export function usePaginationDetails({
   // Avoid a layout jump when reaching the last page with empty data.
   const emptyRows = useMemo(() => {
     if (independentData) {
-      const totalRowsTillPrevPage = page <= 1 ? 0 : (page - 1) * rowsPerPage;
-
+      const totalRowsTillPrevPage = page <= 1 ? 0 : page * rowsPerPage;
       return rowsPerPage - Math.min(rowsPerPage, rows - totalRowsTillPrevPage);
     } else {
       return rows >= rowsPerPage ? 0 : rowsPerPage - rows;
@@ -34,6 +33,7 @@ export function usePaginationDetails({
     [rowsPerPage]
   );
 
+  console.log("emptyRows", emptyRows);
   return {
     independentData,
     total,
