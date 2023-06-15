@@ -13,6 +13,7 @@ import ToggleButtonGroup from "../../ToggleButtonGroup/ToggleButtonGroup";
 import Typography from "../../Typography/Typography";
 import ToggleButtonGroups from "../../ToggleButtonGroup/ToggleButtonGroups";
 import InputColor from "../../TextField/InputColor";
+import Slider from "../../Slider/Slider";
 
 export default {
   title: "TEMPLATE/SVGIcon",
@@ -98,17 +99,49 @@ export const MuiIconNames = () => {
   );
 };
 
-export const Themed = () => {
+export const Size = () => {
+  const [width, setWidth] = useState(50);
+  const [height, setHeight] = useState(50);
+
   return (
-    <Stack>
-      <SVGIcon {...actions} muiColor="primary">
-        primary
-      </SVGIcon>
-      <SVGIcon {...actions} muiColor="secondary">
-        secondary
-      </SVGIcon>
-      <SVGIcon {...actions}>Default</SVGIcon>
-    </Stack>
+    <Grid container spacing={3} sx={{ width: 500 }}>
+      <Grid item xs flex>
+        <Stack direction="row">
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              height: 500,
+            }}
+          >
+            <SVGIcon
+              muiIconName="Home"
+              color={"red"}
+              width={width * 10}
+              height={height * 10}
+            />
+          </Box>
+          <Slider
+            orientation="vertical"
+            value={height}
+            onChange={(e) => setHeight(e.target.value)}
+            min={10}
+            max={100}
+            sx={{ height: 500 }}
+          />
+        </Stack>
+      </Grid>
+      <Grid item xs={12}>
+        <Slider
+          value={width}
+          onChange={(e) => setWidth(e.target.value)}
+          min={10}
+          max={100}
+        />
+      </Grid>
+    </Grid>
   );
 };
 
