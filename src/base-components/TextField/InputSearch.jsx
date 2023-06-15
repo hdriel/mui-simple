@@ -4,17 +4,20 @@ import { Search as SearchIcon } from "@mui/icons-material";
 
 import Input from "./TextField";
 import Button from "../Button/Button";
+import debounce from "lodash/debounce";
 
 export default function InputSearch({
   value,
   label,
   placeholder,
   searchIcon,
+  debounceDelay,
   ...props
 }) {
   return (
     <Input
       {...props}
+      debounceDelay={debounceDelay}
       value={value}
       placeholder={placeholder}
       label={label}

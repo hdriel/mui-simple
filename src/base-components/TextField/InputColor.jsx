@@ -62,10 +62,6 @@ export default function InputColor({
     return [colorStr, showContrastColor];
   }, [valueFormat, value, opacity]);
 
-  const handleOnChange = debounceDelay
-    ? debounce(onChange, debounceDelay)
-    : onChange;
-
   const showOpacityHandler = () => setShowOpacitySlider(!showOpacitySlider);
 
   const handleChange = (event, newValue) => setOpacity(newValue);
@@ -105,7 +101,8 @@ export default function InputColor({
           variant={variant}
           disabled={disabled}
           type="color"
-          onChange={handleOnChange}
+          debounceDelay={debounceDelay}
+          onChange={onChange}
           endCmp={
             <>
               <Button
