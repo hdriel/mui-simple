@@ -27,7 +27,8 @@ export const Button = styled(MuiButton, {
 `;
 
 export const IconButton = styled(MuiIconButton, {
-  shouldForwardProp: (propName) => !["disableElevation"].includes(propName),
+  shouldForwardProp: (propName) =>
+    !["disableElevation", "customColor"].includes(propName),
 })``;
 
 export const ButtonGroup = styled(MuiButtonGroup, {

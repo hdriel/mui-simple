@@ -9,6 +9,7 @@ import ToggleButtonGroup from "./ToggleButtonGroup";
 const ToggleButtonGroups = ({
   fullWidth,
   disableRipple,
+  justifyContent,
   children,
   ...props
 }) => {
@@ -23,7 +24,11 @@ const ToggleButtonGroups = ({
     .filter(Boolean);
 
   return (
-    <MuiToggleButtonGroups fullWidth={fullWidth} {...props}>
+    <MuiToggleButtonGroups
+      fullWidth={fullWidth}
+      sx={{ justifyContent }}
+      {...props}
+    >
       {groups}
     </MuiToggleButtonGroups>
   );
@@ -32,11 +37,13 @@ const ToggleButtonGroups = ({
 ToggleButtonGroups.propTypes = {
   fullWidth: PropTypes.bool,
   disableRipple: PropTypes.bool,
+  justifyContent: PropTypes.string,
 };
 
 ToggleButtonGroups.defaultProps = {
   fullWidth: undefined,
   disableRipple: undefined,
+  justifyContent: undefined,
 };
 
 export default ToggleButtonGroups;

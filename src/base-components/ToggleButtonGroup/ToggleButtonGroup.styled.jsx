@@ -72,4 +72,6 @@ export const ToggleButton = styled(
       {...props}
     />
   )
-)``;
+)`
+  width: max-content;
+`;

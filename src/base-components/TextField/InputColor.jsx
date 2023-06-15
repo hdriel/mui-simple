@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import PropTypes from "prop-types";
 import { toHex } from "colornames";
 import Color from "color";
@@ -14,6 +20,7 @@ import Snackbar from "../Snackbar/Snackbar";
 import { copyToClipboard } from "../../utils/helpers";
 import Slider from "../Slider/Slider";
 import { Box } from "./TextField.styled";
+import debounce from "lodash/debounce";
 
 const VALUE_FORMAT = { hex: "rgba", rgba: "hsl", hsl: "hex" };
 
@@ -25,6 +32,8 @@ export default function InputColor({
   opacityLabel,
   customColor,
   copyAction,
+  debounceDelay,
+  onChange,
   ...props
 }) {
   const colorActive = value;
@@ -52,6 +61,12 @@ export default function InputColor({
 
     return [colorStr, showContrastColor];
   }, [valueFormat, value, opacity]);
+
+  const handleOnChange = debounceDelay
+    ? debounce((event) => {
+        onChange(event);
+      }, debounceDelay)
+    : onChange;
 
   const showOpacityHandler = () => setShowOpacitySlider(!showOpacitySlider);
 
@@ -92,6 +107,7 @@ export default function InputColor({
           variant={variant}
           disabled={disabled}
           type="color"
+          onChange={handleOnChange}
           endCmp={
             <>
               <Button
