@@ -68,6 +68,7 @@ export const CountrySelect = () => {
           setSelectedOptions={(e, options) => setSelectedOptions(options)}
           variant={variant}
           options={countries}
+          raiseSelectedToTop
           autoHighlight
           getOptionLabel={(option) => option.label}
           renderOption={(props, option) => {

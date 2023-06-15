@@ -16,6 +16,7 @@ export default function InputAutocompleteMultiple({
   renderOption,
   checkboxStyle,
   getOptionLabel: _getOptionLabel,
+  options,
   readOnly,
   raiseSelectedToTop, // todo: implement this
   ...props
@@ -27,6 +28,16 @@ export default function InputAutocompleteMultiple({
         : (option) => option[_getOptionLabel] || "",
     [_getOptionLabel]
   );
+
+  let totalSelectedOptions = 0;
+  if (raiseSelectedToTop) {
+    options.forEach((option) => {
+      option.selected = !!selectedOptions.find(
+        (so) => getOptionLabel(so) === getOptionLabel(option)
+      );
+      totalSelectedOptions += option.selected ? 1 : 0;
+    });
+  }
 
   return (
     <MuiAutocomplete
@@ -42,11 +53,13 @@ export default function InputAutocompleteMultiple({
         }
       }}
       multiple
+      raiseSelectedToTop={totalSelectedOptions}
       disableCloseOnSelect
       limitTags={limitTags}
       filterSelectedOptions={filterSelectedOptions}
       getOptionLabel={getOptionLabel}
       readOnly={readOnly}
+      options={options}
       renderOption={(props, option, { selected }) => (
         <li {...props}>
           {checkboxStyle && (

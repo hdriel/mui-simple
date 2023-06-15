@@ -48,6 +48,7 @@ export default function InputAutocomplete({
   autoComplete,
   options: _options,
   renderOption,
+  raiseSelectedToTop,
   getOptionLabel: _getOptionLabel,
   groupBy,
   sortBy,
@@ -81,7 +82,7 @@ export default function InputAutocomplete({
         : { ...option };
     });
 
-    if (sortBy)
+    if (sortBy || raiseSelectedToTop) {
       result =
         result.sort((a, b) => {
           const optionFieldA =
@@ -95,11 +96,17 @@ export default function InputAutocomplete({
             ? [optionFieldA, optionFieldB]
             : [optionFieldB, optionFieldA];
 
+          const selectedComparator = +b.selected - +a.selected;
+          if (raiseSelectedToTop && selectedComparator !== 0) {
+            return selectedComparator;
+          }
+
           return typeof optionFieldA === "string" ? A.localeCompare(B) : A - B;
         }) ?? [];
+    }
 
     return result;
-  }, [sortBy, sortDir, _options]);
+  }, [sortBy, sortDir, _options, raiseSelectedToTop]);
 
   const color = getCustomColor({
     theme,
@@ -277,6 +284,7 @@ InputAutocomplete.propTypes = {
   setSelectedOption: PropTypes.func,
   autoComplete: PropTypes.bool,
   freeSolo: PropTypes.bool,
+  raiseSelectedToTop: PropTypes.number,
   disablePortal: PropTypes.bool,
   disableClearableSolo: PropTypes.bool,
   disableCloseOnSelect: PropTypes.bool,
@@ -327,6 +335,7 @@ InputAutocomplete.defaultProps = {
   autoComplete: true,
   selectedOption: undefined,
   setSelectedOption: undefined,
+  raiseSelectedToTop: undefined,
   disablePortal: undefined,
   disableClearable: undefined,
   disableCloseOnSelect: true,
