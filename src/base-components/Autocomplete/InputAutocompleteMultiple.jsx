@@ -17,6 +17,7 @@ export default function InputAutocompleteMultiple({
   checkboxStyle,
   getOptionLabel: _getOptionLabel,
   readOnly,
+  raiseSelectedToTop, // todo: implement this
   ...props
 }) {
   const getOptionLabel = useMemo(
@@ -100,6 +101,7 @@ InputAutocompleteMultiple.propTypes = {
   renderOption: PropTypes.func,
   checkboxStyle: PropTypes.bool,
   readOnly: PropTypes.bool,
+  raiseSelectedToTop: PropTypes.bool,
 };
 
 InputAutocompleteMultiple.defaultProps = {
@@ -111,4 +113,5 @@ InputAutocompleteMultiple.defaultProps = {
   renderOption: undefined,
   checkboxStyle: true,
   readOnly: undefined,
+  raiseSelectedToTop: undefined,
 };

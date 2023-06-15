@@ -2,7 +2,7 @@ export { default as Accordion } from "./Accordion/Accordion";
 export { default as Alert } from "./Alert/Alert";
 export { default as AppBar } from "./AppBar/AppBar";
 export { default as InputAutocomplete } from "./Autocomplete/InputAutocomplete";
-export { default as InputAutoCompleteAsync } from "./Autocomplete/InputAutoCompleteAsync";
+export { default as InputAutoCompleteAsync } from "./Autocomplete/InputAutocompleteAsync";
 export { default as InputAutocompleteMultiple } from "./Autocomplete/InputAutocompleteMultiple";
 export { default as InputGoogleAddress } from "./Autocomplete/InputGoogleAddress";
 export { default as Avatar } from "./Avatar/Avatar";

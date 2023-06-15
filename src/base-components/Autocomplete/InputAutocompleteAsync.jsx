@@ -55,19 +55,19 @@ export function useAutoCompleteAsync({
   };
 }
 
-export default function InputAutoCompleteAsync({ ...props }) {
+export default function InputAutocompleteAsync({ ...props }) {
   const asyncProps = useAutoCompleteAsync(props);
   return <MuiAutocomplete {...props} {...asyncProps} />;
 }
 
-InputAutoCompleteAsync.propTypes = {
+InputAutocompleteAsync.propTypes = {
   getOptionLabel: PropTypes.func,
   getOptionsPromise: PropTypes.func,
   sleep: PropTypes.number,
   fetchOptionsOnFocus: PropTypes.bool,
 };
 
-InputAutoCompleteAsync.defaultProps = {
+InputAutocompleteAsync.defaultProps = {
   getOptionLabel: undefined,
   getOptionsPromise: undefined,
   sleep: 1e3,
