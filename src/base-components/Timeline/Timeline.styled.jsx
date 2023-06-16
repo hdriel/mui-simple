@@ -10,9 +10,25 @@ import {
 } from "@mui/lab";
 
 export const Timeline = MuiTimeline;
-export const TimelineItem = MuiTimelineItem;
+
+export const TimelineItem = styled(MuiTimelineItem)`
+  // width: max-content;
+`;
+
 export const TimelineSeparator = MuiTimelineSeparator;
+
 export const TimelineConnector = MuiTimelineConnector;
+
 export const TimelineContent = MuiTimelineContent;
-export const TimelineDot = MuiTimelineDot;
+
+export const TimelineDot = styled(MuiTimelineDot, {
+  shouldForwardProp: (propName) => !["customColor"].includes(propName),
+})`
+  background-color: ${(props) => props.customColor};
+  &.MuiTimelineDot-outlined {
+    background-color: unset;
+    border-color: ${(props) => props.customColor};
+  }
+`;
+
 export const TimelineOppositeContent = MuiTimelineOppositeContent;

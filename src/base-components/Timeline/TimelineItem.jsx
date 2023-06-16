@@ -4,30 +4,41 @@ import {
   TimelineConnector,
   TimelineContent,
   TimelineDot,
-  TimelineItem,
+  TimelineItem as MuiTimelineItem,
   TimelineSeparator,
   TimelineOppositeContent,
 } from "./Timeline.styled";
 import Typography from "../Typography/Typography";
+import { useCustomColor } from "../../utils/helpers";
 
 export default function TimelineItem({
   variant,
-  color,
+  color: _color,
   icon,
   title,
   subtitle,
+  secondaryTitle,
+  connector,
   ...props
 }) {
+  const [customColor, muiColor] = useCustomColor(_color);
+
   return (
-    <TimelineItem {...props}>
-      <TimelineOppositeContent color="text.secondary">
-        09:30 am
-      </TimelineOppositeContent>
+    <MuiTimelineItem {...props}>
+      {secondaryTitle && (
+        <TimelineOppositeContent color="text.secondary">
+          {secondaryTitle}
+        </TimelineOppositeContent>
+      )}
       <TimelineSeparator>
-        <TimelineDot variant={variant} color={color}>
+        <TimelineDot
+          variant={variant}
+          color={muiColor}
+          customColor={muiColor ? undefined : customColor}
+        >
           {icon}
         </TimelineDot>
-        <TimelineConnector />
+        {connector && <TimelineConnector />}
       </TimelineSeparator>
       <TimelineContent>
         {title && (
@@ -37,16 +48,17 @@ export default function TimelineItem({
         )}
         {subtitle && <Typography>{subtitle}</Typography>}
       </TimelineContent>
-    </TimelineItem>
+    </MuiTimelineItem>
   );
 }
 
 TimelineItem.propTypes = {
-  variant: PropTypes.string,
+  variant: PropTypes.oneOf(["filled", "outlined"]),
   color: PropTypes.string,
   icon: PropTypes.string,
   title: PropTypes.string,
   subtitle: PropTypes.string,
+  connector: PropTypes.bool,
 };
 
 TimelineItem.defaultProps = {
@@ -55,4 +67,5 @@ TimelineItem.defaultProps = {
   icon: undefined,
   title: undefined,
   subtitle: undefined,
+  connector: undefined,
 };

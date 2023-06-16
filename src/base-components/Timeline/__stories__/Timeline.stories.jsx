@@ -1,12 +1,18 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
 // import { Send as SendIcon } from "@mui/icons-material";
-import { Stack } from "@mui/material";
+import { Stack, Box } from "@mui/material";
+import FastfoodIcon from "@mui/icons-material/Fastfood";
+import LaptopMacIcon from "@mui/icons-material/LaptopMac";
+import HotelIcon from "@mui/icons-material/Hotel";
+import RepeatIcon from "@mui/icons-material/Repeat";
 
 import Timeline from "../Timeline";
+import Typography from "../../Typography/Typography";
+import Divider from "../../Divider/Divider";
 
 export default {
-  title: "Lab/TEMPLATE",
+  title: "Lab/Timeline",
   component: Timeline,
 };
 
@@ -18,45 +24,130 @@ export const Default = () => {
   return <Timeline {...actions} />;
 };
 
+const steps = [
+  {
+    title: "Eat",
+  },
+  {
+    title: "Code",
+    color: "primary",
+    variant: "outlined",
+  },
+  {
+    title: "Sleep",
+    color: "secondary",
+    variant: "outlined",
+  },
+  {
+    title: "Repeat",
+  },
+];
+
 export const Variant = () => {
   return (
-    <Stack>
-      <Timeline {...actions} variant="text">
-        text
-      </Timeline>
-      <Timeline {...actions} variant="outlined">
-        outlined
-      </Timeline>
-      <Timeline {...actions} variant="contained">
-        contained
-      </Timeline>
+    <Stack direction="row" spacing={5}>
+      {["filled", "outlined"].map((variant) => (
+        <Timeline
+          key={variant}
+          variant={variant}
+          steps={["Eat", "Code", "Sleep", "Repeat"]}
+        />
+      ))}
     </Stack>
   );
 };
 
-export const Themed = () => {
+export const ThemedAndColored = () => {
   return (
-    <Stack>
-      <Timeline {...actions} muiColor="primary">
-        primary
-      </Timeline>
-      <Timeline {...actions} muiColor="secondary">
-        secondary
-      </Timeline>
-      <Timeline {...actions}>Default</Timeline>
+    <Stack spacing={5}>
+      {["filled", "outlined"]
+        .map((variant) => (
+          <>
+            <Stack key={variant} direction="row" spacing={5}>
+              {[
+                undefined,
+                "primary",
+                "secondary",
+                "info",
+                "success",
+                "error",
+                "#df01fd",
+              ].map((color) => (
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: 3,
+                    width: "max-content",
+                  }}
+                >
+                  <Typography tooltip={false}>{color ?? "default"}</Typography>
+                  <Timeline
+                    key={`${variant}-${color}`}
+                    variant={variant}
+                    color={color}
+                    steps={["Eat", "Code", "Sleep", "Repeat"]}
+                  />
+                </Box>
+              ))}
+            </Stack>
+            <Divider />
+          </>
+        ))
+        .flat()}
     </Stack>
   );
 };
 
-export const Colored = () => {
+export const Icon = () => {
+  const steps = [
+    { title: "Eat", icon: <FastfoodIcon /> },
+    { title: "Code", icon: <LaptopMacIcon />, color: "primary" },
+    {
+      title: "Sleep",
+      icon: <HotelIcon />,
+      color: "primary",
+      variant: "outlined",
+    },
+    { title: "Repeat", icon: <RepeatIcon />, color: "secondary" },
+  ];
+  return <Timeline steps={steps} />;
+};
+
+export const ZigZag = () => {
+  const steps = [
+    { title: "Eat", icon: <FastfoodIcon /> },
+    { title: "Code", icon: <LaptopMacIcon />, color: "primary" },
+    {
+      title: "Sleep",
+      icon: <HotelIcon />,
+      color: "primary",
+      variant: "outlined",
+    },
+    { title: "Repeat", icon: <RepeatIcon />, color: "secondary" },
+  ];
+  return <Timeline steps={steps} position="alternate" />;
+};
+
+export const Subtitle = () => {
   return (
-    <Timeline {...actions} color={"#D050CC"}>
-      Colored
-    </Timeline>
+    <Stack>
+      <Timeline {...actions} size="small">
+        small
+      </Timeline>
+      <Timeline {...actions} size="medium">
+        medium
+      </Timeline>
+      <Timeline {...actions} size="large">
+        large
+      </Timeline>
+      <Timeline {...actions}>>Default</Timeline>
+    </Stack>
   );
 };
 
-export const Sized = () => {
+export const OtherSideTitle = () => {
   return (
     <Stack>
       <Timeline {...actions} size="small">

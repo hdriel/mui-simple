@@ -3,9 +3,32 @@ import PropTypes from "prop-types";
 import { Timeline as MuiTimeline } from "./Timeline.styled";
 import TimelineItem from "./TimelineItem";
 
-export default function Timeline({ position, steps, ...props }) {
+export default function Timeline({
+  color,
+  variant,
+  position,
+  steps: _steps,
+  useZigZagStyle,
+  ...props
+}) {
+  const steps =
+    _steps?.map((step, index, arr) => {
+      if (typeof step === "string") {
+        step = { title: step };
+      }
+
+      return {
+        variant: step.variant ?? variant,
+        color: step.color ?? color,
+        icon: step.icon,
+        title: step.title,
+        subtitle: step.subtitle,
+        connector: index !== arr.length - 1,
+      };
+    }) ?? [];
+
   return (
-    <MuiTimeline position={position}>
+    <MuiTimeline position={useZigZagStyle ? "alternate" : position} {...props}>
       {steps.map((step) => (
         <TimelineItem {...step} />
       ))}
@@ -14,9 +37,13 @@ export default function Timeline({ position, steps, ...props }) {
 }
 
 Timeline.propTypes = {
-  test: PropTypes.string,
+  variant: PropTypes.oneOf(["filled", "outlined"]),
+  color: PropTypes.string,
+  useZigZagStyle: PropTypes.bool,
 };
 
 Timeline.defaultProps = {
-  test: undefined,
+  variant: undefined,
+  color: undefined,
+  useZigZagStyle: undefined,
 };
