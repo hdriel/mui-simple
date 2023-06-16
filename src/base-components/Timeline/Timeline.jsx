@@ -18,11 +18,13 @@ export default function Timeline({
       }
 
       return {
+        ...step,
         variant: step.variant ?? variant,
         color: step.color ?? color,
         icon: step.icon,
         title: step.title,
         subtitle: step.subtitle,
+        secondaryTitle: step.secondaryTitle,
         connector: index !== arr.length - 1,
       };
     }) ?? [];

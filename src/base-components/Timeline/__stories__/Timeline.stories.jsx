@@ -136,11 +136,13 @@ export const Subtitle = () => {
       title: "Eat",
       subtitle: "Because you need strength",
       icon: <FastfoodIcon />,
+      secondaryTitle: "09:30 am",
     },
     {
       title: "Code",
       subtitle: "Because it's awesome!",
       icon: <LaptopMacIcon />,
+      secondaryTitle: "10:00 am",
     },
     { title: "Sleep", subtitle: "Because you need rest", icon: <HotelIcon /> },
     {

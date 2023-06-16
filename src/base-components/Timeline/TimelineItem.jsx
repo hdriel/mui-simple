@@ -29,7 +29,11 @@ export default function TimelineItem({
   return (
     <MuiTimelineItem {...props}>
       {secondaryTitle && (
-        <TimelineOppositeContent color="text.secondary">
+        <TimelineOppositeContent
+          sx={{ mx: 0, mt: icon ? "16px" : "3px" }}
+          variant="body2"
+          color="text.secondary"
+        >
           {secondaryTitle}
         </TimelineOppositeContent>
       )}
