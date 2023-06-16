@@ -131,18 +131,32 @@ export const ZigZag = () => {
 };
 
 export const Subtitle = () => {
+  const steps = [
+    {
+      title: "Eat",
+      subtitle: "Because you need strength",
+      icon: <FastfoodIcon />,
+    },
+    {
+      title: "Code",
+      subtitle: "Because it's awesome!",
+      icon: <LaptopMacIcon />,
+    },
+    { title: "Sleep", subtitle: "Because you need rest", icon: <HotelIcon /> },
+    {
+      title: "Repeat",
+      subtitle: "Because this is the life you love!",
+      icon: <RepeatIcon />,
+    },
+  ];
+
   return (
     <Stack>
-      <Timeline {...actions} size="small">
-        small
-      </Timeline>
-      <Timeline {...actions} size="medium">
-        medium
-      </Timeline>
-      <Timeline {...actions} size="large">
-        large
-      </Timeline>
-      <Timeline {...actions}>>Default</Timeline>
+      <Timeline steps={steps.map(({ icon, subtitle, ...step }) => step)} />
+      <Timeline steps={steps.map(({ icon, ...step }) => step)} />
+      <Timeline steps={steps} />
+      <Timeline steps={steps.map(({ subtitle, ...step }) => step)} />
+      <Timeline steps={steps} useZigZagStyle />
     </Stack>
   );
 };

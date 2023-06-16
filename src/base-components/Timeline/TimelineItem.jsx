@@ -22,6 +22,9 @@ export default function TimelineItem({
   ...props
 }) {
   const [customColor, muiColor] = useCustomColor(_color);
+  let mt = "-3px";
+  if (icon && subtitle) mt = "0";
+  if (icon && !subtitle) mt = "8px";
 
   return (
     <MuiTimelineItem {...props}>
@@ -40,13 +43,17 @@ export default function TimelineItem({
         </TimelineDot>
         {connector && <TimelineConnector />}
       </TimelineSeparator>
-      <TimelineContent>
+      <TimelineContent sx={{ mt, py: "px", px: 2 }}>
         {title && (
-          <Typography variant="h6" component="span">
+          <Typography variant="h6" component="span" tooltip={false}>
             {title}
           </Typography>
         )}
-        {subtitle && <Typography>{subtitle}</Typography>}
+        {subtitle && (
+          <Typography component="span" tooltip={false}>
+            {subtitle}
+          </Typography>
+        )}
       </TimelineContent>
     </MuiTimelineItem>
   );
