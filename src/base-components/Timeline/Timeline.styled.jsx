@@ -11,8 +11,10 @@ import {
 
 export const Timeline = MuiTimeline;
 
-export const TimelineItem = styled(MuiTimelineItem)`
-  // width: max-content;
+export const TimelineItem = styled(MuiTimelineItem, {
+  shouldForwardProp: (propName) => !["timeFormat"].includes(propName),
+})`
+  width: max-content;
 `;
 
 export const TimelineSeparator = MuiTimelineSeparator;

@@ -24,25 +24,6 @@ export const Default = () => {
   return <Timeline {...actions} />;
 };
 
-const steps = [
-  {
-    title: "Eat",
-  },
-  {
-    title: "Code",
-    color: "primary",
-    variant: "outlined",
-  },
-  {
-    title: "Sleep",
-    color: "secondary",
-    variant: "outlined",
-  },
-  {
-    title: "Repeat",
-  },
-];
-
 export const Variant = () => {
   return (
     <Stack direction="row" spacing={5}>
@@ -112,7 +93,13 @@ export const Icon = () => {
     },
     { title: "Repeat", icon: <RepeatIcon />, color: "secondary" },
   ];
-  return <Timeline steps={steps} />;
+
+  return (
+    <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+      <Timeline steps={steps.map(({ icon, ...step }) => step)} />
+      <Timeline steps={steps} />
+    </Box>
+  );
 };
 
 export const ZigZag = () => {
@@ -127,7 +114,30 @@ export const ZigZag = () => {
     },
     { title: "Repeat", icon: <RepeatIcon />, color: "secondary" },
   ];
-  return <Timeline steps={steps} position="alternate" />;
+
+  return (
+    <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+      {["left", "zigzag", "right"].map((position) => (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 3,
+            width: "max-content",
+          }}
+        >
+          <Typography tooltip={false}>{position ?? "default"}</Typography>
+          <Timeline
+            steps={steps}
+            left={position === "left"}
+            right={position === "right"}
+            zigzag={position === "zigzag"}
+          />
+        </Box>
+      ))}
+    </Box>
+  );
 };
 
 export const Subtitle = () => {
@@ -136,13 +146,13 @@ export const Subtitle = () => {
       title: "Eat",
       subtitle: "Because you need strength",
       icon: <FastfoodIcon />,
-      secondaryTitle: "09:30 am",
+      time: "09:30 am",
     },
     {
       title: "Code",
       subtitle: "Because it's awesome!",
       icon: <LaptopMacIcon />,
-      secondaryTitle: "10:00 am",
+      time: "10:00 am",
     },
     { title: "Sleep", subtitle: "Because you need rest", icon: <HotelIcon /> },
     {
@@ -153,29 +163,12 @@ export const Subtitle = () => {
   ];
 
   return (
-    <Stack>
+    <Stack direction="row" spacing={5}>
       <Timeline steps={steps.map(({ icon, subtitle, ...step }) => step)} />
       <Timeline steps={steps.map(({ icon, ...step }) => step)} />
       <Timeline steps={steps} />
       <Timeline steps={steps.map(({ subtitle, ...step }) => step)} />
-      <Timeline steps={steps} useZigZagStyle />
-    </Stack>
-  );
-};
-
-export const OtherSideTitle = () => {
-  return (
-    <Stack>
-      <Timeline {...actions} size="small">
-        small
-      </Timeline>
-      <Timeline {...actions} size="medium">
-        medium
-      </Timeline>
-      <Timeline {...actions} size="large">
-        large
-      </Timeline>
-      <Timeline {...actions}>>Default</Timeline>
+      <Timeline steps={steps} zigzag />
     </Stack>
   );
 };

@@ -2,50 +2,73 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Timeline as MuiTimeline } from "./Timeline.styled";
 import TimelineItem from "./TimelineItem";
+import { Box } from "@mui/material";
+import { useMaxWidth, useSteps } from "./Timeline.hooks";
 
 export default function Timeline({
   color,
   variant,
-  position,
   steps: _steps,
-  useZigZagStyle,
+  timeFormat,
+  right,
+  left,
+  zigzag,
+  position: _position,
   ...props
 }) {
-  const steps =
-    _steps?.map((step, index, arr) => {
-      if (typeof step === "string") {
-        step = { title: step };
-      }
+  const steps = useSteps({ steps: _steps, variant, color, timeFormat });
 
-      return {
-        ...step,
-        variant: step.variant ?? variant,
-        color: step.color ?? color,
-        icon: step.icon,
-        title: step.title,
-        subtitle: step.subtitle,
-        secondaryTitle: step.secondaryTitle,
-        connector: index !== arr.length - 1,
-      };
-    }) ?? [];
+  const position = [
+    zigzag && "alternate",
+    left && "left",
+    right && "right",
+    _position || "right",
+  ].find((val) => val);
+
+  const { timeWidth, titleWidth } = useMaxWidth({ steps });
 
   return (
-    <MuiTimeline position={useZigZagStyle ? "alternate" : position} {...props}>
-      {steps.map((step) => (
-        <TimelineItem {...step} />
-      ))}
-    </MuiTimeline>
+    <Box sx={{ display: "flex", border: "1px solid" }}>
+      <MuiTimeline position={position} {...props}>
+        {steps.map((step, index) => (
+          <TimelineItem
+            key={index}
+            {...step}
+            timeWidth={position === "alternate" ? titleWidth : timeWidth}
+            titleWidth={titleWidth}
+          />
+        ))}
+      </MuiTimeline>
+    </Box>
   );
 }
 
 Timeline.propTypes = {
   variant: PropTypes.oneOf(["filled", "outlined"]),
   color: PropTypes.string,
-  useZigZagStyle: PropTypes.bool,
+  timeFormat: PropTypes.string,
+  right: PropTypes.bool,
+  left: PropTypes.bool,
+  zigzag: PropTypes.bool,
+  steps: PropTypes.arrayOf(
+    PropTypes.shape({
+      variant: PropTypes.oneOf(["filled", "outlined"]),
+      color: PropTypes.string,
+      icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+      title: PropTypes.string,
+      subtitle: PropTypes.string,
+      time: PropTypes.string,
+      timeFormat: PropTypes.string,
+    })
+  ),
 };
 
 Timeline.defaultProps = {
   variant: undefined,
   color: undefined,
-  useZigZagStyle: undefined,
+  timeFormat: "HH:mm",
+  right: false,
+  left: false,
+  zigzag: false,
+  steps: [],
 };

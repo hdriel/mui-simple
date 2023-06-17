@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Grid } from "@mui/material";
-import { Rating, Dialog, Input, Avatar } from "../../base-components";
+import { Rating, Dialog, InputText, Avatar } from "../../base-components";
 
 const MIN_POSITIVE_RATING = 3;
 
@@ -45,7 +45,7 @@ export default function RatingDialog({ open, onClose }) {
         </Grid>
         <Grid item xs={12} sm={6}>
           {rating <= MIN_POSITIVE_RATING && (
-            <Input
+            <InputText
               label="Reason"
               required
               multiline

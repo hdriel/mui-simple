@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import {
   TimelineConnector,
   TimelineContent,
@@ -13,30 +14,33 @@ import { useCustomColor } from "../../utils/helpers";
 
 export default function TimelineItem({
   variant,
-  color: _color,
+  color,
   icon,
   title,
   subtitle,
-  secondaryTitle,
+  time,
   connector,
+  timeWidth,
+  titleWidth,
   ...props
 }) {
-  const [customColor, muiColor] = useCustomColor(_color);
+  const [customColor, muiColor] = useCustomColor(color);
   let mt = "-3px";
   if (icon && subtitle) mt = "0";
   if (icon && !subtitle) mt = "8px";
 
   return (
     <MuiTimelineItem {...props}>
-      {secondaryTitle && (
+      {
         <TimelineOppositeContent
-          sx={{ mx: 0, mt: icon ? "16px" : "3px" }}
+          sx={{ mx: 0, mt: icon ? "16px" : "3px", minWidth: timeWidth }}
           variant="body2"
           color="text.secondary"
         >
-          {secondaryTitle}
+          {time}
         </TimelineOppositeContent>
-      )}
+      }
+
       <TimelineSeparator>
         <TimelineDot
           variant={variant}
@@ -47,17 +51,15 @@ export default function TimelineItem({
         </TimelineDot>
         {connector && <TimelineConnector />}
       </TimelineSeparator>
-      <TimelineContent sx={{ mt, py: "px", px: 2 }}>
+
+      <TimelineContent sx={{ mt, py: "px", px: 2, minWidth: titleWidth }}>
         {title && (
-          <Typography variant="h6" component="span" tooltip={false}>
+          <Typography variant="h6" component="span">
             {title}
           </Typography>
         )}
-        {subtitle && (
-          <Typography component="span" tooltip={false}>
-            {subtitle}
-          </Typography>
-        )}
+
+        {subtitle && <Typography component="span">{subtitle}</Typography>}
       </TimelineContent>
     </MuiTimelineItem>
   );
@@ -66,9 +68,11 @@ export default function TimelineItem({
 TimelineItem.propTypes = {
   variant: PropTypes.oneOf(["filled", "outlined"]),
   color: PropTypes.string,
-  icon: PropTypes.string,
+  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   title: PropTypes.string,
   subtitle: PropTypes.string,
+  time: PropTypes.string,
+  timeFormat: PropTypes.string,
   connector: PropTypes.bool,
 };
 
@@ -78,5 +82,7 @@ TimelineItem.defaultProps = {
   icon: undefined,
   title: undefined,
   subtitle: undefined,
+  time: undefined,
+  timeFormat: undefined,
   connector: undefined,
 };
