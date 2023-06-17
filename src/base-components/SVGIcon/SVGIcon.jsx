@@ -1,4 +1,4 @@
-import React from "react";
+import React, { cloneElement, isValidElement } from "react";
 import PropTypes from "prop-types";
 import MuiIconName from "./MuiIconName";
 import { SVG } from "./SVGIcon.styled";
@@ -10,9 +10,14 @@ export default function SVGIcon({
   width,
   height,
   size,
+  children,
   ...props
 }) {
-  return (
+  muiIconName ||= typeof children === "string" ? children : undefined;
+
+  return children && isValidElement(children) ? (
+    children
+  ) : (
     <MuiIconName
       name={muiIconName}
       color={color}
@@ -20,13 +25,15 @@ export default function SVGIcon({
       height={size ?? height}
       {...props}
     >
-      <SVG
-        src={iconSrc}
-        fill={color}
-        width={size ?? width}
-        height={size ?? height}
-        {...props}
-      />
+      {iconSrc && (
+        <SVG
+          src={iconSrc}
+          fill={color}
+          width={size ?? width}
+          height={size ?? height}
+          {...props}
+        />
+      )}
     </MuiIconName>
   );
 }
