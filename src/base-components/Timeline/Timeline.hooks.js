@@ -33,7 +33,15 @@ export function useMaxWidth({ steps }) {
   return { titleWidth: maxTitleWidth, timeWidth: maxTimeWidth };
 }
 
-export function useSteps({ steps: _steps, timeFormat, variant, color }) {
+export function useSteps({
+  steps: _steps,
+  timeFormat,
+  variant,
+  connectorColor,
+  connectorHeight,
+  connectorWidth,
+  color,
+}) {
   const steps =
     _steps?.map((step, index, arr) => {
       if (typeof step === "string") {
@@ -50,6 +58,9 @@ export function useSteps({ steps: _steps, timeFormat, variant, color }) {
         ...step,
         variant: step.variant ?? variant,
         color: step.color ?? color,
+        connectorColor: step.connectorColor ?? connectorColor,
+        connectorHeight: step.connectorHeight ?? connectorHeight,
+        connectorWidth: step.connectorWidth ?? connectorWidth,
         icon: step.icon,
         title: step.title,
         subtitle: step.subtitle,

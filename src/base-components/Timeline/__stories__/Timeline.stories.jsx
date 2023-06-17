@@ -102,6 +102,34 @@ export const Icon = () => {
   );
 };
 
+export const Connector = () => {
+  const steps = [
+    { title: "Eat", icon: <FastfoodIcon /> },
+    { title: "Code", icon: <LaptopMacIcon />, color: "primary" },
+    {
+      title: "Sleep",
+      icon: <HotelIcon />,
+      color: "primary",
+      variant: "outlined",
+      connectorColor: "info",
+      connectorHeight: 50,
+      connectorWidth: 8,
+    },
+    { title: "Repeat", icon: <RepeatIcon />, color: "secondary" },
+  ];
+
+  return (
+    <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+      <Timeline
+        steps={steps.map(({ icon, ...step }) => step)}
+        connectorColor="error"
+        connectorHeight={150}
+      />
+      <Timeline steps={steps} connectorHeight={150} />
+    </Box>
+  );
+};
+
 export const ZigZag = () => {
   const steps = [
     { title: "Eat", icon: <FastfoodIcon /> },

@@ -15,6 +15,9 @@ import { useCustomColor } from "../../utils/helpers";
 export default function TimelineItem({
   variant,
   color,
+  connectorColor,
+  connectorHeight,
+  connectorWidth,
   icon,
   title,
   subtitle,
@@ -25,6 +28,8 @@ export default function TimelineItem({
   ...props
 }) {
   const [customColor, muiColor] = useCustomColor(color);
+  const [customColorConnector] = useCustomColor(connectorColor);
+
   let mt = "-3px";
   if (icon && subtitle) mt = "0";
   if (icon && !subtitle) mt = "8px";
@@ -49,10 +54,26 @@ export default function TimelineItem({
         >
           {icon}
         </TimelineDot>
-        {connector && <TimelineConnector />}
+        {connector && (
+          <TimelineConnector
+            sx={{
+              bgcolor: customColorConnector,
+              minHeight: connectorHeight,
+              width: connectorWidth,
+              borderRadius: "25px",
+            }}
+          />
+        )}
       </TimelineSeparator>
 
-      <TimelineContent sx={{ mt, py: "px", px: 2, minWidth: titleWidth }}>
+      <TimelineContent
+        sx={{
+          mt,
+          py: "px",
+          px: 2,
+          minWidth: titleWidth,
+        }}
+      >
         {title && (
           <Typography variant="h6" component="span">
             {title}
@@ -74,6 +95,9 @@ TimelineItem.propTypes = {
   time: PropTypes.string,
   timeFormat: PropTypes.string,
   connector: PropTypes.bool,
+  connectorColor: PropTypes.string,
+  connectorHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  connectorWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 TimelineItem.defaultProps = {
@@ -85,4 +109,7 @@ TimelineItem.defaultProps = {
   time: undefined,
   timeFormat: undefined,
   connector: undefined,
+  connectorColor: undefined,
+  connectorHeight: undefined,
+  connectorWidth: undefined,
 };

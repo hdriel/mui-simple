@@ -9,6 +9,9 @@ import { timelineOppositeContentClasses } from "@mui/lab/TimelineOppositeContent
 
 export default function Timeline({
   color,
+  connectorColor,
+  connectorHeight,
+  connectorWidth,
   variant,
   steps: _steps,
   timeFormat,
@@ -19,7 +22,15 @@ export default function Timeline({
   align,
   ...props
 }) {
-  const steps = useSteps({ steps: _steps, variant, color, timeFormat });
+  const steps = useSteps({
+    steps: _steps,
+    variant,
+    color,
+    connectorColor,
+    connectorHeight,
+    connectorWidth,
+    timeFormat,
+  });
 
   const position = [
     zigzag && "alternate",
@@ -53,6 +64,10 @@ export default function Timeline({
 Timeline.propTypes = {
   variant: PropTypes.oneOf(["filled", "outlined"]),
   color: PropTypes.string,
+  connectorColor: PropTypes.string,
+  connectorHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  connectorWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  connectorStyle: PropTypes.string,
   timeFormat: PropTypes.string,
   right: PropTypes.bool,
   left: PropTypes.bool,
@@ -62,6 +77,7 @@ Timeline.propTypes = {
     PropTypes.shape({
       variant: PropTypes.oneOf(["filled", "outlined"]),
       color: PropTypes.string,
+      connectorColor: PropTypes.string,
       icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
       title: PropTypes.string,
       subtitle: PropTypes.string,
@@ -74,6 +90,9 @@ Timeline.propTypes = {
 Timeline.defaultProps = {
   variant: undefined,
   color: undefined,
+  connectorColor: undefined,
+  connectorHeight: undefined,
+  connectorWidth: undefined,
   timeFormat: "HH:mm",
   right: false,
   left: false,
