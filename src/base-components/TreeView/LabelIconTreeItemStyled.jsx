@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Box } from "@mui/material";
-import { TreeItemStyled } from "./TreeView.styled";
+import { LabelIconTreeItemStyled } from "./TreeView.styled";
 import Typography from "../Typography/Typography";
 import SVGIcon from "../SVGIcon/SVGIcon";
 
@@ -9,7 +9,8 @@ export default function StyledTreeItem(props) {
   const { bgColor, color, labelIcon, labelInfo, labelText, ...other } = props;
 
   return (
-    <TreeItemStyled
+    <LabelIconTreeItemStyled
+      {...other}
       label={
         <Box sx={{ display: "flex", alignItems: "center", p: 0.5, pr: 0 }}>
           {labelIcon && (
@@ -39,7 +40,6 @@ export default function StyledTreeItem(props) {
         "--tree-view-color": color,
         "--tree-view-bg-color": bgColor,
       }}
-      {...other}
     />
   );
 }

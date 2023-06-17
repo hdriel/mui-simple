@@ -177,6 +177,76 @@ export const GmailClone = () => {
       selectedIds={selected}
       onExpended={setExpanded}
       onSelected={setSelected}
+      useStyle="LabelIcon"
+    />
+  );
+};
+
+export const Styles = () => {
+  let nodes = [
+    {
+      id: "1",
+      label: "All Mail",
+      icon: "Mail",
+    },
+    {
+      id: "2",
+      label: "Trash",
+      icon: "Delete",
+    },
+    {
+      id: "3",
+      label: "Trash",
+      icon: "Label",
+      children: [
+        {
+          id: "5",
+          label: "Social",
+          icon: "SupervisorAccount",
+          color: "#1a73e8",
+          bgColor: "#e8f0fe",
+        },
+        {
+          id: "6",
+          label: "Updates",
+          icon: "Info",
+          color: "#e3742f",
+          bgColor: "#fcefe3",
+        },
+        {
+          id: "7",
+          label: "Forums",
+          icon: "Forum",
+          color: "#a250f5",
+          bgColor: "#f3e8fd",
+        },
+        {
+          id: "8",
+          label: "Promotions",
+          icon: "LocalOffer",
+          color: "#3c8039",
+          bgColor: "#e6f4ea",
+        },
+      ],
+    },
+    {
+      id: "4",
+      label: "History",
+      icon: "Label",
+    },
+  ];
+
+  const [expanded, setExpanded] = React.useState(["3"]);
+  const [selected, setSelected] = React.useState([]);
+
+  return (
+    <TreeView
+      nodes={nodes}
+      expandedIds={expanded}
+      selectedIds={selected}
+      onExpended={setExpanded}
+      onSelected={setSelected}
+      useStyle="IndentBorder"
     />
   );
 };

@@ -3,19 +3,29 @@ import PropTypes from "prop-types";
 import { Box } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
-import { TreeView as MuiTreeView, TreeItem } from "./TreeView.styled";
-import TreeViewItem from "./TreeViewItem";
+import {
+  TreeView as MuiTreeView,
+  IndentBorderTreeItemStyled,
+  TreeItem,
+} from "./TreeView.styled";
+import LabelIconTreeItemStyled from "./LabelIconTreeItemStyled";
+import { CloseSquare, MinusSquare, PlusSquare } from "./TreeView.icons";
+import TransitionComponent from "./TreeView.transition";
 
 export default function TreeView({
   nodes,
   collapseIcon,
   expandIcon,
+  endIcon,
   multiSelect,
   expandedIds,
   onExpended,
   selectedIds,
   onSelected,
+  useStyle,
   ...props
 }) {
   const handleToggle = onExpended
@@ -27,25 +37,47 @@ export default function TreeView({
     : undefined;
 
   const renderTree = (nodes) =>
-    nodes?.map(({ id, label, icon, info, ...node }) => (
-      <TreeViewItem
-        key={id}
-        nodeId={id}
-        labelText={label}
-        labelIcon={icon}
-        labelInfo={info}
-        {...node}
-      >
-        {renderTree(node.children)}
-      </TreeViewItem>
-    )) ?? null;
+    nodes?.map(({ id, label, icon, info, ...node }) => {
+      let TreeViewItem;
+      if (useStyle === "LabelIcon") {
+        TreeViewItem = LabelIconTreeItemStyled;
+      } else if (useStyle === "IndentBorder") {
+        TreeViewItem = IndentBorderTreeItemStyled;
+      } else {
+        TreeViewItem = TreeItem;
+      }
+      return (
+        <TreeViewItem
+          key={id}
+          TransitionComponent={TransitionComponent}
+          nodeId={id}
+          label={label}
+          labelText={label}
+          labelIcon={icon}
+          labelInfo={info}
+          {...node}
+        >
+          {renderTree(node.children)}
+        </TreeViewItem>
+      );
+    }) ?? null;
+
+  if (useStyle === "LabelIcon") {
+    collapseIcon = <ArrowDropDownIcon />;
+    expandIcon = <ArrowRightIcon />;
+    endIcon = <div style={{ width: 24 }} />;
+  } else if (useStyle === "IndentBorder") {
+    collapseIcon = <MinusSquare />;
+    expandIcon = <PlusSquare />;
+    endIcon = <CloseSquare />;
+  }
 
   return (
     <Box>
       <MuiTreeView
         defaultCollapseIcon={collapseIcon}
         defaultExpandIcon={expandIcon}
-        defaultEndIcon={<div style={{ width: 24, bgcolor: "red" }} />}
+        defaultEndIcon={endIcon}
         multiSelect={multiSelect}
         expanded={expandedIds}
         selected={selectedIds}
@@ -77,15 +109,18 @@ TreeView.propTypes = {
   onExpended: PropTypes.func,
   selectedIds: PropTypes.arrayOf(PropTypes.string),
   onSelected: PropTypes.func,
+  useStyle: PropTypes.oneOf(["default", "LabelIcon", "IndentBorder"]),
 };
 
 TreeView.defaultProps = {
   nodes: [],
   collapseIcon: <ExpandMoreIcon />,
   expandIcon: <ChevronRightIcon />,
+  endIcon: undefined,
   multiSelect: undefined,
   expandedIds: undefined,
   onExpended: undefined,
   selectedIds: undefined,
   onSelected: undefined,
+  useStyle: "default",
 };

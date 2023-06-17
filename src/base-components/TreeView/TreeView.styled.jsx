@@ -1,4 +1,4 @@
-import { styled } from "@mui/material/styles";
+import { styled, alpha } from "@mui/material/styles";
 import { TreeView as MuiTreeView } from "@mui/lab";
 import MuiTreeItem, { treeItemClasses } from "@mui/lab/TreeItem";
 
@@ -9,11 +9,12 @@ export const TreeView = styled(MuiTreeView, {
   flex-grow: 1;
   max-width: ${(props) => (props.maxWidth ? `${props.maxWidth}px` : undefined)};
   overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 export const TreeItem = styled(MuiTreeItem)``;
 
-export const TreeItemStyled = styled(MuiTreeItem)(({ theme }) => ({
+export const LabelIconTreeItemStyled = styled(MuiTreeItem)(({ theme }) => ({
   color: theme.palette.text.secondary,
   [`& .${treeItemClasses.content}`]: {
     width: "auto",
@@ -42,5 +43,18 @@ export const TreeItemStyled = styled(MuiTreeItem)(({ theme }) => ({
     [`& .${treeItemClasses.content}`]: {
       paddingLeft: theme.spacing(2),
     },
+  },
+}));
+
+export const IndentBorderTreeItemStyled = styled(MuiTreeItem)(({ theme }) => ({
+  [`& .${treeItemClasses.iconContainer}`]: {
+    "& .close": {
+      opacity: 0.3,
+    },
+  },
+  [`& .${treeItemClasses.group}`]: {
+    marginLeft: 15,
+    paddingLeft: 18,
+    borderLeft: `1px dashed ${alpha(theme.palette.text.primary, 0.4)}`,
   },
 }));
