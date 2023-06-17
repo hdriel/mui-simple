@@ -172,3 +172,34 @@ export const Subtitle = () => {
     </Stack>
   );
 };
+
+export const Aligned = () => {
+  const steps = [
+    {
+      title: "Eat",
+      subtitle: "Because you need strength",
+      icon: <FastfoodIcon />,
+      time: "09:30 am",
+    },
+    {
+      title: "Code",
+      subtitle: "Because it's awesome!",
+      icon: <LaptopMacIcon />,
+      time: "10:00 am",
+    },
+    { title: "Sleep", subtitle: "Because you need rest", icon: <HotelIcon /> },
+    {
+      title: "Repeat",
+      subtitle: "Because this is the life you love!",
+      icon: <RepeatIcon />,
+    },
+  ];
+
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 5 }}>
+      <Timeline steps={steps} align="left" />
+      <Timeline steps={steps} />
+      <Timeline steps={steps} align="right" />
+    </Box>
+  );
+};

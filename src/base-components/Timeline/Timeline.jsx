@@ -4,6 +4,8 @@ import { Timeline as MuiTimeline } from "./Timeline.styled";
 import TimelineItem from "./TimelineItem";
 import { Box } from "@mui/material";
 import { useMaxWidth, useSteps } from "./Timeline.hooks";
+import { timelineContentClasses } from "@mui/lab/TimelineContent";
+import { timelineOppositeContentClasses } from "@mui/lab/TimelineOppositeContent";
 
 export default function Timeline({
   color,
@@ -14,6 +16,7 @@ export default function Timeline({
   left,
   zigzag,
   position: _position,
+  align,
   ...props
 }) {
   const steps = useSteps({ steps: _steps, variant, color, timeFormat });
@@ -28,8 +31,12 @@ export default function Timeline({
   const { timeWidth, titleWidth } = useMaxWidth({ steps });
 
   return (
-    <Box sx={{ display: "flex", border: "1px solid" }}>
-      <MuiTimeline position={position} {...props}>
+    <Box sx={{ display: "flex", border: "1px solid", justifyContent: align }}>
+      <MuiTimeline
+        position={position}
+        {...props}
+        sx={{ maxWidth: "max-content" }}
+      >
         {steps.map((step, index) => (
           <TimelineItem
             key={index}
@@ -50,6 +57,7 @@ Timeline.propTypes = {
   right: PropTypes.bool,
   left: PropTypes.bool,
   zigzag: PropTypes.bool,
+  align: PropTypes.oneOf(["right", "left", "center"]),
   steps: PropTypes.arrayOf(
     PropTypes.shape({
       variant: PropTypes.oneOf(["filled", "outlined"]),
@@ -71,4 +79,5 @@ Timeline.defaultProps = {
   left: false,
   zigzag: false,
   steps: [],
+  align: "center",
 };
