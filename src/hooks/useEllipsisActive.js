@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useElementSize from "./useElementSize";
+import { getTextWidth } from "../utils/helpers";
 
 export function useEllipsisActive({ active, text, maxRows }) {
   const [ref, { width: widthText }] = useElementSize(active);
@@ -7,7 +8,7 @@ export function useEllipsisActive({ active, text, maxRows }) {
 
   useEffect(() => {
     if (active) {
-      const { offsetWidth } = getOriginalTextWidth(text);
+      const { offsetWidth } = getTextWidth(text);
       const rows = getElementRowCount(ref.current);
       const isEllipsis = !!(maxRows
         ? rows > maxRows
@@ -18,15 +19,6 @@ export function useEllipsisActive({ active, text, maxRows }) {
   }, [widthText]);
 
   return [ref, isEllipsis];
-}
-
-export function getOriginalTextWidth(text) {
-  const element = document.createElement("span");
-  element.textContent = text;
-  document.body.appendChild(element);
-  const { offsetWidth, scrollWidth } = element;
-  element.parentElement.removeChild(element);
-  return { offsetWidth, scrollWidth };
 }
 
 function getElementRowCount(element) {

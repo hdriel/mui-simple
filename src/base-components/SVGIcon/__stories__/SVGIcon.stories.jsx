@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { action } from "@storybook/addon-actions";
-// import { Send as SendIcon } from "@mui/icons-material";
 import filledIcons from "./filled-icons.json";
 import outlinedIcons from "./outlined-icons.json";
 import roundedIcons from "./rounded-icons.json";
@@ -16,7 +15,7 @@ import InputColor from "../../TextField/InputColor";
 import Slider from "../../Slider/Slider";
 
 export default {
-  title: "TEMPLATE/SVGIcon",
+  title: "Data-Display/Icons",
   component: SVGIcon,
 };
 
@@ -104,44 +103,86 @@ export const WidthAndHeight = () => {
   const [height, setHeight] = useState(100);
 
   return (
-    <Grid container spacing={3} sx={{ width: 500 }}>
-      <Grid item xs flex>
-        <Stack direction="row">
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "100%",
-              height: 500,
-            }}
-          >
-            <Box sx={{ border: "1px dashed black" }}>
-              <SVGIcon
-                muiIconName="Home"
-                color={"red"}
-                width={width}
-                height={height}
-              />
+    <Grid container spacing={5} sx={{ width: 1200 }}>
+      <Grid item xs={6}>
+        <Grid item xs flex>
+          <Stack direction="row">
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: 500,
+              }}
+            >
+              <Box sx={{ border: "1px dashed black" }}>
+                <SVGIcon
+                  muiIconName="Home"
+                  color={"red"}
+                  width={width}
+                  height={height}
+                />
+              </Box>
             </Box>
-          </Box>
+            <Slider
+              orientation="vertical"
+              value={height}
+              onChange={(e) => setHeight(e.target.value)}
+              min={100}
+              max={500}
+              sx={{ height: 500 }}
+            />
+          </Stack>
+        </Grid>
+        <Grid item xs={12}>
           <Slider
-            orientation="vertical"
-            value={height}
-            onChange={(e) => setHeight(e.target.value)}
+            value={width}
+            onChange={(e) => setWidth(e.target.value)}
             min={100}
             max={500}
-            sx={{ height: 500 }}
           />
-        </Stack>
+        </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <Slider
-          value={width}
-          onChange={(e) => setWidth(e.target.value)}
-          min={100}
-          max={500}
-        />
+      <Grid item xs={6}>
+        <Grid item xs flex>
+          <Stack direction="row">
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: 500,
+              }}
+            >
+              <Box sx={{ border: "1px dashed black" }}>
+                <SVGIcon
+                  iconSrc="/hashtag-icon.svg"
+                  color={"red"}
+                  width={width}
+                  height={height}
+                />
+              </Box>
+            </Box>
+            <Slider
+              orientation="vertical"
+              value={height}
+              onChange={(e) => setHeight(e.target.value)}
+              min={100}
+              max={500}
+              sx={{ height: 500 }}
+            />
+          </Stack>
+        </Grid>
+        <Grid item xs={12}>
+          <Slider
+            value={width}
+            onChange={(e) => setWidth(e.target.value)}
+            min={100}
+            max={500}
+          />
+        </Grid>
       </Grid>
     </Grid>
   );

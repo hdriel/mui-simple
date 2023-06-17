@@ -1,7 +1,6 @@
 import _ from "lodash";
-import { getOriginalTextWidth } from "../../hooks/useEllipsisActive";
 import { SORT } from "./Table.consts";
-import { getCustomColor, isDefined } from "../../utils/helpers";
+import { getCustomColor, getTextWidth, isDefined } from "../../utils/helpers";
 
 export function getDataRange({ rows, total, page, rowsPerPage }) {
   // case that got full data as total
@@ -75,7 +74,7 @@ function getMenuWidth(fields) {
   const sized = fields?.map((field) => field?.length ?? 0) ?? [0];
   const index = Math.max(...sized);
   const maxWord = fields?.[sized.indexOf(index)] ?? "";
-  const { offsetWidth } = getOriginalTextWidth(maxWord);
+  const { offsetWidth } = getTextWidth(maxWord);
   const checkboxPadding = 50;
   const draggalbePadding = 50;
   const spaceItemsPadding = 15;

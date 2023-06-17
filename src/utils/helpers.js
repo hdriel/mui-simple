@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { alpha, darken, lighten } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+
 const toHex = require("colornames");
 
 export function getCapitalLetters(str) {
@@ -140,4 +141,13 @@ export function loadScript(src, element, id) {
   script.setAttribute("id", id);
   script.src = src;
   element.appendChild(script);
+}
+
+export function getTextWidth(text) {
+  const element = document.createElement("span");
+  element.textContent = text;
+  document.body.appendChild(element);
+  const { offsetWidth, scrollWidth } = element;
+  element.parentElement.removeChild(element);
+  return { offsetWidth, scrollWidth };
 }

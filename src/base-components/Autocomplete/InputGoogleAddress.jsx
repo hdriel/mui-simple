@@ -114,7 +114,7 @@ export default function InputGoogleAddress({
 
       loaded.current = true;
     }
-  }, [loaded.current]);
+  }, [GOOGLE_MAPS_API_KEY]);
 
   return (
     <MuiAutocomplete
