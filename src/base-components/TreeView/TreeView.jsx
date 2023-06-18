@@ -10,10 +10,13 @@ import {
   TreeView as MuiTreeView,
   IndentBorderTreeItemStyled,
   TreeItem,
+  TreeItemStyled,
 } from "./TreeView.styled";
 import LabelIconTreeItemStyled from "./LabelIconTreeItemStyled";
 import { CloseSquare, MinusSquare, PlusSquare } from "./TreeView.icons";
 import TransitionComponent from "./TreeView.transition";
+import { useTreeItem } from "@mui/lab";
+import { withTreeViewItem } from "./TreeViewItemCustomWrapper";
 
 export default function TreeView({
   nodes,
@@ -26,6 +29,7 @@ export default function TreeView({
   selectedIds,
   onSelected,
   useStyle,
+  Component,
   ...props
 }) {
   const handleToggle = onExpended
@@ -36,18 +40,27 @@ export default function TreeView({
     ? (event, nodeIds) => onSelected(nodeIds)
     : undefined;
 
+  const getCustomTreeItem = (useStyle) => {
+    if (Component) return withTreeViewItem({})(Component);
+
+    let TreeViewItem;
+    if (useStyle === "LabelIcon") {
+      TreeViewItem = LabelIconTreeItemStyled;
+    } else if (useStyle === "IndentBorder") {
+      TreeViewItem = IndentBorderTreeItemStyled;
+    } else {
+      TreeViewItem = TreeItem;
+    }
+
+    return TreeViewItem;
+  };
+
   const renderTree = (nodes) =>
     nodes?.map(({ id, label, icon, info, ...node }) => {
-      let TreeViewItem;
-      if (useStyle === "LabelIcon") {
-        TreeViewItem = LabelIconTreeItemStyled;
-      } else if (useStyle === "IndentBorder") {
-        TreeViewItem = IndentBorderTreeItemStyled;
-      } else {
-        TreeViewItem = TreeItem;
-      }
+      const CustomTreeItem = getCustomTreeItem(useStyle);
+
       return (
-        <TreeViewItem
+        <CustomTreeItem
           key={id}
           TransitionComponent={TransitionComponent}
           nodeId={id}
@@ -58,7 +71,7 @@ export default function TreeView({
           {...node}
         >
           {renderTree(node.children)}
-        </TreeViewItem>
+        </CustomTreeItem>
       );
     }) ?? null;
 
@@ -110,6 +123,7 @@ TreeView.propTypes = {
   selectedIds: PropTypes.arrayOf(PropTypes.string),
   onSelected: PropTypes.func,
   useStyle: PropTypes.oneOf(["default", "LabelIcon", "IndentBorder"]),
+  Component: PropTypes.any,
 };
 
 TreeView.defaultProps = {
@@ -123,4 +137,5 @@ TreeView.defaultProps = {
   selectedIds: undefined,
   onSelected: undefined,
   useStyle: "default",
+  Component: "default",
 };

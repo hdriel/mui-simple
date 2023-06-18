@@ -186,53 +186,53 @@ export const Styles = () => {
   let nodes = [
     {
       id: "1",
-      label: "All Mail",
-      icon: "Mail",
-    },
-    {
-      id: "2",
-      label: "Trash",
-      icon: "Delete",
-    },
-    {
-      id: "3",
-      label: "Trash",
-      icon: "Label",
+      label: "Main",
       children: [
         {
+          id: "2",
+          label: "Hello",
+        },
+        {
+          id: "3",
+          label: "Subtree with children",
+          children: [
+            {
+              id: "6",
+              label: "Hello",
+            },
+            {
+              id: "7",
+              label: "Sub-subtree with children",
+              children: [
+                {
+                  id: "9",
+                  label: "Child 1",
+                },
+                {
+                  id: "10",
+                  label: "Child 2",
+                },
+                {
+                  id: "11",
+                  label: "Child 3",
+                },
+              ],
+            },
+            {
+              id: "8",
+              label: "Hello",
+            },
+          ],
+        },
+        {
+          id: "4",
+          label: "World",
+        },
+        {
           id: "5",
-          label: "Social",
-          icon: "SupervisorAccount",
-          color: "#1a73e8",
-          bgColor: "#e8f0fe",
-        },
-        {
-          id: "6",
-          label: "Updates",
-          icon: "Info",
-          color: "#e3742f",
-          bgColor: "#fcefe3",
-        },
-        {
-          id: "7",
-          label: "Forums",
-          icon: "Forum",
-          color: "#a250f5",
-          bgColor: "#f3e8fd",
-        },
-        {
-          id: "8",
-          label: "Promotions",
-          icon: "LocalOffer",
-          color: "#3c8039",
-          bgColor: "#e6f4ea",
+          label: "Something something",
         },
       ],
-    },
-    {
-      id: "4",
-      label: "History",
-      icon: "Label",
     },
   ];
 
@@ -247,6 +247,80 @@ export const Styles = () => {
       onExpended={setExpanded}
       onSelected={setSelected}
       useStyle="IndentBorder"
+    />
+  );
+};
+
+function TreeItemCustomized(props) {
+  console.log("props", props);
+  return <div>Hello World</div>;
+}
+
+export const CustomItem = () => {
+  let nodes = [
+    {
+      id: "1",
+      label: "Main",
+      children: [
+        {
+          id: "2",
+          label: "Hello",
+        },
+        {
+          id: "3",
+          label: "Subtree with children",
+          children: [
+            {
+              id: "6",
+              label: "Hello",
+            },
+            {
+              id: "7",
+              label: "Sub-subtree with children",
+              children: [
+                {
+                  id: "9",
+                  label: "Child 1",
+                },
+                {
+                  id: "10",
+                  label: "Child 2",
+                },
+                {
+                  id: "11",
+                  label: "Child 3",
+                },
+              ],
+            },
+            {
+              id: "8",
+              label: "Hello",
+            },
+          ],
+        },
+        {
+          id: "4",
+          label: "World",
+        },
+        {
+          id: "5",
+          label: "Something something",
+        },
+      ],
+    },
+  ];
+
+  const [expanded, setExpanded] = React.useState(["3"]);
+  const [selected, setSelected] = React.useState([]);
+
+  return (
+    <TreeView
+      nodes={nodes}
+      expandedIds={expanded}
+      selectedIds={selected}
+      onExpended={setExpanded}
+      onSelected={setSelected}
+      Component={TreeItemCustomized}
     />
   );
 };
