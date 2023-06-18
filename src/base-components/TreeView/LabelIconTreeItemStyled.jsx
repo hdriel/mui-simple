@@ -1,15 +1,26 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import { Box } from "@mui/material";
 import { LabelIconTreeItemStyled } from "./TreeView.styled";
 import Typography from "../Typography/Typography";
 import SVGIcon from "../SVGIcon/SVGIcon";
 
-export default function StyledTreeItem(props) {
-  const { bgColor, color, labelIcon, labelInfo, labelText, ...other } = props;
+const StyledTreeItem = forwardRef((props, ref) => {
+  if (!props) return null;
+
+  debugger;
+  const {
+    bgColor,
+    color,
+    icon: labelIcon,
+    info: labelInfo,
+    label: labelText,
+    ...other
+  } = props ?? {};
 
   return (
     <LabelIconTreeItemStyled
+      ref={ref}
       {...other}
       label={
         <Box sx={{ display: "flex", alignItems: "center", p: 0.5, pr: 0 }}>
@@ -42,7 +53,7 @@ export default function StyledTreeItem(props) {
       }}
     />
   );
-}
+});
 
 StyledTreeItem.propTypes = {
   bgColor: PropTypes.string,
@@ -63,3 +74,5 @@ StyledTreeItem.defaultProps = {
   labelInfo: undefined,
   labelText: undefined,
 };
+
+export default StyledTreeItem;

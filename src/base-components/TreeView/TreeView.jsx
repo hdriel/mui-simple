@@ -1,11 +1,10 @@
-import React from "react";
+import React, { isValidElement } from "react";
 import PropTypes from "prop-types";
 import { Box } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-
 import {
   TreeView as MuiTreeView,
   IndentBorderTreeItemStyled,
@@ -16,7 +15,7 @@ import LabelIconTreeItemStyled from "./LabelIconTreeItemStyled";
 import { CloseSquare, MinusSquare, PlusSquare } from "./TreeView.icons";
 import TransitionComponent from "./TreeView.transition";
 import { useTreeItem } from "@mui/lab";
-import { withTreeViewItem } from "./TreeViewItemCustomWrapper";
+import { withTreeViewItem } from "./withTreeViewItem";
 
 export default function TreeView({
   nodes,
@@ -40,40 +39,20 @@ export default function TreeView({
     ? (event, nodeIds) => onSelected(nodeIds)
     : undefined;
 
-  const getCustomTreeItem = (useStyle) => {
-    if (Component) return withTreeViewItem({})(Component);
-
-    let TreeViewItem;
-    if (useStyle === "LabelIcon") {
-      TreeViewItem = LabelIconTreeItemStyled;
-    } else if (useStyle === "IndentBorder") {
-      TreeViewItem = IndentBorderTreeItemStyled;
-    } else {
-      TreeViewItem = TreeItem;
-    }
-
-    return TreeViewItem;
-  };
+  const CustomTreeItem = Component ? withTreeViewItem(Component) : TreeItem;
 
   const renderTree = (nodes) =>
-    nodes?.map(({ id, label, icon, info, ...node }) => {
-      const CustomTreeItem = getCustomTreeItem(useStyle);
-
-      return (
-        <CustomTreeItem
-          key={id}
-          TransitionComponent={TransitionComponent}
-          nodeId={id}
-          label={label}
-          labelText={label}
-          labelIcon={icon}
-          labelInfo={info}
-          {...node}
-        >
-          {renderTree(node.children)}
-        </CustomTreeItem>
-      );
-    }) ?? null;
+    nodes?.map(({ id, label, ...node }) => (
+      <CustomTreeItem
+        key={id}
+        TransitionComponent={TransitionComponent}
+        nodeId={id}
+        label={label}
+        {...node}
+      >
+        {renderTree(node.children)}
+      </CustomTreeItem>
+    ));
 
   if (useStyle === "LabelIcon") {
     collapseIcon = <ArrowDropDownIcon />;

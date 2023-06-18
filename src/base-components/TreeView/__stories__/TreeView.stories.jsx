@@ -5,6 +5,8 @@ import TreeView from "../TreeView";
 import { Box } from "@mui/material";
 import Button from "../../Button/Button";
 
+import StyledTreeItem from "../LabelIconTreeItemStyled";
+
 export default {
   title: "Lab/TreeView",
   component: TreeView,
@@ -123,7 +125,7 @@ export const GmailClone = () => {
     },
     {
       id: "3",
-      label: "Trash",
+      label: "Categories",
       icon: "Label",
       children: [
         {
@@ -177,7 +179,8 @@ export const GmailClone = () => {
       selectedIds={selected}
       onExpended={setExpanded}
       onSelected={setSelected}
-      useStyle="LabelIcon"
+      // useStyle="LabelIcon"
+      Component={StyledTreeItem}
     />
   );
 };

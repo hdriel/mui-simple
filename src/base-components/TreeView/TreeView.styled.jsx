@@ -13,7 +13,7 @@ export const TreeView = styled(MuiTreeView, {
   overflow-x: hidden;
 `;
 
-export const TreeItem = styled(MuiTreeItem)``;
+export const TreeItem = MuiTreeItem;
 
 export const LabelIconTreeItemStyled = styled(MuiTreeItem)(({ theme }) => ({
   color: theme.palette.text.secondary,
