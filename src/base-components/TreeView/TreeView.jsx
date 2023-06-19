@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 import { Box } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { TreeView as MuiTreeView, TreeItem } from "./TreeView.styled";
+import {
+  TreeView as MuiTreeView,
+  TreeItem,
+  TreeItemStyled,
+} from "./TreeView.styled";
 import MuiTransitionComponent from "./TreeView.transition";
 import { withTreeViewItem } from "./withTreeViewItem";
 
@@ -36,7 +40,7 @@ export default function TreeView({
     : undefined;
 
   const CustomTreeItem = LabelComponent
-    ? withTreeViewItem(LabelComponent, TreeItemComponent)
+    ? withTreeViewItem(LabelComponent, TreeItemStyled)
     : TreeItemComponent;
 
   const renderTree = (nodes) =>

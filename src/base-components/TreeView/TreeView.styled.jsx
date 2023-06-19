@@ -4,6 +4,7 @@ import MuiTreeItem, { treeItemClasses } from "@mui/lab/TreeItem";
 import {
   borderedStyles,
   closeIconFade,
+  edgeCorners,
   selectedColor,
 } from "./TreeView.styles";
 
@@ -71,14 +72,14 @@ export const TreeItemStyled = styled(MuiTreeItem, {
   ${closeIconFade}
   ${borderedStyles}
   ${selectedColor}
+  ${edgeCorners}
 
   & .${treeItemClasses.content} {
     width: auto;
 
-    border-top-right-radius: ${(props) => props.theme.spacing(2)};
-    border-bottom-right-radius: ${(props) => props.theme.spacing(2)};
     padding-right: ${(props) => props.theme.spacing(1)};
     font-weight: ${(props) => props.theme.typography.fontWeightMedium};
+
     &.Mui-expanded {
       font-weight: ${(props) => props.theme.typography.fontWeightRegular};
     }
@@ -92,7 +93,7 @@ export const TreeItemStyled = styled(MuiTreeItem, {
   & .${treeItemClasses.group} {
     margin-left: 0;
 
-    & . ${treeItemClasses.content} {
+    & .${treeItemClasses.content} {
       padding-left: ${(props) => props.theme.spacing(2)};
     }
   }

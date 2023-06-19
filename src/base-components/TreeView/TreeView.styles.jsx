@@ -47,3 +47,12 @@ export function selectedColor(props) {
     }
   `;
 }
+
+export function edgeCorners(props) {
+  return css`
+    & .${treeItemClasses.content} {
+      border-top-right-radius: ${(props) => props.theme.spacing(2)};
+      border-bottom-right-radius: ${(props) => props.theme.spacing(2)};
+    }
+  `;
+}
