@@ -7,11 +7,11 @@ export default function TransitionComponent(props) {
   const style = useSpring({
     from: {
       opacity: 0,
-      transform: "translate3d(20px,0,0)",
+      transform: "translate3d(0,-20px,0)",
     },
     to: {
       opacity: props.in ? 1 : 0,
-      transform: `translate3d(${props.in ? 0 : 20}px,0,0)`,
+      transform: `translate3d(0,${props.in ? 0 : 20}px,0)`,
     },
   });
 

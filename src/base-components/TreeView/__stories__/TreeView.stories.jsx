@@ -5,8 +5,15 @@ import TreeView from "../TreeView";
 import { Box } from "@mui/material";
 import Button from "../../Button/Button";
 
-import StyledTreeItem from "../LabelIconTreeItemStyled";
-import { TreeItem } from "../TreeView.styled";
+import LabelIconTreeItem, {
+  LabelIconTreeItemIcons,
+} from "../TreeItemComponents/LabelIconTreeItem";
+import IndentBorderTreeItem, {
+  IndentBorderTreeItemIcons,
+} from "../TreeItemComponents/IndentBorderTreeItem";
+
+import SVGIcon from "../../SVGIcon/SVGIcon";
+import Typography from "../../Typography/Typography";
 
 export default {
   title: "Lab/TreeView",
@@ -81,7 +88,6 @@ export const MultiSelection = () => {
       oldExpanded.length === 0 ? ["1", "5", "6", "7"] : []
     );
   };
-
   const handleSelectClick = () => {
     setSelected((oldSelected) =>
       oldSelected.length === 0
@@ -107,13 +113,14 @@ export const MultiSelection = () => {
         selectedIds={selected}
         onExpended={setExpanded}
         onSelected={setSelected}
+        multiSelect
       />
     </Box>
   );
 };
 
-export const GmailClone = () => {
-  let nodes = [
+export const GmailCloneStyles = () => {
+  const nodes = [
     {
       id: "1",
       label: "All Mail",
@@ -180,14 +187,14 @@ export const GmailClone = () => {
       selectedIds={selected}
       onExpended={setExpanded}
       onSelected={setSelected}
-      // useStyle="LabelIcon"
-      Component={StyledTreeItem}
+      TreeItemComponent={LabelIconTreeItem}
+      {...LabelIconTreeItemIcons}
     />
   );
 };
 
-export const Styles = () => {
-  let nodes = [
+export const IndentBorderStyles = () => {
+  const nodes = [
     {
       id: "1",
       label: "Main",
@@ -250,20 +257,57 @@ export const Styles = () => {
       selectedIds={selected}
       onExpended={setExpanded}
       onSelected={setSelected}
-      useStyle="IndentBorder"
+      TreeItemComponent={IndentBorderTreeItem}
+      {...IndentBorderTreeItemIcons}
     />
   );
 };
 
-function TreeItemCustomized(props) {
-  console.log("props", props);
-  const item = props?.getTreeItemProps();
-  console.log("item", item);
-  return <div>Hello World</div>;
-}
+const StyledTreeItemContent = (props) => {
+  if (!props) return null;
+
+  const {
+    nodeId,
+    icon: labelIcon,
+    info: labelInfo,
+    label: labelText,
+    selected,
+  } = props ?? {};
+  debugger;
+
+  return (
+    <Box sx={{ display: "flex", alignItems: "center", p: 0.5, pr: 0 }}>
+      {labelIcon && (
+        <Box
+          color="inherit"
+          sx={{ mr: 1, display: "flex", alignItems: "center" }}
+        >
+          <SVGIcon muiIconName={labelIcon}>{labelIcon}</SVGIcon>
+        </Box>
+      )}
+      {labelText && (
+        <Typography
+          variant="body2"
+          sx={{
+            fontWeight: "inherit",
+            flexGrow: 1,
+            bgColor: selected ? "red" : undefined,
+          }}
+        >
+          {labelText} ({nodeId})
+        </Typography>
+      )}
+      {labelInfo && (
+        <Typography variant="caption" color="inherit">
+          {labelInfo}
+        </Typography>
+      )}
+    </Box>
+  );
+};
 
 export const CustomItem = () => {
-  let nodes = [
+  const nodes = [
     {
       id: "1",
       label: "Main",
@@ -316,7 +360,7 @@ export const CustomItem = () => {
     },
   ];
 
-  const [expanded, setExpanded] = React.useState(["3"]);
+  const [expanded, setExpanded] = React.useState(["1"]);
   const [selected, setSelected] = React.useState([]);
 
   return (
@@ -326,7 +370,7 @@ export const CustomItem = () => {
       selectedIds={selected}
       onExpended={setExpanded}
       onSelected={setSelected}
-      Component={TreeItem}
+      LabelComponent={StyledTreeItemContent}
     />
   );
 };

@@ -1,4 +1,4 @@
-import { styled, alpha, css } from "@mui/material/styles";
+import { styled, alpha } from "@mui/material/styles";
 import { TreeView as MuiTreeView } from "@mui/lab";
 import MuiTreeItem, { treeItemClasses } from "@mui/lab/TreeItem";
 import { borderedStyles, closeIconFade } from "./TreeView.styles";
