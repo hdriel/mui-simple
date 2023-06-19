@@ -247,7 +247,7 @@ export const IndentBorderStyles = () => {
     },
   ];
 
-  const [expanded, setExpanded] = React.useState(["3"]);
+  const [expanded, setExpanded] = React.useState(["1"]);
   const [selected, setSelected] = React.useState([]);
 
   return (
@@ -264,8 +264,6 @@ export const IndentBorderStyles = () => {
 };
 
 const StyledTreeItemContent = (props) => {
-  if (!props) return null;
-
   const {
     nodeId,
     icon: labelIcon,
@@ -276,33 +274,35 @@ const StyledTreeItemContent = (props) => {
   debugger;
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center", p: 0.5, pr: 0 }}>
-      {labelIcon && (
-        <Box
-          color="inherit"
-          sx={{ mr: 1, display: "flex", alignItems: "center" }}
-        >
-          <SVGIcon muiIconName={labelIcon}>{labelIcon}</SVGIcon>
-        </Box>
-      )}
-      {labelText && (
-        <Typography
-          variant="body2"
-          sx={{
-            fontWeight: "inherit",
-            flexGrow: 1,
-            bgColor: selected ? "red" : undefined,
-          }}
-        >
-          {labelText} ({nodeId})
-        </Typography>
-      )}
-      {labelInfo && (
-        <Typography variant="caption" color="inherit">
-          {labelInfo}
-        </Typography>
-      )}
-    </Box>
+    props && (
+      <Box sx={{ display: "flex", alignItems: "center", p: 0.5, pr: 0 }}>
+        {labelIcon && (
+          <Box
+            color="inherit"
+            sx={{ mr: 1, display: "flex", alignItems: "center" }}
+          >
+            <SVGIcon muiIconName={labelIcon}>{labelIcon}</SVGIcon>
+          </Box>
+        )}
+        {labelText && (
+          <Typography
+            variant="body2"
+            sx={{
+              fontWeight: "inherit",
+              flexGrow: 1,
+              bgColor: selected ? "red" : undefined,
+            }}
+          >
+            {labelText} ({nodeId})
+          </Typography>
+        )}
+        {labelInfo && (
+          <Typography variant="caption" color="inherit">
+            {labelInfo}
+          </Typography>
+        )}
+      </Box>
+    )
   );
 };
 
@@ -311,6 +311,8 @@ export const CustomItem = () => {
     {
       id: "1",
       label: "Main",
+      icon: "Home",
+      info: "test",
       children: [
         {
           id: "2",
@@ -370,6 +372,7 @@ export const CustomItem = () => {
       selectedIds={selected}
       onExpended={setExpanded}
       onSelected={setSelected}
+      TransitionComponent={null}
       LabelComponent={StyledTreeItemContent}
     />
   );

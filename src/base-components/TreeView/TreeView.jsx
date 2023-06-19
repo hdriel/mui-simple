@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { TreeView as MuiTreeView, TreeItem } from "./TreeView.styled";
-import TransitionComponent from "./TreeView.transition";
+import MuiTransitionComponent from "./TreeView.transition";
 import { withTreeViewItem } from "./withTreeViewItem";
 
 export default function TreeView({
@@ -20,6 +20,7 @@ export default function TreeView({
   useStyle,
   LabelComponent,
   TreeItemComponent,
+  TransitionComponent,
   ...props
 }) {
   const handleToggle = onExpended
@@ -106,4 +107,5 @@ TreeView.defaultProps = {
   onSelected: undefined,
   LabelComponent: undefined,
   TreeItemComponent: TreeItem,
+  TransitionComponent: MuiTransitionComponent,
 };
