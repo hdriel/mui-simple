@@ -6,6 +6,7 @@ import { Box } from "@mui/material";
 import Button from "../../Button/Button";
 
 import StyledTreeItem from "../LabelIconTreeItemStyled";
+import { TreeItem } from "../TreeView.styled";
 
 export default {
   title: "Lab/TreeView",
@@ -256,6 +257,8 @@ export const Styles = () => {
 
 function TreeItemCustomized(props) {
   console.log("props", props);
+  const item = props?.getTreeItemProps();
+  console.log("item", item);
   return <div>Hello World</div>;
 }
 
@@ -323,7 +326,7 @@ export const CustomItem = () => {
       selectedIds={selected}
       onExpended={setExpanded}
       onSelected={setSelected}
-      Component={TreeItemCustomized}
+      Component={TreeItem}
     />
   );
 };

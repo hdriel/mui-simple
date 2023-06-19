@@ -14,7 +14,6 @@ import {
 import LabelIconTreeItemStyled from "./LabelIconTreeItemStyled";
 import { CloseSquare, MinusSquare, PlusSquare } from "./TreeView.icons";
 import TransitionComponent from "./TreeView.transition";
-import { useTreeItem } from "@mui/lab";
 import { withTreeViewItem } from "./withTreeViewItem";
 
 export default function TreeView({
@@ -32,11 +31,15 @@ export default function TreeView({
   ...props
 }) {
   const handleToggle = onExpended
-    ? (event, nodeIds) => onExpended(nodeIds)
+    ? (event, nodeIds) => {
+        onExpended([].concat(nodeIds));
+      }
     : undefined;
 
   const handleSelect = onSelected
-    ? (event, nodeIds) => onSelected(nodeIds)
+    ? (event, nodeIds) => {
+        onSelected([].concat(nodeIds));
+      }
     : undefined;
 
   const CustomTreeItem = Component ? withTreeViewItem(Component) : TreeItem;

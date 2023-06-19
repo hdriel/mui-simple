@@ -8,7 +8,6 @@ import SVGIcon from "../SVGIcon/SVGIcon";
 const StyledTreeItem = forwardRef((props, ref) => {
   if (!props) return null;
 
-  debugger;
   const {
     bgColor,
     color,

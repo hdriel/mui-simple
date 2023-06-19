@@ -66,7 +66,6 @@ export default function Skeleton({
         avatarProps.variant = SKELETON_VARIANT.RECTANGULAR;
         break;
       default:
-        debugger;
         avatarProps.variant = SKELETON_VARIANT.ROUNDED;
         break;
     }
