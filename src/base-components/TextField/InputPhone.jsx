@@ -29,6 +29,7 @@ export default function InputPhone({
         inputRef={ref}
         name={name}
         value={value}
+        /* eslint-disable no-octal-escape */
         mask="\050-000-0000"
         type="tel"
         showMaskAsPlaceholder

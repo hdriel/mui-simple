@@ -4,8 +4,6 @@ import { Timeline as MuiTimeline } from "./Timeline.styled";
 import TimelineItem from "./TimelineItem";
 import { Box } from "@mui/material";
 import { useMaxWidth, useSteps } from "./Timeline.hooks";
-import { timelineContentClasses } from "@mui/lab/TimelineContent";
-import { timelineOppositeContentClasses } from "@mui/lab/TimelineOppositeContent";
 
 export default function Timeline({
   color,

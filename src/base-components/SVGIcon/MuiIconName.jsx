@@ -12,6 +12,7 @@ export default function MuiIconName({
   ...props
 }) {
   const Icon = name && MUIIcon[name];
+
   return Icon
     ? createElement(Icon, {
         ...props,
