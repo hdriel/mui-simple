@@ -59,21 +59,17 @@ const LabelIconTreeItem = forwardRef((props, ref) => {
 LabelIconTreeItem.propTypes = {
   bgColor: PropTypes.string,
   color: PropTypes.string,
-  labelIcon: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.node,
-    PropTypes.any,
-  ]),
-  labelInfo: PropTypes.string,
-  labelText: PropTypes.string.isRequired,
+  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.any]),
+  info: PropTypes.string,
+  label: PropTypes.string.isRequired,
 };
 
 LabelIconTreeItem.defaultProps = {
   bgColor: undefined,
   color: undefined,
-  labelIcon: undefined,
-  labelInfo: undefined,
-  labelText: undefined,
+  icon: undefined,
+  info: undefined,
+  label: undefined,
 };
 
 export default LabelIconTreeItem;

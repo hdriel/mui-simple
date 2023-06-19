@@ -1,4 +1,4 @@
-import React, { cloneElement, isValidElement } from "react";
+import React, { isValidElement } from "react";
 import PropTypes from "prop-types";
 import MuiIconName from "./MuiIconName";
 import { SVG } from "./SVGIcon.styled";

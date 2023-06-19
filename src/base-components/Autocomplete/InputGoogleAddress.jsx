@@ -114,6 +114,7 @@ export default function InputGoogleAddress({
 
       loaded.current = true;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [GOOGLE_MAPS_API_KEY]);
 
   return (
