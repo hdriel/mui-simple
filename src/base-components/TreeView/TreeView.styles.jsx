@@ -27,9 +27,9 @@ export function closeIconFade(props) {
 
 export function selectedColor(props) {
   return css`
-    color: ${(props) => props.theme.palette.text.secondary};
+    color: ${props.theme.palette.text.secondary};
     & .${treeItemClasses.content} {
-      color: ${(props) => props.theme.palette.text.secondary};
+      color: ${props.theme.palette.text.secondary};
 
       &.Mui-focused,
       &.Mui-selected,
@@ -37,22 +37,24 @@ export function selectedColor(props) {
         color: var(--tree-view-color);
         background-color: var(
           --tree-view-bg-color,
-          ${(props) => props.theme.palette.action.selected}}
+          ${props.theme.palette.action.selected}}
         );
       }
 
       &:hover {
-        background-color: ${(props) => props.theme.palette.action.hover};
+        background-color: ${props.theme.palette.action.hover};
       }
     }
   `;
 }
 
 export function edgeCorners(props) {
+  if (!props.edgeCorners) return css``;
+
   return css`
     & .${treeItemClasses.content} {
-      border-top-right-radius: ${(props) => props.theme.spacing(2)};
-      border-bottom-right-radius: ${(props) => props.theme.spacing(2)};
+      border-top-right-radius: ${props.theme.spacing(2)};
+      border-bottom-right-radius: ${props.theme.spacing(2)};
     }
   `;
 }
