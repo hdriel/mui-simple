@@ -313,6 +313,8 @@ export const CustomItem = () => {
       label: "Main",
       icon: "Home",
       info: "test",
+      // color: "red",
+      // bgColor: "yellow",
       children: [
         {
           id: "2",

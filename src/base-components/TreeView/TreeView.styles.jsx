@@ -24,3 +24,26 @@ export function closeIconFade(props) {
     }
   `;
 }
+
+export function selectedColor(props) {
+  return css`
+    color: ${(props) => props.theme.palette.text.secondary};
+    & .${treeItemClasses.content} {
+      color: ${(props) => props.theme.palette.text.secondary};
+
+      &.Mui-focused,
+      &.Mui-selected,
+      &.Mui-selected.Mui-focused {
+        color: var(--tree-view-color);
+        background-color: var(
+          --tree-view-bg-color,
+          ${(props) => props.theme.palette.action.selected}}
+        );
+      }
+
+      &:hover {
+        background-color: ${(props) => props.theme.palette.action.hover};
+      }
+    }
+  `;
+}

@@ -1,7 +1,11 @@
 import { styled, alpha } from "@mui/material/styles";
 import { TreeView as MuiTreeView } from "@mui/lab";
 import MuiTreeItem, { treeItemClasses } from "@mui/lab/TreeItem";
-import { borderedStyles, closeIconFade } from "./TreeView.styles";
+import {
+  borderedStyles,
+  closeIconFade,
+  selectedColor,
+} from "./TreeView.styles";
 
 export const TreeView = styled(MuiTreeView, {
   shouldForwardProp: (propName) => !["maxWidth", "height"].includes(propName),
@@ -66,11 +70,11 @@ export const TreeItemStyled = styled(MuiTreeItem, {
 })`
   ${closeIconFade}
   ${borderedStyles}
+  ${selectedColor}
 
-  color: ${(props) => props.theme.palette.text.secondary};
   & .${treeItemClasses.content} {
     width: auto;
-    color: ${(props) => props.theme.palette.text.secondary};
+
     border-top-right-radius: ${(props) => props.theme.spacing(2)};
     border-bottom-right-radius: ${(props) => props.theme.spacing(2)};
     padding-right: ${(props) => props.theme.spacing(1)};
@@ -78,19 +82,7 @@ export const TreeItemStyled = styled(MuiTreeItem, {
     &.Mui-expanded {
       font-weight: ${(props) => props.theme.typography.fontWeightRegular};
     }
-    &:hover {
-      background-color: ${(props) => props.theme.palette.action.hover};
-    }
-    &.Mui-focused,
-    &.Mui-selected,
-    &.Mui-selected.Mui-focused {
-      background-color: var(
-        --tree-view-bg-color,
-        ${(props) => props.theme.palette.action.selected}
-      );
-      color: var(--tree-view-color);
-    }
-    ,
+
     & .${treeItemClasses.label} {
       font-weight: inherit;
       color: inherit;

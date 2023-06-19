@@ -20,41 +20,49 @@ export function withTreeViewItem(Component, TreeItemComponent = TreeItem) {
     const handleSelectionClick = (event) => handleSelection?.(event);
 
     return (
-      <TreeItemComponent
-        ref={ref}
-        nodeId={nodeId}
-        TransitionComponent={TransitionComponent}
-        label={
-          <Component
-            {...restProps}
-            nodeId={nodeId}
-            itemDisabled={disabled}
-            itemExpanded={expanded}
-            itemSelected={selected}
-            itemFocused={focused}
-            onExpandedItem={handleExpansionClick}
-            onSelectedItem={handleSelectionClick}
-            preventSelectItem={preventSelection}
-          />
-        }
-        style={{
-          "--tree-view-color": restProps.color,
-          "--tree-view-bg-color": restProps.bgColor,
-        }}
-      >
-        {[].concat(children ?? [])?.map(({ props: treeItemProps }) => {
-          return <CustomTreeItemChild {...treeItemProps} />;
-        })}
-      </TreeItemComponent>
+      props && (
+        <TreeItemComponent
+          key={nodeId}
+          ref={ref}
+          nodeId={nodeId}
+          TransitionComponent={TransitionComponent}
+          label={
+            <Component
+              {...restProps}
+              nodeId={nodeId}
+              itemDisabled={disabled}
+              itemExpanded={expanded}
+              itemSelected={selected}
+              itemFocused={focused}
+              onExpandedItem={handleExpansionClick}
+              onSelectedItem={handleSelectionClick}
+              preventSelectItem={preventSelection}
+            />
+          }
+          style={{
+            "--tree-view-color": restProps.color,
+            "--tree-view-bg-color": restProps.bgColor,
+          }}
+        >
+          {[].concat(children ?? [])?.map(({ props: treeItemProps }, index) => {
+            return (
+              <CustomTreeItemChild
+                key={treeItemProps?.nodeId ?? index}
+                {...treeItemProps}
+              />
+            );
+          })}
+        </TreeItemComponent>
+      )
     );
   });
 
   return function renderTree({ children, ...props }) {
     return (
       <CustomTreeItemChild {...props}>
-        {[].concat(children ?? [])?.map(({ props: treeItemProps }) => {
-          return renderTree(treeItemProps);
-        })}
+        {[]
+          .concat(children ?? [])
+          ?.map(({ props: treeItemProps }) => renderTree(treeItemProps))}
       </CustomTreeItemChild>
     );
   };
