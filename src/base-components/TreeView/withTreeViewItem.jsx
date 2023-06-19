@@ -4,7 +4,16 @@ import { TreeItem } from "./TreeView.styled";
 
 export function withTreeViewItem(Component, TreeItemComponent = TreeItem) {
   const CustomTreeItemChild = forwardRef((props, ref) => {
-    const { nodeId, TransitionComponent, children, ...restProps } = props ?? {};
+    const {
+      nodeId,
+      TransitionComponent,
+      children,
+      closeIconFade,
+      closeIconFadeStyles,
+      borderedStyles,
+      edgeCornersStyles,
+      ...restProps
+    } = props ?? {};
 
     const {
       disabled,
@@ -26,6 +35,11 @@ export function withTreeViewItem(Component, TreeItemComponent = TreeItem) {
           ref={ref}
           nodeId={nodeId}
           TransitionComponent={TransitionComponent}
+          closeIconFade={closeIconFade}
+          bordered={borderedStyles}
+          closeIconFadeStyles={closeIconFadeStyles}
+          borderedStyles={borderedStyles}
+          edgeCornersStyles={edgeCornersStyles}
           label={
             <Component
               {...restProps}

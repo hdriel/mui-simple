@@ -25,6 +25,9 @@ export default function TreeView({
   LabelComponent,
   TreeItemComponent,
   TransitionComponent,
+  closeIconFadeStyles,
+  borderedStyles,
+  edgeCornersStyles,
   ...props
 }) {
   const handleToggle = onExpended
@@ -51,6 +54,9 @@ export default function TreeView({
         nodeId={id}
         label={label}
         TransitionComponent={TransitionComponent}
+        closeIconFadeStyles={closeIconFadeStyles}
+        borderedStyles={borderedStyles}
+        edgeCornersStyles={edgeCornersStyles}
         {...node}
       >
         {renderTree(node.children)}
@@ -97,6 +103,9 @@ TreeView.propTypes = {
   useStyle: PropTypes.oneOf(["default", "LabelIcon", "IndentBorder"]),
   LabelComponent: PropTypes.any,
   TreeItemComponent: PropTypes.any,
+  closeIconFadeStyles: PropTypes.bool,
+  borderedStyles: PropTypes.bool,
+  edgeCornersStyles: PropTypes.bool,
 };
 
 TreeView.defaultProps = {
@@ -112,4 +121,7 @@ TreeView.defaultProps = {
   LabelComponent: undefined,
   TreeItemComponent: TreeItem,
   TransitionComponent: MuiTransitionComponent,
+  closeIconFadeStyles: false,
+  borderedStyles: false,
+  edgeCornersStyles: false,
 };
