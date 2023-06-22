@@ -1,7 +1,10 @@
 {
   "name": "custom-mui-components",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
+  "keywords": ["@mui","mui", "material-ui"],
+  "author": "Hadriel Benjo",
   "publishConfig": {
     "registery": "https://npm.pkg.github.com/@hdriel"
   },
