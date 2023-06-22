@@ -1,9 +1,15 @@
 {
-  "name": "custom-mui-components",
+  "name": "@hdriel/mui-simple",
+  "repository": "git://github.com/hdriel/mui-simple.git",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "keywords": ["@mui","mui", "material-ui"],
+  "keywords": [
+    "@mui",
+    "mui",
+    "material-ui",
+    "@mui-simple"
+  ],
   "author": "Hadriel Benjo",
   "publishConfig": {
     "registery": "https://npm.pkg.github.com/@hdriel"
@@ -18,6 +24,10 @@
     "predeploy": "npm run build-storybook",
     "deploy": "gh-pages -d storybook-static"
   },
+  "bugs": {
+    "url": "https://github.com/hdriel/custom-mui-components/issues"
+  },
+  "homepage": "https://github.com/hdriel/custom-mui-components#readme",
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.0",
     "@emotion/react": "^11.10.6",
