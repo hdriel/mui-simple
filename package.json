@@ -1,5 +1,5 @@
 {
-  "name": "@hdriel/mui-simple",
+  "name": "mui-simple",
   "repository": "git://github.com/hdriel/mui-simple.git",
   "version": "1.0.0",
   "description": "",
@@ -8,11 +8,11 @@
     "@mui",
     "mui",
     "material-ui",
-    "@mui-simple"
+    "mui-simple"
   ],
   "author": "Hadriel Benjo",
   "publishConfig": {
-    "registery": "https://npm.pkg.github.com/@hdriel"
+    "registery": "https://registry.npmjs.org/@hdriel"
   },
   "scripts": {
     "start": "react-scripts start",

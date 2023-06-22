@@ -1,21 +1,26 @@
-# Customize mui component
-Just-Like-That project that show how to customize out our components to handle must error handling and support easy using case in out projects
+# mui-simple
 
-#### live demo: [storybook](https://hdriel.github.io/jlt-my-mui-cmp/)  
+ customized **ALL MUI COMPONENTS** to make simplify the usage of mui. <br/>
+ get a lot of features to use mui, like custom-color that you can send any color of theme color name. <br/>
+ or more customized way to use component more eazier way, and less code bugs homemade. <br/>
+ 
+#### live demo: [storybook](https://hdriel.github.io/mui-simple/)
 
-After Mui Components APIs review [Afek Sakaju](https://github.com/afekTheMiniLearner) choosed 6 components to re-build and we develop these components into stories, 
+#### Join and Support
+ 
+ this package need more maintenance like : <br>
+ &#9744; adding typescript. <br>
+ &#9744; make docs and fixing stories in storybook. <br>
+ &#9744; become open-source by support MIT licence terms. <br>
+ and so on..<br>
+ 
+ so feel free to be in touch and make this beautiful package to be more awesome as should be! 
+ 
+ 
+  
+## Author
 
-the components are:
+:octocat: **Hadriel Benjo**
 
-| Mui components    | JLT Component | 
-| ----------------  | ------------- | 
-| &#9744; MuiAvatar | &#9745; Avatar |
-| &#9744; MuiButton | &#9745; Button |
-| &#9744; MuiDialog | &#9745; Dialog |
-| &#9744; TextField | &#9745; Input <br> &#9745; PasswordInput |
-| &#9744; MuiTooltip| &#9745; Tooltip |
-| &#9744; MuiRating | &#9745; Rating |
-
-Here are the results: 
-
-![storybbok-rating-dialog-component](public/screenshoot.png)
+- LinkedIn: [@hadriel-benjo](https://www.linkedin.com/in/hadriel-benjo/)
+- GitHub: [@hdriel](https://github.com/hdriel)
