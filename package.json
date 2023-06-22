@@ -4,7 +4,7 @@
   "private": true,
   "main": "index.js",
   "publishConfig": {
-    "registery": "https://npm.pkg.github.com/@mui-simple"
+    "registery": "https://npm.pkg.github.com/@hdriel"
   },
   "scripts": {
     "start": "react-scripts start",
