@@ -1,4 +1,4 @@
-name: Node.js Package
+name: "publish repo"
 
 on: 
   push: 
@@ -15,10 +15,10 @@ jobs:
         uses: actions/setup-node@v2
         with: 
           node-version: 12
-          registry-url: https://npm.pkg.github.com/          
-      - name: install dependencies
+          registry-url: https://registry.npmjs.org
+      - name: install npm dependencies
         run: npm install
-      - name: publish
+      - name: publish npm package
         run: npm publish
         env: 
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
