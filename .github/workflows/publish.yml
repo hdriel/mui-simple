@@ -18,6 +18,8 @@ jobs:
           registry-url: https://registry.npmjs.org
       - name: install npm dependencies
         run: npm install
+      - name: deploy storybook livedemo
+        run: npm run deploy
       - name: publish npm package
         run: npm publish
         env: 

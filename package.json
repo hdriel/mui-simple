@@ -1,7 +1,7 @@
 {
   "name": "mui-simple",
   "repository": "git://github.com/hdriel/mui-simple.git",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "keywords": [
