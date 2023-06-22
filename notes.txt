@@ -1,4 +1,3 @@
-Need to fix snackbar to support local Alert component , and not from original mui component
 
 Skeleton should wrap content, and displayed by loading prop for example
 <Skeleton loading={isLoading}>
@@ -11,23 +10,5 @@ Note dont forget to clear content like typography
 </Skeleton>
 
 
-order implementation: 
-
-Link
-Skeleton
-Accordion
-Menu
-AppBar
-Breadcrumb
-Select
-SpeedDial
-Tabs
-BottomNavigation
-Drawer
-List
-Table
-TextField
-Autocomplete
-Stepper
 
 
