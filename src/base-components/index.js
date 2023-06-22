@@ -62,8 +62,8 @@ export { default as Snackbar } from "./Snackbar/Snackbar";
 export { default as SpeedDial } from "./SpeedDial/SpeedDial";
 export { default as Stepper } from "./Stepper/Stepper";
 export { default as MobileStepper } from "./Stepper/MobileStepper";
-export { default as SVGIcon } from "./SVGIcon/SVGIcon";
 export { useSimpleStepper } from "./Stepper/Stepper.utils";
+export { default as SVGIcon } from "./SVGIcon/SVGIcon";
 export { default as Switch } from "./Switch/Switch";
 
 export { Table } from "./Table/Table";
@@ -73,4 +73,6 @@ export { default as Timeline } from "./Timeline/Timeline";
 export { default as ToggleButtonGroup } from "./ToggleButtonGroup/ToggleButtonGroup";
 export { default as ToggleButtonGroups } from "./ToggleButtonGroup/ToggleButtonGroups";
 export { default as Tooltip } from "./Tooltip/Tooltip";
+export { default as TreeView } from "./TreeView/TreeView";
+export * from "./TreeView";
 export { default as Typography } from "./Typography/Typography";
