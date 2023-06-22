@@ -14,6 +14,10 @@
   "publishConfig": {
     "registery": "https://registry.npmjs.org/@hdriel"
   },
+  "bugs": {
+    "url": "https://github.com/hdriel/mui-simple/issues"
+  },
+  "homepage": "https://github.com/hdriel/mui-simple#readme",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -24,10 +28,6 @@
     "predeploy": "npm run build-storybook",
     "deploy": "gh-pages -d storybook-static"
   },
-  "bugs": {
-    "url": "https://github.com/hdriel/custom-mui-components/issues"
-  },
-  "homepage": "https://github.com/hdriel/custom-mui-components#readme",
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.0",
     "@emotion/react": "^11.10.6",
