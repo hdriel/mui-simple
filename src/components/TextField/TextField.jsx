@@ -86,12 +86,16 @@ function TextField({
           ...(showActions &&
             startCmp && {
               startAdornment: (
-                <InputAdornment position="start">{startCmp}</InputAdornment>
+                <InputAdornment position="start" sx={{ margin: "auto" }}>
+                  {startCmp}
+                </InputAdornment>
               ),
             }),
           ...(endCmp && {
             endAdornment: (
-              <InputAdornment position="end">{endCmp}</InputAdornment>
+              <InputAdornment position="end" sx={{ margin: "auto" }}>
+                {endCmp}
+              </InputAdornment>
             ),
           }),
           sx: { alignItems: alignActions },
