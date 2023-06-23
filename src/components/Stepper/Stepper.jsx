@@ -32,6 +32,7 @@ export default function Stepper({
   stepsIndexSkipped,
   allCompletedCmp,
   labels,
+  stepsOnlyWithoutComplete,
   unmountOnExit,
   qontoStyle,
   customStyleProps,
@@ -167,96 +168,107 @@ export default function Stepper({
   const handleBack = () => onBack?.(activeStep);
   const handleSkip = (index) => isStepOptional(index) && onSkip?.(index);
 
+  const connector = qontoStyle ? (
+    <QontoConnector
+      orientation={orientation ?? ""}
+      color={customColor}
+      {...customStyleProps}
+    />
+  ) : iconListSize || isCustomStyleUsed ? (
+    <StepConnector
+      orientation={orientation ?? ""}
+      color={customColor}
+      {...customStyleProps}
+    />
+  ) : undefined;
+
   return (
     <Box sx={{ width: "100%" }}>
       <MuiStepper
+        nonLinear={stepsOnlyWithoutComplete}
         activeStep={activeStep}
         alternativeLabel={stepsBottomLabel}
-        orientation={orientation ?? ""}
-        connector={
-          qontoStyle ? (
-            <QontoConnector
-              orientation={orientation ?? ""}
-              color={customColor}
-              {...customStyleProps}
-            />
-          ) : iconListSize || isCustomStyleUsed ? (
-            <StepConnector
-              orientation={orientation ?? ""}
-              color={customColor}
-              {...customStyleProps}
-            />
-          ) : undefined
-        }
+        orientation={orientation ?? undefined}
+        connector={connector}
+        marginContent={customStyleProps?.marginContent}
         {...props}
       >
-        {steps?.map((step, index) => {
-          return (
-            <Step
-              key={index}
-              completed={isStepSkipped(index) ? false : undefined}
+        {steps?.map((step, index) => (
+          <Step
+            key={index}
+            completed={isStepSkipped(index) ? false : undefined}
+          >
+            <StepLabel
+              error={step.error}
+              StepIconComponent={QontoStepIconMemo || ConnectorStepIconMemo}
+              color={step.color}
+              optional={
+                isStepOptional(index) ? (
+                  <Typography variant="caption">{step.optional}</Typography>
+                ) : undefined
+              }
             >
-              <StepLabel
-                error={step.error}
-                StepIconComponent={QontoStepIconMemo || ConnectorStepIconMemo}
-                color={step.color}
-                optional={
-                  isStepOptional(index) ? (
-                    <Typography variant="caption">{step.optional}</Typography>
-                  ) : undefined
+              {step.label}
+            </StepLabel>
+
+            {orientation === "vertical" && (
+              <StepContent
+                TransitionProps={{ unmountOnExit }}
+                lineWidth={customStyleProps?.lineWidth}
+                marginContent={customStyleProps?.marginContent}
+                lineColor={
+                  customStyleProps?.lineColor?.includes("gradient")
+                    ? undefined
+                    : customStyleProps?.lineColor
                 }
               >
-                {step.label}
-              </StepLabel>
-              {orientation === "vertical" && (
-                <StepContent TransitionProps={{ unmountOnExit }}>
-                  {[].concat(children)[index]}
-                  <Box
-                    sx={{
-                      mb: 2,
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <div>
+                {[].concat(children)[index]}
+                <Box
+                  sx={{
+                    mb: 2,
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <div>
+                    <Button
+                      variant="contained"
+                      onClick={handleNext}
+                      color={step.color}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      {LABELS.next}
+                    </Button>
+                    {index !== 0 && (
                       <Button
-                        variant="contained"
-                        onClick={handleNext}
+                        color="inherit"
+                        disabled={index === 0}
+                        onClick={handleBack}
+                        sx={{ mt: 1, mr: 1 }}
+                      >
+                        {LABELS.back}
+                      </Button>
+                    )}
+                  </div>
+                  <div>
+                    {isStepOptional(index) && (
+                      <Button
+                        onClick={() => handleSkip(index)}
                         color={step.color}
                         sx={{ mt: 1, mr: 1 }}
                       >
-                        {LABELS.next}
+                        {LABELS.skip}
                       </Button>
-                      {index !== 0 && (
-                        <Button
-                          color="inherit"
-                          disabled={index === 0}
-                          onClick={handleBack}
-                          sx={{ mt: 1, mr: 1 }}
-                        >
-                          {LABELS.back}
-                        </Button>
-                      )}
-                    </div>
-                    <div>
-                      {isStepOptional(index) && (
-                        <Button
-                          onClick={() => handleSkip(index)}
-                          color={step.color}
-                          sx={{ mt: 1, mr: 1 }}
-                        >
-                          {LABELS.skip}
-                        </Button>
-                      )}
-                    </div>
-                  </Box>
-                </StepContent>
-              )}
-            </Step>
-          );
-        })}
+                    )}
+                  </div>
+                </Box>
+              </StepContent>
+            )}
+          </Step>
+        ))}
       </MuiStepper>
+
       {steps?.length ? (
         activeStep === steps?.length ? (
           <>
@@ -315,6 +327,7 @@ Stepper.propTypes = {
   ),
   stepIndex: PropTypes.number,
   orientation: PropTypes.oneOf(["horizontal", "vertical"]),
+  stepsOnlyWithoutComplete: PropTypes.bool,
   stepsBottomLabel: PropTypes.bool,
   color: PropTypes.string,
   onReset: PropTypes.func,
@@ -346,6 +359,7 @@ Stepper.propTypes = {
 
 Stepper.defaultProps = {
   steps: undefined,
+  stepsOnlyWithoutComplete: undefined,
   stepIndex: undefined,
   stepsBottomLabel: undefined,
   color: undefined,

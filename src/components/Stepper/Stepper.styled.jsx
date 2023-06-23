@@ -18,18 +18,33 @@ export const Typography = MuiTypography;
 
 export const Button = MuiButton;
 
-export const Stepper = styled(MuiStepper)`
+export const Stepper = styled(MuiStepper, {
+  shouldForwardProp: (propName) =>
+    !["lineWidth", "lineColor", "marginContent"].includes(propName),
+})`
   &.MuiStepper-root.MuiStepper-vertical.MuiStepper-alternativeLabel {
     gap: 1.5em;
   }
   & .MuiStep-root.MuiStep-vertical.MuiStep-alternativeLabel {
-    width: ${(props) => "100%"};
+    width: 100%;
+  }
+  & .MuiStepConnector-vertical {
+    margin-left: ${(props) => numberToPx(props.marginContent)};
   }
 `;
 
 export const Step = MuiStep;
 
-export const StepContent = MuiStepContent;
+export const StepContent = styled(MuiStepContent, {
+  shouldForwardProp: (propName) =>
+    !["lineWidth", "lineColor", "marginContent"].includes(propName),
+})`
+  &.MuiStepContent-root {
+    border-width: ${(props) => numberToPx(props.lineWidth) ?? "3px"};
+    border-color: ${(props) => props.lineColor ?? "#eaeaf0"};
+    margin-left: ${(props) => numberToPx(props.marginContent)};
+  }
+`;
 
 export const StepLabel = styled(MuiStepLabel, {
   shouldForwardProp: (propName) => ![].includes(propName),
@@ -44,6 +59,7 @@ export const StepLabel = styled(MuiStepLabel, {
     }
   }
 `;
+
 export const Box = styled(MuiBox)``;
 
 export const ConnectorStepIconRoot = styled("div")(

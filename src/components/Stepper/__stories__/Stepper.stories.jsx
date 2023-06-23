@@ -23,6 +23,7 @@ export default {
           width: "750px",
           backgroundColor: "rgba(255,255,255,0.8)",
           border: "1px solid black",
+          padding: "1em",
         }}
       >
         <Story />
@@ -131,6 +132,7 @@ export const VerticalStepper = () => {
           "linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)",
         padding: 3,
         lineWidth: 5,
+        marginContent: 26,
       }}
       orientation="vertical"
       allCompletedCmp={
