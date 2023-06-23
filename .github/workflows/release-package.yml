@@ -5,20 +5,21 @@ on:
         workflows: ["Build bump tag"]
         types:
             - completed
+            
 jobs:
-    publish-gpr:
+    build:
         runs-on: ubuntu-latest
         if: ${{ github.event.workflow_run.conclusion == 'success' }}
         permissions:
             packages: write
             contents: read
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v2
+            - uses: actions/checkout@v3        
+            - uses: actions/setup-node@v3
               with:
-                  node-version: 12
-                  registry-url: https://npm.pkg.github.com/
-                  scope: '@hdriel'
+                node-version: '16.x'
+                registry-url: 'https://registry.npmjs.org'            
+                scope: '@hdriel'
             - run: npm publish
               env:
                   NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
