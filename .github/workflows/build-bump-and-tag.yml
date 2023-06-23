@@ -14,7 +14,8 @@ jobs:
               with:
                   node-version: 12
             - run: npm i -g husky
-            - run: npm ci
+#            - run: npm ci
+            - run: npm install
             - run: npm test
     tag-and-bump:
         if: "!startsWith(github.event.head_commit.message, 'bump:')"
