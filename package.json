@@ -1,7 +1,5 @@
 {
   "name": "mui-simple",
-  "repository": "git://github.com/hdriel/mui-simple.git",
-  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "keywords": [
@@ -12,7 +10,11 @@
   ],
   "author": "Hadriel Benjo",
   "publishConfig": {
-    "registery": "https://npm.pkg.github.com"
+    "@hdriel:registery": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hdriel/mui-simple.git"
   },
   "bugs": {
     "url": "https://github.com/hdriel/mui-simple/issues"
