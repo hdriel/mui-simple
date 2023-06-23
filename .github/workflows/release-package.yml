@@ -21,7 +21,9 @@ jobs:
               with:
                 node-version: '16.x'
                 registry-url: https://registry.npmjs.org
-                scope: '@hdriel'
+                scope: '@hdriel'            
+            # move to another action workflow to deploy storybook 
+            - run: npm install
             - name: deploy storybook
               run: npm run deploy
             - run: npm publish --access public
