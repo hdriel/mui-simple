@@ -12,7 +12,7 @@
   ],
   "author": "Hadriel Benjo",
   "publishConfig": {
-    "registery": "https://registry.npmjs.org/@hdriel"
+    "registery": "https://npm.pkg.github.com/@hdriel"
   },
   "bugs": {
     "url": "https://github.com/hdriel/mui-simple/issues"
