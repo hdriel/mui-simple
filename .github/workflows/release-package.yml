@@ -1,4 +1,4 @@
-name: Release
+name: Publish to NPM
 
 on:
     workflow_run:
@@ -7,19 +7,21 @@ on:
             - completed
             
 jobs:
-    publish-gpr:
+    release:
         runs-on: ubuntu-latest
         if: ${{ github.event.workflow_run.conclusion == 'success' }}
         permissions:
             packages: write
             contents: read
         steps:
-            - uses: actions/checkout@v3        
-            - uses: actions/setup-node@v3
+            - name: checkout
+              uses: actions/checkout@v3        
+            - name: setup node
+              uses: actions/setup-node@v3
               with:
                 node-version: '16.x'
-                registry-url: 'https://registry.npmjs.org'            
+                registry-url: https://registry.npmjs.org
                 scope: '@hdriel'
-            - run: npm publish
+            - run: npm publish --access public
               env:
-                  NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+                  NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
