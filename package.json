@@ -7,7 +7,8 @@
     "@mui",
     "mui",
     "material-ui",
-    "mui-simple"
+    "mui-simple",
+    "@hdriel"
   ],
   "author": "Hadriel Benjo",
   "publishConfig": {
