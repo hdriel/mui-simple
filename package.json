@@ -1,5 +1,5 @@
 {
-  "name": "mui-simple",
+  "name": "@hdriel/mui-simple",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,7 +12,7 @@
   ],
   "author": "Hadriel Benjo",
   "publishConfig": {
-    "@hdriel:registery": "https://npm.pkg.github.com"
+    "registery": "https://npm.pkg.github.com"
   },
   "repository": {
     "type": "git",
