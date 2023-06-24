@@ -17,7 +17,7 @@ jobs:
               persist-credentials: false
           - name: Set Git Identity
             run: |
-              git config user.name "hdriel"
+              git config user.name "Github-Actions-Bot"
               git config user.email "hdriel@gmail.com"
           - name: setup node
             uses: actions/setup-node@v3
@@ -25,7 +25,10 @@ jobs:
               node-version: '16.x'
           - run: npm ci
           - name: Deploy storybook to Github Pages
-            run: npm run deploy
+            uses: peaceiris/actions-gh-pages@v3
+            with:
+              github_token: ${{ secrets.GITHUB_TOKEN }}
+              publish_dir: ./storybook-static
 
     release:
         needs: build
