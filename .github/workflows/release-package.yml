@@ -14,8 +14,8 @@ jobs:
           - name: checkout
             uses: actions/checkout@v3
           - run: |
-              git config --global user.email "hadriel.benjo@example.com"
-              git config --global user.name "Hadriel Benjo"
+              git config --global user.email "${{env.USER_EMAIL}}"
+              git config --global user.name "${{env.USER_NAME}}"
           - name: setup node
             uses: actions/setup-node@v3
             with:
