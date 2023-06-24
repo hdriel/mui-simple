@@ -28,7 +28,12 @@
     "build-storybook": "storybook build",
     "predeploy": "npm run build-storybook",
     "deploy": "gh-pages -d storybook-static",
-    "deploy-storybook": "storybook-to-ghpages"
+    "deploy-storybook": "storybook-to-ghpages -- --source-branch=main --out=storybook-static"
+  },
+  "storybook-deployer": {
+    "gitUsername": "Hadriel Bot",
+    "gitEmail": "hdriel@gmail.com",
+    "commitMessage": "Deploy Storybook to GitHub Pages"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.0",
