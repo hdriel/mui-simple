@@ -19,8 +19,6 @@ jobs:
               node-version: '16.x'
           - run: npm ci
           - run: npm run deploy
-            env:
-              NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
 
     release:
         needs: build
