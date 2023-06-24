@@ -13,9 +13,10 @@ jobs:
         steps:
           - name: checkout
             uses: actions/checkout@v3
-          - run: |
-              git config --global user.email "${{env.USER_EMAIL}}"
-              git config --global user.name "${{env.USER_NAME}}"
+          - name: Set Git Identity
+            run: |
+              git config user.name "${{ env.USER_NAME }}"
+              git config user.email "${{ env.USER_EMAIL }}"
           - name: setup node
             uses: actions/setup-node@v3
             with:
