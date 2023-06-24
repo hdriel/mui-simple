@@ -12,7 +12,7 @@
   ],
   "author": "Hadriel Benjo",
   "publishConfig": {
-    "registery": "https://registry.npmjs.org"
+    "@hdriel:registery": "https://npm.pkg.github.com"
   },
   "repository": {
     "type": "git",
@@ -23,12 +23,9 @@
   },
   "homepage": "https://github.com/hdriel/mui-simple#readme",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "",
-    "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "build-storybook": "storybook build public",
     "predeploy": "npm run build-storybook",
     "deploy": "gh-pages -d storybook-static"
   },
