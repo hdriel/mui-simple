@@ -7,7 +7,7 @@ on:
             - completed
             
 jobs:
-    build:
+    deploy-storybook:
         runs-on: ubuntu-latest
         if: ${{ github.event.workflow_run.conclusion == 'success' }}
         steps:
@@ -31,7 +31,7 @@ jobs:
               publish_dir: ./storybook-static
 
     release:
-        needs: build
+        needs: deploy-storybook
         runs-on: ubuntu-latest
         if: ${{ github.event.workflow_run.conclusion == 'success' }}
         permissions:
