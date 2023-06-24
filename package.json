@@ -27,7 +27,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "predeploy": "npm run build-storybook",
-    "deploy": "gh-pages -d storybook-static"
+    "deploy": "gh-pages -d storybook-static",
+    "deploy-storybook": "storybook-to-ghpages -p packages -o=storybook-static --ci"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.0",
@@ -77,6 +78,7 @@
     "@storybook/preset-create-react-app": "^7.0.2",
     "@storybook/react": "^7.0.2",
     "@storybook/react-webpack5": "^7.0.2",
+    "@storybook/storybook-deployer": "^2.8.16",
     "@storybook/testing-library": "^0.0.14-next.2",
     "babel-plugin-named-exports-order": "^0.0.2",
     "gh-pages": "^5.0.0",
