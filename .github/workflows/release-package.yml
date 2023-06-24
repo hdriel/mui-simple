@@ -14,21 +14,26 @@ jobs:
           - name: checkout
             uses: actions/checkout@v3
             with:
-              persist-credentials: false
-          - name: Set Git Identity
-            run: |
-              git config user.name "Github-Actions-Bot"
-              git config user.email "hdriel@gmail.com"
-          - name: setup node
-            uses: actions/setup-node@v3
+              submodules: true  # Fetch Hugo themes (true OR recursive)
+              fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+          - name: Setup Hugo
+            uses: peaceiris/actions-hugo@v2
             with:
-              node-version: '16.x'
-          - run: npm ci
+              hugo-version: '0.110.0'
+
+          - name: Build
+            run: hugo --minify
+
           - name: Deploy storybook to Github Pages
             uses: peaceiris/actions-gh-pages@v3
             with:
               github_token: ${{ secrets.GITHUB_TOKEN }}
               publish_dir: ./storybook-static
+              full_commit_message: ${{ github.event.head_commit.message }}
+              tag_name: ${{ steps.prepare_tag.outputs.DEPLOY_TAG_NAME }}
+              tag_message: 'Deployment ${{ github.ref_name }}'
+
     release:
         needs: deploy-storybook
         runs-on: ubuntu-latest
