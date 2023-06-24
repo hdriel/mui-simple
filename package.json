@@ -28,7 +28,7 @@
     "build-storybook": "storybook build",
     "predeploy": "npm run build-storybook",
     "deploy": "gh-pages -d storybook-static",
-    "deploy-storybook": "storybook-to-ghpages"
+    "deploy-storybook": "storybook-to-ghpages --source-branch=main"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.0",
