@@ -25,7 +25,7 @@
   "scripts": {
     "test": "",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build public",
+    "build-storybook": "storybook build",
     "predeploy": "npm run build-storybook",
     "deploy": "gh-pages -d storybook-static"
   },
