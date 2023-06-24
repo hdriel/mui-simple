@@ -18,7 +18,9 @@ jobs:
             with:
               node-version: '16.x'
           - run: npm ci
-#          - run: npm run deploy
+          - run: npm run deploy
+            env:
+              NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
 
     release:
         needs: build
@@ -36,7 +38,6 @@ jobs:
                 node-version: 16
                 registry-url: https://registry.npmjs.org/
                 scope: '@hdriel'
-                # scope: ${{ github.repository_owner }}
             - run: npm ci
             - run: npm publish --access public
               env:

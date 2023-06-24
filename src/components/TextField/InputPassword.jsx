@@ -44,7 +44,7 @@ export default function InputPassword({
     );
     setShowPassword(true);
 
-    onChange({ target: { name, value: password } });
+    onChange?.({ target: { name, value: password } });
   };
 
   return (

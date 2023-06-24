@@ -118,7 +118,7 @@ export default function Tabs({
           index={activeTabIndex}
           onChangeIndex={(event, tabIndex) => {
             const tabId = filteredChildren[tabIndex]?.props.value;
-            onChange(tabId);
+            onChange?.(tabId);
           }}
           style={{ width: "100%", height: "100%" }}
         >

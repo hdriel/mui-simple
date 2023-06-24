@@ -61,7 +61,7 @@ export default function InputNumber({
     : onChange;
 
   const handleChangeSlider = (event, newValue) => {
-    onChange({ target: { name, value: newValue } });
+    onChange?.({ target: { name, value: newValue } });
   };
 
   const [sliderLabelDebounce] = useState(() =>
@@ -156,7 +156,7 @@ export default function InputNumber({
           onValueChange={(values) => {
             const { floatValue: value } = values;
             const event = { target: { name, value } };
-            handleOnChange(event);
+            handleOnChange?.(event);
           }}
         />
         {showSlider && (
