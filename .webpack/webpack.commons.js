@@ -15,11 +15,11 @@ module.exports = {
     },
     module: {
         // These rule order is important for storybook main.js webpackFinal option
-        rules: [mjsRule, styleRule, svgRule, fontsRule, hbsRule, HTMLRule],
+        rules: [mjsRule, styleRule, svgRule, fontsRule],
     },
     // plugins: [copyFilesPlugin],
-    externals: [],
-    stats: { colors: true },
+    // externals: [],
+    // stats: { colors: true },
     resolve: {
         extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
         fallback: {
