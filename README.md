@@ -1,4 +1,4 @@
-# mui-simple
+# [mui-simple](https://www.npmjs.com/package/@hdriel/mui-simple)
 
  customized **ALL MUI COMPONENTS** to make simplify the usage of mui. <br/>
  get a lot of features to use mui, like custom-color that you can send any color of theme color name. <br/>
