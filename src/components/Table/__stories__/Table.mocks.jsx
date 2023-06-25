@@ -98,7 +98,7 @@ export const PERSON_COLUMNS = [
 
 export const PERSON_DATA = [
   {
-    avatar: "/1.jpg",
+    avatar: "1.jpg",
     age: 18,
     birthday: new Date(1990, 9, 29, 20, 30).getTime(),
     stars: 12015045,
@@ -107,7 +107,7 @@ export const PERSON_DATA = [
       "Hoping to reinvent yourself or just planning to be a bit more casual? It's hard to choose the perfect nickname. We'll find you a range of options including diminutives, alliteration, descriptive names, rhyming nicknames and even some computer generated words, which may or may not be helpful!",
   },
   {
-    avatar: "/2.jpg",
+    avatar: "2.jpg",
     age: 15,
     birthday: new Date(1982, 9, 29, 20, 30).getTime(),
     stars: 40015,
@@ -116,7 +116,7 @@ export const PERSON_DATA = [
       "Faucibus scelerisque eleifend donec pretium vulputate sapien nec. Ultricies mi eget mauris pharetra. Id semper risus in hendrerit gravida. Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Ac turpis egestas sed tempus urna et pharetra pharetra massa. Velit scelerisque in dictum non consectetur a erat nam. Quam nulla porttitor massa id. Pulvinar neque laoreet suspendisse interdum consectetur libero. Lorem sed risus ultricies tristique nulla aliquet. In pellentesque massa placerat duis ultricies lacus sed.",
   },
   {
-    avatar: "/3.jpg",
+    avatar: "3.jpg",
     age: 20,
     birthday: new Date(2003, 9, 29, 20, 30).getTime(),
     stars: 15,
@@ -125,7 +125,7 @@ export const PERSON_DATA = [
       "Aliquet nec ullamcorper sit amet risus nullam. Senectus et netus et malesuada fames ac turpis egestas integer. Arcu ac tortor dignissim convallis aenean et tortor at risus. In est ante in nibh. Est placerat in egestas erat imperdiet sed euismod nisi porta. Tellus elementum sagittis vitae et. Viverra orci sagittis eu volutpat odio facilisis. Nec feugiat in fermentum posuere",
   },
   {
-    avatar: "/4.jpg",
+    avatar: "4.jpg",
     age: 28,
     birthday: new Date(1990, 9, 29, 20, 30).getTime(),
     stars: 1e5,
@@ -133,7 +133,7 @@ export const PERSON_DATA = [
     description: "Sollicitudin tempor id eu nisl nunc mi ipsum",
   },
   {
-    avatar: "/5.jpg",
+    avatar: "5.jpg",
     age: 10,
     birthday: new Date(1975, 9, 29, 20, 30).getTime(),
     name: "Duncan Mcdonald",
@@ -142,7 +142,7 @@ export const PERSON_DATA = [
       "egestas pretium aenean. Bibendum enim facilisis gravida neque. Porta non pulvinar neque laoreet. Nullam vehicula ipsum a arcu cursus. Tortor condimentum lacinia quis vel. Ultricies mi eget mauris pharetra et. Sit amet nisl suscipit adipiscing bibendum est ultricies integer. ",
   },
   {
-    avatar: "/6.jpg",
+    avatar: "6.jpg",
     age: 18,
     birthday: new Date(1999, 9, 29, 20, 30).getTime(),
     stars: 450480,
