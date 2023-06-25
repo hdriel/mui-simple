@@ -1,62 +1,30 @@
 name: Publish to NPM
 
 on:
-#    workflow_run:
-#        workflows: ["Build bump tag"]
-#        types:
-#            - completed
-    push:
-      branches:
-        - "main"
+    workflow_run:
+        workflows: ["Build bump tag", "Deploy Storybook"]
+        types:
+            - completed
             
 jobs:
-#    deploy-storybook:
-#        runs-on: ubuntu-latest
-#        if: ${{ github.event.workflow_run.conclusion == 'success' }}
-#        steps:
-#          - name: checkout
-#            uses: actions/checkout@v3
-#
-#          - name: Deploy storybook to Github Pages
-#            uses: peaceiris/actions-gh-pages@v3
-#            with:
-#              github_token: ${{ secrets.GITHUB_TOKEN }}
-#              publish_dir: ./storybook-static
-#              full_commit_message: ${{ github.event.head_commit.message }}
-#              tag_name: ${{ steps.prepare_tag.outputs.DEPLOY_TAG_NAME }}
-#              tag_message: 'Deployment ${{ github.ref_name }}'
-
-#    deploy:
-#        environment:
-#          name: github-pages
-#          url: ${{ steps.build-publish.outputs.page_url }}
-#        runs-on: ubuntu-latest
-##        if: ${{ github.event.workflow_run.conclusion == 'success' }}
-#        steps:
-#          - id: build-publish
-#            uses: bitovi/github-actions-react-to-ghp@v1.2.0
-#            with:
-#              path: dist/storybook
-#              build_command: npm run build-storybook
-
-#    release:
-#        needs: deploy
-#        runs-on: ubuntu-latest
-#        if: ${{ github.event.workflow_run.conclusion == 'success' }}
-#        permissions:
-#            packages: write
-#            contents: read
-#        steps:
-#            - name: checkout
-#              uses: actions/checkout@v3
-#            - name: setup node
-#              uses: actions/setup-node@v3
-#              with:
-#                node-version: 16
-#                registry-url: https://registry.npmjs.org/
-#                scope: '@hdriel'
-#            - run: npm ci
-#            - run: npm version ${{ steps.cz.outputs.version }}
-#            - run: npm publish --access public
-#              env:
-#                  NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+    release:
+        needs: deploy
+        runs-on: ubuntu-latest
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        permissions:
+            packages: write
+            contents: read
+        steps:
+            - name: checkout
+              uses: actions/checkout@v3
+            - name: setup node
+              uses: actions/setup-node@v3
+              with:
+                node-version: 16
+                registry-url: https://registry.npmjs.org/
+                scope: '@hdriel'
+            - run: npm ci
+            - run: npm version ${{ steps.cz.outputs.version }}
+            - run: npm publish --access public
+              env:
+                  NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}

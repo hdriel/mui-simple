@@ -1,11 +1,12 @@
-name: Build and Deploy
+name: Deploy Storybook
+
 on: 
   push:
     branches:
         - "main"
     
 jobs:
-  build-and-deploy:
+  build-and-deploy-storybook-to-gh-pages:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
@@ -23,5 +24,5 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
-          CLEAN: true # Automatically remove deleted files from the deploy branch          
+          CLEAN: true # Automatically remove deleted files from the deploy branch
           FOLDER: storybook-static # output folder from `npm run build-storybook` (The folder that the build-storybook script generates files.)
