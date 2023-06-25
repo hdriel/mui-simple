@@ -17,12 +17,14 @@ jobs:
         steps:
             - name: checkout
               uses: actions/checkout@v3
+
             - name: setup node
               uses: actions/setup-node@v3
               with:
                 node-version: 16
                 registry-url: https://registry.npmjs.org/
                 scope: '@hdriel'
+
             - run: npm ci
             - run: npm version ${{ steps.cz.outputs.version }}
             - run: npm publish --access public
