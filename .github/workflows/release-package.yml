@@ -31,7 +31,7 @@ jobs:
           name: github-pages
           url: ${{ steps.build-publish.outputs.page_url }}
         runs-on: ubuntu-latest
-        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+#        if: ${{ github.event.workflow_run.conclusion == 'success' }}
         steps:
           - id: build-publish
             uses: bitovi/github-actions-react-to-ghp@v1.2.0
