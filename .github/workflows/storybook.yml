@@ -1,9 +1,9 @@
 name: Deploy Storybook
 
-on: 
+on:
   push:
     branches:
-        - "main"
+      - "main"
     
 jobs:
   build-and-deploy-storybook-to-gh-pages:
