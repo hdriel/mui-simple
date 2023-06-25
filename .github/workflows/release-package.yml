@@ -25,7 +25,7 @@ jobs:
                 scope: '@hdriel'
 
             - run: npm ci
-            - run: npm version ${{ steps.cz.outputs.version }}
+#            - run: npm version ${{ steps.cz.outputs.version }}
             - run: npm publish --access public
               env:
                   NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
