@@ -82,7 +82,7 @@ export const ComplexInteraction = () => {
       title="Shrimp and Chorizo Paella"
       subtitle="September 14, 2016"
       optionsMenu={{ options, width: 200 }}
-      image="/paella.jpg"
+      image="paella.jpg"
       actions={[{ icon: <FavoriteIcon /> }, { icon: <ShareIcon /> }]}
     >
       <Typography variant="body2" color="text.secondary" rows={3}>
@@ -130,7 +130,7 @@ export const Media = () => {
     <Card
       maxWidth={345}
       image={{
-        src: "/contemplative-reptile.jpg",
+        src: "contemplative-reptile.jpg",
         title: "green iguana",
         alt: "image",
       }}
@@ -170,7 +170,7 @@ export const UIControls = () => {
   return (
     <Stack spacing={3}>
       <Card
-        image={{ src: "/live-from-space.jpg", width: 151 }}
+        image={{ src: "live-from-space.jpg", width: 151 }}
         flexDirection="row-reverse"
       >
         <Box
@@ -191,7 +191,7 @@ export const UIControls = () => {
         </Box>
       </Card>
       <Card
-        image={{ src: "/live-from-space.jpg", width: 151 }}
+        image={{ src: "live-from-space.jpg", width: 151 }}
         flexDirection="row-reverse"
         title="Live From Space"
         subtitle="Mac Miller"

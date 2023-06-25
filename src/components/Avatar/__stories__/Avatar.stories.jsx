@@ -40,12 +40,12 @@ export const Tooltip = () => {
 };
 
 export const Image = () => {
-  return <Avatar {...actions} image="/1.jpg" />;
+  return <Avatar {...actions} image="1.jpg" />;
 };
 
 export const BrokenImage = () => {
   return (
-    <Avatar {...actions} image="/broken-image.jpg" fallbackImage="/cat.jpg" />
+    <Avatar {...actions} image="broken-image.jpg" fallbackImage="cat.jpg" />
   );
 };
 
@@ -53,8 +53,8 @@ export const BrokenBrokenImage = () => {
   return (
     <Avatar
       {...actions}
-      image="/broken-image.jpg"
-      fallbackImage="/undefined.jpg"
+      image="broken-image.jpg"
+      fallbackImage="undefined.jpg"
     />
   );
 };

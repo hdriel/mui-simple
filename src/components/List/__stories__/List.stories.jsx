@@ -116,7 +116,7 @@ export const AlignAvatarListItems = () => {
     {
       title: "Brunch this weekend?",
       subtitle: "Ali Connors — I'll be in your neighborhood doing errands this",
-      avatar: { username: "Ali Connors", image: "/1.jpg" },
+      avatar: { username: "Ali Connors", image: "1.jpg" },
       actions: [
         <Button icon={<PhoneIcon />} />,
         <Button icon={<CommentIcon />} />,
@@ -127,7 +127,7 @@ export const AlignAvatarListItems = () => {
       title: "Summer BBQ",
       subtitle:
         "to Scott, Alex, Jennifer — Wish I could come, but I'm out of town this",
-      avatar: { image: "/2.jpg" },
+      avatar: { image: "2.jpg" },
       actions: [<Button icon={<SendIcon />} />],
       divider: true,
     },
@@ -135,7 +135,7 @@ export const AlignAvatarListItems = () => {
       title: "Oui Oui",
       subtitle:
         "Sandra Adams — Do you have Paris recommendations? Have you ever seen something like this?",
-      avatar: { username: "Sandra Adams", image: "/3.jpg" },
+      avatar: { username: "Sandra Adams", image: "3.jpg" },
       actions: [<Button icon={<SendIcon />} />],
       divider: {},
     },

@@ -157,7 +157,7 @@ export const WidthAndHeight = () => {
             >
               <Box sx={{ border: "1px dashed black" }}>
                 <SVGIcon
-                  iconSrc="/hashtag-icon.svg"
+                  iconSrc="hashtag-icon.svg"
                   color={"red"}
                   width={width}
                   height={height}
@@ -238,7 +238,7 @@ export const SVGFile = () => {
             }}
           >
             <Box sx={{ border: "1px dashed black" }}>
-              <SVGIcon iconSrc="/hashtag-icon.svg" color="green" size={size} />
+              <SVGIcon iconSrc="hashtag-icon.svg" color="green" size={size} />
             </Box>
           </Box>
         </Stack>

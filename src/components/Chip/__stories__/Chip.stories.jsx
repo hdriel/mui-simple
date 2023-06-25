@@ -142,7 +142,7 @@ export const AvatarIcon = () => {
       <Chip
         {...actions}
         muiColor={"secondary"}
-        avatar={<Avatar image="/1.jpg" />}
+        avatar={<Avatar image="1.jpg" />}
       >
         Avatar image
       </Chip>
@@ -162,7 +162,7 @@ export const EndIcon = () => {
       <Chip
         {...actions}
         muiColor={"secondary"}
-        avatar={<Avatar image="/1.jpg" />}
+        avatar={<Avatar image="1.jpg" />}
         onDelete={onDeleteHandler}
         endIcon={<DeleteIcon />}
       >

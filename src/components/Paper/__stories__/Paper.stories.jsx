@@ -144,7 +144,7 @@ export const Image = () => {
         height={250}
         elevation={20}
         textColor={"#FFFFFF"}
-        imageSrc={"/1.jpg"}
+        imageSrc={"1.jpg"}
         imageOpacity={0.3}
       >
         Image
@@ -154,7 +154,7 @@ export const Image = () => {
         height={250}
         elevation={20}
         textColor={"#FFFFFF"}
-        imageSrc={"/1.jpg"}
+        imageSrc={"1.jpg"}
         imageOpacity={0.8}
         imageLayout="auto auto"
       />
@@ -163,7 +163,7 @@ export const Image = () => {
         height={250}
         elevation={20}
         textColor={"#FFFFFF"}
-        imageSrc={"/1.jpg"}
+        imageSrc={"1.jpg"}
         imageOpacity={0.8}
         imageLayout="50px 60px"
       />

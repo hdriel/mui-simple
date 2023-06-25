@@ -67,7 +67,7 @@ export const Title = () => {
         menu
         title={
           <>
-            <Avatar image={"/1.jpg"} />
+            <Avatar image={"1.jpg"} />
             <Typography wrap={false}>Hello world</Typography>
           </>
         }
@@ -86,7 +86,7 @@ export const Dense = () => {
         dense
         title={
           <>
-            <Avatar image={"/1.jpg"} />
+            <Avatar image={"1.jpg"} />
             <Typography wrap={false}>With Dense</Typography>
           </>
         }
@@ -96,7 +96,7 @@ export const Dense = () => {
         menu
         title={
           <>
-            <Avatar image={"/1.jpg"} />
+            <Avatar image={"1.jpg"} />
             <Typography wrap={false}>Without Dense</Typography>
           </>
         }
@@ -107,7 +107,7 @@ export const Dense = () => {
         disablePadding
         title={
           <>
-            <Avatar image={"/1.jpg"} />
+            <Avatar image={"1.jpg"} />
             <Typography wrap={false}>Disable Padding</Typography>
           </>
         }
@@ -119,7 +119,7 @@ export const Dense = () => {
         disablePadding
         title={
           <>
-            <Avatar image={"/1.jpg"} />
+            <Avatar image={"1.jpg"} />
             <Typography wrap={false}>Dense & Disable Padding</Typography>
           </>
         }
@@ -136,7 +136,7 @@ export const Actions = () => {
         menu
         title={
           <>
-            <Avatar image={"/1.jpg"} />
+            <Avatar image={"1.jpg"} />
             <Typography wrap={false}>Hello world</Typography>
           </>
         }
@@ -207,7 +207,7 @@ export const ActionMenu = () => {
       title="Hello World"
       actions={
         <Menu options={options} open={open} onClose={() => setOpen(false)}>
-          <Avatar image={"/1.jpg"} onClick={() => setOpen(true)} />
+          <Avatar image={"1.jpg"} onClick={() => setOpen(true)} />
         </Menu>
       }
     />

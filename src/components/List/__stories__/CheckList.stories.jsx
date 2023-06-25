@@ -52,15 +52,15 @@ export const CheckboxListAlignEnd = () => {
   const items = [
     {
       checked: true,
-      avatar: { image: "/1.jpg" },
+      avatar: { image: "1.jpg" },
       title: "Line item 1",
     },
     {
       checked: false,
-      avatar: { image: "/2.jpg" },
+      avatar: { image: "2.jpg" },
       title: "Line item 2",
     },
-    { avatar: { image: "/3.jpg" }, title: "Line item 3" },
+    { avatar: { image: "3.jpg" }, title: "Line item 3" },
     {
       divider: true,
     },
