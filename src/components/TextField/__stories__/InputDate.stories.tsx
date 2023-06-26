@@ -17,7 +17,7 @@ export const Default = () => {
     return <InputDate />;
 };
 
-export const Date = () => {
+export const DateValue = () => {
     const [value, setValue] = useState(new Date());
 
     return <InputDate label="Date" value={value} onChange={(e) => setValue(e.target.value)} />;

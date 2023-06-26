@@ -4,6 +4,9 @@
 /node_modules
 /.pnp
 .pnp.js
+.storybook/*.d.ts*
+storybook-config-entry.d.ts*
+storybook-stories.d.ts*
 
 # testing
 /coverage
