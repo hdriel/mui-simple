@@ -25,6 +25,7 @@ jobs:
                 scope: '@hdriel'
 
             - run: npm ci
-            - run: npm publish --access public
+            - run: npm run build
+            - run: npm publish lib --access public
               env:
                   NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
