@@ -10,6 +10,7 @@ import del from 'rollup-plugin-delete';
 import { createRequire } from 'node:module';
 const requireFile = createRequire(import.meta.url);
 const packageJson = requireFile('./package.json');
+// import packageJson from "./package.json" assert { type: "json" };
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -35,7 +36,7 @@ export default [
             peedDepsExternal(),
             resolve(),
             commonjs(),
-            typescript(),
+            typescript({ tsconfig: './tsconfig.json' }),
             postcss({ extensions: ['.css'] }),
             isProd && terser(),
         ],
@@ -43,7 +44,7 @@ export default [
     {
         input: 'lib/index.d.ts',
         output: [{ file: 'lib/index.d.ts', format: 'es' }],
-        plugins: [dts()],
+        plugins: [dts],
         external: [/\.css$/],
     },
 ];
