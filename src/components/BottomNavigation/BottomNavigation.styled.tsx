@@ -1,3 +1,4 @@
+import React from 'react';
 import { get } from 'lodash-es';
 import {
     BottomNavigation as MuiBottomNavigation,
