@@ -39,7 +39,7 @@ export default [
             resolve({ extensions: ['.js', '.jsx', '.ts', '.tsx'] }),
             commonjs(),
             json(),
-            babel({ babelrc: true }),
+            babel({ babelHelpers: 'bundled', babelrc: true }),
             typescript({ tsconfig: './tsconfig.json' }),
             postcss({ minimize: true, extensions: ['.css', '.less', '.scss'] }),
             isProd && terser(),
