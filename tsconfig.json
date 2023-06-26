@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "sourceMap": true,
-        "strictNullChecks": true,
+        "strictNullChecks": false,
         "target": "ES6",
         "outDir": "lib",
         "lib": ["dom", "dom.iterable", "esnext"],
@@ -23,6 +23,6 @@
         "noImplicitAny": false,
         "baseUrl": "."
     },
-    "include": ["src", ".storybook"],
+    "include": ["src",  ".storybook"],
     "exclude": [".idea", ".git", "node_modules", "lib", "storybook-static", "public"]
 }
