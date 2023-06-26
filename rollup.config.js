@@ -5,7 +5,7 @@ import typescript from '@rollup/plugin-typescript';
 import postcss from 'rollup-plugin-postcss';
 import dts from 'rollup-plugin-dts';
 import { terser } from 'rollup-plugin-terser';
-import del from 'rollup-plugin-del';
+import del from 'rollup-plugin-delete';
 
 import { createRequire } from 'node:module';
 const requireFile = createRequire(import.meta.url);

@@ -11,3 +11,7 @@ By default, npm will only crash for peerDependencies conflicts caused by the dir
 
 --force
 will force npm to fetch remote resources even if a local copy exists on disk.
+
+
+npm install --save-dev --ignore-scripts install-peers
+// "install-peers": "^1.0.4",
