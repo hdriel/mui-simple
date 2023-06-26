@@ -1,0 +1,17 @@
+In the new version of npm (v7), by default, npm install will fail when it encounters conflicting peerDependencies.
+It was not like that before.
+
+--legacy-peer-deps
+ignore all peerDependencies when installing,
+in the style of npm version 4 through version 6.
+
+--strict-peer-deps
+fail and abort the install process for any conflicting peerDependencies when encountered.
+By default, npm will only crash for peerDependencies conflicts caused by the direct dependencies of the root project.
+
+--force
+will force npm to fetch remote resources even if a local copy exists on disk.
+
+
+npm install --save-dev --ignore-scripts install-peers
+// "install-peers": "^1.0.4",
