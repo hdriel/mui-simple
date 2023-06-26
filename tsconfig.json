@@ -20,9 +20,9 @@
         "isolatedModules": true,
         "noEmit": false,
         "noEmitOnError": false,
-        "jsx": "react"
+        "jsx": "react",
+        "noImplicitAny": false
     },
-    "noImplicitAny": false,
     "include": ["src", ".storybook"],
     "exclude": ["node_modules", "lib", "storybook-static", "public"]
 }
