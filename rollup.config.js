@@ -10,7 +10,7 @@ import del from 'rollup-plugin-delete';
 import { createRequire } from 'node:module';
 const requireFile = createRequire(import.meta.url);
 const packageJson = requireFile('./package.json');
-// import packageJson from "./package.json" assert { type: "json" };
+// import packageJson from './package.json' assert { type: 'json' };
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -18,21 +18,13 @@ const sourcemap = isProd ? false : 'inline';
 
 export default [
     {
-        input: 'src/index.ts',
+        input: './src/index.ts',
         output: [
-            {
-                file: packageJson.main,
-                format: 'cjs',
-                sourcemap,
-            },
-            {
-                file: packageJson.module,
-                format: 'esm',
-                sourcemap,
-            },
+            { sourcemap, format: 'cjs', file: packageJson.main },
+            { sourcemap, format: 'esm', file: packageJson.module },
         ],
         plugins: [
-            del({ target: 'lib/*' }),
+            del({ targets: 'lib/*' }),
             peedDepsExternal(),
             resolve(),
             commonjs(),
@@ -44,7 +36,7 @@ export default [
     {
         input: 'lib/index.d.ts',
         output: [{ file: 'lib/index.d.ts', format: 'es' }],
-        plugins: [dts],
+        plugins: [dts()],
         external: [/\.css$/],
     },
 ];

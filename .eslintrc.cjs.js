@@ -3,6 +3,8 @@ module.exports = {
     env: {
         browser: true,
         es2021: true,
+        es6: true,
+        jest: true,
     },
     extends: [
         'react-app',
@@ -21,13 +23,22 @@ module.exports = {
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
+        ecmaFeatures: { jsx: true },
         ecmaVersion: 'latest',
         sourceType: 'module',
         project: './tsconfig.json',
     },
-    plugins: ['react', '@typescript-eslint'],
+    plugins: ['react', 'jest-dom', 'testing-library', '@typescript-eslint', 'prettier'],
     rules: {
         '@typescript-eslint/strict-boolean-expression': false,
         'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.stories.*', '**/.storybook/**.*'] }],
+    },
+    settings: {
+        'import/resolver': {
+            jsconfig: {
+                config: 'tsconfig.json',
+                extensions: ['.tsx', '.ts', '.js', '.jsx'],
+            },
+        },
     },
 };

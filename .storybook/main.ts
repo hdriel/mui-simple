@@ -22,7 +22,7 @@ const config: StorybookConfig = {
     webpackFinal: async (config) => {
         config.plugins?.push(
             new CopyWebpackPlugin({
-                patterns: [{ from: 'public', to: 'public', toType: 'dir' }],
+                patterns: [{ from: '../public', to: 'public', toType: 'dir' }],
             })
         );
 
