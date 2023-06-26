@@ -1,3 +1,4 @@
+import path from 'path';
 import type { StorybookConfig } from '@storybook/react-webpack5';
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
@@ -22,7 +23,7 @@ const config: StorybookConfig = {
     webpackFinal: async (config) => {
         config.plugins?.push(
             new CopyWebpackPlugin({
-                patterns: [{ from: '../public', to: 'public', toType: 'dir' }],
+                patterns: [{ from: path.resolve(__dirname, '../public'), to: '', toType: 'dir' }],
             })
         );
 

@@ -18,9 +18,9 @@ interface ButtonProps {
     disabled: boolean;
     startIcon: boolean;
     endIcon: any;
-    onClick: any;
-    onRightClick: Function;
-    link: Function;
+    onClick?: Function;
+    onRightClick?: Function;
+    link: string;
     color: string;
     disableRipple: string;
     isLoading: boolean;

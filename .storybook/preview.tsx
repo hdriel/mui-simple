@@ -1,6 +1,10 @@
 import React from 'react';
 import { clone, merge } from 'lodash-es';
+import { withThemeFromJSXProvider } from '@storybook/addon-styling';
 import { ThemeProvider, lightTheme, darkTheme } from '../src/themes';
+import { CssBaseline } from '@mui/material';
+import { createTheme } from '@mui/material/styles';
+import ProviderFn from './ProviderFn';
 
 const LightTheme = clone(merge({}, lightTheme, { themeName: 'light' }));
 const DarkTheme = clone(merge({}, darkTheme, { themeName: 'dark' }));
@@ -17,15 +21,26 @@ const preview = {
         },
     },
     decorators: [
-        (Story, context) => {
-            const { theme, direction } = context.globals;
-
-            return (
-                <ThemeProvider theme={theme} dir={direction}>
-                    <Story />
-                </ThemeProvider>
-            );
-        },
+        withThemeFromJSXProvider({
+            themes: {
+                light: createTheme({ palette: { mode: 'light' } }),
+                lightRTL: createTheme({ direction: 'rtl', palette: { mode: 'light' } }),
+                dark: createTheme({ palette: { mode: 'dark' } }),
+                darkRTL: createTheme({ direction: 'rtl', palette: { mode: 'dark' } }),
+            },
+            defaultTheme: 'light',
+            Provider: ProviderFn,
+            GlobalStyles: CssBaseline,
+        }),
+        // (Story, context) => {
+        //     const { theme, direction } = context.globals;
+        //
+        //     return (
+        //         <ThemeProvider theme={theme} dir={direction}>
+        //             <Story />
+        //         </ThemeProvider>
+        //     );
+        // },
     ],
     globalTypes: {
         theme: {

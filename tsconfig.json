@@ -3,7 +3,6 @@
         "sourceMap": true,
         "strictNullChecks": true,
         "target": "ES6",
-        "rootDir": ".",
         "outDir": "lib",
         "lib": ["dom", "dom.iterable", "esnext"],
         "declaration": true,
