@@ -2,6 +2,8 @@
     "name": "@hdriel/mui-simple",
     "version": "1.2.1",
     "description": "override mui components to simplify usage",
+    "license": "MIT",
+    "author": "Hadriel Benjo <hdriel@gmail.com> (https://github.com/hdriel)",
     "scripts": {
         "test": "",
         "install": "npm install --ignore-scripts --force",
@@ -24,11 +26,10 @@
         "@hdriel"
     ],
     "files": [ "lib/*" ],
-    "author": "Hadriel Benjo",
     "bugs": {
         "url": "https://github.com/hdriel/mui-simple/issues"
     },
-    "homepage": "https://github.com/hdriel/mui-simple#readme",
+    "homepage": "https://github.com/hdriel/mui-simple",
     "publishConfig": {
         "registery": "https://registry.npmjs.org"
     },

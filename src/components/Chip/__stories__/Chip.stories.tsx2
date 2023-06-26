@@ -53,19 +53,6 @@ export const MultiLine = () => {
   );
 };
 
-export const Variant = () => {
-  return (
-    <Stack direction="row" spacing={3}>
-      <Chip {...actions} variant="text">
-        text
-      </Chip>
-      <Chip {...actions} variant="outlined">
-        outlined
-      </Chip>
-    </Stack>
-  );
-};
-
 export const ThemedAndColored = () => {
   return (
     <Stack direction="column" spacing={3}>
