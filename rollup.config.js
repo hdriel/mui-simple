@@ -30,8 +30,8 @@ export default [
     {
         input: './src/index.ts',
         output: [
-            { sourcemap, format: 'cjs', file: packageJson.main },
-            { sourcemap, format: 'esm', file: packageJson.module },
+            { sourcemap, format: 'cjs', file: `lib/${packageJson.main}` },
+            { sourcemap, format: 'esm', file: `lib/${packageJson.module}` },
         ],
         plugins: [
             del({ targets: 'lib/*' }),

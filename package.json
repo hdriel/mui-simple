@@ -13,9 +13,9 @@
         "deploy": "gh-pages -d storybook-static"
     },
     "type": "module",
-    "main": "lib/index.js",
-    "module": "lib/index.esm.js",
-    "types": "lib/index.d.ts",
+    "main": "index.js",
+    "module": "index.esm.js",
+    "types": "index.d.ts",
     "keywords": [
         "@mui",
         "mui",
@@ -23,9 +23,7 @@
         "mui-simple",
         "@hdriel"
     ],
-    "files": [
-        "lib/*"
-    ],
+    "files": [ "lib/*" ],
     "author": "Hadriel Benjo",
     "bugs": {
         "url": "https://github.com/hdriel/mui-simple/issues"
