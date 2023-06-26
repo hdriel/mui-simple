@@ -24,10 +24,16 @@ jobs:
                 registry-url: https://registry.npmjs.org/
                 scope: '@hdriel'
 
-            - run: npm ci --ignore-scripts --force
-            - run: npm run build
-            - run: cp package.json lib/package.json
-            - run: cd lib
-            - run: npm publish --access public
+            - name: building package
+            - run: npm ci --ignore-scripts --force && npm run build
+
+            - name: copy package.json file
+              uses: canastro/copy-file-action@master
+              with:
+                  source: "package.json"
+                  target: "lib/package.json"
+
+            - name: publish step
+              run: cd lib && npm publish --access public
               env:
                   NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}

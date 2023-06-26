@@ -11,16 +11,15 @@
  this package need more maintenance like : <br>
  &#9744; adding typescript. <br>
  &#9744; make docs and fixing stories in storybook. <br>
- &#9744; become open-source by support MIT licence terms. <br>
  and so on..<br>
  
  so feel free to be in touch and make this beautiful package to be more awesome as should be! 
- 
- 
   
-## Author
+## Author 
 
-:octocat: **Hadriel Benjo**
+:octocat: **Hadriel Benjo**  
+<img src="https://github.com/hdriel/mui-simple/assets/20520565/7794f330-5765-42d5-8154-fe6b094f5960" width="100px;"/>
 
 - LinkedIn: [@hadriel-benjo](https://www.linkedin.com/in/hadriel-benjo/)
 - GitHub: [@hdriel](https://github.com/hdriel)
+
