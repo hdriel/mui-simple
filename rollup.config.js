@@ -17,7 +17,7 @@ import generatePackageJson from 'rollup-plugin-generate-package-json';
 import { createRequire } from 'node:module';
 const requireFile = createRequire(import.meta.url);
 const packageJson = requireFile('./package.json');
-const isProd = false && process.env.NODE_ENV === 'production';
+const isProd = process.env.NODE_ENV === 'production';
 const sourcemap = isProd ? undefined : 'inline';
 console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 
@@ -72,12 +72,12 @@ export default [
             // }),
         ],
     },
-    // {
-    //     input: 'dist/bundles/bundle.d.ts',
-    //     output: [{ file: 'dist/bundles/bundle.d.ts', format: 'es' }],
-    //     plugins: [dts()],
-    //     external: [/\.(css|less|scss)$/],
-    // },
+    {
+        input: 'dist/bundles/bundle.d.ts',
+        output: [{ file: 'dist/bundles/bundle.d.ts', format: 'es' }],
+        plugins: [dts()],
+        external: [/\.(css|less|scss)$/],
+    },
 ];
 
 // export default [
