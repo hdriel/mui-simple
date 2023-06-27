@@ -123,7 +123,6 @@
         "eslint-plugin-storybook": "^0.6.6",
         "eslint-plugin-testing-library": "^5.0.4",
         "gh-pages": "^5.0.0",
-        "install-peers": "^1.0.4",
         "path": "^0.12.7",
         "postcss": "^8.4.24",
         "prettier": "^2.8.7",
