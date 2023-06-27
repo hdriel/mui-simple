@@ -11,29 +11,29 @@ interface ButtonProps {
     /**
      * The variant of the button allowed types: "contained", "outlined", "text"
      */
-    variant: string;
+    variant?: string;
     /**
      * The disabled field of button, when is disabled - onClick event won't fire
      */
-    disabled: boolean;
-    startIcon: boolean;
-    endIcon: any;
+    disabled?: boolean;
+    startIcon?: any;
+    endIcon?: any;
     onClick?: Function;
     onRightClick?: Function;
-    link: string;
-    color: string;
-    disableRipple: string;
-    isLoading: boolean;
-    loadingIconPosition: string;
-    loadingLabel: string;
-    size: string | number;
-    icon: any;
-    fullWidth: boolean;
-    tooltipProps: object;
-    uppercase: boolean;
-    minWidth: string | number;
-    sx: object;
-    children: any;
+    link?: string;
+    color?: string;
+    disableRipple?: boolean;
+    isLoading?: boolean;
+    loadingIconPosition?: string;
+    loadingLabel?: string;
+    size?: string | number;
+    icon?: any;
+    fullWidth?: boolean;
+    tooltipProps?: object;
+    uppercase?: boolean;
+    minWidth?: string | number;
+    sx?: object;
+    children?: any;
 }
 
 const Button: React.FC<ButtonProps> = forwardRef(
