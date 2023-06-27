@@ -1,2 +1,6 @@
 node_modules
 lib
+.storybook
+**/__stories__
+public
+dist

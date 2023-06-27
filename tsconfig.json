@@ -21,6 +21,7 @@
         "rootDir": "src",
         "skipLibCheck": true,
         "sourceMap": true,
+        "suppressImplicitAnyIndexErrors": true,
         "strict": false,
         "strictNullChecks": false,
         "target": "ESNext"

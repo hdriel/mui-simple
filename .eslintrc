@@ -1,0 +1,62 @@
+{
+    "root": true,
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "es6": true,
+        "jest": true
+    },
+    "extends": [
+        "react-app",
+        "react-app/jest",
+        "standard-with-typescript",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier"
+    ],
+    "overrides": [
+        {
+            "files": ["**/*.stories.*", "**/.storybook/**/*.js"],
+            "rules": { "import/no-anonymous-default-export": "off" }
+        }
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": { "jsx": true },
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "plugins": [
+        "react",
+        "jest-dom",
+        "testing-library",
+        "@typescript-eslint",
+        "prettier"
+    ],
+    "rules": {
+        "react-hooks/exhaustive-deps": "warn",
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": ["**/*.stories.*", "**/.storybook/**.*"] }],
+        "@typescript-eslint/strict-boolean-expression": [
+            "error",
+            {
+                "allowNullableBoolean": false,
+                "allowNullableString": false,
+                "allowNullableNumber": false,
+                "allowAny": false,
+                "allowString": false,
+                "allowNumber": false,
+                "allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing": false
+            }
+        ]
+    },
+    "settings": {
+        "import/resolver": {
+            "jsconfig": {
+                "config": "tsconfig.json",
+                "extensions": [".mjs", ".json", ".js", ".jsx", ".ts", ".tsx"]
+            }
+        }
+    }
+}
