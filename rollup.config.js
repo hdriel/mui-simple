@@ -35,7 +35,7 @@ export default [
         plugins: [
             del({ targets: 'lib/*' }),
             peedDepsExternal(),
-            resolve({ extensions: ['.js', '.jsx', '.ts', '.tsx'] }),
+            resolve({ extensions: ['.mjs', '.json', '.js', '.jsx', '.ts', '.tsx'] }),
             commonjs(),
             json(),
             babel({ babelHelpers: 'bundled', babelrc: true }),

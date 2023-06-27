@@ -1,6 +1,6 @@
 {
     "name": "@hdriel/mui-simple",
-    "version": "1.2.4",
+    "version": "1.2.5",
     "description": "override mui components to simplify usage",
     "license": "MIT",
     "author": "Hadriel Benjo <hdriel@gmail.com> (https://github.com/hdriel)",

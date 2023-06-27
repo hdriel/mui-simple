@@ -37,7 +37,7 @@ module.exports = {
         'import/resolver': {
             jsconfig: {
                 config: 'tsconfig.json',
-                extensions: ['.tsx', '.ts', '.js', '.jsx'],
+                extensions: ['.mjs', '.json', '.js', '.jsx', '.ts', '.tsx'],
             },
         },
     },
