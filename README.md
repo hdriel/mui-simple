@@ -12,7 +12,7 @@
 
 install peer dependencies first: 
 ```npm
-$ npm install @emotion/react @emotion/styled @mui/lab @mui/material
+$ npm install @emotion/react @emotion/styled @mui/lab @mui/material @mui/icons-material
 ```
 
 it's going to take while
