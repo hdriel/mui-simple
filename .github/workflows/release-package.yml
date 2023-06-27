@@ -24,7 +24,8 @@ jobs:
 
             - name: building package
               run: | # Install npm packages and build lib output before publish
-                npm ci --ignore-scripts --force              
+                npm ci --ignore-scripts --force
+                npm npm uninstall --save-dev @mui/lab @material-ui @emotion/react @emotion/styled
                 npm run build
 
             - name: publish step
