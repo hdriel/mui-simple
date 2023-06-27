@@ -7,7 +7,7 @@ import postcss from 'rollup-plugin-postcss';
 import dts from 'rollup-plugin-dts';
 import { terser } from 'rollup-plugin-terser';
 import del from 'rollup-plugin-delete';
-import { babel, getBabelOutputPlugin } from '@rollup/plugin-babel';
+import { babel } from '@rollup/plugin-babel';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import { uglify } from 'rollup-plugin-uglify';
@@ -24,14 +24,13 @@ function getDirname(importMetaUrl) {
 }
 const __dirname = getDirname(import.meta.url);
 const babelConfigFilePath = path.resolve(__dirname, '.babelrc');
-console.log('babelConfigFilePath', babelConfigFilePath);
 
 export default [
     {
         input: './src/index.ts',
         output: [
-            { sourcemap, format: 'cjs', file: `lib/${packageJson.main}` },
-            { sourcemap, format: 'esm', file: `lib/${packageJson.module}` },
+            { sourcemap, format: 'cjs', file: packageJson.main },
+            { sourcemap, format: 'esm', file: packageJson.module },
         ],
         plugins: [
             del({ targets: 'lib/*' }),
@@ -45,8 +44,8 @@ export default [
             isProd && terser(),
             isProd && uglify(),
         ],
-        preserveEntrySignatures: false,
-        treeshake: true,
+        // preserveEntrySignatures: false,
+        // treeshake: true,
     },
     {
         input: 'lib/index.d.ts',

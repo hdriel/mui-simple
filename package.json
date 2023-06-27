@@ -1,6 +1,6 @@
 {
     "name": "@hdriel/mui-simple",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "description": "override mui components to simplify usage",
     "license": "MIT",
     "author": "Hadriel Benjo <hdriel@gmail.com> (https://github.com/hdriel)",
@@ -15,9 +15,9 @@
         "deploy": "gh-pages -d storybook-static"
     },
     "type": "module",
-    "main": "index.js",
-    "module": "index.esm.js",
-    "types": "index.d.ts",
+    "main": "lib/index.js",
+    "module": "lib/index.esm.js",
+    "types": "lib/index.d.ts",
     "keywords": [
         "@mui",
         "mui",
