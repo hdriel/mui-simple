@@ -13,7 +13,7 @@
         "build-storybook": "storybook build",
         "predeploy": "npm run build-storybook",
         "deploy": "gh-pages -d storybook-static",
-        "serve-storybook-static": "npm run build-storybook && serve -s storybook-static"
+        "storybook-static-serve": "serve -s storybook-static"
     },
     "type": "module",
     "module": "dist/bundles/bundle.esm.js",
