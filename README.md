@@ -2,14 +2,37 @@
 
  customized **ALL MUI COMPONENTS** to make simplify the usage of mui. <br/>
  get a lot of features to use mui, like custom-color that you can send any color of theme color name. <br/>
- or more customized way to use component more eazier way, and less code bugs homemade. <br/>
+ or more customized way to use component more easier way, and less code bugs homemade. <br/>
  
-#### live demo: [storybook](https://hdriel.github.io/mui-simple/)
+#### Demo: [storybook link](https://hdriel.github.io/mui-simple/)
 
-#### Join and Support
+## Install
+
+### npm
+
+install peer dependencies first: 
+```npm
+$ npm install @emotion/react @emotion/styled @mui/lab @mui/material
+```
+
+it's going to take while
+```npm
+$ npm install --force @hdriel/mui-simple
+```
+
+## Usage
+
+```javascript
+import { Button } from '@hdriel/mui-simple';
+// or
+const { Button } = require('@hdriel/mui-simple')
+```
+
+
+# Join and Support
  
  this package need more maintenance like : <br>
- &#9744; adding typescript. <br>
+ &#9744; fully support typescript. <br>
  &#9744; make docs and fixing stories in storybook. <br>
  and so on..<br>
  
