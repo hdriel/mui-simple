@@ -17,7 +17,7 @@
     "type": "module",
     "module": "dist/bundles/bundle.esm.js",
     "main": "dist/bundles/bundle.js",
-    "types": "dist/bundles/bundle.d.ts",
+    "types": "dist/bundles/lib/index.d.ts",
     "keywords": [
         "@mui",
         "mui",
