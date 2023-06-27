@@ -16,7 +16,7 @@ jobs:
           
       - name: Install and Build 🔧
         run: | # Install npm packages and build the Storybook files
-          npm ci --ignore-scripts --force
+          npm install --force
           npm run build-storybook
           
       - name: Deploy 🚀
