@@ -30,7 +30,7 @@ export default [
         input: './src/index.ts',
         output: [
             { sourcemap, format: 'cjs', file: packageJson.main },
-            { sourcemap, format: 'esm', file: packageJson.module },
+            { sourcemap, format: 'esm', file: packageJson.module }, // ES2015 modules version so consumers can tree-shake
         ],
         plugins: [
             del({ targets: 'lib/*' }),
@@ -45,7 +45,7 @@ export default [
             isProd && uglify(),
         ],
         // preserveEntrySignatures: false,
-        // treeshake: true,
+        treeshake: true,
     },
     {
         input: 'lib/index.d.ts',
