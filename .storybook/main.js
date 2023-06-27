@@ -32,15 +32,9 @@ const config = {
             test: /\.[jt]sx?$/,
             exclude: [path.resolve(__dirname, '..', 'node_modules')],
             use: [
+                { loader: 'babel-loader' },
                 {
-                    loader: 'babel-loader',
-                    // options: {
-                    //     configFile: path.resolve(__dirname, '..', '.babelrc'),
-                    //     transpileOnly: true,
-                    // },
-                },
-                {
-                    loader: require.resolve('ts-loader'),
+                    loader: 'ts-loader',
                     options: {
                         configFile: path.resolve(__dirname, '..', 'tsconfig.json'),
                         transpileOnly: true,

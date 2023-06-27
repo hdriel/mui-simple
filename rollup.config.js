@@ -26,7 +26,7 @@ export default [
         output: [
             { sourcemap, format: 'cjs', file: packageJson.main },
             // ES2015 modules version so consumers can tree-shake
-            ...(ESM ? [{ sourcemap, format: 'esm', file: packageJson.module }] : []),
+            ...(ESM ? [{ sourcemap, format: 'esm', file: packageJson.module, plugins: [terser()] }] : []),
         ],
         external: [
             '@emotion/react',
@@ -60,48 +60,20 @@ export default [
                     homepage: pkg.homepage,
                     publishConfig: pkg.publishConfig,
                     repository: pkg.repository,
-                    ...(ESM && { type: pkg.type, module: pkg.module?.replace('dist/') }),
-                    main: pkg.main.replace('dist/'),
-                    types: pkg.types.replace('dist/'),
+                    ...(ESM && { type: pkg.type, module: pkg.module?.replace('dist/', '') }),
+                    main: pkg.main.replace('dist/', ''),
+                    types: pkg.types.replace('dist/', ''),
                     files: ['bundles/*'],
                 }),
             }),
         ],
+        preserveEntrySignatures: false,
+        treeshake: true,
     },
     {
-        input: 'dist/bundles/lib/index.d.ts',
-        output: [{ file: 'dist/bundles/lib/index.d.ts', format: 'es' }],
+        input: 'dist/bundles/index.d.ts',
+        output: [{ file: 'dist/bundles/index.d.ts', format: 'es' }],
         plugins: [dts()],
         external: [/\.(css|less|scss)$/],
     },
 ];
-
-// export default [
-//     {
-//         input: './src/index.ts',
-//         output: [
-//             { sourcemap, format: 'cjs', file: packageJson.main },
-//             { sourcemap, format: 'esm', file: packageJson.module }, // ES2015 modules version so consumers can tree-shake
-//         ],
-//         plugins: [
-//             del({ targets: 'lib/*' }),
-//             peedDepsExternal(),
-//             resolve({ extensions: ['.mjs', '.json', '.js', '.jsx', '.ts', '.tsx'] }),
-//             commonjs(),
-//             json(),
-//             babel({ babelHelpers: 'bundled', babelrc: true }),
-//             typescript({ tsconfig: './tsconfig.json' }),
-//             postcss({ minimize: true, extensions: ['.css', '.less', '.scss'] }),
-//             isProd && terser(),
-//             isProd && uglify(),
-//         ],
-//         // preserveEntrySignatures: false,
-//         treeshake: true,
-//     },
-//     {
-//         input: 'lib/index.d.ts',
-//         output: [{ file: 'lib/index.d.ts', format: 'es' }],
-//         plugins: [dts()],
-//         external: [/\.(css|less|scss)$/],
-//     },
-// ];
