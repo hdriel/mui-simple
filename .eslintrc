@@ -11,14 +11,19 @@
         "react-app/jest",
         "standard-with-typescript",
         "plugin:react/recommended",
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended",
+        "plugin:storybook/recommended",
+//        "plugin:@typescript-eslint/eslint-recommended",
+//        "plugin:@typescript-eslint/recommended",
         "prettier"
     ],
     "overrides": [
         {
-            "files": ["**/*.stories.*", "**/.storybook/**/*.js"],
-            "rules": { "import/no-anonymous-default-export": "off" }
+            "files": ["src/**/*.stories.@(ts|tsx|js|jsx|mjs|cjs)"],
+            "rules": {
+                "import/no-anonymous-default-export": "off",
+                "storybook/hierarchy-separator": "error",
+                "storybook/default-exports": "off"
+            }
         }
     ],
     "parser": "@typescript-eslint/parser",

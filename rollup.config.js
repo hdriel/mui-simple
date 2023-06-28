@@ -16,7 +16,7 @@ import { createRequire } from 'node:module';
 const requireFile = createRequire(import.meta.url);
 const packageJson = requireFile('./package.json');
 const isProd = process.env.NODE_ENV === 'production';
-const sourcemap = isProd ? undefined : 'inline';
+// const sourcemap = isProd ? undefined : 'inline';
 
 const ESM = false;
 
@@ -24,9 +24,9 @@ export default [
     {
         input: './src/index.ts',
         output: [
-            { sourcemap, format: 'cjs', file: packageJson.main },
+            { sourcemap: true, format: 'cjs', file: packageJson.main },
             // ES2015 modules version so consumers can tree-shake
-            ...(ESM ? [{ sourcemap, format: 'esm', file: packageJson.module, plugins: [terser()] }] : []),
+            ...(ESM ? [{ sourcemap: true, format: 'esm', file: packageJson.module, plugins: [terser()] }] : []),
         ],
         external: [
             '@emotion/react',

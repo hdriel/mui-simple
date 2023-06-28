@@ -1,5 +1,6 @@
 import path from 'path';
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const config = {
     stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -21,8 +22,26 @@ const config = {
             options: { loaderOptions: { injectStoryParameters: false } },
         },
     ],
+    typescript: {
+        check: false,
+        checkOptions: {},
+        reactDocgen: 'react-docgen-typescript',
+        reactDocgenTypescriptOptions: {
+            shouldExtractLiteralValuesFromEnum: true,
+            propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
+        },
+    },
     webpackFinal: async (config) => {
-        config.plugins?.push(
+        // plugins
+        config.plugins = config.plugins.filter(
+            (plugin) => !['ESLintWebpackPlugin', 'ForkTsCheckerWebpackPlugin'].includes(plugin.constructor.name)
+        );
+        config.plugins.push(
+            new ESLintPlugin({
+                context: path.resolve(__dirname, '..', 'src'),
+                overrideConfigFile: path.resolve(__dirname, '..', '.eslintrc'),
+                failOnError: false,
+            }),
             new CopyWebpackPlugin({
                 patterns: [{ from: path.resolve(__dirname, '..', 'public'), to: '', toType: 'dir' }],
             })
@@ -44,7 +63,17 @@ const config = {
         };
         config.module.rules.push(typescriptRule);
 
-        // Add the peer dependencies to the rule's include array
+        // config.externals = {
+        //     '@emotion/react': '@emotion/react',
+        //     '@emotion/styled': '@emotion/styled',
+        //     '@mui/icons-material': '@mui/icons-material',
+        //     '@mui/lab': '@mui/lab',
+        //     '@mui/material': '@mui/material',
+        //     react: 'react',
+        //     'react-dom': 'react-dom',
+        // };
+
+        // // Add the peer dependencies to the rule's include array
         typescriptRule.include ||= [];
         typescriptRule.include.push(
             path.resolve(__dirname, '../node_modules/react'),
@@ -52,6 +81,8 @@ const config = {
             path.resolve(__dirname, '../node_modules/@mui'),
             path.resolve(__dirname, '../node_modules/@emotion')
         );
+
+        config.stats = undefined;
 
         return config;
     },
