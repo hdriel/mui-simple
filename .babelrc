@@ -1,13 +1,12 @@
 {
-    "sourceType": "unambiguous",
     "presets": [
-        ["@babel/preset-env", { "targets": { "chrome": 100, "esmodules": true} }],
+        ["@babel/preset-env", { "targets": { "chrome": 100 } }],
         "@babel/preset-typescript",
         "@babel/preset-react"
     ],
     "plugins": [
         "@babel/proposal-object-rest-spread",
-        ["@babel/plugin-transform-react-jsx", { "extensions": [".jsx", ".js"] }]
+        ["@babel/plugin-transform-react-jsx", { "extensions": [".jsx", ".js", ".ts", ".tsx"] }]
     ],
     "exclude": "node_modules/**"
 }

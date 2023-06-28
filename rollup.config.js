@@ -1,4 +1,6 @@
 // https://medium.com/self-learning/build-react-library-by-rollup-5680252e1aee
+// https://dev.to/alexeagleson/how-to-create-and-publish-a-react-component-library-2oe
+// https://www.youtube.com/watch?v=hf6Z8OZanec
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
@@ -18,7 +20,7 @@ const packageJson = requireFile('./package.json');
 const isProd = process.env.NODE_ENV === 'production';
 // const sourcemap = isProd ? undefined : 'inline';
 
-const ESM = false;
+const ESM = true;
 
 export default [
     {
@@ -26,7 +28,17 @@ export default [
         output: [
             { sourcemap: true, format: 'cjs', file: packageJson.main },
             // ES2015 modules version so consumers can tree-shake
-            ...(ESM ? [{ sourcemap: true, format: 'esm', file: packageJson.module, plugins: [terser()] }] : []),
+            ...(ESM
+                ? [
+                      {
+                          sourcemap: true,
+                          format: 'es',
+                          file: packageJson.module,
+                          export: 'named',
+                          //plugins: [terser()],
+                      },
+                  ]
+                : []),
         ],
         external: [
             '@emotion/react',
@@ -39,14 +51,19 @@ export default [
         ],
         plugins: [
             del({ targets: 'dist/*' }),
-            peerDepsExternal(),
-            resolve({ extensions: ['.js', '.jsx', '.ts', '.tsx'] }),
             commonjs(),
             json(),
             babel({ babelHelpers: 'bundled', babelrc: true }),
             typescript({ tsconfig: './tsconfig.json' }),
             postcss({ minimize: true, extensions: ['.css', '.less', '.scss'] }),
-            ...(isProd ? [terser(), uglify()] : []),
+            peerDepsExternal(),
+            resolve({ extensions: ['.js', '.jsx', '.ts', '.tsx'] }),
+            ...(isProd
+                ? [
+                      terser(),
+                      // uglify()
+                  ]
+                : []),
             generatePackageJson({
                 outputFolder: 'dist',
                 baseContents: (pkg) => ({

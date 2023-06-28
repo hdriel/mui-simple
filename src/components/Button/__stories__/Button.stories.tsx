@@ -37,6 +37,7 @@ export default meta;
 
 type Story = StoryObj<typeof Button>;
 
+/** The button with default color as primary from palette theme */
 export const Primary: Story = {
     args: {
         children: 'Primary',

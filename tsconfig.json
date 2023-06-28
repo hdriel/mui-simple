@@ -10,8 +10,8 @@
         "forceConsistentCasingInFileNames": true,
         "isolatedModules": true,
         "jsx": "react-jsx",
-        "lib": ["dom", "esnext"],
-        "module": "ESNext",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "module": "esnext",
         "moduleResolution": "node",
         "noEmit": false,
         "noEmitOnError": false,
@@ -21,10 +21,9 @@
         "rootDir": "src",
         "skipLibCheck": true,
         "sourceMap": true,
-        "suppressImplicitAnyIndexErrors": true,
         "strict": false,
         "strictNullChecks": false,
-        "target": "ESNext"
+        "target": "es5"
     },
     "include": ["src", ".storybook"],
     "exclude": [".idea", ".git", "node_modules", "lib", "dist", "storybook-static", "public"]
