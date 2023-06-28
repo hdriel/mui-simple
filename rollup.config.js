@@ -18,7 +18,7 @@ const packageJson = requireFile('./package.json');
 const isProd = process.env.NODE_ENV === 'production';
 const sourcemap = isProd ? undefined : 'inline';
 
-const ESM = true;
+const ESM = false;
 
 export default [
     {
