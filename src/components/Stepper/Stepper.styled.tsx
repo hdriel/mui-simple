@@ -19,7 +19,7 @@ export const Typography = MuiTypography;
 export const Button = MuiButton;
 
 export const Stepper = styled(MuiStepper, {
-    shouldForwardProp: (propName) => !['lineWidth', 'lineColor', 'marginContent'].includes(propName),
+    shouldForwardProp: (propName) => !['lineWidth', 'lineColor', 'marginContent'].includes(propName as string),
 })`
     &.MuiStepper-root.MuiStepper-vertical.MuiStepper-alternativeLabel {
         gap: 1.5em;
@@ -35,7 +35,7 @@ export const Stepper = styled(MuiStepper, {
 export const Step = MuiStep;
 
 export const StepContent = styled(MuiStepContent, {
-    shouldForwardProp: (propName) => !['lineWidth', 'lineColor', 'marginContent'].includes(propName),
+    shouldForwardProp: (propName) => !['lineWidth', 'lineColor', 'marginContent'].includes(propName as string),
 })`
     &.MuiStepContent-root {
         border-width: ${(props) => numberToPx(props.lineWidth) ?? '3px'};
@@ -45,7 +45,7 @@ export const StepContent = styled(MuiStepContent, {
 `;
 
 export const StepLabel = styled(MuiStepLabel, {
-    shouldForwardProp: (propName) => ![].includes(propName),
+    shouldForwardProp: (propName) => ![].includes(propName as string),
 })`
     & .MuiStepIcon-root.Mui-active,
     & .MuiStepIcon-root.Mui-completed,

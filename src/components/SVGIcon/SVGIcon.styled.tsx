@@ -1,14 +1,14 @@
-import { styled } from "@mui/material/styles";
-import InlineSVG from "react-inlinesvg";
+import { styled } from '@mui/material/styles';
+import InlineSVG from 'react-inlinesvg';
 
 export const SVG = styled(InlineSVG, {
-  shouldForwardProp: (propName) => !["color"].includes(propName),
+    shouldForwardProp: (propName) => !['color'].includes(propName as string),
 })`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  svg {
-    ${(props) => ({ ...props })}
-  }
+    svg {
+        ${(props) => ({ ...props })}
+    }
 `;

@@ -1,9 +1,10 @@
-import { Breadcrumbs as MuiBreadcrumbs } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import { numberToPx } from "../../utils/helpers";
+import type { ComponentType } from 'react';
+import { Breadcrumbs as MuiBreadcrumbs, BreadcrumbsProps } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { numberToPx } from '../../utils/helpers';
 
 export const Breadcrumbs = styled(MuiBreadcrumbs)`
-  & .MuiBreadcrumbs-separator {
-    font-size: ${(props) => numberToPx(props.size)};
-  }
-`;
+    & .MuiBreadcrumbs-separator {
+        font-size: ${(props) => numberToPx(props.size)};
+    }
+` as ComponentType<BreadcrumbsProps>;

@@ -40,7 +40,7 @@ function multiLineStyle(props) {
 
 export const Chip = styled(MuiChip, {
     shouldForwardProp: (propName) =>
-        !['textColor', 'customColor', 'multiLine', 'breadCrumbsStyle', 'rounded'].includes(propName),
+        !['textColor', 'customColor', 'multiLine', 'breadCrumbsStyle', 'rounded'].includes(propName as string),
 })`
     width: ${(props) => props.width ?? 'auto'};
     border-radius: ${(props) => (props.rounded ? undefined : '4px')};

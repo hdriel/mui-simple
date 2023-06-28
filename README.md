@@ -20,6 +20,34 @@ it's going to take while
 $ npm install --force @hdriel/mui-simple
 ```
 
+##Lancher
+
+#### Create-React-App
+if you use CRA v5+ you need to override webpack config with CRACO 
+install craco: 
+```npm
+$ npm install --save-dev @craco/craco
+``` 
+
+then create in the root project the file
+```javascript
+# craco.config.js 
+module.exports = {
+  style: {},
+  eslint: {},
+  babel: {},
+  webpack: {
+    configure: {
+      module: {
+        rules: [{ test: /\.m?js$/, resolve: { fullySpecified: false } }],
+      },
+    },
+  },
+};
+
+```
+
+
 ## Usage
 
 ```javascript

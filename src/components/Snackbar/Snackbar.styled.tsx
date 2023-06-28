@@ -1,10 +1,10 @@
-import { Alert as MuiAlert, Snackbar as MuiSnackbar } from "@mui/material";
-import { styled } from "@mui/material/styles";
-export { Fade, Grow, Slide } from "@mui/material";
+import { Alert as MuiAlert, Snackbar as MuiSnackbar } from '@mui/material';
+import { styled } from '@mui/material/styles';
+export { Fade, Grow, Slide } from '@mui/material';
 export const Alert = styled(MuiAlert)``;
 
 export const Snackbar = styled(MuiSnackbar, {
-  shouldForwardProp: (propName) => !["fullWidth"].includes(propName),
+    shouldForwardProp: (propName) => !['fullWidth'].includes(propName as string),
 })`
-  width: 100%;
+    width: 100%;
 `;

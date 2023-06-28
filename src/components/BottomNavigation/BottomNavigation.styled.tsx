@@ -26,7 +26,7 @@ export const BottomNavigation = styled(
         </Paper>
     ),
     {
-        shouldForwardProp: (propName) => !['muiColor', 'customColor'].includes(propName),
+        shouldForwardProp: (propName) => !['muiColor', 'customColor'].includes(propName as string),
     }
 )`
     & .MuiBottomNavigationAction-root.Mui-selected {

@@ -1,50 +1,44 @@
-import React from "react";
+import React from 'react';
 
 import {
-  List as MuiList,
-  ListItem as MuiListItem,
-  ListItemAvatar as MuiListItemAvatar,
-  ListItemButton as MuiListItemButton,
-  ListItemIcon as MuiListItemIcon,
-  ListItemSecondaryAction as MuiListItemSecondaryAction,
-  ListItemText as MuiListItemText,
-  ListSubheader as MuiListSubheader,
-  Collapse as MuiCollapse,
-} from "@mui/material";
-import { TransitionGroup } from "react-transition-group";
-import { styled } from "@mui/material/styles";
-import MuiDivider from "../Divider/Divider";
+    List as MuiList,
+    ListItem as MuiListItem,
+    ListItemAvatar as MuiListItemAvatar,
+    ListItemButton as MuiListItemButton,
+    ListItemIcon as MuiListItemIcon,
+    ListItemSecondaryAction as MuiListItemSecondaryAction,
+    ListItemText as MuiListItemText,
+    ListSubheader as MuiListSubheader,
+    Collapse as MuiCollapse,
+} from '@mui/material';
+import { TransitionGroup } from 'react-transition-group';
+import { styled } from '@mui/material/styles';
+import MuiDivider from '../Divider/Divider';
 
 export const Divider = MuiDivider;
 export const Collapse = MuiCollapse;
 export const List = styled(({ useTransition, children, ...props }) => (
-  <MuiList {...props}>
-    {useTransition ? (
-      <TransitionGroup>{children}</TransitionGroup>
-    ) : (
-      { children }
-    )}
-  </MuiList>
+    <MuiList {...props}>{useTransition ? <TransitionGroup>{children}</TransitionGroup> : { children }}</MuiList>
 ))`
-  width: 100%;
+    width: 100%;
 `;
 
 export const ListItem = styled(MuiListItem, {
-  shouldForwardProp: (propName) => !["flexDirectionItems"].includes(propName),
+    shouldForwardProp: (propName) => !['flexDirectionItems'].includes(propName as string),
 })`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-
-  & .MuiCollapse-root {
     width: 100%;
-  }
+    display: flex;
+    flex-direction: column;
+
+    & .MuiCollapse-root {
+        width: 100%;
+    }
 `;
 export const ListItemAvatar = MuiListItemAvatar;
 export const ListItemButton = styled(MuiListItemButton)`
-  width: 100%;
-  padding: ${(props) => props.padding};
-  flex-direction: ${(props) => props.flexDirection ?? "row"};
+    width: 100%;
+    padding: ${(props) => props.padding};
+    flex-direction: ${(props) => props.flexDirection ?? 'row'};
 `;
 export const ListItemIcon = MuiListItemIcon;
 export const ListItemSecondaryAction = MuiListItemSecondaryAction;

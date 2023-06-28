@@ -43,7 +43,7 @@ export const LinearProgress = styled(
         </ContentWrapper>
     ),
     {
-        shouldForwardProp: (propName) => !['customColor'].includes(propName),
+        shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
     }
 )`
     &.MuiLinearProgress-root {

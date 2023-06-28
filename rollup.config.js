@@ -5,7 +5,7 @@ import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
-// import typescript2 from 'rollup-plugin-typescript2';
+import typescript2 from 'rollup-plugin-typescript2';
 import json from '@rollup/plugin-json';
 import postcss from 'rollup-plugin-postcss';
 import dts from 'rollup-plugin-dts';
@@ -22,8 +22,6 @@ const requireFile = createRequire(import.meta.url);
 const packageJson = requireFile('./package.json');
 const isProd = process.env.NODE_ENV === 'production';
 // const sourcemap = isProd ? undefined : 'inline';
-
-const ESM = true;
 
 export default [
     {
@@ -53,23 +51,27 @@ export default [
             commonjs({
                 include: 'node_modules/**',
                 namedExports: { 'react-is': ['isForwardRef', 'isValidElementType'] },
+                // defaultIsModuleExports: true,
             }),
             json(),
-            typescript({ tsconfig: './tsconfig.json' }),
-            // typescript({
-            //     tsconfig: './tsconfig.json',
-            //     verbosity: 3,
-            //     clean: true,
-            //     check: true,
-            // }),
+            // typescript({ tsconfig: 'tsconfig.json' }),
+            typescript2({
+                tsconfig: 'tsconfig.json',
+                verbosity: 3,
+                clean: true,
+                check: false,
+                noEmitOnError: false,
+                declaration: true,
+                declarationMap: true,
+            }),
             babel({
                 babelHelpers: 'bundled',
                 extensions: ['.jsx', '.js', '.ts', '.tsx'],
-                exclude: ['/node_modules'],
+                exclude: ['node_modules'],
                 babelrc: true,
             }),
             postcss({ minimize: true, extensions: ['.css', '.less', '.scss'], plugins: [] }),
-            peerDepsExternal(),
+            peerDepsExternal({ includeDependencies: true }),
             resolve({
                 browser: true,
                 preferBuiltins: true,
@@ -96,7 +98,7 @@ export default [
                     homepage: pkg.homepage,
                     publishConfig: pkg.publishConfig,
                     repository: pkg.repository,
-                    // type: pkg.type,
+                    type: pkg.type,
                     module: pkg.module?.replace('dist/', ''),
                     main: pkg.main.replace('dist/', ''),
                     types: pkg.types.replace('dist/', ''),

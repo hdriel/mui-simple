@@ -11,7 +11,8 @@ import Slider from '../Slider/Slider';
 import { debounce } from 'lodash-es';
 
 export const TextField = styled((props) => <Input {...props} type="text" />, {
-    shouldForwardProp: (propName) => !['patternChar', 'allowEmptyFormatting', 'thousandSeparator'].includes(propName),
+    shouldForwardProp: (propName) =>
+        !['patternChar', 'allowEmptyFormatting', 'thousandSeparator'].includes(propName as string),
 })``;
 
 export default function InputNumber({
