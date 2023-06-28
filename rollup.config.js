@@ -31,17 +31,13 @@ export default [
         output: [
             { sourcemap: true, format: 'cjs', file: packageJson.main },
             // ES2015 modules version so consumers can tree-shake
-            ...(ESM
-                ? [
-                      {
-                          sourcemap: true,
-                          format: 'es',
-                          file: packageJson.module,
-                          exports: 'named',
-                          // plugins: [terser()],
-                      },
-                  ]
-                : []),
+            {
+                sourcemap: true,
+                format: 'es',
+                file: packageJson.module,
+                exports: 'named',
+                // plugins: [terser()],
+            },
         ],
         external: [
             '@emotion/react',
@@ -100,7 +96,8 @@ export default [
                     homepage: pkg.homepage,
                     publishConfig: pkg.publishConfig,
                     repository: pkg.repository,
-                    ...(ESM && { type: pkg.type, module: pkg.module?.replace('dist/', '') }),
+                    // type: pkg.type,
+                    module: pkg.module?.replace('dist/', ''),
                     main: pkg.main.replace('dist/', ''),
                     types: pkg.types.replace('dist/', ''),
                     files: ['bundles/*'],

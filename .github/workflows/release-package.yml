@@ -24,7 +24,7 @@ jobs:
             - name: building package
               run: | # Install npm packages and build lib output before publish
                 npm ci --force
-                npm run build
+                npm run build:debug
 
             - name: publish step
               run: npm publish
