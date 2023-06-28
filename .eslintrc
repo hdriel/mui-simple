@@ -12,8 +12,8 @@
         "standard-with-typescript",
         "plugin:react/recommended",
         "plugin:storybook/recommended",
-//        "plugin:@typescript-eslint/eslint-recommended",
-//        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
         "prettier"
     ],
     "overrides": [
@@ -60,7 +60,7 @@
         "import/resolver": {
             "jsconfig": {
                 "config": "tsconfig.json",
-                "extensions": [".mjs", ".json", ".js", ".jsx", ".ts", ".tsx"]
+                "extensions": [ ".json", ".js", ".jsx", ".ts", ".tsx"]
             }
         }
     }

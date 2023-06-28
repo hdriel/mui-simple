@@ -5,6 +5,7 @@ import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
+// import typescript2 from 'rollup-plugin-typescript2';
 import json from '@rollup/plugin-json';
 import postcss from 'rollup-plugin-postcss';
 import dts from 'rollup-plugin-dts';
@@ -12,6 +13,8 @@ import del from 'rollup-plugin-delete';
 import generatePackageJson from 'rollup-plugin-generate-package-json';
 import { terser } from 'rollup-plugin-terser';
 import { babel } from '@rollup/plugin-babel';
+import urlResolve from 'rollup-plugin-url-resolve';
+
 import { uglify } from 'rollup-plugin-uglify';
 
 import { createRequire } from 'node:module';
@@ -34,8 +37,8 @@ export default [
                           sourcemap: true,
                           format: 'es',
                           file: packageJson.module,
-                          export: 'named',
-                          //plugins: [terser()],
+                          exports: 'named',
+                          // plugins: [terser()],
                       },
                   ]
                 : []),
@@ -51,13 +54,33 @@ export default [
         ],
         plugins: [
             del({ targets: 'dist/*' }),
-            commonjs(),
+            commonjs({
+                include: 'node_modules/**',
+                namedExports: { 'react-is': ['isForwardRef', 'isValidElementType'] },
+            }),
             json(),
-            babel({ babelHelpers: 'bundled', babelrc: true }),
             typescript({ tsconfig: './tsconfig.json' }),
-            postcss({ minimize: true, extensions: ['.css', '.less', '.scss'] }),
+            // typescript({
+            //     tsconfig: './tsconfig.json',
+            //     verbosity: 3,
+            //     clean: true,
+            //     check: true,
+            // }),
+            babel({
+                babelHelpers: 'bundled',
+                extensions: ['.jsx', '.js', '.ts', '.tsx'],
+                exclude: ['/node_modules'],
+                babelrc: true,
+            }),
+            postcss({ minimize: true, extensions: ['.css', '.less', '.scss'], plugins: [] }),
             peerDepsExternal(),
-            resolve({ extensions: ['.js', '.jsx', '.ts', '.tsx'] }),
+            resolve({
+                browser: true,
+                preferBuiltins: true,
+                mainFields: ['browser'],
+                extensions: ['.js', '.jsx', '.ts', '.tsx'],
+            }),
+            urlResolve(),
             ...(isProd
                 ? [
                       terser(),
@@ -84,8 +107,8 @@ export default [
                 }),
             }),
         ],
-        preserveEntrySignatures: false,
-        treeshake: true,
+        // preserveEntrySignatures: false,
+        // treeshake: true,
     },
     {
         input: 'dist/bundles/index.d.ts',
