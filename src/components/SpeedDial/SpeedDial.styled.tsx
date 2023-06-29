@@ -19,11 +19,13 @@ type SpeedDialStyledPropsType = SpeedDialProps & SpeedDialStyledProps;
 export const SpeedDial = styled(MuiSpeedDial, {
     shouldForwardProp: (propName) => !['muiColor', 'customColor', 'showTooltip'].includes(propName as string),
 })<SpeedDialStyledPropsType>`
-  position: absolute;
-  & .MuiSpeedDial-actions {
-    gap: ${(props) => (props.showTooltip && ['right', 'left'].includes(props.direction) ? '20px' : undefined)};
-  }
-  & .MuiSpeedDialAction-staticTooltipLabel {
+    position: absolute;
+
+    & .MuiSpeedDial-actions {
+        gap: ${(props) => (props.showTooltip && ['right', 'left'].includes(props.direction) ? '20px' : undefined)};
+    }
+
+    //& .MuiSpeedDialAction-staticTooltipLabel {
     ${(props) => {
         switch (props.direction) {
             case 'right':
@@ -39,7 +41,7 @@ export const SpeedDial = styled(MuiSpeedDial, {
             default:
                 return css``;
         }
-    }}
+    }}//}
 ` as ComponentType<SpeedDialStyledPropsType>;
 
 export const SpeedDialAction = MuiSpeedDialAction;
