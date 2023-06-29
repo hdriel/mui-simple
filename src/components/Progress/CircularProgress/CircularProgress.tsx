@@ -5,22 +5,24 @@ import { useCustomColor } from '../../../utils/helpers';
 
 type VariantType = 'determinate' | 'indeterminate';
 interface CircularProgressProps {
-    color: string;
-    variant: VariantType;
-    value: number;
-    thickness: number;
-    size: number;
-    showProgress: boolean;
-    disableShrink: boolean;
+    color?: string;
+    variant?: VariantType;
+    value?: number;
+    thickness?: number;
+    size?: number;
+    showProgress?: boolean;
+    disableShrink?: boolean;
+
+    [key: string]: any;
 }
 
 export default function CircularProgress({
     color,
-    value,
-    showProgress,
-    thickness,
-    size,
     disableShrink,
+    showProgress,
+    size,
+    thickness,
+    value,
     ...props
 }: CircularProgressProps) {
     const [customColor, muiColor] = useCustomColor(color);
@@ -42,20 +44,20 @@ export default function CircularProgress({
 
 CircularProgress.propTypes = {
     color: PropTypes.string,
-    variant: PropTypes.oneOf(['determinate', 'indeterminate']),
-    value: PropTypes.number,
-    thickness: PropTypes.number,
-    size: PropTypes.number,
-    showProgress: PropTypes.bool,
     disableShrink: PropTypes.bool,
+    showProgress: PropTypes.bool,
+    size: PropTypes.number,
+    thickness: PropTypes.number,
+    value: PropTypes.number,
+    variant: PropTypes.oneOf(['determinate', 'indeterminate']),
 };
 
 CircularProgress.defaultProps = {
     color: undefined,
-    variant: undefined,
-    value: undefined,
-    thickness: undefined,
-    size: undefined,
-    showProgress: true,
     disableShrink: undefined,
+    showProgress: true,
+    size: undefined,
+    thickness: undefined,
+    value: undefined,
+    variant: undefined,
 };
