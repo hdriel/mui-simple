@@ -33,7 +33,6 @@ interface ButtonProps {
     uppercase?: boolean;
     minWidth?: string | number;
     sx?: object;
-    children?: any;
 }
 
 const Button: React.FC<ButtonProps> = forwardRef(

@@ -6,6 +6,40 @@ import { useEllipsisActive } from '../../hooks/useEllipsisActive';
 import { TOOLTIP_PLACEMENTS } from '../Tooltip/Tooltip.consts';
 import { useCustomColor } from '../../utils/helpers';
 
+interface TypographyProps {
+    alignCenter?: boolean;
+    alignJustify?: boolean;
+    alignLeft?: boolean;
+    alignRight?: boolean;
+    autoWidth?: boolean;
+    bgColor?: string;
+    bold?: boolean | string;
+    border?: boolean | string;
+    charsCase?: string;
+    color?: string;
+    component?: string;
+    gutterBottom?: boolean;
+    italic?: boolean;
+    lineHeight?: number;
+    monospace?: boolean;
+    noWrap?: boolean;
+    onEllipsisChange?: Function;
+    paragraph?: boolean;
+    rows?: number;
+    showTooltipOnEllipsis?: boolean;
+    size?: number | string;
+    strike?: boolean;
+    sub?: boolean;
+    sup?: boolean;
+    tooltip?: boolean | string;
+    tooltipPlacement?: string;
+    underline?: boolean;
+    width?: number | string;
+    wrap?: boolean;
+
+    [key: string]: any;
+}
+
 export default function Typography({
     alignCenter,
     alignJustify,
@@ -39,7 +73,7 @@ export default function Typography({
     width,
     wrap,
     ...props
-}) {
+}: TypographyProps) {
     const [customColor, muiColor] = useCustomColor(color);
     const [customBGColor] = useCustomColor(bgColor);
 
@@ -76,7 +110,6 @@ export default function Typography({
         gutterBottom: gutterBottom,
         paragraph: paragraph,
         component: component,
-        border: border,
         color: muiColor,
         customColor: customColor,
         bgColor: customBGColor,

@@ -1,41 +1,9 @@
 import type { ComponentType } from 'react';
 import { Box, Typography as MuiTypography, TypographyProps, BoxProps } from '@mui/material';
 import { styled, css } from '@mui/material/styles';
+
+import { ellipsisRow1, ellipsisRows } from './Typography.styles';
 import { numberToPx } from '../../utils/helpers';
-
-function ellipsisRow1(props) {
-    if (props.noWrap || props.rows !== 1) return css``;
-
-    return css`
-        text-overflow: ellipsis;
-        white-space: normal;
-        overflow: hidden;
-        display: -webkit-box !important;
-        -webkit-line-clamp: ${props.rows};
-        -webkit-box-orient: vertical;
-        & > * {
-            white-space: unset !important;
-        }
-    `;
-}
-
-function ellipsisRows(props) {
-    if (props.noWrap || !props.rows || (props.rows && props.rows <= 1)) {
-        return css``;
-    }
-
-    return css`
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: normal;
-        display: -webkit-box !important;
-        -webkit-line-clamp: ${props.rows};
-        -webkit-box-orient: vertical;
-        & > * {
-            white-space: unset !important;
-        }
-    `;
-}
 
 interface TypographyBorderProps {
     autoWidth?: boolean;
@@ -43,22 +11,24 @@ interface TypographyBorderProps {
     width?: string | number;
     border?: boolean | string;
     rows?: number;
+
+    [key: string]: any;
 }
+type TypographyBorderPropsType = Omit<BoxProps, 'border'> & TypographyBorderProps;
 
 export const Border = styled(Box, {
     shouldForwardProp: (propName) => !['autoWidth', 'noWrap', 'border', 'rows'].includes(propName as string),
-})<BoxProps & TypographyBorderProps>`
+})<TypographyBorderPropsType>`
     width: ${(props) => numberToPx(props.width) ?? (props.autoWidth ? 'auto' : '100%')};
     display: flex;
     border: ${(props) => (props.border && typeof props.border === 'boolean' ? '1px solid black' : props.border)};
     ${ellipsisRows}
     ${ellipsisRow1}
-` as ComponentType<BoxProps & TypographyBorderProps>;
+` as ComponentType<TypographyBorderPropsType>;
 
 interface TypographyStyledProps {
-    fontSize?: boolean;
-    customColor?: boolean;
-    bold?: boolean;
+    customColor?: string;
+    bold?: boolean | string;
     italic?: boolean;
     underline?: boolean;
     strike?: boolean;
@@ -66,9 +36,13 @@ interface TypographyStyledProps {
     sup?: boolean;
     sub?: boolean;
     monospace?: boolean;
-    lineHeight?: boolean;
-    bgColor?: boolean;
+    lineHeight?: number;
+    bgColor?: string;
+    fontSize?: number | string;
+
+    [key: string]: any;
 }
+type TypographyStyledPropsType = Omit<TypographyProps, 'fontSize'> & TypographyStyledProps;
 
 export const Typography = styled(MuiTypography, {
     shouldForwardProp: (propName) =>
@@ -86,7 +60,7 @@ export const Typography = styled(MuiTypography, {
             'lineHeight',
             'bgColor',
         ].includes(propName as string),
-})<TypographyProps & TypographyStyledProps>`
+})<TypographyStyledPropsType>`
     width: 100%;
     color: ${(props) => props.customColor};
     background-color: ${(props) => props.bgColor};
@@ -110,4 +84,4 @@ export const Typography = styled(MuiTypography, {
     &:has(:not(:empty)) {
         display: inherit;
     }
-` as ComponentType<TypographyProps & TypographyStyledProps>;
+` as ComponentType<TypographyStyledPropsType>;
