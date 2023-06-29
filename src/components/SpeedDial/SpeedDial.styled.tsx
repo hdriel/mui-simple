@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 import {
     SpeedDial as MuiSpeedDial,
     SpeedDialAction as MuiSpeedDialAction,
     SpeedDialIcon as MuiSpeedDialIcon,
+    SpeedDialProps,
 } from '@mui/material';
 import { styled, css } from '@mui/material/styles';
 
 export const SpeedDialIcon = MuiSpeedDialIcon; // note: styled on MuiSpeedDialIcon will break his flip icon animation!!
-export const SpeedDial = styled(
-    ({ top, bottom, right, left, ...props }) => <MuiSpeedDial sx={{ top, bottom, right, left }} {...props} />,
-    {
-        shouldForwardProp: (propName) => !['muiColor', 'customColor', 'showTooltip'].includes(propName as string),
-    }
-)`
+
+interface SpeedDialStyledProps {
+    showTooltip?: boolean;
+}
+
+type SpeedDialStyledPropsType = SpeedDialProps & SpeedDialStyledProps;
+
+// TODO: FIX THE  & .MuiSpeedDialAction-staticTooltipLabel position for right and left direction - not getting the top/bottom values
+export const SpeedDial = styled(MuiSpeedDial, {
+    shouldForwardProp: (propName) => !['muiColor', 'customColor', 'showTooltip'].includes(propName as string),
+})<SpeedDialStyledPropsType>`
   position: absolute;
   & .MuiSpeedDial-actions {
     gap: ${(props) => (props.showTooltip && ['right', 'left'].includes(props.direction) ? '20px' : undefined)};
@@ -34,5 +40,6 @@ export const SpeedDial = styled(
                 return css``;
         }
     }}
-`;
-export const SpeedDialAction = styled(MuiSpeedDialAction)``;
+` as ComponentType<SpeedDialStyledPropsType>;
+
+export const SpeedDialAction = MuiSpeedDialAction;
