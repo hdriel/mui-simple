@@ -47,14 +47,27 @@ export function isDefined(value) {
     return value !== undefined && value !== null;
 }
 
-export function useCustomColor(color, options) {
+export function useCustomColor(color, options?) {
     const theme = useTheme();
     return getCustomColor({ theme, customColor: color }, options);
 }
 
+interface getCustomColorOptionsProps {
+    field: string | undefined;
+    muiLevel: string;
+    opacity: number;
+    darken: number;
+    lighten: number;
+}
 export function getCustomColor(
     props,
-    { field = undefined, muiLevel = 'main', opacity = 1, darken: _darken, lighten: _lighten } = {}
+    {
+        field = undefined,
+        muiLevel = 'main',
+        opacity = 1,
+        darken: _darken,
+        lighten: _lighten,
+    }: getCustomColorOptionsProps = {} as getCustomColorOptionsProps
 ) {
     const customColor = props?.[field] ?? props?.customColor;
     if (!customColor) return [];

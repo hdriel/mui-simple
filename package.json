@@ -6,6 +6,7 @@
     "author": "Hadriel Benjo <hdriel@gmail.com> (https://github.com/hdriel)",
     "scripts": {
         "test": "",
+        "build:ts": "tsc -p tsconfig.json -w",
         "install": "npm install --ignore-scripts --force",
         "build:debug": "cross-env NODE_ENV=production rollup -c rollup.config.js",
         "build": "cross-env NODE_ENV=production rollup -c rollup.config.js",

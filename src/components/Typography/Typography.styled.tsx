@@ -1,4 +1,5 @@
-import { Box, Typography as MuiTypography } from '@mui/material';
+import type { ComponentType } from 'react';
+import { Box, Typography as MuiTypography, TypographyProps, BoxProps } from '@mui/material';
 import { styled, css } from '@mui/material/styles';
 import { numberToPx } from '../../utils/helpers';
 
@@ -36,16 +37,38 @@ function ellipsisRows(props) {
     `;
 }
 
+interface TypographyBorderProps {
+    autoWidth?: boolean;
+    noWrap?: boolean;
+    width?: string | number;
+    border?: boolean | string;
+    rows?: number;
+}
+
 export const Border = styled(Box, {
-    shouldForwardProp: (propName) => !['autoWidth', 'noWrap'].includes(propName as string),
-})`
+    shouldForwardProp: (propName) => !['autoWidth', 'noWrap', 'border', 'rows'].includes(propName as string),
+})<BoxProps & TypographyBorderProps>`
     width: ${(props) => numberToPx(props.width) ?? (props.autoWidth ? 'auto' : '100%')};
     display: flex;
     border: ${(props) => (props.border && typeof props.border === 'boolean' ? '1px solid black' : props.border)};
-
     ${ellipsisRows}
     ${ellipsisRow1}
-`;
+` as ComponentType<BoxProps & TypographyBorderProps>;
+
+interface TypographyStyledProps {
+    fontSize?: boolean;
+    customColor?: boolean;
+    bold?: boolean;
+    italic?: boolean;
+    underline?: boolean;
+    strike?: boolean;
+    charsCase?: string;
+    sup?: boolean;
+    sub?: boolean;
+    monospace?: boolean;
+    lineHeight?: boolean;
+    bgColor?: boolean;
+}
 
 export const Typography = styled(MuiTypography, {
     shouldForwardProp: (propName) =>
@@ -63,7 +86,7 @@ export const Typography = styled(MuiTypography, {
             'lineHeight',
             'bgColor',
         ].includes(propName as string),
-})`
+})<TypographyProps & TypographyStyledProps>`
     width: 100%;
     color: ${(props) => props.customColor};
     background-color: ${(props) => props.bgColor};
@@ -87,4 +110,4 @@ export const Typography = styled(MuiTypography, {
     &:has(:not(:empty)) {
         display: inherit;
     }
-`;
+` as ComponentType<TypographyProps & TypographyStyledProps>;
