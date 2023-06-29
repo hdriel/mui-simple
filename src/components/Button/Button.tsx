@@ -77,13 +77,22 @@ const Button: React.FC<ButtonProps> = forwardRef(
                 <Tooltip {...tooltipProps}>
                     <MuiIconButton
                         ref={ref}
-                        sx={{ minWidth, color: muiColor ? undefined : customColor, ...sx }}
                         color={muiColor}
-                        size={size}
+                        size={
+                            ['small', 'medium', 'large'].includes(size as string)
+                                ? (size as 'small' | 'medium' | 'large')
+                                : undefined
+                        }
                         disableRipple={disabled ? true : disableRipple}
                         onClick={disabled ? undefined : onClick}
                         onContextMenu={disabled ? undefined : onRightClick ? onRightClickHandler : props.onContextMenu}
                         href={link}
+                        sx={{
+                            minWidth,
+                            color: muiColor ? undefined : customColor,
+                            ...(size && !['small', 'medium', 'large'].includes(size as string) && { fontSize: size }),
+                            ...sx,
+                        }}
                         {...props}
                     >
                         {isLoading ? spinner : icon}
