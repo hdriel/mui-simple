@@ -1,9 +1,23 @@
 import { styled } from '@mui/material/styles';
-import { Button as MuiButton, IconButton as MuiIconButton, ButtonGroup as MuiButtonGroup, alpha } from '@mui/material';
+import {
+    Button as MuiButton,
+    IconButton as MuiIconButton,
+    ButtonGroup as MuiButtonGroup,
+    alpha,
+    ButtonProps,
+    IconButtonProps,
+    ButtonGroupProps,
+} from '@mui/material';
+import { ComponentType } from 'react';
 
+interface ButtonStyledProps {
+    customColor?: string;
+    disableElevation?: boolean;
+}
+type ButtonStyledPropsType = ButtonProps & ButtonStyledProps;
 export const Button = styled(MuiButton, {
     shouldForwardProp: (propName) => !['disableElevation', 'customColor'].includes(propName as string),
-})`
+})<ButtonStyledPropsType>`
     width: ${(props) => (props.fullWidth ? '100%' : 'max-content')};
     &:not(.MuiButton-contained) {
         color: ${(props) => props.customColor} !important;
@@ -17,17 +31,27 @@ export const Button = styled(MuiButton, {
             border-color: white;
         }
     }
-`;
+` as ComponentType<ButtonStyledPropsType>;
 
+interface IconButtonStyledProps {
+    customColor?: string;
+    disableElevation?: boolean;
+}
+type IconButtonStyledPropsType = ButtonProps & IconButtonStyledProps;
 export const IconButton = styled(MuiIconButton, {
     shouldForwardProp: (propName) => !['disableElevation', 'customColor'].includes(propName as string),
-})`
+})<IconButtonStyledPropsType>`
     box-sizing: border-box;
-`;
+` as ComponentType<IconButtonStyledPropsType>;
 
+interface ButtonGroupStyledProps {
+    customColor?: string;
+    disableElevation?: boolean;
+}
+type ButtonGroupStyledPropsType = ButtonProps & IconButtonStyledProps;
 export const ButtonGroup = styled(MuiButtonGroup, {
     shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
-})`
+})<ButtonGroupStyledPropsType>`
     width: ${(props) => (props.fullWidth ? '100%' : 'max-content')};
     & .MuiButtonGroup-grouped {
         &:not(.MuiButton-contained) {
@@ -43,6 +67,6 @@ export const ButtonGroup = styled(MuiButtonGroup, {
             }
         }
     }
-`;
+` as ComponentType<ButtonGroupStyledPropsType>;
 
 // background-color: ${(props) => props.variant !== "contained" && props.customColor};

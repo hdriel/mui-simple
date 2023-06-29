@@ -1,4 +1,4 @@
-import React, { ComponentType, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 
 const MyCustomChildrenComponent = ({ innerRef, children, ...props }) => {
     return (
@@ -8,6 +8,6 @@ const MyCustomChildrenComponent = ({ innerRef, children, ...props }) => {
     );
 };
 
-export const CustomChildTooltipWrapper: ComponentType<any> = forwardRef(function WrappedMyComponent(props, ref) {
+export const CustomChildTooltipWrapper: React.FC<any> = forwardRef(function WrappedMyComponent(props, ref) {
     return <MyCustomChildrenComponent {...props} innerRef={ref} />;
 });

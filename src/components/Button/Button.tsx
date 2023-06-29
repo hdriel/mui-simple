@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, MouseEventHandler, Ref } from 'react';
 import PropTypes from 'prop-types';
 import CircularProgress from '../Progress/CircularProgress/CircularProgress';
 import { Button as MuiButton, IconButton as MuiIconButton } from './Button.styled';
@@ -7,18 +7,20 @@ import { useCustomColor } from '../../utils/helpers';
 
 const spinner = <CircularProgress color="inherit" size={15} />;
 
+type ButtonVariantType = 'contained' | 'outlined' | 'text';
+
 interface ButtonProps {
     /**
      * The variant of the button allowed types: "contained", "outlined", "text"
      */
-    variant?: string;
+    variant?: ButtonVariantType;
     /**
      * The disabled field of button, when is disabled - onClick event won't fire
      */
     disabled?: boolean;
     startIcon?: any;
     endIcon?: any;
-    onClick?: Function;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
     onRightClick?: Function;
     link?: string;
     color?: string;
@@ -32,7 +34,8 @@ interface ButtonProps {
     tooltipProps?: object;
     uppercase?: boolean;
     minWidth?: string | number;
-    sx?: object;
+
+    [key: string]: any;
 }
 
 const Button: React.FC<ButtonProps> = forwardRef(
@@ -60,7 +63,7 @@ const Button: React.FC<ButtonProps> = forwardRef(
             children,
             ...props
         },
-        ref
+        ref: Ref<HTMLButtonElement>
     ) => {
         const [customColor, muiColor] = useCustomColor(color);
 
@@ -90,7 +93,6 @@ const Button: React.FC<ButtonProps> = forwardRef(
         }
 
         const startIconCmp = isLoading ? loadingIconPosition === 'start' && startIcon && spinner : startIcon;
-
         const endIconCmp = isLoading ? loadingIconPosition === 'end' && endIcon && spinner : endIcon;
 
         const content = isLoading ? loadingLabel || (!startIconCmp && !endIconCmp && children) || children : children;
@@ -109,10 +111,15 @@ const Button: React.FC<ButtonProps> = forwardRef(
                     disableRipple={disableRipple}
                     customColor={muiColor ? undefined : customColor}
                     color={muiColor}
-                    size={size}
+                    size={
+                        ['small', 'medium', 'large'].includes(size as string)
+                            ? (size as 'small' | 'medium' | 'large')
+                            : undefined
+                    }
                     fullWidth={fullWidth}
                     sx={{
                         minWidth,
+                        ...(size && !['small', 'medium', 'large'].includes(size as string) && { fontSize: size }),
                         ...(!uppercase && { textTransform: 'none' }),
                         ...sx,
                     }}

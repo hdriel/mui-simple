@@ -6,26 +6,26 @@ import { CustomChildTooltipWrapper } from './Tooltip.helper';
 import { TOOLTIP_PLACEMENTS, tooltipPlacementsType } from './Tooltip.consts';
 
 interface TooltipProps {
-    title?: string;
-    placement?: tooltipPlacementsType;
-    followCursor?: boolean;
     bgColor?: string;
     color?: string;
+    followCursor?: boolean;
     fontSize?: string | number;
     lineHeight?: string | number;
+    placement?: tooltipPlacementsType;
+    title?: string;
 
     [key: string]: any;
 }
 
 export default function Tooltip({
-    title,
-    placement,
-    followCursor,
     bgColor,
+    children,
     color,
+    followCursor,
     fontSize,
     lineHeight,
-    children,
+    placement,
+    title,
     ...props
 }: TooltipProps) {
     const isValidTooltipProps = title && isValidElement(children);
@@ -58,21 +58,21 @@ export default function Tooltip({
 }
 
 Tooltip.propTypes = {
-    title: PropTypes.string,
-    placement: PropTypes.oneOf(TOOLTIP_PLACEMENTS),
-    followCursor: PropTypes.bool,
     bgColor: PropTypes.string,
     color: PropTypes.string,
+    followCursor: PropTypes.bool,
     fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     lineHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    placement: PropTypes.oneOf(TOOLTIP_PLACEMENTS),
+    title: PropTypes.string,
 };
 
 Tooltip.defaultProps = {
-    title: undefined,
-    placement: 'bottom',
-    followCursor: undefined,
     bgColor: undefined,
     color: undefined,
+    followCursor: undefined,
     fontSize: 16,
     lineHeight: 1.2,
+    placement: 'bottom',
+    title: undefined,
 };
