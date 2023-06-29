@@ -1,3 +1,4 @@
+import type { ComponentType } from 'react';
 import { styled } from '@mui/material/styles';
 import {
     Button as MuiButton,
@@ -8,7 +9,6 @@ import {
     IconButtonProps,
     ButtonGroupProps,
 } from '@mui/material';
-import { ComponentType } from 'react';
 
 interface ButtonStyledProps {
     customColor?: string;

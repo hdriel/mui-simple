@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 import { styled } from '@mui/material/styles';
-import { CircularProgress as MuiCircularProgress, Box as MuiBox, Typography as MuiTypography } from '@mui/material';
+import {
+    CircularProgress as MuiCircularProgress,
+    Box as MuiBox,
+    Typography as MuiTypography,
+    CircularProgressProps,
+} from '@mui/material';
 
 const BoxWrapper = styled(MuiBox)`
     position: relative;
@@ -18,10 +23,16 @@ const CenterBoxContent = styled(MuiBox)`
     justify-content: center;
 `;
 
+interface CircularProgressStyledProps {
+    showProgress?: boolean;
+    customColor?: string;
+}
+type CircularProgressStyledPropsType = CircularProgressProps & CircularProgressStyledProps;
 export const CircularProgress = styled(
-    ({ theme, size, showProgress, variant, value, ...props }) => (
+    ({ size, showProgress, variant, value, color, ...props }: CircularProgressStyledPropsType) => (
         <BoxWrapper>
             <MuiCircularProgress
+                color={color}
                 value={value}
                 variant={value && variant === undefined ? 'determinate' : variant}
                 size={size}
@@ -52,4 +63,4 @@ export const CircularProgress = styled(
         color: ${(props) => props.customColor};
     }
     //animation-duration: 760ms;
-`;
+` as ComponentType<CircularProgressStyledPropsType>;
