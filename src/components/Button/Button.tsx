@@ -21,7 +21,7 @@ interface ButtonProps {
     startIcon?: any;
     endIcon?: any;
     onClick?: MouseEventHandler<HTMLButtonElement>;
-    onRightClick?: Function;
+    onRightClick?: MouseEventHandler<HTMLButtonElement>;
     link?: string;
     color?: string;
     disableRipple?: boolean;
