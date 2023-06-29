@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Border, Typography as MuiTypography } from './Typography.styled';
 import Tooltip from '../Tooltip/Tooltip';
 import { useEllipsisActive } from '../../hooks/useEllipsisActive';
-import { TOOLTIP_PLACEMENTS } from '../Tooltip/Tooltip.consts';
+import { TOOLTIP_PLACEMENTS, tooltipPlacementsType } from '../Tooltip/Tooltip.consts';
 import { useCustomColor } from '../../utils/helpers';
 
 interface TypographyProps {
@@ -40,6 +40,7 @@ interface TypographyProps {
     [key: string]: any;
 }
 
+// todo: add commend to autodocs
 export default function Typography({
     alignCenter,
     alignJustify,
@@ -162,7 +163,7 @@ export default function Typography({
     }, [isEllipsis]);
 
     return (
-        <Tooltip title={tooltipMessage} placement={tooltipPlacement}>
+        <Tooltip title={tooltipMessage} placement={tooltipPlacement as tooltipPlacementsType}>
             {cmp}
         </Tooltip>
     );
