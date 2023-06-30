@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { throttle } from 'lodash-es';
 import parse from 'autosuggest-highlight/parse';
 import { Box, Grid, Typography } from '@mui/material';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { LocationOn as LocationOnIcon } from '@mui/icons-material';
 
 import { Autocomplete as MuiAutocomplete } from './InputAutocomplete.styled';
 import TextField from '../TextField/TextField';

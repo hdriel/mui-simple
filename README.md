@@ -1,4 +1,4 @@
-# [@hdriel/mui-simple](https://www.npmjs.com/package/@hdriel/mui-simple)
+# [mui-simple](https://www.npmjs.com/package/mui-simple)
 
  customized **ALL MUI COMPONENTS** to make simplify the usage of mui. <br/>
  get a lot of features to use mui, like custom-color that you can send any color of theme color name. <br/>
@@ -20,9 +20,9 @@ it's going to take while
 $ npm install --force @hdriel/mui-simple
 ```
 
-##Lancher
+## Troubleshooting
 
-#### Create-React-App
+#### Create-React-App Launcher
 if you use CRA v5+ you need to override webpack config with CRACO 
 install craco: 
 ```npm
@@ -31,7 +31,7 @@ $ npm install --save-dev @craco/craco
 
 then create in the root project the file
 ```javascript
-# craco.config.js 
+// craco.config.js 
 module.exports = {
   style: {},
   eslint: {},

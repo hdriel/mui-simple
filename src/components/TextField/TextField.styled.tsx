@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled, css } from '@mui/material/styles';
-import CommitRoundedIcon from '@mui/icons-material/CommitRounded';
+import { CommitRounded as CommitRoundedIcon } from '@mui/icons-material';
 
 import { TextField as MuiTextField, Box as MuiBox, Stack as MuiStack } from '@mui/material';
 import { getCustomColor } from '../../utils/helpers';
