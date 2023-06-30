@@ -7,7 +7,7 @@ import React from 'react';
 import ReactIs from 'react-is';
 import ReactDOM from 'react-dom';
 import { builtinModules } from 'module';
-// import nodePolyfills from 'rollup-plugin-node-polyfills';
+import { cjsToEsm } from '@wessberg/cjs-to-esm-transformer';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import filesize from 'rollup-plugin-filesize';
 import resolve from '@rollup/plugin-node-resolve';
@@ -30,6 +30,7 @@ const packageJson = requireFile('./package.json');
 
 const isProd = process.env.NODE_ENV === 'production';
 // const sourcemap = isProd ? undefined : 'inline';
+const externalDep = [...builtinModules, ...Object.keys(packageJson.devDependencies), 'hoist-non-react-statics'];
 
 export default [
     {
@@ -37,16 +38,16 @@ export default [
         input: './src/index.ts',
         output: [
             {
-                sourcemap: true,
+                sourcemap: 'inline',
                 file: packageJson.main,
                 format: 'cjs',
             },
             // ES2015 modules version so consumers can tree-shake
             {
-                sourcemap: true,
+                sourcemap: 'inline',
                 file: packageJson.module,
                 format: 'esm',
-                exports: 'named',
+                // exports: 'named',
                 // plugins: [terser()],
             },
         ],
@@ -54,14 +55,16 @@ export default [
             del({ targets: 'dist/*' }),
             peerDepsExternal(),
             // replace({ "process.env.NODE_ENV": JSON.stringify("development") }),
-            // nodePolyfills(),
             resolve({
                 extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json'],
-                dedupe: ['react', 'react-dom'],
+                dedupe: externalDep,
                 preferBuiltins: true,
                 browser: true,
             }),
-            typescript({ tsconfig: 'tsconfig.json' }),
+            typescript({
+                tsconfig: 'tsconfig.json',
+                transformers: [cjsToEsm()],
+            }),
             babel({
                 babelHelpers: 'bundled',
                 extensions: ['.jsx', '.js', '.ts', '.tsx'],
@@ -108,13 +111,7 @@ export default [
             }),
             filesize(),
         ],
-        external: [
-            ...builtinModules,
-            ...Object.keys(packageJson.devDependencies),
-            'react',
-            'react-dom',
-            'hoist-non-react-statics',
-        ],
+        external: externalDep,
         // preserveEntrySignatures: false,
         // treeshake: true,
     },
