@@ -23,8 +23,18 @@
         "sourceMap": true,
         "strict": false,
         "strictNullChecks": false,
-        "target": "es5"
+        "target": "es5",
+        "typeRoots": ["./src/@types"]
     },
     "include": ["src", ".storybook"],
-    "exclude": [".idea", ".git", "node_modules", "lib", "dist", "storybook-static", "public"]
+    "exclude": [
+        ".idea",
+        ".git",
+        "node_modules",
+        "lib",
+        "dist",
+        "storybook-static",
+        "public",
+        "src/**/__stories__"
+    ]
 }
