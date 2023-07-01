@@ -93,5 +93,3 @@ Checkbox.defaultProps = {
     required: false,
     size: 'medium',
 };
-
-export default Checkbox;
