@@ -2,7 +2,7 @@
 // https://dev.to/alexeagleson/how-to-create-and-publish-a-react-component-library-2oe
 // https://www.youtube.com/watch?v=hf6Z8OZanec
 // https://github.com/wessberg/rollup-plugin-ts/issues/78
-
+// https://www.codifytools.com/blog/react-npm-package
 import React from 'react';
 import ReactIs from 'react-is';
 import ReactDOM from 'react-dom';
@@ -61,10 +61,7 @@ export default [
                 preferBuiltins: true,
                 browser: true,
             }),
-            typescript({
-                tsconfig: 'tsconfig.json',
-                transformers: [cjsToEsm()],
-            }),
+            typescript({ tsconfig: 'tsconfig.json' }),
             babel({
                 babelHelpers: 'bundled',
                 extensions: ['.jsx', '.js', '.ts', '.tsx'],
@@ -78,7 +75,6 @@ export default [
                     'react-is': Object.keys(ReactIs),
                     react: Object.keys(React),
                     'react-dom': Object.keys(ReactDOM),
-                    // 'styled-components': ['styled', 'css', 'ThemeProvider'],
                 },
             }),
             postcss({

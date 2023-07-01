@@ -1,6 +1,6 @@
 {
     "name": "mui-simple",
-    "version": "1.2.35",
+    "version": "1.2.36",
     "description": "override mui components to simplify usage",
     "license": "MIT",
     "author": "Hadriel Benjo <hdriel@gmail.com> (https://github.com/hdriel)",
@@ -43,16 +43,16 @@
         "url": "git://github.com/hdriel/mui-simple.git"
     },
     "peerDependencies": {
-        "react": "^17 || ^18",
-        "react-dom": "^17 || ^18"
+        "react": ">=16.8.0",
+        "react-dom": ">=16.8.0"
     },
     "dependencies": {
         "@emotion/is-prop-valid": "^1.2.0",
         "@emotion/react": "^11.10.6",
         "@emotion/styled": "^11.11.0",
-        "@mui/icons-material": "^5",
+        "@mui/icons-material": "^5.11.16",
         "@mui/lab": "5.0.0-alpha.134",
-        "@mui/material": "^5",
+        "@mui/material": "5.13.6",
         "@mui/styles": "5.11.2",
         "@react-spring/web": "^9.7.2",
         "@testing-library/jest-dom": "^5.16.5",
