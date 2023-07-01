@@ -37,7 +37,7 @@ interface IconButtonStyledProps {
     customColor?: string;
     disableElevation?: boolean;
 }
-type IconButtonStyledPropsType = ButtonProps & IconButtonStyledProps;
+type IconButtonStyledPropsType = IconButtonProps & IconButtonStyledProps;
 export const IconButton = styled(MuiIconButton, {
     shouldForwardProp: (propName) => !['disableElevation', 'customColor'].includes(propName as string),
 })<IconButtonStyledPropsType>`
@@ -48,7 +48,7 @@ interface ButtonGroupStyledProps {
     customColor?: string;
     disableElevation?: boolean;
 }
-type ButtonGroupStyledPropsType = ButtonProps & IconButtonStyledProps;
+type ButtonGroupStyledPropsType = ButtonGroupProps & ButtonGroupStyledProps;
 export const ButtonGroup = styled(MuiButtonGroup, {
     shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
 })<ButtonGroupStyledPropsType>`
