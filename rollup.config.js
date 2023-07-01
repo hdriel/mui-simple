@@ -82,8 +82,8 @@ export default [
                 include: /node_modules/,
                 namedExports: {
                     'react-is': Object.keys(ReactIs),
-                    // react: Object.keys(React),
-                    // 'react-dom': Object.keys(ReactDOM),
+                    react: Object.keys(React),
+                    'react-dom': Object.keys(ReactDOM),
                 },
             }),
             postcss({

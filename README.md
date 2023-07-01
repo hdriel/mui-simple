@@ -33,16 +33,23 @@ then create in the root project the file
 ```javascript
 // craco.config.js 
 module.exports = {
-  style: {},
-  eslint: {},
-  babel: {},
   webpack: {
-    configure: {
-      module: {
-        rules: [{ test: /\.m?js$/, resolve: { fullySpecified: false } }],
+      configure(webpackConfig) {
+        const scopePluginIndex = webpackConfig.resolve.plugins.findIndex(
+          ({ constructor }) => constructor && constructor.name === "ModuleScopePlugin"
+        ); 
+        webpackConfig.resolve.plugins.splice(scopePluginIndex, 1);  
+        webpackConfig.module.rules.push({
+          test: /\.m?js$/,
+          resolve: { fullySpecified: false },
+        });
+  
+        return webpackConfig;
       },
-    },
-  },
+      alias: {
+        react: path.resolve(__dirname, "node_modules/react"),
+      }
+  }
 };
 
 ```
