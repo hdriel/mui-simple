@@ -44,7 +44,11 @@
     },
     "peerDependencies": {
         "react": ">=16.8.0",
-        "react-dom": ">=16.8.0"
+        "react-dom": ">=16.8.0",
+        "@emotion/react": "^11.9.3",
+        "@emotion/styled": "^11.9.3",
+        "@mui/icons-material": "^5",
+        "@mui/material": "^5"
     },
     "dependencies": {
         "@emotion/is-prop-valid": "^1.2.0",

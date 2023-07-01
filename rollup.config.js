@@ -3,11 +3,12 @@
 // https://www.youtube.com/watch?v=hf6Z8OZanec
 // https://github.com/wessberg/rollup-plugin-ts/issues/78
 // https://www.codifytools.com/blog/react-npm-package
+
+// https://stackoverflow.com/questions/56788551/material-ui-themeprovider-invalid-hook-call-when-building-an-es6-module-using-ro
 import React from 'react';
 import ReactIs from 'react-is';
 import ReactDOM from 'react-dom';
 import { builtinModules } from 'module';
-import { cjsToEsm } from '@wessberg/cjs-to-esm-transformer';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import filesize from 'rollup-plugin-filesize';
 import resolve from '@rollup/plugin-node-resolve';
@@ -21,7 +22,7 @@ import generatePackageJson from 'rollup-plugin-generate-package-json';
 import { terser } from 'rollup-plugin-terser';
 import { babel } from '@rollup/plugin-babel';
 import urlResolve from 'rollup-plugin-url-resolve';
-// import replace from '@rollup/plugin-replace';
+import replace from '@rollup/plugin-replace';
 
 // import package json file
 import { createRequire } from 'node:module';
@@ -29,8 +30,14 @@ const requireFile = createRequire(import.meta.url);
 const packageJson = requireFile('./package.json');
 
 const isProd = process.env.NODE_ENV === 'production';
-// const sourcemap = isProd ? undefined : 'inline';
-const externalDep = [...builtinModules, ...Object.keys(packageJson.devDependencies), 'hoist-non-react-statics'];
+const sourcemap = isProd ? undefined : 'inline';
+
+const externalDep = [
+    ...builtinModules,
+    ...Object.keys(packageJson.devDependencies),
+    ...Object.keys(packageJson.peerDependencies),
+    'hoist-non-react-statics',
+];
 
 export default [
     {
@@ -38,28 +45,32 @@ export default [
         input: './src/index.ts',
         output: [
             {
-                sourcemap: 'inline',
+                sourcemap,
                 file: packageJson.main,
                 format: 'cjs',
+                exports: 'named',
+                interop: 'auto',
             },
             // ES2015 modules version so consumers can tree-shake
             {
-                sourcemap: 'inline',
+                sourcemap,
                 file: packageJson.module,
-                format: 'esm',
-                // exports: 'named',
-                // plugins: [terser()],
+                format: 'es',
+                exports: 'named',
+                interop: 'esModule',
             },
         ],
         plugins: [
             del({ targets: 'dist/*' }),
             peerDepsExternal(),
-            // replace({ "process.env.NODE_ENV": JSON.stringify("development") }),
+            replace({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
             resolve({
                 extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json'],
+                moduleDirectories: ['node_modules'],
                 dedupe: externalDep,
                 preferBuiltins: true,
                 browser: true,
+                main: true,
             }),
             typescript({ tsconfig: 'tsconfig.json' }),
             babel({
@@ -68,13 +79,11 @@ export default [
                 babelrc: true,
             }),
             commonjs({
-                // transformMixedEsModules: true,
                 include: /node_modules/,
-                // requireReturnsDefault: 'auto',
                 namedExports: {
                     'react-is': Object.keys(ReactIs),
-                    react: Object.keys(React),
-                    'react-dom': Object.keys(ReactDOM),
+                    // react: Object.keys(React),
+                    // 'react-dom': Object.keys(ReactDOM),
                 },
             }),
             postcss({
@@ -97,6 +106,8 @@ export default [
                     bugs: pkg.bugs,
                     homepage: pkg.homepage,
                     publishConfig: pkg.publishConfig,
+                    peerDependencies: pkg.peerDependencies,
+                    dependencies: pkg.dependencies,
                     repository: pkg.repository,
                     type: pkg.type,
                     module: pkg.module?.replace('dist/', ''),
@@ -108,7 +119,6 @@ export default [
             filesize(),
         ],
         external: externalDep,
-        // preserveEntrySignatures: false,
         // treeshake: true,
     },
     {
