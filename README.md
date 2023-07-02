@@ -2,27 +2,31 @@
 
  customized **ALL MUI COMPONENTS** to make simplify the usage of mui. <br/>
  get a lot of features to use mui, like custom-color that you can send any color of theme color name. <br/>
- or more customized way to use component more easier way, and less code bugs homemade. <br/>
+ or more customized way to use component easier way, and less code bugs homemade. <br/>
  
 #### Demo: [storybook link](https://hdriel.github.io/mui-simple/)
 
 ## Install
 
+because using peer dependencies, to avoid from install force warning, add the following file change:
+```text
+// .npmrc
+legacy-peer-deps=true
+```
+
 ### npm
 
 install peer dependencies first: 
 ```npm
-$ npm install @emotion/react @emotion/styled @mui/lab @mui/material @mui/icons-material
+$ npm install react react-dom @emotion/react @emotion/styled @mui/material @mui/icons-material
 ```
 
 it's going to take while
 ```npm
-$ npm install --force @hdriel/mui-simple
+$ npm install mui-simple
 ```
 
-## Troubleshooting
-
-#### Create-React-App Launcher
+#### Using Create-React-App Launcher
 if you use CRA v5+ you need to override webpack config with CRACO 
 install craco: 
 ```npm
@@ -49,18 +53,50 @@ module.exports = {
       alias: {
         react: path.resolve(__dirname, "node_modules/react"),
       }
+      ...
   }
+  ...
 };
-
 ```
 
+#### Using Webpack Launcher
+if you use webpack v5+ you need to override webpack config
+
+```javascript
+// webpack.config.js 
+...
+module.exports = {
+   ...
+   module: {
+      rules: [
+       {
+        test: /\.m?js$/,
+        resolve: { fullySpecified: false },
+        // exclude: ['node_module'], // DON'T put node_module in exclude here!! 
+       }, 
+        ...
+      ],
+   },
+   resolve: {
+      extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
+      alias: {
+       react: path.resolve(__dirname, '..', 'node_modules/react'),
+      },
+      ...
+   },
+   ...
+};
+```
 
 ## Usage
 
+import your components with ES Module syntax, usage like this: 
 ```javascript
 import { Button } from '@hdriel/mui-simple';
-// or
-const { Button } = require('@hdriel/mui-simple')
+
+export const App = () => {
+  return <Button>Hello Miu-Simple</Button>
+}
 ```
 
 
@@ -69,6 +105,7 @@ const { Button } = require('@hdriel/mui-simple')
  this package need more maintenance like : <br>
  &#9744; fully support typescript. <br>
  &#9744; make docs and fixing stories in storybook. <br>
+ &#9744; Improving infrastructure and performance. <br>
  and so on..<br>
  
  so feel free to be in touch and make this beautiful package to be more awesome as should be! 
