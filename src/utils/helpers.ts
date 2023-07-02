@@ -3,7 +3,6 @@ import { alpha, darken, lighten } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 import toHex from 'colornames-es';
-// const toHex = () => undefined;
 
 export function getCapitalLetters(str) {
     const chars =
