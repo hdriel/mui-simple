@@ -14,21 +14,22 @@ interface SpeedDialActionProps {
 }
 
 interface SpeedDialProps {
-    actions: SpeedDialActionProps[];
-    bottom: string | number;
-    color: string;
-    direction: DirectionType;
-    hidden: boolean;
-    icon: React.ReactNode;
-    left: string | number;
-    onClose: (event: SyntheticEvent<{}, Event>, reason: CloseReason) => void;
-    onOpen: (event: SyntheticEvent<{}, Event>, reason: OpenReason) => void;
-    open: boolean;
-    openIcon: React.ReactNode;
-    right: string | number;
-    showOnBackdrop: boolean;
-    showTooltip: boolean;
-    top: string | number;
+    actions?: SpeedDialActionProps[];
+    bottom?: string | number;
+    color?: string;
+    direction?: DirectionType;
+    hidden?: boolean;
+    icon?: React.ReactNode;
+    left?: string | number;
+    onClose?: (event: SyntheticEvent<{}, Event>, reason: CloseReason) => void;
+    onOpen?: (event: SyntheticEvent<{}, Event>, reason: OpenReason) => void;
+    open?: boolean;
+    openIcon?: React.ReactNode;
+    right?: string | number;
+    showOnBackdrop?: boolean;
+    showTooltip?: boolean;
+    top?: string | number;
+
     [key: string]: any;
 }
 
