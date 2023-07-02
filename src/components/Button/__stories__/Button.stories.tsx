@@ -154,22 +154,22 @@ export const Primary: Story = {
 //     );
 // };
 //
-// export const ThemedAndColored = () => {
-//     return (
-//         <Stack direction="column" spacing={2}>
-//             {[undefined, 'primary', 'secondary', 'info', 'success', 'error', '#df01fd'].map((color, index) => (
-//                 <Stack key={index} direction="row" spacing={2}>
-//                     {['contained', 'outlined', 'text'].map((variant) => (
-//                         <Button {...actions} key={variant} variant={variant} color={color} sx={{ minWidth: 200 }}>
-//                             {color ?? 'Default'}
-//                         </Button>
-//                     ))}
-//                     <Button {...actions} icon={<SendIcon />} color={color} />
-//                 </Stack>
-//             ))}
-//         </Stack>
-//     );
-// };
+export const ThemedAndColored = () => {
+    return (
+        <Stack direction="column" spacing={2}>
+            {[undefined, 'primary', 'secondary', 'info', 'success', 'error', '#df01fd'].map((color, index) => (
+                <Stack key={index} direction="row" spacing={2}>
+                    {['contained', 'outlined', 'text'].map((variant) => (
+                        <Button key={variant} variant={variant} color={color} sx={{ minWidth: 200 }}>
+                            {color ?? 'Default'}
+                        </Button>
+                    ))}
+                    <Button icon={<SendIcon />} color={color} />
+                </Stack>
+            ))}
+        </Stack>
+    );
+};
 //
 // export const Loading = () => {
 //     return (
