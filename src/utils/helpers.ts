@@ -2,8 +2,7 @@ import { get } from 'lodash-es';
 import { alpha, darken, lighten } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-// const toHex = require('colornames');
-const toHex = () => undefined;
+import toHex from 'colornames-es';
 
 export function getCapitalLetters(str) {
     const chars =
