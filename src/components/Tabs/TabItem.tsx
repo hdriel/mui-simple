@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react';
 import { Tab as MuiTab } from './Tabs.styled';
 import Tooltip from '../Tooltip/Tooltip';
 import { tooltipPlacementsType } from '../Tooltip/Tooltip.consts';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
 type IconPositionType = 'bottom' | 'end' | 'start' | 'top';
 type OrientationType = 'horizontal' | 'vertical';
@@ -26,7 +27,7 @@ interface TabItemProps {
     wrapped?: boolean;
     disabled?: boolean;
     disableRipple?: boolean;
-    icon?: ReactNode;
+    icon?: ReactNode | string;
     link?: string;
     onClick?: (event: any, value: string) => void;
     tooltipProps?: TooltipProps;
@@ -40,6 +41,7 @@ const TabItem: React.FC<TabItemProps> = ({
     open,
     tooltipProps,
     orientation,
+    icon,
     children,
     ...props
 }) => {
@@ -62,6 +64,7 @@ const TabItem: React.FC<TabItemProps> = ({
                 aria-labelledby={`simple-tab-${value}`}
                 component={link ? 'a' : undefined}
                 href={link}
+                icon={<SVGIcon>{icon}</SVGIcon>}
                 onClick={
                     link
                         ? (event, value) => {

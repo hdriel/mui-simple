@@ -12,7 +12,7 @@ interface TabProps {
     wrapped?: boolean;
     disabled?: boolean;
     disableRipple?: boolean;
-    icon?: ReactNode;
+    icon?: ReactNode | string;
     link?: string;
     onClick?: (event: any, value: string) => void;
     tooltip?: string;
