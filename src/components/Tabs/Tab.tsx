@@ -5,7 +5,7 @@ import { Box } from './Tabs.styled';
 type IconPositionType = 'bottom' | 'end' | 'start' | 'top';
 
 interface TabProps {
-    iconPosition: IconPositionType;
+    iconPosition?: IconPositionType;
     label?: string;
     value?: string;
     open?: boolean;
