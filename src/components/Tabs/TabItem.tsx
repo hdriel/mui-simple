@@ -64,7 +64,7 @@ const TabItem: React.FC<TabItemProps> = ({
                 aria-labelledby={`simple-tab-${value}`}
                 component={link ? 'a' : undefined}
                 href={link}
-                icon={<SVGIcon>{icon}</SVGIcon>}
+                icon={icon && <SVGIcon>{icon}</SVGIcon>}
                 onClick={
                     link
                         ? (event, value) => {
