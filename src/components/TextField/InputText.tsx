@@ -9,11 +9,13 @@ interface InputTextProps extends Omit<InputBaseProps, 'value'> {
     limitIndicator?: number;
 }
 
-export default function InputText({ value, showLimitIndicatorFrom, limitIndicator, endCmp, ...props }: InputTextProps) {
+export default function InputText(props: InputTextProps) {
+    const { value, showLimitIndicatorFrom, limitIndicator, endCmp, ...rest } = props;
     const count = value?.length ?? 0;
+
     return (
         <Input
-            {...props}
+            {...rest}
             value={value}
             endCmp={
                 <span style={{ ...(count > limitIndicator && { color: 'red' }) }}>

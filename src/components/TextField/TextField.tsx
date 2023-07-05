@@ -6,42 +6,47 @@ import { ClickAwayListener } from '@mui/material';
 import { debounce } from 'lodash-es';
 import type { InputBaseProps } from './decs';
 
-function TextField({
-    label,
-    id,
-    name,
-    variant,
-    onChange,
-    onFocus,
-    onBlur,
-    value,
-    fullWidth,
-    required,
-    readOnly,
-    type,
-    multiline,
-    maxRows,
-    rows,
-    autoComplete,
-    error,
-    margin,
-    focused,
-    helperText,
-    colorText,
-    colorLabel,
-    colorActive,
-    startCmp,
-    endCmp,
-    startCmpExternal,
-    endCmpExternal,
-    cmpSpacing,
-    hideStartActionsOnEmpty,
-    alignActions,
-    alignActionsExternal,
-    disabled,
-    debounceDelay,
-    ...props
-}: InputBaseProps & Record<string, any>) {
+function TextField(props: InputBaseProps & Record<string, any>) {
+    const {
+        label,
+        id,
+        name,
+        variant,
+        onChange,
+        onFocus,
+        onBlur,
+        value,
+        fullWidth,
+        required,
+        readOnly,
+        type,
+        multiline,
+        maxRows,
+        rows,
+        autoComplete,
+        error,
+        margin,
+        focused,
+        helperText,
+        colorText,
+        colorLabel,
+        colorActive,
+        startCmp,
+        endCmp,
+        startCmpExternal,
+        endCmpExternal,
+        cmpSpacing,
+        hideStartActionsOnEmpty,
+        alignActions,
+        alignActionsExternal,
+        disabled,
+        debounceDelay,
+        InputProps,
+        InputLabelProps,
+        FormHelperTextProps,
+        ...rest
+    } = props;
+
     const [isFocused, setIsFocused] = useState(false);
 
     const onFocusHandler = (e) => {
@@ -79,7 +84,7 @@ function TextField({
                 colorLabel={colorLabel}
                 colorActive={colorActive}
                 InputProps={{
-                    ...props.InputProps,
+                    ...InputProps,
                     readOnly,
                     ...(showActions &&
                         startCmp && {
@@ -98,10 +103,10 @@ function TextField({
                     }),
                     sx: { alignItems: alignActions },
                 }}
-                InputLabelProps={{ ...props.InputLabelProps }}
-                FormHelperTextProps={{ ...props.FormHelperTextProps }}
+                InputLabelProps={{ ...InputLabelProps }}
+                FormHelperTextProps={{ ...FormHelperTextProps }}
                 variant={variant}
-                {...props}
+                {...rest}
             />
         </ClickAwayListener>
     );
