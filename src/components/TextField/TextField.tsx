@@ -41,7 +41,7 @@ function TextField({
     disabled,
     debounceDelay,
     ...props
-}: InputBaseProps & Record<string, any>): React.ReactNode {
+}: InputBaseProps & Record<string, any>) {
     const [isFocused, setIsFocused] = useState(false);
 
     const onFocusHandler = (e) => {

@@ -17,7 +17,7 @@ export default function InputText({
     limitIndicator,
     endCmp,
     ...props
-}: InputTextPropsType): React.ReactNode {
+}: InputTextPropsType) {
     const count = value?.length ?? 0;
     return (
         <Input

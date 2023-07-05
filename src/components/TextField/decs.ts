@@ -29,9 +29,9 @@ export interface InputBaseProps {
     id?: string;
     name?: string;
     variant?: VariantType;
-    onChange?: Function;
-    onFocus?: Function;
-    onBlur?: Function;
+    onChange?: (Event) => void;
+    onFocus?: (Event) => void;
+    onBlur?: (Event) => void;
     value?: string | number;
     fullWidth?: boolean;
     required?: boolean;
