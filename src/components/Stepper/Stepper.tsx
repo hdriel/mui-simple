@@ -18,17 +18,15 @@ import {
 import { getCustomColor, useCustomColor } from '../../utils/helpers';
 import { useTheme } from '@mui/material/styles';
 
-type Step =
-    | string
-    | {
-          label: string;
-          optional?: boolean | string;
-          color?: string;
-          error?: boolean;
-          icon?: React.ReactNode;
-      };
+type Step = {
+    label: string;
+    optional?: boolean | string;
+    color?: string;
+    error?: boolean;
+    icon?: React.ReactNode;
+};
 interface StepperProps {
-    steps?: Array<Step>;
+    steps?: Array<Step | string>;
     stepIndex?: number;
     orientation?: 'horizontal' | 'vertical';
     stepsOnlyWithoutComplete?: boolean;
