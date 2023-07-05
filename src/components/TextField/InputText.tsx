@@ -3,21 +3,13 @@ import React from 'react';
 import Input from './TextField';
 import type { InputBaseProps } from './decs';
 
-interface InputTextProps {
+interface InputTextProps extends Omit<InputBaseProps, 'value'> {
     value?: string;
     showLimitIndicatorFrom?: number;
     limitIndicator?: number;
 }
 
-type InputTextPropsType = Omit<InputBaseProps, 'value'> & InputTextProps;
-
-export default function InputText({
-    value,
-    showLimitIndicatorFrom,
-    limitIndicator,
-    endCmp,
-    ...props
-}: InputTextPropsType) {
+export default function InputText({ value, showLimitIndicatorFrom, limitIndicator, endCmp, ...props }: InputTextProps) {
     const count = value?.length ?? 0;
     return (
         <Input
