@@ -14,7 +14,7 @@ import MuiPaper from '../Paper/Paper';
 import MuiTypography from '../Typography/Typography';
 import MuiButton from '../Button/Button';
 
-export const Card = styled(MuiCard)``;
+export const Card = MuiCard;
 
 export const CardActionArea = MuiCardActionArea;
 export const CardActions = MuiCardActions;
@@ -28,12 +28,10 @@ export const Paper = MuiPaper;
 export const Typography = MuiTypography;
 export const Button = MuiButton;
 
-export const ExpandMore = styled(({ expand, icon, ...props }) => <Button icon={icon} {...props} />)(
-    ({ theme, expand }) => ({
-        transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
-    })
-);
+export const ExpandMore = styled(({ icon, ...props }) => <Button icon={icon} {...props} />)(({ theme, expand }) => ({
+    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+    }),
+}));
