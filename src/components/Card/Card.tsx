@@ -30,6 +30,7 @@ export default function Card({
     mediaOnTop,
     contentPadding,
     children,
+    onClick,
     ...props
 }) {
     const [expanded, setExpanded] = React.useState(false);
@@ -131,7 +132,7 @@ export default function Card({
                 </Box>
             </Box>
             {cardContentExpended && (
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
+                <Collapse in={expanded} timeout="auto" unmountOnExit addEndListener={undefined}>
                     <CardContent>{cardContentExpended}</CardContent>
                 </Collapse>
             )}
