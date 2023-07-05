@@ -4,9 +4,9 @@ import Input from './TextField';
 import type { InputBaseProps } from './decs';
 
 interface InputTextProps {
-    value: string;
-    showLimitIndicatorFrom: number;
-    limitIndicator: number;
+    value?: string;
+    showLimitIndicatorFrom?: number;
+    limitIndicator?: number;
 }
 
 type InputTextPropsType = Omit<InputBaseProps, 'value'> & InputTextProps;
