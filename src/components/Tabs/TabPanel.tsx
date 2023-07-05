@@ -4,11 +4,16 @@ import { TabPanel as MuiTabPanel } from './Tabs.styled';
 
 interface TabPanelProps {
     open?: boolean;
+    swipeable?: boolean;
     [key: string]: any;
 }
 
-const TabPanel: React.FC<TabPanelProps> = ({ open, children, ...props }) => {
-    return open ? <MuiTabPanel {...props}>{children}</MuiTabPanel> : undefined;
+const TabPanel: React.FC<TabPanelProps> = ({ open, swipeable, children, ...props }) => {
+    return open ? (
+        <MuiTabPanel key={props.value} {...props}>
+            {children}
+        </MuiTabPanel>
+    ) : null;
 };
 
 // TabPanel.propTypes = {
@@ -17,6 +22,7 @@ const TabPanel: React.FC<TabPanelProps> = ({ open, children, ...props }) => {
 
 TabPanel.defaultProps = {
     open: undefined,
+    swipeable: undefined,
 };
 
 export default TabPanel;

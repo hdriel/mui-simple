@@ -54,19 +54,29 @@ const Tabs: React.FC<TabsProps> = ({
 
     const theme = useTheme();
 
-    const filteredChildren = [].concat(children).filter((child) => {
-        return isValidElement(child) && child.type.displayName === 'Tab'
-    });
+    const filteredChildren = []
+        .concat(children)
+        .filter((child) => isValidElement(child) && child.type.displayName === 'Tab')
+        .filter((v) => v);
 
-    const tabPanels = filteredChildren.map(({ props }, index) => (
-        <TabPanel key={index} index={index} dir={theme.direction} {...props} open={props.value === value} />
-    ));
+    const tabPanels = filteredChildren
+        .map(({ props }, index) => (
+            <TabPanel
+                key={props.value}
+                index={index}
+                dir={theme.direction}
+                swipeable={swipeable}
+                {...props}
+                open={props.value === value}
+            />
+        ))
+        .filter((v) => v);
 
     const tabs = filteredChildren.map(({ props }, index) => {
         return (
             <TabItem
                 children={undefined}
-                key={index}
+                key={props.value}
                 iconPosition={props.iconPosition}
                 label={props.label}
                 value={String(props.value ?? index).toString()}
