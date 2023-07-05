@@ -23,7 +23,7 @@ type Step = {
     optional?: boolean | string;
     color?: string;
     error?: boolean;
-    icon?: React.ReactNode;
+    icon?: ReactNode;
 };
 interface StepperProps {
     steps?: Array<Step | string>;
