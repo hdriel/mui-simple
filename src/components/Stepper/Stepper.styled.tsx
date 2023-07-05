@@ -8,6 +8,11 @@ import {
     StepContent as MuiStepContent,
     StepConnector as MuiStepConnector,
     stepConnectorClasses,
+    StepperProps,
+    StepContentProps,
+    StepLabelProps,
+    BoxProps,
+    StepConnectorProps,
 } from '@mui/material';
 
 import MuiTypography from '../Typography/Typography';
@@ -18,9 +23,15 @@ export const Typography = MuiTypography;
 
 export const Button = MuiButton;
 
+interface StepperStyledProps {
+    lineWidth?: number;
+    lineColor?: string;
+    marginContent?: number;
+}
+type StepperStyledPropsType = StepperStyledProps & StepperProps;
 export const Stepper = styled(MuiStepper, {
     shouldForwardProp: (propName) => !['lineWidth', 'lineColor', 'marginContent'].includes(propName as string),
-})`
+})<StepperStyledPropsType>`
     &.MuiStepper-root.MuiStepper-vertical.MuiStepper-alternativeLabel {
         gap: 1.5em;
     }
@@ -34,9 +45,15 @@ export const Stepper = styled(MuiStepper, {
 
 export const Step = MuiStep;
 
+interface StepContentStyledProps {
+    lineWidth?: number;
+    lineColor?: string;
+    marginContent?: number;
+}
+type StepContentStyledPropsType = StepContentStyledProps & StepContentProps;
 export const StepContent = styled(MuiStepContent, {
     shouldForwardProp: (propName) => !['lineWidth', 'lineColor', 'marginContent'].includes(propName as string),
-})`
+})<StepContentStyledPropsType>`
     &.MuiStepContent-root {
         border-width: ${(props) => numberToPx(props.lineWidth) ?? '3px'};
         border-color: ${(props) => props.lineColor ?? '#eaeaf0'};
@@ -46,7 +63,7 @@ export const StepContent = styled(MuiStepContent, {
 
 export const StepLabel = styled(MuiStepLabel, {
     shouldForwardProp: (propName) => ![].includes(propName as string),
-})`
+})<StepLabelProps>`
     & .MuiStepIcon-root.Mui-active,
     & .MuiStepIcon-root.Mui-completed,
     & .MuiStepLabel-label.Mui-active {
@@ -58,34 +75,56 @@ export const StepLabel = styled(MuiStepLabel, {
     }
 `;
 
-export const Box = styled(MuiBox)``;
+export const Box = styled(MuiBox)<BoxProps>``;
 
-export const ConnectorStepIconRoot = styled('div')(({ theme, ownerState, padding, background, fontSize = 25 }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
-    zIndex: 1,
-    color: '#fff',
-    width: 50,
-    height: 50,
-    fontSize: numberToPx(fontSize),
-    padding: numberToPx(padding),
-    display: 'flex',
-    borderRadius: '50%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    ...(ownerState.active && {
-        ...(background?.includes('gradient')
-            ? { backgroundImage: background }
-            : { background, backgroundImage: 'unset' }),
-        boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
-    }),
-    ...(ownerState.completed && {
-        ...(background?.includes('gradient')
-            ? { backgroundImage: background }
-            : { background, backgroundImage: 'unset' }),
-    }),
-}));
+type OwnerState = {
+    completed?: boolean;
+    active?: boolean;
+};
+interface ConnectorStepIconRootStyledProps {
+    theme?: string;
+    ownerState?: OwnerState;
+    padding?: number;
+    background?: string;
+    fontSize?: number;
+}
+export const ConnectorStepIconRoot = styled('div')<ConnectorStepIconRootStyledProps>(
+    ({ theme, ownerState, padding, background, fontSize = 25 }) => ({
+        backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
+        zIndex: 1,
+        color: '#fff',
+        width: 50,
+        height: 50,
+        fontSize: numberToPx(fontSize),
+        padding: numberToPx(padding),
+        display: 'flex',
+        borderRadius: '50%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        ...(ownerState.active && {
+            ...(background?.includes('gradient')
+                ? { backgroundImage: background }
+                : { background, backgroundImage: 'unset' }),
+            boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
+        }),
+        ...(ownerState.completed && {
+            ...(background?.includes('gradient')
+                ? { backgroundImage: background }
+                : { background, backgroundImage: 'unset' }),
+        }),
+    })
+);
 
-export const StepConnector = styled(MuiStepConnector)(
+interface StepConnectorStyledProps {
+    theme?: string;
+    orientation?: string;
+    background?: string;
+    lineColor?: string;
+    lineWidth?: number;
+    color?: string;
+}
+type StepConnectorStyledPropsType = StepConnectorStyledProps & StepConnectorProps;
+export const StepConnector = styled(MuiStepConnector)<StepConnectorStyledPropsType>(
     ({ theme, orientation, background, lineColor, lineWidth = 3, color }) => {
         const bgColor = lineColor ?? background ?? color ?? get(theme, `palette.primary.main`);
 
@@ -111,7 +150,15 @@ export const StepConnector = styled(MuiStepConnector)(
     }
 );
 
-export const QontoConnector = styled(MuiStepConnector)(
+interface QontoConnectorStyledProps {
+    theme?: string;
+    fontSize?: string;
+    background?: string;
+    lineColor?: string;
+    lineWidth?: number;
+    color?: string;
+}
+export const QontoConnector = styled(MuiStepConnector)<QontoConnectorStyledProps>(
     ({ theme, fontSize, background, lineColor, lineWidth = 3, color: _color }) => {
         const color = lineColor ?? background ?? _color ?? get(theme, `palette.primary.main`);
 
@@ -140,7 +187,15 @@ export const QontoConnector = styled(MuiStepConnector)(
     }
 );
 
-export const QontoStepIconRoot = styled('div')(
+interface QontoStepStyledProps {
+    theme?: string;
+    ownerState?: OwnerState;
+    background?: string;
+    padding?: number;
+    fontSize?: number;
+    color?: string;
+}
+export const QontoStepIconRoot = styled('div')<QontoStepStyledProps>(
     ({ theme, ownerState, background, padding = 10, fontSize = 25, color }) => {
         const backgroundColor = background ?? color ?? get(theme, `palette.primary.main`);
 

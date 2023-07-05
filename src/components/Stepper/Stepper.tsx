@@ -1,4 +1,4 @@
-import React, { useMemo, cloneElement, isValidElement } from 'react';
+import React, { useMemo, cloneElement, isValidElement, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { Check as CheckIcon } from '@mui/icons-material';
 
@@ -17,6 +17,50 @@ import {
 } from './Stepper.styled';
 import { getCustomColor, useCustomColor } from '../../utils/helpers';
 import { useTheme } from '@mui/material/styles';
+
+type Step =
+    | string
+    | {
+          label: string;
+          optional?: boolean | string;
+          color?: string;
+          error?: boolean;
+          icon?: React.ReactNode;
+      };
+interface StepperProps {
+    steps?: Array<Step>;
+    stepIndex?: number;
+    orientation?: 'horizontal' | 'vertical';
+    stepsOnlyWithoutComplete?: boolean;
+    stepsBottomLabel?: boolean;
+    color?: string;
+    onReset?: () => void;
+    onNext?: () => void;
+    onBack?: () => void;
+    onSkip?: () => void;
+    onDone?: () => void;
+    stepsIndexSkipped?: number[];
+    allCompletedCmp?: ReactNode;
+    unmountOnExit?: boolean;
+    labels?: {
+        next?: string;
+        back?: string;
+        done?: string;
+        skip?: string;
+        optional?: string;
+    };
+    qontoStyle?: boolean;
+    customStyleProps?: {
+        fontSize?: boolean | string;
+        background?: string;
+        lineColor?: string;
+        padding?: boolean | string;
+        lineWidth?: boolean | string;
+        checkIcon?: ReactNode;
+        dotIcon?: ReactNode;
+    };
+    [key: string]: any;
+}
 
 export default function Stepper({
     optionalLabel,
@@ -38,7 +82,7 @@ export default function Stepper({
     customStyleProps,
     children,
     ...props
-}) {
+}): StepperProps {
     const theme = useTheme();
     const [customColor] = useCustomColor(color);
 
@@ -155,11 +199,11 @@ export default function Stepper({
         color,
     ]);
 
-    const isStepOptional = (index) => steps?.[index]?.optional;
-    const isStepSkipped = (index) => stepsIndexSkipped?.includes(index);
+    const isStepOptional = (index: number) => steps?.[index]?.optional;
+    const isStepSkipped = (index: number) => stepsIndexSkipped?.includes(index);
     const handleNext = () => onNext?.(activeStep);
     const handleBack = () => onBack?.(activeStep);
-    const handleSkip = (index) => isStepOptional(index) && onSkip?.(index);
+    const handleSkip = (index: number) => isStepOptional(index) && onSkip?.(index);
 
     const connector = qontoStyle ? (
         <QontoConnector orientation={orientation ?? ''} color={customColor} {...customStyleProps} />
