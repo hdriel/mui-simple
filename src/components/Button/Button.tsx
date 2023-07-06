@@ -1,9 +1,10 @@
-import React, { forwardRef, MouseEventHandler, Ref } from 'react';
+import React, { forwardRef, MouseEventHandler, Ref, ReactNode } from 'react';
 // import PropTypes from 'prop-types';
 import CircularProgress from '../Progress/CircularProgress/CircularProgress';
 import { Button as MuiButton, IconButton as MuiIconButton } from './Button.styled';
 import Tooltip from '../Tooltip/Tooltip';
 import { useCustomColor } from '../../utils/helpers';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
 const spinner = <CircularProgress color="inherit" size={15} />;
 
@@ -18,8 +19,8 @@ export interface ButtonProps {
      * The disabled field of button, when is disabled - onClick event won't fire
      */
     disabled?: boolean;
-    startIcon?: any;
-    endIcon?: any;
+    startIcon?: ReactNode | string;
+    endIcon?: ReactNode | string;
     onClick?: MouseEventHandler<HTMLButtonElement>;
     onRightClick?: MouseEventHandler<HTMLButtonElement>;
     link?: string;
@@ -29,7 +30,7 @@ export interface ButtonProps {
     loadingIconPosition?: string;
     loadingLabel?: string;
     size?: string | number;
-    icon?: any;
+    icon?: ReactNode | string;
     fullWidth?: boolean;
     tooltipProps?: object;
     uppercase?: boolean;
@@ -66,6 +67,9 @@ const Button: React.FC<ButtonProps> = forwardRef(
         ref: Ref<HTMLButtonElement>
     ) => {
         const [customColor, muiColor] = useCustomColor(color);
+        startIcon &&= <SVGIcon>{startIcon}</SVGIcon>;
+        endIcon &&= <SVGIcon>{endIcon}</SVGIcon>;
+        icon &&= <SVGIcon>{icon}</SVGIcon>;
 
         const onRightClickHandler = (e) => {
             e.preventDefault();

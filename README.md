@@ -36,26 +36,26 @@ $ npm install --save-dev @craco/craco
 then create in the root project the file
 ```javascript
 // craco.config.js 
+const path = require('path');
+
 module.exports = {
-  webpack: {
+   webpack: {
       configure(webpackConfig) {
-        const scopePluginIndex = webpackConfig.resolve.plugins.findIndex(
-          ({ constructor }) => constructor && constructor.name === "ModuleScopePlugin"
-        ); 
-        webpackConfig.resolve.plugins.splice(scopePluginIndex, 1);  
-        webpackConfig.module.rules.push({
-          test: /\.m?js$/,
-          resolve: { fullySpecified: false },
-        });
-  
-        return webpackConfig;
+         const scopePluginIndex = webpackConfig.resolve.plugins.findIndex(
+            ({ constructor }) => constructor && constructor.name === "ModuleScopePlugin"
+         );
+         webpackConfig.resolve.plugins.splice(scopePluginIndex, 1);
+         webpackConfig.module.rules.push({
+            test: /\.m?js$/,
+            resolve: { fullySpecified: false },
+         });
+      
+         return webpackConfig;
       },
       alias: {
-        react: path.resolve(__dirname, "node_modules/react"),
+         react: path.resolve(__dirname, "node_modules/react"),
       }
-      ...
-  }
-  ...
+   }
 };
 ```
 
@@ -64,9 +64,9 @@ if you use webpack v5+ you need to override webpack config
 
 ```javascript
 // webpack.config.js 
-...
+const path = require('path');
+
 module.exports = {
-   ...
    module: {
       rules: [
        {
@@ -74,7 +74,6 @@ module.exports = {
         resolve: { fullySpecified: false },
         // exclude: ['node_module'], // DON'T put node_module in exclude here!! 
        }, 
-        ...
       ],
    },
    resolve: {
@@ -82,9 +81,7 @@ module.exports = {
       alias: {
        react: path.resolve(__dirname, '..', 'node_modules/react'),
       },
-      ...
    },
-   ...
 };
 ```
 
