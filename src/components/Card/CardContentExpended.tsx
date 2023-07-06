@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import { Box } from "./Card.styled";
+import { Box } from './Card.styled';
 
 export default function CardContentExpended({ ...props }) {
-  return <Box {...props} />;
+    return <Box {...props} />;
 }
-CardContentExpended.displayName = 'CardContentExpended'
+CardContentExpended.displayName = 'CardContentExpended';
 
 CardContentExpended.propTypes = {};
 

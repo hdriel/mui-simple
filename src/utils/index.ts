@@ -1,1 +1,1 @@
-export { getTextWidth, generatePassword, copyToClipboard } from "./helpers";
+export { getTextWidth, generatePassword, copyToClipboard } from './helpers';
