@@ -72,7 +72,7 @@ export default function Card(props: PropsWithChildren<CardProps>) {
 
     return (
         <MuiCard {...rest} sx={{ maxWidth, width }}>
-            {!mediaOnTop && title && (
+            {!isMediaOnTop && title && (
                 <CardHeader
                     avatar={avatar}
                     title={title}
@@ -105,7 +105,7 @@ export default function Card(props: PropsWithChildren<CardProps>) {
                 )}
 
                 <Box>
-                    {mediaOnTop && title && (
+                    {isMediaOnTop && title && (
                         <CardHeader
                             avatar={avatar}
                             title={title}
@@ -121,7 +121,7 @@ export default function Card(props: PropsWithChildren<CardProps>) {
                     )}
                     <CardContent
                         sx={{
-                            height: mediaOnTop && title ? 'auto' : '100%',
+                            height: isMediaOnTop && title ? 'auto' : '100%',
                             boxSizing: 'border-box',
                             padding: contentPadding,
                         }}
