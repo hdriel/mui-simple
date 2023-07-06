@@ -1,96 +1,84 @@
-import React, { cloneElement, isValidElement } from "react";
-import PropTypes from "prop-types";
-import { alpha } from "@mui/material";
-import { PT_action } from "../Table.propTypes";
-import { Toolbar, Tooltip, Typography } from "../Table.styled";
+import React, { cloneElement, isValidElement } from 'react';
+import PropTypes from 'prop-types';
+import { alpha } from '@mui/material';
+import { PT_action } from '../Table.propTypes';
+import { Toolbar, Tooltip, Typography } from '../Table.styled';
 
 export function EnhancedTableToolbar({
-  selectedLabel,
-  selected,
-  data,
-  title,
-  filterAction,
-  selectionModeAction,
-  sortColumnsAction,
-  selectedActions,
-  actions,
-  colorProps,
+    selectedLabel,
+    selected,
+    data,
+    title,
+    filterAction,
+    selectionModeAction,
+    sortColumnsAction,
+    selectedActions,
+    actions,
+    colorProps,
 }) {
-  const numSelected = selected?.length ?? 0;
-  const filteredActions = (numSelected > 0 ? selectedActions : actions) || [];
+    const numSelected = selected?.length ?? 0;
+    const filteredActions = (numSelected > 0 ? selectedActions : actions) || [];
 
-  return (
-    <Toolbar
-      sx={{
-        pl: { sm: 2 },
-        pr: { xs: 1, sm: 1 },
-        ...(numSelected > 0 && {
-          bgcolor: (theme) =>
-            alpha(
-              colorProps?.background ?? theme.palette.primary.main,
-              theme.palette.action.activatedOpacity
-            ),
-        }),
-      }}
-    >
-      {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: "1 1 100%" }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
+    return (
+        <Toolbar
+            sx={{
+                pl: { sm: 2 },
+                pr: { xs: 1, sm: 1 },
+                ...(numSelected > 0 && {
+                    bgcolor: (theme) =>
+                        alpha(
+                            colorProps?.background ?? theme.palette.primary.main,
+                            theme.palette.action.activatedOpacity
+                        ),
+                }),
+            }}
         >
-          {selectedLabel?.includes("{n}")
-            ? selectedLabel?.replace("{n}", numSelected)
-            : `${numSelected} ${selectedLabel}`}
-        </Typography>
-      ) : (
-        <Typography
-          sx={{ flex: "1 1 100%" }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          {title}
-        </Typography>
-      )}
+            {numSelected > 0 ? (
+                <Typography sx={{ flex: '1 1 100%' }} color="inherit" variant="subtitle1" component="div">
+                    {selectedLabel?.includes('{n}')
+                        ? selectedLabel?.replace('{n}', numSelected)
+                        : `${numSelected} ${selectedLabel}`}
+                </Typography>
+            ) : (
+                <Typography sx={{ flex: '1 1 100%' }} variant="h6" id="tableTitle" component="div">
+                    {title}
+                </Typography>
+            )}
 
-      {filteredActions
-        .filter((action) => isValidElement(action.cmp))
-        .map(({ cmp, tooltip }, index) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <Tooltip key={index} title={tooltip}>
-            {cloneElement(cmp, {
-              onClick: (event) => {
-                cmp?.props?.onClick?.(
-                  event,
-                  data?.filter((row, index) =>
-                    selected.includes(row.id ?? index)
-                  )
-                );
-              },
-            })}
-          </Tooltip>
-        ))}
-      {!numSelected && selectionModeAction}
-      {!numSelected && sortColumnsAction}
-      {!numSelected && filterAction}
-    </Toolbar>
-  );
+            {filteredActions
+                .filter((action) => isValidElement(action.cmp))
+                .map(({ cmp, tooltip }, index) => (
+                    // eslint-disable-next-line react/no-array-index-key
+                    <Tooltip key={index} title={tooltip}>
+                        {cloneElement(cmp, {
+                            onClick: (event) => {
+                                cmp?.props?.onClick?.(
+                                    event,
+                                    data?.filter((row, index) => selected.includes(row.id ?? index))
+                                );
+                            },
+                        })}
+                    </Tooltip>
+                ))}
+            {!numSelected && selectionModeAction}
+            {!numSelected && sortColumnsAction}
+            {!numSelected && filterAction}
+        </Toolbar>
+    );
 }
 
 EnhancedTableToolbar.propTypes = {
-  selectedLabel: PropTypes.string,
-  numSelected: PropTypes.number,
-  title: PropTypes.string,
-  selectedActions: PropTypes.arrayOf(PT_action),
-  actions: PropTypes.arrayOf(PT_action),
+    selectedLabel: PropTypes.string,
+    numSelected: PropTypes.number,
+    title: PropTypes.string,
+    selectedActions: PropTypes.arrayOf(PT_action),
+    actions: PropTypes.arrayOf(PT_action),
 };
 
 EnhancedTableToolbar.defaultProps = {
-  selectedLabel: "{n} selected",
-  numSelected: 0,
-  title: "",
-  selectedActions: [],
-  actions: [],
+    selectedLabel: '{n} selected',
+    numSelected: 0,
+    title: '',
+    selectedActions: [],
+    actions: [],
 };

@@ -2,7 +2,7 @@ name: Publish to NPM
 
 on:
     push:
-        branches: [ 'main' ]
+        branches: ['main']
 
 jobs:
     publish:
@@ -17,14 +17,14 @@ jobs:
             - name: setup node
               uses: actions/setup-node@v3
               with:
-                node-version: 16
-                registry-url: https://registry.npmjs.org/
-                scope: '@hdriel'
+                  node-version: 16
+                  registry-url: https://registry.npmjs.org/
+                  scope: '@hdriel'
 
             - name: building package
               run: | # Install npm packages and build lib output before publish
-                npm ci --force
-                npm run build:debug
+                  npm ci --force
+                  npm run build:debug
 
             - name: publish step
               run: npm publish

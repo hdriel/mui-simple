@@ -2,10 +2,10 @@ name: Publish to NPM
 
 on:
     workflow_run:
-        workflows: ["Deploy Storybook"]
+        workflows: ['Deploy Storybook']
         types:
             - completed
-            
+
 jobs:
     publish:
         runs-on: ubuntu-latest
@@ -20,14 +20,14 @@ jobs:
             - name: setup node
               uses: actions/setup-node@v3
               with:
-                node-version: 16
-                registry-url: https://registry.npmjs.org/
-                scope: '@hdriel'
+                  node-version: 16
+                  registry-url: https://registry.npmjs.org/
+                  scope: '@hdriel'
 
             - name: building package
               run: | # Install npm packages and build lib output before publish
-                npm ci --ignore-scripts --force              
-                npm run build
+                  npm ci --ignore-scripts --force              
+                  npm run build
 
             - name: publish step
               run: npm publish --access public

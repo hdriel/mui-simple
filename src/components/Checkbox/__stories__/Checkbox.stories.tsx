@@ -1,273 +1,265 @@
-import React, { useState } from "react";
-import { action } from "@storybook/addon-actions";
+import React, { useState } from 'react';
+import { action } from '@storybook/addon-actions';
 
-import Checkbox from "../Checkbox";
-import { Stack } from "@mui/material";
+import Checkbox from '../Checkbox';
+import { Stack } from '@mui/material';
 
 export default {
-  title: "Inputs/Checkbox",
-  parameters: {
-    controls: {
-      exclude: /^(onChange)$/g,
+    title: 'Inputs/Checkbox',
+    parameters: {
+        controls: {
+            exclude: /^(onChange)$/g,
+        },
     },
-  },
-  decorators: [
-    (Story) => (
-      <div
-        style={{
-          padding: "1em",
-          height: "auto",
-          width: "90%",
-          overflow: "hidden",
-        }}
-      >
-        <Story />
-      </div>
-    ),
-  ],
-  component: Checkbox,
+    decorators: [
+        (Story) => (
+            <div
+                style={{
+                    padding: '1em',
+                    height: 'auto',
+                    width: '90%',
+                    overflow: 'hidden',
+                }}
+            >
+                <Story />
+            </div>
+        ),
+    ],
+    component: Checkbox,
 };
 
 export const Default = () => <Checkbox />;
 Default.decorators = [
-  (Story) => (
-    <div
-      style={{
-        padding: "1em",
-        width: "200px",
-        height: "auto",
-      }}
-    >
-      <Story />
-    </div>
-  ),
+    (Story) => (
+        <div
+            style={{
+                padding: '1em',
+                width: '200px',
+                height: 'auto',
+            }}
+        >
+            <Story />
+        </div>
+    ),
 ];
 
 const Template = (args) => <Checkbox {...args} />;
 
 export const Custom = Template.bind({});
 Custom.argTypes = {
-  label: { control: { type: "text" }, defaultValue: "check" },
-  size: {
-    control: "inline-radio",
-    options: ["small", "medium"],
-    defaultValue: "small",
-  },
-  color: {
-    control: { type: "color" },
-    defaultValue: "red",
-  },
-  checked: {
-    control: { type: "boolean" },
-    defaultValue: false,
-  },
-  defaultChecked: {
-    control: { type: "boolean" },
-    defaultValue: false,
-  },
-  required: {
-    control: { type: "boolean" },
-    defaultValue: false,
-  },
-  disabled: {
-    control: { type: "boolean" },
-    defaultValue: false,
-  },
+    label: { control: { type: 'text' }, defaultValue: 'check' },
+    size: {
+        control: 'inline-radio',
+        options: ['small', 'medium'],
+        defaultValue: 'small',
+    },
+    color: {
+        control: { type: 'color' },
+        defaultValue: 'red',
+    },
+    checked: {
+        control: { type: 'boolean' },
+        defaultValue: false,
+    },
+    defaultChecked: {
+        control: { type: 'boolean' },
+        defaultValue: false,
+    },
+    required: {
+        control: { type: 'boolean' },
+        defaultValue: false,
+    },
+    disabled: {
+        control: { type: 'boolean' },
+        defaultValue: false,
+    },
 };
 Custom.decorators = [
-  (Story) => (
-    <div
-      style={{
-        padding: "1em",
-        width: "300px",
-        height: "auto",
-      }}
-    >
-      <Story />
-    </div>
-  ),
+    (Story) => (
+        <div
+            style={{
+                padding: '1em',
+                width: '300px',
+                height: 'auto',
+            }}
+        >
+            <Story />
+        </div>
+    ),
 ];
 
 export const Labeled = () => {
-  const [checked, setChecked] = useState(false);
-  return (
-    <Checkbox
-      checked={checked}
-      onChange={(event) => {
-        setChecked(event.target.checked);
-        action(event);
-      }}
-      label="include condition"
-    />
-  );
+    const [checked, setChecked] = useState(false);
+    return (
+        <Checkbox
+            checked={checked}
+            onChange={(event) => {
+                setChecked(event.target.checked);
+                action(event);
+            }}
+            label="include condition"
+        />
+    );
 };
 export const NoLabeled = () => {
-  const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(false);
 
-  return (
-    <Checkbox
-      checked={checked}
-      onChange={(event) => {
-        setChecked(event.target.checked);
-        action(event);
-      }}
-    />
-  );
+    return (
+        <Checkbox
+            checked={checked}
+            onChange={(event) => {
+                setChecked(event.target.checked);
+                action(event);
+            }}
+        />
+    );
 };
 export const Checked = () => {
-  const [checked, setChecked] = useState(true);
-  return (
-    <Checkbox
-      checked={checked}
-      onChange={(event) => {
-        setChecked(event.target.checked);
-        action(event);
-      }}
-      label="test"
-    />
-  );
+    const [checked, setChecked] = useState(true);
+    return (
+        <Checkbox
+            checked={checked}
+            onChange={(event) => {
+                setChecked(event.target.checked);
+                action(event);
+            }}
+            label="test"
+        />
+    );
 };
 export const Disabled = () => {
-  const [checked, setChecked] = useState(true);
-  return (
-    <Checkbox
-      checked={checked}
-      onChange={(event) => {
-        setChecked(event.target.checked);
-        action(event);
-      }}
-      label="disabled checkbox"
-      disabled
-    />
-  );
+    const [checked, setChecked] = useState(true);
+    return (
+        <Checkbox
+            checked={checked}
+            onChange={(event) => {
+                setChecked(event.target.checked);
+                action(event);
+            }}
+            label="disabled checkbox"
+            disabled
+        />
+    );
 };
 
 export const Required = () => {
-  const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(false);
 
-  return (
-    <Checkbox
-      checked={checked}
-      onChange={(event) => {
-        setChecked(event.target.checked);
-        action(event);
-      }}
-      required
-      label="required checkbox test"
-      helperText="is required checkbox!"
-    />
-  );
+    return (
+        <Checkbox
+            checked={checked}
+            onChange={(event) => {
+                setChecked(event.target.checked);
+                action(event);
+            }}
+            required
+            label="required checkbox test"
+            helperText="is required checkbox!"
+        />
+    );
 };
 
 export const ThemedAndColor = () => {
-  const [checked, setChecked] = useState(true);
+    const [checked, setChecked] = useState(true);
 
-  return (
-    <Stack direction="column" spacing={2}>
-      {[
-        undefined,
-        "primary",
-        "secondary",
-        "info",
-        "success",
-        "error",
-        "#df01fd",
-      ].map((color, index) => (
-        <Checkbox
-          key={index}
-          checked={checked}
-          onChange={(event) => {
-            setChecked(event.target.checked);
-            action(event);
-          }}
-          color={color}
-          label={`${index + 1} : ${color}`}
-        />
-      ))}
-    </Stack>
-  );
+    return (
+        <Stack direction="column" spacing={2}>
+            {[undefined, 'primary', 'secondary', 'info', 'success', 'error', '#df01fd'].map((color, index) => (
+                <Checkbox
+                    key={index}
+                    checked={checked}
+                    onChange={(event) => {
+                        setChecked(event.target.checked);
+                        action(event);
+                    }}
+                    color={color}
+                    label={`${index + 1} : ${color}`}
+                />
+            ))}
+        </Stack>
+    );
 };
 
 export const LabelPlacement = () => {
-  const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(false);
 
-  return (
-    <div style={{ display: "flex", gap: "1em" }}>
-      <Checkbox
-        checked={checked}
-        onChange={(event) => {
-          setChecked(event.target.checked);
-          action(event);
-        }}
-        labelPlacement="top"
-        label="top label checkbox"
-      />
+    return (
+        <div style={{ display: 'flex', gap: '1em' }}>
+            <Checkbox
+                checked={checked}
+                onChange={(event) => {
+                    setChecked(event.target.checked);
+                    action(event);
+                }}
+                labelPlacement="top"
+                label="top label checkbox"
+            />
 
-      <Checkbox
-        checked={checked}
-        onChange={(event) => {
-          setChecked(event.target.checked);
-          action(event);
-        }}
-        labelPlacement="start"
-        label="start label checkbox"
-      />
+            <Checkbox
+                checked={checked}
+                onChange={(event) => {
+                    setChecked(event.target.checked);
+                    action(event);
+                }}
+                labelPlacement="start"
+                label="start label checkbox"
+            />
 
-      <Checkbox
-        checked={checked}
-        onChange={(event) => {
-          setChecked(event.target.checked);
-          action(event);
-        }}
-        labelPlacement="bottom"
-        label="bottom label checkbox"
-      />
+            <Checkbox
+                checked={checked}
+                onChange={(event) => {
+                    setChecked(event.target.checked);
+                    action(event);
+                }}
+                labelPlacement="bottom"
+                label="bottom label checkbox"
+            />
 
-      <Checkbox
-        checked={checked}
-        onChange={(event) => {
-          setChecked(event.target.checked);
-          action(event);
-        }}
-        labelPlacement="end"
-        label="end label checkbox"
-      />
-    </div>
-  );
+            <Checkbox
+                checked={checked}
+                onChange={(event) => {
+                    setChecked(event.target.checked);
+                    action(event);
+                }}
+                labelPlacement="end"
+                label="end label checkbox"
+            />
+        </div>
+    );
 };
 
 export const Sizes = () => {
-  const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(false);
 
-  return (
-    <>
-      <Checkbox
-        checked={checked}
-        onChange={(event) => {
-          setChecked(event.target.checked);
-          action(event);
-        }}
-        label="medium checkbox"
-        size={"medium"}
-      />
-      <Checkbox
-        checked={checked}
-        onChange={(event) => {
-          setChecked(event.target.checked);
-          action(event);
-        }}
-        label="small checkbox"
-        size={"small"}
-      />
-      <Checkbox
-        checked={checked}
-        onChange={(event) => {
-          setChecked(event.target.checked);
-          action(event);
-        }}
-        label="custom size checkbox"
-        fontSize={26}
-      />
-    </>
-  );
+    return (
+        <>
+            <Checkbox
+                checked={checked}
+                onChange={(event) => {
+                    setChecked(event.target.checked);
+                    action(event);
+                }}
+                label="medium checkbox"
+                size={'medium'}
+            />
+            <Checkbox
+                checked={checked}
+                onChange={(event) => {
+                    setChecked(event.target.checked);
+                    action(event);
+                }}
+                label="small checkbox"
+                size={'small'}
+            />
+            <Checkbox
+                checked={checked}
+                onChange={(event) => {
+                    setChecked(event.target.checked);
+                    action(event);
+                }}
+                label="custom size checkbox"
+                fontSize={26}
+            />
+        </>
+    );
 };

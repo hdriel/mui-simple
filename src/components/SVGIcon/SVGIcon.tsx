@@ -1,4 +1,5 @@
-import React, { isValidElement, PropsWithChildren } from 'react';
+import React, { isValidElement } from 'react';
+import type { PropsWithChildren } from 'react';
 // import PropTypes from 'prop-types';
 import MuiIconName from './MuiIconName';
 import { SVG } from './SVGIcon.styled';
@@ -12,7 +13,7 @@ interface SVGIconProps {
     size?: string | number;
 }
 
-export default function SVGIcon(props: PropsWithChildren<SVGIconProps>) {
+export default function SVGIcon(props: PropsWithChildren<SVGIconProps>): React.ReactElement {
     const { muiIconName, iconSrc, color, width, height, size, children, ...rest } = props;
     const iconName = muiIconName || typeof children === 'string' ? children : undefined;
 

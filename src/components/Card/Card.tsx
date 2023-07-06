@@ -21,7 +21,9 @@ interface CardMedia {
     src?: string;
     title?: string;
     width?: number | string;
+    height?: number | string;
     onClick?: (Event) => void;
+    [key: string]: any;
 }
 
 type FlexDirectionType = 'row' | 'row-reverse' | 'column' | 'column-reverse';
@@ -39,6 +41,7 @@ interface CardProps {
     mediaOnTop?: boolean;
     contentPadding?: number | string;
     flexDirection?: FlexDirectionType;
+    [key: string]: any;
 }
 
 export default function Card(props: PropsWithChildren<CardProps>) {

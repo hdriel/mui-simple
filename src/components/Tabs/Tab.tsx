@@ -23,7 +23,7 @@ const Tab: React.FC<TabProps> = (props) => {
     return <Box {...props} />;
 };
 
-Tab.displayName = 'Tab'
+Tab.displayName = 'Tab';
 
 // Tab.propTypes = {
 //     iconPosition: PropTypes.oneOf(['bottom', 'end', 'start', 'top']),

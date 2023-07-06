@@ -1,4 +1,4 @@
-import { Zoom as MuiZoom, Tooltip as MuiTooltip } from "@mui/material";
+import { Zoom as MuiZoom, Tooltip as MuiTooltip } from '@mui/material';
 
 export const Zoom = MuiZoom;
 

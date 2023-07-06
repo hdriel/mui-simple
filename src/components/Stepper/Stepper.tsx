@@ -1,5 +1,5 @@
 import React, { useMemo, cloneElement, isValidElement, ReactNode } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Check as CheckIcon } from '@mui/icons-material';
 
 import {
@@ -28,7 +28,7 @@ interface Step {
 interface StepperProps {
     steps?: Array<Step | string>;
     stepIndex?: number;
-    orientation?: 'horizontal' | 'vertical';
+    orientation?: 'horizontal' | 'vertical'; // export this to type variable
     stepsOnlyWithoutComplete?: boolean;
     stepsBottomLabel?: boolean;
     color?: string;
