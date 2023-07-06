@@ -6,6 +6,7 @@
     "author": "Hadriel Benjo <hdriel@gmail.com> (https://github.com/hdriel)",
     "scripts": {
         "test": "",
+        "prettier": "prettier --write .",
         "build:ts": "tsc -p tsconfig.json -w",
         "install": "npm install --ignore-scripts --force",
         "build:debug": "cross-env NODE_ENV=development rollup -c rollup.config.js",
@@ -14,7 +15,13 @@
         "build-storybook": "storybook build",
         "predeploy": "npm run build-storybook",
         "deploy": "gh-pages -d storybook-static",
-        "storybook-static-serve": "serve -s storybook-static -p 6007"
+        "storybook-static-serve": "serve -s storybook-static -p 6007",
+        "prepare": "husky install"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run prettier && git add -A ."
+        }
     },
     "type": "module",
     "module": "dist/bundles/bundle.esm.js",
@@ -41,22 +48,6 @@
     "repository": {
         "type": "git",
         "url": "git://github.com/hdriel/mui-simple.git"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "lint-staged": {
-        "*.{js,jsx,ts,tsx}": [
-            "prettier --write",
-            "eslint --fix",
-            "git add"
-        ],
-        "*.{html,css,less,ejs}": [
-            "prettier --write",
-            "git add"
-        ]
     },
     "peerDependencies": {
         "@emotion/react": "^11.9.3",

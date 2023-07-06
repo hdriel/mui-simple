@@ -33,13 +33,7 @@
         "sourceType": "module",
         "project": "./tsconfig.json"
     },
-    "plugins": [
-        "react",
-        "jest-dom",
-        "testing-library",
-        "@typescript-eslint",
-        "prettier"
-    ],
+    "plugins": ["react", "jest-dom", "testing-library", "@typescript-eslint", "prettier"],
     "rules": {
         "react-hooks/exhaustive-deps": "warn",
         "import/no-extraneous-dependencies": ["error", { "devDependencies": ["**/*.stories.*", "**/.storybook/**.*"] }],
@@ -65,18 +59,18 @@
             "error",
             "ignorePackages",
             {
-                js: "never",
-                jsx: "never",
-                ts: "never",
-                tsx: "never",
-            },
+                "js": "never",
+                "jsx": "never",
+                "ts": "never",
+                "tsx": "never"
+            }
         ]
     },
     "settings": {
         "import/resolver": {
             "jsconfig": {
                 "config": "tsconfig.json",
-                "extensions": [ ".json", ".js", ".jsx", ".ts", ".tsx"]
+                "extensions": [".json", ".js", ".jsx", ".ts", ".tsx"]
             }
         }
     }
