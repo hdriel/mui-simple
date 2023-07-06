@@ -1,5 +1,5 @@
-import React, { cloneElement, isValidElement } from 'react';
-import PropTypes from 'prop-types';
+import React, { cloneElement, isValidElement, PropsWithChildren } from 'react';
+// import PropTypes from 'prop-types';
 import { MoreVert as MoreVertIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 
 import {
@@ -14,33 +14,59 @@ import {
     Box,
 } from './Card.styled';
 
-import Menu from '../Menu/Menu';
+import Menu, { MenuProps, OptionMenuItem, DividerProps } from '../Menu/Menu';
 
-export default function Card({
-    optionsMenu,
-    title,
-    subtitle,
-    actions,
-    avatar,
-    image,
-    imageTitle,
-    width,
-    maxWidth,
-    flexDirection,
-    mediaOnTop,
-    contentPadding,
-    children,
-    ...props
-}) {
+interface CardMedia {
+    src?: string;
+    title?: string;
+    alt?: string;
+    width?: number | string;
+    onClick?: (Event) => void;
+}
+
+type FlexDirectionType = 'row' | 'row-reverse' | 'column' | 'column-reverse';
+
+interface CardProps {
+    raised?: boolean;
+    optionsMenu?: MenuProps | Array<OptionMenuItem | DividerProps>;
+    title?: string;
+    subtitle?: string;
+    actions?: any[];
+    avatar?: React.ReactNode;
+    image?: string | CardMedia;
+    width?: number | string;
+    maxWidth?: number | string;
+    mediaOnTop?: boolean;
+    contentPadding?: number | string;
+    flexDirection?: FlexDirectionType;
+}
+
+export default function Card(props: PropsWithChildren<CardProps>) {
+    let {
+        optionsMenu,
+        title,
+        subtitle,
+        actions,
+        avatar,
+        image,
+        width,
+        maxWidth,
+        flexDirection,
+        mediaOnTop,
+        contentPadding,
+        children,
+        ...rest
+    } = props;
+
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => setExpanded(!expanded);
     mediaOnTop = mediaOnTop === undefined && ['row', 'row-reverse'].includes(flexDirection) ? true : mediaOnTop;
 
-    children = [].concat(children);
-    const cardContentExpendedIndex = children.findIndex((box) => box?.type?.name === 'CardContentExpended');
-    const cardContentExpended = cardContentExpendedIndex >= 0 ? children[cardContentExpendedIndex] : undefined;
-    children = children.filter((_, index) => index !== cardContentExpendedIndex);
+    let content = [].concat(children);
+    const cardContentExpendedIndex = content.findIndex((box) => box?.type?.displayName === 'CardContentExpended');
+    const cardContentExpended = cardContentExpendedIndex >= 0 ? content[cardContentExpendedIndex] : undefined;
+    content = content.filter((_, index) => index !== cardContentExpendedIndex);
 
     const options = Array.isArray(optionsMenu) ? optionsMenu : optionsMenu?.options ?? [];
     const optionsProps = Array.isArray(optionsMenu) ? {} : optionsMenu;
@@ -49,7 +75,7 @@ export default function Card({
     const imageProps = typeof image === 'object' ? image : {};
 
     return (
-        <MuiCard {...props} sx={{ maxWidth, width }}>
+        <MuiCard {...rest} sx={{ maxWidth, width }}>
             {!mediaOnTop && title && (
                 <CardHeader
                     avatar={avatar}
@@ -131,7 +157,7 @@ export default function Card({
                 </Box>
             </Box>
             {cardContentExpended && (
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
+                <Collapse in={expanded} timeout="auto" unmountOnExit addEndListener={undefined}>
                     <CardContent>{cardContentExpended}</CardContent>
                 </Collapse>
             )}
@@ -139,50 +165,50 @@ export default function Card({
     );
 }
 
-Card.propTypes = {
-    raised: PropTypes.bool,
-    optionsMenu: PropTypes.oneOfType([
-        PropTypes.arrayOf(
-            PropTypes.oneOfType([
-                PropTypes.shape({
-                    icon: PropTypes.node,
-                    id: PropTypes.string,
-                    onClick: PropTypes.func,
-                    label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-                    shortcut: PropTypes.node,
-                    check: PropTypes.bool,
-                }),
-                PropTypes.shape({
-                    divider: PropTypes.bool,
-                    variant: PropTypes.oneOf(['fullWidth', 'inset', 'middle']),
-                    label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-                    thickness: PropTypes.number,
-                    color: PropTypes.string,
-                    muiColor: PropTypes.string,
-                }),
-            ])
-        ),
-        PropTypes.shape(Menu.propTypes),
-    ]),
-    title: PropTypes.string,
-    subtitle: PropTypes.string,
-    actions: PropTypes.oneOfType([PropTypes.node, PropTypes.shape({})]),
-    avatar: PropTypes.node,
-    image: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.shape({
-            src: PropTypes.string,
-            title: PropTypes.string,
-            alt: PropTypes.string,
-            width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        }),
-    ]),
-    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    mediaOnTop: PropTypes.bool,
-    contentPadding: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    flexDirection: PropTypes.oneOf(['row', 'row-reverse', 'column', 'column-reverse']),
-};
+// Card.propTypes = {
+//     raised: PropTypes.bool,
+//     optionsMenu: PropTypes.oneOfType([
+//         PropTypes.arrayOf(
+//             PropTypes.oneOfType([
+//                 PropTypes.shape({
+//                     icon: PropTypes.node,
+//                     id: PropTypes.string,
+//                     onClick: PropTypes.func,
+//                     label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+//                     shortcut: PropTypes.node,
+//                     check: PropTypes.bool,
+//                 }),
+//                 PropTypes.shape({
+//                     divider: PropTypes.bool,
+//                     variant: PropTypes.oneOf(['fullWidth', 'inset', 'middle']),
+//                     label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+//                     thickness: PropTypes.number,
+//                     color: PropTypes.string,
+//                     muiColor: PropTypes.string,
+//                 }),
+//             ])
+//         ),
+//         PropTypes.shape(Menu.propTypes),
+//     ]),
+//     title: PropTypes.string,
+//     subtitle: PropTypes.string,
+//     actions: PropTypes.oneOfType([PropTypes.node, PropTypes.shape({})]),
+//     avatar: PropTypes.node,
+//     image: PropTypes.oneOfType([
+//         PropTypes.string,
+//         PropTypes.shape({
+//             src: PropTypes.string,
+//             title: PropTypes.string,
+//             alt: PropTypes.string,
+//             width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+//         }),
+//     ]),
+//     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+//     maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+//     mediaOnTop: PropTypes.bool,
+//     contentPadding: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+//     flexDirection: PropTypes.oneOf(['row', 'row-reverse', 'column', 'column-reverse']),
+// };
 
 Card.defaultProps = {
     raised: undefined,

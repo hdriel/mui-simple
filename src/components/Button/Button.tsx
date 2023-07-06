@@ -1,5 +1,5 @@
 import React, { forwardRef, MouseEventHandler, Ref } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import CircularProgress from '../Progress/CircularProgress/CircularProgress';
 import { Button as MuiButton, IconButton as MuiIconButton } from './Button.styled';
 import Tooltip from '../Tooltip/Tooltip';
@@ -9,7 +9,7 @@ const spinner = <CircularProgress color="inherit" size={15} />;
 
 type ButtonVariantType = 'contained' | 'outlined' | 'text';
 
-interface ButtonProps {
+export interface ButtonProps {
     /**
      * The variant of the button allowed types: "contained", "outlined", "text"
      */
@@ -62,7 +62,7 @@ const Button: React.FC<ButtonProps> = forwardRef(
             sx,
             children,
             ...props
-        },
+        }: ButtonProps,
         ref: Ref<HTMLButtonElement>
     ) => {
         const [customColor, muiColor] = useCustomColor(color);
@@ -141,27 +141,27 @@ const Button: React.FC<ButtonProps> = forwardRef(
     }
 );
 
-Button.propTypes = {
-    variant: PropTypes.oneOf(['contained', 'outlined', 'text']),
-    fullWidth: PropTypes.bool,
-    disabled: PropTypes.bool,
-    startIcon: PropTypes.node,
-    endIcon: PropTypes.node,
-    onClick: PropTypes.func,
-    onRightClick: PropTypes.func,
-    link: PropTypes.string,
-    color: PropTypes.string,
-    disableRipple: PropTypes.bool,
-    isLoading: PropTypes.bool,
-    loadingIconPosition: PropTypes.oneOf(['start', 'end']),
-    loadingLabel: PropTypes.string,
-    disableElevation: PropTypes.bool,
-    icon: PropTypes.node,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    tooltipProps: PropTypes.object,
-    uppercase: PropTypes.bool,
-    minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
+// Button.propTypes = {
+//     variant: PropTypes.oneOf(['contained', 'outlined', 'text']),
+//     fullWidth: PropTypes.bool,
+//     disabled: PropTypes.bool,
+//     startIcon: PropTypes.node,
+//     endIcon: PropTypes.node,
+//     onClick: PropTypes.func,
+//     onRightClick: PropTypes.func,
+//     link: PropTypes.string,
+//     color: PropTypes.string,
+//     disableRipple: PropTypes.bool,
+//     isLoading: PropTypes.bool,
+//     loadingIconPosition: PropTypes.oneOf(['start', 'end']),
+//     loadingLabel: PropTypes.string,
+//     disableElevation: PropTypes.bool,
+//     icon: PropTypes.node,
+//     size: PropTypes.oneOf(['small', 'medium', 'large']),
+//     tooltipProps: PropTypes.object,
+//     uppercase: PropTypes.bool,
+//     minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+// };
 
 Button.defaultProps = {
     variant: undefined, // stay it undefined for supporting ButtonGroup component variant

@@ -1,39 +1,41 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Input from "./TextField";
+import React from 'react';
+// import PropTypes from 'prop-types';
+import Input from './TextField';
+import type { InputBaseProps } from './decs';
 
-export default function InputText({
-  value,
-  showLimitIndicatorFrom,
-  limitIndicator,
-  endCmp,
-  ...props
-}) {
-  const count = value?.length ?? 0;
-  return (
-    <Input
-      {...props}
-      value={value}
-      endCmp={
-        <span style={{ ...(count > limitIndicator && { color: "red" }) }}>
-          {(!showLimitIndicatorFrom || showLimitIndicatorFrom < count) &&
-          limitIndicator
-            ? `${count} / ${limitIndicator}`
-            : ""}
-          {endCmp}
-        </span>
-      }
-      type="text"
-    />
-  );
+interface InputTextProps extends Omit<InputBaseProps, 'value'> {
+    value?: string;
+    showLimitIndicatorFrom?: number;
+    limitIndicator?: number;
 }
 
-InputText.propTypes = {
-  limitIndicator: PropTypes.number,
-  showLimitIndicatorFrom: PropTypes.number,
-};
+export default function InputText(props: InputTextProps) {
+    const { value, showLimitIndicatorFrom, limitIndicator, endCmp, ...rest } = props;
+    const count = value?.length ?? 0;
+
+    return (
+        <Input
+            {...rest}
+            value={value}
+            endCmp={
+                <span style={{ ...(count > limitIndicator && { color: 'red' }) }}>
+                    {(!showLimitIndicatorFrom || showLimitIndicatorFrom < count) && limitIndicator
+                        ? `${count} / ${limitIndicator}`
+                        : ''}
+                    {endCmp}
+                </span>
+            }
+            type="text"
+        />
+    );
+}
+
+// InputText.propTypes = {
+//     limitIndicator: PropTypes.number,
+//     showLimitIndicatorFrom: PropTypes.number,
+// };
 
 InputText.defaultProps = {
-  limitIndicator: undefined,
-  showLimitIndicatorFrom: undefined,
+    limitIndicator: undefined,
+    showLimitIndicatorFrom: undefined,
 };
