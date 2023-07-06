@@ -21,7 +21,9 @@ interface CardMedia {
     title?: string;
     alt?: string;
     width?: number | string;
+    height?: number | string;
     onClick?: (Event) => void;
+    [key: string]: any;
 }
 
 type FlexDirectionType = 'row' | 'row-reverse' | 'column' | 'column-reverse';
@@ -39,6 +41,7 @@ interface CardProps {
     mediaOnTop?: boolean;
     contentPadding?: number | string;
     flexDirection?: FlexDirectionType;
+    [key: string]: any;
 }
 
 export default function Card(props: CardProps) {
@@ -105,7 +108,7 @@ export default function Card(props: CardProps) {
                         component="img"
                         image={imageSrc}
                         alt={'card image media'}
-                        sx={{ width: imageProps?.width }}
+                        sx={{ width: imageProps?.width, height: imageProps?.height }}
                         {...imageProps}
                     />
                 )}
