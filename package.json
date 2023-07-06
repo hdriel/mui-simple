@@ -23,6 +23,10 @@
             "pre-commit": "npm run prettier && git add -A ."
         }
     },
+    "lint-staged": {
+        "src/**/*.{js,jsx,ts,tsx,html.css}": "prettier --write .",
+        "src/**/*.{js,jsx,ts,tsx}": "eslint"
+    },
     "type": "module",
     "module": "dist/bundles/bundle.esm.js",
     "main": "dist/bundles/bundle.js",
