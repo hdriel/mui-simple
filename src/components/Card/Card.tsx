@@ -1,4 +1,4 @@
-import React, { cloneElement, isValidElement } from 'react';
+import React, { useState, cloneElement, isValidElement, PropsWithChildren, Children } from 'react';
 // import PropTypes from 'prop-types';
 import { MoreVert as MoreVertIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 
@@ -15,6 +15,7 @@ import {
 } from './Card.styled';
 
 import Menu, { MenuProps, OptionMenuItem, DividerProps } from '../Menu/Menu';
+import { useCardExpandedContent } from './Card.hooks';
 
 interface CardMedia {
     src?: string;
@@ -44,7 +45,7 @@ interface CardProps {
     [key: string]: any;
 }
 
-export default function Card(props: CardProps) {
+export default function Card(props: PropsWithChildren<CardProps>) {
     let {
         optionsMenu,
         title,
@@ -52,26 +53,20 @@ export default function Card(props: CardProps) {
         actions,
         avatar,
         image,
-        imageTitle,
         width,
         maxWidth,
         flexDirection,
         mediaOnTop,
         contentPadding,
         children,
-        onClick,
         ...rest
     } = props;
 
-    const [expanded, setExpanded] = React.useState(false);
-
-    const handleExpandClick = () => setExpanded(!expanded);
-    mediaOnTop = mediaOnTop === undefined && ['row', 'row-reverse'].includes(flexDirection) ? true : mediaOnTop;
-
-    children = [].concat(children);
-    const cardContentExpendedIndex = children.findIndex((box) => box?.type?.name === 'CardContentExpended');
-    const cardContentExpended = cardContentExpendedIndex >= 0 ? children[cardContentExpendedIndex] : undefined;
-    children = children.filter((_, index) => index !== cardContentExpendedIndex);
+    const { expanded, content, cardContentExpended, isMediaOnTop, handleExpandClick } = useCardExpandedContent({
+        mediaOnTop,
+        children,
+        flexDirection,
+    });
 
     const options = Array.isArray(optionsMenu) ? optionsMenu : optionsMenu?.options ?? [];
     const optionsProps = Array.isArray(optionsMenu) ? {} : optionsMenu;
@@ -135,7 +130,7 @@ export default function Card(props: CardProps) {
                             padding: contentPadding,
                         }}
                     >
-                        {children}
+                        {Children.toArray(content)}
                     </CardContent>
 
                     <CardActions disableSpacing>

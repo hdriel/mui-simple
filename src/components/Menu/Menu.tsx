@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, PropsWithChildren, Children } from 'react';
 // import PropTypes from 'prop-types';
 import { Check as CheckIcon } from '@mui/icons-material';
 import { ListItemIcon, ListItemText, Menu as MuiMenu, MenuItem, MenuList, MenuWrapper } from './Menu.styled';
@@ -6,6 +6,7 @@ import Typography from '../Typography/Typography';
 import Divider from '../Divider/Divider';
 import { Grow } from '@mui/material';
 import { useAnchorProps, useChildrenComponentBinding } from './Menu.hooks';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
 export interface OptionMenuItem {
     icon?: string | React.ReactNode;
@@ -22,11 +23,13 @@ export interface DividerProps {
     label?: string | React.ReactNode;
     thickness?: number;
     color?: string;
-    muiColor?: string;
 }
+type anchorPositionVerticalType = 'top' | 'bottom';
+type anchorPositionHorizontalType = 'left' | 'center' | 'right';
 
 export interface MenuProps {
     width?: string | number;
+    height?: string | number;
     maxHeight?: string | number;
     boundChildrenId?: string;
     boundChildrenIndex?: boolean | number;
@@ -36,10 +39,10 @@ export interface MenuProps {
     arrow?: boolean;
     disableRipple?: boolean;
     open?: boolean;
-    onClose?: (Event: any) => void;
-    onClick?: (Event: any) => void;
-    anchorElementRef?: object;
-    contextMenu?: object;
+    onClose?: (Event?: any) => void | boolean;
+    onClick?: (Event?: any) => void;
+    anchorElementRef?: any;
+    contextMenu?: any;
     elevation?: number;
     options?: Array<OptionMenuItem | DividerVariantType>;
     anchorPosition?: {
@@ -48,10 +51,7 @@ export interface MenuProps {
     };
 }
 
-type anchorPositionVerticalType = 'top' | 'bottom';
-type anchorPositionHorizontalType = 'left' | 'center' | 'right';
-
-export default function Menu(props: MenuProps) {
+export default function Menu(props: PropsWithChildren<MenuProps>) {
     const {
         width,
         height,
@@ -74,6 +74,10 @@ export default function Menu(props: MenuProps) {
         children,
         ...rest
     } = props;
+
+    options?.forEach((option: OptionMenuItem) => {
+        if (option.icon) option.icon &&= <SVGIcon>{option.icon}</SVGIcon>;
+    });
 
     const [openControlled, setOpenControlled] = useState(false);
 
@@ -101,13 +105,13 @@ export default function Menu(props: MenuProps) {
         event.stopPropagation();
         setOpenControlled(false);
         const res = (option?.onClick ?? onClick)?.(option?.id);
-        if (res === undefined || res === true) handleClose();
+        if (res === undefined || res === true) handleClose(event);
     };
 
     return (
         <>
-            {boundingChildren}
-            {(anchorProps.anchorEl || contextMenu) && (
+            {Children.toArray(boundingChildren)}
+            {((anchorProps as any).anchorEl || contextMenu) && (
                 <MenuWrapper arrow={arrow}>
                     <MuiMenu
                         elevation={elevation}
@@ -124,10 +128,14 @@ export default function Menu(props: MenuProps) {
                     >
                         {alternativeContent || (
                             <MenuList dense={dense}>
-                                {options?.map(({ divider, ...option }, index) =>
-                                    divider ? (
-                                        <Divider key={index} variant="fullWidth" {...option} />
-                                    ) : (
+                                {options?.map((item: DividerProps | OptionMenuItem, index) => {
+                                    {
+                                        const { divider, ...option } = (item as DividerProps) ?? {};
+                                        if (divider) return <Divider key={index} variant="fullWidth" {...option} />;
+                                    }
+
+                                    const option = (item as OptionMenuItem) ?? {};
+                                    return (
                                         <MenuItem
                                             key={`${index}-${option.id}`}
                                             onClick={(event) => handleClick(event, option)}
@@ -136,9 +144,8 @@ export default function Menu(props: MenuProps) {
                                             {option.icon || option.check ? (
                                                 <ListItemIcon>
                                                     {(React.isValidElement(option.icon) &&
-                                                        React.cloneElement(option.icon, {
-                                                            fontSize: 'small',
-                                                        })) ||
+                                                        // @ts-ignore
+                                                        React.cloneElement(option.icon, { fontSize: 'small' })) ||
                                                         (option.check && <CheckIcon />)}
                                                 </ListItemIcon>
                                             ) : null}
@@ -150,8 +157,8 @@ export default function Menu(props: MenuProps) {
                                                 </Typography>
                                             ) : null}
                                         </MenuItem>
-                                    )
-                                )}
+                                    );
+                                })}
                             </MenuList>
                         )}
                     </MuiMenu>

@@ -1,4 +1,6 @@
-import React from 'react';
+// @ts-ignore
+
+import React, { ComponentType } from 'react';
 import { styled } from '@mui/material/styles';
 import {
     Card as MuiCard,
@@ -10,9 +12,11 @@ import {
     Collapse as MuiCollapse,
     Box as MuiBox,
 } from '@mui/material';
+import type { ButtonProps } from '@mui/material';
+
 import MuiPaper from '../Paper/Paper';
 import MuiTypography from '../Typography/Typography';
-import MuiButton from '../Button/Button';
+import MuiButton, { ButtonProps as MyButtonProps } from '../Button/Button';
 
 export const Card = MuiCard;
 
@@ -26,12 +30,18 @@ export const Box = MuiBox;
 
 export const Paper = MuiPaper;
 export const Typography = MuiTypography;
+
 export const Button = MuiButton;
 
-export const ExpandMore = styled(({ icon, ...props }) => <Button icon={icon} {...props} />)(({ theme, expand }) => ({
+interface ExpandMoreStyledProps {
+    icon: React.ReactNode;
+    expand: boolean;
+}
+type ExpandMoreStyledPropsType = ButtonProps & ExpandMoreStyledProps;
+export const ExpandMore = styled(MuiButton)<ExpandMoreStyledPropsType>(({ theme, expand }) => ({
     transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
     marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
         duration: theme.transitions.duration.shortest,
     }),
-}));
+})) as ComponentType<ExpandMoreStyledPropsType>;
