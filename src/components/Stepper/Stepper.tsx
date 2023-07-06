@@ -1,5 +1,5 @@
 import React, { useMemo, cloneElement, isValidElement, ReactNode } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Check as CheckIcon } from '@mui/icons-material';
 
 import {
@@ -18,6 +18,7 @@ import {
 import { getCustomColor, useCustomColor } from '../../utils/helpers';
 import { useTheme } from '@mui/material/styles';
 
+// change it into interface
 type Step = {
     label: string;
     optional?: boolean | string;
@@ -25,10 +26,11 @@ type Step = {
     error?: boolean;
     icon?: ReactNode;
 };
+
 interface StepperProps {
     steps?: Array<Step | string>;
     stepIndex?: number;
-    orientation?: 'horizontal' | 'vertical';
+    orientation?: 'horizontal' | 'vertical'; // export this to type variable
     stepsOnlyWithoutComplete?: boolean;
     stepsBottomLabel?: boolean;
     color?: string;
@@ -327,50 +329,50 @@ export default function Stepper({
     );
 }
 
-Stepper.propTypes = {
-    steps: PropTypes.arrayOf(
-        PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.shape({
-                label: PropTypes.string,
-                optional: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-                color: PropTypes.string,
-                error: PropTypes.bool,
-                icon: PropTypes.node,
-            }),
-        ])
-    ),
-    stepIndex: PropTypes.number,
-    orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-    stepsOnlyWithoutComplete: PropTypes.bool,
-    stepsBottomLabel: PropTypes.bool,
-    color: PropTypes.string,
-    onReset: PropTypes.func,
-    onNext: PropTypes.func,
-    onBack: PropTypes.func,
-    onSkip: PropTypes.func,
-    onDone: PropTypes.func,
-    stepsIndexSkipped: PropTypes.arrayOf(PropTypes.number),
-    allCompletedCmp: PropTypes.node,
-    unmountOnExit: PropTypes.bool,
-    labels: PropTypes.shape({
-        next: PropTypes.string,
-        back: PropTypes.string,
-        done: PropTypes.string,
-        skip: PropTypes.string,
-        optional: PropTypes.string,
-    }),
-    qontoStyle: PropTypes.bool,
-    customStyleProps: PropTypes.shape({
-        fontSize: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-        background: PropTypes.string,
-        lineColor: PropTypes.string,
-        padding: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-        lineWidth: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-        checkIcon: PropTypes.node,
-        dotIcon: PropTypes.node,
-    }),
-};
+// Stepper.propTypes = {
+//     steps: PropTypes.arrayOf(
+//         PropTypes.oneOfType([
+//             PropTypes.string,
+//             PropTypes.shape({
+//                 label: PropTypes.string,
+//                 optional: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+//                 color: PropTypes.string,
+//                 error: PropTypes.bool,
+//                 icon: PropTypes.node,
+//             }),
+//         ])
+//     ),
+//     stepIndex: PropTypes.number,
+//     orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+//     stepsOnlyWithoutComplete: PropTypes.bool,
+//     stepsBottomLabel: PropTypes.bool,
+//     color: PropTypes.string,
+//     onReset: PropTypes.func,
+//     onNext: PropTypes.func,
+//     onBack: PropTypes.func,
+//     onSkip: PropTypes.func,
+//     onDone: PropTypes.func,
+//     stepsIndexSkipped: PropTypes.arrayOf(PropTypes.number),
+//     allCompletedCmp: PropTypes.node,
+//     unmountOnExit: PropTypes.bool,
+//     labels: PropTypes.shape({
+//         next: PropTypes.string,
+//         back: PropTypes.string,
+//         done: PropTypes.string,
+//         skip: PropTypes.string,
+//         optional: PropTypes.string,
+//     }),
+//     qontoStyle: PropTypes.bool,
+//     customStyleProps: PropTypes.shape({
+//         fontSize: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+//         background: PropTypes.string,
+//         lineColor: PropTypes.string,
+//         padding: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+//         lineWidth: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+//         checkIcon: PropTypes.node,
+//         dotIcon: PropTypes.node,
+//     }),
+// };
 
 Stepper.defaultProps = {
     steps: undefined,
