@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , PropsWithChildren} from 'react';
 // import PropTypes from 'prop-types';
 import { Check as CheckIcon } from '@mui/icons-material';
 import { ListItemIcon, ListItemText, Menu as MuiMenu, MenuItem, MenuList, MenuWrapper } from './Menu.styled';
@@ -27,6 +27,7 @@ export interface DividerProps {
 
 export interface MenuProps {
     width?: string | number;
+    height?: string | number;
     maxHeight?: string | number;
     boundChildrenId?: string;
     boundChildrenIndex?: boolean | number;
@@ -51,7 +52,7 @@ export interface MenuProps {
 type anchorPositionVerticalType = 'top' | 'bottom';
 type anchorPositionHorizontalType = 'left' | 'center' | 'right';
 
-export default function Menu(props: MenuProps) {
+export default function Menu(props: PropsWithChildren<MenuProps>) {
     const {
         width,
         height,

@@ -1,4 +1,4 @@
-import React, { cloneElement, isValidElement } from 'react';
+import React, { cloneElement, isValidElement, PropsWithChildren } from 'react';
 // import PropTypes from 'prop-types';
 import { MoreVert as MoreVertIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 
@@ -41,7 +41,7 @@ interface CardProps {
     flexDirection?: FlexDirectionType;
 }
 
-export default function Card(props: CardProps) {
+export default function Card(props: PropsWithChildren<CardProps>) {
     let {
         optionsMenu,
         title,
@@ -49,14 +49,12 @@ export default function Card(props: CardProps) {
         actions,
         avatar,
         image,
-        imageTitle,
         width,
         maxWidth,
         flexDirection,
         mediaOnTop,
         contentPadding,
         children,
-        onClick,
         ...rest
     } = props;
 
@@ -65,10 +63,10 @@ export default function Card(props: CardProps) {
     const handleExpandClick = () => setExpanded(!expanded);
     mediaOnTop = mediaOnTop === undefined && ['row', 'row-reverse'].includes(flexDirection) ? true : mediaOnTop;
 
-    children = [].concat(children);
-    const cardContentExpendedIndex = children.findIndex((box) => box?.type?.name === 'CardContentExpended');
-    const cardContentExpended = cardContentExpendedIndex >= 0 ? children[cardContentExpendedIndex] : undefined;
-    children = children.filter((_, index) => index !== cardContentExpendedIndex);
+    let content = [].concat(children);
+    const cardContentExpendedIndex = content.findIndex((box) => box?.type?.displayName === 'CardContentExpended');
+    const cardContentExpended = cardContentExpendedIndex >= 0 ? content[cardContentExpendedIndex] : undefined;
+    content = content.filter((_, index) => index !== cardContentExpendedIndex);
 
     const options = Array.isArray(optionsMenu) ? optionsMenu : optionsMenu?.options ?? [];
     const optionsProps = Array.isArray(optionsMenu) ? {} : optionsMenu;

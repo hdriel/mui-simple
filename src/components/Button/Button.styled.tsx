@@ -34,6 +34,7 @@ export const Button = styled(MuiButton, {
 ` as ComponentType<ButtonStyledPropsType>;
 
 interface IconButtonStyledProps {
+    href?: string;
     customColor?: string;
     disableElevation?: boolean;
 }
