@@ -20,7 +20,6 @@ import { useCardExpandedContent } from './Card.hooks';
 interface CardMedia {
     src?: string;
     title?: string;
-    alt?: string;
     width?: number | string;
     onClick?: (Event) => void;
 }
@@ -99,7 +98,7 @@ export default function Card(props: PropsWithChildren<CardProps>) {
                     <CardMedia
                         component="img"
                         image={imageSrc}
-                        alt={'card image media'}
+                        alt={imageProps?.title ?? 'card image media'}
                         sx={{ width: imageProps?.width }}
                         {...imageProps}
                     />
