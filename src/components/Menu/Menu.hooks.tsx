@@ -1,70 +1,109 @@
-import { cloneElement, isValidElement, useMemo, useState } from "react";
-import { isDefined } from "../../utils/helpers";
+import React, { cloneElement, isValidElement, MouseEventHandler, useMemo, useState } from 'react';
+import { isDefined } from '../../utils/helpers';
 
 export function useChildrenComponentBinding({
-  boundChildrenId,
-  boundChildrenIndex,
-  children,
-  setAnchorEl,
-  anchorElementRef,
-  onClickControlled,
-}) {
-  const elementChildren = [].concat(children);
-  let validIndex = 0;
+    boundChildrenId,
+    boundChildrenIndex,
+    children,
+    setAnchorEl,
+    anchorElementRef,
+    onClickControlled,
+}: {
+    boundChildrenId?: string;
+    boundChildrenIndex?: number | boolean;
+    children?: any;
+    setAnchorEl?: Function;
+    anchorElementRef?: any;
+    onClickControlled?: Function;
+}): any[] {
+    const elementChildren = [].concat(children);
+    let validIndex = 0;
 
-  return elementChildren.map((child, index) => {
-    if (!isValidElement(child)) return child;
-    return cloneElement(child, {
-      key: index,
-      ...(!anchorElementRef &&
-        ((isDefined(boundChildrenId) && boundChildrenId === child.props.id) ||
-          (isDefined(boundChildrenIndex) &&
-            boundChildrenIndex === validIndex++)) && {
-          onClick: (event, ...args) => {
-            setAnchorEl(event?.currentTarget);
-            onClickControlled?.(event);
-            child.props.onClick?.(event, ...args);
-          },
-        }),
+    return elementChildren.map((child, index) => {
+        if (!isValidElement(child)) return child;
+        return cloneElement(child, {
+            key: index,
+            ...(!anchorElementRef &&
+                ((isDefined(boundChildrenId) && boundChildrenId === (child.props as any).id) ||
+                    (isDefined(boundChildrenIndex) && boundChildrenIndex === validIndex++)) && {
+                    onClick: (event, ...args) => {
+                        setAnchorEl(event?.currentTarget);
+                        onClickControlled?.(event);
+                        (child.props as any).onClick?.(event, ...args);
+                    },
+                }),
+        });
     });
-  });
 }
 
+type anchorPositionVerticalType = 'top' | 'bottom';
+type anchorPositionHorizontalType = 'left' | 'center' | 'right';
+
+type AnchorReference = 'anchorPosition';
+type AnchorPositionMouse = {
+    left: number;
+    top: number;
+};
+type AnchorPositionRelative = {
+    vertical: anchorPositionVerticalType;
+    horizontal: anchorPositionHorizontalType;
+};
+
+interface AnchorProps {
+    anchorEl: any;
+    anchorReference?: AnchorReference;
+    anchorPosition?: AnchorPositionMouse | AnchorPositionRelative;
+    transformOrigin?: AnchorPositionMouse | AnchorPositionRelative;
+}
 export function useAnchorProps({
-  contextMenu,
-  anchorElementRef,
-  anchorPosition,
-}) {
-  const [anchorEl, setAnchorEl] = useState(null);
+    contextMenu,
+    anchorElementRef,
+    anchorPosition,
+}: {
+    contextMenu?: any;
+    anchorElementRef?: any;
+    anchorPosition?: Partial<AnchorPositionRelative>;
+}): {
+    setAnchorEl: (value: unknown) => void;
+    anchorProps:
+        | { anchorReference: 'anchorPosition'; anchorPosition: { top: number; left: number } }
+        | {
+              anchorEl: any;
+              transformOrigin: AnchorPositionRelative;
+              anchorPosition: AnchorPositionRelative;
+          }
+        | {};
+} {
+    const [anchorEl, setAnchorEl] = useState(null);
 
-  const anchorProps = useMemo(() => {
-    if (contextMenu) {
-      return {
-        anchorReference: "anchorPosition",
-        anchorPosition: { left: contextMenu?.mouseX, top: contextMenu?.mouseY },
-      };
-    }
+    const anchorProps = useMemo(() => {
+        if (contextMenu) {
+            return {
+                anchorReference: 'anchorPosition',
+                anchorPosition: { left: contextMenu?.mouseX, top: contextMenu?.mouseY },
+            };
+        }
 
-    if (anchorElementRef?.current ?? anchorEl) {
-      const { vertical, horizontal } = anchorPosition ?? {};
+        if (anchorElementRef?.current ?? anchorEl) {
+            const { vertical, horizontal } = anchorPosition ?? {};
 
-      const position =
-        vertical || horizontal
-          ? { vertical: vertical ?? "bottom", horizontal: horizontal ?? "left" }
-          : undefined;
+            const position =
+                vertical || horizontal
+                    ? { vertical: vertical ?? 'bottom', horizontal: horizontal ?? 'left' }
+                    : undefined;
 
-      return {
-        anchorEl: anchorEl ?? anchorElementRef?.current,
-        ...(position && {
-          anchorPosition: position,
-          transformOrigin: position,
-        }),
-      };
-    }
+            return {
+                anchorEl: anchorEl ?? anchorElementRef?.current,
+                ...(position && {
+                    anchorPosition: position,
+                    transformOrigin: position,
+                }),
+            };
+        }
 
-    return {};
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [anchorElementRef?.current, anchorEl, contextMenu, anchorPosition]);
+        return {};
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [anchorElementRef?.current, anchorEl, contextMenu, anchorPosition]);
 
-  return { anchorProps, setAnchorEl };
+    return { anchorProps, setAnchorEl };
 }

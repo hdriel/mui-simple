@@ -1,4 +1,4 @@
-import React, { cloneElement, isValidElement, PropsWithChildren } from 'react';
+import React, { useState, cloneElement, isValidElement, PropsWithChildren, Children } from 'react';
 // import PropTypes from 'prop-types';
 import { MoreVert as MoreVertIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 
@@ -15,6 +15,7 @@ import {
 } from './Card.styled';
 
 import Menu, { MenuProps, OptionMenuItem, DividerProps } from '../Menu/Menu';
+import { useCardExpandedContent } from './Card.hooks';
 
 interface CardMedia {
     src?: string;
@@ -58,15 +59,11 @@ export default function Card(props: PropsWithChildren<CardProps>) {
         ...rest
     } = props;
 
-    const [expanded, setExpanded] = React.useState(false);
-
-    const handleExpandClick = () => setExpanded(!expanded);
-    mediaOnTop = mediaOnTop === undefined && ['row', 'row-reverse'].includes(flexDirection) ? true : mediaOnTop;
-
-    let content = [].concat(children);
-    const cardContentExpendedIndex = content.findIndex((box) => box?.type?.displayName === 'CardContentExpended');
-    const cardContentExpended = cardContentExpendedIndex >= 0 ? content[cardContentExpendedIndex] : undefined;
-    content = content.filter((_, index) => index !== cardContentExpendedIndex);
+    const { expanded, content, cardContentExpended, isMediaOnTop, handleExpandClick } = useCardExpandedContent({
+        mediaOnTop,
+        children,
+        flexDirection,
+    });
 
     const options = Array.isArray(optionsMenu) ? optionsMenu : optionsMenu?.options ?? [];
     const optionsProps = Array.isArray(optionsMenu) ? {} : optionsMenu;
@@ -130,7 +127,7 @@ export default function Card(props: PropsWithChildren<CardProps>) {
                             padding: contentPadding,
                         }}
                     >
-                        {children}
+                        {Children.toArray(content)}
                     </CardContent>
 
                     <CardActions disableSpacing>
