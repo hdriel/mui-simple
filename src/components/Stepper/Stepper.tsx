@@ -18,13 +18,13 @@ import {
 import { getCustomColor, useCustomColor } from '../../utils/helpers';
 import { useTheme } from '@mui/material/styles';
 
-type Step = {
-    label: string;
+interface Step {
+    label?: string;
     optional?: boolean | string;
     color?: string;
     error?: boolean;
     icon?: ReactNode;
-};
+}
 interface StepperProps {
     steps?: Array<Step | string>;
     stepIndex?: number;
@@ -33,9 +33,9 @@ interface StepperProps {
     stepsBottomLabel?: boolean;
     color?: string;
     onReset?: () => void;
-    onNext?: () => void;
-    onBack?: () => void;
-    onSkip?: () => void;
+    onNext?: (stepId: number) => void;
+    onBack?: (stepId: number) => void;
+    onSkip?: (stepId: number) => void;
     onDone?: () => void;
     stepsIndexSkipped?: number[];
     allCompletedCmp?: ReactNode;
@@ -49,7 +49,7 @@ interface StepperProps {
     };
     qontoStyle?: boolean;
     customStyleProps?: {
-        fontSize?: boolean | string;
+        fontSize?: number | string;
         background?: string;
         lineColor?: string;
         padding?: boolean | string;
@@ -80,7 +80,7 @@ export default function Stepper({
     customStyleProps,
     children,
     ...props
-}): StepperProps {
+}: StepperProps) {
     const theme = useTheme();
     const [customColor] = useCustomColor(color);
 
@@ -94,7 +94,7 @@ export default function Stepper({
 
     const steps = useMemo(
         () =>
-            _steps?.map((step) => {
+            _steps?.map((step: Step) => {
                 const [stepColor] = getCustomColor({ theme, customColor: step?.color });
                 const [errorColor] = getCustomColor({
                     theme,
@@ -120,7 +120,9 @@ export default function Stepper({
 
     const icons = useMemo(
         () =>
-            steps.map((step) => step.icon).reduce((obj, icon) => ({ ...obj, [Object.keys(obj).length + 1]: icon }), {}),
+            steps
+                .map((step: Step) => step.icon)
+                .reduce((obj, icon) => ({ ...obj, [Object.keys(obj).length + 1]: icon }), {}),
         [steps]
     );
     const iconListSize = Object.values(icons).filter(Boolean).length;
@@ -327,50 +329,50 @@ export default function Stepper({
     );
 }
 
-Stepper.propTypes = {
-    steps: PropTypes.arrayOf(
-        PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.shape({
-                label: PropTypes.string,
-                optional: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-                color: PropTypes.string,
-                error: PropTypes.bool,
-                icon: PropTypes.node,
-            }),
-        ])
-    ),
-    stepIndex: PropTypes.number,
-    orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-    stepsOnlyWithoutComplete: PropTypes.bool,
-    stepsBottomLabel: PropTypes.bool,
-    color: PropTypes.string,
-    onReset: PropTypes.func,
-    onNext: PropTypes.func,
-    onBack: PropTypes.func,
-    onSkip: PropTypes.func,
-    onDone: PropTypes.func,
-    stepsIndexSkipped: PropTypes.arrayOf(PropTypes.number),
-    allCompletedCmp: PropTypes.node,
-    unmountOnExit: PropTypes.bool,
-    labels: PropTypes.shape({
-        next: PropTypes.string,
-        back: PropTypes.string,
-        done: PropTypes.string,
-        skip: PropTypes.string,
-        optional: PropTypes.string,
-    }),
-    qontoStyle: PropTypes.bool,
-    customStyleProps: PropTypes.shape({
-        fontSize: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-        background: PropTypes.string,
-        lineColor: PropTypes.string,
-        padding: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-        lineWidth: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-        checkIcon: PropTypes.node,
-        dotIcon: PropTypes.node,
-    }),
-};
+//	Stepper.propTypes = {
+//	    steps: PropTypes.arrayOf(
+//	        PropTypes.oneOfType([
+//	            PropTypes.string,
+//	            PropTypes.shape({
+//	                label: PropTypes.string,
+//	                optional: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+//	                color: PropTypes.string,
+//	                error: PropTypes.bool,
+//	                icon: PropTypes.node,
+//	            }),
+//	        ])
+//	    ),
+//	    stepIndex: PropTypes.number,
+//	    orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+//	    stepsOnlyWithoutComplete: PropTypes.bool,
+//	    stepsBottomLabel: PropTypes.bool,
+//	    color: PropTypes.string,
+//	    onReset: PropTypes.func,
+//	    onNext: PropTypes.func,
+//	    onBack: PropTypes.func,
+//	    onSkip: PropTypes.func,
+//	    onDone: PropTypes.func,
+//	    stepsIndexSkipped: PropTypes.arrayOf(PropTypes.number),
+//	    allCompletedCmp: PropTypes.node,
+//	    unmountOnExit: PropTypes.bool,
+//	    labels: PropTypes.shape({
+//	        next: PropTypes.string,
+//	        back: PropTypes.string,
+//	        done: PropTypes.string,
+//	        skip: PropTypes.string,
+//	        optional: PropTypes.string,
+//	    }),
+//	    qontoStyle: PropTypes.bool,
+//	    customStyleProps: PropTypes.shape({
+//	        fontSize: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+//	        background: PropTypes.string,
+//	        lineColor: PropTypes.string,
+//	        padding: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+//	        lineWidth: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+//	        checkIcon: PropTypes.node,
+//	        dotIcon: PropTypes.node,
+//	    }),
+//	};
 
 Stepper.defaultProps = {
     steps: undefined,

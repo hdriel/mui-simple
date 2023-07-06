@@ -192,9 +192,10 @@ interface QontoStepStyledProps {
     ownerState?: OwnerState;
     background?: string;
     padding?: number;
-    fontSize?: number;
+    fontSize?: string | number;
     color?: string;
 }
+// Todo: check why fontSize, color are unused
 export const QontoStepIconRoot = styled('div')<QontoStepStyledProps>(
     ({ theme, ownerState, background, padding = 10, fontSize = 25, color }) => {
         const backgroundColor = background ?? color ?? get(theme, `palette.primary.main`);
