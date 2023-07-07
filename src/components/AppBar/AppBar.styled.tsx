@@ -1,10 +1,18 @@
-import type { ComponentType } from 'react';
-import { AppBar as MuiAppBar, Toolbar as MuiToolbar, Box, ToolbarProps, AppBarProps, BoxProps } from '@mui/material';
+import React from 'react';
 import { styled } from '@mui/material/styles';
+import { AppBar as MuiAppBar, Toolbar as MuiToolbar, Box as MuiBox } from '@mui/material';
+import type { ToolbarProps, AppBarProps, BoxProps } from '@mui/material';
 
+interface AppBarStyledProps {
+    drawerWidth?: number;
+    /* Todo: assert this type and its usage logic
+		since the customColor made using function that returns array */
+    customColor?: string[];
+}
+type AppBarStyledPropsType = AppBarStyledProps & AppBarProps;
 export const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (propName) => !['drawerWidth', 'customColor'].includes(propName as string),
-})`
+})<AppBarStyledPropsType>`
     width: calc(100% - ${(props) => props.drawerWidth}px);
     transition: ${(props) =>
         props.theme.transitions.create('width', {
@@ -15,13 +23,15 @@ export const AppBar = styled(MuiAppBar, {
     &.MuiPaper-root {
         background-color: ${(props) => props.customColor};
     }
-` as ComponentType<AppBarProps>;
+`;
 
-export const Toolbar = styled(MuiToolbar)`` as ComponentType<ToolbarProps>;
+export const Toolbar = styled(MuiToolbar)<ToolbarProps>``;
 
-export const TitleWrapper = styled(Box)`
+export const TitleWrapper = styled(MuiBox)<BoxProps>`
     display: flex;
     align-items: center;
     justify-content: start;
     gap: 1em;
-` as ComponentType<BoxProps>;
+`;
+
+export const Box = styled(MuiBox)<BoxProps>``;
