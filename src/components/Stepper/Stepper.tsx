@@ -1,5 +1,5 @@
 import React, { useMemo, cloneElement, isValidElement } from 'react';
-import type { ReactNode, ReactElement, PropsWithChildren, ReactElementProps } from 'react';
+import type { ReactNode, ReactElement, PropsWithChildren } from 'react';
 // import PropTypes from 'prop-types';
 import { Check as CheckIcon } from '@mui/icons-material';
 
@@ -172,7 +172,7 @@ export default function Stepper(props: PropsWithChildren<StepperProps>): ReactEl
                       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
                       cloneElement(customStyleProps.checkIcon, {
                           className: 'QontoStepIcon-completedIcon',
-                      } as ReactElementProps)
+                      })
                   ) : (
                       <CheckIcon
                           className="QontoStepIcon-completedIcon"
