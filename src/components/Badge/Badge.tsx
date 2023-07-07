@@ -1,5 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import type { ReactNode, PropsWithChildren } from 'react';
+//	import PropTypes from 'prop-types';
+
 import { Badge as MuiBadge } from './Badge.styled';
 import { useCustomColor } from '../../utils/helpers';
 
@@ -17,21 +19,12 @@ interface BadgeProps {
     showZero?: boolean;
     variant?: VariantType;
     vertical?: VerticalType;
-
     [key: string]: any;
 }
-export default function Badge({
-    variant,
-    color,
-    content,
-    hide,
-    showZero,
-    max,
-    overlap,
-    vertical,
-    horizontal,
-    ...props
-}: BadgeProps) {
+
+export default function Badge(props: PropsWithChildren<BadgeProps>): ReactNode {
+    const { variant, color, content, hide, showZero, max, overlap, vertical, horizontal, ...rest } = props;
+
     const [customColor, muiColor] = useCustomColor(color);
     return (
         <MuiBadge
@@ -49,22 +42,22 @@ export default function Badge({
                     horizontal: horizontal ?? 'right',
                 }
             }
-            {...props}
+            {...rest}
         />
     );
 }
 
-Badge.propTypes = {
-    color: PropTypes.string,
-    content: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    hide: PropTypes.bool,
-    horizontal: PropTypes.oneOf(['right', 'left']),
-    max: PropTypes.number,
-    overlap: PropTypes.oneOf(['circular']),
-    showZero: PropTypes.bool,
-    variant: PropTypes.oneOf(['dot']),
-    vertical: PropTypes.oneOf(['top', 'bottom']),
-};
+//	Badge.propTypes = {
+//    color: PropTypes.string,
+//    content: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+//    hide: PropTypes.bool,
+//    horizontal: PropTypes.oneOf(['right', 'left']),
+//    max: PropTypes.number,
+//    overlap: PropTypes.oneOf(['circular']),
+//    showZero: PropTypes.bool,
+//    variant: PropTypes.oneOf(['dot']),
+//    vertical: PropTypes.oneOf(['top', 'bottom']),
+//	};
 
 Badge.defaultProps = {
     color: undefined,
