@@ -44,6 +44,7 @@ interface AppBarProps {
 }
 export default function AppBar(props: PropsWithChildren<AppBarProps>): ReactElement {
     const {
+        position,
         menu,
         title,
         color,
@@ -62,7 +63,6 @@ export default function AppBar(props: PropsWithChildren<AppBarProps>): ReactElem
         children,
         ...rest
     } = props;
-    let { position } = props;
 
     const [drawerOpen, setDrawerOpen] = useState(false);
     const drawerWidth = drawerProps?.drawerWidth ?? DEFAULT_DRAWER_WIDTH;
@@ -74,7 +74,7 @@ export default function AppBar(props: PropsWithChildren<AppBarProps>): ReactElem
     const toggleDrawer = (open): void => setDrawerOpen((v) => !v);
 
     const isBottom = position === 'fixed-bottom';
-    position = isBottom ? 'fixed' : position;
+    const positionStyle: Position = isBottom ? 'fixed' : position;
 
     const menuIcon = isValidElement(menu)
         ? cloneElement(menu, {
@@ -106,7 +106,7 @@ export default function AppBar(props: PropsWithChildren<AppBarProps>): ReactElem
             >
                 <MuiAppBar
                     drawerWidth={drawerOpen ? drawerWidth : 0}
-                    position={hideOnScroll || elevationScroll ? 'fixed' : (position as Position)}
+                    position={hideOnScroll || elevationScroll ? 'fixed' : positionStyle}
                     customColor={customColor}
                     enableColorOnDark={enableColorOnDark}
                     sx={{ ...(isBottom && { top: 'auto', bottom: 0 }), ...rest.sx }}
