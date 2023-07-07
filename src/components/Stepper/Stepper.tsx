@@ -20,6 +20,7 @@ import {
 import { getCustomColor, useCustomColor, numberToPx } from '../../utils/helpers';
 import { useTheme } from '@mui/material/styles';
 
+type Orientation = 'horizontal' | 'vertical';
 interface StepType {
     label?: string;
     optional?: boolean | string;
@@ -30,7 +31,7 @@ interface StepType {
 interface StepperProps {
     steps?: Array<StepType | string>;
     stepIndex?: number;
-    orientation?: 'horizontal' | 'vertical'; // export this to type variable
+    orientation?: Orientation;
     stepsOnlyWithoutComplete?: boolean;
     stepsBottomLabel?: boolean;
     color?: string;

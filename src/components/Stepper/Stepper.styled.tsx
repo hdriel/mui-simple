@@ -73,10 +73,10 @@ export const StepLabel = styled(MuiStepLabel, {
 
 export const Box = styled(MuiBox)<BoxProps>``;
 
-type OwnerState = {
+interface OwnerState {
     completed?: boolean;
     active?: boolean;
-};
+}
 interface ConnectorStepIconRootStyledProps {
     theme?: string;
     ownerState?: OwnerState;
