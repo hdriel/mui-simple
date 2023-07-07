@@ -1,24 +1,40 @@
 import React, { cloneElement, isValidElement } from 'react';
-import PropTypes from 'prop-types';
+import type { PropsWithChildren, ReactNode, MouseEvent } from 'react';
+//	import PropTypes from 'prop-types';
 import { Box, Fade, useScrollTrigger, Slide } from '@mui/material';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@mui/icons-material';
 import Fab from '../FloatingActionButton/FloatingActionButton';
 import { isDefined } from '../../utils/helpers';
 
-export default function OnScrollEventWrapper({
-    scrollToTop,
-    elevationScroll,
-    hideOnScroll,
-    scrollElement,
-    elevation,
-    defaultFabProps,
-    scrollToId,
-    bottom,
-    right,
-    left,
-    top,
-    children,
-}) {
+interface OnScrollEventWrapperProps {
+    scrollElement?: any;
+    elevationScroll?: boolean;
+    hideOnScroll?: boolean;
+    elevation?: number; // assuming you want the values to be numbers
+    scrollToId?: string;
+    bottom?: number;
+    right?: number;
+    left?: number;
+    top?: number;
+    defaultFabProps?: object;
+    scrollToTop?: ReactNode | boolean;
+    scrollToTopProps?: object;
+}
+export default function OnScrollEventWrapper(props: PropsWithChildren<OnScrollEventWrapperProps>): ReactNode {
+    const {
+        scrollToTop,
+        elevationScroll,
+        hideOnScroll,
+        scrollElement,
+        elevation,
+        defaultFabProps,
+        scrollToId,
+        left,
+        top,
+        children,
+    } = props;
+    let { bottom, right } = props;
+
     const trigger = useScrollTrigger({
         target: scrollElement ?? undefined,
         threshold: scrollToTop && scrollToId ? 100 : elevationScroll ? 0 : undefined,
@@ -29,7 +45,7 @@ export default function OnScrollEventWrapper({
         elevation: elevationScroll ? (trigger ? elevation ?? 4 : 0) : elevation ?? 0,
     });
 
-    const handleClick = (event) => {
+    const handleClick = (event: MouseEvent): void => {
         const anchor = scrollToId && (event.target.ownerDocument || document).querySelector(scrollToId);
 
         anchor?.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -77,20 +93,20 @@ export default function OnScrollEventWrapper({
     );
 }
 
-OnScrollEventWrapper.propTypes = {
-    scrollElement: PropTypes.any,
-    elevationScroll: PropTypes.bool,
-    hideOnScroll: PropTypes.bool,
-    elevation: PropTypes.oneOf(Array.from({ length: 25 }, (_, i) => i)), // 0-24
-    scrollToId: PropTypes.string,
-    bottom: PropTypes.number,
-    right: PropTypes.number,
-    left: PropTypes.number,
-    top: PropTypes.number,
-    defaultFabProps: PropTypes.object,
-    scrollToTop: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
-    scrollToTopProps: PropTypes.object,
-};
+//	OnScrollEventWrapper.propTypes = {
+//    scrollElement: PropTypes.any,
+//    elevationScroll: PropTypes.bool,
+//    hideOnScroll: PropTypes.bool,
+//    elevation: PropTypes.oneOf(Array.from({ length: 25 }, (_, i) => i)), // 0-24
+//    scrollToId: PropTypes.string,
+//    bottom: PropTypes.number,
+//    right: PropTypes.number,
+//    left: PropTypes.number,
+//    top: PropTypes.number,
+//    defaultFabProps: PropTypes.object,
+//    scrollToTop: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
+//    scrollToTopProps: PropTypes.object,
+//	};
 
 OnScrollEventWrapper.defaultProps = {
     scrollElement: undefined,
