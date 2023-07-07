@@ -8,12 +8,8 @@ import {
     StepContent as MuiStepContent,
     StepConnector as MuiStepConnector,
     stepConnectorClasses,
-    StepperProps,
-    StepContentProps,
-    StepLabelProps,
-    BoxProps,
-    StepConnectorProps,
 } from '@mui/material';
+import type { StepperProps, StepContentProps, StepLabelProps, BoxProps, StepConnectorProps } from '@mui/material';
 
 import MuiTypography from '../Typography/Typography';
 import MuiButton from '../Button/Button';
@@ -84,9 +80,9 @@ type OwnerState = {
 interface ConnectorStepIconRootStyledProps {
     theme?: string;
     ownerState?: OwnerState;
-    padding?: number;
+    padding?: string;
     background?: string;
-    fontSize?: number;
+    fontSize?: string;
 }
 export const ConnectorStepIconRoot = styled('div')<ConnectorStepIconRootStyledProps>(
     ({ theme, ownerState, padding, background, fontSize = 25 }) => ({
@@ -191,8 +187,8 @@ interface QontoStepStyledProps {
     theme?: string;
     ownerState?: OwnerState;
     background?: string;
-    padding?: number;
-    fontSize?: string | number;
+    padding?: string;
+    fontSize?: string;
     color?: string;
 }
 // Todo: check why fontSize, color are unused
