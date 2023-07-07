@@ -1,6 +1,14 @@
 import { useState } from 'react';
 
-export const useSimpleStepper = () => {
+interface SimpleStepperProps {
+    stepIndex?: number;
+    onReset?: () => void;
+    onNext?: (stepId: number) => void;
+    onBack?: (stepId: number) => void;
+    onSkip?: (stepId: number) => void;
+    stepsIndexSkipped?: number[];
+}
+export const useSimpleStepper = (): SimpleStepperProps => {
     const [activeStep, setActiveStep] = useState(0);
     const [skipSteps, setSkipSteps] = useState([]);
 
