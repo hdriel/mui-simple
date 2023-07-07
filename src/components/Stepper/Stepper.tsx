@@ -1,5 +1,5 @@
-import React, { useMemo, cloneElement, isValidElement, PropsWithChildren } from 'react';
-import type { ReactNode, ReactElement } from 'react';
+import React, { useMemo, cloneElement, isValidElement } from 'react';
+import type { ReactNode, ReactElement, PropsWithChildren } from 'react';
 // import PropTypes from 'prop-types';
 import { Check as CheckIcon } from '@mui/icons-material';
 
@@ -58,6 +58,7 @@ interface StepperProps {
         lineWidth?: number | string;
         checkIcon?: ReactNode;
         dotIcon?: ReactNode;
+        marginContent?: number | string;
     };
     [key: string]: any;
 }
@@ -139,8 +140,8 @@ export default function Stepper(props: PropsWithChildren<StepperProps>): ReactEl
                           ownerState={{ completed, active }}
                           className={className}
                           background={customStyleProps?.background}
-                          fontSize={numberToPx(customStyleProps?.fontSize)}
-                          padding={numberToPx(customStyleProps?.padding)}
+                          fontSize={customStyleProps?.fontSize}
+                          padding={customStyleProps?.padding}
                       >
                           {icons?.[String(icon)] ?? icon}
                       </ConnectorStepIconRoot>
@@ -206,7 +207,9 @@ export default function Stepper(props: PropsWithChildren<StepperProps>): ReactEl
     const isStepSkipped = (index: number): boolean | undefined => stepsIndexSkipped?.includes(index);
     const handleNext = (): void => onNext?.(activeStep);
     const handleBack = (): void => onBack?.(activeStep);
-    const handleSkip = (index: number): boolean | undefined | void => isStepOptional(index) && onSkip?.(index);
+    const handleSkip = (index: number): void => {
+        if (isStepOptional(index)) onSkip?.(index);
+    };
 
     const connector = qontoStyle ? (
         <QontoConnector orientation={orientation ?? ''} color={customColor} {...customStyleProps} />
@@ -225,7 +228,7 @@ export default function Stepper(props: PropsWithChildren<StepperProps>): ReactEl
                 marginContent={customStyleProps?.marginContent}
                 {...rest}
             >
-                {steps?.map((step, index) => (
+                {steps?.map((step: StepType, index) => (
                     <Step key={index} completed={isStepSkipped(index) ? false : undefined}>
                         <StepLabel
                             error={step.error}

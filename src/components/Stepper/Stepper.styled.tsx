@@ -22,7 +22,7 @@ export const Button = MuiButton;
 interface StepperStyledProps {
     lineWidth?: number;
     lineColor?: string;
-    marginContent?: number;
+    marginContent?: number | string;
 }
 type StepperStyledPropsType = StepperStyledProps & StepperProps;
 export const Stepper = styled(MuiStepper, {
@@ -42,9 +42,9 @@ export const Stepper = styled(MuiStepper, {
 export const Step = MuiStep;
 
 interface StepContentStyledProps {
-    lineWidth?: number;
+    lineWidth?: string | number;
     lineColor?: string;
-    marginContent?: number;
+    marginContent?: string | number;
 }
 type StepContentStyledPropsType = StepContentStyledProps & StepContentProps;
 export const StepContent = styled(MuiStepContent, {
@@ -80,9 +80,9 @@ type OwnerState = {
 interface ConnectorStepIconRootStyledProps {
     theme?: string;
     ownerState?: OwnerState;
-    padding?: string;
+    padding?: string | number;
     background?: string;
-    fontSize?: string;
+    fontSize?: string | number;
 }
 export const ConnectorStepIconRoot = styled('div')<ConnectorStepIconRootStyledProps>(
     ({ theme, ownerState, padding, background, fontSize = 25 }) => ({
@@ -116,7 +116,7 @@ interface StepConnectorStyledProps {
     orientation?: string;
     background?: string;
     lineColor?: string;
-    lineWidth?: number;
+    lineWidth?: string | number;
     color?: string;
 }
 type StepConnectorStyledPropsType = StepConnectorStyledProps & StepConnectorProps;
@@ -137,7 +137,7 @@ export const StepConnector = styled(MuiStepConnector)<StepConnectorStyledPropsTy
                 [`& .${stepConnectorClasses.line}`]: { ...bgColorProp },
             },
             [`& .${stepConnectorClasses.line}`]: {
-                ...(orientation === 'vertical' ? { width: lineWidth } : { height: lineWidth }),
+                ...(orientation === 'vertical' ? { width: numberToPx(lineWidth) } : { height: numberToPx(lineWidth) }),
                 border: 0,
                 backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#eaeaf0',
                 borderRadius: 1,
@@ -148,11 +148,12 @@ export const StepConnector = styled(MuiStepConnector)<StepConnectorStyledPropsTy
 
 interface QontoConnectorStyledProps {
     theme?: string;
-    fontSize?: string;
+    fontSize?: string | number;
     background?: string;
     lineColor?: string;
-    lineWidth?: number;
+    lineWidth?: string | number;
     color?: string;
+    orientation?: string;
 }
 export const QontoConnector = styled(MuiStepConnector)<QontoConnectorStyledProps>(
     ({ theme, fontSize, background, lineColor, lineWidth = 3, color: _color }) => {
@@ -176,7 +177,7 @@ export const QontoConnector = styled(MuiStepConnector)<QontoConnectorStyledProps
             },
             [`& .${stepConnectorClasses.line}`]: {
                 borderColor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#eaeaf0',
-                borderTopWidth: lineWidth,
+                borderTopWidth: numberToPx(lineWidth),
                 borderRadius: 1,
             },
         };
