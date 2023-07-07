@@ -2,7 +2,8 @@ import SwipeableViewsBase from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 
 import { styled, css } from '@mui/material/styles';
-import { MobileStepper as MuiMobileStepper, Box as MuiBox, MobileStepperProps } from '@mui/material';
+import { MobileStepper as MuiMobileStepper, Box as MuiBox } from '@mui/material';
+import type { MobileStepperProps } from '@mui/material';
 import { KeyboardArrowLeft, KeyboardArrowRight, Check } from '@mui/icons-material';
 
 import MuiButton from '../Button/Button';

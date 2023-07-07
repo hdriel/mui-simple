@@ -1,5 +1,6 @@
-import React, { useEffect, useMemo, useState, ReactNode } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useMemo, useState } from 'react';
+import type { ReactNode, PropsWithChildren } from 'react';
+//	import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 
 import {
@@ -16,14 +17,15 @@ import {
 } from './MobileStepper.styled';
 import { useCustomColor } from '../../utils/helpers';
 
-interface Step {
+interface StepType {
     label: string;
     optional?: boolean | string;
     color?: string;
     error?: boolean;
     icon?: ReactNode;
+    // Todo: assert if the type string actually match the project creator's intention
+    customColor?: string;
 }
-
 interface Labels {
     next?: string;
     back?: string;
@@ -31,7 +33,6 @@ interface Labels {
     skip?: string;
     optional?: string;
 }
-
 interface MobileStepperProps {
     swipeable?: boolean;
     autoPlay?: boolean;
@@ -39,11 +40,12 @@ interface MobileStepperProps {
     infiniteLoop?: boolean;
     variant?: 'text' | 'dots' | 'progress';
     position?: 'bottom' | 'static' | 'top';
-    steps?: Array<string | Step>;
+    steps?: Array<string | StepType>;
+    stepIndex?: number;
     color?: string;
-    onNext?: () => void;
-    onBack?: () => void;
-    onSkip?: () => void;
+    onNext?: (stepId: number) => void;
+    onBack?: (stepId: number) => void;
+    onSkip?: (stepId: number) => void;
     onDone?: () => void;
     stepsIndexSkipped?: number[];
     labels?: Labels;
@@ -52,27 +54,29 @@ interface MobileStepperProps {
     [key: string]: any;
 }
 
-export default function MobileStepper({
-    variant,
-    position,
-    steps: _steps,
-    stepIndex: activeStep,
-    color,
-    onNext,
-    onBack,
-    onSkip,
-    onDone,
-    stepsIndexSkipped,
-    labels,
-    autoPlay,
-    autoPlayInterval,
-    infiniteLoop,
-    swipeable,
-    height,
-    maxWidth,
-    children,
-    ...props
-}): MobileStepperProps {
+export default function MobileStepper(props: PropsWithChildren<MobileStepperProps>): MobileStepperProps {
+    const {
+        variant,
+        position,
+        steps: _steps,
+        stepIndex: activeStep,
+        color,
+        onNext,
+        onBack,
+        onSkip,
+        onDone,
+        stepsIndexSkipped,
+        labels,
+        autoPlay,
+        autoPlayInterval,
+        infiniteLoop,
+        swipeable,
+        height,
+        maxWidth,
+        children,
+        ...rest
+    } = props;
+
     const [customColor] = useCustomColor(color);
 
     const theme = useTheme();
@@ -85,10 +89,12 @@ export default function MobileStepper({
         back: labels?.back || 'Back',
         skip: labels?.skip || 'Skip',
         done: labels?.done || 'Done',
+        optional: labels?.optional || 'Optional',
     };
 
-    const handleNext = (step) => onNext?.(step);
-    const handleBack = (step) => onBack?.(step);
+    // Todo: assert if this is the correct type to be as the HandleNext/Back param (number)
+    const handleNext = (activeStep: number): void => onNext?.(activeStep);
+    const handleBack = (activeStep: number): void => onBack?.(activeStep);
     // const isStepOptional = (index) => steps?.[index]?.optional;
     // const isStepSkipped = (index) => stepsIndexSkipped?.includes(index);
     // const handleSkip = (index) => isStepOptional(index) && onSkip?.(index);
@@ -223,7 +229,9 @@ export default function MobileStepper({
                         index={activeStep}
                         onChangeIndex={(step) => {
                             if (step === maxSteps - 1 && !infiniteLoop) {
-                                setTimeout(() => setAutoPlayState(false), [autoPlayInterval - 10]);
+                                /* Todo: assert if the code change was surely ok, prev code was:
+                                setTimeout(() => setAutoPlayState(false), [autoPlayInterval - 10]); */
+                                setTimeout(() => setAutoPlayState(false), autoPlayInterval - 10);
                             }
                             handleNext(step - 1);
                         }}
@@ -251,47 +259,47 @@ export default function MobileStepper({
                 activeStep={activeStep}
                 nextButton={!forceFixedDirection || isLTR ? nextButton : backButton}
                 backButton={!forceFixedDirection || isLTR ? backButton : nextButton}
-                {...props}
+                {...rest}
             />
         </Box>
     );
 }
 
-MobileStepper.propTypes = {
-    swipeable: PropTypes.bool,
-    autoPlay: PropTypes.bool,
-    autoPlayInterval: PropTypes.number,
-    infiniteLoop: PropTypes.bool,
-    variant: PropTypes.oneOf(['text', 'dots', 'progress']),
-    position: PropTypes.oneOf(['bottom', 'static', 'top']),
-    steps: PropTypes.arrayOf(
-        PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.shape({
-                label: PropTypes.string,
-                optional: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-                color: PropTypes.string,
-                error: PropTypes.bool,
-                icon: PropTypes.node,
-            }),
-        ])
-    ),
-    color: PropTypes.string,
-    onNext: PropTypes.func,
-    onBack: PropTypes.func,
-    onSkip: PropTypes.func,
-    onDone: PropTypes.func,
-    stepsIndexSkipped: PropTypes.arrayOf(PropTypes.number),
-    labels: PropTypes.shape({
-        next: PropTypes.string,
-        back: PropTypes.string,
-        done: PropTypes.string,
-        skip: PropTypes.string,
-        optional: PropTypes.string,
-    }),
-    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
+//	MobileStepper.propTypes = {
+//	    swipeable: PropTypes.bool,
+//	    autoPlay: PropTypes.bool,
+//	    autoPlayInterval: PropTypes.number,
+//	    infiniteLoop: PropTypes.bool,
+//	    variant: PropTypes.oneOf(['text', 'dots', 'progress']),
+//	    position: PropTypes.oneOf(['bottom', 'static', 'top']),
+//	    steps: PropTypes.arrayOf(
+//	        PropTypes.oneOfType([
+//	            PropTypes.string,
+//	            PropTypes.shape({
+//	                label: PropTypes.string,
+//	                optional: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+//	                color: PropTypes.string,
+//	                error: PropTypes.bool,
+//	                icon: PropTypes.node,
+//	            }),
+//	        ])
+//	    ),
+//	    color: PropTypes.string,
+//	    onNext: PropTypes.func,
+//	    onBack: PropTypes.func,
+//	    onSkip: PropTypes.func,
+//	    onDone: PropTypes.func,
+//	    stepsIndexSkipped: PropTypes.arrayOf(PropTypes.number),
+//	    labels: PropTypes.shape({
+//	        next: PropTypes.string,
+//	        back: PropTypes.string,
+//	        done: PropTypes.string,
+//	        skip: PropTypes.string,
+//	        optional: PropTypes.string,
+//	    }),
+//	    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+//	    maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+//	};
 
 MobileStepper.defaultProps = {
     swipeable: true,
