@@ -1,31 +1,53 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import type { SyntheticEvent, PropsWithChildren, ReactElement } from 'react';
+//	import PropTypes from 'prop-types';
 import { Accordion as MuiAccordion, AccordionDetails, AccordionSummary, ShowMoreWrapper } from './Accordion.styled';
 import Typography from '../Typography/Typography';
 import Button from '../Button/Button';
 import { ArrowForwardIosSharp as ArrowForwardIosSharpIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 import { useCustomColor } from '../../utils/helpers';
 
-export default function Accordion({
-    id,
-    expanded,
-    onChange,
-    disabled,
-    label,
-    secondaryLabel,
-    details,
-    detailsMaxRows,
-    showMoreLabel,
-    hideLabel,
-    unmountDetailsOnClose,
-    useCustomStyle,
-    bgColor: _bgColor,
-    titleColor: _titleColor,
-    textColor,
-    buttonsColor,
-    children,
-    ...props
-}) {
+interface AccordionProps {
+    id?: string;
+    expanded?: boolean | string;
+    onChange?: (event: React.SyntheticEvent<unknown>, expanded: boolean) => void;
+    disabled?: boolean;
+    label?: string;
+    secondaryLabel?: string;
+    details?: string;
+    detailsMaxRows?: number;
+    showMoreLabel?: string;
+    hideLabel?: string;
+    bgColor?: string;
+    textColor?: string;
+    titleColor?: string;
+    buttonsColor?: string;
+    unmountDetailsOnClose?: boolean;
+    useCustomStyle?: boolean;
+    [key: string]: any;
+}
+export default function Accordion(props: PropsWithChildren<AccordionProps>): ReactElement {
+    const {
+        id,
+        expanded,
+        onChange,
+        disabled,
+        label,
+        secondaryLabel,
+        details,
+        detailsMaxRows,
+        showMoreLabel,
+        hideLabel,
+        unmountDetailsOnClose,
+        useCustomStyle,
+        bgColor: _bgColor,
+        titleColor: _titleColor,
+        textColor,
+        buttonsColor,
+        children,
+        ...rest
+    } = props;
+
     const [showMore, setShowMore] = useState(false);
     const [isEllipsis, setIsEllipsis] = useState(false);
     const [bgColor] = useCustomColor(_bgColor);
@@ -38,7 +60,7 @@ export default function Accordion({
             onChange={(event, isExpanded) => onChange?.(isExpanded ? id : false)}
             useCustomStyle={useCustomStyle}
             TransitionProps={{ unmountOnExit: unmountDetailsOnClose }}
-            {...props}
+            {...rest}
         >
             <AccordionSummary
                 id={id}
@@ -95,24 +117,24 @@ export default function Accordion({
     );
 }
 
-Accordion.propTypes = {
-    id: PropTypes.string,
-    expanded: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-    onChange: PropTypes.func,
-    disabled: PropTypes.bool,
-    label: PropTypes.string,
-    secondaryLabel: PropTypes.string,
-    details: PropTypes.string,
-    detailsMaxRows: PropTypes.number,
-    showMoreLabel: PropTypes.string,
-    hideLabel: PropTypes.string,
-    bgColor: PropTypes.string,
-    textColor: PropTypes.string,
-    titleColor: PropTypes.string,
-    buttonsColor: PropTypes.string,
-    unmountDetailsOnClose: PropTypes.bool,
-    useCustomStyle: PropTypes.bool,
-};
+//	Accordion.propTypes = {
+//	    id: PropTypes.string,
+//	    expanded: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+//	    onChange: PropTypes.func,
+//	    disabled: PropTypes.bool,
+//	    label: PropTypes.string,
+//	    secondaryLabel: PropTypes.string,
+//	    details: PropTypes.string,
+//	    detailsMaxRows: PropTypes.number,
+//	    showMoreLabel: PropTypes.string,
+//	    hideLabel: PropTypes.string,
+//	    bgColor: PropTypes.string,
+//	    textColor: PropTypes.string,
+//	    titleColor: PropTypes.string,
+//	    buttonsColor: PropTypes.string,
+//	    unmountDetailsOnClose: PropTypes.bool,
+//	    useCustomStyle: PropTypes.bool,
+//	};
 
 Accordion.defaultProps = {
     id: undefined,

@@ -6,8 +6,17 @@ import {
     AccordionDetails as MuiAccordionDetails,
     Box,
 } from '@mui/material';
+import type { AccordionProps, AccordionSummaryProps, Theme, AccordionDetailsProps, BoxProps } from '@mui/material';
+import type { SerializedStyles } from '@emotion/serialize';
 
-function customStyleAccordion(props) {
+interface AccordionStyledProps {
+    useCustomStyle?: boolean;
+    bgColor?: string;
+    titleColor?: string;
+    theme?: Theme;
+}
+type AccordionStyledPropsType = AccordionStyledProps & AccordionProps;
+function customStyleAccordion(props: AccordionStyledPropsType): SerializedStyles {
     if (!props.useCustomStyle) return css``;
     const { theme } = props;
 
@@ -21,6 +30,7 @@ function customStyleAccordion(props) {
         }
     `;
 }
+
 export const Accordion = styled(
     ({ useCustomStyle, children, ...props }) => (
         <MuiAccordion
@@ -37,11 +47,18 @@ export const Accordion = styled(
     {
         shouldForwardProp: (propName) => ![].includes(propName as string),
     }
-)`
+)<AccordionStyledPropsType>`
     ${customStyleAccordion}
 `;
 
-function customStyleSummary(props) {
+interface AccordionSummaryStyledProps {
+    useCustomStyle?: boolean;
+    bgColor?: string;
+    titleColor?: string;
+    theme?: Theme;
+}
+type AccordionSummaryStyledPropsType = AccordionSummaryStyledProps & AccordionSummaryProps;
+function customStyleSummary(props: AccordionSummaryStyledPropsType): SerializedStyles {
     if (!props.useCustomStyle) return css``;
     const { theme } = props;
 
@@ -61,9 +78,10 @@ function customStyleSummary(props) {
         }
     `;
 }
+
 export const AccordionSummary = styled(({ label, ...props }) => <MuiAccordionSummary {...props} />, {
     shouldForwardProp: (propName) => !['useCustomStyle', 'bgColor', 'titleColor'].includes(propName as string),
-})`
+})<AccordionSummaryStyledPropsType>`
     ${customStyleSummary};
     &.MuiAccordionSummary-root {
         background-color: ${(props) => props.bgColor};
@@ -71,7 +89,12 @@ export const AccordionSummary = styled(({ label, ...props }) => <MuiAccordionSum
     }
 `;
 
-function customStyleDetails(props) {
+interface AccordionDetailsStyledProps {
+    useCustomStyle?: boolean;
+    theme?: Theme;
+}
+type AccordionDetailsStyledPropsType = AccordionDetailsStyledProps & AccordionDetailsProps;
+function customStyleDetails(props: AccordionDetailsStyledPropsType): SerializedStyles {
     if (!props.useCustomStyle) return css``;
 
     const { theme } = props;
@@ -82,12 +105,12 @@ function customStyleDetails(props) {
 }
 export const AccordionDetails = styled(MuiAccordionDetails, {
     shouldForwardProp: (propName) => !['useCustomStyle'].includes(propName as string),
-})`
+})<AccordionDetailsStyledPropsType>`
     padding-bottom: 1em;
     ${customStyleDetails}
 `;
 
-export const ShowMoreWrapper = styled(Box)`
+export const ShowMoreWrapper = styled(Box)<BoxProps>`
     display: flex;
     align-items: center;
     justify-content: end;
