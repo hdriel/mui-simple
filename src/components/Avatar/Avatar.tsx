@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { PropsWithChildren, ReactNode } from 'react';
 //	import PropTypes from 'prop-types';
 import { Avatar as MuiAvatar } from '@mui/material';
