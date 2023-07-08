@@ -1,21 +1,34 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import type { ReactNode, PropsWithChildren } from 'react';
+
+//	import PropTypes from 'prop-types';
 import Button from './Button';
 import { ButtonGroup as MuiButtonGroup } from './Button.styled';
 import { useCustomColor } from '../../utils/helpers';
 
-const ButtonGroup = ({
-    variant,
-    disabled,
-    color,
-    size,
-    orientation,
-    disableElevation,
-    disableRipple,
-    fullWidth,
-    children,
-    ...props
-}) => {
+interface ButtonGroupProps {
+    variant?: 'contained' | 'outlined' | 'text';
+    disabled?: boolean;
+    color?: string;
+    size?: 'small' | 'medium' | 'large';
+    orientation?: 'horizontal' | 'vertical';
+    disableElevation?: boolean;
+    disableRipple?: boolean;
+    fullWidth?: boolean;
+}
+const ButtonGroup = (props: PropsWithChildren<ButtonGroupProps>): ReactNode => {
+    const {
+        variant,
+        disabled,
+        color,
+        size,
+        orientation,
+        disableElevation,
+        disableRipple,
+        fullWidth,
+        children,
+        ...rest
+    } = props;
     const [customColor, muiColor] = useCustomColor(color);
 
     const buttons = []
@@ -41,23 +54,23 @@ const ButtonGroup = ({
             disableElevation={disableElevation}
             disableRipple={disableRipple}
             fullWidth={fullWidth}
-            {...props}
+            {...rest}
         >
             {buttons}
         </MuiButtonGroup>
     );
 };
 
-ButtonGroup.propTypes = {
-    variant: PropTypes.oneOf(['contained', 'outlined', 'text']),
-    disabled: PropTypes.bool,
-    color: PropTypes.string,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-    disableElevation: PropTypes.bool,
-    disableRipple: PropTypes.bool,
-    fullWidth: PropTypes.bool,
-};
+//	ButtonGroup.propTypes = {
+//    variant: PropTypes.oneOf(['contained', 'outlined', 'text']),
+//    disabled: PropTypes.bool,
+//    color: PropTypes.string,
+//    size: PropTypes.oneOf(['small', 'medium', 'large']),
+//    orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+//    disableElevation: PropTypes.bool,
+//    disableRipple: PropTypes.bool,
+//    fullWidth: PropTypes.bool,
+//	};
 
 ButtonGroup.defaultProps = {
     variant: undefined,
