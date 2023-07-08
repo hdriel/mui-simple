@@ -1,4 +1,8 @@
-const openedMixin = (theme, drawerWidth) => ({
+import type { PropsWithChildren } from 'react';
+import type { SxProps, Theme } from '@mui/material';
+
+// Todo: check if its should be SxProps type
+const openedMixin = (theme: Theme, drawerWidth?: number | string): SxProps => ({
     width: drawerWidth,
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
@@ -7,7 +11,7 @@ const openedMixin = (theme, drawerWidth) => ({
     overflowX: 'hidden',
 });
 
-const closedMixin = (theme) => ({
+const closedMixin = (theme: Theme): SxProps => ({
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -19,7 +23,14 @@ const closedMixin = (theme) => ({
     },
 });
 
-export function drawerStyles({ theme, open, isMiniPersistent, drawerWidth = 240 }) {
+interface DrawerStylesProps {
+    theme?: Theme;
+    open?: boolean;
+    isMiniPersistent?: boolean;
+    drawerWidth?: number | string;
+}
+export function drawerStyles(props: PropsWithChildren<DrawerStylesProps>): SxProps {
+    const { theme, open, isMiniPersistent, drawerWidth = 240 } = props;
     return {
         width: drawerWidth,
         flexShrink: 0,
