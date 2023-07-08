@@ -35,7 +35,6 @@ export interface ButtonProps {
     tooltipProps?: object;
     uppercase?: boolean;
     minWidth?: string | number;
-
     [key: string]: any;
 }
 

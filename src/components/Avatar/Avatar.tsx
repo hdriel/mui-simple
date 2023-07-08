@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import type { PropsWithChildren, ReactNode } from 'react';
 //	import PropTypes from 'prop-types';
 import { Avatar as MuiAvatar } from '@mui/material';
@@ -65,7 +65,7 @@ export default function Avatar(props: PropsWithChildren<AvatarProps>): ReactNode
                 {!url && (icon ?? getCapitalLetters(username))}
             </MuiAvatar>
         </Tooltip>
-    );
+    ) as ReactNode; // Todo: check if as ReactNode is the correct way to deal with the TS error
 }
 
 //	Avatar.propTypes = {

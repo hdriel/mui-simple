@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import type { SyntheticEvent, PropsWithChildren, ReactElement } from 'react';
 //	import PropTypes from 'prop-types';
 import { Accordion as MuiAccordion, AccordionDetails, AccordionSummary, ShowMoreWrapper } from './Accordion.styled';

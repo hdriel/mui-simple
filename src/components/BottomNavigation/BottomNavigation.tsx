@@ -25,6 +25,7 @@ interface BottomNavigationProps {
     showLabels?: boolean;
     value?: number | string;
     width?: number | string;
+    [key: string]: any;
 }
 export default function BottomNavigation(props: PropsWithChildren<BottomNavigationProps>): ReactNode {
     const {

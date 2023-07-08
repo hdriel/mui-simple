@@ -8,6 +8,7 @@ interface BackdropProps {
     open: boolean;
     color?: string;
     invisible?: boolean;
+    [key: string]: any;
 }
 export default function Backdrop(props: PropsWithChildren<BackdropProps>): ReactNode {
     const { open, color, onClick, invisible, ...rest } = props;

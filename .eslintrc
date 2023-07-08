@@ -14,8 +14,7 @@
         "plugin:storybook/recommended",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
-        "prettier",
-        "plugin:react/jsx-runtime"
+        "prettier"
     ],
     "overrides": [
         {

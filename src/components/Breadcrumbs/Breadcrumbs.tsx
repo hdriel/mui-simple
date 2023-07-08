@@ -1,23 +1,40 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import type { PropsWithChildren, ReactNode } from 'react';
+//	import PropTypes from 'prop-types';
 import { Breadcrumbs as MuiBreadcrumbs } from './Breadcrumbs.styled';
 import Link from '../Link/Link';
 import Chip from '../Chip/Chip';
 import Typography from '../Typography/Typography';
 
-export default function Breadcrumbs({
-    maxItems,
-    size,
-    separator,
-    color,
-    links,
-    chips,
-    chipBreadCrumbsStyle,
-    children,
-    ...props
-}) {
+type Underline = 'always' | 'hover' | 'none';
+interface BreadcrumbLink {
+    url?: string;
+    label?: string;
+    icon?: ReactNode;
+    underline?: Underline;
+    color?: string;
+    onClick?: () => void;
+    onDelete?: () => void;
+    customColor?: string;
+    size?: string | number;
+    startIcon?: ReactNode | string;
+    endIcon?: ReactNode | string;
+}
+interface BreadcrumbsProps {
+    color?: string;
+    maxItems?: number;
+    separator?: string | ReactNode;
+    size?: string | number;
+    links?: Array<string | BreadcrumbLink>;
+    chips?: Array<string | BreadcrumbLink>;
+    chipBreadCrumbsStyle?: boolean;
+    [key: string]: any;
+}
+export default function Breadcrumbs(props: PropsWithChildren<BreadcrumbsProps>): ReactNode {
+    const { maxItems, size, separator, color, links, chips, chipBreadCrumbsStyle, children, ...rest } = props;
+
     return (
-        <MuiBreadcrumbs size={size} maxItems={maxItems} separator={separator} {...props}>
+        <MuiBreadcrumbs size={size} maxItems={maxItems} separator={separator} {...rest}>
             {links?.map((link, index) => {
                 return typeof link === 'string' ? (
                     <Typography key={`${link}-${index}`} color={color} tooltip={false} size={size}>
@@ -52,6 +69,7 @@ export default function Breadcrumbs({
                         startIcon={chip?.startIcon}
                         endIcon={chip?.endIcon}
                         onClick={chip?.onClick}
+                        // Todo: check if need to fill function or login inside this empty arrow func
                         onDelete={chip?.onDelete ?? (chip?.endIcon && (() => {}))}
                         breadCrumbsStyle={chipBreadCrumbsStyle}
                     />
@@ -59,49 +77,49 @@ export default function Breadcrumbs({
             })}
             {children}
         </MuiBreadcrumbs>
-    );
+    ) as ReactNode;
 }
 
-Breadcrumbs.propTypes = {
-    color: PropTypes.string,
-    maxItems: PropTypes.number,
-    separator: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    links: PropTypes.arrayOf(
-        PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.shape({
-                url: PropTypes.string,
-                label: PropTypes.string,
-                icon: PropTypes.node,
-                underline: PropTypes.oneOf(['always', 'hover', 'none']),
-                color: PropTypes.string,
-                onClick: PropTypes.func,
-            }),
-        ])
-    ),
-    chips: PropTypes.arrayOf(
-        PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.shape({
-                url: PropTypes.string,
-                label: PropTypes.string,
-                startIcon: PropTypes.node,
-                endIcon: PropTypes.node,
-                color: PropTypes.string,
-                onClick: PropTypes.func,
-            }),
-        ])
-    ),
-    chipBreadCrumbsStyle: PropTypes.bool,
-};
+//	Breadcrumbs.propTypes = {
+//    color: PropTypes.string,
+//    maxItems: PropTypes.number,
+//    separator: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+//    size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+//    links: PropTypes.arrayOf(
+//        PropTypes.oneOfType([
+//            PropTypes.string,
+//            PropTypes.shape({
+//                url: PropTypes.string,
+//                label: PropTypes.string,
+//                icon: PropTypes.node,
+//                underline: PropTypes.oneOf(['always', 'hover', 'none']),
+//                color: PropTypes.string,
+//                onClick: PropTypes.func,
+//            }),
+//        ])
+//    ),
+//    chips: PropTypes.arrayOf(
+//        PropTypes.oneOfType([
+//            PropTypes.string,
+//            PropTypes.shape({
+//                url: PropTypes.string,
+//                label: PropTypes.string,
+//                startIcon: PropTypes.node,
+//                endIcon: PropTypes.node,
+//                color: PropTypes.string,
+//                onClick: PropTypes.func,
+//            }),
+//        ])
+//    ),
+//    chipBreadCrumbsStyle: PropTypes.bool,
+//	};
 
 Breadcrumbs.defaultProps = {
+    chipBreadCrumbsStyle: true,
+    chips: undefined,
     color: undefined,
+    links: undefined,
     maxItems: undefined,
     separator: undefined,
     size: undefined,
-    links: undefined,
-    chips: undefined,
-    chipBreadCrumbsStyle: true,
 };

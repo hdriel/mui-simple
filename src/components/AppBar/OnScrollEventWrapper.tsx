@@ -1,4 +1,4 @@
-import { cloneElement, isValidElement } from 'react';
+import React, { cloneElement, isValidElement } from 'react';
 import type { PropsWithChildren, ReactNode, MouseEvent } from 'react';
 //	import PropTypes from 'prop-types';
 import { Box, Fade, useScrollTrigger, Slide } from '@mui/material';
@@ -19,6 +19,7 @@ interface OnScrollEventWrapperProps {
     defaultFabProps?: object;
     scrollToTop?: ReactNode | boolean;
     scrollToTopProps?: object;
+    [key: string]: any;
 }
 export default function OnScrollEventWrapper(props: PropsWithChildren<OnScrollEventWrapperProps>): ReactNode {
     const {
