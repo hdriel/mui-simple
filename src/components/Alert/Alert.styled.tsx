@@ -36,4 +36,4 @@ export const Alert = styled(MuiAlert, {
     }
 ` as ComponentType<AlertStyledPropsType>;
 
-export const AlertTitle = styled(MuiAlertTitle)`` as ComponentType<AlertTitleProps>;
+export const AlertTitle = MuiAlertTitle;
