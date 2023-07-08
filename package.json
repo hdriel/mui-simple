@@ -119,6 +119,7 @@
         "@storybook/react": "^7.0.2",
         "@storybook/react-webpack5": "^7.0.2",
         "@storybook/testing-library": "^0.0.14-next.2",
+        "@types/autosuggest-highlight": "^3.2.0",
         "@types/color": "^3.0.3",
         "@types/lodash-es": "^4.17.7",
         "@types/prop-types": "^15.7.5",
