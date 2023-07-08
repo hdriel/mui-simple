@@ -1,4 +1,5 @@
 import React from 'react';
+import type { PropsWithChildren } from 'react';
 import { get } from 'lodash-es';
 import { styled } from '@mui/material/styles';
 import {
@@ -21,7 +22,14 @@ interface BottomNavigationStyledProps {
 }
 type BottomNavigationStyledPropsType = BottomNavigationProps & BottomNavigationStyledProps;
 export const BottomNavigation = styled(
-    ({ width, elevation, fixedToTop, fixedToBottom, position, ...props }) => (
+    ({
+        width,
+        elevation,
+        fixedToTop,
+        fixedToBottom,
+        position,
+        ...props
+    }: PropsWithChildren<BottomNavigationStyledProps>) => (
         <Paper
             sx={{
                 width,

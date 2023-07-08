@@ -1,4 +1,5 @@
 import React from 'react';
+import type { PropsWithChildren } from 'react';
 import { styled, css } from '@mui/material/styles';
 import {
     Accordion as MuiAccordion,
@@ -32,7 +33,7 @@ function customStyleAccordion(props: AccordionStyledPropsType): SerializedStyles
 }
 
 export const Accordion = styled(
-    ({ useCustomStyle, children, ...props }) => (
+    ({ useCustomStyle, children, ...props }: PropsWithChildren<AccordionStyledProps>) => (
         <MuiAccordion
             {...(useCustomStyle && {
                 disableGutters: true,
@@ -56,6 +57,7 @@ interface AccordionSummaryStyledProps {
     bgColor?: string;
     titleColor?: string;
     theme?: Theme;
+    label?: string;
 }
 type AccordionSummaryStyledPropsType = AccordionSummaryStyledProps & AccordionSummaryProps;
 function customStyleSummary(props: AccordionSummaryStyledPropsType): SerializedStyles {
@@ -79,9 +81,12 @@ function customStyleSummary(props: AccordionSummaryStyledPropsType): SerializedS
     `;
 }
 
-export const AccordionSummary = styled(({ label, ...props }) => <MuiAccordionSummary {...props} />, {
-    shouldForwardProp: (propName) => !['useCustomStyle', 'bgColor', 'titleColor'].includes(propName as string),
-})<AccordionSummaryStyledPropsType>`
+export const AccordionSummary = styled(
+    ({ label, ...props }: PropsWithChildren<AccordionSummaryStyledProps>) => <MuiAccordionSummary {...props} />,
+    {
+        shouldForwardProp: (propName) => !['useCustomStyle', 'bgColor', 'titleColor'].includes(propName as string),
+    }
+)<AccordionSummaryStyledPropsType>`
     ${customStyleSummary};
     &.MuiAccordionSummary-root {
         background-color: ${(props) => props.bgColor};
