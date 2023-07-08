@@ -1,4 +1,5 @@
-import React, { useState, cloneElement, isValidElement, PropsWithChildren, Children } from 'react';
+import React, { cloneElement, isValidElement, Children } from 'react';
+import type { PropsWithChildren, MouseEvent, ReactNode } from 'react';
 // import PropTypes from 'prop-types';
 import { MoreVert as MoreVertIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 
@@ -13,29 +14,27 @@ import {
     ExpandMore,
     Box,
 } from './Card.styled';
-
-import Menu, { MenuProps, OptionMenuItem, DividerProps } from '../Menu/Menu';
+import Menu from '../Menu/Menu';
+import type { MenuProps, OptionMenuItem, DividerProps } from '../Menu/Menu';
 import { useCardExpandedContent } from './Card.hooks';
 
-interface CardMedia {
+interface CardMediaType {
     src?: string;
     title?: string;
     width?: number | string;
     height?: number | string;
-    onClick?: (Event) => void;
+    onClick?: (e: MouseEvent) => void;
     [key: string]: any;
 }
-
 type FlexDirectionType = 'row' | 'row-reverse' | 'column' | 'column-reverse';
-
 interface CardProps {
     raised?: boolean;
     optionsMenu?: MenuProps | Array<OptionMenuItem | DividerProps>;
     title?: string;
     subtitle?: string;
     actions?: any[];
-    avatar?: React.ReactNode;
-    image?: string | CardMedia;
+    avatar?: ReactNode;
+    image?: string | CardMediaType;
     width?: number | string;
     maxWidth?: number | string;
     mediaOnTop?: boolean;
@@ -43,9 +42,8 @@ interface CardProps {
     flexDirection?: FlexDirectionType;
     [key: string]: any;
 }
-
-export default function Card(props: PropsWithChildren<CardProps>) {
-    let {
+export default function Card(props: PropsWithChildren<CardProps>): ReactNode {
+    const {
         optionsMenu,
         title,
         subtitle,
@@ -93,7 +91,7 @@ export default function Card(props: PropsWithChildren<CardProps>) {
                 sx={{
                     ...(flexDirection && {
                         display: 'flex',
-                        flexDirection: flexDirection,
+                        flexDirection,
                     }),
                 }}
             >

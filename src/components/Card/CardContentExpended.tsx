@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Box } from './Card.styled';
 
-export default function CardContentExpended({ ...props }) {
+export default function CardContentExpended({ ...props }): React.ReactNode {
     return <Box {...props} />;
 }
 CardContentExpended.displayName = 'CardContentExpended';

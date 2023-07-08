@@ -1,6 +1,3 @@
-// @ts-ignore
-
-import React, { ComponentType } from 'react';
 import { styled } from '@mui/material/styles';
 import {
     Card as MuiCard,
@@ -44,4 +41,4 @@ export const ExpandMore = styled(MuiButton)<ExpandMoreStyledPropsType>(({ theme,
     transition: theme.transitions.create('transform', {
         duration: theme.transitions.duration.shortest,
     }),
-})) as ComponentType<ExpandMoreStyledPropsType>;
+}));
