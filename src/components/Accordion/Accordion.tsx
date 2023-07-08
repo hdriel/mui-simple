@@ -10,7 +10,7 @@ import { useCustomColor } from '../../utils/helpers';
 interface AccordionProps {
     id?: string;
     expanded?: boolean | string;
-    onChange?: (event: SyntheticEvent<unknown>, expanded: boolean) => void;
+    onChange?: (event: SyntheticEvent<unknown>, expanded: boolean | string) => void;
     disabled?: boolean;
     label?: string;
     secondaryLabel?: string;
@@ -58,7 +58,7 @@ export default function Accordion(props: PropsWithChildren<AccordionProps>): Rea
             disabled={disabled}
             expanded={typeof expanded === 'string' ? expanded === id : expanded}
             // Todo: check if necessary to send event to onChange
-            onChange={(event, isExpanded) => onChange?.(isExpanded ? id : false)}
+            onChange={(event, isExpanded) => onChange?.(event, isExpanded ? id : false)}
             useCustomStyle={useCustomStyle}
             TransitionProps={{ unmountOnExit: unmountDetailsOnClose }}
             {...rest}
