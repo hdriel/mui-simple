@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
+import type { ReactNode, PropsWithChildren, MouseEventHandler } from 'react';
+//	import PropTypes from 'prop-types';
 import {
     Dialog as MuiDialog,
     DialogTitle as MuiDialogTitle,
@@ -15,43 +16,73 @@ import Draggable from 'react-draggable';
 
 import Button from '../Button/Button';
 
-const Transition = forwardRef(function Transition({ children, ...props }, ref) {
+const Transition = forwardRef(function Transition(props: PropsWithChildren, ref) {
+    const { children, ...rest } = props;
     return (
-        <MuiSlide direction="up" ref={ref} {...props}>
+        <MuiSlide direction="up" ref={ref} {...rest}>
             {children}
         </MuiSlide>
     );
 });
 
-function PaperComponent({ titleId, ...props }) {
+interface PaperComponentProps {
+    titleId?: string | number;
+}
+function PaperComponent(props: PropsWithChildren<PaperComponentProps>): ReactNode {
+    const { titleId, ...rest } = props;
     return (
         <Draggable bounds="body" handle={`#${titleId}`} cancel={'[class*="MuiDialogContent-root"]'}>
-            <MuiPaper {...props} />
+            <MuiPaper {...rest} />
         </Draggable>
     );
 }
 
-function Dialog({
-    onClose,
-    title,
-    titleId,
-    dividers,
-    contentId,
-    selectedValue,
-    open,
-    actions,
-    fullWidth,
-    maxWidth,
-    fullScreen,
-    draggable,
-    children,
-    autoContentPadding,
-    ...props
-}) {
+type ButtonVariantType = 'contained' | 'outlined' | 'text';
+interface DialogAction {
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+    label?: string;
+    autoFocus?: boolean;
+    variant?: ButtonVariantType;
+}
+type MaxWidth = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+type FullScreen = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+interface DialogProps {
+    open: boolean;
+    onClose?: (value: string) => void;
+    selectedValue?: string;
+    title?: string | ReactNode;
+    titleId?: string;
+    contentId?: string;
+    fullWidth?: boolean;
+    dividers?: boolean;
+    autoContentPadding?: boolean;
+    draggable?: boolean;
+    maxWidth?: false | MaxWidth;
+    fullScreen?: false | true | FullScreen;
+    actions?: DialogAction[];
+}
+function Dialog(props: PropsWithChildren<DialogProps>): ReactNode {
+    const {
+        onClose,
+        title,
+        titleId,
+        dividers,
+        contentId,
+        selectedValue,
+        open,
+        actions,
+        fullWidth,
+        maxWidth,
+        fullScreen,
+        draggable,
+        children,
+        autoContentPadding,
+        ...rest
+    } = props;
     const theme = useTheme();
-    const fullScreenBreakPoint = useMediaQuery(theme.breakpoints.down(fullScreen));
+    const fullScreenBreakPoint = useMediaQuery(theme.breakpoints.down(fullScreen as FullScreen));
 
-    const handleClose = () => onClose?.(selectedValue);
+    const handleClose = (): void => onClose?.(selectedValue);
 
     return (
         <MuiDialog
@@ -65,9 +96,9 @@ function Dialog({
             maxWidth={maxWidth}
             aria-labelledby={titleId}
             aria-describedby={contentId}
-            PaperComponent={draggable ? (props) => <PaperComponent titleId={titleId} {...props} /> : undefined}
+            PaperComponent={draggable ? (props) => <PaperComponent titleId={titleId} {...rest} /> : undefined}
             fullScreen={typeof fullScreen === 'boolean' ? fullScreen : fullScreenBreakPoint}
-            {...props}
+            {...rest}
         >
             {title && (
                 <MuiDialogTitle style={{ ...(draggable && { cursor: 'move' }) }} id={titleId}>
@@ -102,27 +133,27 @@ function Dialog({
     );
 }
 
-Dialog.propTypes = {
-    open: PropTypes.bool.isRequired,
-    onClose: PropTypes.func,
-    selectedValue: PropTypes.string,
-    title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    titleId: PropTypes.string,
-    contentId: PropTypes.string,
-    fullWidth: PropTypes.bool,
-    dividers: PropTypes.bool,
-    autoContentPadding: PropTypes.bool,
-    draggable: PropTypes.bool,
-    maxWidth: PropTypes.oneOf([false, 'xs', 'sm', 'md', 'lg', 'xl']),
-    fullScreen: PropTypes.oneOf([false, true, 'xs', 'sm', 'md', 'lg', 'xl']),
-    actions: PropTypes.arrayOf(
-        PropTypes.shape({
-            onClick: PropTypes.func,
-            label: PropTypes.string,
-            autoFocus: PropTypes.bool,
-        })
-    ),
-};
+//	Dialog.propTypes = {
+//    open: PropTypes.bool.isRequired,
+//    onClose: PropTypes.func,
+//    selectedValue: PropTypes.string,
+//    title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+//    titleId: PropTypes.string,
+//    contentId: PropTypes.string,
+//    fullWidth: PropTypes.bool,
+//    dividers: PropTypes.bool,
+//    autoContentPadding: PropTypes.bool,
+//    draggable: PropTypes.bool,
+//    maxWidth: PropTypes.oneOf([false, 'xs', 'sm', 'md', 'lg', 'xl']),
+//    fullScreen: PropTypes.oneOf([false, true, 'xs', 'sm', 'md', 'lg', 'xl']),
+//    actions: PropTypes.arrayOf(
+//        PropTypes.shape({
+//            onClick: PropTypes.func,
+//            label: PropTypes.string,
+//            autoFocus: PropTypes.bool,
+//        })
+//    ),
+//	};
 
 Dialog.defaultProps = {
     onClose: undefined,
