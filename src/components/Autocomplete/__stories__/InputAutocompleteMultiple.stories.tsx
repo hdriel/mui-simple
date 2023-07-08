@@ -58,7 +58,7 @@ export const CountrySelect = () => {
                     raiseSelectedToTop
                     autoHighlight
                     getOptionLabel={(option) => option.label}
-                    renderOption={(props, option) => {
+                    renderOption={(props, option, meta) => {
                         return (
                             <Box
                                 sx={{

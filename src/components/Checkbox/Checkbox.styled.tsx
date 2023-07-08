@@ -20,21 +20,21 @@ interface CheckboxStyledProps {
 
 type CheckboxStyledPropsType = CheckboxProps & CheckboxStyledProps;
 
-export const Checkbox = styled((props: CheckboxStyledPropsType) => {
-    const {
-        required,
-        disabled,
-        labelPlacement,
-        helperText,
-        label = '',
-        fontSize,
-        customColor,
-        muiColor,
-        sx,
-        ...rest
-    } = props;
-    return (
-        (
+export const Checkbox = styled(
+    (props: CheckboxStyledPropsType) => {
+        const {
+            required,
+            disabled,
+            labelPlacement,
+            helperText,
+            label = '',
+            fontSize,
+            customColor,
+            muiColor,
+            sx,
+            ...rest
+        } = props;
+        return (
             <>
                 <FormControlLabel
                     required={required}
@@ -59,9 +59,9 @@ export const Checkbox = styled((props: CheckboxStyledPropsType) => {
                 />
                 {helperText && <FormHelperText>{helperText}</FormHelperText>}
             </>
-        ),
-        {
-            shouldForwardProp: (prop) => !['textColor', 'fontSize', 'helperText'].includes(prop),
-        }
-    );
-})<CheckboxStyledPropsType>`` as ComponentType<CheckboxStyledPropsType>;
+        );
+    },
+    {
+        shouldForwardProp: (prop) => !['textColor', 'fontSize', 'helperText'].includes(prop),
+    }
+)<CheckboxStyledPropsType>`` as ComponentType<CheckboxStyledPropsType>;

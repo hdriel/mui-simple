@@ -55,7 +55,7 @@ export default function InputAutocompleteMultiple({
             options={options}
             renderOption={(props, option, { selected }) => (
                 <li {...props}>
-                    {checkboxStyle && <Checkbox style={{ marginRight: 2 }} checked={selected} edge="start" />}
+                    {checkboxStyle ? <Checkbox style={{ marginRight: 2 }} checked={selected} edge="start" /> : null}
                     <Box
                         sx={{
                             width: '100%',
@@ -64,7 +64,7 @@ export default function InputAutocompleteMultiple({
                         }}
                     >
                         {renderOption?.(props, option, { selected }) ?? getOptionLabel?.(option) ?? option}
-                        {!checkboxStyle && selected && <CheckIcon />}
+                        {!checkboxStyle && selected ? <CheckIcon /> : null}
                     </Box>
                 </li>
             )}

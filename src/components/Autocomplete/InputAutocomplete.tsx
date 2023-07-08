@@ -182,13 +182,17 @@ export default function InputAutocomplete({
             }
             renderInput={(params) => <TextField {...params} {...inputProps} fullWidth />}
             groupBy={typeof groupBy === 'function' ? groupBy : (option) => option[groupBy]}
-            renderOption={
-                typeof renderOption === 'function'
-                    ? (props, option, ...args) => renderOption(props, option, ...args)
-                    : highlightSearchResults
-                    ? renderHighlightOptionCB(highlightField ?? getOptionLabel)
-                    : undefined
-            }
+            renderOption={(...args) => {
+                if (typeof renderOption === 'function') {
+                    return renderOption(...args);
+                }
+
+                if (highlightSearchResults) {
+                    return renderHighlightOptionCB(highlightField ?? getOptionLabel);
+                }
+
+                return undefined;
+            }}
             getOptionDisabled={(option) => option.disabled}
             renderGroup={
                 groupBy
