@@ -1,8 +1,11 @@
 import { Divider as MuiDivider } from '@mui/material';
 import { styled, css } from '@mui/material/styles';
+import type { DividerProps } from '@mui/material';
+import type { SerializedStyles } from '@emotion/serialize';
+
 import { numberToPx } from '../../utils/helpers';
 
-function getCustomBorderStyle({ color, thicknessValue, borderPosition }) {
+function getCustomBorderStyle({ color, thicknessValue, borderPosition }): SerializedStyles {
     const customColorStyle =
         color &&
         css`
@@ -21,7 +24,7 @@ function getCustomBorderStyle({ color, thicknessValue, borderPosition }) {
     `;
 }
 
-function getCustomColorStyle({ color }) {
+function getCustomColorStyle({ color }): SerializedStyles {
     if (!color) return css``;
 
     return css`
@@ -29,7 +32,7 @@ function getCustomColorStyle({ color }) {
     `;
 }
 
-function verticalStyle(props) {
+function verticalStyle(props): SerializedStyles {
     if (props.orientation !== 'vertical') return css``;
 
     const { thickness, customColor: color } = props;
@@ -37,21 +40,22 @@ function verticalStyle(props) {
     const thicknessValue = (thickness !== undefined && numberToPx(thickness)) || 'thin';
 
     return css`
-    & .MuiDivider-wrapper {
-      ${getCustomColorStyle({ color })};     
-    }
-    
-    &::before,
-    &::after {
-      ${getCustomBorderStyle({
-          color,
-          thicknessValue,
-          borderPosition: 'border-left',
-      })}   
-  `;
+        & .MuiDivider-wrapper {
+            ${getCustomColorStyle({ color })};
+        }
+
+        &::before,
+        &::after {
+            ${getCustomBorderStyle({
+                color,
+                thicknessValue,
+                borderPosition: 'border-left',
+            })};
+        }
+    `;
 }
 
-function horizontalStyle(props) {
+function horizontalStyle(props): SerializedStyles {
     if (props.orientation !== 'horizontal') return css``;
 
     const { thickness, customColor: color } = props;
@@ -76,7 +80,7 @@ function horizontalStyle(props) {
 
 export const Divider = styled(MuiDivider, {
     shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
-})`
+})<DividerProps>`
     ${verticalStyle}
     ${horizontalStyle}
 `;

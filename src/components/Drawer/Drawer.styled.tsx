@@ -1,5 +1,7 @@
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import { Drawer as MuiDrawer, SwipeableDrawer as MuiSwipeableDrawer, Box } from '@mui/material';
+
 import { drawerStyles } from './Drawer.styles';
 
 export const Drawer = styled(MuiDrawer, {

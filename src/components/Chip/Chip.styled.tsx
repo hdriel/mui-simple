@@ -1,8 +1,18 @@
 import { get } from 'lodash-es';
 import { Chip as MuiChip } from '@mui/material';
+import type { Theme, ChipProps } from '@mui/material';
 import { styled, css, emphasize } from '@mui/material/styles';
+import type { SerializedStyles } from '@emotion/serialize';
+import { ComponentType } from 'react';
 
-function chipBreadCrumbsStyle(props) {
+interface ChipBreadCrumbsStyleProps {
+    theme?: Theme;
+    muiColor?: string;
+    // Todo: assert if breadCrumbsStyle type is actually boolean
+    breadCrumbsStyle?: boolean;
+}
+
+function chipBreadCrumbsStyle(props: ChipBreadCrumbsStyleProps): SerializedStyles {
     if (!props.breadCrumbsStyle) return css``;
     const { theme, muiColor } = props;
     const backgroundColor = get(
@@ -17,16 +27,20 @@ function chipBreadCrumbsStyle(props) {
     color: ${textColor};
     font-weight: ${theme.typography.fontWeightRegular};
     &:hover, &:focus {
-      background-color: ${emphasize(backgroundColor, 0.06)};
+      background-color: ${backgroundColor && emphasize(backgroundColor as string, 0.06)};
     }
     &:active {
       box-shadow: ${theme.shadows[1]};
-      background-color: ${emphasize(backgroundColor, 0.12)};
+      background-color: ${backgroundColor && emphasize(backgroundColor as string, 0.12)};
     },
   `;
 }
 
-function multiLineStyle(props) {
+interface MultiLineStyleProps {
+    // Todo: assert if multiLine type is actually boolean
+    multiLine?: boolean;
+}
+function multiLineStyle(props): SerializedStyles {
     if (!props.multiLine) return css``;
 
     return css`
@@ -38,14 +52,22 @@ function multiLineStyle(props) {
     `;
 }
 
+interface ChipStyledProps {
+    width?: string;
+    rounded?: boolean;
+    customColor?: string;
+    textColor?: string;
+}
+type ChipStyledPropsType = ChipStyledProps & ChipProps;
+
 export const Chip = styled(MuiChip, {
     shouldForwardProp: (propName) =>
         !['textColor', 'customColor', 'multiLine', 'breadCrumbsStyle', 'rounded'].includes(propName as string),
-})`
+})<ChipStyledPropsType>`
     width: ${(props) => props.width ?? 'auto'};
     border-radius: ${(props) => (props.rounded ? undefined : '4px')};
     background-color: ${(props) => props.customColor};
     color: ${(props) => props.textColor};
     ${multiLineStyle}
     ${chipBreadCrumbsStyle}
-`;
+` as ComponentType<ChipStyledPropsType>;

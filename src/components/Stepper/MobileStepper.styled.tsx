@@ -3,15 +3,20 @@ import { autoPlay } from 'react-swipeable-views-utils';
 
 import { styled, css } from '@mui/material/styles';
 import { MobileStepper as MuiMobileStepper, Box as MuiBox } from '@mui/material';
+import type { MobileStepperProps } from '@mui/material';
 import { KeyboardArrowLeft, KeyboardArrowRight, Check } from '@mui/icons-material';
 
 import MuiButton from '../Button/Button';
 import MuiTypography from '../Typography/Typography';
 import MuiPaper from '../Paper/Paper';
 
+interface MobileStepperStyledProps {
+    forceFixedDirection?: boolean;
+}
+type MobileStepperStyledPropsType = MobileStepperStyledProps & MobileStepperProps;
 export const MobileStepper = styled(MuiMobileStepper, {
     shouldForwardProp: (propName) => !['forceFixedDirection'].includes(propName as string),
-})`
+})<MobileStepperStyledPropsType>`
     &.MuiMobileStepper-root {
         ${(props) =>
             props.forceFixedDirection

@@ -1,6 +1,11 @@
 import { styled, css } from '@mui/material/styles';
 
-export const DraggableListUL = styled('ul')`
+type FlexDirectionType = 'row' | 'row-reverse' | 'column' | 'column-reverse';
+interface DraggableListULProps {
+    flexGap?: number | string;
+    flexDirection?: FlexDirectionType;
+}
+export const DraggableListUL = styled('ul')<DraggableListULProps>`
     display: flex;
     gap: ${(props) => props.flexGap};
 

@@ -1,11 +1,10 @@
 import React, { cloneElement, isValidElement, useState } from 'react';
-import PropTypes from 'prop-types';
-import { Box } from '@mui/material';
+import type { ReactElement, PropsWithChildren, ReactNode } from 'react';
+//	import PropTypes from 'prop-types';
 import { Menu as MenuIcon } from '@mui/icons-material';
 
-import { AppBar as MuiAppBar, TitleWrapper, Toolbar } from './AppBar.styled';
+import { AppBar as MuiAppBar, TitleWrapper, Toolbar, Box } from './AppBar.styled';
 import OnScrollEventWrapper from './OnScrollEventWrapper';
-
 import Button from '../Button/Button';
 import Typography from '../Typography/Typography';
 import Drawer from '../Drawer/Drawer';
@@ -13,34 +12,69 @@ import { useCustomColor } from '../../utils/helpers';
 
 const DEFAULT_DRAWER_WIDTH = 240;
 
-export default function AppBar({
-    menu,
-    title,
-    color,
-    position,
-    enableColorOnDark,
-    scrollElement,
-    toolbarId,
-    elevationScroll,
-    elevation,
-    hideOnScroll,
-    dense,
-    disablePadding,
-    scrollToTop,
-    scrollToTopProps,
-    actions,
-    drawerProps,
-    children,
-    ...props
-}) {
+type Variant = 'permanent' | 'persistent' | 'temporary';
+type OpenDirection = 'left' | 'right' | 'top' | 'bottom';
+type Position = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
+interface DrawerProps {
+    open: boolean;
+    openDirection?: OpenDirection;
+    variant?: Variant;
+    swipeable?: boolean;
+    drawerWidth?: number;
+    toggleDrawer?: (open: boolean) => void;
+}
+interface AppBarProps {
+    menu?: ReactNode | boolean;
+    title?: string | ReactNode;
+    position?: Position | 'fixed-bottom';
+    color?: string;
+    enableColorOnDark?: boolean;
+    toolbarId?: string;
+    scrollElement?: ReactNode | string;
+    elevationScroll?: boolean;
+    hideOnScroll?: boolean;
+    dense?: boolean;
+    disablePadding?: boolean;
+    elevation?: number; // assuming you want the values to be numbers
+    scrollToTop?: ReactNode | boolean;
+    scrollToTopProps?: object;
+    actions?: ReactNode;
+    drawerProps?: DrawerProps;
+    [key: string]: any;
+}
+export default function AppBar(props: PropsWithChildren<AppBarProps>): ReactElement {
+    const {
+        position,
+        menu,
+        title,
+        color,
+        enableColorOnDark,
+        scrollElement,
+        toolbarId,
+        elevationScroll,
+        elevation,
+        hideOnScroll,
+        dense,
+        disablePadding,
+        scrollToTop,
+        scrollToTopProps,
+        actions,
+        drawerProps,
+        children,
+        ...rest
+    } = props;
+
     const [drawerOpen, setDrawerOpen] = useState(false);
     const drawerWidth = drawerProps?.drawerWidth ?? DEFAULT_DRAWER_WIDTH;
-    const customColor = useCustomColor(color);
+    /* Todo: assert this type and its usage logic
+		since the customColor made using function that returns array */
+    const customColor: string[] = useCustomColor(color);
 
-    const toggleDrawer = (open) => setDrawerOpen((v) => !v);
+    // Todo: check if the open param is necessary
+    const toggleDrawer = (open): void => setDrawerOpen((v) => !v);
 
     const isBottom = position === 'fixed-bottom';
-    position = isBottom ? 'fixed' : position;
+    const positionStyle: Position = isBottom ? 'fixed' : position;
 
     const menuIcon = isValidElement(menu)
         ? cloneElement(menu, {
@@ -72,11 +106,11 @@ export default function AppBar({
             >
                 <MuiAppBar
                     drawerWidth={drawerOpen ? drawerWidth : 0}
-                    position={hideOnScroll || elevationScroll ? 'fixed' : position}
+                    position={hideOnScroll || elevationScroll ? 'fixed' : positionStyle}
                     customColor={customColor}
                     enableColorOnDark={enableColorOnDark}
-                    sx={{ ...(isBottom && { top: 'auto', bottom: 0 }), ...props.sx }}
-                    {...props}
+                    sx={{ ...(isBottom && { top: 'auto', bottom: 0 }), ...rest.sx }}
+                    {...rest}
                 >
                     <Toolbar color="inherit" variant={dense ? 'dense' : undefined} disableGutters={disablePadding}>
                         {menuIcon}
@@ -116,24 +150,24 @@ export default function AppBar({
 // @todo: consider to all logo field and position like start / center
 // @todo: what about responsive way ?
 
-AppBar.propTypes = {
-    menu: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
-    title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    position: PropTypes.oneOf(['fixed', 'fixed-bottom', 'sticky', 'static']),
-    color: PropTypes.string,
-    enableColorOnDark: PropTypes.bool,
-    toolbarId: PropTypes.string,
-    scrollElement: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-    elevationScroll: PropTypes.bool,
-    hideOnScroll: PropTypes.bool,
-    dense: PropTypes.bool,
-    disablePadding: PropTypes.bool,
-    elevation: PropTypes.oneOf(Array.from({ length: 25 }, (_, i) => i)), // 0-24
-    scrollToTop: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
-    scrollToTopProps: PropTypes.object,
-    actions: PropTypes.node,
-    drawerProps: PropTypes.object,
-};
+//	AppBar.propTypes = {
+//    menu: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
+//    title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+//    position: PropTypes.oneOf(['fixed', 'fixed-bottom', 'sticky', 'static']),
+//    color: PropTypes.string,
+//    enableColorOnDark: PropTypes.bool,
+//    toolbarId: PropTypes.string,
+//    scrollElement: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+//    elevationScroll: PropTypes.bool,
+//    hideOnScroll: PropTypes.bool,
+//    dense: PropTypes.bool,
+//    disablePadding: PropTypes.bool,
+//    elevation: PropTypes.oneOf(Array.from({ length: 25 }, (_, i) => i)), // 0-24
+//    scrollToTop: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
+//    scrollToTopProps: PropTypes.object,
+//    actions: PropTypes.node,
+//    drawerProps: PropTypes.object,
+//	};
 
 AppBar.defaultProps = {
     menu: undefined,

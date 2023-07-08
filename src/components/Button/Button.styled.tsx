@@ -1,20 +1,16 @@
 import type { ComponentType } from 'react';
 import { styled } from '@mui/material/styles';
-import {
-    Button as MuiButton,
-    IconButton as MuiIconButton,
-    ButtonGroup as MuiButtonGroup,
-    alpha,
-    ButtonProps,
-    IconButtonProps,
-    ButtonGroupProps,
-} from '@mui/material';
+
+import { Button as MuiButton, IconButton as MuiIconButton, ButtonGroup as MuiButtonGroup, alpha } from '@mui/material';
+import type { ButtonProps, IconButtonProps, ButtonGroupProps } from '@mui/material';
 
 interface ButtonStyledProps {
     customColor?: string;
     disableElevation?: boolean;
 }
+
 type ButtonStyledPropsType = ButtonProps & ButtonStyledProps;
+
 export const Button = styled(MuiButton, {
     shouldForwardProp: (propName) => !['disableElevation', 'customColor'].includes(propName as string),
 })<ButtonStyledPropsType>`
@@ -38,7 +34,9 @@ interface IconButtonStyledProps {
     customColor?: string;
     disableElevation?: boolean;
 }
+
 type IconButtonStyledPropsType = IconButtonProps & IconButtonStyledProps;
+
 export const IconButton = styled(MuiIconButton, {
     shouldForwardProp: (propName) => !['disableElevation', 'customColor'].includes(propName as string),
 })<IconButtonStyledPropsType>`
@@ -49,7 +47,9 @@ interface ButtonGroupStyledProps {
     customColor?: string;
     disableElevation?: boolean;
 }
+
 type ButtonGroupStyledPropsType = ButtonGroupProps & ButtonGroupStyledProps;
+
 export const ButtonGroup = styled(MuiButtonGroup, {
     shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
 })<ButtonGroupStyledPropsType>`

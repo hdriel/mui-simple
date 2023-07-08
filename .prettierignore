@@ -1,0 +1,8 @@
+dist
+public
+storybook-static
+node_modules
+coverage
+.vscode
+.idea
+.gitgub

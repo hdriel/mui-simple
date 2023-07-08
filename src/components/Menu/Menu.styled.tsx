@@ -23,6 +23,7 @@ export const ContextMenuWrapper = styled(Box)`
 
 interface ManuWrapperStyledProps {
     arrow?: boolean;
+    [key: string]: any;
 }
 type ManuWrapperStyledPropsType = ManuWrapperStyledProps & BoxProps;
 export const MenuWrapper = styled(Box)<ManuWrapperStyledPropsType>`

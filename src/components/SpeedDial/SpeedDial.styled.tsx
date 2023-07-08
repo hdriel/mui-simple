@@ -1,10 +1,11 @@
-import React, { ComponentType } from 'react';
+import React from 'react';
+import type { ComponentType } from 'react';
 import {
     SpeedDial as MuiSpeedDial,
     SpeedDialAction as MuiSpeedDialAction,
     SpeedDialIcon as MuiSpeedDialIcon,
-    SpeedDialProps,
 } from '@mui/material';
+import type { SpeedDialProps } from '@mui/material';
 import { styled, css } from '@mui/material/styles';
 
 export const SpeedDialIcon = MuiSpeedDialIcon; // note: styled on MuiSpeedDialIcon will break his flip icon animation!!

@@ -1,14 +1,36 @@
 import React from 'react';
+import type { ComponentType, PropsWithChildren } from 'react';
 import { get } from 'lodash-es';
+import { styled } from '@mui/material/styles';
 import {
     BottomNavigation as MuiBottomNavigation,
     BottomNavigationAction as MuiBottomNavigationAction,
 } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import type { BottomNavigationProps } from '@mui/material';
+
 import Paper from '../Paper/Paper';
 
+interface BottomNavigationStyledProps {
+    fixedToBottom?: boolean;
+    customColor?: string;
+    elevation?: number;
+    fixedToTop?: boolean;
+    muiColor?: string;
+    width?: number | string;
+    position?: 'absolute' | 'fixed';
+}
+
+type BottomNavigationStyledPropsType = BottomNavigationProps & BottomNavigationStyledProps;
+
 export const BottomNavigation = styled(
-    ({ width, elevation, fixedToTop, fixedToBottom, position, ...props }) => (
+    ({
+        width,
+        elevation,
+        fixedToTop,
+        fixedToBottom,
+        position,
+        ...props
+    }: PropsWithChildren<BottomNavigationStyledProps>) => (
         <Paper
             sx={{
                 width,
@@ -28,12 +50,13 @@ export const BottomNavigation = styled(
     {
         shouldForwardProp: (propName) => !['muiColor', 'customColor'].includes(propName as string),
     }
-)`
+)<BottomNavigationStyledPropsType>`
     & .MuiBottomNavigationAction-root.Mui-selected {
         color: ${(props) =>
             get(props, `theme.palette.${props.muiColor}.main`) ??
             get(props, `theme.palette.${props.muiColor}`) ??
             props.customColor};
     }
-`;
+` as ComponentType<BottomNavigationStyledPropsType>;
+
 export const BottomNavigationAction = MuiBottomNavigationAction;

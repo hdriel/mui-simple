@@ -33,26 +33,37 @@
         "sourceType": "module",
         "project": "./tsconfig.json"
     },
-    "plugins": [
-        "react",
-        "jest-dom",
-        "testing-library",
-        "@typescript-eslint",
-        "prettier"
-    ],
+    "plugins": ["react", "jest-dom", "testing-library", "@typescript-eslint", "prettier"],
     "rules": {
+        "@typescript-eslint/no-confusing-void-expression": 0,
         "react-hooks/exhaustive-deps": "warn",
         "import/no-extraneous-dependencies": ["error", { "devDependencies": ["**/*.stories.*", "**/.storybook/**.*"] }],
-        "@typescript-eslint/strict-boolean-expression": [
+        "@typescript-eslint/ban-ts-comment": 0,
+        "@typescript-eslint/prefer-nullish-coalescing": 0,
+        "@typescript-eslint/strict-boolean-expressions": 0,
+        "@typescript-eslint/strict-boolean-expression": 0,
+        "linebreak-style": 0,
+        "require-default-props": 0,
+        "react/jsx-no-bind": 0,
+        "react/jsx-boolean-value": 0,
+        "react/jsx-props-no-spreading": 0,
+        "react/jsx-filename-extension": 0,
+        "import/prefer-default-export": 0,
+        "no-underscore-dangle": 0,
+        "no-unsafe-optional-chaining": 0,
+        "func-names": 0,
+        "jsx-a11y/label-has-associated-control": 0,
+        "jsx-a11y/click-events-have-key-events": 0,
+        "jsx-a11y/no-static-element-interactions": 0,
+        "prettier/prettier": 0,
+        "import/extensions": [
             "error",
+            "ignorePackages",
             {
-                "allowNullableBoolean": false,
-                "allowNullableString": false,
-                "allowNullableNumber": false,
-                "allowAny": false,
-                "allowString": false,
-                "allowNumber": false,
-                "allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing": false
+                "js": "never",
+                "jsx": "never",
+                "ts": "never",
+                "tsx": "never"
             }
         ]
     },
@@ -60,7 +71,7 @@
         "import/resolver": {
             "jsconfig": {
                 "config": "tsconfig.json",
-                "extensions": [ ".json", ".js", ".jsx", ".ts", ".tsx"]
+                "extensions": [".json", ".js", ".jsx", ".ts", ".tsx"]
             }
         }
     }

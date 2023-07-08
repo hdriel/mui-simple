@@ -1,4 +1,7 @@
-import React, { forwardRef, MouseEventHandler, Ref, ReactNode } from 'react';
+import React, { forwardRef } from 'react';
+import type { MouseEventHandler, MouseEvent, ReactNode, Ref, PropsWithChildren } from 'react';
+import type { SxProps } from '@mui/material';
+
 // import PropTypes from 'prop-types';
 import CircularProgress from '../Progress/CircularProgress/CircularProgress';
 import { Button as MuiButton, IconButton as MuiIconButton } from './Button.styled';
@@ -9,43 +12,39 @@ import SVGIcon from '../SVGIcon/SVGIcon';
 const spinner = <CircularProgress color="inherit" size={15} />;
 
 type ButtonVariantType = 'contained' | 'outlined' | 'text';
-
 export interface ButtonProps {
-    /**
-     * The variant of the button allowed types: "contained", "outlined", "text"
-     */
-    variant?: ButtonVariantType;
+    color?: string;
     /**
      * The disabled field of button, when is disabled - onClick event won't fire
      */
     disabled?: boolean;
-    startIcon?: ReactNode | string;
-    endIcon?: ReactNode | string;
-    onClick?: MouseEventHandler<HTMLButtonElement>;
-    onRightClick?: MouseEventHandler<HTMLButtonElement>;
-    link?: string;
-    color?: string;
     disableRipple?: boolean;
+    endIcon?: ReactNode | string;
+    fullWidth?: boolean;
+    icon?: ReactNode | string;
     isLoading?: boolean;
+    link?: string;
     loadingIconPosition?: string;
     loadingLabel?: string;
+    minWidth?: string | number;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+    onRightClick?: MouseEventHandler<HTMLButtonElement>;
     size?: string | number;
-    icon?: ReactNode | string;
-    fullWidth?: boolean;
+    startIcon?: ReactNode | string;
+    sx?: SxProps;
     tooltipProps?: object;
     uppercase?: boolean;
-    minWidth?: string | number;
-
+    /**
+     * The variant of the button allowed types: "contained", "outlined", "text"
+     */
+    variant?: ButtonVariantType;
     [key: string]: any;
 }
-
 const Button: React.FC<ButtonProps> = forwardRef(
-    (
-        {
+    (props: PropsWithChildren<ButtonProps>, ref: Ref<HTMLButtonElement>) => {
+        const {
             variant,
             disabled,
-            startIcon,
-            endIcon,
             onClick,
             onRightClick,
             link,
@@ -55,24 +54,24 @@ const Button: React.FC<ButtonProps> = forwardRef(
             loadingIconPosition,
             loadingLabel,
             size,
-            icon,
             fullWidth,
             tooltipProps,
             uppercase,
             minWidth,
             sx,
             children,
-            ...props
-        }: ButtonProps,
-        ref: Ref<HTMLButtonElement>
-    ) => {
+            ...rest
+        } = props;
+        let { startIcon, endIcon, icon } = props;
+
         const [customColor, muiColor] = useCustomColor(color);
         startIcon &&= <SVGIcon>{startIcon}</SVGIcon>;
         endIcon &&= <SVGIcon>{endIcon}</SVGIcon>;
         icon &&= <SVGIcon>{icon}</SVGIcon>;
 
-        const onRightClickHandler = (e) => {
+        const onRightClickHandler = (e: MouseEvent): void => {
             e.preventDefault();
+            // Todo: fix this type error
             onRightClick?.(e);
         };
 
@@ -89,6 +88,7 @@ const Button: React.FC<ButtonProps> = forwardRef(
                         }
                         disableRipple={disabled ? true : disableRipple}
                         onClick={disabled ? undefined : onClick}
+                        // Todo: add correct type for onContextMenu
                         onContextMenu={disabled ? undefined : onRightClick ? onRightClickHandler : props.onContextMenu}
                         href={link}
                         sx={{
@@ -97,7 +97,7 @@ const Button: React.FC<ButtonProps> = forwardRef(
                             ...(size && !['small', 'medium', 'large'].includes(size as string) && { fontSize: size }),
                             ...sx,
                         }}
-                        {...props}
+                        {...rest}
                     >
                         {isLoading ? spinner : icon}
                     </MuiIconButton>
@@ -136,7 +136,7 @@ const Button: React.FC<ButtonProps> = forwardRef(
                         ...(!uppercase && { textTransform: 'none' }),
                         ...sx,
                     }}
-                    {...props}
+                    {...rest}
                 >
                     {content}
                 </MuiButton>
@@ -189,4 +189,5 @@ Button.defaultProps = {
     minWidth: undefined,
 };
 
+Button.displayName = 'Button';
 export default Button;

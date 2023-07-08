@@ -1,80 +1,91 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { Avatar as MuiAvatar } from "@mui/material";
-import {
-  getCapitalLetters,
-  stringToColor,
-  useCustomColor,
-} from "../../utils/helpers";
-import Tooltip from "../Tooltip/Tooltip";
-import { TOOLTIP_PLACEMENTS } from "../Tooltip/Tooltip.consts";
+import React, { useState } from 'react';
+import type { PropsWithChildren, ReactNode } from 'react';
+//	import PropTypes from 'prop-types';
+import { Avatar as MuiAvatar } from '@mui/material';
 
-export default function Avatar({
-  username,
-  image,
-  size,
-  icon,
-  variant,
-  color,
-  fallbackImage,
-  onClick,
-  showTooltip,
-  tooltipPlacement,
-  ...props
-}) {
-  const [url, setUrl] = useState(image);
-  const [fallbackSet, setFallbackSet] = useState(false);
-  const [customColor] = useCustomColor(color);
+import { getCapitalLetters, stringToColor, useCustomColor } from '../../utils/helpers';
+import Tooltip from '../Tooltip/Tooltip';
 
-  const errorHandler = () => {
-    if (fallbackSet) {
-      setUrl(undefined);
-    } else {
-      setFallbackSet(true);
-      setUrl(fallbackImage);
-    }
-  };
+interface AvatarProps {
+    color?: string;
+    fallbackImage?: string;
+    icon?: ReactNode;
+    image?: string;
+    onClick?: () => void;
+    showTooltip?: boolean;
+    size?: string;
+    tooltipPlacement?: 'top' | 'right' | 'bottom' | 'left';
+    username?: string;
+    variant?: 'circular' | 'rounded' | 'square';
+    [key: string]: any;
+}
+export default function Avatar(props: PropsWithChildren<AvatarProps>): ReactNode {
+    const {
+        username,
+        image,
+        size,
+        icon,
+        variant,
+        color,
+        fallbackImage,
+        onClick,
+        showTooltip,
+        tooltipPlacement,
+        ...rest
+    } = props;
+    const [url, setUrl] = useState(image);
+    const [fallbackSet, setFallbackSet] = useState(false);
+    const [customColor] = useCustomColor(color);
 
-  const background =
-    customColor ?? (url && !username ? undefined : stringToColor(username));
+    const errorHandler = (): void => {
+        if (fallbackSet) {
+            setUrl(undefined);
+        } else {
+            setFallbackSet(true);
+            setUrl(fallbackImage);
+        }
+    };
 
-  return (
-    <Tooltip title={showTooltip ? username : ""} placement={tooltipPlacement}>
-      <MuiAvatar
-        alt={username ?? "avatar"}
-        src={url}
-        sx={{ width: size, height: size, background }}
-        variant={variant}
-        imgProps={{ onError: errorHandler }}
-        onClick={onClick}
-        {...props}
-      >
-        {!url && (icon ?? getCapitalLetters(username))}
-      </MuiAvatar>
-    </Tooltip>
-  );
+    const background = customColor ?? (url && !username ? undefined : stringToColor(username));
+
+    return (
+        <Tooltip title={showTooltip ? username : ''} placement={tooltipPlacement}>
+            <MuiAvatar
+                alt={username ?? 'avatar'}
+                src={url}
+                sx={{ width: size, height: size, background }}
+                variant={variant}
+                imgProps={{ onError: errorHandler }}
+                onClick={onClick}
+                {...rest}
+            >
+                {!url && (icon ?? getCapitalLetters(username))}
+            </MuiAvatar>
+        </Tooltip>
+    ) as ReactNode; // Todo: check if as ReactNode is the correct way to deal with the TS error
 }
 
-Avatar.propTypes = {
-  username: PropTypes.string,
-  image: PropTypes.string,
-  size: PropTypes.string,
-  icon: PropTypes.node,
-  variant: PropTypes.oneOf(["circular", "rounded", "square"]),
-  fallbackImage: PropTypes.string,
-  onClick: PropTypes.func,
-  showTooltip: PropTypes.bool,
-  tooltipPlacement: PropTypes.oneOf(TOOLTIP_PLACEMENTS),
-};
+//	Avatar.propTypes = {
+//		fallbackImage: PropTypes.string,
+//		icon: PropTypes.node,
+//		image: PropTypes.string,
+//		onClick: PropTypes.func,
+//		showTooltip: PropTypes.bool,
+//		size: PropTypes.string,
+//		tooltipPlacement: PropTypes.oneOf(TOOLTIP_PLACEMENTS),
+//		username: PropTypes.string,
+//		variant: PropTypes.oneOf(['circular', 'rounded', 'square']),
+//	};
 
 Avatar.defaultProps = {
-  username: undefined,
-  image: undefined,
-  size: undefined,
-  icon: undefined,
-  variant: "circular",
-  fallbackImage: undefined,
-  onClick: undefined,
-  showTooltip: false,
-  tooltipPlacement: undefined,
+    color: undefined,
+    fallbackImage: undefined,
+    icon: undefined,
+    image: undefined,
+    onClick: undefined,
+    showTooltip: false,
+    size: undefined,
+    tooltipPlacement: undefined,
+    username: undefined,
+    variant: 'circular',
 };

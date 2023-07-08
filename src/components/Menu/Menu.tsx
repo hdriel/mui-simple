@@ -15,6 +15,7 @@ export interface OptionMenuItem {
     label?: string | React.ReactNode;
     shortcut?: React.ReactNode;
     check?: boolean;
+    [key: string]: any;
 }
 type DividerVariantType = 'fullWidth' | 'inset' | 'middle';
 export interface DividerProps {
@@ -23,6 +24,7 @@ export interface DividerProps {
     label?: string | React.ReactNode;
     thickness?: number;
     color?: string;
+    [key: string]: any;
 }
 type anchorPositionVerticalType = 'top' | 'bottom';
 type anchorPositionHorizontalType = 'left' | 'center' | 'right';
@@ -49,6 +51,7 @@ export interface MenuProps {
         vertical?: anchorPositionVerticalType;
         horizontal?: anchorPositionHorizontalType;
     };
+    [key: string]: any;
 }
 
 export default function Menu(props: PropsWithChildren<MenuProps>) {
@@ -58,6 +61,7 @@ export default function Menu(props: PropsWithChildren<MenuProps>) {
         maxHeight,
         arrow,
         id,
+        hide,
         disableRipple,
         open,
         dense,

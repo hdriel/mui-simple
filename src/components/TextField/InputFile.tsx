@@ -1,8 +1,8 @@
-import React from "react";
-import Input from "./TextField";
+import React from 'react';
+import Input from './TextField';
 
 export default function InputFile(props) {
-  return <Input {...props} type="file" />;
+    return <Input {...props} type="file" />;
 }
 
 InputFile.propTypes = Input.propTypes;
