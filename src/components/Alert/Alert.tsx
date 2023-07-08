@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo } from 'react';
+import { forwardRef, useMemo, isValidElement, cloneElement } from 'react';
 import type { ReactElement, PropsWithChildren, ReactNode, MouseEvent } from 'react';
 //	import PropTypes from 'prop-types';
 
@@ -31,8 +31,8 @@ const Alert = forwardRef((props: PropsWithChildren<AlertProps>, ref): ReactEleme
             .concat(actions)
             .filter(Boolean)
             .map((action, index) => {
-                return React.isValidElement(action) ? (
-                    React.cloneElement(action, { key: index })
+                return isValidElement(action) ? (
+                    cloneElement(action, { key: index })
                 ) : (
                     <Button
                         key={index}

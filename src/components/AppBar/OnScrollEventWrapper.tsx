@@ -1,4 +1,4 @@
-import React, { cloneElement, isValidElement } from 'react';
+import { cloneElement, isValidElement } from 'react';
 import type { PropsWithChildren, ReactNode, MouseEvent } from 'react';
 //	import PropTypes from 'prop-types';
 import { Box, Fade, useScrollTrigger, Slide } from '@mui/material';

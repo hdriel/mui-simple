@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { SyntheticEvent, PropsWithChildren, ReactElement } from 'react';
 //	import PropTypes from 'prop-types';
 import { Accordion as MuiAccordion, AccordionDetails, AccordionSummary, ShowMoreWrapper } from './Accordion.styled';
@@ -10,7 +10,7 @@ import { useCustomColor } from '../../utils/helpers';
 interface AccordionProps {
     id?: string;
     expanded?: boolean | string;
-    onChange?: (event: React.SyntheticEvent<unknown>, expanded: boolean) => void;
+    onChange?: (event: SyntheticEvent<unknown>, expanded: boolean) => void;
     disabled?: boolean;
     label?: string;
     secondaryLabel?: string;
@@ -57,6 +57,7 @@ export default function Accordion(props: PropsWithChildren<AccordionProps>): Rea
         <MuiAccordion
             disabled={disabled}
             expanded={typeof expanded === 'string' ? expanded === id : expanded}
+            // Todo: check if necessary to send event to onChange
             onChange={(event, isExpanded) => onChange?.(isExpanded ? id : false)}
             useCustomStyle={useCustomStyle}
             TransitionProps={{ unmountOnExit: unmountDetailsOnClose }}
@@ -91,6 +92,7 @@ export default function Accordion(props: PropsWithChildren<AccordionProps>): Rea
                         <Typography
                             wrap={showMore ? false : !!detailsMaxRows}
                             rows={showMore ? undefined : detailsMaxRows}
+                            // Todo: check value type to send event to onChange
                             onEllipsisChange={(value) => setIsEllipsis(value)}
                             color={textColor}
                         >
