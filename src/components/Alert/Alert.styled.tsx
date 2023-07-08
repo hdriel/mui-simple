@@ -34,6 +34,6 @@ export const Alert = styled(MuiAlert, {
     &.MuiPaper-root {
         background-color: ${(props) => props.customColor && alpha(props.customColor, 0.15)};
     }
-` as ComponentType<AlertProps>;
+` as ComponentType<AlertStyledPropsType>;
 
 export const AlertTitle = styled(MuiAlertTitle)`` as ComponentType<AlertTitleProps>;

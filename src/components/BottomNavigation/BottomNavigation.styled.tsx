@@ -1,5 +1,5 @@
 import React from 'react';
-import type { PropsWithChildren } from 'react';
+import type { ComponentType, PropsWithChildren } from 'react';
 import { get } from 'lodash-es';
 import { styled } from '@mui/material/styles';
 import {
@@ -10,7 +10,6 @@ import type { BottomNavigationProps } from '@mui/material';
 
 import Paper from '../Paper/Paper';
 
-type Position = 'absolute' | 'fixed';
 interface BottomNavigationStyledProps {
     fixedToBottom?: boolean;
     customColor?: string;
@@ -18,9 +17,11 @@ interface BottomNavigationStyledProps {
     fixedToTop?: boolean;
     muiColor?: string;
     width?: number | string;
-    position?: Position;
+    position?: 'absolute' | 'fixed';
 }
+
 type BottomNavigationStyledPropsType = BottomNavigationProps & BottomNavigationStyledProps;
+
 export const BottomNavigation = styled(
     ({
         width,
@@ -56,5 +57,6 @@ export const BottomNavigation = styled(
             get(props, `theme.palette.${props.muiColor}`) ??
             props.customColor};
     }
-`;
+` as ComponentType<BottomNavigationStyledPropsType>;
+
 export const BottomNavigationAction = MuiBottomNavigationAction;

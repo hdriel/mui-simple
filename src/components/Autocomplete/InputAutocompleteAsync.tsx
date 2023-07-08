@@ -5,7 +5,21 @@ import MuiAutocomplete from './InputAutocomplete';
 import CircularProgress from '../Progress/CircularProgress/CircularProgress';
 import { sleep } from '../../utils/helpers';
 
-export function useAutoCompleteAsync({ getOptionsPromise, sleep: _sleep, getOptionsCallback, fetchOptionsOnFocus }) {
+interface UseAutoCompleteAsyncReturn {
+    onOpen: () => void;
+    onClose: () => void;
+    options: any[];
+    open: boolean;
+    loading: boolean;
+    endCmp: React.ReactNode;
+}
+
+export function useAutoCompleteAsync({
+    getOptionsPromise,
+    sleep: _sleep,
+    getOptionsCallback,
+    fetchOptionsOnFocus,
+}): UseAutoCompleteAsyncReturn {
     const [open, setOpen] = useState(false);
     const [options, setOptions] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -50,6 +64,7 @@ export function useAutoCompleteAsync({ getOptionsPromise, sleep: _sleep, getOpti
 
 export default function InputAutocompleteAsync({ ...props }) {
     const asyncProps = useAutoCompleteAsync(props);
+
     return <MuiAutocomplete {...props} {...asyncProps} />;
 }
 

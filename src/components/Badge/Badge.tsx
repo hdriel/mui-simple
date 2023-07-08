@@ -7,18 +7,17 @@ import { useCustomColor } from '../../utils/helpers';
 
 type OverlapType = 'circular';
 type VariantType = 'dot';
-type VerticalType = 'top' | 'bottom';
-type HorizontalType = 'right' | 'left';
+
 interface BadgeProps {
     color?: string;
     content?: string | number;
     hide?: boolean;
-    horizontal?: HorizontalType;
+    horizontal?: 'right' | 'left';
     max?: number;
     overlap?: OverlapType;
     showZero?: boolean;
     variant?: VariantType;
-    vertical?: VerticalType;
+    vertical?: 'top' | 'bottom';
     [key: string]: any;
 }
 

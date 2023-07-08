@@ -1,23 +1,25 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 import { styled } from '@mui/material/styles';
 import { Checkbox as MuiCheckbox, FormControlLabel, FormHelperText } from '@mui/material';
 import type { CheckboxProps, SxProps } from '@mui/material';
 
 type MuiColor = 'error' | 'default' | 'primary' | 'secondary' | 'info' | 'success' | 'warning';
-type LabelPlacementType = 'top' | 'start' | 'bottom' | 'end';
+
 interface CheckboxStyledProps {
     textColor?: string;
     fontSize?: string | number;
     helperText?: string;
     required?: boolean;
     disabled?: boolean;
-    labelPlacement?: LabelPlacementType;
+    labelPlacement?: 'top' | 'start' | 'bottom' | 'end';
     label?: string;
     customColor?: string;
     muiColor?: string;
     sx?: SxProps;
 }
+
 type CheckboxStyledPropsType = CheckboxProps & CheckboxStyledProps;
+
 export const Checkbox = styled((props: CheckboxStyledPropsType) => {
     const {
         required,
@@ -62,4 +64,4 @@ export const Checkbox = styled((props: CheckboxStyledPropsType) => {
             shouldForwardProp: (prop) => !['textColor', 'fontSize', 'helperText'].includes(prop),
         }
     );
-})<CheckboxStyledPropsType>``;
+})<CheckboxStyledPropsType>`` as ComponentType<CheckboxStyledPropsType>;

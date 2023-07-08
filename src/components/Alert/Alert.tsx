@@ -1,5 +1,5 @@
 import React, { forwardRef, useMemo, isValidElement, cloneElement } from 'react';
-import type { ReactElement, PropsWithChildren, ReactNode, MouseEvent } from 'react';
+import type { ReactElement, PropsWithChildren, ReactNode, MouseEvent, ForwardedRef } from 'react';
 //	import PropTypes from 'prop-types';
 
 import { Alert as MuiAlert, AlertTitle } from './Alert.styled';
@@ -22,7 +22,7 @@ interface AlertProps {
     [key: string]: any;
 }
 
-const Alert = forwardRef((props: PropsWithChildren<AlertProps>, ref): ReactElement => {
+const Alert = forwardRef((props: PropsWithChildren<AlertProps>, ref: ForwardedRef<HTMLDivElement>): ReactElement => {
     const { severity, variant, onClose, icon, color, actions, title, width, children, ...rest } = props;
     const [customColor] = useCustomColor(color);
 

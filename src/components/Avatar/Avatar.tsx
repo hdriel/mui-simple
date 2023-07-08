@@ -5,10 +5,7 @@ import { Avatar as MuiAvatar } from '@mui/material';
 
 import { getCapitalLetters, stringToColor, useCustomColor } from '../../utils/helpers';
 import Tooltip from '../Tooltip/Tooltip';
-//	import { TOOLTIP_PLACEMENTS } from '../Tooltip/Tooltip.consts';
 
-type Variant = 'circular' | 'rounded' | 'square';
-type tooltipPlacement = 'top' | 'right' | 'bottom' | 'left';
 interface AvatarProps {
     color?: string;
     fallbackImage?: string;
@@ -17,9 +14,9 @@ interface AvatarProps {
     onClick?: () => void;
     showTooltip?: boolean;
     size?: string;
-    tooltipPlacement?: tooltipPlacement;
+    tooltipPlacement?: 'top' | 'right' | 'bottom' | 'left';
     username?: string;
-    variant?: Variant;
+    variant?: 'circular' | 'rounded' | 'square';
     [key: string]: any;
 }
 export default function Avatar(props: PropsWithChildren<AvatarProps>): ReactNode {

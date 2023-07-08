@@ -1,8 +1,9 @@
 import { get } from 'lodash-es';
 import { Chip as MuiChip } from '@mui/material';
-import type { Theme } from '@mui/material';
+import type { Theme, ChipProps } from '@mui/material';
 import { styled, css, emphasize } from '@mui/material/styles';
 import type { SerializedStyles } from '@emotion/serialize';
+import { ComponentType } from 'react';
 
 interface ChipBreadCrumbsStyleProps {
     theme?: Theme;
@@ -10,6 +11,7 @@ interface ChipBreadCrumbsStyleProps {
     // Todo: assert if breadCrumbsStyle type is actually boolean
     breadCrumbsStyle?: boolean;
 }
+
 function chipBreadCrumbsStyle(props: ChipBreadCrumbsStyleProps): SerializedStyles {
     if (!props.breadCrumbsStyle) return css``;
     const { theme, muiColor } = props;
@@ -25,11 +27,11 @@ function chipBreadCrumbsStyle(props: ChipBreadCrumbsStyleProps): SerializedStyle
     color: ${textColor};
     font-weight: ${theme.typography.fontWeightRegular};
     &:hover, &:focus {
-      background-color: ${emphasize(backgroundColor, 0.06)};
+      background-color: ${backgroundColor && emphasize(backgroundColor as string, 0.06)};
     }
     &:active {
       box-shadow: ${theme.shadows[1]};
-      background-color: ${emphasize(backgroundColor, 0.12)};
+      background-color: ${backgroundColor && emphasize(backgroundColor as string, 0.12)};
     },
   `;
 }
@@ -57,6 +59,7 @@ interface ChipStyledProps {
     textColor?: string;
 }
 type ChipStyledPropsType = ChipStyledProps & ChipProps;
+
 export const Chip = styled(MuiChip, {
     shouldForwardProp: (propName) =>
         !['textColor', 'customColor', 'multiLine', 'breadCrumbsStyle', 'rounded'].includes(propName as string),
@@ -67,4 +70,4 @@ export const Chip = styled(MuiChip, {
     color: ${(props) => props.textColor};
     ${multiLineStyle}
     ${chipBreadCrumbsStyle}
-`;
+` as ComponentType<ChipStyledPropsType>;

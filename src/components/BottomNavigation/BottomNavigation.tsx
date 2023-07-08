@@ -5,7 +5,6 @@ import type { PropsWithChildren, ReactNode, SyntheticEvent } from 'react';
 import { BottomNavigation as MuiBottomNavigation, BottomNavigationAction } from './BottomNavigation.styled';
 import { useCustomColor } from '../../utils/helpers';
 
-type Position = 'absolute' | 'fixed';
 interface Action {
     icon?: ReactNode;
     label?: string;
@@ -21,7 +20,7 @@ interface BottomNavigationProps {
     fixedToTop?: boolean;
     muiColor?: string;
     onChange?: (event: SyntheticEvent<Element, Event>, value: number | string) => void;
-    position?: Position;
+    position?: 'absolute' | 'fixed';
     showLabels?: boolean;
     value?: number | string;
     width?: number | string;
