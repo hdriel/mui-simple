@@ -1,19 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import type { ReactNode, PropsWithChildren } from 'react';
+//	import PropTypes from 'prop-types';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { DraggableListUL, DraggableListULItem } from './DraggableList.styled';
 
-export default function DraggableList({
-    disabled,
-    flexDirection,
-    flexGap,
-    droppableClassName,
-    dataList,
-    renderValue,
-    onChange,
-    ...props
-}) {
-    const handleOnDragEnd = (result) => {
+interface DataItem {
+    id: string;
+}
+interface DraggableListProps {
+    dataList?: Array<string | DataItem>;
+    droppableClassName?: string;
+    flexGap?: string;
+    flexDirection?: 'row' | 'column';
+    renderValue?: (value: string | DataItem, index: number) => ReactNode;
+    onChange?: (newDataList: Array<string | DataItem>) => void;
+    disabled?: ((value: string | DataItem, index: number) => boolean) | boolean;
+}
+export default function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode {
+    const { disabled, flexDirection, flexGap, droppableClassName, dataList, renderValue, onChange, ...rest } = props;
+    const handleOnDragEnd = (result): undefined => {
         if (!result.destination) return;
 
         const items = Array.from(dataList);
@@ -31,11 +36,11 @@ export default function DraggableList({
                         flexDirection={flexDirection}
                         flexGap={flexGap}
                         className={droppableClassName}
-                        {...props}
+                        {...rest}
                         {...providedList.droppableProps}
                         ref={providedList.innerRef}
                     >
-                        {dataList?.map((data, index) => (
+                        {dataList?.map((data: DataItem, index) => (
                             <Draggable
                                 key={`${data?.id} ${index}`}
                                 draggableId={data?.id ?? data ?? `${index}`}
@@ -60,15 +65,15 @@ export default function DraggableList({
     );
 }
 
-DraggableList.propTypes = {
-    dataList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.shape({ id: PropTypes.string })])),
-    droppableClassName: PropTypes.string,
-    flexGap: PropTypes.string,
-    flexDirection: PropTypes.oneOf(['row', 'column']),
-    renderValue: PropTypes.func,
-    onChange: PropTypes.func,
-    disabled: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
-};
+//	DraggableList.propTypes = {
+// 	 dataList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.shape({ id: PropTypes.string })])),
+// 	 droppableClassName: PropTypes.string,
+// 	 flexGap: PropTypes.string,
+// 	 flexDirection: PropTypes.oneOf(['row', 'column']),
+// 	 renderValue: PropTypes.func,
+// 	 onChange: PropTypes.func,
+// 	 disabled: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+//	};
 
 DraggableList.defaultProps = {
     dataList: [],
