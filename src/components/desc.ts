@@ -1,5 +1,40 @@
-import type { ReactNode, ReactElement, ChangeEvent } from 'react';
+import type { ReactNode, ReactElement, ChangeEvent, MouseEventHandler } from 'react';
 import type { SxProps } from '@mui/material';
+
+export interface ButtonProps {
+    color?: string;
+    disabled?: boolean;
+    disableRipple?: boolean;
+    endIcon?: ReactNode | string;
+    fullWidth?: boolean;
+    icon?: ReactNode | string;
+    isLoading?: boolean;
+    label?: string;
+    link?: string;
+    loadingIconPosition?: 'start' | 'end';
+    loadingLabel?: string;
+    minWidth?: string | number;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+    onRightClick?: MouseEventHandler<HTMLButtonElement>;
+    size?: 'small' | 'medium' | 'large' | string | number;
+    startIcon?: ReactNode | string;
+    sx?: SxProps;
+    tooltipProps?: object;
+    uppercase?: boolean;
+    variant?: 'contained' | 'outlined' | 'text';
+    [key: string]: any;
+}
+
+export interface ButtonGroupProps {
+    color?: string;
+    disabled?: boolean;
+    disableElevation?: boolean;
+    disableRipple?: boolean;
+    fullWidth?: boolean;
+    orientation?: 'horizontal' | 'vertical';
+    size?: 'small' | 'medium' | 'large';
+    variant?: 'contained' | 'outlined' | 'text';
+}
 
 export interface CheckboxProps {
     checked?: boolean;

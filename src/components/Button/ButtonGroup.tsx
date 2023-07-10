@@ -1,39 +1,17 @@
 import React from 'react';
-import type { ReactNode, PropsWithChildren } from 'react';
-
-//	import PropTypes from 'prop-types';
+import type { ReactElement, PropsWithChildren } from 'react';
 import Button from './Button';
 import { ButtonGroup as MuiButtonGroup } from './Button.styled';
 import { useCustomColor } from '../../utils/helpers';
+import type { ButtonGroupProps } from '../desc';
 
-interface ButtonGroupProps {
-    variant?: 'contained' | 'outlined' | 'text';
-    disabled?: boolean;
-    color?: string;
-    size?: 'small' | 'medium' | 'large';
-    orientation?: 'horizontal' | 'vertical';
-    disableElevation?: boolean;
-    disableRipple?: boolean;
-    fullWidth?: boolean;
-}
-const ButtonGroup = (props: PropsWithChildren<ButtonGroupProps>): ReactNode => {
-    const {
-        variant,
-        disabled,
-        color,
-        size,
-        orientation,
-        disableElevation,
-        disableRipple,
-        fullWidth,
-        children,
-        ...rest
-    } = props;
+const ButtonGroup: React.FC<PropsWithChildren<ButtonGroupProps>> = (props): ReactElement => {
+    const { children, color, disableElevation, ...rest } = props;
     const [customColor, muiColor] = useCustomColor(color);
 
     const buttons = []
         .concat(children ?? [])
-        .filter((child) => child.type.name === Button.name)
+        .filter((child) => child.type.displayName === Button.displayName)
         .map((child, index, arr) => {
             return React.cloneElement(child, {
                 key: `B${index}`,
@@ -45,32 +23,15 @@ const ButtonGroup = (props: PropsWithChildren<ButtonGroupProps>): ReactNode => {
 
     return (
         <MuiButtonGroup
-            variant={variant}
-            disabled={disabled}
             color={muiColor}
             customColor={muiColor ? undefined : customColor}
-            size={size}
-            orientation={orientation}
             disableElevation={disableElevation}
-            disableRipple={disableRipple}
-            fullWidth={fullWidth}
             {...rest}
         >
             {buttons}
         </MuiButtonGroup>
     );
 };
-
-//	ButtonGroup.propTypes = {
-//    variant: PropTypes.oneOf(['contained', 'outlined', 'text']),
-//    disabled: PropTypes.bool,
-//    color: PropTypes.string,
-//    size: PropTypes.oneOf(['small', 'medium', 'large']),
-//    orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-//    disableElevation: PropTypes.bool,
-//    disableRipple: PropTypes.bool,
-//    fullWidth: PropTypes.bool,
-//	};
 
 ButtonGroup.defaultProps = {
     variant: undefined,

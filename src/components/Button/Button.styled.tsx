@@ -2,15 +2,15 @@ import type { ComponentType } from 'react';
 import { styled } from '@mui/material/styles';
 
 import { Button as MuiButton, IconButton as MuiIconButton, ButtonGroup as MuiButtonGroup, alpha } from '@mui/material';
-import type { ButtonProps, IconButtonProps, ButtonGroupProps } from '@mui/material';
+import type {
+    ButtonProps as MuiButtonProps,
+    IconButtonProps,
+    ButtonGroupProps as MuiButtonGroupProps,
+} from '@mui/material';
+import type { ButtonProps, ButtonGroupProps } from '../desc';
 
-interface ButtonStyledProps {
-    customColor?: string;
-    disableElevation?: boolean;
-}
-
-type ButtonStyledPropsType = ButtonProps & ButtonStyledProps;
-
+// ### Button
+type ButtonStyledPropsType = MuiButtonProps & ButtonProps;
 export const Button = styled(MuiButton, {
     shouldForwardProp: (propName) => !['disableElevation', 'customColor'].includes(propName as string),
 })<ButtonStyledPropsType>`
@@ -29,27 +29,16 @@ export const Button = styled(MuiButton, {
     }
 ` as ComponentType<ButtonStyledPropsType>;
 
-interface IconButtonStyledProps {
-    href?: string;
-    customColor?: string;
-    disableElevation?: boolean;
-}
-
-type IconButtonStyledPropsType = IconButtonProps & IconButtonStyledProps;
-
+// ### IconButton
+type IconButtonStyledPropsType = IconButtonProps & ButtonProps;
 export const IconButton = styled(MuiIconButton, {
     shouldForwardProp: (propName) => !['disableElevation', 'customColor'].includes(propName as string),
 })<IconButtonStyledPropsType>`
     box-sizing: border-box;
 ` as ComponentType<IconButtonStyledPropsType>;
 
-interface ButtonGroupStyledProps {
-    customColor?: string;
-    disableElevation?: boolean;
-}
-
-type ButtonGroupStyledPropsType = ButtonGroupProps & ButtonGroupStyledProps;
-
+// ### ButtonGroup
+type ButtonGroupStyledPropsType = ButtonGroupProps & MuiButtonGroupProps;
 export const ButtonGroup = styled(MuiButtonGroup, {
     shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
 })<ButtonGroupStyledPropsType>`
