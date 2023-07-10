@@ -1,28 +1,18 @@
-import React, { ComponentType } from 'react';
+import React from 'react';
+import type { ComponentType } from 'react';
 import { styled } from '@mui/material/styles';
 import { Checkbox as MuiCheckbox, FormControlLabel, FormHelperText } from '@mui/material';
-import type { CheckboxProps, SxProps } from '@mui/material';
+import type { CheckboxProps as MuiCheckboxProps } from '@mui/material';
+import type { CheckboxProps } from '../desc';
 
-type MuiColor = 'error' | 'default' | 'primary' | 'secondary' | 'info' | 'success' | 'warning';
-
-interface CheckboxStyledProps {
-    textColor?: string;
-    fontSize?: string | number;
-    helperText?: string;
-    required?: boolean;
-    disabled?: boolean;
-    labelPlacement?: 'top' | 'start' | 'bottom' | 'end';
-    label?: string;
-    customColor?: string;
-    muiColor?: string;
-    sx?: SxProps;
-}
-
-type CheckboxStyledPropsType = CheckboxProps & CheckboxStyledProps;
+type CheckboxStyledPropsType = CheckboxProps & MuiCheckboxProps;
 
 export const Checkbox = styled(
     (props: CheckboxStyledPropsType) => {
         const {
+            inputProps,
+            ariaLabel,
+            readOnly,
             required,
             disabled,
             labelPlacement,
@@ -44,6 +34,11 @@ export const Checkbox = styled(
                     control={
                         <MuiCheckbox
                             color={muiColor as MuiColor}
+                            inputProps={{
+                                ...inputProps,
+                                'aria-label': ariaLabel,
+                                readOnly,
+                            }}
                             sx={{
                                 ...sx,
                                 ...(fontSize && { '& .MuiSvgIcon-root': { fontSize } }),

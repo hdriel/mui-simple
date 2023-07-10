@@ -1,27 +1,20 @@
 import React from 'react';
-import type { PropsWithChildren } from 'react';
+import type { PropsWithChildren, ReactElement } from 'react';
 
 import { Chip as MuiChip } from './Chip.styled';
 import { useCustomColor } from '../../utils/helpers';
 import SVGIcon from '../SVGIcon/SVGIcon';
 import type { ChipProps } from '../desc';
 
-function Chip(props: PropsWithChildren<ChipProps>): React.ReactElement {
+function Chip(props: PropsWithChildren<ChipProps>): ReactElement {
     const {
-        avatar,
-        useStyleBreadCrumb,
         children,
         color,
-        disabled,
         endIcon,
         label,
         link: href,
         minWidth,
-        multiLine,
-        onClick,
         onDelete,
-        rounded,
-        size,
         startIcon,
         sx,
         textColor: _textColor,
@@ -37,19 +30,12 @@ function Chip(props: PropsWithChildren<ChipProps>): React.ReactElement {
 
     return (
         <MuiChip
-            avatar={avatar}
-            useStyleBreadCrumb={useStyleBreadCrumb}
             color={muiColor}
             customColor={muiColor ? undefined : customColor}
             deleteIcon={typeof endIcon === 'string' ? <SVGIcon>{endIcon}</SVGIcon> : (endIcon as any)}
-            disabled={disabled}
             icon={typeof startIcon === 'string' ? <SVGIcon>{startIcon}</SVGIcon> : (startIcon as any)}
             label={label ?? children}
-            multiLine={multiLine}
-            onClick={onClick}
             onDelete={onDeleteHandler}
-            rounded={rounded}
-            size={size}
             sx={{ ...sx, minWidth, width: width ?? 'auto' }}
             textColor={textColor}
             {...linkProps}
