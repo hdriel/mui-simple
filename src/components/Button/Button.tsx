@@ -8,7 +8,6 @@ import { useCustomColor } from '../../utils/helpers';
 import SVGIcon from '../SVGIcon/SVGIcon';
 import type { ButtonProps } from '../desc';
 
-const SpinnerCmp = <CircularProgress color="inherit" size={15} />;
 const SIZES = ['small', 'medium', 'large'];
 type SizeType = 'small' | 'medium' | 'large';
 
@@ -27,6 +26,7 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = forwardRef(
             link,
             loadingIconPosition,
             loadingLabel,
+            loadingCmp,
             minWidth,
             onClick,
             onRightClick,
@@ -43,8 +43,8 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = forwardRef(
         const startIcon = typeof _startIcon === 'string' ? <SVGIcon>{_startIcon}</SVGIcon> : _startIcon;
         const endIcon = typeof _endIcon === 'string' ? <SVGIcon>{_endIcon}</SVGIcon> : _endIcon;
         const icon = typeof _icon === 'string' ? <SVGIcon>{_icon}</SVGIcon> : _icon;
-        const startIconCmp = isLoading ? loadingIconPosition === 'start' && startIcon && SpinnerCmp : startIcon;
-        const endIconCmp = isLoading ? loadingIconPosition === 'end' && endIcon && SpinnerCmp : endIcon;
+        const startIconCmp = isLoading ? loadingIconPosition === 'start' && loadingCmp : startIcon;
+        const endIconCmp = isLoading ? loadingIconPosition === 'end' && loadingCmp : endIcon;
         const label = _label ?? children;
         const content = isLoading ? loadingLabel || (!startIconCmp && !endIconCmp && label) || label : label;
         const isIconButton = icon || (isLoading && !loadingLabel && !startIcon && !endIcon);
@@ -65,14 +65,15 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = forwardRef(
                     ref={ref}
                     size={SIZES.includes(size as string) ? (size as SizeType) : undefined}
                     sx={{
-                        ...sx,
                         minWidth,
+                        width: 'max-content',
+                        ...sx,
                         color: muiColor ? undefined : customColor,
                         ...(size && !SIZES.includes(size as string) && { fontSize: size }),
                     }}
                     {...rest}
                 >
-                    {isLoading ? SpinnerCmp : icon}
+                    {isLoading ? loadingCmp : icon}
                 </MuiIconButton>
             </Tooltip>
         ) : (
@@ -118,6 +119,7 @@ Button.defaultProps = {
     link: undefined,
     loadingIconPosition: undefined,
     loadingLabel: undefined,
+    loadingCmp: <CircularProgress color="inherit" size={15} />,
     minWidth: undefined,
     onClick: undefined,
     onRightClick: undefined,

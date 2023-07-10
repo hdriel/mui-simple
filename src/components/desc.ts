@@ -12,6 +12,7 @@ export interface ButtonProps {
     label?: string;
     link?: string;
     loadingIconPosition?: 'start' | 'end';
+    loadingCmp?: ReactNode;
     loadingLabel?: string;
     minWidth?: string | number;
     onClick?: MouseEventHandler<HTMLButtonElement>;

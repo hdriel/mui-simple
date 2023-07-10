@@ -10,7 +10,8 @@ import type {
 import type { ButtonProps, ButtonGroupProps } from '../desc';
 
 // ### Button
-type ButtonStyledPropsType = MuiButtonProps & ButtonProps;
+type ButtonStyledPropsType = MuiButtonProps &
+    Omit<ButtonProps, 'endIcon' | 'startIcon'> & { endIcon: any; startIcon: any };
 export const Button = styled(MuiButton, {
     shouldForwardProp: (propName) => !['disableElevation', 'customColor'].includes(propName as string),
 })<ButtonStyledPropsType>`

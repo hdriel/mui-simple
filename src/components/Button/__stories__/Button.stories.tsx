@@ -6,6 +6,7 @@ import { Stack, Box } from '@mui/material';
 
 import Button from '../Button';
 import Avatar from '../../Avatar/Avatar';
+import CircularProgress from '../../Progress/CircularProgress/CircularProgress';
 
 const meta: Meta<typeof Button> = {
     title: 'Inputs/Button',
@@ -23,7 +24,7 @@ export const Default: Story = {
     },
 };
 
-const ColoredButton = () => {
+const Color = () => {
     return (
         <Stack direction="row" spacing={3}>
             <Button color={'#00ab92'}>#00ab92</Button>
@@ -32,23 +33,23 @@ const ColoredButton = () => {
         </Stack>
     );
 };
-export const ColoredButton_ = () => <ColoredButton />;
+export const Color_ = () => <Color />;
 
-export const DisabledButton: Story = {
+export const Disabled: Story = {
     args: {
         disabled: true,
         children: 'Disabled Button',
     },
 };
 
-export const DisableRippleButton: Story = {
+export const DisableRipple: Story = {
     args: {
         disableRipple: true,
         children: 'disableRipple Button',
     },
 };
 
-const EndIconButton = () => {
+const EndIcon = () => {
     return (
         <Stack spacing={3}>
             <Button endIcon="Fingerprint">"Fingerprint" Button</Button>
@@ -56,16 +57,16 @@ const EndIconButton = () => {
         </Stack>
     );
 };
-export const EndIconButton_ = () => <EndIconButton />;
+export const EndIcon_ = () => <EndIcon />;
 
-export const FullWidthButton: Story = {
+export const FullWidth: Story = {
     args: {
         fullWidth: true,
         children: 'fullWidth Button',
     },
 };
 
-const IconButton = () => {
+const Icon = () => {
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
             <Button icon="Fingerprint">"Fingerprint" IconButton</Button>
@@ -73,9 +74,9 @@ const IconButton = () => {
         </Box>
     );
 };
-export const IconButton_ = () => <IconButton />;
+export const Icon_ = () => <Icon />;
 
-export const IsLoadingButton: Story = {
+export const IsLoading: Story = {
     args: {
         isLoading: true,
         loadingLabel: 'Loading...',
@@ -83,21 +84,21 @@ export const IsLoadingButton: Story = {
     },
 };
 
-export const LabelButton: Story = {
+export const Label: Story = {
     args: {
         label: 'Label',
         children: 'Label Button',
     },
 };
 
-export const LinkButton: Story = {
+export const Link: Story = {
     args: {
         link: 'https://google.com',
         children: 'Google Link Button',
     },
 };
 
-const LoadingIconPositionButton = () => {
+const LoadingIconPosition = () => {
     return (
         <Stack spacing={3}>
             <Button isLoading loadingLabel="Loading...">
@@ -112,9 +113,19 @@ const LoadingIconPositionButton = () => {
         </Stack>
     );
 };
-export const LoadingIconPositionButton_ = () => <LoadingIconPositionButton />;
+export const LoadingIconPosition_ = () => <LoadingIconPosition />;
 
-export const LoadingLabelButton: Story = {
+export const LoadingCmp: Story = {
+    args: {
+        isLoading: true,
+        loadingLabel: 'is loading please wait',
+        loadingIconPosition: 'end',
+        loadingCmp: <SendIcon size={15} />,
+        children: 'Button',
+    },
+};
+
+export const LoadingLabel: Story = {
     args: {
         isLoading: true,
         loadingLabel: 'is loading please wait',
@@ -122,28 +133,28 @@ export const LoadingLabelButton: Story = {
     },
 };
 
-export const MinWidthButton: Story = {
+export const MinWidth: Story = {
     args: {
         minWidth: 250,
         children: 'minWidth Button',
     },
 };
 
-export const OnClickButton: Story = {
+export const OnClick: Story = {
     args: {
         onClick: action('onClick'),
         children: 'onClick Button',
     },
 };
 
-export const OnRightClickButton: Story = {
+export const OnRightClick: Story = {
     args: {
         onRightClick: action('onRightClick'),
         children: 'onClick Button',
     },
 };
 
-const SizeButton = () => {
+const Size = () => {
     return (
         <Stack spacing={3}>
             <Button size="small">small Button</Button>
@@ -153,9 +164,9 @@ const SizeButton = () => {
         </Stack>
     );
 };
-export const SizeButton_ = () => <SizeButton />;
+export const Size_ = () => <Size />;
 
-const StartIconButton = () => {
+const StartIcon = () => {
     return (
         <Stack spacing={3}>
             <Button startIcon="Send">small Button</Button>
@@ -163,9 +174,9 @@ const StartIconButton = () => {
         </Stack>
     );
 };
-export const StartIconButton_ = () => <StartIconButton />;
+export const StartIcon_ = () => <StartIcon />;
 
-export const TooltipPropsButton: Story = {
+export const TooltipProps: Story = {
     args: {
         tooltipProps: {
             bgColor: '#10D0DD',
@@ -180,14 +191,14 @@ export const TooltipPropsButton: Story = {
     },
 };
 
-export const NonUppercaseButton: Story = {
+export const Uppercase: Story = {
     args: {
         uppercase: false,
         children: 'Non Uppercase Button',
     },
 };
 
-const VariantButton = () => {
+const Variant = () => {
     return (
         <Stack spacing={3}>
             <Button variant="contained">contained Button</Button>
@@ -196,4 +207,4 @@ const VariantButton = () => {
         </Stack>
     );
 };
-export const VariantButton_ = () => <VariantButton />;
+export const Variant_ = () => <Variant />;

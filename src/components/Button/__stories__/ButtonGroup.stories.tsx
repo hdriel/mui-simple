@@ -29,7 +29,7 @@ export const Default: Story = {
     },
 };
 
-const ColoredButtonsGroup = () => {
+const Color = () => {
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
             <ButtonGroup color={'#00ab92'}>{children}</ButtonGroup>
@@ -38,44 +38,44 @@ const ColoredButtonsGroup = () => {
         </Box>
     );
 };
-export const ColoredButtonsGroup_ = () => <ColoredButtonsGroup />;
+export const Color_ = () => <Color />;
 
-export const DisabledButtonsGroup: Story = {
+export const Disabled: Story = {
     args: {
         disabled: true,
         children,
     },
 };
 
-export const DisableElevationButtonsGroup: Story = {
+export const DisableElevation: Story = {
     args: {
         disableElevation: true,
         children,
     },
 };
 
-export const DisableRippleButtonsGroup: Story = {
+export const DisableRipple: Story = {
     args: {
         disableRipple: true,
         children,
     },
 };
 
-export const fullWidthButtonsGroup: Story = {
+export const FullWidth: Story = {
     args: {
         fullWidth: true,
         children,
     },
 };
 
-export const VerticalOrientationButtonsGroup: Story = {
+export const VerticalOrientation: Story = {
     args: {
         orientation: 'vertical',
         children,
     },
 };
 
-const SizeButtonsGroup = () => {
+const Size = () => {
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
             <ButtonGroup size="small">{children}</ButtonGroup>
@@ -84,9 +84,9 @@ const SizeButtonsGroup = () => {
         </Box>
     );
 };
-export const SizeButtonsGroup_ = () => <SizeButtonsGroup />;
+export const Size_ = () => <Size />;
 
-const VariantButtonsGroup = () => {
+const Variant = () => {
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
             <ButtonGroup variant="contained">{children}</ButtonGroup>
@@ -95,4 +95,4 @@ const VariantButtonsGroup = () => {
         </Box>
     );
 };
-export const VariantButtonsGroup_ = () => <VariantButtonsGroup />;
+export const Variant_ = () => <Variant />;
