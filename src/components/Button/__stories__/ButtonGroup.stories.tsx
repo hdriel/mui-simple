@@ -1,237 +1,98 @@
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import type { Meta, StoryObj } from '@storybook/react';
+import { Box } from '@mui/material';
 
-import Button from '../Button';
 import ButtonGroup from '../ButtonGroup';
-import { Delete as DeleteIcon, Send as SendIcon } from '@mui/icons-material';
-import { Stack } from '@mui/material';
-import Divider from '../../Divider/Divider';
+import Button from '../Button';
 
-export default {
+const meta: Meta<typeof ButtonGroup> = {
     title: 'Inputs/ButtonGroup',
     component: ButtonGroup,
+    tags: ['autodocs'],
 };
 
-const actions = {
-    onClick: action('onClick'),
+export default meta;
+
+type Story = StoryObj<typeof ButtonGroup>;
+
+const children = (
+    <>
+        <Button>Action 1</Button>
+        <Button>Action 2</Button>
+        <Button>Action 3</Button>
+    </>
+);
+
+export const Default: Story = {
+    args: {
+        children,
+    },
 };
 
-export const Default = () => {
-    return <ButtonGroup {...actions} />;
-};
-
-export const Variant = () => {
+const Color = () => {
     return (
-        <Stack spacing={3}>
-            <ButtonGroup variant="text">
-                <Button {...actions} startIcon={<SendIcon />}>
-                    Start Icon
-                </Button>
-                <Button {...actions} endIcon={<DeleteIcon />}>
-                    End Icon
-                </Button>
-                <Button {...actions}>Test</Button>
-            </ButtonGroup>
-            <ButtonGroup variant="contained">
-                <Button {...actions} startIcon={<SendIcon />}>
-                    Start Icon
-                </Button>
-                <Button {...actions} endIcon={<DeleteIcon />}>
-                    End Icon
-                </Button>
-                <Button {...actions}>Test</Button>
-            </ButtonGroup>
-            <ButtonGroup variant="outlined">
-                <Button {...actions} startIcon={<SendIcon />}>
-                    Start Icon
-                </Button>
-                <Button {...actions} endIcon={<DeleteIcon />}>
-                    End Icon
-                </Button>
-                <Button {...actions}>Test</Button>
-            </ButtonGroup>
-
-            <ButtonGroup>
-                <Button {...actions} startIcon={<SendIcon />}>
-                    Start Icon
-                </Button>
-                <Button {...actions} endIcon={<DeleteIcon />}>
-                    End Icon
-                </Button>
-                <Button {...actions}>Test</Button>
-            </ButtonGroup>
-        </Stack>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+            <ButtonGroup color={'#00ab92'}>{children}</ButtonGroup>
+            <ButtonGroup color={'primary'}>{children}</ButtonGroup>
+            <ButtonGroup color={'secondary'}>{children}</ButtonGroup>
+        </Box>
     );
 };
+export const Color_ = () => <Color />;
 
-export const ThemedAndColored = () => {
-    return (
-        <Stack direction="column" spacing={4}>
-            {[undefined, 'primary', 'secondary', 'info', 'success', 'error', '#df01fd'].map(
-                (color, colorIndex, arr) => (
-                    <Stack key={`${colorIndex}-${color}`} direction="column" spacing={2}>
-                        {['text', 'contained', 'outlined'].map((variant, index) => (
-                            <>
-                                <Stack key={`${variant}-${color}`} direction="column" spacing={2}>
-                                    <ButtonGroup variant={variant} color={color}>
-                                        <Button {...actions} startIcon={<SendIcon />}>
-                                            Start Icon
-                                        </Button>
-                                        <Button {...actions} endIcon={<DeleteIcon />} color={arr[colorIndex - 1]}>
-                                            End Icon
-                                        </Button>
-                                        <Button {...actions}>Test</Button>
-                                    </ButtonGroup>
-                                </Stack>
-                            </>
-                        ))}
-                        <Divider />
-                    </Stack>
-                )
-            )}
-        </Stack>
-    );
+export const Disabled: Story = {
+    args: {
+        disabled: true,
+        children,
+    },
 };
 
-export const FullWidth = () => {
-    return (
-        <Stack spacing={3}>
-            <ButtonGroup variant="text" fullWidth>
-                <Button {...actions} startIcon={<SendIcon />}>
-                    Start Icon
-                </Button>
-                <Button {...actions} endIcon={<DeleteIcon />}>
-                    End Icon
-                </Button>
-                <Button {...actions}>Test</Button>
-            </ButtonGroup>
-            <ButtonGroup variant="text">
-                <Button {...actions} startIcon={<SendIcon />}>
-                    Start Icon
-                </Button>
-                <Button {...actions} endIcon={<DeleteIcon />}>
-                    End Icon
-                </Button>
-                <Button {...actions}>Test</Button>
-            </ButtonGroup>
-        </Stack>
-    );
+export const DisableElevation: Story = {
+    args: {
+        disableElevation: true,
+        children,
+    },
 };
 
-export const Orientation = () => {
-    return (
-        <Stack spacing={3}>
-            <ButtonGroup variant="text" orientation={'horizontal'}>
-                <Button {...actions} startIcon={<SendIcon />}>
-                    Start Icon
-                </Button>
-                <Button {...actions} endIcon={<DeleteIcon />}>
-                    End Icon
-                </Button>
-                <Button {...actions}>Test</Button>
-            </ButtonGroup>
-            <ButtonGroup variant="text" orientation={'vertical'}>
-                <Button {...actions} startIcon={<SendIcon />}>
-                    Start Icon
-                </Button>
-                <Button {...actions} endIcon={<DeleteIcon />}>
-                    End Icon
-                </Button>
-                <Button {...actions}>Test</Button>
-            </ButtonGroup>
-        </Stack>
-    );
+export const DisableRipple: Story = {
+    args: {
+        disableRipple: true,
+        children,
+    },
 };
 
-export const DisableRipple = () => {
-    return (
-        <Stack spacing={3}>
-            <ButtonGroup variant="text" disableRipple>
-                <Button {...actions} startIcon={<SendIcon />}>
-                    Start Icon
-                </Button>
-                <Button {...actions} endIcon={<DeleteIcon />}>
-                    End Icon
-                </Button>
-                <Button {...actions}>Test</Button>
-            </ButtonGroup>
-            <ButtonGroup variant="text">
-                <Button {...actions} startIcon={<SendIcon />}>
-                    Start Icon
-                </Button>
-                <Button {...actions} endIcon={<DeleteIcon />}>
-                    End Icon
-                </Button>
-                <Button {...actions}>Test</Button>
-            </ButtonGroup>
-        </Stack>
-    );
+export const FullWidth: Story = {
+    args: {
+        fullWidth: true,
+        children,
+    },
 };
 
-export const Disable = () => {
-    return (
-        <Stack spacing={3}>
-            <ButtonGroup variant="text" disabled>
-                <Button {...actions} startIcon={<SendIcon />}>
-                    Start Icon
-                </Button>
-                <Button {...actions} endIcon={<DeleteIcon />}>
-                    End Icon
-                </Button>
-                <Button {...actions}>Test</Button>
-            </ButtonGroup>
-            <ButtonGroup variant="text">
-                <Button {...actions} startIcon={<SendIcon />}>
-                    Start Icon
-                </Button>
-                <Button {...actions} endIcon={<DeleteIcon />} disabled>
-                    End Icon
-                </Button>
-                <Button {...actions}>Test</Button>
-            </ButtonGroup>
-        </Stack>
-    );
+export const VerticalOrientation: Story = {
+    args: {
+        orientation: 'vertical',
+        children,
+    },
 };
 
-export const Sizes = () => {
+const Size = () => {
     return (
-        <Stack spacing={3}>
-            <ButtonGroup variant="text" size="small">
-                <Button {...actions} startIcon={<SendIcon />}>
-                    small
-                </Button>
-                <Button {...actions} endIcon={<DeleteIcon />}>
-                    small
-                </Button>
-                <Button {...actions}>small</Button>
-            </ButtonGroup>
-            <ButtonGroup variant="contained" size="medium">
-                <Button {...actions} startIcon={<SendIcon />}>
-                    medium
-                </Button>
-                <Button {...actions} endIcon={<DeleteIcon />}>
-                    medium
-                </Button>
-                <Button {...actions}>medium</Button>
-            </ButtonGroup>
-            <ButtonGroup variant="outlined" size="large">
-                <Button {...actions} startIcon={<SendIcon />}>
-                    large
-                </Button>
-                <Button {...actions} endIcon={<DeleteIcon />}>
-                    large
-                </Button>
-                <Button {...actions}>large</Button>
-            </ButtonGroup>
-            <ButtonGroup variant="outlined">
-                <Button {...actions} startIcon={<SendIcon />}>
-                    default
-                </Button>
-                <Button {...actions} endIcon={<DeleteIcon />}>
-                    default
-                </Button>
-                <Button {...actions}>default</Button>
-            </ButtonGroup>
-        </Stack>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+            <ButtonGroup size="small">{children}</ButtonGroup>
+            <ButtonGroup size="medium">{children}</ButtonGroup>
+            <ButtonGroup size="large">{children}</ButtonGroup>
+        </Box>
     );
 };
+export const Size_ = () => <Size />;
+
+const Variant = () => {
+    return (
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+            <ButtonGroup variant="contained">{children}</ButtonGroup>
+            <ButtonGroup variant="outlined">{children}</ButtonGroup>
+            <ButtonGroup variant="text">{children}</ButtonGroup>
+        </Box>
+    );
+};
+export const Variant_ = () => <Variant />;

@@ -1,11 +1,11 @@
 import { createElement } from 'react';
-import type { PropsWithChildren } from 'react';
+import type { PropsWithChildren, ReactElement, ReactNode } from 'react';
 // import PropTypes from 'prop-types';
 import * as MUIIcon from '@mui/icons-material';
 import { numberToPx } from '../../utils/helpers';
 
 interface MuiIconNameProps {
-    name: string;
+    name: string | ReactNode;
     color: string;
     width: string | number;
     height: string | number;
@@ -19,8 +19,8 @@ export default function MuiIconName({
     height,
     children,
     ...props
-}: MuiIconNamePropsType): React.ReactElement {
-    const Icon = name && MUIIcon[name];
+}: MuiIconNamePropsType): ReactElement | any {
+    const Icon = typeof name === 'string' ? MUIIcon[name] : undefined;
 
     return Icon
         ? createElement(Icon, {

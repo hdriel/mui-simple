@@ -1,49 +1,52 @@
-import React, { ComponentType } from 'react';
+import React, { isValidElement } from 'react';
+import type { ComponentType } from 'react';
 import { styled } from '@mui/material/styles';
-import { Checkbox as MuiCheckbox, FormControlLabel, FormHelperText } from '@mui/material';
-import type { CheckboxProps, SxProps } from '@mui/material';
+import { Checkbox as MuiCheckbox, FormControlLabel, FormHelperText, Typography } from '@mui/material';
+import type { CheckboxProps as MuiCheckboxProps } from '@mui/material';
+import type { CheckboxProps } from '../desc';
 
-type MuiColor = 'error' | 'default' | 'primary' | 'secondary' | 'info' | 'success' | 'warning';
-
-interface CheckboxStyledProps {
-    textColor?: string;
-    fontSize?: string | number;
-    helperText?: string;
-    required?: boolean;
-    disabled?: boolean;
-    labelPlacement?: 'top' | 'start' | 'bottom' | 'end';
-    label?: string;
-    customColor?: string;
-    muiColor?: string;
-    sx?: SxProps;
-}
-
-type CheckboxStyledPropsType = CheckboxProps & CheckboxStyledProps;
+type CheckboxStyledPropsType = CheckboxProps & MuiCheckboxProps;
 
 export const Checkbox = styled(
     (props: CheckboxStyledPropsType) => {
         const {
-            required,
-            disabled,
-            labelPlacement,
-            helperText,
-            label = '',
-            fontSize,
+            ariaLabel,
             customColor,
+            disabled,
+            fontSize,
+            helperText,
+            inputProps,
+            label = '',
+            labelPlacement,
             muiColor,
+            readOnly,
+            required,
             sx,
+            textColor,
             ...rest
         } = props;
         return (
-            <>
+            <span>
                 <FormControlLabel
                     required={required}
                     disabled={disabled}
                     labelPlacement={labelPlacement}
-                    sx={{ m: 0, userSelect: 'none' }}
+                    label={
+                        isValidElement(label) ? (
+                            label
+                        ) : (
+                            <Typography sx={{ fontSize, color: textColor }}>{label}</Typography>
+                        )
+                    }
+                    sx={{ m: 0, userSelect: 'none', color: textColor }}
                     control={
                         <MuiCheckbox
                             color={muiColor as MuiColor}
+                            inputProps={{
+                                ...inputProps,
+                                'aria-label': ariaLabel,
+                                readOnly,
+                            }}
                             sx={{
                                 ...sx,
                                 ...(fontSize && { '& .MuiSvgIcon-root': { fontSize } }),
@@ -55,13 +58,12 @@ export const Checkbox = styled(
                             {...rest}
                         />
                     }
-                    label={label}
                 />
                 {helperText && <FormHelperText>{helperText}</FormHelperText>}
-            </>
+            </span>
         );
     },
     {
-        shouldForwardProp: (prop) => !['textColor', 'fontSize', 'helperText'].includes(prop),
+        shouldForwardProp: (prop) => ![].includes(prop),
     }
 )<CheckboxStyledPropsType>`` as ComponentType<CheckboxStyledPropsType>;

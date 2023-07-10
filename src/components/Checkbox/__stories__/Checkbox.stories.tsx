@@ -1,265 +1,155 @@
+// @ts-ignore
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
-
-import Checkbox from '../Checkbox';
+import type { Meta, StoryObj } from '@storybook/react';
+import { Send as SendIcon, Fingerprint as FingerprintIcon } from '@mui/icons-material';
 import { Stack } from '@mui/material';
 
-export default {
+import Checkbox from '../Checkbox';
+
+const meta: Meta<typeof Checkbox> = {
     title: 'Inputs/Checkbox',
-    parameters: {
-        controls: {
-            exclude: /^(onChange)$/g,
-        },
-    },
-    decorators: [
-        (Story) => (
-            <div
-                style={{
-                    padding: '1em',
-                    height: 'auto',
-                    width: '90%',
-                    overflow: 'hidden',
-                }}
-            >
-                <Story />
-            </div>
-        ),
-    ],
     component: Checkbox,
+    tags: ['autodocs'],
 };
 
-export const Default = () => <Checkbox />;
-Default.decorators = [
-    (Story) => (
-        <div
-            style={{
-                padding: '1em',
-                width: '200px',
-                height: 'auto',
-            }}
-        >
-            <Story />
-        </div>
-    ),
-];
+export default meta;
 
-const Template = (args) => <Checkbox {...args} />;
+type Story = StoryObj<typeof Checkbox>;
 
-export const Custom = Template.bind({});
-Custom.argTypes = {
-    label: { control: { type: 'text' }, defaultValue: 'check' },
-    size: {
-        control: 'inline-radio',
-        options: ['small', 'medium'],
-        defaultValue: 'small',
-    },
-    color: {
-        control: { type: 'color' },
-        defaultValue: 'red',
-    },
-    checked: {
-        control: { type: 'boolean' },
-        defaultValue: false,
-    },
-    defaultChecked: {
-        control: { type: 'boolean' },
-        defaultValue: false,
-    },
-    required: {
-        control: { type: 'boolean' },
-        defaultValue: false,
-    },
-    disabled: {
-        control: { type: 'boolean' },
-        defaultValue: false,
+export const Default: Story = {
+    args: {
+        children: 'checkbox',
     },
 };
-Custom.decorators = [
-    (Story) => (
-        <div
-            style={{
-                padding: '1em',
-                width: '300px',
-                height: 'auto',
-            }}
-        >
-            <Story />
-        </div>
-    ),
-];
 
-export const Labeled = () => {
-    const [checked, setChecked] = useState(false);
-    return (
-        <Checkbox
-            checked={checked}
-            onChange={(event) => {
-                setChecked(event.target.checked);
-                action(event);
-            }}
-            label="include condition"
-        />
-    );
-};
-export const NoLabeled = () => {
-    const [checked, setChecked] = useState(false);
-
-    return (
-        <Checkbox
-            checked={checked}
-            onChange={(event) => {
-                setChecked(event.target.checked);
-                action(event);
-            }}
-        />
-    );
-};
-export const Checked = () => {
-    const [checked, setChecked] = useState(true);
-    return (
-        <Checkbox
-            checked={checked}
-            onChange={(event) => {
-                setChecked(event.target.checked);
-                action(event);
-            }}
-            label="test"
-        />
-    );
-};
-export const Disabled = () => {
-    const [checked, setChecked] = useState(true);
-    return (
-        <Checkbox
-            checked={checked}
-            onChange={(event) => {
-                setChecked(event.target.checked);
-                action(event);
-            }}
-            label="disabled checkbox"
-            disabled
-        />
-    );
+export const Checked: Story = {
+    args: {
+        checked: true,
+        children: 'Checked',
+    },
 };
 
-export const Required = () => {
-    const [checked, setChecked] = useState(false);
-
-    return (
-        <Checkbox
-            checked={checked}
-            onChange={(event) => {
-                setChecked(event.target.checked);
-                action(event);
-            }}
-            required
-            label="required checkbox test"
-            helperText="is required checkbox!"
-        />
-    );
+export const OnChange: Story = {
+    args: {
+        checked: true,
+        children: 'on change event',
+    },
+    render: (args) => {
+        const [value, onChange] = useState(args.checked);
+        return <Checkbox {...args} value={value} onChange={(e, v) => onChange(v)} />;
+    },
+};
+export const CheckedIcon: Story = {
+    args: {
+        checked: true,
+        children: 'on change event',
+    },
+    render: (args) => {
+        const [value, onChange] = useState(args.checked);
+        return (
+            <Checkbox
+                {...args}
+                value={value}
+                onChange={(e, v) => onChange(v)}
+                checkedIcon="Favorite"
+                icon="FavoriteBorder"
+            />
+        );
+    },
 };
 
-export const ThemedAndColor = () => {
-    const [checked, setChecked] = useState(true);
-
+const ColoredCheckbox = () => {
     return (
-        <Stack direction="column" spacing={2}>
-            {[undefined, 'primary', 'secondary', 'info', 'success', 'error', '#df01fd'].map((color, index) => (
-                <Checkbox
-                    key={index}
-                    checked={checked}
-                    onChange={(event) => {
-                        setChecked(event.target.checked);
-                        action(event);
-                    }}
-                    color={color}
-                    label={`${index + 1} : ${color}`}
-                />
-            ))}
+        <Stack direction="row" spacing={3}>
+            <Checkbox checked color={'#00ab92'}>
+                #00ab92
+            </Checkbox>
+            <Checkbox checked color={'primary'}>
+                Primary
+            </Checkbox>
+            <Checkbox checked color={'secondary'}>
+                Secondary
+            </Checkbox>
         </Stack>
     );
 };
+export const ColoredCheckbox_ = () => <ColoredCheckbox />;
 
-export const LabelPlacement = () => {
-    const [checked, setChecked] = useState(false);
-
-    return (
-        <div style={{ display: 'flex', gap: '1em' }}>
-            <Checkbox
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    action(event);
-                }}
-                labelPlacement="top"
-                label="top label checkbox"
-            />
-
-            <Checkbox
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    action(event);
-                }}
-                labelPlacement="start"
-                label="start label checkbox"
-            />
-
-            <Checkbox
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    action(event);
-                }}
-                labelPlacement="bottom"
-                label="bottom label checkbox"
-            />
-
-            <Checkbox
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    action(event);
-                }}
-                labelPlacement="end"
-                label="end label checkbox"
-            />
-        </div>
-    );
+export const DisabledCheckbox: Story = {
+    args: {
+        disabled: true,
+        children: 'disabled checkbox',
+    },
 };
 
-export const Sizes = () => {
-    const [checked, setChecked] = useState(false);
+export const FontSize: Story = {
+    args: {
+        fontSize: 35,
+        children: 'FontSize checkbox',
+    },
+};
 
+export const HelperText: Story = {
+    args: {
+        helperText: 'some helper text here',
+        children: 'checkbox with helper text',
+    },
+};
+
+export const IconCheckbox: Story = {
+    args: {
+        icon: <FingerprintIcon />,
+        checkedIcon: <SendIcon />,
+        children: 'checkbox with icons',
+    },
+};
+
+export const LabelCheckbox: Story = {
+    args: {
+        label: 'some label',
+    },
+};
+
+const LabelPlacementCheckbox = () => {
     return (
-        <>
-            <Checkbox
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    action(event);
-                }}
-                label="medium checkbox"
-                size={'medium'}
-            />
-            <Checkbox
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    action(event);
-                }}
-                label="small checkbox"
-                size={'small'}
-            />
-            <Checkbox
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    action(event);
-                }}
-                label="custom size checkbox"
-                fontSize={26}
-            />
-        </>
+        <Stack direction="row" spacing={4}>
+            <Checkbox labelPlacement="top">top label</Checkbox>
+            <Checkbox labelPlacement="start">start label</Checkbox>
+            <Checkbox labelPlacement="bottom">bottom label</Checkbox>
+            <Checkbox labelPlacement="end">end label</Checkbox>
+        </Stack>
     );
+};
+export const LabelPlacementCheckbox_ = () => <LabelPlacementCheckbox />;
+
+export const ReadOnlyCheckbox: Story = {
+    args: {
+        readOnly: true,
+        checked: true,
+        children: 'readOnly checkbox',
+    },
+};
+
+export const Required: Story = {
+    args: {
+        required: true,
+        children: 'required checkbox',
+    },
+};
+
+const SizeCheckbox = () => {
+    return (
+        <Stack direction="row" spacing={3}>
+            <Checkbox size="small">small checkbox</Checkbox>
+            <Checkbox size="medium">medium checkbox</Checkbox>
+        </Stack>
+    );
+};
+export const SizeCheckbox_ = () => <SizeCheckbox />;
+
+export const TextColorCheckbox: Story = {
+    args: {
+        textColor: '#FF0000',
+        children: 'red text',
+    },
 };

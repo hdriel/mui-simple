@@ -1,138 +1,100 @@
 import React, { forwardRef } from 'react';
-import type { MouseEventHandler, MouseEvent, ReactNode, Ref, PropsWithChildren } from 'react';
-import type { SxProps } from '@mui/material';
+import type { Ref, ReactElement, PropsWithChildren } from 'react';
 
-// import PropTypes from 'prop-types';
 import CircularProgress from '../Progress/CircularProgress/CircularProgress';
 import { Button as MuiButton, IconButton as MuiIconButton } from './Button.styled';
 import Tooltip from '../Tooltip/Tooltip';
 import { useCustomColor } from '../../utils/helpers';
 import SVGIcon from '../SVGIcon/SVGIcon';
+import type { ButtonProps } from '../desc';
 
-const spinner = <CircularProgress color="inherit" size={15} />;
+const SIZES = ['small', 'medium', 'large'];
+type SizeType = 'small' | 'medium' | 'large';
 
-type ButtonVariantType = 'contained' | 'outlined' | 'text';
-export interface ButtonProps {
-    color?: string;
-    /**
-     * The disabled field of button, when is disabled - onClick event won't fire
-     */
-    disabled?: boolean;
-    disableRipple?: boolean;
-    endIcon?: ReactNode | string;
-    fullWidth?: boolean;
-    icon?: ReactNode | string;
-    isLoading?: boolean;
-    link?: string;
-    loadingIconPosition?: string;
-    loadingLabel?: string;
-    minWidth?: string | number;
-    onClick?: MouseEventHandler<HTMLButtonElement>;
-    onRightClick?: MouseEventHandler<HTMLButtonElement>;
-    size?: string | number;
-    startIcon?: ReactNode | string;
-    sx?: SxProps;
-    tooltipProps?: object;
-    uppercase?: boolean;
-    /**
-     * The variant of the button allowed types: "contained", "outlined", "text"
-     */
-    variant?: ButtonVariantType;
-    [key: string]: any;
-}
-const Button: React.FC<ButtonProps> = forwardRef(
-    (props: PropsWithChildren<ButtonProps>, ref: Ref<HTMLButtonElement>) => {
+const Button: React.FC<PropsWithChildren<ButtonProps>> = forwardRef(
+    (props: PropsWithChildren<ButtonProps>, ref: Ref<HTMLButtonElement>): ReactElement => {
         const {
-            variant,
-            disabled,
-            onClick,
-            onRightClick,
-            link,
+            children,
             color,
+            disabled,
             disableRipple,
+            endIcon: _endIcon,
+            fullWidth,
+            icon: _icon,
             isLoading,
+            label: _label,
+            link,
             loadingIconPosition,
             loadingLabel,
+            loadingCmp,
+            minWidth,
+            onClick,
+            onRightClick,
             size,
-            fullWidth,
+            startIcon: _startIcon,
+            sx,
             tooltipProps,
             uppercase,
-            minWidth,
-            sx,
-            children,
+            variant,
             ...rest
         } = props;
-        let { startIcon, endIcon, icon } = props;
 
         const [customColor, muiColor] = useCustomColor(color);
-        startIcon &&= <SVGIcon>{startIcon}</SVGIcon>;
-        endIcon &&= <SVGIcon>{endIcon}</SVGIcon>;
-        icon &&= <SVGIcon>{icon}</SVGIcon>;
+        const startIcon = typeof _startIcon === 'string' ? <SVGIcon>{_startIcon}</SVGIcon> : _startIcon;
+        const endIcon = typeof _endIcon === 'string' ? <SVGIcon>{_endIcon}</SVGIcon> : _endIcon;
+        const icon = typeof _icon === 'string' ? <SVGIcon>{_icon}</SVGIcon> : _icon;
+        const startIconCmp = isLoading ? loadingIconPosition === 'start' && loadingCmp : startIcon;
+        const endIconCmp = isLoading ? loadingIconPosition === 'end' && loadingCmp : endIcon;
+        const label = _label ?? children;
+        const content = isLoading ? loadingLabel || (!startIconCmp && !endIconCmp && label) || label : label;
+        const isIconButton = icon || (isLoading && !loadingLabel && !startIcon && !endIcon);
 
-        const onRightClickHandler = (e: MouseEvent): void => {
+        const onRightClickHandler = (e: any): void => {
             e.preventDefault();
-            // Todo: fix this type error
             onRightClick?.(e);
         };
 
-        if (icon || (isLoading && !loadingLabel && !startIcon && !endIcon)) {
-            return (
-                <Tooltip {...tooltipProps}>
-                    <MuiIconButton
-                        ref={ref}
-                        color={muiColor}
-                        size={
-                            ['small', 'medium', 'large'].includes(size as string)
-                                ? (size as 'small' | 'medium' | 'large')
-                                : undefined
-                        }
-                        disableRipple={disabled ? true : disableRipple}
-                        onClick={disabled ? undefined : onClick}
-                        // Todo: add correct type for onContextMenu
-                        onContextMenu={disabled ? undefined : onRightClick ? onRightClickHandler : props.onContextMenu}
-                        href={link}
-                        sx={{
-                            minWidth,
-                            color: muiColor ? undefined : customColor,
-                            ...(size && !['small', 'medium', 'large'].includes(size as string) && { fontSize: size }),
-                            ...sx,
-                        }}
-                        {...rest}
-                    >
-                        {isLoading ? spinner : icon}
-                    </MuiIconButton>
-                </Tooltip>
-            );
-        }
-
-        const startIconCmp = isLoading ? loadingIconPosition === 'start' && startIcon && spinner : startIcon;
-        const endIconCmp = isLoading ? loadingIconPosition === 'end' && endIcon && spinner : endIcon;
-
-        const content = isLoading ? loadingLabel || (!startIconCmp && !endIconCmp && children) || children : children;
-
-        return (
+        return isIconButton ? (
             <Tooltip {...tooltipProps}>
-                <MuiButton
-                    ref={ref}
-                    variant={variant}
-                    disabled={isLoading || disabled}
-                    startIcon={startIconCmp}
-                    endIcon={endIconCmp}
-                    onClick={onClick}
-                    onContextMenu={onRightClick ? onRightClickHandler : props.onContextMenu}
-                    href={link}
-                    disableRipple={disableRipple}
-                    customColor={muiColor ? undefined : customColor}
+                <MuiIconButton
                     color={muiColor}
-                    size={
-                        ['small', 'medium', 'large'].includes(size as string)
-                            ? (size as 'small' | 'medium' | 'large')
-                            : undefined
-                    }
-                    fullWidth={fullWidth}
+                    disableRipple={disabled ? true : disableRipple}
+                    href={link}
+                    onClick={disabled ? undefined : onClick}
+                    onContextMenu={disabled ? undefined : onRightClick ? onRightClickHandler : props.onContextMenu}
+                    ref={ref}
+                    size={SIZES.includes(size as string) ? (size as SizeType) : undefined}
                     sx={{
                         minWidth,
-                        ...(size && !['small', 'medium', 'large'].includes(size as string) && { fontSize: size }),
+                        width: 'max-content',
+                        ...sx,
+                        color: muiColor ? undefined : customColor,
+                        ...(size && !SIZES.includes(size as string) && { fontSize: size }),
+                    }}
+                    {...rest}
+                >
+                    {isLoading ? loadingCmp : icon}
+                </MuiIconButton>
+            </Tooltip>
+        ) : (
+            <Tooltip {...tooltipProps}>
+                <MuiButton
+                    color={muiColor}
+                    customColor={muiColor ? undefined : customColor}
+                    disabled={disabled}
+                    disableRipple={isLoading || disableRipple}
+                    endIcon={endIconCmp}
+                    fullWidth={fullWidth}
+                    href={link}
+                    onClick={isLoading ? undefined : onClick}
+                    onContextMenu={isLoading ? undefined : onRightClick ? onRightClickHandler : props.onContextMenu}
+                    ref={ref}
+                    size={SIZES.includes(size as string) ? (size as SizeType) : undefined}
+                    startIcon={startIconCmp}
+                    variant={variant}
+                    sx={{
+                        minWidth,
+                        ...(size && !SIZES.includes(size as string) && { fontSize: size }),
                         ...(!uppercase && { textTransform: 'none' }),
                         ...sx,
                     }}
@@ -145,49 +107,29 @@ const Button: React.FC<ButtonProps> = forwardRef(
     }
 );
 
-// Button.propTypes = {
-//     variant: PropTypes.oneOf(['contained', 'outlined', 'text']),
-//     fullWidth: PropTypes.bool,
-//     disabled: PropTypes.bool,
-//     startIcon: PropTypes.node,
-//     endIcon: PropTypes.node,
-//     onClick: PropTypes.func,
-//     onRightClick: PropTypes.func,
-//     link: PropTypes.string,
-//     color: PropTypes.string,
-//     disableRipple: PropTypes.bool,
-//     isLoading: PropTypes.bool,
-//     loadingIconPosition: PropTypes.oneOf(['start', 'end']),
-//     loadingLabel: PropTypes.string,
-//     disableElevation: PropTypes.bool,
-//     icon: PropTypes.node,
-//     size: PropTypes.oneOf(['small', 'medium', 'large']),
-//     tooltipProps: PropTypes.object,
-//     uppercase: PropTypes.bool,
-//     minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-// };
-
 Button.defaultProps = {
-    variant: undefined, // stay it undefined for supporting ButtonGroup component variant
-    fullWidth: undefined,
-    disabled: undefined,
-    startIcon: undefined,
-    endIcon: undefined,
-    onClick: undefined,
-    onRightClick: undefined,
-    link: undefined,
     color: undefined,
+    disabled: undefined,
+    disableElevation: undefined,
     disableRipple: undefined,
+    endIcon: undefined,
+    fullWidth: undefined,
+    icon: undefined,
     isLoading: undefined,
+    link: undefined,
     loadingIconPosition: undefined,
     loadingLabel: undefined,
-    disableElevation: undefined,
-    icon: undefined,
+    loadingCmp: <CircularProgress color="inherit" size={15} />,
+    minWidth: undefined,
+    onClick: undefined,
+    onRightClick: undefined,
     size: undefined,
+    startIcon: undefined,
     tooltipProps: undefined,
     uppercase: true,
-    minWidth: undefined,
+    variant: undefined, // stay it undefined for supporting ButtonGroup component variant
 };
 
 Button.displayName = 'Button';
+
 export default Button;

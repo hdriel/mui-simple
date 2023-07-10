@@ -23,7 +23,7 @@ interface TypographyProps {
     lineHeight?: number;
     monospace?: boolean;
     noWrap?: boolean;
-    onEllipsisChange?: Function;
+    onEllipsisChange?: (isEllipsis: boolean) => void;
     paragraph?: boolean;
     rows?: number;
     showTooltipOnEllipsis?: boolean;

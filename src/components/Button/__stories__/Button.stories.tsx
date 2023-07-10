@@ -1,35 +1,16 @@
 import React from 'react';
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
+import { Send as SendIcon, Fingerprint as FingerprintIcon } from '@mui/icons-material';
+import { action } from '@storybook/addon-actions';
+import { Stack, Box } from '@mui/material';
 
 import Button from '../Button';
-import { Delete as DeleteIcon, Send as SendIcon, Fingerprint as FingerprintIcon } from '@mui/icons-material';
-import { Stack, Typography } from '@mui/material';
+import Avatar from '../../Avatar/Avatar';
+import CircularProgress from '../../Progress/CircularProgress/CircularProgress';
 
 const meta: Meta<typeof Button> = {
     title: 'Inputs/Button',
     component: Button,
-    argTypes: {
-        // variant: undefined,
-        // disabled: undefined,
-        // startIcon: undefined,
-        // endIcon: undefined,
-        // onClick: undefined,
-        // onRightClick: undefined,
-        // link: undefined,
-        // color: undefined,
-        // disableRipple: undefined,
-        // isLoading: undefined,
-        // loadingIconPosition: undefined,
-        // loadingLabel: undefined,
-        // size: undefined,
-        // icon: undefined,
-        // fullWidth: undefined,
-        // tooltipProps: undefined,
-        // uppercase: undefined,
-        // minWidth: undefined,
-    },
-    // parameters: { actions: { handles: 'click' } },
     tags: ['autodocs'],
 };
 
@@ -37,265 +18,193 @@ export default meta;
 
 type Story = StoryObj<typeof Button>;
 
-/** The button with default color as primary from palette theme */
-export const Primary: Story = {
+export const Default: Story = {
     args: {
-        children: 'Primary',
+        children: 'Button',
     },
 };
 
-//
-// export default {
-//     title: 'Inputs/Button',
-//     component: Button,
-// };
-
-// const actions = {
-//     onClick: action('onClick'),
-// };
-//
-// export const Default = () => {
-//     return <Button {...actions} />;
-// };
-//
-// export const FullWidth = () => {
-//     return (
-//         <Stack spacing={3}>
-//             <Button {...actions} fullWidth variant="contained">
-//                 Full Width
-//             </Button>
-//             <Button {...actions} variant="contained">
-//                 Not Full Width
-//             </Button>
-//         </Stack>
-//     );
-// };
-//
-// export const Icons = () => {
-//     return (
-//         <Stack direction="row" spacing={3}>
-//             <Button {...actions}>Label only</Button>
-//             <Button {...actions} startIcon={<SendIcon />}>
-//                 Start Icon
-//             </Button>
-//             <Button {...actions} color="error" endIcon={<DeleteIcon />}>
-//                 End Icon
-//             </Button>
-//             <Button {...actions} color={'#D05010'} icon={<FingerprintIcon />} />
-//         </Stack>
-//     );
-// };
-//
-// export const Variants = () => {
-//     return (
-//         <Stack direction="row" spacing={3}>
-//             <Button {...actions} variant="text">
-//                 text
-//             </Button>
-//             <Button {...actions} variant="outlined">
-//                 outlined
-//             </Button>
-//             <Button {...actions} variant="contained">
-//                 contained
-//             </Button>
-//             <Button {...actions}>default</Button>
-//         </Stack>
-//     );
-// };
-//
-// export const DisableRipple = () => {
-//     return (
-//         <Stack direction="column" spacing={3}>
-//             <Stack direction="row" spacing={3}>
-//                 <Button {...actions} disableRipple color="primary">
-//                     Disable Ripple
-//                 </Button>
-//                 <Button {...actions} color={'#D05010'} disableRipple icon={<FingerprintIcon />} />
-//             </Stack>
-//             <Stack direction="row" spacing={3}>
-//                 <Button {...actions} color="secondary">
-//                     Ripple
-//                 </Button>
-//                 <Button {...actions} color={'#D05010'} icon={<FingerprintIcon />} />
-//             </Stack>
-//         </Stack>
-//     );
-// };
-//
-// export const ButtonLink = () => {
-//     return (
-//         <Stack direction={'column'} spacing={2}>
-//             <Stack direction={'row'} spacing={2}>
-//                 <Button {...actions} disableRipple disableElevation variant="text" link="https://chat.openai.com/">
-//                     Chat GTP
-//                 </Button>
-//                 <Button {...actions} color={'#D05010'} icon={<SendIcon />} link="https://chat.openai.com/" />
-//             </Stack>
-//             <Stack direction={'row'} spacing={2}>
-//                 <Button {...actions} variant="text">
-//                     normal button
-//                 </Button>
-//                 <Button {...actions} color={'#D05010'} icon={<FingerprintIcon />} />
-//             </Stack>
-//         </Stack>
-//     );
-// };
-//
-// export const Elevation = () => {
-//     return (
-//         <Stack direction={'row'} spacing={2}>
-//             <Button {...actions} disableElevation link="https://chat.openai.com/">
-//                 Disable Elevation
-//             </Button>
-//             <Button {...actions} link="https://chat.openai.com/">
-//                 Elevation
-//             </Button>
-//         </Stack>
-//     );
-// };
-//
-export const ThemedAndColored = () => {
+const Color = () => {
     return (
-        <Stack direction="column" spacing={2}>
-            {[undefined, 'primary', 'secondary', 'info', 'success', 'error', '#df01fd'].map((color, index) => (
-                <Stack key={index} direction="row" spacing={2}>
-                    {['contained', 'outlined', 'text'].map((variant) => (
-                        <Button key={variant} variant={variant} color={color} sx={{ minWidth: 200 }}>
-                            {color ?? 'Default'}
-                        </Button>
-                    ))}
-                    <Button icon={<SendIcon />} color={color} />
-                </Stack>
-            ))}
+        <Stack direction="row" spacing={3}>
+            <Button color={'#00ab92'}>#00ab92</Button>
+            <Button color={'primary'}>Primary</Button>
+            <Button color={'secondary'}>Secondary</Button>
         </Stack>
     );
 };
-//
-// export const Loading = () => {
-//     return (
-//         <Stack direction={'column'} spacing={2}>
-//             <Stack direction={'row'} spacing={2}>
-//                 <Typography>Loading</Typography>
-//                 <Button {...actions} isLoading disableElevation startIcon={<SendIcon />} loadingIconPosition="start">
-//                     Start Send Data
-//                 </Button>
-//                 <Button {...actions} isLoading disableElevation endIcon={<SendIcon />} loadingIconPosition="end">
-//                     End Send Data
-//                 </Button>
-//                 <Button {...actions} isLoading disableElevation>
-//                     Send Data
-//                 </Button>
-//             </Stack>
-//             <Stack direction={'row'} spacing={2}>
-//                 <Typography>Loading Label</Typography>
-//                 <Button
-//                     {...actions}
-//                     isLoading
-//                     disableElevation
-//                     startIcon={<SendIcon />}
-//                     loadingIconPosition="start"
-//                     loadingLabel="Loading..."
-//                 >
-//                     Start Send Data
-//                 </Button>
-//                 <Button
-//                     {...actions}
-//                     isLoading
-//                     disableElevation
-//                     endIcon={<SendIcon />}
-//                     loadingIconPosition="end"
-//                     loadingLabel="Loading..."
-//                 >
-//                     End Send Data
-//                 </Button>
-//                 <Button {...actions} isLoading disableElevation loadingLabel="Loading...">
-//                     Send Data
-//                 </Button>
-//             </Stack>
-//             <Stack direction={'row'} spacing={2}>
-//                 <Typography>Size Small</Typography>
-//                 <Button
-//                     {...actions}
-//                     isLoading
-//                     disableElevation
-//                     startIcon={<SendIcon />}
-//                     loadingIconPosition="start"
-//                     loadingLabel="Loading..."
-//                     size="small"
-//                 >
-//                     Start Send Data
-//                 </Button>
-//                 <Button
-//                     {...actions}
-//                     isLoading
-//                     disableElevation
-//                     endIcon={<SendIcon />}
-//                     loadingIconPosition="end"
-//                     loadingLabel="Loading..."
-//                     size="small"
-//                 >
-//                     End Send Data
-//                 </Button>
-//                 <Button {...actions} isLoading disableElevation loadingLabel="Loading..." size="small">
-//                     Send Data
-//                 </Button>
-//             </Stack>
-//             <Stack direction={'row'} spacing={2}>
-//                 <Typography>Size Medium</Typography>
-//                 <Button
-//                     {...actions}
-//                     isLoading
-//                     disableElevation
-//                     startIcon={<SendIcon />}
-//                     loadingIconPosition="start"
-//                     loadingLabel="Loading..."
-//                     size="medium"
-//                 >
-//                     Start Send Data
-//                 </Button>
-//                 <Button
-//                     {...actions}
-//                     isLoading
-//                     disableElevation
-//                     endIcon={<SendIcon />}
-//                     loadingIconPosition="end"
-//                     loadingLabel="Loading..."
-//                     size="medium"
-//                 >
-//                     End Send Data
-//                 </Button>
-//                 <Button {...actions} isLoading disableElevation loadingLabel="Loading..." size="medium">
-//                     Send Data
-//                 </Button>
-//             </Stack>
-//             <Stack direction={'row'} spacing={2}>
-//                 <Typography>Size Large</Typography>
-//                 <Button
-//                     {...actions}
-//                     isLoading
-//                     disableElevation
-//                     startIcon={<SendIcon />}
-//                     loadingIconPosition="start"
-//                     loadingLabel="Loading..."
-//                     size="large"
-//                 >
-//                     Start Send Data
-//                 </Button>
-//                 <Button
-//                     {...actions}
-//                     isLoading
-//                     disableElevation
-//                     endIcon={<SendIcon />}
-//                     loadingIconPosition="end"
-//                     loadingLabel="Loading..."
-//                     size="large"
-//                 >
-//                     End Send Data
-//                 </Button>
-//                 <Button {...actions} isLoading disableElevation loadingLabel="Loading..." size="large">
-//                     Send Data
-//                 </Button>
-//             </Stack>
-//         </Stack>
-//     );
-// };
+export const Color_ = () => <Color />;
+
+export const Disabled: Story = {
+    args: {
+        disabled: true,
+        children: 'Disabled Button',
+    },
+};
+
+export const DisableRipple: Story = {
+    args: {
+        disableRipple: true,
+        children: 'disableRipple Button',
+    },
+};
+
+const EndIcon = () => {
+    return (
+        <Stack spacing={3}>
+            <Button endIcon="Fingerprint">"Fingerprint" Button</Button>
+            <Button endIcon={<FingerprintIcon />}>Fingerprint Button</Button>
+        </Stack>
+    );
+};
+export const EndIcon_ = () => <EndIcon />;
+
+export const FullWidth: Story = {
+    args: {
+        fullWidth: true,
+        children: 'fullWidth Button',
+    },
+};
+
+const Icon = () => {
+    return (
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+            <Button icon="Fingerprint">"Fingerprint" IconButton</Button>
+            <Button icon={<FingerprintIcon />}>Fingerprint IconButton</Button>
+        </Box>
+    );
+};
+export const Icon_ = () => <Icon />;
+
+export const IsLoading: Story = {
+    args: {
+        isLoading: true,
+        loadingLabel: 'Loading...',
+        children: 'Label Button',
+    },
+};
+
+export const Label: Story = {
+    args: {
+        label: 'Label',
+        children: 'Label Button',
+    },
+};
+
+export const Link: Story = {
+    args: {
+        link: 'https://google.com',
+        children: 'Google Link Button',
+    },
+};
+
+const LoadingIconPosition = () => {
+    return (
+        <Stack spacing={3}>
+            <Button isLoading loadingLabel="Loading...">
+                Loading Button
+            </Button>
+            <Button isLoading loadingLabel="Loading..." loadingIconPosition="start">
+                Loading Button
+            </Button>
+            <Button isLoading loadingLabel="Loading..." loadingIconPosition="end">
+                Loading Button
+            </Button>
+        </Stack>
+    );
+};
+export const LoadingIconPosition_ = () => <LoadingIconPosition />;
+
+export const LoadingCmp: Story = {
+    args: {
+        isLoading: true,
+        loadingLabel: 'is loading please wait',
+        loadingIconPosition: 'end',
+        loadingCmp: <SendIcon size={15} />,
+        children: 'Button',
+    },
+};
+
+export const LoadingLabel: Story = {
+    args: {
+        isLoading: true,
+        loadingLabel: 'is loading please wait',
+        children: 'Button',
+    },
+};
+
+export const MinWidth: Story = {
+    args: {
+        minWidth: 250,
+        children: 'minWidth Button',
+    },
+};
+
+export const OnClick: Story = {
+    args: {
+        onClick: action('onClick'),
+        children: 'onClick Button',
+    },
+};
+
+export const OnRightClick: Story = {
+    args: {
+        onRightClick: action('onRightClick'),
+        children: 'onClick Button',
+    },
+};
+
+const Size = () => {
+    return (
+        <Stack spacing={3}>
+            <Button size="small">small Button</Button>
+            <Button size="medium">medium Button</Button>
+            <Button size="large">large Button</Button>
+            <Button size={35}>35px Button</Button>
+        </Stack>
+    );
+};
+export const Size_ = () => <Size />;
+
+const StartIcon = () => {
+    return (
+        <Stack spacing={3}>
+            <Button startIcon="Send">small Button</Button>
+            <Button startIcon={<SendIcon />}>medium Button</Button>
+        </Stack>
+    );
+};
+export const StartIcon_ = () => <StartIcon />;
+
+export const TooltipProps: Story = {
+    args: {
+        tooltipProps: {
+            bgColor: '#10D0DD',
+            color: '#FF0000',
+            followCursor: true,
+            fontSize: 15,
+            lineHeight: 2,
+            placement: 'right',
+            title: 'tooltip button',
+        },
+        children: 'Tooltip Button',
+    },
+};
+
+export const Uppercase: Story = {
+    args: {
+        uppercase: false,
+        children: 'Non Uppercase Button',
+    },
+};
+
+const Variant = () => {
+    return (
+        <Stack spacing={3}>
+            <Button variant="contained">contained Button</Button>
+            <Button variant="outlined">outlined Button</Button>
+            <Button variant="text">text Button</Button>
+        </Stack>
+    );
+};
+export const Variant_ = () => <Variant />;
