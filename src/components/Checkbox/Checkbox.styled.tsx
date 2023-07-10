@@ -10,19 +10,19 @@ type CheckboxStyledPropsType = CheckboxProps & MuiCheckboxProps;
 export const Checkbox = styled(
     (props: CheckboxStyledPropsType) => {
         const {
-            inputProps,
             ariaLabel,
+            customColor,
+            disabled,
+            fontSize,
+            helperText,
+            inputProps,
+            label = '',
+            labelPlacement,
+            muiColor,
             readOnly,
             required,
-            disabled,
-            labelPlacement,
-            helperText,
-            label = '',
-            fontSize,
-            customColor,
-            muiColor,
-            textColor,
             sx,
+            textColor,
             ...rest
         } = props;
         return (

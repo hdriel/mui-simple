@@ -116,9 +116,9 @@ export const OnDeleteChip: Story = {
     },
 };
 
-export const RoundedChip: Story = {
+export const UnRoundedChip: Story = {
     args: {
-        rounded: true,
+        rounded: false,
         children: `rounded chip`,
     },
 };

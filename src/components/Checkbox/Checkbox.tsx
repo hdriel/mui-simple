@@ -13,13 +13,13 @@ export default function Checkbox(props: PropsWithChildren<CheckboxProps>): React
 
     return (
         <MuiCheckbox
-            customColor={muiColor ? undefined : customColor}
-            muiColor={muiColor}
-            textColor={textColor}
-            label={label ?? children}
             checked={value ?? checked}
             checkedIcon={typeof checkedIcon === 'string' ? <SVGIcon>{checkedIcon}</SVGIcon> : (checkedIcon as any)}
+            customColor={muiColor ? undefined : customColor}
             icon={typeof icon === 'string' ? <SVGIcon>{icon}</SVGIcon> : (icon as any)}
+            label={label ?? children}
+            muiColor={muiColor}
+            textColor={textColor}
             {...rest}
         />
     );
