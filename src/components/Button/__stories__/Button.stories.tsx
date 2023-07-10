@@ -167,8 +167,16 @@ export const StartIconButton_ = () => <StartIconButton />;
 
 export const TooltipPropsButton: Story = {
     args: {
-        onRightClick: action('onRightClick'),
-        children: 'onClick Button',
+        tooltipProps: {
+            bgColor: '#10D0DD',
+            color: '#FF0000',
+            followCursor: true,
+            fontSize: 15,
+            lineHeight: 2,
+            placement: 'right',
+            title: 'tooltip button',
+        },
+        children: 'Tooltip Button',
     },
 };
 
