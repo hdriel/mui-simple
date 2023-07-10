@@ -49,9 +49,9 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = forwardRef(
         const content = isLoading ? loadingLabel || (!startIconCmp && !endIconCmp && label) || label : label;
         const isIconButton = icon || (isLoading && !loadingLabel && !startIcon && !endIcon);
 
-        const onRightClickHandler = (e: any): void => {
-            e.preventDefault();
-            onRightClick?.(e);
+        const onRightClickHandler = (event: any): void => {
+            event.preventDefault();
+            onRightClick?.(event);
         };
 
         return isIconButton ? (

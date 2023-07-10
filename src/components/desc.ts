@@ -1,4 +1,4 @@
-import type { ReactNode, ReactElement, ChangeEvent, MouseEventHandler } from 'react';
+import type { ReactNode, ReactElement, ChangeEvent } from 'react';
 import type { SxProps } from '@mui/material';
 
 export interface ButtonProps {
@@ -15,8 +15,8 @@ export interface ButtonProps {
     loadingCmp?: ReactNode;
     loadingLabel?: string;
     minWidth?: string | number;
-    onClick?: MouseEventHandler<HTMLButtonElement>;
-    onRightClick?: MouseEventHandler<HTMLButtonElement>;
+    onClick?: (event: any) => void;
+    onRightClick?: (event: any) => void;
     size?: 'small' | 'medium' | 'large' | string | number;
     startIcon?: ReactNode | string;
     sx?: SxProps;
