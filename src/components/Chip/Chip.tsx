@@ -1,115 +1,80 @@
 import React from 'react';
-import type { ReactNode, PropsWithChildren } from 'react';
-//	import PropTypes from 'prop-types';
-import type { SxProps } from '@mui/material';
+import type { PropsWithChildren } from 'react';
 
 import { Chip as MuiChip } from './Chip.styled';
 import { useCustomColor } from '../../utils/helpers';
 import SVGIcon from '../SVGIcon/SVGIcon';
+import type { ChipProps } from '../desc';
 
-interface ChipProps {
-    width?: string;
-    label?: string;
-    onClick?: () => void;
-    onDelete?: () => void;
-    link?: string;
-    avatar?: ReactNode;
-    disabled?: boolean;
-    startIcon?: ReactNode;
-    endIcon?: ReactNode;
-    color?: string;
-    multiLine?: boolean;
-    size?: 'small' | 'medium';
-    breadCrumbsStyle?: boolean;
-    rounded?: boolean;
-    minWidth?: string | number;
-    textColor?: string;
-    sx?: SxProps;
-}
-export default function Chip(props: PropsWithChildren<ChipProps>): ReactNode {
+function Chip(props: PropsWithChildren<ChipProps>): React.ReactElement {
     const {
-        label,
         avatar,
+        useStyleBreadCrumb,
+        children,
+        color,
+        disabled,
+        endIcon,
+        label,
+        link: href,
+        minWidth,
+        multiLine,
         onClick,
         onDelete,
-        link,
-        endIcon,
-        color,
-        textColor: _textColor,
-        multiLine,
-        size,
-        width,
-        breadCrumbsStyle,
         rounded,
-        disabled,
-        minWidth,
-        children,
+        size,
+        startIcon,
         sx,
+        textColor: _textColor,
+        width,
         ...rest
     } = props;
-    let { startIcon } = props;
 
     const [customColor, muiColor] = useCustomColor(color);
     const [textColor] = useCustomColor(_textColor);
-    startIcon &&= <SVGIcon>{startIcon}</SVGIcon>;
+    const linkProps = href && { href, component: 'a', clickable: true };
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    const onDeleteHandler = onDelete ?? endIcon ? () => {} : undefined;
 
-    const linkProps = link && { href: link, component: 'a', clickable: true };
     return (
         <MuiChip
-            width={width}
-            label={label ?? children}
-            onClick={onClick}
-            onDelete={onDelete}
             avatar={avatar}
-            icon={startIcon}
-            customColor={muiColor ? undefined : customColor}
-            textColor={muiColor ? undefined : textColor}
+            useStyleBreadCrumb={useStyleBreadCrumb}
             color={muiColor}
-            size={size}
+            customColor={muiColor ? undefined : customColor}
+            deleteIcon={typeof endIcon === 'string' ? <SVGIcon>{endIcon}</SVGIcon> : (endIcon as any)}
             disabled={disabled}
-            deleteIcon={endIcon}
+            icon={typeof startIcon === 'string' ? <SVGIcon>{startIcon}</SVGIcon> : (startIcon as any)}
+            label={label ?? children}
             multiLine={multiLine}
-            breadCrumbsStyle={breadCrumbsStyle}
+            onClick={onClick}
+            onDelete={onDeleteHandler}
             rounded={rounded}
-            sx={{ ...sx, minWidth }}
+            size={size}
+            sx={{ ...sx, minWidth, width: width ?? 'auto' }}
+            textColor={textColor}
             {...linkProps}
             {...rest}
         />
     );
 }
 
-//	Chip.propTypes = {
-//		width: PropTypes.string,
-//		label: PropTypes.string,
-//		onClick: PropTypes.func,
-//		onDelete: PropTypes.func,
-//		link: PropTypes.string,
-//		avatar: PropTypes.node,
-//		disabled: PropTypes.bool,
-//		startIcon: PropTypes.node,
-//		endIcon: PropTypes.node,
-//		color: PropTypes.string,
-//		multiLine: PropTypes.bool,
-//		size: PropTypes.oneOf(['small', 'medium']),
-//		breadCrumbsStyle: PropTypes.bool,
-//		rounded: PropTypes.bool,
-//		minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//	};
-
 Chip.defaultProps = {
-    width: undefined,
+    alignEndIcon: undefined,
+    avatar: undefined,
+    useStyleBreadCrumb: undefined,
+    color: undefined,
+    disabled: undefined,
+    endIcon: undefined,
     label: undefined,
+    link: undefined,
+    minWidth: undefined,
+    multiLine: undefined,
     onClick: undefined,
     onDelete: undefined,
-    link: undefined,
-    avatar: undefined,
-    disabled: undefined,
-    startIcon: undefined,
-    endIcon: undefined,
-    color: undefined,
-    multiLine: undefined,
-    size: undefined,
-    breadCrumbsStyle: undefined,
     rounded: true,
-    minWidth: undefined,
+    size: undefined,
+    startIcon: undefined,
+    width: undefined,
 };
+
+export default Chip;
