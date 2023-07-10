@@ -7,7 +7,7 @@ import type { CheckboxProps } from '../desc';
 import SVGIcon from '../SVGIcon/SVGIcon';
 
 export default function Checkbox(props: PropsWithChildren<CheckboxProps>): ReactElement {
-    const { color, textColor: _textColor, value, checked, checkedIcon, icon, ...rest } = props;
+    const { color, textColor: _textColor, value, checked, checkedIcon, icon, children, label, ...rest } = props;
     const [customColor, muiColor] = useCustomColor(color);
     const [textColor] = useCustomColor(_textColor);
 
@@ -16,6 +16,7 @@ export default function Checkbox(props: PropsWithChildren<CheckboxProps>): React
             customColor={muiColor ? undefined : customColor}
             muiColor={muiColor}
             textColor={textColor}
+            label={label ?? children}
             checked={value ?? checked}
             checkedIcon={typeof checkedIcon === 'string' ? <SVGIcon>{checkedIcon}</SVGIcon> : (checkedIcon as any)}
             icon={typeof icon === 'string' ? <SVGIcon>{icon}</SVGIcon> : (icon as any)}

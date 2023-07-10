@@ -1,7 +1,8 @@
 // @ts-ignore
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Send as SendIcon } from '@mui/icons-material';
+import { Send as SendIcon, Fingerprint as FingerprintIcon } from '@mui/icons-material';
+import { Stack } from '@mui/material';
 
 import Checkbox from '../Checkbox';
 
@@ -83,7 +84,7 @@ export const DisabledCheckbox: Story = {
 
 export const FontSize: Story = {
     args: {
-        fontSize: 30,
+        fontSize: 35,
         children: 'FontSize checkbox',
     },
 };
@@ -97,7 +98,7 @@ export const HelperText: Story = {
 
 export const IconCheckbox: Story = {
     args: {
-        icon: <Fingerprint />,
+        icon: <FingerprintIcon />,
         checkedIcon: <SendIcon />,
         children: 'checkbox with icons',
     },

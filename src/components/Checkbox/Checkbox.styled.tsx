@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { isValidElement } from 'react';
 import type { ComponentType } from 'react';
 import { styled } from '@mui/material/styles';
-import { Checkbox as MuiCheckbox, FormControlLabel, FormHelperText } from '@mui/material';
+import { Checkbox as MuiCheckbox, FormControlLabel, FormHelperText, Typography } from '@mui/material';
 import type { CheckboxProps as MuiCheckboxProps } from '@mui/material';
 import type { CheckboxProps } from '../desc';
 
@@ -21,16 +21,24 @@ export const Checkbox = styled(
             fontSize,
             customColor,
             muiColor,
+            textColor,
             sx,
             ...rest
         } = props;
         return (
-            <>
+            <span>
                 <FormControlLabel
                     required={required}
                     disabled={disabled}
                     labelPlacement={labelPlacement}
-                    sx={{ m: 0, userSelect: 'none' }}
+                    label={
+                        isValidElement(label) ? (
+                            label
+                        ) : (
+                            <Typography sx={{ fontSize, color: textColor }}>{label}</Typography>
+                        )
+                    }
+                    sx={{ m: 0, userSelect: 'none', color: textColor }}
                     control={
                         <MuiCheckbox
                             color={muiColor as MuiColor}
@@ -50,13 +58,12 @@ export const Checkbox = styled(
                             {...rest}
                         />
                     }
-                    label={label}
                 />
                 {helperText && <FormHelperText>{helperText}</FormHelperText>}
-            </>
+            </span>
         );
     },
     {
-        shouldForwardProp: (prop) => !['textColor', 'fontSize', 'helperText'].includes(prop),
+        shouldForwardProp: (prop) => ![].includes(prop),
     }
 )<CheckboxStyledPropsType>`` as ComponentType<CheckboxStyledPropsType>;
