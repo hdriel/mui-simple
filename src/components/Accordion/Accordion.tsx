@@ -26,7 +26,7 @@ interface AccordionProps {
     useCustomStyle?: boolean;
     [key: string]: any;
 }
-export default function Accordion(props: PropsWithChildren<AccordionProps>): ReactElement {
+const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props): React.ReactElement {
     const {
         id,
         expanded,
@@ -57,7 +57,6 @@ export default function Accordion(props: PropsWithChildren<AccordionProps>): Rea
         <MuiAccordion
             disabled={disabled}
             expanded={typeof expanded === 'string' ? expanded === id : expanded}
-            // Todo: check if necessary to send event to onChange
             onChange={(event, isExpanded) => onChange?.(event, isExpanded ? id : false)}
             useCustomStyle={useCustomStyle}
             TransitionProps={{ unmountOnExit: unmountDetailsOnClose }}
@@ -75,12 +74,7 @@ export default function Accordion(props: PropsWithChildren<AccordionProps>): Rea
                 <Typography
                     tooltip={false}
                     wrap={!secondaryLabel}
-                    sx={{
-                        ...(secondaryLabel && {
-                            width: '33%',
-                            flexShrink: 0,
-                        }),
-                    }}
+                    sx={{ ...(secondaryLabel && { width: '33%', flexShrink: 0 }) }}
                 >
                     {label}
                 </Typography>
@@ -92,12 +86,13 @@ export default function Accordion(props: PropsWithChildren<AccordionProps>): Rea
                         <Typography
                             wrap={showMore ? false : !!detailsMaxRows}
                             rows={showMore ? undefined : detailsMaxRows}
-                            // Todo: check value type to send event to onChange
                             onEllipsisChange={(value) => setIsEllipsis(value)}
                             color={textColor}
+                            tooltip={!showMore}
                         >
                             {details}
                         </Typography>
+
                         {isEllipsis && detailsMaxRows ? (
                             <ShowMoreWrapper>
                                 <Button
@@ -117,26 +112,7 @@ export default function Accordion(props: PropsWithChildren<AccordionProps>): Rea
             </AccordionDetails>
         </MuiAccordion>
     );
-}
-
-//	Accordion.propTypes = {
-//	    id: PropTypes.string,
-//	    expanded: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-//	    onChange: PropTypes.func,
-//	    disabled: PropTypes.bool,
-//	    label: PropTypes.string,
-//	    secondaryLabel: PropTypes.string,
-//	    details: PropTypes.string,
-//	    detailsMaxRows: PropTypes.number,
-//	    showMoreLabel: PropTypes.string,
-//	    hideLabel: PropTypes.string,
-//	    bgColor: PropTypes.string,
-//	    textColor: PropTypes.string,
-//	    titleColor: PropTypes.string,
-//	    buttonsColor: PropTypes.string,
-//	    unmountDetailsOnClose: PropTypes.bool,
-//	    useCustomStyle: PropTypes.bool,
-//	};
+};
 
 Accordion.defaultProps = {
     id: undefined,
@@ -156,3 +132,5 @@ Accordion.defaultProps = {
     unmountDetailsOnClose: false,
     useCustomStyle: false,
 };
+
+export default Accordion;

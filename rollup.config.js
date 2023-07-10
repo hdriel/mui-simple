@@ -48,7 +48,6 @@ export default [
                 sourcemap,
                 file: packageJson.main,
                 format: 'cjs',
-                exports: 'named',
                 interop: 'auto',
             },
             // ES2015 modules version so consumers can tree-shake
@@ -56,7 +55,6 @@ export default [
                 sourcemap,
                 file: packageJson.module,
                 format: 'es',
-                exports: 'named',
                 interop: 'esModule',
             },
         ],
