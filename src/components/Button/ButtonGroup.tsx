@@ -4,13 +4,14 @@ import Button from './Button';
 import { ButtonGroup as MuiButtonGroup } from './Button.styled';
 import { useCustomColor } from '../../utils/helpers';
 import type { ButtonGroupProps } from '../desc';
+import { isFragment } from 'react-is';
 
 const ButtonGroup: React.FC<PropsWithChildren<ButtonGroupProps>> = (props): ReactElement => {
     const { children, color, disableElevation, ...rest } = props;
     const [customColor, muiColor] = useCustomColor(color);
 
     const buttons = []
-        .concat(children ?? [])
+        .concat(isFragment(children) ? children.props.children : children ?? [])
         .filter((child) => child.type.displayName === Button.displayName)
         .map((child, index, arr) => {
             return React.cloneElement(child, {
