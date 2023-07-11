@@ -29,16 +29,13 @@ export const Default: Story = {
     },
 };
 
-const Color = () => {
-    return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-            <ButtonGroup color={'#00ab92'}>{children}</ButtonGroup>
-            <ButtonGroup color={'primary'}>{children}</ButtonGroup>
-            <ButtonGroup color={'secondary'}>{children}</ButtonGroup>
-        </Box>
-    );
-};
-export const Color_ = () => <Color />;
+export const Color_ = (args) => (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+        <ButtonGroup color={'#00ab92'}>{children}</ButtonGroup>
+        <ButtonGroup color={'primary'}>{children}</ButtonGroup>
+        <ButtonGroup color={'secondary'}>{children}</ButtonGroup>
+    </Box>
+);
 
 export const Disabled: Story = {
     args: {
@@ -75,24 +72,18 @@ export const VerticalOrientation: Story = {
     },
 };
 
-const Size = () => {
-    return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-            <ButtonGroup size="small">{children}</ButtonGroup>
-            <ButtonGroup size="medium">{children}</ButtonGroup>
-            <ButtonGroup size="large">{children}</ButtonGroup>
-        </Box>
-    );
-};
-export const Size_ = () => <Size />;
+export const Size_ = (args) => (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+        <ButtonGroup size="small">{children}</ButtonGroup>
+        <ButtonGroup size="medium">{children}</ButtonGroup>
+        <ButtonGroup size="large">{children}</ButtonGroup>
+    </Box>
+);
 
-const Variant = () => {
-    return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-            <ButtonGroup variant="contained">{children}</ButtonGroup>
-            <ButtonGroup variant="outlined">{children}</ButtonGroup>
-            <ButtonGroup variant="text">{children}</ButtonGroup>
-        </Box>
-    );
-};
-export const Variant_ = () => <Variant />;
+export const Variant_ = (args) => (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+        <ButtonGroup variant="contained">{children}</ButtonGroup>
+        <ButtonGroup variant="outlined">{children}</ButtonGroup>
+        <ButtonGroup variant="text">{children}</ButtonGroup>
+    </Box>
+);

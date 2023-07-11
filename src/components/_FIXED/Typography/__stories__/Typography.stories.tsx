@@ -86,14 +86,13 @@ export const Border: Story = {
     },
 };
 
-const CharsCase = () => (
+export const CharsCase_ = (args) => (
     <Stack spacing={3}>
         <Typography charsCase="lower">{largeIpsum}</Typography>
         <Typography charsCase="upper">{largeIpsum}</Typography>
         <Typography charsCase="capital">{largeIpsum}</Typography>
     </Stack>
 );
-export const CharsCase_ = () => <CharsCase />;
 
 export const Color: Story = {
     args: {

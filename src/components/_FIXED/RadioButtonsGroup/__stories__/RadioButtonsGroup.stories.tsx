@@ -127,18 +127,16 @@ export const OnChange: Story = {
     },
 };
 
-const Size = () => (
+export const Size_ = (args) => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
         <RadioButtonsGroup data={data} direction="row" size="small" />
         <RadioButtonsGroup data={data} direction="row" size="medium" />
     </Box>
 );
-export const Size_ = () => <Size />;
 
-const Variant = () => (
+export const Variant_ = (args) => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
         <RadioButtonsGroup data={data} label="Gender" direction="row" />
         <RadioButtonsGroup data={data} label="Gender" direction="row" variant="outlined" />
     </Box>
 );
-export const Variant_ = () => <Variant />;

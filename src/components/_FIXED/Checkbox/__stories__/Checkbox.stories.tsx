@@ -58,22 +58,19 @@ export const CheckedIcon: Story = {
     },
 };
 
-const Color = () => {
-    return (
-        <Stack direction="row" spacing={3}>
-            <Checkbox checked color={'#00ab92'}>
-                #00ab92
-            </Checkbox>
-            <Checkbox checked color={'primary'}>
-                Primary
-            </Checkbox>
-            <Checkbox checked color={'secondary'}>
-                Secondary
-            </Checkbox>
-        </Stack>
-    );
-};
-export const Color_ = () => <Color />;
+export const Color_ = (args) => (
+    <Stack direction="row" spacing={3}>
+        <Checkbox checked color={'#00ab92'}>
+            #00ab92
+        </Checkbox>
+        <Checkbox checked color={'primary'}>
+            Primary
+        </Checkbox>
+        <Checkbox checked color={'secondary'}>
+            Secondary
+        </Checkbox>
+    </Stack>
+);
 
 export const Disabled: Story = {
     args: {
@@ -110,17 +107,14 @@ export const Label: Story = {
     },
 };
 
-const LabelPlacement = () => {
-    return (
-        <Stack direction="row" spacing={4}>
-            <Checkbox labelPlacement="top">top label</Checkbox>
-            <Checkbox labelPlacement="start">start label</Checkbox>
-            <Checkbox labelPlacement="bottom">bottom label</Checkbox>
-            <Checkbox labelPlacement="end">end label</Checkbox>
-        </Stack>
-    );
-};
-export const LabelPlacement_ = () => <LabelPlacement />;
+export const LabelPlacement_ = (args) => (
+    <Stack direction="row" spacing={4}>
+        <Checkbox labelPlacement="top">top label</Checkbox>
+        <Checkbox labelPlacement="start">start label</Checkbox>
+        <Checkbox labelPlacement="bottom">bottom label</Checkbox>
+        <Checkbox labelPlacement="end">end label</Checkbox>
+    </Stack>
+);
 
 export const ReadOnly: Story = {
     args: {
@@ -137,15 +131,12 @@ export const Required: Story = {
     },
 };
 
-const Size = () => {
-    return (
-        <Stack direction="row" spacing={3}>
-            <Checkbox size="small">small checkbox</Checkbox>
-            <Checkbox size="medium">medium checkbox</Checkbox>
-        </Stack>
-    );
-};
-export const Size_ = () => <Size />;
+export const Size_ = (args) => (
+    <Stack direction="row" spacing={3}>
+        <Checkbox size="small">small checkbox</Checkbox>
+        <Checkbox size="medium">medium checkbox</Checkbox>
+    </Stack>
+);
 
 export const TextColor: Story = {
     args: {

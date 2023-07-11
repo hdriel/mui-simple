@@ -6,6 +6,7 @@ import { Send as SendIcon } from '@mui/icons-material';
 import { Stack } from '@mui/material';
 
 import TextField from '../TextField';
+import InputSearch from '../InputSearch';
 
 const meta: Meta<typeof TextField> = {
     title: 'Inputs/TextField',
@@ -94,15 +95,14 @@ export const Disabled: Story = {
     },
 };
 
-export const EndCmp = (): ReactElement => (
+export const EndCmp_ = (args): ReactElement => (
     <Stack spacing={3}>
         <TextField endCmp="Send" label="End Cmp" value="endCmp with mui icon name or mui icon element" />
         <TextField endCmp={<SendIcon />} label="End Cmp" value="endCmp with mui icon name or mui icon element" />
     </Stack>
 );
-export const EndCmp_ = (): ReactElement => <EndCmp />;
 
-export const EndCmpExternal = (): ReactElement => (
+export const EndCmpExternal_ = (args): ReactElement => (
     <Stack spacing={3}>
         <TextField
             endCmpExternal="Send"
@@ -116,7 +116,6 @@ export const EndCmpExternal = (): ReactElement => (
         />
     </Stack>
 );
-export const EndCmpExternal_ = (): ReactElement => <EndCmpExternal />;
 
 export const Error: Story = {
     args: {
@@ -150,7 +149,7 @@ export const HelperText: Story = {
     },
 };
 
-export const HideStartActionsOnEmpty = (): ReactElement => (
+export const HideStartActionsOnEmpty_ = (args): ReactElement => (
     <Stack spacing={3}>
         <TextField
             hideStartActionsOnEmpty={true}
@@ -166,7 +165,6 @@ export const HideStartActionsOnEmpty = (): ReactElement => (
         />
     </Stack>
 );
-export const HideStartActionsOnEmpty_ = (): ReactElement => <HideStartActionsOnEmpty />;
 
 export const Label: Story = {
     args: {
@@ -174,13 +172,12 @@ export const Label: Story = {
     },
 };
 
-export const Margin = (): ReactElement => (
+export const Margin_ = (args): ReactElement => (
     <Stack spacing={3}>
         <TextField margin="normal" label="Normal Margin" />
         <TextField margin="dense" label="Dense Margin" />
     </Stack>
 );
-export const Margin_ = (): ReactElement => <Margin />;
 
 export const maxRows: Story = {
     args: {
@@ -242,21 +239,19 @@ export const Rows: Story = {
     },
 };
 
-export const StartCmp = (): ReactElement => (
+export const StartCmp_ = (args): ReactElement => (
     <Stack spacing={3}>
         <TextField startCmp="Send" label="Start Cmp" value="with string mui icon name" />
         <TextField startCmp={<SendIcon />} label="Start Cmp" value="with mui icon element" />
     </Stack>
 );
-export const StartCmp_ = (): ReactElement => <StartCmp />;
 
-export const StartCmpExternal = (): ReactElement => (
+export const StartCmpExternal_ = (args): ReactElement => (
     <Stack spacing={3}>
         <TextField startCmpExternal="Send" label="Start Cmp External" value="with string mui icon name" />
         <TextField startCmpExternal={<SendIcon />} label="Start Cmp External" value="with mui icon element" />
     </Stack>
 );
-export const StartCmpExternal_ = (): ReactElement => <StartCmpExternal />;
 
 export const Type: Story = {
     args: {
@@ -272,11 +267,10 @@ export const Value: Story = {
     },
 };
 
-export const Variant = (): ReactElement => (
+export const Variant_ = (args): ReactElement => (
     <Stack spacing={3}>
         <TextField variant="filled" label="filled variant" value="some text here" />
         <TextField variant="outlined" label="outlined variant" value="some text here" />
         <TextField variant="standard" label="standard variant" value="some text here" />
     </Stack>
 );
-export const Variant_ = (): ReactElement => <Variant />;

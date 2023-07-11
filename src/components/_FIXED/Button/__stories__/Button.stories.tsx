@@ -22,16 +22,13 @@ export const Default: Story = {
     },
 };
 
-const Color = () => {
-    return (
-        <Stack direction="row" spacing={3}>
-            <Button color={'#00ab92'}>#00ab92</Button>
-            <Button color={'primary'}>Primary</Button>
-            <Button color={'secondary'}>Secondary</Button>
-        </Stack>
-    );
-};
-export const Color_ = () => <Color />;
+export const Color_ = (args) => (
+    <Stack direction="row" spacing={3}>
+        <Button color={'#00ab92'}>#00ab92</Button>
+        <Button color={'primary'}>Primary</Button>
+        <Button color={'secondary'}>Secondary</Button>
+    </Stack>
+);
 
 export const Disabled: Story = {
     args: {
@@ -47,15 +44,12 @@ export const DisableRipple: Story = {
     },
 };
 
-const EndIcon = () => {
-    return (
-        <Stack spacing={3}>
-            <Button endIcon="Fingerprint">"Fingerprint" Button</Button>
-            <Button endIcon={<FingerprintIcon />}>Fingerprint Button</Button>
-        </Stack>
-    );
-};
-export const EndIcon_ = () => <EndIcon />;
+export const EndIcon_ = (args) => (
+    <Stack spacing={3}>
+        <Button endIcon="Fingerprint">"Fingerprint" Button</Button>
+        <Button endIcon={<FingerprintIcon />}>Fingerprint Button</Button>
+    </Stack>
+);
 
 export const FullWidth: Story = {
     args: {
@@ -64,15 +58,12 @@ export const FullWidth: Story = {
     },
 };
 
-const Icon = () => {
-    return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-            <Button icon="Fingerprint">"Fingerprint" IconButton</Button>
-            <Button icon={<FingerprintIcon />}>Fingerprint IconButton</Button>
-        </Box>
-    );
-};
-export const Icon_ = () => <Icon />;
+export const Icon_ = (args) => (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+        <Button icon="Fingerprint">"Fingerprint" IconButton</Button>
+        <Button icon={<FingerprintIcon />}>Fingerprint IconButton</Button>
+    </Box>
+);
 
 export const IsLoading: Story = {
     args: {
@@ -96,22 +87,19 @@ export const Link: Story = {
     },
 };
 
-const LoadingIconPosition = () => {
-    return (
-        <Stack spacing={3}>
-            <Button isLoading loadingLabel="Loading...">
-                Loading Button
-            </Button>
-            <Button isLoading loadingLabel="Loading..." loadingIconPosition="start">
-                Loading Button
-            </Button>
-            <Button isLoading loadingLabel="Loading..." loadingIconPosition="end">
-                Loading Button
-            </Button>
-        </Stack>
-    );
-};
-export const LoadingIconPosition_ = () => <LoadingIconPosition />;
+export const LoadingIconPosition_ = (args) => (
+    <Stack spacing={3}>
+        <Button isLoading loadingLabel="Loading...">
+            Loading Button
+        </Button>
+        <Button isLoading loadingLabel="Loading..." loadingIconPosition="start">
+            Loading Button
+        </Button>
+        <Button isLoading loadingLabel="Loading..." loadingIconPosition="end">
+            Loading Button
+        </Button>
+    </Stack>
+);
 
 export const LoadingCmp: Story = {
     args: {
@@ -152,27 +140,21 @@ export const OnRightClick: Story = {
     },
 };
 
-const Size = () => {
-    return (
-        <Stack spacing={3}>
-            <Button size="small">small Button</Button>
-            <Button size="medium">medium Button</Button>
-            <Button size="large">large Button</Button>
-            <Button size={35}>35px Button</Button>
-        </Stack>
-    );
-};
-export const Size_ = () => <Size />;
+export const Size_ = (args) => (
+    <Stack spacing={3}>
+        <Button size="small">small Button</Button>
+        <Button size="medium">medium Button</Button>
+        <Button size="large">large Button</Button>
+        <Button size={35}>35px Button</Button>
+    </Stack>
+);
 
-const StartIcon = () => {
-    return (
-        <Stack spacing={3}>
-            <Button startIcon="Send">small Button</Button>
-            <Button startIcon={<SendIcon />}>medium Button</Button>
-        </Stack>
-    );
-};
-export const StartIcon_ = () => <StartIcon />;
+export const StartIcon_ = (args) => (
+    <Stack spacing={3}>
+        <Button startIcon="Send">small Button</Button>
+        <Button startIcon={<SendIcon />}>medium Button</Button>
+    </Stack>
+);
 
 export const TooltipProps: Story = {
     args: {
@@ -196,13 +178,10 @@ export const Uppercase: Story = {
     },
 };
 
-const Variant = () => {
-    return (
-        <Stack spacing={3}>
-            <Button variant="contained">contained Button</Button>
-            <Button variant="outlined">outlined Button</Button>
-            <Button variant="text">text Button</Button>
-        </Stack>
-    );
-};
-export const Variant_ = () => <Variant />;
+export const Variant_ = (args) => (
+    <Stack spacing={3}>
+        <Button variant="contained">contained Button</Button>
+        <Button variant="outlined">outlined Button</Button>
+        <Button variant="text">text Button</Button>
+    </Stack>
+);

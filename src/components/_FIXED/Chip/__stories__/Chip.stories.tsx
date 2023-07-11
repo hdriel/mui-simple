@@ -45,16 +45,13 @@ export const Avatar: Story = {
     },
 };
 
-const Color = () => {
-    return (
-        <Stack direction="row" spacing={3}>
-            <Chip color={'#00ab92'}>#00ab92</Chip>
-            <Chip color={'primary'}>Primary</Chip>
-            <Chip color={'secondary'}>Secondary</Chip>
-        </Stack>
-    );
-};
-export const Color_ = () => <Color />;
+export const Color_ = (args) => (
+    <Stack direction="row" spacing={3}>
+        <Chip color={'#00ab92'}>#00ab92</Chip>
+        <Chip color={'primary'}>Primary</Chip>
+        <Chip color={'secondary'}>Secondary</Chip>
+    </Stack>
+);
 
 export const Disabled: Story = {
     args: {
@@ -63,15 +60,12 @@ export const Disabled: Story = {
     },
 };
 
-const EndIcon = () => {
-    return (
-        <Stack direction="row" spacing={3}>
-            <Chip endIcon="Fingerprint">"Fingerprint" chip</Chip>
-            <Chip endIcon={<FingerprintIcon />}>Fingerprint chip</Chip>
-        </Stack>
-    );
-};
-export const EndIcon_ = () => <EndIcon />;
+export const EndIcon_ = (args) => (
+    <Stack direction="row" spacing={3}>
+        <Chip endIcon="Fingerprint">"Fingerprint" chip</Chip>
+        <Chip endIcon={<FingerprintIcon />}>Fingerprint chip</Chip>
+    </Stack>
+);
 
 export const Label: Story = {
     args: {
@@ -123,21 +117,19 @@ export const UnRounded: Story = {
     },
 };
 
-const Size = () => (
+export const Size_ = (args) => (
     <Stack direction="row" spacing={3}>
         <Chip size="small">small chip</Chip>
         <Chip size="medium">medium chip</Chip>
     </Stack>
 );
-export const Size_ = () => <Size />;
 
-const StartIcon = () => (
+export const StartIcon_ = (args) => (
     <Stack direction="row" spacing={3}>
         <Chip startIcon="Send">"SendIcon" chip</Chip>
         <Chip startIcon={<SendIcon />}>SendIcon chip</Chip>
     </Stack>
 );
-export const StartIcon_ = () => <StartIcon />;
 
 export const TextColor: Story = {
     args: {

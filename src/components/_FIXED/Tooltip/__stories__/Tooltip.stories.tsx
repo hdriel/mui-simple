@@ -47,47 +47,40 @@ const Template = (tooltipProps) => {
     );
 };
 
-const BgColor = () => {
+export const BgColor_ = (args) => {
     const tooltipProps = { bgColor: '#10ddcc', title: 'tooltip' };
     return <Template {...tooltipProps} />;
 };
-export const BgColor_ = () => <BgColor />;
 
-const Color = () => {
+export const Color_ = (args) => {
     const tooltipProps = { color: '#39099c', title: 'tooltip' };
     return <Template {...tooltipProps} />;
 };
-export const Color_ = () => <Color />;
 
-const FollowCursor = () => {
+export const FollowCursor_ = (args) => {
     const tooltipProps = { followCursor: true, title: 'tooltip' };
     return <Template {...tooltipProps} />;
 };
-export const FollowCursor_ = () => <FollowCursor />;
 
-const FontSize = () => {
+export const FontSize_ = (args) => {
     const tooltipProps = { fontSize: 30, title: 'tooltip' };
     return <Template {...tooltipProps} />;
 };
-export const FontSize_ = () => <FontSize />;
 
-const LineHeight = () => {
+export const LineHeight_ = (args) => {
     const tooltipProps = { lineHeight: 3, title: 'tooltip with big line height' };
     return <Template {...tooltipProps} />;
 };
-export const LineHeight_ = () => <LineHeight />;
 
-const Placement = () => {
+export const Placement_ = (args) => {
     const tooltipProps = { placement: 'right', title: 'tooltip with right placement' };
     return <Template {...tooltipProps} />;
 };
-export const Placement_ = () => <Placement />;
 
-const Title = () => {
+export const Title_ = (args) => {
     const tooltipProps = { title: '' };
     return <Template {...tooltipProps} />;
 };
-export const Title_ = () => <Title />;
 
 export const Open: Story = {
     args: {},

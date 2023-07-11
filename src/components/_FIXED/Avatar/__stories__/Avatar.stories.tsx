@@ -19,30 +19,27 @@ export const Default: Story = {
     args: {},
 };
 
-const Color = () => (
+export const Color_ = (args) => (
     <Stack direction="row" spacing={3}>
         <Avatar color="primary" />
         <Avatar color="secondary.dark" />
         <Avatar color={'#10ddcc'} />
     </Stack>
 );
-export const Color_ = () => <Color />;
 
-const FallbackImage = () => (
+export const FallbackImage_ = (args) => (
     <Stack direction="row" spacing={3}>
         <Avatar image="broken-image.jpg" fallbackImage="cat.jpg" />
         <Avatar image="broken-image.jpg" fallbackImage="undefined.jpg" />
     </Stack>
 );
-export const FallbackImage_ = () => <FallbackImage />;
 
-const Icon = () => (
+export const Icon_ = (args) => (
     <Stack direction="row" spacing={3}>
         <Avatar icon="Send" />
         <Avatar icon={<FingerprintIcon />} />
     </Stack>
 );
-export const Icon_ = () => <Icon />;
 
 export const Image: Story = {
     args: {
@@ -57,13 +54,12 @@ export const ShowTooltip: Story = {
     },
 };
 
-const Size = () => (
+export const Size_ = (args) => (
     <Stack direction="row" spacing={3}>
         <Avatar size={30} />
         <Avatar size={'4em'} />
     </Stack>
 );
-export const Size_ = () => <Size />;
 
 export const TooltipPlacement: Story = {
     args: {
@@ -78,11 +74,10 @@ export const Username: Story = {
     },
 };
 
-const Variant = () => (
+export const Variant_ = (args) => (
     <Stack direction="row" spacing={3}>
         <Avatar variant="circular" />
         <Avatar variant="rounded" />
         <Avatar variant="square" />
     </Stack>
 );
-export const Variant_ = () => <Variant />;
