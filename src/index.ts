@@ -61,9 +61,9 @@ export { default as Slider } from './components/Slider/Slider';
 export { default as RangeSlider } from './components/Slider/RangeSlider';
 export { default as Snackbar } from './components/Snackbar/Snackbar';
 export { default as SpeedDial } from './components/SpeedDial/SpeedDial';
-// export { default as Stepper } from './components/Stepper/Stepper';
-// export { default as MobileStepper } from './components/Stepper/MobileStepper';
-// export { useSimpleStepper } from './components/Stepper/Stepper.utils';
+export { default as Stepper } from './components/Stepper/Stepper';
+export { default as MobileStepper } from './components/Stepper/MobileStepper';
+export { useSimpleStepper } from './components/Stepper/Stepper.utils';
 export { default as SVGIcon } from './components/SVGIcon/SVGIcon';
 export { default as Switch } from './components/Switch/Switch';
 
