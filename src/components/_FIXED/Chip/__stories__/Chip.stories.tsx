@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import { Stack } from '@mui/material';
 
 import Chip from '../Chip';
-import Avatar from '../../../Avatar/Avatar';
+import MuiAvatar from '../../../Avatar/Avatar';
 
 const meta: Meta<typeof Chip> = {
     title: 'Data-Display/Chip',
@@ -40,7 +40,7 @@ export const AlignEndIcon: Story = {
 
 export const Avatar: Story = {
     args: {
-        avatar: <Avatar image="1.jpg" />,
+        avatar: <MuiAvatar image="1.jpg" />,
         children: 'Avatar',
     },
 };
