@@ -24,7 +24,7 @@ const RadioButtonsGroup: React.FC<RadioButtonsGroupProps> = ({
 
     return (
         <>
-            <RadioGroup direction={direction} value={selectedValue} {...props}>
+            <RadioGroup row={direction === 'row'} value={selectedValue} {...props}>
                 {data?.map(({ value, ...radioProps }, index) => (
                     <RadioControlled
                         key={value ?? index}
