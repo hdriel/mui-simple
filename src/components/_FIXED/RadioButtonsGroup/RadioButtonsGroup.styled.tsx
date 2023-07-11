@@ -7,20 +7,30 @@ import {
     FormHelperText as MuiFormHelperText,
     RadioGroup as MuiRadioGroup,
     Radio as MuiRadio,
+    FormControl as MuiFormControl,
+    FormLabel as MuiFormLabel,
 } from '@mui/material';
 import type { RadioProps, FormControlLabelProps } from '@mui/material';
 
+export const FormControl = MuiFormControl;
+export const FormLabel = MuiFormLabel;
 export const FormHelperText = MuiFormHelperText;
+
 export const RadioGroup = MuiRadioGroup;
+export const Legend = styled('legend')`
+    display: block;
+    padding-left: ${(props) => (props.children ? '10px' : 0)};
+    padding-right: ${(props) => (props.children ? '10px' : 0)};
+`;
 
 // #### Radio
 type RadioStyledPropsType = RadioProps & any;
 
-export const Radio = styled(({ value, fontSize, muiColor, color, ...props }: RadioStyledPropsType) => (
+export const Radio = styled(({ value, fontSize, muiColor, color, inputProps, ...props }: RadioStyledPropsType) => (
     <MuiRadio
         value={value}
         color={muiColor}
-        inputProps={{ 'aria-label': value as string, ...props.inputProps }}
+        inputProps={{ 'aria-label': value as string, ...inputProps }}
         sx={{
             ...(color && { color, '&.Mui-checked': { color } }),
             ...(fontSize && { '& .MuiSvgIcon-root': { fontSize } }),
@@ -38,7 +48,7 @@ export const RadioControlled = styled(
     ),
     {
         shouldForwardProp: (propName) =>
-            !['textColor', 'fontSize', 'helperText', 'ignoreLabelColor'].includes(propName as string),
+            !['textColor', 'muiColor', 'fontSize', 'helperText', 'ignoreLabelColor'].includes(propName as string),
     }
 )(({ theme, color, muiColor, checked, ignoreLabelColor }) => ({
     ...(!ignoreLabelColor &&

@@ -163,12 +163,15 @@ export interface RadioButtonsGroupProps {
     defaultValue?: string;
     direction?: 'row' | 'column';
     disableRipple?: boolean;
+    fullWidth?: boolean;
     helperText?: string;
     icon?: ReactNode;
     ignoreLabelColor?: boolean;
+    label?: string;
     name?: string;
     onChange?: (event: ChangeEvent<HTMLInputElement>, value: string) => void;
     row?: boolean;
     size?: 'small' | 'medium';
     value?: string;
+    variant?: 'outlined';
 }
