@@ -123,7 +123,7 @@ const Size = () => (
         <RadioButtonsGroup data={data} direction="row" size="medium" />
     </Box>
 );
-export const Size_ = <Size />;
+export const Size_ = () => <Size />;
 
 const Variant = () => (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
@@ -131,4 +131,4 @@ const Variant = () => (
         <RadioButtonsGroup data={data} label="Gender" direction="row" variant="outlined" />
     </Box>
 );
-export const Variant_ = <Variant />;
+export const Variant_ = () => <Variant />;

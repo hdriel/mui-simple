@@ -58,7 +58,7 @@ export const CheckedIcon: Story = {
     },
 };
 
-const ColoredCheckbox = () => {
+const Color = () => {
     return (
         <Stack direction="row" spacing={3}>
             <Checkbox checked color={'#00ab92'}>
@@ -73,9 +73,9 @@ const ColoredCheckbox = () => {
         </Stack>
     );
 };
-export const ColoredCheckbox_ = () => <ColoredCheckbox />;
+export const Color_ = () => <Color />;
 
-export const DisabledCheckbox: Story = {
+export const Disabled: Story = {
     args: {
         disabled: true,
         children: 'disabled checkbox',
@@ -96,7 +96,7 @@ export const HelperText: Story = {
     },
 };
 
-export const IconCheckbox: Story = {
+export const Icon: Story = {
     args: {
         icon: <FingerprintIcon />,
         checkedIcon: <SendIcon />,
@@ -104,13 +104,13 @@ export const IconCheckbox: Story = {
     },
 };
 
-export const LabelCheckbox: Story = {
+export const Label: Story = {
     args: {
         label: 'some label',
     },
 };
 
-const LabelPlacementCheckbox = () => {
+const LabelPlacement = () => {
     return (
         <Stack direction="row" spacing={4}>
             <Checkbox labelPlacement="top">top label</Checkbox>
@@ -120,9 +120,9 @@ const LabelPlacementCheckbox = () => {
         </Stack>
     );
 };
-export const LabelPlacementCheckbox_ = () => <LabelPlacementCheckbox />;
+export const LabelPlacement_ = () => <LabelPlacement />;
 
-export const ReadOnlyCheckbox: Story = {
+export const ReadOnly: Story = {
     args: {
         readOnly: true,
         checked: true,
@@ -137,7 +137,7 @@ export const Required: Story = {
     },
 };
 
-const SizeCheckbox = () => {
+const Size = () => {
     return (
         <Stack direction="row" spacing={3}>
             <Checkbox size="small">small checkbox</Checkbox>
@@ -145,9 +145,9 @@ const SizeCheckbox = () => {
         </Stack>
     );
 };
-export const SizeCheckbox_ = () => <SizeCheckbox />;
+export const Size_ = () => <Size />;
 
-export const TextColorCheckbox: Story = {
+export const TextColor: Story = {
     args: {
         textColor: '#FF0000',
         children: 'red text',

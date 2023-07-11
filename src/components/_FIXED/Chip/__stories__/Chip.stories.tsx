@@ -30,7 +30,7 @@ export const UseStyleBreadCrumb: Story = {
     },
 };
 
-export const AlignEndIconChip: Story = {
+export const AlignEndIcon: Story = {
     args: {
         alignEndIcon: true,
         minWidth: 200,
@@ -38,14 +38,14 @@ export const AlignEndIconChip: Story = {
     },
 };
 
-export const AvatarChip: Story = {
+export const Avatar: Story = {
     args: {
         avatar: <Avatar image="1.jpg" />,
         children: 'Avatar',
     },
 };
 
-const ColoredChip = () => {
+const Color = () => {
     return (
         <Stack direction="row" spacing={3}>
             <Chip color={'#00ab92'}>#00ab92</Chip>
@@ -54,16 +54,16 @@ const ColoredChip = () => {
         </Stack>
     );
 };
-export const ColoredChip_ = () => <ColoredChip />;
+export const Color_ = () => <Color />;
 
-export const DisabledChip: Story = {
+export const Disabled: Story = {
     args: {
         disabled: true,
         children: 'disabled chip',
     },
 };
 
-const EndIconChip = () => {
+const EndIcon = () => {
     return (
         <Stack direction="row" spacing={3}>
             <Chip endIcon="Fingerprint">"Fingerprint" chip</Chip>
@@ -71,30 +71,30 @@ const EndIconChip = () => {
         </Stack>
     );
 };
-export const EndIconChip_ = () => <EndIconChip />;
+export const EndIcon_ = () => <EndIcon />;
 
-export const LabelChip: Story = {
+export const Label: Story = {
     args: {
         label: 'Label',
         children: 'Label chip',
     },
 };
 
-export const LinkChip: Story = {
+export const Link: Story = {
     args: {
         link: 'http://google.com',
         children: 'google link',
     },
 };
 
-export const MinWidthChip: Story = {
+export const MinWidth: Story = {
     args: {
         minWidth: 300,
         children: 'min width chip',
     },
 };
 
-export const MultiLineChip: Story = {
+export const MultiLine: Story = {
     args: {
         multiLine: true,
         width: 100,
@@ -102,55 +102,51 @@ export const MultiLineChip: Story = {
     },
 };
 
-export const OnClickChip: Story = {
+export const OnClick: Story = {
     args: {
         onClick: action('onClickChip'),
         children: `click me`,
     },
 };
 
-export const OnDeleteChip: Story = {
+export const OnDelete: Story = {
     args: {
         onDelete: action('onDeleteChip'),
         children: `delete me`,
     },
 };
 
-export const UnRoundedChip: Story = {
+export const UnRounded: Story = {
     args: {
         rounded: false,
         children: `rounded chip`,
     },
 };
 
-const SizeChip = () => {
-    return (
-        <Stack direction="row" spacing={3}>
-            <Chip size="small">small chip</Chip>
-            <Chip size="medium">medium chip</Chip>
-        </Stack>
-    );
-};
-export const SizeChip_ = () => <SizeChip />;
+const Size = () => (
+    <Stack direction="row" spacing={3}>
+        <Chip size="small">small chip</Chip>
+        <Chip size="medium">medium chip</Chip>
+    </Stack>
+);
+export const Size_ = () => <Size />;
 
-const StartIconChip = () => {
-    return (
-        <Stack direction="row" spacing={3}>
-            <Chip startIcon="Send">"SendIcon" chip</Chip>
-            <Chip startIcon={<SendIcon />}>SendIcon chip</Chip>
-        </Stack>
-    );
-};
-export const StartIconChip_ = () => <StartIconChip />;
+const StartIcon = () => (
+    <Stack direction="row" spacing={3}>
+        <Chip startIcon="Send">"SendIcon" chip</Chip>
+        <Chip startIcon={<SendIcon />}>SendIcon chip</Chip>
+    </Stack>
+);
+export const StartIcon_ = () => <StartIcon />;
 
-export const TextColorChip: Story = {
+export const TextColor: Story = {
     args: {
         textColor: '#FF0000',
         children: 'red text',
     },
 };
 
-export const WidthChip: Story = {
+export const Width: Story = {
     args: {
         width: 150,
         children: 'width chip',
