@@ -6,10 +6,10 @@
 // export { default as InputAutocompleteMultiple } from './components/Autocomplete/InputAutocompleteMultiple';
 // export { default as InputGoogleAddress } from './components/Autocomplete/InputGoogleAddress';
 export { default as Avatar } from './components/_FIXED/Avatar/Avatar';
-// export { default as Backdrop } from './components/Backdrop/Backdrop';
-// export { default as Badge } from './components/Badge/Badge';
-// export { default as BottomNavigation } from './components/BottomNavigation/BottomNavigation';
-// export { default as Breadcrumbs } from './components/Breadcrumbs/Breadcrumbs';
+export { default as Backdrop } from './components/Backdrop/Backdrop';
+export { default as Badge } from './components/Badge/Badge';
+export { default as BottomNavigation } from './components/BottomNavigation/BottomNavigation';
+export { default as Breadcrumbs } from './components/Breadcrumbs/Breadcrumbs';
 export { default as Button } from './components/_FIXED/Button/Button';
 export { default as ButtonGroup } from './components/_FIXED/Button/ButtonGroup';
 
