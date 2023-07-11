@@ -3,7 +3,7 @@ import type { PropsWithChildren, ReactNode } from 'react';
 //	import PropTypes from 'prop-types';
 import { Breadcrumbs as MuiBreadcrumbs } from './Breadcrumbs.styled';
 import Link from '../Link/Link';
-import Chip from '../FIXED/Chip/Chip';
+import Chip from '../_FIXED/Chip/Chip';
 import Typography from '../Typography/Typography';
 
 type Underline = 'always' | 'hover' | 'none';

@@ -3,8 +3,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { TextField as MuiTextField, Stack } from './TextField.styled';
 import { ClickAwayListener } from '@mui/material';
 import { debounce } from 'lodash-es';
-import type { InputBaseProps } from './decs';
-import SVGIcon from '../SVGIcon/SVGIcon';
+import type { InputBaseProps } from '../../decs';
+import SVGIcon from '../../SVGIcon/SVGIcon';
 
 const TextField: React.FC<InputBaseProps> = function TextField(props): React.ReactElement {
     const {
@@ -64,7 +64,7 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
                     ...(showActions &&
                         startCmp && {
                             startAdornment: (
-                                <InputAdornment position="start" sx={{ margin: 'auto' }}>
+                                <InputAdornment position="start" sx={{ margin: 'auto', paddingInlineEnd: '8px' }}>
                                     {startCmp}
                                 </InputAdornment>
                             ),

@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import Input from './TextField';
+import Input from '../_FIXED/TextField/TextField';
 import type { InputTextProps } from '../decs';
 
 const InputText: React.FC<InputTextProps> = function InputText(props): React.ReactElement {

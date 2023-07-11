@@ -10,7 +10,7 @@ import {
 } from '@mui/icons-material';
 
 import Drawer from '../Drawer';
-import Button from '../../FIXED/Button/Button';
+import Button from '../../_FIXED/Button/Button';
 import List from '../../List/List';
 import Divider from '../../Divider/Divider';
 

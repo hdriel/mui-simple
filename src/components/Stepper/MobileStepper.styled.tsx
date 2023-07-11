@@ -6,7 +6,7 @@ import { MobileStepper as MuiMobileStepper, Box as MuiBox } from '@mui/material'
 import type { MobileStepperProps } from '@mui/material';
 import { KeyboardArrowLeft, KeyboardArrowRight, Check } from '@mui/icons-material';
 
-import MuiButton from '../FIXED/Button/Button';
+import MuiButton from '../_FIXED/Button/Button';
 import MuiTypography from '../Typography/Typography';
 import MuiPaper from '../Paper/Paper';
 

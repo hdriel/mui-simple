@@ -10,9 +10,9 @@ import {
     renderHighlightOptionCB,
 } from './InputAutocomplete.styled';
 
-import TextField from '../TextField/TextField';
+import TextField from '../_FIXED/TextField/TextField';
 import { getCustomColor } from '../../utils/helpers';
-import Chip from '../FIXED/Chip/Chip';
+import Chip from '../_FIXED/Chip/Chip';
 
 export default function InputAutocomplete({
     // inputProps: {

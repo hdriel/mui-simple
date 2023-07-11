@@ -13,11 +13,11 @@ import {
     Toolbar as MuiToolbar,
 } from '@mui/material';
 
-import MuiCheckbox from '../FIXED/Checkbox/Checkbox';
+import MuiCheckbox from '../_FIXED/Checkbox/Checkbox';
 import MuiAvatar from '../Avatar/Avatar';
 import MuiTypography from '../Typography/Typography';
 import MuiTooltip from '../Tooltip/Tooltip';
-import MuiButton from '../FIXED/Button/Button';
+import MuiButton from '../_FIXED/Button/Button';
 import MuiPaper from '../Paper/Paper';
 import { extractColors } from './Table.utils';
 

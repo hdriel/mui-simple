@@ -14,7 +14,7 @@ import type { ButtonProps } from '@mui/material';
 
 import MuiPaper from '../Paper/Paper';
 import MuiTypography from '../Typography/Typography';
-import MuiButton from '../FIXED/Button/Button';
+import MuiButton from '../_FIXED/Button/Button';
 
 export const Card = MuiCard;
 

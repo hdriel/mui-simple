@@ -3,7 +3,7 @@ import type { ReactElement, PropsWithChildren, ReactNode, MouseEvent, ForwardedR
 //	import PropTypes from 'prop-types';
 
 import { Alert as MuiAlert, AlertTitle } from './Alert.styled';
-import Button from '../FIXED/Button/Button';
+import Button from '../_FIXED/Button/Button';
 import { useCustomColor } from '../../utils/helpers';
 
 interface AlertProps {

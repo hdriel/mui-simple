@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import InputSelect from '../InputSelect';
 import { Stack } from '@mui/material';
 import { FormatColorFill as FormatColorFillIcon, Airplay as AirplayIcon } from '@mui/icons-material';
-import Button from '../../FIXED/Button/Button';
+import Button from '../../_FIXED/Button/Button';
 
 export default {
     title: 'Inputs/Inputs/InputSelect',

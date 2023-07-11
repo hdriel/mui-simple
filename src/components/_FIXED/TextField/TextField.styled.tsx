@@ -1,18 +1,22 @@
 import React from 'react';
+import type { ComponentType } from 'react';
 import { styled, css } from '@mui/material/styles';
 import { CommitRounded as CommitRoundedIcon } from '@mui/icons-material';
-
 import { TextField as MuiTextField, Box as MuiBox, Stack as MuiStack } from '@mui/material';
-import { getCustomColor } from '../../utils/helpers';
-import Button from '../FIXED/Button/Button';
+import type { TextFieldProps } from '@mui/material';
+import type { InputBaseProps } from '../../decs';
+import { getCustomColor } from '../../../utils/helpers';
+import Button from '../Button/Button';
 
 export const Stack = MuiStack;
 export const Box = MuiBox;
+
 export const SliderIcon = (props) => <Button icon={<CommitRoundedIcon />} {...props} />;
 
+type TextFieldStyledType = InputBaseProps & TextFieldProps & any;
 export const TextField = styled(MuiTextField, {
     shouldForwardProp: (propName) => !['colorText', 'colorLabel', 'colorActive'].includes(propName as string),
-})`
+})<TextFieldStyledType>`
     ${(props) => {
         const colorText = getCustomColor(props, { field: 'colorText' });
         const colorLabel = getCustomColor(props, { field: 'colorLabel' });
@@ -54,4 +58,4 @@ export const TextField = styled(MuiTextField, {
             }
         `;
     }}
-`;
+` as ComponentType<TextFieldStyledType>;

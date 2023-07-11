@@ -53,11 +53,11 @@ export function useCustomColor(color, options?) {
 }
 
 interface getCustomColorOptionsProps {
-    field: string | undefined;
-    muiLevel: string;
-    opacity: number;
-    darken: number;
-    lighten: number;
+    field?: string | undefined;
+    muiLevel?: string;
+    opacity?: number;
+    darken?: number;
+    lighten?: number;
 }
 export function getCustomColor(
     props,

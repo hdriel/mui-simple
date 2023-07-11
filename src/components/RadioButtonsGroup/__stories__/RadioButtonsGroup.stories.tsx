@@ -1,32 +1,21 @@
 import React, { useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { Send as SendIcon, Fingerprint as FingerprintIcon } from '@mui/icons-material';
 import { action } from '@storybook/addon-actions';
-import { Circle as CircleIcon, CircleTwoTone as CircleTwoToneIcon } from '@mui/icons-material';
+import { Box, Stack } from '@mui/material';
 
 import RadioButtonsGroup from '../RadioButtonsGroup';
 
-export default {
+const meta: Meta<typeof RadioButtonsGroup> = {
     title: 'Inputs/RadioButtonsGroup',
-    parameters: {
-        controls: { exclude: /^(onChange)$/g },
-    },
-    decorators: [
-        (Story) => (
-            <div
-                style={{
-                    padding: '0.5em',
-                    height: '300px',
-                    width: '300px',
-                    border: '1px solid black',
-                }}
-            >
-                <Story />
-            </div>
-        ),
-    ],
     component: RadioButtonsGroup,
+    tags: ['autodocs'],
 };
 
-const onChangeAction = action('onChange');
+export default meta;
+
+type Story = StoryObj<typeof RadioButtonsGroup>;
+
 const data = [
     { label: 'Female', value: '0' },
     { label: 'Male', value: '1' },
@@ -34,120 +23,96 @@ const data = [
     { label: 'Other', value: '3', disabled: true },
 ];
 
-export const Default = () => <RadioButtonsGroup />;
-
-export const IgnoreLabelColor = () => {
-    const [value, setValue] = useState(null);
-
-    return (
-        <RadioButtonsGroup
-            ignoreLabelColor
-            data={data}
-            name="gender"
-            value={value}
-            onChange={(event) => {
-                onChangeAction(event.target.value);
-                setValue(event.target.value);
-            }}
-            defaultValue={data[1]?.value}
-            size={'medium'}
-        />
-    );
+export const Default: Story = {
+    args: {
+        data,
+    },
 };
 
-export const CustomIcons = () => {
-    const [value, setValue] = useState(null);
-
-    return (
-        <RadioButtonsGroup
-            ignoreLabelColor
-            data={data}
-            name="gender"
-            icon={<CircleTwoToneIcon />}
-            checkedIcon={<CircleIcon />}
-            value={value}
-            onChange={(event) => {
-                onChangeAction(event.target.value);
-                setValue(event.target.value);
-            }}
-            defaultValue={data[1]?.value}
-            size={'medium'}
-        />
-    );
+export const CheckedIcon: Story = {
+    args: {
+        checkedIcon: 'Send',
+        data,
+        value: data[0].value,
+    },
 };
 
-export const GroupInRow = () => {
-    const [value, setValue] = useState(null);
-
-    return (
-        <RadioButtonsGroup
-            direction="row"
-            data={data}
-            name="gender"
-            value={value}
-            onChange={(event) => {
-                onChangeAction(event.target.value);
-                setValue(event.target.value);
-            }}
-            defaultValue={data[1]?.value}
-            size={'medium'}
-        />
-    );
+export const Color: Story = {
+    args: {
+        color: '#00b69c',
+        data,
+        value: data[0].value,
+    },
 };
 
-export const GroupInColumn = () => {
-    const [value, setValue] = useState(null);
-
-    return (
-        <RadioButtonsGroup
-            direction="column"
-            data={data}
-            name="gender"
-            value={value}
-            onChange={(event) => {
-                onChangeAction(event.target.value);
-                setValue(event.target.value);
-            }}
-            defaultValue={data[1]?.value}
-            size={'medium'}
-        />
-    );
+export const Data: Story = {
+    args: {
+        data: [
+            { label: 'Javascript', value: 'javascript' },
+            { label: 'C#', value: 'C#', disabled: false },
+            { label: 'Pyhton', value: 'python' },
+        ],
+        value: 'javascript',
+    },
 };
 
-export const Colored = () => {
-    const [value, setValue] = useState(null);
-
-    return (
-        <RadioButtonsGroup
-            data={data}
-            name="gender"
-            color={'#105010'}
-            value={value}
-            onChange={(event) => {
-                onChangeAction(event.target.value);
-                setValue(event.target.value);
-            }}
-            defaultValue={data[1]?.value}
-            size={'medium'}
-        />
-    );
+export const DataString: Story = {
+    args: {
+        data: ['react', 'angular', 'vue'],
+        value: 'react',
+    },
 };
 
-export const Themed = () => {
-    const [value, setValue] = useState(null);
-
-    return (
-        <RadioButtonsGroup
-            data={data}
-            name="gender"
-            color={'secondary'}
-            value={value}
-            onChange={(event) => {
-                onChangeAction(event.target.value);
-                setValue(event.target.value);
-            }}
-            defaultValue={data[1]?.value}
-            size={'medium'}
-        />
-    );
+export const DirectionRow: Story = {
+    args: {
+        data,
+        direction: 'row',
+    },
 };
+
+export const DisableRipple: Story = {
+    args: {
+        data,
+        disableRipple: true,
+    },
+};
+
+export const HelperText: Story = {
+    args: {
+        data,
+        helperText: 'choose your gender',
+    },
+};
+
+export const Icon: Story = {
+    args: {
+        data,
+        icon: 'Fingerprint',
+    },
+};
+
+export const IgnoreLabelColor: Story = {
+    args: {
+        data,
+        color: 'secondary',
+        value: data[0].value,
+        ignoreLabelColor: true,
+    },
+};
+
+export const OnChange: Story = {
+    args: {
+        data,
+    },
+    render: (args) => {
+        const [value, setValue] = useState(data[0].value);
+        return <RadioButtonsGroup value={value} onChange={(e) => setValue(e.target.value)} {...args} />;
+    },
+};
+
+export const Size = () => (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+        <RadioButtonsGroup data={data} direction="row" size="small" />
+        <RadioButtonsGroup data={data} direction="row" size="medium" />
+    </Box>
+);

@@ -4,12 +4,12 @@ import Color from 'color';
 import { Opacity as OpacityIcon, ContentCopy as ContentCopyIcon } from '@mui/icons-material';
 import { ClickAwayListener } from '@mui/material';
 
-import Input from './TextField';
-import Button from '../FIXED/Button/Button';
+import Input from '../_FIXED/TextField/TextField';
+import Button from '../_FIXED/Button/Button';
 import Snackbar from '../Snackbar/Snackbar';
 import { copyToClipboard } from '../../utils/helpers';
 import Slider from '../Slider/Slider';
-import { Box } from './TextField.styled';
+import { Box } from '../_FIXED/TextField/TextField.styled';
 
 const VALUE_FORMAT = { hex: 'rgba', rgba: 'hsl', hsl: 'hex' };
 

@@ -5,7 +5,7 @@ import { Menu as MenuIcon } from '@mui/icons-material';
 
 import { AppBar as MuiAppBar, TitleWrapper, Toolbar, Box } from './AppBar.styled';
 import OnScrollEventWrapper from './OnScrollEventWrapper';
-import Button from '../FIXED/Button/Button';
+import Button from '../_FIXED/Button/Button';
 import Typography from '../Typography/Typography';
 import Drawer from '../Drawer/Drawer';
 import { useCustomColor } from '../../utils/helpers';

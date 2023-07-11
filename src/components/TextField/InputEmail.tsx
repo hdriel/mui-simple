@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Input from './TextField';
+import Input from '../_FIXED/TextField/TextField';
 
 export default function InputEmail({ value, hideCmpOnEmpty, startCmp, endCmp, ...props }) {
     return (

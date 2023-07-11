@@ -8,8 +8,8 @@ import {
     LockReset as LockResetIcon,
 } from '@mui/icons-material';
 
-import Input from './TextField';
-import Button from '../FIXED/Button/Button';
+import Input from '../_FIXED/TextField/TextField';
+import Button from '../_FIXED/Button/Button';
 import { copyToClipboard, generatePassword } from '../../utils/helpers';
 import Snackbar from '../Snackbar/Snackbar';
 

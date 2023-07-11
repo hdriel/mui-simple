@@ -6,7 +6,7 @@ import Avatar from '../../Avatar/Avatar';
 
 import Skeleton from '../Skeleton';
 import Typography from '../../Typography/Typography';
-import Button from '../../FIXED/Button/Button';
+import Button from '../../_FIXED/Button/Button';
 
 export default {
     title: 'Feedback/Skeleton',

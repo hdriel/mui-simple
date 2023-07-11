@@ -12,7 +12,7 @@ import {
 import type { StepperProps, StepContentProps, StepLabelProps, BoxProps, StepConnectorProps } from '@mui/material';
 
 import MuiTypography from '../Typography/Typography';
-import MuiButton from '../FIXED/Button/Button';
+import MuiButton from '../_FIXED/Button/Button';
 import { numberToPx } from '../../utils/helpers';
 
 export const Typography = MuiTypography;

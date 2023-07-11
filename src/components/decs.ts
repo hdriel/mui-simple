@@ -143,3 +143,32 @@ export interface InputTextProps extends Omit<InputBaseProps, 'value'> {
     showLimitIndicatorFrom?: number;
     limitIndicator?: number;
 }
+
+export interface RadioButtonProps {
+    value: string;
+    label: string;
+    disabled?: boolean;
+}
+export interface RadioButtonsGroupProps {
+    checkedIcon?: ReactNode;
+    color?: string;
+    data?: Array<
+        | string
+        | {
+              value: string;
+              label: string;
+              disabled?: boolean;
+          }
+    >;
+    defaultValue?: string;
+    direction?: 'row' | 'column';
+    disableRipple?: boolean;
+    helperText?: string;
+    icon?: ReactNode;
+    ignoreLabelColor?: boolean;
+    name?: string;
+    onChange?: (event: ChangeEvent<HTMLInputElement>, value: string) => void;
+    row?: boolean;
+    size?: 'small' | 'medium';
+    value?: string;
+}
