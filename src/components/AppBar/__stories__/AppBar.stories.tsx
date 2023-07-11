@@ -10,7 +10,7 @@ import {
 
 import AppBar from '../AppBar';
 import Button from '../../_FIXED/Button/Button';
-import Avatar from '../../Avatar/Avatar';
+import Avatar from '../../_FIXED/Avatar/Avatar';
 import Typography from '../../Typography/Typography';
 import Menu from '../../Menu/Menu';
 import { action } from '@storybook/addon-actions';

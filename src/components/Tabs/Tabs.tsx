@@ -1,6 +1,5 @@
 import React, { isValidElement } from 'react';
 import SwipeableViews from 'react-swipeable-views';
-// import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 
 import { Tabs as MuiTabs, Box } from './Tabs.styled';
@@ -155,23 +154,6 @@ const Tabs: React.FC<TabsProps> = ({
         </Box>
     );
 };
-
-// Tabs.propTypes = {
-//     centered: PropTypes.bool,
-//     fillActiveTab: PropTypes.bool,
-//     color: PropTypes.string,
-//     onChange: PropTypes.func,
-//     orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-//     variant: PropTypes.oneOf(['fullWidth', 'scrollable', 'standard']),
-//     value: PropTypes.string,
-//     visibleScrollbar: PropTypes.bool,
-//     visibleScrollButtons: PropTypes.oneOf(['auto', false, true]),
-//     swipeable: PropTypes.bool,
-//     autoNavigateByArrowKeyboard: PropTypes.bool,
-//     verticalMaxFixedHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//     verticalTabWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//     reverse: PropTypes.bool,
-// };
 
 Tabs.defaultProps = {
     centered: undefined,

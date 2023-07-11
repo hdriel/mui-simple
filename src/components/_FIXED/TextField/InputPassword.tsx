@@ -25,6 +25,7 @@ const InputPassword: React.FC<InputPasswordProps> = ({
     generateRandomCmp,
     hidePasswordOnClickAway,
     name,
+    endCmp,
     onChange,
     showPasswordAction,
     showPasswordTooltip,
@@ -90,6 +91,7 @@ const InputPassword: React.FC<InputPasswordProps> = ({
                                     tooltipProps={{ title: showPasswordTooltip }}
                                 />
                             ) : undefined}
+                            {typeof endCmp === 'string' ? <SVGIcon>{endCmp}</SVGIcon> : endCmp}
                         </>
                     }
                     type={showPassword ? 'text' : 'password'}

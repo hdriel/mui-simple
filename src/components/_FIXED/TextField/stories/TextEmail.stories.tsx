@@ -5,17 +5,17 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Send as SendIcon } from '@mui/icons-material';
 import { Stack } from '@mui/material';
 
-import TextField from '../TextField';
+import InputEmail from '../InputEmail';
 
-const meta: Meta<typeof TextField> = {
-    title: 'Inputs/TextField',
-    component: TextField,
+const meta: Meta<typeof InputEmail> = {
+    title: 'Inputs/Inputs/InputEmail',
+    component: InputEmail,
     tags: ['autodocs'],
 };
 
 export default meta;
 
-type Story = StoryObj<typeof TextField>;
+type Story = StoryObj<typeof InputEmail>;
 
 export const Default: Story = {
     args: {},
@@ -96,20 +96,20 @@ export const Disabled: Story = {
 
 export const EndCmp = (): ReactElement => (
     <Stack spacing={3}>
-        <TextField endCmp="Send" label="End Cmp" value="endCmp with mui icon name or mui icon element" />
-        <TextField endCmp={<SendIcon />} label="End Cmp" value="endCmp with mui icon name or mui icon element" />
+        <InputEmail endCmp="Send" label="End Cmp" value="endCmp with mui icon name or mui icon element" />
+        <InputEmail endCmp={<SendIcon />} label="End Cmp" value="endCmp with mui icon name or mui icon element" />
     </Stack>
 );
 export const EndCmp_ = (): ReactElement => <EndCmp />;
 
 export const EndCmpExternal = (): ReactElement => (
     <Stack spacing={3}>
-        <TextField
+        <InputEmail
             endCmpExternal="Send"
             label="End Cmp External"
             value="endCmpExternal with mui icon name or mui icon element"
         />
-        <TextField
+        <InputEmail
             endCmpExternal={<SendIcon />}
             label="End Cmp External"
             value="endCmpExternal with mui icon name or mui icon element"
@@ -152,13 +152,13 @@ export const HelperText: Story = {
 
 export const HideStartActionsOnEmpty = (): ReactElement => (
     <Stack spacing={3}>
-        <TextField
+        <InputEmail
             hideStartActionsOnEmpty={true}
             startCmp="Send"
             endCmp="Fingerprint"
             label="Hide Start Actions OnEmpty"
         />
-        <TextField
+        <InputEmail
             hideStartActionsOnEmpty={false}
             startCmp="Send"
             endCmp="Fingerprint"
@@ -176,25 +176,11 @@ export const Label: Story = {
 
 export const Margin = (): ReactElement => (
     <Stack spacing={3}>
-        <TextField margin="normal" label="Normal Margin" />
-        <TextField margin="dense" label="Dense Margin" />
+        <InputEmail margin="normal" label="Normal Margin" />
+        <InputEmail margin="dense" label="Dense Margin" />
     </Stack>
 );
 export const Margin_ = (): ReactElement => <Margin />;
-
-export const maxRows: Story = {
-    args: {
-        maxRows: 3,
-        label: 'MaxRows 3',
-    },
-};
-
-export const Multiline: Story = {
-    args: {
-        multiline: true,
-        label: 'Multiline field',
-    },
-};
 
 export const OnChangeText: Story = {
     args: {
@@ -202,18 +188,7 @@ export const OnChangeText: Story = {
     },
     render: (args) => {
         const [value, setValue] = useState('');
-        return <TextField {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
-};
-
-export const DebounceDelay: Story = {
-    args: {
-        label: 'Debounce Delay',
-        debounceDelay: 400,
-    },
-    render: (args) => {
-        const [value, setValue] = useState('');
-        return <TextField {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+        return <InputEmail {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
     },
 };
 
@@ -224,7 +199,7 @@ export const ReadOnly: Story = {
     },
     render: (args) => {
         const [value, setValue] = useState('some text for show only');
-        return <TextField {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+        return <InputEmail {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
     },
 };
 
@@ -235,36 +210,21 @@ export const Required: Story = {
     },
 };
 
-export const Rows: Story = {
-    args: {
-        rows: 3,
-        label: 'Rows 3',
-    },
-};
-
 export const StartCmp = (): ReactElement => (
     <Stack spacing={3}>
-        <TextField startCmp="Send" label="Start Cmp" value="with string mui icon name" />
-        <TextField startCmp={<SendIcon />} label="Start Cmp" value="with mui icon element" />
+        <InputEmail startCmp="Send" label="Start Cmp" value="with string mui icon name" />
+        <InputEmail startCmp={<SendIcon />} label="Start Cmp" value="with mui icon element" />
     </Stack>
 );
 export const StartCmp_ = (): ReactElement => <StartCmp />;
 
 export const StartCmpExternal = (): ReactElement => (
     <Stack spacing={3}>
-        <TextField startCmpExternal="Send" label="Start Cmp External" value="with string mui icon name" />
-        <TextField startCmpExternal={<SendIcon />} label="Start Cmp External" value="with mui icon element" />
+        <InputEmail startCmpExternal="Send" label="Start Cmp External" value="with string mui icon name" />
+        <InputEmail startCmpExternal={<SendIcon />} label="Start Cmp External" value="with mui icon element" />
     </Stack>
 );
 export const StartCmpExternal_ = (): ReactElement => <StartCmpExternal />;
-
-export const Type: Story = {
-    args: {
-        type: 'password',
-        label: 'Type Password',
-        value: 'mui simple is the best library package forever',
-    },
-};
 
 export const Value: Story = {
     args: {
@@ -274,9 +234,9 @@ export const Value: Story = {
 
 export const Variant = (): ReactElement => (
     <Stack spacing={3}>
-        <TextField variant="filled" label="filled variant" value="some text here" />
-        <TextField variant="outlined" label="outlined variant" value="some text here" />
-        <TextField variant="standard" label="standard variant" value="some text here" />
+        <InputEmail variant="filled" label="filled variant" value="some text here" />
+        <InputEmail variant="outlined" label="outlined variant" value="some text here" />
+        <InputEmail variant="standard" label="standard variant" value="some text here" />
     </Stack>
 );
 export const Variant_ = (): ReactElement => <Variant />;

@@ -9,7 +9,7 @@ import {
     ListItemSecondaryAction,
     ListItem as MuiListItem,
 } from './List.styled';
-import Avatar from '../Avatar/Avatar';
+import Avatar from '../_FIXED/Avatar/Avatar';
 import Typography from '../Typography/Typography';
 import { Box } from '@mui/material';
 

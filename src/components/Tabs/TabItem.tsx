@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
 // import PropTypes from 'prop-types';
 import { Tab as MuiTab } from './Tabs.styled';
-import Tooltip from '../Tooltip/Tooltip';
-import { tooltipPlacementsType } from '../Tooltip/Tooltip.consts';
+import Tooltip from '../_FIXED/Tooltip/Tooltip';
+import { tooltipPlacementsType } from '../_FIXED/Tooltip/Tooltip.consts';
 import SVGIcon from '../SVGIcon/SVGIcon';
 
 type IconPositionType = 'bottom' | 'end' | 'start' | 'top';

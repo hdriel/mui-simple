@@ -1,9 +1,8 @@
 import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Border, Typography as MuiTypography } from './Typography.styled';
-import Tooltip from '../Tooltip/Tooltip';
+import Tooltip from '../_FIXED/Tooltip/Tooltip';
 import { useEllipsisActive } from '../../hooks/useEllipsisActive';
-import { TOOLTIP_PLACEMENTS, tooltipPlacementsType } from '../Tooltip/Tooltip.consts';
 import { useCustomColor } from '../../utils/helpers';
 
 interface TypographyProps {
@@ -195,7 +194,7 @@ Typography.propTypes = {
     sub: PropTypes.bool,
     sup: PropTypes.bool,
     tooltip: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-    tooltipPlacement: PropTypes.oneOf(TOOLTIP_PLACEMENTS),
+    // tooltipPlacement: PropTypes.oneOf(TOOLTIP_PLACEMENTS),
     underline: PropTypes.bool,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     wrap: PropTypes.bool,

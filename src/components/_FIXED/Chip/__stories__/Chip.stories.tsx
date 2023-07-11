@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import { Stack } from '@mui/material';
 
 import Chip from '../Chip';
-import MuiAvatar from '../../../Avatar/Avatar';
+import MuiAvatar from '../../Avatar/Avatar';
 
 const meta: Meta<typeof Chip> = {
     title: 'Data-Display/Chip',

@@ -14,9 +14,9 @@ import {
 } from '@mui/material';
 
 import MuiCheckbox from '../_FIXED/Checkbox/Checkbox';
-import MuiAvatar from '../Avatar/Avatar';
+import MuiAvatar from '../_FIXED/Avatar/Avatar';
 import MuiTypography from '../Typography/Typography';
-import MuiTooltip from '../Tooltip/Tooltip';
+import MuiTooltip from '../_FIXED/Tooltip/Tooltip';
 import MuiButton from '../_FIXED/Button/Button';
 import MuiPaper from '../Paper/Paper';
 import { extractColors } from './Table.utils';

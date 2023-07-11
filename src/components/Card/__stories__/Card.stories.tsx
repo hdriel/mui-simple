@@ -19,7 +19,7 @@ import {
 // import { Send as SendIcon } from "@mui/icons-material";
 
 import Card from '../Card';
-import Avatar from '../../Avatar/Avatar';
+import Avatar from '../../_FIXED/Avatar/Avatar';
 
 import CardContentExpended from '../CardContentExpended';
 import Typography from '../../Typography/Typography';

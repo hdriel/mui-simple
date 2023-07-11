@@ -1,6 +1,20 @@
 import type { ReactNode, ReactElement, ChangeEvent } from 'react';
 import type { SxProps } from '@mui/material';
 
+export interface AvatarProps {
+    color?: string;
+    fallbackImage?: string;
+    icon?: ReactNode;
+    image?: string;
+    onClick?: () => void;
+    showTooltip?: boolean;
+    size?: string;
+    tooltipPlacement?: 'top' | 'right' | 'bottom' | 'left';
+    username?: string;
+    variant?: 'circular' | 'rounded' | 'square';
+    [key: string]: any;
+}
+
 export interface ButtonProps {
     color?: string;
     disabled?: boolean;
@@ -133,15 +147,18 @@ export interface InputBaseProps {
     startCmp?: ReactNode | string;
     startCmpExternal?: ReactNode | string;
     type?: string;
-    value?: string | number;
+    value?: string | any;
     variant?: 'filled' | 'standard' | 'outlined';
     [key: string]: any;
 }
 
-export interface InputTextProps extends Omit<InputBaseProps, 'value'> {
-    value?: string;
+export interface InputTextProps extends InputBaseProps {
     showLimitIndicatorFrom?: number;
     limitIndicator?: number;
+}
+
+export interface InputSearchProps extends InputBaseProps {
+    searchIcon?: string | ReactNode;
 }
 
 export interface InputPasswordProps extends Omit<InputBaseProps, 'value'> {
@@ -158,6 +175,37 @@ export interface InputPasswordProps extends Omit<InputBaseProps, 'value'> {
     showPasswordAction: boolean;
     showPasswordTooltip: string;
     value?: string;
+}
+
+export type TooltipPlacementType =
+    | 'bottom-end'
+    | 'bottom-start'
+    | 'bottom'
+    | 'left-end'
+    | 'left-start'
+    | 'left'
+    | 'right-end'
+    | 'right-start'
+    | 'right'
+    | 'top-end'
+    | 'top-start'
+    | 'top';
+
+export interface TooltipProps {
+    bgColor?: string;
+    color?: string;
+    followCursor?: boolean;
+    fontSize?: string | number;
+    lineHeight?: string | number;
+    placement?: TooltipPlacementType;
+    title?: string;
+    onClose?: (Event: any) => void;
+    open?: boolean;
+    disableFocusListener?: boolean;
+    disableHoverListener?: boolean;
+    disableTouchListener?: boolean;
+    PopperProps?: { disablePortal: boolean; [key: string]: any };
+    [key: string]: any;
 }
 
 export interface RadioButtonProps {

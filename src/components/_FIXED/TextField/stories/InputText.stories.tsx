@@ -173,8 +173,18 @@ export const HelperText: Story = {
 
 export const HideStartActionsOnEmpty = (): ReactElement => (
     <Stack spacing={3}>
-        <InputText hideStartActionsOnEmpty={true} startCmp="Send" label="Hide Start Actions OnEmpty" />
-        <InputText hideStartActionsOnEmpty={false} startCmp="Send" label="Not Hide Start Actions OnEmpty" />
+        <InputText
+            hideStartActionsOnEmpty={true}
+            startCmp="Send"
+            endCmp="Fingerprint"
+            label="Hide Start Actions OnEmpty"
+        />
+        <InputText
+            hideStartActionsOnEmpty={false}
+            startCmp="Send"
+            endCmp="Fingerprint"
+            label="Not Hide Start Actions OnEmpty"
+        />
     </Stack>
 );
 export const HideStartActionsOnEmpty_ = (): ReactElement => <HideStartActionsOnEmpty />;

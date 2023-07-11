@@ -2,7 +2,7 @@ import React from 'react';
 import Tooltip from '../Tooltip';
 import { Button as MuiButton } from '@mui/material';
 import { Send as SendIcon } from '@mui/icons-material';
-import Button from '../../_FIXED/Button/Button';
+import Button from '../../Button/Button';
 import { action } from '@storybook/addon-actions';
 
 export default {

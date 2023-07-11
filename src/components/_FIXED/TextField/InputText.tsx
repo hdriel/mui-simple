@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from './TextField';
 import type { InputTextProps } from '../../decs';
+import SVGIcon from '../../SVGIcon/SVGIcon';
 
 const InputText: React.FC<InputTextProps> = function InputText(props): React.ReactElement {
     const { value, showLimitIndicatorFrom, limitIndicator, endCmp, ...rest } = props;
@@ -15,7 +16,7 @@ const InputText: React.FC<InputTextProps> = function InputText(props): React.Rea
                     {(!showLimitIndicatorFrom || showLimitIndicatorFrom < count) && limitIndicator
                         ? `${count} / ${limitIndicator}`
                         : ''}
-                    {endCmp}
+                    {typeof endCmp === 'string' ? <SVGIcon>{endCmp}</SVGIcon> : endCmp}
                 </span>
             }
             type="text"
