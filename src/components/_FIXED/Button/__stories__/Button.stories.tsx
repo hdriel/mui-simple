@@ -5,8 +5,6 @@ import { action } from '@storybook/addon-actions';
 import { Stack, Box } from '@mui/material';
 
 import Button from '../Button';
-import Avatar from '../../../Avatar/Avatar';
-import CircularProgress from '../../../Progress/CircularProgress/CircularProgress';
 
 const meta: Meta<typeof Button> = {
     title: 'Inputs/Button',

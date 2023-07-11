@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
-import Input from '../_FIXED/TextField/TextField';
-import type { InputTextProps } from '../decs';
+import React from 'react';
+import Input from './TextField';
+import type { InputTextProps } from '../../decs';
 
 const InputText: React.FC<InputTextProps> = function InputText(props): React.ReactElement {
     const { value, showLimitIndicatorFrom, limitIndicator, endCmp, ...rest } = props;

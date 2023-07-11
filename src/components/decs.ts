@@ -144,6 +144,22 @@ export interface InputTextProps extends Omit<InputBaseProps, 'value'> {
     limitIndicator?: number;
 }
 
+export interface InputPasswordProps extends Omit<InputBaseProps, 'value'> {
+    copyAction: boolean;
+    copyMessage: string;
+    copyTooltip: string;
+    disabled: boolean;
+    generatePasswordTooltip: string;
+    generateRandom:
+        | number
+        | { length: number; numbers: boolean; lowercase: boolean; uppercase: boolean; symbol: boolean };
+    generateRandomAction: boolean;
+    hidePasswordOnClickAway: boolean;
+    showPasswordAction: boolean;
+    showPasswordTooltip: string;
+    value?: string;
+}
+
 export interface RadioButtonProps {
     value: string;
     label: string;

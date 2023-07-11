@@ -2,23 +2,44 @@
 import React, { useState } from 'react';
 import type { ReactElement } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Send as SendIcon } from '@mui/icons-material';
+
+import InputText from '../InputText';
 import { Stack } from '@mui/material';
+import { Send as SendIcon } from '@mui/icons-material';
 
-import TextField from '../TextField';
-
-const meta: Meta<typeof TextField> = {
-    title: 'Inputs/TextField',
-    component: TextField,
+const meta: Meta<typeof InputText> = {
+    title: 'Inputs/Inputs/InputText',
+    component: InputText,
     tags: ['autodocs'],
 };
 
 export default meta;
 
-type Story = StoryObj<typeof TextField>;
+type Story = StoryObj<typeof InputText>;
 
 export const Default: Story = {
     args: {},
+};
+
+export const LimitIndicator: Story = {
+    args: {
+        limitIndicator: 20,
+    },
+    render: (args) => {
+        const [value, setValue] = useState('');
+        return <InputText {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+    },
+};
+
+export const ShowLimitIndicatorFrom: Story = {
+    args: {
+        showLimitIndicatorFrom: 5,
+        limitIndicator: 20,
+    },
+    render: (args) => {
+        const [value, setValue] = useState('');
+        return <InputText {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+    },
 };
 
 export const AlignActions: Story = {
@@ -96,20 +117,20 @@ export const Disabled: Story = {
 
 export const EndCmp = (): ReactElement => (
     <Stack spacing={3}>
-        <TextField endCmp="Send" label="End Cmp" value="endCmp with mui icon name or mui icon element" />
-        <TextField endCmp={<SendIcon />} label="End Cmp" value="endCmp with mui icon name or mui icon element" />
+        <InputText endCmp="Send" label="End Cmp" value="endCmp with mui icon name or mui icon element" />
+        <InputText endCmp={<SendIcon />} label="End Cmp" value="endCmp with mui icon name or mui icon element" />
     </Stack>
 );
 export const EndCmp_ = (): ReactElement => <EndCmp />;
 
 export const EndCmpExternal = (): ReactElement => (
     <Stack spacing={3}>
-        <TextField
+        <InputText
             endCmpExternal="Send"
             label="End Cmp External"
             value="endCmpExternal with mui icon name or mui icon element"
         />
-        <TextField
+        <InputText
             endCmpExternal={<SendIcon />}
             label="End Cmp External"
             value="endCmpExternal with mui icon name or mui icon element"
@@ -152,8 +173,8 @@ export const HelperText: Story = {
 
 export const HideStartActionsOnEmpty = (): ReactElement => (
     <Stack spacing={3}>
-        <TextField hideStartActionsOnEmpty={true} startCmp="Send" label="Hide Start Actions OnEmpty" />
-        <TextField hideStartActionsOnEmpty={false} startCmp="Send" label="Not Hide Start Actions OnEmpty" />
+        <InputText hideStartActionsOnEmpty={true} startCmp="Send" label="Hide Start Actions OnEmpty" />
+        <InputText hideStartActionsOnEmpty={false} startCmp="Send" label="Not Hide Start Actions OnEmpty" />
     </Stack>
 );
 export const HideStartActionsOnEmpty_ = (): ReactElement => <HideStartActionsOnEmpty />;
@@ -166,8 +187,8 @@ export const Label: Story = {
 
 export const Margin = (): ReactElement => (
     <Stack spacing={3}>
-        <TextField margin="normal" label="Normal Margin" />
-        <TextField margin="dense" label="Dense Margin" />
+        <InputText margin="normal" label="Normal Margin" />
+        <InputText margin="dense" label="Dense Margin" />
     </Stack>
 );
 export const Margin_ = (): ReactElement => <Margin />;
@@ -192,7 +213,7 @@ export const OnChangeText: Story = {
     },
     render: (args) => {
         const [value, setValue] = useState('');
-        return <TextField {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+        return <InputText {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
     },
 };
 
@@ -203,7 +224,7 @@ export const ReadOnly: Story = {
     },
     render: (args) => {
         const [value, setValue] = useState('some text for show only');
-        return <TextField {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+        return <InputText {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
     },
 };
 
@@ -223,16 +244,16 @@ export const Rows: Story = {
 
 export const StartCmp = (): ReactElement => (
     <Stack spacing={3}>
-        <TextField startCmp="Send" label="Start Cmp" value="with string mui icon name" />
-        <TextField startCmp={<SendIcon />} label="Start Cmp" value="with mui icon element" />
+        <InputText startCmp="Send" label="Start Cmp" value="with string mui icon name" />
+        <InputText startCmp={<SendIcon />} label="Start Cmp" value="with mui icon element" />
     </Stack>
 );
 export const StartCmp_ = (): ReactElement => <StartCmp />;
 
 export const StartCmpExternal = (): ReactElement => (
     <Stack spacing={3}>
-        <TextField startCmpExternal="Send" label="Start Cmp External" value="with string mui icon name" />
-        <TextField startCmpExternal={<SendIcon />} label="Start Cmp External" value="with mui icon element" />
+        <InputText startCmpExternal="Send" label="Start Cmp External" value="with string mui icon name" />
+        <InputText startCmpExternal={<SendIcon />} label="Start Cmp External" value="with mui icon element" />
     </Stack>
 );
 export const StartCmpExternal_ = (): ReactElement => <StartCmpExternal />;
@@ -253,9 +274,9 @@ export const Value: Story = {
 
 export const Variant = (): ReactElement => (
     <Stack spacing={3}>
-        <TextField variant="filled" label="filled variant" value="some text here" />
-        <TextField variant="outlined" label="outlined variant" value="some text here" />
-        <TextField variant="standard" label="standard variant" value="some text here" />
+        <InputText variant="filled" label="filled variant" value="some text here" />
+        <InputText variant="outlined" label="outlined variant" value="some text here" />
+        <InputText variant="standard" label="standard variant" value="some text here" />
     </Stack>
 );
 export const Variant_ = (): ReactElement => <Variant />;
