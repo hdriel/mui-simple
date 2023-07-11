@@ -18,12 +18,12 @@ export { default as CardContentExpended } from './components/Card/CardContentExp
 export { default as Checkbox } from './components/_FIXED/Checkbox/Checkbox';
 export { default as Chip } from './components/_FIXED/Chip/Chip';
 
-// export { default as Dialog } from './components/Dialog/Dialog';
-// export { default as Divider } from './components/Divider/Divider';
-// export { default as Drawer } from './components/Drawer/Drawer';
-//
-// export { default as Fab } from './components/FloatingActionButton/FloatingActionButton';
-//
+export { default as Dialog } from './components/Dialog/Dialog';
+export { default as Divider } from './components/Divider/Divider';
+export { default as Drawer } from './components/Drawer/Drawer';
+
+export { default as Fab } from './components/FloatingActionButton/FloatingActionButton';
+
 export { default as TextField } from './components/_FIXED/TextField/TextField';
 export { default as InputColor } from './components/TextField/InputColor';
 export { default as InputDate } from './components/TextField/InputDate';
