@@ -7,7 +7,7 @@ import type {
     IconButtonProps,
     ButtonGroupProps as MuiButtonGroupProps,
 } from '@mui/material';
-import type { ButtonProps, ButtonGroupProps } from '../desc';
+import type { ButtonProps, ButtonGroupProps } from '../../decs';
 
 // ### Button
 type ButtonStyledPropsType = MuiButtonProps &

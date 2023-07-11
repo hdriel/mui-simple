@@ -78,3 +78,68 @@ export interface ChipProps {
     width?: string | number;
     [key: string]: any;
 }
+
+type AlignType =
+    | 'center'
+    | 'start'
+    | 'end'
+    | 'flex-start'
+    | 'flex-end'
+    | 'normal'
+    | 'baseline'
+    | 'first baseline'
+    | 'last baseline'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly'
+    | 'stretch'
+    | 'safe center'
+    | 'unsafe center'
+    | 'inherit'
+    | 'initial'
+    | 'revert'
+    | 'revert-layer'
+    | 'unset';
+
+export interface InputBaseProps {
+    alignActions?: AlignType;
+    alignActionsExternal?: AlignType;
+    autoComplete?: string;
+    cmpSpacing?: number;
+    colorActive?: string;
+    colorLabel?: string;
+    colorText?: string;
+    debounceDelay?: number;
+    disabled?: boolean;
+    endCmp?: ReactNode | string;
+    endCmpExternal?: ReactNode | string;
+    error?: boolean;
+    focused?: boolean;
+    fullWidth?: boolean;
+    helperText?: string;
+    hideStartActionsOnEmpty?: boolean;
+    id?: string;
+    label?: string;
+    margin?: 'normal' | 'dense';
+    maxRows?: number;
+    multiline?: boolean;
+    name?: string;
+    onBlur?: (Event) => void;
+    onChange?: (Event) => void;
+    onFocus?: (Event) => void;
+    readOnly?: boolean;
+    required?: boolean;
+    rows?: number;
+    startCmp?: ReactNode | string;
+    startCmpExternal?: ReactNode | string;
+    type?: string;
+    value?: string | number;
+    variant?: 'filled' | 'standard' | 'outlined';
+    [key: string]: any;
+}
+
+export interface InputTextProps extends Omit<InputBaseProps, 'value'> {
+    value?: string;
+    showLimitIndicatorFrom?: number;
+    limitIndicator?: number;
+}

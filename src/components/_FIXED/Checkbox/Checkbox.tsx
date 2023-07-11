@@ -2,9 +2,9 @@ import React from 'react';
 import type { ReactElement, PropsWithChildren } from 'react';
 
 import { Checkbox as MuiCheckbox } from './Checkbox.styled';
-import { useCustomColor } from '../../utils/helpers';
-import type { CheckboxProps } from '../desc';
-import SVGIcon from '../SVGIcon/SVGIcon';
+import { useCustomColor } from '../../../utils/helpers';
+import type { CheckboxProps } from '../../decs';
+import SVGIcon from '../../SVGIcon/SVGIcon';
 
 export default function Checkbox(props: PropsWithChildren<CheckboxProps>): ReactElement {
     const { color, textColor: _textColor, value, checked, checkedIcon, icon, children, label, ...rest } = props;

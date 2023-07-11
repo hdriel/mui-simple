@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Search as SearchIcon } from '@mui/icons-material';
 
 import Input from './TextField';
-import Button from '../Button/Button';
+import Button from '../FIXED/Button/Button';
 
 export default function InputSearch({ value, label, placeholder, searchIcon, debounceDelay, ...props }) {
     return (

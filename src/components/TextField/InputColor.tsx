@@ -5,7 +5,7 @@ import { Opacity as OpacityIcon, ContentCopy as ContentCopyIcon } from '@mui/ico
 import { ClickAwayListener } from '@mui/material';
 
 import Input from './TextField';
-import Button from '../Button/Button';
+import Button from '../FIXED/Button/Button';
 import Snackbar from '../Snackbar/Snackbar';
 import { copyToClipboard } from '../../utils/helpers';
 import Slider from '../Slider/Slider';

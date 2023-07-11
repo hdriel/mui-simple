@@ -4,7 +4,7 @@ import { CommitRounded as CommitRoundedIcon } from '@mui/icons-material';
 
 import { TextField as MuiTextField, Box as MuiBox, Stack as MuiStack } from '@mui/material';
 import { getCustomColor } from '../../utils/helpers';
-import Button from '../Button/Button';
+import Button from '../FIXED/Button/Button';
 
 export const Stack = MuiStack;
 export const Box = MuiBox;

@@ -1,88 +1,63 @@
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
 import InputAdornment from '@mui/material/InputAdornment';
 import { TextField as MuiTextField, Stack } from './TextField.styled';
 import { ClickAwayListener } from '@mui/material';
 import { debounce } from 'lodash-es';
 import type { InputBaseProps } from './decs';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
-function TextField(props: InputBaseProps & Record<string, any>) {
+const TextField: React.FC<InputBaseProps> = function TextField(props): React.ReactElement {
     const {
-        label,
-        id,
-        name,
-        variant,
-        onChange,
-        onFocus,
-        onBlur,
-        value,
-        fullWidth,
-        required,
-        readOnly,
-        type,
-        multiline,
-        maxRows,
-        rows,
-        autoComplete,
-        error,
-        margin,
-        focused,
-        helperText,
-        colorText,
-        colorLabel,
-        colorActive,
-        startCmp,
-        endCmp,
-        startCmpExternal,
-        endCmpExternal,
-        cmpSpacing,
-        hideStartActionsOnEmpty,
         alignActions,
         alignActionsExternal,
-        disabled,
+        cmpSpacing,
+        colorActive,
+        colorLabel,
+        colorText,
         debounceDelay,
-        InputProps,
-        InputLabelProps,
+        endCmp: _endCmp,
+        endCmpExternal: _endCmpExternal,
+        focused,
         FormHelperTextProps,
+        hideStartActionsOnEmpty,
+        InputLabelProps,
+        InputProps,
+        onBlur,
+        onChange,
+        onFocus,
+        readOnly,
+        startCmp: _startCmp,
+        startCmpExternal: _startCmpExternal,
+        value,
         ...rest
     } = props;
-
     const [isFocused, setIsFocused] = useState(false);
-
     const onFocusHandler = (e) => {
         setIsFocused(true);
         onFocus?.(e);
     };
 
+    const startCmp = typeof _startCmp === 'string' ? <SVGIcon>{_startCmp}</SVGIcon> : _startCmp;
+    const startCmpExternal =
+        typeof _startCmpExternal === 'string' ? <SVGIcon>{_startCmpExternal}</SVGIcon> : _startCmpExternal;
+    const endCmp = typeof _endCmp === 'string' ? <SVGIcon>{_endCmp}</SVGIcon> : _endCmp;
+    const endCmpExternal = typeof _endCmpExternal === 'string' ? <SVGIcon>{_endCmpExternal}</SVGIcon> : _endCmpExternal;
     const showActions = !hideStartActionsOnEmpty || value || (!value && isFocused);
-
     const handleOnChange = debounceDelay ? debounce(onChange, debounceDelay) : onChange;
 
     const component = (
         <ClickAwayListener onClickAway={() => setIsFocused(false)}>
             <MuiTextField
-                fullWidth={fullWidth}
-                label={label}
-                id={id}
-                name={name}
-                error={error}
-                helperText={helperText}
-                onChange={handleOnChange}
-                required={required}
-                value={value}
-                margin={margin}
-                focused={focused}
-                multiline={multiline}
-                maxRows={maxRows}
-                rows={rows}
-                autoComplete={autoComplete}
-                type={type}
-                onFocus={onFocusHandler}
-                onBlur={(...args) => onBlur?.(...args)}
-                disabled={disabled}
-                colorText={colorText}
-                colorLabel={colorLabel}
                 colorActive={colorActive}
+                colorLabel={colorLabel}
+                colorText={colorText}
+                focused={focused}
+                FormHelperTextProps={{ ...FormHelperTextProps }}
+                InputLabelProps={{ ...InputLabelProps }}
+                onBlur={(...args) => onBlur?.(...args)}
+                onChange={handleOnChange}
+                onFocus={onFocusHandler}
+                value={value}
                 InputProps={{
                     ...InputProps,
                     readOnly,
@@ -103,9 +78,6 @@ function TextField(props: InputBaseProps & Record<string, any>) {
                     }),
                     sx: { alignItems: alignActions },
                 }}
-                InputLabelProps={{ ...InputLabelProps }}
-                FormHelperTextProps={{ ...FormHelperTextProps }}
-                variant={variant}
                 {...rest}
             />
         </ClickAwayListener>
@@ -122,73 +94,39 @@ function TextField(props: InputBaseProps & Record<string, any>) {
     }
 
     return component;
-}
-
-// TextField.propTypes = {
-//     debounceDelay: PropTypes.number,
-//     label: PropTypes.string,
-//     id: PropTypes.string,
-//     name: PropTypes.string,
-//     fullWidth: PropTypes.bool,
-//     error: PropTypes.bool,
-//     required: PropTypes.bool,
-//     readOnly: PropTypes.bool,
-//     onChange: PropTypes.func,
-//     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//     focused: PropTypes.bool,
-//     margin: PropTypes.oneOf(['normal', 'dense']),
-//     type: PropTypes.string,
-//     multiline: PropTypes.bool,
-//     maxRows: PropTypes.number,
-//     rows: PropTypes.number,
-//     autoComplete: PropTypes.string,
-//     helperText: PropTypes.string,
-//     variant: PropTypes.oneOf(['filled', 'standard', 'outlined']),
-//     startCmp: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-//     startCmpExternal: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-//     endCmp: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-//     endCmpExternal: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-//     cmpSpacing: PropTypes.number,
-//     hideStartActionsOnEmpty: PropTypes.bool,
-//     alignActions: PropTypes.string,
-//     alignActionsExternal: PropTypes.string,
-//     disabled: PropTypes.bool,
-//     colorText: PropTypes.string,
-//     colorLabel: PropTypes.string,
-//     colorActive: PropTypes.string,
-// };
+};
 
 TextField.defaultProps = {
-    label: undefined,
-    id: undefined,
-    name: undefined,
-    fullWidth: true,
-    error: undefined,
-    required: undefined,
-    readOnly: undefined,
-    onChange: undefined,
-    focused: undefined,
-    value: undefined,
-    type: 'text',
-    margin: undefined,
-    multiline: undefined,
-    maxRows: undefined,
-    rows: undefined,
-    autoComplete: 'off',
-    helperText: undefined,
-    variant: 'outlined',
-    startCmp: undefined,
-    startCmpExternal: undefined,
-    endCmp: undefined,
-    endCmpExternal: undefined,
-    cmpSpacing: 2,
-    hideStartActionsOnEmpty: true,
     alignActions: 'baseline',
     alignActionsExternal: 'baseline',
-    disabled: undefined,
-    colorText: undefined,
-    colorLabel: undefined,
+    autoComplete: 'off',
+    cmpSpacing: 2,
     colorActive: undefined,
+    colorLabel: undefined,
+    colorText: undefined,
+    disabled: undefined,
+    endCmp: undefined,
+    endCmpExternal: undefined,
+    error: undefined,
+    focused: undefined,
+    fullWidth: true,
+    helperText: undefined,
+    hideStartActionsOnEmpty: true,
+    id: undefined,
+    label: undefined,
+    margin: undefined,
+    maxRows: undefined,
+    multiline: undefined,
+    name: undefined,
+    onChange: undefined,
+    readOnly: undefined,
+    required: undefined,
+    rows: undefined,
+    startCmp: undefined,
+    startCmpExternal: undefined,
+    type: 'text',
+    value: undefined,
+    variant: 'outlined',
 };
 
 export default TextField;

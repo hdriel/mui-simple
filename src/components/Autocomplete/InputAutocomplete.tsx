@@ -12,7 +12,7 @@ import {
 
 import TextField from '../TextField/TextField';
 import { getCustomColor } from '../../utils/helpers';
-import Chip from '../Chip/Chip';
+import Chip from '../FIXED/Chip/Chip';
 
 export default function InputAutocomplete({
     // inputProps: {

@@ -9,7 +9,7 @@ import {
 } from '@mui/icons-material';
 
 import Input from './TextField';
-import Button from '../Button/Button';
+import Button from '../FIXED/Button/Button';
 import { copyToClipboard, generatePassword } from '../../utils/helpers';
 import Snackbar from '../Snackbar/Snackbar';
 

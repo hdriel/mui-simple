@@ -3,7 +3,7 @@ import type { ComponentType } from 'react';
 import { styled } from '@mui/material/styles';
 import { Checkbox as MuiCheckbox, FormControlLabel, FormHelperText, Typography } from '@mui/material';
 import type { CheckboxProps as MuiCheckboxProps } from '@mui/material';
-import type { CheckboxProps } from '../desc';
+import type { CheckboxProps } from '../../decs';
 
 type CheckboxStyledPropsType = CheckboxProps & MuiCheckboxProps;
 

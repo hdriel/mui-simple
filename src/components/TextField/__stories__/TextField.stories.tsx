@@ -1,185 +1,185 @@
+// @ts-ignore
 import React, { useState } from 'react';
-import TextField from '../TextField';
-import { Clear as ClearIcon } from '@mui/icons-material';
+import type { Meta, StoryObj } from '@storybook/react';
+import { Send as SendIcon, Fingerprint as FingerprintIcon } from '@mui/icons-material';
 import { Stack } from '@mui/material';
 
-export default {
+import TextField from '../TextField';
+
+const meta: Meta<typeof TextField> = {
     title: 'Inputs/TextField',
     component: TextField,
-    decorators: [
-        (Story) => (
-            <div style={{ width: '450px', padding: '1em', border: '1px dashed black' }}>
-                <Story />
-            </div>
-        ),
-    ],
+    tags: ['autodocs'],
 };
 
-export const Default = () => {
-    return <TextField />;
+export default meta;
+
+type Story = StoryObj<typeof TextField>;
+
+export const Default: Story = {
+    args: {},
 };
 
-export const StartIcon = () => {
-    return <TextField label="Start Icon Input" startCmp="kg" variant="outlined" type="number" />;
+// alignActions: 'baseline',
+// alignActionsExternal: 'baseline',
+// autoComplete: 'off',
+// cmpSpacing: 2,
+// colorActive: undefined,
+// colorLabel: undefined,
+// colorText: undefined,
+// disabled: undefined,
+// endCmp: undefined,
+// endCmpExternal: undefined,
+// error: undefined,
+// focused: undefined,
+// fullWidth: true,
+// helperText: undefined,
+// hideStartActionsOnEmpty: true,
+// id: undefined,
+// label: undefined,
+// margin: undefined,
+// maxRows: undefined,
+// multiline: undefined,
+// name: undefined,
+// onChange: undefined,
+// readOnly: undefined,
+// required: undefined,
+// rows: undefined,
+// startCmp: undefined,
+// startCmpExternal: undefined,
+// type: 'text',
+// value: undefined,
+// variant: 'outlined',
+
+/*
+export const Checked: Story = {
+    args: {
+        value: '',
+    },
 };
 
-export const EndIcon = () => {
-    return <TextField label="End Icon Input" endCmp={<ClearIcon />} variant="standard" />;
+export const OnChange: Story = {
+    args: {
+        checked: true,
+        children: 'on change event',
+    },
+    render: (args) => {
+        const [value, onChange] = useState(args.checked);
+        return <TextField {...args} value={value} onChange={(e, v) => onChange(v)} />;
+    },
 };
-
-export const Password = () => {
-    return <TextField label="End Icon Input" endCmp={<ClearIcon />} variant="standard" type="password" />;
-};
-
-export const Disabled = () => {
-    const [value, setValue] = useState('Hello world');
-
-    return <TextField label="Disabled Input" disabled value={value} onChange={(e) => setValue(e.target.value)} />;
-};
-
-export const ReadOnly = () => {
-    const [value, setValue] = useState('Hello world');
-
-    return <TextField label="Read Only Input" readOnly value={value} onChange={(e) => setValue(e.target.value)} />;
-};
-
-export const Multiline = () => {
-    const [value, setValue] = useState('Hello world');
-
-    return (
-        <TextField
-            label="Multiline input"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            multiline
-            maxRows={4}
-        />
-    );
-};
-
-export const Required = () => {
-    const [value, setValue] = useState('Hello world');
-
-    return <TextField label="username" required value={value} onChange={(e) => setValue(e.target.value)} />;
-};
-
-export const Error = () => {
-    const [value, setValue] = useState('3#%32');
-
-    return (
-        <TextField
-            label="username"
-            error
-            helperText="Invalid username"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-        />
-    );
-};
-
-export const HelperText = () => {
-    const [value, setValue] = useState('Test');
-
-    return (
-        <TextField
-            label="username"
-            helperText="username for credentials"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-        />
-    );
-};
-
-export const NotFullwith = () => {
-    return <TextField fullWidth={false} label="End Icon Input" endCmp={<ClearIcon />} variant="standard" />;
-};
-
-export const Focused = () => {
-    return <TextField fullWidth={false} label="auto focused input" variant="outlined" autoFocus />;
-};
-
-export const MuiltipleInputs = () => {
-    const [value, setValue] = useState('Test');
-
-    return (
-        <>
-            <div style={{ display: 'flex', gap: '16px' }}>
-                <TextField
-                    fullWidth={false}
-                    label="First Input"
-                    endCmp={<ClearIcon />}
-                    variant="standard"
-                    helperText={' '}
-                />
-                <TextField
-                    fullWidth={false}
-                    label="Second Input"
-                    endCmp={<ClearIcon onClick={() => setValue('')} />}
-                    error={!value}
-                    helperText={!value ? "Hi it's second input" : ' '}
-                    variant="standard"
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                />
-            </div>
-            <div style={{ display: 'flex', gap: '16px' }}>
-                <TextField fullWidth={false} label="First Input" endCmp={<ClearIcon />} variant="standard" error />
-                <TextField fullWidth={false} label="Second Input" endCmp={<ClearIcon />} variant="standard" />
-            </div>
-        </>
-    );
-};
-
-export const ThemedAndColored = () => {
-    const [value, setValue] = useState('Hello World');
-
-    return (
-        <Stack spacing={2}>
+export const CheckedIcon: Story = {
+    args: {
+        checked: true,
+        children: 'on change event',
+    },
+    render: (args) => {
+        const [value, onChange] = useState(args.checked);
+        return (
             <TextField
-                label={'default color'}
-                variant="outlined"
+                {...args}
                 value={value}
-                onChange={(e) => setValue(e.target.value)}
+                onChange={(e, v) => onChange(v)}
+                checkedIcon="Favorite"
+                icon="FavoriteBorder"
             />
-            <TextField
-                color="secondary"
-                label="default color"
-                variant="outlined"
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-            />
+        );
+    },
+};
 
-            {[
-                'primary',
-                'secondary',
-                'info',
-                'warning',
-                'success',
-                'error',
-                'primary.dark',
-                'secondary.dark',
-                'info.dark',
-                'warning.dark',
-                'success.dark',
-                'error.dark',
-                '#014299',
-                '#4a4a02',
-                '#ff59f3',
-                'REDS', // text invalid color
-            ].map((customColor, index, arr) => (
-                <TextField
-                    key={customColor}
-                    label={`${customColor} color`}
-                    startCmp={index % 2 === 0 && 'COLOR:'}
-                    endCmp={index % 4 === 0 && <ClearIcon />}
-                    variant="outlined"
-                    colorActive={arr[index - 1]}
-                    colorLabel={customColor}
-                    colorText={arr[index + 1]}
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                />
-            ))}
+const ColoredTextField = () => {
+    return (
+        <Stack direction="row" spacing={3}>
+            <TextField checked color={'#00ab92'}>
+                #00ab92
+            </TextField>
+            <TextField checked color={'primary'}>
+                Primary
+            </TextField>
+            <TextField checked color={'secondary'}>
+                Secondary
+            </TextField>
         </Stack>
     );
 };
+export const ColoredTextField_ = () => <ColoredTextField />;
+
+export const DisabledTextField: Story = {
+    args: {
+        disabled: true,
+        children: 'disabled checkbox',
+    },
+};
+
+export const FontSize: Story = {
+    args: {
+        fontSize: 35,
+        children: 'FontSize checkbox',
+    },
+};
+
+export const HelperText: Story = {
+    args: {
+        helperText: 'some helper text here',
+        children: 'checkbox with helper text',
+    },
+};
+
+export const IconTextField: Story = {
+    args: {
+        icon: <FingerprintIcon />,
+        checkedIcon: <SendIcon />,
+        children: 'checkbox with icons',
+    },
+};
+
+export const LabelTextField: Story = {
+    args: {
+        label: 'some label',
+    },
+};
+
+const LabelPlacementTextField = () => {
+    return (
+        <Stack direction="row" spacing={4}>
+            <TextField labelPlacement="top">top label</TextField>
+            <TextField labelPlacement="start">start label</TextField>
+            <TextField labelPlacement="bottom">bottom label</TextField>
+            <TextField labelPlacement="end">end label</TextField>
+        </Stack>
+    );
+};
+export const LabelPlacementTextField_ = () => <LabelPlacementTextField />;
+
+export const ReadOnlyTextField: Story = {
+    args: {
+        readOnly: true,
+        checked: true,
+        children: 'readOnly checkbox',
+    },
+};
+
+export const Required: Story = {
+    args: {
+        required: true,
+        children: 'required checkbox',
+    },
+};
+
+const SizeTextField = () => {
+    return (
+        <Stack direction="row" spacing={3}>
+            <TextField size="small">small checkbox</TextField>
+            <TextField size="medium">medium checkbox</TextField>
+        </Stack>
+    );
+};
+export const SizeTextField_ = () => <SizeTextField />;
+
+export const TextColorTextField: Story = {
+    args: {
+        textColor: '#FF0000',
+        children: 'red text',
+    },
+};
+*/

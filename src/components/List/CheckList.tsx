@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import List from './List';
-import Checkbox from '../Checkbox/Checkbox';
+import Checkbox from '../FIXED/Checkbox/Checkbox';
 import Switch from '../Switch/Switch';
 
 export default function CheckList({ controlType, alignCheck, items, ...props }) {

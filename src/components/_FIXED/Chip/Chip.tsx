@@ -2,9 +2,9 @@ import React from 'react';
 import type { PropsWithChildren, ReactElement } from 'react';
 
 import { Chip as MuiChip } from './Chip.styled';
-import { useCustomColor } from '../../utils/helpers';
-import SVGIcon from '../SVGIcon/SVGIcon';
-import type { ChipProps } from '../desc';
+import { useCustomColor } from '../../../utils/helpers';
+import SVGIcon from '../../SVGIcon/SVGIcon';
+import type { ChipProps } from '../../decs';
 
 function Chip(props: PropsWithChildren<ChipProps>): ReactElement {
     const {

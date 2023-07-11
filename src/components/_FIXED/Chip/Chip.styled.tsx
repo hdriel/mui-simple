@@ -4,7 +4,7 @@ import { Chip as MuiChip } from '@mui/material';
 import { styled, css, emphasize } from '@mui/material/styles';
 import type { ChipProps as MuiChipProps } from '@mui/material';
 import type { SerializedStyles } from '@emotion/serialize';
-import type { ChipProps } from '../desc';
+import type { ChipProps } from '../../decs';
 
 type ChipStyledPropsType = Omit<ChipProps, 'label'> & MuiChipProps;
 

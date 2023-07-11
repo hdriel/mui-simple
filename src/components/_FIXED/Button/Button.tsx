@@ -1,12 +1,12 @@
 import React, { forwardRef } from 'react';
 import type { Ref, ReactElement, PropsWithChildren } from 'react';
 
-import CircularProgress from '../Progress/CircularProgress/CircularProgress';
+import CircularProgress from '../../Progress/CircularProgress/CircularProgress';
 import { Button as MuiButton, IconButton as MuiIconButton } from './Button.styled';
-import Tooltip from '../Tooltip/Tooltip';
-import { useCustomColor } from '../../utils/helpers';
-import SVGIcon from '../SVGIcon/SVGIcon';
-import type { ButtonProps } from '../desc';
+import Tooltip from '../../Tooltip/Tooltip';
+import { useCustomColor } from '../../../utils/helpers';
+import SVGIcon from '../../SVGIcon/SVGIcon';
+import type { ButtonProps } from '../../decs';
 
 const SIZES = ['small', 'medium', 'large'];
 type SizeType = 'small' | 'medium' | 'large';

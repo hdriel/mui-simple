@@ -9,7 +9,7 @@ import {
 } from '@mui/icons-material';
 
 import AppBar from '../AppBar';
-import Button from '../../Button/Button';
+import Button from '../../FIXED/Button/Button';
 import Avatar from '../../Avatar/Avatar';
 import Typography from '../../Typography/Typography';
 import Menu from '../../Menu/Menu';

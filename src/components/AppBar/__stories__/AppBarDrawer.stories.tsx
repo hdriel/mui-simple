@@ -11,7 +11,7 @@ import {
 } from '@mui/icons-material';
 
 import AppBar from '../AppBar';
-import Button from '../../Button/Button';
+import Button from '../../FIXED/Button/Button';
 import List from '../../List/List';
 import Divider from '../../Divider/Divider';
 import ToggleButtonGroup from '../../ToggleButtonGroup/ToggleButtonGroup';

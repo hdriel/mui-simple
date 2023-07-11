@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Stack } from '@mui/material';
 
 import InputMultipleSelect from '../InputMultipleSelect';
-import Button from '../../Button/Button';
+import Button from '../../FIXED/Button/Button';
 
 import { Airplay as AirplayIcon, FormatColorFill as FormatColorFillIcon } from '@mui/icons-material';
 

@@ -14,7 +14,7 @@ import {
 import { useTheme } from '@mui/material/styles';
 import Draggable from 'react-draggable';
 
-import Button from '../Button/Button';
+import Button from '../FIXED/Button/Button';
 
 const Transition = forwardRef(function Transition(props: PropsWithChildren, ref) {
     const { children, ...rest } = props;

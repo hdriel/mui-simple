@@ -12,7 +12,7 @@ import {
 } from '@mui/icons-material';
 
 import List from '../List';
-import Button from '../../Button/Button';
+import Button from '../../FIXED/Button/Button';
 
 export default {
     title: 'Data-Display/List',

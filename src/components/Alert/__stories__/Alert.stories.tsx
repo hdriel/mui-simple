@@ -5,7 +5,7 @@ import { Stack } from '@mui/material';
 
 import Alert from '../Alert';
 import Divider from '../../Divider/Divider';
-import Button from '../../Button/Button';
+import Button from '../../FIXED/Button/Button';
 
 export default {
     title: 'Feedback/Alert',

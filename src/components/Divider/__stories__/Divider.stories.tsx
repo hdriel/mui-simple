@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 // import { Send as SendIcon } from "@mui/icons-material";
 import { Typography, Box, List, ListItem, ListItemText } from '@mui/material';
 
-import Chip from '../../Chip/Chip';
+import Chip from '../../FIXED/Chip/Chip';
 import Divider from '../Divider';
 
 export default {

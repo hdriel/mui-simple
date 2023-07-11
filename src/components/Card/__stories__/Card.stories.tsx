@@ -23,7 +23,7 @@ import Avatar from '../../Avatar/Avatar';
 
 import CardContentExpended from '../CardContentExpended';
 import Typography from '../../Typography/Typography';
-import Button from '../../Button/Button';
+import Button from '../../FIXED/Button/Button';
 
 export default {
     title: 'Surfaces/Card',

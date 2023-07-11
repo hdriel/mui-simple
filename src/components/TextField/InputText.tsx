@@ -1,15 +1,8 @@
-import React from 'react';
-// import PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
 import Input from './TextField';
-import type { InputBaseProps } from './decs';
+import type { InputTextProps } from '../decs';
 
-interface InputTextProps extends Omit<InputBaseProps, 'value'> {
-    value?: string;
-    showLimitIndicatorFrom?: number;
-    limitIndicator?: number;
-}
-
-export default function InputText(props: InputTextProps) {
+const InputText: React.FC<InputTextProps> = function InputText(props): React.ReactElement {
     const { value, showLimitIndicatorFrom, limitIndicator, endCmp, ...rest } = props;
     const count = value?.length ?? 0;
 
@@ -28,14 +21,44 @@ export default function InputText(props: InputTextProps) {
             type="text"
         />
     );
-}
-
-// InputText.propTypes = {
-//     limitIndicator: PropTypes.number,
-//     showLimitIndicatorFrom: PropTypes.number,
-// };
+};
 
 InputText.defaultProps = {
+    alignActions: undefined,
+    alignActionsExternal: undefined,
+    autoComplete: undefined,
+    cmpSpacing: undefined,
+    colorActive: undefined,
+    colorLabel: undefined,
+    colorText: undefined,
+    debounceDelay: undefined,
+    disabled: undefined,
+    endCmp: undefined,
+    endCmpExternal: undefined,
+    error: undefined,
+    focused: undefined,
+    fullWidth: undefined,
+    helperText: undefined,
+    hideStartActionsOnEmpty: undefined,
+    id: undefined,
+    label: undefined,
     limitIndicator: undefined,
+    margin: undefined,
+    maxRows: undefined,
+    multiline: undefined,
+    name: undefined,
+    onBlur: undefined,
+    onChange: undefined,
+    onFocus: undefined,
+    readOnly: undefined,
+    required: undefined,
+    rows: undefined,
     showLimitIndicatorFrom: undefined,
+    startCmp: undefined,
+    startCmpExternal: undefined,
+    type: 'text',
+    value: undefined,
+    variant: undefined,
 };
+
+export default InputText;
