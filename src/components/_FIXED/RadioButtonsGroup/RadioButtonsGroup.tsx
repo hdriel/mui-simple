@@ -30,7 +30,7 @@ const RadioButtonsGroup: React.FC<RadioButtonsGroupProps> = ({
     ...props
 }): React.ReactElement => {
     const [customColor, muiColor] = useCustomColor(color);
-    const label = <FormLabel>{_label}</FormLabel>;
+    const label = _label ? <FormLabel>{_label}</FormLabel> : undefined;
     const useLegend = variant === 'outlined';
     const data = _data?.map((item) => {
         return typeof item === 'string' ? { label: item, value: item } : { ...item };
@@ -38,7 +38,7 @@ const RadioButtonsGroup: React.FC<RadioButtonsGroupProps> = ({
 
     return (
         <FormControl fullWidth={fullWidth}>
-            <fieldset style={{ borderRadius: '8px', border: useLegend ? 'unset' : undefined }}>
+            <fieldset style={{ borderRadius: '8px', border: useLegend ? undefined : 'unset' }}>
                 {label && (useLegend ? <Legend>{label}</Legend> : label)}
                 <RadioGroup
                     value={selectedValue}
@@ -92,6 +92,7 @@ RadioButtonsGroup.defaultProps = {
     row: undefined,
     size: undefined,
     value: undefined,
+    variant: undefined,
 };
 
 export default RadioButtonsGroup;

@@ -160,7 +160,6 @@ export interface RadioButtonsGroupProps {
               disabled?: boolean;
           }
     >;
-    defaultValue?: string;
     direction?: 'row' | 'column';
     disableRipple?: boolean;
     fullWidth?: boolean;

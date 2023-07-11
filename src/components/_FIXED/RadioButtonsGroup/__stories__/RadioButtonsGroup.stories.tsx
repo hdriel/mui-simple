@@ -107,6 +107,16 @@ export const Label: Story = {
     },
 };
 
+export const FullWidth: Story = {
+    args: {
+        data,
+        label: 'Gender',
+        fullWidth: false,
+        variant: 'outlined',
+        value: data[0].value,
+    },
+};
+
 export const OnChange: Story = {
     args: {
         data,
