@@ -22,7 +22,7 @@ import Card from '../Card';
 import Avatar from '../../_FIXED/Avatar/Avatar';
 
 import CardContentExpended from '../CardContentExpended';
-import Typography from '../../Typography/Typography';
+import Typography from '../../_FIXED/Typography/Typography';
 import Button from '../../_FIXED/Button/Button';
 
 export default {

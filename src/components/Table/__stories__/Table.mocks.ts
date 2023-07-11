@@ -1,4 +1,4 @@
-import Typography from '../../Typography/Typography';
+import Typography from '../../_FIXED/Typography/Typography';
 
 export const FITNESS_COLUMNS = [
     {

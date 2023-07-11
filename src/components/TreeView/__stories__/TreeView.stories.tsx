@@ -9,7 +9,7 @@ import LabelIconTreeItem, { LabelIconTreeItemIcons } from '../TreeItemComponents
 import IndentBorderTreeItem, { IndentBorderTreeItemIcons } from '../TreeItemComponents/IndentBorderTreeItem';
 
 import SVGIcon from '../../SVGIcon/SVGIcon';
-import Typography from '../../Typography/Typography';
+import Typography from '../../_FIXED/Typography/Typography';
 
 export default {
     title: 'Lab/TreeView',

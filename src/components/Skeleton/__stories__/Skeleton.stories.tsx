@@ -5,7 +5,7 @@ import { Box, Card, CardContent, CardHeader, CardMedia, Grid, Stack } from '@mui
 import Avatar from '../../_FIXED/Avatar/Avatar';
 
 import Skeleton from '../Skeleton';
-import Typography from '../../Typography/Typography';
+import Typography from '../../_FIXED/Typography/Typography';
 import Button from '../../_FIXED/Button/Button';
 
 export default {

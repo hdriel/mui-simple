@@ -1,9 +1,10 @@
 import type { ComponentType } from 'react';
-import { Box, Typography as MuiTypography, TypographyProps, BoxProps } from '@mui/material';
+import { Box, Typography as MuiTypography } from '@mui/material';
+import type { TypographyProps, BoxProps } from '@mui/material';
 import { styled, css } from '@mui/material/styles';
 
 import { ellipsisRow1, ellipsisRows } from './Typography.styles';
-import { numberToPx } from '../../utils/helpers';
+import { numberToPx } from '../../../utils/helpers';
 
 interface TypographyBorderProps {
     autoWidth?: boolean;
@@ -11,7 +12,6 @@ interface TypographyBorderProps {
     width?: string | number;
     border?: boolean | string;
     rows?: number;
-
     [key: string]: any;
 }
 type TypographyBorderPropsType = Omit<BoxProps, 'border'> & TypographyBorderProps;
@@ -65,7 +65,6 @@ export const Typography = styled(MuiTypography, {
     color: ${(props) => props.customColor};
     background-color: ${(props) => props.bgColor};
     font-weight: ${(props) => (props.bold && typeof props.bold === 'boolean' ? 'bold' : props.bold)};
-
     font-size: ${(props) => numberToPx(props.fontSize)};
     font-style: ${(props) => (props.italic ? 'italic' : undefined)};
     text-decoration: ${(props) => (props.underline ? 'underline' : undefined)};

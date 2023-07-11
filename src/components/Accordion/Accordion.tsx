@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import type { SyntheticEvent, PropsWithChildren, ReactElement } from 'react';
 //	import PropTypes from 'prop-types';
 import { Accordion as MuiAccordion, AccordionDetails, AccordionSummary, ShowMoreWrapper } from './Accordion.styled';
-import Typography from '../Typography/Typography';
+import Typography from '../_FIXED/Typography/Typography';
 import Button from '../_FIXED/Button/Button';
 import { ArrowForwardIosSharp as ArrowForwardIosSharpIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 import { useCustomColor } from '../../utils/helpers';

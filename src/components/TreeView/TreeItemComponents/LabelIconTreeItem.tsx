@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
 import { LabelIconTreeItemStyled } from '../TreeView.styled';
-import Typography from '../../Typography/Typography';
+import Typography from '../../_FIXED/Typography/Typography';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 import { ArrowDropDown as ArrowDropDownIcon, ArrowRight as ArrowRightIcon } from '@mui/icons-material';
 

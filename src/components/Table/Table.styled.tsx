@@ -15,7 +15,7 @@ import {
 
 import MuiCheckbox from '../_FIXED/Checkbox/Checkbox';
 import MuiAvatar from '../_FIXED/Avatar/Avatar';
-import MuiTypography from '../Typography/Typography';
+import MuiTypography from '../_FIXED/Typography/Typography';
 import MuiTooltip from '../_FIXED/Tooltip/Tooltip';
 import MuiButton from '../_FIXED/Button/Button';
 import MuiPaper from '../Paper/Paper';

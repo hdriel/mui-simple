@@ -4,7 +4,7 @@ import type { PropsWithChildren, ReactNode } from 'react';
 import { Breadcrumbs as MuiBreadcrumbs } from './Breadcrumbs.styled';
 import Link from '../Link/Link';
 import Chip from '../_FIXED/Chip/Chip';
-import Typography from '../Typography/Typography';
+import Typography from '../_FIXED/Typography/Typography';
 
 type Underline = 'always' | 'hover' | 'none';
 interface BreadcrumbLink {

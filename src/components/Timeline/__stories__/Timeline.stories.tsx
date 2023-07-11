@@ -10,7 +10,7 @@ import {
 } from '@mui/icons-material';
 
 import Timeline from '../Timeline';
-import Typography from '../../Typography/Typography';
+import Typography from '../../_FIXED/Typography/Typography';
 import Divider from '../../Divider/Divider';
 
 export default {

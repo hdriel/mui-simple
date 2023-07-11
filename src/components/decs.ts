@@ -208,6 +208,40 @@ export interface TooltipProps {
     [key: string]: any;
 }
 
+export interface TypographyProps {
+    alignCenter?: boolean;
+    alignJustify?: boolean;
+    alignLeft?: boolean;
+    alignRight?: boolean;
+    autoWidth?: boolean;
+    bgColor?: string;
+    bold?: boolean | string;
+    border?: boolean | string;
+    charsCase?: 'upper' | 'lower' | 'capital';
+    color?: string;
+    component?: string;
+    gutterBottom?: boolean;
+    italic?: boolean;
+    lineHeight?: number;
+    monospace?: boolean;
+    noWrap?: boolean;
+    onEllipsisChange?: (isEllipsis: boolean) => void;
+    paragraph?: boolean;
+    rows?: number;
+    showTooltipOnEllipsis?: boolean;
+    size?: number | string;
+    strike?: boolean;
+    sub?: boolean;
+    sup?: boolean;
+    tooltip?: boolean | string;
+    tooltipPlacement?: TooltipPlacementType;
+    underline?: boolean;
+    width?: number | string;
+    wrap?: boolean;
+    link?: string;
+    [key: string]: any;
+}
+
 export interface RadioButtonProps {
     value: string;
     label: string;

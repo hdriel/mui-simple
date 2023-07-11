@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Stack } from '@mui/material';
 
 import { Pagination as MuiPagination, PaginationItem } from './Pagination.styled';
-import Typography from '../Typography/Typography';
+import Typography from '../_FIXED/Typography/Typography';
 import { isDefined, useCustomColor } from '../../utils/helpers';
 
 // function useSearchParam(pageParamFieldName) {

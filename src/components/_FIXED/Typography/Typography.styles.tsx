@@ -1,6 +1,7 @@
 import { css } from '@mui/material/styles';
+import type { SerializedStyles } from '@emotion/serialize';
 
-export function ellipsisRow1(props) {
+export function ellipsisRow1(props): SerializedStyles {
     if (props.noWrap || props.rows !== 1) return css``;
 
     return css`
@@ -16,7 +17,7 @@ export function ellipsisRow1(props) {
     `;
 }
 
-export function ellipsisRows(props) {
+export function ellipsisRows(props): SerializedStyles {
     if (props.noWrap || !props.rows || (props.rows && props.rows <= 1)) {
         return css``;
     }
