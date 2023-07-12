@@ -68,8 +68,8 @@ export { default as SVGIcon } from './components/SVGIcon/SVGIcon';
 export { default as Switch } from './components/Switch/Switch';
 
 export { Table } from './components/Table/Table';
-export { default as Tabs } from './components/Tabs/Tabs';
-export { default as Tab } from './components/Tabs/Tab';
+export { default as Tabs } from './components/_FIXED/Tabs/Tabs';
+export { default as Tab } from './components/_FIXED/Tabs/Tab';
 export { default as Timeline } from './components/Timeline/Timeline';
 export { default as ToggleButtonGroup } from './components/ToggleButtonGroup/ToggleButtonGroup';
 export { default as ToggleButtonGroups } from './components/ToggleButtonGroup/ToggleButtonGroups';

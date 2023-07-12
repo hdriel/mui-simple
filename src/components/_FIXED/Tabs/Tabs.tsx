@@ -6,8 +6,8 @@ import { useTheme } from '@mui/material/styles';
 import { Tabs as MuiTabs, Box } from './Tabs.styled';
 import TabItem from './TabItem';
 import TabPanel from './TabPanel';
-import { useCustomColor } from '../../utils/helpers';
-import type { TabsProps } from '../decs';
+import { useCustomColor } from '../../../utils/helpers';
+import type { TabsProps } from '../../decs';
 
 const Tabs: React.FC<PropsWithChildren<TabsProps>> = ({
     centered,
