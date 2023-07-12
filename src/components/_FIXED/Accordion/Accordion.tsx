@@ -1,31 +1,12 @@
 import React, { useState } from 'react';
-import type { SyntheticEvent, PropsWithChildren, ReactElement } from 'react';
-//	import PropTypes from 'prop-types';
+import type { PropsWithChildren } from 'react';
 import { Accordion as MuiAccordion, AccordionDetails, AccordionSummary, ShowMoreWrapper } from './Accordion.styled';
-import Typography from '../_FIXED/Typography/Typography';
-import Button from '../_FIXED/Button/Button';
+import Typography from '../Typography/Typography';
+import Button from '../Button/Button';
 import { ArrowForwardIosSharp as ArrowForwardIosSharpIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
-import { useCustomColor } from '../../utils/helpers';
+import { useCustomColor } from '../../../utils/helpers';
+import type { AccordionProps } from '../../decs';
 
-interface AccordionProps {
-    id?: string;
-    expanded?: boolean | string;
-    onChange?: (event: SyntheticEvent<unknown>, expanded: boolean | string) => void;
-    disabled?: boolean;
-    label?: string;
-    secondaryLabel?: string;
-    details?: string;
-    detailsMaxRows?: number;
-    showMoreLabel?: string;
-    hideLabel?: string;
-    bgColor?: string;
-    textColor?: string;
-    titleColor?: string;
-    buttonsColor?: string;
-    unmountDetailsOnClose?: boolean;
-    useCustomStyle?: boolean;
-    [key: string]: any;
-}
 const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props): React.ReactElement {
     const {
         id,
@@ -57,7 +38,9 @@ const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props):
         <MuiAccordion
             disabled={disabled}
             expanded={typeof expanded === 'string' ? expanded === id : expanded}
-            onChange={(event, isExpanded) => onChange?.(event, isExpanded ? id : false)}
+            onChange={(event, isExpanded) => {
+                onChange?.(event, isExpanded ? id ?? isExpanded : false);
+            }}
             useCustomStyle={useCustomStyle}
             TransitionProps={{ unmountOnExit: unmountDetailsOnClose }}
             {...rest}
@@ -88,7 +71,7 @@ const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props):
                             rows={showMore ? undefined : detailsMaxRows}
                             onEllipsisChange={(value) => setIsEllipsis(value)}
                             color={textColor}
-                            tooltip={!showMore}
+                            tooltip={''}
                         >
                             {details}
                         </Typography>

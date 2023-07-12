@@ -1,5 +1,25 @@
-import type { ReactNode, ReactElement, ChangeEvent } from 'react';
+import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent } from 'react';
 import type { SxProps } from '@mui/material';
+
+export interface AccordionProps {
+    id?: string;
+    expanded?: boolean | string;
+    onChange?: (event: SyntheticEvent<unknown>, expanded: boolean | string) => void;
+    disabled?: boolean;
+    label?: string;
+    secondaryLabel?: string;
+    details?: string;
+    detailsMaxRows?: number;
+    showMoreLabel?: string;
+    hideLabel?: string;
+    bgColor?: string;
+    textColor?: string;
+    titleColor?: string;
+    buttonsColor?: string;
+    unmountDetailsOnClose?: boolean;
+    useCustomStyle?: boolean;
+    [key: string]: any;
+}
 
 export interface AvatarProps {
     color?: string;

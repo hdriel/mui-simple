@@ -34,7 +34,7 @@ function useTooltipMessage({ children, tooltip, showTooltipOnEllipsis, isEllipsi
         const [defaultTooltip, childrenTooltip, customTooltip] = [
             children,
             tooltip === undefined || (typeof tooltip === 'boolean' && tooltip) ? children : undefined,
-            typeof tooltip === 'string' && tooltip ? tooltip : undefined,
+            typeof tooltip === 'string' ? tooltip : undefined,
         ];
 
         if (tooltip === false || (showTooltipOnEllipsis && !isEllipsis)) {
