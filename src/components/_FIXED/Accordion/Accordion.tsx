@@ -9,23 +9,24 @@ import type { AccordionProps } from '../../decs';
 
 const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props): React.ReactElement {
     const {
-        id,
-        expanded,
-        onChange,
-        disabled,
-        label,
-        secondaryLabel,
-        details,
-        detailsMaxRows,
-        showMoreLabel,
-        hideLabel,
-        unmountDetailsOnClose,
-        useCustomStyle,
         bgColor: _bgColor,
-        titleColor: _titleColor,
-        textColor,
+        bottomSecondaryLabel,
         buttonsColor,
         children,
+        details,
+        detailsMaxRows,
+        disabled,
+        expanded,
+        hideLabel,
+        id,
+        label,
+        onChange,
+        secondaryLabel: _secondaryLabel,
+        showMoreLabel,
+        textColor,
+        titleColor: _titleColor,
+        unmountDetailsOnClose,
+        useCustomStyle,
         ...rest
     } = props;
 
@@ -33,6 +34,7 @@ const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props):
     const [isEllipsis, setIsEllipsis] = useState(false);
     const [bgColor] = useCustomColor(_bgColor);
     const [titleColor] = useCustomColor(_titleColor);
+    const secondaryLabel = bottomSecondaryLabel || _secondaryLabel;
 
     return (
         <MuiAccordion
@@ -53,6 +55,7 @@ const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props):
                 expandIcon={
                     useCustomStyle ? <ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} /> : <ExpandMoreIcon />
                 }
+                bottomSecondaryLabel={!!bottomSecondaryLabel}
             >
                 <Typography
                     tooltip={false}
@@ -98,20 +101,21 @@ const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props):
 };
 
 Accordion.defaultProps = {
-    id: undefined,
-    expanded: undefined,
-    onChange: undefined,
-    disabled: undefined,
-    label: undefined,
-    secondaryLabel: undefined,
+    bgColor: undefined,
+    bottomSecondaryLabel: undefined,
+    buttonsColor: undefined,
     details: undefined,
     detailsMaxRows: undefined,
-    showMoreLabel: 'Show More',
+    disabled: undefined,
+    expanded: undefined,
     hideLabel: 'Hide',
-    bgColor: undefined,
+    id: undefined,
+    label: undefined,
+    onChange: undefined,
+    secondaryLabel: undefined,
+    showMoreLabel: 'Show More',
     textColor: undefined,
     titleColor: undefined,
-    buttonsColor: undefined,
     unmountDetailsOnClose: false,
     useCustomStyle: false,
 };

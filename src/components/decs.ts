@@ -2,20 +2,21 @@ import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent } from 'react
 import type { SxProps } from '@mui/material';
 
 export interface AccordionProps {
-    id?: string;
-    expanded?: boolean | string;
-    onChange?: (event: SyntheticEvent<unknown>, expanded: boolean | string) => void;
-    disabled?: boolean;
-    label?: string;
-    secondaryLabel?: string;
+    bgColor?: string;
+    buttonsColor?: string;
     details?: string;
     detailsMaxRows?: number;
-    showMoreLabel?: string;
+    disabled?: boolean;
+    expanded?: boolean | string;
     hideLabel?: string;
-    bgColor?: string;
+    id?: string;
+    label?: string;
+    bottomSecondaryLabel: string;
+    onChange?: (event: SyntheticEvent<unknown>, expanded: boolean | string) => void;
+    secondaryLabel?: string;
+    showMoreLabel?: string;
     textColor?: string;
     titleColor?: string;
-    buttonsColor?: string;
     unmountDetailsOnClose?: boolean;
     useCustomStyle?: boolean;
     [key: string]: any;

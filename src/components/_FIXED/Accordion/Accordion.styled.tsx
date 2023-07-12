@@ -1,6 +1,6 @@
 import React from 'react';
 import type { ComponentType } from 'react';
-import { styled } from '@mui/material/styles';
+import { styled, css } from '@mui/material/styles';
 import {
     Accordion as MuiAccordion,
     AccordionSummary as MuiAccordionSummary,
@@ -14,24 +14,19 @@ import type {
     BoxProps,
 } from '@mui/material';
 import { customStyleAccordion, customStyleDetails, customStyleSummary } from './Accordion.styles';
-import type { AccordionProps } from '../../decs';
 
-type AccordionStyledPropsType = MuiAccordionProps & AccordionProps & any;
+interface AccordionStyledProps {
+    useCustomStyle?: boolean;
+}
+type AccordionStyledPropsType = AccordionStyledProps &
+    Omit<MuiAccordionProps, 'disabled' | 'expanded' | 'onChange' | 'TransitionProps'> &
+    any;
 export const Accordion = styled(
-    ({ useCustomStyle, children, ...props }) => (
-        <MuiAccordion
-            {...(useCustomStyle && {
-                disableGutters: true,
-                elevation: 0,
-                square: true,
-            })}
-            {...props}
-        >
-            {children}
-        </MuiAccordion>
+    ({ useCustomStyle, ...props }) => (
+        <MuiAccordion {...(useCustomStyle && { disableGutters: true, elevation: 0, square: true })} {...props} />
     ),
     {
-        shouldForwardProp: (propName) => ![].includes(propName as string),
+        shouldForwardProp: (propName) => !['useCustomStyle'].includes(propName as string),
     }
 )<AccordionStyledPropsType>`
     ${customStyleAccordion}
@@ -39,12 +34,22 @@ export const Accordion = styled(
 
 type AccordionSummaryStyledPropsType = AccordionSummaryProps & any;
 export const AccordionSummary = styled(({ label, ...props }) => <MuiAccordionSummary {...props} />, {
-    shouldForwardProp: (propName) => !['useCustomStyle', 'bgColor', 'titleColor'].includes(propName as string),
+    shouldForwardProp: (propName) =>
+        !['bottomSecondaryLabel', 'useCustomStyle', 'bgColor', 'titleColor'].includes(propName as string),
 })<AccordionSummaryStyledPropsType>`
     ${customStyleSummary};
     &.MuiAccordionSummary-root {
         background-color: ${(props) => props.bgColor};
         color: ${(props) => props.titleColor};
+        ${(props) =>
+            props.bottomSecondaryLabel
+                ? css`
+                      & > div {
+                          display: flex;
+                          flex-direction: column;
+                      }
+                  `
+                : css``}
     }
 ` as ComponentType<AccordionSummaryStyledPropsType>;
 

@@ -76,6 +76,14 @@ export const SecondaryLabel: Story = {
     },
 };
 
+export const BottomSecondaryLabel: Story = {
+    args: {
+        label: 'Accordion Label',
+        bottomSecondaryLabel: 'Accordion secondary label',
+        details: smallIpsum,
+    },
+};
+
 export const Details_ = (args) => (
     <Stack>
         <Accordion label="details as children" details={smallIpsum} expanded />

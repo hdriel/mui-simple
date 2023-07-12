@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react';
 import { styled, css } from '@mui/material/styles';
 import { Alert as MuiAlert, AlertTitle as MuiAlertTitle, alpha } from '@mui/material';
-import type { AlertProps, AlertTitleProps } from '@mui/material';
+import type { AlertProps } from '@mui/material';
 
 import { numberToPx } from '../../utils/helpers';
 
