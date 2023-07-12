@@ -1,16 +1,10 @@
 import React from 'react';
 import { TabPanel as MuiTabPanel } from './Tabs.styled';
+import type { TabPanelProps } from '../decs';
 
-interface TabPanelProps {
-    value?: string | number;
-    open?: boolean;
-    swipeable?: boolean;
-    [key: string]: any;
-}
-
-const TabPanel: React.FC<TabPanelProps> = ({ open, swipeable, children, ...props }) => {
+const TabPanel: React.FC<TabPanelProps> = ({ open, swipeable, children, ...props }): React.ReactElement => {
     return open ? (
-        <MuiTabPanel key={props.value} {...props}>
+        <MuiTabPanel key={String(props.value) as any} {...props}>
             {children}
         </MuiTabPanel>
     ) : null;

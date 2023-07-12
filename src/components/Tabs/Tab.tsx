@@ -1,11 +1,9 @@
-import React, { ReactNode } from 'react';
-// import PropTypes from 'prop-types';
+import React from 'react';
+import type { ReactNode } from 'react';
 import { Box } from './Tabs.styled';
 
-type IconPositionType = 'bottom' | 'end' | 'start' | 'top';
-
 interface TabProps {
-    iconPosition?: IconPositionType;
+    iconPosition?: 'bottom' | 'end' | 'start' | 'top';
     label?: string;
     value?: string;
     open?: boolean;
@@ -19,25 +17,9 @@ interface TabProps {
     [key: string]: any;
 }
 
-const Tab: React.FC<TabProps> = (props) => {
-    return <Box {...props} />;
-};
+const Tab: React.FC<TabProps> = (props): React.ReactElement => <Box {...props} />;
 
 Tab.displayName = 'Tab';
-
-// Tab.propTypes = {
-//     iconPosition: PropTypes.oneOf(['bottom', 'end', 'start', 'top']),
-//     label: PropTypes.string,
-//     value: PropTypes.string,
-//     open: PropTypes.bool,
-//     wrapped: PropTypes.bool,
-//     disabled: PropTypes.bool,
-//     disableRipple: PropTypes.bool,
-//     icon: PropTypes.node,
-//     link: PropTypes.string,
-//     onClick: PropTypes.func,
-//     tooltip: PropTypes.string,
-// };
 
 Tab.defaultProps = {
     iconPosition: undefined,

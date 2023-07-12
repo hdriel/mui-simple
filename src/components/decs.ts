@@ -295,3 +295,43 @@ export interface RadioButtonsGroupProps {
     value?: string;
     variant?: 'outlined';
 }
+
+export interface TabItemProps {
+    iconPosition?: 'bottom' | 'end' | 'start' | 'top';
+    orientation?: 'horizontal' | 'vertical';
+    label?: string | number;
+    value?: string;
+    open?: boolean;
+    wrapped?: boolean;
+    disabled?: boolean;
+    disableRipple?: boolean;
+    icon?: ReactNode | string;
+    link?: string;
+    onClick?: (event: any, value: string) => void;
+    tooltipProps?: TooltipProps;
+    [key: string]: any;
+}
+
+export interface TabPanelProps {
+    open?: boolean;
+    swipeable?: boolean;
+    [key: string]: any;
+}
+
+export interface TabsProps {
+    centered?: boolean;
+    fillActiveTab?: boolean;
+    color?: string;
+    onChange?: (tabId: string | number) => void;
+    orientation?: 'vertical' | 'horizontal';
+    variant?: 'fullWidth' | 'scrollable' | 'standard';
+    value?: string | number;
+    visibleScrollbar?: boolean;
+    visibleScrollButtons?: 'auto' | false | true;
+    swipeable?: boolean;
+    autoNavigateByArrowKeyboard?: boolean;
+    verticalMaxFixedHeight?: string | number;
+    verticalTabWidth?: string | number;
+    reverse?: boolean;
+    [key: string]: any;
+}

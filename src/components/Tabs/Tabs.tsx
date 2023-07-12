@@ -1,4 +1,5 @@
 import React, { isValidElement } from 'react';
+import type { PropsWithChildren } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from '@mui/material/styles';
 
@@ -6,32 +7,9 @@ import { Tabs as MuiTabs, Box } from './Tabs.styled';
 import TabItem from './TabItem';
 import TabPanel from './TabPanel';
 import { useCustomColor } from '../../utils/helpers';
+import type { TabsProps } from '../decs';
 
-type VariantType = 'fullWidth' | 'scrollable' | 'standard';
-type OrientationType = 'vertical' | 'horizontal';
-type VisibleScrollButtonsType = 'auto' | false | true;
-type TabIdType = string;
-
-interface TabsProps {
-    centered?: boolean;
-    fillActiveTab?: boolean;
-    color?: string;
-    onChange?: (tabId: TabIdType) => void;
-    orientation?: OrientationType;
-    variant?: VariantType;
-    value?: TabIdType;
-    visibleScrollbar?: boolean;
-    visibleScrollButtons?: VisibleScrollButtonsType;
-    swipeable?: boolean;
-    autoNavigateByArrowKeyboard?: boolean;
-    verticalMaxFixedHeight?: string | number;
-    verticalTabWidth?: string | number;
-    reverse?: boolean;
-
-    [key: string]: any;
-}
-
-const Tabs: React.FC<TabsProps> = ({
+const Tabs: React.FC<PropsWithChildren<TabsProps>> = ({
     centered,
     fillActiveTab,
     color,
@@ -74,7 +52,6 @@ const Tabs: React.FC<TabsProps> = ({
     const tabs = filteredChildren.map(({ props }, index) => {
         return (
             <TabItem
-                children={undefined}
                 key={props.value}
                 iconPosition={props.iconPosition}
                 label={props.label}
@@ -92,7 +69,7 @@ const Tabs: React.FC<TabsProps> = ({
 
     const activeTabIndex = filteredChildren.map((child) => child.props.value).indexOf(value);
 
-    const handleChange = (event, tabId) => onChange?.(tabId);
+    const handleChange = (event, tabId): void => onChange?.(tabId);
     const isScrollableVariant = orientation === 'vertical' || visibleScrollbar || variant === 'scrollable';
 
     return (
@@ -108,6 +85,7 @@ const Tabs: React.FC<TabsProps> = ({
             }}
         >
             <MuiTabs
+                reverse={reverse}
                 centered={isScrollableVariant ? undefined : centered}
                 customColor={customColor}
                 fillActiveTab={fillActiveTab}
@@ -121,7 +99,7 @@ const Tabs: React.FC<TabsProps> = ({
                 scrollButtons={visibleScrollButtons}
                 sx={{
                     ...(orientation === 'vertical' && {
-                        borderRight: 1,
+                        ...(reverse ? { borderLeft: 1 } : { borderRight: 1 }),
                         borderColor: 'divider',
                         minWidth: 'fit-content',
                         width: verticalTabWidth,
@@ -157,7 +135,7 @@ const Tabs: React.FC<TabsProps> = ({
 
 Tabs.defaultProps = {
     centered: undefined,
-    fillActiveTab: true,
+    fillActiveTab: undefined,
     color: undefined,
     onChange: undefined,
     orientation: undefined,

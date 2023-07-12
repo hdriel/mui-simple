@@ -1,17 +1,18 @@
 import type { ComponentType } from 'react';
 import { get } from 'lodash-es';
 import { styled, css } from '@mui/material/styles';
-import { Tabs as MuiTabs, Tab as MuiTab, Box as MuiBox, TabsProps, BoxProps } from '@mui/material';
+import { Tabs as MuiTabs, Tab as MuiTab, Box as MuiBox } from '@mui/material';
+import type { TabsProps, BoxProps } from '@mui/material';
 
 interface TabsStyledProps {
     customColor?: string;
     fillActiveTab?: boolean;
 }
 
-type TabsStyledPropsType = TabsProps & TabsStyledProps;
+type TabsStyledPropsType = TabsProps & TabsStyledProps & any;
 
 export const Tabs = styled(MuiTabs, {
-    shouldForwardProp: (propName) => !['fillActiveTab', 'customColor'].includes(propName as string),
+    shouldForwardProp: (propName) => !['reverse', 'fillActiveTab', 'customColor'].includes(propName as string),
 })<TabsStyledPropsType>`
     & .MuiTabs-indicator {
         background-color: ${(props) => props.customColor};
@@ -20,6 +21,7 @@ export const Tabs = styled(MuiTabs, {
         &.Mui-selected {
             ${(props) => {
                 const color = props.customColor ?? get(props, `theme.palette.primary.main`);
+                const borderLeft = props.orientation === 'vertical' && props.reverse;
 
                 return props.fillActiveTab
                     ? css`
@@ -28,8 +30,12 @@ export const Tabs = styled(MuiTabs, {
                       `
                     : css`
                           color: ${color};
+                          // props.orientation === 'vertical'
+                          // border: 0;
+                          // border-left: ${borderLeft ? '2px solid' : 'unset'};
+                          // border-right: ${borderLeft ? 'unset' : '2px solid'};
                       `;
-            }}
+            }};
         }
     }
 ` as ComponentType<TabsStyledPropsType>;
@@ -41,7 +47,7 @@ interface TabPanelStyledProps {
     disableRipple?: boolean;
 }
 
-type TabPanelStyledPropsType = BoxProps & TabPanelStyledProps;
+type TabPanelStyledPropsType = BoxProps & TabPanelStyledProps & any;
 
 export const TabPanel = styled(MuiBox, {
     shouldForwardProp: (propName) => !['iconPosition', 'disableRipple'].includes(propName as string),

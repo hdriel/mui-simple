@@ -1,302 +1,180 @@
 import React, { useState } from 'react';
-import { Box, Stack } from '@mui/material';
-import {
-    Send as SendIcon,
-    Phone as PhoneIcon,
-    Favorite as FavoriteIcon,
-    PersonPin as PersonPinIcon,
-} from '@mui/icons-material';
+import type { Meta, StoryObj } from '@storybook/react';
+import { Stack } from '@mui/material';
 
 import Tabs from '../Tabs';
 import Tab from '../Tab';
-import ToggleButtonGroup from '../../ToggleButtonGroup/ToggleButtonGroup';
 
-export default {
+const meta: Meta<typeof Tabs> = {
     title: 'Navigation/Tabs',
     component: Tabs,
-    decorators: [
-        (Story) => (
-            <div
-                style={{
-                    height: '100%',
-                    width: '100%',
-                    backgroundColor: 'black',
-                    padding: '1em',
-                }}
+    tags: ['autodocs'],
+};
+
+export default meta;
+
+type Story = StoryObj<typeof Tabs>;
+
+const tabs = (totalTabs?: number) =>
+    [
+        { value: '1', label: 'Item ' },
+        { value: '2', label: 'Item ' },
+        { value: '3', label: 'Item ' },
+        { value: '4', label: 'Item ' },
+        { value: '5', label: 'Item ' },
+        { value: '6', label: 'Item ' },
+        { value: '7', label: 'Item ' },
+        { value: '8', label: 'Item ' },
+        { value: '9', label: 'Item ' },
+        { value: '10', label: 'Item ' },
+        { value: '11', label: 'Item ' },
+        { value: '12', label: 'Item ' },
+    ]
+        .slice(0, totalTabs)
+        .map((tabProps, index) => (
+            <Tab
+                key={index}
+                value={tabProps.value}
+                label={tabProps.label + tabProps.value}
+                sx={{ backgroundColor: 'red', padding: '1em' }}
             >
-                <div
-                    style={{
-                        height: '500px',
-                        width: '800px',
-                        backgroundColor: 'white',
-                    }}
-                >
-                    <Story />
-                </div>
-            </div>
-        ),
-    ],
-};
+                Content {index + 1}
+            </Tab>
+        ));
 
-export const Default = () => {
-    return <Tabs />;
-};
-
-export const Variant = () => {
-    const data0 = [{ value: 'reverse', component: 'reverse' }];
-    const [reverse, setReverse] = useState();
-
-    const data1 = [
-        { value: 'horizontal', component: 'horizontal' },
-        { value: 'vertical', component: 'vertical' },
-    ];
-    const [orientation, setOrientation] = useState('horizontal');
-
-    const data2 = [
-        { value: 'fullWidth', component: 'fullWidth' },
-        { value: 'scrollable', component: 'scrollable' },
-        { value: 'standard', component: 'standard' },
-    ];
-    const [variant, setVariant] = useState('standard');
-
-    const [value, setValue] = useState('one');
-    const onChangeHandler = (tabId) => setValue(tabId);
-
+const render = (args) => {
+    const [value, setValue] = useState<string | number>(args.value ?? '2');
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1em',
-            }}
-        >
-            <Stack direction="row" spacing={3}>
-                <ToggleButtonGroup value={reverse} exclusive onChange={(value) => setReverse(value)} data={data0} />
+        <Tabs {...args} value={value} onChange={(tabId) => setValue(tabId as string)}>
+            {tabs(5)}
+        </Tabs>
+    );
+};
 
-                <ToggleButtonGroup
-                    value={orientation}
-                    exclusive
-                    onChange={(value) => setOrientation(value)}
-                    data={data1}
-                />
-                <ToggleButtonGroup value={variant} exclusive onChange={(value) => setVariant(value)} data={data2} />
-            </Stack>
-            <Tabs
-                reverse={reverse}
-                verticalMaxFixedHeight={400}
-                variant={variant}
-                orientation={orientation}
-                value={value}
-                onChange={(newValue) => onChangeHandler(newValue)}
-            >
-                {[
-                    { value: 'one', label: 'Item ' },
-                    { value: 'two', label: 'Item ' },
-                    { value: 'three', label: 'Item ' },
-                    { value: 'four', label: 'Item ' },
-                    { value: 'five', label: 'Item ' },
-                    { value: 'six', label: 'Item ' },
-                    { value: 'seven', label: 'Item ' },
-                    { value: 'eight', label: 'Item ' },
-                    { value: 'nine', label: 'Item ' },
-                    { value: 'ten', label: 'Item ' },
-                    { value: 'eleven', label: 'Item ' },
-                    { value: 'twelve', label: 'Item ' },
-                ].map((tabProps, index) => (
-                    <Tab
-                        key={index}
-                        value={tabProps.value}
-                        label={tabProps.label + tabProps.value}
-                        sx={{ backgroundColor: 'red' }}
-                    >
-                        Content {index + 1}
-                    </Tab>
-                ))}
+export const Default: Story = {
+    args: {},
+};
+
+export const Centered: Story = {
+    args: {
+        centered: true,
+        children: tabs(5),
+    },
+    render,
+};
+
+export const FillActiveTab: Story = {
+    args: {
+        fillActiveTab: true,
+        value: '2',
+        children: tabs(5),
+    },
+    render,
+};
+
+export const Color: Story = {
+    args: {
+        color: '#D10CC0',
+        value: '2',
+        children: tabs(5),
+    },
+    render,
+};
+
+export const OnChange: Story = {
+    args: {
+        children: tabs(5),
+    },
+    render,
+};
+export const OrientationVertical: Story = {
+    args: {
+        orientation: 'vertical',
+        children: tabs(5),
+    },
+    render,
+};
+
+export const Variant_ = (args) => {
+    const [value, setValue] = useState<string | number>(args.value ?? '2');
+    return (
+        <Stack spacing={2}>
+            <Tabs {...args} variant="fullWidth" value={value} onChange={(tabId) => setValue(tabId as string)}>
+                {tabs()}
             </Tabs>
-        </Box>
-    );
-};
-
-export const Centered = () => {
-    const data1 = [{ value: 'centered', component: 'centered' }];
-    const [centered, setCentered] = useState('centered');
-
-    const data2 = [
-        { value: 'fullWidth', component: 'fullWidth' },
-        { value: 'scrollable', component: 'scrollable' },
-        { value: 'standard', component: 'standard' },
-    ];
-    const [variant, setVariant] = useState('standard');
-
-    const [value, setValue] = useState('one');
-    const onChangeHandler = (tabId) => setValue(tabId);
-
-    return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1em',
-            }}
-        >
-            <Stack direction="row" spacing={3}>
-                <ToggleButtonGroup value={centered} exclusive onChange={(value) => setCentered(value)} data={data1} />
-                <ToggleButtonGroup value={variant} exclusive onChange={(value) => setVariant(value)} data={data2} />
-            </Stack>
-            <Tabs
-                verticalMaxFixedHeight={400}
-                variant={variant}
-                centered={centered}
-                value={value}
-                onChange={(newValue) => onChangeHandler(newValue)}
-            >
-                {[
-                    { value: 'one', label: 'Item ' },
-                    { value: 'two', label: 'Item ' },
-                    { value: 'three', label: 'Item ' },
-                    { value: 'four', label: 'Item ' },
-                ].map((tabProps, index) => (
-                    <Tab key={index} value={tabProps.value} label={tabProps.label + tabProps.value}>
-                        Content {index + 1}
-                    </Tab>
-                ))}
+            <Tabs {...args} variant="scrollable" value={value} onChange={(tabId) => setValue(tabId as string)}>
+                {tabs()}
             </Tabs>
-        </Box>
+            <Tabs {...args} variant="standard" value={value} onChange={(tabId) => setValue(tabId as string)}>
+                {tabs()}
+            </Tabs>
+        </Stack>
     );
 };
 
-export const ThemedAndColored = () => {
-    const [value, setValue] = useState('one');
-    const onChangeHandler = (tabId) => setValue(tabId);
-
-    return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1em',
-            }}
-        >
-            {['#0a7b6f', 'primary', 'secondary', 'info', 'success', 'warning', 'error'].map((color, index) => (
-                <Tabs
-                    color={color}
-                    verticalMaxFixedHeight={400}
-                    value={value}
-                    onChange={(newValue) => onChangeHandler(newValue)}
-                >
-                    {[
-                        { value: 'one', label: 'Item ' },
-                        { value: 'two', label: 'Item ' },
-                        { value: 'three', label: 'Item ' },
-                        { value: 'four', label: 'Item ' },
-                    ].map((tabProps, index) => (
-                        <Tab key={index} value={tabProps.value} label={tabProps.label + tabProps.value} />
-                    ))}
-                </Tabs>
-            ))}
-        </Box>
-    );
+export const VisibleScrollbar: Story = {
+    args: {
+        visibleScrollbar: true,
+        children: tabs(),
+    },
+    render,
 };
 
-export const Icons = () => {
-    const data1 = [
-        { value: 'horizontal', component: 'horizontal' },
-        { value: 'vertical', component: 'vertical' },
-    ];
-    const [orientation, setOrientation] = useState('horizontal');
+export const visibleScrollButtons: Story = {
+    args: {
+        visibleScrollbar: true,
+        children: tabs(),
+    },
+    render,
+};
 
-    const [value, setValue] = useState('0');
-    const onChangeHandler = (tabId) => setValue(tabId);
-    const tabs = [
-        {
-            label: 'Messages ',
-            icon: 'Send',
-            iconPosition: 'top',
-            tooltip: 'messages tab',
-        },
-        {
-            label: 'Recents',
-            icon: 'Phone',
-            iconPosition: 'start',
-            tooltip: 'calls tab',
-        },
-        {
-            label: 'Favorites',
-            icon: <FavoriteIcon />,
-            iconPosition: 'end',
-        },
-        {
-            label: 'Nearby',
-            icon: <PersonPinIcon />,
-            iconPosition: 'bottom',
-        },
-    ];
+export const Swipeable: Story = {
+    args: {
+        swipeable: true,
+        children: tabs(5),
+    },
+    render,
+};
 
-    return (
-        <>
-            <ToggleButtonGroup value={orientation} exclusive onChange={(value) => setOrientation(value)} data={data1} />
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: orientation === 'vertical' ? 'row' : 'column',
-                    gap: '2em',
-                }}
-            >
-                <Tabs
-                    verticalTabWidth={250}
-                    orientation={orientation}
-                    centered
-                    customColor={'#0a7b6f'}
-                    value={value}
-                    onChange={(newValue) => onChangeHandler(newValue)}
-                >
-                    {tabs.map(({ icon, iconPosition, label, tooltip }, index) => (
-                        <Tab key={index} label={label} tooltipProps={{ title: tooltip }} />
-                    ))}
-                </Tabs>
+export const AutoNavigateByArrowKeyboard: Story = {
+    args: {
+        autoNavigateByArrowKeyboard: true,
+        children: tabs(5),
+    },
+    render,
+};
 
-                <Tabs
-                    orientation={orientation}
-                    centered
-                    muiColor={'secondary'}
-                    value={value}
-                    onChange={(newValue) => onChangeHandler(newValue)}
-                >
-                    {tabs.map(({ icon, iconPosition, label, tooltip }, index) => (
-                        <Tab key={index} icon={icon} tooltipProps={{ title: tooltip }} />
-                    ))}
-                </Tabs>
+export const VerticalMaxFixedHeight: Story = {
+    args: {
+        orientation: 'vertical',
+        verticalMaxFixedHeight: 400,
+        children: tabs(5),
+    },
+    render,
+};
 
-                <Tabs
-                    orientation={orientation}
-                    centered
-                    muiColor={'info'}
-                    value={value}
-                    onChange={(newValue) => onChangeHandler(newValue)}
-                >
-                    {tabs.map(({ icon, iconPosition, label, tooltip }, index) => (
-                        <Tab key={index} icon={icon} label={label} tooltipProps={{ title: tooltip }} />
-                    ))}
-                </Tabs>
+export const VerticalTabWidth: Story = {
+    args: {
+        orientation: 'vertical',
+        verticalTabWidth: 200,
+        children: tabs(5),
+    },
+    render,
+};
 
-                <Tabs
-                    orientation={orientation}
-                    centered
-                    muiColor={'success'}
-                    value={value}
-                    onChange={(newValue) => onChangeHandler(newValue)}
-                >
-                    {tabs.map(({ icon, iconPosition, label, tooltip }, index) => (
-                        <Tab
-                            key={index}
-                            icon={icon}
-                            label={label}
-                            iconPosition={iconPosition}
-                            tooltipProps={{ title: tooltip }}
-                        />
-                    ))}
-                </Tabs>
-            </Box>
-        </>
-    );
+export const ReverseHorizontal: Story = {
+    args: {
+        reverse: true,
+        children: tabs(5),
+    },
+    render,
+};
+
+export const ReverseVertical: Story = {
+    args: {
+        reverse: true,
+        orientation: 'vertical',
+        children: tabs(5),
+    },
+    render,
 };
