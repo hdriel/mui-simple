@@ -102,6 +102,29 @@ export const DetailsMaxRows: Story = {
     },
 };
 
+export const ExpendedAndCollapsedIcon: Story = {
+    args: {
+        label: 'Accordion Label',
+        expandedIcon: 'Send',
+        collapsedIcon: 'Person',
+        details: smallIpsum,
+    },
+    render: (args) => {
+        const [expanded, setExpended] = useState(false);
+        const onChange = (event, isExpended) => setExpended(isExpended);
+        return <Accordion {...args} expanded={expanded} onChange={onChange} />;
+    },
+};
+
+export const ExpendedIcon: Story = {
+    args: {
+        label: 'Accordion Label',
+        expandedIcon: 'Home',
+        collapsedIcon: 'Person',
+        details: smallIpsum,
+    },
+};
+
 export const ShowMoreAndHideLabel: Story = {
     args: {
         label: 'Details Max Rows 3',
@@ -171,11 +194,13 @@ export const UnmountDetailsOnClose_ = (args) => (
     </Stack>
 );
 
-export const UseCustomStyle: Story = {
-    args: {
-        label: 'Use Custom Style',
-        detailsMaxRows: 3,
-        useCustomStyle: true,
-        details: largeIpsum,
-    },
-};
+export const UseCustomStyle_ = (args) => (
+    <Stack>
+        <Accordion useCustomStyle detailsMaxRows={3} label="Use Custom Style A">
+            {largeIpsum}
+        </Accordion>
+        <Accordion useCustomStyle detailsMaxRows={3} label="Use Custom Style B">
+            {largeIpsum}
+        </Accordion>
+    </Stack>
+);

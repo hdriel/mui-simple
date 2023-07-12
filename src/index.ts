@@ -1,4 +1,4 @@
-// export { default as Accordion } from './components/Accordion/Accordion';
+// export { default as Accordion } from './components/_FIXED/Accordion/Accordion';
 // export { default as Alert } from './components/Alert/Alert';
 // export { default as AppBar } from './components/AppBar/AppBar';
 // export { default as InputAutocomplete } from './components/Autocomplete/InputAutocomplete';

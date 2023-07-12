@@ -3,15 +3,17 @@ import type { SxProps } from '@mui/material';
 
 export interface AccordionProps {
     bgColor?: string;
+    bottomSecondaryLabel: string;
     buttonsColor?: string;
+    collapsedIcon?: string | ReactNode;
     details?: string;
     detailsMaxRows?: number;
     disabled?: boolean;
     expanded?: boolean | string;
+    expandedIcon?: string | ReactNode;
     hideLabel?: string;
     id?: string;
     label?: string;
-    bottomSecondaryLabel: string;
     onChange?: (event: SyntheticEvent<unknown>, expanded: boolean | string) => void;
     secondaryLabel?: string;
     showMoreLabel?: string;

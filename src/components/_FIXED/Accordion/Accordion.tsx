@@ -3,9 +3,10 @@ import type { PropsWithChildren } from 'react';
 import { Accordion as MuiAccordion, AccordionDetails, AccordionSummary, ShowMoreWrapper } from './Accordion.styled';
 import Typography from '../Typography/Typography';
 import Button from '../Button/Button';
-import { ArrowForwardIosSharp as ArrowForwardIosSharpIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
+import { ArrowForwardIosSharp as ArrowForwardIosSharpIcon } from '@mui/icons-material';
 import { useCustomColor } from '../../../utils/helpers';
 import type { AccordionProps } from '../../decs';
+import SVGIcon from '../../SVGIcon/SVGIcon';
 
 const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props): React.ReactElement {
     const {
@@ -13,10 +14,12 @@ const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props):
         bottomSecondaryLabel,
         buttonsColor,
         children,
+        collapsedIcon: _collapsedIcon,
         details,
         detailsMaxRows,
         disabled,
         expanded,
+        expandedIcon: _expandedIcon,
         hideLabel,
         id,
         label,
@@ -35,6 +38,10 @@ const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props):
     const [bgColor] = useCustomColor(_bgColor);
     const [titleColor] = useCustomColor(_titleColor);
     const secondaryLabel = bottomSecondaryLabel || _secondaryLabel;
+    const expandedIcon = typeof _expandedIcon === 'string' ? <SVGIcon>{_expandedIcon}</SVGIcon> : _expandedIcon;
+    const collapsedIcon = typeof _collapsedIcon === 'string' ? <SVGIcon>{_collapsedIcon}</SVGIcon> : _collapsedIcon;
+    const icon = expanded === undefined || expanded ? expandedIcon : collapsedIcon || expandedIcon;
+    const useCustomStyleIcon = <ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />;
 
     return (
         <MuiAccordion
@@ -52,9 +59,7 @@ const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props):
                 useCustomStyle={useCustomStyle}
                 bgColor={bgColor}
                 titleColor={titleColor}
-                expandIcon={
-                    useCustomStyle ? <ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} /> : <ExpandMoreIcon />
-                }
+                expandIcon={useCustomStyle ? useCustomStyleIcon : icon}
                 bottomSecondaryLabel={!!bottomSecondaryLabel}
             >
                 <Typography
@@ -104,10 +109,12 @@ Accordion.defaultProps = {
     bgColor: undefined,
     bottomSecondaryLabel: undefined,
     buttonsColor: undefined,
+    collapsedIcon: 'ExpandMore',
     details: undefined,
     detailsMaxRows: undefined,
     disabled: undefined,
     expanded: undefined,
+    expandedIcon: 'ExpandMore',
     hideLabel: 'Hide',
     id: undefined,
     label: undefined,
