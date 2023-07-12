@@ -15,7 +15,7 @@ interface SVGIconProps {
 
 export default function SVGIcon(props: PropsWithChildren<SVGIconProps>): React.ReactElement {
     const { muiIconName, iconSrc, color, width, height, size, children, ...rest } = props;
-    const iconName = muiIconName || typeof children === 'string' ? children : undefined;
+    const iconName = muiIconName || (typeof children === 'string' ? children : undefined);
 
     if (children && isValidElement(children)) {
         return children;
