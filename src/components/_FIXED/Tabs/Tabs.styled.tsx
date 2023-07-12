@@ -30,11 +30,15 @@ export const Tabs = styled(MuiTabs, {
                       `
                     : css`
                           color: ${color};
-                          // props.orientation === 'vertical'
-                          // border: 0;
-                          // border-left: ${borderLeft ? '2px solid' : 'unset'};
-                          // border-right: ${borderLeft ? 'unset' : '2px solid'};
                       `;
+            }};
+            ${(props) => {
+                return props.orientation === 'vertical'
+                    ? css`
+                          border-left: ${props.reverse ? '2px solid' : 'unset'};
+                          border-right: ${props.reverse ? 'unset' : '2px solid'};
+                      `
+                    : css``;
             }};
         }
     }
