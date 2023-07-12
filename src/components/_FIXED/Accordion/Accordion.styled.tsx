@@ -23,7 +23,9 @@ type AccordionStyledPropsType = AccordionStyledProps &
     any;
 export const Accordion = styled(
     ({ useCustomStyle, ...props }) => (
-        <MuiAccordion {...(useCustomStyle && { disableGutters: true, elevation: 0, square: true })} {...props} />
+        <MuiAccordion {...(useCustomStyle && { disableGutters: true, elevation: 0, square: true })} {...props}>
+            {props.children}
+        </MuiAccordion>
     ),
     {
         shouldForwardProp: (propName) => !['useCustomStyle'].includes(propName as string),
