@@ -1,5 +1,6 @@
 import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent } from 'react';
 import type { SxProps } from '@mui/material';
+import ToggleButtonGroups from './ToggleButtonGroup/ToggleButtonGroups';
 
 export interface AccordionProps {
     bgColor?: string;
@@ -334,4 +335,27 @@ export interface TabsProps {
     verticalTabWidth?: string | number;
     reverse?: boolean;
     [key: string]: any;
+}
+
+export interface ToggleButtonGroupProps {
+    orientation: 'horizontal' | 'vertical';
+    size: 'small' | 'medium' | 'large';
+    value: string;
+    exclusive: boolean;
+    fullWidth: boolean;
+    disableRipple: boolean;
+    onChange: (event: any) => void;
+    color: string;
+    enforceValueSet: boolean;
+    data: Array<{
+        value: string;
+        disabled: boolean;
+        component: any;
+    }>;
+}
+
+export interface ToggleButtonGroupsProps {
+    fullWidth: boolean;
+    disableRipple: boolean;
+    justifyContent: string;
 }
