@@ -5,7 +5,7 @@ import SVGIcon from '../../SVGIcon/SVGIcon';
 
 const InputText: React.FC<InputTextProps> = function InputText(props): React.ReactElement {
     const { value, showLimitIndicatorFrom, limitIndicator, endCmp, ...rest } = props;
-    const count = value?.length ?? 0;
+    const count: number = value?.length ?? 0;
 
     return (
         <Input
