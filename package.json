@@ -10,7 +10,7 @@
         "build:ts": "tsc -p tsconfig.json",
         "build:ts-watch": "tsc -p tsconfig.json -w",
         "install": "npm install --ignore-scripts --force",
-        "build:debug": "cross-env NODE_ENV=development rollup -c rollup.config.js",
+        "build:debug": "cross-env NODE_ENV=development NODE_OPTIONS=--max-old-space-size=8192 rollup -c rollup.config.js",
         "build": "cross-env NODE_ENV=production rollup -c rollup.config.js",
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build",
