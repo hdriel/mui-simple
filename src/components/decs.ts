@@ -1,6 +1,5 @@
 import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent } from 'react';
 import type { SxProps } from '@mui/material';
-import ToggleButtonGroups from './ToggleButtonGroup/ToggleButtonGroups';
 
 export interface AccordionProps {
     bgColor?: string;
@@ -58,7 +57,7 @@ export interface ButtonProps {
     size?: 'small' | 'medium' | 'large' | string | number;
     startIcon?: ReactNode | string;
     sx?: SxProps;
-    tooltipProps?: object;
+    tooltipProps?: TooltipProps;
     uppercase?: boolean;
     variant?: 'contained' | 'outlined' | 'text';
     [key: string]: any;
@@ -358,4 +357,17 @@ export interface ToggleButtonGroupsProps {
     fullWidth: boolean;
     disableRipple: boolean;
     justifyContent: string;
+}
+
+export interface AlertProps {
+    actions?: ReactNode | string | ButtonProps | Array<ReactNode | ButtonProps | string>;
+    color?: string;
+    icon?: ReactNode;
+    onClose?: (event: any) => void;
+    severity?: 'error' | 'info' | 'success' | 'warning';
+    show?: boolean;
+    title?: string;
+    variant?: 'filled' | 'outlined' | 'standard';
+    width?: string | number;
+    [key: string]: any;
 }

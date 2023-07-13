@@ -3,7 +3,7 @@ import { styled, css } from '@mui/material/styles';
 import { Alert as MuiAlert, AlertTitle as MuiAlertTitle, alpha } from '@mui/material';
 import type { AlertProps } from '@mui/material';
 
-import { numberToPx } from '../../utils/helpers';
+import { numberToPx } from '../../../utils/helpers';
 
 interface AlertStyledProps {
     customColor?: string;

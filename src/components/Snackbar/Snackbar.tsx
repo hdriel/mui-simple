@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Snackbar as MuiSnackbar, Grow, Slide } from './Snackbar.styled';
 import Button from '../_FIXED/Button/Button';
 import { Close as CloseIcon } from '@mui/icons-material';
-import Alert from '../Alert/Alert';
+import Alert from '../_FIXED/Alert/Alert';
 
 export default function Snackbar({
     open,
