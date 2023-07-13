@@ -1,9 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import type { PropsWithChildren } from 'react';
 import { Divider, ToggleButtonGroups as MuiToggleButtonGroups } from './ToggleButtonGroup.styled';
 import ToggleButtonGroup from './ToggleButtonGroup';
+import type { ToggleButtonGroupsProps } from '../decs';
 
-const ToggleButtonGroups = ({ fullWidth, disableRipple, justifyContent, children, ...props }) => {
+const ToggleButtonGroups: React.FC<PropsWithChildren<ToggleButtonGroupsProps>> = ({
+    fullWidth,
+    disableRipple,
+    justifyContent,
+    children,
+    ...props
+}): React.ReactElement => {
     const groups = []
         .concat(children)
         .filter((child) => child.type.name === ToggleButtonGroup.name)
@@ -19,12 +26,6 @@ const ToggleButtonGroups = ({ fullWidth, disableRipple, justifyContent, children
             {groups}
         </MuiToggleButtonGroups>
     );
-};
-
-ToggleButtonGroups.propTypes = {
-    fullWidth: PropTypes.bool,
-    disableRipple: PropTypes.bool,
-    justifyContent: PropTypes.string,
 };
 
 ToggleButtonGroups.defaultProps = {

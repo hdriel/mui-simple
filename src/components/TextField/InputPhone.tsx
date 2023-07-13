@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import InputPattern from './InputPattern';
 import { ContentCopy as ContentCopyIcon } from '@mui/icons-material';
-import Button from '../Button/Button';
+import Button from '../_FIXED/Button/Button';
 import { copyToClipboard } from '../../utils/helpers';
 import Snackbar from '../Snackbar/Snackbar';
 

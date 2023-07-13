@@ -9,7 +9,7 @@ import { Stack, Grid, Box } from '@mui/material';
 
 import SVGIcon from '../SVGIcon';
 import ToggleButtonGroup from '../../ToggleButtonGroup/ToggleButtonGroup';
-import Typography from '../../Typography/Typography';
+import Typography from '../../_FIXED/Typography/Typography';
 import ToggleButtonGroups from '../../ToggleButtonGroup/ToggleButtonGroups';
 import InputColor from '../../TextField/InputColor';
 import Slider from '../../Slider/Slider';

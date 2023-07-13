@@ -5,7 +5,7 @@ import { useTheme } from '@mui/material/styles';
 import { ChevronLeft as ChevronLeftIcon, ChevronRight as ChevronRightIcon } from '@mui/icons-material';
 
 import { Drawer as MuiDrawer, ContentWrapper, SwipeableDrawer, DrawerHeader } from './Drawer.styled';
-import Button from '../Button/Button';
+import Button from '../_FIXED/Button/Button';
 import Divider from '../Divider/Divider';
 
 interface DrawerProps {

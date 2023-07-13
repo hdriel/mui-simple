@@ -9,7 +9,7 @@ import {
     TimelineSeparator,
     TimelineOppositeContent,
 } from './Timeline.styled';
-import Typography from '../Typography/Typography';
+import Typography from '../_FIXED/Typography/Typography';
 import { useCustomColor } from '../../utils/helpers';
 
 export default function TimelineItem({

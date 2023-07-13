@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import Button from '../../Button/Button';
+import Button from '../../_FIXED/Button/Button';
 
 import Backdrop from '../Backdrop';
 import CircularProgress from '../../Progress/CircularProgress/CircularProgress';

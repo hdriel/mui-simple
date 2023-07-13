@@ -3,13 +3,13 @@ import { action } from '@storybook/addon-actions';
 
 import TreeView from '../TreeView';
 import { Box } from '@mui/material';
-import Button from '../../Button/Button';
+import Button from '../../_FIXED/Button/Button';
 
 import LabelIconTreeItem, { LabelIconTreeItemIcons } from '../TreeItemComponents/LabelIconTreeItem';
 import IndentBorderTreeItem, { IndentBorderTreeItemIcons } from '../TreeItemComponents/IndentBorderTreeItem';
 
 import SVGIcon from '../../SVGIcon/SVGIcon';
-import Typography from '../../Typography/Typography';
+import Typography from '../../_FIXED/Typography/Typography';
 
 export default {
     title: 'Lab/TreeView',

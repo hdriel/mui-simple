@@ -9,8 +9,8 @@ import {
     ListItemSecondaryAction,
     ListItem as MuiListItem,
 } from './List.styled';
-import Avatar from '../Avatar/Avatar';
-import Typography from '../Typography/Typography';
+import Avatar from '../_FIXED/Avatar/Avatar';
+import Typography from '../_FIXED/Typography/Typography';
 import { Box } from '@mui/material';
 
 const ListItemWrapper = ({ item, index, onClick, buttonItems, alignItems, flexDirection, children, ...props }) => {

@@ -2,7 +2,7 @@ import React, { useState, PropsWithChildren, Children } from 'react';
 // import PropTypes from 'prop-types';
 import { Check as CheckIcon } from '@mui/icons-material';
 import { ListItemIcon, ListItemText, Menu as MuiMenu, MenuItem, MenuList, MenuWrapper } from './Menu.styled';
-import Typography from '../Typography/Typography';
+import Typography from '../_FIXED/Typography/Typography';
 import Divider from '../Divider/Divider';
 import { Grow } from '@mui/material';
 import { useAnchorProps, useChildrenComponentBinding } from './Menu.hooks';

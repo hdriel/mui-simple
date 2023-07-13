@@ -4,9 +4,9 @@ import { NumericFormat } from 'react-number-format';
 import { ClickAwayListener } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 
-import Input from './TextField';
+import Input from '../_FIXED/TextField/TextField';
 import { getCustomColor, isDefined } from '../../utils/helpers';
-import { Box, SliderIcon } from './TextField.styled';
+import { Box, SliderIcon } from '../_FIXED/TextField/TextField.styled';
 import Slider from '../Slider/Slider';
 import { debounce } from 'lodash-es';
 

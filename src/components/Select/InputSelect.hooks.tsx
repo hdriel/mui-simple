@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { groupBy as _groupBy } from 'lodash-es';
 import { ListSubheader, MenuItem } from './InputSelect.styled';
-import Checkbox from '../Checkbox/Checkbox';
+import Checkbox from '../_FIXED/Checkbox/Checkbox';
 import { isDefined } from '../../utils/helpers';
 import ListItem from '../List/ListItem';
 

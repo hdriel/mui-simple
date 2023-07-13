@@ -9,9 +9,9 @@ import {
 } from '@mui/icons-material';
 
 import AppBar from '../AppBar';
-import Button from '../../Button/Button';
-import Avatar from '../../Avatar/Avatar';
-import Typography from '../../Typography/Typography';
+import Button from '../../_FIXED/Button/Button';
+import Avatar from '../../_FIXED/Avatar/Avatar';
+import Typography from '../../_FIXED/Typography/Typography';
 import Menu from '../../Menu/Menu';
 import { action } from '@storybook/addon-actions';
 import { createTheme, ThemeProvider } from '@mui/material/styles';

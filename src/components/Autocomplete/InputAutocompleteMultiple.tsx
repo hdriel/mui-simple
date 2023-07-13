@@ -2,8 +2,8 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import MuiAutocomplete from './InputAutocomplete';
-import Chip from '../Chip/Chip';
-import Checkbox from '../Checkbox/Checkbox';
+import Chip from '../_FIXED/Chip/Chip';
+import Checkbox from '../_FIXED/Checkbox/Checkbox';
 import { Check as CheckIcon, Close as CloseIcon } from '@mui/icons-material';
 import { Box } from '@mui/material';
 

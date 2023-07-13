@@ -4,9 +4,9 @@ import { Box } from '@mui/material';
 import { Check as CheckIcon, IndeterminateCheckBox as IndeterminateCheckBoxIcon } from '@mui/icons-material';
 
 import InputSelect from './InputSelect';
-import Chip from '../Chip/Chip';
+import Chip from '../_FIXED/Chip/Chip';
 import { isDefined } from '../../utils/helpers';
-import Checkbox from '../Checkbox/Checkbox';
+import Checkbox from '../_FIXED/Checkbox/Checkbox';
 import { MenuItem } from './InputSelect.styled';
 import { useOptionsConverter } from './InputSelect.hooks';
 import ListItem from '../List/ListItem';

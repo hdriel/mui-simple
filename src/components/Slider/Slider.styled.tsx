@@ -4,7 +4,7 @@ import MuiSlider, { SliderThumb } from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
 import { sliderStyleIOS, sliderStylePretto, sliderStyleAirBNB, sliderStyleCustomColor } from './Slider.styles';
 import React from 'react';
-import Tooltip from '../Tooltip/Tooltip';
+import Tooltip from '../_FIXED/Tooltip/Tooltip';
 export { Grid, Box } from '@mui/material';
 
 export function ValueLabelComponent(props) {

@@ -6,7 +6,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import { LocationOn as LocationOnIcon } from '@mui/icons-material';
 
 import { Autocomplete as MuiAutocomplete } from './InputAutocomplete.styled';
-import TextField from '../TextField/TextField';
+import TextField from '../_FIXED/TextField/TextField';
 import { loadScript } from '../../utils/helpers';
 
 const autocompleteService = { current: null };

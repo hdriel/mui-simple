@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { MoreVert as MoreVertIcon } from '@mui/icons-material';
 import { Box, Card, CardContent, CardHeader, CardMedia, Grid, Stack } from '@mui/material';
 
-import Avatar from '../../Avatar/Avatar';
+import Avatar from '../../_FIXED/Avatar/Avatar';
 
 import Skeleton from '../Skeleton';
-import Typography from '../../Typography/Typography';
-import Button from '../../Button/Button';
+import Typography from '../../_FIXED/Typography/Typography';
+import Button from '../../_FIXED/Button/Button';
 
 export default {
     title: 'Feedback/Skeleton',

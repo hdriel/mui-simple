@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { ToggleButton, ToggleButtonGroup as MuiToggleButtonGroup } from './ToggleButtonGroup.styled';
 import { useCustomColor } from '../../utils/helpers';
+import type { ToggleButtonGroupProps } from '../decs';
 
-const ToggleButtonGroup = ({
+const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
     value: selectedValue,
     onChange,
     size,
@@ -15,12 +15,11 @@ const ToggleButtonGroup = ({
     fullWidth,
     color,
     ...props
-}) => {
+}): React.ReactElement => {
     const [customColor, muiColor] = useCustomColor(color);
-
     const commonsValues = [].concat(selectedValue);
 
-    function onChangeHandler(event, newValues) {
+    function onChangeHandler(event, newValues): void {
         if (!onChange) return;
 
         if (enforceValueSet) {
@@ -31,7 +30,7 @@ const ToggleButtonGroup = ({
         }
     }
 
-    function onButtonClickHandler(value, event) {
+    function onButtonClickHandler(value, event): void {
         if (!event.target.value) {
             event.stopPropagation();
             onChangeHandler?.(event, exclusive ? null : commonsValues.filter((cv) => cv !== value));
@@ -69,24 +68,6 @@ const ToggleButtonGroup = ({
                 : null}
         </MuiToggleButtonGroup>
     );
-};
-
-ToggleButtonGroup.propTypes = {
-    orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    exclusive: PropTypes.bool,
-    fullWidth: PropTypes.bool,
-    disableRipple: PropTypes.bool,
-    onChange: PropTypes.func,
-    color: PropTypes.string,
-    enforceValueSet: PropTypes.bool,
-    data: PropTypes.arrayOf(
-        PropTypes.shape({
-            value: PropTypes.string,
-            disabled: PropTypes.bool,
-            component: PropTypes.any,
-        })
-    ),
 };
 
 ToggleButtonGroup.defaultProps = {

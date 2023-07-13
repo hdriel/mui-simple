@@ -15,13 +15,19 @@ interface SVGIconProps {
 
 export default function SVGIcon(props: PropsWithChildren<SVGIconProps>): React.ReactElement {
     const { muiIconName, iconSrc, color, width, height, size, children, ...rest } = props;
-    const iconName = muiIconName || typeof children === 'string' ? children : undefined;
+    const iconName = muiIconName || (typeof children === 'string' ? children : undefined);
 
-    return children && isValidElement(children) ? (
-        children
-    ) : (
+    if (children && isValidElement(children)) {
+        return children;
+    }
+
+    return (
         <MuiIconName name={iconName} color={color} width={size ?? width} height={size ?? height} {...rest}>
-            {iconSrc && <SVG src={iconSrc} fill={color} width={size ?? width} height={size ?? height} {...rest} />}
+            {iconSrc ? (
+                <SVG src={iconSrc} fill={color} width={size ?? width} height={size ?? height} {...rest} />
+            ) : (
+                children
+            )}
         </MuiIconName>
     );
 }

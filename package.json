@@ -1,6 +1,6 @@
 {
     "name": "mui-simple",
-    "version": "1.3.23",
+    "version": "1.3.24",
     "description": "override mui components to simplify usage",
     "license": "MIT",
     "author": "Hadriel Benjo (https://github.com/hdriel)",
@@ -10,7 +10,7 @@
         "build:ts": "tsc -p tsconfig.json",
         "build:ts-watch": "tsc -p tsconfig.json -w",
         "install": "npm install --ignore-scripts --force",
-        "build:debug": "cross-env NODE_ENV=development rollup -c rollup.config.js -w",
+        "build:debug": "cross-env NODE_ENV=development NODE_OPTIONS=--max-old-space-size=8192 rollup -c rollup.config.js",
         "build": "cross-env NODE_ENV=production rollup -c rollup.config.js",
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build",

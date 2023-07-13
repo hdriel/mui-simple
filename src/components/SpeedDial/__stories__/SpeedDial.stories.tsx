@@ -8,7 +8,7 @@ import {
 } from '@mui/icons-material';
 
 import SpeedDial from '../SpeedDial';
-import Button from '../../Button/Button';
+import Button from '../../_FIXED/Button/Button';
 
 export default {
     title: 'Navigation/SpeedDial',
