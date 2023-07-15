@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
 import { Box, ClickAwayListener } from '@mui/material';
-import {
-    VisibilityOff as VisibilityOffIcon,
-    Visibility as VisibilityIcon,
-    LockReset as LockResetIcon,
-} from '@mui/icons-material';
-
 import Input from './TextField';
 import Button from '../Button/Button';
 import { copyToClipboard, generatePassword } from '../../../utils/helpers';
@@ -94,6 +88,7 @@ const InputPassword: React.FC<InputPasswordProps> = ({
                             {typeof endCmp === 'string' ? <SVGIcon>{endCmp}</SVGIcon> : endCmp}
                         </>
                     }
+                    disabled={disabled}
                     type={showPassword ? 'text' : 'password'}
                 />
                 <Snackbar

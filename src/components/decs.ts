@@ -72,6 +72,7 @@ export interface ButtonGroupProps {
     orientation?: 'horizontal' | 'vertical';
     size?: 'small' | 'medium' | 'large';
     variant?: 'contained' | 'outlined' | 'text';
+    [key: string]: any;
 }
 
 export interface CheckboxProps {
@@ -178,10 +179,12 @@ export interface InputBaseProps {
 export interface InputTextProps extends InputBaseProps {
     showLimitIndicatorFrom?: number;
     limitIndicator?: number;
+    [key: string]: any;
 }
 
 export interface InputSearchProps extends InputBaseProps {
     searchIcon?: string | ReactNode;
+    [key: string]: any;
 }
 
 export interface InputPasswordProps extends Omit<InputBaseProps, 'value'> {
@@ -198,6 +201,7 @@ export interface InputPasswordProps extends Omit<InputBaseProps, 'value'> {
     showPasswordAction: boolean;
     showPasswordTooltip: string;
     value?: string;
+    [key: string]: any;
 }
 
 export type TooltipPlacementType =
@@ -269,6 +273,7 @@ export interface RadioButtonProps {
     value: string;
     label: string;
     disabled?: boolean;
+    [key: string]: any;
 }
 export interface RadioButtonsGroupProps {
     checkedIcon?: ReactNode;
@@ -294,6 +299,7 @@ export interface RadioButtonsGroupProps {
     size?: 'small' | 'medium';
     value?: string;
     variant?: 'outlined';
+    [key: string]: any;
 }
 
 export interface TabItemProps {
@@ -351,12 +357,14 @@ export interface ToggleButtonGroupProps {
         disabled: boolean;
         component: any;
     }>;
+    [key: string]: any;
 }
 
 export interface ToggleButtonGroupsProps {
     fullWidth: boolean;
     disableRipple: boolean;
     justifyContent: string;
+    [key: string]: any;
 }
 
 export interface AlertProps {

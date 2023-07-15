@@ -98,16 +98,16 @@ export const Variant_ = (args) => (
         {['filled', 'outlined', 'standard'].map((variant) => (
             <>
                 <Alert key={`${variant}-success`} variant={variant} severity="success">
-                    success {variant} severity
+                    success - {variant} Variant
                 </Alert>
                 <Alert key={`${variant}-info`} variant={variant} severity="info">
-                    info {variant} severity
+                    info - {variant} Variant
                 </Alert>
                 <Alert key={`${variant}-warning`} variant={variant} severity="warning">
-                    warning {variant} severity
+                    warning - {variant} Variant
                 </Alert>
                 <Alert key={`${variant}-error`} variant={variant} severity="error">
-                    error {variant} severity
+                    error - {variant} Variant
                 </Alert>
             </>
         ))}
