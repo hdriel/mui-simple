@@ -162,7 +162,7 @@ export function SelectionMode() {
             selectedActions={[
                 {
                     tooltip: 'delete',
-                    cmp: (
+                    Cmp: (
                         <Button
                             icon={<DeleteIcon />}
                             onClick={(event, data) => {
@@ -191,7 +191,7 @@ export function FilterAction() {
             selectedActions={[
                 {
                     tooltip: 'delete',
-                    cmp: (
+                    Cmp: (
                         <Button
                             icon={<DeleteIcon />}
                             onClick={(event, data) => {
