@@ -52,7 +52,7 @@ export function EnhancedTableToolbar({
                     <Tooltip key={index} title={tooltip}>
                         {cloneElement(Cmp, {
                             onClick: (event) => {
-                                cmp?.props?.onClick?.(
+                                Cmp?.props?.onClick?.(
                                     event,
                                     data?.filter((row, index) => selected.includes(row.id ?? index))
                                 );
