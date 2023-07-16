@@ -17,7 +17,10 @@ export function useSelectionMode({ selectionMode: _selectionMode, hide, tooltip,
                 checkedIcon={<LibraryAddCheckIcon />}
                 icon={<LibraryAddCheckIcon />}
                 checked={selectionMode}
-                onClick={(_event) => setSelectionMode(!selectionMode)}
+                onClick={(event) => {
+                    event.stopPropagation();
+                    setSelectionMode(!selectionMode);
+                }}
             />
         </Tooltip>
     );

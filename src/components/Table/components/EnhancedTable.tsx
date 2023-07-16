@@ -151,7 +151,10 @@ export default function EnhancedTable({
                                 <EnhancedTableRow
                                     key={index}
                                     columns={columns}
-                                    handleClick={(event, rowId, rowData) => onClickRow?.(rowId, rowData)}
+                                    handleClick={(event, rowId, rowData) => {
+                                        event.stopPropagation();
+                                        if (!selectionMode) onClickRow?.(rowId, rowData);
+                                    }}
                                     index={index}
                                     selectionMode={selectionMode}
                                     evenRowsColor={evenRowsColor}
