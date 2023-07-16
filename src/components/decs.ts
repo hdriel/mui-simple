@@ -1,5 +1,6 @@
 import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent } from 'react';
 import type { SxProps } from '@mui/material';
+import PropTypes from 'prop-types';
 
 export interface AccordionProps {
     bgColor?: string;
@@ -221,6 +222,27 @@ export interface InputPasswordProps extends Omit<InputBaseProps, 'value'> {
     showPasswordAction: boolean;
     showPasswordTooltip: string;
     value?: string;
+    [key: string]: any;
+}
+
+export interface SnackbarProps {
+    actions?: Array<string | ButtonProps>;
+    animation?: 'grow' | 'fade' | 'slide';
+    animationDuration?: number | object;
+    animationProps?: object;
+    autoHideDuration?: number;
+    fullWidth?: boolean;
+    horizontal?: 'left' | 'center' | 'right';
+    message?: string;
+    messageId?: string;
+    onClickAway?: (event: any, reason?: string) => void;
+    onClose?: (event: any, reason?: string) => void;
+    open?: boolean;
+    resumeHideDuration?: number;
+    slideDirection?: 'left' | 'up' | 'right' | 'down';
+    title?: string;
+    variant?: 'success' | 'error' | 'warning' | 'info';
+    vertical?: 'top' | 'bottom';
     [key: string]: any;
 }
 

@@ -1,220 +1,135 @@
+// @ts-ignore
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import type { Meta, StoryObj } from '@storybook/react';
+import { Send as SendIcon, Fingerprint as FingerprintIcon } from '@mui/icons-material';
 import { Stack } from '@mui/material';
-import { Send as SendIcon } from '@mui/icons-material';
-import Button from '../../_FIXED/Button/Button';
 
 import Snackbar from '../Snackbar';
 
-export default {
+const meta: Meta<typeof Snackbar> = {
     title: 'Feedback/Snackbar',
     component: Snackbar,
+    tags: ['autodocs'],
 };
 
-const actions = {
-    onClick: action('onClick'),
-    onClose: action('onClose'),
-    onClickAway: action('onClickAway'),
+export default meta;
+
+type Story = StoryObj<typeof Snackbar>;
+
+export const Default: Story = {
+    args: {},
 };
 
-export const Simple = () => {
-    const [open, setOpen] = React.useState(false);
-
-    const handleClick = () => {
-        setOpen(true);
-    };
-
-    const handleClose = (event, reason) => {
-        setOpen(false);
-        actions.onClose(event, reason);
-    };
-
-    const handleClickAway = (event, reason) => {
-        setOpen(false);
-        actions.onClickAway(event, reason);
-    };
-
-    return (
-        <Stack>
-            <Button onClick={handleClick} muiColor={'secondary'}>
-                Open Simple Snackbar
-            </Button>
-            <Snackbar
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-                open={open}
-                autoHideDuration={6000}
-                onClose={handleClose}
-                onClickAway={handleClickAway}
-                variant="success"
-            >
-                This is a success message!
-            </Snackbar>
-            <Snackbar
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                open={open}
-                autoHideDuration={6000}
-                onClose={handleClose}
-                onClickAway={handleClickAway}
-                variant="info"
-            >
-                This is a info message!
-            </Snackbar>
-        </Stack>
-    );
+export const Actions: Story = {
+    args: {
+        actions: [{ icon: 'Fingerprint' }, { startIcon: 'Send', label: 'Send' }],
+        open: true,
+        children: 'Actions snackbar alert',
+    },
 };
 
-export const Variant = () => {
-    return (
-        <Stack>
-            {[
-                {
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                    variant: undefined,
-                    title: 'title',
-                },
-                {
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                    variant: 'success',
-                },
-                {
-                    vertical: 'bottom',
-                    horizontal: 'right',
-                    variant: 'error',
-                },
-                {
-                    vertical: 'top',
-                    horizontal: 'left',
-                    variant: 'warning',
-                    title: 'title',
-                },
-                {
-                    vertical: 'top',
-                    horizontal: 'center',
-                    variant: 'info',
-                    title: 'title',
-                },
-                { vertical: 'top', horizontal: 'right', variant: null, title: 'title' },
-            ].map(({ vertical, horizontal, variant, ...props }) => (
-                <Snackbar
-                    key={`${vertical} - ${horizontal}`}
-                    anchorOrigin={{ vertical, horizontal }}
-                    open
-                    variant={variant}
-                    message={`${variant ?? 'default'}`}
-                    messageId={`${vertical} - ${horizontal}`}
-                    {...props}
-                />
-            ))}
-        </Stack>
-    );
+export const Animation: Story = {
+    args: {
+        animation: 'grow',
+        animationDuration: 5000,
+        autoHideDuration: 6000,
+        resumeHideDuration: 1000,
+        // animationProps: {},
+        open: true,
+        children: 'Animation snackbar alert',
+    },
 };
 
-export const AnchorPosition = () => {
-    return (
-        <Stack>
-            {[
-                { vertical: 'bottom', horizontal: 'left' },
-                { vertical: 'bottom', horizontal: 'center' },
-                { vertical: 'bottom', horizontal: 'right' },
-                { vertical: 'top', horizontal: 'left' },
-                { vertical: 'top', horizontal: 'center' },
-                { vertical: 'top', horizontal: 'right' },
-            ].map(({ vertical, horizontal }) => (
-                <Snackbar
-                    key={`${vertical} - ${horizontal}`}
-                    anchorOrigin={{ vertical, horizontal }}
-                    open
-                    message={`${vertical} - ${horizontal}`}
-                    messageId={`${vertical} - ${horizontal}`}
-                />
-            ))}
-        </Stack>
-    );
+export const FullWidth: Story = {
+    args: {
+        fullWidth: true,
+        open: true,
+        children: 'FullWidth snackbar alert',
+    },
 };
 
-export const Actions = () => {
-    return (
-        <Stack>
-            <Snackbar
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-                open
-                message={'alert with actions'}
-                messageId={'1'}
-                onClose={actions.onClose}
-                actions={['undo', <Button muiColor="inherit" size="small" icon={<SendIcon />} />]}
-            />
-            <Snackbar
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-                open
-                message={'alert with actions'}
-                variant="success"
-                messageId={'1'}
-                onClose={actions.onClose}
-                actions={['undo', <Button muiColor="inherit" size="small" icon={<SendIcon />} />]}
-            />
-        </Stack>
-    );
+export const Horizontal: Story = {
+    args: {
+        horizontal: 'left',
+        open: true,
+        children: 'Horizontal - left snackbar alert',
+    },
 };
 
-export const Animation = () => {
-    const [open, setOpen] = useState(false);
-
-    // useEffect(() => {
-    //   const intervalId = setInterval(() => setOpen((o) => !o), 1000 * 1.5);
-    //
-    //   return () => {
-    //     clearInterval(intervalId);
-    //   };
-    // }, []);
-
-    return (
-        <div
-            style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '300px',
-                border: '1px dashed black',
-            }}
-            onClick={() => setOpen((o) => !o)}
-        >
-            <p>CLICK ANYWHERE</p>
-            {[
-                {
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                    animation: 'slide',
-                    // animationDuration: 1000,
-                },
-                {
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                    animation: 'grow',
-                    // animationDuration: 1000,
-                },
-                {
-                    vertical: 'bottom',
-                    horizontal: 'right',
-                    animation: 'fade',
-                    // animationDuration: 1000,
-                },
-                { vertical: 'top', horizontal: 'left', slideDirection: 'down' },
-                { vertical: 'top', horizontal: 'center', slideDirection: 'left' },
-                { vertical: 'top', horizontal: 'right', slideDirection: 'right' },
-            ].map(({ vertical, horizontal, animation, slideDirection, animationDuration }) => (
-                <Snackbar
-                    key={`${vertical} - ${horizontal}`}
-                    anchorOrigin={{ vertical, horizontal }}
-                    open={open}
-                    message={`${vertical} - ${horizontal}`}
-                    messageId={`${vertical} - ${horizontal}`}
-                    animation={animation}
-                    animationDuration={animationDuration}
-                    slideDirection={slideDirection}
-                />
-            ))}
-        </div>
-    );
+export const Message: Story = {
+    args: {
+        message: 'Message',
+        open: true,
+        children: 'Horizontal - left snackbar alert',
+    },
 };
+
+export const MessageId: Story = {
+    args: {
+        message: 'Message',
+        messageId: 'MessageId',
+        open: true,
+        children: 'Horizontal - left snackbar alert',
+    },
+};
+
+//   onClickAway: undefined,
+//   onClose: undefined,
+//   open: undefined,
+
+export const SlideDirection: Story = {
+    args: {
+        slideDirection: 'right',
+        open: true,
+        children: 'SlideDirection - right snackbar alert',
+    },
+};
+
+export const Title: Story = {
+    args: {
+        title: 'title',
+        open: true,
+        children: 'children',
+    },
+};
+
+export const Variant: Story = {
+    args: {
+        variant: 'success',
+        open: true,
+        children: 'success - variants',
+    },
+};
+
+export const Vertical: Story = {
+    args: {
+        vertical: 'top',
+        open: true,
+        children: 'Vertical - top',
+    },
+};
+
+//
+// export const OnChange: Story = {
+//     args: {
+//         checked: true,
+//         children: 'on change event',
+//     },
+//     render: (args) => {
+//         const [value, onChange] = useState(args.checked);
+//         return <Snackbar {...args} value={value} onChange={(e, v) => onChange(v)} />;
+//     },
+// };
+// export const Color_ = (args) => (
+//     <Stack direction="row" spacing={3}>
+//         <Snackbar checked color={'#00ab92'}>
+//             #00ab92
+//         </Snackbar>
+//         <Snackbar checked color={'primary'}>
+//             Primary
+//         </Snackbar>
+//         <Snackbar checked color={'secondary'}>
+//             Secondary
+//         </Snackbar>
+//     </Stack>
+// );

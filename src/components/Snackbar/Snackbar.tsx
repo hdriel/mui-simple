@@ -1,37 +1,41 @@
-import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
+import React, { useMemo, isValidElement, cloneElement } from 'react';
+import type { PropsWithChildren, ReactNode, ReactElement } from 'react';
 import { Snackbar as MuiSnackbar, Grow, Slide } from './Snackbar.styled';
 import Button from '../_FIXED/Button/Button';
-import { Close as CloseIcon } from '@mui/icons-material';
 import Alert from '../_FIXED/Alert/Alert';
+import type { SnackbarProps } from '../decs';
 
-export default function Snackbar({
-    open,
-    autoHideDuration,
-    resumeHideDuration,
-    onClose,
-    onClickAway,
-    vertical,
-    horizontal,
-    variant,
-    title,
-    message,
-    messageId,
+const Snackbar: React.FC<PropsWithChildren<SnackbarProps>> = ({
     actions,
     animation,
     animationDuration,
     animationProps,
-    slideDirection,
+    autoHideDuration,
+    children,
     fullWidth,
+    horizontal,
+    message,
+    messageId,
+    onClickAway,
+    onClose,
+    open,
+    resumeHideDuration,
+    slideDirection,
+    title,
+    variant,
+    vertical,
     ...props
-}) {
+}): ReactElement => {
     const action = useMemo(
         () =>
             []
-                .concat(actions, onClose ? [<Button muiColor="inherit" size="small" icon={<CloseIcon />} />] : [])
+                .concat(
+                    actions,
+                    onClose ? [<Button key="onCloseAction" muiColor="inherit" size="small" icon="Close" />] : []
+                )
                 ?.map((action, index) =>
-                    React.isValidElement(action) ? (
-                        React.cloneElement(action, { key: index })
+                    isValidElement(action) ? (
+                        cloneElement(action, { key: index })
                     ) : (
                         <Button key={index} {...(typeof action === 'object' ? action : undefined)}>
                             {action?.label ?? action}
@@ -42,20 +46,22 @@ export default function Snackbar({
     );
 
     const transition = useMemo(() => {
-        const SlideTransition = (props) => (
+        const SlideTransition = (props): ReactNode => (
             <Slide direction={slideDirection ?? 'up'} {...props}>
-                {props.children}
+                {children ?? ''}
             </Slide>
         );
-        const GrowTransition = (props) => <Grow {...props}>{props.children}</Grow>;
-        const FadeTransition = (props) => <Grow {...props}>{props.children}</Grow>;
+        const GrowTransition = (props): ReactNode => <Grow {...props}>{children ?? ''}</Grow>;
+        const FadeTransition = (props): ReactNode => <Grow {...props}>{children ?? ''}</Grow>;
 
-        return {
-            fade: FadeTransition,
-            slide: SlideTransition,
-            grow: GrowTransition,
-        }[animation ?? 'slide'];
-    }, [slideDirection, animation]);
+        return (
+            {
+                fade: FadeTransition,
+                slide: SlideTransition,
+                grow: GrowTransition,
+            }[animation ?? 'slide'] || SlideTransition
+        );
+    }, [animation, slideDirection, children]);
 
     return (
         <MuiSnackbar
@@ -63,7 +69,7 @@ export default function Snackbar({
             autoHideDuration={autoHideDuration}
             resumeHideDuration={resumeHideDuration}
             onClose={(event, reason) => {
-                if (reason === 'clickaway') return onClickAway?.();
+                if (reason === 'clickaway') return onClickAway?.(event, reason);
                 return onClose?.(event, reason);
             }}
             key={messageId}
@@ -83,48 +89,32 @@ export default function Snackbar({
             action={action} // 'action' end after props, to prevent bugs from storybook, that any props has storybook action field
         >
             {['success', 'error', 'warning', 'info'].includes(variant) ? (
-                <Alert onClose={onClose} severity={variant} action={action} title={title}>
-                    {props.children ?? message}
+                <Alert onClose={(event) => onClose(event)} severity={variant} action={action} title={title}>
+                    {children ?? message}
                 </Alert>
             ) : null}
         </MuiSnackbar>
     );
-}
-
-Snackbar.propTypes = {
-    fullWidth: PropTypes.bool,
-    open: PropTypes.bool,
-    autoHideDuration: PropTypes.number,
-    resumeHideDuration: PropTypes.number,
-    onClose: PropTypes.func,
-    onClickAway: PropTypes.func,
-    vertical: PropTypes.oneOf(['top', 'bottom']),
-    horizontal: PropTypes.oneOf(['left', 'center', 'right']),
-    variant: PropTypes.oneOf(['success', 'error', 'warning', 'info']),
-    title: PropTypes.string,
-    message: PropTypes.string,
-    messageId: PropTypes.string,
-    actions: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
-    animation: PropTypes.oneOf(['grow', 'fade', 'slide']),
-    animationDuration: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
-    animationProps: PropTypes.object,
-    slideDirection: PropTypes.oneOf(['left', 'up', 'right', 'down']),
 };
 
 Snackbar.defaultProps = {
-    open: undefined,
-    autoHideDuration: undefined,
-    resumeHideDuration: undefined,
-    onClose: undefined,
-    onClickAway: undefined,
-    vertical: undefined,
-    horizontal: undefined,
-    title: undefined,
-    message: undefined,
-    messageId: undefined,
-    action: undefined,
+    actions: undefined,
     animation: undefined,
     animationDuration: undefined,
     animationProps: undefined,
+    autoHideDuration: undefined,
+    fullWidth: undefined,
+    horizontal: undefined,
+    message: undefined,
+    messageId: undefined,
+    onClickAway: undefined,
+    onClose: undefined,
+    open: undefined,
+    resumeHideDuration: undefined,
     slideDirection: undefined,
+    title: undefined,
+    variant: undefined,
+    vertical: undefined,
 };
+
+export default Snackbar;
