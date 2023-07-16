@@ -75,6 +75,27 @@ export interface ButtonGroupProps {
     [key: string]: any;
 }
 
+export interface BottomNavigationProps {
+    actions?: Array<{
+        icon?: ReactNode | string;
+        label?: string;
+        showLabel?: boolean;
+        value?: ReactNode;
+        [key: string]: any;
+    }>;
+    color?: string;
+    elevation?: number; // assuming you want the values to be numbers
+    fixedToBottom?: boolean;
+    fixedToTop?: boolean;
+    muiColor?: string;
+    onChange?: (event: any, value: number | string) => void;
+    position?: 'absolute' | 'fixed';
+    showLabels?: boolean;
+    value?: number | string;
+    width?: number | string;
+    [key: string]: any;
+}
+
 export interface CheckboxProps {
     checked?: boolean;
     checkedIcon?: ReactNode | string;
