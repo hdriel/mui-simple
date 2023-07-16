@@ -5,6 +5,7 @@ import { Send as SendIcon, Fingerprint as FingerprintIcon } from '@mui/icons-mat
 import { Stack } from '@mui/material';
 
 import Snackbar from '../Snackbar';
+import Button from '../../_FIXED/Button/Button';
 
 const meta: Meta<typeof Snackbar> = {
     title: 'Feedback/Snackbar',
@@ -23,8 +24,16 @@ export const Default: Story = {
 export const Actions: Story = {
     args: {
         actions: [{ icon: 'Fingerprint' }, { startIcon: 'Send', label: 'Send' }],
-        open: true,
         children: 'Actions snackbar alert',
+    },
+    render: (args) => {
+        const [open, setOpen] = useState(false);
+        return (
+            <>
+                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
+                <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
+            </>
+        );
     },
 };
 
@@ -34,33 +43,65 @@ export const Animation: Story = {
         animationDuration: 5000,
         autoHideDuration: 6000,
         resumeHideDuration: 1000,
-        // animationProps: {},
-        open: true,
+        animationProps: {},
         children: 'Animation snackbar alert',
+    },
+    render: (args) => {
+        const [open, setOpen] = useState(false);
+        return (
+            <>
+                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
+                <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
+            </>
+        );
     },
 };
 
 export const FullWidth: Story = {
     args: {
         fullWidth: true,
-        open: true,
         children: 'FullWidth snackbar alert',
+    },
+    render: (args) => {
+        const [open, setOpen] = useState(false);
+        return (
+            <>
+                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
+                <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
+            </>
+        );
     },
 };
 
 export const Horizontal: Story = {
     args: {
         horizontal: 'left',
-        open: true,
         children: 'Horizontal - left snackbar alert',
+    },
+    render: (args) => {
+        const [open, setOpen] = useState(false);
+        return (
+            <>
+                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
+                <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
+            </>
+        );
     },
 };
 
 export const Message: Story = {
     args: {
         message: 'Message',
-        open: true,
         children: 'Horizontal - left snackbar alert',
+    },
+    render: (args) => {
+        const [open, setOpen] = useState(false);
+        return (
+            <>
+                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
+                <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
+            </>
+        );
     },
 };
 
@@ -68,8 +109,16 @@ export const MessageId: Story = {
     args: {
         message: 'Message',
         messageId: 'MessageId',
-        open: true,
         children: 'Horizontal - left snackbar alert',
+    },
+    render: (args) => {
+        const [open, setOpen] = useState(false);
+        return (
+            <>
+                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
+                <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
+            </>
+        );
     },
 };
 
@@ -80,56 +129,63 @@ export const MessageId: Story = {
 export const SlideDirection: Story = {
     args: {
         slideDirection: 'right',
-        open: true,
         children: 'SlideDirection - right snackbar alert',
+    },
+    render: (args) => {
+        const [open, setOpen] = useState(false);
+        return (
+            <>
+                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
+                <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
+            </>
+        );
     },
 };
 
 export const Title: Story = {
     args: {
         title: 'title',
-        open: true,
         children: 'children',
+    },
+    render: (args) => {
+        const [open, setOpen] = useState(false);
+        return (
+            <>
+                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
+                <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
+            </>
+        );
     },
 };
 
 export const Variant: Story = {
     args: {
         variant: 'success',
-        open: true,
         children: 'success - variants',
+    },
+    render: (args) => {
+        const [open, setOpen] = useState(false);
+        return (
+            <>
+                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
+                <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
+            </>
+        );
     },
 };
 
 export const Vertical: Story = {
     args: {
         vertical: 'top',
-        open: true,
         children: 'Vertical - top',
     },
+    render: (args) => {
+        const [open, setOpen] = useState(false);
+        return (
+            <>
+                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
+                <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
+            </>
+        );
+    },
 };
-
-//
-// export const OnChange: Story = {
-//     args: {
-//         checked: true,
-//         children: 'on change event',
-//     },
-//     render: (args) => {
-//         const [value, onChange] = useState(args.checked);
-//         return <Snackbar {...args} value={value} onChange={(e, v) => onChange(v)} />;
-//     },
-// };
-// export const Color_ = (args) => (
-//     <Stack direction="row" spacing={3}>
-//         <Snackbar checked color={'#00ab92'}>
-//             #00ab92
-//         </Snackbar>
-//         <Snackbar checked color={'primary'}>
-//             Primary
-//         </Snackbar>
-//         <Snackbar checked color={'secondary'}>
-//             Secondary
-//         </Snackbar>
-//     </Stack>
-// );

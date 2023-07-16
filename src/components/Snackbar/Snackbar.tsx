@@ -48,11 +48,11 @@ const Snackbar: React.FC<PropsWithChildren<SnackbarProps>> = ({
     const transition = useMemo(() => {
         const SlideTransition = (props): ReactNode => (
             <Slide direction={slideDirection ?? 'up'} {...props}>
-                {children ?? ''}
+                {props.children}
             </Slide>
         );
-        const GrowTransition = (props): ReactNode => <Grow {...props}>{children ?? ''}</Grow>;
-        const FadeTransition = (props): ReactNode => <Grow {...props}>{children ?? ''}</Grow>;
+        const GrowTransition = (props): ReactNode => <Grow {...props}>{props.children}</Grow>;
+        const FadeTransition = (props): ReactNode => <Grow {...props}>{props.children}</Grow>;
 
         return (
             {
