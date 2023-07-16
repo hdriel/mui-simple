@@ -1,9 +1,9 @@
 import React, { useMemo, isValidElement, cloneElement } from 'react';
 import type { PropsWithChildren, ReactNode, ReactElement } from 'react';
 import { Snackbar as MuiSnackbar, Grow, Slide } from './Snackbar.styled';
-import Button from '../_FIXED/Button/Button';
-import Alert from '../_FIXED/Alert/Alert';
-import type { SnackbarProps } from '../decs';
+import Button from '../Button/Button';
+import Alert from '../Alert/Alert';
+import type { SnackbarProps } from '../../decs';
 
 const transitionStyle = { width: '100%' };
 

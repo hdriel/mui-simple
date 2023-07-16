@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Stack } from '@mui/material';
 
 import Snackbar from '../Snackbar';
-import Button from '../../_FIXED/Button/Button';
+import Button from '../../Button/Button';
 
 const meta: Meta<typeof Snackbar> = {
     title: 'Feedback/Snackbar',

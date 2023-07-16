@@ -4,7 +4,7 @@ import InputPattern from './InputPattern';
 import { ContentCopy as ContentCopyIcon } from '@mui/icons-material';
 import Button from '../_FIXED/Button/Button';
 import { copyToClipboard } from '../../utils/helpers';
-import Snackbar from '../Snackbar/Snackbar';
+import Snackbar from '../_FIXED/Snackbar/Snackbar';
 
 export default function InputPhone({ name, value, showMaskAsPlaceholder, copyTooltip, copyMessage, ...props }) {
     const ref = useRef(null);

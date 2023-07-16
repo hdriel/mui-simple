@@ -3,7 +3,7 @@ import { Box, ClickAwayListener } from '@mui/material';
 import Input from './TextField';
 import Button from '../Button/Button';
 import { copyToClipboard, generatePassword } from '../../../utils/helpers';
-import Snackbar from '../../Snackbar/Snackbar';
+import Snackbar from '../Snackbar/Snackbar';
 import type { InputPasswordProps } from '../../decs';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 
