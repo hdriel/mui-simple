@@ -5,6 +5,8 @@ import Button from '../_FIXED/Button/Button';
 import Alert from '../_FIXED/Alert/Alert';
 import type { SnackbarProps } from '../decs';
 
+const transitionStyle = { width: '100%' };
+
 const Snackbar: React.FC<PropsWithChildren<SnackbarProps>> = ({
     actions,
     animation,
@@ -31,13 +33,19 @@ const Snackbar: React.FC<PropsWithChildren<SnackbarProps>> = ({
             []
                 .concat(
                     actions,
-                    onClose ? [<Button key="onCloseAction" muiColor="inherit" size="small" icon="Close" />] : []
+                    onClose
+                        ? [<Button key="onCloseAction" color="inherit" size="small" icon="Close" onClick={onClose} />]
+                        : []
                 )
                 ?.map((action, index) =>
                     isValidElement(action) ? (
-                        cloneElement(action, { key: index })
+                        cloneElement(action, { key: index, color: action.props.color ?? 'inherit' })
                     ) : (
-                        <Button key={index} {...(typeof action === 'object' ? action : undefined)}>
+                        <Button
+                            key={index}
+                            color={action?.color ?? 'inherit'}
+                            {...(typeof action === 'object' ? action : undefined)}
+                        >
                             {action?.label ?? action}
                         </Button>
                     )
@@ -47,12 +55,20 @@ const Snackbar: React.FC<PropsWithChildren<SnackbarProps>> = ({
 
     const transition = useMemo(() => {
         const SlideTransition = (props): ReactNode => (
-            <Slide direction={slideDirection ?? 'up'} {...props}>
+            <Slide direction={slideDirection ?? 'up'} sx={{ ...(fullWidth && transitionStyle) }} {...props}>
                 {props.children}
             </Slide>
         );
-        const GrowTransition = (props): ReactNode => <Grow {...props}>{props.children}</Grow>;
-        const FadeTransition = (props): ReactNode => <Grow {...props}>{props.children}</Grow>;
+        const GrowTransition = (props): ReactNode => (
+            <Grow sx={{ ...(fullWidth && transitionStyle) }} {...props}>
+                {props.children}
+            </Grow>
+        );
+        const FadeTransition = (props): ReactNode => (
+            <Grow sx={{ ...(fullWidth && transitionStyle) }} {...props}>
+                {props.children}
+            </Grow>
+        );
 
         return (
             {
@@ -61,8 +77,9 @@ const Snackbar: React.FC<PropsWithChildren<SnackbarProps>> = ({
                 grow: GrowTransition,
             }[animation ?? 'slide'] || SlideTransition
         );
-    }, [animation, slideDirection, children]);
+    }, [animation, slideDirection]);
 
+    const msg = children ?? message;
     return (
         <MuiSnackbar
             open={open}
@@ -79,7 +96,7 @@ const Snackbar: React.FC<PropsWithChildren<SnackbarProps>> = ({
                     horizontal: horizontal ?? 'right',
                 }
             }
-            message={message}
+            message={msg}
             title={title}
             fullWidth={fullWidth}
             TransitionComponent={transition}
@@ -89,8 +106,14 @@ const Snackbar: React.FC<PropsWithChildren<SnackbarProps>> = ({
             action={action} // 'action' end after props, to prevent bugs from storybook, that any props has storybook action field
         >
             {['success', 'error', 'warning', 'info'].includes(variant) ? (
-                <Alert onClose={(event) => onClose(event)} severity={variant} action={action} title={title}>
-                    {children ?? message}
+                <Alert
+                    onClose={(event) => onClose(event)}
+                    severity={variant}
+                    action={action}
+                    title={title}
+                    width={fullWidth ? '100%' : undefined}
+                >
+                    {msg}
                 </Alert>
             ) : null}
         </MuiSnackbar>

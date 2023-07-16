@@ -7,4 +7,6 @@ export const Snackbar = styled(MuiSnackbar, {
     shouldForwardProp: (propName) => !['fullWidth'].includes(propName as string),
 })`
     width: 100%;
+    box-sizing: border-box;
+    padding-right: 3em;
 `;

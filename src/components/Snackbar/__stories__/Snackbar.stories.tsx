@@ -1,7 +1,6 @@
 // @ts-ignore
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Send as SendIcon, Fingerprint as FingerprintIcon } from '@mui/icons-material';
 import { Stack } from '@mui/material';
 
 import Snackbar from '../Snackbar';
@@ -40,9 +39,9 @@ export const Actions: Story = {
 export const Animation: Story = {
     args: {
         animation: 'grow',
-        animationDuration: 5000,
-        autoHideDuration: 6000,
-        resumeHideDuration: 1000,
+        animationDuration: 2000,
+        autoHideDuration: 3000,
+        resumeHideDuration: 500,
         animationProps: {},
         children: 'Animation snackbar alert',
     },
@@ -129,6 +128,7 @@ export const MessageId: Story = {
 export const SlideDirection: Story = {
     args: {
         slideDirection: 'right',
+        animation: 'slide',
         children: 'SlideDirection - right snackbar alert',
     },
     render: (args) => {
@@ -145,6 +145,7 @@ export const SlideDirection: Story = {
 export const Title: Story = {
     args: {
         title: 'title',
+        variant: 'info',
         children: 'children',
     },
     render: (args) => {
