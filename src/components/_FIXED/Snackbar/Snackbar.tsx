@@ -55,7 +55,7 @@ const Snackbar: React.FC<PropsWithChildren<SnackbarProps>> = ({
 
     const transition = useMemo(() => {
         const SlideTransition = (props): ReactNode => (
-            <Slide direction={slideDirection ?? 'up'} sx={{ ...(fullWidth && transitionStyle) }} {...props}>
+            <Slide sx={{ ...(fullWidth && transitionStyle) }} {...props} direction={slideDirection ?? 'up'}>
                 {props.children}
             </Slide>
         );

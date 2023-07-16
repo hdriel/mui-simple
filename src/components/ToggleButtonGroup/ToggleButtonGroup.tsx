@@ -12,8 +12,8 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
     disableRipple,
     enforceValueSet,
     data,
-    fullWidth,
     color,
+    fullWidth,
     ...props
 }): React.ReactElement => {
     const [customColor, muiColor] = useCustomColor(color);
@@ -23,10 +23,10 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
         if (!onChange) return;
 
         if (enforceValueSet) {
-            if (exclusive && newValues !== null) onChange(newValues);
-            if (!exclusive && newValues?.length) onChange(newValues);
+            if (exclusive && newValues !== null) onChange(event, newValues);
+            if (!exclusive && newValues?.length) onChange(event, newValues);
         } else {
-            onChange(newValues);
+            onChange(event, newValues);
         }
     }
 
@@ -46,6 +46,7 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
             exclusive={exclusive}
             size={size}
             onChange={onChangeHandler}
+            fullWidth={fullWidth}
             {...props}
         >
             {data
@@ -60,6 +61,7 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
                               value={value}
                               disabled={disabled}
                               onClick={onButtonClickHandler.bind(null, value)}
+                              sx={{ ...(fullWidth && { flex: '1 1 auto' }), ...toggleProps.sx }}
                               {...toggleProps}
                           >
                               {component}

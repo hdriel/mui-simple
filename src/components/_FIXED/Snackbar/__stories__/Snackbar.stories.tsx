@@ -5,6 +5,7 @@ import { Stack } from '@mui/material';
 
 import Snackbar from '../Snackbar';
 import Button from '../../Button/Button';
+import ToggleButtonGroup from '../../../ToggleButtonGroup/ToggleButtonGroup';
 
 const meta: Meta<typeof Snackbar> = {
     title: 'Feedback/Snackbar',
@@ -27,9 +28,14 @@ export const Actions: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
+        const onClickHandler = (event) => {
+            event.stopPropagation();
+            setOpen(!open);
+        };
+
         return (
             <>
-                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
+                <Button fullWidth variant="outlined" onClick={onClickHandler} label={open ? 'Close' : 'Open'} />
                 <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
             </>
         );
@@ -47,9 +53,14 @@ export const Animation: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
+        const onClickHandler = (event) => {
+            event.stopPropagation();
+            setOpen(!open);
+        };
+
         return (
             <>
-                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
+                <Button fullWidth variant="outlined" onClick={onClickHandler} label={open ? 'Close' : 'Open'} />
                 <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
             </>
         );
@@ -63,9 +74,14 @@ export const FullWidth: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
+        const onClickHandler = (event) => {
+            event.stopPropagation();
+            setOpen(!open);
+        };
+
         return (
             <>
-                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
+                <Button fullWidth variant="outlined" onClick={onClickHandler} label={open ? 'Close' : 'Open'} />
                 <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
             </>
         );
@@ -79,9 +95,14 @@ export const Horizontal: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
+        const onClickHandler = (event) => {
+            event.stopPropagation();
+            setOpen(!open);
+        };
+
         return (
             <>
-                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
+                <Button fullWidth variant="outlined" onClick={onClickHandler} label={open ? 'Close' : 'Open'} />
                 <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
             </>
         );
@@ -95,9 +116,14 @@ export const Message: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
+        const onClickHandler = (event) => {
+            event.stopPropagation();
+            setOpen(!open);
+        };
+
         return (
             <>
-                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
+                <Button fullWidth variant="outlined" onClick={onClickHandler} label={open ? 'Close' : 'Open'} />
                 <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
             </>
         );
@@ -112,32 +138,58 @@ export const MessageId: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
+        const onClickHandler = (event) => {
+            event.stopPropagation();
+            setOpen(!open);
+        };
+
         return (
             <>
-                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
+                <Button fullWidth variant="outlined" onClick={onClickHandler} label={open ? 'Close' : 'Open'} />
                 <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
             </>
         );
     },
 };
 
-//   onClickAway: undefined,
-//   onClose: undefined,
-//   open: undefined,
-
 export const SlideDirection: Story = {
     args: {
-        slideDirection: 'right',
         animation: 'slide',
         children: 'SlideDirection - right snackbar alert',
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
+        const [slideDirection, setSlideDirection] = useState('up');
+
         return (
-            <>
-                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
-                <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
-            </>
+            <Stack direction="row" spacing={3}>
+                <ToggleButtonGroup
+                    fullWidth
+                    value={slideDirection}
+                    exclusive
+                    onChange={(event, v) => {
+                        event?.stopPropagation();
+                        setSlideDirection(v as string);
+                        setOpen(!!v);
+                    }}
+                    data={[
+                        { value: 'up', component: 'Up' },
+                        { value: 'right', component: 'Right' },
+                        { value: 'left', component: 'Left' },
+                        { value: 'down', component: 'Down' },
+                    ]}
+                />
+                <Snackbar
+                    {...args}
+                    slideDirection={slideDirection}
+                    open={open}
+                    onClose={() => setOpen(!!slideDirection)}
+                    onClickAway={() => {
+                        setOpen(false);
+                        setSlideDirection(null as unknown as string);
+                    }}
+                />
+            </Stack>
         );
     },
 };
@@ -150,9 +202,14 @@ export const Title: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
+        const onClickHandler = (event) => {
+            event.stopPropagation();
+            setOpen(!open);
+        };
+
         return (
             <>
-                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
+                <Button fullWidth variant="outlined" onClick={onClickHandler} label={open ? 'Close' : 'Open'} />
                 <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
             </>
         );
@@ -166,9 +223,14 @@ export const Variant: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
+        const onClickHandler = (event) => {
+            event.stopPropagation();
+            setOpen(!open);
+        };
+
         return (
             <>
-                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
+                <Button fullWidth variant="outlined" onClick={onClickHandler} label={open ? 'Close' : 'Open'} />
                 <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
             </>
         );
@@ -182,9 +244,14 @@ export const Vertical: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
+        const onClickHandler = (event) => {
+            event.stopPropagation();
+            setOpen(!open);
+        };
+
         return (
             <>
-                <Button onClick={() => setOpen(!open)} label={open ? 'Close' : 'Open'} />
+                <Button fullWidth variant="outlined" onClick={onClickHandler} label={open ? 'Close' : 'Open'} />
                 <Snackbar {...args} open={open} onClose={() => setOpen(false)} onClickAway={() => setOpen(false)} />
             </>
         );

@@ -391,7 +391,7 @@ export interface ToggleButtonGroupProps {
     exclusive: boolean;
     fullWidth: boolean;
     disableRipple: boolean;
-    onChange: (event: any) => void;
+    onChange: (event: any, newValues: null | string | string[]) => void;
     color: string;
     enforceValueSet: boolean;
     data: Array<{
