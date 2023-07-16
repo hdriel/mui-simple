@@ -46,7 +46,7 @@ export function EnhancedTableToolbar({
             )}
 
             {filteredActions
-                .filter((action) => isValidElement(action.cmp))
+                .filter((action) => isValidElement(action.Cmp))
                 .map(({ cmp, tooltip }, index) => (
                     // eslint-disable-next-line react/no-array-index-key
                     <Tooltip key={index} title={tooltip}>
