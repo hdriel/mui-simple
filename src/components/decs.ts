@@ -84,10 +84,9 @@ export interface BottomNavigationProps {
         [key: string]: any;
     }>;
     color?: string;
-    elevation?: number; // assuming you want the values to be numbers
+    elevation?: number; // 0-24
     fixedToBottom?: boolean;
     fixedToTop?: boolean;
-    muiColor?: string;
     onChange?: (event: any, value: number | string) => void;
     position?: 'absolute' | 'fixed';
     showLabels?: boolean;

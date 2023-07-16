@@ -38,6 +38,7 @@ export const BottomNavigation = styled(
                     right: 0,
                     top: fixedToTop ? 0 : undefined,
                     bottom: fixedToBottom ? 0 : undefined,
+                    zIndex: 2,
                 }),
             }}
             elevation={elevation}
