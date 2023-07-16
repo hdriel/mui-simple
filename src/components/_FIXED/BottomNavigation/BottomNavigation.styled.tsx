@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import type { BottomNavigationProps } from '@mui/material';
 
-import Paper from '../Paper/Paper';
+import Paper from '../../Paper/Paper';
 
 interface BottomNavigationStyledProps {
     fixedToBottom?: boolean;

@@ -1,9 +1,9 @@
 import React from 'react';
 import type { PropsWithChildren, ReactElement } from 'react';
 import { BottomNavigation as MuiBottomNavigation, BottomNavigationAction } from './BottomNavigation.styled';
-import { useCustomColor } from '../../utils/helpers';
-import type { BottomNavigationProps } from '../decs';
-import SVGIcon from '../SVGIcon/SVGIcon';
+import { useCustomColor } from '../../../utils/helpers';
+import type { BottomNavigationProps } from '../../decs';
+import SVGIcon from '../../SVGIcon/SVGIcon';
 
 const BottomNavigation: React.FC<PropsWithChildren<BottomNavigationProps>> = function (props): ReactElement {
     const {
@@ -54,7 +54,6 @@ BottomNavigation.defaultProps = {
     elevation: undefined,
     fixedToBottom: undefined,
     fixedToTop: undefined,
-    muiColor: undefined,
     onChange: undefined,
     position: undefined,
     showLabels: undefined,
