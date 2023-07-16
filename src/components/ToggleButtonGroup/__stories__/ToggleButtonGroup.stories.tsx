@@ -62,7 +62,7 @@ export const Icon = () => {
     return (
         <ToggleButtonGroup
             value={value}
-            onChange={(value) => {
+            onChange={(event, value) => {
                 onChangeAction(value);
                 setValue(value);
             }}
@@ -77,7 +77,7 @@ export const Text = () => {
     return (
         <ToggleButtonGroup
             value={value}
-            onChange={(newValue) => {
+            onChange={(event, newValue) => {
                 onChangeAction(newValue);
                 setValue(newValue);
             }}
@@ -94,7 +94,7 @@ export const EnforceValueSet = () => {
         <Stack direction={'row'} spacing={2}>
             <ToggleButtonGroup
                 value={value1}
-                onChange={(newValue) => {
+                onChange={(event, newValue) => {
                     onChangeAction(newValue);
                     setValue1(newValue);
                 }}
@@ -103,7 +103,7 @@ export const EnforceValueSet = () => {
             />
             <ToggleButtonGroup
                 value={value2}
-                onChange={(newValue) => {
+                onChange={(event, newValue) => {
                     onChangeAction(newValue);
                     setValue2(newValue);
                 }}
@@ -120,7 +120,7 @@ export const Menu = () => {
     return (
         <ToggleButtonGroup
             value={value}
-            onChange={(newValue) => {
+            onChange={(event, newValue) => {
                 onChangeAction(newValue);
                 setValue(newValue);
             }}
@@ -135,7 +135,7 @@ export const Colored = () => {
     return (
         <ToggleButtonGroup
             value={value}
-            onChange={(newValue) => {
+            onChange={(event, newValue) => {
                 onChangeAction(newValue);
                 setValue(newValue);
             }}
@@ -151,7 +151,7 @@ export const Themed = () => {
     return (
         <ToggleButtonGroup
             value={value}
-            onChange={(newValue) => {
+            onChange={(event, newValue) => {
                 onChangeAction(newValue);
                 setValue(newValue);
             }}
@@ -166,7 +166,7 @@ export const Disabled = () => {
     return (
         <ToggleButtonGroup
             value={value}
-            onChange={(newValue) => {
+            onChange={(event, newValue) => {
                 onChangeAction(newValue);
                 setValue(newValue);
             }}
@@ -183,7 +183,7 @@ export const Orientation = () => {
             <ToggleButtonGroup
                 orientation={'horizontal'}
                 value={value}
-                onChange={(newValue) => {
+                onChange={(event, newValue) => {
                     onChangeAction(newValue);
                     setValue(newValue);
                 }}
@@ -192,7 +192,7 @@ export const Orientation = () => {
             <ToggleButtonGroup
                 orientation={'vertical'}
                 value={value}
-                onChange={(newValue) => {
+                onChange={(event, newValue) => {
                     onChangeAction(newValue);
                     setValue(newValue);
                 }}
@@ -207,7 +207,7 @@ export const MultipleSelection = () => {
     return (
         <ToggleButtonGroup
             value={value}
-            onChange={(newValue) => {
+            onChange={(event, newValue) => {
                 onChangeAction(newValue);
                 setValue(newValue);
             }}
@@ -221,7 +221,7 @@ export const ExclusiveSelection = () => {
     return (
         <ToggleButtonGroup
             value={value}
-            onChange={(newValue) => {
+            onChange={(event, newValue) => {
                 onChangeAction(newValue);
                 setValue(newValue);
             }}
@@ -237,7 +237,7 @@ export const Separate = () => {
         <ToggleButtonGroups>
             <ToggleButtonGroup
                 value={value}
-                onChange={(newValue) => {
+                onChange={(event, newValue) => {
                     onChangeAction(newValue);
                     setValue(newValue);
                 }}
@@ -246,7 +246,7 @@ export const Separate = () => {
             />
             <ToggleButtonGroup
                 value={value}
-                onChange={(newValue) => {
+                onChange={(event, newValue) => {
                     onChangeAction(newValue);
                     setValue(newValue);
                 }}
@@ -262,7 +262,7 @@ export const Ripple = () => {
         <Stack direction="row" spacing={1}>
             <ToggleButtonGroup
                 value={value}
-                onChange={(newValue) => {
+                onChange={(event, newValue) => {
                     onChangeAction(newValue);
                     setValue(newValue);
                 }}
@@ -271,7 +271,7 @@ export const Ripple = () => {
             />
             <ToggleButtonGroup
                 value={value}
-                onChange={(newValue) => {
+                onChange={(event, newValue) => {
                     onChangeAction(newValue);
                     setValue(newValue);
                 }}
@@ -288,7 +288,7 @@ export const Size = () => {
         <Stack direction="column" spacing={1}>
             <ToggleButtonGroup
                 value={value}
-                onChange={(newValue) => {
+                onChange={(event, newValue) => {
                     onChangeAction(newValue);
                     setValue(newValue);
                 }}
@@ -298,7 +298,7 @@ export const Size = () => {
             />
             <ToggleButtonGroup
                 value={value}
-                onChange={(newValue) => {
+                onChange={(event, newValue) => {
                     onChangeAction(newValue);
                     setValue(newValue);
                 }}
@@ -308,7 +308,7 @@ export const Size = () => {
             />
             <ToggleButtonGroup
                 value={value}
-                onChange={(newValue) => {
+                onChange={(event, newValue) => {
                     onChangeAction(newValue);
                     setValue(newValue);
                 }}
@@ -318,7 +318,7 @@ export const Size = () => {
             />
             <ToggleButtonGroup
                 value={value}
-                onChange={(newValue) => {
+                onChange={(event, newValue) => {
                     onChangeAction(newValue);
                     setValue(newValue);
                 }}
@@ -339,7 +339,7 @@ export const MultiValue = () => {
         <Stack direction="column" spacing={1}>
             <ToggleButtonGroup
                 value={value11}
-                onChange={(newValue) => {
+                onChange={(event, newValue) => {
                     onChangeAction(newValue);
                     setValue11(newValue);
                 }}
@@ -348,7 +348,7 @@ export const MultiValue = () => {
             />
             <ToggleButtonGroup
                 value={value12}
-                onChange={(newValue) => {
+                onChange={(event, newValue) => {
                     onChangeAction(newValue);
                     setValue12(newValue);
                 }}
@@ -358,7 +358,7 @@ export const MultiValue = () => {
             />
             <ToggleButtonGroup
                 value={value21}
-                onChange={(newValue) => {
+                onChange={(event, newValue) => {
                     onChangeAction(newValue);
                     setValue21(newValue);
                 }}
@@ -367,7 +367,7 @@ export const MultiValue = () => {
             />
             <ToggleButtonGroup
                 value={value22}
-                onChange={(newValue) => {
+                onChange={(event, newValue) => {
                     onChangeAction(newValue);
                     setValue22(newValue);
                 }}

@@ -8,7 +8,7 @@ export { default as InputGoogleAddress } from './components/Autocomplete/InputGo
 export { default as Avatar } from './components/_FIXED/Avatar/Avatar';
 export { default as Backdrop } from './components/Backdrop/Backdrop';
 export { default as Badge } from './components/Badge/Badge';
-export { default as BottomNavigation } from './components/BottomNavigation/BottomNavigation';
+export { default as BottomNavigation } from './components/_FIXED/BottomNavigation/BottomNavigation';
 export { default as Breadcrumbs } from './components/Breadcrumbs/Breadcrumbs';
 export { default as Button } from './components/_FIXED/Button/Button';
 export { default as ButtonGroup } from './components/_FIXED/Button/ButtonGroup';
@@ -59,7 +59,7 @@ export { RippleBox } from './components/RippleBox/RippleBox';
 export { default as Skeleton } from './components/Skeleton/Skeleton';
 export { default as Slider } from './components/Slider/Slider';
 export { default as RangeSlider } from './components/Slider/RangeSlider';
-export { default as Snackbar } from './components/Snackbar/Snackbar';
+export { default as Snackbar } from './components/_FIXED/Snackbar/Snackbar';
 export { default as SpeedDial } from './components/SpeedDial/SpeedDial';
 export { default as Stepper } from './components/Stepper/Stepper';
 export { default as MobileStepper } from './components/Stepper/MobileStepper';

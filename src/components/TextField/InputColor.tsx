@@ -6,7 +6,7 @@ import { ClickAwayListener } from '@mui/material';
 
 import Input from '../_FIXED/TextField/TextField';
 import Button from '../_FIXED/Button/Button';
-import Snackbar from '../Snackbar/Snackbar';
+import Snackbar from '../_FIXED/Snackbar/Snackbar';
 import { copyToClipboard } from '../../utils/helpers';
 import Slider from '../Slider/Slider';
 import { Box } from '../_FIXED/TextField/TextField.styled';
