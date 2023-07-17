@@ -179,8 +179,8 @@ export const PaginationAlign: Story = {
 export const defaultEmptyRowHeight: Story = {
     args: {
         columns: FITNESS_COLUMNS,
-        data: FITNESS_DATA,
-        pagination: { page: 4, rowsPerPage: 3, total: FITNESS_DATA.length },
+        data: FITNESS_DATA.slice(0, 3),
+        pagination: { page: 1, rowsPerPage: 5, total: 5 },
         paginationAlign: 'center',
         DEFAULT_EMPTY_ROW_HEIGHT: 40,
     },
