@@ -5,7 +5,7 @@ import List from './List';
 import Checkbox from '../_FIXED/Checkbox/Checkbox';
 import Switch from '../Switch/Switch';
 
-export default function CheckList({ controlType, alignCheck, items, ...props }) {
+export default function CheckList({ controlType, alignCheck, items, ...props }): React.ReactElement {
     const checklistItems = items?.map((item) => {
         if (item && Object.keys(item ?? {}).length === 1 && item.hasOwnProperty('divider')) {
             return item;

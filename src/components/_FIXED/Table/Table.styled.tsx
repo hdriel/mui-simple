@@ -13,13 +13,14 @@ import {
     Toolbar as MuiToolbar,
 } from '@mui/material';
 
-import MuiCheckbox from '../_FIXED/Checkbox/Checkbox';
-import MuiAvatar from '../_FIXED/Avatar/Avatar';
-import MuiTypography from '../_FIXED/Typography/Typography';
-import MuiTooltip from '../_FIXED/Tooltip/Tooltip';
-import MuiButton from '../_FIXED/Button/Button';
-import MuiPaper from '../Paper/Paper';
+import MuiCheckbox from '../Checkbox/Checkbox';
+import MuiAvatar from '../Avatar/Avatar';
+import MuiTypography from '../Typography/Typography';
+import MuiTooltip from '../Tooltip/Tooltip';
+import MuiButton from '../Button/Button';
+import MuiPaper from '../../Paper/Paper';
 import { extractColors } from './Table.utils';
+import type { ColorsProps } from './Table.desc';
 
 export const Typography = MuiTypography;
 export const Avatar = MuiAvatar;
@@ -32,26 +33,41 @@ export const Box = MuiBox;
 export const Button = MuiButton;
 export const Table = MuiTable;
 export const TableBody = MuiTableBody;
-export const TableCell = styled(MuiTableCell)`
+
+interface TableCellProp {
+    colors?: ColorsProps;
+    centerContent?: boolean;
+}
+export const TableCell = styled(MuiTableCell, {
+    shouldForwardProp: (propName: PropertyKey) => !['colors', 'centerContent'].includes(propName as string),
+})<TableCellProp>`
     padding-left: 1em;
     padding-right: 1em;
 
     ${(props) => {
-        const { color, background } =
-            extractColors({
-                theme: props.theme,
-                colors: props.colors,
-            }) ?? {};
+        const { colors, theme } = props;
+        const { color, background } = extractColors({ theme, colors }) ?? {};
 
         return css`
             color: ${color};
             background-color: ${background};
         `;
     }};
+
+    ${(props) => {
+        return props.centerContent
+            ? css`
+                  width: 100%;
+                  justify-content: center;
+                  align-items: center;
+                  display: flex;
+              `
+            : css``;
+    }}
 `;
 export const TableContainer = MuiTableContainer;
 export const TableHead = MuiTableHead;
 export const TablePagination = MuiTablePagination;
-export const TableRow = MuiTableRow;
+export const TableRow: any = MuiTableRow;
 export const TableSortLabel = MuiTableSortLabel;
 export const Toolbar = MuiToolbar;

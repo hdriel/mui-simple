@@ -1,14 +1,25 @@
 import React from 'react';
-
+import { IndeterminateCheckBox as IndeterminateCheckBoxIcon } from '@mui/icons-material';
 import { SORT, SORT_VALUE } from '../Table.consts';
-
 import { TableHead, TableCell, TableRow, TableSortLabel, Checkbox } from '../Table.styled';
 import { getNextOrderBy } from '../Table.utils';
+import type { ColorsProps, Column, SORT_VALUE_TYPE } from '../Table.desc';
 
-export function EnhancedTableHead({
+interface EnhancedTableHeadProps {
+    columns: Column[];
+    sortColumns: Column[];
+    onRequestSort: (event: any, property: string, nextState: string) => void;
+    headerColor: ColorsProps;
+    actionColor: ColorsProps;
+    numSelected: number;
+    onSelectAllClick: (event: any) => void;
+    rowCount: number;
+    selectionMode: boolean;
+}
+
+export const EnhancedTableHead: React.FC<EnhancedTableHeadProps> = ({
     columns,
     sortColumns,
-    orderBy,
     onRequestSort,
     headerColor,
     actionColor,
@@ -16,8 +27,10 @@ export function EnhancedTableHead({
     onSelectAllClick,
     rowCount,
     selectionMode,
-}) {
-    const createSortHandler = (property, nextState) => (event) => onRequestSort(event, property, nextState);
+}): React.ReactElement => {
+    const createSortHandler = (property, nextState) => {
+        return (event) => onRequestSort(event, property, nextState);
+    };
 
     return (
         <TableHead>
@@ -27,6 +40,11 @@ export function EnhancedTableHead({
                         <Checkbox
                             color={actionColor?.background ?? actionColor?.color ?? 'primary'}
                             indeterminate={numSelected > 0 && numSelected < rowCount}
+                            indeterminateIcon={
+                                <IndeterminateCheckBoxIcon
+                                    sx={{ color: actionColor?.background ?? actionColor?.color ?? 'primary' }}
+                                />
+                            }
                             checked={rowCount > 0 && numSelected === rowCount}
                             onChange={onSelectAllClick}
                         />
@@ -36,7 +54,12 @@ export function EnhancedTableHead({
                 {columns?.map((headCell) => {
                     const sortColumn = sortColumns.find((sortColumn) => sortColumn.field === headCell.field);
                     const { orderBy } = sortColumn ?? {};
-                    const isActiveOrderBy = [SORT.DOWN, SORT.UP].includes(orderBy);
+                    const isActiveOrderBy = [SORT.DOWN, SORT.UP].includes(orderBy as string);
+                    const sortDirection: SORT_VALUE_TYPE = {
+                        [SORT.DOWN]: SORT_VALUE.DOWN,
+                        [SORT.UP]: SORT_VALUE.UP,
+                    }[orderBy] as SORT_VALUE_TYPE;
+
                     const nextState = getNextOrderBy(orderBy);
 
                     return (
@@ -44,7 +67,7 @@ export function EnhancedTableHead({
                             key={headCell.field}
                             align={headCell.numeric ? 'right' : 'left'}
                             padding={headCell.disablePadding ? 'none' : 'normal'}
-                            sortDirection={SORT_VALUE[orderBy]}
+                            sortDirection={sortDirection}
                             colors={headerColor}
                         >
                             <TableSortLabel
@@ -60,4 +83,4 @@ export function EnhancedTableHead({
             </TableRow>
         </TableHead>
     );
-}
+};

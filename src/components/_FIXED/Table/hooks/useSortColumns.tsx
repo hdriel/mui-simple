@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { SORT } from '../Table.consts';
 import { getMenuSizes, getNextOrderBy } from '../Table.utils';
-import Menu from '../../Menu/Menu';
-import CheckList from '../../List/CheckList';
+import Menu from '../../../Menu/Menu';
+import CheckList from '../../../List/CheckList';
 import {
     DragHandle as DragHandleIcon,
     ImportExport as ImportExportIcon,
@@ -11,26 +11,26 @@ import {
     South as SouthIcon,
 } from '@mui/icons-material';
 import { Checkbox, Tooltip } from '../Table.styled';
+import type { Column, useSortColumnsProps, useSortColumnsResult } from '../Table.desc';
 
 export function useSortColumns({
     firstItem,
     columns,
-    orderBy: _orderBy = [],
     hide,
     onChangeSortColumns,
     title,
     tooltip,
     colors,
-}) {
-    const [sortColumns, setSortColumns] = useState(
+}: useSortColumnsProps): useSortColumnsResult {
+    const [sortColumns, setSortColumns] = useState<Column[]>(
         columns?.map(
             (column) =>
-                ({
+                (({
                     field: column.field,
-                    orderBy: [SORT.DOWN, SORT.UP].includes(column.orderBy) ? column.orderBy : false,
+                    orderBy: [SORT.DOWN, SORT.UP].includes(column.orderBy as string) ? column.orderBy : false,
                     label: column.label,
                     type: typeof firstItem?.[column.field],
-                } ?? [])
+                } ?? {}) as Column)
         )
     );
 
@@ -40,9 +40,10 @@ export function useSortColumns({
         return getMenuSizes({ columns: sortColumns, title });
     }, [sortColumns, title]);
 
-    const handleRequestSort = (event, property, orderBy) => {
+    const handleRequestSort = (event, property, orderBy): void => {
         const sortColumn = sortColumns.find(({ field }) => field === property);
-        if (sortColumn === -1) return;
+        if (!sortColumn) return;
+
         sortColumn.orderBy = orderBy;
         setSortColumns([...sortColumns]);
 
@@ -73,7 +74,7 @@ export function useSortColumns({
                     disableGuttersItems
                     droppableId="filter-menu"
                     title={title}
-                    items={sortColumns?.map((column) => ({
+                    items={sortColumns?.map((column, index) => ({
                         id: column.field,
                         title: column.label ?? column.field,
                         color: 'rgba(0, 0, 0, 0.87)',
@@ -82,7 +83,7 @@ export function useSortColumns({
                         padding: '0.5em 0',
                         icon: column.orderBy === SORT.DOWN ? <SouthIcon /> : <ImportExportIcon />,
                         onClick: onClickItem(column.field, getNextOrderBy(column.orderBy)),
-                        actions: [<DragHandleIcon />],
+                        actions: [<DragHandleIcon key={`${column.field}-${index}`} />],
                         data: column,
                     }))}
                     dragAndDropItems

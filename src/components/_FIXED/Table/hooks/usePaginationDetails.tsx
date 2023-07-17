@@ -1,7 +1,11 @@
-import { getDataRange } from '../Table.utils';
 import { useMemo } from 'react';
+import { getDataRange } from '../Table.utils';
+import type { usePaginationDetailsProps, usePaginationDetailsResult } from '../Table.desc';
 
-export function usePaginationDetails({ rows = 0, pagination = {}, onChangePagination }) {
+export function usePaginationDetails({
+    rows = 0,
+    pagination = {},
+}: usePaginationDetailsProps): usePaginationDetailsResult {
     const { total: _total, rowsPerPage: _rowsPerPage, page: _page } = pagination;
 
     const total = _total ?? rows;
@@ -22,7 +26,10 @@ export function usePaginationDetails({ rows = 0, pagination = {}, onChangePagina
     }, [independentData, page, rowsPerPage, rows]);
 
     const rowsPerPageList = useMemo(
-        () => [...new Set([5, 10, 20, rowsPerPage])].filter(Boolean).sort((a, b) => a - b),
+        () =>
+            [...[5, 10, 20, rowsPerPage].filter((item, pos, arr) => arr.indexOf(item) === pos)]
+                .filter(Boolean)
+                .sort((a, b) => a - b),
         [rowsPerPage]
     );
 

@@ -1,17 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { isValidElement } from 'react';
 import { useTheme } from '@mui/material/styles';
-
 import { EnhancedTableToolbar } from './EnhancedTableToolbar';
 import { EnhancedTableHead } from './EnhancedTableHead';
 import EnhancedTableRow from './EnhancedTableRow';
-
-import { PT_elevation, PT_action, PT_column, PT_pagination, PT_sizeUnit, PT_colors } from '../Table.propTypes';
-
 import { extractColors } from '../Table.utils';
-
 import { TableCell, Box, TableRow, TableContainer, TableBody, Table, Paper } from '../Table.styled';
-
 import {
     useData,
     useFilterColumns,
@@ -21,39 +14,46 @@ import {
     useSortColumns,
 } from '../hooks';
 import { EnhancedTablePagination } from './EnhancedTablePagination';
+import type { TableProps } from '../../../decs';
 
-const DEFAULT_EMPTY_ROW_HEIGHT = 57;
-
-export default function EnhancedTable({
-    elevation,
-    stickyHeader,
-    helperText,
-    maxHeight,
-    dense,
-    title,
-    pagination,
-    onChangePagination,
-    onChangeSortColumns,
-    orderBy,
-    addSortColumnsAction,
+const EnhancedTable: React.FC<TableProps> = ({
+    actionColor,
+    actions,
     addFilterColumnsAction,
     addSelectionModeAction,
-    data: _data,
+    addSortColumnsAction,
     columns: _columns,
+    data: _data,
+    DEFAULT_EMPTY_ROW_HEIGHT,
+    dense,
+    elevation,
+    evenRowsColor,
+    EmptyResultCmp,
+    fieldId,
+    FILTER_MENU_TITLE_LABEL,
+    FILTER_TOOLTIP_LABEL,
+    headerColor,
+    helperText,
+    maxHeight,
+    NUM_SELECTED_LABEL,
+    oddRowsColor,
+    onChangePagination,
+    onChangeSortColumns,
     onClickRow,
-    actions,
-    selectionMode: _selectionMode,
-    selectedActions,
-    paginationProps,
+    orderBy,
+    pagination,
     paginationAlign,
     PaginationComponent,
-    actionColor,
+    paginationProps,
+    selectedActions,
+    SELECTION_MODE_TOOLTIP_LABEL,
+    selectionMode: _selectionMode,
+    SORT_MENU_TITLE_LABEL,
+    SORT_TOOLTIP_LABEL,
+    stickyHeader,
     tableColor,
-    headerColor,
-    evenRowsColor,
-    oddRowsColor,
-    LABELS,
-}) {
+    title,
+}): React.ReactElement => {
     const theme = useTheme();
     const colorProps = extractColors({ theme, colors: tableColor });
     const actionColorProps =
@@ -69,16 +69,14 @@ export default function EnhancedTable({
     const { emptyRows, sliceFrom, sliceTo, independentData, page } = usePaginationDetails({
         rows,
         pagination,
-        orderBy,
-        onChangePagination,
     });
 
     const [columns, filterActionCmp] = useFilterColumns({
         firstItem,
         columns: _columns,
         hide: !addFilterColumnsAction,
-        tooltip: LABELS.FILTER_TOOLTIP,
-        title: LABELS.FILTER_MENU_TITLE,
+        tooltip: FILTER_TOOLTIP_LABEL,
+        title: FILTER_MENU_TITLE_LABEL,
         colors: actionColorProps,
     });
 
@@ -87,19 +85,19 @@ export default function EnhancedTable({
         sortColumns,
         cmp: sortColumnsAction,
     } = useSortColumns({
+        tooltip: SORT_TOOLTIP_LABEL,
         firstItem,
         columns,
         hide: !addSortColumnsAction,
-        orderBy,
         onChangeSortColumns,
-        title: LABELS.SORT_MENU_TITLE,
+        title: SORT_MENU_TITLE_LABEL,
         colors: actionColorProps,
     });
 
     const [selectionMode, selectionModeCmp] = useSelectionMode({
         selectionMode: _selectionMode,
         hide: !addSelectionModeAction,
-        tooltip: LABELS.SELECTION_MODE_TOOLTIP,
+        tooltip: SELECTION_MODE_TOOLTIP_LABEL,
         colors: actionColorProps,
     });
 
@@ -112,10 +110,12 @@ export default function EnhancedTable({
         data: _data,
     });
 
+    const isEmpty = !data.length;
+
     return (
         <Box sx={{ width: '100%' }}>
             <Paper elevation={elevation} sx={{ width: '100%', mb: 2, overflow: 'hidden', ...colorProps }}>
-                {(title || actions?.length || selectedActions?.length || filterActionCmp) && (
+                {(title || actions?.length || selectedActions?.length || filterActionCmp || selectionModeCmp) && (
                     <EnhancedTableToolbar
                         title={title}
                         actions={actions}
@@ -123,15 +123,23 @@ export default function EnhancedTable({
                         selectionModeAction={selectionModeCmp}
                         sortColumnsAction={sortColumnsAction}
                         selectedActions={selectedActions}
-                        selectedLabel={LABELS.NUM_SELECTED}
+                        selectedLabel={NUM_SELECTED_LABEL}
                         data={_data}
                         selected={selected}
-                        colorProps={colorProps}
+                        colorProps={actionColorProps ?? colorProps}
+                        fieldId={fieldId}
                     />
                 )}
 
-                <TableContainer sx={{ maxHeight: maxHeight }}>
-                    <Table stickyHeader={stickyHeader} sx={{ minWidth: 750 }} size={dense ? 'small' : 'medium'}>
+                <TableContainer sx={{ maxHeight }}>
+                    <Table
+                        stickyHeader={stickyHeader}
+                        sx={{
+                            minWidth: 750,
+                            ...(isEmpty && { width: '100%', display: 'flex', flexDirection: 'column' }),
+                        }}
+                        size={dense ? 'small' : 'medium'}
+                    >
                         {helperText && <caption>{helperText}</caption>}
                         <EnhancedTableHead
                             numSelected={selected.length}
@@ -151,9 +159,9 @@ export default function EnhancedTable({
                                 <EnhancedTableRow
                                     key={index}
                                     columns={columns}
-                                    handleClick={(event, rowId, rowData) => {
+                                    handleClick={(event, rowData) => {
                                         event.stopPropagation();
-                                        if (!selectionMode) onClickRow?.(rowId, rowData);
+                                        if (!selectionMode) onClickRow?.(event, rowData);
                                     }}
                                     index={index}
                                     selectionMode={selectionMode}
@@ -161,18 +169,34 @@ export default function EnhancedTable({
                                     oddRowsColor={oddRowsColor}
                                     actionColor={actionColorProps ?? colorProps}
                                     onSelect={(event) => {
-                                        handleSelect(event, row.id ?? index);
-                                        if (!row.id) console.warn('Missing id field in row', row);
+                                        handleSelect(event, row[fieldId] ?? index);
+                                        if (!row[fieldId]) console.warn('Missing id field in row', row);
                                     }}
-                                    selected={isSelected(row.id ?? index)}
+                                    selected={isSelected(row[fieldId] ?? index)}
                                 >
                                     {row}
                                 </EnhancedTableRow>
                             ))}
 
                             {emptyRows > 0 && (
-                                <TableRow style={{ height: DEFAULT_EMPTY_ROW_HEIGHT * emptyRows }}>
-                                    <TableCell colSpan={columns?.length || undefined} rowSpan={emptyRows} />
+                                <TableRow
+                                    sx={{
+                                        height: DEFAULT_EMPTY_ROW_HEIGHT * emptyRows,
+                                        ...(isEmpty && { width: '100%', display: 'flex' }),
+                                    }}
+                                    rowSpan={emptyRows}
+                                >
+                                    <TableCell colSpan={columns?.length || undefined} centerContent={isEmpty}>
+                                        {isEmpty && EmptyResultCmp ? (
+                                            isValidElement(EmptyResultCmp) ? (
+                                                React.cloneElement(EmptyResultCmp)
+                                            ) : typeof EmptyResultCmp === 'string' ? (
+                                                EmptyResultCmp
+                                            ) : (
+                                                <EmptyResultCmp />
+                                            )
+                                        ) : null}
+                                    </TableCell>
                                 </TableRow>
                             )}
                         </TableBody>
@@ -191,74 +215,43 @@ export default function EnhancedTable({
             </Paper>
         </Box>
     );
-}
-
-EnhancedTable.propTypes = {
-    elevation: PT_elevation,
-    stickyHeader: PropTypes.bool,
-    dense: PropTypes.bool,
-    maxHeight: PT_sizeUnit,
-    selectedLabel: PropTypes.string,
-    selectionMode: PropTypes.bool,
-    addSortColumnsAction: PropTypes.bool,
-    addFilterColumnsAction: PropTypes.bool,
-    addSelectionModeAction: PropTypes.bool,
-    title: PropTypes.string,
-    helperText: PropTypes.string,
-    onChangePagination: PropTypes.func,
-    onClickRow: PropTypes.func,
-    pagination: PT_pagination,
-    columns: PropTypes.arrayOf(PT_column),
-    actions: PropTypes.arrayOf(PT_action),
-    selectedActions: PropTypes.arrayOf(PT_action),
-    PaginationComponent: PropTypes.any,
-    paginationProps: PropTypes.object,
-    paginationAlign: PropTypes.oneOf(['start', 'center', 'end']),
-    tableColor: PT_colors,
-    headerColor: PT_colors,
-    evenRowsColor: PT_colors,
-    oddRowsColor: PT_colors,
-    LABELS: PropTypes.shape({
-        FILTER_TOOLTIP: PropTypes.string,
-        SELECTION_MODE_TOOLTIP: PropTypes.string,
-    }),
-    // eslint-disable-next-line react/forbid-prop-types
-    orderBy: PropTypes.object,
-    // eslint-disable-next-line react/forbid-prop-types
-    data: PropTypes.arrayOf(PropTypes.object),
 };
 
 EnhancedTable.defaultProps = {
-    elevation: 10,
-    stickyHeader: true,
-    dense: undefined,
-    maxHeight: undefined,
-    selectionMode: undefined,
-    addSortColumnsAction: undefined,
+    actions: undefined,
     addFilterColumnsAction: undefined,
     addSelectionModeAction: undefined,
-    title: undefined,
+    addSortColumnsAction: undefined,
+    columns: undefined,
+    data: undefined,
+    DEFAULT_EMPTY_ROW_HEIGHT: 57,
+    dense: undefined,
+    elevation: 10,
+    evenRowsColor: undefined,
+    fieldId: 'id',
+    FILTER_MENU_TITLE_LABEL: 'Filter Columns order',
+    FILTER_TOOLTIP_LABEL: 'Filter Columns',
+    headerColor: undefined,
     helperText: undefined,
+    maxHeight: undefined,
+    NUM_SELECTED_LABEL: '{n} selected',
+    oddRowsColor: undefined,
     onChangePagination: undefined,
     onClickRow: undefined,
+    orderBy: undefined,
     pagination: undefined,
-    columns: undefined,
-    actions: undefined,
-    selectedActions: undefined,
+    paginationAlign: undefined,
     PaginationComponent: undefined,
     paginationProps: undefined,
-    paginationAlign: undefined,
+    selectedActions: undefined,
+    SELECTION_MODE_TOOLTIP_LABEL: 'Enable Selection Mode',
+    selectionMode: undefined,
+    SORT_MENU_TITLE_LABEL: 'Sort Columns order',
+    SORT_TOOLTIP_LABEL: 'Sort Columns',
+    EmptyResultCmp: 'EMPTY RESULT',
+    stickyHeader: true,
     tableColor: undefined,
-    headerColor: undefined,
-    evenRowsColor: undefined,
-    oddRowsColor: undefined,
-    LABELS: {
-        FILTER_TOOLTIP: 'Filter Columns',
-        FILTER_MENU_TITLE: 'Filter Columns order',
-        SORT_MENU_TITLE: 'Sort Columns order',
-        SELECTION_MODE_TOOLTIP: 'Enable Selection Mode',
-        NUM_SELECTED: '{n} selected',
-    },
-    orderBy: undefined,
-    data: undefined,
+    title: undefined,
 };
+
+export default EnhancedTable;
