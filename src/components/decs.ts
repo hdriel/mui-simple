@@ -1,5 +1,7 @@
+import type React from 'react';
 import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent } from 'react';
 import type { SxProps } from '@mui/material';
+import type { ColorsProps, Column, Pagination, ToolbarAction } from './Table/Table.desc';
 
 export interface AccordionProps {
     bgColor?: string;
@@ -381,6 +383,43 @@ export interface TabsProps {
     verticalTabWidth?: string | number;
     reverse?: boolean;
     [key: string]: any;
+}
+
+export interface TableProps {
+    actionColor: string | ColorsProps;
+    actions: ToolbarAction[];
+    addFilterColumnsAction: boolean;
+    addSelectionModeAction: boolean;
+    addSortColumnsAction: boolean;
+    columns: Column[];
+    data: any[];
+    DEFAULT_EMPTY_ROW_HEIGHT: number;
+    dense: boolean;
+    elevation: number;
+    evenRowsColor: string | ColorsProps;
+    FILTER_MENU_TITLE_LABEL: string;
+    FILTER_TOOLTIP_LABEL: string;
+    headerColor: string | ColorsProps;
+    helperText: string;
+    maxHeight: string | number;
+    NUM_SELECTED_LABEL: string;
+    oddRowsColor: string | ColorsProps;
+    onChangePagination: (param: { orderBy: string | boolean; pagination: Pagination }) => void;
+    onChangeSortColumns: (sort: Record<string, string | number>) => void;
+    onClickRow: (rowId: string, rowData: any) => void;
+    orderBy: Record<string, string | number>;
+    pagination: Pagination;
+    paginationAlign: 'start' | 'center' | 'end';
+    PaginationComponent: React.ReactNode;
+    paginationProps: Record<string, any>;
+    selectedActions: ToolbarAction[];
+    SELECTION_MODE_TOOLTIP_LABEL: string;
+    selectionMode: boolean;
+    SORT_MENU_TITLE_LABEL: string;
+    SORT_TOOLTIP_LABEL: string;
+    stickyHeader: boolean;
+    tableColor: string | ColorsProps;
+    title: string;
 }
 
 export interface ToggleButtonGroupProps {

@@ -14,78 +14,43 @@ import {
     useSortColumns,
 } from '../hooks';
 import { EnhancedTablePagination } from './EnhancedTablePagination';
-import type { ColorsProps, Column, Pagination, ToolbarAction } from '../Table.desc';
+import { TableProps } from '../../decs';
 
-const DEFAULT_EMPTY_ROW_HEIGHT = 57;
-
-interface EnhancedTableProps {
-    elevation: number;
-    stickyHeader: boolean;
-    helperText: string;
-    maxHeight: string | number;
-    dense: boolean;
-    title: string;
-    pagination: Pagination;
-    onChangePagination: (param: { orderBy: string | boolean; pagination: Pagination }) => void;
-    onChangeSortColumns: (sort: Record<string, string | number>) => void;
-    orderBy: Record<string, string | number>;
-    addSortColumnsAction: boolean;
-    addFilterColumnsAction: boolean;
-    addSelectionModeAction: boolean;
-    data: any[];
-    columns: Column[];
-    onClickRow: (rowId: string, rowData: any) => void;
-    actions: ToolbarAction[];
-    selectionMode: boolean;
-    selectedActions: ToolbarAction[];
-    paginationProps: Record<string, any>;
-    paginationAlign: 'start' | 'center' | 'end';
-    PaginationComponent: React.ReactNode;
-    actionColor: string | ColorsProps;
-    tableColor: string | ColorsProps;
-    headerColor: string | ColorsProps;
-    evenRowsColor: string | ColorsProps;
-    oddRowsColor: string | ColorsProps;
-    FILTER_TOOLTIP_LABELS: string;
-    FILTER_MENU_TITLE_LABELS: string;
-    SORT_MENU_TITLE_LABELS: string;
-    SELECTION_MODE_TOOLTIP_LABELS: string;
-    NUM_SELECTED_LABELS: string;
-}
-
-const EnhancedTable: React.FC<EnhancedTableProps> = ({
-    elevation,
-    stickyHeader,
-    helperText,
-    maxHeight,
-    dense,
-    title,
-    pagination,
-    onChangePagination,
-    onChangeSortColumns,
-    orderBy,
-    addSortColumnsAction,
+const EnhancedTable: React.FC<TableProps> = ({
+    actionColor,
+    actions,
     addFilterColumnsAction,
     addSelectionModeAction,
-    data: _data,
+    addSortColumnsAction,
     columns: _columns,
+    data: _data,
+    DEFAULT_EMPTY_ROW_HEIGHT,
+    dense,
+    elevation,
+    evenRowsColor,
+    FILTER_MENU_TITLE_LABEL,
+    FILTER_TOOLTIP_LABEL,
+    headerColor,
+    helperText,
+    maxHeight,
+    NUM_SELECTED_LABEL,
+    oddRowsColor,
+    onChangePagination,
+    onChangeSortColumns,
     onClickRow,
-    actions,
-    selectionMode: _selectionMode,
-    selectedActions,
-    paginationProps,
+    orderBy,
+    pagination,
     paginationAlign,
     PaginationComponent,
-    actionColor,
+    paginationProps,
+    selectedActions,
+    SELECTION_MODE_TOOLTIP_LABEL,
+    selectionMode: _selectionMode,
+    SORT_MENU_TITLE_LABEL,
+    SORT_TOOLTIP_LABEL,
+    stickyHeader,
     tableColor,
-    headerColor,
-    evenRowsColor,
-    oddRowsColor,
-    FILTER_TOOLTIP_LABELS,
-    FILTER_MENU_TITLE_LABELS,
-    SORT_MENU_TITLE_LABELS,
-    SELECTION_MODE_TOOLTIP_LABELS,
-    NUM_SELECTED_LABELS,
+    title,
 }): React.ReactElement => {
     const theme = useTheme();
     const colorProps = extractColors({ theme, colors: tableColor });
@@ -108,8 +73,8 @@ const EnhancedTable: React.FC<EnhancedTableProps> = ({
         firstItem,
         columns: _columns,
         hide: !addFilterColumnsAction,
-        tooltip: FILTER_TOOLTIP_LABELS,
-        title: FILTER_MENU_TITLE_LABELS,
+        tooltip: FILTER_TOOLTIP_LABEL,
+        title: FILTER_MENU_TITLE_LABEL,
         colors: actionColorProps,
     });
 
@@ -118,18 +83,19 @@ const EnhancedTable: React.FC<EnhancedTableProps> = ({
         sortColumns,
         cmp: sortColumnsAction,
     } = useSortColumns({
+        tooltip: SORT_TOOLTIP_LABEL,
         firstItem,
         columns,
         hide: !addSortColumnsAction,
         onChangeSortColumns,
-        title: SORT_MENU_TITLE_LABELS,
+        title: SORT_MENU_TITLE_LABEL,
         colors: actionColorProps,
     });
 
     const [selectionMode, selectionModeCmp] = useSelectionMode({
         selectionMode: _selectionMode,
         hide: !addSelectionModeAction,
-        tooltip: SELECTION_MODE_TOOLTIP_LABELS,
+        tooltip: SELECTION_MODE_TOOLTIP_LABEL,
         colors: actionColorProps,
     });
 
@@ -153,14 +119,14 @@ const EnhancedTable: React.FC<EnhancedTableProps> = ({
                         selectionModeAction={selectionModeCmp}
                         sortColumnsAction={sortColumnsAction}
                         selectedActions={selectedActions}
-                        selectedLabel={NUM_SELECTED_LABELS}
+                        selectedLabel={NUM_SELECTED_LABEL}
                         data={_data}
                         selected={selected}
                         colorProps={colorProps}
                     />
                 )}
 
-                <TableContainer sx={{ maxHeight: maxHeight }}>
+                <TableContainer sx={{ maxHeight }}>
                     <Table stickyHeader={stickyHeader} sx={{ minWidth: 750 }} size={dense ? 'small' : 'medium'}>
                         {helperText && <caption>{helperText}</caption>}
                         <EnhancedTableHead
@@ -181,9 +147,9 @@ const EnhancedTable: React.FC<EnhancedTableProps> = ({
                                 <EnhancedTableRow
                                     key={index}
                                     columns={columns}
-                                    handleClick={(event, rowId, rowData) => {
+                                    handleClick={(event, rowData) => {
                                         event.stopPropagation();
-                                        if (!selectionMode) onClickRow?.(rowId, rowData);
+                                        if (!selectionMode) onClickRow?.(event, rowData);
                                     }}
                                     index={index}
                                     selectionMode={selectionMode}
@@ -223,72 +189,39 @@ const EnhancedTable: React.FC<EnhancedTableProps> = ({
     );
 };
 
-// EnhancedTable.propTypes = {
-//     elevation: PT_elevation,
-//     stickyHeader: PropTypes.bool,
-//     dense: PropTypes.bool,
-//     maxHeight: PT_sizeUnit,
-//     selectedLabel: PropTypes.string,
-//     selectionMode: PropTypes.bool,
-//     addSortColumnsAction: PropTypes.bool,
-//     addFilterColumnsAction: PropTypes.bool,
-//     addSelectionModeAction: PropTypes.bool,
-//     title: PropTypes.string,
-//     helperText: PropTypes.string,
-//     onChangePagination: PropTypes.func,
-//     onClickRow: PropTypes.func,
-//     pagination: PT_pagination,
-//     columns: PropTypes.arrayOf(PT_column),
-//     actions: PropTypes.arrayOf(PT_action),
-//     selectedActions: PropTypes.arrayOf(PT_action),
-//     PaginationComponent: PropTypes.any,
-//     paginationProps: PropTypes.object,
-//     paginationAlign: PropTypes.oneOf(['start', 'center', 'end']),
-//     tableColor: PT_colors,
-//     headerColor: PT_colors,
-//     evenRowsColor: PT_colors,
-//     oddRowsColor: PT_colors,
-//     LABELS: PropTypes.shape({
-//         FILTER_TOOLTIP: PropTypes.string,
-//         SELECTION_MODE_TOOLTIP: PropTypes.string,
-//     }),
-//     // eslint-disable-next-line react/forbid-prop-types
-//     orderBy: PropTypes.object,
-//     // eslint-disable-next-line react/forbid-prop-types
-//     data: PropTypes.arrayOf(PropTypes.object),
-// };
-
 EnhancedTable.defaultProps = {
-    elevation: 10,
-    stickyHeader: true,
-    dense: undefined,
-    maxHeight: undefined,
-    selectionMode: undefined,
-    addSortColumnsAction: undefined,
+    actions: undefined,
     addFilterColumnsAction: undefined,
     addSelectionModeAction: undefined,
-    title: undefined,
+    addSortColumnsAction: undefined,
+    columns: undefined,
+    data: undefined,
+    DEFAULT_EMPTY_ROW_HEIGHT: 57,
+    dense: undefined,
+    elevation: 10,
+    evenRowsColor: undefined,
+    FILTER_MENU_TITLE_LABEL: 'Filter Columns order',
+    FILTER_TOOLTIP_LABEL: 'Filter Columns',
+    headerColor: undefined,
     helperText: undefined,
+    maxHeight: undefined,
+    NUM_SELECTED_LABEL: '{n} selected',
+    oddRowsColor: undefined,
     onChangePagination: undefined,
     onClickRow: undefined,
+    orderBy: undefined,
     pagination: undefined,
-    columns: undefined,
-    actions: undefined,
-    selectedActions: undefined,
+    paginationAlign: undefined,
     PaginationComponent: undefined,
     paginationProps: undefined,
-    paginationAlign: undefined,
+    selectedActions: undefined,
+    SELECTION_MODE_TOOLTIP_LABEL: 'Enable Selection Mode',
+    selectionMode: undefined,
+    SORT_MENU_TITLE_LABEL: 'Sort Columns order',
+    SORT_TOOLTIP_LABEL: 'Sort Columns',
+    stickyHeader: true,
     tableColor: undefined,
-    headerColor: undefined,
-    evenRowsColor: undefined,
-    oddRowsColor: undefined,
-    FILTER_TOOLTIP_LABELS: 'Filter Columns',
-    FILTER_MENU_TITLE_LABELS: 'Filter Columns order',
-    SORT_MENU_TITLE_LABELS: 'Sort Columns order',
-    SELECTION_MODE_TOOLTIP_LABELS: 'Enable Selection Mode',
-    NUM_SELECTED_LABELS: '{n} selected',
-    orderBy: undefined,
-    data: undefined,
+    title: undefined,
 };
 
 export default EnhancedTable;

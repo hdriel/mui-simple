@@ -75,7 +75,6 @@ export interface useSortColumnsResult {
 export interface useSortColumnsProps {
     firstItem: any;
     columns: Column[];
-    orderBy: Record<string, string | number>;
     hide: boolean;
     onChangeSortColumns: (sort: Record<string, string | number>) => void;
     title: string;
