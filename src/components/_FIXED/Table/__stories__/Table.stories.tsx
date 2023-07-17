@@ -3,10 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { FITNESS_DATA, FITNESS_COLUMNS, PERSON_DATA, PERSON_COLUMNS } from './Table.mocks';
 
 import { Table } from '../Table';
-import Button from '../../_FIXED/Button/Button';
-import Pagination from '../../Pagination/Pagination';
+import Button from '../../Button/Button';
+import Pagination from '../../../Pagination/Pagination';
 import { a } from '@react-spring/web';
-import Typography from '../../_FIXED/Typography/Typography';
+import Typography from '../../Typography/Typography';
 
 const meta: Meta<typeof Table> = {
     title: 'Data-Display/Table',

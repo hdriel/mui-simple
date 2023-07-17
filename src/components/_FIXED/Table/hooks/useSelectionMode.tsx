@@ -3,7 +3,7 @@ import {
     LibraryAddCheckOutlined as LibraryAddCheckOutlinedIcon,
     LibraryAddCheck as LibraryAddCheckIcon,
 } from '@mui/icons-material';
-import { isDefined } from '../../../utils/helpers';
+import { isDefined } from '../../../../utils/helpers';
 import { Checkbox, Tooltip } from '../Table.styled';
 import type { useSelectionModeProps } from '../Table.desc';
 

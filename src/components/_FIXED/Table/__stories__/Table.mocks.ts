@@ -1,4 +1,4 @@
-import Typography from '../../_FIXED/Typography/Typography';
+import Typography from '../../Typography/Typography';
 import { Column } from '../Table.desc';
 
 export const FITNESS_COLUMNS: Column[] = [

@@ -1,6 +1,6 @@
 import { get } from 'lodash-es';
 import { SORT } from './Table.consts';
-import { getCustomColor, getTextWidth, isDefined } from '../../utils/helpers';
+import { getCustomColor, getTextWidth, isDefined } from '../../../utils/helpers';
 import type { ColorsProps, extractColorsProps, getDataRangeProps, Column } from './Table.desc';
 import React, { cloneElement, isValidElement } from 'react';
 import moment from 'moment/moment';

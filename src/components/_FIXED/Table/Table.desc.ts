@@ -1,5 +1,5 @@
 import type { Theme } from '@mui/material';
-import type { AvatarProps } from '../decs';
+import type { AvatarProps } from '../../decs';
 
 export type SORT_TYPE = '1' | '-1';
 export type SORT_VALUE_TYPE = 'asc' | 'desc' | undefined;

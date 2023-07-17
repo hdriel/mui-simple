@@ -1,7 +1,7 @@
 import type React from 'react';
 import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent } from 'react';
 import type { SxProps } from '@mui/material';
-import type { ColorsProps, Column, Pagination, ToolbarAction } from './Table/Table.desc';
+import type { ColorsProps, Column, Pagination, ToolbarAction } from './_FIXED/Table/Table.desc';
 
 export interface AccordionProps {
     bgColor?: string;

@@ -67,7 +67,7 @@ export { useSimpleStepper } from './components/Stepper/Stepper.utils';
 export { default as SVGIcon } from './components/SVGIcon/SVGIcon';
 export { default as Switch } from './components/Switch/Switch';
 
-export { Table } from './components/Table/Table';
+export { Table } from './components/_FIXED/Table/Table';
 export { default as Tabs } from './components/_FIXED/Tabs/Tabs';
 export { default as Tab } from './components/_FIXED/Tabs/Tab';
 export { default as Timeline } from './components/Timeline/Timeline';
