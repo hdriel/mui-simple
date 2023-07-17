@@ -1,5 +1,6 @@
 import React, { cloneElement, isValidElement } from 'react';
 import { alpha } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { Toolbar, Tooltip, Typography } from '../Table.styled';
 import type { EnhancedTableToolbarProps } from '../Table.desc';
 
@@ -16,6 +17,7 @@ export const EnhancedTableToolbar: React.FC<EnhancedTableToolbarProps> = ({
     colorProps,
     fieldId,
 }: EnhancedTableToolbarProps): React.ReactElement => {
+    const theme = useTheme();
     const numSelected = selected?.length ?? 0;
     const filteredActions = (numSelected > 0 ? selectedActions : actions) || [];
 
