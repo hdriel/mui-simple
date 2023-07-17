@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { alpha } from '@mui/material';
 import { PT_action } from '../Table.propTypes';
 import { Toolbar, Tooltip, Typography } from '../Table.styled';
+import type { ColorsProps, EnhancedTableToolbarProps } from '../Table.desc';
 
 export function EnhancedTableToolbar({
     selectedLabel,
@@ -15,7 +16,7 @@ export function EnhancedTableToolbar({
     selectedActions,
     actions,
     colorProps,
-}) {
+}: EnhancedTableToolbarProps): React.ReactElement {
     const numSelected = selected?.length ?? 0;
     const filteredActions = (numSelected > 0 ? selectedActions : actions) || [];
 
@@ -27,7 +28,7 @@ export function EnhancedTableToolbar({
                 ...(numSelected > 0 && {
                     bgcolor: (theme) =>
                         alpha(
-                            colorProps?.background ?? theme.palette.primary.main,
+                            (colorProps as ColorsProps)?.background ?? theme.palette.primary.main,
                             theme.palette.action.activatedOpacity
                         ),
                 }),
@@ -36,7 +37,7 @@ export function EnhancedTableToolbar({
             {numSelected > 0 ? (
                 <Typography sx={{ flex: '1 1 100%' }} color="inherit" variant="subtitle1" component="div">
                     {selectedLabel?.includes('{n}')
-                        ? selectedLabel?.replace('{n}', numSelected)
+                        ? selectedLabel?.replace('{n}', String(numSelected))
                         : `${numSelected} ${selectedLabel}`}
                 </Typography>
             ) : (

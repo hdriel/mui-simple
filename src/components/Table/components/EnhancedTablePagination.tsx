@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, TablePagination } from '../Table.styled';
 import { usePaginationDetails } from '../hooks';
+import type { EnhancedTablePaginationProps } from '../Table.desc';
 
 export function EnhancedTablePagination({
     onChangePagination,
@@ -10,22 +11,16 @@ export function EnhancedTablePagination({
     paginationAlign,
     PaginationComponent,
     orderBy,
-}) {
-    const { total, rowsPerPage, rowsPerPageList, page } = usePaginationDetails({
-        pagination,
-        orderBy,
-        rows,
-        onChangePagination,
-    });
+}: EnhancedTablePaginationProps): React.ReactElement {
+    const { total, rowsPerPage, rowsPerPageList, page } = usePaginationDetails({ pagination, rows });
 
-    const handleChangePage = (event, newPage) => {
+    const handleChangePage = (event, newPage): void => {
         if (typeof event === 'number') newPage = event;
-
         const config = { orderBy, pagination: { ...pagination, page: newPage } };
         onChangePagination?.(config);
     };
 
-    const handleChangeRowsPerPage = (event) => {
+    const handleChangeRowsPerPage = (event): void => {
         const rowPerPage = parseInt(event.target.value, 10);
         const config = { orderBy, pagination: { ...pagination, rowPerPage } };
         onChangePagination?.(config);

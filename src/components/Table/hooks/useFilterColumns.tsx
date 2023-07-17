@@ -1,15 +1,23 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { getColumn, getMenuSizes } from '../Table.utils';
-import Menu from '../../Menu/Menu';
-import CheckList from '../../List/CheckList';
 import {
     DragHandle as DragHandleIcon,
     FilterAlt as FilterAltIcon,
     FilterAltOff as FilterAltOffIcon,
 } from '@mui/icons-material';
+import { getColumn, getMenuSizes } from '../Table.utils';
+import Menu from '../../Menu/Menu';
+import CheckList from '../../List/CheckList';
 import { Checkbox, Tooltip } from '../Table.styled';
+import type { Column, useFilterColumnsProps } from '../Table.desc';
 
-export function useFilterColumns({ firstItem = {}, columns: _columns, hide, tooltip, title, colors }) {
+export function useFilterColumns({
+    firstItem = {},
+    columns: _columns,
+    hide,
+    tooltip,
+    title,
+    colors,
+}: useFilterColumnsProps): [Column[], React.ReactElement] {
     const [columnsState, setColumnsState] = useState(_columns);
 
     const columns = useMemo(
@@ -62,13 +70,13 @@ export function useFilterColumns({ firstItem = {}, columns: _columns, hide, tool
                 <CheckList
                     droppableId="filter-menu"
                     title={title}
-                    items={columns?.map((column) => ({
+                    items={columns?.map((column, index) => ({
                         id: column.field,
                         title: column.label ?? column.field,
                         checked: filters[column.field] ?? false,
                         onClick: onClickFilterItem(column.field),
                         padding: '0.5em 0',
-                        actions: [<DragHandleIcon />],
+                        actions: [<DragHandleIcon key={`${column.field}-${index}`} />],
                         data: column,
                     }))}
                     dragAndDropItems

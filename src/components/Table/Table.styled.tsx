@@ -20,6 +20,7 @@ import MuiTooltip from '../_FIXED/Tooltip/Tooltip';
 import MuiButton from '../_FIXED/Button/Button';
 import MuiPaper from '../Paper/Paper';
 import { extractColors } from './Table.utils';
+import { ColorsProps } from './Table.desc';
 
 export const Typography = MuiTypography;
 export const Avatar = MuiAvatar;
@@ -32,16 +33,19 @@ export const Box = MuiBox;
 export const Button = MuiButton;
 export const Table = MuiTable;
 export const TableBody = MuiTableBody;
-export const TableCell = styled(MuiTableCell)`
+
+interface TableCellProp {
+    colors?: ColorsProps;
+}
+export const TableCell = styled(MuiTableCell, {
+    shouldForwardProp: (propName: PropertyKey) => !['colors'].includes(propName as string),
+})<TableCellProp>`
     padding-left: 1em;
     padding-right: 1em;
 
     ${(props) => {
-        const { color, background } =
-            extractColors({
-                theme: props.theme,
-                colors: props.colors,
-            }) ?? {};
+        const { colors, theme } = props;
+        const { color, background } = extractColors({ theme, colors }) ?? {};
 
         return css`
             color: ${color};
@@ -52,6 +56,6 @@ export const TableCell = styled(MuiTableCell)`
 export const TableContainer = MuiTableContainer;
 export const TableHead = MuiTableHead;
 export const TablePagination = MuiTablePagination;
-export const TableRow = MuiTableRow;
+export const TableRow: any = MuiTableRow;
 export const TableSortLabel = MuiTableSortLabel;
 export const Toolbar = MuiToolbar;

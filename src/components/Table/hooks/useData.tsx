@@ -1,8 +1,15 @@
 import { useMemo } from 'react';
-
 import { SORT } from '../Table.consts';
+import type { useDataProps } from '../Table.desc';
 
-export function useData({ page, independentData, sortColumns, data: _data = [], sliceFrom = 0, sliceTo }) {
+export function useData({
+    page,
+    independentData,
+    sortColumns,
+    data: _data = [],
+    sliceFrom = 0,
+    sliceTo,
+}: useDataProps): any[] {
     const sortedData = useMemo(() => {
         let data = _data ?? [];
         if (independentData) {

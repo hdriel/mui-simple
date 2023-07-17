@@ -1,8 +1,12 @@
 import { get } from 'lodash-es';
 import { SORT } from './Table.consts';
 import { getCustomColor, getTextWidth, isDefined } from '../../utils/helpers';
+import type { ColorsProps, extractColorsProps, getDataRangeProps, Column } from './Table.desc';
+import React, { cloneElement, isValidElement } from 'react';
+import moment from 'moment/moment';
+import { Avatar, Image, Tooltip, Typography } from './Table.styled';
 
-export function getDataRange({ rows, total, page, rowsPerPage }) {
+export function getDataRange({ rows, total, page, rowsPerPage }: getDataRangeProps): [number, number] {
     // case that got full data as total
     if (rows === total) {
         const from = page * rowsPerPage;
@@ -13,8 +17,10 @@ export function getDataRange({ rows, total, page, rowsPerPage }) {
     return [0, rowsPerPage];
 }
 
-export function extractColors({ theme, colors }) {
-    const { background: _background, color: _color } = typeof colors === 'object' ? colors : { background: colors };
+export function extractColors({ theme, colors }: extractColorsProps): undefined | ColorsProps {
+    const { background: _background, color: _color } = (
+        typeof colors === 'object' ? colors : { background: colors }
+    ) as ColorsProps;
 
     const [color] = getCustomColor({ theme, customColor: _color });
     const [, isThemeColor] = getCustomColor({
@@ -23,20 +29,20 @@ export function extractColors({ theme, colors }) {
     });
     const [background] = getCustomColor({ theme, customColor: _background });
 
-    const textColor = isThemeColor ? get(theme, `palette.${background}.contrastText`) : color;
+    const textColor = isThemeColor && background ? get(theme, `palette.${background as string}.contrastText`) : color;
 
     const bgColor = background;
 
     return isDefined(textColor) || isDefined(bgColor) ? { color: textColor, background: bgColor } : undefined;
 }
 
-export function getColumn(row, column) {
+export function getColumn(row: any, column: Column): Column {
     const isString = typeof column === 'string';
-    const field = isString ? column : column?.field;
+    const field: string = isString ? column : column?.field;
 
     return {
-        id: field,
-        field: field,
+        id: column?.id ?? field,
+        field,
         label: isString ? column : column.label,
         numeric: isString ? typeof row?.[field] === 'number' ?? false : column.numeric,
         disablePadding: isString ? false : column.disablePadding ?? false,
@@ -56,7 +62,7 @@ export function getColumn(row, column) {
     };
 }
 
-function getMenuWidth(fields) {
+function getMenuWidth(fields: string[]): number {
     const sized = fields?.map((field) => field?.length ?? 0) ?? [0];
     const index = Math.max(...sized);
     const maxWord = fields?.[sized.indexOf(index)] ?? '';
@@ -68,7 +74,7 @@ function getMenuWidth(fields) {
 }
 
 // ### sort functions
-export function descendingComparator(a, b, orderBy) {
+export function descendingComparator(a, b, orderBy): number {
     if (b[orderBy] < a[orderBy]) {
         return -1;
     }
@@ -78,7 +84,7 @@ export function descendingComparator(a, b, orderBy) {
     return 0;
 }
 
-export function getComparator(order, orderBy) {
+export function getComparator(order: 'asc' | 'desc', orderBy: string): (a, b) => number {
     return order === 'desc'
         ? (a, b) => descendingComparator(a, b, orderBy)
         : (a, b) => -descendingComparator(a, b, orderBy);
@@ -88,7 +94,7 @@ export function getComparator(order, orderBy) {
 // stableSort() brings sort stability to non-modern browsers (notably IE11). If you
 // only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
 // with exampleArray.slice().sort(exampleComparator)
-export function stableSort(array, comparator) {
+export function stableSort(array, comparator): any[] {
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {
         const order = comparator(a[0], b[0]);
@@ -100,18 +106,63 @@ export function stableSort(array, comparator) {
     return stabilizedThis.map((el) => el[0]);
 }
 
-export function getNextOrderBy(orderBy) {
-    return {
+export function getNextOrderBy(orderBy: string | boolean): '1' | '-1' | false {
+    return ({
         false: SORT.UP,
         [SORT.UP]: SORT.DOWN,
         [SORT.DOWN]: false,
-    }[orderBy];
+    }[orderBy as string] ?? SORT.UP) as '1' | '-1' | false;
 }
 
-export function getMenuSizes({ columns, title }) {
+export function getMenuSizes({ columns, title }: { columns: any[]; title: string }): [number, number] {
     const fields = columns?.map((column) => column.label);
     const width = getMenuWidth(fields);
     const height = (fields?.length ?? 1) * 62 + (title ? 48 : 5);
 
     return [width, height];
+}
+
+export function getRowContent({ column, data }: { column: Column; data: any }): React.ReactElement {
+    const fieldValue = data[column.field];
+
+    const props = typeof column.props === 'function' ? column.props(data) : column.props;
+
+    const CustomCmp: React.ReactElement = isValidElement(column.cmp) ? cloneElement(column.cmp, { ...props }) : null;
+
+    if (CustomCmp) {
+        // @ts-expect-error
+        return <CustomCmp>{fieldValue}</CustomCmp>;
+    }
+
+    let content;
+    if (column.dateFormat && fieldValue) {
+        content = moment(fieldValue).format(column.dateFormat);
+    } else if (column.image && fieldValue) {
+        const { width, height, avatar, alt } =
+            typeof column.image === 'boolean' ? ({} as any) : column.image ?? ({} as any);
+
+        content = avatar ? (
+            <Avatar image={fieldValue} {...props} />
+        ) : (
+            <Image src={fieldValue} alt={alt ?? fieldValue} style={{ width, height }} {...props} />
+        );
+    } else {
+        content = fieldValue;
+        content = typeof column.format === 'function' ? column.format(content, data) : content;
+
+        // numberVariable.toLocaleString('en-US')  1324171354 => 1,324,171,354
+        content = column.numeric ? content?.toLocaleString('en-US') : content;
+    }
+
+    const tooltip = typeof column.tooltip === 'function' ? column.tooltip?.(data) : column.tooltip;
+
+    const wrapped = ['number', 'string'].includes(typeof content) ? (
+        <Typography rows={2} {...props}>
+            {content}
+        </Typography>
+    ) : (
+        content
+    );
+
+    return <Tooltip title={tooltip}>{wrapped}</Tooltip>;
 }

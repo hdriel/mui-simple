@@ -1,11 +1,23 @@
 import React from 'react';
-
 import { SORT, SORT_VALUE } from '../Table.consts';
-
 import { TableHead, TableCell, TableRow, TableSortLabel, Checkbox } from '../Table.styled';
 import { getNextOrderBy } from '../Table.utils';
+import type { ColorsProps, Column, SORT_VALUE_TYPE } from '../Table.desc';
 
-export function EnhancedTableHead({
+interface EnhancedTableHeadProps {
+    columns: Column[];
+    sortColumns: Column[];
+    orderBy: '1' | '-1' | undefined;
+    onRequestSort: (event: any, property: string, nextState: string) => void;
+    headerColor: ColorsProps;
+    actionColor: ColorsProps;
+    numSelected: number;
+    onSelectAllClick: (event: any) => void;
+    rowCount: number;
+    selectionMode: boolean;
+}
+
+export const EnhancedTableHead: React.FC<EnhancedTableHeadProps> = ({
     columns,
     sortColumns,
     orderBy,
@@ -16,7 +28,7 @@ export function EnhancedTableHead({
     onSelectAllClick,
     rowCount,
     selectionMode,
-}) {
+}): React.ReactElement => {
     const createSortHandler = (property, nextState) => (event) => onRequestSort(event, property, nextState);
 
     return (
@@ -36,7 +48,12 @@ export function EnhancedTableHead({
                 {columns?.map((headCell) => {
                     const sortColumn = sortColumns.find((sortColumn) => sortColumn.field === headCell.field);
                     const { orderBy } = sortColumn ?? {};
-                    const isActiveOrderBy = [SORT.DOWN, SORT.UP].includes(orderBy);
+                    const isActiveOrderBy = [SORT.DOWN, SORT.UP].includes(orderBy as string);
+                    const sortDirection: SORT_VALUE_TYPE = {
+                        [SORT.DOWN]: SORT_VALUE.DOWN,
+                        [SORT.UP]: SORT_VALUE.UP,
+                    }[orderBy] as SORT_VALUE_TYPE;
+
                     const nextState = getNextOrderBy(orderBy);
 
                     return (
@@ -44,7 +61,7 @@ export function EnhancedTableHead({
                             key={headCell.field}
                             align={headCell.numeric ? 'right' : 'left'}
                             padding={headCell.disablePadding ? 'none' : 'normal'}
-                            sortDirection={SORT_VALUE[orderBy]}
+                            sortDirection={sortDirection}
                             colors={headerColor}
                         >
                             <TableSortLabel
@@ -60,4 +77,4 @@ export function EnhancedTableHead({
             </TableRow>
         </TableHead>
     );
-}
+};

@@ -1,51 +1,11 @@
-import React, { cloneElement, isValidElement } from 'react';
-import moment from 'moment';
+import React from 'react';
+import type { PropsWithChildren } from 'react';
 
-import { TableCell, TableRow, Tooltip, Image, Checkbox, Avatar, Typography } from '../Table.styled';
+import { TableCell, TableRow, Checkbox } from '../Table.styled';
+import { getRowContent } from '../Table.utils';
+import type { EnhancedTableRowProps } from '../Table.desc';
 
-function getRowContent({ column, data }) {
-    const fieldValue = typeof column.field === 'function' ? column.field(data) : data[column.field];
-
-    const props = typeof column.props === 'function' ? column.props(data) : column.props;
-
-    const CustomCmp = isValidElement(column.cmp) && cloneElement(column.cmp, { ...props });
-
-    if (CustomCmp) {
-        return <CustomCmp>{fieldValue}</CustomCmp>;
-    }
-
-    let content;
-    if (column.dateFormat && fieldValue) {
-        content = moment(fieldValue).format(column.dateFormat);
-    } else if (column.image && fieldValue) {
-        const { width, height, avatar } = typeof column.image === 'boolean' ? {} : column.image ?? {};
-
-        content = avatar ? (
-            <Avatar image={fieldValue} {...props} />
-        ) : (
-            <Image src={fieldValue} alt={`${column.field}`} style={{ width, height }} {...props} />
-        );
-    } else {
-        content = fieldValue;
-        content = typeof column.format === 'function' ? column.format(content, data) : content;
-
-        // numberVariable.toLocaleString('en-US')  1324171354 => 1,324,171,354
-        content = column.numeric ? content?.toLocaleString('en-US') : content;
-    }
-
-    const tooltip = typeof column.tooltip === 'function' ? column.tooltip?.(data) : column.tooltip;
-
-    const wrapped = ['number', 'string'].includes(typeof content) ? (
-        <Typography rows={2} {...props}>
-            {content}
-        </Typography>
-    ) : (
-        content
-    );
-
-    return <Tooltip title={tooltip}>{wrapped}</Tooltip>;
-}
-export default function EnhancedTableRow({
+const EnhancedTableRow: React.FC<PropsWithChildren<EnhancedTableRowProps>> = ({
     columns,
     handleClick,
     index,
@@ -56,8 +16,8 @@ export default function EnhancedTableRow({
     selected,
     selectionMode,
     children,
-}) {
-    const data = children ?? {};
+}): React.ReactElement => {
+    const data: any = children ?? {};
 
     return (
         <TableRow
@@ -69,7 +29,7 @@ export default function EnhancedTableRow({
             sx={{ cursor: handleClick ? 'pointer' : 'default' }}
         >
             {selectionMode && (
-                <TableCell padding="checkbox">
+                <TableCell padding="checkbox" colors={index % 2 === 0 ? evenRowsColor : oddRowsColor}>
                     <Checkbox
                         color={actionColor?.background ?? actionColor?.color ?? 'primary'}
                         checked={selected ?? false}
@@ -92,4 +52,6 @@ export default function EnhancedTableRow({
             ))}
         </TableRow>
     );
-}
+};
+
+export default EnhancedTableRow;

@@ -1,6 +1,5 @@
 import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent } from 'react';
 import type { SxProps } from '@mui/material';
-import PropTypes from 'prop-types';
 
 export interface AccordionProps {
     bgColor?: string;

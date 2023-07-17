@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import type { useSelectionResult } from '../Table.desc';
 
-export function useSelection({ data }) {
-    const [selected, setSelected] = useState([]);
+export function useSelection({ data }: { data: any[] }): useSelectionResult {
+    const [selected, setSelected] = useState<string[]>([]);
 
-    const isSelected = (id) => selected.indexOf(id) !== -1;
+    const isSelected = (id: string): boolean => selected.includes(id);
 
-    const handleSelectAllClick = (event) => {
+    const handleSelectAllClick = (event): void => {
         if (event.target.checked) {
             const newSelected = data.map((row, index) => row.id ?? index);
             setSelected(newSelected);
@@ -14,7 +15,7 @@ export function useSelection({ data }) {
         setSelected([]);
     };
 
-    const handleSelect = (event, name) => {
+    const handleSelect = (event, name: string): void => {
         const selectedIndex = selected.indexOf(name);
         let newSelected = [];
 

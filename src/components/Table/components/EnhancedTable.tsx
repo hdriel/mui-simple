@@ -1,17 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
-
 import { EnhancedTableToolbar } from './EnhancedTableToolbar';
 import { EnhancedTableHead } from './EnhancedTableHead';
 import EnhancedTableRow from './EnhancedTableRow';
-
-import { PT_elevation, PT_action, PT_column, PT_pagination, PT_sizeUnit, PT_colors } from '../Table.propTypes';
-
 import { extractColors } from '../Table.utils';
-
 import { TableCell, Box, TableRow, TableContainer, TableBody, Table, Paper } from '../Table.styled';
-
 import {
     useData,
     useFilterColumns,
@@ -21,10 +14,42 @@ import {
     useSortColumns,
 } from '../hooks';
 import { EnhancedTablePagination } from './EnhancedTablePagination';
+import type { ColorsProps, Column, Pagination, ToolbarAction } from '../Table.desc';
 
 const DEFAULT_EMPTY_ROW_HEIGHT = 57;
 
-export default function EnhancedTable({
+interface EnhancedTableProps {
+    elevation: number;
+    stickyHeader: boolean;
+    helperText: string;
+    maxHeight;
+    dense: boolean;
+    title: string;
+    pagination: Pagination;
+    onChangePagination;
+    onChangeSortColumns;
+    orderBy;
+    addSortColumnsAction: boolean;
+    addFilterColumnsAction: boolean;
+    addSelectionModeAction: boolean;
+    data: any[];
+    columns: Column[];
+    onClickRow;
+    actions: ToolbarAction[];
+    selectionMode: boolean;
+    selectedActions: ToolbarAction[];
+    paginationProps: Record<string, any>;
+    paginationAlign: 'start' | 'center' | 'end';
+    PaginationComponent: React.ReactNode;
+    actionColor: string | ColorsProps;
+    tableColor: string | ColorsProps;
+    headerColor: string | ColorsProps;
+    evenRowsColor: string | ColorsProps;
+    oddRowsColor: string | ColorsProps;
+    LABELS;
+}
+
+const EnhancedTable: React.FC<EnhancedTableProps> = ({
     elevation,
     stickyHeader,
     helperText,
@@ -53,7 +78,7 @@ export default function EnhancedTable({
     evenRowsColor,
     oddRowsColor,
     LABELS,
-}) {
+}): React.ReactElement => {
     const theme = useTheme();
     const colorProps = extractColors({ theme, colors: tableColor });
     const actionColorProps =
@@ -69,8 +94,6 @@ export default function EnhancedTable({
     const { emptyRows, sliceFrom, sliceTo, independentData, page } = usePaginationDetails({
         rows,
         pagination,
-        orderBy,
-        onChangePagination,
     });
 
     const [columns, filterActionCmp] = useFilterColumns({
@@ -191,42 +214,42 @@ export default function EnhancedTable({
             </Paper>
         </Box>
     );
-}
-
-EnhancedTable.propTypes = {
-    elevation: PT_elevation,
-    stickyHeader: PropTypes.bool,
-    dense: PropTypes.bool,
-    maxHeight: PT_sizeUnit,
-    selectedLabel: PropTypes.string,
-    selectionMode: PropTypes.bool,
-    addSortColumnsAction: PropTypes.bool,
-    addFilterColumnsAction: PropTypes.bool,
-    addSelectionModeAction: PropTypes.bool,
-    title: PropTypes.string,
-    helperText: PropTypes.string,
-    onChangePagination: PropTypes.func,
-    onClickRow: PropTypes.func,
-    pagination: PT_pagination,
-    columns: PropTypes.arrayOf(PT_column),
-    actions: PropTypes.arrayOf(PT_action),
-    selectedActions: PropTypes.arrayOf(PT_action),
-    PaginationComponent: PropTypes.any,
-    paginationProps: PropTypes.object,
-    paginationAlign: PropTypes.oneOf(['start', 'center', 'end']),
-    tableColor: PT_colors,
-    headerColor: PT_colors,
-    evenRowsColor: PT_colors,
-    oddRowsColor: PT_colors,
-    LABELS: PropTypes.shape({
-        FILTER_TOOLTIP: PropTypes.string,
-        SELECTION_MODE_TOOLTIP: PropTypes.string,
-    }),
-    // eslint-disable-next-line react/forbid-prop-types
-    orderBy: PropTypes.object,
-    // eslint-disable-next-line react/forbid-prop-types
-    data: PropTypes.arrayOf(PropTypes.object),
 };
+
+// EnhancedTable.propTypes = {
+//     elevation: PT_elevation,
+//     stickyHeader: PropTypes.bool,
+//     dense: PropTypes.bool,
+//     maxHeight: PT_sizeUnit,
+//     selectedLabel: PropTypes.string,
+//     selectionMode: PropTypes.bool,
+//     addSortColumnsAction: PropTypes.bool,
+//     addFilterColumnsAction: PropTypes.bool,
+//     addSelectionModeAction: PropTypes.bool,
+//     title: PropTypes.string,
+//     helperText: PropTypes.string,
+//     onChangePagination: PropTypes.func,
+//     onClickRow: PropTypes.func,
+//     pagination: PT_pagination,
+//     columns: PropTypes.arrayOf(PT_column),
+//     actions: PropTypes.arrayOf(PT_action),
+//     selectedActions: PropTypes.arrayOf(PT_action),
+//     PaginationComponent: PropTypes.any,
+//     paginationProps: PropTypes.object,
+//     paginationAlign: PropTypes.oneOf(['start', 'center', 'end']),
+//     tableColor: PT_colors,
+//     headerColor: PT_colors,
+//     evenRowsColor: PT_colors,
+//     oddRowsColor: PT_colors,
+//     LABELS: PropTypes.shape({
+//         FILTER_TOOLTIP: PropTypes.string,
+//         SELECTION_MODE_TOOLTIP: PropTypes.string,
+//     }),
+//     // eslint-disable-next-line react/forbid-prop-types
+//     orderBy: PropTypes.object,
+//     // eslint-disable-next-line react/forbid-prop-types
+//     data: PropTypes.arrayOf(PropTypes.object),
+// };
 
 EnhancedTable.defaultProps = {
     elevation: 10,
@@ -262,3 +285,5 @@ EnhancedTable.defaultProps = {
     orderBy: undefined,
     data: undefined,
 };
+
+export default EnhancedTable;
