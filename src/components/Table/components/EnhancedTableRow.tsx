@@ -29,7 +29,7 @@ const EnhancedTableRow: React.FC<PropsWithChildren<EnhancedTableRowProps>> = ({
             sx={{ cursor: handleClick ? 'pointer' : 'default' }}
         >
             {selectionMode && (
-                <TableCell padding="checkbox" colors={index % 2 === 0 ? evenRowsColor : oddRowsColor}>
+                <TableCell padding="checkbox" colors={index % 2 === 1 ? evenRowsColor : oddRowsColor}>
                     <Checkbox
                         color={actionColor?.background ?? actionColor?.color ?? 'primary'}
                         checked={selected ?? false}
@@ -43,7 +43,7 @@ const EnhancedTableRow: React.FC<PropsWithChildren<EnhancedTableRowProps>> = ({
                     key={column.field}
                     id={`enhanced-table-checkbox-${colIndex}`}
                     align={column.align}
-                    colors={index % 2 === 0 ? evenRowsColor : oddRowsColor}
+                    colors={index % 2 === 1 ? evenRowsColor : oddRowsColor}
                     rowSpan={data._rowSpan}
                     colSpan={data.colSpan}
                 >

@@ -1,9 +1,9 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Send as SendIcon } from '@mui/icons-material';
-import { PERSON_COLUMNS, FITNESS_DATA, FITNESS_COLUMNS, PERSON_DATA } from './Table.mocks';
+import { FITNESS_DATA, FITNESS_COLUMNS, PERSON_DATA, PERSON_COLUMNS } from './Table.mocks';
 
 import { Table } from '../Table';
+import Button from '../../_FIXED/Button/Button';
 
 const meta: Meta<typeof Table> = {
     title: 'Data-Display/Table',
@@ -25,27 +25,89 @@ export const ActionColor: Story = {
         data: FITNESS_DATA.slice(0, 3),
         actionColor: { background: 'warning', color: 'secondary' },
         addSelectionModeAction: true,
-        actions: [<SendIcon />],
     },
 };
 
-//   actions,
-//   addFilterColumnsAction,
-//   addSelectionModeAction,
-//   addSortColumnsAction,
+export const Actions: Story = {
+    args: {
+        columns: FITNESS_COLUMNS,
+        data: FITNESS_DATA.slice(0, 3),
+        actionColor: { background: 'secondary', color: 'secondary' },
+        actions: [{ tooltip: 'send', Cmp: <Button icon="Send" /> }],
+    },
+};
+
+export const AddModeAction: Story = {
+    args: {
+        columns: FITNESS_COLUMNS,
+        data: FITNESS_DATA.slice(0, 3),
+        actionColor: { background: 'success', color: 'success' },
+        addFilterColumnsAction: true,
+        addSortColumnsAction: true,
+        addSelectionModeAction: true,
+    },
+};
+
+export const Dense: Story = {
+    args: {
+        columns: FITNESS_COLUMNS,
+        data: FITNESS_DATA.slice(0, 3),
+        dense: true,
+    },
+};
+
+export const Elevation: Story = {
+    args: {
+        columns: FITNESS_COLUMNS,
+        data: FITNESS_DATA.slice(0, 3),
+        elevation: 0,
+    },
+};
+
+export const EvenAndOddRowsColor: Story = {
+    args: {
+        columns: FITNESS_COLUMNS,
+        data: FITNESS_DATA.slice(0, 5),
+        evenRowsColor: '#10DCCC',
+        oddRowsColor: { background: 'warning', color: 'white' },
+    },
+};
+
 //   columns: _columns,
 //   data: _data,
 //   DEFAULT_EMPTY_ROW_HEIGHT,
-//   dense,
-//   elevation,
-//   evenRowsColor,
 //   FILTER_MENU_TITLE_LABEL,
 //   FILTER_TOOLTIP_LABEL,
-//   headerColor,
-//   helperText,
-//   maxHeight,
 //   NUM_SELECTED_LABEL,
-//   oddRowsColor,
+//   SORT_MENU_TITLE_LABEL,
+//   SORT_TOOLTIP_LABEL,
+//   SELECTION_MODE_TOOLTIP_LABEL,
+
+export const HeaderColor: Story = {
+    args: {
+        columns: FITNESS_COLUMNS,
+        data: FITNESS_DATA.slice(0, 3),
+        headerColor: { background: '#FF00F0', color: 'info.dark' },
+    },
+};
+
+export const TableColor: Story = {
+    args: {
+        columns: FITNESS_COLUMNS,
+        data: FITNESS_DATA.slice(0, 3),
+        tableColor: { background: '#48d95f', color: '#039999' },
+    },
+};
+
+export const helperText: Story = {
+    args: {
+        columns: FITNESS_COLUMNS,
+        data: FITNESS_DATA.slice(0, 3),
+        helperText: 'here is the helper text content',
+    },
+};
+
+//   maxHeight,
 //   onChangePagination,
 //   onChangeSortColumns,
 //   onClickRow,
@@ -55,10 +117,7 @@ export const ActionColor: Story = {
 //   PaginationComponent,
 //   paginationProps,
 //   selectedActions,
-//   SELECTION_MODE_TOOLTIP_LABEL,
-//   selectionMode: _selectionMode,
-//   SORT_MENU_TITLE_LABEL,
-//   SORT_TOOLTIP_LABEL,
+//   selectionMode,
 //   stickyHeader,
 //   tableColor,
 //   title,

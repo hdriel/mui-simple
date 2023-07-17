@@ -112,7 +112,7 @@ const EnhancedTable: React.FC<TableProps> = ({
     return (
         <Box sx={{ width: '100%' }}>
             <Paper elevation={elevation} sx={{ width: '100%', mb: 2, overflow: 'hidden', ...colorProps }}>
-                {(title || actions?.length || selectedActions?.length || filterActionCmp) && (
+                {(title || actions?.length || selectedActions?.length || filterActionCmp || selectionModeCmp) && (
                     <EnhancedTableToolbar
                         title={title}
                         actions={actions}

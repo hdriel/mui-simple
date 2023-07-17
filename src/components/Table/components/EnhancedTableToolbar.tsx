@@ -51,6 +51,8 @@ export const EnhancedTableToolbar: React.FC<EnhancedTableToolbarProps> = ({
                     // eslint-disable-next-line react/no-array-index-key
                     <Tooltip key={index} title={tooltip}>
                         {cloneElement(Cmp as any, {
+                            color: colorProps?.color ?? colorProps?.background ?? theme.palette.primary.main,
+                            sx: { color: colorProps?.background ?? theme.palette.primary.main, ...Cmp?.props?.sx },
                             onClick: (event) => {
                                 Cmp?.props?.onClick?.(
                                     event,
