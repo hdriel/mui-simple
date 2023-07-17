@@ -218,6 +218,7 @@ const EnhancedTable: React.FC<TableProps> = ({
 };
 
 EnhancedTable.defaultProps = {
+    actionColor: undefined,
     actions: undefined,
     addFilterColumnsAction: undefined,
     addSelectionModeAction: undefined,
@@ -237,6 +238,7 @@ EnhancedTable.defaultProps = {
     NUM_SELECTED_LABEL: '{n} selected',
     oddRowsColor: undefined,
     onChangePagination: undefined,
+    onChangeSortColumns: undefined,
     onClickRow: undefined,
     orderBy: undefined,
     pagination: undefined,
