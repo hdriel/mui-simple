@@ -6,6 +6,7 @@ import { Table } from '../Table';
 import Button from '../../_FIXED/Button/Button';
 import Pagination from '../../Pagination/Pagination';
 import { a } from '@react-spring/web';
+import Typography from '../../_FIXED/Typography/Typography';
 
 const meta: Meta<typeof Table> = {
     title: 'Data-Display/Table',
@@ -176,6 +177,7 @@ export const PaginationAlign: Story = {
         );
     },
 };
+
 export const defaultEmptyRowHeight: Story = {
     args: {
         columns: FITNESS_COLUMNS,
@@ -247,5 +249,18 @@ export const StickyHeader: Story = {
         data: PERSON_DATA.slice(0, 5),
         maxHeight: 300,
         stickyHeader: false,
+    },
+};
+
+export const EmptyResultCmp: Story = {
+    args: {
+        columns: FITNESS_COLUMNS,
+        data: [],
+        pagination: { page: 1, rowsPerPage: 5, total: 5 },
+        paginationAlign: 'center',
+        DEFAULT_EMPTY_ROW_HEIGHT: 40,
+        EmptyResultCmp: <Typography size={25}>Noting was found here...</Typography>, // work
+        // EmptyResultCmp: 'Noting was found here...', // work
+        // EmptyResultCmp: () => <Typography size={25}>Noting was found here...</Typography>, // work
     },
 };

@@ -36,9 +36,10 @@ export const TableBody = MuiTableBody;
 
 interface TableCellProp {
     colors?: ColorsProps;
+    centerContent?: boolean;
 }
 export const TableCell = styled(MuiTableCell, {
-    shouldForwardProp: (propName: PropertyKey) => !['colors'].includes(propName as string),
+    shouldForwardProp: (propName: PropertyKey) => !['colors', 'centerContent'].includes(propName as string),
 })<TableCellProp>`
     padding-left: 1em;
     padding-right: 1em;
@@ -52,6 +53,17 @@ export const TableCell = styled(MuiTableCell, {
             background-color: ${background};
         `;
     }};
+
+    ${(props) => {
+        return props.centerContent
+            ? css`
+                  width: 100%;
+                  justify-content: center;
+                  align-items: center;
+                  display: flex;
+              `
+            : css``;
+    }}
 `;
 export const TableContainer = MuiTableContainer;
 export const TableHead = MuiTableHead;

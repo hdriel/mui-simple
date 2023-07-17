@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { isValidElement } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { EnhancedTableToolbar } from './EnhancedTableToolbar';
 import { EnhancedTableHead } from './EnhancedTableHead';
@@ -28,6 +28,7 @@ const EnhancedTable: React.FC<TableProps> = ({
     dense,
     elevation,
     evenRowsColor,
+    EmptyResultCmp,
     fieldId,
     FILTER_MENU_TITLE_LABEL,
     FILTER_TOOLTIP_LABEL,
@@ -109,6 +110,8 @@ const EnhancedTable: React.FC<TableProps> = ({
         data: _data,
     });
 
+    const isEmpty = !data.length;
+
     return (
         <Box sx={{ width: '100%' }}>
             <Paper elevation={elevation} sx={{ width: '100%', mb: 2, overflow: 'hidden', ...colorProps }}>
@@ -129,7 +132,14 @@ const EnhancedTable: React.FC<TableProps> = ({
                 )}
 
                 <TableContainer sx={{ maxHeight }}>
-                    <Table stickyHeader={stickyHeader} sx={{ minWidth: 750 }} size={dense ? 'small' : 'medium'}>
+                    <Table
+                        stickyHeader={stickyHeader}
+                        sx={{
+                            minWidth: 750,
+                            ...(isEmpty && { width: '100%', display: 'flex', flexDirection: 'column' }),
+                        }}
+                        size={dense ? 'small' : 'medium'}
+                    >
                         {helperText && <caption>{helperText}</caption>}
                         <EnhancedTableHead
                             numSelected={selected.length}
@@ -169,8 +179,24 @@ const EnhancedTable: React.FC<TableProps> = ({
                             ))}
 
                             {emptyRows > 0 && (
-                                <TableRow style={{ height: DEFAULT_EMPTY_ROW_HEIGHT * emptyRows }}>
-                                    <TableCell colSpan={columns?.length || undefined} rowSpan={emptyRows} />
+                                <TableRow
+                                    sx={{
+                                        height: DEFAULT_EMPTY_ROW_HEIGHT * emptyRows,
+                                        ...(isEmpty && { width: '100%', display: 'flex' }),
+                                    }}
+                                    rowSpan={emptyRows}
+                                >
+                                    <TableCell colSpan={columns?.length || undefined} centerContent={isEmpty}>
+                                        {isEmpty && EmptyResultCmp ? (
+                                            isValidElement(EmptyResultCmp) ? (
+                                                React.cloneElement(EmptyResultCmp)
+                                            ) : typeof EmptyResultCmp === 'string' ? (
+                                                EmptyResultCmp
+                                            ) : (
+                                                <EmptyResultCmp />
+                                            )
+                                        ) : null}
+                                    </TableCell>
                                 </TableRow>
                             )}
                         </TableBody>
@@ -222,6 +248,7 @@ EnhancedTable.defaultProps = {
     selectionMode: undefined,
     SORT_MENU_TITLE_LABEL: 'Sort Columns order',
     SORT_TOOLTIP_LABEL: 'Sort Columns',
+    EmptyResultCmp: 'EMPTY RESULT',
     stickyHeader: true,
     tableColor: undefined,
     title: undefined,
