@@ -22,19 +22,19 @@ interface EnhancedTableProps {
     elevation: number;
     stickyHeader: boolean;
     helperText: string;
-    maxHeight;
+    maxHeight: string | number;
     dense: boolean;
     title: string;
     pagination: Pagination;
-    onChangePagination;
-    onChangeSortColumns;
-    orderBy;
+    onChangePagination: (param: { orderBy: string | boolean; pagination: Pagination }) => void;
+    onChangeSortColumns: (sort: Record<string, string | number>) => void;
+    orderBy: Record<string, string | number>;
     addSortColumnsAction: boolean;
     addFilterColumnsAction: boolean;
     addSelectionModeAction: boolean;
     data: any[];
     columns: Column[];
-    onClickRow;
+    onClickRow: (rowId: string, rowData: any) => void;
     actions: ToolbarAction[];
     selectionMode: boolean;
     selectedActions: ToolbarAction[];
@@ -46,7 +46,11 @@ interface EnhancedTableProps {
     headerColor: string | ColorsProps;
     evenRowsColor: string | ColorsProps;
     oddRowsColor: string | ColorsProps;
-    LABELS;
+    FILTER_TOOLTIP_LABELS: string;
+    FILTER_MENU_TITLE_LABELS: string;
+    SORT_MENU_TITLE_LABELS: string;
+    SELECTION_MODE_TOOLTIP_LABELS: string;
+    NUM_SELECTED_LABELS: string;
 }
 
 const EnhancedTable: React.FC<EnhancedTableProps> = ({
@@ -77,7 +81,11 @@ const EnhancedTable: React.FC<EnhancedTableProps> = ({
     headerColor,
     evenRowsColor,
     oddRowsColor,
-    LABELS,
+    FILTER_TOOLTIP_LABELS,
+    FILTER_MENU_TITLE_LABELS,
+    SORT_MENU_TITLE_LABELS,
+    SELECTION_MODE_TOOLTIP_LABELS,
+    NUM_SELECTED_LABELS,
 }): React.ReactElement => {
     const theme = useTheme();
     const colorProps = extractColors({ theme, colors: tableColor });
@@ -100,8 +108,8 @@ const EnhancedTable: React.FC<EnhancedTableProps> = ({
         firstItem,
         columns: _columns,
         hide: !addFilterColumnsAction,
-        tooltip: LABELS.FILTER_TOOLTIP,
-        title: LABELS.FILTER_MENU_TITLE,
+        tooltip: FILTER_TOOLTIP_LABELS,
+        title: FILTER_MENU_TITLE_LABELS,
         colors: actionColorProps,
     });
 
@@ -113,16 +121,15 @@ const EnhancedTable: React.FC<EnhancedTableProps> = ({
         firstItem,
         columns,
         hide: !addSortColumnsAction,
-        orderBy,
         onChangeSortColumns,
-        title: LABELS.SORT_MENU_TITLE,
+        title: SORT_MENU_TITLE_LABELS,
         colors: actionColorProps,
     });
 
     const [selectionMode, selectionModeCmp] = useSelectionMode({
         selectionMode: _selectionMode,
         hide: !addSelectionModeAction,
-        tooltip: LABELS.SELECTION_MODE_TOOLTIP,
+        tooltip: SELECTION_MODE_TOOLTIP_LABELS,
         colors: actionColorProps,
     });
 
@@ -146,7 +153,7 @@ const EnhancedTable: React.FC<EnhancedTableProps> = ({
                         selectionModeAction={selectionModeCmp}
                         sortColumnsAction={sortColumnsAction}
                         selectedActions={selectedActions}
-                        selectedLabel={LABELS.NUM_SELECTED}
+                        selectedLabel={NUM_SELECTED_LABELS}
                         data={_data}
                         selected={selected}
                         colorProps={colorProps}
@@ -275,13 +282,11 @@ EnhancedTable.defaultProps = {
     headerColor: undefined,
     evenRowsColor: undefined,
     oddRowsColor: undefined,
-    LABELS: {
-        FILTER_TOOLTIP: 'Filter Columns',
-        FILTER_MENU_TITLE: 'Filter Columns order',
-        SORT_MENU_TITLE: 'Sort Columns order',
-        SELECTION_MODE_TOOLTIP: 'Enable Selection Mode',
-        NUM_SELECTED: '{n} selected',
-    },
+    FILTER_TOOLTIP_LABELS: 'Filter Columns',
+    FILTER_MENU_TITLE_LABELS: 'Filter Columns order',
+    SORT_MENU_TITLE_LABELS: 'Sort Columns order',
+    SELECTION_MODE_TOOLTIP_LABELS: 'Enable Selection Mode',
+    NUM_SELECTED_LABELS: '{n} selected',
     orderBy: undefined,
     data: undefined,
 };

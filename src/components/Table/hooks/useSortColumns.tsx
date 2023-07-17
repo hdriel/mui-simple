@@ -16,7 +16,6 @@ import type { Column, useSortColumnsProps, useSortColumnsResult } from '../Table
 export function useSortColumns({
     firstItem,
     columns,
-    orderBy: _orderBy = [],
     hide,
     onChangeSortColumns,
     title,
