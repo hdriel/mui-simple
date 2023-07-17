@@ -32,8 +32,8 @@ export interface Column {
     props?: object | any;
     cmp?: React.ReactNode | string;
     image?: boolean | (AvatarProps & { width: string | number; height: string | number; avatar: boolean });
-    orderBy: SORT_TYPE;
-    type: string;
+    orderBy?: SORT_TYPE;
+    type?: string;
     [key: string]: any;
 }
 

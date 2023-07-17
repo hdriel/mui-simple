@@ -122,6 +122,7 @@
         "@types/autosuggest-highlight": "^3.2.0",
         "@types/color": "^3.0.3",
         "@types/lodash-es": "^4.17.7",
+        "@types/mui-image": "^1.0.1",
         "@types/prop-types": "^15.7.5",
         "@types/react": "^18.2.14",
         "@types/react-beautiful-dnd": "^13.1.4",

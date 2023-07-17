@@ -1,4 +1,5 @@
 import React from 'react';
+import { IndeterminateCheckBox as IndeterminateCheckBoxIcon } from '@mui/icons-material';
 import { SORT, SORT_VALUE } from '../Table.consts';
 import { TableHead, TableCell, TableRow, TableSortLabel, Checkbox } from '../Table.styled';
 import { getNextOrderBy } from '../Table.utils';
@@ -7,7 +8,6 @@ import type { ColorsProps, Column, SORT_VALUE_TYPE } from '../Table.desc';
 interface EnhancedTableHeadProps {
     columns: Column[];
     sortColumns: Column[];
-    orderBy: '1' | '-1' | undefined;
     onRequestSort: (event: any, property: string, nextState: string) => void;
     headerColor: ColorsProps;
     actionColor: ColorsProps;
@@ -20,7 +20,6 @@ interface EnhancedTableHeadProps {
 export const EnhancedTableHead: React.FC<EnhancedTableHeadProps> = ({
     columns,
     sortColumns,
-    orderBy,
     onRequestSort,
     headerColor,
     actionColor,
@@ -29,7 +28,9 @@ export const EnhancedTableHead: React.FC<EnhancedTableHeadProps> = ({
     rowCount,
     selectionMode,
 }): React.ReactElement => {
-    const createSortHandler = (property, nextState) => (event) => onRequestSort(event, property, nextState);
+    const createSortHandler = (property, nextState) => {
+        return (event) => onRequestSort(event, property, nextState);
+    };
 
     return (
         <TableHead>
@@ -39,6 +40,11 @@ export const EnhancedTableHead: React.FC<EnhancedTableHeadProps> = ({
                         <Checkbox
                             color={actionColor?.background ?? actionColor?.color ?? 'primary'}
                             indeterminate={numSelected > 0 && numSelected < rowCount}
+                            indeterminateIcon={
+                                <IndeterminateCheckBoxIcon
+                                    sx={{ color: actionColor?.background ?? actionColor?.color ?? 'primary' }}
+                                />
+                            }
                             checked={rowCount > 0 && numSelected === rowCount}
                             onChange={onSelectAllClick}
                         />

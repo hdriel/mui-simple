@@ -14,7 +14,7 @@ import {
     useSortColumns,
 } from '../hooks';
 import { EnhancedTablePagination } from './EnhancedTablePagination';
-import { TableProps } from '../../decs';
+import type { TableProps } from '../../decs';
 
 const EnhancedTable: React.FC<TableProps> = ({
     actionColor,
@@ -28,6 +28,7 @@ const EnhancedTable: React.FC<TableProps> = ({
     dense,
     elevation,
     evenRowsColor,
+    fieldId,
     FILTER_MENU_TITLE_LABEL,
     FILTER_TOOLTIP_LABEL,
     headerColor,
@@ -122,7 +123,8 @@ const EnhancedTable: React.FC<TableProps> = ({
                         selectedLabel={NUM_SELECTED_LABEL}
                         data={_data}
                         selected={selected}
-                        colorProps={colorProps}
+                        colorProps={actionColorProps ?? colorProps}
+                        fieldId={fieldId}
                     />
                 )}
 
@@ -157,10 +159,10 @@ const EnhancedTable: React.FC<TableProps> = ({
                                     oddRowsColor={oddRowsColor}
                                     actionColor={actionColorProps ?? colorProps}
                                     onSelect={(event) => {
-                                        handleSelect(event, row.id ?? index);
-                                        if (!row.id) console.warn('Missing id field in row', row);
+                                        handleSelect(event, row[fieldId] ?? index);
+                                        if (!row[fieldId]) console.warn('Missing id field in row', row);
                                     }}
-                                    selected={isSelected(row.id ?? index)}
+                                    selected={isSelected(row[fieldId] ?? index)}
                                 >
                                     {row}
                                 </EnhancedTableRow>
@@ -200,6 +202,7 @@ EnhancedTable.defaultProps = {
     dense: undefined,
     elevation: 10,
     evenRowsColor: undefined,
+    fieldId: 'id',
     FILTER_MENU_TITLE_LABEL: 'Filter Columns order',
     FILTER_TOOLTIP_LABEL: 'Filter Columns',
     headerColor: undefined,

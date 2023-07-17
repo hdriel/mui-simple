@@ -20,7 +20,7 @@ import MuiTooltip from '../_FIXED/Tooltip/Tooltip';
 import MuiButton from '../_FIXED/Button/Button';
 import MuiPaper from '../Paper/Paper';
 import { extractColors } from './Table.utils';
-import { ColorsProps } from './Table.desc';
+import type { ColorsProps } from './Table.desc';
 
 export const Typography = MuiTypography;
 export const Avatar = MuiAvatar;

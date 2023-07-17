@@ -397,6 +397,7 @@ export interface TableProps {
     dense: boolean;
     elevation: number;
     evenRowsColor: string | ColorsProps;
+    fieldId?: string;
     FILTER_MENU_TITLE_LABEL: string;
     FILTER_TOOLTIP_LABEL: string;
     headerColor: string | ColorsProps;

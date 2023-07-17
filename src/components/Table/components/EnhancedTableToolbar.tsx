@@ -1,11 +1,9 @@
 import React, { cloneElement, isValidElement } from 'react';
-import PropTypes from 'prop-types';
 import { alpha } from '@mui/material';
-import { PT_action } from '../Table.propTypes';
 import { Toolbar, Tooltip, Typography } from '../Table.styled';
-import type { ColorsProps, EnhancedTableToolbarProps } from '../Table.desc';
+import type { EnhancedTableToolbarProps } from '../Table.desc';
 
-export function EnhancedTableToolbar({
+export const EnhancedTableToolbar: React.FC<EnhancedTableToolbarProps> = ({
     selectedLabel,
     selected,
     data,
@@ -16,7 +14,8 @@ export function EnhancedTableToolbar({
     selectedActions,
     actions,
     colorProps,
-}: EnhancedTableToolbarProps): React.ReactElement {
+    fieldId,
+}: EnhancedTableToolbarProps): React.ReactElement => {
     const numSelected = selected?.length ?? 0;
     const filteredActions = (numSelected > 0 ? selectedActions : actions) || [];
 
@@ -28,7 +27,7 @@ export function EnhancedTableToolbar({
                 ...(numSelected > 0 && {
                     bgcolor: (theme) =>
                         alpha(
-                            (colorProps as ColorsProps)?.background ?? theme.palette.primary.main,
+                            colorProps?.background ?? theme.palette.primary.main,
                             theme.palette.action.activatedOpacity
                         ),
                 }),
@@ -51,11 +50,11 @@ export function EnhancedTableToolbar({
                 .map(({ Cmp, tooltip }, index) => (
                     // eslint-disable-next-line react/no-array-index-key
                     <Tooltip key={index} title={tooltip}>
-                        {cloneElement(Cmp, {
+                        {cloneElement(Cmp as any, {
                             onClick: (event) => {
                                 Cmp?.props?.onClick?.(
                                     event,
-                                    data?.filter((row, index) => selected.includes(row.id ?? index))
+                                    data?.filter((row, index) => selected.includes(row[fieldId] ?? index))
                                 );
                             },
                         })}
@@ -66,20 +65,18 @@ export function EnhancedTableToolbar({
             {!numSelected && filterAction}
         </Toolbar>
     );
-}
-
-EnhancedTableToolbar.propTypes = {
-    selectedLabel: PropTypes.string,
-    numSelected: PropTypes.number,
-    title: PropTypes.string,
-    selectedActions: PropTypes.arrayOf(PT_action),
-    actions: PropTypes.arrayOf(PT_action),
 };
 
 EnhancedTableToolbar.defaultProps = {
     selectedLabel: '{n} selected',
-    numSelected: 0,
     title: '',
     selectedActions: [],
     actions: [],
+    filterAction: undefined,
+    selectionModeAction: undefined,
+    sortColumnsAction: undefined,
+    data: undefined,
+    selected: undefined,
+    colorProps: undefined,
+    fieldId: undefined,
 };

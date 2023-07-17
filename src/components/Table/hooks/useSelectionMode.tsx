@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { LibraryAddCheck as LibraryAddCheckIcon } from '@mui/icons-material';
+import {
+    LibraryAddCheckOutlined as LibraryAddCheckOutlinedIcon,
+    LibraryAddCheck as LibraryAddCheckIcon,
+} from '@mui/icons-material';
 import { isDefined } from '../../../utils/helpers';
 import { Checkbox, Tooltip } from '../Table.styled';
 import type { useSelectionModeProps } from '../Table.desc';
@@ -21,7 +24,7 @@ export function useSelectionMode({
             <Checkbox
                 color={colors?.background ?? (colors as string)}
                 checkedIcon={<LibraryAddCheckIcon />}
-                icon={<LibraryAddCheckIcon />}
+                icon={<LibraryAddCheckOutlinedIcon />}
                 checked={selectionMode}
                 onClick={(event) => {
                     event.stopPropagation();
