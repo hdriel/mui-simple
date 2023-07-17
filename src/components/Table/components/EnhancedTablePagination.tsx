@@ -21,8 +21,8 @@ export function EnhancedTablePagination({
     };
 
     const handleChangeRowsPerPage = (event): void => {
-        const rowPerPage = parseInt(event.target.value, 10);
-        const config = { orderBy, pagination: { ...pagination, rowPerPage } };
+        const rowsPerPage = parseInt(event.target.value, 10);
+        const config = { orderBy, pagination: { ...pagination, rowsPerPage } };
         onChangePagination?.(config);
     };
 

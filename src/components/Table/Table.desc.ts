@@ -31,7 +31,7 @@ export interface Column {
     dateFormat?: string;
     props?: object | any;
     cmp?: React.ReactNode | string;
-    image?: boolean | (AvatarProps & { width: string | number; height: string | number; avatar: boolean });
+    image?: boolean | (Partial<AvatarProps> & { width?: string | number; height?: string | number; avatar?: boolean });
     orderBy?: SORT_TYPE;
     type?: string;
     [key: string]: any;
@@ -106,7 +106,7 @@ export interface useFilterColumnsProps {
 }
 
 export interface ToolbarAction {
-    tooltip: string;
+    tooltip?: string;
     Cmp: React.ReactElement;
 }
 

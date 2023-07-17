@@ -54,7 +54,7 @@ export const FITNESS_DATA = [
     { id: 'FD-13', name: 'Oreo', calories: 437, fat: 18.0, carbs: 63, protein: 4.0 },
 ];
 
-export const PERSON_COLUMNS = [
+export const PERSON_COLUMNS: Column[] = [
     {
         field: 'avatar',
         align: 'center',
