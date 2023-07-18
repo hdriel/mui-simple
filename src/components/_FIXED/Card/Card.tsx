@@ -25,6 +25,7 @@ const Card: React.FC<PropsWithChildren<CardProps>> = (props): React.ReactElement
         flexDirection,
         image,
         maxWidth,
+        minWidth,
         mediaOnTop,
         optionsMenu,
         subtitle,
@@ -46,7 +47,7 @@ const Card: React.FC<PropsWithChildren<CardProps>> = (props): React.ReactElement
     const imageProps = typeof image === 'object' ? image : {};
 
     return (
-        <MuiCard {...rest} sx={{ maxWidth, width }}>
+        <MuiCard {...rest} sx={{ maxWidth, minWidth, width }}>
             {!isMediaOnTop && title ? <CardHeader avatar={avatar} title={title} subheader={subtitle} /> : undefined}
             <Box sx={{ ...(flexDirection && { flexDirection, display: 'flex' }) }}>
                 {image ? (
@@ -134,6 +135,7 @@ Card.defaultProps = {
     flexDirection: undefined,
     image: undefined,
     maxWidth: 'max-content',
+    minWidth: undefined,
     mediaOnTop: undefined,
     optionsMenu: undefined,
     subtitle: undefined,
