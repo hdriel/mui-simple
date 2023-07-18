@@ -130,7 +130,7 @@ export function getRowContent({ column, data }: { column: Column; data: any }): 
         return cloneElement(column.cmp, { ...props });
     } else if (column.cmp) {
         const { cmp: Cmp } = column;
-        return <Cmp />;
+        return <Cmp {...data} />;
     }
 
     let content;
