@@ -13,8 +13,7 @@ export { default as Breadcrumbs } from './components/Breadcrumbs/Breadcrumbs';
 export { default as Button } from './components/_FIXED/Button/Button';
 export { default as ButtonGroup } from './components/_FIXED/Button/ButtonGroup';
 
-export { default as Card } from './components/Card/Card';
-export { default as CardContentExpended } from './components/Card/CardContentExpended';
+export * from './components/_FIXED/Card';
 export { default as Checkbox } from './components/_FIXED/Checkbox/Checkbox';
 export { default as Chip } from './components/_FIXED/Chip/Chip';
 

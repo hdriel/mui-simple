@@ -9,11 +9,11 @@ interface CardExpandedContent {
     handleExpandClick?: () => void;
 }
 
-type FlexDirectionType = 'row' | 'row-reverse' | 'column' | 'column-reverse';
 interface UseCardExpandedContentProps {
-    flexDirection?: FlexDirectionType;
+    flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
     mediaOnTop?: boolean;
 }
+
 export const useCardExpandedContent = (props: PropsWithChildren<UseCardExpandedContentProps>): CardExpandedContent => {
     const { children, flexDirection, mediaOnTop } = props;
     const [expanded, setExpanded] = useState(false);
@@ -22,8 +22,9 @@ export const useCardExpandedContent = (props: PropsWithChildren<UseCardExpandedC
     const isMediaOnTop = mediaOnTop === undefined && ['row', 'row-reverse'].includes(flexDirection) ? true : mediaOnTop;
 
     const content = [].concat(children);
-    const cardContentExpendedIndex = content.findIndex((box) => box?.type?.displayName === 'CardContentExpended');
+    const cardContentExpendedIndex = content.findIndex((box) => box?.type?.displayName === 'CardExpandedContent');
     let cardContentExpended: ReactNode | string;
+
     if (cardContentExpendedIndex >= 0) {
         const [ContentExpended] = content.splice(cardContentExpendedIndex, 1);
         cardContentExpended = ContentExpended;

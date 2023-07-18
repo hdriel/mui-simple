@@ -2,6 +2,7 @@ import type React from 'react';
 import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent } from 'react';
 import type { SxProps } from '@mui/material';
 import type { ColorsProps, TableColumn, Pagination, ToolbarAction } from './_FIXED/Table/Table.desc';
+import type { MenuProps, OptionMenuItem, DividerProps } from './Menu/Menu';
 
 export type { TableColumn } from './_FIXED/Table/Table.desc';
 export interface AccordionProps {
@@ -94,6 +95,31 @@ export interface BottomNavigationProps {
     position?: 'absolute' | 'fixed';
     showLabels?: boolean;
     value?: number | string;
+    width?: number | string;
+    [key: string]: any;
+}
+
+export interface CardProps {
+    actions?: ReactNode | string | ButtonProps | Array<ReactNode | ButtonProps | string>;
+    avatar?: ReactNode;
+    contentPadding?: number | string;
+    flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
+    image?:
+        | string
+        | {
+              src?: string;
+              title?: string;
+              width?: number | string;
+              height?: number | string;
+              onClick?: (e: any) => void;
+              stretch?: 'cover' | 'contain' | 'none' | 'fill';
+              [key: string]: any;
+          };
+    maxWidth?: number | string;
+    mediaOnTop?: boolean;
+    optionsMenu?: MenuProps | Array<OptionMenuItem | DividerProps>;
+    subtitle?: string;
+    title?: string;
     width?: number | string;
     [key: string]: any;
 }
