@@ -11,7 +11,7 @@ import {
     South as SouthIcon,
 } from '@mui/icons-material';
 import { Checkbox, Tooltip } from '../Table.styled';
-import type { Column, useSortColumnsProps, useSortColumnsResult } from '../Table.desc';
+import type { TableColumn, useSortColumnsProps, useSortColumnsResult } from '../Table.desc';
 
 export function useSortColumns({
     firstItem,
@@ -22,7 +22,7 @@ export function useSortColumns({
     tooltip,
     colors,
 }: useSortColumnsProps): useSortColumnsResult {
-    const [sortColumns, setSortColumns] = useState<Column[]>(
+    const [sortColumns, setSortColumns] = useState<TableColumn[]>(
         columns?.map(
             (column) =>
                 (({
@@ -30,7 +30,7 @@ export function useSortColumns({
                     orderBy: [SORT.DOWN, SORT.UP].includes(column.orderBy as string) ? column.orderBy : false,
                     label: column.label,
                     type: typeof firstItem?.[column.field],
-                } ?? {}) as Column)
+                } ?? {}) as TableColumn)
         )
     );
 

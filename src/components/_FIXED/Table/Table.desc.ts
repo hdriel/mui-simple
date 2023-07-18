@@ -20,7 +20,7 @@ export interface extractColorsProps {
     colors: string | ColorsProps;
 }
 
-export interface Column {
+export interface TableColumn {
     id?: string;
     field?: string;
     label: string;
@@ -40,7 +40,7 @@ export interface Column {
 export interface useDataProps {
     page: number;
     independentData: any;
-    sortColumns: Column[];
+    sortColumns: TableColumn[];
     data: any[];
     sliceFrom: number;
     sliceTo: number;
@@ -68,13 +68,13 @@ export interface usePaginationDetailsResult {
 }
 
 export interface useSortColumnsResult {
-    sortColumns: Column[];
+    sortColumns: TableColumn[];
     handleRequestSort: (event, property, orderBy) => void;
     cmp: React.ReactElement;
 }
 export interface useSortColumnsProps {
     firstItem: any;
-    columns: Column[];
+    columns: TableColumn[];
     hide: boolean;
     onChangeSortColumns: (sort: Record<string, string | number>) => void;
     title: string;
@@ -98,7 +98,7 @@ export interface useSelectionResult {
 
 export interface useFilterColumnsProps {
     firstItem: Record<string, string>;
-    columns: Column[];
+    columns: TableColumn[];
     hide: boolean;
     tooltip: string;
     title: string;
@@ -134,7 +134,7 @@ export interface EnhancedTablePaginationProps {
 }
 
 export interface EnhancedTableRowProps {
-    columns: Column[];
+    columns: TableColumn[];
     handleClick: (event: any, data: any) => void;
     index: number;
     evenRowsColor: ColorsProps;

@@ -8,7 +8,7 @@ import { getColumn, getMenuSizes } from '../Table.utils';
 import Menu from '../../../Menu/Menu';
 import CheckList from '../../../List/CheckList';
 import { Checkbox, Tooltip } from '../Table.styled';
-import type { Column, useFilterColumnsProps } from '../Table.desc';
+import type { TableColumn, useFilterColumnsProps } from '../Table.desc';
 
 export function useFilterColumns({
     firstItem = {},
@@ -17,7 +17,7 @@ export function useFilterColumns({
     tooltip,
     title,
     colors,
-}: useFilterColumnsProps): [Column[], React.ReactElement] {
+}: useFilterColumnsProps): [TableColumn[], React.ReactElement] {
     const [columnsState, setColumnsState] = useState(_columns);
 
     const columns = useMemo(

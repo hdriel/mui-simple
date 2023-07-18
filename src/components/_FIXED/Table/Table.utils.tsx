@@ -1,7 +1,7 @@
 import { get } from 'lodash-es';
 import { SORT } from './Table.consts';
 import { getCustomColor, getTextWidth, isDefined } from '../../../utils/helpers';
-import type { ColorsProps, extractColorsProps, getDataRangeProps, Column } from './Table.desc';
+import type { ColorsProps, extractColorsProps, getDataRangeProps, TableColumn } from './Table.desc';
 import React, { cloneElement, isValidElement } from 'react';
 import moment from 'moment/moment';
 import { Avatar, Image, Tooltip, Typography } from './Table.styled';
@@ -35,7 +35,7 @@ export function extractColors({ theme, colors }: extractColorsProps): undefined 
         : undefined;
 }
 
-export function getColumn(row: any, column: Column): Column {
+export function getColumn(row: any, column: TableColumn): TableColumn {
     const isString = typeof column === 'string';
     const field: string = isString ? (column as string) : column?.field;
 
@@ -121,7 +121,7 @@ export function getMenuSizes({ columns, title }: { columns: any[]; title: string
     return [width, height];
 }
 
-export function getRowContent({ column, data }: { column: Column; data: any }): React.ReactElement {
+export function getRowContent({ column, data }: { column: TableColumn; data: any }): React.ReactElement {
     const fieldValue = data[column.field];
 
     const props = typeof column.props === 'function' ? column.props(data) : column.props;

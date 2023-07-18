@@ -1,7 +1,7 @@
 import Typography from '../../Typography/Typography';
-import { Column } from '../Table.desc';
+import { TableColumn } from '../Table.desc';
 
-export const FITNESS_COLUMNS: Column[] = [
+export const FITNESS_COLUMNS: TableColumn[] = [
     {
         field: 'name',
         numeric: false,
@@ -54,7 +54,7 @@ export const FITNESS_DATA = [
     { id: 'FD-13', name: 'Oreo', calories: 437, fat: 18.0, carbs: 63, protein: 4.0 },
 ];
 
-export const PERSON_COLUMNS: Column[] = [
+export const PERSON_COLUMNS: TableColumn[] = [
     {
         field: 'avatar',
         align: 'center',

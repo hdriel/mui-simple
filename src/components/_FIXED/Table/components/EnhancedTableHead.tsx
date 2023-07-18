@@ -3,11 +3,11 @@ import { IndeterminateCheckBox as IndeterminateCheckBoxIcon } from '@mui/icons-m
 import { SORT, SORT_VALUE } from '../Table.consts';
 import { TableHead, TableCell, TableRow, TableSortLabel, Checkbox } from '../Table.styled';
 import { getNextOrderBy } from '../Table.utils';
-import type { ColorsProps, Column, SORT_VALUE_TYPE } from '../Table.desc';
+import type { ColorsProps, TableColumn, SORT_VALUE_TYPE } from '../Table.desc';
 
 interface EnhancedTableHeadProps {
-    columns: Column[];
-    sortColumns: Column[];
+    columns: TableColumn[];
+    sortColumns: TableColumn[];
     onRequestSort: (event: any, property: string, nextState: string) => void;
     headerColor: ColorsProps;
     actionColor: ColorsProps;
