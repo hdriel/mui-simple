@@ -5,7 +5,6 @@ import { FITNESS_DATA, FITNESS_COLUMNS, PERSON_DATA, PERSON_COLUMNS } from './Ta
 import { Table } from '../Table';
 import Button from '../../Button/Button';
 import Pagination from '../../../Pagination/Pagination';
-import { a } from '@react-spring/web';
 import Typography from '../../Typography/Typography';
 
 const meta: Meta<typeof Table> = {
@@ -143,7 +142,7 @@ export const PaginationFeature: Story = {
     args: {
         columns: FITNESS_COLUMNS,
         data: FITNESS_DATA,
-        pagination: { page: 1, rowsPerPage: 3, total: FITNESS_DATA.length },
+        pagination: { page: 0, rowsPerPage: 3, total: FITNESS_DATA.length },
     },
     render: (args) => {
         const [pagination, setPagination] = useState(args.pagination);
@@ -163,7 +162,7 @@ export const PaginationAlign: Story = {
     args: {
         columns: FITNESS_COLUMNS,
         data: FITNESS_DATA,
-        pagination: { page: 1, rowsPerPage: 3, total: FITNESS_DATA.length },
+        pagination: { page: 0, rowsPerPage: 3, total: FITNESS_DATA.length },
         paginationAlign: 'center',
     },
     render: (args) => {
@@ -182,7 +181,7 @@ export const defaultEmptyRowHeight: Story = {
     args: {
         columns: FITNESS_COLUMNS,
         data: FITNESS_DATA.slice(0, 3),
-        pagination: { page: 1, rowsPerPage: 5, total: 5 },
+        pagination: { page: 0, rowsPerPage: 5, total: 5 },
         paginationAlign: 'center',
         DEFAULT_EMPTY_ROW_HEIGHT: 40,
     },
@@ -202,7 +201,7 @@ export const PaginationComponent: Story = {
     args: {
         columns: FITNESS_COLUMNS,
         data: FITNESS_DATA,
-        pagination: { page: 1, rowsPerPage: 3, total: FITNESS_DATA.length },
+        pagination: { page: 0, rowsPerPage: 3, total: FITNESS_DATA.length },
         PaginationComponent: Pagination,
         paginationProps: { variant: 'outlined' },
     },
@@ -231,7 +230,7 @@ export const OrderBy: Story = {
         columns: FITNESS_COLUMNS,
         data: FITNESS_DATA.slice(0, 3),
         onChangeSortColumns: console.log,
-        orderBy: { [FITNESS_COLUMNS[1].field]: '-1', [FITNESS_COLUMNS[2].field]: '1' },
+        orderBy: { [FITNESS_COLUMNS[1]?.field]: 'desc', [FITNESS_COLUMNS[2]?.field]: 'asc' },
     },
 };
 
@@ -256,7 +255,7 @@ export const EmptyResultCmp: Story = {
     args: {
         columns: FITNESS_COLUMNS,
         data: [],
-        pagination: { page: 1, rowsPerPage: 5, total: 5 },
+        pagination: { page: 0, rowsPerPage: 5, total: 5 },
         paginationAlign: 'center',
         DEFAULT_EMPTY_ROW_HEIGHT: 40,
         EmptyResultCmp: <Typography size={25}>Noting was found here...</Typography>, // work

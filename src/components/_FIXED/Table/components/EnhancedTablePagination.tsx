@@ -36,14 +36,19 @@ export function EnhancedTablePagination({
             }}
         >
             {PaginationComponent ? (
-                <PaginationComponent totalPages={total} page={page} onChange={handleChangePage} {...paginationProps} />
+                <PaginationComponent
+                    totalPages={total}
+                    page={!total || total <= 0 ? 0 : page}
+                    onChange={handleChangePage}
+                    {...paginationProps}
+                />
             ) : (
                 <TablePagination
                     component="div"
                     rowsPerPageOptions={rowsPerPageList}
                     count={total}
                     rowsPerPage={rowsPerPage}
-                    page={page}
+                    page={!total || total <= 0 ? 0 : page}
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />

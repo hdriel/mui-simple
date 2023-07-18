@@ -44,7 +44,7 @@ const EnhancedTableRow: React.FC<PropsWithChildren<EnhancedTableRowProps>> = ({
                     id={`enhanced-table-checkbox-${colIndex}`}
                     align={column.align}
                     colors={index % 2 === 1 ? evenRowsColor : oddRowsColor}
-                    rowSpan={data._rowSpan}
+                    rowSpan={data.rowSpan}
                     colSpan={data.colSpan}
                 >
                     {getRowContent({ column, data })}

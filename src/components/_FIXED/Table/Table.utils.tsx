@@ -18,10 +18,7 @@ export function getDataRange({ rows, total, page, rowsPerPage }: getDataRangePro
 }
 
 export function extractColors({ theme, colors }: extractColorsProps): undefined | ColorsProps {
-    const { background: _background, color: _color } = (
-        typeof colors === 'object' ? colors : { background: colors }
-    ) as ColorsProps;
-
+    const { background: _background, color: _color } = typeof colors === 'object' ? colors : { background: colors };
     const [color] = getCustomColor({ theme, customColor: _color });
     const [, isThemeColor] = getCustomColor({
         theme,
@@ -33,12 +30,14 @@ export function extractColors({ theme, colors }: extractColorsProps): undefined 
 
     const bgColor = background;
 
-    return isDefined(textColor) || isDefined(bgColor) ? { color: textColor, background: bgColor } : undefined;
+    return isDefined(textColor) || isDefined(bgColor)
+        ? { color: textColor as string, background: bgColor as string }
+        : undefined;
 }
 
 export function getColumn(row: any, column: Column): Column {
     const isString = typeof column === 'string';
-    const field: string = isString ? column : column?.field;
+    const field: string = isString ? (column as string) : column?.field;
 
     return {
         id: column?.id ?? field,
@@ -127,11 +126,11 @@ export function getRowContent({ column, data }: { column: Column; data: any }): 
 
     const props = typeof column.props === 'function' ? column.props(data) : column.props;
 
-    const CustomCmp: React.ReactElement = isValidElement(column.cmp) ? cloneElement(column.cmp, { ...props }) : null;
-
-    if (CustomCmp) {
-        // @ts-expect-error
-        return <CustomCmp>{fieldValue}</CustomCmp>;
+    if (isValidElement(column.cmp)) {
+        return cloneElement(column.cmp, { ...props });
+    } else if (column.cmp) {
+        const { cmp: Cmp } = column;
+        return <Cmp />;
     }
 
     let content;
@@ -150,7 +149,7 @@ export function getRowContent({ column, data }: { column: Column; data: any }): 
         content = fieldValue;
         content = typeof column.format === 'function' ? column.format(content, data) : content;
 
-        // numberVariable.toLocaleString('en-US')  1324171354 => 1,324,171,354
+        // Example: numberVariable.toLocaleString('en-US')  1324171354 => 1,324,171,354
         content = column.numeric ? content?.toLocaleString('en-US') : content;
     }
 
