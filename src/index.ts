@@ -36,7 +36,7 @@ export { default as InputPhone } from './components/TextField/InputPhone';
 export { default as InputSearch } from './components/_FIXED/TextField/InputSearch';
 export { default as InputText } from './components/_FIXED/TextField/InputText';
 export { default as InputTime } from './components/TextField/InputTime';
-export { default as InputSelect } from './components/Select/InputSelect';
+export { default as InputSelect } from './components/_FIXED/Select/InputSelect';
 export { default as InputMultipleSelect } from './components/Select/InputMultipleSelect';
 
 export { default as Link } from './components/Link/Link';

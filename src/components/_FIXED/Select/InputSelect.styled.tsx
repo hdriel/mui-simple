@@ -11,7 +11,8 @@ import {
     ListSubheader as MuiListSubheader,
     ListItemText as MuiListItemText,
 } from '@mui/material';
-import { getCustomColor } from '../../utils/helpers';
+import { getCustomColor } from '../../../utils/helpers';
+import { ComponentType } from 'react';
 
 export const Stack = MuiStack;
 
@@ -23,9 +24,15 @@ export const ListSubheader = MuiListSubheader;
 
 export const ListItemText = MuiListItemText;
 
+interface FormControlProps {
+    colorText: string;
+    colorLabel: string;
+    colorActive: string;
+    [key: string]: any;
+}
 export const FormControl = styled(MuiFormControl, {
     shouldForwardProp: (propName) => !['colorText', 'colorLabel', 'colorActive'].includes(propName as string),
-})`
+})<FormControlProps>`
     ${(props) => {
         const colorText = getCustomColor(props, { field: 'colorText' });
         const colorLabel = getCustomColor(props, { field: 'colorLabel' });
@@ -75,7 +82,7 @@ export const FormControl = styled(MuiFormControl, {
             }
         `;
     }}
-`;
+` as ComponentType<FormControlProps>;
 
 export const InputLabel = MuiInputLabel;
 export const FormHelperText = MuiFormHelperText;

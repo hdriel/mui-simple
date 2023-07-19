@@ -1,57 +1,110 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import type { ReactNode } from 'react';
 import { ClickAwayListener } from '@mui/material';
 
 import { Select, FormControl, InputLabel, FormHelperText, Stack, Box } from './InputSelect.styled';
-import { getCustomColor } from '../../utils/helpers';
+import { getCustomColor, useCustomColor } from '../../../utils/helpers';
 import { useTheme } from '@mui/material/styles';
 import { useOptions, useOptionsConverter } from './InputSelect.hooks';
+import SVGIcon from '../../SVGIcon/SVGIcon';
 
 const emptyObjectRef = [];
-export default function InputSelect({
-    label,
-    id,
-    name,
-    variant,
-    onChange,
-    onFocus,
-    onBlur,
-    value,
-    startCmp,
-    endCmp,
-    fullWidth,
-    required,
-    readOnly,
-    autoComplete,
-    error,
-    margin,
-    focused,
-    size,
-    helperText,
-    colorText: _colorText,
-    colorLabel: _colorLabel,
-    colorActive: _colorActive,
-    startCmpExternal,
-    endCmpExternal,
-    cmpSpacing,
-    hideStartActionsOnEmpty,
+
+type SelectOption =
+    | string
+    | Array<{
+          label?: string | ReactNode;
+          subtitle?: string | ReactNode;
+          disabled?: boolean;
+          chipProps?: object;
+          value?: string | number | boolean;
+          [key: string]: any;
+      }>;
+
+interface InputSelectProps {
+    alignActions?: string;
+    alignActionsExternal?: string;
+    checkbox?: boolean;
+    cmpSpacing?: number;
+    colorActive?: string;
+    colorLabel?: string;
+    colorText?: string;
+    convertedOptions?: any;
+    disabled?: boolean;
+    endCmp?: string | ReactNode;
+    endCmpExternal?: string | ReactNode;
+    error?: boolean;
+    focused?: boolean;
+    fullWidth?: boolean;
+    groupBy?: string | ((event: any) => void);
+    helperText?: string;
+    hideStartActionsOnEmpty?: boolean;
+    id?: string;
+    label?: string;
+    margin?: 'normal' | 'dense';
+    max?: number;
+    name?: string;
+    nullable?: string | boolean;
+    onBlur?: (event: any) => void;
+    onChange?: (event: any) => void;
+    onFocus?: (event: any) => void;
+    options?: SelectOption;
+    autoWidth?: boolean;
+    placeholderOption?: string;
+    readOnly?: boolean;
+    renderValue?: (value: any, option: SelectOption) => any;
+    required?: boolean;
+    selectAll?: boolean;
+    selectAllOption?: any;
+    size?: 'medium' | 'small';
+    startCmp?: string | ReactNode;
+    startCmpExternal?: string | ReactNode;
+    value?: string | number | boolean | Array<string | number | boolean>;
+    variant?: 'filled' | 'standard' | 'outlined';
+    [key: string]: any;
+}
+
+const InputSelect: React.FC<InputSelectProps> = ({
     alignActions,
     alignActionsExternal,
     autoWidth,
-    disabled,
-    renderValue,
-    options: _options,
-    convertedOptions: _convertedOptions,
-    placeholderOption,
-    nullable,
-    groupBy,
     checkbox,
+    cmpSpacing,
+    colorActive: _colorActive,
+    colorLabel: _colorLabel,
+    colorText: _colorText,
+    convertedOptions: _convertedOptions,
+    disabled,
+    endCmp: _endCmp,
+    endCmpExternal: _endCmpExternal,
+    error,
+    fullWidth,
+    groupBy,
+    helperText,
+    hideStartActionsOnEmpty,
+    id,
+    label,
+    margin,
     max,
+    name,
+    nullable,
+    onBlur,
+    onChange,
+    onFocus,
+    options: _options,
+    placeholderOption,
+    readOnly,
+    renderValue,
+    required,
     selectAll,
     selectAllOption,
+    size,
+    startCmp: _startCmp,
+    startCmpExternal: _startCmpExternal,
+    value,
+    variant,
     ...props
-}) {
-    const theme = useTheme();
+}): React.ReactElement => {
     const [isFocused, setIsFocused] = useState(false);
 
     const optionsObj = useOptionsConverter({
@@ -67,12 +120,17 @@ export default function InputSelect({
     });
 
     const menuColor = _colorActive ?? _colorLabel;
+    const [menuColorText] = useCustomColor(_colorText);
+    const [menuColorSelected] = useCustomColor(menuColor, { lighten: 0.8 });
+    const [menuColorHover] = useCustomColor(menuColor, { lighten: 0.6 });
 
-    const menuColorText = getCustomColor({ theme, customColor: _colorText });
-    const menuColorSelected = getCustomColor({ theme, customColor: menuColor }, { lighten: 0.8 });
-    const menuColorHover = getCustomColor({ theme, customColor: menuColor }, { lighten: 0.6 });
+    const startCmp = typeof _startCmp === 'string' ? <SVGIcon>{_startCmp}</SVGIcon> : _startCmp;
+    const startCmpExternal =
+        typeof _startCmpExternal === 'string' ? <SVGIcon>{_startCmpExternal}</SVGIcon> : _startCmpExternal;
+    const endCmp = typeof _endCmp === 'string' ? <SVGIcon>{_endCmp}</SVGIcon> : _endCmp;
+    const endCmpExternal = typeof _endCmpExternal === 'string' ? <SVGIcon>{_endCmpExternal}</SVGIcon> : _endCmpExternal;
 
-    const onFocusHandler = (e) => {
+    const onFocusHandler = (e): void => {
         setIsFocused(true);
         onFocus?.(e);
     };
@@ -91,6 +149,7 @@ export default function InputSelect({
                 colorText={_colorText}
                 colorLabel={_colorLabel}
                 colorActive={_colorActive}
+                margin={['dense', 'normal'].includes(margin) ? margin : undefined}
             >
                 {label && <InputLabel>{label}</InputLabel>}
                 <Select
@@ -112,8 +171,9 @@ export default function InputSelect({
                             '&& .Mui-selected:hover': { backgroundColor: menuColorSelected },
                         },
                     }}
-                    renderValue={() => {
-                        const rValue = renderValue?.(value) ?? value;
+                    renderValue={(value) => {
+                        const option = options.find((option) => option.value === value);
+                        const rValue = renderValue?.(value, option) ?? value;
 
                         return (
                             <Box
@@ -122,6 +182,7 @@ export default function InputSelect({
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'space-between',
+                                    gap: '10px',
                                 }}
                             >
                                 <Box
@@ -159,91 +220,40 @@ export default function InputSelect({
     }
 
     return component;
-}
-
-InputSelect.propTypes = {
-    label: PropTypes.string,
-    id: PropTypes.string,
-    name: PropTypes.string,
-    fullWidth: PropTypes.bool,
-    error: PropTypes.bool,
-    required: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    onChange: PropTypes.func,
-    value: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-        PropTypes.bool,
-        PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])),
-    ]),
-    focused: PropTypes.bool,
-    margin: PropTypes.oneOf(['normal', 'dense']),
-    size: PropTypes.oneOf(['medium', 'small']),
-    autoComplete: PropTypes.string,
-    helperText: PropTypes.string,
-    variant: PropTypes.oneOf(['filled', 'standard', 'outlined']),
-    startCmp: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    startCmpExternal: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    endCmp: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    endCmpExternal: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    cmpSpacing: PropTypes.number,
-    hideStartActionsOnEmpty: PropTypes.bool,
-    alignActions: PropTypes.string,
-    alignActionsExternal: PropTypes.string,
-    options: PropTypes.arrayOf(
-        PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.shape({
-                label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-                subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-                disabled: PropTypes.bool,
-                chipProps: PropTypes.object,
-                value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
-            }),
-        ])
-    ),
-    autoWidth: PropTypes.bool,
-    renderValue: PropTypes.func,
-    disabled: PropTypes.bool,
-    colorText: PropTypes.string,
-    colorLabel: PropTypes.string,
-    colorActive: PropTypes.string,
-    nullable: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-    placeholderOption: PropTypes.string,
-    groupBy: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 };
 
 InputSelect.defaultProps = {
-    label: undefined,
-    id: undefined,
-    name: undefined,
-    fullWidth: true,
-    error: undefined,
-    required: undefined,
-    readOnly: undefined,
-    onChange: undefined,
-    focused: undefined,
-    value: undefined,
-    margin: undefined,
+    alignActions: 'baseline',
+    alignActionsExternal: 'baseline',
     autoComplete: 'off',
+    autoWidth: undefined,
+    cmpSpacing: 2,
+    colorActive: undefined,
+    colorLabel: undefined,
+    colorText: undefined,
+    endCmp: undefined,
+    endCmpExternal: undefined,
+    error: undefined,
+    fullWidth: true,
+    groupBy: undefined, // (option) => option?.label[0].toUpperCase()
     helperText: undefined,
-    variant: 'outlined',
+    hideStartActionsOnEmpty: true,
+    id: undefined,
+    label: undefined,
+    margin: undefined,
+    name: undefined,
+    nullable: undefined,
+    onChange: undefined,
+    options: undefined,
+    placeholderOption: undefined,
+    readOnly: undefined,
+    renderValue: undefined,
+    required: undefined,
     size: 'medium',
     startCmp: undefined,
     startCmpExternal: undefined,
-    endCmp: undefined,
-    endCmpExternal: undefined,
-    cmpSpacing: 2,
-    hideStartActionsOnEmpty: true,
-    alignActions: 'baseline',
-    alignActionsExternal: 'baseline',
-    options: undefined,
-    autoWidth: undefined,
-    renderValue: undefined,
-    colorText: undefined,
-    colorLabel: undefined,
-    colorActive: undefined,
-    nullable: undefined,
-    placeholderOption: undefined,
-    groupBy: undefined, // (option) => option?.label[0].toUpperCase()
+    value: undefined,
+    variant: 'outlined',
 };
+
+export default InputSelect;
