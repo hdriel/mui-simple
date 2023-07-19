@@ -1,68 +1,13 @@
-import React, { useState } from 'react';
-import type { ReactNode } from 'react';
+import React, { cloneElement, isValidElement, useState } from 'react';
 import { ClickAwayListener } from '@mui/material';
 
 import { Select, FormControl, InputLabel, FormHelperText, Stack, Box } from './InputSelect.styled';
-import { getCustomColor, useCustomColor } from '../../../utils/helpers';
-import { useTheme } from '@mui/material/styles';
+import { useCustomColor } from '../../../utils/helpers';
 import { useOptions, useOptionsConverter } from './InputSelect.hooks';
 import SVGIcon from '../../SVGIcon/SVGIcon';
+import type { InputSelectProps } from '../../decs';
 
 const emptyObjectRef = [];
-
-type SelectOption =
-    | string
-    | Array<{
-          label?: string | ReactNode;
-          subtitle?: string | ReactNode;
-          disabled?: boolean;
-          chipProps?: object;
-          value?: string | number | boolean;
-          [key: string]: any;
-      }>;
-
-interface InputSelectProps {
-    alignActions?: string;
-    alignActionsExternal?: string;
-    checkbox?: boolean;
-    cmpSpacing?: number;
-    colorActive?: string;
-    colorLabel?: string;
-    colorText?: string;
-    convertedOptions?: any;
-    disabled?: boolean;
-    endCmp?: string | ReactNode;
-    endCmpExternal?: string | ReactNode;
-    error?: boolean;
-    focused?: boolean;
-    fullWidth?: boolean;
-    groupBy?: string | ((event: any) => void);
-    helperText?: string;
-    hideStartActionsOnEmpty?: boolean;
-    id?: string;
-    label?: string;
-    margin?: 'normal' | 'dense';
-    max?: number;
-    name?: string;
-    nullable?: string | boolean;
-    onBlur?: (event: any) => void;
-    onChange?: (event: any) => void;
-    onFocus?: (event: any) => void;
-    options?: SelectOption;
-    autoWidth?: boolean;
-    placeholderOption?: string;
-    readOnly?: boolean;
-    renderValue?: (value: any, option: SelectOption) => any;
-    required?: boolean;
-    selectAll?: boolean;
-    selectAllOption?: any;
-    size?: 'medium' | 'small';
-    startCmp?: string | ReactNode;
-    startCmpExternal?: string | ReactNode;
-    value?: string | number | boolean | Array<string | number | boolean>;
-    variant?: 'filled' | 'standard' | 'outlined';
-    [key: string]: any;
-}
 
 const InputSelect: React.FC<InputSelectProps> = ({
     alignActions,
@@ -109,12 +54,13 @@ const InputSelect: React.FC<InputSelectProps> = ({
 
     const optionsObj = useOptionsConverter({
         options: _convertedOptions ? emptyObjectRef : _options,
+        convertedOptions: _convertedOptions,
         groupBy,
     });
 
     const options = useOptions({
         placeholder: placeholderOption,
-        convertedOptions: _convertedOptions ?? optionsObj,
+        convertedOptions: optionsObj,
         checkbox,
         nullable: !selectAll && nullable,
     });
@@ -172,8 +118,15 @@ const InputSelect: React.FC<InputSelectProps> = ({
                         },
                     }}
                     renderValue={(value) => {
-                        const option = options.find((option) => option.value === value);
-                        const rValue = renderValue?.(value, option) ?? value;
+                        const optionList = Array.isArray(optionsObj) ? optionsObj : Object.values(optionsObj).flat();
+                        const option = Array.isArray(value)
+                            ? optionList.filter((option) => value.includes(option.value))
+                            : optionList.find((option) => option.value === value);
+                        const _value = isValidElement(renderValue)
+                            ? cloneElement(renderValue, { value, option })
+                            : renderValue?.(value, option) ??
+                              (Array.isArray(option) ? option.map((op) => op.label ?? op.value) : option?.label) ??
+                              (Array.isArray(value) ? value.join(', ') : value);
 
                         return (
                             <Box
@@ -194,7 +147,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
                                     }}
                                 >
                                     {showActions && startCmp}
-                                    {rValue}
+                                    {_value}
                                 </Box>
                                 {endCmp}
                             </Box>

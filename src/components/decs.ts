@@ -253,6 +253,60 @@ export interface InputPasswordProps extends Omit<InputBaseProps, 'value'> {
     [key: string]: any;
 }
 
+type SelectOption =
+    | string[]
+    | Array<{
+          label?: string | ReactNode;
+          subtitle?: string | ReactNode;
+          disabled?: boolean;
+          chipProps?: object;
+          value?: string | number | boolean;
+          [key: string]: any;
+      }>;
+
+export interface InputSelectProps {
+    alignActions?: string;
+    alignActionsExternal?: string;
+    checkbox?: boolean;
+    cmpSpacing?: number;
+    colorActive?: string;
+    colorLabel?: string;
+    colorText?: string;
+    convertedOptions?: any;
+    disabled?: boolean;
+    endCmp?: string | ReactNode;
+    endCmpExternal?: string | ReactNode;
+    error?: boolean;
+    focused?: boolean;
+    fullWidth?: boolean;
+    groupBy?: string | ((event: any) => void);
+    helperText?: string;
+    hideStartActionsOnEmpty?: boolean;
+    id?: string;
+    label?: string;
+    margin?: 'normal' | 'dense';
+    max?: number;
+    name?: string;
+    nullable?: string | boolean;
+    onBlur?: (event: any) => void;
+    onChange?: (event: any) => void;
+    onFocus?: (event: any) => void;
+    options?: SelectOption;
+    autoWidth?: boolean;
+    placeholderOption?: string;
+    readOnly?: boolean;
+    renderValue?: (value: any, option: SelectOption) => any;
+    required?: boolean;
+    selectAll?: boolean;
+    selectAllOption?: any;
+    size?: 'medium' | 'small';
+    startCmp?: string | ReactNode;
+    startCmpExternal?: string | ReactNode;
+    value?: string | number | boolean | Array<string | number | boolean>;
+    variant?: 'filled' | 'standard' | 'outlined';
+    [key: string]: any;
+}
+
 export interface SnackbarProps {
     actions?: Array<string | ButtonProps>;
     animation?: 'grow' | 'fade' | 'slide';

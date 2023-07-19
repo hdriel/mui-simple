@@ -5,9 +5,10 @@ import Checkbox from '../Checkbox/Checkbox';
 import { isDefined } from '../../../utils/helpers';
 import ListItem from '../../List/ListItem';
 
-export const useOptionsConverter = ({ options: _options, groupBy }) => {
+export const useOptionsConverter = ({ options: _options, convertedOptions, groupBy }): any[] => {
     const options = useMemo(
         () =>
+            convertedOptions ??
             _groupBy(
                 []
                     .concat(_options)
@@ -17,7 +18,7 @@ export const useOptionsConverter = ({ options: _options, groupBy }) => {
                     }),
                 groupBy ?? ''
             ),
-        [_options, groupBy]
+        [_options, groupBy, convertedOptions]
     );
 
     return options;
