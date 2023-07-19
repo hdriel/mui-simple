@@ -2,15 +2,15 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import { Check as CheckIcon, IndeterminateCheckBox as IndeterminateCheckBoxIcon } from '@mui/icons-material';
 
-import InputSelect from '../_FIXED/Select/InputSelect';
-import Chip from '../_FIXED/Chip/Chip';
-import { isDefined } from '../../utils/helpers';
-import Checkbox from '../_FIXED/Checkbox/Checkbox';
-import { MenuItem } from '../_FIXED/Select/InputSelect.styled';
-import { useOptionsConverter } from '../_FIXED/Select/InputSelect.hooks';
-import ListItem from '../List/ListItem';
-import type { InputSelectProps } from '../decs';
-import SVGIcon from '../SVGIcon/SVGIcon';
+import InputSelect from './InputSelect';
+import Chip from '../Chip/Chip';
+import { isDefined } from '../../../utils/helpers';
+import Checkbox from '../Checkbox/Checkbox';
+import { MenuItem } from './InputSelect.styled';
+import { useOptionsConverter } from './InputSelect.hooks';
+import ListItem from '../../List/ListItem';
+import type { InputMultipleSelectProps } from '../../decs';
+import SVGIcon from '../../SVGIcon/SVGIcon';
 
 const RenderValuesAsChips = ({ value, option: options }): React.ReactElement => {
     return (
@@ -29,18 +29,6 @@ const RenderValuesAsSquaredChips = ({ value, option: options }): React.ReactElem
             ))}
         </Box>
     );
-};
-type InputMultipleSelectProps = Omit<InputSelectProps, 'value'> & {
-    value: Array<string | number | boolean>;
-    chips: boolean;
-    squaredChips: boolean;
-    checkboxMarker: string | boolean | React.ReactNode;
-    max: number;
-    selectedIndicator: boolean;
-    selectAll: boolean;
-    SELECT_ALL_LABEL: string;
-    HIDE_ALL_LABEL: string;
-    SELECTED_ITEMS_LABEL: string;
 };
 
 const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({

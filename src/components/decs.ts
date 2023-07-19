@@ -307,6 +307,19 @@ export interface InputSelectProps {
     [key: string]: any;
 }
 
+export type InputMultipleSelectProps = Omit<InputSelectProps, 'value'> & {
+    value: Array<string | number | boolean>;
+    chips: boolean;
+    squaredChips: boolean;
+    checkboxMarker: string | boolean | React.ReactNode;
+    max: number;
+    selectedIndicator: boolean;
+    selectAll: boolean;
+    SELECT_ALL_LABEL: string;
+    HIDE_ALL_LABEL: string;
+    SELECTED_ITEMS_LABEL: string;
+};
+
 export interface SnackbarProps {
     actions?: Array<string | ButtonProps>;
     animation?: 'grow' | 'fade' | 'slide';
