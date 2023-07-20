@@ -285,7 +285,6 @@ export interface InputSelectProps {
     id?: string;
     label?: string;
     margin?: 'normal' | 'dense';
-    max?: number;
     name?: string;
     nullable?: string | boolean;
     onBlur?: (event: any) => void;
@@ -297,8 +296,6 @@ export interface InputSelectProps {
     readOnly?: boolean;
     renderValue?: (value: any, option: SelectOption) => any;
     required?: boolean;
-    selectAll?: boolean;
-    selectAllOption?: any;
     size?: 'medium' | 'small';
     startCmp?: string | ReactNode;
     startCmpExternal?: string | ReactNode;

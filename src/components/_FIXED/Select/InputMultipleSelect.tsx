@@ -12,7 +12,7 @@ import ListItem from '../../List/ListItem';
 import type { InputMultipleSelectProps } from '../../decs';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 
-const RenderValuesAsChips = ({ value, option: options }): React.ReactElement => {
+const RenderValuesAsChips = ({ value, option: options }: { value?: any; option?: any }): React.ReactElement => {
     return (
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
             {options?.map(({ value, label }) => (
@@ -21,7 +21,7 @@ const RenderValuesAsChips = ({ value, option: options }): React.ReactElement => 
         </Box>
     );
 };
-const RenderValuesAsSquaredChips = ({ value, option: options }): React.ReactElement => {
+const RenderValuesAsSquaredChips = ({ value, option: options }: { value?: any; option?: any }): React.ReactElement => {
     return (
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
             {options?.map(({ value, label }) => (
@@ -55,7 +55,7 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
         .flat()
         .filter((option) => !option.disabled).length;
     const [selectAllState, setSelectAllState] = useState(false);
-    const [, setClickAll] = useState(false);
+    const [isClickedAll, setClickAll] = useState(false);
 
     const checkboxMarker =
         _checkboxMarker && typeof _checkboxMarker === 'string' ? <SVGIcon>{_checkboxMarker}</SVGIcon> : _checkboxMarker;
@@ -83,19 +83,22 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
     );
 
     const handleSelectAllChange = (event, isClickedOnSelectAllOption = true): void => {
-        if (isClickedOnSelectAllOption) setClickAll(true);
-        setSelectAllState((state) => {
-            const showAll = !state;
-            const allValues = showAll
-                ? Object.values(convertedOptions ?? {})
-                      .flat()
-                      .map((option) => option.value)
-                : [];
+        setTimeout(() => {
+            if (isClickedAll) return;
+            if (isClickedOnSelectAllOption) setClickAll(true);
+            setSelectAllState((state) => {
+                const showAll = !state;
+                const allValues = showAll
+                    ? Object.values(convertedOptions ?? {})
+                          .flat()
+                          .map((option) => option.value)
+                    : [];
 
-            onChange?.({ target: { name, value: allValues } });
+                onChange?.({ target: { name, value: allValues } });
 
-            return showAll;
-        });
+                return showAll;
+            });
+        }, 100);
     };
 
     useEffect(() => {
@@ -113,7 +116,7 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
             label={label}
             renderValue={squaredChips ? <RenderValuesAsSquaredChips /> : chips ? <RenderValuesAsChips /> : renderValue}
             onChange={onClickMenuItemHandler}
-            checkbox={checkboxMarker}
+            checkbox={checkboxMarker as boolean}
             selectAll={selectAll}
             options={options}
             convertedOptions={convertedOptions}
