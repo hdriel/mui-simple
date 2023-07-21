@@ -5,7 +5,15 @@ import Checkbox from '../Checkbox/Checkbox';
 import { isDefined } from '../../../utils/helpers';
 import ListItem from '../../List/ListItem';
 
-export const useOptionsConverter = ({ options: _options, convertedOptions, groupBy }): any[] => {
+export const useOptionsConverter = ({
+    options: _options,
+    convertedOptions,
+    groupBy,
+}: {
+    options: any[];
+    convertedOptions?;
+    groupBy: string | Function;
+}): any[] => {
     const options = useMemo(
         () =>
             convertedOptions ??

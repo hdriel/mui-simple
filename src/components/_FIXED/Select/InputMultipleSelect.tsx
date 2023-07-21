@@ -54,7 +54,7 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
     const selectedValuesLen = Object.values(convertedOptions)
         .flat()
         .filter((option) => !option.disabled).length;
-    const [selectAllState, setSelectAllState] = useState(false);
+    const [, setClickAllState] = useState(false);
     const [isClickedAll, setClickAll] = useState(false);
 
     const checkboxMarker =
@@ -65,10 +65,27 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
             ? `${(_label as string) ?? ''} ${SELECTED_ITEMS_LABEL?.replace('{n}', String(n))}`
             : _label;
 
+    const handleSelectAllChange = useCallback((): void => {
+        setClickAll((isClickedAll) => {
+            const allValues = isClickedAll
+                ? Object.values(convertedOptions ?? {})
+                      .flat()
+                      .map((option) => option.value)
+                : [];
+
+            onChange?.({ target: { name, value: allValues } });
+
+            return isClickedAll;
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     const onClickMenuItemHandler = useCallback(
         (event) => {
-            setClickAll((clickAll) => {
-                if (!clickAll) {
+            setClickAllState((isClickAllState) => {
+                if (isClickAllState) {
+                    handleSelectAllChange();
+                } else {
                     const values = event.target.value;
                     if (!isDefined(max) || values?.length <= max) {
                         onChange?.(event);
@@ -79,34 +96,8 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
             });
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        [max]
+        [max, handleSelectAllChange]
     );
-
-    const handleSelectAllChange = (event, isClickedOnSelectAllOption = true): void => {
-        setTimeout(() => {
-            if (isClickedAll) return;
-            if (isClickedOnSelectAllOption) setClickAll(true);
-            setSelectAllState((state) => {
-                const showAll = !state;
-                const allValues = showAll
-                    ? Object.values(convertedOptions ?? {})
-                          .flat()
-                          .map((option) => option.value)
-                    : [];
-
-                onChange?.({ target: { name, value: allValues } });
-
-                return showAll;
-            });
-        }, 100);
-    };
-
-    useEffect(() => {
-        if ((selectedValuesLen === value?.length && !selectAllState) || (value?.length === 0 && selectAllState)) {
-            handleSelectAllChange(null, false);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [selectedValuesLen, value?.length, selectAllState]);
 
     return (
         <InputSelect
@@ -122,10 +113,15 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
             convertedOptions={convertedOptions}
             selectAllOption={
                 !isDefined(max) && selectAll ? (
-                    <MenuItem onClick={handleSelectAllChange}>
+                    <MenuItem
+                        onClick={() => {
+                            setClickAllState(true);
+                            setClickAll((v) => !v);
+                        }}
+                    >
                         {typeof checkboxMarker === 'boolean' && checkboxMarker && (
                             <Checkbox
-                                checked={selectAllState}
+                                checked={isClickedAll}
                                 checkedIcon={
                                     selectedValuesLen === value?.length ? undefined : <IndeterminateCheckBoxIcon />
                                 }
@@ -135,13 +131,13 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
                         <ListItem
                             disableGutters
                             itemProps={{
-                                title: selectAllState
+                                title: isClickedAll
                                     ? !isDefined(checkboxMarker) ||
                                       (typeof checkboxMarker === 'boolean' && checkboxMarker)
                                         ? HIDE_ALL_LABEL
                                         : SELECT_ALL_LABEL
                                     : SELECT_ALL_LABEL,
-                                actions: selectAllState ? checkboxMarker : undefined,
+                                actions: isClickedAll ? checkboxMarker : undefined,
                                 bold: true,
                             }}
                             buttonItems
