@@ -99,6 +99,13 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
         [max, handleSelectAllChange]
     );
 
+    // useEffect(() => {
+    //     if (selectedValuesLen && !isClickedAll) {
+    //         setClickAll((v) => !v);
+    //     }
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [selectedValuesLen, value?.length]);
+
     return (
         <InputSelect
             value={[].concat(value).filter(Boolean)}
@@ -155,7 +162,6 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
 
 InputMultipleSelect.defaultProps = {
     value: undefined,
-    // renderValue: (value, options) => options?.map((option) => option?.label ?? option.value) ?? value.join(', '),
     chips: true,
     squaredChips: true,
     checkboxMarker: <CheckIcon />,
