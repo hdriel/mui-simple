@@ -42,6 +42,7 @@ interface ListProps {
     items?: Array<string | ListItemProps>;
     [key: string]: any;
 }
+
 const List: React.FC<ListProps> = ({
     useTransition,
     component,
@@ -63,7 +64,7 @@ const List: React.FC<ListProps> = ({
     ...props
 }): React.ReactElement => {
     const [open, setOpen] = useState({});
-    const onClick = (index, cb, event) => {
+    const onClick = (index, cb, event): void => {
         event.stopPropagation();
         setOpen((o) => ({
             ...o,
