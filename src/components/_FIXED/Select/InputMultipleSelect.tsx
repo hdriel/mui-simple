@@ -7,10 +7,11 @@ import Chip from '../Chip/Chip';
 import { isDefined } from '../../../utils/helpers';
 import Checkbox from '../Checkbox/Checkbox';
 import { MenuItem } from './InputSelect.styled';
-import { useOptionsConverter } from './InputSelect.hooks';
+import { getOptions, useOptionsConverter } from './InputSelect.hooks';
 import ListItem from '../../List/ListItem';
 import type { InputMultipleSelectProps } from '../../decs';
 import SVGIcon from '../../SVGIcon/SVGIcon';
+import { InputSelectOption } from '../../decs';
 
 const RenderValuesAsChips = ({ value, option: options }: { value?: any; option?: any }): React.ReactElement => {
     return (
@@ -42,7 +43,7 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
     squaredChips,
     selectedIndicator,
     selectAll,
-    options,
+    options: _options,
     groupBy,
     SELECT_ALL_LABEL,
     HIDE_ALL_LABEL,
@@ -50,10 +51,11 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
     checkboxMarker: _checkboxMarker,
     ...props
 }): React.ReactElement => {
+    const options = getOptions({ options: _options });
     const convertedOptions = useOptionsConverter({ options, groupBy });
-    const selectedValuesLen = Object.values(convertedOptions)
-        .flat()
-        .filter((option) => !option.disabled).length;
+    const availableValuesLen = options.filter(
+        (option: InputSelectOption) => !option.disabled || value.includes(option.value)
+    ).length;
 
     const [, setClickAllState] = useState(false);
     const [isClickedAll, setClickAll] = useState(false);
@@ -101,9 +103,8 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
     );
 
     useEffect(() => {
-        if (selectedValuesLen && !isClickedAll) {
-            setClickAll((v) => !v);
-        }
+        if (!value?.length && isClickedAll) setClickAll(false);
+        if (value?.length && value?.length >= availableValuesLen && !isClickedAll) setClickAll(true);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [value?.length]);
 
@@ -129,9 +130,11 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
                     >
                         {typeof checkboxMarker === 'boolean' && checkboxMarker && (
                             <Checkbox
-                                checked={isClickedAll}
+                                checked={!!(value?.length || isClickedAll)}
                                 checkedIcon={
-                                    selectedValuesLen === value?.length ? undefined : <IndeterminateCheckBoxIcon />
+                                    !value?.length || value?.length >= availableValuesLen ? undefined : (
+                                        <IndeterminateCheckBoxIcon />
+                                    )
                                 }
                             />
                         )}

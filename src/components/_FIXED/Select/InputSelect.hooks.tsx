@@ -6,24 +6,28 @@ import { isDefined } from '../../../utils/helpers';
 import ListItem from '../../List/ListItem';
 import type { InputSelectOption, InputSelectOptions } from '../../decs';
 
-export const useOptionsConverter = ({
-    options: _options,
-    convertedOptions,
-    groupBy,
-}: {
-    options: InputSelectOptions;
-    convertedOptions?: Record<string, InputSelectOptions>;
-    groupBy?: string | ((row: any) => string);
-}): Record<string, InputSelectOption[]> => {
-    if (isDefined(convertedOptions)) return convertedOptions;
-    if (!_options?.length) return {};
-
+export const getOptions = ({ options: _options }: { options: InputSelectOptions }): InputSelectOption[] => {
     const options: InputSelectOption[] = []
         .concat(_options)
         ?.filter(Boolean)
         .map((option) => {
             return typeof option === 'string' ? { value: option, label: option, disabled: false } : option;
         });
+
+    return options;
+};
+
+export const useOptionsConverter = ({
+    options,
+    convertedOptions,
+    groupBy,
+}: {
+    options: InputSelectOption[];
+    convertedOptions?: Record<string, InputSelectOptions>;
+    groupBy?: string | ((row: any) => string);
+}): Record<string, InputSelectOption[]> => {
+    if (isDefined(convertedOptions)) return convertedOptions;
+    if (!options?.length) return {};
 
     return _groupBy(options, groupBy ?? '') as Record<string, InputSelectOption[]>;
 };

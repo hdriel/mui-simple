@@ -3,7 +3,7 @@ import { ClickAwayListener } from '@mui/material';
 
 import { Select, FormControl, InputLabel, FormHelperText, Stack, Box } from './InputSelect.styled';
 import { useCustomColor } from '../../../utils/helpers';
-import { useOptions, useOptionsConverter } from './InputSelect.hooks';
+import { getOptions, useOptions, useOptionsConverter } from './InputSelect.hooks';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 import type { InputSelectProps } from '../../decs';
 
@@ -53,7 +53,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
     const [isFocused, setIsFocused] = useState(false);
 
     const optionsObj = useOptionsConverter({
-        options: _convertedOptions ? emptyObjectRef : _options,
+        options: _convertedOptions ? emptyObjectRef : getOptions({ options: _options }),
         convertedOptions: _convertedOptions,
         groupBy,
     });
