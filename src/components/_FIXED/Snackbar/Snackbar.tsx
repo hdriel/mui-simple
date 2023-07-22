@@ -140,4 +140,5 @@ Snackbar.defaultProps = {
     vertical: undefined,
 };
 
+export type { SnackbarProps } from '../../decs';
 export default Snackbar;

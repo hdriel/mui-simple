@@ -63,4 +63,5 @@ Chip.defaultProps = {
     width: undefined,
 };
 
+export type { ChipProps } from '../../decs';
 export default Chip;

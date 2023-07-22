@@ -1,21 +1,39 @@
 export { default as Accordion } from './components/_FIXED/Accordion/Accordion';
+export type { AccordionProps } from './components/_FIXED/Accordion/Accordion';
+
 export { default as Alert } from './components/_FIXED/Alert/Alert';
+export type { AlertProps } from './components/_FIXED/Alert/Alert';
+
 export { default as AppBar } from './components/AppBar/AppBar';
 export { default as InputAutocomplete } from './components/Autocomplete/InputAutocomplete';
 export { default as InputAutoCompleteAsync } from './components/Autocomplete/InputAutocompleteAsync';
 export { default as InputAutocompleteMultiple } from './components/Autocomplete/InputAutocompleteMultiple';
 export { default as InputGoogleAddress } from './components/Autocomplete/InputGoogleAddress';
+
 export { default as Avatar } from './components/_FIXED/Avatar/Avatar';
+export type { AvatarProps } from './components/_FIXED/Avatar/Avatar';
+
 export { default as Backdrop } from './components/Backdrop/Backdrop';
 export { default as Badge } from './components/Badge/Badge';
+
 export { default as BottomNavigation } from './components/_FIXED/BottomNavigation/BottomNavigation';
+export type { BottomNavigationProps } from './components/_FIXED/BottomNavigation/BottomNavigation';
+
 export { default as Breadcrumbs } from './components/Breadcrumbs/Breadcrumbs';
+
 export { default as Button } from './components/_FIXED/Button/Button';
+export type { ButtonProps } from './components/_FIXED/Button/Button';
+
 export { default as ButtonGroup } from './components/_FIXED/Button/ButtonGroup';
+export type { ButtonGroupProps } from './components/_FIXED/Button/ButtonGroup';
 
 export * from './components/_FIXED/Card';
+
 export { default as Checkbox } from './components/_FIXED/Checkbox/Checkbox';
+export type { CheckboxProps } from './components/_FIXED/Checkbox/Checkbox';
+
 export { default as Chip } from './components/_FIXED/Chip/Chip';
+export type { ChipProps } from './components/_FIXED/Chip/Chip';
 
 export { default as Dialog } from './components/Dialog/Dialog';
 export { default as Divider } from './components/Divider/Divider';
@@ -24,20 +42,37 @@ export { default as Drawer } from './components/Drawer/Drawer';
 export { default as Fab } from './components/FloatingActionButton/FloatingActionButton';
 
 export { default as TextField } from './components/_FIXED/TextField/TextField';
+export type { TextFieldProps } from './components/_FIXED/TextField/TextField';
+
 export { default as InputColor } from './components/TextField/InputColor';
 export { default as InputDate } from './components/TextField/InputDate';
 export { default as InputDateTime } from './components/TextField/InputDateTime';
+
 export { default as InputEmail } from './components/_FIXED/TextField/InputEmail';
+export type { InputEmailProps } from './components/_FIXED/TextField/InputEmail';
+
 export { default as InputFile } from './components/TextField/InputFile';
 export { default as InputNumber } from './components/TextField/InputNumber';
+
 export { default as InputPassword } from './components/_FIXED/TextField/InputPassword';
+export type { InputPasswordProps } from './components/_FIXED/TextField/InputPassword';
+
 export { default as InputPattern } from './components/TextField/InputPattern';
 export { default as InputPhone } from './components/TextField/InputPhone';
+
 export { default as InputSearch } from './components/_FIXED/TextField/InputSearch';
+export type { InputSearchProps } from './components/_FIXED/TextField/InputSearch';
+
 export { default as InputText } from './components/_FIXED/TextField/InputText';
+export type { InputTextProps } from './components/_FIXED/TextField/InputText';
+
 export { default as InputTime } from './components/TextField/InputTime';
+
 export { default as InputSelect } from './components/_FIXED/Select/InputSelect';
+export type { InputSelectOptions, InputSelectProps } from './components/_FIXED/Select/InputSelect';
+
 export { default as InputMultipleSelect } from './components/_FIXED/Select/InputMultipleSelect';
+export type { InputMultipleSelectProps } from './components/_FIXED/Select/InputMultipleSelect';
 
 export { default as Link } from './components/Link/Link';
 export { default as List } from './components/List/List';
@@ -75,7 +110,9 @@ export { default as ToggleButtonGroups } from './components/ToggleButtonGroup/To
 export { default as Tooltip } from './components/_FIXED/Tooltip/Tooltip';
 export { default as TreeView } from './components/TreeView/TreeView';
 export * from './components/TreeView';
+
 export { default as Typography } from './components/_FIXED/Typography/Typography';
+export type { TypographyProps } from './components/_FIXED/Typography/Typography';
 
 export * from './utils';
 export { default as useElementSize } from './hooks/useElementSize';

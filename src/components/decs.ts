@@ -458,6 +458,21 @@ export interface TabPanelProps {
     [key: string]: any;
 }
 
+export interface TabProps {
+    iconPosition?: 'bottom' | 'end' | 'start' | 'top';
+    label?: string;
+    value?: string;
+    open?: boolean;
+    wrapped?: boolean;
+    disabled?: boolean;
+    disableRipple?: boolean;
+    icon?: ReactNode | string;
+    link?: string;
+    onClick?: (event: any, value: string) => void;
+    tooltip?: string;
+    [key: string]: any;
+}
+
 export interface TabsProps {
     centered?: boolean;
     fillActiveTab?: boolean;

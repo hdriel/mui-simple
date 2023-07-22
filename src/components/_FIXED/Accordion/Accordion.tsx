@@ -127,4 +127,5 @@ Accordion.defaultProps = {
     useCustomStyle: false,
 };
 
+export type { AccordionProps } from '../../decs';
 export default Accordion;

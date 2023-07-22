@@ -95,4 +95,6 @@ Alert.defaultProps = {
 };
 
 Alert.displayName = 'Alert';
+
+export type { AlertProps } from '../../decs';
 export default Alert;

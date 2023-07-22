@@ -61,4 +61,5 @@ BottomNavigation.defaultProps = {
     width: undefined,
 };
 
+export type { BottomNavigationProps } from '../../decs';
 export default BottomNavigation;

@@ -256,4 +256,5 @@ EnhancedTable.defaultProps = {
     title: undefined,
 };
 
+export type { TableProps } from '../../../decs';
 export default EnhancedTable;

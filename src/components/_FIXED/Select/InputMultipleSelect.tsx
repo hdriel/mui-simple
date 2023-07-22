@@ -174,4 +174,5 @@ InputMultipleSelect.defaultProps = {
     SELECTED_ITEMS_LABEL: '({n} selected)',
 };
 
+export type { InputMultipleSelectProps } from '../../decs';
 export default InputMultipleSelect;

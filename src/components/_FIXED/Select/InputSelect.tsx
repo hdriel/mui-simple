@@ -210,4 +210,5 @@ InputSelect.defaultProps = {
     variant: 'outlined',
 };
 
+export type { InputSelectProps, InputSelectOptions } from '../../decs';
 export default InputSelect;
