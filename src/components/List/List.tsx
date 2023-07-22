@@ -1,12 +1,46 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
 import { Divider, List as MuiList, ListSubheader, Collapse } from './List.styled';
 import MuiListItem from './ListItem';
 import DraggableList from '../DraggableList/DraggableList';
 import { Box } from '@mui/material';
 
-const List = ({
+interface ListItemProps {
+    divider: object | boolean;
+    selected: boolean;
+    inset: boolean;
+    disablePadding: boolean;
+    disableGutters: boolean;
+    startIcon: React.ReactNode | string;
+    avatar: object;
+    title: string;
+    subtitle: string;
+    link: string;
+    items: any[];
+    actions: any[];
+    align: 'flex-start';
+}
+
+interface ListProps {
+    useTransition: boolean;
+    component: string;
+    width: string | number;
+    dense: boolean;
+    buttonItems: boolean;
+    disablePadding: boolean;
+    disablePaddingItems: boolean;
+    disableGuttersItems: boolean;
+    dragAndDropItems: boolean;
+    enableSubtitle: boolean;
+    droppableId: string;
+    title: string;
+    alignItems: 'flex-start';
+    insetItems: boolean;
+    onListOrderChange: (event: any) => void;
+    flexDirectionItems: 'row' | 'column';
+    items: Array<string | ListItemProps>;
+}
+const List: React.FC<ListProps> = ({
     useTransition,
     component,
     width,
@@ -25,7 +59,7 @@ const List = ({
     insetItems,
     droppableId,
     ...props
-}) => {
+}): React.ReactElement => {
     const [open, setOpen] = useState({});
     const onClick = (index, cb, event) => {
         event.stopPropagation();
@@ -107,45 +141,6 @@ const List = ({
             }
         </MuiList>
     );
-};
-
-List.propTypes = {
-    useTransition: PropTypes.bool,
-    component: PropTypes.string,
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    dense: PropTypes.bool,
-    buttonItems: PropTypes.bool,
-    disablePadding: PropTypes.bool,
-    disablePaddingItems: PropTypes.bool,
-    disableGuttersItems: PropTypes.bool,
-    dragAndDropItems: PropTypes.bool,
-    enableSubtitle: PropTypes.bool,
-    droppableId: PropTypes.string,
-    title: PropTypes.string,
-    alignItems: PropTypes.oneOf(['flex-start']),
-    insetItems: PropTypes.bool,
-    onListOrderChange: PropTypes.func,
-    flexDirectionItems: PropTypes.oneOf(['row', 'column']),
-    items: PropTypes.arrayOf(
-        PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.shape({
-                divider: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-                selected: PropTypes.bool,
-                inset: PropTypes.bool,
-                disablePadding: PropTypes.bool,
-                disableGutters: PropTypes.bool,
-                startIcon: PropTypes.node,
-                avatar: PropTypes.object,
-                title: PropTypes.string,
-                subtitle: PropTypes.string,
-                link: PropTypes.string,
-                items: PropTypes.array,
-                actions: PropTypes.array,
-                align: PropTypes.oneOf(['flex-start']),
-            }),
-        ])
-    ),
 };
 
 List.defaultProps = {
