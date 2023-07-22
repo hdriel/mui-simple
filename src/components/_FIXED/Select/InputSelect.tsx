@@ -123,7 +123,8 @@ const InputSelect: React.FC<InputSelectProps> = ({
                             ? optionList.filter((option) => value.includes(option.value))
                             : optionList.find((option) => option.value === value);
                         const _value = isValidElement(renderValue)
-                            ? cloneElement(renderValue, { value, option })
+                            ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                              cloneElement(renderValue, { value, option } as any)
                             : renderValue?.(value, option) ??
                               (Array.isArray(option) ? option.map((op) => op.label ?? op.value) : option?.label) ??
                               (Array.isArray(value) ? value.join(', ') : value);

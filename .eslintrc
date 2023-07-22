@@ -70,7 +70,7 @@
     "settings": {
         "import/resolver": {
             "jsconfig": {
-                "config": "tsconfig.json",
+                "config": "./tsconfig.json",
                 "extensions": [".json", ".js", ".jsx", ".ts", ".tsx"]
             }
         }

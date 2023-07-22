@@ -54,6 +54,7 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
     const selectedValuesLen = Object.values(convertedOptions)
         .flat()
         .filter((option) => !option.disabled).length;
+
     const [, setClickAllState] = useState(false);
     const [isClickedAll, setClickAll] = useState(false);
 
@@ -99,12 +100,12 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
         [max, handleSelectAllChange]
     );
 
-    // useEffect(() => {
-    //     if (selectedValuesLen && !isClickedAll) {
-    //         setClickAll((v) => !v);
-    //     }
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [selectedValuesLen, value?.length]);
+    useEffect(() => {
+        if (selectedValuesLen && !isClickedAll) {
+            setClickAll((v) => !v);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [value?.length]);
 
     return (
         <InputSelect
