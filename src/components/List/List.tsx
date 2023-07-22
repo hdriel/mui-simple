@@ -6,39 +6,41 @@ import DraggableList from '../DraggableList/DraggableList';
 import { Box } from '@mui/material';
 
 interface ListItemProps {
-    divider: object | boolean;
-    selected: boolean;
-    inset: boolean;
-    disablePadding: boolean;
-    disableGutters: boolean;
-    startIcon: React.ReactNode | string;
-    avatar: object;
-    title: string;
-    subtitle: string;
-    link: string;
-    items: any[];
-    actions: any[];
-    align: 'flex-start';
+    divider?: object | boolean;
+    selected?: boolean;
+    inset?: boolean;
+    disablePadding?: boolean;
+    disableGutters?: boolean;
+    startIcon?: React.ReactNode | string;
+    avatar?: object;
+    title?: string;
+    subtitle?: string;
+    link?: string;
+    items?: any[];
+    actions?: any[];
+    align?: 'flex-start';
+    [key: string]: any;
 }
 
 interface ListProps {
-    useTransition: boolean;
-    component: string;
-    width: string | number;
-    dense: boolean;
-    buttonItems: boolean;
-    disablePadding: boolean;
-    disablePaddingItems: boolean;
-    disableGuttersItems: boolean;
-    dragAndDropItems: boolean;
-    enableSubtitle: boolean;
-    droppableId: string;
-    title: string;
-    alignItems: 'flex-start';
-    insetItems: boolean;
-    onListOrderChange: (event: any) => void;
-    flexDirectionItems: 'row' | 'column';
-    items: Array<string | ListItemProps>;
+    useTransition?: boolean;
+    component?: string;
+    width?: string | number;
+    dense?: boolean;
+    buttonItems?: boolean;
+    disablePadding?: boolean;
+    disablePaddingItems?: boolean;
+    disableGuttersItems?: boolean;
+    dragAndDropItems?: boolean;
+    enableSubtitle?: boolean;
+    droppableId?: string;
+    title?: string;
+    alignItems?: 'flex-start';
+    insetItems?: boolean;
+    onListOrderChange?: (event: any) => void;
+    flexDirectionItems?: 'row' | 'column';
+    items?: Array<string | ListItemProps>;
+    [key: string]: any;
 }
 const List: React.FC<ListProps> = ({
     useTransition,
