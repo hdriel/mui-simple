@@ -62,4 +62,5 @@ InputText.defaultProps = {
     variant: undefined,
 };
 
+export type { InputTextProps } from '../../decs';
 export default InputText;

@@ -150,4 +150,5 @@ Tabs.defaultProps = {
     reverse: undefined,
 };
 
+export type { TabsProps } from '../../decs';
 export default Tabs;

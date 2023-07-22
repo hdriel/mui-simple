@@ -45,4 +45,5 @@ ButtonGroup.defaultProps = {
     fullWidth: undefined,
 };
 
+export type { ButtonGroupProps } from '../../decs';
 export default ButtonGroup;

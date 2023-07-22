@@ -3,7 +3,7 @@ import { ClickAwayListener } from '@mui/material';
 
 import { Select, FormControl, InputLabel, FormHelperText, Stack, Box } from './InputSelect.styled';
 import { useCustomColor } from '../../../utils/helpers';
-import { useOptions, useOptionsConverter } from './InputSelect.hooks';
+import { getOptions, useOptions, useOptionsConverter } from './InputSelect.hooks';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 import type { InputSelectProps } from '../../decs';
 
@@ -53,7 +53,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
     const [isFocused, setIsFocused] = useState(false);
 
     const optionsObj = useOptionsConverter({
-        options: _convertedOptions ? emptyObjectRef : _options,
+        options: _convertedOptions ? emptyObjectRef : getOptions({ options: _options }),
         convertedOptions: _convertedOptions,
         groupBy,
     });
@@ -123,7 +123,8 @@ const InputSelect: React.FC<InputSelectProps> = ({
                             ? optionList.filter((option) => value.includes(option.value))
                             : optionList.find((option) => option.value === value);
                         const _value = isValidElement(renderValue)
-                            ? cloneElement(renderValue, { value, option })
+                            ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                              cloneElement(renderValue, { value, option } as any)
                             : renderValue?.(value, option) ??
                               (Array.isArray(option) ? option.map((op) => op.label ?? op.value) : option?.label) ??
                               (Array.isArray(value) ? value.join(', ') : value);
@@ -209,4 +210,5 @@ InputSelect.defaultProps = {
     variant: 'outlined',
 };
 
+export type { InputSelectProps, InputSelectOptions } from '../../decs';
 export default InputSelect;

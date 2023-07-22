@@ -63,4 +63,5 @@ Avatar.defaultProps = {
     variant: 'circular',
 };
 
+export type { AvatarProps } from '../../decs';
 export default Avatar;

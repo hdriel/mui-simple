@@ -253,16 +253,16 @@ export interface InputPasswordProps extends Omit<InputBaseProps, 'value'> {
     [key: string]: any;
 }
 
-type SelectOption =
-    | string[]
-    | Array<{
-          label?: string | ReactNode;
-          subtitle?: string | ReactNode;
-          disabled?: boolean;
-          chipProps?: object;
-          value?: string | number | boolean;
-          [key: string]: any;
-      }>;
+export interface InputSelectOption {
+    label?: string | ReactNode;
+    subtitle?: string | ReactNode;
+    disabled?: boolean;
+    chipProps?: object;
+    value?: string | number | boolean;
+    [key: string]: any;
+}
+
+export type InputSelectOptions = Array<string | InputSelectOption>;
 
 export interface InputSelectProps {
     alignActions?: string;
@@ -279,7 +279,7 @@ export interface InputSelectProps {
     error?: boolean;
     focused?: boolean;
     fullWidth?: boolean;
-    groupBy?: string | ((event: any) => void);
+    groupBy?: string | ((row: any) => string);
     helperText?: string;
     hideStartActionsOnEmpty?: boolean;
     id?: string;
@@ -290,11 +290,11 @@ export interface InputSelectProps {
     onBlur?: (event: any) => void;
     onChange?: (event: any) => void;
     onFocus?: (event: any) => void;
-    options?: SelectOption;
+    options?: InputSelectOptions;
     autoWidth?: boolean;
     placeholderOption?: string;
     readOnly?: boolean;
-    renderValue?: (value: any, option: SelectOption) => any;
+    renderValue?: (value: any, option: InputSelectOption) => any;
     required?: boolean;
     size?: 'medium' | 'small';
     startCmp?: string | ReactNode;
@@ -455,6 +455,21 @@ export interface TabItemProps {
 export interface TabPanelProps {
     open?: boolean;
     swipeable?: boolean;
+    [key: string]: any;
+}
+
+export interface TabProps {
+    iconPosition?: 'bottom' | 'end' | 'start' | 'top';
+    label?: string;
+    value?: string;
+    open?: boolean;
+    wrapped?: boolean;
+    disabled?: boolean;
+    disableRipple?: boolean;
+    icon?: ReactNode | string;
+    link?: string;
+    onClick?: (event: any, value: string) => void;
+    tooltip?: string;
     [key: string]: any;
 }
 

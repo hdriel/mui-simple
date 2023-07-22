@@ -95,4 +95,5 @@ RadioButtonsGroup.defaultProps = {
     variant: undefined,
 };
 
+export type { RadioButtonsGroupProps } from '../../decs';
 export default RadioButtonsGroup;

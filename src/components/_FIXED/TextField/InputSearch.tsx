@@ -49,4 +49,5 @@ InputSearch.defaultProps = {
     variant: undefined,
 };
 
+export type { InputSearchProps } from '../../decs';
 export default InputSearch;

@@ -6,7 +6,7 @@ import { useCustomColor } from '../../../utils/helpers';
 import type { CheckboxProps } from '../../decs';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 
-export default function Checkbox(props: PropsWithChildren<CheckboxProps>): ReactElement {
+function Checkbox(props: PropsWithChildren<CheckboxProps>): ReactElement {
     const { color, textColor: _textColor, value, checked, checkedIcon, icon, children, label, ...rest } = props;
     const [customColor, muiColor] = useCustomColor(color);
     const [textColor] = useCustomColor(_textColor);
@@ -42,3 +42,6 @@ Checkbox.defaultProps = {
     textColor: undefined,
     value: undefined,
 };
+
+export type { CheckboxProps } from '../../decs';
+export default Checkbox;

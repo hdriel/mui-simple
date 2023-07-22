@@ -132,4 +132,5 @@ Button.defaultProps = {
 
 Button.displayName = 'Button';
 
+export type { ButtonProps } from '../../decs';
 export default Button;

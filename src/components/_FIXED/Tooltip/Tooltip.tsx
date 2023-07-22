@@ -52,4 +52,5 @@ Tooltip.defaultProps = {
     title: undefined,
 };
 
+export type { TooltipProps } from '../../decs';
 export default Tooltip;

@@ -178,4 +178,5 @@ Typography.defaultProps = {
     wrap: true,
 };
 
+export type { TypographyProps } from '../../decs';
 export default Typography;

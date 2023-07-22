@@ -151,4 +151,5 @@ InputPassword.defaultProps = {
     variant: undefined,
 };
 
+export type { InputPasswordProps } from '../../decs';
 export default InputPassword;

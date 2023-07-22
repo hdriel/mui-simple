@@ -143,4 +143,5 @@ Card.defaultProps = {
     width: 'auto',
 };
 
+export type { CardProps } from '../../decs';
 export default Card;

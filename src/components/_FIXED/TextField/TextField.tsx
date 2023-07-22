@@ -129,4 +129,5 @@ TextField.defaultProps = {
     variant: 'outlined',
 };
 
+export type { InputBaseProps as TextFieldProps } from '../../decs';
 export default TextField;

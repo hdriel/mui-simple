@@ -43,4 +43,5 @@ InputEmail.defaultProps = {
     variant: undefined,
 };
 
+export type { InputBaseProps as InputEmailProps } from '../../decs';
 export default InputEmail;
