@@ -15,7 +15,7 @@ export const reorder = (list, startIndex, endIndex): any[] => {
 export const getItemStyle = (theme, isDragging, draggableStyle): object => ({
     userSelect: 'none',
     // change background colour if dragging
-    background: isDragging ? 'lightgreen' : 'grey',
+    background: isDragging ? 'lightgreen' : undefined,
     ...draggableStyle,
 });
 

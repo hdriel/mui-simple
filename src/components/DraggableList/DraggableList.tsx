@@ -4,6 +4,7 @@ import { isEmpty } from 'lodash-es';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import classNames from 'classnames';
+import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { DraggableListUL, DraggableListULItem } from './DraggableList.styled';
 
@@ -92,9 +93,13 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
                         {provided.placeholder}
 
                         {!isEmpty(placeholderProps) && snapshot.isDraggingOver && (
-                            <div
+                            <Box
                                 className="placeholder"
-                                style={{
+                                sx={{
+                                    position: 'absolute',
+                                    borderRadius: '3px',
+                                    border: 'dashed 1px blue',
+                                    backgroundColor: 'white',
                                     top: placeholderProps.clientY,
                                     left: placeholderProps.clientX,
                                     height: placeholderProps.clientHeight,
