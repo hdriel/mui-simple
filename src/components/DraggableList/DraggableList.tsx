@@ -62,7 +62,7 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
                         className={classNames([droppableClassName, className])}
                         {...provided.droppableProps}
                         ref={provided.innerRef}
-                        style={getListStyle(theme, snapshot.isDraggingOver)}
+                        style={getListStyle({ theme, isDraggingOver: snapshot.isDraggingOver })}
                     >
                         {dataList?.map((data: DataItem, index) => {
                             const id = getDataId(data, fieldId, index);
@@ -80,11 +80,12 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
                                             {...providedItem.dragHandleProps}
                                             component={component}
                                             ref={providedItem.innerRef}
-                                            style={getItemStyle(
+                                            style={getItemStyle({
                                                 theme,
-                                                snapshot.isDragging,
-                                                providedItem.draggableProps.style
-                                            )}
+                                                isDragging: snapshot.isDragging,
+                                                draggableStyle: providedItem.draggableProps.style,
+                                                flexDirection,
+                                            })}
                                         >
                                             {renderValue(data, index)}
                                         </DraggableListULItem>

@@ -18,15 +18,28 @@ export const reorder = (list: DataItem[], startIndex: number, endIndex: number):
     return result;
 };
 
-export const getItemStyle = (theme, isDragging, draggableStyle): object => ({
-    userSelect: 'none',
-    // change background colour if dragging
-    background: isDragging ? alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity) : undefined,
-    width: 'max-content',
-    ...draggableStyle,
-});
+export const getItemStyle = ({
+    theme,
+    isDragging,
+    draggableStyle: { transform, ...draggableStyle },
+    flexDirection,
+}): object => {
+    // console.log({ transform, ...draggableStyle });
+    // const [, x] = /\((.*),(.*)\)/.exec(transform) ?? [];
+    // const translate = flexDirection === 'column' ? transform : `translate(${x}, 0px)`;
+    const translate = transform;
 
-export const getListStyle = (theme, isDraggingOver): object => ({
+    return {
+        userSelect: 'none',
+        // change background colour if dragging
+        background: isDragging ? alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity) : undefined,
+        width: flexDirection === 'row' ? 'max-content' : '100%',
+        transform: translate,
+        ...draggableStyle,
+    };
+};
+
+export const getListStyle = ({ theme, isDraggingOver }): object => ({
     position: 'relative',
     background: isDraggingOver ? alpha(theme.palette.text.disabled, theme.palette.action.activatedOpacity) : undefined,
 });
