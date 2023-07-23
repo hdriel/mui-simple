@@ -35,7 +35,9 @@ export const ListItem = styled(MuiListItem, {
     }
 `;
 export const ListItemAvatar = MuiListItemAvatar;
-export const ListItemButton = styled(MuiListItemButton)`
+export const ListItemButton = styled(MuiListItemButton, {
+    shouldForwardProp: (propName) => !['flexDirection'].includes(propName),
+})`
     width: 100%;
     padding: ${(props) => props.padding};
     flex-direction: ${(props) => props.flexDirection ?? 'row'};

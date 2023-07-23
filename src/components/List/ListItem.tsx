@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ExpandLess as ExpandLessIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
+import { Box } from '@mui/material';
+
 import {
     ListItemText,
     ListItemAvatar,
@@ -11,7 +13,6 @@ import {
 } from './List.styled';
 import Avatar from '../_FIXED/Avatar/Avatar';
 import Typography from '../_FIXED/Typography/Typography';
-import { Box } from '@mui/material';
 
 const ListItemWrapper = ({ item, index, onClick, buttonItems, alignItems, flexDirection, children, ...props }) => {
     if (!item) return children;
@@ -78,11 +79,13 @@ const ListItem = ({
                     ) : (
                         <ListItemIcon>{itemProps.startIcon}</ListItemIcon>
                     ))}
+
                 {itemProps.avatar && (
                     <ListItemAvatar>
                         <Avatar {...itemProps.avatar} />
                     </ListItemAvatar>
                 )}
+
                 <ListItemText
                     inset={itemProps.inset ?? insetItems}
                     primary={itemProps.title}
@@ -92,7 +95,7 @@ const ListItem = ({
                                 rows={itemProps.rows ?? 2}
                                 component="span"
                                 variant="body2"
-                                muiColor="text.primary"
+                                color="text.primary"
                             >
                                 {itemProps.subtitle}
                             </Typography>
@@ -105,6 +108,7 @@ const ListItem = ({
                         },
                     }}
                 />
+
                 {itemProps.items?.length ? isOpen ? <ExpandLessIcon /> : <ExpandMoreIcon /> : undefined}
 
                 <ListItemSecondaryAction>{itemProps.actions}</ListItemSecondaryAction>
