@@ -15,6 +15,7 @@ import {
 } from '../hooks';
 import { EnhancedTablePagination } from './EnhancedTablePagination';
 import type { TableProps } from '../../../decs';
+import type { ColorsProps } from '../Table.desc';
 
 const EnhancedTable: React.FC<TableProps> = ({
     actionColor,
@@ -147,7 +148,7 @@ const EnhancedTable: React.FC<TableProps> = ({
                             sortColumns={sortColumns}
                             orderBy={orderBy}
                             onRequestSort={handleRequestSort}
-                            headerColor={headerColor ?? colorProps}
+                            headerColor={(headerColor ?? colorProps) as ColorsProps}
                             rowCount={rows}
                             onSelectAllClick={handleSelectAllClick}
                             selectionMode={selectionMode}
@@ -165,8 +166,8 @@ const EnhancedTable: React.FC<TableProps> = ({
                                     }}
                                     index={index}
                                     selectionMode={selectionMode}
-                                    evenRowsColor={evenRowsColor}
-                                    oddRowsColor={oddRowsColor}
+                                    evenRowsColor={evenRowsColor as ColorsProps}
+                                    oddRowsColor={oddRowsColor as ColorsProps}
                                     actionColor={actionColorProps ?? colorProps}
                                     onSelect={(event) => {
                                         handleSelect(event, row[fieldId] ?? index);

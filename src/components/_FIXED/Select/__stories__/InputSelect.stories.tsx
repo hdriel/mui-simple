@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Send as SendIcon, Fingerprint as FingerprintIcon } from '@mui/icons-material';
-import { action } from '@storybook/addon-actions';
 import { Stack } from '@mui/material';
 
 import InputSelect from '../InputSelect';
@@ -197,7 +195,8 @@ export const Margin: Story = {
 };
 
 export const Size_ = (args) => {
-    const [value, setValue] = useState(args.value ?? '');
+    const [value, setValue] = useState<string>(args.value ?? '');
+
     return (
         <Stack spacing={3}>
             <InputSelect
@@ -219,7 +218,7 @@ export const Size_ = (args) => {
 };
 
 export const Variant_ = (args) => {
-    const [value, setValue] = useState(args.value ?? '');
+    const [value, setValue] = useState<string>(args.value ?? '');
 
     return (
         <Stack spacing={3}>
@@ -305,9 +304,3 @@ export const RenderValue: Story = {
         return <InputSelect {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
     },
 };
-
-//   checkbox,
-//   max,
-//   selectAll,
-//   selectAllOption,
-//   multi

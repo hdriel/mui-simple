@@ -258,8 +258,8 @@ export const EmptyResultCmp: Story = {
         pagination: { page: 0, rowsPerPage: 5, total: 5 },
         paginationAlign: 'center',
         DEFAULT_EMPTY_ROW_HEIGHT: 40,
-        EmptyResultCmp: <Typography size={25}>Noting was found here...</Typography>, // work
-        // EmptyResultCmp: 'Noting was found here...', // work
+        // EmptyResultCmp: <Typography size={25}>Noting was found here...</Typography>, // work
+        EmptyResultCmp: 'Noting was found here...', // work
         // EmptyResultCmp: () => <Typography size={25}>Noting was found here...</Typography>, // work
     },
 };

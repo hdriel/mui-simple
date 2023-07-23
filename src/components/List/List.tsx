@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-
+import { Box } from '@mui/material';
 import { Divider, List as MuiList, ListSubheader, Collapse } from './List.styled';
 import MuiListItem from './ListItem';
 import DraggableList from '../DraggableList/DraggableList';
-import { Box } from '@mui/material';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
 interface ListItemProps {
     actions?: any[];
@@ -95,18 +95,26 @@ const List: React.FC<ListProps> = ({
                     disabled={!dragAndDropItems}
                     onChange={onListOrderChange}
                     renderValue={(item, index) => {
-                        const { divider, alignControl, controlType, ...itemProps } =
+                        const { divider, alignControl, controlType, ..._itemProps } =
                             typeof item === 'string' ? { title: item } : item || {};
+
+                        const itemProps = _itemProps as ListItemProps;
                         const isControl = ['checkbox', 'switch'].includes(controlType);
                         const isOpen = open[index];
                         const listItem = !!Object.keys(itemProps).length;
+                        itemProps.startIcon =
+                            typeof itemProps.startIcon === 'string' ? (
+                                <SVGIcon>{itemProps.startIcon}</SVGIcon>
+                            ) : (
+                                itemProps.startIcon
+                            );
 
                         return (
                             <div style={{ width: '100%' }} key={`i-${index}`}>
                                 {listItem && (
                                     <MuiListItem
-                                        disablePadding={item.disablePadding ?? disablePaddingItems ?? true}
-                                        disableGutters={item.disableGutters ?? disableGuttersItems}
+                                        disablePadding={itemProps.disablePadding ?? disablePaddingItems ?? true}
+                                        disableGutters={itemProps.disableGutters ?? disableGuttersItems}
                                         alignItems={itemProps.align ?? alignItems}
                                         index={index}
                                         itemProps={itemProps}

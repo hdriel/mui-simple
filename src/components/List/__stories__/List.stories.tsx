@@ -2,6 +2,16 @@ import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import List from '../List';
+import {
+    Send as SendIcon,
+    BeachAccess as BeachAccessIcon,
+    Phone as PhoneIcon,
+    Comment as CommentIcon,
+    Drafts as DraftsIcon,
+    Inbox as InboxIcon,
+    StarBorder as StarBorderIcon,
+} from '@mui/icons-material';
+import Button from '../../_FIXED/Button/Button';
 
 const meta: Meta<typeof List> = {
     title: 'Data-Display/List',
@@ -169,4 +179,166 @@ export const SubItems: Story = {
     },
 };
 
-// items?: Array<string | ListItemProps>;
+export const AvatarItems: Story = {
+    args: {
+        items: [
+            {
+                title: 'Photos',
+                subtitle: 'Jan 9, 2014',
+                avatar: { icon: 'Image' },
+                actions: [<Button icon="Comment" />],
+                items: [{ title: 'Hadriel Benjo', actions: [<Button icon="Phone" />] }],
+            },
+            {
+                title: 'Work',
+                subtitle: 'Jan 7, 2014',
+                avatar: { icon: 'Work' },
+                actions: [<Button icon="Send" />],
+            },
+            {
+                title: 'Vacation',
+                subtitle: 'July 20, 2014',
+                avatar: { icon: <BeachAccessIcon /> },
+                actions: [<Button icon={<SendIcon />} />],
+            },
+        ],
+    },
+};
+
+export const StartIconItems: Story = {
+    args: {
+        items: [
+            {
+                title: 'Inbox',
+                startIcon: 'Inbox',
+                items: [
+                    { title: 'Hadriel Benjo', startIcon: 'Person' },
+                    { title: 'inset item with startIcon', startIcon: 'AccessTime', inset: true },
+                ],
+            },
+            { title: 'Drafts', startIcon: 'Drafts', divider: true },
+            { title: 'Trash' },
+            'Spam',
+        ],
+    },
+};
+
+export const DividerItems: Story = {
+    args: {
+        items: [
+            {
+                title: 'Inbox',
+                startIcon: 'Inbox',
+                divider: true,
+                items: [
+                    { title: 'Hadriel Benjo', startIcon: 'Person', divider: true },
+                    { title: 'inset item with startIcon', startIcon: 'AccessTime', inset: true, divider: true },
+                ],
+            },
+            { title: 'Drafts', startIcon: 'Drafts', divider: true },
+            { title: 'Trash', divider: true },
+            'Spam',
+        ],
+    },
+};
+
+export const LinkItems: Story = {
+    args: {
+        items: [
+            {
+                title: 'Google',
+                startIcon: 'Google',
+                link: 'https://google.com',
+            },
+            {
+                title: 'YouTube',
+                startIcon: 'YouTube',
+                link: 'https://YouTube.com',
+            },
+        ],
+    },
+};
+
+export const ActionsItems: Story = {
+    args: {
+        buttonItems: false,
+        disablePaddingItems: false,
+        alignItems: 'flex-start',
+        items: [
+            {
+                title: 'Brunch this weekend?',
+                subtitle: "Ali Connors — I'll be in your neighborhood doing errands this",
+                avatar: { username: 'Ali Connors', image: '1.jpg' },
+                actions: [<Button icon="Phone" />, <Button icon="Comment" />],
+                divider: { variant: 'inset' },
+            },
+            {
+                title: 'Summer BBQ',
+                subtitle: "to Scott, Alex, Jennifer — Wish I could come, but I'm out of town this",
+                avatar: { image: '2.jpg' },
+                actions: [<Button icon="Send" />],
+                divider: true,
+            },
+            {
+                title: 'Oui Oui',
+                subtitle: 'Sandra Adams — Do you have Paris recommendations? Have you ever seen something like this?',
+                avatar: { username: 'Sandra Adams', image: '3.jpg' },
+                actions: [<Button icon="Send" />],
+                divider: {},
+            },
+        ],
+    },
+};
+
+export const NestedList = () => {
+    const items = [
+        {
+            startIcon: <SendIcon />,
+            title: 'Sent mail',
+        },
+        {
+            startIcon: <DraftsIcon />,
+            title: 'Drafts',
+        },
+        {
+            startIcon: <InboxIcon />,
+            title: 'Inbox',
+            items: [
+                {
+                    startIcon: <StarBorderIcon />,
+                    title: 'Starred',
+                    items: [
+                        {
+                            startIcon: 'LooksOne',
+                            title: 'Mail One',
+                            inset: true,
+                        },
+                        {
+                            startIcon: 'LooksTwo',
+                            title: 'Mail Two',
+                            inset: true,
+                        },
+                        {
+                            startIcon: 'Looks3',
+                            title: 'Mail 3',
+                            inset: true,
+                            items: [
+                                {
+                                    startIcon: 'ThirtyFpsSelect',
+                                    title: 'something',
+                                    inset: true,
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            startIcon: <PhoneIcon />,
+            title: 'Recents',
+        },
+    ];
+
+    return <List title="Nested List Items" items={items} />;
+};

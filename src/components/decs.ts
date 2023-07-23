@@ -518,6 +518,7 @@ export interface TableProps {
     pagination?: Pagination;
     paginationAlign?: 'start' | 'center' | 'end';
     PaginationComponent?: React.ReactNode;
+    EmptyResultCmp?: React.ReactNode | string;
     paginationProps?: Record<string, any>;
     selectedActions?: ToolbarAction[];
     SELECTION_MODE_TOOLTIP_LABEL?: string;
