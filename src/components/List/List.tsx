@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
+import Button from '../_FIXED/Button/Button';
 import { Divider, List as MuiList, ListSubheader, Collapse } from './List.styled';
 import MuiListItem from './ListItem';
 import DraggableList from '../DraggableList/DraggableList';
@@ -14,6 +15,7 @@ const List: React.FC<ListProps> = ({
     buttonItems,
     alignItems,
     enableSubtitle,
+    draggableIcon,
     disablePaddingItems,
     disableGuttersItems,
     dragAndDropItems,
@@ -40,8 +42,14 @@ const List: React.FC<ListProps> = ({
     const dataList =
         items?.map((item, index) =>
             typeof item === 'string'
-                ? { title: item, id: `${item}-${index}` }
-                : { ...item, id: item[fieldId] ?? `${item.title}-${index}` }
+                ? {
+                      title: item,
+                      id: `${item}-${index}`,
+                  }
+                : {
+                      ...item,
+                      id: item[fieldId] ?? `${item.title}-${index}`,
+                  }
         ) ?? [];
 
     const renderValue = (item: ListItemProps, index: number): React.ReactElement => {
@@ -114,7 +122,18 @@ const List: React.FC<ListProps> = ({
                     droppableClassName={droppableId}
                     disabled={!dragAndDropItems}
                     onChange={onListOrderChange}
-                    renderValue={(item, index) => renderValue(item as ListItemProps, index)}
+                    renderValue={(item, index) =>
+                        renderValue(
+                            {
+                                ...item,
+                                actions: [
+                                    ...(item?.actions ?? []),
+                                    ...(draggableIcon ? [<Button key="dragable" icon={draggableIcon} />] : []),
+                                ],
+                            },
+                            index
+                        )
+                    }
                     component="div"
                 />
             ) : (
@@ -133,6 +152,7 @@ List.defaultProps = {
     enableSubtitle: true,
     disablePadding: true,
     dragAndDropItems: false,
+    draggableIcon: 'DragHandle',
     alignItems: undefined,
     component: 'nav',
     width: undefined,
