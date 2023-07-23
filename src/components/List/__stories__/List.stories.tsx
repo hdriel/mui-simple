@@ -44,7 +44,7 @@ export const ButtonItems: Story = {
 export const Component: Story = {
     args: {
         items: [{ title: 'item 1' }, { title: 'item 2' }],
-        component: 'p',
+        component: 'span',
     },
 };
 
@@ -186,20 +186,20 @@ export const AvatarItems: Story = {
                 title: 'Photos',
                 subtitle: 'Jan 9, 2014',
                 avatar: { icon: 'Image' },
-                actions: [<Button icon="Comment" />],
-                items: [{ title: 'Hadriel Benjo', actions: [<Button icon="Phone" />] }],
+                actions: [<Button key="a1" icon="Comment" />],
+                items: [{ title: 'Hadriel Benjo', actions: [<Button key="a1" icon="Phone" />] }],
             },
             {
                 title: 'Work',
                 subtitle: 'Jan 7, 2014',
                 avatar: { icon: 'Work' },
-                actions: [<Button icon="Send" />],
+                actions: [<Button key="a1" icon="Send" />],
             },
             {
                 title: 'Vacation',
                 subtitle: 'July 20, 2014',
                 avatar: { icon: <BeachAccessIcon /> },
-                actions: [<Button icon={<SendIcon />} />],
+                actions: [<Button key="a1" icon={<SendIcon />} />],
             },
         ],
     },
@@ -269,21 +269,21 @@ export const ActionsItems: Story = {
                 title: 'Brunch this weekend?',
                 subtitle: "Ali Connors — I'll be in your neighborhood doing errands this",
                 avatar: { username: 'Ali Connors', image: '1.jpg' },
-                actions: [<Button icon="Phone" />, <Button icon="Comment" />],
+                actions: [<Button key="a1" icon="Phone" />, <Button key="a2" icon="Comment" />],
                 divider: { variant: 'inset' },
             },
             {
                 title: 'Summer BBQ',
                 subtitle: "to Scott, Alex, Jennifer — Wish I could come, but I'm out of town this",
                 avatar: { image: '2.jpg' },
-                actions: [<Button icon="Send" />],
+                actions: [<Button key="a1" icon="Send" />],
                 divider: true,
             },
             {
                 title: 'Oui Oui',
                 subtitle: 'Sandra Adams — Do you have Paris recommendations? Have you ever seen something like this?',
                 avatar: { username: 'Sandra Adams', image: '3.jpg' },
-                actions: [<Button icon="Send" />],
+                actions: [<Button key="a1" icon="Send" />],
                 divider: {},
             },
         ],
