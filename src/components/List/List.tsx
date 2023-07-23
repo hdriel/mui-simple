@@ -4,44 +4,7 @@ import { Divider, List as MuiList, ListSubheader, Collapse } from './List.styled
 import MuiListItem from './ListItem';
 import DraggableList from '../DraggableList/DraggableList';
 import SVGIcon from '../SVGIcon/SVGIcon';
-
-interface ListItemProps {
-    actions?: any[];
-    align?: 'flex-start';
-    avatar?: object;
-    disableGutters?: boolean;
-    disablePadding?: boolean;
-    divider?: object | boolean;
-    inset?: boolean;
-    items?: Array<string | ListItemProps>;
-    link?: string;
-    selected?: boolean;
-    startIcon?: React.ReactNode | string;
-    subtitle?: string;
-    title?: string;
-    [key: string]: any;
-}
-
-interface ListProps {
-    alignItems?: 'flex-start';
-    buttonItems?: boolean;
-    component?: string;
-    dense?: boolean;
-    disableGuttersItems?: boolean;
-    disablePadding?: boolean;
-    disablePaddingItems?: boolean;
-    dragAndDropItems?: boolean;
-    droppableId?: string;
-    enableSubtitle?: boolean;
-    flexDirectionItems?: 'row' | 'column';
-    insetItems?: boolean;
-    items?: Array<string | ListItemProps>;
-    onListOrderChange?: (items: Array<string | ListItemProps>) => void;
-    title?: string;
-    useTransition?: boolean;
-    width?: string | number;
-    [key: string]: any;
-}
+import type { ListItemProps, ListProps } from '../decs';
 
 const List: React.FC<ListProps> = ({
     useTransition,
@@ -54,6 +17,7 @@ const List: React.FC<ListProps> = ({
     disablePaddingItems,
     disableGuttersItems,
     dragAndDropItems,
+    fieldId,
     flexDirectionItems,
     onListOrderChange,
     disablePadding,
@@ -73,9 +37,60 @@ const List: React.FC<ListProps> = ({
         cb?.(event);
     };
 
-    const dataList = items?.map((item, index) =>
-        typeof item === 'string' ? { title: item, id: String(index) } : { ...item, id: item.id ?? String(index) }
-    );
+    const dataList =
+        items?.map((item, index) =>
+            typeof item === 'string'
+                ? { title: item, id: String(index) }
+                : { ...item, id: item[fieldId] ?? String(index) }
+        ) ?? [];
+
+    const renderValue = (item: ListItemProps, index: number): React.ReactElement => {
+        const { divider, component, alignControl, controlType, ...itemProps } = item || {};
+        const isControl = ['checkbox', 'switch'].includes(controlType);
+        const isOpen = open[index];
+        const listItem = !!Object.keys(itemProps).length;
+        itemProps.startIcon =
+            typeof itemProps.startIcon === 'string' ? <SVGIcon>{itemProps.startIcon}</SVGIcon> : itemProps.startIcon;
+
+        const nestedItems = (
+            <Box>
+                <List items={itemProps.items} />
+                <Divider variant="fullWidth" {...divider} component="div" />
+            </Box>
+        );
+
+        return (
+            <div style={{ width: '100%' }} key={`i-${index}`}>
+                {listItem && (
+                    <MuiListItem
+                        disablePadding={itemProps.disablePadding ?? disablePaddingItems ?? true}
+                        disableGutters={itemProps.disableGutters ?? disableGuttersItems}
+                        alignItems={itemProps.align ?? alignItems}
+                        index={index}
+                        itemProps={itemProps}
+                        onClick={onClick}
+                        buttonItems={buttonItems}
+                        isControl={isControl}
+                        alignControl={alignControl}
+                        insetItems={insetItems}
+                        enableSubtitle={enableSubtitle}
+                        isOpen={isOpen}
+                        flexDirectionItems={flexDirectionItems}
+                    >
+                        <Collapse
+                            in={!!(isOpen && itemProps.items?.length)}
+                            timeout="auto"
+                            unmountOnExit
+                            addEndListener={undefined}
+                        >
+                            {nestedItems}
+                        </Collapse>
+                    </MuiListItem>
+                )}
+                {divider && <Divider key={`d-${index}`} variant="fullWidth" {...divider} component="li" />}
+            </div>
+        );
+    };
 
     return (
         <MuiList
@@ -85,71 +100,20 @@ const List: React.FC<ListProps> = ({
             dense={dense}
             sx={{ width, bgcolor: 'background.paper' }}
             component={component}
-            subheader={<ListSubheader component="div">{title}</ListSubheader>}
+            subheader={title ? <ListSubheader component="span">{title}</ListSubheader> : undefined}
             {...props}
         >
-            {
+            {dragAndDropItems ? (
                 <DraggableList
                     dataList={dataList}
                     droppableClassName={droppableId}
                     disabled={!dragAndDropItems}
                     onChange={onListOrderChange}
-                    renderValue={(item, index) => {
-                        const { divider, alignControl, controlType, ..._itemProps } =
-                            typeof item === 'string' ? { title: item } : item || {};
-
-                        const itemProps = _itemProps as ListItemProps;
-                        const isControl = ['checkbox', 'switch'].includes(controlType);
-                        const isOpen = open[index];
-                        const listItem = !!Object.keys(itemProps).length;
-                        itemProps.startIcon =
-                            typeof itemProps.startIcon === 'string' ? (
-                                <SVGIcon>{itemProps.startIcon}</SVGIcon>
-                            ) : (
-                                itemProps.startIcon
-                            );
-
-                        return (
-                            <div style={{ width: '100%' }} key={`i-${index}`}>
-                                {listItem && (
-                                    <MuiListItem
-                                        disablePadding={itemProps.disablePadding ?? disablePaddingItems ?? true}
-                                        disableGutters={itemProps.disableGutters ?? disableGuttersItems}
-                                        alignItems={itemProps.align ?? alignItems}
-                                        index={index}
-                                        itemProps={itemProps}
-                                        onClick={onClick}
-                                        buttonItems={buttonItems}
-                                        isControl={isControl}
-                                        alignControl={alignControl}
-                                        insetItems={insetItems}
-                                        enableSubtitle={enableSubtitle}
-                                        isOpen={isOpen}
-                                        flexDirectionItems={flexDirectionItems}
-                                    >
-                                        <Collapse
-                                            in={!!(isOpen && itemProps.items?.length)}
-                                            timeout="auto"
-                                            unmountOnExit
-                                            addEndListener={undefined}
-                                        >
-                                            {isOpen && itemProps.items?.length ? (
-                                                <Box>
-                                                    <List items={itemProps.items} />
-                                                    <Divider variant="fullWidth" {...divider} component="li" />
-                                                </Box>
-                                            ) : undefined}
-                                        </Collapse>
-                                    </MuiListItem>
-                                )}
-                                {divider && (
-                                    <Divider key={`d-${index}`} variant="fullWidth" {...divider} component="li" />
-                                )}
-                            </div>
-                        );
-                    }}
+                    renderValue={(item, index) => renderValue(item as ListItemProps, index)}
                 />
-            }
+            ) : (
+                dataList.map((item, index) => renderValue(item, index))
+            )}
         </MuiList>
     );
 };
@@ -158,6 +122,7 @@ List.defaultProps = {
     useTransition: true,
     dense: undefined,
     buttonItems: true,
+    fieldId: 'id',
     flexDirectionItems: undefined,
     enableSubtitle: true,
     disablePadding: true,
