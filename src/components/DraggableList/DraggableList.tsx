@@ -12,7 +12,8 @@ import { getDataId, getItemStyle, getListStyle } from './DraggableList.styles';
 import { useDragHandlers } from './DraggableList.hooks';
 
 interface DataItem {
-    id: string;
+    id?: string;
+    [key: string]: any;
 }
 
 interface DraggableListProps {
@@ -44,6 +45,7 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
     } = props;
     const theme = useTheme();
     const { handleDragEnd, handleDragStart, handleDragUpdate, placeholderProps } = useDragHandlers({
+        flexGap,
         dataList,
         onChange,
     });

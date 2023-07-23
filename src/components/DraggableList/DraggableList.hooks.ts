@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import toPx from 'to-px';
 import { queryAttr, reorder } from './DraggableList.styles';
 
 interface PlaceholderProps {
@@ -9,6 +10,7 @@ interface PlaceholderProps {
 }
 
 export const useDragHandlers = ({
+    flexGap,
     dataList,
     onChange,
 }): {
@@ -18,6 +20,7 @@ export const useDragHandlers = ({
     handleDragUpdate: (event: any) => void;
 } => {
     const [placeholderProps, setPlaceholderProps] = useState<PlaceholderProps>({});
+    const gapPx = toPx(flexGap);
 
     const getDraggedDom = (draggableId: string): JSX.Element => {
         const domQuery = `[${queryAttr}='${draggableId}']`;
@@ -40,7 +43,7 @@ export const useDragHandlers = ({
                 const style = curr.currentStyle || window.getComputedStyle(curr);
                 const marginBottom = parseFloat(style.marginBottom);
                 // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-                return total + curr.clientHeight + marginBottom;
+                return total + curr.clientHeight + marginBottom + gapPx;
             }, 0);
 
         setPlaceholderProps({
@@ -75,6 +78,7 @@ export const useDragHandlers = ({
         }
 
         const { clientHeight, clientWidth } = draggedDOM;
+
         const destinationIndex = event.destination.index;
         const sourceIndex = event.source.index;
 
@@ -96,7 +100,7 @@ export const useDragHandlers = ({
                 const style = curr.currentStyle || window.getComputedStyle(curr);
                 const marginBottom = parseFloat(style.marginBottom);
                 // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-                return total + curr.clientHeight + marginBottom;
+                return total + curr.clientHeight + marginBottom + gapPx;
             }, 0);
 
         setPlaceholderProps({

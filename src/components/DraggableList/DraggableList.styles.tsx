@@ -4,8 +4,13 @@ export const getDataId = (data: any, fieldId: string, index: number): string =>
 
 export const queryAttr = 'data-rbd-drag-handle-draggable-id';
 
+interface DataItem {
+    id?: string;
+    [key: string]: any;
+}
+
 // a little function to help us with reordering the result
-export const reorder = (list, startIndex, endIndex): any[] => {
+export const reorder = (list: DataItem[], startIndex: number, endIndex: number): DataItem[] => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
