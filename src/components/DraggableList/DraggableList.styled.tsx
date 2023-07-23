@@ -1,4 +1,5 @@
 import { styled, css } from '@mui/material/styles';
+import { Box } from '@mui/material';
 
 type FlexDirectionType = 'row' | 'row-reverse' | 'column' | 'column-reverse';
 interface DraggableListULProps {
@@ -25,6 +26,6 @@ export const DraggableListUL = styled('ul')<DraggableListULProps>`
     padding: 0;
 `;
 
-export const DraggableListULItem = styled('li')`
+export const DraggableListULItem = styled(Box)`
     width: 100%;
 `;

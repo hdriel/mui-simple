@@ -31,7 +31,7 @@
         "ecmaFeatures": { "jsx": true },
         "ecmaVersion": "latest",
         "sourceType": "module",
-        "project": "./tsconfig.json"
+        "project": "tsconfig.json"
     },
     "plugins": ["react", "jest-dom", "testing-library", "@typescript-eslint", "prettier"],
     "rules": {
@@ -70,7 +70,7 @@
     "settings": {
         "import/resolver": {
             "jsconfig": {
-                "config": "./tsconfig.json",
+                "config": "tsconfig.json",
                 "extensions": [".json", ".js", ".jsx", ".ts", ".tsx"]
             }
         }
