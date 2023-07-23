@@ -289,6 +289,11 @@ export const ActionsItems: Story = {
         ],
     },
 };
+export const SelectedItems: Story = {
+    args: {
+        items: [{ title: 'Brunch this weekend?', selected: true }, { title: 'Summer BBQ' }, { title: 'Oui Oui' }],
+    },
+};
 
 export const NestedList = () => {
     const items = [

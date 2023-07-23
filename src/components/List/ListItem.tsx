@@ -43,6 +43,7 @@ const ListItemWrapper: React.FC<PropsWithChildren<ListItemWrapperProps>> = ({
 
     return itemButton ? (
         <ListItemButton
+            key={`${item.title}-${index}`}
             component={item.link ? 'a' : undefined}
             href={item.link}
             onClick={item.items?.length ? onClickHandler : item.onClick}
@@ -54,7 +55,9 @@ const ListItemWrapper: React.FC<PropsWithChildren<ListItemWrapperProps>> = ({
             {children}
         </ListItemButton>
     ) : (
-        <Box sx={{ flexDirection, display: 'flex', width: '100%' }}>{children}</Box>
+        <Box key={`${item.title}-${index}`} sx={{ flexDirection, display: 'flex', width: '100%' }}>
+            {children}
+        </Box>
     );
 };
 
@@ -93,11 +96,11 @@ const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
 }) => {
     return (
         <MuiListItem
-            key={`i-${index}`}
             disablePadding={disablePadding}
             disableGutters={disableGutters}
             alignItems={itemProps.align ?? alignItems}
             {...props}
+            key={`${index}`}
         >
             <ListItemWrapper
                 index={index}

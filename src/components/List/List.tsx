@@ -40,8 +40,8 @@ const List: React.FC<ListProps> = ({
     const dataList =
         items?.map((item, index) =>
             typeof item === 'string'
-                ? { title: item, id: String(index) }
-                : { ...item, id: item[fieldId] ?? String(index) }
+                ? { title: item, id: `${item}-${index}` }
+                : { ...item, id: item[fieldId] ?? `${item.title}-${index}` }
         ) ?? [];
 
     const renderValue = (item: ListItemProps, index: number): React.ReactElement => {
