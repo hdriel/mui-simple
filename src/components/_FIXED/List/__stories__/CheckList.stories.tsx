@@ -11,6 +11,8 @@ import {
     StarBorder as StarBorderIcon,
 } from '@mui/icons-material';
 import Button from '../../Button/Button';
+import { Box } from '@mui/material';
+import Checkbox from '../../Checkbox/Checkbox';
 
 const meta: Meta<typeof CheckList> = {
     title: 'Data-Display/CheckList',
@@ -288,6 +290,54 @@ export const ActionsItems: Story = {
         ],
     },
 };
+
+export const ActionsDraggableItems: Story = {
+    args: {
+        buttonItems: false,
+        disablePaddingItems: false,
+        alignItems: 'flex-start',
+        dragAndDropItems: true,
+        droppableId: 'test',
+        items: [
+            {
+                title: 'Brunch this weekend?',
+                subtitle: "Ali Connors — I'll be in your neighborhood doing errands this",
+                avatar: { username: 'Ali Connors', image: '1.jpg' },
+                actions: [<Button key="a1" icon="Phone" />, <Button key="a2" icon="Comment" />],
+                divider: { variant: 'inset' },
+            },
+            {
+                title: 'Summer BBQ',
+                subtitle: "to Scott, Alex, Jennifer — Wish I could come, but I'm out of town this",
+                avatar: { image: '2.jpg' },
+                actions: [<Button key="a1" icon="Send" />],
+                divider: true,
+            },
+            {
+                title: 'Oui Oui',
+                subtitle: 'Sandra Adams — Do you have Paris recommendations? Have you ever seen something like this?',
+                avatar: { username: 'Sandra Adams', image: '3.jpg' },
+                actions: [<Button key="a1" icon="Send" />],
+                divider: {},
+            },
+        ],
+    },
+    render: (args) => {
+        const [dragAndDropItems, setDragAndDropItems] = useState(args.dragAndDropItems);
+        const [items, setItems] = useState(args.items);
+        return (
+            <Box>
+                <Checkbox
+                    checked={dragAndDropItems}
+                    onChange={(event) => setDragAndDropItems(event.target.checked)}
+                    label="Allow drag and drop"
+                />
+                <CheckList {...args} items={items} onListOrderChange={setItems} dragAndDropItems={dragAndDropItems} />
+            </Box>
+        );
+    },
+};
+
 export const SelectedItems: Story = {
     args: {
         items: [{ title: 'Brunch this weekend?', selected: true }, { title: 'Summer BBQ' }, { title: 'Oui Oui' }],

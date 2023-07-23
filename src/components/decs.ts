@@ -347,6 +347,7 @@ export interface ListProps {
     dragAndDropItems?: boolean;
     droppableId?: string;
     enableSubtitle?: boolean;
+    hideActionsOnDragAndDropItems?: boolean;
     fieldId?: string;
     flexDirectionItems?: 'row' | 'column';
     insetItems?: boolean;

@@ -8,25 +8,26 @@ import SVGIcon from '../../SVGIcon/SVGIcon';
 import type { ListItemProps, ListProps } from '../../decs';
 
 const List: React.FC<ListProps> = ({
-    useTransition,
-    component,
-    width,
-    dense,
-    buttonItems,
     alignItems,
-    enableSubtitle,
-    draggableIcon,
-    disablePaddingItems,
+    buttonItems,
+    component,
+    dense,
     disableGuttersItems,
+    disablePadding,
+    disablePaddingItems,
     dragAndDropItems,
+    draggableIcon,
+    droppableId,
+    enableSubtitle,
     fieldId,
     flexDirectionItems,
-    onListOrderChange,
-    disablePadding,
-    title,
-    items,
+    hideActionsOnDragAndDropItems,
     insetItems,
-    droppableId,
+    items,
+    onListOrderChange,
+    title,
+    useTransition,
+    width,
     ...props
 }): React.ReactElement => {
     const [open, setOpen] = useState({});
@@ -49,6 +50,7 @@ const List: React.FC<ListProps> = ({
                 : {
                       ...item,
                       id: item[fieldId] ?? `${item.title}-${index}`,
+                      ...(hideActionsOnDragAndDropItems && dragAndDropItems && { actions: [] }),
                   }
         ) ?? [];
 
@@ -120,7 +122,7 @@ const List: React.FC<ListProps> = ({
                     fieldId={fieldId}
                     dataList={dataList}
                     droppableClassName={droppableId}
-                    disabled={!dragAndDropItems}
+                    // disabled={!dragAndDropItems}
                     onChange={onListOrderChange}
                     renderValue={(item, index) =>
                         renderValue(
@@ -144,20 +146,21 @@ const List: React.FC<ListProps> = ({
 };
 
 List.defaultProps = {
-    useTransition: true,
-    dense: undefined,
+    alignItems: undefined,
     buttonItems: true,
-    fieldId: 'id',
-    flexDirectionItems: undefined,
-    enableSubtitle: true,
+    component: 'nav',
+    dense: undefined,
     disablePadding: true,
     dragAndDropItems: false,
     draggableIcon: 'DragHandle',
-    alignItems: undefined,
-    component: 'nav',
-    width: undefined,
-    title: undefined,
+    enableSubtitle: true,
+    fieldId: 'id',
+    flexDirectionItems: undefined,
+    hideActionsOnDragAndDropItems: true,
     items: [],
+    title: undefined,
+    useTransition: true,
+    width: undefined,
 };
 
 export type { ListItemProps, ListProps } from '../../decs';
