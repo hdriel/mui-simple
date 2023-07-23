@@ -16,7 +16,7 @@ interface DraggableListProps {
     onChange?: (newDataList: Array<string | DataItem>) => void;
     disabled?: ((value: string | DataItem, index: number) => boolean) | boolean;
 }
-export default function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode {
+function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode {
     const { disabled, flexDirection, flexGap, droppableClassName, dataList, renderValue, onChange, ...rest } = props;
     const handleOnDragEnd = (result): undefined => {
         if (!result.destination) return;
@@ -65,16 +65,6 @@ export default function DraggableList(props: PropsWithChildren<DraggableListProp
     );
 }
 
-//	DraggableList.propTypes = {
-// 	 dataList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.shape({ id: PropTypes.string })])),
-// 	 droppableClassName: PropTypes.string,
-// 	 flexGap: PropTypes.string,
-// 	 flexDirection: PropTypes.oneOf(['row', 'column']),
-// 	 renderValue: PropTypes.func,
-// 	 onChange: PropTypes.func,
-// 	 disabled: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
-//	};
-
 DraggableList.defaultProps = {
     dataList: [],
     droppableClassName: 'droppableId',
@@ -84,3 +74,5 @@ DraggableList.defaultProps = {
     onChange: undefined,
     disabled: false,
 };
+
+export default DraggableList;

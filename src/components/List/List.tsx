@@ -77,17 +77,21 @@ const List: React.FC<ListProps> = ({
                         isOpen={isOpen}
                         flexDirectionItems={flexDirectionItems}
                     >
-                        <Collapse
-                            in={!!(isOpen && itemProps.items?.length)}
-                            timeout="auto"
-                            unmountOnExit
-                            addEndListener={undefined}
-                        >
-                            {nestedItems}
-                        </Collapse>
+                        {useTransition ? (
+                            <Collapse
+                                in={!!(isOpen && itemProps.items?.length)}
+                                timeout="auto"
+                                unmountOnExit
+                                addEndListener={undefined}
+                            >
+                                {nestedItems}
+                            </Collapse>
+                        ) : (
+                            nestedItems
+                        )}
                     </MuiListItem>
                 )}
-                {divider && <Divider key={`d-${index}`} variant="fullWidth" {...divider} component="li" />}
+                {divider && <Divider key={`d-${index}`} variant="fullWidth" {...divider} component="span" />}
             </div>
         );
     };
@@ -112,7 +116,7 @@ const List: React.FC<ListProps> = ({
                     renderValue={(item, index) => renderValue(item as ListItemProps, index)}
                 />
             ) : (
-                dataList.map((item, index) => renderValue(item, index))
+                <Box>{dataList.map((item, index) => renderValue(item, index))}</Box>
             )}
         </MuiList>
     );

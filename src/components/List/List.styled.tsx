@@ -20,7 +20,13 @@ export const Collapse = MuiCollapse;
 
 export const List = styled(({ useTransition, children, ...props }) => (
     <MuiList {...props}>
-        {useTransition && children ? <TransitionGroup>{children}</TransitionGroup> : { children }}
+        {useTransition && children ? (
+            <TransitionGroup>
+                <CSSTransition timeout={500}>{children}</CSSTransition>
+            </TransitionGroup>
+        ) : (
+            children
+        )}
     </MuiList>
 ))`
     width: 100%;
