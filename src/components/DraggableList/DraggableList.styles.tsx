@@ -12,8 +12,6 @@ export const reorder = (list, startIndex, endIndex): any[] => {
     return result;
 };
 
-const grid = 8;
-
 export const getItemStyle = (theme, isDragging, draggableStyle): object => ({
     userSelect: 'none',
     // change background colour if dragging
