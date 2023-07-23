@@ -45,6 +45,7 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
     } = props;
     const theme = useTheme();
     const { handleDragEnd, handleDragStart, handleDragUpdate, placeholderProps } = useDragHandlers({
+        flexDirection,
         flexGap,
         dataList,
         onChange,

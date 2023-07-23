@@ -10,6 +10,7 @@ interface PlaceholderProps {
 }
 
 export const useDragHandlers = ({
+    flexDirection,
     flexGap,
     dataList,
     onChange,
@@ -46,11 +47,27 @@ export const useDragHandlers = ({
                 return total + curr.clientHeight + marginBottom + gapPx;
             }, 0);
 
+        const clientX =
+            parseFloat(window.getComputedStyle(draggedDOM.parentNode).paddingLeft) +
+            // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+            [...draggedDOM.parentNode.children].slice(0, sourceIndex).reduce((total, curr) => {
+                const style = curr.currentStyle || window.getComputedStyle(curr);
+                const paddingLeft = parseFloat(style.paddingLeft);
+                // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+                return total + curr.clientWidth + paddingLeft + gapPx;
+            }, 0);
+
         setPlaceholderProps({
             clientHeight,
             clientWidth,
-            clientY,
-            clientX: parseFloat(window.getComputedStyle(draggedDOM.parentNode).paddingLeft),
+            clientY:
+                flexDirection === 'column'
+                    ? clientY
+                    : parseFloat(window.getComputedStyle(draggedDOM.parentNode).marginBottom),
+            clientX:
+                flexDirection === 'row'
+                    ? clientX
+                    : parseFloat(window.getComputedStyle(draggedDOM.parentNode).paddingLeft),
         });
     };
 
@@ -103,11 +120,27 @@ export const useDragHandlers = ({
                 return total + curr.clientHeight + marginBottom + gapPx;
             }, 0);
 
+        const clientX =
+            parseFloat(window.getComputedStyle(draggedDOM.parentNode).paddingLeft) +
+            // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+            [...draggedDOM.parentNode.children].slice(0, sourceIndex).reduce((total, curr) => {
+                const style = curr.currentStyle || window.getComputedStyle(curr);
+                const paddingLeft = parseFloat(style.paddingLeft);
+                // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+                return total + curr.clientWidth + paddingLeft + gapPx;
+            }, 0);
+
         setPlaceholderProps({
             clientHeight,
             clientWidth,
-            clientY,
-            clientX: parseFloat(window.getComputedStyle(draggedDOM.parentNode).paddingLeft),
+            clientY:
+                flexDirection === 'column'
+                    ? clientY
+                    : parseFloat(window.getComputedStyle(draggedDOM.parentNode).marginBottom),
+            clientX:
+                flexDirection === 'row'
+                    ? clientX
+                    : parseFloat(window.getComputedStyle(draggedDOM.parentNode).paddingLeft),
         });
     };
 
