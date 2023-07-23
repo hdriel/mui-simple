@@ -11,14 +11,17 @@ import {
     ListSubheader as MuiListSubheader,
     Collapse as MuiCollapse,
 } from '@mui/material';
-import { TransitionGroup } from 'react-transition-group';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { styled } from '@mui/material/styles';
 import MuiDivider from '../Divider/Divider';
 
 export const Divider = MuiDivider;
 export const Collapse = MuiCollapse;
+
 export const List = styled(({ useTransition, children, ...props }) => (
-    <MuiList {...props}>{useTransition ? <TransitionGroup>{children}</TransitionGroup> : { children }}</MuiList>
+    <MuiList {...props}>
+        {useTransition && children ? <TransitionGroup>{children}</TransitionGroup> : { children }}
+    </MuiList>
 ))`
     width: 100%;
 `;

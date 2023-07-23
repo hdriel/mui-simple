@@ -78,7 +78,7 @@ export const DisablePaddingItems: Story = {
 
 export const DragAndDropItems: Story = {
     args: {
-        items: [{ title: 'item 1' }, { title: 'item 2' }],
+        items: ['item 1', 'item 2', 'item 3', 'item 4'],
         dragAndDropItems: true,
         droppableId: 'test',
     },
@@ -303,6 +303,7 @@ export const NestedList = () => {
         {
             startIcon: <InboxIcon />,
             title: 'Inbox',
+            component: 'div',
             items: [
                 {
                     startIcon: <StarBorderIcon />,

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import type { PropsWithChildren } from 'react';
 import { ExpandLess as ExpandLessIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 import { Box } from '@mui/material';
 
@@ -13,8 +13,26 @@ import {
 } from './List.styled';
 import Avatar from '../_FIXED/Avatar/Avatar';
 import Typography from '../_FIXED/Typography/Typography';
+import type { ListItemProps } from '../decs';
 
-const ListItemWrapper = ({ item, index, onClick, buttonItems, alignItems, flexDirection, children, ...props }) => {
+interface ListItemWrapperProps {
+    item: ListItemProps;
+    index: number;
+    onClick: (index: number, cb: any, event: any) => void;
+    buttonItems: boolean;
+    alignItems: 'flex-start';
+    flexDirection: 'row' | 'column';
+}
+const ListItemWrapper: React.FC<PropsWithChildren<ListItemWrapperProps>> = ({
+    item,
+    index,
+    onClick,
+    buttonItems,
+    alignItems,
+    flexDirection,
+    children,
+    ...props
+}) => {
     if (!item) return children;
 
     const onClickHandler = onClick?.bind(null, index, item.onClick);
@@ -40,7 +58,23 @@ const ListItemWrapper = ({ item, index, onClick, buttonItems, alignItems, flexDi
     );
 };
 
-const ListItem = ({
+interface ListItemCmpProps {
+    disablePadding: boolean;
+    disableGutters: boolean;
+    flexDirectionItems: 'row' | 'column';
+    index: number;
+    itemProps: ListItemProps;
+    onClick: (index: number, cb: any, event: any) => void;
+    buttonItems: boolean;
+    alignItems: 'flex-start';
+    isControl: boolean;
+    alignControl: string;
+    insetItems: boolean;
+    enableSubtitle: boolean;
+    isOpen: boolean;
+}
+
+const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
     disablePadding,
     disableGutters,
     flexDirectionItems,
@@ -89,6 +123,9 @@ const ListItem = ({
                 <ListItemText
                     inset={itemProps.inset ?? insetItems}
                     primary={itemProps.title}
+                    primaryTypographyProps={{
+                        style: { ...(itemProps.bold && { fontWeight: 'bold' }), ...itemProps.style },
+                    }}
                     secondary={
                         enableSubtitle && itemProps.subtitle ? (
                             <Typography
@@ -101,12 +138,7 @@ const ListItem = ({
                             </Typography>
                         ) : undefined
                     }
-                    primaryTypographyProps={{
-                        style: {
-                            ...(itemProps.bold && { fontWeight: 'bold' }),
-                            ...itemProps.style,
-                        },
-                    }}
+                    secondaryTypographyProps={{ component: 'div' as any }}
                 />
 
                 {itemProps.items?.length ? isOpen ? <ExpandLessIcon /> : <ExpandMoreIcon /> : undefined}
@@ -116,22 +148,6 @@ const ListItem = ({
             {children}
         </MuiListItem>
     );
-};
-
-ListItem.propTypes = {
-    disablePadding: PropTypes.bool,
-    disableGutters: PropTypes.bool,
-    flexDirectionItems: PropTypes.string,
-    index: PropTypes.number,
-    itemProps: PropTypes.object,
-    onClick: PropTypes.func,
-    buttonItems: PropTypes.bool,
-    alignItems: PropTypes.string,
-    isControl: PropTypes.bool,
-    alignControl: PropTypes.string,
-    insetItems: PropTypes.bool,
-    enableSubtitle: PropTypes.bool,
-    isOpen: PropTypes.bool,
 };
 
 ListItem.defaultProps = {

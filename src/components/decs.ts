@@ -317,6 +317,47 @@ export type InputMultipleSelectProps = Omit<InputSelectProps, 'value'> & {
     SELECTED_ITEMS_LABEL: string;
 };
 
+export interface ListItemProps {
+    actions?: any[];
+    align?: 'flex-start';
+    alignControl?: string;
+    avatar?: object;
+    disableGutters?: boolean;
+    disablePadding?: boolean;
+    divider?: object | boolean;
+    inset?: boolean;
+    items?: Array<string | ListItemProps>;
+    link?: string;
+    controlType?: 'checkbox' | 'switch';
+    selected?: boolean;
+    startIcon?: React.ReactNode | string;
+    subtitle?: string;
+    title?: string;
+    [key: string]: any;
+}
+
+export interface ListProps {
+    alignItems?: 'flex-start';
+    buttonItems?: boolean;
+    component?: string;
+    dense?: boolean;
+    disableGuttersItems?: boolean;
+    disablePadding?: boolean;
+    disablePaddingItems?: boolean;
+    dragAndDropItems?: boolean;
+    droppableId?: string;
+    enableSubtitle?: boolean;
+    fieldId?: string;
+    flexDirectionItems?: 'row' | 'column';
+    insetItems?: boolean;
+    items?: Array<string | ListItemProps>;
+    onListOrderChange?: (items: Array<string | ListItemProps>) => void;
+    title?: string;
+    useTransition?: boolean;
+    width?: string | number;
+    [key: string]: any;
+}
+
 export interface SnackbarProps {
     actions?: Array<string | ButtonProps>;
     animation?: 'grow' | 'fade' | 'slide';
