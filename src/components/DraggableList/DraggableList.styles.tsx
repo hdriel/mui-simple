@@ -22,6 +22,7 @@ export const getItemStyle = (theme, isDragging, draggableStyle): object => ({
     userSelect: 'none',
     // change background colour if dragging
     background: isDragging ? alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity) : undefined,
+    width: 'max-content',
     ...draggableStyle,
 });
 
