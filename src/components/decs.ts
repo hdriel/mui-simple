@@ -358,6 +358,12 @@ export interface ListProps {
     [key: string]: any;
 }
 
+export type CheckListProps = {
+    controlType: 'checkbox' | 'switch';
+    alignCheck: 'start' | 'end';
+    droppableId: string;
+} & ListProps;
+
 export interface SnackbarProps {
     actions?: Array<string | ButtonProps>;
     animation?: 'grow' | 'fade' | 'slide';

@@ -1,12 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import List from './List';
-import Checkbox from '../_FIXED/Checkbox/Checkbox';
-import Switch from '../Switch/Switch';
+import Checkbox from '../Checkbox/Checkbox';
+import Switch from '../../Switch/Switch';
+import type { CheckListProps } from '../../decs';
 
-export default function CheckList({ controlType, alignCheck, items, ...props }): React.ReactElement {
+const CheckList: React.FC<CheckListProps> = ({ controlType, alignCheck, items, ...props }): React.ReactElement => {
     const checklistItems = items?.map((item) => {
+        // eslint-disable-next-line no-prototype-builtins
         if (item && Object.keys(item ?? {}).length === 1 && item.hasOwnProperty('divider')) {
             return item;
         }
@@ -41,15 +42,12 @@ export default function CheckList({ controlType, alignCheck, items, ...props }):
     });
 
     return <List {...props} items={checklistItems} />;
-}
-
-CheckList.propTypes = {
-    controlType: PropTypes.oneOf(['checkbox', 'switch']),
-    alignCheck: PropTypes.oneOf(['start', 'end']),
-    droppableId: PropTypes.string,
 };
 
 CheckList.defaultProps = {
     controlType: 'checkbox',
     alignCheck: undefined,
 };
+
+export type { CheckListProps } from '../../decs';
+export default CheckList;

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
-import Button from '../_FIXED/Button/Button';
+import Button from '../Button/Button';
 import { Divider, List as MuiList, ListSubheader, Collapse } from './List.styled';
 import MuiListItem from './ListItem';
-import DraggableList from '../DraggableList/DraggableList';
-import SVGIcon from '../SVGIcon/SVGIcon';
-import type { ListItemProps, ListProps } from '../decs';
+import DraggableList from '../../DraggableList/DraggableList';
+import SVGIcon from '../../SVGIcon/SVGIcon';
+import type { ListItemProps, ListProps } from '../../decs';
 
 const List: React.FC<ListProps> = ({
     useTransition,
@@ -160,4 +160,5 @@ List.defaultProps = {
     items: [],
 };
 
+export type { ListItemProps, ListProps } from '../../decs';
 export default List;

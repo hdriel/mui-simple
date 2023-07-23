@@ -75,8 +75,10 @@ export { default as InputMultipleSelect } from './components/_FIXED/Select/Input
 export type { InputMultipleSelectProps } from './components/_FIXED/Select/InputMultipleSelect';
 
 export { default as Link } from './components/Link/Link';
-export { default as List } from './components/List/List';
-export { default as CheckList } from './components/List/CheckList';
+export { default as List } from './components/_FIXED/List/List';
+export type { ListProps, ListItemProps } from './components/_FIXED/List/List';
+export { default as CheckList } from './components/_FIXED/List/CheckList';
+export type { CheckListProps } from './components/_FIXED/List/CheckList';
 
 export { default as Menu } from './components/Menu/Menu';
 export { default as ContextMenu } from './components/Menu/ContextMenu';

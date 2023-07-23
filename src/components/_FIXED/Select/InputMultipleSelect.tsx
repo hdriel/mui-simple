@@ -8,7 +8,7 @@ import { isDefined } from '../../../utils/helpers';
 import Checkbox from '../Checkbox/Checkbox';
 import { MenuItem } from './InputSelect.styled';
 import { getOptions, useOptionsConverter } from './InputSelect.hooks';
-import ListItem from '../../List/ListItem';
+import ListItem from '../List/ListItem';
 import type { InputMultipleSelectProps } from '../../decs';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 import { InputSelectOption } from '../../decs';

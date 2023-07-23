@@ -11,9 +11,9 @@ import {
     ListItemSecondaryAction,
     ListItem as MuiListItem,
 } from './List.styled';
-import Avatar from '../_FIXED/Avatar/Avatar';
-import Typography from '../_FIXED/Typography/Typography';
-import type { ListItemProps } from '../decs';
+import Avatar from '../Avatar/Avatar';
+import Typography from '../Typography/Typography';
+import type { ListItemProps } from '../../decs';
 
 interface ListItemWrapperProps {
     item: ListItemProps;

@@ -1,27 +1,26 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import List from '../List';
+import CheckList from '../CheckList';
 import {
     Send as SendIcon,
     BeachAccess as BeachAccessIcon,
     Phone as PhoneIcon,
-    Comment as CommentIcon,
     Drafts as DraftsIcon,
     Inbox as InboxIcon,
     StarBorder as StarBorderIcon,
 } from '@mui/icons-material';
-import Button from '../../_FIXED/Button/Button';
+import Button from '../../Button/Button';
 
-const meta: Meta<typeof List> = {
-    title: 'Data-Display/List',
-    component: List,
+const meta: Meta<typeof CheckList> = {
+    title: 'Data-Display/CheckList',
+    component: CheckList,
     tags: ['autodocs'],
 };
 
 export default meta;
 
-type Story = StoryObj<typeof List>;
+type Story = StoryObj<typeof CheckList>;
 
 export const Default: Story = {
     args: {},
@@ -84,7 +83,7 @@ export const DragAndDropItems: Story = {
     },
     render: (args) => {
         const [items, setItems] = useState(args.items);
-        return <List {...args} items={items} onListOrderChange={setItems} />;
+        return <CheckList {...args} items={items} onCheckListOrderChange={setItems} />;
     },
 };
 
@@ -295,7 +294,7 @@ export const SelectedItems: Story = {
     },
 };
 
-export const NestedList = () => {
+export const NestedCheckList = () => {
     const items = [
         {
             startIcon: <SendIcon />,
@@ -346,5 +345,47 @@ export const NestedList = () => {
         },
     ];
 
-    return <List title="Nested List Items" items={items} />;
+    return <CheckList title="Nested CheckList Items" items={items} />;
+};
+
+export const ControlTypeSwitch: Story = {
+    args: {
+        controlType: 'switch',
+        items: [
+            { title: 'item 1', subtitle: 'subtitle 1' },
+            { title: 'item 2', subtitle: 'subtitle 2' },
+        ],
+    },
+};
+
+export const ControlTypeCheckbox: Story = {
+    args: {
+        controlType: 'checkbox',
+        items: [
+            { title: 'item 1', subtitle: 'subtitle 1' },
+            { title: 'item 2', subtitle: 'subtitle 2' },
+        ],
+    },
+};
+
+export const alignCheckEndSwitch: Story = {
+    args: {
+        controlType: 'switch',
+        alignCheck: 'end',
+        items: [
+            { title: 'item 1', subtitle: 'subtitle 1' },
+            { title: 'item 2', subtitle: 'subtitle 2' },
+        ],
+    },
+};
+
+export const alignCheckStartCheckbox: Story = {
+    args: {
+        controlType: 'checkbox',
+        alignCheck: 'start',
+        items: [
+            { title: 'item 1', subtitle: 'subtitle 1' },
+            { title: 'item 2', subtitle: 'subtitle 2' },
+        ],
+    },
 };

@@ -12,7 +12,7 @@ import {
 
 import AppBar from '../AppBar';
 import Button from '../../_FIXED/Button/Button';
-import List from '../../List/List';
+import List from '../../_FIXED/List/List';
 import Divider from '../../Divider/Divider';
 import ToggleButtonGroup from '../../ToggleButtonGroup/ToggleButtonGroup';
 

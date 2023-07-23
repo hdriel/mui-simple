@@ -11,7 +11,7 @@ import {
 
 import Drawer from '../Drawer';
 import Button from '../../_FIXED/Button/Button';
-import List from '../../List/List';
+import List from '../../_FIXED/List/List';
 import Divider from '../../Divider/Divider';
 
 export default {
