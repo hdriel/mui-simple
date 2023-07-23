@@ -9,7 +9,9 @@ interface DraggableListULProps {
 export const DraggableListUL = styled('ul')<DraggableListULProps>`
     display: flex;
     gap: ${(props) => props.flexGap};
-
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
     ${(props) =>
         props.flexDirection === 'row'
             ? css`
@@ -20,10 +22,6 @@ export const DraggableListUL = styled('ul')<DraggableListULProps>`
                   flex-direction: column;
                   width: 100%;
               `};
-
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
 `;
 
 export const DraggableListULItem = styled(Box)`

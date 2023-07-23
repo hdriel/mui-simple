@@ -1,5 +1,3 @@
-import { alpha } from '@mui/material';
-
 export const getDataId = (data: any, fieldId: string, index: number): string =>
     typeof data === 'string' ? data : data?.[fieldId] || String(index ?? '');
 
@@ -17,24 +15,13 @@ export const reorder = (list, startIndex, endIndex): any[] => {
 const grid = 8;
 
 export const getItemStyle = (theme, isDragging, draggableStyle): object => ({
-    // some basic styles to make the items look a bit nicer
     userSelect: 'none',
-    padding: grid * 2,
-    margin: `0 0 ${grid}px 0`,
-
     // change background colour if dragging
-    ...(isDragging && {
-        background: alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity ?? 1),
-        border: '1px dashed black',
-    }),
-
-    // styles we need to apply on draggables
+    background: isDragging ? 'lightgreen' : 'grey',
     ...draggableStyle,
 });
 
 export const getListStyle = (theme, isDraggingOver): object => ({
-    background: isDraggingOver ? 'lightblue' : 'lightgrey',
-    padding: grid,
     position: 'relative',
-    // width: 250,
+    background: isDraggingOver ? 'lightblue' : 'lightgrey',
 });
