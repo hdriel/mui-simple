@@ -54,13 +54,12 @@ interface ManuStyledProps {
     width?: string | number;
     maxHeight?: string | number;
     elevation?: number;
-    onClick: any;
-
+    onClick?: (event: any) => void;
     [key: string]: any;
 }
-type ManuStyledPropsType = PropsWithChildren<Omit<MenuProps, 'onClick'> & ManuStyledProps>;
+type MenuStyledPropsType = PropsWithChildren<Omit<MenuProps, 'onClick'> & ManuStyledProps>;
 
-export const Menu = styled(({ height, width, maxHeight, elevation, ...props }: ManuStyledProps) => (
+export const Menu = styled(({ height, width, maxHeight, elevation, ...props }) => (
     <MuiMenu
         open
         PaperProps={{
@@ -71,22 +70,18 @@ export const Menu = styled(({ height, width, maxHeight, elevation, ...props }: M
                 maxHeight,
                 overflowY: 'auto',
                 filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                '& .MuiAvatar-root': {
-                    width: 32,
-                    height: 32,
-                    ml: -0.5,
-                    mr: 1,
-                },
+                '& > .MuiList-root': { padding: 0 },
+                '& .MuiAvatar-root': { width: 32, height: 32, ml: -0.5, mr: 1 },
             },
         }}
         {...props}
     />
-))<ManuStyledProps>`
+))<MenuStyledPropsType>`
     max-width: 100%;
     & .MuiList-root:focus-visible {
         outline: none;
     }
-` as ComponentType<ManuStyledProps>;
+` as ComponentType<MenuStyledPropsType>;
 
 export const MenuList = MuiMenuList;
 export const MenuItem = MuiMenuItem;

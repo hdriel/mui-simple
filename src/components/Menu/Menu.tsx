@@ -1,4 +1,4 @@
-import React, { useState, Children } from 'react';
+import React, { useState, Children, useEffect, useRef } from 'react';
 import type { PropsWithChildren } from 'react';
 import { Check as CheckIcon } from '@mui/icons-material';
 import { ListItemIcon, ListItemText, Menu as MuiMenu, MenuItem, MenuList, MenuWrapper } from './Menu.styled';
@@ -7,7 +7,7 @@ import Divider from '../_FIXED/Divider/Divider';
 import { Grow } from '@mui/material';
 import { useAnchorProps, useChildrenComponentBinding } from './Menu.hooks';
 import SVGIcon from '../SVGIcon/SVGIcon';
-import type { DividerProps, MenuOptionItem, MenuProps } from '../decs';
+import type { DividerProps, MenuOption, MenuOptionItem, MenuProps } from '../decs';
 
 const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement => {
     const {
@@ -27,6 +27,7 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
         onClose,
         open,
         options,
+        optionsDirection,
         ...rest
     } = props;
     const [openControlled, setOpenControlled] = useState(false);
@@ -51,6 +52,7 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
     });
 
     const boundingChildren = useChildrenComponentBinding({
+        open,
         boundChildrenId,
         boundChildrenIndex,
         children,
@@ -72,6 +74,15 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
         if (res === undefined || res === true) handleClose(event);
     };
 
+    // const ref = useRef();
+    // useEffect(() => {
+    //     ref.current = boundingChildren[0];
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // anchorEl={ref.current}
+    // anchorPosition={{ vertical: 'bottom', horizontal: 'left' }}
+    // transformOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+    // }, [boundingChildren.length]);
+
     return (
         <>
             {Children.toArray(boundingChildren)}
@@ -86,14 +97,21 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
                         {...rest}
                     >
                         {alternativeContent || (
-                            <MenuList dense={dense}>
-                                {options?.map((item: DividerProps | MenuOptionItem, index) => {
+                            <MenuList
+                                dense={dense}
+                                sx={{ display: 'flex', flexDirection: optionsDirection ?? 'column' }}
+                            >
+                                {options?.map((item: MenuOption, index) => {
                                     const { divider, ...dividerOption } = (item as DividerProps) ?? {};
                                     if (divider) {
                                         return <Divider key={index} variant="fullWidth" {...dividerOption} />;
                                     }
 
-                                    const option = (item as MenuOptionItem) ?? {};
+                                    const option =
+                                        typeof item === 'string'
+                                            ? // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+                                              ({ label: item, id: index } as MenuOptionItem)
+                                            : (item as MenuOptionItem) ?? {};
                                     const optionId = (options as any)?.[fieldId] as string;
 
                                     return (
@@ -143,7 +161,11 @@ Menu.defaultProps = {
     contextMenu: undefined,
     anchorPosition: undefined,
     anchorElementRef: undefined,
+    optionsDirection: undefined,
 };
 
-export type { DividerProps, MenuOptionItem, MenuProps } from '../decs';
+export type { MenuOption, MenuProps } from '../decs';
 export default Menu;
+
+// BUG: the menu closed when click on content menu include alternative content
+// BUG: allow to defined the styles of the children wrapper/fragment

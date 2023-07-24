@@ -386,6 +386,7 @@ export interface MenuOptionItem {
     shortcut?: ReactNode;
     [key: string]: any;
 }
+export type MenuOption = string | MenuOptionItem | DividerProps;
 
 export interface MenuProps {
     alternativeContent?: any;
@@ -404,7 +405,8 @@ export interface MenuProps {
     onClick?: (event?: any) => void;
     onClose?: (event?: any) => boolean;
     open?: boolean;
-    options?: Array<MenuOptionItem | DividerProps>;
+    options?: MenuOption[];
+    optionsDirection?: 'column' | 'row';
     width?: string | number;
     [key: string]: any;
 }

@@ -16,9 +16,9 @@ const Divider: React.FC<PropsWithChildren<DividerProps>> = (props): React.ReactE
     const thicknessValue = (thickness !== undefined && numberToPx(thickness)) || 'thin';
     let data: string | React.ReactNode | React.ReactElement | any;
     if (typeof _chip === 'boolean' && _chip && typeof label === 'string' && label) {
-        data = <Chip textColor={textColor} label={label}></Chip>;
+        data = <Chip textColor={textColor} label={label} />;
     } else if (typeof _chip === 'string' && _chip) {
-        data = <Chip textColor={textColor} label={_chip}></Chip>;
+        data = <Chip textColor={textColor} label={_chip} />;
     } else if (typeof _chip !== 'string' && _chip) {
         data = _chip;
     } else if (label) {

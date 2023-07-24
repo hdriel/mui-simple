@@ -1,7 +1,8 @@
-import React, { cloneElement, isValidElement, MouseEventHandler, useMemo, useState } from 'react';
+import React, { cloneElement, isValidElement, useMemo, useState } from 'react';
 import { isDefined } from '../../utils/helpers';
 
 export function useChildrenComponentBinding({
+    open,
     boundChildrenId,
     boundChildrenIndex,
     children,
@@ -9,6 +10,7 @@ export function useChildrenComponentBinding({
     anchorElementRef,
     onClickControlled,
 }: {
+    open?: boolean;
     boundChildrenId?: string;
     boundChildrenIndex?: number | boolean;
     children?: any;
@@ -24,8 +26,8 @@ export function useChildrenComponentBinding({
         return cloneElement(child, {
             key: index,
             ...(!anchorElementRef &&
-                ((isDefined(boundChildrenId) && boundChildrenId === (child.props as any).id) ||
-                    (isDefined(boundChildrenIndex) && boundChildrenIndex === validIndex++)) && {
+                ((!boundChildrenIndex && isDefined(boundChildrenId) && boundChildrenId === (child.props as any).id) ||
+                    (!boundChildrenId && isDefined(boundChildrenIndex) && boundChildrenIndex === validIndex++)) && {
                     onClick: (event, ...args) => {
                         setAnchorEl(event?.currentTarget);
                         onClickControlled?.(event);
