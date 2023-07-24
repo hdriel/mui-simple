@@ -61,13 +61,11 @@ interface ManuStyledProps {
 type MenuStyledPropsType = PropsWithChildren<Omit<MenuProps, 'onClick'> & ManuStyledProps>;
 
 // https://stackoverflow.com/questions/69065717/material-ui-menu-component-locks-body-scrollbar
-export const Menu = styled(({ height, width, maxHeight, elevation, disableScrollLock, ...props }) => (
+export const Menu = styled(({ height, width, maxHeight, elevation, ...props }) => (
     <MuiMenu
         open
-        disableScrollLock={disableScrollLock}
         PaperProps={{
             // transition: true,
-            // disablePortal: true,
             elevation,
             sx: {
                 height,

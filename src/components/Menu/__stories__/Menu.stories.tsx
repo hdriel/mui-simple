@@ -284,10 +284,10 @@ export const MaxHeight: Story = {
     },
 };
 
-export const Open: Story = {
+export const DisableScrollLock: Story = {
     args: {
         options: shortcutOptions,
-        maxHeight: 200,
+        disableScrollLock: true,
         children: <Button>Open Menu</Button>,
     },
     render: (args) => {

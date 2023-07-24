@@ -98,7 +98,9 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
     //     // eslint-disable-next-line react-hooks/exhaustive-deps
     // }, [wasSeen]);
     // (bindRef || (anchorProps as any).anchorEl || contextMenu) && (
+    // <MuiMenu {...refProps}
 
+    console.log('rest', rest);
     return (
         <>
             {Children.toArray(boundingChildren)}
@@ -109,7 +111,6 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
                         onClose={handleClose}
                         onClick={handleClick}
                         TransitionComponent={Grow}
-                        {...refProps}
                         {...anchorProps}
                         {...rest}
                     >
