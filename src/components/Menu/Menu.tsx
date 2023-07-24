@@ -21,6 +21,7 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
         contextMenu,
         dense,
         disableRipple,
+        elevation,
         fieldId,
         hide,
         onClick,
@@ -87,7 +88,7 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
         <>
             {Children.toArray(boundingChildren)}
             {((anchorProps as any).anchorEl || contextMenu) && (
-                <MenuWrapper arrow={arrow}>
+                <MenuWrapper arrow={arrow} elevation={elevation}>
                     <MuiMenu
                         open={open ?? openControlled}
                         onClose={handleClose}

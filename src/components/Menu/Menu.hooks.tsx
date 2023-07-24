@@ -1,8 +1,7 @@
-import React, { cloneElement, isValidElement, useMemo, useState } from 'react';
+import { cloneElement, isValidElement, useMemo, useState } from 'react';
 import { isDefined } from '../../utils/helpers';
 
 export function useChildrenComponentBinding({
-    open,
     boundChildrenId,
     boundChildrenIndex,
     children,
@@ -14,9 +13,9 @@ export function useChildrenComponentBinding({
     boundChildrenId?: string;
     boundChildrenIndex?: number | boolean;
     children?: any;
-    setAnchorEl?: Function;
+    setAnchorEl?: (event: any) => void;
     anchorElementRef?: any;
-    onClickControlled?: Function;
+    onClickControlled?: (event: any) => void;
 }): any[] {
     const elementChildren = [].concat(children);
     let validIndex = 0;

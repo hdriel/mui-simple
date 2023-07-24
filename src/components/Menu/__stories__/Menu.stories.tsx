@@ -190,11 +190,20 @@ export const BoundChildrenId: Story = {
                     ]}
                 />
 
-                <Menu {...args} boundChildrenId={id} optionsDirection="row">
-                    <Button id="b1">Button 1</Button>
-                    <Button id="b2">Button 2</Button>
-                    <Button id="b3">Button 3</Button>
-                </Menu>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                    }}
+                >
+                    <Menu {...args} boundChildrenId={id} optionsDirection="row">
+                        <Button id="b1">Button 1</Button>
+                        <Button id="b2">Button 2</Button>
+                        <Button id="b3">Button 3</Button>
+                    </Menu>
+                </Box>
             </Stack>
         );
     },
@@ -318,6 +327,17 @@ export const Options: Story = {
                     <Button>Alternative Content</Button>
                 </Menu>
             </Box>
+        );
+    },
+};
+
+export const OptionsDirectionRow: Story = {
+    args: {},
+    render: (args) => {
+        return (
+            <Menu {...args} open options={optionLongList} optionsDirection="row">
+                <Button>String List</Button>
+            </Menu>
         );
     },
 };
