@@ -1,8 +1,6 @@
-import type React from 'react';
 import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent } from 'react';
 import type { SxProps } from '@mui/material';
 import type { ColorsProps, TableColumn, Pagination, ToolbarAction } from './_FIXED/Table/Table.desc';
-import type { MenuProps, OptionMenuItem, DividerProps } from './Menu/Menu';
 
 export type { TableColumn } from './_FIXED/Table/Table.desc';
 export interface AccordionProps {
@@ -99,6 +97,19 @@ export interface BottomNavigationProps {
     [key: string]: any;
 }
 
+export interface DividerProps {
+    color?: string;
+    component?: string | ReactNode;
+    flexItem?: boolean;
+    label?: string | ReactNode;
+    light?: boolean;
+    orientation?: 'horizontal' | 'vertical';
+    textAlign?: 'center' | 'left' | 'right';
+    thickness?: number;
+    variant?: 'fullWidth' | 'inset' | 'middle';
+    [key: string]: any;
+}
+
 export interface CardProps {
     actions?: ReactNode | string | ButtonProps | Array<ReactNode | ButtonProps | string>;
     avatar?: ReactNode;
@@ -117,7 +128,7 @@ export interface CardProps {
           };
     maxWidth?: number | string;
     mediaOnTop?: boolean;
-    optionsMenu?: MenuProps | Array<OptionMenuItem | DividerProps>;
+    optionsMenu?: MenuProps | Array<MenuOptionItem | DividerProps>;
     subtitle?: string;
     title?: string;
     width?: number | string;
@@ -308,7 +319,7 @@ export type InputMultipleSelectProps = Omit<InputSelectProps, 'value'> & {
     value: Array<string | number | boolean>;
     chips: boolean;
     squaredChips: boolean;
-    checkboxMarker: string | boolean | React.ReactNode;
+    checkboxMarker: string | boolean | ReactNode;
     max: number;
     selectedIndicator: boolean;
     selectAll: boolean;
@@ -330,7 +341,7 @@ export interface ListItemProps {
     link?: string;
     controlType?: 'checkbox' | 'switch';
     selected?: boolean;
-    startIcon?: React.ReactNode | string;
+    startIcon?: ReactNode | string;
     subtitle?: string;
     title?: string;
     [key: string]: any;
@@ -364,6 +375,38 @@ export type CheckListProps = {
     alignCheck: 'start' | 'end';
     droppableId: string;
 } & ListProps;
+
+export interface MenuOptionItem {
+    check?: boolean;
+    icon?: string | ReactNode;
+    id?: string;
+    label?: string | ReactNode;
+    onClick?: (Event: any) => void;
+    shortcut?: ReactNode;
+    [key: string]: any;
+}
+
+export interface MenuProps {
+    alternativeContent?: any;
+    anchorElementRef?: any;
+    anchorPosition?: { vertical?: 'top' | 'bottom'; horizontal?: 'left' | 'center' | 'right' };
+    arrow?: boolean;
+    boundChildrenId?: string;
+    boundChildrenIndex?: boolean | number;
+    contextMenu?: any;
+    dense?: boolean;
+    disableRipple?: boolean;
+    elevation?: number;
+    height?: string | number;
+    id?: string;
+    maxHeight?: string | number;
+    onClick?: (event?: any) => void;
+    onClose?: (event?: any) => boolean;
+    open?: boolean;
+    options?: Array<MenuOptionItem | DividerProps>;
+    width?: string | number;
+    [key: string]: any;
+}
 
 export interface SnackbarProps {
     actions?: Array<string | ButtonProps>;
@@ -565,8 +608,8 @@ export interface TableProps {
     orderBy?: Record<string, string | number>;
     pagination?: Pagination;
     paginationAlign?: 'start' | 'center' | 'end';
-    PaginationComponent?: React.ReactNode;
-    EmptyResultCmp?: React.ReactNode | string;
+    PaginationComponent?: ReactNode;
+    EmptyResultCmp?: ReactNode | string | JSX.Element;
     paginationProps?: Record<string, any>;
     selectedActions?: ToolbarAction[];
     SELECTION_MODE_TOOLTIP_LABEL?: string;

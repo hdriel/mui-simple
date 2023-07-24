@@ -1,28 +1,15 @@
 import React, { isValidElement, cloneElement } from 'react';
-import type { ReactNode, PropsWithChildren } from 'react';
-//	import PropTypes from 'prop-types';
-
+import type { PropsWithChildren } from 'react';
 import { Divider as MuiDivider } from './Divider.styled';
-import { useCustomColor } from '../../utils/helpers';
+import { isDefined, useCustomColor } from '../../utils/helpers';
+import type { DividerProps } from '../decs';
 
-interface DividerProps {
-    orientation?: 'horizontal' | 'vertical';
-    light?: boolean;
-    flexItem?: boolean;
-    textAlign?: 'center' | 'left' | 'right';
-    variant?: 'fullWidth' | 'inset' | 'middle';
-    component?: ReactNode;
-    label?: string | ReactNode;
-    thickness?: number;
-    color?: string;
-}
-export default function Divider(props: PropsWithChildren<DividerProps>): ReactNode {
-    const { orientation, light, flexItem, textAlign, variant, component, label, thickness, color, children, ...rest } =
-        props;
-    const [customColor] = useCustomColor(color);
+const Divider: React.FC<PropsWithChildren<DividerProps>> = (props): React.ReactElement => {
+    const { orientation, flexItem, label, color: _color, children, ...rest } = props;
+    const [color] = useCustomColor(_color);
 
     const content = [label]
-        .concat(children ?? [])
+        .concat(children)
         .map((child, index) => {
             return isValidElement(child)
                 ? cloneElement(child, {
@@ -33,35 +20,20 @@ export default function Divider(props: PropsWithChildren<DividerProps>): ReactNo
         })
         .filter(Boolean);
 
+    console.log('content', content);
     return (
         <MuiDivider
-            orientation={orientation}
-            light={light}
+            orientation={isDefined(orientation) ? orientation : 'horizontal'}
             flexItem={flexItem ?? (orientation === 'vertical' ? true : undefined)}
-            textAlign={textAlign}
-            variant={variant}
-            // Todo: find correct type for this instead of ReactNode
-            component={component}
-            thickness={thickness}
-            customColor={customColor}
+            color={color}
             {...rest}
         >
-            {content.length ? content : undefined}
+            {content.length ? content : <span style={{ background: color }}> </span>}
         </MuiDivider>
     );
-}
+};
 
-//	Divider.propTypes = {
-//    orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-//    light: PropTypes.bool,
-//    flexItem: PropTypes.bool,
-//    textAlign: PropTypes.oneOf(['center', 'left', 'right']),
-//    variant: PropTypes.oneOf(['fullWidth', 'inset', 'middle']),
-//    component: PropTypes.string,
-//    label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-//    thickness: PropTypes.number,
-//    color: PropTypes.string,
-//	};
+// bug: Divider without label/children doesn't got thickness
 
 Divider.defaultProps = {
     orientation: undefined,
@@ -74,3 +46,5 @@ Divider.defaultProps = {
     thickness: undefined,
     color: undefined,
 };
+
+export default Divider;

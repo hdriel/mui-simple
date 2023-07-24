@@ -27,7 +27,8 @@ export const Avatar = MuiAvatar;
 export const Paper = MuiPaper;
 export const Checkbox = MuiCheckbox;
 export const Tooltip = MuiTooltip;
-export const Image = MuiImage;
+
+export const Image: any = MuiImage;
 
 export const Box = MuiBox;
 export const Button = MuiButton;

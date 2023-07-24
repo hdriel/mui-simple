@@ -35,7 +35,7 @@ function getCustomColorStyle({ color }): SerializedStyles {
 function verticalStyle(props): SerializedStyles {
     if (props.orientation !== 'vertical') return css``;
 
-    const { thickness, customColor: color } = props;
+    const { thickness, color } = props;
 
     const thicknessValue = (thickness !== undefined && numberToPx(thickness)) || 'thin';
 
@@ -58,7 +58,7 @@ function verticalStyle(props): SerializedStyles {
 function horizontalStyle(props): SerializedStyles {
     if (props.orientation !== 'horizontal') return css``;
 
-    const { thickness, customColor: color } = props;
+    const { thickness, color } = props;
 
     const thicknessValue = (thickness !== undefined && numberToPx(thickness)) || 'thin';
 
@@ -73,13 +73,13 @@ function horizontalStyle(props): SerializedStyles {
                 color,
                 thicknessValue,
                 borderPosition: 'border-top',
-            })}
+            })};
         }
     `;
 }
 
 export const Divider = styled(MuiDivider, {
-    shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
+    shouldForwardProp: (propName) => !['color'].includes(propName as string),
 })<DividerProps>`
     ${verticalStyle}
     ${horizontalStyle}

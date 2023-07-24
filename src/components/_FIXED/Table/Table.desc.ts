@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import type { Theme } from '@mui/material';
 import type { AvatarProps } from '../../decs';
 
@@ -30,7 +31,7 @@ export interface TableColumn {
     format?: ((content: any, data: any) => string) | string;
     dateFormat?: string;
     props?: object | any;
-    cmp?: React.ReactNode | string;
+    cmp?: ReactNode | string;
     image?: boolean | (Partial<AvatarProps> & { width?: string | number; height?: string | number; avatar?: boolean });
     orderBy?: SORT_TYPE;
     type?: string;
@@ -111,16 +112,17 @@ export interface ToolbarAction {
 }
 
 export interface EnhancedTableToolbarProps {
-    selectedLabel: string;
-    selected: string[];
-    data: any[];
-    title: string;
-    filterAction: React.ReactNode;
-    selectionModeAction: React.ReactNode;
-    sortColumnsAction: React.ReactNode;
-    selectedActions: ToolbarAction[];
     actions: ToolbarAction[];
     colorProps: ColorsProps;
+    data: any[];
+    fieldId: string;
+    filterAction: ReactNode;
+    selected: string[];
+    selectedActions: ToolbarAction[];
+    selectedLabel: string;
+    selectionModeAction: ReactNode;
+    sortColumnsAction: ReactNode;
+    title: string;
 }
 
 export interface EnhancedTablePaginationProps {
