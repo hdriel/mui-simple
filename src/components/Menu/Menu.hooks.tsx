@@ -7,6 +7,7 @@ export function useChildrenComponentBinding({
     children,
     setAnchorEl,
     anchorElementRef,
+    ref,
     onClickControlled,
 }: {
     open?: boolean;
@@ -15,6 +16,7 @@ export function useChildrenComponentBinding({
     children?: any;
     setAnchorEl?: (event: any) => void;
     anchorElementRef?: any;
+    ref?: any;
     onClickControlled?: (event: any) => void;
 }): any[] {
     const elementChildren = [].concat(children);
@@ -27,6 +29,7 @@ export function useChildrenComponentBinding({
             ...(!anchorElementRef &&
                 ((!boundChildrenIndex && isDefined(boundChildrenId) && boundChildrenId === (child.props as any).id) ||
                     (!boundChildrenId && isDefined(boundChildrenIndex) && boundChildrenIndex === validIndex++)) && {
+                    ref,
                     onClick: (event, ...args) => {
                         setAnchorEl(event?.currentTarget);
                         onClickControlled?.(event);

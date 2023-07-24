@@ -1,4 +1,4 @@
-import React, { useState, Children, useEffect, useRef } from 'react';
+import React, { useState, Children } from 'react';
 import type { PropsWithChildren } from 'react';
 import { Check as CheckIcon } from '@mui/icons-material';
 import { ListItemIcon, ListItemText, Menu as MuiMenu, MenuItem, MenuList, MenuWrapper } from './Menu.styled';
@@ -31,6 +31,9 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
         optionsDirection,
         ...rest
     } = props;
+    // const [wasSeen, ref] = useWasSeen();
+    // const [wasSeen, ref] = useInViewport();
+    // const [bindRef, setBindRef] = useState();
     const [openControlled, setOpenControlled] = useState(false);
 
     options?.forEach((option) => {
@@ -59,6 +62,7 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
         children,
         setAnchorEl,
         anchorElementRef,
+        // ref,
         onClickControlled: open === undefined ? () => setOpenControlled(true) : undefined,
     });
 
@@ -75,14 +79,25 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
         if (res === undefined || res === true) handleClose(event);
     };
 
-    // const ref = useRef();
+    // const refProps = bindRef && {
+    //     anchorEl: bindRef,
+    //     anchorPosition: { vertical: 'bottom', horizontal: 'left', bottom: 0, left: 0, top: 0, right: 0 },
+    //     transformOrigin: { vertical: 'bottom', horizontal: 'left', bottom: 0, left: 0, top: 0, right: 0 },
+    // };
+
+    // A lot of problem with fix open state, like:
+    // - scroll and got out of DOM
+    // - update the position on scroll,
+    // - position of the auto popup menu
+    // - etc...
+    // there for I decide not handle this case, but this code will stay here
+
     // useEffect(() => {
-    //     ref.current = boundingChildren[0];
+    //     if (wasSeen && !bindRef) setBindRef(ref.current);
+    //     if (!wasSeen && bindRef) setBindRef(null);
     //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // anchorEl={ref.current}
-    // anchorPosition={{ vertical: 'bottom', horizontal: 'left' }}
-    // transformOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-    // }, [boundingChildren.length]);
+    // }, [wasSeen]);
+    // (bindRef || (anchorProps as any).anchorEl || contextMenu) && (
 
     return (
         <>
@@ -94,6 +109,7 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
                         onClose={handleClose}
                         onClick={handleClick}
                         TransitionComponent={Grow}
+                        {...refProps}
                         {...anchorProps}
                         {...rest}
                     >
@@ -130,7 +146,7 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
                                             {option.label ? <ListItemText>{option.label}</ListItemText> : undefined}
 
                                             {option.shortcut ? (
-                                                <Typography variant="body2" muiColor="text.secondary">
+                                                <Typography variant="body2" color="text.secondary">
                                                     {option.shortcut}
                                                 </Typography>
                                             ) : undefined}
@@ -153,6 +169,7 @@ Menu.defaultProps = {
     boundChildrenId: undefined,
     boundChildrenIndex: 0,
     dense: undefined,
+    disableScrollLock: undefined,
     fieldId: 'id',
     open: undefined,
     onClose: undefined,

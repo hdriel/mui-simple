@@ -395,6 +395,7 @@ export interface MenuProps {
     arrow?: boolean;
     boundChildrenId?: string;
     boundChildrenIndex?: boolean | number;
+    disableScrollLock?: boolean;
     contextMenu?: any;
     dense?: boolean;
     disableRipple?: boolean;

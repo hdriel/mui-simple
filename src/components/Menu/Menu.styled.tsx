@@ -1,4 +1,5 @@
-import React, { ComponentType, PropsWithChildren } from 'react';
+import React from 'react';
+import type { ComponentType, PropsWithChildren } from 'react';
 import {
     Menu as MuiMenu,
     MenuList as MuiMenuList,
@@ -9,10 +10,8 @@ import {
     ClickAwayListener,
     Grow,
     Box,
-    BoxProps,
-    MenuProps,
-    PopperProps,
 } from '@mui/material';
+import type { BoxProps, MenuProps, PopperProps } from '@mui/material';
 import { styled, css } from '@mui/material/styles';
 import Paper from '../Paper/Paper';
 
@@ -26,7 +25,9 @@ interface ManuWrapperStyledProps {
     [key: string]: any;
 }
 type ManuWrapperStyledPropsType = ManuWrapperStyledProps & BoxProps;
-export const MenuWrapper = styled(Box)<ManuWrapperStyledPropsType>`
+export const MenuWrapper = styled(Box, {
+    shouldForwardProp: (propName) => !['arrow'].includes(propName),
+})<ManuWrapperStyledPropsType>`
     position: relative;
     overflow: visible;
     margin-top: 1.5px;
@@ -59,10 +60,14 @@ interface ManuStyledProps {
 }
 type MenuStyledPropsType = PropsWithChildren<Omit<MenuProps, 'onClick'> & ManuStyledProps>;
 
-export const Menu = styled(({ height, width, maxHeight, elevation, ...props }) => (
+// https://stackoverflow.com/questions/69065717/material-ui-menu-component-locks-body-scrollbar
+export const Menu = styled(({ height, width, maxHeight, elevation, disableScrollLock, ...props }) => (
     <MuiMenu
         open
+        disableScrollLock={disableScrollLock}
         PaperProps={{
+            // transition: true,
+            // disablePortal: true,
             elevation,
             sx: {
                 height,
