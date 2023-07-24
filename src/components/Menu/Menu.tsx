@@ -100,7 +100,6 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
     // (bindRef || (anchorProps as any).anchorEl || contextMenu) && (
     // <MuiMenu {...refProps}
 
-    console.log('rest', rest);
     return (
         <>
             {Children.toArray(boundingChildren)}
