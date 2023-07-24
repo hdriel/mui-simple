@@ -3,7 +3,7 @@ import type { PropsWithChildren } from 'react';
 import { Check as CheckIcon } from '@mui/icons-material';
 import { ListItemIcon, ListItemText, Menu as MuiMenu, MenuItem, MenuList, MenuWrapper } from './Menu.styled';
 import Typography from '../_FIXED/Typography/Typography';
-import Divider from '../Divider/Divider';
+import Divider from '../_FIXED/Divider/Divider';
 import { Grow } from '@mui/material';
 import { useAnchorProps, useChildrenComponentBinding } from './Menu.hooks';
 import SVGIcon from '../SVGIcon/SVGIcon';

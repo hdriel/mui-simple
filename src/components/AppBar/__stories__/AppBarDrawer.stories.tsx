@@ -13,7 +13,7 @@ import {
 import AppBar from '../AppBar';
 import Button from '../../_FIXED/Button/Button';
 import List from '../../_FIXED/List/List';
-import Divider from '../../Divider/Divider';
+import Divider from '../../_FIXED/Divider/Divider';
 import ToggleButtonGroup from '../../ToggleButtonGroup/ToggleButtonGroup';
 
 export default {

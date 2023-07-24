@@ -36,7 +36,10 @@ export { default as Chip } from './components/_FIXED/Chip/Chip';
 export type { ChipProps } from './components/_FIXED/Chip/Chip';
 
 export { default as Dialog } from './components/Dialog/Dialog';
-export { default as Divider } from './components/Divider/Divider';
+
+export { default as Divider } from './components/_FIXED/Divider/Divider';
+export type { DividerProps } from './components/_FIXED/Divider/Divider';
+
 export { default as Drawer } from './components/Drawer/Drawer';
 
 export { default as Fab } from './components/FloatingActionButton/FloatingActionButton';

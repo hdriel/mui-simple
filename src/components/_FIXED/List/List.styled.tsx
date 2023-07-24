@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { styled } from '@mui/material/styles';
-import MuiDivider from '../../Divider/Divider';
+import MuiDivider from '../Divider/Divider';
 
 export const Divider = MuiDivider;
 export const Collapse = MuiCollapse;

@@ -1,9 +1,10 @@
+// @ts-ignore
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Box, Stack, Typography } from '@mui/material';
 
 import Divider from '../Divider';
-import Chip from '../../_FIXED/Chip/Chip';
+import Chip from '../../Chip/Chip';
 
 const meta: Meta<typeof Divider> = {
     title: 'Data-Display/Divider',
@@ -11,8 +12,8 @@ const meta: Meta<typeof Divider> = {
     tags: ['autodocs'],
 };
 
-const Text = () => (
-    <Typography color="text.secondary" variant="body2">
+const Text = (props) => (
+    <Typography color="text.secondary" variant="body2" {...props}>
         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
     </Typography>
 );
@@ -107,7 +108,7 @@ export const TextAlign_ = (args) => (
     </Stack>
 );
 
-export const Thickness = (args) => (
+export const ThicknessHorizontal_ = (args) => (
     <Stack spacing={3}>
         <Text />
         <Divider color="black">Default thickness</Divider>
@@ -119,6 +120,31 @@ export const Thickness = (args) => (
         <Divider thickness={5} color="black" />
         <Text />
     </Stack>
+);
+
+export const ThicknessVertical_ = (args) => (
+    <Box
+        sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '8px',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: 150,
+        }}
+    >
+        <Text />
+        <Divider orientation="vertical" color="black">
+            Default thickness
+        </Divider>
+        <Text />
+        <Divider orientation="vertical" thickness={5} color="black">
+            thickness with label
+        </Divider>
+        <Text />
+        <Divider orientation="vertical" thickness={5} color="black" />
+        <Text />
+    </Box>
 );
 
 export const Variant_ = (args) => (
@@ -138,3 +164,65 @@ export const Variant_ = (args) => (
         <Text />
     </Box>
 );
+
+export const ComplexExample_ = () => {
+    return (
+        <Box
+            sx={{
+                border: '1px dashed black',
+                width: '100%',
+                maxWidth: 450,
+                bgcolor: 'background.paper',
+                p: 2,
+            }}
+        >
+            <Box sx={{ my: 1, display: 'flex' }}>
+                <Text sx={{ mr: 1 }} />
+                <Divider
+                    variant="fullWidth"
+                    orientation="vertical"
+                    label={'#2bce20'}
+                    textAlign="center"
+                    color={'#2bce20'}
+                    thickness={2}
+                />
+                <Text sx={{ ml: 2 }} />
+            </Box>
+
+            <Divider
+                variant="middle"
+                orientation="horizontal"
+                label="secondary"
+                chip
+                textAlign="center"
+                color="secondary"
+                thickness={4}
+            />
+            <Divider
+                variant="middle"
+                orientation="horizontal"
+                label="secondary"
+                textAlign="left"
+                color="secondary"
+                thickness={4}
+            />
+            <Divider
+                variant="middle"
+                orientation="horizontal"
+                label="default"
+                textAlign="right"
+                light
+                color={'#5019c9'}
+                thickness={5}
+            />
+
+            <Box sx={{ my: 1, display: 'flex' }}>
+                <Text sx={{ mr: 1 }} />
+                <Divider variant="fullWidth" orientation="vertical" textAlign="left" color="primary" thickness={3}>
+                    primary
+                </Divider>
+                <Text sx={{ ml: 2 }} />
+            </Box>
+        </Box>
+    );
+};

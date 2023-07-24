@@ -1,9 +1,6 @@
-import { Divider as MuiDivider } from '@mui/material';
-import { styled, css } from '@mui/material/styles';
-import type { DividerProps } from '@mui/material';
+import { css } from '@mui/material/styles';
 import type { SerializedStyles } from '@emotion/serialize';
-
-import { numberToPx } from '../../utils/helpers';
+import { numberToPx } from '../../../utils/helpers';
 
 function getCustomBorderStyle({ color, thicknessValue, borderPosition }): SerializedStyles {
     const customColorStyle =
@@ -32,7 +29,7 @@ function getCustomColorStyle({ color }): SerializedStyles {
     `;
 }
 
-function verticalStyle(props): SerializedStyles {
+export function verticalStyle(props): SerializedStyles {
     if (props.orientation !== 'vertical') return css``;
 
     const { thickness, color } = props;
@@ -55,7 +52,7 @@ function verticalStyle(props): SerializedStyles {
     `;
 }
 
-function horizontalStyle(props): SerializedStyles {
+export function horizontalStyle(props): SerializedStyles {
     if (props.orientation !== 'horizontal') return css``;
 
     const { thickness, color } = props;
@@ -77,10 +74,3 @@ function horizontalStyle(props): SerializedStyles {
         }
     `;
 }
-
-export const Divider = styled(MuiDivider, {
-    shouldForwardProp: (propName) => !['color'].includes(propName as string),
-})<DividerProps>`
-    ${verticalStyle}
-    ${horizontalStyle}
-`;

@@ -6,7 +6,7 @@ import { ChevronLeft as ChevronLeftIcon, ChevronRight as ChevronRightIcon } from
 
 import { Drawer as MuiDrawer, ContentWrapper, SwipeableDrawer, DrawerHeader } from './Drawer.styled';
 import Button from '../_FIXED/Button/Button';
-import Divider from '../Divider/Divider';
+import Divider from '../_FIXED/Divider/Divider';
 
 interface DrawerProps {
     openDirection?: 'left' | 'right' | 'top' | 'bottom';

@@ -100,6 +100,7 @@ export interface BottomNavigationProps {
 export interface DividerProps {
     color?: string;
     component?: string | ReactNode;
+    chip?: string | boolean;
     flexItem?: boolean;
     label?: string | ReactNode;
     light?: boolean;

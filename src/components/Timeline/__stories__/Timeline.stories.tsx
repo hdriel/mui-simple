@@ -11,7 +11,7 @@ import {
 
 import Timeline from '../Timeline';
 import Typography from '../../_FIXED/Typography/Typography';
-import Divider from '../../Divider/Divider';
+import Divider from '../../_FIXED/Divider/Divider';
 
 export default {
     title: 'Lab/Timeline',
