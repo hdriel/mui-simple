@@ -83,8 +83,11 @@ export type { ListProps, ListItemProps } from './components/_FIXED/List/List';
 export { default as CheckList } from './components/_FIXED/List/CheckList';
 export type { CheckListProps } from './components/_FIXED/List/CheckList';
 
-export { default as Menu } from './components/Menu/Menu';
-export { default as ContextMenu } from './components/Menu/ContextMenu';
+export { default as Menu } from './components/_FIXED/Menu/Menu';
+export type { MenuProps, MenuOption } from './components/_FIXED/Menu/Menu';
+
+export { default as ContextMenu } from './components/_FIXED/Menu/ContextMenu';
+export type { ContextMenuProps } from './components/_FIXED/Menu/ContextMenu';
 
 export { default as Pagination } from './components/Pagination/Pagination';
 export { default as Paper } from './components/Paper/Paper';

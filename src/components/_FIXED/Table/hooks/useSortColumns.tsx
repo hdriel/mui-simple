@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { SORT } from '../Table.consts';
 import { getMenuSizes, getNextOrderBy } from '../Table.utils';
-import Menu from '../../../Menu/Menu';
+import Menu from '../../Menu/Menu';
 import CheckList from '../../List/CheckList';
 import {
     DragHandle as DragHandleIcon,

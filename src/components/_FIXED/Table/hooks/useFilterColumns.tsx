@@ -5,7 +5,7 @@ import {
     FilterAltOff as FilterAltOffIcon,
 } from '@mui/icons-material';
 import { getColumn, getMenuSizes } from '../Table.utils';
-import Menu from '../../../Menu/Menu';
+import Menu from '../../Menu/Menu';
 import CheckList from '../../List/CheckList';
 import { Checkbox, Tooltip } from '../Table.styled';
 import type { TableColumn, useFilterColumnsProps } from '../Table.desc';

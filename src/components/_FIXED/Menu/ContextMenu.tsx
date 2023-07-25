@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { PropsWithChildren } from 'react';
 import Menu from './Menu';
-import type { ContextMenuProps } from '../decs';
+import type { ContextMenuProps } from '../../decs';
 import { ContextMenuWrapper } from './Menu.styled';
 
 const ContextMenu: React.FC<PropsWithChildren<ContextMenuProps>> = ({ children, reopen, ...props }) => {
@@ -39,5 +39,5 @@ ContextMenu.defaultProps = {
     reopen: undefined,
 };
 
-export type { ContextMenuProps } from '../decs';
+export type { ContextMenuProps } from '../../decs';
 export default ContextMenu;

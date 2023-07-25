@@ -1,19 +1,10 @@
 import React, { useRef, useState } from 'react';
-import { action } from '@storybook/addon-actions';
-import {
-    ContentCut as ContentCutIcon,
-    ContentCopy as ContentCopyIcon,
-    ContentPaste as ContentPasteIcon,
-    Cloud as CloudIcon,
-} from '@mui/icons-material';
-
+import { Box } from '@mui/material';
+import { Image as MuiImage } from 'mui-image';
 import ContextMenu from '../ContextMenu';
 import { Meta, StoryObj } from '@storybook/react';
-import { MenuOption } from '../../decs';
-import Button from '../../_FIXED/Button/Button';
-import { Box, Stack } from '@mui/material';
-import { Image as MuiImage } from 'mui-image';
-import ToggleButtonGroup from '../../ToggleButtonGroup/ToggleButtonGroup';
+import Button from '../../Button/Button';
+import { shortcutOptions, optionLongList, options } from './Menu.mocks';
 
 const meta: Meta<typeof ContextMenu> = {
     title: 'Navigation/ContextMenu',
@@ -24,74 +15,6 @@ const meta: Meta<typeof ContextMenu> = {
 export default meta;
 
 type Story = StoryObj<typeof ContextMenu>;
-
-const optionLongList: MenuOption[] = [
-    'Option 1',
-    'Option 2',
-    'Option 3',
-    'Option 4',
-    'Option 5',
-    'Option 6',
-    'Option 7',
-    'Option 8',
-    'Option 9',
-    'Option 10',
-];
-
-const options: MenuOption[] = [
-    { id: 'o1', label: 'Profile', onClick: action('onClickOption') },
-    { id: 'o2', label: 'My account', onClick: action('onClickOption') },
-    {
-        id: 'o3',
-        label: 'Logout',
-        onClick: action('onClickOption'),
-    },
-    { divider: true },
-    {
-        id: 'o3',
-        label: 'return false',
-        onClick: () => {
-            action('onClickOption');
-            return false;
-        },
-    },
-];
-
-const shortcutOptions: MenuOption[] = [
-    {
-        id: 'o1',
-        label: 'Cut',
-        icon: <ContentCutIcon />,
-        onClick: action('onClickOption'),
-        shortcut: 'Ctrl+X',
-    },
-    {
-        id: 'o2',
-        label: 'Copy',
-        icon: <ContentCopyIcon />,
-        onClick: action('onClickOption'),
-        shortcut: 'Ctrl+C',
-    },
-    {
-        id: 'o3',
-        label: 'Logout',
-        icon: <ContentPasteIcon />,
-        onClick: action('onClickOption'),
-        shortcut: 'Ctrl+V',
-    },
-    {
-        divider: true,
-    },
-    {
-        id: 'o4',
-        label: 'Paste',
-        icon: <CloudIcon />,
-        onClick: () => {
-            action('onClickOption');
-            return false;
-        },
-    },
-];
 
 export const Default: Story = {
     args: {

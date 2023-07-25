@@ -12,7 +12,7 @@ import {
     ExpandMore,
     Box,
 } from './Card.styled';
-import Menu from '../../Menu/Menu';
+import Menu from '../Menu/Menu';
 import { useCardExpandedContent } from './Card.hooks';
 import type { CardProps } from '../../decs';
 

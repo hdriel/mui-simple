@@ -1,5 +1,5 @@
 import { cloneElement, isValidElement, useMemo, useState } from 'react';
-import { isDefined } from '../../utils/helpers';
+import { isDefined } from '../../../utils/helpers';
 
 export function useChildrenComponentBinding({
     boundChildrenId,
