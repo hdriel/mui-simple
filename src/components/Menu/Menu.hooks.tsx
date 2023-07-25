@@ -6,7 +6,6 @@ export function useChildrenComponentBinding({
     boundChildrenIndex,
     children,
     setAnchorEl,
-    anchorElementRef,
     ref,
     onClickControlled,
 }: {
@@ -26,62 +25,60 @@ export function useChildrenComponentBinding({
         if (!isValidElement(child)) return child;
         return cloneElement(child, {
             key: index,
-            ...(!anchorElementRef &&
-                ((!boundChildrenIndex && isDefined(boundChildrenId) && boundChildrenId === (child.props as any).id) ||
-                    (!boundChildrenId && isDefined(boundChildrenIndex) && boundChildrenIndex === validIndex++)) && {
-                    ref,
-                    onClick: (event, ...args) => {
-                        setAnchorEl(event?.currentTarget);
-                        onClickControlled?.(event);
-                        (child.props as any).onClick?.(event, ...args);
-                    },
-                }),
+            ...(((!boundChildrenIndex && isDefined(boundChildrenId) && boundChildrenId === (child.props as any).id) ||
+                (!boundChildrenId && isDefined(boundChildrenIndex) && boundChildrenIndex === validIndex++)) && {
+                ref,
+                onClick: (event, ...args) => {
+                    setAnchorEl(event?.currentTarget);
+                    onClickControlled?.(event);
+                    (child.props as any).onClick?.(event, ...args);
+                },
+            }),
         });
     });
 }
 
-type anchorPositionVerticalType = 'top' | 'bottom';
-type anchorPositionHorizontalType = 'left' | 'center' | 'right';
-
-type AnchorReference = 'anchorPosition';
-type AnchorPositionMouse = {
+interface AnchorPositionMouse {
     left: number;
     top: number;
-};
-type AnchorPositionRelative = {
-    vertical: anchorPositionVerticalType;
-    horizontal: anchorPositionHorizontalType;
-};
+}
+interface AnchorPositionRelative {
+    vertical: 'top' | 'bottom';
+    horizontal: 'left' | 'center' | 'right';
+}
 
 interface AnchorProps {
     anchorEl: any;
-    anchorReference?: AnchorReference;
+    anchorReference?: 'anchorPosition';
     anchorPosition?: AnchorPositionMouse | AnchorPositionRelative;
     transformOrigin?: AnchorPositionMouse | AnchorPositionRelative;
 }
-export function useAnchorProps({
-    contextMenu,
-    anchorElementRef,
-    anchorPosition,
-}: {
+
+interface UseAnchorProps {
     contextMenu?: any;
     anchorElementRef?: any;
     anchorPosition?: Partial<AnchorPositionRelative>;
-}): {
-    setAnchorEl: (value: unknown) => void;
+}
+interface UseAnchorPropsResponse {
+    setAnchorEl: (value: any) => void;
     anchorProps:
+        | object
         | { anchorReference: 'anchorPosition'; anchorPosition: { top: number; left: number } }
         | {
               anchorEl: any;
               transformOrigin: AnchorPositionRelative;
               anchorPosition: AnchorPositionRelative;
-          }
-        | {};
-} {
+          };
+}
+export function useAnchorProps({
+    contextMenu,
+    anchorElementRef,
+    anchorPosition,
+}: UseAnchorProps): UseAnchorPropsResponse {
     const [anchorEl, setAnchorEl] = useState(null);
 
     const anchorProps = useMemo(() => {
-        if (contextMenu) {
+        if (contextMenu && !(anchorElementRef?.current ?? anchorEl)) {
             return {
                 anchorReference: 'anchorPosition',
                 anchorPosition: { left: contextMenu?.mouseX, top: contextMenu?.mouseY },

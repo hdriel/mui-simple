@@ -395,11 +395,11 @@ export interface MenuProps {
     arrow?: boolean;
     boundChildrenId?: string;
     boundChildrenIndex?: boolean | number;
-    disableScrollLock?: boolean;
-    contextMenu?: any;
     dense?: boolean;
     disableRipple?: boolean;
+    disableScrollLock?: boolean;
     elevation?: number;
+    fieldId?: string;
     height?: string | number;
     id?: string;
     maxHeight?: string | number;
@@ -411,6 +411,8 @@ export interface MenuProps {
     width?: string | number;
     [key: string]: any;
 }
+
+export type ContextMenuProps = MenuProps & { reopen?: boolean };
 
 export interface SnackbarProps {
     actions?: Array<string | ButtonProps>;
@@ -638,7 +640,7 @@ export interface ToggleButtonGroupProps {
     enforceValueSet: boolean;
     data: Array<{
         value: string;
-        disabled: boolean;
+        disabled?: boolean;
         component: any;
     }>;
     [key: string]: any;

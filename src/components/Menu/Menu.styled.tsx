@@ -24,28 +24,31 @@ interface ManuWrapperStyledProps {
     arrow?: boolean;
     [key: string]: any;
 }
-type ManuWrapperStyledPropsType = ManuWrapperStyledProps & BoxProps;
+type ManuWrapperStyledPropsType = ManuWrapperStyledProps & BoxProps & any;
+
 export const MenuWrapper = styled(Box, {
+    label: 'arrow-test',
     shouldForwardProp: (propName) => !['arrow'].includes(propName),
 })<ManuWrapperStyledPropsType>`
     position: relative;
     overflow: visible;
     margin-top: 1.5px;
+    width: 0;
 
     &::before {
         ${(props) =>
             props.arrow &&
             css`
+                background-color: ${props.theme.palette.background.paper};
                 content: '';
                 display: block;
                 position: absolute;
                 top: 0;
-                right: 14px;
+                left: 14px;
                 width: 10px;
                 height: 10px;
-                background-color: ${props.theme.palette.background.paper};
                 transform: translateY(-50%) rotate(45deg);
-                z-index: 0;
+                z-index: 1;
             `}
     }
 ` as ComponentType<ManuWrapperStyledPropsType>;
@@ -58,7 +61,7 @@ interface ManuStyledProps {
     onClick?: (event: any) => void;
     [key: string]: any;
 }
-type MenuStyledPropsType = PropsWithChildren<Omit<MenuProps, 'onClick'> & ManuStyledProps>;
+type MenuStyledPropsType = PropsWithChildren<Omit<MenuProps, 'onClick'> & ManuStyledProps & any>;
 
 // https://stackoverflow.com/questions/69065717/material-ui-menu-component-locks-body-scrollbar
 export const Menu = styled(({ height, width, maxHeight, elevation, ...props }) => (
@@ -72,8 +75,8 @@ export const Menu = styled(({ height, width, maxHeight, elevation, ...props }) =
                 width,
                 maxHeight,
                 overflowY: 'auto',
-                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                '& > .MuiList-root': { padding: 0 },
+                filter: `drop-shadow(0px 2px ${(elevation as number) ?? 3}px rgba(0,0,0,0.32))`,
+                '& > .MuiList-root': { pt: 0, pb: 0 },
                 '& .MuiAvatar-root': { width: 32, height: 32, ml: -0.5, mr: 1 },
             },
         }}

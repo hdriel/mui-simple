@@ -97,8 +97,12 @@ export const Default: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
+        const onCloseHandler = () => {
+            setOpen(false);
+            return true;
+        };
         return (
-            <Menu {...args} open={open} onClose={() => setOpen(false)}>
+            <Menu {...args} open={open} onClose={onCloseHandler}>
                 <Button onClick={() => setOpen(true)}>Open Menu</Button>
             </Menu>
         );
@@ -112,8 +116,12 @@ export const AlternativeContent: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
+        const onCloseHandler = () => {
+            setOpen(false);
+            return true;
+        };
         return (
-            <Menu {...args} open={open} onClose={() => setOpen(false)}>
+            <Menu {...args} open={open} onClose={onCloseHandler}>
                 <Button onClick={() => setOpen(true)}>Open Menu</Button>
             </Menu>
         );
@@ -127,10 +135,14 @@ export const AnchorElementRef: Story = {
     render: (args) => {
         const [open, setOpen] = useState(false);
         const ref = useRef();
+        const onCloseHandler = () => {
+            setOpen(false);
+            return true;
+        };
 
         return (
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Menu {...args} open={open} onClose={() => setOpen(false)} anchorElementRef={ref}>
+                <Menu {...args} open={open} onClose={onCloseHandler} anchorElementRef={ref}>
                     <Button onClick={() => setOpen(true)}>Open Menu</Button>
                 </Menu>
                 <span ref={ref}>Menu will popup here</span>
@@ -146,8 +158,12 @@ export const AnchorPosition: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
+        const onCloseHandler = () => {
+            setOpen(false);
+            return true;
+        };
         return (
-            <Menu {...args} open={open} onClose={() => setOpen(false)}>
+            <Menu {...args} open={open} onClose={onCloseHandler}>
                 <Button onClick={() => setOpen(true)}>Open Menu</Button>
             </Menu>
         );
@@ -161,8 +177,12 @@ export const Arrow: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
+        const onCloseHandler = () => {
+            setOpen(false);
+            return true;
+        };
         return (
-            <Menu {...args} open={open} onClose={() => setOpen(false)}>
+            <Menu {...args} open={open} onClose={onCloseHandler}>
                 <Button onClick={() => setOpen(true)}>Open Menu</Button>
             </Menu>
         );
@@ -216,8 +236,12 @@ export const Dense: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
+        const onCloseHandler = () => {
+            setOpen(false);
+            return true;
+        };
         return (
-            <Menu {...args} open={open} onClose={() => setOpen(false)}>
+            <Menu {...args} open={open} onClose={onCloseHandler}>
                 <Button onClick={() => setOpen(true)}>Open Menu</Button>
             </Menu>
         );
@@ -231,8 +255,12 @@ export const DisableRipple: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
+        const onCloseHandler = () => {
+            setOpen(false);
+            return true;
+        };
         return (
-            <Menu {...args} open={open} onClose={() => setOpen(false)}>
+            <Menu {...args} open={open} onClose={onCloseHandler}>
                 <Button onClick={() => setOpen(true)}>Open Menu</Button>
             </Menu>
         );
@@ -246,8 +274,12 @@ export const Elevation: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
+        const onCloseHandler = () => {
+            setOpen(false);
+            return true;
+        };
         return (
-            <Menu {...args} open={open} onClose={() => setOpen(false)}>
+            <Menu {...args} open={open} onClose={onCloseHandler}>
                 <Button onClick={() => setOpen(true)}>Open Menu</Button>
             </Menu>
         );
@@ -261,8 +293,12 @@ export const Height: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
+        const onCloseHandler = () => {
+            setOpen(false);
+            return true;
+        };
         return (
-            <Menu {...args} open={open} onClose={() => setOpen(false)}>
+            <Menu {...args} open={open} onClose={onCloseHandler}>
                 <Button onClick={() => setOpen(true)}>Open Menu</Button>
             </Menu>
         );
@@ -276,8 +312,12 @@ export const MaxHeight: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
+        const onCloseHandler = () => {
+            setOpen(false);
+            return true;
+        };
         return (
-            <Menu {...args} open={open} onClose={() => setOpen(false)}>
+            <Menu {...args} open={open} onClose={onCloseHandler}>
                 <Button onClick={() => setOpen(true)}>Open Menu</Button>
             </Menu>
         );

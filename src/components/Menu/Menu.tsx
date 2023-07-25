@@ -36,7 +36,7 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
     // const [bindRef, setBindRef] = useState();
     const [openControlled, setOpenControlled] = useState(false);
 
-    options?.forEach((option) => {
+    options?.forEach((option: MenuOptionItem) => {
         if (option.icon) {
             option.icon =
                 typeof option.icon === 'string' ? (
@@ -61,7 +61,6 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
         boundChildrenIndex,
         children,
         setAnchorEl,
-        anchorElementRef,
         // ref,
         onClickControlled: open === undefined ? () => setOpenControlled(true) : undefined,
     });
@@ -169,14 +168,13 @@ Menu.defaultProps = {
     boundChildrenId: undefined,
     boundChildrenIndex: 0,
     dense: undefined,
-    disableScrollLock: undefined,
+    disableScrollLock: true,
     fieldId: 'id',
     open: undefined,
     onClose: undefined,
     onClick: undefined,
-    elevation: undefined,
+    elevation: 7,
     options: undefined,
-    contextMenu: undefined,
     anchorPosition: undefined,
     anchorElementRef: undefined,
     optionsDirection: undefined,
