@@ -50,21 +50,17 @@
         "url": "git://github.com/hdriel/mui-simple.git"
     },
     "peerDependencies": {
-        "@emotion/react": "^11.9.3",
-        "@emotion/styled": "^11.9.3",
+        "@emotion/react": "^11",
+        "@emotion/styled": "^11",
         "@mui/icons-material": "^5",
         "@mui/material": "^5",
-        "react": ">=16.8.0",
-        "react-dom": ">=16.8.0"
+        "@mui/styles": "^5",
+        "react": ">=18",
+        "react-dom": ">=18"
     },
     "dependencies": {
         "@emotion/is-prop-valid": "^1.2.0",
-        "@emotion/react": "^11.9.3",
-        "@emotion/styled": "^11.9.3",
-        "@mui/icons-material": "^5",
         "@mui/lab": "5.0.0-alpha.134",
-        "@mui/material": "^5",
-        "@mui/styles": "5.11.2",
         "@react-spring/web": "^9.7.2",
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^13.4.0",
@@ -103,6 +99,11 @@
         "@babel/preset-react": "^7.22.5",
         "@babel/runtime": "^7.22.5",
         "@emotion/cache": "11.10.5",
+        "@emotion/react": "^11.9.3",
+        "@emotion/styled": "^11.9.3",
+        "@mui/icons-material": "^5",
+        "@mui/material": "^5",
+        "@mui/styles": "5.11.2",
         "@rollup/plugin-babel": "^6.0.3",
         "@rollup/plugin-commonjs": "^25.0.2",
         "@rollup/plugin-json": "^6.0.0",
