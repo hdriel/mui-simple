@@ -70,7 +70,7 @@ const List: React.FC<ListProps> = ({
         );
 
         return (
-            <div style={{ width: '100%' }} key={`i-${index}`}>
+            <div style={{ width: '100%' }} key={item[fieldId] ?? String(item).toString()}>
                 {listItem && (
                     <MuiListItem
                         disablePadding={itemProps.disablePadding ?? disablePaddingItems ?? true}
@@ -101,7 +101,7 @@ const List: React.FC<ListProps> = ({
                         )}
                     </MuiListItem>
                 )}
-                {divider && <Divider key={`d-${index}`} variant="fullWidth" {...divider} component="span" />}
+                {divider && <Divider variant="fullWidth" {...divider} component="span" />}
             </div>
         );
     };
