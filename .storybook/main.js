@@ -5,8 +5,8 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const config = {
     stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
     framework: '@storybook/react-webpack5',
-    // core: { builder: '@storybook/builder-webpack5' },
-    core: { builder: 'webpack5' },
+    core: { disableTelemetry: true, builder: 'webpack5' },
+    // core: { builder: 'webpack5' },
     docs: { autodocs: 'tag' },
     // basePath: '/storybook/',
     staticDirs: ['../public'],

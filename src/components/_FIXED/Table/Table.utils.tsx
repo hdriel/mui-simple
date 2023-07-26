@@ -1,10 +1,21 @@
+import { Image } from 'mui-image';
 import { get } from 'lodash-es';
 import { SORT } from './Table.consts';
 import { getCustomColor, getTextWidth, isDefined } from '../../../utils/helpers';
 import type { ColorsProps, extractColorsProps, getDataRangeProps, TableColumn } from './Table.desc';
 import React, { cloneElement, isValidElement } from 'react';
 import moment from 'moment/moment';
-import { Avatar, Image, Tooltip, Typography } from './Table.styled';
+import MuiTypography from '../Typography/Typography';
+import MuiAvatar from '../Avatar/Avatar';
+import MuiPaper from '../../Paper/Paper';
+import MuiCheckbox from '../Checkbox/Checkbox';
+import MuiTooltip from '../Tooltip/Tooltip';
+
+export const Typography = MuiTypography;
+export const Avatar = MuiAvatar;
+export const Paper = MuiPaper;
+export const Checkbox = MuiCheckbox;
+export const Tooltip = MuiTooltip;
 
 export function getDataRange({ rows, total, page, rowsPerPage }: getDataRangeProps): [number, number] {
     // case that got full data as total

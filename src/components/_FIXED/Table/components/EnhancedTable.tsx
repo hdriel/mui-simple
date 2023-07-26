@@ -14,8 +14,7 @@ import {
     useSortColumns,
 } from '../hooks';
 import { EnhancedTablePagination } from './EnhancedTablePagination';
-import type { TableProps } from '../../../decs';
-import type { ColorsProps } from '../Table.desc';
+import type { ColorsProps, TableProps } from '../Table.desc';
 
 const EnhancedTable: React.FC<TableProps> = ({
     actionColor,
@@ -257,5 +256,5 @@ EnhancedTable.defaultProps = {
     title: undefined,
 };
 
-export type { TableProps } from '../../../decs';
+export type { TableColumn, TableProps } from '../Table.desc';
 export default EnhancedTable;

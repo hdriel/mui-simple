@@ -109,9 +109,8 @@ export { useSimpleStepper } from './components/Stepper/Stepper.utils';
 export { default as SVGIcon } from './components/SVGIcon/SVGIcon';
 export { default as Switch } from './components/Switch/Switch';
 
-export { Table } from './components/_FIXED/Table/Table';
-export { default as Tabs } from './components/_FIXED/Tabs/Tabs';
-export { default as Tab } from './components/_FIXED/Tabs/Tab';
+export * from './components/_FIXED/Table/Table';
+export * from './components/_FIXED/Tabs';
 export { default as Timeline } from './components/Timeline/Timeline';
 export { default as ToggleButtonGroup } from './components/ToggleButtonGroup/ToggleButtonGroup';
 export { default as ToggleButtonGroups } from './components/ToggleButtonGroup/ToggleButtonGroups';
@@ -124,4 +123,5 @@ export type { TypographyProps } from './components/_FIXED/Typography/Typography'
 
 export * from './utils';
 export { default as useElementSize } from './hooks/useElementSize';
+
 export * from './components/decs';
