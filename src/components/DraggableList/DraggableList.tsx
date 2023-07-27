@@ -56,11 +56,11 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
             <Droppable droppableId={droppableClassName}>
                 {(provided, snapshot) => (
                     <DraggableListUL
+                        {...rest}
+                        {...provided.droppableProps}
                         flexDirection={flexDirection}
                         flexGap={flexGap}
-                        {...rest}
                         className={classNames([droppableClassName, className])}
-                        {...provided.droppableProps}
                         ref={provided.innerRef}
                         style={getListStyle({ theme, isDraggingOver: snapshot.isDraggingOver })}
                     >
@@ -69,7 +69,7 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
 
                             return (
                                 <Draggable
-                                    key={`${id} ${index}`}
+                                    key={id ?? (typeof data === 'string' ? data : `${index}`)}
                                     draggableId={id ?? (typeof data === 'string' ? data : `${index}`)}
                                     index={index}
                                     isDragDisabled={typeof disabled === 'function' ? disabled(data, index) : disabled}
