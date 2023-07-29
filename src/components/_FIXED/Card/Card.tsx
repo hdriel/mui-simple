@@ -49,7 +49,7 @@ const Card: React.FC<PropsWithChildren<CardProps>> = (props): React.ReactElement
     return (
         <MuiCard {...rest} sx={{ maxWidth, minWidth, width }}>
             {!isMediaOnTop && title ? <CardHeader avatar={avatar} title={title} subheader={subtitle} /> : undefined}
-            <Box sx={{ ...(flexDirection && { flexDirection, display: 'flex' }) }}>
+            <Box sx={{ ...(flexDirection && { flexDirection, display: 'flex', alignItems: 'center' }) }}>
                 {image ? (
                     <CardMedia
                         component="img"
