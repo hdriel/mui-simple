@@ -89,4 +89,5 @@ InputPattern.defaultProps = {
     value: '', // stay this value, to prevent from component to be disabled on missing provider value
 };
 
+export type { InputPatternProps } from '../../decs';
 export default InputPattern;

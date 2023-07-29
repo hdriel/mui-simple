@@ -34,4 +34,5 @@ ToggleButtonGroups.defaultProps = {
     justifyContent: undefined,
 };
 
+export type { ToggleButtonGroupsProps } from '../decs';
 export default ToggleButtonGroups;

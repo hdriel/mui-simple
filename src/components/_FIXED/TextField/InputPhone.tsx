@@ -4,8 +4,8 @@ import { ContentCopy as ContentCopyIcon } from '@mui/icons-material';
 import Button from '../Button/Button';
 import { copyToClipboard } from '../../../utils/helpers';
 import Snackbar from '../Snackbar/Snackbar';
-import type { InputPhoneProps } from '../../decs';
 import SVGIcon from '../../SVGIcon/SVGIcon';
+import type { InputPhoneProps } from '../../decs';
 
 const InputPhone: React.FC<InputPhoneProps> = ({
     name,
@@ -69,4 +69,5 @@ InputPhone.defaultProps = {
     copyAction: false,
 };
 
+export type { InputPhoneProps } from '../../decs';
 export default InputPhone;
