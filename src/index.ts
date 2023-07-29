@@ -120,11 +120,11 @@ export * from './components/_FIXED/Tabs';
 
 export { default as Timeline } from './components/Timeline/Timeline';
 
-export { default as ToggleButtonGroup } from './components/ToggleButtonGroup/ToggleButtonGroup';
-export type { ToggleButtonGroupProps } from './components/ToggleButtonGroup/ToggleButtonGroup';
+export { default as ToggleButtonGroup } from './components/_FIXED/ToggleButtonGroup/ToggleButtonGroup';
+export type { ToggleButtonGroupProps } from './components/_FIXED/ToggleButtonGroup/ToggleButtonGroup';
 
-export { default as ToggleButtonGroups } from './components/ToggleButtonGroup/ToggleButtonGroups';
-export type { ToggleButtonGroupsProps } from './components/ToggleButtonGroup/ToggleButtonGroups';
+export { default as ToggleButtonGroups } from './components/_FIXED/ToggleButtonGroup/ToggleButtonGroups';
+export type { ToggleButtonGroupsProps } from './components/_FIXED/ToggleButtonGroup/ToggleButtonGroups';
 
 export { default as Tooltip } from './components/_FIXED/Tooltip/Tooltip';
 export { default as TreeView } from './components/TreeView/TreeView';

@@ -5,7 +5,8 @@ import { AddLocation as AddLocationIcon, Send as SendIcon } from '@mui/icons-mat
 import Stepper from '../Stepper';
 import { Typography } from '../Stepper.styled';
 import { useSimpleStepper } from '../Stepper.utils';
-import ToggleButtonGroup, { ToggleButtonGroups } from '../../ToggleButtonGroup/ToggleButtonGroup';
+import ToggleButtonGroup from '../../_FIXED/ToggleButtonGroup/ToggleButtonGroup';
+import ToggleButtonGroups from '../../_FIXED/ToggleButtonGroup/ToggleButtonGroups';
 
 export default {
     title: 'Navigation/Stepper',

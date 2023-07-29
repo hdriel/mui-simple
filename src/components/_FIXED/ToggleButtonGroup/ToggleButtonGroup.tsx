@@ -1,8 +1,8 @@
 import React from 'react';
 import { ToggleButton, ToggleButtonGroup as MuiToggleButtonGroup } from './ToggleButtonGroup.styled';
-import { useCustomColor } from '../../utils/helpers';
-import SVGIcon from '../SVGIcon/SVGIcon';
-import type { ToggleButtonGroupProps } from '../decs';
+import { useCustomColor } from '../../../utils/helpers';
+import SVGIcon from '../../SVGIcon/SVGIcon';
+import type { ToggleButtonGroupProps } from '../../decs';
 
 const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
     value: selectedValue,
@@ -72,6 +72,7 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
         </MuiToggleButtonGroup>
     );
 };
+ToggleButtonGroup.displayName = 'ToggleButtonGroup';
 
 ToggleButtonGroup.defaultProps = {
     color: undefined,
@@ -85,5 +86,5 @@ ToggleButtonGroup.defaultProps = {
     data: [],
 };
 
-export type { ToggleButtonGroupProps } from '../decs';
+export type { ToggleButtonGroupProps } from '../../decs';
 export default ToggleButtonGroup;

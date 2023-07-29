@@ -14,7 +14,7 @@ import AppBar from '../AppBar';
 import Button from '../../_FIXED/Button/Button';
 import List from '../../_FIXED/List/List';
 import Divider from '../../_FIXED/Divider/Divider';
-import ToggleButtonGroup from '../../ToggleButtonGroup/ToggleButtonGroup';
+import ToggleButtonGroup from '../../_FIXED/ToggleButtonGroup/ToggleButtonGroup';
 
 export default {
     title: 'Surfaces/AppBarDrawer',

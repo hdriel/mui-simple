@@ -5,7 +5,7 @@ import { Stack } from '@mui/material';
 
 import Snackbar from '../Snackbar';
 import Button from '../../Button/Button';
-import ToggleButtonGroup from '../../../ToggleButtonGroup/ToggleButtonGroup';
+import ToggleButtonGroup from '../../ToggleButtonGroup/ToggleButtonGroup';
 
 const meta: Meta<typeof Snackbar> = {
     title: 'Feedback/Snackbar',
