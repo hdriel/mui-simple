@@ -246,19 +246,29 @@ export const MaskPhone: Story = {
         label: 'Phone',
         mask: '+(972) 50-000-0000',
         definitions: { '#': /[1-9]/ },
+        unmask: false,
+        onChange: (e) => alert('mask value: ' + e.target.value),
     },
-    render: (args) => {
-        const [value, setValue] = useState('some text for show only');
-        return (
-            <InputPattern
-                {...args}
-                value={value}
-                onChange={(e) => {
-                    console.log(e);
-                    setValue(e.target.value);
-                }}
-            />
-        );
+};
+
+export const UnmaskPhoneValue: Story = {
+    args: {
+        label: 'Phone',
+        mask: '+(972) 50-000-0000',
+        definitions: { '#': /[1-9]/ },
+        unmask: true,
+        onChange: (e) => alert('unmask value: ' + e.target.value),
+    },
+};
+
+export const ShowMaskAsPlaceholder: Story = {
+    args: {
+        label: 'Phone',
+        mask: '+(972) 50-000-0000',
+        definitions: { '#': /[1-9]/ },
+        unmask: true,
+        showMaskAsPlaceholder: false,
+        onChange: (e) => alert('unmask value: ' + e.target.value),
     },
 };
 
@@ -266,26 +276,24 @@ export const MaskTime: Story = {
     args: {
         label: 'Time',
         mask: 'HH:MM',
+        unmask: true,
         blocks: {
             HH: {
                 mask: IMask.MaskedRange,
-                placeholderChar: 'HH',
+                placeholderChar: 'H',
                 from: 0,
                 to: 23,
                 maxLength: 2,
             },
             MM: {
                 mask: IMask.MaskedRange,
-                placeholderChar: 'MM',
+                placeholderChar: 'M',
                 from: 0,
                 to: 59,
                 maxLength: 2,
             },
         },
-    },
-    render: (args) => {
-        const [value, setValue] = useState('some text for show only');
-        return <InputPattern {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+        onChange: (e) => alert(e.target.value),
     },
 };
 
@@ -294,9 +302,23 @@ export const MaskID: Story = {
         label: 'ID',
         mask: '0 0000000 0',
         definitions: { '#': /[1-9]/ },
-    },
-    render: (args) => {
-        const [value, setValue] = useState('some text for show only');
-        return <InputPattern {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+        onChange: (e) => alert(e.target.value),
     },
 };
+
+export const Overwrite: Story = {
+    args: {
+        label: 'ID',
+        mask: '0 0000000 0',
+        definitions: { '#': /[1-9]/ },
+        overwrite: true,
+    },
+};
+
+export const Lazy_ = (args) => (
+    <Stack spacing={3}>
+        <InputPattern label="ID default Lazy" mask="0 0000000 0" definitions={{ '#': /[1-9]/ }} />
+        <InputPattern label="ID true Lazy" mask="0 0000000 0" definitions={{ '#': /[1-9]/ }} lazy />
+        <InputPattern label="ID false Lazy" mask="0 0000000 0" definitions={{ '#': /[1-9]/ }} lazy={false} />
+    </Stack>
+);
