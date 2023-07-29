@@ -60,7 +60,7 @@ export { default as InputNumber } from './components/TextField/InputNumber';
 export { default as InputPassword } from './components/_FIXED/TextField/InputPassword';
 export type { InputPasswordProps } from './components/_FIXED/TextField/InputPassword';
 
-export { default as InputPattern } from './components/TextField/InputPattern';
+export { default as InputPattern } from './components/_FIXED/TextField/InputPattern';
 export { default as InputPhone } from './components/_FIXED/TextField/InputPhone';
 
 export { default as InputSearch } from './components/_FIXED/TextField/InputSearch';

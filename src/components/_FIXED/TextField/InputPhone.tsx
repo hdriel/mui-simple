@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import InputPattern from '../../TextField/InputPattern';
+import InputPattern from './InputPattern';
 import { ContentCopy as ContentCopyIcon } from '@mui/icons-material';
 import Button from '../Button/Button';
 import { copyToClipboard } from '../../../utils/helpers';

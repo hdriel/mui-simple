@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { IMaskMixin } from 'react-imask';
 import { ClickAwayListener, Box } from '@mui/material';
-import Input from '../_FIXED/TextField/TextField';
-import { isDefined } from '../../utils/helpers';
-import type { InputPatternProps } from '../decs';
+import Input from './TextField';
+import { isDefined } from '../../../utils/helpers';
+import type { InputPatternProps } from '../../decs';
 
 const MaskedInput = IMaskMixin(({ inputRef, value, onChange, ...otherProps }) => {
     return <Input inputRef={inputRef} value={value} onChange={onChange} {...otherProps} />;
