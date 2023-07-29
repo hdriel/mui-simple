@@ -13,9 +13,9 @@ const ToggleButtonGroups: React.FC<PropsWithChildren<ToggleButtonGroupsProps>> =
 }): React.ReactElement => {
     const groups = []
         .concat(children)
-        .filter((child) => child.type.name === ToggleButtonGroup.name)
+        .filter((child) => child?.type?.name === ToggleButtonGroup.name)
         .map((child, index, arr) => [
-            React.cloneElement(child, { key: `TB${index}`, disableRipple }),
+            React.cloneElement(child, { key: `TB${index}`, disableRipple } as any),
             index !== arr.length - 1 ? <Divider key={`D${index}`} /> : null,
         ])
         .flat()

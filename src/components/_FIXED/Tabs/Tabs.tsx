@@ -4,6 +4,7 @@ import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from '@mui/material/styles';
 
 import { Tabs as MuiTabs, Box } from './Tabs.styled';
+import Tab from './Tab';
 import TabItem from './TabItem';
 import TabPanel from './TabPanel';
 import { useCustomColor } from '../../../utils/helpers';
@@ -33,7 +34,7 @@ const Tabs: React.FC<PropsWithChildren<TabsProps>> = ({
 
     const filteredChildren = []
         .concat(children)
-        .filter((child) => isValidElement(child) && child.type.displayName === 'Tab')
+        .filter((child) => isValidElement(child) && child?.type?.displayName === Tab.displayName)
         .filter((v) => v);
 
     const tabPanels = filteredChildren

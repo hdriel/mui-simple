@@ -12,7 +12,7 @@ const ButtonGroup: React.FC<PropsWithChildren<ButtonGroupProps>> = (props): Reac
 
     const buttons = []
         .concat(isFragment(children) ? children.props.children : children ?? [])
-        .filter((child) => child && child.type.displayName === Button.displayName)
+        .filter((child) => child?.type?.displayName === Button.displayName)
         .map((child, index, arr) => {
             return React.cloneElement(child, {
                 key: `B${index}`,
