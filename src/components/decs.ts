@@ -609,27 +609,27 @@ export interface TabsProps {
 }
 
 export interface ToggleButtonGroupProps {
-    orientation: 'horizontal' | 'vertical';
-    size: 'small' | 'medium' | 'large';
-    value: string;
-    exclusive: boolean;
-    fullWidth: boolean;
-    disableRipple: boolean;
-    onChange: (event: any, newValues: null | string | string[]) => void;
-    color: string;
-    enforceValueSet: boolean;
-    data: Array<{
+    orientation?: 'horizontal' | 'vertical';
+    size?: 'small' | 'medium' | 'large';
+    value?: string;
+    exclusive?: boolean;
+    fullWidth?: boolean;
+    disableRipple?: boolean;
+    onChange?: (event: any, newValues: null | string | string[]) => void;
+    color?: string;
+    enforceValueSet?: boolean;
+    data?: Array<{
         value: string;
         disabled?: boolean;
-        component: any;
+        component: ReactElement | ReactNode | string | number;
     }>;
     [key: string]: any;
 }
 
 export interface ToggleButtonGroupsProps {
-    fullWidth: boolean;
-    disableRipple: boolean;
-    justifyContent: string;
+    fullWidth?: boolean;
+    disableRipple?: boolean;
+    justifyContent?: string;
     [key: string]: any;
 }
 
