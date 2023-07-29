@@ -60,8 +60,11 @@ export { default as InputNumber } from './components/TextField/InputNumber';
 export { default as InputPassword } from './components/_FIXED/TextField/InputPassword';
 export type { InputPasswordProps } from './components/_FIXED/TextField/InputPassword';
 
-export { default as InputPattern } from './components/TextField/InputPattern';
-export { default as InputPhone } from './components/TextField/InputPhone';
+export { default as InputPattern } from './components/_FIXED/TextField/InputPattern';
+export type { InputPatternProps } from './components/_FIXED/TextField/InputPattern';
+
+export { default as InputPhone } from './components/_FIXED/TextField/InputPhone';
+export type { InputPhoneProps } from './components/_FIXED/TextField/InputPhone';
 
 export { default as InputSearch } from './components/_FIXED/TextField/InputSearch';
 export type { InputSearchProps } from './components/_FIXED/TextField/InputSearch';
@@ -78,8 +81,10 @@ export { default as InputMultipleSelect } from './components/_FIXED/Select/Input
 export type { InputMultipleSelectProps } from './components/_FIXED/Select/InputMultipleSelect';
 
 export { default as Link } from './components/Link/Link';
+
 export { default as List } from './components/_FIXED/List/List';
 export type { ListProps, ListItemProps } from './components/_FIXED/List/List';
+
 export { default as CheckList } from './components/_FIXED/List/CheckList';
 export type { CheckListProps } from './components/_FIXED/List/CheckList';
 
@@ -110,10 +115,17 @@ export { default as SVGIcon } from './components/SVGIcon/SVGIcon';
 export { default as Switch } from './components/Switch/Switch';
 
 export * from './components/_FIXED/Table/Table';
+
 export * from './components/_FIXED/Tabs';
+
 export { default as Timeline } from './components/Timeline/Timeline';
-export { default as ToggleButtonGroup } from './components/ToggleButtonGroup/ToggleButtonGroup';
-export { default as ToggleButtonGroups } from './components/ToggleButtonGroup/ToggleButtonGroups';
+
+export { default as ToggleButtonGroup } from './components/_FIXED/ToggleButtonGroup/ToggleButtonGroup';
+export type { ToggleButtonGroupProps } from './components/_FIXED/ToggleButtonGroup/ToggleButtonGroup';
+
+export { default as ToggleButtonGroups } from './components/_FIXED/ToggleButtonGroup/ToggleButtonGroups';
+export type { ToggleButtonGroupsProps } from './components/_FIXED/ToggleButtonGroup/ToggleButtonGroups';
+
 export { default as Tooltip } from './components/_FIXED/Tooltip/Tooltip';
 export { default as TreeView } from './components/TreeView/TreeView';
 export * from './components/TreeView';

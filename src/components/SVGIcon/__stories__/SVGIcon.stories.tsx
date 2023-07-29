@@ -8,9 +8,9 @@ import twoToneIcons from './twoTone-icons.json';
 import { Stack, Grid, Box } from '@mui/material';
 
 import SVGIcon from '../SVGIcon';
-import ToggleButtonGroup from '../../ToggleButtonGroup/ToggleButtonGroup';
+import ToggleButtonGroup from '../../_FIXED/ToggleButtonGroup/ToggleButtonGroup';
 import Typography from '../../_FIXED/Typography/Typography';
-import ToggleButtonGroups from '../../ToggleButtonGroup/ToggleButtonGroups';
+import ToggleButtonGroups from '../../_FIXED/ToggleButtonGroup/ToggleButtonGroups';
 import InputColor from '../../TextField/InputColor';
 import Slider from '../../Slider/Slider';
 

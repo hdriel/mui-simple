@@ -32,7 +32,7 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
         ...rest
     } = props;
     const [isFocused, setIsFocused] = useState(false);
-    const onFocusHandler = (e) => {
+    const onFocusHandler = (e): void => {
         setIsFocused(true);
         onFocus?.(e);
     };

@@ -11,7 +11,7 @@ import Button from '../Button/Button';
 export const Stack = MuiStack;
 export const Box = MuiBox;
 
-export const SliderIcon = (props) => <Button icon={<CommitRoundedIcon />} {...props} />;
+export const SliderIcon = (props): React.ReactElement => <Button icon={<CommitRoundedIcon />} {...props} />;
 
 type TextFieldStyledType = InputBaseProps & TextFieldProps & any;
 export const TextField = styled(MuiTextField, {
@@ -25,6 +25,7 @@ export const TextField = styled(MuiTextField, {
             darken: 0.3,
         });
         const colorActive = getCustomColor(props, { field: 'colorActive' });
+        const isColorActiveExists = !!colorActive.length;
 
         return css`
             & input {
@@ -34,10 +35,10 @@ export const TextField = styled(MuiTextField, {
                 color: ${colorLabel};
             }
             & label.Mui-focused {
-                color: ${colorActive ?? colorLabel};
+                color: ${isColorActiveExists ? colorActive : colorLabel};
             }
             & .MuiInputBase-root:after {
-                border-bottom-color: ${colorActive ?? colorLabel};
+                border-bottom-color: ${isColorActiveExists ? colorActive : colorLabel};
             }
             & .MuiInput-underline:after {
                 border-bottom-color: ${colorLabel};
@@ -53,7 +54,7 @@ export const TextField = styled(MuiTextField, {
                     border-color: ${hoverColorLabel};
                 }
                 &.Mui-focused fieldset {
-                    border-color: ${colorActive ?? colorLabel};
+                    border-color: ${isColorActiveExists ? colorActive : colorLabel};
                 }
             }
         `;

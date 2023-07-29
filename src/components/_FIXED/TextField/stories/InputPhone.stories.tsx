@@ -2,78 +2,29 @@
 import React, { useState } from 'react';
 import type { ReactElement } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-
-import InputPassword from '../InputPassword';
-import { Stack } from '@mui/material';
 import { Send as SendIcon } from '@mui/icons-material';
+import { Stack } from '@mui/material';
 
-const meta: Meta<typeof InputPassword> = {
-    title: 'Inputs/Inputs/InputPassword',
-    component: InputPassword,
+import InputPhone from '../InputPhone';
+
+const meta: Meta<typeof InputPhone> = {
+    title: 'Inputs/Inputs/InputPhone',
+    component: InputPhone,
     tags: ['autodocs'],
 };
 
 export default meta;
 
-type Story = StoryObj<typeof InputPassword>;
+type Story = StoryObj<typeof InputPhone>;
 
 export const Default: Story = {
     args: {},
 };
 
-export const CopyAction: Story = {
-    args: {
-        copyAction: true,
-        copyMessage: 'Copied!',
-        copyTooltip: 'COPY PASS TO CLIPBOARD',
-        copyCmp: 'CopyAll',
-        showPasswordAction: true,
-        generateRandomAction: false,
-        label: 'Copy Action Props',
-        value: 'mui-simple password',
-    },
-};
-
-export const GenerateRandomAction: Story = {
-    args: {
-        generateRandomAction: true,
-        generateRandom: { length: 6, lowercase: false, numbers: true, uppercase: true, symbol: false },
-        generatePasswordTooltip: 'generate password',
-        label: 'Generate Random Action Props',
-        value: 'generate by click action icon',
-    },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputPassword {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
-};
-
-export const ShowPasswordAction: Story = {
-    args: {
-        generateRandomAction: false,
-        copyAction: false,
-        showPasswordAction: true,
-        showPasswordTooltip: 'show',
-        label: 'Show Password Props',
-        value: 'mui-simple password',
-    },
-};
-
-export const HidePasswordOnClickAway: Story = {
-    args: {
-        generateRandomAction: false,
-        copyAction: false,
-        showPasswordAction: true,
-        hidePasswordOnClickAway: false,
-        label: 'Hide Password On Click Away',
-        value: 'mui-simple password',
-    },
-};
-
 export const AlignActions: Story = {
     args: {
         alignActions: 'flex-start',
-        startCmp: 'Email',
+        startCmp: 'Phone',
         endCmp: 'Fingerprint',
         multiline: true,
         label: 'Align Actions',
@@ -84,7 +35,7 @@ export const AlignActions: Story = {
 export const AlignActionsExternal: Story = {
     args: {
         alignActions: 'flex-start',
-        startCmpExternal: 'Email',
+        startCmpExternal: 'Phone',
         endCmpExternal: 'Fingerprint',
         multiline: true,
         label: 'Align Actions External',
@@ -103,7 +54,7 @@ export const AutoComplete: Story = {
 export const CmpSpacing: Story = {
     args: {
         alignActions: 'flex-start',
-        startCmp: 'Email',
+        startCmp: 'Phone',
         endCmp: 'Fingerprint',
         cmpSpacing: 6,
         label: 'Cmp Spacing',
@@ -146,19 +97,19 @@ export const Disabled: Story = {
 
 export const EndCmp_ = (args): ReactElement => (
     <Stack spacing={3}>
-        <InputPassword endCmp="Send" label="End Cmp" value="endCmp with mui icon name or mui icon element" />
-        <InputPassword endCmp={<SendIcon />} label="End Cmp" value="endCmp with mui icon name or mui icon element" />
+        <InputPhone endCmp="Send" label="End Cmp" value="endCmp with mui icon name or mui icon element" />
+        <InputPhone endCmp={<SendIcon />} label="End Cmp" value="endCmp with mui icon name or mui icon element" />
     </Stack>
 );
 
 export const EndCmpExternal_ = (args): ReactElement => (
     <Stack spacing={3}>
-        <InputPassword
+        <InputPhone
             endCmpExternal="Send"
             label="End Cmp External"
             value="endCmpExternal with mui icon name or mui icon element"
         />
-        <InputPassword
+        <InputPhone
             endCmpExternal={<SendIcon />}
             label="End Cmp External"
             value="endCmpExternal with mui icon name or mui icon element"
@@ -200,8 +151,18 @@ export const HelperText: Story = {
 
 export const HideStartActionsOnEmpty_ = (args): ReactElement => (
     <Stack spacing={3}>
-        <InputPassword hideStartActionsOnEmpty={true} startCmp="Send" label="Hide Start Actions OnEmpty" />
-        <InputPassword hideStartActionsOnEmpty={false} startCmp="Send" label="Not Hide Start Actions OnEmpty" />
+        <InputPhone
+            hideStartActionsOnEmpty={true}
+            startCmp="Send"
+            endCmp="Fingerprint"
+            label="Hide Start Actions OnEmpty"
+        />
+        <InputPhone
+            hideStartActionsOnEmpty={false}
+            startCmp="Send"
+            endCmp="Fingerprint"
+            label="Not Hide Start Actions OnEmpty"
+        />
     </Stack>
 );
 
@@ -214,28 +175,14 @@ export const Label: Story = {
 export const Margin_ = (args): ReactElement => (
     <Stack>
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <InputPassword label="None Margin" />
+        <InputPhone label="None Margin" />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <InputPassword margin="normal" label="Normal Margin" />
+        <InputPhone margin="dense" label="Dense Margin" />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <InputPassword margin="dense" label="Dense Margin" />
+        <InputPhone margin="normal" label="Normal Margin" />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
     </Stack>
 );
-
-export const maxRows: Story = {
-    args: {
-        maxRows: 3,
-        label: 'MaxRows 3',
-    },
-};
-
-export const Multiline: Story = {
-    args: {
-        multiline: true,
-        label: 'Multiline field',
-    },
-};
 
 export const OnChangeText: Story = {
     args: {
@@ -243,7 +190,7 @@ export const OnChangeText: Story = {
     },
     render: (args) => {
         const [value, setValue] = useState('');
-        return <InputPassword {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+        return <InputPhone {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
     },
 };
 
@@ -254,7 +201,7 @@ export const ReadOnly: Story = {
     },
     render: (args) => {
         const [value, setValue] = useState('some text for show only');
-        return <InputPassword {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+        return <InputPhone {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
     },
 };
 
@@ -265,45 +212,30 @@ export const Required: Story = {
     },
 };
 
-export const Rows: Story = {
-    args: {
-        rows: 3,
-        label: 'Rows 3',
-    },
-};
-
 export const StartCmp_ = (args): ReactElement => (
     <Stack spacing={3}>
-        <InputPassword startCmp="Send" label="Start Cmp" value="with string mui icon name" />
-        <InputPassword startCmp={<SendIcon />} label="Start Cmp" value="with mui icon element" />
+        <InputPhone startCmp="Send" label="Start Cmp" value="with string mui icon name" />
+        <InputPhone startCmp={<SendIcon />} label="Start Cmp" value="with mui icon element" />
     </Stack>
 );
 
 export const StartCmpExternal_ = (args): ReactElement => (
     <Stack spacing={3}>
-        <InputPassword startCmpExternal="Send" label="Start Cmp External" value="with string mui icon name" />
-        <InputPassword startCmpExternal={<SendIcon />} label="Start Cmp External" value="with mui icon element" />
+        <InputPhone startCmpExternal="Send" label="Start Cmp External" value="with string mui icon name" />
+        <InputPhone startCmpExternal={<SendIcon />} label="Start Cmp External" value="with mui icon element" />
     </Stack>
 );
 
-export const Type: Story = {
-    args: {
-        type: 'password',
-        label: 'Type Password',
-        value: 'mui simple is the best library package forever',
-    },
-};
-
 export const Value: Story = {
     args: {
-        value: 'text value here',
+        value: '0501234567',
     },
 };
 
 export const Variant_ = (args): ReactElement => (
     <Stack spacing={3}>
-        <InputPassword variant="filled" label="filled variant" value="some text here" />
-        <InputPassword variant="outlined" label="outlined variant" value="some text here" />
-        <InputPassword variant="standard" label="standard variant" value="some text here" />
+        <InputPhone variant="filled" label="filled variant" value="some text here" />
+        <InputPhone variant="outlined" label="outlined variant" value="some text here" />
+        <InputPhone variant="standard" label="standard variant" value="some text here" />
     </Stack>
 );

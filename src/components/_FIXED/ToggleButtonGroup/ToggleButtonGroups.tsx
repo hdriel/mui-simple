@@ -2,7 +2,7 @@ import React from 'react';
 import type { PropsWithChildren } from 'react';
 import { Divider, ToggleButtonGroups as MuiToggleButtonGroups } from './ToggleButtonGroup.styled';
 import ToggleButtonGroup from './ToggleButtonGroup';
-import type { ToggleButtonGroupsProps } from '../decs';
+import type { ToggleButtonGroupsProps } from '../../decs';
 
 const ToggleButtonGroups: React.FC<PropsWithChildren<ToggleButtonGroupsProps>> = ({
     fullWidth,
@@ -13,9 +13,9 @@ const ToggleButtonGroups: React.FC<PropsWithChildren<ToggleButtonGroupsProps>> =
 }): React.ReactElement => {
     const groups = []
         .concat(children)
-        .filter((child) => child.type.name === ToggleButtonGroup.name)
+        .filter((child) => child?.type?.name === ToggleButtonGroup.displayName)
         .map((child, index, arr) => [
-            React.cloneElement(child, { key: `TB${index}`, disableRipple }),
+            React.cloneElement(child, { key: `TB${index}`, disableRipple } as any),
             index !== arr.length - 1 ? <Divider key={`D${index}`} /> : null,
         ])
         .flat()
@@ -34,4 +34,5 @@ ToggleButtonGroups.defaultProps = {
     justifyContent: undefined,
 };
 
+export type { ToggleButtonGroupsProps } from '../../decs';
 export default ToggleButtonGroups;

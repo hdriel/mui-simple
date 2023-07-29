@@ -235,33 +235,54 @@ export interface InputBaseProps {
     [key: string]: any;
 }
 
-export interface InputTextProps extends InputBaseProps {
+export type InputPatternProps = InputBaseProps & {
+    mask?: ((event: any) => void) | string | any[];
+    definitions?: object;
+    blocks?: object;
+    overwrite?: boolean;
+    autofix?: boolean;
+    lazy?: boolean;
+    unmask?: boolean;
+    showMaskAsPlaceholder?: boolean;
+    placeholder?: string;
+    [key: string]: any;
+};
+
+export type InputPhoneProps = InputBaseProps & {
+    showMaskAsPlaceholder?: boolean;
+    copyTooltip?: string;
+    copyMessage?: string;
+    copyAction?: boolean;
+    [key: string]: any;
+};
+
+export type InputTextProps = InputBaseProps & {
     showLimitIndicatorFrom?: number;
     limitIndicator?: number;
     [key: string]: any;
-}
+};
 
-export interface InputSearchProps extends InputBaseProps {
+export type InputSearchProps = InputBaseProps & {
     searchIcon?: string | ReactNode;
     [key: string]: any;
-}
+};
 
-export interface InputPasswordProps extends Omit<InputBaseProps, 'value'> {
-    copyAction: boolean;
-    copyMessage: string;
-    copyTooltip: string;
-    disabled: boolean;
-    generatePasswordTooltip: string;
-    generateRandom:
+export type InputPasswordProps = Omit<InputBaseProps, 'value'> & {
+    copyAction?: boolean;
+    copyMessage?: string;
+    copyTooltip?: string;
+    disabled?: boolean;
+    generatePasswordTooltip?: string;
+    generateRandom?:
         | number
         | { length: number; numbers: boolean; lowercase: boolean; uppercase: boolean; symbol: boolean };
-    generateRandomAction: boolean;
-    hidePasswordOnClickAway: boolean;
-    showPasswordAction: boolean;
-    showPasswordTooltip: string;
+    generateRandomAction?: boolean;
+    hidePasswordOnClickAway?: boolean;
+    showPasswordAction?: boolean;
+    showPasswordTooltip?: string;
     value?: string;
     [key: string]: any;
-}
+};
 
 export interface InputSelectOption {
     label?: string | ReactNode;
@@ -315,16 +336,17 @@ export interface InputSelectProps {
 }
 
 export type InputMultipleSelectProps = Omit<InputSelectProps, 'value'> & {
-    value: Array<string | number | boolean>;
-    chips: boolean;
-    squaredChips: boolean;
-    checkboxMarker: string | boolean | ReactNode;
-    max: number;
-    selectedIndicator: boolean;
-    selectAll: boolean;
-    SELECT_ALL_LABEL: string;
-    HIDE_ALL_LABEL: string;
-    SELECTED_ITEMS_LABEL: string;
+    value?: Array<string | number | boolean>;
+    chips?: boolean;
+    squaredChips?: boolean;
+    checkboxMarker?: string | boolean | ReactNode;
+    max?: number;
+    selectedIndicator?: boolean;
+    selectAll?: boolean;
+    SELECT_ALL_LABEL?: string;
+    HIDE_ALL_LABEL?: string;
+    SELECTED_ITEMS_LABEL?: string;
+    [key: string]: any;
 };
 
 export interface ListItemProps {
@@ -370,9 +392,9 @@ export interface ListProps {
 }
 
 export type CheckListProps = {
-    controlType: 'checkbox' | 'switch';
-    alignCheck: 'start' | 'end';
-    droppableId: string;
+    controlType?: 'checkbox' | 'switch';
+    alignCheck?: 'start' | 'end';
+    droppableId?: string;
 } & ListProps;
 
 export interface MenuOptionItem {
@@ -587,27 +609,27 @@ export interface TabsProps {
 }
 
 export interface ToggleButtonGroupProps {
-    orientation: 'horizontal' | 'vertical';
-    size: 'small' | 'medium' | 'large';
-    value: string;
-    exclusive: boolean;
-    fullWidth: boolean;
-    disableRipple: boolean;
-    onChange: (event: any, newValues: null | string | string[]) => void;
-    color: string;
-    enforceValueSet: boolean;
-    data: Array<{
+    orientation?: 'horizontal' | 'vertical';
+    size?: 'small' | 'medium' | 'large';
+    value?: string;
+    exclusive?: boolean;
+    fullWidth?: boolean;
+    disableRipple?: boolean;
+    onChange?: (event: any, newValues: null | string | string[]) => void;
+    color?: string;
+    enforceValueSet?: boolean;
+    data?: Array<{
         value: string;
         disabled?: boolean;
-        component: any;
+        component: ReactElement | ReactNode | string | number;
     }>;
     [key: string]: any;
 }
 
 export interface ToggleButtonGroupsProps {
-    fullWidth: boolean;
-    disableRipple: boolean;
-    justifyContent: string;
+    fullWidth?: boolean;
+    disableRipple?: boolean;
+    justifyContent?: string;
     [key: string]: any;
 }
 

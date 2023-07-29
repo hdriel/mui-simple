@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Box, Stack } from '@mui/material';
 import Menu, { MenuOption } from '../Menu';
 import Button from '../../Button/Button';
-import ToggleButtonGroup from '../../../ToggleButtonGroup/ToggleButtonGroup';
+import ToggleButtonGroup from '../../ToggleButtonGroup/ToggleButtonGroup';
 import { shortcutOptions, optionLongList, options } from './Menu.mocks';
 
 const meta: Meta<typeof Menu> = {

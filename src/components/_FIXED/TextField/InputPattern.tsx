@@ -1,22 +1,16 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
 import { IMaskMixin } from 'react-imask';
 import { ClickAwayListener, Box } from '@mui/material';
-
-import Input from '../_FIXED/TextField/TextField';
-import { isDefined } from '../../utils/helpers';
+import Input from './TextField';
+import { isDefined } from '../../../utils/helpers';
+import type { InputPatternProps } from '../../decs';
 
 const MaskedInput = IMaskMixin(({ inputRef, value, onChange, ...otherProps }) => {
     return <Input inputRef={inputRef} value={value} onChange={onChange} {...otherProps} />;
 });
 
-export default function InputPattern({
+const InputPattern: React.FC<InputPatternProps> = ({
     name,
-    mask,
-    definitions,
-    overwrite,
-    blocks,
-    autofix,
     lazy: _lazy,
     unmask,
     inputRef,
@@ -27,35 +21,32 @@ export default function InputPattern({
     placeholder,
     onAccept,
     ...props
-}) {
-    const [value, setValue] = useState(_value);
-    const [unmaskedValue, setUnmaskedValue] = useState(_value);
+}): React.ReactElement => {
+    // for example output for mask: '+(972) 50-000-0000'
+    const [maskedValue, setMaskedValue] = useState(_value); // for example: '+(972) 50-000-0000'
+    const [unmaskedValue, setUnmaskedValue] = useState(_value); // for example: '0-000-0000'
     const [isOnFocus, setIsOnFocus] = useState(false);
+    const [hasFirstFocus, setHasFirstFocus] = useState(false);
 
     const lazy = useMemo(() => {
-        if (isDefined(_lazy)) {
-            return !!_lazy;
-        }
-        if (!isOnFocus) {
-            return true;
-        }
-        if (!unmaskedValue && isDefined(placeholder)) {
-            return true;
-        }
-        if (showMaskAsPlaceholder) {
-            return false;
-        }
+        if (isDefined(_lazy)) return !!_lazy;
+        if (!isOnFocus) return true;
+        if (!unmaskedValue && isDefined(placeholder)) return true;
+        if (showMaskAsPlaceholder) return false;
         return !unmaskedValue;
     }, [_lazy, isOnFocus, placeholder, showMaskAsPlaceholder, unmaskedValue]);
 
     useEffect(() => {
-        if (!isOnFocus) {
+        if (hasFirstFocus && !isOnFocus) {
             if (!unmaskedValue) {
-                setValue('');
+                setMaskedValue('');
+                setUnmaskedValue('');
                 onChange?.({ target: { name, value: '' } });
             } else {
-                onChange?.({ target: { name, value } });
+                onChange?.({ target: { name, value: unmask ? unmaskedValue : maskedValue } });
             }
+        } else {
+            if (!hasFirstFocus) setHasFirstFocus(true);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isOnFocus]);
@@ -67,12 +58,8 @@ export default function InputPattern({
                     {...props}
                     name={name}
                     inputRef={inputRef}
-                    value={value}
-                    mask={mask}
-                    definitions={definitions}
-                    blocks={blocks}
-                    overwrite={overwrite}
-                    autofix={autofix}
+                    value={maskedValue}
+                    focused={!!maskedValue || isOnFocus}
                     lazy={lazy}
                     unmask={unmask}
                     onFocus={(e) => {
@@ -80,26 +67,14 @@ export default function InputPattern({
                         onFocus?.(e);
                     }}
                     onAccept={(value, mask) => {
-                        setValue(value);
-                        setUnmaskedValue(mask._unmaskedValue);
+                        setUnmaskedValue(mask._value);
+                        setMaskedValue(mask._unmaskedValue);
                         onAccept?.(value, mask);
                     }}
                 />
             </Box>
         </ClickAwayListener>
     );
-}
-
-InputPattern.propTypes = {
-    mask: PropTypes.oneOfType([PropTypes.func, PropTypes.string, PropTypes.array]),
-    definitions: PropTypes.object,
-    blocks: PropTypes.object,
-    overwrite: PropTypes.bool,
-    autofix: PropTypes.bool,
-    lazy: PropTypes.bool,
-    unmask: PropTypes.bool,
-    showMaskAsPlaceholder: PropTypes.bool,
-    placeholder: PropTypes.string,
 };
 
 InputPattern.defaultProps = {
@@ -111,5 +86,8 @@ InputPattern.defaultProps = {
     lazy: undefined,
     unmask: undefined,
     showMaskAsPlaceholder: true,
-    placeholder: undefined,
+    value: '', // stay this value, to prevent from component to be disabled on missing provider value
 };
+
+export type { InputPatternProps } from '../../decs';
+export default InputPattern;
