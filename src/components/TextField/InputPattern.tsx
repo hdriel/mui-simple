@@ -1,16 +1,15 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
 import { IMaskMixin } from 'react-imask';
 import { ClickAwayListener, Box } from '@mui/material';
-
 import Input from '../_FIXED/TextField/TextField';
 import { isDefined } from '../../utils/helpers';
+import type { InputPatternProps } from '../decs';
 
 const MaskedInput = IMaskMixin(({ inputRef, value, onChange, ...otherProps }) => {
     return <Input inputRef={inputRef} value={value} onChange={onChange} {...otherProps} />;
 });
 
-export default function InputPattern({
+const InputPattern: React.FC<InputPatternProps> = ({
     name,
     mask,
     definitions,
@@ -27,24 +26,16 @@ export default function InputPattern({
     placeholder,
     onAccept,
     ...props
-}) {
+}): React.ReactElement => {
     const [value, setValue] = useState(_value);
     const [unmaskedValue, setUnmaskedValue] = useState(_value);
     const [isOnFocus, setIsOnFocus] = useState(false);
 
     const lazy = useMemo(() => {
-        if (isDefined(_lazy)) {
-            return !!_lazy;
-        }
-        if (!isOnFocus) {
-            return true;
-        }
-        if (!unmaskedValue && isDefined(placeholder)) {
-            return true;
-        }
-        if (showMaskAsPlaceholder) {
-            return false;
-        }
+        if (isDefined(_lazy)) return !!_lazy;
+        if (!isOnFocus) return true;
+        if (!unmaskedValue && isDefined(placeholder)) return true;
+        if (showMaskAsPlaceholder) return false;
         return !unmaskedValue;
     }, [_lazy, isOnFocus, placeholder, showMaskAsPlaceholder, unmaskedValue]);
 
@@ -88,18 +79,6 @@ export default function InputPattern({
             </Box>
         </ClickAwayListener>
     );
-}
-
-InputPattern.propTypes = {
-    mask: PropTypes.oneOfType([PropTypes.func, PropTypes.string, PropTypes.array]),
-    definitions: PropTypes.object,
-    blocks: PropTypes.object,
-    overwrite: PropTypes.bool,
-    autofix: PropTypes.bool,
-    lazy: PropTypes.bool,
-    unmask: PropTypes.bool,
-    showMaskAsPlaceholder: PropTypes.bool,
-    placeholder: PropTypes.string,
 };
 
 InputPattern.defaultProps = {
@@ -113,3 +92,5 @@ InputPattern.defaultProps = {
     showMaskAsPlaceholder: true,
     placeholder: undefined,
 };
+
+export default InputPattern;
