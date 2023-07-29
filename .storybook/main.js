@@ -1,13 +1,19 @@
 import path from 'path';
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
-
 const config = {
     stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
-    framework: '@storybook/react-webpack5',
-    core: { disableTelemetry: true, builder: 'webpack5' },
+    framework: {
+        name: '@storybook/react-webpack5',
+        options: {},
+    },
+    core: {
+        disableTelemetry: true,
+    },
     // core: { builder: 'webpack5' },
-    docs: { autodocs: 'tag' },
+    docs: {
+        autodocs: 'tag',
+    },
     // basePath: '/storybook/',
     staticDirs: ['../public'],
     addons: [
@@ -17,11 +23,20 @@ const config = {
         '@storybook/addon-essentials',
         '@storybook/addon-interactions',
         '@storybook/blocks',
-        { name: '@storybook/addon-docs', options: { configureJSX: true } },
+        {
+            name: '@storybook/addon-docs',
+            options: {
+                configureJSX: true,
+            },
+        },
         // '@storybook/preset-create-react-app',
         {
             name: '@storybook/addon-storysource',
-            options: { loaderOptions: { injectStoryParameters: false } },
+            options: {
+                loaderOptions: {
+                    injectStoryParameters: false,
+                },
+            },
         },
     ],
     typescript: {
