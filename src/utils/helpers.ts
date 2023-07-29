@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 
 import toHex from 'colornames-es';
 
-export function getCapitalLetters(str) {
+export function getCapitalLetters(str): [string, string?] {
     const chars =
         str
             ?.split(' ')
@@ -17,7 +17,7 @@ export function getCapitalLetters(str) {
     return chars.length > 1 ? [firstChar, secondChar] : [firstChar];
 }
 
-export function stringToColor(string) {
+export function stringToColor(string): string {
     if (!string) return undefined;
 
     let hash = 0;
@@ -39,15 +39,15 @@ export function stringToColor(string) {
     return color;
 }
 
-export function numberToPx(field) {
+export function numberToPx(field): string {
     return typeof field === 'number' ? `${field}px` : field;
 }
 
-export function isDefined(value) {
+export function isDefined(value): boolean {
     return value !== undefined && value !== null;
 }
 
-export function useCustomColor(color, options?) {
+export function useCustomColor(color, options?): [string, string] {
     const theme = useTheme();
     return getCustomColor({ theme, customColor: color }, options);
 }
@@ -59,6 +59,7 @@ interface getCustomColorOptionsProps {
     darken?: number;
     lighten?: number;
 }
+
 export function getCustomColor(
     props,
     {
@@ -67,16 +68,16 @@ export function getCustomColor(
         opacity = 1,
         darken: _darken,
         lighten: _lighten,
-    }: getCustomColorOptionsProps = {} as getCustomColorOptionsProps
-) {
+    }: getCustomColorOptionsProps = {}
+): [string, string] {
     const customColor = props?.[field] ?? props?.customColor;
     if (!customColor) return [];
     if (Array.isArray(customColor)) return customColor;
     if (customColor === 'inherit') return [undefined, 'inherit'];
 
     let color =
-        get(props, `theme.palette.${customColor}.${muiLevel}`) ??
-        get(props, `theme.palette.${customColor}`) ??
+        get(props, `theme.palette.${customColor as string}.${muiLevel}`) ??
+        get(props, `theme.palette.${customColor as string}`) ??
         toHex(customColor) ??
         customColor;
 
@@ -90,9 +91,9 @@ export function getCustomColor(
     return [color, isMuiColor ? customColor : undefined];
 }
 
-const isValidColor = (color) => CSS.supports('color', color);
+const isValidColor = (color): boolean => CSS.supports('color', color);
 
-export const copyToClipboard = (value) => {
+export const copyToClipboard = (value): boolean => {
     if (!value) return false;
 
     const textField = document.createElement('textarea');
@@ -116,7 +117,7 @@ export function generatePassword({
     lowercase = true,
     uppercase = true,
     symbol = true,
-} = {}) {
+} = {}): string {
     const chars = [numbers && NUMBERS, lowercase && LOWERCASE, uppercase && UPPERCASE, symbol && SYMBOL]
         .filter(Boolean)
         .join('');
@@ -131,11 +132,11 @@ export function generatePassword({
     return password;
 }
 
-export function sleep(delay = 0) {
-    return new Promise((resolve) => setTimeout(resolve, delay));
+export async function sleep(delay = 0): Promise<void> {
+    return await new Promise((resolve) => setTimeout(resolve, delay));
 }
 
-export function loadScript(src, element, id) {
+export function loadScript(src, element, id): void {
     if (!element) return;
 
     const script = document.createElement('script');
@@ -145,7 +146,7 @@ export function loadScript(src, element, id) {
     element.appendChild(script);
 }
 
-export function getTextWidth(text) {
+export function getTextWidth(text): { offsetWidth: number; scrollWidth: number } {
     const element = document.createElement('span');
     element.textContent = text;
     document.body.appendChild(element);

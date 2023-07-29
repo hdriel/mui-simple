@@ -235,18 +235,26 @@ export interface InputBaseProps {
     [key: string]: any;
 }
 
-export interface InputTextProps extends InputBaseProps {
+export type InputPhoneProps = InputBaseProps & {
+    showMaskAsPlaceholder: boolean;
+    copyTooltip: string;
+    copyMessage: string;
+    copyAction: boolean;
+    [key: string]: any;
+};
+
+export type InputTextProps = InputBaseProps & {
     showLimitIndicatorFrom?: number;
     limitIndicator?: number;
     [key: string]: any;
-}
+};
 
-export interface InputSearchProps extends InputBaseProps {
+export type InputSearchProps = InputBaseProps & {
     searchIcon?: string | ReactNode;
     [key: string]: any;
-}
+};
 
-export interface InputPasswordProps extends Omit<InputBaseProps, 'value'> {
+export type InputPasswordProps = Omit<InputBaseProps, 'value'> & {
     copyAction: boolean;
     copyMessage: string;
     copyTooltip: string;
@@ -261,7 +269,7 @@ export interface InputPasswordProps extends Omit<InputBaseProps, 'value'> {
     showPasswordTooltip: string;
     value?: string;
     [key: string]: any;
-}
+};
 
 export interface InputSelectOption {
     label?: string | ReactNode;

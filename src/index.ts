@@ -61,7 +61,7 @@ export { default as InputPassword } from './components/_FIXED/TextField/InputPas
 export type { InputPasswordProps } from './components/_FIXED/TextField/InputPassword';
 
 export { default as InputPattern } from './components/TextField/InputPattern';
-export { default as InputPhone } from './components/TextField/InputPhone';
+export { default as InputPhone } from './components/_FIXED/TextField/InputPhone';
 
 export { default as InputSearch } from './components/_FIXED/TextField/InputSearch';
 export type { InputSearchProps } from './components/_FIXED/TextField/InputSearch';

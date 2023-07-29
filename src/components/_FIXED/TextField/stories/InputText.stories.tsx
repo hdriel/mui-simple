@@ -112,6 +112,7 @@ export const Disabled: Story = {
         colorText: '#D10DAA',
         label: 'Disabled',
         value: 'disabled text',
+        disabled: true,
     },
 };
 
@@ -193,9 +194,14 @@ export const Label: Story = {
 };
 
 export const Margin_ = (args): ReactElement => (
-    <Stack spacing={3}>
+    <Stack>
+        <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
+        <InputText label="None Margin" />
+        <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
         <InputText margin="normal" label="Normal Margin" />
+        <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
         <InputText margin="dense" label="Dense Margin" />
+        <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
     </Stack>
 );
 
