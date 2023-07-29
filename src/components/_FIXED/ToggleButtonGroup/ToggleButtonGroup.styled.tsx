@@ -35,21 +35,20 @@ export const ToggleButtonGroups = styled(({ ...props }) => <MuiPaper elevation={
     }
 `;
 
+// & .MuiToggleButton-root:hover {
+//     background-color: ${(props) => props.customColor && alpha(props.customColor, 0.2)};
+// }
 export const ToggleButtonGroup = styled(({ ...props }) => <MuiToggleButtonGroup {...props} />, {
     shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
 })`
-    & .MuiToggleButton-root:hover {
-        background-color: ${(props) => props.customColor && alpha(props.customColor, 0.2)};
-    }
-
-    & .Mui-selected,
-    & .MuiTouchRipple-root {
+    & .Mui-selected // , & .MuiTouchRipple-root
+    {
         color: ${(props) => props.customColor};
     }
 
     & .Mui-selected {
         ${(props) => {
-            const color = props.customColor && alpha(props.customColor, 0.2);
+            const color = props.customColor && (alpha(props.customColor, 0.2) as string);
             return css`
                 background-color: ${color ? `${color} !important` : ''};
             `;
