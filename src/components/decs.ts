@@ -232,6 +232,8 @@ export interface InputBaseProps {
     type?: string;
     value?: string | any;
     variant?: 'filled' | 'standard' | 'outlined';
+    direction?: 'ltr' | 'rtl';
+    textAlign?: 'start' | 'end' | 'center' | 'left' | 'right' | 'inherit' | 'initial' | 'unset' | 'revert';
     [key: string]: any;
 }
 
