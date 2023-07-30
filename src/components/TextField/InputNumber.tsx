@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import type { ComponentType } from 'react';
-import { NumericFormat } from 'react-number-format';
+import { NumericFormat, PatternFormat } from 'react-number-format';
 import { ClickAwayListener } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 
@@ -14,7 +14,9 @@ import SVGIcon from '../SVGIcon/SVGIcon';
 
 export const TextField = styled((props) => <Input {...props} type="text" />, {
     shouldForwardProp: (propName) =>
-        !['patternChar', 'allowEmptyFormatting', 'thousandSeparator'].includes(propName as string),
+        !['patternChar', 'allowEmptyFormatting', 'thousandSeparator', 'fixedDecimalScale', 'decimalSeparator'].includes(
+            propName as string
+        ),
 })`` as ComponentType<InputNumberProps>;
 
 const InputNumber: React.FC<InputNumberProps> = ({
@@ -25,6 +27,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
     max,
     step,
     mask,
+    format,
     disabled,
     emptyFormatPlaceholder,
     thousandSeparator,
@@ -87,6 +90,8 @@ const InputNumber: React.FC<InputNumberProps> = ({
 
     const [color] = getCustomColor({ theme, customColor: colorActive });
 
+    const CMP = format ? PatternFormat : NumericFormat;
+
     return (
         <ClickAwayListener
             onClickAway={() => {
@@ -95,7 +100,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
             }}
         >
             <Box sx={{ position: 'relative', width: '100%' }} ref={ref}>
-                <NumericFormat
+                <CMP
                     {...props}
                     label={label}
                     value={typeof decimalSeparator === 'boolean' && !decimalSeparator ? String(~~value) : String(value)}
@@ -104,7 +109,8 @@ const InputNumber: React.FC<InputNumberProps> = ({
                     min={min}
                     max={max}
                     step={step}
-                    mask={mask ?? emptyFormatPlaceholder}
+                    mask={mask}
+                    format={format}
                     colorActive={colorActive}
                     thousandSeparator={
                         typeof thousandSeparator === 'string' ? thousandSeparator : thousandSeparator ? ',' : undefined
@@ -115,7 +121,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
                     valueIsNumericString={typeof value === 'string'}
                     autoComplete="off"
                     onBlur={onBlurHandler}
-                    customInput={TextField}
+                    customInput={TextField as any}
                     type="number"
                     endCmp={
                         <>
@@ -186,7 +192,7 @@ InputNumber.defaultProps = {
     thousandSeparator: true,
     decimalSeparator: undefined,
     valueIsNumericString: true,
-    mask: undefined,
+    mask: '_',
     format: undefined,
     patternChar: '#',
     decimal: 2,

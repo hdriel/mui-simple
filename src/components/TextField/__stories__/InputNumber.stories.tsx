@@ -355,8 +355,9 @@ export const ValueIsNumericString: Story = {
 export const Mask: Story = {
     args: {
         label: 'Mask',
-        value: 1223334444,
-        mask: '# ## ### ####',
+        value: 122333,
+        mask: '#',
+        format: '# ## ### ####',
     },
     render: (args) => {
         const [value, setValue] = useState(args.value);
@@ -368,7 +369,9 @@ export const Format: Story = {
     args: {
         label: 'Format',
         value: 1555008877,
-        format: '+1 (###) ###-####',
+        valueIsNumericString: true,
+        format: '#### #### #### ####',
+        mask: '_',
     },
     render: (args) => {
         const [value, setValue] = useState(args.value);
