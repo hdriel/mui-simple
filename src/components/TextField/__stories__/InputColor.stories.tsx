@@ -263,3 +263,43 @@ export const Variant_ = (args): ReactElement => (
         <InputColor variant="standard" label="standard variant" value={'#ff0f0f'} />
     </Stack>
 );
+
+export const CopyMessage: Story = {
+    args: {
+        copyMessage: 'Hi copy you color to clipboard',
+    },
+};
+
+export const OpacityAction: Story = {
+    args: {
+        opacityAction: false,
+    },
+};
+
+export const OpacityLabel: Story = {
+    args: {
+        opacityAction: true,
+        opacityLabel: 'Change color opacity action',
+    },
+};
+export const OpacityIcon: Story = {
+    args: {
+        opacityAction: true,
+        opacityIcon: 'AcUnit',
+    },
+};
+
+export const CopyAction: Story = {
+    args: {
+        copyAction: false,
+    },
+};
+
+export const CopyIcon: Story = {
+    args: {
+        copyAction: true,
+        copyIcon: 'ContentCut',
+    },
+};
+
+//   customColor: undefined,

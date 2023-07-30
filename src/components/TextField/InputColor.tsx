@@ -158,7 +158,6 @@ const InputColor: React.FC<InputColorProps> = ({
 };
 
 InputColor.defaultProps = {
-    disabled: undefined,
     value: '#000000',
     customColor: undefined,
     copyMessage: 'Copied to clipboard',

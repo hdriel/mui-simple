@@ -236,15 +236,15 @@ export interface InputBaseProps {
 }
 
 export type InputColorProps = InputBaseProps & {
-    value: string;
-    customColor: string;
-    copyAction: boolean;
-    opacityAction: boolean;
-    copyMessage: string;
-    copyToClipboard: boolean;
-    opacityLabel: string;
-    opacityIcon: string | ReactNode;
-    copyIcon: string | ReactNode;
+    value?: string;
+    customColor?: string;
+    copyAction?: boolean;
+    opacityAction?: boolean;
+    copyMessage?: string;
+    copyToClipboard?: boolean;
+    opacityLabel?: string;
+    opacityIcon?: string | ReactNode;
+    copyIcon?: string | ReactNode;
 };
 
 export type InputPatternProps = InputBaseProps & {
