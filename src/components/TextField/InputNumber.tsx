@@ -98,7 +98,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
                 <NumericFormat
                     {...props}
                     label={label}
-                    value={String(value)}
+                    value={typeof decimalSeparator === 'boolean' && !decimalSeparator ? String(~~value) : String(value)}
                     name={name}
                     disabled={disabled}
                     min={min}
@@ -184,7 +184,7 @@ InputNumber.defaultProps = {
     prefix: undefined,
     suffix: undefined,
     thousandSeparator: true,
-    decimalSeparator: true,
+    decimalSeparator: undefined,
     valueIsNumericString: true,
     mask: undefined,
     format: undefined,

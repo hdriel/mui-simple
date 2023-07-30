@@ -313,15 +313,22 @@ export const ThousandSeparator_ = (args) => (
     <Stack spacing={3}>
         <InputNumber label="without thousand separator" thousandSeparator={false} value={4054407} />
         <InputNumber label="with thousand separator" thousandSeparator={true} value={4054407} />
-        <InputNumber label="... thousand separator" thousandSeparator={'...'} value={4054407} />
+        <InputNumber label="space thousand separator" thousandSeparator={' '} value={4054407} />
+        <InputNumber label="# thousand separator" thousandSeparator={'#'} value={4054407} />
     </Stack>
 );
 
 export const DecimalSeparator_ = (args) => (
     <Stack spacing={3}>
-        <InputNumber label="without decimal separator" decimalSeparator={false} value={407.458} />
-        <InputNumber label="with decimal separator" decimalSeparator={true} value={407.458} />
-        <InputNumber label="# decimal separator" decimalSeparator={'#'} value={407.458} />
+        <InputNumber
+            label="without decimal separator"
+            decimalSeparator={false}
+            value={'50407.458'}
+            valueIsNumericString
+        />
+        <InputNumber label="with decimal separator" decimalSeparator={true} value={'50407.458'} valueIsNumericString />
+        <InputNumber label="space decimal separator" decimalSeparator={' '} value={'50407.458'} valueIsNumericString />
+        <InputNumber label="# decimal separator" decimalSeparator={'#'} value={'50407.458'} valueIsNumericString />
     </Stack>
 );
 
