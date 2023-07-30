@@ -26,7 +26,6 @@ export const AlignActions: Story = {
         alignActions: 'flex-start',
         startCmp: 'Email',
         endCmp: 'Fingerprint',
-        multiline: true,
         label: 'Align Actions',
         value: '#F0F0F0',
     },
@@ -37,7 +36,6 @@ export const AlignActionsExternal: Story = {
         alignActions: 'flex-start',
         startCmpExternal: 'Email',
         endCmpExternal: 'Fingerprint',
-        multiline: true,
         label: 'Align Actions External',
         value: '#F0F0F0',
     },
@@ -183,16 +181,9 @@ export const maxRows: Story = {
     },
 };
 
-export const Multiline: Story = {
+export const OnChangeColor: Story = {
     args: {
-        multiline: true,
-        label: 'Multiline field',
-    },
-};
-
-export const OnChangeText: Story = {
-    args: {
-        label: 'text field state',
+        label: 'color field state',
     },
     render: (args) => {
         const [value, setValue] = useState('');
@@ -256,13 +247,24 @@ export const Value: Story = {
     },
 };
 
-export const Variant_ = (args): ReactElement => (
-    <Stack spacing={3}>
-        <InputColor variant="filled" label="filled variant" value={'#ff0f0f'} />
-        <InputColor variant="outlined" label="outlined variant" value={'#ff0f0f'} />
-        <InputColor variant="standard" label="standard variant" value={'#ff0f0f'} />
-    </Stack>
-);
+export const Variant_ = (args): ReactElement => {
+    const [value, setValue] = useState('#ff0f0f');
+
+    return (
+        <Stack spacing={3}>
+            {['filled', 'outlined', 'standard'].map((variant) => (
+                <InputColor
+                    {...args}
+                    key={variant}
+                    variant={variant}
+                    label={`${variant} variant`}
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                />
+            ))}
+        </Stack>
+    );
+};
 
 export const CopyMessage: Story = {
     args: {
@@ -292,6 +294,10 @@ export const OpacityIcon: Story = {
 export const CopyAction: Story = {
     args: {
         copyAction: false,
+    },
+    render: (args) => {
+        const [value, setValue] = useState('');
+        return <InputColor {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
     },
 };
 
