@@ -267,6 +267,37 @@ export type InputSearchProps = InputBaseProps & {
     [key: string]: any;
 };
 
+export type InputNumberProps = InputBaseProps & {
+    colorActive?: string;
+    label?: string;
+    name?: string;
+    onChange?: (event: any) => void;
+    onBlur?: (event: any) => void;
+    value?: number | string;
+    min?: number;
+    max?: number;
+    step?: number;
+    prefix?: string | ReactNode;
+    suffix?: string | ReactNode;
+    thousandSeparator?: string | boolean;
+    decimalSeparator?: string | boolean;
+    valueIsNumericString?: boolean;
+    mask?: string;
+    format?: string; // +1 (###) ###-####
+    patternChar?: string; // +1 (###) ###-####
+    decimal?: number;
+    disabled?: boolean;
+    decimalScale?: number;
+    fixedDecimalScale?: boolean;
+    allowEmptyFormatting?: boolean;
+    emptyFormatPlaceholder?: string;
+    slider?: boolean;
+    sliderTooltip?: string;
+    sliderLabel?: string | ((value: string | number) => string);
+    selectAllOnFocus?: boolean;
+    debounceDelay?: number;
+};
+
 export type InputPasswordProps = Omit<InputBaseProps, 'value'> & {
     copyAction?: boolean;
     copyMessage?: string;

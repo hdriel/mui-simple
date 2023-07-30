@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+import type { ComponentType } from 'react';
 import { NumericFormat } from 'react-number-format';
 import { ClickAwayListener } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
@@ -9,13 +9,15 @@ import { getCustomColor, isDefined } from '../../utils/helpers';
 import { Box, SliderIcon } from '../_FIXED/TextField/TextField.styled';
 import Slider from '../Slider/Slider';
 import { debounce } from 'lodash-es';
+import type { InputNumberProps } from '../decs';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
 export const TextField = styled((props) => <Input {...props} type="text" />, {
     shouldForwardProp: (propName) =>
         !['patternChar', 'allowEmptyFormatting', 'thousandSeparator'].includes(propName as string),
-})``;
+})`` as ComponentType<InputNumberProps>;
 
-export default function InputNumber({
+const InputNumber: React.FC<InputNumberProps> = ({
     label,
     name,
     value,
@@ -38,31 +40,33 @@ export default function InputNumber({
     onBlur,
     onChange,
     slider,
+    endCmp: _endCmp,
     colorActive,
     sliderTooltip,
     sliderLabel,
     selectAllOnFocus,
     debounceDelay,
     ...props
-}) {
+}): React.ReactElement => {
     const theme = useTheme();
-    const ref = useRef(null);
+    const ref = useRef<HTMLDivElement>(null);
     const [onFocus, setOnFocus] = useState(false);
     const [showSlider, setShowSlider] = useState(false);
     const showSliderAsEndCmp = isDefined(min) && isDefined(max) && slider;
-    const showSliderHandler = (forceValue) => {
+    const showSliderHandler = (forceValue): void => {
         setShowSlider((v) => forceValue ?? !v);
     };
+    const endCmp = typeof _endCmp === 'string' ? <SVGIcon>{_endCmp}</SVGIcon> : _endCmp;
 
     const handleOnChange = debounceDelay ? debounce(onChange, debounceDelay) : onChange;
 
-    const handleChangeSlider = (event, newValue) => {
+    const handleChangeSlider = (event, newValue): void => {
         onChange?.({ target: { name, value: newValue } });
     };
 
     const [sliderLabelDebounce] = useState(() =>
         debounce(
-            (v) => {
+            (v: string) => {
                 if (typeof sliderLabel === 'function') sliderLabel(v);
                 else if (isDefined(sliderLabel)) return sliderLabel;
                 else return `${label ? `${label}: ` : ''}${v}`;
@@ -72,7 +76,7 @@ export default function InputNumber({
         )
     );
 
-    const onBlurHandler = (e) => {
+    const onBlurHandler = (e): void => {
         const value = +(e.target.value?.replaceAll?.(/,/gi, '') ?? 0);
 
         if (e.target.value === '') {
@@ -111,8 +115,7 @@ export default function InputNumber({
                     allowEmptyFormatting={allowEmptyFormatting}
                     format={format}
                     patternChar={patternChar}
-                    colorActive={color}
-                    colorLabel={onFocus ? color : undefined}
+                    colorActive={colorActive}
                     thousandSeparator={
                         typeof thousandSeparator === 'string' ? thousandSeparator : thousandSeparator ? ',' : undefined
                     }
@@ -129,13 +132,16 @@ export default function InputNumber({
                     customInput={TextField}
                     type="number"
                     endCmp={
-                        showSliderAsEndCmp ? (
-                            <SliderIcon
-                                customColor={onFocus ? color : undefined}
-                                onClick={showSliderHandler}
-                                tooltipProps={{ title: sliderTooltip }}
-                            />
-                        ) : undefined
+                        <>
+                            {endCmp}
+                            {showSliderAsEndCmp ? (
+                                <SliderIcon
+                                    customColor={onFocus ? color : undefined}
+                                    onClick={showSliderHandler}
+                                    tooltipProps={{ title: sliderTooltip }}
+                                />
+                            ) : undefined}
+                        </>
                     }
                     onFocus={(e) => {
                         if (selectAllOnFocus) e.target.select();
@@ -144,6 +150,7 @@ export default function InputNumber({
                     onValueChange={(values) => {
                         const { floatValue: value } = values;
                         const event = { target: { name, value } };
+                        // @ts-expect-error
                         handleOnChange?.(event);
                     }}
                 />
@@ -164,7 +171,7 @@ export default function InputNumber({
                             value={+value}
                             disabled={disabled}
                             onChange={handleChangeSlider}
-                            valueLabelFormat={sliderLabelDebounce}
+                            valueLabelFormat={sliderLabelDebounce as any}
                             min={min}
                             max={max}
                             step={step}
@@ -177,35 +184,6 @@ export default function InputNumber({
             </Box>
         </ClickAwayListener>
     );
-}
-
-InputNumber.propTypes = {
-    colorActive: PropTypes.string,
-    label: PropTypes.string,
-    name: PropTypes.string,
-    onChange: PropTypes.func,
-    onBlur: PropTypes.func,
-    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    min: PropTypes.number,
-    max: PropTypes.number,
-    step: PropTypes.number,
-    prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    thousandSeparator: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-    decimalSeparator: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-    valueIsNumericString: PropTypes.bool,
-    mask: PropTypes.string,
-    format: PropTypes.string, // +1 (###) ###-####
-    patternChar: PropTypes.string, // +1 (###) ###-####
-    decimal: PropTypes.number,
-    disabled: PropTypes.bool,
-    fixedDecimalScale: PropTypes.bool,
-    allowEmptyFormatting: PropTypes.bool,
-    emptyFormatPlaceholder: PropTypes.string,
-    slider: PropTypes.bool,
-    sliderTooltip: PropTypes.string,
-    sliderLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-    selectAllOnFocus: PropTypes.bool,
 };
 
 InputNumber.defaultProps = {
@@ -235,3 +213,5 @@ InputNumber.defaultProps = {
     sliderLabel: undefined,
     selectAllOnFocus: true,
 };
+
+export default InputNumber;

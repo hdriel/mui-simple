@@ -45,8 +45,8 @@ export const AlignActionsExternal: Story = {
 
 export const AutoComplete: Story = {
     args: {
-        autoComplete: 'email',
-        name: 'email',
+        autoComplete: 'phone',
+        name: 'phone',
         label: 'Auto Complete',
     },
 };
