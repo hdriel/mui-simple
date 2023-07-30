@@ -2,16 +2,16 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import Color from 'color';
 import { ClickAwayListener } from '@mui/material';
 
-import Input from '../_FIXED/TextField/TextField';
-import Button from '../_FIXED/Button/Button';
-import Snackbar from '../_FIXED/Snackbar/Snackbar';
-import { copyToClipboard, getCustomColor, useCustomColor } from '../../utils/helpers';
-import Slider from '../Slider/Slider';
-import { Box } from '../_FIXED/TextField/TextField.styled';
-import type { InputColorProps } from '../decs';
-import SVGIcon from '../SVGIcon/SVGIcon';
+import Input from './TextField';
+import Button from '../Button/Button';
+import Snackbar from '../Snackbar/Snackbar';
+import { copyToClipboard, getCustomColor, useCustomColor } from '../../../utils/helpers';
+import Slider from '../../Slider/Slider';
+import { Box } from './TextField.styled';
+import type { InputColorProps } from '../../decs';
+import SVGIcon from '../../SVGIcon/SVGIcon';
 import { useTheme } from '@mui/material/styles';
-import { HEX_OPACITY_SUFFIX } from '../../utils/consts';
+import { HEX_OPACITY_SUFFIX } from '../../../utils/consts';
 
 const VALUE_FORMAT = { hex: 'rgba', rgba: 'hsl', hsl: 'hex' };
 
@@ -19,7 +19,6 @@ const InputColor: React.FC<InputColorProps> = ({
     copyAction,
     copyIcon,
     copyMessage,
-    customColor,
     debounceDelay,
     disabled,
     endCmp: _endCmp,
@@ -170,8 +169,7 @@ const InputColor: React.FC<InputColorProps> = ({
 };
 
 InputColor.defaultProps = {
-    value: '#000000',
-    customColor: undefined,
+    value: '#FFFFFF',
     copyMessage: 'Copied to clipboard',
     opacityAction: true,
     copyAction: true,
@@ -180,5 +178,5 @@ InputColor.defaultProps = {
     copyIcon: 'ContentCopy',
 };
 
-export type { InputColorProps } from '../decs';
+export type { InputColorProps } from '../../decs';
 export default InputColor;

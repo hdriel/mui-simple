@@ -307,5 +307,3 @@ export const CopyIcon: Story = {
         copyIcon: 'ContentCut',
     },
 };
-
-//   customColor: undefined,

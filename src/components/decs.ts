@@ -237,7 +237,6 @@ export interface InputBaseProps {
 
 export type InputColorProps = InputBaseProps & {
     value?: string;
-    customColor?: string;
     copyAction?: boolean;
     opacityAction?: boolean;
     copyMessage?: string;
@@ -339,8 +338,8 @@ export interface InputSelectOption {
 export type InputSelectOptions = Array<string | InputSelectOption>;
 
 export interface InputSelectProps {
-    alignActions?: string;
-    alignActionsExternal?: string;
+    alignActions?: AlignType;
+    alignActionsExternal?: AlignType;
     checkbox?: boolean;
     cmpSpacing?: number;
     colorActive?: string;
@@ -395,7 +394,7 @@ export type InputMultipleSelectProps = Omit<InputSelectProps, 'value'> & {
 export interface ListItemProps {
     actions?: any[];
     align?: 'flex-start';
-    alignControl?: string;
+    alignControl?: 'end' | 'start';
     avatar?: object;
     disableGutters?: boolean;
     disablePadding?: boolean;

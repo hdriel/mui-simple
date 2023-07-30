@@ -47,7 +47,9 @@ export { default as Fab } from './components/FloatingActionButton/FloatingAction
 export { default as TextField } from './components/_FIXED/TextField/TextField';
 export type { TextFieldProps } from './components/_FIXED/TextField/TextField';
 
-export { default as InputColor } from './components/TextField/InputColor';
+export { default as InputColor } from './components/_FIXED/TextField/InputColor';
+export type { InputColorProps } from './components/_FIXED/TextField/InputColor';
+
 export { default as InputDate } from './components/TextField/InputDate';
 export { default as InputDateTime } from './components/TextField/InputDateTime';
 

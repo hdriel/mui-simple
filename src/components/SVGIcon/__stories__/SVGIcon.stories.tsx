@@ -11,7 +11,7 @@ import SVGIcon from '../SVGIcon';
 import ToggleButtonGroup from '../../_FIXED/ToggleButtonGroup/ToggleButtonGroup';
 import Typography from '../../_FIXED/Typography/Typography';
 import ToggleButtonGroups from '../../_FIXED/ToggleButtonGroup/ToggleButtonGroups';
-import InputColor from '../../TextField/InputColor';
+import InputColor from '../../_FIXED/TextField/InputColor';
 import Slider from '../../Slider/Slider';
 
 export default {
