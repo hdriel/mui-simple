@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { IMaskMixin } from 'react-imask';
-import { ClickAwayListener, Box } from '@mui/material';
+import { ClickAwayListener, Box, FormHelperText } from '@mui/material';
 import Input from './TextField';
 import { isDefined } from '../../../utils/helpers';
 import type { InputPatternProps } from '../../decs';
@@ -10,16 +10,18 @@ const MaskedInput = IMaskMixin(({ inputRef, value, onChange, ...otherProps }) =>
 });
 
 const InputPattern: React.FC<InputPatternProps> = ({
-    name,
-    lazy: _lazy,
-    unmask,
+    error,
+    helperText,
     inputRef,
-    value: _value,
-    showMaskAsPlaceholder,
-    onFocus,
-    onChange,
-    placeholder,
+    lazy: _lazy,
+    name,
     onAccept,
+    onChange,
+    onFocus,
+    placeholder,
+    showMaskAsPlaceholder,
+    unmask,
+    value: _value,
     ...props
 }): React.ReactElement => {
     // for example output for mask: '+(972) 50-000-0000'
@@ -72,6 +74,7 @@ const InputPattern: React.FC<InputPatternProps> = ({
                         onAccept?.(value, mask);
                     }}
                 />
+                {helperText && <FormHelperText error={error}>{helperText}</FormHelperText>}
             </Box>
         </ClickAwayListener>
     );

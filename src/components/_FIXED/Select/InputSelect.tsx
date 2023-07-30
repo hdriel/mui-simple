@@ -158,7 +158,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
                     {options.length ? selectAllOption : undefined}
                     {options.map((option) => (typeof option === 'function' ? option({ value, max }) : option))}
                 </Select>
-                {helperText && <FormHelperText>{helperText}</FormHelperText>}
+                {helperText && <FormHelperText error={error}>{helperText}</FormHelperText>}
             </FormControl>
         </ClickAwayListener>
     );

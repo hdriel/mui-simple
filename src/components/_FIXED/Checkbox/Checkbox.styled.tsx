@@ -17,6 +17,7 @@ export const Checkbox = styled(
             helperText,
             inputProps,
             label = '',
+            error,
             labelPlacement,
             muiColor,
             readOnly,
@@ -31,6 +32,7 @@ export const Checkbox = styled(
                     required={required}
                     disabled={disabled}
                     labelPlacement={labelPlacement}
+                    error={error}
                     label={
                         isValidElement(label) ? (
                             label
@@ -59,7 +61,7 @@ export const Checkbox = styled(
                         />
                     }
                 />
-                {helperText && <FormHelperText>{helperText}</FormHelperText>}
+                {helperText && <FormHelperText error={error}>{helperText}</FormHelperText>}
             </span>
         );
     },

@@ -18,6 +18,7 @@ const RadioButtonsGroup: React.FC<RadioButtonsGroupProps> = ({
     data: _data,
     direction,
     disableRipple,
+    error,
     helperText,
     icon,
     label: _label,
@@ -51,6 +52,7 @@ const RadioButtonsGroup: React.FC<RadioButtonsGroupProps> = ({
                             color={muiColor ? undefined : customColor}
                             muiColor={muiColor}
                             value={value}
+                            error={error}
                             ignoreLabelColor={ignoreLabelColor}
                             {...radioProps}
                             checked={selectedValue === value}
@@ -70,7 +72,7 @@ const RadioButtonsGroup: React.FC<RadioButtonsGroupProps> = ({
                         />
                     ))}
                 </RadioGroup>
-                {helperText && <FormHelperText>{helperText}</FormHelperText>}
+                {helperText && <FormHelperText error={error}>{helperText}</FormHelperText>}
             </fieldset>
         </FormControl>
     );
