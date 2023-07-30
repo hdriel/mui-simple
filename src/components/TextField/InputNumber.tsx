@@ -26,17 +26,10 @@ const InputNumber: React.FC<InputNumberProps> = ({
     step,
     mask,
     disabled,
-    format,
-    patternChar,
     emptyFormatPlaceholder,
-    allowEmptyFormatting,
     thousandSeparator,
     decimalSeparator,
     valueIsNumericString,
-    decimalScale,
-    fixedDecimalScale,
-    prefix,
-    suffix,
     onBlur,
     onChange,
     slider,
@@ -112,9 +105,6 @@ const InputNumber: React.FC<InputNumberProps> = ({
                     max={max}
                     step={step}
                     mask={mask ?? emptyFormatPlaceholder}
-                    allowEmptyFormatting={allowEmptyFormatting}
-                    format={format}
-                    patternChar={patternChar}
                     colorActive={colorActive}
                     thousandSeparator={
                         typeof thousandSeparator === 'string' ? thousandSeparator : thousandSeparator ? ',' : undefined
@@ -123,11 +113,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
                         typeof decimalSeparator === 'string' ? decimalSeparator : decimalSeparator ? '.' : undefined
                     }
                     valueIsNumericString={typeof value === 'string'}
-                    prefix={prefix}
-                    suffix={suffix}
                     autoComplete="off"
-                    decimalScale={decimalScale}
-                    fixedDecimalScale={fixedDecimalScale}
                     onBlur={onBlurHandler}
                     customInput={TextField}
                     type="number"

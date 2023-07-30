@@ -333,14 +333,132 @@ export const ValueIsNumericString: Story = {
     },
 };
 
-//   mask: undefined,
-//   format: undefined,
-//   patternChar: '#',
-//   fixedDecimalScale: true,
-//   allowEmptyFormatting: true,
-//   emptyFormatPlaceholder: undefined,
+export const Mask: Story = {
+    args: {
+        label: 'Mask',
+        value: 1223334444,
+        mask: '# ## ### ####',
+    },
+    render: (args) => {
+        const [value, setValue] = useState(args.value);
+        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+    },
+};
 
-//   slider: true,
-//   sliderTooltip: 'slider',
-//   sliderLabel: undefined,
-//   selectAllOnFocus: true,
+export const Format: Story = {
+    args: {
+        label: 'Format',
+        value: 1555008877,
+        format: '+1 (###) ###-####',
+    },
+    render: (args) => {
+        const [value, setValue] = useState(args.value);
+        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+    },
+};
+
+export const PatternChar: Story = {
+    args: {
+        label: 'Format',
+        value: 1555008877,
+        format: '+1 (@@@) @@@-@@@@',
+        patternChar: '@',
+    },
+    render: (args) => {
+        const [value, setValue] = useState(args.value);
+        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+    },
+};
+
+export const FixedDecimalScale: Story = {
+    args: {
+        label: 'Format',
+        value: 155.1051,
+        fixedDecimalScale: false,
+    },
+    render: (args) => {
+        const [value, setValue] = useState(args.value);
+        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+    },
+};
+
+export const AllowEmptyFormatting: Story = {
+    args: {
+        label: 'Not Allow Empty Formatting',
+        value: 155.1051,
+        allowEmptyFormatting: false,
+    },
+    render: (args) => {
+        const [value, setValue] = useState(args.value);
+        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+    },
+};
+
+export const EmptyFormatPlaceholder: Story = {
+    args: {
+        label: 'Format',
+        value: 1555008877,
+        format: '+1 (###) ###-####',
+        emptyFormatPlaceholder: 'phone number in format: +1 (###) ###-####',
+    },
+    render: (args) => {
+        const [value, setValue] = useState(args.value);
+        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+    },
+};
+
+export const Slider: Story = {
+    args: {
+        label: 'without slider',
+        value: 150,
+        min: 100,
+        max: 200,
+        slider: false,
+    },
+    render: (args) => {
+        const [value, setValue] = useState(args.value);
+        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+    },
+};
+
+export const SliderTooltip: Story = {
+    args: {
+        label: 'Slider label',
+        value: 150,
+        min: 100,
+        max: 200,
+        slider: true,
+        sliderTooltip: 'slider tooltip here',
+    },
+    render: (args) => {
+        const [value, setValue] = useState(args.value);
+        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+    },
+};
+
+export const SliderLabel: Story = {
+    args: {
+        label: 'Slider label',
+        value: 150,
+        min: 100,
+        max: 200,
+        slider: true,
+        sliderLabel: (n) => `Slider Label '${n}' value`,
+    },
+    render: (args) => {
+        const [value, setValue] = useState(args.value);
+        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+    },
+};
+
+export const SelectAllOnFocus: Story = {
+    args: {
+        label: 'not Select All On Focus',
+        value: 150,
+        selectAllOnFocus: false,
+    },
+    render: (args) => {
+        const [value, setValue] = useState(args.value);
+        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+    },
+};
