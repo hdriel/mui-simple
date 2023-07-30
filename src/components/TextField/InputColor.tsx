@@ -1,45 +1,56 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import Color from 'color';
-import { Opacity as OpacityIcon, ContentCopy as ContentCopyIcon } from '@mui/icons-material';
 import { ClickAwayListener } from '@mui/material';
 
 import Input from '../_FIXED/TextField/TextField';
 import Button from '../_FIXED/Button/Button';
 import Snackbar from '../_FIXED/Snackbar/Snackbar';
-import { copyToClipboard } from '../../utils/helpers';
+import { copyToClipboard, getCustomColor, useCustomColor } from '../../utils/helpers';
 import Slider from '../Slider/Slider';
 import { Box } from '../_FIXED/TextField/TextField.styled';
+import type { InputColorProps } from '../decs';
+import SVGIcon from '../SVGIcon/SVGIcon';
+import { useTheme } from '@mui/material/styles';
 
 const VALUE_FORMAT = { hex: 'rgba', rgba: 'hsl', hsl: 'hex' };
 
-export default function InputColor({
+const InputColor: React.FC<InputColorProps> = ({
     variant,
-    value,
+    value: _value,
     disabled,
     copyMessage,
     opacityLabel,
     customColor,
     copyAction,
+    opacityAction,
     debounceDelay,
+    opacityIcon,
+    copyIcon,
+    endCmp: _endCmp,
     onChange,
     ...props
-}) {
+}): React.ReactElement => {
+    // const [value] = useCustomColor(_value);
+    const theme = useTheme();
+    const value = _value;
     const colorActive = value;
-    const ref = useRef(null);
+    const ref = useRef<HTMLDivElement>(null);
     const [width, setWidth] = useState(100);
 
     const [showAlert, setShowAlert] = useState(false);
     const [valueFormat, setValueFormat] = useState('hex');
     const [opacity, setOpacity] = useState(100);
-
     const [showOpacitySlider, setShowOpacitySlider] = useState(false);
 
-    const opacityLabelTooltip = (opacity) => `${opacityLabel}: ${opacity / 100}`;
-    const [valueLabel, showContrastColor] = useMemo(() => {
-        const color = Color(value);
+    const endCmp = typeof _endCmp === 'string' ? <SVGIcon>{_endCmp}</SVGIcon> : _endCmp;
 
-        const convertedColor = Color(value).alpha(opacity / 100);
+    const opacityLabelTooltip = (opacity): string => `${opacityLabel}: ${opacity / 100}`;
+
+    const [valueLabel, showContrastColor] = useMemo(() => {
+        const colorValue = getCustomColor({ theme, customColor: value });
+        const color = Color(colorValue);
+
+        const convertedColor = Color(colorValue).alpha(opacity / 100);
         const colorStr =
             {
                 hex: convertedColor.hex(),
@@ -51,11 +62,11 @@ export default function InputColor({
         return [colorStr, showContrastColor];
     }, [valueFormat, value, opacity]);
 
-    const showOpacityHandler = () => setShowOpacitySlider(!showOpacitySlider);
+    const showOpacityHandler = (): void => setShowOpacitySlider(!showOpacitySlider);
 
-    const handleChange = (event, newValue) => setOpacity(newValue);
+    const handleChange = (event, newValue): void => setOpacity(newValue);
 
-    const handleClick = () => {
+    const handleClick = (): void => {
         const copied = copyToClipboard(valueLabel);
         setShowAlert(copied);
     };
@@ -91,23 +102,27 @@ export default function InputColor({
                     type="color"
                     debounceDelay={debounceDelay}
                     onChange={onChange}
+                    sx={{ minWidth: 150 }}
                     endCmp={
                         <>
-                            <Button
-                                disabled={disabled}
-                                onClick={showOpacityHandler}
-                                customColor={showContrastColor ? '#636363' : value}
-                                icon={<OpacityIcon />}
-                                tooltipProps={{
-                                    title: opacityLabelTooltip(opacity),
-                                    placement: 'top',
-                                }}
-                            />
+                            {endCmp}
+                            {opacityAction ? (
+                                <Button
+                                    disabled={disabled}
+                                    onClick={showOpacityHandler}
+                                    customColor={showContrastColor ? '#636363' : value}
+                                    icon={opacityIcon}
+                                    tooltipProps={{
+                                        title: opacityLabelTooltip(opacity),
+                                        placement: 'top',
+                                    }}
+                                />
+                            ) : undefined}
                             {copyAction ? (
                                 <Button
                                     onClick={handleClick}
                                     customColor={showContrastColor ? '#636363' : value}
-                                    icon={<ContentCopyIcon />}
+                                    icon={copyIcon}
                                     onRightClick={() => setValueFormat(VALUE_FORMAT[valueFormat])}
                                     tooltipProps={{ title: valueLabel, placement: 'top' }}
                                 />
@@ -118,7 +133,7 @@ export default function InputColor({
                     }
                 />
                 {showOpacitySlider && (
-                    <Box sx={{ position: 'absolute', width: width, ...sliderPositions }}>
+                    <Box sx={{ position: 'absolute', width, ...sliderPositions }}>
                         <Slider
                             customColor={{
                                 track: showContrastColor ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)',
@@ -140,14 +155,6 @@ export default function InputColor({
             </Box>
         </ClickAwayListener>
     );
-}
-
-InputColor.propTypes = {
-    disabled: PropTypes.bool,
-    value: PropTypes.string,
-    customColor: PropTypes.string,
-    copyMessage: PropTypes.string,
-    copyToClipboard: PropTypes.bool,
 };
 
 InputColor.defaultProps = {
@@ -155,6 +162,12 @@ InputColor.defaultProps = {
     value: '#000000',
     customColor: undefined,
     copyMessage: 'Copied to clipboard',
+    opacityAction: true,
     copyAction: true,
     opacityLabel: 'opacity',
+    opacityIcon: 'Opacity',
+    copyIcon: 'ContentCopy',
 };
+
+export type { InputColorProps } from '../decs';
+export default InputColor;

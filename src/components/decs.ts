@@ -235,6 +235,18 @@ export interface InputBaseProps {
     [key: string]: any;
 }
 
+export type InputColorProps = InputBaseProps & {
+    value: string;
+    customColor: string;
+    copyAction: boolean;
+    opacityAction: boolean;
+    copyMessage: string;
+    copyToClipboard: boolean;
+    opacityLabel: string;
+    opacityIcon: string | ReactNode;
+    copyIcon: string | ReactNode;
+};
+
 export type InputPatternProps = InputBaseProps & {
     mask?: ((event: any) => void) | string | any[];
     definitions?: object;
@@ -268,34 +280,34 @@ export type InputSearchProps = InputBaseProps & {
 };
 
 export type InputNumberProps = InputBaseProps & {
+    allowEmptyFormatting?: boolean;
     colorActive?: string;
+    debounceDelay?: number;
+    decimal?: number;
+    decimalScale?: number;
+    decimalSeparator?: string | boolean;
+    disabled?: boolean;
+    emptyFormatPlaceholder?: string;
+    fixedDecimalScale?: boolean;
+    format?: string; // +1 (###) ###-####
     label?: string;
-    name?: string;
-    onChange?: (event: any) => void;
-    onBlur?: (event: any) => void;
-    value?: number | string;
-    min?: number;
+    mask?: string;
     max?: number;
-    step?: number;
+    min?: number;
+    name?: string;
+    onBlur?: (event: any) => void;
+    onChange?: (event: any) => void;
+    patternChar?: string; // +1 (###) ###-####
     prefix?: string | ReactNode;
+    selectAllOnFocus?: boolean;
+    slider?: boolean;
+    sliderLabel?: string | ((value: string | number) => string);
+    sliderTooltip?: string;
+    step?: number;
     suffix?: string | ReactNode;
     thousandSeparator?: string | boolean;
-    decimalSeparator?: string | boolean;
+    value?: number | string;
     valueIsNumericString?: boolean;
-    mask?: string;
-    format?: string; // +1 (###) ###-####
-    patternChar?: string; // +1 (###) ###-####
-    decimal?: number;
-    disabled?: boolean;
-    decimalScale?: number;
-    fixedDecimalScale?: boolean;
-    allowEmptyFormatting?: boolean;
-    emptyFormatPlaceholder?: string;
-    slider?: boolean;
-    sliderTooltip?: string;
-    sliderLabel?: string | ((value: string | number) => string);
-    selectAllOnFocus?: boolean;
-    debounceDelay?: number;
 };
 
 export type InputPasswordProps = Omit<InputBaseProps, 'value'> & {

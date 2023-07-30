@@ -3,14 +3,14 @@ import type { ComponentType } from 'react';
 import { NumericFormat, PatternFormat } from 'react-number-format';
 import { ClickAwayListener } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
-
-import Input from '../_FIXED/TextField/TextField';
-import { getCustomColor, isDefined } from '../../utils/helpers';
-import { Box, SliderIcon } from '../_FIXED/TextField/TextField.styled';
-import Slider from '../Slider/Slider';
 import { debounce } from 'lodash-es';
-import type { InputNumberProps } from '../decs';
-import SVGIcon from '../SVGIcon/SVGIcon';
+
+import Input from './TextField';
+import { getCustomColor, isDefined } from '../../../utils/helpers';
+import { Box, SliderIcon } from './TextField.styled';
+import Slider from '../../Slider/Slider';
+import SVGIcon from '../../SVGIcon/SVGIcon';
+import type { InputNumberProps } from '../../decs';
 
 export const TextField = styled((props) => <Input {...props} type="text" />, {
     shouldForwardProp: (propName) =>
@@ -20,28 +20,28 @@ export const TextField = styled((props) => <Input {...props} type="text" />, {
 })`` as ComponentType<InputNumberProps>;
 
 const InputNumber: React.FC<InputNumberProps> = ({
-    label,
-    name,
-    value,
-    min,
-    max,
-    step,
-    mask,
-    format,
+    colorActive,
+    debounceDelay,
+    decimalSeparator,
     disabled,
     emptyFormatPlaceholder,
-    thousandSeparator,
-    decimalSeparator,
-    valueIsNumericString,
+    endCmp: _endCmp,
+    format,
+    label,
+    mask,
+    max,
+    min,
+    name,
     onBlur,
     onChange,
-    slider,
-    endCmp: _endCmp,
-    colorActive,
-    sliderTooltip,
-    sliderLabel,
     selectAllOnFocus,
-    debounceDelay,
+    slider,
+    sliderLabel,
+    sliderTooltip,
+    step,
+    thousandSeparator,
+    value,
+    valueIsNumericString,
     ...props
 }): React.ReactElement => {
     const theme = useTheme();
@@ -179,31 +179,32 @@ const InputNumber: React.FC<InputNumberProps> = ({
 };
 
 InputNumber.defaultProps = {
+    allowEmptyFormatting: true,
     colorActive: 'primary',
-    name: undefined,
-    onChange: undefined,
-    onBlur: undefined,
-    value: undefined,
-    min: undefined,
+    decimal: 2,
+    decimalSeparator: undefined,
+    disabled: undefined,
+    emptyFormatPlaceholder: undefined,
+    fixedDecimalScale: true,
+    format: undefined,
+    mask: '_',
     max: undefined,
-    step: undefined,
+    min: undefined,
+    name: undefined,
+    onBlur: undefined,
+    onChange: undefined,
+    patternChar: '#',
     prefix: undefined,
+    selectAllOnFocus: true,
+    slider: true,
+    sliderLabel: undefined,
+    sliderTooltip: 'slider',
+    step: undefined,
     suffix: undefined,
     thousandSeparator: true,
-    decimalSeparator: undefined,
+    value: undefined,
     valueIsNumericString: true,
-    mask: '_',
-    format: undefined,
-    patternChar: '#',
-    decimal: 2,
-    disabled: undefined,
-    fixedDecimalScale: true,
-    allowEmptyFormatting: true,
-    emptyFormatPlaceholder: undefined,
-    slider: true,
-    sliderTooltip: 'slider',
-    sliderLabel: undefined,
-    selectAllOnFocus: true,
 };
 
+export type { InputNumberProps } from '../../decs';
 export default InputNumber;

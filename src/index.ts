@@ -55,7 +55,9 @@ export { default as InputEmail } from './components/_FIXED/TextField/InputEmail'
 export type { InputEmailProps } from './components/_FIXED/TextField/InputEmail';
 
 export { default as InputFile } from './components/TextField/InputFile';
-export { default as InputNumber } from './components/TextField/InputNumber';
+
+export { default as InputNumber } from './components/_FIXED/TextField/InputNumber';
+export type { InputNumberProps } from './components/_FIXED/TextField/InputNumber';
 
 export { default as InputPassword } from './components/_FIXED/TextField/InputPassword';
 export type { InputPasswordProps } from './components/_FIXED/TextField/InputPassword';
