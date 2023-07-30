@@ -2,7 +2,7 @@ import React from 'react';
 import type { PropsWithChildren, ReactNode } from 'react';
 //	import PropTypes from 'prop-types';
 import { Breadcrumbs as MuiBreadcrumbs } from './Breadcrumbs.styled';
-import Link from '../Link/Link';
+import Link from '../_FIXED/Link/Link';
 import Chip from '../_FIXED/Chip/Chip';
 import Typography from '../_FIXED/Typography/Typography';
 

@@ -391,6 +391,14 @@ export type InputMultipleSelectProps = Omit<InputSelectProps, 'value'> & {
     [key: string]: any;
 };
 
+export interface LinkProps {
+    url?: string;
+    color?: string;
+    underline?: 'always' | 'hover' | 'none';
+    size?: string | number;
+    [key: string]: any;
+}
+
 export interface ListItemProps {
     actions?: any[];
     align?: 'flex-start';

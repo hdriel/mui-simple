@@ -1,21 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link as MuiLink } from './Link.styled';
-import { useCustomColor } from '../../utils/helpers';
+import { useCustomColor } from '../../../utils/helpers';
+import type { LinkProps } from '../../decs';
 
-export default function Link({ url, color, size, ...props }) {
+const Link: React.FC<LinkProps> = ({ url, color, size, ...props }): React.ReactElement => {
     const [customColor, muiColor] = useCustomColor(color);
 
     return (
         <MuiLink href={url} color={muiColor} customColor={muiColor ? undefined : customColor} size={size} {...props} />
     );
-}
-
-Link.propTypes = {
-    url: PropTypes.string,
-    color: PropTypes.string,
-    underline: PropTypes.oneOf(['always', 'hover', 'none']),
-    size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 Link.defaultProps = {
@@ -24,3 +17,6 @@ Link.defaultProps = {
     underline: undefined,
     size: undefined,
 };
+
+export type { LinkProps } from '../../decs';
+export default Link;

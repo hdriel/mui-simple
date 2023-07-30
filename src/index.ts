@@ -84,7 +84,8 @@ export type { InputSelectOptions, InputSelectProps } from './components/_FIXED/S
 export { default as InputMultipleSelect } from './components/_FIXED/Select/InputMultipleSelect';
 export type { InputMultipleSelectProps } from './components/_FIXED/Select/InputMultipleSelect';
 
-export { default as Link } from './components/Link/Link';
+export { default as Link } from './components/_FIXED/Link/Link';
+export type { LinkProps } from './components/_FIXED/Link/Link';
 
 export { default as List } from './components/_FIXED/List/List';
 export type { ListProps, ListItemProps } from './components/_FIXED/List/List';

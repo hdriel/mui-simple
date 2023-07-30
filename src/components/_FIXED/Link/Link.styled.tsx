@@ -1,6 +1,6 @@
 import { Link as MuiLink } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { numberToPx } from '../../utils/helpers';
+import { numberToPx } from '../../../utils/helpers';
 
 export const Link = styled(MuiLink, {
     shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
