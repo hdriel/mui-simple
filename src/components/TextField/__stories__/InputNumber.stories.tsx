@@ -222,13 +222,25 @@ export const Value: Story = {
     },
 };
 
-export const Variant_ = (args): ReactElement => (
-    <Stack spacing={3}>
-        <InputNumber variant="filled" label="filled variant" value={54407} />
-        <InputNumber variant="outlined" label="outlined variant" value={54407} />
-        <InputNumber variant="standard" label="standard variant" value={54407} />
-    </Stack>
-);
+export const Variant_ = (args): ReactElement => {
+    const [value, setValue] = useState(1500);
+
+    return (
+        <Stack spacing={3}>
+            {['filled', 'outlined', 'standard'].map((variant) => (
+                <InputNumber
+                    key={variant}
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                    min={1000}
+                    max={2000}
+                    variant={variant as any}
+                    label={`${variant} variant`}
+                />
+            ))}
+        </Stack>
+    );
+};
 
 export const Min: Story = {
     args: {
