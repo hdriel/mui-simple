@@ -1,5 +1,6 @@
 import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent } from 'react';
 import type { SxProps } from '@mui/material';
+import { number } from 'prop-types';
 
 export interface AccordionProps {
     bgColor?: string;
@@ -207,6 +208,7 @@ export interface InputBaseProps {
     colorLabel?: string;
     colorText?: string;
     debounceDelay?: number;
+    direction?: 'ltr' | 'rtl';
     disabled?: boolean;
     endCmp?: ReactNode | string;
     endCmpExternal?: ReactNode | string;
@@ -217,6 +219,7 @@ export interface InputBaseProps {
     hideStartActionsOnEmpty?: boolean;
     id?: string;
     label?: string;
+    letterSpacing?: number | string;
     margin?: 'normal' | 'dense';
     maxRows?: number;
     multiline?: boolean;
@@ -229,11 +232,10 @@ export interface InputBaseProps {
     rows?: number;
     startCmp?: ReactNode | string;
     startCmpExternal?: ReactNode | string;
+    textAlign?: 'start' | 'end' | 'center' | 'left' | 'right' | 'inherit' | 'initial' | 'unset' | 'revert';
     type?: string;
     value?: string | any;
     variant?: 'filled' | 'standard' | 'outlined';
-    direction?: 'ltr' | 'rtl';
-    textAlign?: 'start' | 'end' | 'center' | 'left' | 'right' | 'inherit' | 'initial' | 'unset' | 'revert';
     [key: string]: any;
 }
 

@@ -8,15 +8,14 @@ import SVGIcon from '../../SVGIcon/SVGIcon';
 
 const TextField: React.FC<InputBaseProps> = function TextField(props): React.ReactElement {
     const {
-        textAlign,
         alignActions,
         alignActionsExternal,
         cmpSpacing,
         colorActive,
         colorLabel,
-        direction,
         colorText,
         debounceDelay,
+        direction,
         endCmp: _endCmp,
         endCmpExternal: _endCmpExternal,
         focused,
@@ -24,6 +23,7 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
         hideStartActionsOnEmpty,
         InputLabelProps,
         InputProps,
+        letterSpacing,
         onBlur,
         onChange,
         onFocus,
@@ -62,8 +62,6 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
                 value={value}
                 InputProps={{
                     ...InputProps,
-                    direction,
-                    textAlign,
                     readOnly,
                     ...(showActions &&
                         startCmp && {
@@ -80,7 +78,7 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
                             </InputAdornment>
                         ),
                     }),
-                    sx: { alignItems: alignActions },
+                    sx: { alignItems: alignActions, direction, letterSpacing, ...InputProps?.sx },
                 }}
                 {...rest}
             />
@@ -133,6 +131,7 @@ TextField.defaultProps = {
     type: 'text',
     value: undefined,
     variant: 'outlined',
+    letterSpacing: undefined,
 };
 
 export type { InputBaseProps as TextFieldProps } from '../../decs';

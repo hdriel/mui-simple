@@ -15,21 +15,23 @@ export const SliderIcon = (props): React.ReactElement => <Button icon={<CommitRo
 
 type TextFieldStyledType = InputBaseProps & TextFieldProps & any;
 export const TextField = styled(MuiTextField, {
-    shouldForwardProp: (propName) => !['colorText', 'colorLabel', 'colorActive'].includes(propName as string),
+    shouldForwardProp: (propName) =>
+        !['colorText', 'colorLabel', 'colorActive', 'textAlign'].includes(propName as string),
 })<TextFieldStyledType>`
     ${(props) => {
-        const colorText = getCustomColor(props, { field: 'colorText' });
-        const colorLabel = getCustomColor(props, { field: 'colorLabel' });
-        const hoverColorLabel = getCustomColor(props, {
+        const [colorText] = getCustomColor(props, { field: 'colorText' });
+        const [colorLabel] = getCustomColor(props, { field: 'colorLabel' });
+        const [hoverColorLabel] = getCustomColor(props, {
             field: 'colorLabel',
             darken: 0.3,
         });
-        const colorActive = getCustomColor(props, { field: 'colorActive' });
-        const isColorActiveExists = !!colorActive.length;
+        const [colorActive] = getCustomColor(props, { field: 'colorActive' });
+        const isColorActiveExists = !!colorActive;
 
         return css`
             & input {
-                color: ${colorText} !important;
+                color: ${colorText ? `${colorText} !important` : ''};
+                text-align: ${props.textAlign};
             }
             & label {
                 color: ${colorLabel};

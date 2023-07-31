@@ -17,8 +17,6 @@ const InputPattern: React.FC<InputPatternProps> = ({
     name,
     onAccept,
     onChange,
-    direction,
-    textAlign,
     onFocus,
     placeholder,
     showMaskAsPlaceholder,
@@ -74,11 +72,6 @@ const InputPattern: React.FC<InputPatternProps> = ({
                         setUnmaskedValue(mask._value);
                         setMaskedValue(mask._unmaskedValue);
                         onAccept?.(value, mask);
-                    }}
-                    InputProps={{
-                        direction,
-                        textAlign,
-                        ...props.InputProps,
                     }}
                 />
                 {helperText && <FormHelperText error={error}>{helperText}</FormHelperText>}

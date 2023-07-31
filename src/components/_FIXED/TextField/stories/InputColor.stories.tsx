@@ -21,6 +21,14 @@ export const Default: Story = {
     args: {},
 };
 
+export const Direction: Story = {
+    args: {
+        label: 'RTL Direction',
+        direction: 'rtl',
+        value: 'right to left direction',
+    },
+};
+
 export const AlignActions: Story = {
     args: {
         alignActions: 'flex-start',

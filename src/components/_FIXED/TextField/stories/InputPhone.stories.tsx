@@ -17,8 +17,34 @@ export default meta;
 
 type Story = StoryObj<typeof InputPhone>;
 
+const value = '0512345678';
+
 export const Default: Story = {
     args: {},
+};
+
+export const TextAlign: Story = {
+    args: {
+        label: 'Text Align',
+        textAlign: 'center',
+        value,
+    },
+};
+
+export const Direction: Story = {
+    args: {
+        label: 'RTL Direction',
+        direction: 'rtl',
+        value,
+    },
+};
+
+export const LetterSpacing: Story = {
+    args: {
+        label: 'Letter Spacing',
+        letterSpacing: '5px',
+        value,
+    },
 };
 
 export const AlignActions: Story = {
@@ -28,7 +54,7 @@ export const AlignActions: Story = {
         endCmp: 'Fingerprint',
         multiline: true,
         label: 'Align Actions',
-        value: 'text...\ntext...\ntext...',
+        value,
     },
 };
 
@@ -39,7 +65,7 @@ export const AlignActionsExternal: Story = {
         endCmpExternal: 'Fingerprint',
         multiline: true,
         label: 'Align Actions External',
-        value: 'text...\ntext...\ntext...',
+        value,
     },
 };
 
@@ -58,7 +84,7 @@ export const CmpSpacing: Story = {
         endCmp: 'Fingerprint',
         cmpSpacing: 6,
         label: 'Cmp Spacing',
-        value: 'some text to see spacing...',
+        value,
     },
 };
 
@@ -66,7 +92,7 @@ export const ColorActive: Story = {
     args: {
         colorActive: 'warning',
         label: 'Color Active',
-        value: 'color active with palette and custom color',
+        value,
     },
 };
 
@@ -74,7 +100,7 @@ export const ColorLabel: Story = {
     args: {
         colorLabel: 'success',
         label: 'Color Label',
-        value: 'color label with palette and custom color',
+        value,
     },
 };
 
@@ -82,7 +108,7 @@ export const ColorText: Story = {
     args: {
         colorText: '#D10DAA',
         label: 'Color Text',
-        value: 'color text with palette and custom color',
+        value,
     },
 };
 
@@ -90,8 +116,8 @@ export const Disabled: Story = {
     args: {
         colorText: '#D10DAA',
         label: 'Disabled',
-        value: 'disabled text',
         disabled: true,
+        value,
     },
 };
 
@@ -121,7 +147,7 @@ export const Error: Story = {
     args: {
         error: true,
         label: 'With Error',
-        value: 'some text with error',
+        value,
     },
 };
 
@@ -129,7 +155,7 @@ export const Focused: Story = {
     args: {
         focused: true,
         label: 'Focused',
-        value: 'focused text',
+        value,
     },
 };
 
@@ -137,7 +163,7 @@ export const FullWidth: Story = {
     args: {
         fullWidth: false,
         label: 'Not FullWidth',
-        value: 'text field is default with fullWidth',
+        value,
     },
 };
 
@@ -145,7 +171,7 @@ export const HelperText: Story = {
     args: {
         helperText: 'some helperText',
         label: 'HelperText',
-        value: 'some text...',
+        value,
     },
 };
 

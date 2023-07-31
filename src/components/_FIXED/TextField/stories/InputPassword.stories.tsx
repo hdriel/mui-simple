@@ -21,6 +21,30 @@ export const Default: Story = {
     args: {},
 };
 
+export const TextAlign: Story = {
+    args: {
+        label: 'Text Align',
+        textAlign: 'center',
+        value: 'center text',
+    },
+};
+
+export const Direction: Story = {
+    args: {
+        label: 'RTL Direction',
+        direction: 'rtl',
+        value: 'right to left direction',
+    },
+};
+
+export const LetterSpacing: Story = {
+    args: {
+        label: 'Letter Spacing',
+        letterSpacing: '5px',
+        value: 'letter spacing',
+    },
+};
+
 export const CopyAction: Story = {
     args: {
         copyAction: true,
