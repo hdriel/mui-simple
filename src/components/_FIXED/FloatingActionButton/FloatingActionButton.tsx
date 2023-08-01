@@ -2,20 +2,11 @@ import React from 'react';
 import type { PropsWithChildren } from 'react';
 import { Fab as MuiFab } from './FloatingActionButton.styled';
 import { useCustomColor } from '../../../utils/helpers';
-import type { FabProps } from '../../decs';
 import SVGIcon from '../../SVGIcon/SVGIcon';
+import type { FabProps } from '../../decs';
 
-const Fab: React.FC<PropsWithChildren<FabProps>> = ({
-    disabled,
-    disableRipple,
-    link,
-    size,
-    variant,
-    icon: _icon,
-    color,
-    children,
-    ...props
-}): React.ReactElement => {
+const Fab: React.FC<PropsWithChildren<FabProps>> = (props): React.ReactElement => {
+    const { children, color, disabled, disableRipple, icon: _icon, link, size, variant, ...rest } = props;
     const [customColor, muiColor] = useCustomColor(color);
     const icon = typeof _icon === 'string' ? <SVGIcon>{_icon}</SVGIcon> : _icon;
 
@@ -28,7 +19,7 @@ const Fab: React.FC<PropsWithChildren<FabProps>> = ({
             variant={variant}
             customColor={muiColor ? undefined : customColor}
             color={muiColor as any}
-            {...props}
+            {...rest}
         >
             {icon}
             {children}
@@ -37,13 +28,13 @@ const Fab: React.FC<PropsWithChildren<FabProps>> = ({
 };
 
 Fab.defaultProps = {
+    color: undefined,
     disabled: undefined,
     disableRipple: undefined,
-    link: undefined,
     icon: undefined,
+    link: undefined,
     size: undefined,
     variant: undefined,
-    color: undefined,
 };
 
 export type { FabProps } from '../../decs';
