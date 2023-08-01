@@ -120,7 +120,10 @@ export type { RippleBoxProps } from './components/_FIXED/RippleBox/RippleBox';
 export { default as Skeleton } from './components/Skeleton/Skeleton';
 export { default as Slider } from './components/Slider/Slider';
 export { default as RangeSlider } from './components/Slider/RangeSlider';
+
 export { default as Snackbar } from './components/_FIXED/Snackbar/Snackbar';
+export type { SnackbarProps } from './components/_FIXED/Snackbar/Snackbar';
+
 export { default as SpeedDial } from './components/SpeedDial/SpeedDial';
 export { default as Stepper } from './components/Stepper/Stepper';
 export { default as MobileStepper } from './components/Stepper/MobileStepper';
