@@ -45,7 +45,8 @@ export type { DividerProps } from './components/_FIXED/Divider/Divider';
 
 export { default as Drawer } from './components/Drawer/Drawer';
 
-export { default as Fab } from './components/FloatingActionButton/FloatingActionButton';
+export { default as Fab } from './components/_FIXED/FloatingActionButton/FloatingActionButton';
+export type { FabProps } from './components/_FIXED/FloatingActionButton/FloatingActionButton';
 
 export { default as TextField } from './components/_FIXED/TextField/TextField';
 export type { TextFieldProps } from './components/_FIXED/TextField/TextField';

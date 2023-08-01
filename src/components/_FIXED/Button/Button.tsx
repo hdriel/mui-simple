@@ -57,7 +57,7 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = forwardRef(
         return isIconButton ? (
             <Tooltip {...tooltipProps}>
                 <MuiIconButton
-                    color={muiColor}
+                    color={muiColor as any}
                     disableRipple={disabled ? true : disableRipple}
                     href={link}
                     onClick={disabled ? undefined : onClick}
@@ -79,7 +79,7 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = forwardRef(
         ) : (
             <Tooltip {...tooltipProps}>
                 <MuiButton
-                    color={muiColor}
+                    color={muiColor as any}
                     customColor={muiColor ? undefined : customColor}
                     disabled={disabled}
                     disableRipple={isLoading || disableRipple}

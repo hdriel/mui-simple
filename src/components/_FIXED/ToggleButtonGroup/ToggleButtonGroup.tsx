@@ -40,7 +40,7 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
 
     return (
         <MuiToggleButtonGroup
-            color={muiColor}
+            color={muiColor as any}
             customColor={muiColor ? undefined : customColor}
             orientation={orientation}
             value={exclusive ? selectedValue : commonsValues}

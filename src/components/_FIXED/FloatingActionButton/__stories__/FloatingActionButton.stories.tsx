@@ -1,0 +1,66 @@
+import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { Box, Stack } from '@mui/material';
+import { Mail as MainIcon } from '@mui/icons-material';
+
+import Fab from '../FloatingActionButton';
+
+const meta: Meta<typeof Fab> = {
+    title: 'Inputs/FloatingActionButton (Fab)',
+    component: Fab,
+    tags: ['autodocs'],
+};
+
+export default meta;
+
+type Story = StoryObj<typeof Fab>;
+
+export const Default: Story = {
+    args: {
+        children: <MainIcon />,
+    },
+};
+
+export const Disabled: Story = {
+    args: {
+        icon: 'Favorite',
+        disabled: true,
+    },
+};
+
+export const DisableRipple: Story = {
+    args: {
+        icon: 'Favorite',
+        disableRipple: true,
+    },
+};
+
+export const Link: Story = {
+    args: {
+        icon: 'Google',
+        link: 'https://google.com',
+    },
+};
+
+export const Size_ = (args) => (
+    <Stack direction="row" spacing={3}>
+        <Fab size="small">small</Fab>
+        <Fab size="medium">medium</Fab>
+        <Fab size="large">large</Fab>
+    </Stack>
+);
+
+export const Color_ = (args) => (
+    <Stack direction="row" spacing={3}>
+        <Fab color={'#00ab92'}>#00ab92</Fab>
+        <Fab color={'primary'}>Primary</Fab>
+        <Fab color={'success.light'}>Secondary</Fab>
+    </Stack>
+);
+export const Variant_ = (args) => (
+    <Stack direction="row" spacing={3}>
+        <Fab variant="extended">EXTENDED</Fab>
+        <Fab variant="circular">CIRCULAR</Fab>
+        <Fab>ROUND (default)</Fab>
+    </Stack>
+);

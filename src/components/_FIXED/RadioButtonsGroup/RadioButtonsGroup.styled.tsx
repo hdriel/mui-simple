@@ -29,7 +29,7 @@ type RadioStyledPropsType = RadioProps & any;
 export const Radio = styled(({ value, fontSize, muiColor, color, inputProps, ...props }: RadioStyledPropsType) => (
     <MuiRadio
         value={value}
-        color={muiColor}
+        color={muiColor as any}
         inputProps={{ 'aria-label': value as string, ...inputProps }}
         sx={{
             ...(color && { color, '&.Mui-checked': { color } }),

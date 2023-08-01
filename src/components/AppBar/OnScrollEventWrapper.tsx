@@ -3,7 +3,7 @@ import type { PropsWithChildren, ReactNode, MouseEvent } from 'react';
 //	import PropTypes from 'prop-types';
 import { Box, Fade, useScrollTrigger, Slide } from '@mui/material';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@mui/icons-material';
-import Fab from '../FloatingActionButton/FloatingActionButton';
+import Fab from '../_FIXED/FloatingActionButton/FloatingActionButton';
 import { isDefined } from '../../utils/helpers';
 
 interface OnScrollEventWrapperProps {

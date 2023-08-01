@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 
 export const Fab = styled(MuiFab, {
     shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
-})`
+})<{ customColor: string }>`
     &.MuiButtonBase-root {
         display: flex;
         align-items: center;

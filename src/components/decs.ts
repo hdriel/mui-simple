@@ -408,6 +408,17 @@ export type InputMultipleSelectProps = Omit<InputSelectProps, 'value'> & {
     [key: string]: any;
 };
 
+export interface FabProps {
+    disabled?: boolean;
+    disableRipple?: boolean;
+    link?: string;
+    icon?: string | ReactNode;
+    size?: 'small' | 'medium' | 'large';
+    variant?: 'extended' | 'circular';
+    color?: string;
+    [key: string]: any;
+}
+
 export interface LinkProps {
     color?: string;
     icon?: string | ReactNode;

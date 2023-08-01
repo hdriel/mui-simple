@@ -17,7 +17,13 @@ const Link: React.FC<LinkProps> = ({
     const icon = typeof _icon === 'string' ? <SVGIcon>{_icon}</SVGIcon> : _icon;
 
     return (
-        <MuiLink href={url} color={muiColor} customColor={muiColor ? undefined : customColor} size={size} {...props}>
+        <MuiLink
+            href={url}
+            color={muiColor as any}
+            customColor={muiColor ? undefined : customColor}
+            size={size}
+            {...props}
+        >
             {icon}
             {label}
             {children}
