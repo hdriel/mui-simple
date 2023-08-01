@@ -13,7 +13,8 @@ export { default as InputGoogleAddress } from './components/Autocomplete/InputGo
 export { default as Avatar } from './components/_FIXED/Avatar/Avatar';
 export type { AvatarProps } from './components/_FIXED/Avatar/Avatar';
 
-export { default as Backdrop } from './components/Backdrop/Backdrop';
+export { default as Backdrop } from './components/_FIXED/Backdrop/Backdrop';
+export type { BackdropProps } from './components/_FIXED/Backdrop/Backdrop';
 
 export { default as Badge } from './components/_FIXED/Badge/Badge';
 export type { BadgeProps } from './components/_FIXED/Badge/Badge';
@@ -109,8 +110,12 @@ export { default as CircularProgress } from './components/Progress/CircularProgr
 export { default as LinearProgress } from './components/Progress/LinearProgress/LinearProgress';
 
 export { default as RadioButtonsGroup } from './components/_FIXED/RadioButtonsGroup/RadioButtonsGroup';
+export type { RadioButtonsGroupProps } from './components/_FIXED/RadioButtonsGroup/RadioButtonsGroup';
+
 export { default as Rating } from './components/Rating/Rating';
-export { RippleBox } from './components/RippleBox/RippleBox';
+
+export { default as RippleBox } from './components/_FIXED/RippleBox/RippleBox';
+export type { RippleBoxProps } from './components/_FIXED/RippleBox/RippleBox';
 
 export { default as Skeleton } from './components/Skeleton/Skeleton';
 export { default as Slider } from './components/Slider/Slider';

@@ -1,16 +1,12 @@
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
+import type { PropsWithChildren } from 'react';
 import TouchRipple from '@mui/material/ButtonBase/TouchRipple';
 
 import { Wrapper } from './RippleBox.styled';
-import { useCustomColor } from '../../utils/helpers';
+import { useCustomColor } from '../../../utils/helpers';
+import type { RippleBoxProps } from '../../decs';
 
-interface RippleBoxProps {
-    color?: string;
-    [key: string]: any;
-}
-
-export function RippleBox({ color, children }: RippleBoxProps) {
+const RippleBox: React.FC<PropsWithChildren<RippleBoxProps>> = ({ color, children }): React.ReactElement => {
     const [customColor, muiColor] = useCustomColor(color ?? 'primary');
 
     const rippleRef = useRef(null);
@@ -33,13 +29,11 @@ export function RippleBox({ color, children }: RippleBoxProps) {
             <TouchRipple ref={rippleRef} center={false} />
         </Wrapper>
     );
-}
-
-RippleBox.propTypes = {
-    color: PropTypes.string,
-    children: PropTypes.node.isRequired,
 };
 
 RippleBox.defaultProps = {
     color: undefined,
 };
+
+export type { RippleBoxProps } from '../../decs';
+export default RippleBox;

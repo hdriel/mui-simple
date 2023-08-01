@@ -39,6 +39,13 @@ export interface AvatarProps {
     [key: string]: any;
 }
 
+export interface BackdropProps {
+    color?: string;
+    invisible?: boolean;
+    onClick?: () => void;
+    open: boolean;
+    [key: string]: any;
+}
 export interface BadgeProps {
     color?: string;
     content?: string | number;
@@ -521,6 +528,11 @@ export interface BreadcrumbsProps {
     maxItems?: number;
     separator?: string | ReactNode;
     size?: string | number;
+    [key: string]: any;
+}
+
+export interface RippleBoxProps {
+    color?: string;
     [key: string]: any;
 }
 

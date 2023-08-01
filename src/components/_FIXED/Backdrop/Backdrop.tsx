@@ -1,14 +1,8 @@
 import React from 'react';
-import type { ReactNode, PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import { Backdrop as MuiBackdrop } from './Backdrop.styled';
+import type { BackdropProps } from '../../decs';
 
-interface BackdropProps {
-    onClick?: () => void;
-    open: boolean;
-    color?: string;
-    invisible?: boolean;
-    [key: string]: any;
-}
 const Backdrop: React.FC<PropsWithChildren<BackdropProps>> = function (props): React.ReactElement {
     const { open, color, onClick, invisible, ...rest } = props;
 
@@ -16,9 +10,10 @@ const Backdrop: React.FC<PropsWithChildren<BackdropProps>> = function (props): R
 };
 
 Backdrop.defaultProps = {
-    onClick: undefined,
     color: '#fff',
     invisible: undefined,
+    onClick: undefined,
 };
 
+export type { BackdropProps } from '../../decs';
 export default Backdrop;
