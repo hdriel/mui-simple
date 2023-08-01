@@ -23,13 +23,6 @@ export const Default: Story = {
     },
 };
 
-export const UseStyleBreadCrumb: Story = {
-    args: {
-        useStyleBreadCrumb: true,
-        children: 'Bread Crumbs Style',
-    },
-};
-
 export const AlignEndIcon: Story = {
     args: {
         alignEndIcon: true,

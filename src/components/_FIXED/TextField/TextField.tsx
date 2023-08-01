@@ -56,7 +56,7 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
                 focused={focused}
                 FormHelperTextProps={{ ...FormHelperTextProps }}
                 InputLabelProps={{ ...InputLabelProps }}
-                onBlur={(...args) => onBlur?.(...args)}
+                onBlur={onBlur}
                 onChange={handleOnChange}
                 onFocus={onFocusHandler}
                 value={value}
@@ -78,7 +78,12 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
                             </InputAdornment>
                         ),
                     }),
-                    sx: { alignItems: alignActions, direction, letterSpacing, ...InputProps?.sx },
+                    sx: {
+                        alignItems: alignActions,
+                        letterSpacing,
+                        ...(direction && { direction: `${direction} !important` }),
+                        ...InputProps?.sx,
+                    },
                 }}
                 {...rest}
             />

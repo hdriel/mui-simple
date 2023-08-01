@@ -71,8 +71,8 @@ export function getCustomColor(
     }: getCustomColorOptionsProps = {}
 ): [string, string] {
     const customColor = props?.[field] ?? props?.customColor;
-    if (!customColor) return [];
-    if (Array.isArray(customColor)) return customColor;
+    if (!customColor) return [undefined, undefined];
+    if (Array.isArray(customColor)) return customColor as [string, string];
     if (customColor === 'inherit') return [undefined, 'inherit'];
 
     let color =
@@ -81,7 +81,7 @@ export function getCustomColor(
         toHex(customColor) ??
         customColor;
 
-    if (!isValidColor(color)) return [];
+    if (!isValidColor(color)) return [undefined, undefined];
     const isMuiColor = color && color !== customColor;
 
     color = isDefined(opacity) ? alpha(color, opacity) : color;

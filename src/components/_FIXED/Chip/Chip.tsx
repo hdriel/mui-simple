@@ -30,7 +30,7 @@ function Chip(props: PropsWithChildren<ChipProps>): ReactElement {
 
     return (
         <MuiChip
-            color={muiColor}
+            color={muiColor as any}
             customColor={muiColor ? undefined : customColor}
             deleteIcon={typeof endIcon === 'string' ? <SVGIcon>{endIcon}</SVGIcon> : (endIcon as any)}
             icon={typeof startIcon === 'string' ? <SVGIcon>{startIcon}</SVGIcon> : (startIcon as any)}
@@ -47,7 +47,6 @@ function Chip(props: PropsWithChildren<ChipProps>): ReactElement {
 Chip.defaultProps = {
     alignEndIcon: undefined,
     avatar: undefined,
-    useStyleBreadCrumb: undefined,
     color: undefined,
     disabled: undefined,
     endIcon: undefined,

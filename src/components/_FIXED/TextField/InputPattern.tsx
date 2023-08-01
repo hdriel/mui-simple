@@ -5,8 +5,8 @@ import Input from './TextField';
 import { isDefined } from '../../../utils/helpers';
 import type { InputPatternProps } from '../../decs';
 
-const MaskedInput = IMaskMixin(({ inputRef, value, onChange, ...otherProps }) => {
-    return <Input inputRef={inputRef} value={value} onChange={onChange} {...otherProps} />;
+const MaskedInput: any = IMaskMixin(({ inputRef, ...otherProps }) => {
+    return <Input inputRef={inputRef} {...otherProps} />;
 });
 
 const InputPattern: React.FC<InputPatternProps> = ({

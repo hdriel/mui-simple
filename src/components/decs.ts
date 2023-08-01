@@ -39,6 +39,19 @@ export interface AvatarProps {
     [key: string]: any;
 }
 
+export interface BadgeProps {
+    color?: string;
+    content?: string | number;
+    hide?: boolean;
+    horizontal?: 'right' | 'left';
+    max?: number;
+    overlap?: 'circular';
+    showZero?: boolean;
+    variant?: 'dot';
+    vertical?: 'top' | 'bottom';
+    [key: string]: any;
+}
+
 export interface ButtonProps {
     color?: string;
     disabled?: boolean;
@@ -396,10 +409,12 @@ export type InputMultipleSelectProps = Omit<InputSelectProps, 'value'> & {
 };
 
 export interface LinkProps {
-    url?: string;
     color?: string;
-    underline?: 'always' | 'hover' | 'none';
+    icon?: string | ReactNode;
+    label?: string;
     size?: string | number;
+    underline?: 'always' | 'hover' | 'none';
+    url?: string;
     [key: string]: any;
 }
 
@@ -487,6 +502,16 @@ export interface MenuProps {
 }
 
 export type ContextMenuProps = MenuProps & { reopen?: boolean };
+
+export interface BreadcrumbsProps {
+    chips?: Array<string | ChipProps>;
+    color?: string;
+    links?: Array<string | LinkProps>;
+    maxItems?: number;
+    separator?: string | ReactNode;
+    size?: string | number;
+    [key: string]: any;
+}
 
 export interface SnackbarProps {
     actions?: Array<string | ButtonProps>;

@@ -1,12 +1,12 @@
 {
     "compilerOptions": {
         "allowJs": true,
+        "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "baseUrl": ".",
         "declaration": true,
         "declarationDir": "dist",
         "declarationMap": true,
-        "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "isolatedModules": true,
         "jsx": "react",
@@ -37,5 +37,6 @@
         "storybook-static",
         "public",
         "src/**/__stories__"
-    ]
+    ],
+    "references": [{ "path": "src", "prepend": true }]
 }

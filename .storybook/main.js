@@ -1,19 +1,16 @@
 import path from 'path';
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+
 const config = {
     stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
     framework: {
         name: '@storybook/react-webpack5',
         options: {},
     },
-    core: {
-        disableTelemetry: true,
-    },
+    core: { disableTelemetry: true },
     // core: { builder: 'webpack5' },
-    docs: {
-        autodocs: 'tag',
-    },
+    docs: { autodocs: 'tag' },
     // basePath: '/storybook/',
     staticDirs: ['../public'],
     addons: [

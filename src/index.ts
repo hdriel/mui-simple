@@ -14,12 +14,15 @@ export { default as Avatar } from './components/_FIXED/Avatar/Avatar';
 export type { AvatarProps } from './components/_FIXED/Avatar/Avatar';
 
 export { default as Backdrop } from './components/Backdrop/Backdrop';
-export { default as Badge } from './components/Badge/Badge';
+
+export { default as Badge } from './components/_FIXED/Badge/Badge';
+export type { BadgeProps } from './components/_FIXED/Badge/Badge';
 
 export { default as BottomNavigation } from './components/_FIXED/BottomNavigation/BottomNavigation';
 export type { BottomNavigationProps } from './components/_FIXED/BottomNavigation/BottomNavigation';
 
-export { default as Breadcrumbs } from './components/Breadcrumbs/Breadcrumbs';
+export { default as Breadcrumbs } from './components/_FIXED/Breadcrumbs/Breadcrumbs';
+export type { BreadcrumbsProps } from './components/_FIXED/Breadcrumbs/Breadcrumbs';
 
 export { default as Button } from './components/_FIXED/Button/Button';
 export type { ButtonProps } from './components/_FIXED/Button/Button';
