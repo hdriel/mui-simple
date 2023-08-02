@@ -6,6 +6,7 @@ import { Send as SendIcon } from '@mui/icons-material';
 import { Stack } from '@mui/material';
 
 import InputPhone from '../InputPhone';
+import { action } from '@storybook/addon-actions';
 
 const meta: Meta<typeof InputPhone> = {
     title: 'Inputs/Inputs/InputPhone',
@@ -216,7 +217,16 @@ export const OnChangeText: Story = {
     },
     render: (args) => {
         const [value, setValue] = useState('');
-        return <InputPhone {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+        return (
+            <InputPhone
+                {...args}
+                value={value}
+                onChange={(e) => {
+                    setValue(e.target.value);
+                    action('onChange')(e.target.value);
+                }}
+            />
+        );
     },
 };
 

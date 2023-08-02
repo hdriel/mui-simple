@@ -17,6 +17,8 @@ const InputPattern: React.FC<InputPatternProps> = ({
     name,
     onAccept,
     onChange,
+    onEnterKeyPress,
+    onKeyPress,
     onFocus,
     placeholder,
     showMaskAsPlaceholder,
@@ -73,6 +75,13 @@ const InputPattern: React.FC<InputPatternProps> = ({
                         setMaskedValue(mask._unmaskedValue);
                         onAccept?.(value, mask);
                     }}
+                    onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                            setIsOnFocus(false);
+                            onEnterKeyPress?.();
+                        }
+                        onKeyPress?.(e);
+                    }}
                 />
                 {helperText && <FormHelperText error={error}>{helperText}</FormHelperText>}
             </Box>
@@ -81,16 +90,18 @@ const InputPattern: React.FC<InputPatternProps> = ({
 };
 
 InputPattern.defaultProps = {
-    mask: undefined,
-    direction: 'ltr',
-    textAlign: undefined,
-    definitions: undefined,
-    blocks: undefined,
-    overwrite: undefined,
     autofix: undefined,
+    blocks: undefined,
+    definitions: undefined,
+    direction: 'ltr',
     lazy: undefined,
-    unmask: undefined,
+    mask: undefined,
+    onEnterKeyPress: undefined,
+    onKeyPress: undefined,
+    overwrite: undefined,
     showMaskAsPlaceholder: true,
+    textAlign: undefined,
+    unmask: undefined,
     value: '', // stay this value, to prevent from component to be disabled on missing provider value
 };
 

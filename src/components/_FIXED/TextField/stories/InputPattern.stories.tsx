@@ -339,7 +339,7 @@ export const Overwrite: Story = {
     },
 };
 
-export const Lazy_ = (args) => (
+export const Lazy_ = (args): React.ReactElement => (
     <Stack spacing={3}>
         <InputPattern label="ID default Lazy" mask="0 0000000 0" definitions={{ '#': /[1-9]/ }} />
         <InputPattern label="ID true Lazy" mask="0 0000000 0" definitions={{ '#': /[1-9]/ }} lazy />

@@ -289,15 +289,17 @@ export type InputColorProps = InputBaseProps & {
 };
 
 export type InputPatternProps = InputBaseProps & {
-    mask?: ((event: any) => void) | string | any[];
-    definitions?: object;
-    blocks?: object;
-    overwrite?: boolean;
     autofix?: boolean;
+    blocks?: object;
+    definitions?: object;
     lazy?: boolean;
-    unmask?: boolean;
-    showMaskAsPlaceholder?: boolean;
+    mask?: ((event: any) => void) | string | any[];
+    onEnterKeyPress?: () => void;
+    onKeyPress?: (event: any) => void;
+    overwrite?: boolean;
     placeholder?: string;
+    showMaskAsPlaceholder?: boolean;
+    unmask?: boolean;
     [key: string]: any;
 };
 
