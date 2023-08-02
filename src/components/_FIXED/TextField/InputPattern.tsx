@@ -17,7 +17,6 @@ const InputPattern: React.FC<InputPatternProps> = ({
     name,
     onBlur,
     onAccept,
-    onChange,
     onEnterKeyPress,
     onKeyPress,
     onFocus,
@@ -31,7 +30,7 @@ const InputPattern: React.FC<InputPatternProps> = ({
     const [maskedValue, setMaskedValue] = useState(_value); // for example: '+(972) 50-000-0000'
     const [unmaskedValue, setUnmaskedValue] = useState(_value); // for example: '0-000-0000'
     const [isOnFocus, setIsOnFocus] = useState(false);
-    const [hasFirstFocus, setHasFirstFocus] = useState(false);
+    // const [hasFirstFocus, setHasFirstFocus] = useState(false);
 
     const lazy = useMemo(() => {
         if (isDefined(_lazy)) return !!_lazy;
@@ -71,12 +70,6 @@ const InputPattern: React.FC<InputPatternProps> = ({
                     onFocus={(e) => {
                         setIsOnFocus(true);
                         onFocus?.(e);
-                    }}
-                    onChange={(e) => {
-                        const value = e.target.value;
-                        setUnmaskedValue(value);
-                        setMaskedValue(value);
-                        onChange?.(e);
                     }}
                     onAccept={(value, mask) => {
                         setUnmaskedValue(mask._value);

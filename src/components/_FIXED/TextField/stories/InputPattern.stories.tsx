@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useReducer, useState } from 'react';
+import React, { useState } from 'react';
 import type { ReactElement } from 'react';
+import { Formik } from 'formik';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Send as SendIcon } from '@mui/icons-material';
 import { Stack } from '@mui/material';
@@ -8,6 +9,7 @@ import { Stack } from '@mui/material';
 import InputPattern from '../InputPattern';
 import { IMask } from 'react-imask';
 import { action } from '@storybook/addon-actions';
+import { values } from 'lodash-es';
 
 const meta: Meta<typeof InputPattern> = {
     title: 'Inputs/Inputs/InputPattern',
@@ -356,3 +358,33 @@ export const Lazy_ = (args): React.ReactElement => (
         <InputPattern label="ID false Lazy" mask="0 0000000 0" definitions={{ '#': /[1-9]/ }} lazy={false} />
     </Stack>
 );
+
+export const Formik_ = (args) => {
+    const [value, setValue] = useState('');
+
+    return (
+        <Formik
+            initialValues={{ phone: value }}
+            onSubmit={(values) => {
+                alert(values.phone);
+                setValue(values.phone);
+            }}
+        >
+            {({ values, setFieldValue }) => {
+                action('formikRender')(values);
+                return (
+                    <InputPattern
+                        name="phone"
+                        value={values.phone}
+                        label="Phone"
+                        mask="+(972) 50-000-0000"
+                        definitions={{ '#': /[1-9]/ }}
+                        unmask
+                        showMaskAsPlaceholder={false}
+                        onAccept={(value, mask) => setFieldValue('phone', mask._value)}
+                    />
+                );
+            }}
+        </Formik>
+    );
+};

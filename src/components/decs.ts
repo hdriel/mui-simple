@@ -296,6 +296,7 @@ export type InputPatternProps = InputBaseProps & {
     mask?: ((event: any) => void) | string | any[];
     onEnterKeyPress?: () => void;
     onKeyPress?: (event: any) => void;
+    onAccept: (value, mask: { _value: string; [key: string]: any }) => void;
     overwrite?: boolean;
     placeholder?: string;
     showMaskAsPlaceholder?: boolean;

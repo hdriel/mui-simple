@@ -1,6 +1,6 @@
 {
     "name": "mui-simple",
-    "version": "1.6.11",
+    "version": "1.6.12",
     "description": "override mui components to simplify usage",
     "license": "MIT",
     "author": "Hadriel Benjo (https://github.com/hdriel)",
@@ -161,6 +161,7 @@
         "eslint-plugin-storybook": "^0.6.13",
         "eslint-plugin-testing-library": "^5.0.4",
         "eslint-webpack-plugin": "^4.0.1",
+        "formik": "^2.4.3",
         "fs": "^0.0.1-security",
         "gh-pages": "^5.0.0",
         "husky": "^8.0.3",
