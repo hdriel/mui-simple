@@ -6,7 +6,6 @@ import { copyToClipboard } from '../../../utils/helpers';
 import Snackbar from '../Snackbar/Snackbar';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 import type { InputPhoneProps } from '../../decs';
-import { FormHelperText } from '../Select/InputSelect.styled';
 
 const InputPhone: React.FC<InputPhoneProps> = ({
     name,

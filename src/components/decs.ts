@@ -303,7 +303,7 @@ export type InputPatternProps = InputBaseProps & {
     [key: string]: any;
 };
 
-export type InputPhoneProps = InputBaseProps & {
+export type InputPhoneProps = InputPatternProps & {
     showMaskAsPlaceholder?: boolean;
     copyTooltip?: string;
     copyMessage?: string;

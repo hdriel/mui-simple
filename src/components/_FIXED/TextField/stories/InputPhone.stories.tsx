@@ -275,3 +275,12 @@ export const Variant_ = (args): ReactElement => (
         <InputPhone variant="standard" label="standard variant" value="some text here" />
     </Stack>
 );
+
+export const CopyAction: Story = {
+    args: {
+        value: '0501234567',
+        copyAction: true,
+        copyMessage: 'COPIED!',
+        copyTooltip: 'copy tooltip',
+    },
+};
