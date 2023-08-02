@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Stack } from '@mui/material';
 
 import { Pagination as MuiPagination, PaginationItem } from './Pagination.styled';
@@ -14,31 +13,54 @@ import { isDefined, useCustomColor } from '../../utils/helpers';
 //   return parseInt(query.get(pageParamFieldName) || "1", 10);
 // }
 
-export default function Pagination({
-    orientation,
-    label,
+interface PaginationProps {
+    color: string;
+    disabled: boolean;
+    disabledPages: number[];
+    firstIconCmpCB: React.ReactNode;
+    label: string;
+    lastIconCmpCB: React.ReactNode;
+    maxBoundaryPagesVisible: number;
+    maxPagesVisible: number;
+    nextIconCmpCB: React.ReactNode;
+    onChange: (event: any) => void;
+    orientation: 'horizontal' | 'vertical';
+    page: number;
+    pageToLink: ((page: number) => string) | string;
+    prevIconCmpCB: React.ReactNode;
+    shape: 'circular' | 'rounded';
+    showFirstButton: boolean;
+    showLastButton: boolean;
+    size: 'small' | 'medium' | 'large';
+    totalPages: number;
+    variant: 'outlined' | 'text';
+}
+
+const Pagination: React.FC<PaginationProps> = ({
     color,
-    totalPages,
     disabled,
     disabledPages,
-    variant,
-    size,
-    prevIconCmpCB,
-    nextIconCmpCB,
     firstIconCmpCB,
+    label,
     lastIconCmpCB,
+    maxBoundaryPagesVisible,
+    maxPagesVisible,
+    nextIconCmpCB,
+    onChange,
+    orientation,
+    page,
+    pageToLink,
+    prevIconCmpCB,
     showFirstButton,
     showLastButton,
-    page,
-    onChange,
-    maxPagesVisible,
-    maxBoundaryPagesVisible,
-    pageToLink,
+    size,
+    totalPages,
+    variant,
     ...props
-}) {
+}): React.ReactElement => {
     const [customColor, muiColor] = useCustomColor(color);
 
-    const pageToLinkHandler = (page) => {
+    const pageToLinkHandler = (page): string | undefined => {
         switch (typeof pageToLink) {
             case 'function':
                 return pageToLink?.(page);
@@ -63,8 +85,8 @@ export default function Pagination({
                 size={size}
                 showFirstButton={showFirstButton === undefined && page && page > 1 ? true : showFirstButton}
                 showLastButton={showLastButton === undefined && page && page < totalPages ? true : showLastButton}
-                siblingCount={maxPagesVisible ? maxPagesVisible : undefined}
-                boundaryCount={maxBoundaryPagesVisible ? maxBoundaryPagesVisible : undefined}
+                siblingCount={maxPagesVisible || undefined}
+                boundaryCount={maxBoundaryPagesVisible || undefined}
                 page={page}
                 onChange={(event, nextPage) => onChange?.(nextPage)}
                 renderItem={(item) => {
@@ -87,49 +109,28 @@ export default function Pagination({
             />
         </Stack>
     );
-}
-
-Pagination.propTypes = {
-    orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-    label: PropTypes.string,
-    color: PropTypes.string,
-    disabled: PropTypes.bool,
-    disabledPages: PropTypes.arrayOf(PropTypes.number),
-    variant: PropTypes.oneOf(['outlined', 'text']),
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    shape: PropTypes.oneOf(['circular', 'rounded']),
-    prevIconCmpCB: PropTypes.any,
-    nextIconCmpCB: PropTypes.any,
-    firstIconCmpCB: PropTypes.any,
-    lastIconCmpCB: PropTypes.any,
-    showFirstButton: PropTypes.bool,
-    showLastButton: PropTypes.bool,
-    totalPages: PropTypes.number,
-    maxPagesVisible: PropTypes.number,
-    maxBoundaryPagesVisible: PropTypes.number,
-    page: PropTypes.number,
-    onChange: PropTypes.func,
-    pageToLink: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
 };
 
 Pagination.defaultProps = {
-    orientation: 'horizontal',
-    label: undefined,
     color: undefined,
     disabled: undefined,
-    variant: undefined,
-    size: undefined,
+    firstIconCmpCB: undefined,
+    label: undefined,
+    lastIconCmpCB: undefined,
+    maxBoundaryPagesVisible: undefined,
+    maxPagesVisible: undefined,
+    nextIconCmpCB: undefined,
+    onChange: undefined,
+    orientation: 'horizontal',
+    page: undefined,
+    pageToLink: undefined,
+    prevIconCmpCB: undefined,
     shape: 'rounded',
     showFirstButton: undefined,
     showLastButton: undefined,
-    prevIconCmpCB: undefined,
-    nextIconCmpCB: undefined,
-    firstIconCmpCB: undefined,
-    lastIconCmpCB: undefined,
+    size: undefined,
     totalPages: undefined,
-    maxPagesVisible: undefined,
-    maxBoundaryPagesVisible: undefined,
-    page: undefined,
-    onChange: undefined,
-    pageToLink: undefined,
+    variant: undefined,
 };
+
+export default Pagination;
