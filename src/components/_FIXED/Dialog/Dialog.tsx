@@ -20,7 +20,7 @@ function Dialog(props: PropsWithChildren<DialogProps>): ReactNode {
         children,
         contentId,
         dividers,
-        draggable,
+        draggable, // todo: draggable not working, hide the dialog
         fullScreen,
         onClose,
         open,
