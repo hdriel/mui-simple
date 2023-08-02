@@ -39,7 +39,8 @@ export type { CheckboxProps } from './components/_FIXED/Checkbox/Checkbox';
 export { default as Chip } from './components/_FIXED/Chip/Chip';
 export type { ChipProps } from './components/_FIXED/Chip/Chip';
 
-export { default as Dialog } from './components/Dialog/Dialog';
+export { default as Dialog, DialogContentText } from './components/_FIXED/Dialog/Dialog';
+export type { DialogProps } from './components/_FIXED/Dialog/Dialog';
 
 export { default as Divider } from './components/_FIXED/Divider/Divider';
 export type { DividerProps } from './components/_FIXED/Divider/Divider';

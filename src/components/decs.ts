@@ -1,6 +1,7 @@
 import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent } from 'react';
 import type { SxProps } from '@mui/material';
 import { number } from 'prop-types';
+import { MouseEventHandler } from 'react';
 
 export interface AccordionProps {
     bgColor?: string;
@@ -113,6 +114,23 @@ export interface BottomNavigationProps {
     showLabels?: boolean;
     value?: number | string;
     width?: number | string;
+    [key: string]: any;
+}
+
+export interface DialogProps {
+    open: boolean;
+    onClose?: (value: string) => void;
+    selectedValue?: string;
+    title?: string | ReactNode;
+    titleId?: string;
+    contentId?: string;
+    fullWidth?: boolean;
+    dividers?: boolean;
+    autoContentPadding?: boolean;
+    draggable?: boolean;
+    maxWidth?: false | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    fullScreen?: false | true | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    actions?: ButtonProps[];
     [key: string]: any;
 }
 
