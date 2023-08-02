@@ -55,6 +55,11 @@ const InputPattern: React.FC<InputPatternProps> = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isOnFocus]);
 
+    useEffect(() => {
+        setMaskedValue(_value);
+        setUnmaskedValue(_value);
+    }, [_value]);
+
     return (
         <ClickAwayListener onClickAway={() => setIsOnFocus(false)}>
             <Box>
