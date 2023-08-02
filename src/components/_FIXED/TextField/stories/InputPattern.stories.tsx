@@ -7,6 +7,7 @@ import { Stack } from '@mui/material';
 
 import InputPattern from '../InputPattern';
 import { IMask } from 'react-imask';
+import { action } from '@storybook/addon-actions';
 
 const meta: Meta<typeof InputPattern> = {
     title: 'Inputs/Inputs/InputPattern',
@@ -215,7 +216,16 @@ export const OnChangeText: Story = {
     },
     render: (args) => {
         const [value, setValue] = useState('');
-        return <InputPattern {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+        return (
+            <InputPattern
+                {...args}
+                value={value}
+                onChange={(e) => {
+                    setValue(e.target.value);
+                    action('onChange')(e.target.value);
+                }}
+            />
+        );
     },
 };
 

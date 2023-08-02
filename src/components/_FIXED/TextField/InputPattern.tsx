@@ -15,6 +15,7 @@ const InputPattern: React.FC<InputPatternProps> = ({
     inputRef,
     lazy: _lazy,
     name,
+    onBlur,
     onAccept,
     onChange,
     onEnterKeyPress,
@@ -40,25 +41,21 @@ const InputPattern: React.FC<InputPatternProps> = ({
         return !unmaskedValue;
     }, [_lazy, isOnFocus, placeholder, showMaskAsPlaceholder, unmaskedValue]);
 
-    useEffect(() => {
-        if (hasFirstFocus && !isOnFocus) {
-            if (!unmaskedValue) {
-                setMaskedValue('');
-                setUnmaskedValue('');
-                onChange?.({ target: { name, value: '' } });
-            } else {
-                onChange?.({ target: { name, value: unmask ? unmaskedValue : maskedValue } });
-            }
-        } else {
-            if (!hasFirstFocus) setHasFirstFocus(true);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isOnFocus]);
-
-    useEffect(() => {
-        setMaskedValue(_value);
-        setUnmaskedValue(_value);
-    }, [_value]);
+    // useEffect(() => {
+    //     if (hasFirstFocus && !isOnFocus) {
+    //         if (!unmaskedValue) {
+    //             setMaskedValue('');
+    //             setUnmaskedValue('');
+    //             onChange?.({ target: { name, value: '' } });
+    //         } else {
+    //             const value = unmask ? unmaskedValue : maskedValue;
+    //             onChange?.({ target: { name, value } });
+    //         }
+    //     } else {
+    //         if (!hasFirstFocus) setHasFirstFocus(true);
+    //     }
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [isOnFocus]);
 
     return (
         <ClickAwayListener onClickAway={() => setIsOnFocus(false)}>
@@ -75,6 +72,12 @@ const InputPattern: React.FC<InputPatternProps> = ({
                         setIsOnFocus(true);
                         onFocus?.(e);
                     }}
+                    onChange={(e) => {
+                        const value = e.target.value;
+                        setUnmaskedValue(value);
+                        setMaskedValue(value);
+                        onChange?.(e);
+                    }}
                     onAccept={(value, mask) => {
                         setUnmaskedValue(mask._value);
                         setMaskedValue(mask._unmaskedValue);
@@ -84,8 +87,9 @@ const InputPattern: React.FC<InputPatternProps> = ({
                         if (e.key === 'Enter') {
                             setIsOnFocus(false);
                             onEnterKeyPress?.();
+                        } else {
+                            onKeyPress?.(e);
                         }
-                        onKeyPress?.(e);
                     }}
                 />
                 {helperText && <FormHelperText error={error}>{helperText}</FormHelperText>}
