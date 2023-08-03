@@ -29,6 +29,7 @@ const InputPhone: React.FC<InputPhoneProps> = ({
     return (
         <>
             <InputPattern
+                showMaskAsPlaceholder
                 {...props}
                 inputRef={ref}
                 name={name}
@@ -36,7 +37,6 @@ const InputPhone: React.FC<InputPhoneProps> = ({
                 /* eslint-disable no-octal-escape */
                 mask="\050-000-0000"
                 type="tel"
-                showMaskAsPlaceholder
                 endCmp={
                     <>
                         {endCmp}
@@ -63,10 +63,22 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 };
 
 InputPhone.defaultProps = {
-    showMaskAsPlaceholder: undefined,
     copyTooltip: 'copy',
     copyMessage: 'Copied to clipboard',
     copyAction: false,
+    autofix: undefined,
+    blocks: undefined,
+    definitions: undefined,
+    direction: 'ltr',
+    lazy: undefined,
+    mask: undefined,
+    onEnterKeyPress: undefined,
+    onKeyPress: undefined,
+    overwrite: undefined,
+    showMaskAsPlaceholder: true,
+    textAlign: undefined,
+    unmask: undefined,
+    value: '', // stay this value, to prevent from component to be disabled on missing provider value
 };
 
 export type { InputPhoneProps } from '../../decs';

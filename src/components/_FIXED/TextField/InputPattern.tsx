@@ -28,8 +28,9 @@ const InputPattern: React.FC<InputPatternProps> = ({
     ...props
 }): React.ReactElement => {
     // for example output for mask: '+(972) 50-000-0000'
-    const [maskedValue, setMaskedValue] = useState(_value); // for example: '+(972) 50-000-0000'
-    const [unmaskedValue, setUnmaskedValue] = useState(_value); // for example: '0-000-0000'
+    const [maskedValue, setMaskedValue] = useState(''); // for example: '0-000-0000'
+    const [unmaskedValue, setUnmaskedValue] = useState(''); // for example: '0-000-0000'
+    const [isExceptionValue, setIsExceptionValue] = useState(false); // for value: '0'
     const [isOnFocus, setIsOnFocus] = useState(false);
 
     const lazy = useMemo(() => {
@@ -40,25 +41,43 @@ const InputPattern: React.FC<InputPatternProps> = ({
         return !unmaskedValue;
     }, [_lazy, isOnFocus, placeholder, showMaskAsPlaceholder, unmaskedValue]);
 
+    let value = unmask ? unmaskedValue : maskedValue;
+    if (isExceptionValue) value = unmask ? '0' : value.replace('_', '0');
+
+    useEffect(() => {
+        const maskEqual = unmask ? true : _value === maskedValue;
+        const unmaskEqual = unmask ? _value === unmaskedValue : true;
+        if (!maskEqual || !unmaskEqual) {
+            if (unmask) setUnmaskedValue(_value);
+            else setMaskedValue(_value);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [_value]);
+
     return (
         <ClickAwayListener onClickAway={() => setIsOnFocus(false)}>
             <Box>
                 <MaskedInput
                     {...props}
-                    name={name}
                     inputRef={inputRef}
-                    value={maskedValue}
-                    focused={!!maskedValue || isOnFocus}
-                    lazy={lazy}
+                    name={name}
                     unmask={unmask}
+                    value={isExceptionValue ? '000' : value}
+                    focused={!!_value || isOnFocus}
+                    lazy={lazy}
                     onFocus={(e) => {
                         setIsOnFocus(true);
                         onFocus?.(e);
                     }}
                     onAccept={(changeValue, mask) => {
-                        setUnmaskedValue(mask._value);
-                        setMaskedValue(mask._unmaskedValue);
-                        onAccept?.(changeValue, mask);
+                        if (mask._unmaskedValue === '0') {
+                            setIsExceptionValue(true);
+                            onChange?.({ target: { name, value: '0' } });
+                            return;
+                        }
+                        setIsExceptionValue(false);
+                        setMaskedValue(mask._value);
+                        setUnmaskedValue(mask._unmaskedValue);
                         const value = unmask ? mask._unmaskedValue : mask._value;
                         onChange?.({ target: { name, value } });
                     }}
