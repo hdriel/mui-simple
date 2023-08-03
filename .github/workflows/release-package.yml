@@ -23,8 +23,7 @@ jobs:
 
             - name: building package
               run: | # Install npm packages and build lib output before publish
-                  npm set-script prepare ""
-                  npm ci --only=production --force
+                  npm ci --only=production --force --ignore-scripts
                   npm run build:debug
 
             - name: publish step
