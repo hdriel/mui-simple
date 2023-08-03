@@ -17,7 +17,7 @@
         "predeploy": "npm run build-storybook",
         "deploy": "gh-pages -d storybook-static",
         "storybook-static-serve": "serve -s storybook-static -p 6007",
-        "prepare": "husky install"
+        "prepare-commit": "husky install"
     },
     "lint-staged": {
         "src/**/*.{js,jsx,ts,tsx,html.css}": "prettier --write .",
