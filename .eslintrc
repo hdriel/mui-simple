@@ -31,7 +31,7 @@
         "ecmaFeatures": { "jsx": true },
         "ecmaVersion": "latest",
         "sourceType": "module",
-        "project": "./tsconfig.json"
+        "project": "tsconfig.json"
     },
     "plugins": ["react", "jest-dom", "testing-library", "@typescript-eslint", "prettier"],
     "rules": {
