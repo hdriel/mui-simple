@@ -17,6 +17,7 @@ const InputPattern: React.FC<InputPatternProps> = ({
     name,
     onBlur,
     onAccept,
+    onChange,
     onEnterKeyPress,
     onKeyPress,
     onFocus,
@@ -30,7 +31,6 @@ const InputPattern: React.FC<InputPatternProps> = ({
     const [maskedValue, setMaskedValue] = useState(_value); // for example: '+(972) 50-000-0000'
     const [unmaskedValue, setUnmaskedValue] = useState(_value); // for example: '0-000-0000'
     const [isOnFocus, setIsOnFocus] = useState(false);
-    // const [hasFirstFocus, setHasFirstFocus] = useState(false);
 
     const lazy = useMemo(() => {
         if (isDefined(_lazy)) return !!_lazy;
@@ -39,22 +39,6 @@ const InputPattern: React.FC<InputPatternProps> = ({
         if (showMaskAsPlaceholder) return false;
         return !unmaskedValue;
     }, [_lazy, isOnFocus, placeholder, showMaskAsPlaceholder, unmaskedValue]);
-
-    // useEffect(() => {
-    //     if (hasFirstFocus && !isOnFocus) {
-    //         if (!unmaskedValue) {
-    //             setMaskedValue('');
-    //             setUnmaskedValue('');
-    //             onChange?.({ target: { name, value: '' } });
-    //         } else {
-    //             const value = unmask ? unmaskedValue : maskedValue;
-    //             onChange?.({ target: { name, value } });
-    //         }
-    //     } else {
-    //         if (!hasFirstFocus) setHasFirstFocus(true);
-    //     }
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [isOnFocus]);
 
     return (
         <ClickAwayListener onClickAway={() => setIsOnFocus(false)}>
@@ -71,10 +55,12 @@ const InputPattern: React.FC<InputPatternProps> = ({
                         setIsOnFocus(true);
                         onFocus?.(e);
                     }}
-                    onAccept={(value, mask) => {
+                    onAccept={(changeValue, mask) => {
                         setUnmaskedValue(mask._value);
                         setMaskedValue(mask._unmaskedValue);
-                        onAccept?.(value, mask);
+                        onAccept?.(changeValue, mask);
+                        const value = unmask ? mask._unmaskedValue : mask._value;
+                        onChange?.({ target: { name, value } });
                     }}
                     onKeyPress={(e) => {
                         if (e.key === 'Enter') {
