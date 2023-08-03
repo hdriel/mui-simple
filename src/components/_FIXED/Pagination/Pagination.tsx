@@ -1,9 +1,11 @@
 import React from 'react';
 import { Stack } from '@mui/material';
+import * as MUIIcon from '@mui/icons-material';
 
 import { Pagination as MuiPagination, PaginationItem } from './Pagination.styled';
-import Typography from '../_FIXED/Typography/Typography';
-import { isDefined, useCustomColor } from '../../utils/helpers';
+import Typography from '../Typography/Typography';
+import { isDefined, useCustomColor } from '../../../utils/helpers';
+import type { PaginationProps } from '../../decs';
 
 // function useSearchParam(pageParamFieldName) {
 //   if (!pageParamFieldName) return;
@@ -13,76 +15,58 @@ import { isDefined, useCustomColor } from '../../utils/helpers';
 //   return parseInt(query.get(pageParamFieldName) || "1", 10);
 // }
 
-interface PaginationProps {
-    color: string;
-    disabled: boolean;
-    disabledPages: number[];
-    firstIconCmpCB: React.ReactNode;
-    label: string;
-    lastIconCmpCB: React.ReactNode;
-    maxBoundaryPagesVisible: number;
-    maxPagesVisible: number;
-    nextIconCmpCB: React.ReactNode;
-    onChange: (event: any) => void;
-    orientation: 'horizontal' | 'vertical';
-    page: number;
-    pageToLink: ((page: number) => string) | string;
-    prevIconCmpCB: React.ReactNode;
-    shape: 'circular' | 'rounded';
-    showFirstButton: boolean;
-    showLastButton: boolean;
-    size: 'small' | 'medium' | 'large';
-    totalPages: number;
-    variant: 'outlined' | 'text';
-}
+const pageToLinkHandler = (page, pageToLink): string | undefined => {
+    if (!pageToLink) return undefined;
+
+    switch (typeof pageToLink) {
+        case 'function':
+            return pageToLink?.(page);
+        case 'string':
+            return isDefined(page) ? pageToLink.replaceAll(/\{page\}/gi, page) : undefined;
+        default:
+            return undefined;
+    }
+};
 
 const Pagination: React.FC<PaginationProps> = ({
     color,
     disabled,
     disabledPages,
-    firstIconCmpCB,
+    IconFirst: _IconFirst,
+    IconLast: _IconLast,
+    IconNext: _IconNext,
+    IconPrev: _IconPrev,
     label,
-    lastIconCmpCB,
     maxBoundaryPagesVisible,
     maxPagesVisible,
-    nextIconCmpCB,
     onChange,
     orientation,
     page,
     pageToLink,
-    prevIconCmpCB,
     showFirstButton,
     showLastButton,
-    size,
     totalPages,
-    variant,
     ...props
 }): React.ReactElement => {
     const [customColor, muiColor] = useCustomColor(color);
-
-    const pageToLinkHandler = (page): string | undefined => {
-        switch (typeof pageToLink) {
-            case 'function':
-                return pageToLink?.(page);
-            case 'string':
-                return isDefined(page) ? pageToLink.replaceAll(/\{page\}/gi, page) : undefined;
-            default:
-                return undefined;
-        }
-    };
+    const IconFirst = typeof _IconFirst === 'string' ? MUIIcon[_IconFirst] : _IconFirst;
+    const IconLast = typeof _IconLast === 'string' ? MUIIcon[_IconLast] : _IconLast;
+    const IconNext = typeof _IconNext === 'string' ? MUIIcon[_IconNext] : _IconNext;
+    const IconPrev = typeof _IconPrev === 'string' ? MUIIcon[_IconPrev] : _IconPrev;
 
     return (
         <Stack spacing={1} sx={{ width: orientation === 'vertical' ? 'min-content' : 'max-content' }}>
             {label && (
-                <Typography wrap={false}>{isDefined(page) ? label?.replaceAll(/\{page\}/gi, page) : label}</Typography>
+                <Typography wrap={false}>
+                    {isDefined(page) ? label?.replaceAll(/\{page\}/gi, String(page)) : label}
+                </Typography>
             )}
+
             <MuiPagination
-                color={muiColor}
+                color={muiColor as any}
                 customColor={muiColor ? undefined : customColor}
                 count={totalPages}
                 disabled={disabled}
-                variant={variant}
-                size={size}
                 showFirstButton={showFirstButton === undefined && page && page > 1 ? true : showFirstButton}
                 showLastButton={showLastButton === undefined && page && page < totalPages ? true : showLastButton}
                 siblingCount={maxPagesVisible || undefined}
@@ -93,14 +77,19 @@ const Pagination: React.FC<PaginationProps> = ({
                     return (
                         <PaginationItem
                             {...item}
-                            disabled={item.disabled || disabledPages?.includes(item.page)}
+                            disabled={
+                                item.disabled ||
+                                (typeof disabledPages === 'function'
+                                    ? disabledPages(item.page)
+                                    : disabledPages?.includes(item.page))
+                            }
                             component={pageToLink ? 'a' : undefined}
-                            href={pageToLink ? pageToLinkHandler(item.page) : undefined}
+                            href={pageToLinkHandler(item.page, pageToLink)}
                             slots={{
-                                first: firstIconCmpCB,
-                                previous: prevIconCmpCB,
-                                next: nextIconCmpCB,
-                                last: lastIconCmpCB,
+                                first: IconFirst,
+                                previous: IconPrev,
+                                next: IconNext,
+                                last: IconLast,
                             }}
                         />
                     );
@@ -114,17 +103,18 @@ const Pagination: React.FC<PaginationProps> = ({
 Pagination.defaultProps = {
     color: undefined,
     disabled: undefined,
-    firstIconCmpCB: undefined,
+    disabledPages: undefined,
     label: undefined,
-    lastIconCmpCB: undefined,
+    IconFirst: undefined,
+    IconPrev: undefined,
+    IconNext: undefined,
+    IconLast: undefined,
     maxBoundaryPagesVisible: undefined,
     maxPagesVisible: undefined,
-    nextIconCmpCB: undefined,
     onChange: undefined,
     orientation: 'horizontal',
     page: undefined,
     pageToLink: undefined,
-    prevIconCmpCB: undefined,
     shape: 'rounded',
     showFirstButton: undefined,
     showLastButton: undefined,
@@ -133,4 +123,5 @@ Pagination.defaultProps = {
     variant: undefined,
 };
 
+export type { PaginationProps } from '../../decs';
 export default Pagination;

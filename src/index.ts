@@ -105,7 +105,7 @@ export type { MenuProps, MenuOption } from './components/_FIXED/Menu/Menu';
 export { default as ContextMenu } from './components/_FIXED/Menu/ContextMenu';
 export type { ContextMenuProps } from './components/_FIXED/Menu/ContextMenu';
 
-export { default as Pagination } from './components/Pagination/Pagination';
+export { default as Pagination } from './components/_FIXED/Pagination/Pagination';
 export { default as Paper } from './components/Paper/Paper';
 export { default as CircularProgress } from './components/Progress/CircularProgress/CircularProgress';
 export { default as LinearProgress } from './components/Progress/LinearProgress/LinearProgress';

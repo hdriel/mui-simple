@@ -1,7 +1,7 @@
 import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent } from 'react';
 import type { SxProps } from '@mui/material';
 import { number } from 'prop-types';
-import { MouseEventHandler } from 'react';
+import React, { MouseEventHandler } from 'react';
 
 export interface AccordionProps {
     bgColor?: string;
@@ -549,6 +549,30 @@ export interface BreadcrumbsProps {
     maxItems?: number;
     separator?: string | ReactNode;
     size?: string | number;
+    [key: string]: any;
+}
+
+export interface PaginationProps {
+    color?: string;
+    disabled?: boolean;
+    disabledPages?: number[] | ((page: number) => boolean);
+    IconFirst?: ReactNode | string;
+    IconLast?: ReactNode | string;
+    IconNext?: ReactNode | string;
+    IconPrev?: ReactNode | string;
+    label?: string;
+    maxBoundaryPagesVisible?: number;
+    maxPagesVisible?: number;
+    onChange?: (event: any) => void;
+    orientation?: 'horizontal' | 'vertical';
+    page?: number;
+    pageToLink?: ((page: number) => string) | string;
+    shape?: 'circular' | 'rounded';
+    showFirstButton?: boolean;
+    showLastButton?: boolean;
+    size?: 'small' | 'medium' | 'large';
+    totalPages?: number;
+    variant?: 'outlined' | 'text';
     [key: string]: any;
 }
 

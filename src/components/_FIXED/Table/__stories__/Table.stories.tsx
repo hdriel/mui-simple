@@ -4,7 +4,7 @@ import { FITNESS_DATA, FITNESS_COLUMNS, PERSON_DATA, PERSON_COLUMNS } from './Ta
 
 import { Table } from '../Table';
 import Button from '../../Button/Button';
-import Pagination from '../../../Pagination/Pagination';
+import Pagination from '../../Pagination/Pagination';
 import Typography from '../../Typography/Typography';
 
 const meta: Meta<typeof Table> = {
