@@ -42,15 +42,15 @@ const InputPattern: React.FC<InputPatternProps> = ({
 
     const value = unmask ? unmaskedValue : maskedValue;
 
-    useEffect(() => {
-        const maskEqual = unmask ? true : _value === maskedValue;
-        const unmaskEqual = unmask ? _value === unmaskedValue : true;
-        if (!maskEqual || !unmaskEqual) {
-            if (unmask) setUnmaskedValue(_value);
-            else setMaskedValue(_value);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [_value]);
+    // useEffect(() => {
+    //     const maskEqual = unmask ? true : _value === maskedValue;
+    //     const unmaskEqual = unmask ? _value === unmaskedValue : true;
+    //     if (!maskEqual || !unmaskEqual) {
+    //         if (unmask) setUnmaskedValue(_value);
+    //         else setMaskedValue(_value);
+    //     }
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [_value]);
 
     useEffect(() => {
         const value = unmask ? unmaskedValue : maskedValue;

@@ -290,16 +290,19 @@ export const CopyAction: Story = {
 export const Formik_ = (args): React.ReactElement => {
     return (
         <Formik initialValues={{ phone: '', unmask: false }} onSubmit={(values) => alert(values.phone)}>
-            {({ values, handleChange }) => {
+            {({ values, touched, handleChange, handleSubmit }) => {
                 action('formikRender')(values);
                 return (
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                         <InputPhone
+                            {...args}
                             name="phone"
                             label="Phone"
                             value={values.phone}
                             unmask={values.unmask}
                             onChange={handleChange}
+                            showMaskAsPlaceholder={touched.phone}
+                            onEnterKeyPress={handleSubmit}
                         />
                         <Checkbox name="unmask" label="unmask value" checked={values.unmask} onChange={handleChange} />
                         <Typography>VALUE: {values.phone}</Typography>
