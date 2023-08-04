@@ -24,6 +24,7 @@ jobs:
             - name: building package
               run: | # Install npm packages and build lib output before publish
                   npm ci --force --production
+                  npm i -D husky cross-env
                   npm run build:debug
 
             - name: publish step
