@@ -21,10 +21,13 @@ jobs:
                   registry-url: https://registry.npmjs.org/
                   scope: '@hdriel'
 
-            - name: building package
-              run: | # Install npm packages and build lib output before publish
+            - name: installing packages
+              run: | # Install npm packages
                   npm ci --force --production
                   npm i -D husky cross-env
+
+            - name: building package
+              run: | # build lib output before publish
                   npm run build:debug
 
             - name: publish step
