@@ -21,7 +21,9 @@ jobs:
 #                  npm i -D @emotion/react@11.11.1  @emotion/styled@11.11.0 @mui/icons-material@5.14.1 @mui/material@5.14.2 @mui/styles@5.14.1 react@18.2.0 react-beautiful-dnd@13.1.1 react-dom@18.2.0 react-draggable@4.4.5
 
             - name: Build 🔧
-              run: npm run build-storybook
+              run: |
+                  cd package
+                  npm run build-storybook
 
             - name: Deploy 🚀
               uses: JamesIves/github-pages-deploy-action@3.6.2

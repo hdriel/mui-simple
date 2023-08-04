@@ -28,10 +28,13 @@ jobs:
                   npm ci --force --production
 
             - name: building package
-              run: | # Install npm packages and build lib output before publish
+              run: |  # Install npm packages and build lib output before publish
+                  cd package
                   npm run build:debug
 
             - name: publish step
-              run: npm publish
+              run: |
+                  cd package
+                  npm publish
               env:
                   NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
