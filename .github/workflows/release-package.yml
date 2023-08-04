@@ -30,8 +30,8 @@ jobs:
 
             - name: installing packages
               run: | # Install npm packages
-                  npm i -D cross-env
                   npm ci --force --production
+                  npm i cross-env
 
             - name: building package
               run: | # build lib output before publish
