@@ -23,11 +23,11 @@ jobs:
 
             - name: setup node
               uses: actions/setup-node@v3
-            - run: npm i -g husky cross-env
               with:
                   node-version: 16
                   registry-url: https://registry.npmjs.org/
                   scope: '@hdriel'
+            - run: npm i -g husky cross-env
 
             - name: installing packages
               run: npm ci --force --production
