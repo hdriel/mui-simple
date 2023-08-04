@@ -14,26 +14,27 @@ jobs:
             - name: checkout
               uses: actions/checkout@v3
 
-            - name: Modify temporary package.json - remove script 'prepare'
+            - name: Create temporary package.json
+              run: cp package.json temp-package.json
+
+            - name: Modify temporary package.json
               run: |
-                  cp package.json temp-package.json
                   jq 'del(.scripts.prepare)' temp-package.json > package.json
 
             - name: setup node
               uses: actions/setup-node@v3
+            - run: npm i -g husky cross-env
               with:
                   node-version: 16
                   registry-url: https://registry.npmjs.org/
                   scope: '@hdriel'
 
             - name: installing packages
-              run: |
-                npm ci --force --production
-                npm i -g cross-env
+            - run: npm ci --force --production
 
             - name: building package
               run: | # build lib output before publish
-                  npm run build
+                  npm run build:debug
 
             - name: publish step
               run: npm publish
