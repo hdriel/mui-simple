@@ -364,7 +364,7 @@ export const Lazy_ = (args): React.ReactElement => (
 export const Formik_ = (args): React.ReactElement => {
     return (
         <Formik initialValues={{ phone: '', unmask: false }} onSubmit={(values) => alert(values.phone)}>
-            {({ values, setFieldValue, handleChange }) => {
+            {({ values, touched, setFieldValue, handleChange }) => {
                 action('formikRender')(values);
                 return (
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -375,7 +375,7 @@ export const Formik_ = (args): React.ReactElement => {
                             mask="+(972) 50-000-0000"
                             definitions={{ '#': /[1-9]/ }}
                             unmask={values.unmask}
-                            showMaskAsPlaceholder={false}
+                            showMaskAsPlaceholder={touched.phone}
                             onChange={handleChange}
                         />
                         <Checkbox name="unmask" label="unmask value" checked={values.unmask} onChange={handleChange} />

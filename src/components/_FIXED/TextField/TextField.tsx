@@ -46,6 +46,7 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
     const endCmpExternal = typeof _endCmpExternal === 'string' ? <SVGIcon>{_endCmpExternal}</SVGIcon> : _endCmpExternal;
     const showActions = !hideStartActionsOnEmpty || value || (!value && isFocused);
     const handleOnChange = debounceDelay ? debounce(onChange, debounceDelay) : onChange;
+    console.log('direction', direction);
 
     const component = (
         <ClickAwayListener onClickAway={() => setIsFocused(false)}>
@@ -60,6 +61,7 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
                 onChange={handleOnChange}
                 onFocus={onFocusHandler}
                 value={value}
+                direction={direction}
                 InputProps={{
                     ...InputProps,
                     readOnly,
@@ -111,7 +113,7 @@ TextField.defaultProps = {
     colorActive: undefined,
     colorLabel: undefined,
     colorText: undefined,
-    direction: undefined,
+    direction: 'ltr',
     disabled: undefined,
     endCmp: undefined,
     endCmpExternal: undefined,
