@@ -30,7 +30,6 @@ const InputPattern: React.FC<InputPatternProps> = ({
     // for example output for mask: '+(972) 50-000-0000'
     const [maskedValue, setMaskedValue] = useState(''); // for example: '0-000-0000'
     const [unmaskedValue, setUnmaskedValue] = useState(''); // for example: '0-000-0000'
-    const [isExceptionValue, setIsExceptionValue] = useState(false); // for value: '0'
     const [isOnFocus, setIsOnFocus] = useState(false);
 
     const lazy = useMemo(() => {
@@ -41,8 +40,7 @@ const InputPattern: React.FC<InputPatternProps> = ({
         return !unmaskedValue;
     }, [_lazy, isOnFocus, placeholder, showMaskAsPlaceholder, unmaskedValue]);
 
-    let value = unmask ? unmaskedValue : maskedValue;
-    if (isExceptionValue) value = unmask ? '0' : value.replace('_', '0');
+    const value = unmask ? unmaskedValue : maskedValue;
 
     useEffect(() => {
         const maskEqual = unmask ? true : _value === maskedValue;
@@ -62,7 +60,7 @@ const InputPattern: React.FC<InputPatternProps> = ({
                     inputRef={inputRef}
                     name={name}
                     unmask={unmask}
-                    value={isExceptionValue ? '000' : value}
+                    value={value}
                     focused={!!_value || isOnFocus}
                     lazy={lazy}
                     onFocus={(e) => {
@@ -70,12 +68,6 @@ const InputPattern: React.FC<InputPatternProps> = ({
                         onFocus?.(e);
                     }}
                     onAccept={(changeValue, mask) => {
-                        if (mask._unmaskedValue === '0') {
-                            setIsExceptionValue(true);
-                            onChange?.({ target: { name, value: '0' } });
-                            return;
-                        }
-                        setIsExceptionValue(false);
                         setMaskedValue(mask._value);
                         setUnmaskedValue(mask._unmaskedValue);
                         const value = unmask ? mask._unmaskedValue : mask._value;

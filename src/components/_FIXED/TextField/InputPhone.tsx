@@ -35,7 +35,8 @@ const InputPhone: React.FC<InputPhoneProps> = ({
                 name={name}
                 value={value}
                 /* eslint-disable no-octal-escape */
-                mask="\050-000-0000"
+                mask="+(972) 000-000-0000"
+                definitions={{ '#': /[1-9]/ }}
                 type="tel"
                 endCmp={
                     <>
