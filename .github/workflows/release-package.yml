@@ -1,8 +1,8 @@
 name: Publish to NPM
 
-on:
-    push:
-        branches: ['main']
+#on:
+#    push:
+#        branches: ['main']
 
 jobs:
     publish:
@@ -21,9 +21,14 @@ jobs:
                   registry-url: https://registry.npmjs.org/
                   scope: '@hdriel'
 
+            - name: installing packages
+                run: | # Install npm packages and build lib output before publish
+                  npm ci --force
+                  cd package
+                  npm ci --force --production
+
             - name: building package
               run: | # Install npm packages and build lib output before publish
-                  npm ci --force
                   npm run build:debug
 
             - name: publish step
