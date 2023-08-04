@@ -50,14 +50,14 @@
         "url": "git://github.com/hdriel/mui-simple.git"
     },
     "peerDependencies": {
-        "@emotion/react": "^11",
-        "@emotion/styled": "^11",
-        "@mui/icons-material": "^5",
-        "@mui/material": "^5",
-        "@mui/styles": "^5",
-        "react": ">=18",
+        "@emotion/react": "^11.11.1",
+        "@emotion/styled": "^11.11.0",
+        "@mui/icons-material": "^5.14.1",
+        "@mui/material": "^5.14.2",
+        "@mui/styles": "^5.14.1",
+        "react": "^18.2.0",
         "react-beautiful-dnd": "^13.1.1",
-        "react-dom": ">=18",
+        "react-dom": "^18.2.0",
         "react-draggable": "^4.4.5"
     },
     "dependencies": {
