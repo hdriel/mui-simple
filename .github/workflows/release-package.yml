@@ -27,14 +27,16 @@ jobs:
                   node-version: 16
                   registry-url: https://registry.npmjs.org/
                   scope: '@hdriel'
-            - run: npm i -g husky cross-env
+
+            - name: installing global packages
+              run: npm i -g husky cross-env
 
             - name: installing packages
               run: npm ci --force --production
 
             - name: building package
               run: | # build lib output before publish
-                  npm run build:debug
+                  npm run build
 
             - name: publish step
               run: npm publish
