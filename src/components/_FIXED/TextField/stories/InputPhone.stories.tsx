@@ -289,8 +289,12 @@ export const CopyAction: Story = {
 
 export const Formik_ = (args): React.ReactElement => {
     return (
-        <Formik initialValues={{ phone: '', unmask: false }} onSubmit={(values) => alert(values.phone)}>
-            {({ values, touched, handleChange, handleSubmit }) => {
+        <Formik
+            initialValues={{ phone: '', unmask: false }}
+            validate={(values) => (!values.phone.length ? { error: 'Required!' } : {})}
+            onSubmit={(values) => alert(values.phone)}
+        >
+            {({ values, touched, errors, handleChange, handleSubmit }) => {
                 action('formikRender')(values);
                 return (
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -298,6 +302,8 @@ export const Formik_ = (args): React.ReactElement => {
                             {...args}
                             name="phone"
                             label="Phone"
+                            helperText={touched.error && errors.phone ? errors.phone : ''}
+                            error={!!(touched.error && errors.phone)}
                             value={values.phone}
                             unmask={values.unmask}
                             onChange={handleChange}
