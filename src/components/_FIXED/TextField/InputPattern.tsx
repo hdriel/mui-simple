@@ -15,7 +15,6 @@ const InputPattern: React.FC<InputPatternProps> = ({
     inputRef,
     lazy: _lazy,
     name,
-    onBlur,
     onAccept,
     onChange,
     onEnterKeyPress,
