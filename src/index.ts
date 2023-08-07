@@ -111,8 +111,7 @@ export type { PaginationProps } from './components/_FIXED/Pagination/Pagination'
 export { default as Paper } from './components/_FIXED/Paper/Paper';
 export type { PaperProps } from './components/_FIXED/Paper/Paper';
 
-export { default as CircularProgress } from './components/Progress/CircularProgress/CircularProgress';
-export { default as LinearProgress } from './components/Progress/LinearProgress/LinearProgress';
+export * from './components/Progress';
 
 export { default as RadioButtonsGroup } from './components/_FIXED/RadioButtonsGroup/RadioButtonsGroup';
 export type { RadioButtonsGroupProps } from './components/_FIXED/RadioButtonsGroup/RadioButtonsGroup';

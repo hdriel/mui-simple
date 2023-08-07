@@ -50,11 +50,11 @@ export const LinearProgress = styled(
         shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
     }
 )<LinearProgressStyledProps>`
-    &.MuiLinearProgress-root {
+    &.${linearProgressClasses.root} {
         background-color: ${(props) => alpha(props.customColor ?? 'rgba(0,0,0,0.3)', 0.2)} !important;
     }
 
-    &.MuiLinearProgress-bar {
+    &.${linearProgressClasses.bar} {
         background-color: ${(props) => props.customColor};
     }
 
@@ -70,7 +70,7 @@ export const LinearProgress = styled(
         background-color: ${(props) => props.customColor};
     }
 
-    .MuiLinearProgress-dashed {
+    & .${linearProgressClasses.dashed} {
         background-image: ${(props) => {
             const color = alpha(props.customColor ?? 'rgba(0,0,0,0.3)', 0.2);
             return `radial-gradient(${color} 0%, ${color} 16%, transparent 42%)`;

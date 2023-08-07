@@ -29,7 +29,7 @@ export const Color_ = (args) => (
 export const Variant: Story = {
     args: {
         value: 35,
-        variant: 'determinate',
+        variant: 'query',
     },
 };
 
