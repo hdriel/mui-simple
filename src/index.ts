@@ -111,7 +111,7 @@ export type { PaginationProps } from './components/_FIXED/Pagination/Pagination'
 export { default as Paper } from './components/_FIXED/Paper/Paper';
 export type { PaperProps } from './components/_FIXED/Paper/Paper';
 
-export * from './components/Progress';
+export * from './components/_FIXED/Progress';
 
 export { default as RadioButtonsGroup } from './components/_FIXED/RadioButtonsGroup/RadioButtonsGroup';
 export type { RadioButtonsGroupProps } from './components/_FIXED/RadioButtonsGroup/RadioButtonsGroup';
@@ -133,7 +133,9 @@ export { default as Stepper } from './components/Stepper/Stepper';
 export { default as MobileStepper } from './components/Stepper/MobileStepper';
 export { useSimpleStepper } from './components/Stepper/Stepper.utils';
 export { default as SVGIcon } from './components/SVGIcon/SVGIcon';
+
 export { default as Switch } from './components/Switch/Switch';
+export type { SwitchProps } from './components/Switch/Switch';
 
 export * from './components/_FIXED/Table/Table';
 
@@ -157,4 +159,4 @@ export type { TypographyProps } from './components/_FIXED/Typography/Typography'
 export * from './utils';
 export { default as useElementSize } from './hooks/useElementSize';
 
-export * from './components/decs';
+// export * from './components/decs';

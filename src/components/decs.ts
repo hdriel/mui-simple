@@ -664,6 +664,32 @@ export type TooltipPlacementType =
     | 'top-start'
     | 'top';
 
+export interface SwitchProps {
+    checked?: boolean,
+    checkedIcon?: string | React.ReactNode,
+    color?: string,
+    defaultChecked?: boolean,
+    disabled?: boolean,
+    error?: boolean,
+    fontSize?: string,
+    helperText?: string,
+    icon?: string | React.ReactNode,
+    isOnOff?: boolean,
+    label?: string,
+    labelPadding?: string| number,
+    labelPlacement?: 'top'| 'start'| 'bottom'| 'end',
+    name?: string,
+    offLabel?: string,
+    onChange?: (event: any, checked?: boolean) => void,
+    onLabel?: string,
+    required?: boolean,
+    scale?: number,
+    size?: 'small'| 'medium'| 'large',
+    switchStyle?:  'ant'    | 'android12'    | 'ios'    | 'mui'
+    textColor?: string
+    [key: string]: any
+}
+
 export interface TooltipProps {
     bgColor?: string;
     color?: string;

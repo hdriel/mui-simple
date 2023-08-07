@@ -12,7 +12,7 @@ import { customColor, antSwitchStyle, androidSwitchStyle, iosSwitchStyle } from 
 
 export const FormHelperText = MuiFormHelperText;
 export const Switch = styled(
-    ({ switchStyle, checked, color, scale, ...props }) => (
+    ({ switchStyle, checked, color, scale, ...props }: any) => (
         <MuiSwitch
             {...props}
             checked={checked}
@@ -21,7 +21,7 @@ export const Switch = styled(
         />
     ),
     {
-        shouldForwardProp: (prop) =>
+        shouldForwardProp: (prop: string) =>
             !['textColor', 'fontSize', 'helperText', 'switchStyle', 'labelPlacement'].includes(prop),
     }
 )`
@@ -35,7 +35,7 @@ export const Switch = styled(
 `;
 
 export const SwitchOnOff = styled(
-    ({ onLabel = 'on', offLabel = 'off', ...props }) => (
+    ({ onLabel = 'on', offLabel = 'off', ...props }: any) => (
         <MuiStack direction="row" spacing={0} alignItems="center">
             <MuiTypography>{offLabel}</MuiTypography>
             <Switch {...props} />
@@ -43,12 +43,12 @@ export const SwitchOnOff = styled(
         </MuiStack>
     ),
     {
-        shouldForwardProp: (prop) => !['textColor', 'muiColor', 'fontSize', 'helperText'].includes(prop),
+        shouldForwardProp: (prop: string) => !['textColor', 'muiColor', 'fontSize', 'helperText'].includes(prop),
     }
 )``;
 
 export const SwitchControlled = styled(
-    ({ required, fontSize, disabled, labelPlacement, color, labelPadding, label = '', ...props }) => (
+    ({ required, fontSize, disabled, labelPlacement, color, labelPadding, label = '', ...props }: any) => (
         <FormControlLabel
             required={required}
             disabled={disabled}
@@ -67,6 +67,6 @@ export const SwitchControlled = styled(
         />
     ),
     {
-        shouldForwardProp: (prop) => !['textColor', 'muiColor', 'fontSize'].includes(prop),
+        shouldForwardProp: (prop: string) => !['textColor', 'muiColor', 'fontSize'].includes(prop),
     }
 )``;

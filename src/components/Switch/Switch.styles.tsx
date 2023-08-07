@@ -1,8 +1,8 @@
 import { css } from '@mui/material/styles';
-
+import type { SerializedStyles } from '@emotion/serialize';
 import { SWITCH_STYLES } from './Switch.consts';
 
-export function customColor(props) {
+export function customColor(props): SerializedStyles {
     if (!props.color) return css``;
     const opacity = props.theme.palette?.action?.hoverOpacity;
     const color = props.color;
@@ -17,11 +17,12 @@ export function customColor(props) {
   },`;
 }
 
-export function antSwitchStyle(props) {
+export function antSwitchStyle(props): SerializedStyles {
     if (props.switchStyle !== SWITCH_STYLES.ANT) return css``;
 
     const { theme, color } = props;
-    const { palette: { mode } = {}, transitions } = theme ?? {};
+    const mode = theme?.palette?.mode;
+    const transitions = theme?.transitions;
 
     return css`
         width: 28px;
@@ -63,7 +64,7 @@ export function antSwitchStyle(props) {
     `;
 }
 
-export function androidSwitchStyle(props) {
+export function androidSwitchStyle(props): SerializedStyles {
     if (props.switchStyle !== SWITCH_STYLES.ANDROID12) return css``;
 
     const { theme, color } = props;
@@ -103,7 +104,7 @@ export function androidSwitchStyle(props) {
   `;
 }
 
-export function iosSwitchStyle(props) {
+export function iosSwitchStyle(props): SerializedStyles {
     if (props.switchStyle !== SWITCH_STYLES.IOS) return css``;
 
     const { theme, color } = props;

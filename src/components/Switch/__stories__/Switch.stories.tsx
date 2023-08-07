@@ -1,362 +1,143 @@
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
-
-import Switch from '../Switch';
-import { SWITCH_STYLES } from '../Switch.consts';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Stack } from '@mui/material';
 
-export default {
+import Switch from '../Switch';
+
+const meta: Meta<typeof Switch> = {
     title: 'Inputs/Switch',
-    parameters: {
-        controls: {
-            exclude: /^(onChange)$/g,
-        },
-    },
-    decorators: [
-        (Story) => (
-            <div
-                style={{
-                    padding: '0.5em',
-                    height: 'auto',
-                    width: '300px',
-                    border: '1px solid black',
-                }}
-            >
-                <Story />
-            </div>
-        ),
-    ],
     component: Switch,
+    tags: ['autodocs'],
 };
 
-const onChangeAction = action('onChange');
+export default meta;
 
-export const Default = () => <Switch />;
+type Story = StoryObj<typeof Switch>;
 
-const Template = (args) => <Switch {...args} />;
-export const Custom = Template.bind({});
-Custom.argTypes = {
-    label: { control: { type: 'text' }, defaultValue: 'check' },
-    size: {
-        control: 'inline-radio',
-        options: ['small', 'medium'],
-        defaultValue: 'small',
-    },
-    color: {
-        control: { type: 'color' },
-        defaultValue: 'red',
-    },
-    checked: {
-        control: { type: 'boolean' },
-        defaultValue: false,
-    },
-    defaultChecked: {
-        control: { type: 'boolean' },
-        defaultValue: false,
-    },
-    required: {
-        control: { type: 'boolean' },
-        defaultValue: false,
-    },
-    disabled: {
-        control: { type: 'boolean' },
-        defaultValue: false,
+export const Default: Story = {
+    args: {},
+};
+
+export const Checked: Story = {
+    args: {
+        checked: true,
     },
 };
 
-export const Labeled = () => {
-    const [checked, setChecked] = useState(false);
-    return (
-        <Switch
-            checked={checked}
-            onChange={(event) => {
-                setChecked(event.target.checked);
-                onChangeAction(event);
-            }}
-            label="include condition"
-        />
-    );
-};
-export const NoLabeled = () => {
-    const [checked, setChecked] = useState(false);
-
-    return (
-        <Switch
-            checked={checked}
-            onChange={(event) => {
-                setChecked(event.target.checked);
-                onChangeAction(event);
-            }}
-        />
-    );
-};
-export const Checked = () => {
-    const [checked, setChecked] = useState(true);
-    return (
-        <Switch
-            checked={checked}
-            onChange={(event) => {
-                setChecked(event.target.checked);
-                onChangeAction(event);
-            }}
-            label="test"
-        />
-    );
-};
-export const Disabled = () => {
-    const [checked, setChecked] = useState(true);
-    return (
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <Switch
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    onChangeAction(event);
-                }}
-                label="disabled checkbox"
-                disabled
-            />
-            <Switch
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    onChangeAction(event);
-                }}
-                disabled
-            />
-        </div>
-    );
+export const CheckedIcon: Story = {
+    args: {
+        checkedIcon: 'Favorite',
+        icon: 'FavoriteBorder',
+    },
 };
 
-export const Required = () => {
-    const [checked, setChecked] = useState(false);
-
-    return (
-        <Switch
-            checked={checked}
-            onChange={(event) => {
-                setChecked(event.target.checked);
-                onChangeAction(event);
-            }}
-            required
-            label="required checkbox test"
-            error
-            helperText="is required checkbox!"
-        />
-    );
+export const Color: Story = {
+    args: {
+        color: '#FF0000',
+        checkedIcon: 'Favorite',
+        icon: 'FavoriteBorder',
+    },
 };
 
-export const OnOff = () => {
-    const [checked, setChecked] = useState(true);
-
-    return (
-        <Switch
-            checked={checked}
-            onChange={(event) => {
-                setChecked(event.target.checked);
-                action(event);
-            }}
-            label="test"
-            isOnOff
-            onLabel={'ON'}
-            offLabel={'OFF'}
-        />
-    );
+export const Disabled: Story = {
+    args: {
+        checked: true,
+    },
 };
 
-export const Colored = () => {
-    const [checked, setChecked] = useState(true);
-
-    return (
-        <Switch
-            checked={checked}
-            onChange={(event) => {
-                setChecked(event.target.checked);
-                onChangeAction(event);
-            }}
-            label="some colored checkbox"
-            textColor={'#1062dc'}
-            color={'#dc10c8'}
-            defaultChecked
-        />
-    );
+export const Error: Story = {
+    args: {
+        error: true,
+        helperText: 'some error occurred',
+    },
 };
 
-export const ThemedAndColor = () => {
-    const [checked, setChecked] = useState(true);
-
-    return (
-        <Stack direction="column" spacing={2}>
-            {[undefined, 'primary', 'secondary', 'info', 'success', 'error', '#df01fd'].map((color, index, arr) => (
-                <Switch
-                    key={index}
-                    checked={checked}
-                    onChange={(event) => {
-                        setChecked(event.target.checked);
-                        onChangeAction(event);
-                    }}
-                    label="some colored checkbox"
-                    textColor={arr[index + 1]}
-                    color={color}
-                    defaultChecked
-                />
-            ))}
-        </Stack>
-    );
+export const HelperText: Story = {
+    args: {
+        helperText: 'Helper text here',
+    },
 };
 
-export const ThemeColor = () => {
-    const [checked, setChecked] = useState(true);
-
-    return (
-        <Switch
-            checked={checked}
-            onChange={(event) => {
-                setChecked(event.target.checked);
-                onChangeAction(event);
-            }}
-            color="secondary"
-            label="some colored checkbox"
-            defaultChecked
-        />
-    );
+export const IsOnOff: Story = {
+    args: {
+        isOnOff: true,
+    },
 };
 
-export const LabelPlacement = () => {
-    const [checked, setChecked] = useState(false);
-
-    return (
-        <div style={{ display: 'flex', gap: '1em' }}>
-            <Switch
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    onChangeAction(event);
-                }}
-                labelPlacement="top"
-                label="top label checkbox"
-            />
-
-            <Switch
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    onChangeAction(event);
-                }}
-                labelPlacement="start"
-                label="start label checkbox"
-            />
-
-            <Switch
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    onChangeAction(event);
-                }}
-                labelPlacement="bottom"
-                label="bottom label checkbox"
-            />
-
-            <Switch
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    onChangeAction(event);
-                }}
-                labelPlacement="end"
-                label="end label checkbox"
-            />
-        </div>
-    );
+export const OnOffLabels: Story = {
+    args: {
+        isOnOff: true,
+        offLabel: 'DOWN',
+        onLabel: 'UP',
+    },
 };
 
-export const Sizes = () => {
-    const [checked, setChecked] = useState(false);
-
-    return (
-        <>
-            <Switch
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    onChangeAction(event);
-                }}
-                label="medium checkbox"
-                size={'medium'}
-            />
-            <Switch
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    onChangeAction(event);
-                }}
-                label="small checkbox"
-                size={'small'}
-            />
-            <Switch
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    onChangeAction(event);
-                }}
-                label="custom size checkbox"
-                fontSize={'25px'}
-                scale={2}
-            />
-        </>
-    );
+export const Label: Story = {
+    args: {
+        label: 'switch label',
+    },
 };
 
-export const Styles = () => {
-    const [checked, setChecked] = useState(false);
+export const LabelPadding: Story = {
+    args: {
+        label: 'label padding 1em',
+        labelPadding: '1em',
+    },
+};
 
-    return (
-        <Stack spacing={1}>
-            <Switch
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    action(event);
-                }}
-                label="ant style"
-                switchStyle={SWITCH_STYLES.ANT}
-            />
-            <Switch
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    action(event);
-                }}
-                label="android 12 style"
-                switchStyle={SWITCH_STYLES.ANDROID12}
-            />
-            <Switch
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    action(event);
-                }}
-                label="ios style"
-                switchStyle={SWITCH_STYLES.IOS}
-            />
-            <Switch
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    action(event);
-                }}
-                label="mui style"
-                switchStyle={SWITCH_STYLES.MUI}
-            />
-            <Switch
-                checked={checked}
-                onChange={(event) => {
-                    setChecked(event.target.checked);
-                    action(event);
-                }}
-                label="default style"
-                switchStyle={SWITCH_STYLES.DEFAULT}
-            />
-        </Stack>
-    );
+export const Required: Story = {
+    args: {
+        label: 'switch',
+        required: true,
+    },
+};
+
+export const LabelPlacement_ = () => (
+    <Stack spacing={3}>
+        {['top', 'start', 'bottom', 'end'].map((labelPlacement) => (
+            <Switch key={labelPlacement} labelPlacement={labelPlacement} label={`${labelPlacement} label checkbox`} />
+        ))}
+    </Stack>
+);
+
+export const Scale: Story = {
+    args: {
+        label: 'Scale',
+        scale: 2.5,
+    },
+};
+
+export const Size_ = (args) => (
+    <Stack direction="row" spacing={3}>
+        {['small', 'medium', 'large'].map((size) => (
+            <Switch key={size} size={size} {...args} />
+        ))}
+    </Stack>
+);
+
+export const TextColor: Story = {
+    args: {
+        label: 'label text color',
+        textColor: '#2e0480',
+    },
+};
+
+export const SwitchStyle_ = () => (
+    <Stack spacing={3}>
+        {['ant', 'android12', 'ios', 'mui'].map((switchStyle) => (
+            <Switch key={switchStyle} switchStyle={switchStyle} label={`${switchStyle} label styles`} />
+        ))}
+    </Stack>
+);
+
+export const OnChange: Story = {
+    args: {
+        label: 'label controlled',
+        textColor: 'primary',
+        value: true,
+    },
+    render: (args) => {
+        const [value, setValue] = useState(args.value);
+        return <Switch {...args} value={value} onChange={(e, checked) => setValue(checked)} />;
+    },
 };

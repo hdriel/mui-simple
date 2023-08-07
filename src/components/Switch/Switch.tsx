@@ -1,33 +1,33 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Switch as MuiSwitch, SwitchControlled, FormHelperText, SwitchOnOff } from './Switch.styled';
 import { SWITCH_STYLES } from './Switch.consts';
 import { useCustomColor } from '../../utils/helpers';
+import type { SwitchProps } from '../decs';
 
-const Switch = ({
-    label,
-    name,
-    size,
-    textColor: _textColor,
-    color,
-    scale,
+const Switch: React.FC<SwitchProps> = ({
     checked,
-    onChange,
-    icon,
     checkedIcon,
+    color,
     defaultChecked,
-    required,
     disabled,
-    labelPlacement,
-    labelPadding,
-    helperText,
     error,
+    helperText,
+    icon,
     isOnOff,
-    onLabel,
+    label,
+    labelPadding,
+    labelPlacement,
+    name,
     offLabel,
+    onChange,
+    onLabel,
+    required,
+    scale,
+    size,
     switchStyle,
+    textColor: _textColor,
     ...props
-}) => {
+}): React.ReactElement => {
     const [customColor] = useCustomColor(color);
     const [textColor] = useCustomColor(_textColor);
 
@@ -42,7 +42,7 @@ const Switch = ({
             required={required}
             disabled={disabled}
             checked={checked}
-            onChange={onChange}
+            onChange={(e) => onChange?.(e, e.target.checked)}
             labelPlacement={labelPlacement}
             onLabel={onLabel}
             offLabel={offLabel}
@@ -59,7 +59,7 @@ const Switch = ({
             required={required}
             disabled={disabled}
             checked={checked}
-            onChange={onChange}
+            onChange={(e) => onChange?.(e, e.target.checked)}
             labelPlacement={labelPlacement}
             switchStyle={switchStyle}
             {...props}
@@ -77,7 +77,7 @@ const Switch = ({
             required={required}
             disabled={disabled}
             checked={checked}
-            onChange={onChange}
+            onChange={(e) => onChange?.(e, e.target.checked)}
             labelPlacement={labelPlacement}
             labelPadding={
                 labelPadding ?? (isOnOff || [SWITCH_STYLES.ANT, SWITCH_STYLES.IOS].includes(switchStyle) ? '1em' : '')
@@ -97,37 +97,29 @@ const Switch = ({
     );
 };
 
-Switch.propTypes = {
-    label: PropTypes.string,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    color: PropTypes.string,
-    scale: PropTypes.number,
-    checked: PropTypes.bool,
-    defaultChecked: PropTypes.bool,
-    required: PropTypes.bool,
-    disabled: PropTypes.bool,
-    error: PropTypes.bool,
-    labelPlacement: PropTypes.oneOf(['top', 'start', 'bottom', 'end']),
-    labelPadding: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    switchStyle: PropTypes.oneOf(Object.values(SWITCH_STYLES)),
-    helperText: PropTypes.string,
-    fontSize: PropTypes.string,
-};
-
 Switch.defaultProps = {
-    label: undefined,
-    size: 'medium',
-    color: undefined,
-    scale: undefined,
     checked: undefined,
+    checkedIcon: undefined,
+    color: undefined,
     defaultChecked: undefined,
-    error: undefined,
-    required: undefined,
     disabled: undefined,
-    labelPlacement: undefined,
-    labelPadding: undefined,
-    helperText: undefined,
+    error: undefined,
     fontSize: undefined,
+    helperText: undefined,
+    icon: undefined,
+    isOnOff: undefined,
+    label: undefined,
+    labelPadding: undefined,
+    labelPlacement: undefined,
+    name: undefined,
+    offLabel: undefined,
+    onChange: undefined,
+    onLabel: undefined,
+    required: undefined,
+    scale: undefined,
+    size: 'medium',
+    textColor: undefined,
 };
 
+export type { SwitchProps } from '../decs';
 export default Switch;
