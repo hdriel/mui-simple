@@ -117,6 +117,17 @@ export interface BottomNavigationProps {
     [key: string]: any;
 }
 
+export interface CircularProgressProps {
+    color?: string;
+    disableShrink?: boolean;
+    showProgress?: boolean;
+    size?: number;
+    thickness?: number;
+    value?: number;
+    variant?: 'determinate' | 'indeterminate';
+    [key: string]: any;
+}
+
 export interface DialogProps {
     open: boolean;
     onClose?: (value: string) => void;
@@ -447,6 +458,18 @@ export interface FabProps {
     [key: string]: any;
 }
 
+export interface LinearProgressProps {
+    color?: string;
+    disableShrink?: boolean;
+    showProgress?: boolean;
+    size?: number;
+    thickness?: number;
+    value?: number;
+    valueBuffer?: number;
+    variant?: 'buffer' | 'query' | 'determinate' | 'indeterminate';
+    [key: string]: any;
+}
+
 export interface LinkProps {
     color?: string;
     icon?: string | ReactNode;
@@ -549,6 +572,31 @@ export interface BreadcrumbsProps {
     maxItems?: number;
     separator?: string | ReactNode;
     size?: string | number;
+    [key: string]: any;
+}
+
+export interface PaperProps {
+    color?: string;
+    elevation?: number;
+    height?: number | string;
+    imageLayout?:
+        | 'contain'
+        | 'cover'
+        | 'auto'
+        | 'inherit'
+        | 'auto auto'
+        | 'initial'
+        | 'revert'
+        | 'revert-layer'
+        | 'unset'
+        | string;
+    imageOpacity?: number;
+    imageSrc?: string;
+    square?: boolean;
+    textColor?: string;
+    variant?: 'elevation' | 'outlined';
+    width?: number | string;
+
     [key: string]: any;
 }
 

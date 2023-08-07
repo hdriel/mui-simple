@@ -1,5 +1,5 @@
 import React from 'react';
-import { get } from 'lodash-es';
+import type { ComponentType } from 'react';
 import { styled } from '@mui/material/styles';
 import {
     LinearProgress as MuiLinearProgress,
@@ -8,7 +8,9 @@ import {
     linearProgressClasses,
     alpha,
 } from '@mui/material';
+import type { LinearProgressProps as MuiLinearProgressProps } from '@mui/material';
 import { numberToPx } from '../../../utils/helpers';
+import type { LinearProgressProps } from '../../decs';
 
 const ContentWrapper = styled(MuiBox)`
     display: flex;
@@ -25,8 +27,10 @@ const IndicatorWrapper = styled(MuiBox)`
     min-width: 35px;
 `;
 
+type LinearProgressStyledProps = LinearProgressProps & MuiLinearProgressProps;
+
 export const LinearProgress = styled(
-    ({ value, variant, showProgress, ...props }) => (
+    ({ value, variant, showProgress, ...props }: any) => (
         <ContentWrapper>
             <ProgressWrapper>
                 <MuiLinearProgress
@@ -45,13 +49,9 @@ export const LinearProgress = styled(
     {
         shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
     }
-)`
+)<LinearProgressStyledProps>`
     &.MuiLinearProgress-root {
-        background-color: ${(props) =>
-            alpha(
-                get(props, `theme.palette.${props.color}.main`, props.customColor ?? 'rgba(0,0,0,0.3)'),
-                0.2
-            )} !important;
+        background-color: ${(props) => alpha(props.customColor ?? 'rgba(0,0,0,0.3)', 0.2)} !important;
     }
 
     &.MuiLinearProgress-bar {
@@ -67,17 +67,13 @@ export const LinearProgress = styled(
 
     & .${linearProgressClasses.bar} {
         border-radius: 5px;
-        background-color: ${({ theme, color, customColor }) => get(theme, `palette.${color}.main`, customColor)};
+        background-color: ${(props) => props.customColor};
     }
 
     .MuiLinearProgress-dashed {
         background-image: ${(props) => {
-            const color = alpha(
-                get(props, `theme.palette.${props.color}.main`, props.customColor ?? 'rgba(0,0,0,0.3)'),
-                0.2
-            );
-
+            const color = alpha(props.customColor ?? 'rgba(0,0,0,0.3)', 0.2);
             return `radial-gradient(${color} 0%, ${color} 16%, transparent 42%)`;
         }};
     }
-`;
+` as ComponentType<LinearProgressStyledProps>;

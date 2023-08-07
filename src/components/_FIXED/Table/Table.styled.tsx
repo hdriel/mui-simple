@@ -18,7 +18,7 @@ import MuiAvatar from '../Avatar/Avatar';
 import MuiTypography from '../Typography/Typography';
 import MuiTooltip from '../Tooltip/Tooltip';
 import MuiButton from '../Button/Button';
-import MuiPaper from '../../Paper/Paper';
+import MuiPaper from '../Paper/Paper';
 import { extractColors } from './Table.utils';
 import type { ColorsProps } from './Table.desc';
 

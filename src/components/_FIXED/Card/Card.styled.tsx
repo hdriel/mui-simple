@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import type { ButtonProps } from '@mui/material';
 
-import MuiPaper from '../../Paper/Paper';
+import MuiPaper from '../Paper/Paper';
 import MuiTypography from '../Typography/Typography';
 import MuiButton from '../Button/Button';
 

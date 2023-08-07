@@ -1,11 +1,8 @@
-import React, { ComponentType } from 'react';
+import React from 'react';
+import type { ComponentType } from 'react';
 import { styled } from '@mui/material/styles';
-import {
-    CircularProgress as MuiCircularProgress,
-    Box as MuiBox,
-    Typography as MuiTypography,
-    CircularProgressProps,
-} from '@mui/material';
+import { CircularProgress as MuiCircularProgress, Box as MuiBox, Typography as MuiTypography } from '@mui/material';
+import type { CircularProgressProps } from '@mui/material';
 
 const BoxWrapper = styled(MuiBox)`
     position: relative;

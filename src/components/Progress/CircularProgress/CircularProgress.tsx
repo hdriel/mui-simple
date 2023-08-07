@@ -1,22 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { CircularProgress as MuiCircularProgress } from './CircularProgress.styled';
 import { useCustomColor } from '../../../utils/helpers';
+import type { CircularProgressProps } from '../../decs';
 
-type VariantType = 'determinate' | 'indeterminate';
-interface CircularProgressProps {
-    color?: string;
-    variant?: VariantType;
-    value?: number;
-    thickness?: number;
-    size?: number;
-    showProgress?: boolean;
-    disableShrink?: boolean;
-
-    [key: string]: any;
-}
-
-export default function CircularProgress({
+const CircularProgress: React.FC<CircularProgressProps> = ({
     color,
     disableShrink,
     showProgress,
@@ -24,32 +11,21 @@ export default function CircularProgress({
     thickness,
     value,
     ...props
-}: CircularProgressProps) {
-    const [customColor, muiColor] = useCustomColor(color);
+}): React.ReactElement => {
+    const [customColor] = useCustomColor(color);
 
     return (
         <MuiCircularProgress
-            color={muiColor}
-            customColor={muiColor ? undefined : customColor}
-            variant={value ? 'determinate' : undefined}
-            value={value}
-            thickness={thickness}
-            size={size}
-            showProgress={showProgress}
+            customColor={customColor}
             disableShrink={disableShrink}
+            showProgress={showProgress}
+            size={size}
+            thickness={thickness}
+            value={value}
+            variant={value ? 'determinate' : undefined}
             {...props}
         />
     );
-}
-
-CircularProgress.propTypes = {
-    color: PropTypes.string,
-    disableShrink: PropTypes.bool,
-    showProgress: PropTypes.bool,
-    size: PropTypes.number,
-    thickness: PropTypes.number,
-    value: PropTypes.number,
-    variant: PropTypes.oneOf(['determinate', 'indeterminate']),
 };
 
 CircularProgress.defaultProps = {
@@ -61,3 +37,6 @@ CircularProgress.defaultProps = {
     value: undefined,
     variant: undefined,
 };
+
+export type { CircularProgressProps } from '../../decs';
+export default CircularProgress;

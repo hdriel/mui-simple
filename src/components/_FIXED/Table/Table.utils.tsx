@@ -7,7 +7,7 @@ import React, { cloneElement, isValidElement } from 'react';
 import moment from 'moment/moment';
 import MuiTypography from '../Typography/Typography';
 import MuiAvatar from '../Avatar/Avatar';
-import MuiPaper from '../../Paper/Paper';
+import MuiPaper from '../Paper/Paper';
 import MuiCheckbox from '../Checkbox/Checkbox';
 import MuiTooltip from '../Tooltip/Tooltip';
 

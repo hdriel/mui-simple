@@ -8,7 +8,7 @@ import { KeyboardArrowLeft, KeyboardArrowRight, Check } from '@mui/icons-materia
 
 import MuiButton from '../_FIXED/Button/Button';
 import MuiTypography from '../_FIXED/Typography/Typography';
-import MuiPaper from '../Paper/Paper';
+import MuiPaper from '../_FIXED/Paper/Paper';
 
 interface MobileStepperStyledProps {
     forceFixedDirection?: boolean;
