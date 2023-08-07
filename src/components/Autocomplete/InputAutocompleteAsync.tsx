@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import MuiAutocomplete from './InputAutocomplete';
-import CircularProgress from '../Progress/CircularProgress/CircularProgress';
+import CircularProgress from '../_FIXED/Progress/CircularProgress/CircularProgress';
 import { sleep } from '../../utils/helpers';
 
 interface UseAutoCompleteAsyncReturn {
