@@ -9,8 +9,8 @@ import {
     alpha,
 } from '@mui/material';
 import type { LinearProgressProps as MuiLinearProgressProps } from '@mui/material';
-import { numberToPx } from '../../../utils/helpers';
-import type { LinearProgressProps } from '../../decs';
+import { numberToPx } from '../../../../utils/helpers';
+import type { LinearProgressProps } from '../../../decs';
 
 const ContentWrapper = styled(MuiBox)`
     display: flex;

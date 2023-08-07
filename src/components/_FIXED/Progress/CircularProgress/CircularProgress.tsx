@@ -1,7 +1,7 @@
 import React from 'react';
 import { CircularProgress as MuiCircularProgress } from './CircularProgress.styled';
-import { useCustomColor } from '../../../utils/helpers';
-import type { CircularProgressProps } from '../../decs';
+import { useCustomColor } from '../../../../utils/helpers';
+import type { CircularProgressProps } from '../../../decs';
 
 const CircularProgress: React.FC<CircularProgressProps> = ({
     color,
@@ -38,5 +38,5 @@ CircularProgress.defaultProps = {
     variant: undefined,
 };
 
-export type { CircularProgressProps } from '../../decs';
+export type { CircularProgressProps } from '../../../decs';
 export default CircularProgress;

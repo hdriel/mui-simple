@@ -1,7 +1,7 @@
 import React from 'react';
 import { LinearProgress as MuiLinearProgress } from './LinearProgress.styled';
-import { useCustomColor } from '../../../utils/helpers';
-import type { LinearProgressProps } from '../../decs';
+import { useCustomColor } from '../../../../utils/helpers';
+import type { LinearProgressProps } from '../../../decs';
 
 const LinearProgress: React.FC<LinearProgressProps> = ({
     color,
@@ -39,5 +39,5 @@ LinearProgress.defaultProps = {
     variant: undefined,
 };
 
-export type { LinearProgressProps } from '../../decs';
+export type { LinearProgressProps } from '../../../decs';
 export default LinearProgress;

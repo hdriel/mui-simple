@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import type { Ref, ReactElement, PropsWithChildren } from 'react';
 
-import CircularProgress from '../../Progress/CircularProgress/CircularProgress';
+import { CircularProgress } from '../Progress';
 import { Button as MuiButton, IconButton as MuiIconButton } from './Button.styled';
 import Tooltip from '../Tooltip/Tooltip';
 import { useCustomColor } from '../../../utils/helpers';

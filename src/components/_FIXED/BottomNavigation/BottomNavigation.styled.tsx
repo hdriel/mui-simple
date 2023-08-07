@@ -54,4 +54,4 @@ export const BottomNavigation = styled(
         color: ${(props) => props.customColor}
 ` as ComponentType<BottomNavigationStyledPropsType>;
 
-export const BottomNavigationAction = MuiBottomNavigationAction;
+export const BottomNavigationAction: any = MuiBottomNavigationAction;

@@ -36,6 +36,7 @@ const BottomNavigation: React.FC<PropsWithChildren<BottomNavigationProps>> = fun
         >
             {actions?.map((action, key) => (
                 <BottomNavigationAction
+                    // @ts-expect-error
                     {...action.icon}
                     icon={typeof action.icon === 'string' ? <SVGIcon>{action.icon}</SVGIcon> : action.icon}
                     key={key}
