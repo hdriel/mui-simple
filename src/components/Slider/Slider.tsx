@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import {
     Slider as MuiSlider,
     AirbnbThumbComponent,
@@ -10,33 +9,37 @@ import {
 } from './Slider.styled';
 import { SLIDER_STYLES } from './Slider.consts';
 import { useCustomColor } from '../../utils/helpers';
+import SVGIcon from '../SVGIcon/SVGIcon';
+import type { SliderProps } from '../decs';
 
-export default function Slider({
-    startIcon,
-    endIcon,
-    label,
-    value,
-    onChange,
-    disabled,
-    size,
-    displayValue,
-    valueLabelFormat,
-    range,
-    marks,
-    color,
+const Slider: React.FC<SliderProps> = ({
     chooseFromMarksList,
-    trackBarLinePosition,
-    orientation,
-    inputCmp,
-    sliderStyle,
-    removePadding,
+    color,
+    disabled,
     disablePadding,
+    displayValue,
+    endIcon: _endIcon,
+    inputCmp,
+    label,
+    marks,
+    onChange,
+    orientation,
+    range,
+    removePadding,
+    size,
+    sliderStyle,
+    startIcon: _startIcon,
+    trackBarLinePosition,
+    value,
+    valueLabelFormat,
     ...props
-}) {
+}): React.ReactElement => {
     let [customColor, muiColor] = useCustomColor(typeof color === 'object' ? undefined : color);
-    let [track] = useCustomColor(color?.track);
-    let [thumb] = useCustomColor(color?.thumb);
-    customColor = customColor || { track, thumb };
+    const [track] = useCustomColor((color as any)?.track);
+    const [thumb] = useCustomColor((color as any)?.thumb);
+    customColor = (customColor || { track, thumb }) as string;
+    const startIcon = typeof _startIcon === 'string' ? <SVGIcon>{_startIcon}</SVGIcon> : _startIcon;
+    const endIcon = typeof _endIcon === 'string' ? <SVGIcon>{_endIcon}</SVGIcon> : _endIcon;
 
     const rangeProps = useMemo(() => {
         if (!range) return undefined;
@@ -60,6 +63,7 @@ export default function Slider({
     }, [range, marks, chooseFromMarksList]);
 
     const height = orientation === 'vertical' ? 'inherit' : 'max-content';
+
     return (
         <Box
             sx={{
@@ -68,7 +72,7 @@ export default function Slider({
                 ...(orientation === 'vertical' && { width: 'max-content' }),
             }}
         >
-            <SliderLabel>{label}</SliderLabel>
+            {label && <SliderLabel>{label}</SliderLabel>}
             <Grid
                 {...(!disablePadding && {
                     container: true,
@@ -97,7 +101,7 @@ export default function Slider({
                         onChange={onChange}
                         valueLabelDisplay={displayValue ?? (disabled ? 'on' : 'auto')}
                         valueLabelFormat={valueLabelFormat}
-                        color={muiColor}
+                        color={muiColor as any}
                         customColor={muiColor ? undefined : customColor}
                         orientation={orientation}
                         track={trackBarLinePosition === 'none' ? false : trackBarLinePosition}
@@ -114,66 +118,27 @@ export default function Slider({
             </Grid>
         </Box>
     );
-}
-
-Slider.propTypes = {
-    startIcon: PropTypes.node,
-    endIcon: PropTypes.node,
-    value: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
-    label: PropTypes.string,
-    color: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.shape({
-            track: PropTypes.string,
-            thumb: PropTypes.string,
-        }),
-    ]),
-    onChange: PropTypes.func,
-    disabled: PropTypes.bool,
-    orientation: PropTypes.oneOf(['vertical', 'horizontal']),
-    size: PropTypes.oneOf(['small', 'medium']),
-    displayValue: PropTypes.oneOf(['auto', 'off', 'on']),
-    valueLabelFormat: PropTypes.func,
-    disableSwap: PropTypes.bool,
-    chooseFromMarksList: PropTypes.bool,
-    inputCmp: PropTypes.node,
-    sliderStyle: PropTypes.oneOf(Object.values(SLIDER_STYLES)),
-    trackBarLinePosition: PropTypes.oneOf(['none', 'inverted', 'normal']),
-    disablePadding: PropTypes.bool,
-    marks: PropTypes.oneOfType([
-        PropTypes.bool,
-        PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, value: PropTypes.number })),
-    ]),
-    range: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.number),
-        PropTypes.shape({
-            min: PropTypes.number,
-            max: PropTypes.number,
-            step: PropTypes.number,
-            marks: PropTypes.oneOfType([
-                PropTypes.bool,
-                PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, value: PropTypes.number })),
-            ]),
-        }),
-    ]),
 };
 
 Slider.defaultProps = {
-    startIcon: undefined,
-    endIcon: undefined,
-    label: undefined,
     color: undefined,
-    onChange: undefined,
-    valueLabelFormat: undefined,
     disabled: undefined,
     disablePadding: undefined,
-    orientation: undefined,
-    size: undefined,
-    trackBarLinePosition: undefined,
-    displayValue: undefined,
     disableSwap: undefined,
-    sliderStyle: undefined,
+    displayValue: undefined,
+    endIcon: undefined,
     inputCmp: undefined,
+    label: undefined,
     marks: undefined,
+    onChange: undefined,
+    orientation: undefined,
     range: undefined,
+    size: undefined,
+    sliderStyle: undefined,
+    startIcon: undefined,
+    trackBarLinePosition: undefined,
+    valueLabelFormat: undefined,
 };
+
+export type { SliderProps } from '../decs';
+export default Slider;

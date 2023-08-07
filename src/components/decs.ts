@@ -689,6 +689,69 @@ export interface SwitchProps {
     [key: string]: any;
 }
 
+export interface SliderProps {
+    chooseFromMarksList?: boolean;
+    color?: string | { track: string; thumb: string };
+    disabled?: boolean;
+    disablePadding?: boolean;
+    disableSwap?: boolean;
+    displayValue?: 'auto' | 'off' | 'on';
+    endIcon?: string | React.ReactNode;
+    inputCmp?: React.ReactNode;
+    label?: string;
+    marks?: boolean | Array<{ label: string; value: number }>;
+    onChange?: (event: any) => void;
+    orientation?: 'vertical' | 'horizontal';
+    removePadding?: boolean;
+    size?: 'small' | 'medium';
+    sliderStyle?: 'ios' | 'pretto' | 'tooltip' | 'airbnb';
+    startIcon?: string | React.ReactNode;
+    trackBarLinePosition?: 'none' | 'inverted' | 'normal';
+    range?:
+        | [number, number, number, number] // [min, max, step, marksRange]
+        | {
+              min: number;
+              max: number;
+              step: number;
+              marks: boolean | Array<{ label: string; value: number }>;
+          };
+    value?: number | number[];
+    valueLabelFormat?: (value: number) => string;
+    [key: string]: any;
+}
+
+export interface RangeSliderProps {
+    chooseFromMarksList?: boolean;
+    customColor?: string;
+    disabled?: boolean;
+    disableSwap?: 'locking' | 'trailing';
+    displayValue?: 'auto' | 'off' | 'on';
+    endIcon?: string | React.ReactNode;
+    fromValue?: number;
+    inputCmp?: React.ReactNode;
+    label?: string;
+    marks?: boolean | Array<{ label: string; value: number }>;
+    minDistance?: number;
+    muiColor?: string;
+    onChange?: (event: any, newValue?: any, activeThumb?: any) => void;
+    onChangeFromValue?: (event: any, fromValue: number) => void;
+    onChangeToValue?: (event: any, toValue: number) => void;
+    orientation?: 'vertical' | 'horizontal';
+    size?: 'small' | 'medium';
+    startIcon?: string | React.ReactNode;
+    toValue?: number;
+    trackBarLinePosition?: 'none' | 'inverted' | 'normal';
+    range?:
+        | [number, number, number, number] // [min, max, step, marksRange]
+        | {
+              min: number;
+              max: number;
+              step: number;
+              marks: boolean | Array<{ label: string; value: number }>;
+          };
+    valueLabelFormat?: (value: number) => string;
+}
+
 export interface TooltipProps {
     bgColor?: string;
     color?: string;

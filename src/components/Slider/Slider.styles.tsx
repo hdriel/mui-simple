@@ -1,9 +1,10 @@
 import { get } from 'lodash-es';
 import { css } from '@mui/material/styles';
 import { alpha } from '@mui/material';
+import type { SerializedStyles } from '@emotion/serialize';
 import { SLIDER_STYLES } from './Slider.consts';
 
-export function sliderStyleCustomColor(props) {
+export function sliderStyleCustomColor(props): SerializedStyles {
     if (props.sliderStyle || !props.customColor) return css``;
 
     const { track: trackColor, thumb: thumbColor } =
@@ -33,12 +34,12 @@ export function sliderStyleCustomColor(props) {
 
 const iOSBoxShadow = '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
 
-export function sliderStyleIOS(props) {
+export function sliderStyleIOS(props): SerializedStyles {
     if (props.sliderStyle !== SLIDER_STYLES.IOS) return css``;
 
     const { theme, customColor, muiColor } = props;
     const primary = get(theme, `palette.primary.main`);
-    const color = get(theme, `palette.${muiColor}.main`, customColor ?? primary);
+    const color = get(theme, `palette.${muiColor as string}.main`, customColor ?? primary);
 
     return css`
         color: ${color};
@@ -93,12 +94,12 @@ export function sliderStyleIOS(props) {
     `;
 }
 
-export function sliderStylePretto(props) {
+export function sliderStylePretto(props): SerializedStyles {
     if (props.sliderStyle !== SLIDER_STYLES.PRETTO) return css``;
 
     const { theme, customColor, muiColor } = props;
     const primary = get(theme, `palette.primary.main`);
-    const color = get(theme, `palette.${muiColor}.main`, customColor ?? primary);
+    const color = get(theme, `palette.${muiColor as string}.main`, customColor ?? primary);
 
     return css`
         color: ${color};
@@ -148,12 +149,12 @@ export function sliderStylePretto(props) {
     `;
 }
 
-export function sliderStyleAirBNB(props) {
+export function sliderStyleAirBNB(props): SerializedStyles {
     if (props.sliderStyle !== SLIDER_STYLES.AIRBNB) return css``;
 
     const { theme, customColor, muiColor } = props;
     const primary = get(theme, `palette.primary.main`);
-    const color = get(theme, `palette.${muiColor}.main`, customColor ?? primary);
+    const color = get(theme, `palette.${muiColor as string}.main`, customColor ?? primary);
 
     return css`
         color: ${color};

@@ -122,8 +122,8 @@ export { default as RippleBox } from './components/_FIXED/RippleBox/RippleBox';
 export type { RippleBoxProps } from './components/_FIXED/RippleBox/RippleBox';
 
 export { default as Skeleton } from './components/Skeleton/Skeleton';
-export { default as Slider } from './components/Slider/Slider';
-export { default as RangeSlider } from './components/Slider/RangeSlider';
+
+export * from './components/Slider';
 
 export { default as Snackbar } from './components/_FIXED/Snackbar/Snackbar';
 export type { SnackbarProps } from './components/_FIXED/Snackbar/Snackbar';
@@ -150,7 +150,8 @@ export { default as ToggleButtonGroups } from './components/_FIXED/ToggleButtonG
 export type { ToggleButtonGroupsProps } from './components/_FIXED/ToggleButtonGroup/ToggleButtonGroups';
 
 export { default as Tooltip } from './components/_FIXED/Tooltip/Tooltip';
-export { default as TreeView } from './components/TreeView/TreeView';
+export type { TooltipProps } from './components/_FIXED/Tooltip/Tooltip';
+
 export * from './components/TreeView';
 
 export { default as Typography } from './components/_FIXED/Typography/Typography';

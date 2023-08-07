@@ -1,13 +1,14 @@
+import React from 'react';
+import type { PropsWithChildren } from 'react';
 import { Typography as MuiTypography } from '@mui/material';
 import MuiSlider, { SliderThumb } from '@mui/material/Slider';
-
 import { styled } from '@mui/material/styles';
 import { sliderStyleIOS, sliderStylePretto, sliderStyleAirBNB, sliderStyleCustomColor } from './Slider.styles';
-import React from 'react';
 import Tooltip from '../_FIXED/Tooltip/Tooltip';
+
 export { Grid, Box } from '@mui/material';
 
-export function ValueLabelComponent(props) {
+export const ValueLabelComponent: React.FC<PropsWithChildren<{ value: string }>> = (props): React.ReactElement => {
     const { children, value } = props;
 
     return (
@@ -15,9 +16,9 @@ export function ValueLabelComponent(props) {
             {children}
         </Tooltip>
     );
-}
+};
 
-export function AirbnbThumbComponent(props) {
+export const AirbnbThumbComponent: React.FC<PropsWithChildren<any>> = (props): React.ReactElement => {
     const { children, ...other } = props;
     return (
         <SliderThumb {...other}>
@@ -27,16 +28,27 @@ export function AirbnbThumbComponent(props) {
             <span className="airbnb-bar" />
         </SliderThumb>
     );
+};
+
+interface SliderStyledProps {
+    sliderStyle: string;
+    label: string;
+    customColor: string;
+    startIcon: React.ReactNode;
+    endIcon: React.ReactNode;
+    [key: string]: any;
 }
 
 export const Slider = styled(MuiSlider, {
     shouldForwardProp: (propName) =>
         !['startIcon', 'endIcon', 'customColor', 'sliderStyle'].includes(propName as string),
-})`
+})<SliderStyledProps & any>`
     ${sliderStyleIOS}
     ${sliderStylePretto}
-  ${sliderStyleAirBNB}
-  ${sliderStyleCustomColor}
+    ${sliderStyleAirBNB}
+    ${sliderStyleCustomColor}
 `;
 
-export const SliderLabel = styled(({ ...props }) => <MuiTypography gutterBottom {...props} />)``;
+export const SliderLabel: any = styled(({ ...props }) => <MuiTypography gutterBottom {...props} />)<
+    PropsWithChildren<string>
+>``;

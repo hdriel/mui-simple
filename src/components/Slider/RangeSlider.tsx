@@ -1,34 +1,34 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Slider from './Slider';
+import type { RangeSliderProps } from '../decs';
 
-export default function RangeSlider({
+const RangeSlider: React.FC<RangeSliderProps> = ({
+    chooseFromMarksList,
+    customColor,
+    disabled,
+    disableSwap,
+    displayValue,
+    endIcon,
     fromValue,
-    toValue,
+    inputCmp,
+    label,
+    marks,
+    minDistance,
+    muiColor,
     onChangeFromValue,
     onChangeToValue,
-    startIcon,
-    endIcon,
-    label,
-    disabled,
-    size,
-    displayValue,
-    valueLabelFormat,
-    range,
-    marks,
-    muiColor,
-    customColor,
-    chooseFromMarksList,
-    trackBarLinePosition,
     orientation,
-    disableSwap,
-    minDistance,
-    inputCmp,
+    range,
+    size,
+    startIcon,
+    toValue,
+    trackBarLinePosition,
+    valueLabelFormat,
     ...props
-}) {
+}): React.ReactElement => {
     minDistance = minDistance ?? 0;
 
-    const handleChangeLocking = (event, newValue, activeThumb) => {
+    const handleChangeLocking = (event, newValue, activeThumb): void => {
         if (!Array.isArray(newValue)) return;
         const [fromNewValue, toNewValue] = newValue;
 
@@ -41,7 +41,7 @@ export default function RangeSlider({
         }
     };
 
-    const handleChangeTrailing = (event, newValue, activeThumb) => {
+    const handleChangeTrailing = (event, newValue, activeThumb): void => {
         if (!Array.isArray(newValue)) return;
         const [fromNewValue, toNewValue] = newValue;
 
@@ -63,7 +63,7 @@ export default function RangeSlider({
         }
     };
 
-    const handleChange = (event, newValue) => {
+    const handleChange = (event, newValue): void => {
         if (!Array.isArray(newValue)) return;
         onChangeFromValue?.(event, Math.min(...newValue));
         onChangeToValue?.(event, Math.max(...newValue));
@@ -102,63 +102,27 @@ export default function RangeSlider({
             {...props}
         />
     );
-}
-
-RangeSlider.propTypes = {
-    fromValue: PropTypes.number,
-    toValue: PropTypes.number,
-    onChangeFromValue: PropTypes.func,
-    onChangeToValue: PropTypes.func,
-    startIcon: PropTypes.node,
-    endIcon: PropTypes.node,
-    label: PropTypes.string,
-    muiColor: PropTypes.string,
-    customColor: PropTypes.string,
-    onChange: PropTypes.func,
-    disabled: PropTypes.bool,
-    orientation: PropTypes.oneOf(['vertical', 'horizontal']),
-    size: PropTypes.oneOf(['small', 'medium']),
-    displayValue: PropTypes.oneOf(['auto', 'off', 'on']),
-    valueLabelFormat: PropTypes.func,
-    chooseFromMarksList: PropTypes.bool,
-    inputCmp: PropTypes.node,
-    trackBarLinePosition: PropTypes.oneOf(['none', 'inverted', 'normal']),
-    marks: PropTypes.oneOfType([
-        PropTypes.bool,
-        PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, value: PropTypes.number })),
-    ]),
-    range: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.number),
-        PropTypes.shape({
-            min: PropTypes.number,
-            max: PropTypes.number,
-            step: PropTypes.number,
-            marks: PropTypes.oneOfType([
-                PropTypes.bool,
-                PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, value: PropTypes.number })),
-            ]),
-        }),
-    ]),
-    disableSwap: PropTypes.oneOf(['locking', 'trailing']),
-    minDistance: PropTypes.number,
 };
 
 RangeSlider.defaultProps = {
-    startIcon: undefined,
-    endIcon: undefined,
-    label: undefined,
-    muiColor: undefined,
     customColor: undefined,
-    onChange: undefined,
-    valueLabelFormat: undefined,
     disabled: undefined,
-    orientation: undefined,
-    size: undefined,
-    trackBarLinePosition: undefined,
-    displayValue: undefined,
     disableSwap: undefined,
+    displayValue: undefined,
+    endIcon: undefined,
     inputCmp: undefined,
+    label: undefined,
     marks: undefined,
-    range: undefined,
     minDistance: 1,
+    muiColor: undefined,
+    onChange: undefined,
+    orientation: undefined,
+    range: undefined,
+    size: undefined,
+    startIcon: undefined,
+    trackBarLinePosition: undefined,
+    valueLabelFormat: undefined,
 };
+
+export type { RangeSliderProps } from '../decs';
+export default RangeSlider;
