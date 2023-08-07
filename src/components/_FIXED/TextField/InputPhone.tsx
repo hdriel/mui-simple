@@ -8,9 +8,7 @@ import SVGIcon from '../../SVGIcon/SVGIcon';
 import type { InputPhoneProps } from '../../decs';
 
 const InputPhone: React.FC<InputPhoneProps> = ({
-    name,
     value,
-    showMaskAsPlaceholder,
     copyAction,
     copyTooltip,
     copyMessage,
@@ -29,14 +27,10 @@ const InputPhone: React.FC<InputPhoneProps> = ({
     return (
         <>
             <InputPattern
-                {...props}
                 inputRef={ref}
-                name={name}
                 value={value}
-                /* eslint-disable no-octal-escape */
-                mask="\050-000-0000"
                 type="tel"
-                showMaskAsPlaceholder
+                {...props}
                 endCmp={
                     <>
                         {endCmp}
@@ -63,10 +57,23 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 };
 
 InputPhone.defaultProps = {
-    showMaskAsPlaceholder: undefined,
     copyTooltip: 'copy',
     copyMessage: 'Copied to clipboard',
     copyAction: false,
+    autofix: undefined,
+    blocks: undefined,
+    definitions: { '#': /[1-9]/ },
+    direction: 'ltr',
+    lazy: undefined,
+    onEnterKeyPress: undefined,
+    onKeyPress: undefined,
+    overwrite: undefined,
+    showMaskAsPlaceholder: true,
+    textAlign: undefined,
+    unmask: undefined,
+    value: '', // stay this value, to prevent from component to be disabled on missing provider value
+    // eslint-disable-next-line
+    mask: '000-000-0000',
 };
 
 export type { InputPhoneProps } from '../../decs';

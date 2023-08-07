@@ -5,6 +5,9 @@ get a lot of features to use mui, like custom-color that you can send any color 
 or more customized way to use component easier way, and less code bugs homemade. <br/>
 
 #### Demo: [storybook link](https://hdriel.github.io/mui-simple/)
+#####NOTE: 
+To run storybook locally, because peer dependencies not installed in package npm install, you need to wrap this project with package.json that include this peed in there node_modules. 
+there for, cut all git repo into the wrapper-repo directory and run `npm install` and run the `npm run storybook` in script's file: wrapper-repo/mui-simple/package.json
 
 ## Install
 

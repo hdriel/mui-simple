@@ -60,6 +60,7 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
                 onChange={handleOnChange}
                 onFocus={onFocusHandler}
                 value={value}
+                direction={direction}
                 InputProps={{
                     ...InputProps,
                     readOnly,
@@ -111,7 +112,7 @@ TextField.defaultProps = {
     colorActive: undefined,
     colorLabel: undefined,
     colorText: undefined,
-    direction: undefined,
+    direction: 'ltr',
     disabled: undefined,
     endCmp: undefined,
     endCmpExternal: undefined,

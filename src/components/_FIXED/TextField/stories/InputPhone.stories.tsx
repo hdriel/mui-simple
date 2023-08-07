@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import type { ReactElement } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Send as SendIcon } from '@mui/icons-material';
-import { Stack } from '@mui/material';
-
-import InputPhone from '../InputPhone';
+import { Box, Stack } from '@mui/material';
 import { action } from '@storybook/addon-actions';
+import { Formik } from 'formik';
+import InputPhone from '../InputPhone';
+import Checkbox from '../../Checkbox/Checkbox';
+import Typography from '../../Typography/Typography';
 
 const meta: Meta<typeof InputPhone> = {
     title: 'Inputs/Inputs/InputPhone',
@@ -283,4 +285,36 @@ export const CopyAction: Story = {
         copyMessage: 'COPIED!',
         copyTooltip: 'copy tooltip',
     },
+};
+
+export const Formik_ = (args): React.ReactElement => {
+    return (
+        <Formik
+            initialValues={{ phone: '', unmask: false }}
+            validate={(values) => (!values.phone.length ? { error: 'Required!' } : {})}
+            onSubmit={(values) => alert(values.phone)}
+        >
+            {({ values, touched, errors, handleChange, handleSubmit }) => {
+                action('formikRender')(values);
+                return (
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                        <InputPhone
+                            {...args}
+                            name="phone"
+                            label="Phone"
+                            helperText={touched.error && errors.phone ? errors.phone : ''}
+                            error={!!(touched.error && errors.phone)}
+                            value={values.phone}
+                            unmask={values.unmask}
+                            onChange={handleChange}
+                            showMaskAsPlaceholder={touched.phone}
+                            onEnterKeyPress={handleSubmit}
+                        />
+                        <Checkbox name="unmask" label="unmask value" checked={values.unmask} onChange={handleChange} />
+                        <Typography>VALUE: {values.phone}</Typography>
+                    </Box>
+                );
+            }}
+        </Formik>
+    );
 };

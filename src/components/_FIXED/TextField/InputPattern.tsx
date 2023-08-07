@@ -15,8 +15,8 @@ const InputPattern: React.FC<InputPatternProps> = ({
     inputRef,
     lazy: _lazy,
     name,
-    onBlur,
     onAccept,
+    onChange,
     onEnterKeyPress,
     onKeyPress,
     onFocus,
@@ -27,10 +27,9 @@ const InputPattern: React.FC<InputPatternProps> = ({
     ...props
 }): React.ReactElement => {
     // for example output for mask: '+(972) 50-000-0000'
-    const [maskedValue, setMaskedValue] = useState(_value); // for example: '+(972) 50-000-0000'
-    const [unmaskedValue, setUnmaskedValue] = useState(_value); // for example: '0-000-0000'
+    const [maskedValue, setMaskedValue] = useState(''); // for example: '0-000-0000'
+    const [unmaskedValue, setUnmaskedValue] = useState(''); // for example: '0-000-0000'
     const [isOnFocus, setIsOnFocus] = useState(false);
-    // const [hasFirstFocus, setHasFirstFocus] = useState(false);
 
     const lazy = useMemo(() => {
         if (isDefined(_lazy)) return !!_lazy;
@@ -40,41 +39,44 @@ const InputPattern: React.FC<InputPatternProps> = ({
         return !unmaskedValue;
     }, [_lazy, isOnFocus, placeholder, showMaskAsPlaceholder, unmaskedValue]);
 
+    const value = unmask ? unmaskedValue : maskedValue;
+
     // useEffect(() => {
-    //     if (hasFirstFocus && !isOnFocus) {
-    //         if (!unmaskedValue) {
-    //             setMaskedValue('');
-    //             setUnmaskedValue('');
-    //             onChange?.({ target: { name, value: '' } });
-    //         } else {
-    //             const value = unmask ? unmaskedValue : maskedValue;
-    //             onChange?.({ target: { name, value } });
-    //         }
-    //     } else {
-    //         if (!hasFirstFocus) setHasFirstFocus(true);
+    //     const maskEqual = unmask ? true : _value === maskedValue;
+    //     const unmaskEqual = unmask ? _value === unmaskedValue : true;
+    //     if (!maskEqual || !unmaskEqual) {
+    //         if (unmask) setUnmaskedValue(_value);
+    //         else setMaskedValue(_value);
     //     }
     //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [isOnFocus]);
+    // }, [_value]);
+
+    useEffect(() => {
+        const value = unmask ? unmaskedValue : maskedValue;
+        onChange?.({ target: { name, value } });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [unmask]);
 
     return (
         <ClickAwayListener onClickAway={() => setIsOnFocus(false)}>
             <Box>
                 <MaskedInput
                     {...props}
-                    name={name}
                     inputRef={inputRef}
-                    value={maskedValue}
-                    focused={!!maskedValue || isOnFocus}
-                    lazy={lazy}
+                    name={name}
                     unmask={unmask}
+                    value={value}
+                    focused={!!_value || isOnFocus || showMaskAsPlaceholder}
+                    lazy={lazy}
                     onFocus={(e) => {
                         setIsOnFocus(true);
                         onFocus?.(e);
                     }}
-                    onAccept={(value, mask) => {
-                        setUnmaskedValue(mask._value);
-                        setMaskedValue(mask._unmaskedValue);
-                        onAccept?.(value, mask);
+                    onAccept={(changeValue, mask) => {
+                        setMaskedValue(mask._value);
+                        setUnmaskedValue(mask._unmaskedValue);
+                        const value = unmask ? mask._unmaskedValue : mask._value;
+                        onChange?.({ target: { name, value } });
                     }}
                     onKeyPress={(e) => {
                         if (e.key === 'Enter') {

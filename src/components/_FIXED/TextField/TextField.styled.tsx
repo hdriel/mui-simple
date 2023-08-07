@@ -16,9 +16,10 @@ export const SliderIcon = (props): React.ReactElement => <Button icon={<CommitRo
 type TextFieldStyledType = InputBaseProps & TextFieldProps & any;
 export const TextField = styled(MuiTextField, {
     shouldForwardProp: (propName) =>
-        !['colorText', 'colorLabel', 'colorActive', 'textAlign'].includes(propName as string),
+        !['colorText', 'colorLabel', 'colorActive', 'textAlign', 'direction'].includes(propName as string),
 })<TextFieldStyledType>`
     ${(props) => {
+        const direction = props.direction as 'rtl' | 'ltr';
         const [colorText] = getCustomColor(props, { field: 'colorText' });
         const [colorLabel] = getCustomColor(props, { field: 'colorLabel' });
         const [hoverColorLabel] = getCustomColor(props, {
@@ -32,6 +33,7 @@ export const TextField = styled(MuiTextField, {
             & input {
                 color: ${colorText ? `${colorText} !important` : ''};
                 text-align: ${props.textAlign};
+                direction: ${direction ? `${direction} !important` : ''};
             }
             & label {
                 color: ${colorLabel};

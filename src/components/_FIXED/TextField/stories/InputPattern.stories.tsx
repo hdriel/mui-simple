@@ -4,12 +4,14 @@ import type { ReactElement } from 'react';
 import { Formik } from 'formik';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Send as SendIcon } from '@mui/icons-material';
-import { Stack } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 
 import InputPattern from '../InputPattern';
 import { IMask } from 'react-imask';
 import { action } from '@storybook/addon-actions';
 import { values } from 'lodash-es';
+import Typography from '../../Typography/Typography';
+import Checkbox from '../../Checkbox/Checkbox';
 
 const meta: Meta<typeof InputPattern> = {
     title: 'Inputs/Inputs/InputPattern',
@@ -359,30 +361,28 @@ export const Lazy_ = (args): React.ReactElement => (
     </Stack>
 );
 
-export const Formik_ = (args) => {
-    const [value, setValue] = useState('');
-
+export const Formik_ = (args): React.ReactElement => {
     return (
-        <Formik
-            initialValues={{ phone: value }}
-            onSubmit={(values) => {
-                alert(values.phone);
-                setValue(values.phone);
-            }}
-        >
-            {({ values, setFieldValue }) => {
+        <Formik initialValues={{ phone: '', unmask: false }} onSubmit={(values) => alert(values.phone)}>
+            {({ values, touched, setFieldValue, handleChange, handleSubmit }) => {
                 action('formikRender')(values);
                 return (
-                    <InputPattern
-                        name="phone"
-                        value={values.phone}
-                        label="Phone"
-                        mask="+(972) 50-000-0000"
-                        definitions={{ '#': /[1-9]/ }}
-                        unmask
-                        showMaskAsPlaceholder={false}
-                        onAccept={(value, mask) => setFieldValue('phone', mask._value)}
-                    />
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                        <InputPattern
+                            {...args}
+                            name="phone"
+                            value={values.phone}
+                            label="Phone"
+                            mask="+(972) 50-000-0000"
+                            definitions={{ '#': /[1-9]/ }}
+                            unmask={values.unmask}
+                            showMaskAsPlaceholder={touched.phone}
+                            onChange={handleChange}
+                            onEnterKeyPress={handleSubmit}
+                        />
+                        <Checkbox name="unmask" label="unmask value" checked={values.unmask} onChange={handleChange} />
+                        <Typography>VALUE: {values.phone}</Typography>
+                    </Box>
                 );
             }}
         </Formik>
