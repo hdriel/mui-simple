@@ -689,6 +689,15 @@ export interface SwitchProps {
     [key: string]: any;
 }
 
+type Range =
+    | [number, number, number, number] // [min, max, step, marksRange]
+    | {
+          min: number;
+          max: number;
+          step?: number;
+          marks?: boolean | Array<{ label: string; value: number }>;
+      };
+
 export interface SliderProps {
     chooseFromMarksList?: boolean;
     color?: string | { track: string; thumb: string };
@@ -696,8 +705,8 @@ export interface SliderProps {
     disablePadding?: boolean;
     disableSwap?: boolean;
     displayValue?: 'auto' | 'off' | 'on';
-    endIcon?: string | React.ReactNode;
-    inputCmp?: React.ReactNode;
+    endIcon?: string | ReactNode;
+    inputCmp?: ReactNode;
     label?: string;
     marks?: boolean | Array<{ label: string; value: number }>;
     onChange?: (event: any) => void;
@@ -705,16 +714,9 @@ export interface SliderProps {
     removePadding?: boolean;
     size?: 'small' | 'medium';
     sliderStyle?: 'ios' | 'pretto' | 'tooltip' | 'airbnb';
-    startIcon?: string | React.ReactNode;
+    startIcon?: string | ReactNode;
     trackBarLinePosition?: 'none' | 'inverted' | 'normal';
-    range?:
-        | [number, number, number, number] // [min, max, step, marksRange]
-        | {
-              min: number;
-              max: number;
-              step: number;
-              marks: boolean | Array<{ label: string; value: number }>;
-          };
+    range?: Range;
     value?: number | number[];
     valueLabelFormat?: (value: number) => string;
     [key: string]: any;
@@ -726,9 +728,9 @@ export interface RangeSliderProps {
     disabled?: boolean;
     disableSwap?: 'locking' | 'trailing';
     displayValue?: 'auto' | 'off' | 'on';
-    endIcon?: string | React.ReactNode;
+    endIcon?: string | ReactNode;
     fromValue?: number;
-    inputCmp?: React.ReactNode;
+    inputCmp?: ReactNode;
     label?: string;
     marks?: boolean | Array<{ label: string; value: number }>;
     minDistance?: number;
@@ -738,17 +740,10 @@ export interface RangeSliderProps {
     onChangeToValue?: (event: any, toValue: number) => void;
     orientation?: 'vertical' | 'horizontal';
     size?: 'small' | 'medium';
-    startIcon?: string | React.ReactNode;
+    startIcon?: string | ReactNode;
     toValue?: number;
     trackBarLinePosition?: 'none' | 'inverted' | 'normal';
-    range?:
-        | [number, number, number, number] // [min, max, step, marksRange]
-        | {
-              min: number;
-              max: number;
-              step: number;
-              marks: boolean | Array<{ label: string; value: number }>;
-          };
+    range?: Range;
     valueLabelFormat?: (value: number) => string;
 }
 
@@ -809,17 +804,11 @@ export interface RadioButtonProps {
     disabled?: boolean;
     [key: string]: any;
 }
+
 export interface RadioButtonsGroupProps {
     checkedIcon?: ReactNode;
     color?: string;
-    data?: Array<
-        | string
-        | {
-              value: string;
-              label: string;
-              disabled?: boolean;
-          }
-    >;
+    data?: Array<string | RadioButtonProps>;
     direction?: 'row' | 'column';
     disableRipple?: boolean;
     fullWidth?: boolean;

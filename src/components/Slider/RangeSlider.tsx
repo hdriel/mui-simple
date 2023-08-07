@@ -26,7 +26,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
     valueLabelFormat,
     ...props
 }): React.ReactElement => {
-    minDistance = minDistance ?? 0;
+    minDistance = minDistance || 0;
 
     const handleChangeLocking = (event, newValue, activeThumb): void => {
         if (!Array.isArray(newValue)) return;
