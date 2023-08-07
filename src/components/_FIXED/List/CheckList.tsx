@@ -2,7 +2,7 @@ import React from 'react';
 
 import List from './List';
 import Checkbox from '../Checkbox/Checkbox';
-import Switch from '../../Switch/Switch';
+import Switch from '../Switch/Switch';
 import type { CheckListProps } from '../../decs';
 
 const CheckList: React.FC<CheckListProps> = ({ controlType, alignCheck, items, ...props }): React.ReactElement => {

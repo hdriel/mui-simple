@@ -1,26 +1,25 @@
 import React from 'react';
 import { Switch as MuiSwitch, SwitchControlled, FormHelperText, SwitchOnOff } from './Switch.styled';
 import { SWITCH_STYLES } from './Switch.consts';
-import { useCustomColor } from '../../utils/helpers';
-import type { SwitchProps } from '../decs';
+import { useCustomColor } from '../../../utils/helpers';
+import type { SwitchProps } from '../../decs';
 
 const Switch: React.FC<SwitchProps> = ({
     checked,
-    checkedIcon,
     color,
     defaultChecked,
     disabled,
     error,
     helperText,
-    icon,
     isOnOff,
     label,
     labelPadding,
     labelPlacement,
     name,
-    offLabel,
+    OFF_LABEL,
     onChange,
-    onLabel,
+    onOffLabelSide,
+    ON_LABEL,
     required,
     scale,
     size,
@@ -44,8 +43,9 @@ const Switch: React.FC<SwitchProps> = ({
             checked={checked}
             onChange={(e) => onChange?.(e, e.target.checked)}
             labelPlacement={labelPlacement}
-            onLabel={onLabel}
-            offLabel={offLabel}
+            ON_LABEL={ON_LABEL}
+            OFF_LABEL={OFF_LABEL}
+            onOffLabelSide={onOffLabelSide}
             switchStyle={switchStyle}
             {...props}
         />
@@ -99,27 +99,26 @@ const Switch: React.FC<SwitchProps> = ({
 
 Switch.defaultProps = {
     checked: undefined,
-    checkedIcon: undefined,
     color: undefined,
     defaultChecked: undefined,
     disabled: undefined,
     error: undefined,
     fontSize: undefined,
     helperText: undefined,
-    icon: undefined,
     isOnOff: undefined,
     label: undefined,
     labelPadding: undefined,
     labelPlacement: undefined,
     name: undefined,
-    offLabel: undefined,
+    OFF_LABEL: 'off',
     onChange: undefined,
-    onLabel: undefined,
+    ON_LABEL: 'on',
+    onOffLabelSide: undefined,
     required: undefined,
     scale: undefined,
     size: 'medium',
     textColor: undefined,
 };
 
-export type { SwitchProps } from '../decs';
+export type { SwitchProps } from '../../decs';
 export default Switch;

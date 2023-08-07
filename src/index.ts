@@ -134,8 +134,8 @@ export { default as MobileStepper } from './components/Stepper/MobileStepper';
 export { useSimpleStepper } from './components/Stepper/Stepper.utils';
 export { default as SVGIcon } from './components/SVGIcon/SVGIcon';
 
-export { default as Switch } from './components/Switch/Switch';
-export type { SwitchProps } from './components/Switch/Switch';
+export { default as Switch } from './components/_FIXED/Switch/Switch';
+export type { SwitchProps } from './components/_FIXED/Switch/Switch';
 
 export * from './components/_FIXED/Table/Table';
 

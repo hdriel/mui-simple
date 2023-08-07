@@ -24,18 +24,9 @@ export const Checked: Story = {
     },
 };
 
-export const CheckedIcon: Story = {
-    args: {
-        checkedIcon: 'Favorite',
-        icon: 'FavoriteBorder',
-    },
-};
-
 export const Color: Story = {
     args: {
         color: '#FF0000',
-        checkedIcon: 'Favorite',
-        icon: 'FavoriteBorder',
     },
 };
 
@@ -67,8 +58,33 @@ export const IsOnOff: Story = {
 export const OnOffLabels: Story = {
     args: {
         isOnOff: true,
-        offLabel: 'DOWN',
-        onLabel: 'UP',
+        OFF_LABEL: 'DOWN',
+        ON_LABEL: 'UP',
+    },
+};
+
+export const OnOffLabelSide: Story = {
+    args: {
+        isOnOff: true,
+        labelPlacement: 'top',
+    },
+    render: (args) => {
+        const [value, setValue] = useState(true);
+
+        return (
+            <Stack spacing={3} alignItems="flex-start">
+                {['left', 'right'].map((onOffLabelSide) => (
+                    <Switch
+                        {...args}
+                        checked={value}
+                        onChange={(e) => setValue(e.target.checked)}
+                        key={onOffLabelSide}
+                        onOffLabelSide={onOffLabelSide}
+                        label={`${onOffLabelSide} label on-off`}
+                    />
+                ))}
+            </Stack>
+        );
     },
 };
 
@@ -93,7 +109,7 @@ export const Required: Story = {
 };
 
 export const LabelPlacement_ = () => (
-    <Stack spacing={3}>
+    <Stack spacing={3} alignItems="flex-start">
         {['top', 'start', 'bottom', 'end'].map((labelPlacement) => (
             <Switch key={labelPlacement} labelPlacement={labelPlacement} label={`${labelPlacement} label checkbox`} />
         ))}
@@ -109,8 +125,8 @@ export const Scale: Story = {
 
 export const Size_ = (args) => (
     <Stack direction="row" spacing={3}>
-        {['small', 'medium', 'large'].map((size) => (
-            <Switch key={size} size={size} {...args} />
+        {['small', 'medium'].map((size) => (
+            <Switch key={size} size={size} label={`${size} size`} {...args} />
         ))}
     </Stack>
 );
@@ -125,7 +141,7 @@ export const TextColor: Story = {
 export const SwitchStyle_ = () => (
     <Stack spacing={3}>
         {['ant', 'android12', 'ios', 'mui'].map((switchStyle) => (
-            <Switch key={switchStyle} switchStyle={switchStyle} label={`${switchStyle} label styles`} />
+            <Switch key={switchStyle} switchStyle={switchStyle} label={`'${switchStyle}' styles`} />
         ))}
     </Stack>
 );

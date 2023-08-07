@@ -5,10 +5,11 @@ import {
     FormHelperText as MuiFormHelperText,
     Switch as MuiSwitch,
     Stack as MuiStack,
-    Typography as MuiTypography,
 } from '@mui/material';
+import MuiTypography from '../Typography/Typography';
 import { SWITCH_STYLES } from './Switch.consts';
 import { customColor, antSwitchStyle, androidSwitchStyle, iosSwitchStyle } from './Switch.styles';
+import { isDefined } from '../../../utils/helpers';
 
 export const FormHelperText = MuiFormHelperText;
 export const Switch = styled(
@@ -27,24 +28,34 @@ export const Switch = styled(
 )`
     ${(props) => customColor(props)}
     ${(props) => antSwitchStyle(props)}
-  ${(props) => androidSwitchStyle(props)}
-  ${(props) => iosSwitchStyle(props)}
-  &.MuiSwitch-root {
+    ${(props) => androidSwitchStyle(props)}
+    ${(props) => iosSwitchStyle(props)}
+    &.MuiSwitch-root {
         scale: ${(props) => props.scale};
     }
 `;
 
 export const SwitchOnOff = styled(
-    ({ onLabel = 'on', offLabel = 'off', ...props }: any) => (
-        <MuiStack direction="row" spacing={0} alignItems="center">
-            <MuiTypography>{offLabel}</MuiTypography>
-            <Switch {...props} />
-            <MuiTypography>{onLabel}</MuiTypography>
-        </MuiStack>
-    ),
-    {
-        shouldForwardProp: (prop: string) => !['textColor', 'muiColor', 'fontSize', 'helperText'].includes(prop),
-    }
+    ({ onOffLabelSide, ON_LABEL, OFF_LABEL, ...props }: any) => {
+        const offLabel = OFF_LABEL && <MuiTypography tooltip={false}>{OFF_LABEL}</MuiTypography>;
+        const onLabel = ON_LABEL && <MuiTypography tooltip={false}>{ON_LABEL}</MuiTypography>;
+        const label = props.checked ? onLabel : offLabel;
+
+        return isDefined(onOffLabelSide) && ['left', 'right'].includes(onOffLabelSide) ? (
+            <MuiStack direction="row" spacing={0} alignItems="center">
+                {onOffLabelSide === 'left' ? label : undefined}
+                <Switch {...props} />
+                {onOffLabelSide === 'right' ? label : undefined}
+            </MuiStack>
+        ) : (
+            <MuiStack direction="row" spacing={0} alignItems="center">
+                {offLabel}
+                <Switch {...props} />
+                {onLabel}
+            </MuiStack>
+        );
+    },
+    { shouldForwardProp: (prop: string) => ![].includes(prop) }
 )``;
 
 export const SwitchControlled = styled(
