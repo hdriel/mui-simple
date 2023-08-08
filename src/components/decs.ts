@@ -692,8 +692,8 @@ export interface SwitchProps {
 type Range =
     | [number, number, number, number] // [min, max, step, marksRange]
     | {
-          min: number;
-          max: number;
+          min?: number;
+          max?: number;
           step?: number;
           marks?: boolean | Array<{ label: string; value: number }>;
       };
