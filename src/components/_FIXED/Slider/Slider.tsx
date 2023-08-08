@@ -8,9 +8,9 @@ import {
     Grid,
 } from './Slider.styled';
 import { SLIDER_STYLES } from './Slider.consts';
-import { useCustomColor } from '../../utils/helpers';
-import SVGIcon from '../SVGIcon/SVGIcon';
-import type { SliderProps } from '../decs';
+import { useCustomColor } from '../../../utils/helpers';
+import SVGIcon from '../../SVGIcon/SVGIcon';
+import type { SliderProps } from '../../decs';
 
 const Slider: React.FC<SliderProps> = ({
     chooseFromMarksList,
@@ -152,5 +152,5 @@ Slider.defaultProps = {
     valueLabelFormat: undefined,
 };
 
-export type { SliderProps } from '../decs';
+export type { SliderProps } from '../../decs';
 export default Slider;

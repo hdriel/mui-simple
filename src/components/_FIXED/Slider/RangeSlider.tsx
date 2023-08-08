@@ -1,7 +1,7 @@
 import React from 'react';
 import Slider from './Slider';
-import type { RangeSliderProps } from '../decs';
-import { isDefined } from '../../utils/helpers';
+import type { RangeSliderProps } from '../../decs';
+import { isDefined } from '../../../utils/helpers';
 
 const RangeSlider: React.FC<RangeSliderProps> = ({
     disabled,
@@ -125,5 +125,5 @@ RangeSlider.defaultProps = {
     defaultValue: [0, 0],
 };
 
-export type { RangeSliderProps } from '../decs';
+export type { RangeSliderProps } from '../../decs';
 export default RangeSlider;

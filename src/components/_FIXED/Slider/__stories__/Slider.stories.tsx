@@ -5,7 +5,7 @@ import { VolumeUp as VolumeUpIcon } from '@mui/icons-material';
 
 import Slider from '../Slider';
 import { action } from '@storybook/addon-actions';
-import TextField from '../../_FIXED/TextField/TextField';
+import TextField from '../../TextField/TextField';
 
 const meta: Meta<typeof Slider> = {
     title: 'Inputs/Slider',

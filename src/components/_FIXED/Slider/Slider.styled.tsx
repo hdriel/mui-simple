@@ -4,7 +4,7 @@ import { Typography as MuiTypography } from '@mui/material';
 import MuiSlider, { SliderThumb } from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
 import { sliderStyleIOS, sliderStylePretto, sliderStyleAirBNB, sliderStyleCustomColor } from './Slider.styles';
-import Tooltip from '../_FIXED/Tooltip/Tooltip';
+import Tooltip from '../Tooltip/Tooltip';
 
 export { Grid, Box } from '@mui/material';
 

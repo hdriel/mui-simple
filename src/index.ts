@@ -123,7 +123,7 @@ export type { RippleBoxProps } from './components/_FIXED/RippleBox/RippleBox';
 
 export { default as Skeleton } from './components/Skeleton/Skeleton';
 
-export * from './components/Slider';
+export * from './components/_FIXED/Slider';
 
 export { default as Snackbar } from './components/_FIXED/Snackbar/Snackbar';
 export type { SnackbarProps } from './components/_FIXED/Snackbar/Snackbar';

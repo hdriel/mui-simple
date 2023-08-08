@@ -12,7 +12,7 @@ import ToggleButtonGroup from '../../_FIXED/ToggleButtonGroup/ToggleButtonGroup'
 import Typography from '../../_FIXED/Typography/Typography';
 import ToggleButtonGroups from '../../_FIXED/ToggleButtonGroup/ToggleButtonGroups';
 import InputColor from '../../_FIXED/TextField/InputColor';
-import Slider from '../../Slider/Slider';
+import Slider from '../../_FIXED/Slider/Slider';
 
 export default {
     title: 'Data-Display/Icons',
