@@ -131,6 +131,17 @@ export const OnChangeEvent: Story = {
     },
 };
 
+export const onChangeCommitted: Story = {
+    args: {
+        label: 'on Change Committed',
+        min: 0,
+        max: 50,
+        step: 2,
+        defaultValue: [11, 23],
+        onChangeCommitted: (e, newValue) => alert(JSON.stringify(newValue ?? [])),
+    },
+};
+
 export const ValueLabelFormat: Story = {
     args: {
         label: 'Value Label Format',
@@ -273,7 +284,6 @@ export const InputCmp: Story = {
                 {...args}
                 value={value}
                 onChange={handleChange}
-                endIcon="VolumeUp"
                 startIcon={
                     <TextField
                         value={value[0]}
@@ -295,4 +305,32 @@ export const InputCmp: Story = {
             />
         );
     },
+};
+
+function useValue(v1 = 0, v2 = 0) {
+    const [fromValue, setFromValue] = React.useState(v1);
+    const [toValue, setToValue] = React.useState(v2);
+    const onChangeFromValue = (event, newValue) => setFromValue(newValue);
+    const onChangeToValue = (event, newValue) => setToValue(newValue);
+
+    return { fromValue, toValue, onChangeFromValue, onChangeToValue };
+}
+
+export const DisableSwap_ = () => {
+    return (
+        <Stack spacing={3}>
+            <RangeSlider label="swap" {...useValue(30, 50)} minDistance={10} />
+            <RangeSlider label="DisableSwap - locking" disableSwap="locking" {...useValue(30, 50)} minDistance={10} />
+            <RangeSlider label="DisableSwap - trailing" disableSwap="trailing" {...useValue(30, 50)} minDistance={10} />
+        </Stack>
+    );
+};
+
+export const MinDistance: Story = {
+    args: {
+        label: 'Min Distance',
+        minDistance: 10,
+        max: 50,
+    },
+    render: (args) => <RangeSlider {...args} {...useValue(12, 26)} />,
 };

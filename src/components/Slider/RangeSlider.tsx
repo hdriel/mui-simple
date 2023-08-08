@@ -5,7 +5,7 @@ import { isDefined } from '../../utils/helpers';
 
 const RangeSlider: React.FC<RangeSliderProps> = ({
     disabled,
-    disableSwap,
+    disableSwap: _disableSwap,
     displayValue,
     defaultValue,
     fromValue,
@@ -15,6 +15,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
     onChangeToValue,
     range,
     toValue,
+    value: _value,
     trackBarLinePosition,
     ...props
 }): React.ReactElement => {
@@ -63,7 +64,16 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
         onChange?.(event, newValue);
     };
 
-    const value = fromValue !== undefined && toValue !== undefined ? [fromValue, toValue] : undefined;
+    const value =
+        isDefined(fromValue) || isDefined(toValue)
+            ? [fromValue, toValue]
+            : Array.isArray(_value)
+            ? _value
+            : isDefined(_value) && typeof _value === 'number'
+            ? [_value]
+            : undefined;
+
+    const disableSwap = isDefined(_disableSwap) || minDistance > 0 ? _disableSwap || 'locking' : undefined;
 
     return (
         <Slider
@@ -73,7 +83,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
             trackBarLinePosition={trackBarLinePosition}
             valueLabelDisplay={displayValue ?? (disabled ? 'on' : 'auto')}
             track={trackBarLinePosition === 'none' ? false : trackBarLinePosition}
-            disableSwap={disableSwap !== undefined}
+            disableSwap={disableSwap !== undefined || minDistance > 0}
             value={value as any}
             defaultValue={isDefined(value) ? undefined : defaultValue}
             // @ts-expect-error
@@ -100,7 +110,7 @@ RangeSlider.defaultProps = {
     marks: undefined,
     max: undefined,
     min: undefined,
-    minDistance: 1,
+    minDistance: undefined,
     onChange: undefined,
     orientation: undefined,
     range: undefined,

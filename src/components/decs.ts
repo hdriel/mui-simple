@@ -712,6 +712,7 @@ export interface SliderProps {
     step?: number;
     marks?: boolean | Array<{ label: string; value: number }>;
     onChange?: (event: any) => void;
+    onChangeCommitted?: (event: any, newValue: number) => void;
     orientation?: 'vertical' | 'horizontal';
     removePadding?: boolean;
     size?: 'small' | 'medium';
@@ -724,11 +725,12 @@ export interface SliderProps {
     [key: string]: any;
 }
 
-export type RangeSliderProps = Omit<SliderProps, 'value' | 'onChange'> & {
+export type RangeSliderProps = Omit<SliderProps, 'value' | 'onChange' | 'onChangeCommitted'> & {
     disableSwap?: 'locking' | 'trailing';
     fromValue?: number;
     minDistance?: number;
-    onChange?: (event: any, newValue?: any) => void;
+    onChange?: (event: any, newValue?: number[]) => void;
+    onChangeCommitted?: (event: any, newValue: number[]) => void;
     onChangeFromValue?: (event: any, fromValue: number) => void;
     onChangeToValue?: (event: any, toValue: number) => void;
     toValue?: number;

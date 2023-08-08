@@ -118,6 +118,16 @@ export const OnChangeEvent: Story = {
     },
 };
 
+export const onChangeCommitted: Story = {
+    args: {
+        label: 'on Change Committed',
+        min: 0,
+        max: 50,
+        step: 2,
+        onChangeCommitted: (e, newValue) => alert(JSON.stringify(newValue ?? 0, null, 4)),
+    },
+};
+
 export const ValueLabelFormat: Story = {
     args: {
         label: 'Value Label Format',
