@@ -19,7 +19,7 @@ export const Default: Story = {
     args: {},
 };
 
-export const Color_ = () => (
+export const Color_ = (args) => (
     <Stack>
         {[
             '#10DDCC',
@@ -47,7 +47,7 @@ export const DisablePadding: Story = {
     },
 };
 
-export const DisplayValue_ = () => (
+export const DisplayValue_ = (args) => (
     <Stack>
         {['on', 'off', 'auto'].map((displayValue) => (
             <Slider key={displayValue} displayValue={displayValue} label={displayValue} />
@@ -76,7 +76,7 @@ export const OrientationVertical: Story = {
     },
 };
 
-export const Size_ = () => (
+export const Size_ = (args) => (
     <Stack>
         {['small', 'medium'].map((size) => (
             <Slider key={size} size={size} label={size} />
@@ -84,7 +84,7 @@ export const Size_ = () => (
     </Stack>
 );
 
-export const Styles_ = () => (
+export const Styles_ = (args) => (
     <Stack>
         {['ios', 'pretto', 'tooltip', 'airbnb'].map((sliderStyle) => (
             <Slider key={sliderStyle} sliderStyle={sliderStyle} label={`'${sliderStyle}' styles`} />
@@ -122,7 +122,7 @@ export const RemovePadding: Story = {
     },
 };
 
-export const TrackBarLinePosition_ = () => (
+export const TrackBarLinePosition_ = (args) => (
     <Stack>
         {['normal', 'none', 'inverted'].map((trackBarLinePosition) => (
             <Slider
@@ -134,11 +134,30 @@ export const TrackBarLinePosition_ = () => (
     </Stack>
 );
 
-export const Range_ = () => (
+export const Range_ = (args) => (
+    <Stack>
+        {[[150, 200], { min: 150, max: 200 }, [-10, 10, 2], { min: -10, max: 10, step: 2 }].map((range) => (
+            <Slider key={range} range={range} />
+        ))}
+    </Stack>
+);
+
+export const RangeMarks_ = (args) => (
     <Stack>
         {[
+            [undefined, undefined, 5],
             [150, 200, 2.5, true],
             { min: 150, max: 200, step: 2.5, marks: true },
+            [
+                -10,
+                10,
+                2,
+                [
+                    { label: '2L', value: 2 },
+                    { label: '6L', value: 6 },
+                    { label: '8M', value: 8 },
+                ],
+            ],
             {
                 min: -10,
                 max: 10,
@@ -155,9 +174,34 @@ export const Range_ = () => (
     </Stack>
 );
 
+export const Marks: Story = {
+    args: {
+        label: 'Marks',
+        range: [4, 20],
+        step: 2,
+        marks: [
+            { label: '8L', value: 12 },
+            { label: '12L', value: 16 },
+            { label: '16M', value: 18 },
+        ],
+    },
+};
+
+export const ChooseFromMarksList: Story = {
+    args: {
+        label: 'ChooseFromMarksList',
+        chooseFromMarksList: true,
+        range: [5, 20],
+        marks: [
+            { label: '5L', value: 5 },
+            { label: '8L', value: 12 },
+            { label: '12L', value: 16 },
+            { label: '16M', value: 18 },
+            { label: '20L', value: 20 },
+        ],
+    },
+};
+
 /*
-chooseFromMarksList?: boolean;
 inputCmp?: ReactNode;
-marks?: boolean | Array<{ label: string; value: number }>;
-range?: Range;
  */

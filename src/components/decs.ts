@@ -708,6 +708,9 @@ export interface SliderProps {
     endIcon?: string | ReactNode;
     inputCmp?: ReactNode;
     label?: string;
+    min?: number;
+    max?: number;
+    step?: number;
     marks?: boolean | Array<{ label: string; value: number }>;
     onChange?: (event: any) => void;
     orientation?: 'vertical' | 'horizontal';

@@ -21,11 +21,14 @@ const Slider: React.FC<SliderProps> = ({
     endIcon: _endIcon,
     inputCmp,
     label,
-    marks,
+    marks: _marks,
+    min: _min,
+    max: _max,
     onChange,
     orientation,
     range,
     removePadding,
+    step: _step,
     size,
     sliderStyle,
     startIcon: _startIcon,
@@ -44,23 +47,23 @@ const Slider: React.FC<SliderProps> = ({
     const rangeProps = useMemo(() => {
         if (!range) return undefined;
         if (Array.isArray(range)) {
-            const [min, max, step, marksRange] = range; // default min = 0, max = 100, marks = false
+            const [min, max, step, marks] = range; // default min = 0, max = 100, marks = false
             return {
-                min,
-                max,
-                step: chooseFromMarksList ? null : step,
-                marks: marks ?? marksRange,
+                min: _min ?? min,
+                max: _max ?? max,
+                step: chooseFromMarksList ? null : _step ?? step,
+                marks: _marks ?? marks,
             };
         } else {
-            const { min, max, step, marks: marksRange } = range ?? {}; // default min = 0, max = 100, marks = false
+            const { min, max, step, marks } = range ?? {}; // default min = 0, max = 100, marks = false
             return {
-                min,
-                max,
-                step: chooseFromMarksList ? null : step,
-                marks: marks ?? marksRange,
+                min: _min ?? min,
+                max: _max ?? max,
+                step: chooseFromMarksList ? null : _step ?? step,
+                marks: _marks ?? marks,
             };
         }
-    }, [range, marks, chooseFromMarksList]);
+    }, [range, _marks, _min, _max, _step, chooseFromMarksList]);
 
     const height = orientation === 'vertical' ? 'inherit' : 'max-content';
 
