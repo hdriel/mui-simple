@@ -728,7 +728,7 @@ export type RangeSliderProps = Omit<SliderProps, 'value' | 'onChange'> & {
     disableSwap?: 'locking' | 'trailing';
     fromValue?: number;
     minDistance?: number;
-    onChange?: (event: any, newValue?: any, activeThumb?: any) => void;
+    onChange?: (event: any, newValue?: any) => void;
     onChangeFromValue?: (event: any, fromValue: number) => void;
     onChangeToValue?: (event: any, toValue: number) => void;
     toValue?: number;

@@ -40,7 +40,7 @@ export const Color_ = (args) => (
 export const Disabled: Story = {
     args: {
         disabled: true,
-        value: [15, 35],
+        defaultValue: [15, 35],
     },
 };
 
@@ -48,7 +48,7 @@ export const DisablePadding: Story = {
     args: {
         disablePadding: true,
         label: 'disable padding',
-        value: [15, 35],
+        defaultValue: [15, 35],
     },
 };
 
@@ -241,50 +241,58 @@ export const ChooseFromMarksList: Story = {
         defaultValue: [12, 16],
     },
 };
-//
-// export const InputCmp: Story = {
-//     args: {},
-//     render: (args) => {
-//         const [value, setValue] = useState([30, 50]);
-//         const handleChange = (event, newValue) => {
-//             setValue(newValue);
-//             action('onChangeInput')(newValue);
-//         };
-//         const handleInputChange = (event) => {
-//             const v = event.target.value;
-//             setValue(v === '' ? 0 : Number(v));
-//             action('onChangeInput')(v);
-//         };
-//
-//         const handleBlur = () => {
-//             if (value < 0) {
-//                 setValue(0);
-//                 action('onChangeInput')(0);
-//             } else if (value > 100) {
-//                 setValue(100);
-//                 action('onChangeInput')(100);
-//             }
-//         };
-//
-//         const input = (
-//             <TextField
-//                 value={value}
-//                 size="small"
-//                 onChange={handleInputChange}
-//                 onBlur={handleBlur}
-//                 inputProps={{ step: 10, min: 0, max: 100, type: 'number' }}
-//             />
-//         );
-//
-//         return (
-//             <RangeSlider
-//                 {...args}
-//                 defaultValue={40}
-//                 startIcon={input}
-//                 value={value}
-//                 onChange={handleChange}
-//                 endIcon="VolumeUp"
-//             />
-//         );
-//     },
-// };
+
+export const InputCmp: Story = {
+    args: {},
+    render: (args) => {
+        const [value, setValue] = useState([30, 50]);
+        const handleChange = (event, newValue) => {
+            setValue(newValue);
+            action('onChangeInput')(newValue);
+        };
+        const handleInputChange = (index) => (event) => {
+            const v = event.target.value;
+            setValue((value) => {
+                const newValue = [...value];
+                newValue[index] = v;
+                return newValue;
+            });
+            action('onChangeInput')(v);
+        };
+
+        const handleBlur = () => {
+            let min = value[0] < 0 ? 0 : value[0];
+            let max = value[1] > 100 ? 100 : value[1];
+            const v = [min, max];
+            setValue(v);
+            action('onChangeInput')(v);
+        };
+
+        return (
+            <RangeSlider
+                {...args}
+                value={value}
+                onChange={handleChange}
+                endIcon="VolumeUp"
+                startIcon={
+                    <TextField
+                        value={value[0]}
+                        size="small"
+                        onChange={handleInputChange(0)}
+                        onBlur={handleBlur}
+                        inputProps={{ step: 10, min: 0, max: 100, type: 'number' }}
+                    />
+                }
+                endIcon={
+                    <TextField
+                        value={value[1]}
+                        size="small"
+                        onChange={handleInputChange(1)}
+                        onBlur={handleBlur}
+                        inputProps={{ step: 10, min: 0, max: 100, type: 'number' }}
+                    />
+                }
+            />
+        );
+    },
+};

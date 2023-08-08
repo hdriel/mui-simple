@@ -4,28 +4,18 @@ import type { RangeSliderProps } from '../decs';
 import { isDefined } from '../../utils/helpers';
 
 const RangeSlider: React.FC<RangeSliderProps> = ({
-    chooseFromMarksList,
-    customColor,
     disabled,
     disableSwap,
     displayValue,
     defaultValue,
-    endIcon,
     fromValue,
-    inputCmp,
-    label,
-    marks,
     minDistance,
-    muiColor,
+    onChange,
     onChangeFromValue,
     onChangeToValue,
-    orientation,
     range,
-    size,
-    startIcon,
     toValue,
     trackBarLinePosition,
-    valueLabelFormat,
     ...props
 }): React.ReactElement => {
     minDistance = minDistance || 0;
@@ -69,33 +59,24 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
         if (!Array.isArray(newValue)) return;
         onChangeFromValue?.(event, Math.min(...newValue));
         onChangeToValue?.(event, Math.max(...newValue));
+        event.target.value = newValue;
+        onChange?.(event, newValue);
     };
 
     const value = fromValue !== undefined && toValue !== undefined ? [fromValue, toValue] : undefined;
 
     return (
         <Slider
-            startIcon={startIcon}
-            endIcon={endIcon}
-            label={label}
             disabled={disabled}
-            size={size}
             displayValue={displayValue}
-            valueLabelFormat={valueLabelFormat}
             range={range}
-            marks={marks}
-            muiColor={muiColor}
-            customColor={customColor}
-            chooseFromMarksList={chooseFromMarksList}
             trackBarLinePosition={trackBarLinePosition}
-            orientation={orientation}
-            inputCmp={inputCmp}
             valueLabelDisplay={displayValue ?? (disabled ? 'on' : 'auto')}
-            color={muiColor}
             track={trackBarLinePosition === 'none' ? false : trackBarLinePosition}
             disableSwap={disableSwap !== undefined}
             value={value as any}
             defaultValue={isDefined(value) ? undefined : defaultValue}
+            // @ts-expect-error
             onChange={
                 {
                     locking: handleChangeLocking,
