@@ -706,7 +706,6 @@ export interface SliderProps {
     disableSwap?: boolean;
     displayValue?: 'auto' | 'off' | 'on';
     endIcon?: string | ReactNode;
-    inputCmp?: ReactNode;
     label?: string;
     min?: number;
     max?: number;

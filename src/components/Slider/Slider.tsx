@@ -19,7 +19,6 @@ const Slider: React.FC<SliderProps> = ({
     disablePadding,
     displayValue,
     endIcon: _endIcon,
-    inputCmp,
     label,
     marks: _marks,
     min: _min,
@@ -116,7 +115,7 @@ const Slider: React.FC<SliderProps> = ({
                         {...props}
                     />
                 </Grid>
-                {(inputCmp || endIcon) && <Grid item>{inputCmp ?? endIcon}</Grid>}
+                {endIcon && <Grid item>{endIcon}</Grid>}
             </Grid>
         </Box>
     );
@@ -129,7 +128,6 @@ Slider.defaultProps = {
     disableSwap: undefined,
     displayValue: undefined,
     endIcon: undefined,
-    inputCmp: undefined,
     label: undefined,
     marks: undefined,
     onChange: undefined,

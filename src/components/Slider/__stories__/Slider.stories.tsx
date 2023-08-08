@@ -4,6 +4,8 @@ import { Box, Stack } from '@mui/material';
 import { VolumeUp as VolumeUpIcon } from '@mui/icons-material';
 
 import Slider from '../Slider';
+import { action } from '@storybook/addon-actions';
+import TextField from '../../_FIXED/TextField/TextField';
 
 const meta: Meta<typeof Slider> = {
     title: 'Inputs/Slider',
@@ -202,6 +204,42 @@ export const ChooseFromMarksList: Story = {
     },
 };
 
-/*
-inputCmp?: ReactNode;
- */
+export const InputCmp: Story = {
+    args: {
+        label: 'Input Cmp',
+    },
+    render: (args) => {
+        const [value, setValue] = useState(30);
+        const handleChange = (event, newValue) => {
+            setValue(newValue);
+            action('onChangeInput')(newValue);
+        };
+        const handleInputChange = (event) => {
+            const v = event.target.value;
+            setValue(v === '' ? 0 : Number(v));
+            action('onChangeInput')(v);
+        };
+
+        const handleBlur = () => {
+            if (value < 0) {
+                setValue(0);
+                action('onChangeInput')(0);
+            } else if (value > 100) {
+                setValue(100);
+                action('onChangeInput')(100);
+            }
+        };
+
+        const input = (
+            <TextField
+                value={value}
+                size="small"
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                inputProps={{ step: 10, min: 0, max: 100, type: 'number' }}
+            />
+        );
+
+        return <Slider defaultValue={40} startIcon={input} value={value} onChange={handleChange} endIcon="VolumeUp" />;
+    },
+};
