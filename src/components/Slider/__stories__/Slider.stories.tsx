@@ -77,6 +77,7 @@ export const OrientationVertical: Story = {
         orientation: 'vertical',
         startIcon: 'AcUnit',
         endIcon: 'Whatshot',
+        disablePadding: true,
         marks: [
             { value: 0, label: '0°C' },
             { value: 20, label: '20°C' },
@@ -86,9 +87,9 @@ export const OrientationVertical: Story = {
     },
     decorators: [
         (Story) => (
-            <div style={{ height: 300 }}>
+            <Box sx={{ height: 300, px: 3 }}>
                 <Story />
-            </div>
+            </Box>
         ),
     ],
 };

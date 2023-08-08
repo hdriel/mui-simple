@@ -1,4 +1,5 @@
 import React, { isValidElement } from 'react';
+import type { SxProps } from '@mui/material';
 import type { PropsWithChildren } from 'react';
 // import PropTypes from 'prop-types';
 import MuiIconName from './MuiIconName';
@@ -11,20 +12,21 @@ interface SVGIconProps {
     width?: string | number;
     height?: string | number;
     size?: string | number;
+    sx?: SxProps;
 }
 
 export default function SVGIcon(props: PropsWithChildren<SVGIconProps>): React.ReactElement {
-    const { muiIconName, iconSrc, color, width, height, size, children, ...rest } = props;
+    const { muiIconName, iconSrc, color, width, height, size, children, sx: _sx, ...rest } = props;
     const iconName = muiIconName || (typeof children === 'string' ? children : undefined);
-
+    const sx = { display: 'flex', justifyContent: 'center', alignItems: 'center', ..._sx };
     if (children && isValidElement(children)) {
         return children;
     }
 
     return (
-        <MuiIconName name={iconName} color={color} width={size ?? width} height={size ?? height} {...rest}>
+        <MuiIconName name={iconName} color={color} width={size ?? width} height={size ?? height} sx={sx} {...rest}>
             {iconSrc ? (
-                <SVG src={iconSrc} fill={color} width={size ?? width} height={size ?? height} {...rest} />
+                <SVG src={iconSrc} fill={color} width={size ?? width} height={size ?? height} sx={sx} {...rest} />
             ) : (
                 children
             )}

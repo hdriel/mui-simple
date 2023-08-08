@@ -75,22 +75,26 @@ const Slider: React.FC<SliderProps> = ({
         >
             {label && <SliderLabel>{label}</SliderLabel>}
             <Grid
-                {...(!disablePadding && {
-                    container: true,
-                    spacing: 2,
-                    alignItems: 'center',
-                    direction: orientation === 'vertical' ? 'column-reverse' : 'row',
-                })}
+                container={!disablePadding}
+                spacing={!disablePadding ? 2 : 0}
+                alignItems={orientation === 'vertical' ? 'flex-start' : 'center'}
+                direction={orientation === 'vertical' ? 'column-reverse' : 'row'}
                 sx={{
                     height,
-                    ...(disablePadding && {
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '1em',
-                    }),
+                    ...(disablePadding && { display: 'flex', gap: '1em' }),
                 }}
             >
-                {startIcon && <Grid item>{startIcon}</Grid>}
+                {startIcon && (
+                    <Grid
+                        item
+                        sx={{
+                            pt: `${orientation === 'vertical' ? 0 : 16}px !important`,
+                            pl: `${orientation === 'vertical' ? 3 : 8}px !important`,
+                        }}
+                    >
+                        {startIcon}
+                    </Grid>
+                )}
                 <Grid item xs sx={{ height: 'inherit' }}>
                     <MuiSlider
                         startIcon={startIcon}
@@ -114,28 +118,37 @@ const Slider: React.FC<SliderProps> = ({
                         {...props}
                     />
                 </Grid>
-                {endIcon && <Grid item>{endIcon}</Grid>}
+                {endIcon && (
+                    <Grid item sx={{ pt: '8px !important', pl: `${orientation === 'vertical' ? 3 : 8}px !important` }}>
+                        {endIcon}
+                    </Grid>
+                )}
             </Grid>
         </Box>
     );
 };
 
 Slider.defaultProps = {
+    chooseFromMarksList: undefined,
     color: undefined,
     disabled: undefined,
     disablePadding: undefined,
-    disableSwap: undefined,
     displayValue: undefined,
     endIcon: undefined,
     label: undefined,
     marks: undefined,
+    min: undefined,
+    max: undefined,
     onChange: undefined,
     orientation: undefined,
     range: undefined,
+    removePadding: undefined,
+    step: undefined,
     size: undefined,
     sliderStyle: undefined,
     startIcon: undefined,
     trackBarLinePosition: undefined,
+    value: undefined,
     valueLabelFormat: undefined,
 };
 

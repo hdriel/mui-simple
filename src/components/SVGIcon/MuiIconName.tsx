@@ -1,4 +1,5 @@
 import { createElement } from 'react';
+import type { SxProps } from '@mui/material';
 import type { PropsWithChildren, ReactElement, ReactNode } from 'react';
 // import PropTypes from 'prop-types';
 import * as MUIIcon from '@mui/icons-material';
@@ -9,6 +10,7 @@ interface MuiIconNameProps {
     color: string;
     width: string | number;
     height: string | number;
+    sx?: SxProps;
 }
 type MuiIconNamePropsType = PropsWithChildren<MuiIconNameProps>;
 
