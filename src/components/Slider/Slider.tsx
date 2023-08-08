@@ -44,9 +44,8 @@ const Slider: React.FC<SliderProps> = ({
     const endIcon = typeof _endIcon === 'string' ? <SVGIcon>{_endIcon}</SVGIcon> : _endIcon;
 
     const rangeProps = useMemo(() => {
-        if (!range) return undefined;
         if (Array.isArray(range)) {
-            const [min, max, step, marks] = range; // default min = 0, max = 100, marks = false
+            const [min, max, step, marks] = range ?? []; // default min = 0, max = 100, marks = false
             return {
                 min: _min ?? min,
                 max: _max ?? max,

@@ -29,8 +29,8 @@ export const Color_ = (args) => (
             'success.light',
             { track: '#D0CCC0', thumb: '#150CCC' },
             { track: 'success.dark', thumb: 'error' },
-        ].map((color) => (
-            <Slider key={JSON.stringify(color)} color={color} />
+        ].map((color, index) => (
+            <Slider key={JSON.stringify(color)} color={color} defaultValue={40 + index * 10} />
         ))}
     </Stack>
 );
@@ -75,7 +75,22 @@ export const OrientationVertical: Story = {
     args: {
         label: 'Slider Vertical',
         orientation: 'vertical',
+        startIcon: 'AcUnit',
+        endIcon: 'Whatshot',
+        marks: [
+            { value: 0, label: '0°C' },
+            { value: 20, label: '20°C' },
+            { value: 37, label: '37°C' },
+            { value: 100, label: '100°C' },
+        ],
     },
+    decorators: [
+        (Story) => (
+            <div style={{ height: 300 }}>
+                <Story />
+            </div>
+        ),
+    ],
 };
 
 export const Size_ = (args) => (
@@ -95,25 +110,21 @@ export const Styles_ = (args) => (
 );
 
 export const OnChangeEvent: Story = {
-    args: {
-        label: 'Slider Vertical',
-        orientation: 'vertical',
-    },
-    render: () => {
+    args: {},
+    render: (args) => {
         const [value, setValue] = useState();
-        return <Slider value={value} onChange={(e) => setValue(e.target.value)} />;
+        return <Slider {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
     },
 };
 
 export const ValueLabelFormat: Story = {
     args: {
-        label: 'Slider Vertical',
-        orientation: 'vertical',
-        valueLabelFormat: (n) => `HI: ${n}`,
+        label: 'Value Label Format',
+        valueLabelFormat: (n) => `score: ${n}`,
     },
-    render: () => {
+    render: (args) => {
         const [value, setValue] = useState();
-        return <Slider value={value} onChange={(e) => setValue(e.target.value)} />;
+        return <Slider {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
     },
 };
 
@@ -205,9 +216,7 @@ export const ChooseFromMarksList: Story = {
 };
 
 export const InputCmp: Story = {
-    args: {
-        label: 'Input Cmp',
-    },
+    args: {},
     render: (args) => {
         const [value, setValue] = useState(30);
         const handleChange = (event, newValue) => {
@@ -240,6 +249,15 @@ export const InputCmp: Story = {
             />
         );
 
-        return <Slider defaultValue={40} startIcon={input} value={value} onChange={handleChange} endIcon="VolumeUp" />;
+        return (
+            <Slider
+                {...args}
+                defaultValue={40}
+                startIcon={input}
+                value={value}
+                onChange={handleChange}
+                endIcon="VolumeUp"
+            />
+        );
     },
 };
