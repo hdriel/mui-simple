@@ -37,9 +37,9 @@ const iOSBoxShadow = '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0
 export function sliderStyleIOS(props): SerializedStyles {
     if (props.sliderStyle !== SLIDER_STYLES.IOS) return css``;
 
-    const { theme, customColor, muiColor } = props;
+    const { theme, customColor } = props;
     const primary = get(theme, `palette.primary.main`);
-    const color = get(theme, `palette.${muiColor as string}.main`, customColor ?? primary);
+    const color = customColor ?? primary;
 
     return css`
         color: ${color};
@@ -97,9 +97,9 @@ export function sliderStyleIOS(props): SerializedStyles {
 export function sliderStylePretto(props): SerializedStyles {
     if (props.sliderStyle !== SLIDER_STYLES.PRETTO) return css``;
 
-    const { theme, customColor, muiColor } = props;
+    const { theme, customColor } = props;
     const primary = get(theme, `palette.primary.main`);
-    const color = get(theme, `palette.${muiColor as string}.main`, customColor ?? primary);
+    const color = customColor ?? primary;
 
     return css`
         color: ${color};
@@ -152,9 +152,9 @@ export function sliderStylePretto(props): SerializedStyles {
 export function sliderStyleAirBNB(props): SerializedStyles {
     if (props.sliderStyle !== SLIDER_STYLES.AIRBNB) return css``;
 
-    const { theme, customColor, muiColor } = props;
+    const { theme, customColor } = props;
     const primary = get(theme, `palette.primary.main`);
-    const color = get(theme, `palette.${muiColor as string}.main`, customColor ?? primary);
+    const color = customColor ?? primary;
 
     return css`
         color: ${color};

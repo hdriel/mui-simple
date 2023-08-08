@@ -34,7 +34,7 @@ const Slider: React.FC<SliderProps> = ({
     valueLabelFormat,
     ...props
 }): React.ReactElement => {
-    let [customColor, muiColor] = useCustomColor(typeof color === 'object' ? undefined : color);
+    let [customColor] = useCustomColor(typeof color === 'object' ? undefined : color);
     const [track] = useCustomColor((color as any)?.track);
     const [thumb] = useCustomColor((color as any)?.thumb);
     customColor = (customColor || { track, thumb }) as string;
@@ -101,8 +101,7 @@ const Slider: React.FC<SliderProps> = ({
                         onChange={onChange}
                         valueLabelDisplay={displayValue ?? (disabled ? 'on' : 'auto')}
                         valueLabelFormat={valueLabelFormat}
-                        color={muiColor as any}
-                        customColor={muiColor ? undefined : customColor}
+                        customColor={customColor}
                         orientation={orientation}
                         track={trackBarLinePosition === 'none' ? false : trackBarLinePosition}
                         {...rangeProps}
