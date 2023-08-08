@@ -719,35 +719,21 @@ export interface SliderProps {
     startIcon?: string | ReactNode;
     trackBarLinePosition?: 'none' | 'inverted' | 'normal';
     range?: Range;
-    value?: number | number[];
+    value?: number;
     valueLabelFormat?: (value: number) => string;
     [key: string]: any;
 }
 
-export interface RangeSliderProps {
-    chooseFromMarksList?: boolean;
-    customColor?: string;
-    disabled?: boolean;
+export type RangeSliderProps = Omit<SliderProps, 'value' | 'onChange'> & {
     disableSwap?: 'locking' | 'trailing';
-    displayValue?: 'auto' | 'off' | 'on';
-    endIcon?: string | ReactNode;
     fromValue?: number;
-    inputCmp?: ReactNode;
-    label?: string;
-    marks?: boolean | Array<{ label: string; value: number }>;
     minDistance?: number;
-    muiColor?: string;
     onChange?: (event: any, newValue?: any, activeThumb?: any) => void;
     onChangeFromValue?: (event: any, fromValue: number) => void;
     onChangeToValue?: (event: any, toValue: number) => void;
-    orientation?: 'vertical' | 'horizontal';
-    size?: 'small' | 'medium';
-    startIcon?: string | ReactNode;
     toValue?: number;
-    trackBarLinePosition?: 'none' | 'inverted' | 'normal';
-    range?: Range;
-    valueLabelFormat?: (value: number) => string;
-}
+    value?: number[];
+};
 
 export interface TooltipProps {
     bgColor?: string;

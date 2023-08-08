@@ -1,6 +1,7 @@
 import React from 'react';
 import Slider from './Slider';
 import type { RangeSliderProps } from '../decs';
+import { isDefined } from '../../utils/helpers';
 
 const RangeSlider: React.FC<RangeSliderProps> = ({
     chooseFromMarksList,
@@ -8,6 +9,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
     disabled,
     disableSwap,
     displayValue,
+    defaultValue,
     endIcon,
     fromValue,
     inputCmp,
@@ -92,7 +94,8 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
             color={muiColor}
             track={trackBarLinePosition === 'none' ? false : trackBarLinePosition}
             disableSwap={disableSwap !== undefined}
-            value={value}
+            value={value as any}
+            defaultValue={isDefined(value) ? undefined : defaultValue}
             onChange={
                 {
                     locking: handleChangeLocking,
@@ -105,23 +108,30 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
 };
 
 RangeSlider.defaultProps = {
-    customColor: undefined,
+    chooseFromMarksList: undefined,
+    color: undefined,
     disabled: undefined,
+    disablePadding: undefined,
     disableSwap: undefined,
     displayValue: undefined,
     endIcon: undefined,
-    inputCmp: undefined,
     label: undefined,
     marks: undefined,
+    max: undefined,
+    min: undefined,
     minDistance: 1,
-    muiColor: undefined,
     onChange: undefined,
     orientation: undefined,
     range: undefined,
+    removePadding: undefined,
     size: undefined,
+    sliderStyle: undefined,
     startIcon: undefined,
+    step: undefined,
     trackBarLinePosition: undefined,
+    value: undefined,
     valueLabelFormat: undefined,
+    defaultValue: [0, 0],
 };
 
 export type { RangeSliderProps } from '../decs';
