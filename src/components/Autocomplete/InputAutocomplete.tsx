@@ -8,7 +8,7 @@ import {
 import TextField from '../_FIXED/TextField/TextField';
 import { useCustomColor } from '../../utils/helpers';
 import Chip from '../_FIXED/Chip/Chip';
-import type { InputAutoCompleteProp } from '../decs';
+import type { InputAutoCompleteProp, InputBaseProps } from '../decs';
 import { useAutocompleteOptionsHook } from './hooks/useAutocompleteOptions.hook';
 
 const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
@@ -81,7 +81,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
         filterOptions: _filterOptions,
     });
 
-    const inputProps = {
+    const inputProps: InputBaseProps = {
         id,
         name,
         placeholder,
@@ -105,6 +105,38 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
         error,
         endCmp,
     };
+
+    const renderOption = (...args): React.ReactNode => {
+        if (typeof renderOption === 'function') {
+            return renderOption(...args);
+        }
+
+        if (highlightSearchResults) {
+            return renderHighlightOptionCB(highlightField ?? getOptionLabel);
+        }
+
+        return undefined;
+    };
+
+    const renderGroup = groupBy
+        ? (params) => (
+              <li key={params.key}>
+                  <GroupHeader color={color}>{params.group}</GroupHeader>
+                  <GroupItems>{params.children}</GroupItems>
+              </li>
+          )
+        : undefined;
+
+    const renderTags = multiple
+        ? (value, getTagProps) =>
+              value.map((option, index) => (
+                  <Chip
+                      label={option}
+                      {...getTagProps({ index })}
+                      {...(typeof chipProps === 'function' ? chipProps(option) : chipProps)}
+                  />
+              ))
+        : undefined;
 
     return (
         <MuiAutocomplete
@@ -136,40 +168,10 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
             }
             renderInput={(params) => <TextField {...params} {...inputProps} fullWidth />}
             groupBy={typeof groupBy === 'function' ? groupBy : (option) => option[groupBy]}
-            renderOption={(...args) => {
-                if (typeof renderOption === 'function') {
-                    return renderOption(...args);
-                }
-
-                if (highlightSearchResults) {
-                    return renderHighlightOptionCB(highlightField ?? getOptionLabel);
-                }
-
-                return undefined;
-            }}
+            renderOption={renderOption}
             getOptionDisabled={(option) => option.disabled}
-            renderGroup={
-                groupBy
-                    ? (params) => (
-                          <li key={params.key}>
-                              <GroupHeader color={color}>{params.group}</GroupHeader>
-                              <GroupItems>{params.children}</GroupItems>
-                          </li>
-                      )
-                    : undefined
-            }
-            renderTags={
-                multiple
-                    ? (value, getTagProps) =>
-                          value.map((option, index) => (
-                              <Chip
-                                  label={option}
-                                  {...getTagProps({ index })}
-                                  {...(typeof chipProps === 'function' ? chipProps(option) : chipProps)}
-                              />
-                          ))
-                    : undefined
-            }
+            renderGroup={renderGroup}
+            renderTags={renderTags}
             {...props}
         />
     );
