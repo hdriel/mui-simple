@@ -447,6 +447,46 @@ export type InputMultipleSelectProps = Omit<InputSelectProps, 'value'> & {
     [key: string]: any;
 };
 
+export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
+    hideStartActionsOnEmpty?: boolean;
+    renderOption?: () => void;
+    filterOptions?:
+        | (() => void)
+        | {
+              ignoreAccents?: boolean;
+              ignoreCase?: boolean;
+              limitResultOptions?: number;
+              matchFrom?: string | 'start';
+              stringify?: string | (() => void);
+              trim?: boolean;
+          };
+    getOptionLabel?: string | (() => string);
+    groupBy?: string | (() => void);
+    sortBy?: string | (() => void);
+    sortDir?: boolean | number;
+    selectedOption?: any;
+    setSelectedOption?: () => void;
+    autoComplete?: boolean;
+    freeSolo?: boolean;
+    raiseSelectedToTop?: number;
+    disablePortal?: boolean;
+    disableClearableSolo?: boolean;
+    disableCloseOnSelect?: boolean;
+    clearOnPressEscape?: boolean;
+    includeInputInList?: boolean;
+    openOnFocus?: boolean;
+    disableListWrap?: boolean;
+    autoHighlight?: boolean;
+    blurOnSelect?: boolean;
+    selectOnFocus?: boolean;
+    highlightSearchResults?: boolean;
+    highlightField?: string;
+    multiple?: boolean;
+    filterSelectedOptions?: boolean;
+    chipProps?: ChipProps | (() => ChipProps);
+    [key: string]: any;
+};
+
 export interface FabProps {
     color?: string;
     disabled?: boolean;

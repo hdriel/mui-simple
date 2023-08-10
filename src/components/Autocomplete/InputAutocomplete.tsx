@@ -1,20 +1,17 @@
-import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
-
-import { useTheme } from '@mui/material/styles';
-import { createFilterOptions } from '@mui/material';
+import React from 'react';
 import {
     Autocomplete as MuiAutocomplete,
     GroupHeader,
     GroupItems,
     renderHighlightOptionCB,
 } from './InputAutocomplete.styled';
-
 import TextField from '../_FIXED/TextField/TextField';
-import { getCustomColor } from '../../utils/helpers';
+import { useCustomColor } from '../../utils/helpers';
 import Chip from '../_FIXED/Chip/Chip';
+import type { InputAutoCompleteProp } from '../decs';
+import { useAutocompleteOptionsHook } from './hooks/useAutocompleteOptions.hook';
 
-export default function InputAutocomplete({
+const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
     // inputProps: {
     id,
     name,
@@ -73,59 +70,16 @@ export default function InputAutocomplete({
     filterOptions: _filterOptions,
     sx,
     ...props
-}) {
-    const theme = useTheme();
-    const options = useMemo(() => {
-        let result = _options?.map((option) => {
-            return typeof option === 'string' ? { label: option, id: option } : { ...option };
-        });
-
-        if (sortBy || raiseSelectedToTop) {
-            result =
-                result.sort((a, b) => {
-                    const optionFieldA = typeof sortBy === 'function' ? sortBy(a) : a[sortBy];
-
-                    const optionFieldB = typeof sortBy === 'function' ? sortBy(b) : b[sortBy];
-
-                    const asc = typeof sortDir === 'boolean' ? sortDir : sortDir > 0;
-                    const [A, B] = asc ? [optionFieldA, optionFieldB] : [optionFieldB, optionFieldA];
-
-                    const selectedComparator = +b.selected - +a.selected;
-                    if (raiseSelectedToTop && selectedComparator !== 0) {
-                        return selectedComparator;
-                    }
-
-                    return typeof optionFieldA === 'string' ? A.localeCompare(B) : A - B;
-                }) ?? [];
-        }
-
-        return result;
-    }, [sortBy, sortDir, _options, raiseSelectedToTop]);
-
-    const color = getCustomColor({
-        theme,
-        customColor: colorActive ?? colorLabel,
+}): React.ReactElement => {
+    const [color] = useCustomColor(colorActive ?? colorLabel);
+    const { options, filterOptions, getOptionLabel } = useAutocompleteOptionsHook({
+        sortDir,
+        sortBy,
+        raiseSelectedToTop,
+        options: _options,
+        getOptionLabel: _getOptionLabel,
+        filterOptions: _filterOptions,
     });
-
-    const getOptionLabel = useMemo(
-        () => (typeof _getOptionLabel === 'function' ? _getOptionLabel : (option) => option[_getOptionLabel] || ''),
-        [_getOptionLabel]
-    );
-
-    const filterOptions = useMemo(() => {
-        return typeof _filterOptions === 'function'
-            ? _filterOptions
-            : Object.keys(_filterOptions ?? {}).length
-            ? createFilterOptions({
-                  ignoreAccents: _filterOptions.ignoreAccents,
-                  ignoreCase: _filterOptions.ignoreCase,
-                  limit: _filterOptions.limitResultOptions,
-                  matchFrom: _filterOptions.matchFrom,
-                  stringify: _filterOptions.stringify ?? getOptionLabel,
-                  trim: _filterOptions.trim,
-              })
-            : undefined;
-    }, [_filterOptions, getOptionLabel]);
 
     const inputProps = {
         id,
@@ -219,73 +173,73 @@ export default function InputAutocomplete({
             {...props}
         />
     );
-}
-
-InputAutocomplete.propTypes = {
-    label: PropTypes.string,
-    id: PropTypes.string,
-    placeholder: PropTypes.string,
-    name: PropTypes.string,
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    error: PropTypes.bool,
-    required: PropTypes.bool,
-    focused: PropTypes.bool,
-    margin: PropTypes.oneOf(['normal', 'dense']),
-    helperText: PropTypes.string,
-    options: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.any])),
-    variant: PropTypes.oneOf(['filled', 'standard', 'outlined']),
-    startCmp: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    startCmpExternal: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    endCmp: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    endCmpExternal: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    cmpSpacing: PropTypes.number,
-    hideStartActionsOnEmpty: PropTypes.bool,
-    alignActions: PropTypes.string,
-    alignActionsExternal: PropTypes.string,
-    disabled: PropTypes.bool,
-    colorText: PropTypes.string,
-    colorLabel: PropTypes.string,
-    colorActive: PropTypes.string,
-
-    renderOption: PropTypes.func,
-    filterOptions: PropTypes.oneOfType([
-        PropTypes.func,
-        PropTypes.shape({
-            ignoreAccents: PropTypes.bool,
-            ignoreCase: PropTypes.bool,
-            limitResultOptions: PropTypes.number,
-            matchFrom: PropTypes.oneOf(['any', 'start']),
-            stringify: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-            trim: PropTypes.bool,
-        }),
-    ]),
-    size: PropTypes.oneOf(['small', 'medium']),
-    getOptionLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    groupBy: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    sortBy: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    sortDir: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
-    selectedOption: PropTypes.any,
-    setSelectedOption: PropTypes.func,
-    autoComplete: PropTypes.bool,
-    freeSolo: PropTypes.bool,
-    raiseSelectedToTop: PropTypes.number,
-    disablePortal: PropTypes.bool,
-    disableClearableSolo: PropTypes.bool,
-    disableCloseOnSelect: PropTypes.bool,
-    clearOnPressEscape: PropTypes.bool,
-    includeInputInList: PropTypes.bool,
-    openOnFocus: PropTypes.bool,
-    disableListWrap: PropTypes.bool,
-    autoHighlight: PropTypes.bool,
-    blurOnSelect: PropTypes.bool,
-    selectOnFocus: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    highlightSearchResults: PropTypes.bool,
-    highlightField: PropTypes.string,
-    multiple: PropTypes.bool,
-    filterSelectedOptions: PropTypes.bool,
-    chipProps: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 };
+
+//
+// InputAutocomplete.propTypes = {
+//     label: PropTypes.string,
+//     id: PropTypes.string,
+//     placeholder: PropTypes.string,
+//     name: PropTypes.string,
+//     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+//     error: PropTypes.bool,
+//     required: PropTypes.bool,
+//     focused: PropTypes.bool,
+//     margin: PropTypes.oneOf(['normal', 'dense']),
+//     helperText: PropTypes.string,
+//     options: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.any])),
+//     variant: PropTypes.oneOf(['filled', 'standard', 'outlined']),
+//     startCmp: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+//     startCmpExternal: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+//     endCmp: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+//     endCmpExternal: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+//     cmpSpacing: PropTypes.number,
+//     hideStartActionsOnEmpty: PropTypes.bool,
+//     alignActions: PropTypes.string,
+//     alignActionsExternal: PropTypes.string,
+//     disabled: PropTypes.bool,
+//     colorText: PropTypes.string,
+//     colorLabel: PropTypes.string,
+//     colorActive: PropTypes.string,
+//     renderOption: PropTypes.func,
+//     filterOptions: PropTypes.oneOfType([
+//         PropTypes.func,
+//         PropTypes.shape({
+//             ignoreAccents: PropTypes.bool,
+//             ignoreCase: PropTypes.bool,
+//             limitResultOptions: PropTypes.number,
+//             matchFrom: PropTypes.oneOf(['any', 'start']),
+//             stringify: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+//             trim: PropTypes.bool,
+//         }),
+//     ]),
+//     size: PropTypes.oneOf(['small', 'medium']),
+//     getOptionLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+//     groupBy: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+//     sortBy: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+//     sortDir: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
+//     selectedOption: PropTypes.any,
+//     setSelectedOption: PropTypes.func,
+//     autoComplete: PropTypes.bool,
+//     freeSolo: PropTypes.bool,
+//     raiseSelectedToTop: PropTypes.number,
+//     disablePortal: PropTypes.bool,
+//     disableClearableSolo: PropTypes.bool,
+//     disableCloseOnSelect: PropTypes.bool,
+//     clearOnPressEscape: PropTypes.bool,
+//     includeInputInList: PropTypes.bool,
+//     openOnFocus: PropTypes.bool,
+//     disableListWrap: PropTypes.bool,
+//     autoHighlight: PropTypes.bool,
+//     blurOnSelect: PropTypes.bool,
+//     selectOnFocus: PropTypes.bool,
+//     readOnly: PropTypes.bool,
+//     highlightSearchResults: PropTypes.bool,
+//     highlightField: PropTypes.string,
+//     multiple: PropTypes.bool,
+//     filterSelectedOptions: PropTypes.bool,
+//     chipProps: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+// };
 
 InputAutocomplete.defaultProps = {
     id: undefined,
@@ -307,7 +261,6 @@ InputAutocomplete.defaultProps = {
     colorLabel: undefined,
     colorActive: 'primary',
     size: undefined,
-
     options: [],
     label: undefined,
     filterOptions: undefined,
@@ -338,3 +291,5 @@ InputAutocomplete.defaultProps = {
     filterSelectedOptions: true,
     chipProps: undefined,
 };
+
+export default InputAutocomplete;
