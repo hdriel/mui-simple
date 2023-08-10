@@ -725,6 +725,24 @@ export interface SliderProps {
     [key: string]: any;
 }
 
+export interface RatingProps {
+    boxSx?: SxProps;
+    color?: string;
+    disabled?: boolean;
+    emptyIcon?: ReactNode | string;
+    filledIcon?: ReactNode | string;
+    halfIcon?: ReactNode | string;
+    isHalf?: boolean;
+    name?: string;
+    onChange?: (event: any, newValue: number) => void;
+    SCORE_LABELS: Record<number, string>;
+    showLabel?: boolean;
+    size?: number;
+    stars?: number;
+    value?: number;
+    [key: string]: any;
+}
+
 export type RangeSliderProps = Omit<SliderProps, 'value' | 'onChange' | 'onChangeCommitted'> & {
     disableSwap?: 'locking' | 'trailing';
     fromValue?: number;

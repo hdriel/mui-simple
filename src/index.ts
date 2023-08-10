@@ -116,7 +116,8 @@ export * from './components/_FIXED/Progress';
 export { default as RadioButtonsGroup } from './components/_FIXED/RadioButtonsGroup/RadioButtonsGroup';
 export type { RadioButtonsGroupProps } from './components/_FIXED/RadioButtonsGroup/RadioButtonsGroup';
 
-export { default as Rating } from './components/Rating/Rating';
+export { default as Rating } from './components/_FIXED/Rating/Rating';
+export type { RatingProps } from './components/_FIXED/Rating/Rating';
 
 export { default as RippleBox } from './components/_FIXED/RippleBox/RippleBox';
 export type { RippleBoxProps } from './components/_FIXED/RippleBox/RippleBox';
