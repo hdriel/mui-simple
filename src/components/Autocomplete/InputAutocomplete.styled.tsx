@@ -23,16 +23,16 @@ export const GroupItems = styled('ul')`
     padding: 0;
 `;
 
-export const renderHighlightOptionCB =
-    (_field) =>
-    (props, option, { inputValue }) => {
-        const optionValue = typeof _field === 'function' ? _field(option) : _field;
+export type RenderOptionCB = (props: any, option: string, input: { inputValue: string }) => React.ReactNode;
+export const renderHighlightOptionCB = (field: any): RenderOptionCB => {
+    const HighlightOption: RenderOptionCB = (props, option, { inputValue } = { inputValue: '' }) => {
+        const optionValue = typeof field === 'function' ? field(option) : field;
         const matches = match(optionValue, inputValue);
         const parts = parse(optionValue, matches);
 
         return (
             <li {...props}>
-                <div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                     {parts.map((part, index) => (
                         <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
                             {part.text}
@@ -42,3 +42,6 @@ export const renderHighlightOptionCB =
             </li>
         );
     };
+
+    return HighlightOption;
+};

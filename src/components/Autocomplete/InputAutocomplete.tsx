@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-    Autocomplete as MuiAutocomplete,
-    GroupHeader,
-    GroupItems,
-    renderHighlightOptionCB,
-} from './InputAutocomplete.styled';
+import { Autocomplete as MuiAutocomplete, GroupHeader, GroupItems } from './InputAutocomplete.styled';
 import TextField from '../_FIXED/TextField/TextField';
 import { useCustomColor } from '../../utils/helpers';
 import Chip from '../_FIXED/Chip/Chip';
@@ -44,7 +39,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
     setSelectedOption,
     autoComplete,
     options: _options,
-    renderOption,
+    renderOption: _renderOption,
     raiseSelectedToTop,
     getOptionLabel: _getOptionLabel,
     groupBy,
@@ -72,14 +67,38 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
     ...props
 }): React.ReactElement => {
     const [color] = useCustomColor(colorActive ?? colorLabel);
-    const { options, filterOptions, getOptionLabel } = useAutocompleteOptionsHook({
+    const { options, filterOptions, getOptionLabel, renderOption } = useAutocompleteOptionsHook({
         sortDir,
         sortBy,
         raiseSelectedToTop,
         options: _options,
         getOptionLabel: _getOptionLabel,
         filterOptions: _filterOptions,
+        highlightField,
+        highlightSearchResults,
+        renderOption: _renderOption,
     });
+
+    const renderGroup = groupBy
+        ? (params) => (
+              <li key={params.key}>
+                  <GroupHeader color={color}>{params.group}</GroupHeader>
+                  <GroupItems>{params.children}</GroupItems>
+              </li>
+          )
+        : undefined;
+
+    const renderTags = multiple
+        ? (value, getTagProps) =>
+              value.map((option, index) => (
+                  <Chip
+                      key={option}
+                      label={option}
+                      {...getTagProps({ index })}
+                      {...(typeof chipProps === 'function' ? chipProps(option) : chipProps)}
+                  />
+              ))
+        : undefined;
 
     const inputProps: InputBaseProps = {
         id,
@@ -105,38 +124,6 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
         error,
         endCmp,
     };
-
-    const renderOption = (...args): React.ReactNode => {
-        if (typeof renderOption === 'function') {
-            return renderOption(...args);
-        }
-
-        if (highlightSearchResults) {
-            return renderHighlightOptionCB(highlightField ?? getOptionLabel);
-        }
-
-        return undefined;
-    };
-
-    const renderGroup = groupBy
-        ? (params) => (
-              <li key={params.key}>
-                  <GroupHeader color={color}>{params.group}</GroupHeader>
-                  <GroupItems>{params.children}</GroupItems>
-              </li>
-          )
-        : undefined;
-
-    const renderTags = multiple
-        ? (value, getTagProps) =>
-              value.map((option, index) => (
-                  <Chip
-                      label={option}
-                      {...getTagProps({ index })}
-                      {...(typeof chipProps === 'function' ? chipProps(option) : chipProps)}
-                  />
-              ))
-        : undefined;
 
     return (
         <MuiAutocomplete
@@ -176,72 +163,6 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
         />
     );
 };
-
-//
-// InputAutocomplete.propTypes = {
-//     label: PropTypes.string,
-//     id: PropTypes.string,
-//     placeholder: PropTypes.string,
-//     name: PropTypes.string,
-//     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//     error: PropTypes.bool,
-//     required: PropTypes.bool,
-//     focused: PropTypes.bool,
-//     margin: PropTypes.oneOf(['normal', 'dense']),
-//     helperText: PropTypes.string,
-//     options: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.any])),
-//     variant: PropTypes.oneOf(['filled', 'standard', 'outlined']),
-//     startCmp: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-//     startCmpExternal: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-//     endCmp: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-//     endCmpExternal: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-//     cmpSpacing: PropTypes.number,
-//     hideStartActionsOnEmpty: PropTypes.bool,
-//     alignActions: PropTypes.string,
-//     alignActionsExternal: PropTypes.string,
-//     disabled: PropTypes.bool,
-//     colorText: PropTypes.string,
-//     colorLabel: PropTypes.string,
-//     colorActive: PropTypes.string,
-//     renderOption: PropTypes.func,
-//     filterOptions: PropTypes.oneOfType([
-//         PropTypes.func,
-//         PropTypes.shape({
-//             ignoreAccents: PropTypes.bool,
-//             ignoreCase: PropTypes.bool,
-//             limitResultOptions: PropTypes.number,
-//             matchFrom: PropTypes.oneOf(['any', 'start']),
-//             stringify: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-//             trim: PropTypes.bool,
-//         }),
-//     ]),
-//     size: PropTypes.oneOf(['small', 'medium']),
-//     getOptionLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-//     groupBy: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-//     sortBy: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-//     sortDir: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
-//     selectedOption: PropTypes.any,
-//     setSelectedOption: PropTypes.func,
-//     autoComplete: PropTypes.bool,
-//     freeSolo: PropTypes.bool,
-//     raiseSelectedToTop: PropTypes.number,
-//     disablePortal: PropTypes.bool,
-//     disableClearableSolo: PropTypes.bool,
-//     disableCloseOnSelect: PropTypes.bool,
-//     clearOnPressEscape: PropTypes.bool,
-//     includeInputInList: PropTypes.bool,
-//     openOnFocus: PropTypes.bool,
-//     disableListWrap: PropTypes.bool,
-//     autoHighlight: PropTypes.bool,
-//     blurOnSelect: PropTypes.bool,
-//     selectOnFocus: PropTypes.bool,
-//     readOnly: PropTypes.bool,
-//     highlightSearchResults: PropTypes.bool,
-//     highlightField: PropTypes.string,
-//     multiple: PropTypes.bool,
-//     filterSelectedOptions: PropTypes.bool,
-//     chipProps: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-// };
 
 InputAutocomplete.defaultProps = {
     id: undefined,

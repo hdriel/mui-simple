@@ -1,5 +1,8 @@
 import { useMemo } from 'react';
+import type { ReactNode } from 'react';
 import { createFilterOptions } from '@mui/material';
+import { renderHighlightOptionCB } from '../InputAutocomplete.styled';
+import type { RenderOptionCB } from '../InputAutocomplete.styled';
 
 export const useAutocompleteOptionsHook = ({
     raiseSelectedToTop,
@@ -8,7 +11,10 @@ export const useAutocompleteOptionsHook = ({
     sortDir,
     getOptionLabel: _getOptionLabel,
     filterOptions: _filterOptions,
-}): { options: any; filterOptions: any; getOptionLabel: any } => {
+    renderOption: _renderOption,
+    highlightSearchResults,
+    highlightField,
+}): { options: any; filterOptions: any; getOptionLabel: any; renderOption: any } => {
     const options = useMemo(() => {
         let result = _options?.map((option) => {
             return typeof option === 'string' ? { label: option, id: option } : { ...option };
@@ -56,5 +62,17 @@ export const useAutocompleteOptionsHook = ({
             : undefined;
     }, [_filterOptions, getOptionLabel]);
 
-    return { options, getOptionLabel, filterOptions };
+    const renderOption = (...args): ReactNode | RenderOptionCB => {
+        if (typeof _renderOption === 'function') {
+            return _renderOption(...args);
+        }
+
+        if (highlightSearchResults) {
+            return renderHighlightOptionCB(highlightField ?? getOptionLabel);
+        }
+
+        return undefined;
+    };
+
+    return { options, getOptionLabel, renderOption, filterOptions };
 };

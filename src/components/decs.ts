@@ -451,7 +451,7 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     hideStartActionsOnEmpty?: boolean;
     renderOption?: () => void;
     filterOptions?:
-        | (() => void)
+        | ((...args: any) => ReactNode)
         | {
               ignoreAccents?: boolean;
               ignoreCase?: boolean;
@@ -483,7 +483,7 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     highlightField?: string;
     multiple?: boolean;
     filterSelectedOptions?: boolean;
-    chipProps?: ChipProps | (() => ChipProps);
+    chipProps?: ChipProps | ((props: any) => ChipProps);
     [key: string]: any;
 };
 
