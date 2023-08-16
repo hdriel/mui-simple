@@ -290,7 +290,7 @@ export const CopyAction: Story = {
 export const Formik_ = (args): React.ReactElement => {
     return (
         <Formik
-            initialValues={{ phone: '', unmask: false }}
+            initialValues={{ phone: '050-000-0124', unmask: false }}
             validate={(values) => (!values.phone.length ? { error: 'Required!' } : {})}
             onSubmit={(values) => alert(values.phone)}
         >
