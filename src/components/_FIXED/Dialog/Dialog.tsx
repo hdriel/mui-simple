@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ReactNode, PropsWithChildren } from 'react';
+import type { ReactElement, PropsWithChildren } from 'react';
 import {
     Dialog as MuiDialog,
     DialogTitle as MuiDialogTitle,
@@ -13,7 +13,7 @@ import Button from '../Button/Button';
 import { Transition, PaperComponent } from './Dialog.components';
 import type { DialogProps } from '../../decs';
 
-function Dialog(props: PropsWithChildren<DialogProps>): ReactNode {
+function Dialog(props: PropsWithChildren<DialogProps>): ReactElement {
     const {
         actions,
         autoContentPadding,
