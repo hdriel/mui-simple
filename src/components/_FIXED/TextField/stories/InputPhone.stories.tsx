@@ -294,7 +294,7 @@ export const Formik_ = (args): React.ReactElement => {
             validate={(values) => (!values.phone.length ? { error: 'Required!' } : {})}
             onSubmit={(values) => alert(values.phone)}
         >
-            {({ values, touched, errors, handleChange, handleSubmit }) => {
+            {({ values, touched, errors, handleChange, handleSubmit }: any) => {
                 action('formikRender')(values);
                 return (
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
