@@ -114,6 +114,7 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
             multiple
             max={max}
             label={label}
+            name={name}
             renderValue={squaredChips ? <RenderValuesAsSquaredChips /> : chips ? <RenderValuesAsChips /> : renderValue}
             onChange={onClickMenuItemHandler}
             checkbox={checkboxMarker as boolean}
