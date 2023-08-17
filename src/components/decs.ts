@@ -175,8 +175,12 @@ export interface CardProps {
               stretch?: 'cover' | 'contain' | 'none' | 'fill';
               [key: string]: any;
           };
+    height?: number | string;
+    maxHeight?: number | string;
     maxWidth?: number | string;
     mediaOnTop?: boolean;
+    minHeight?: number | string;
+    minWidth?: number | string;
     optionsMenu?: MenuProps | Array<MenuOptionItem | DividerProps>;
     subtitle?: string;
     title?: string;

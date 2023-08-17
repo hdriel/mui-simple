@@ -27,8 +27,8 @@ const InputPattern: React.FC<InputPatternProps> = ({
     ...props
 }): React.ReactElement => {
     // for example output for mask: '+(972) 50-000-0000'
-    const [maskedValue, setMaskedValue] = useState(''); // for example: '0-000-0000'
-    const [unmaskedValue, setUnmaskedValue] = useState(''); // for example: '0-000-0000'
+    const [maskedValue, setMaskedValue] = useState(_value); // for example: '0-000-0000'
+    const [unmaskedValue, setUnmaskedValue] = useState(_value); // for example: '0-000-0000'
     const [isOnFocus, setIsOnFocus] = useState(false);
 
     const lazy = useMemo(() => {
