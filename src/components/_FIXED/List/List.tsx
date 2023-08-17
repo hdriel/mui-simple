@@ -43,10 +43,7 @@ const List: React.FC<ListProps> = ({
     const dataList =
         items?.map((item, index) =>
             typeof item === 'string'
-                ? {
-                      title: item,
-                      id: `${item}-${index}`,
-                  }
+                ? { title: item, id: `${item}-${index}` }
                 : {
                       ...item,
                       id: item[fieldId] ?? `${item.title}-${index}`,
@@ -64,7 +61,7 @@ const List: React.FC<ListProps> = ({
 
         const nestedItems = (
             <Box>
-                <List items={itemProps.items} />
+                <List items={itemProps.items} {...itemProps.listItemsProps} />
                 <Divider variant="fullWidth" {...divider} component="div" />
             </Box>
         );
@@ -158,6 +155,7 @@ List.defaultProps = {
     flexDirectionItems: undefined,
     hideActionsOnDragAndDropItems: true,
     items: [],
+    listItemsProps: undefined,
     title: undefined,
     useTransition: true,
     width: undefined,
