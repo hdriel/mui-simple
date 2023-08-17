@@ -175,13 +175,13 @@ export const CustomStepper = () => {
                 <ToggleButtonGroup
                     value={orientation}
                     exclusive
-                    onChange={(value) => setOrientation(value)}
+                    onChange={(event, value) => setOrientation(value)}
                     data={data1}
                 />
                 <ToggleButtonGroup
                     value={stepsBottomLabel}
                     exclusive
-                    onChange={(value) => setStepsBottomLabel(value)}
+                    onChange={(event, value) => setStepsBottomLabel(value)}
                     data={data2}
                 />
             </ToggleButtonGroups>

@@ -1,36 +1,49 @@
 import React from 'react';
 import type { ReactElement } from 'react';
-import { Typography, Button, Stepper as MuiStepper, Step, StepLabel, StepContent, Box } from './Stepper.styled';
+import {
+    Typography,
+    Button,
+    Stepper as MuiStepper,
+    Step,
+    StepLabel,
+    StepContent,
+    Box,
+    ActionContainer,
+    ActionButton,
+    Container,
+    VerticalActionContainer,
+    ContentContainer,
+    FullSpaceBox,
+} from './Stepper.styled';
 import { useCustomColor } from '../../utils/helpers';
 import type { StepperProps, StepType } from '../decs';
 import { useStepperIndexHook, useStepperSteps, useStepperConnector } from './hooks';
 
-const Stepper: React.FC<StepperProps> = (props): ReactElement => {
-    const {
-        steps: _steps,
-        stepIndex: activeStep,
-        stepsBottomLabel,
-        color,
-        orientation,
-        onNext,
-        onBack,
-        onSkip,
-        onDone,
-        stepsIndexSkipped,
-        allCompletedCmp,
-        labels,
-        stepsOnlyWithoutComplete,
-        unmountOnExit,
-        qontoStyle,
-        customStyleProps,
-        NEXT_LABEL,
-        BACK_LABEL,
-        SKIP_LABEL,
-        DONE_LABEL,
-        OPTIONAL_LABEL,
-        children,
-        ...rest
-    } = props;
+const Stepper: React.FC<StepperProps> = ({
+    steps: _steps,
+    stepIndex: activeStep,
+    stepsBottomLabel,
+    color,
+    orientation,
+    onNext,
+    onBack,
+    onSkip,
+    onDone,
+    stepsIndexSkipped,
+    allCompletedCmp,
+    labels,
+    stepsOnlyWithoutComplete,
+    unmountOnExit,
+    qontoStyle,
+    customStyleProps,
+    NEXT_LABEL,
+    BACK_LABEL,
+    SKIP_LABEL,
+    DONE_LABEL,
+    OPTIONAL_LABEL,
+    children,
+    ...rest
+}): ReactElement => {
     const [customColor] = useCustomColor(color);
 
     const { steps, icons, iconListSize, isCustomStyleUsed } = useStepperSteps({
@@ -60,7 +73,7 @@ const Stepper: React.FC<StepperProps> = (props): ReactElement => {
     });
 
     return (
-        <Box sx={{ width: '100%' }}>
+        <Container>
             <MuiStepper
                 nonLinear={stepsOnlyWithoutComplete}
                 activeStep={activeStep}
@@ -97,48 +110,25 @@ const Stepper: React.FC<StepperProps> = (props): ReactElement => {
                                 }
                             >
                                 {[].concat(children)[index]}
-                                <Box
-                                    sx={{
-                                        mb: 2,
-                                        display: 'flex',
-                                        justifyContent: 'space-between',
-                                        alignItems: 'center',
-                                    }}
-                                >
+                                <ActionContainer>
                                     <div>
-                                        <Button
-                                            variant="contained"
-                                            onClick={handleNext}
-                                            color={step.color}
-                                            sx={{ mt: 1, mr: 1 }}
-                                        >
+                                        <ActionButton variant="contained" onClick={handleNext} color={step.color}>
                                             {NEXT_LABEL}
-                                        </Button>
+                                        </ActionButton>
                                         {index !== 0 && (
-                                            <Button
-                                                color="inherit"
-                                                disabled={index === 0}
-                                                onClick={handleBack}
-                                                sx={{ mt: 1, mr: 1 }}
-                                            >
+                                            <ActionButton color="inherit" disabled={index === 0} onClick={handleBack}>
                                                 {BACK_LABEL}
-                                            </Button>
+                                            </ActionButton>
                                         )}
                                     </div>
                                     <div>
                                         {isStepOptional(index) && (
-                                            <Button
-                                                onClick={() => {
-                                                    handleSkip(index);
-                                                }}
-                                                color={step.color}
-                                                sx={{ mt: 1, mr: 1 }}
-                                            >
+                                            <ActionButton onClick={() => handleSkip(index)} color={step.color}>
                                                 {SKIP_LABEL}
-                                            </Button>
+                                            </ActionButton>
                                         )}
                                     </div>
-                                </Box>
+                                </ActionContainer>
                             </StepContent>
                         )}
                     </Step>
@@ -148,40 +138,35 @@ const Stepper: React.FC<StepperProps> = (props): ReactElement => {
             {steps?.length ? (
                 activeStep === steps?.length ? (
                     <>
-                        <Box sx={{ mt: 2, mb: 1 }}>{allCompletedCmp}</Box>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                            <Box sx={{ flex: '1 1 auto' }} />
-                            <Button onClick={onDone}>Done</Button>
-                        </Box>
+                        <ContentContainer>{allCompletedCmp}</ContentContainer>
+                        <VerticalActionContainer>
+                            <FullSpaceBox />
+                            <Button onClick={onDone}>{DONE_LABEL}</Button>
+                        </VerticalActionContainer>
                     </>
                 ) : orientation === 'vertical' ? undefined : (
                     <>
-                        <Box sx={{ mt: 2, mb: 1 }}>{[].concat(children)[activeStep]}</Box>
+                        <ContentContainer>{[].concat(children)[activeStep]}</ContentContainer>
 
-                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                            <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
+                        <VerticalActionContainer>
+                            <ActionButton color="inherit" onClick={handleBack} disabled={activeStep === 0}>
                                 {BACK_LABEL}
-                            </Button>
+                            </ActionButton>
 
-                            <Box sx={{ flex: '1 1 auto' }} />
+                            <FullSpaceBox />
+
                             {isStepOptional(activeStep) && (
-                                <Button
-                                    color="inherit"
-                                    onClick={() => {
-                                        handleSkip(activeStep);
-                                    }}
-                                    sx={{ mr: 1 }}
-                                >
+                                <ActionButton color="inherit" onClick={() => handleSkip(activeStep)}>
                                     {SKIP_LABEL}
-                                </Button>
+                                </ActionButton>
                             )}
 
-                            <Button onClick={handleNext}>{NEXT_LABEL}</Button>
-                        </Box>
+                            <ActionButton onClick={handleNext}>{NEXT_LABEL}</ActionButton>
+                        </VerticalActionContainer>
                     </>
                 )
             ) : undefined}
-        </Box>
+        </Container>
     );
 };
 

@@ -13,8 +13,8 @@ interface UseStepperConnectorHookProps {
     customStyleProps: Record<string, any>;
 }
 interface UseStepperConnectorHookResponse {
-    QontoStepIconMemo: React.ReactElement | undefined;
-    ConnectorStepIconMemo: React.ReactElement | undefined;
+    QontoStepIconMemo: any;
+    ConnectorStepIconMemo: any;
     connector: React.ReactElement;
 }
 
@@ -98,9 +98,9 @@ export const useStepperConnector = ({
     ]);
 
     const connector = qontoStyle ? (
-        <QontoConnector orientation={orientation ?? ''} color={customColor} {...customStyleProps} />
+        <QontoConnector orientation={orientation ?? 'horizontal'} color={customColor} {...customStyleProps} />
     ) : iconListSize || isCustomStyleUsed ? (
-        <StepConnector orientation={orientation ?? ''} color={customColor} {...customStyleProps} />
+        <StepConnector orientation={orientation ?? 'horizontal'} color={customColor} {...customStyleProps} />
     ) : undefined;
 
     return { QontoStepIconMemo, ConnectorStepIconMemo, connector };
