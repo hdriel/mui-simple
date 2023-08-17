@@ -15,6 +15,9 @@ export const useDragHandlers = ({
     dataList,
     droppableId,
     onChange,
+    onListOrderChange,
+    onItemBetweenDiffListOrderChange,
+    onSubListOrderChange,
 }): {
     placeholderProps: PlaceholderProps;
     handleDragStart: (event: any) => void;
@@ -81,7 +84,7 @@ export const useDragHandlers = ({
         if (!destination) return; // dropped outside the list
 
         const items = reorder(dataList, source.index, destination.index);
-        onChange(items, result, dataList);
+        onChange?.(items, result, dataList);
 
         if (destination.droppableId === droppableId) {
             // // drag and drop main item list
@@ -92,17 +95,21 @@ export const useDragHandlers = ({
                 source.index,
                 destination.index
             );
+            const items = reorder(dataList, source.index, destination.index);
+            onListOrderChange?.(dataList, source.index, destination.index, items);
         } else if (destination.droppableId !== source.droppableId) {
             // // drag and drop item between different lists
             // // find the source in items array and change with destination droppable i
             // // onChangeItemInDifferentLists(dataList, toListId, fromListId)
-            // onChangeItemInDifferentLists(dataList, destination.droppableId, source.droppableId)
+            // onChangeItemInDifferentLists(dataList, source.droppableId, destination.droppableId)
             console.debug(
                 'drag and drop item between different lists: (dataList, toListId, fromListId)',
                 dataList,
-                destination.droppableId,
-                source.droppableId
+                source,
+                destination
             );
+            // const items = reorder(dataList, source.index, destination.index);
+            onItemBetweenDiffListOrderChange?.(dataList, source, destination);
         } else {
             // // drag and drop item inside his list
             // // rearange the array if it is in the same category
@@ -113,6 +120,8 @@ export const useDragHandlers = ({
                 source.index,
                 destination.index
             );
+            const items = reorder(dataList.items, source.index, destination.index);
+            onSubListOrderChange?.(dataList, source.index, destination.index, items);
         }
     };
 

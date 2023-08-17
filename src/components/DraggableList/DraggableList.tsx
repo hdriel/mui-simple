@@ -27,6 +27,24 @@ interface DraggableListProps {
     flexGap?: string;
     useDraggableContext?: boolean;
     droppableType?: string;
+    onListOrderChange: (
+        dataItems: DataItem[],
+        sourceIndex: number,
+        destinationIndex: number,
+        reorderedDataItems: DataItem[]
+    ) => void;
+    onItemBetweenDiffListOrderChange: (
+        dataItems: DataItem[],
+        source: { index: number; droppableId: string },
+        destinationIndex: { index: number; droppableId: string },
+        reorderedSubDataItems?: DataItem[]
+    ) => void;
+    onSubListOrderChange: (
+        dataItems: DataItem[],
+        sourceIndex: number,
+        destinationIndex: number,
+        reorderedSubDataItems: DataItem[]
+    ) => void;
     onChange?: (newDataList: Array<string | DataItem>) => void;
     renderValue?: (value: string | DataItem, index: number) => ReactNode;
 }
@@ -42,6 +60,9 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
         flexGap,
         onChange,
         renderValue,
+        onListOrderChange,
+        onItemBetweenDiffListOrderChange,
+        onSubListOrderChange,
         className,
         useDraggableContext,
         droppableType,
@@ -54,6 +75,9 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
         flexGap,
         dataList,
         onChange,
+        onListOrderChange,
+        onItemBetweenDiffListOrderChange,
+        onSubListOrderChange,
     });
 
     const type = droppableType ?? (useDraggableContext ? droppableClassName : undefined);

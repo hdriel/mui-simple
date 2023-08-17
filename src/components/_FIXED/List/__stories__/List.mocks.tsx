@@ -33,7 +33,7 @@ export const nestedList: ListItemProps[] = [
         component: 'div',
         listItemsProps: {
             dragAndDropItems: true,
-            // droppableId: 'inbox',  // default value to title: 'Inbox'
+            // droppableId: 'inbox', // default value to title: 'Inbox'
         },
         items: [
             'Favorite',

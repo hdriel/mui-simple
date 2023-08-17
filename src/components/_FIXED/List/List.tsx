@@ -25,6 +25,8 @@ const List: React.FC<ListProps> = ({
     insetItems,
     items,
     onListOrderChange,
+    onItemBetweenDiffListOrderChange,
+    onSubListOrderChange,
     title,
     useTransition,
     width,
@@ -129,7 +131,9 @@ const List: React.FC<ListProps> = ({
                     dataList={dataList}
                     droppableClassName={droppableId}
                     // disabled={!dragAndDropItems}
-                    onChange={onListOrderChange}
+                    onListOrderChange={onListOrderChange}
+                    onItemBetweenDiffListOrderChange={onItemBetweenDiffListOrderChange}
+                    onSubListOrderChange={onSubListOrderChange}
                     renderValue={(item, index) =>
                         renderValue(
                             {

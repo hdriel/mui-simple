@@ -497,6 +497,8 @@ export interface ListItemProps {
     listItemsProps?: Omit<ListProps, 'items'>;
     link?: string;
     controlType?: 'checkbox' | 'switch';
+    droppableId?: string;
+    droppableType?: string;
     selected?: boolean;
     startIcon?: ReactNode | string;
     subtitle?: string;
@@ -523,6 +525,8 @@ export interface ListProps {
     onListOrderChange?: (items: Array<string | ListItemProps>) => void;
     title?: string;
     useTransition?: boolean;
+    useDraggableContext?: true;
+    droppableType?: string;
     width?: string | number;
     [key: string]: any;
 }
