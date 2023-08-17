@@ -729,6 +729,49 @@ export interface SliderProps {
     [key: string]: any;
 }
 
+export interface StepType {
+    label?: string;
+    optional?: boolean | string;
+    color?: string;
+    error?: boolean;
+    icon?: ReactNode;
+}
+export interface StepperProps {
+    allCompletedCmp?: ReactNode;
+    color?: string;
+    customStyleProps?: {
+        fontSize?: number | string;
+        background?: string;
+        lineColor?: string;
+        padding?: number | string;
+        lineWidth?: number | string;
+        checkIcon?: ReactNode;
+        dotIcon?: ReactNode;
+        marginContent?: number | string;
+        [key: string]: any;
+    };
+    labels?: { next?: string; back?: string; done?: string; skip?: string; optional?: string };
+    onBack?: (stepId: number) => void;
+    onDone?: () => void;
+    onNext?: (stepId: number) => void;
+    onReset?: () => void;
+    onSkip?: (stepId: number) => void;
+    orientation?: 'horizontal' | 'vertical';
+    qontoStyle?: boolean;
+    stepIndex?: number;
+    steps?: Array<StepType | string>;
+    stepsBottomLabel?: boolean;
+    stepsIndexSkipped?: number[];
+    stepsOnlyWithoutComplete?: boolean;
+    unmountOnExit?: boolean;
+    NEXT_LABEL?: string;
+    BACK_LABEL?: string;
+    SKIP_LABEL?: string;
+    DONE_LABEL?: string;
+    OPTIONAL_LABEL?: string;
+    [key: string]: any;
+}
+
 export interface RatingProps {
     boxSx?: SxProps;
     color?: string;

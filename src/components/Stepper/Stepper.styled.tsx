@@ -1,3 +1,4 @@
+import type { ComponentType } from 'react';
 import { get } from 'lodash-es';
 import { styled } from '@mui/material/styles';
 import {
@@ -59,7 +60,7 @@ export const StepContent = styled(MuiStepContent, {
 
 export const StepLabel = styled(MuiStepLabel, {
     shouldForwardProp: (propName) => ![].includes(propName as string),
-})<StepLabelProps>`
+})<any>`
     & .MuiStepIcon-root.Mui-active,
     & .MuiStepIcon-root.Mui-completed,
     & .MuiStepLabel-label.Mui-active {
