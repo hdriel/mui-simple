@@ -28,6 +28,8 @@ const List: React.FC<ListProps> = ({
     title,
     useTransition,
     width,
+    useDraggableContext,
+    droppableType,
     ...props
 }): React.ReactElement => {
     const [open, setOpen] = useState({});
@@ -61,7 +63,12 @@ const List: React.FC<ListProps> = ({
 
         const nestedItems = (
             <Box>
-                <List items={itemProps.items} {...itemProps.listItemsProps} />
+                <List
+                    items={itemProps.items}
+                    droppableId={itemProps.title}
+                    {...itemProps.listItemsProps}
+                    useDraggableContext={false}
+                />
                 <Divider variant="fullWidth" {...divider} component="div" />
             </Box>
         );
@@ -116,6 +123,8 @@ const List: React.FC<ListProps> = ({
         >
             {dragAndDropItems ? (
                 <DraggableList
+                    useDraggableContext={useDraggableContext}
+                    droppableType={droppableType}
                     fieldId={fieldId}
                     dataList={dataList}
                     droppableClassName={droppableId}
@@ -143,6 +152,8 @@ const List: React.FC<ListProps> = ({
 };
 
 List.defaultProps = {
+    useDraggableContext: true,
+    droppableType: undefined,
     alignItems: undefined,
     buttonItems: true,
     component: 'nav',

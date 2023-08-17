@@ -494,7 +494,7 @@ export interface ListItemProps {
     divider?: object | boolean;
     inset?: boolean;
     items?: Array<string | ListItemProps>;
-    listItemsProps?: ListProps;
+    listItemsProps?: Omit<ListProps, 'items'>;
     link?: string;
     controlType?: 'checkbox' | 'switch';
     selected?: boolean;

@@ -15,6 +15,7 @@ export const nestedList: ListItemProps[] = [
         items: ['Send1', 'Send2', 'Send3', 'Send4'],
         listItemsProps: {
             dragAndDropItems: true,
+            // droppableId: 'send', // default value to title: 'Send mail'
         },
     },
     {
@@ -23,6 +24,7 @@ export const nestedList: ListItemProps[] = [
         items: ['Draft1', 'Draft2', 'Draft3'],
         listItemsProps: {
             dragAndDropItems: true,
+            // droppableId: 'drafts', // default value to title: 'Draft'
         },
     },
     {
@@ -31,6 +33,7 @@ export const nestedList: ListItemProps[] = [
         component: 'div',
         listItemsProps: {
             dragAndDropItems: true,
+            // droppableId: 'inbox',  // default value to title: 'Inbox'
         },
         items: [
             'Favorite',
@@ -69,6 +72,7 @@ export const nestedList: ListItemProps[] = [
         title: 'Recents',
         listItemsProps: {
             dragAndDropItems: true,
+            // droppableId: 'recents',  // default value to title: 'Recents'
         },
     },
 ];

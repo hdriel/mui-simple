@@ -13,6 +13,7 @@ export const useDragHandlers = ({
     flexDirection,
     flexGap,
     dataList,
+    droppableId,
     onChange,
 }): {
     placeholderProps: PlaceholderProps;
@@ -71,16 +72,48 @@ export const useDragHandlers = ({
         });
     };
 
-    const handleDragEnd = (result): void => {
+    const handleDragEnd = (result: {
+        source?: { index: number; droppableId: string };
+        destination?: { index: number; droppableId: string };
+    }): void => {
         setPlaceholderProps({});
-        // dropped outside the list
-        if (!result.destination) {
-            return;
+        const { destination, source } = result;
+        if (!destination) return; // dropped outside the list
+
+        const items = reorder(dataList, source.index, destination.index);
+        onChange(items, result, dataList);
+
+        if (destination.droppableId === droppableId) {
+            // // drag and drop main item list
+            // onChangeMainList(dataList, source.index, destination.index);
+            console.debug(
+                'drag and drop main item list: (dataList, source.index, destination.index)',
+                dataList,
+                source.index,
+                destination.index
+            );
+        } else if (destination.droppableId !== source.droppableId) {
+            // // drag and drop item between different lists
+            // // find the source in items array and change with destination droppable i
+            // // onChangeItemInDifferentLists(dataList, toListId, fromListId)
+            // onChangeItemInDifferentLists(dataList, destination.droppableId, source.droppableId)
+            console.debug(
+                'drag and drop item between different lists: (dataList, toListId, fromListId)',
+                dataList,
+                destination.droppableId,
+                source.droppableId
+            );
+        } else {
+            // // drag and drop item inside his list
+            // // rearange the array if it is in the same category
+            // onChangeSubList(dataList.items, source.index, destination.index));
+            console.debug(
+                'drag and drop item inside his list: (dataList.items, source.index, destination.index)',
+                dataList.items,
+                source.index,
+                destination.index
+            );
         }
-
-        const items = reorder(dataList, result.source.index, result.destination.index);
-
-        onChange(items);
     };
 
     const handleDragUpdate = (event): void => {
