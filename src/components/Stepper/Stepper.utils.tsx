@@ -14,6 +14,7 @@ export const useSimpleStepper = (): SimpleStepperProps => {
 
     return {
         stepIndex: activeStep,
+        stepsIndexSkipped: skipSteps,
         onReset: () => {
             setSkipSteps([]);
             setActiveStep(0);
@@ -27,6 +28,5 @@ export const useSimpleStepper = (): SimpleStepperProps => {
             setSkipSteps((a) => (a.includes(index) ? a : [...a, index]));
             setActiveStep(index + 1);
         },
-        stepsIndexSkipped: skipSteps,
     };
 };

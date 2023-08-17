@@ -769,6 +769,7 @@ export interface StepperProps {
     SKIP_LABEL?: string;
     DONE_LABEL?: string;
     OPTIONAL_LABEL?: string;
+
     [key: string]: any;
 }
 
