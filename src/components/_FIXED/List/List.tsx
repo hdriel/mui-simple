@@ -17,6 +17,7 @@ const List: React.FC<ListProps> = ({
     disablePaddingItems,
     dragAndDropItems,
     draggableIcon,
+    draggableListType,
     droppableId,
     enableSubtitle,
     fieldId,
@@ -24,14 +25,13 @@ const List: React.FC<ListProps> = ({
     hideActionsOnDragAndDropItems,
     insetItems,
     items,
-    onListOrderChange,
     onItemBetweenDiffListOrderChange,
+    onListOrderChange,
     onSubListOrderChange,
     title,
+    useDraggableContext,
     useTransition,
     width,
-    useDraggableContext,
-    droppableType,
     ...props
 }): React.ReactElement => {
     const [open, setOpen] = useState({});
@@ -126,7 +126,7 @@ const List: React.FC<ListProps> = ({
             {dragAndDropItems ? (
                 <DraggableList
                     useDraggableContext={useDraggableContext}
-                    droppableType={droppableType}
+                    draggableListType={draggableListType}
                     fieldId={fieldId}
                     dataList={dataList}
                     droppableClassName={droppableId}
@@ -156,22 +156,29 @@ const List: React.FC<ListProps> = ({
 };
 
 List.defaultProps = {
-    useDraggableContext: true,
-    droppableType: undefined,
     alignItems: undefined,
     buttonItems: true,
     component: 'nav',
     dense: undefined,
+    disableGuttersItems: undefined,
     disablePadding: true,
+    disablePaddingItems: undefined,
     dragAndDropItems: false,
     draggableIcon: 'DragHandle',
+    draggableListType: undefined,
+    droppableId: undefined,
     enableSubtitle: true,
     fieldId: 'id',
     flexDirectionItems: undefined,
     hideActionsOnDragAndDropItems: true,
+    insetItems: undefined,
     items: [],
     listItemsProps: undefined,
+    onItemBetweenDiffListOrderChange: undefined,
+    onListOrderChange: undefined,
+    onSubListOrderChange: undefined,
     title: undefined,
+    useDraggableContext: true,
     useTransition: true,
     width: undefined,
 };

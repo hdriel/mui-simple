@@ -498,7 +498,7 @@ export interface ListItemProps {
     link?: string;
     controlType?: 'checkbox' | 'switch';
     droppableId?: string;
-    droppableType?: string;
+    draggableListType?: string;
     selected?: boolean;
     startIcon?: ReactNode | string;
     subtitle?: string;
@@ -515,18 +515,35 @@ export interface ListProps {
     disablePadding?: boolean;
     disablePaddingItems?: boolean;
     dragAndDropItems?: boolean;
+    draggableListType?: string;
     droppableId?: string;
     enableSubtitle?: boolean;
-    hideActionsOnDragAndDropItems?: boolean;
     fieldId?: string;
     flexDirectionItems?: 'row' | 'column';
+    hideActionsOnDragAndDropItems?: boolean;
     insetItems?: boolean;
     items?: Array<string | ListItemProps>;
-    onListOrderChange?: (items: Array<string | ListItemProps>) => void;
+    onListOrderChange: (
+        dataItems: Array<ListItemProps & { id: string }>,
+        sourceIndex: number,
+        destinationIndex: number,
+        reorderedDataItems: Array<ListItemProps & { id: string }>
+    ) => void;
+    onItemBetweenDiffListOrderChange: (
+        dataItems: Array<ListItemProps & { id: string }>,
+        source: { index: number; droppableId: string },
+        destinationIndex: { index: number; droppableId: string },
+        reorderedSubDataItems?: Array<ListItemProps & { id: string }>
+    ) => void;
+    onSubListOrderChange: (
+        dataItems: Array<ListItemProps & { id: string }>,
+        sourceIndex: number,
+        destinationIndex: number,
+        reorderedSubDataItems: Array<ListItemProps & { id: string }>
+    ) => void;
     title?: string;
-    useTransition?: boolean;
     useDraggableContext?: true;
-    droppableType?: string;
+    useTransition?: boolean;
     width?: string | number;
     [key: string]: any;
 }

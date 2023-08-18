@@ -26,7 +26,7 @@ interface DraggableListProps {
     flexDirection?: 'row' | 'column';
     flexGap?: string;
     useDraggableContext?: boolean;
-    droppableType?: string;
+    draggableListType?: string;
     onListOrderChange: (
         dataItems: DataItem[],
         sourceIndex: number,
@@ -65,10 +65,11 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
         onSubListOrderChange,
         className,
         useDraggableContext,
-        droppableType,
+        draggableListType,
         ...rest
     } = props;
     const theme = useTheme();
+    const type = draggableListType ?? (useDraggableContext ? droppableClassName : undefined);
     const { handleDragEnd, handleDragStart, handleDragUpdate, placeholderProps } = useDragHandlers({
         flexDirection,
         droppableId: droppableClassName,
@@ -79,8 +80,6 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
         onItemBetweenDiffListOrderChange,
         onSubListOrderChange,
     });
-
-    const type = droppableType ?? (useDraggableContext ? droppableClassName : undefined);
 
     const content = (
         <Droppable droppableId={droppableClassName} type={type}>
@@ -156,18 +155,21 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
 }
 
 DraggableList.defaultProps = {
-    useDraggableContext: undefined,
-    droppableType: undefined,
-    dataList: [],
-    droppableClassName: 'droppableId',
-    flexDirection: 'column',
-    fieldId: 'id',
-    flexGap: undefined,
-    renderValue: undefined,
-    onChange: undefined,
-    disabled: false,
-    component: 'li',
     className: undefined,
+    component: 'li',
+    dataList: [],
+    disabled: false,
+    draggableListType: undefined,
+    droppableClassName: 'droppableId',
+    fieldId: 'id',
+    flexDirection: 'column',
+    flexGap: undefined,
+    onChange: undefined,
+    onItemBetweenDiffListOrderChange: undefined,
+    onListOrderChange: undefined,
+    onSubListOrderChange: undefined,
+    renderValue: undefined,
+    useDraggableContext: undefined,
 };
 
 export default DraggableList;
