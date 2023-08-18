@@ -1,12 +1,11 @@
 import React from 'react';
-import type { PropsWithChildren } from 'react';
 import { ExpandLess as ExpandLessIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
-import { Box } from '@mui/material';
 
 import {
     ListItemText,
     ListItemAvatar,
     ListItemButton,
+    ListItemBox,
     ListItemIcon,
     ListItemSecondaryAction,
     ListItem as MuiListItem,
@@ -22,19 +21,21 @@ interface ListItemWrapperProps {
     buttonItems: boolean;
     alignItems: 'flex-start';
     flexDirection: 'row' | 'column';
+    draggable: boolean;
 }
-const ListItemWrapper: React.FC<PropsWithChildren<ListItemWrapperProps>> = ({
+const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
     item,
     index,
     onClick,
     buttonItems,
     alignItems,
     flexDirection,
+    draggable,
     children,
     ...props
 }) => {
     if (!item) return children;
-
+    const key = `${item.title}-${index}`;
     const onClickHandler = onClick?.bind(null, index, item.onClick);
     const itemButton =
         alignItems !== 'flex-start' &&
@@ -43,21 +44,22 @@ const ListItemWrapper: React.FC<PropsWithChildren<ListItemWrapperProps>> = ({
 
     return itemButton ? (
         <ListItemButton
-            key={`${item.title}-${index}`}
+            key={key}
             component={item.link ? 'a' : undefined}
             href={item.link}
             onClick={item.items?.length ? onClickHandler : item.onClick}
             selected={item.selected}
             padding={item.padding}
             flexDirection={flexDirection}
+            draggable={draggable}
             {...props}
         >
             {children}
         </ListItemButton>
     ) : (
-        <Box key={`${item.title}-${index}`} sx={{ flexDirection, display: 'flex', width: '100%' }}>
+        <ListItemBox key={key} flexDirection={flexDirection} draggable={draggable}>
             {children}
-        </Box>
+        </ListItemBox>
     );
 };
 
@@ -75,23 +77,25 @@ interface ListItemCmpProps {
     insetItems: boolean;
     enableSubtitle: boolean;
     isOpen: boolean;
+    draggable: boolean;
 }
 
-const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
-    disablePadding,
+const ListItem: React.FC<ListItemCmpProps> = ({
+    alignControl,
+    alignItems,
+    buttonItems,
+    children,
     disableGutters,
+    disablePadding,
+    draggable,
+    enableSubtitle,
     flexDirectionItems,
     index,
+    insetItems,
+    isControl,
+    isOpen,
     itemProps,
     onClick,
-    buttonItems,
-    alignItems,
-    isControl,
-    alignControl,
-    insetItems,
-    enableSubtitle,
-    isOpen,
-    children,
     ...props
 }) => {
     return (
@@ -103,12 +107,13 @@ const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
             key={`${index}`}
         >
             <ListItemWrapper
+                alignItems={alignItems}
+                buttonItems={buttonItems}
+                draggable={draggable}
+                flexDirection={flexDirectionItems}
                 index={index}
                 item={itemProps}
                 onClick={onClick}
-                buttonItems={buttonItems}
-                alignItems={alignItems}
-                flexDirection={flexDirectionItems}
             >
                 {itemProps.startIcon &&
                     (isControl && alignControl === 'start' ? (

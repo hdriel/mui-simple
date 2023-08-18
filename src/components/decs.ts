@@ -523,7 +523,7 @@ export interface ListProps {
     hideActionsOnDragAndDropItems?: boolean;
     insetItems?: boolean;
     items?: Array<string | ListItemProps>;
-    onListOrderChange: (
+    onListOrderChange?: (
         dataItems: Array<ListItemProps & { id: string }>,
         extraProps: {
             source: { index: number; droppableId: string };

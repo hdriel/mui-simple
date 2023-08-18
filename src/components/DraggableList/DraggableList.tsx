@@ -68,7 +68,7 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
     });
 
     const content = (
-        <Droppable droppableId={droppableClassName} type={type}>
+        <Droppable droppableId={droppableClassName} type={type} isDropDisabled={!!disabled}>
             {(provided, snapshot) => (
                 <DraggableListUL
                     {...rest}
@@ -88,7 +88,9 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
                                 key={key}
                                 draggableId={id ?? key}
                                 index={index}
-                                isDragDisabled={typeof disabled === 'function' ? disabled(data, index) : disabled}
+                                isDragDisabled={
+                                    typeof data.disabled === 'function' ? data.disabled(data, index) : data.disabled
+                                }
                             >
                                 {(providedItem, snapshot) => (
                                     <DraggableListULItem
@@ -152,7 +154,6 @@ DraggableList.defaultProps = {
     flexDirection: 'column',
     flexGap: undefined,
     onChange: undefined,
-    onListOrderChange: undefined,
     renderValue: undefined,
     useDraggableContext: undefined,
 };

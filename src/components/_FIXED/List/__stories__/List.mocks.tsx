@@ -8,33 +8,28 @@ import {
 } from '@mui/icons-material';
 import { ListItemProps } from '../../../decs';
 
+const listItemProps = {
+    dragAndDropItems: true,
+    // droppableId: 'id', // default value to id (title if not exists)
+};
+
 export const nestedList: ListItemProps[] = [
     {
         startIcon: <SendIcon />,
         title: 'Sent mail',
         items: ['Send1', 'Send2', 'Send3', 'Send4'],
-        listItemsProps: {
-            dragAndDropItems: true,
-            // droppableId: 'send', // default value to title: 'Send mail'
-        },
+        listItemsProps: listItemProps,
     },
     {
         startIcon: <DraftsIcon />,
         title: 'Drafts',
         items: ['Draft1', 'Draft2', 'Draft3'],
-        listItemsProps: {
-            dragAndDropItems: true,
-            // droppableId: 'drafts', // default value to title: 'Draft'
-        },
+        listItemsProps: listItemProps,
     },
     {
         startIcon: <InboxIcon />,
         title: 'Inbox',
         component: 'div',
-        listItemsProps: {
-            dragAndDropItems: true,
-            // droppableId: 'inbox', // default value to title: 'Inbox'
-        },
         items: [
             'Favorite',
             {
@@ -70,9 +65,6 @@ export const nestedList: ListItemProps[] = [
     {
         startIcon: <PhoneIcon />,
         title: 'Recents',
-        listItemsProps: {
-            dragAndDropItems: true,
-            // droppableId: 'recents',  // default value to title: 'Recents'
-        },
+        listItemsProps: listItemProps,
     },
 ];

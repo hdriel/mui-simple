@@ -90,6 +90,7 @@ const List: React.FC<ListProps> = ({
                         enableSubtitle={enableSubtitle}
                         isOpen={isOpen}
                         flexDirectionItems={flexDirectionItems}
+                        draggable={dragAndDropItems}
                     >
                         {useTransition ? (
                             <Collapse
@@ -121,32 +122,30 @@ const List: React.FC<ListProps> = ({
             subheader={title ? <ListSubheader component="span">{title}</ListSubheader> : undefined}
             {...props}
         >
-            {dragAndDropItems ? (
-                <DraggableList
-                    useDraggableContext={useDraggableContext}
-                    draggableListType={draggableListType}
-                    fieldId={fieldId}
-                    dataList={dataList}
-                    droppableClassName={droppableId}
-                    // disabled={!dragAndDropItems}
-                    onChange={onListOrderChange}
-                    renderValue={(item, index) =>
-                        renderValue(
-                            {
-                                ...item,
-                                actions: [
-                                    ...(item?.actions ?? []),
-                                    ...(draggableIcon ? [<Button key="dragable" icon={draggableIcon} />] : []),
-                                ],
-                            },
-                            index
-                        )
-                    }
-                    component="div"
-                />
-            ) : (
-                <Box>{dataList.map((item, index) => renderValue(item, index))}</Box>
-            )}
+            <DraggableList
+                useDraggableContext={useDraggableContext}
+                draggableListType={draggableListType}
+                fieldId={fieldId}
+                dataList={dataList}
+                droppableClassName={droppableId}
+                disabled={!dragAndDropItems}
+                onChange={onListOrderChange}
+                renderValue={(item, index) =>
+                    renderValue(
+                        {
+                            ...item,
+                            actions: [
+                                ...(item?.actions ?? []),
+                                ...(dragAndDropItems && draggableIcon
+                                    ? [<Button key="dragable" icon={draggableIcon} />]
+                                    : []),
+                            ],
+                        },
+                        index
+                    )
+                }
+                component="div"
+            />
         </MuiList>
     );
 };
@@ -169,7 +168,6 @@ List.defaultProps = {
     hideActionsOnDragAndDropItems: true,
     insetItems: undefined,
     items: [],
-    listItemsProps: undefined,
     onListOrderChange: undefined,
     title: undefined,
     useDraggableContext: true,
