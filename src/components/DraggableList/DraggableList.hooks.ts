@@ -15,9 +15,6 @@ export const useDragHandlers = ({
     dataList,
     droppableId,
     onChange,
-    onListOrderChange,
-    onItemBetweenDiffListOrderChange,
-    onSubListOrderChange,
 }): {
     placeholderProps: PlaceholderProps;
     handleDragStart: (event: any) => void;
@@ -83,45 +80,40 @@ export const useDragHandlers = ({
         const { destination, source } = result;
         if (!destination) return; // dropped outside the list
 
-        const items = reorder(dataList, source.index, destination.index);
-        onChange?.(items, result, dataList);
+        const extraProps = { source, destination, droppableId, dataList };
+        const isMainListChange = destination.droppableId === droppableId;
+        const isItemMoveBetweenList = destination.droppableId !== source.droppableId;
+        const isSubListChange = !isMainListChange && !isItemMoveBetweenList;
 
-        if (destination.droppableId === droppableId) {
-            // // drag and drop main item list
-            // onChangeMainList(dataList, source.index, destination.index);
-            console.debug(
-                'drag and drop main item list: (dataList, source.index, destination.index)',
-                dataList,
-                source.index,
-                destination.index
-            );
-            const items = reorder(dataList, source.index, destination.index);
-            onListOrderChange?.(dataList, source.index, destination.index, items);
-        } else if (destination.droppableId !== source.droppableId) {
-            // // drag and drop item between different lists
-            // // find the source in items array and change with destination droppable i
-            // // onChangeItemInDifferentLists(dataList, toListId, fromListId)
-            // onChangeItemInDifferentLists(dataList, source.droppableId, destination.droppableId)
-            console.debug(
-                'drag and drop item between different lists: (dataList, toListId, fromListId)',
-                dataList,
-                source,
-                destination
-            );
-            // const items = reorder(dataList, source.index, destination.index);
-            onItemBetweenDiffListOrderChange?.(dataList, source, destination);
-        } else {
-            // // drag and drop item inside his list
-            // // rearange the array if it is in the same category
-            // onChangeSubList(dataList.items, source.index, destination.index));
-            console.debug(
-                'drag and drop item inside his list: (dataList.items, source.index, destination.index)',
-                dataList.items,
-                source.index,
-                destination.index
-            );
-            const items = reorder(dataList.items, source.index, destination.index);
-            onSubListOrderChange?.(dataList, source.index, destination.index, items);
+        switch (true) {
+            case isMainListChange: {
+                const items = reorder(dataList, source.index, destination.index);
+                onChange?.(items, extraProps);
+                break;
+            }
+
+            case isItemMoveBetweenList: {
+                const subListSource = dataList.find((list) => list.id === source.droppableId);
+                const subListDestination = dataList.find((list) => list.id === destination.droppableId);
+                if (subListSource?.items && subListDestination?.items) {
+                    const [item] = subListSource?.items?.splice(source.index, 1);
+                    subListDestination?.items?.splice(destination.index, 0, item);
+                    onChange?.(dataList, extraProps);
+                }
+                break;
+            }
+
+            case isSubListChange:
+            default: {
+                const subList = dataList.find(
+                    (list) => list.id === source.droppableId && list.id === destination.droppableId
+                );
+                if (subList?.items) {
+                    subList.items = reorder(subList.items, source.index, destination.index);
+                    onChange?.(dataList, extraProps);
+                }
+                break;
+            }
         }
     };
 

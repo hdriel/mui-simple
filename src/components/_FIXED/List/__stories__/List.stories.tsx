@@ -342,7 +342,16 @@ export const NestedList = (args) => {
 };
 
 export const DraggableNestedList = (args) => {
+    const [items, setItems] = useState(nestedList);
+
     return (
-        <List {...args} title="Draggable Nested List Items" items={nestedList} dragAndDropItems droppableId="root" />
+        <List
+            {...args}
+            title="Draggable Nested List Items"
+            items={items}
+            onListOrderChange={(reorderedItems) => setItems(reorderedItems)}
+            dragAndDropItems
+            droppableId="root"
+        />
     );
 };

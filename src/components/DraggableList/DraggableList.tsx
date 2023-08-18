@@ -10,6 +10,8 @@ import { DraggableListUL, DraggableListULItem } from './DraggableList.styled';
 
 import { getDataId, getItemStyle, getListStyle } from './DraggableList.styles';
 import { useDragHandlers } from './DraggableList.hooks';
+import { number } from 'prop-types';
+import { ListItemProps } from '../decs';
 
 interface DataItem {
     id?: string;
@@ -27,25 +29,15 @@ interface DraggableListProps {
     flexGap?: string;
     useDraggableContext?: boolean;
     draggableListType?: string;
-    onListOrderChange: (
-        dataItems: DataItem[],
-        sourceIndex: number,
-        destinationIndex: number,
-        reorderedDataItems: DataItem[]
+    onChange?: (
+        dataItems: Array<ListItemProps & { id: string }>,
+        extraProps: {
+            source: { index: number; droppableId: string };
+            destinationIndex: { index: number; droppableId: string };
+            droppableId: string;
+            dataList?: Array<ListItemProps & { id: string }>;
+        }
     ) => void;
-    onItemBetweenDiffListOrderChange: (
-        dataItems: DataItem[],
-        source: { index: number; droppableId: string },
-        destinationIndex: { index: number; droppableId: string },
-        reorderedSubDataItems?: DataItem[]
-    ) => void;
-    onSubListOrderChange: (
-        dataItems: DataItem[],
-        sourceIndex: number,
-        destinationIndex: number,
-        reorderedSubDataItems: DataItem[]
-    ) => void;
-    onChange?: (newDataList: Array<string | DataItem>) => void;
     renderValue?: (value: string | DataItem, index: number) => ReactNode;
 }
 
@@ -60,9 +52,6 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
         flexGap,
         onChange,
         renderValue,
-        onListOrderChange,
-        onItemBetweenDiffListOrderChange,
-        onSubListOrderChange,
         className,
         useDraggableContext,
         draggableListType,
@@ -76,9 +65,6 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
         flexGap,
         dataList,
         onChange,
-        onListOrderChange,
-        onItemBetweenDiffListOrderChange,
-        onSubListOrderChange,
     });
 
     const content = (
@@ -95,11 +81,12 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
                 >
                     {dataList?.map((data: DataItem, index) => {
                         const id = getDataId(data, fieldId, index);
+                        const key = id ? `${id}-${index}` : typeof data === 'string' ? data : `${index}`;
 
                         return (
                             <Draggable
-                                key={id ?? (typeof data === 'string' ? data : `${index}`)}
-                                draggableId={id ?? (typeof data === 'string' ? data : `${index}`)}
+                                key={key}
+                                draggableId={id ?? key}
                                 index={index}
                                 isDragDisabled={typeof disabled === 'function' ? disabled(data, index) : disabled}
                             >
@@ -165,9 +152,7 @@ DraggableList.defaultProps = {
     flexDirection: 'column',
     flexGap: undefined,
     onChange: undefined,
-    onItemBetweenDiffListOrderChange: undefined,
     onListOrderChange: undefined,
-    onSubListOrderChange: undefined,
     renderValue: undefined,
     useDraggableContext: undefined,
 };

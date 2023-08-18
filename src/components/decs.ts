@@ -525,21 +525,12 @@ export interface ListProps {
     items?: Array<string | ListItemProps>;
     onListOrderChange: (
         dataItems: Array<ListItemProps & { id: string }>,
-        sourceIndex: number,
-        destinationIndex: number,
-        reorderedDataItems: Array<ListItemProps & { id: string }>
-    ) => void;
-    onItemBetweenDiffListOrderChange: (
-        dataItems: Array<ListItemProps & { id: string }>,
-        source: { index: number; droppableId: string },
-        destinationIndex: { index: number; droppableId: string },
-        reorderedSubDataItems?: Array<ListItemProps & { id: string }>
-    ) => void;
-    onSubListOrderChange: (
-        dataItems: Array<ListItemProps & { id: string }>,
-        sourceIndex: number,
-        destinationIndex: number,
-        reorderedSubDataItems: Array<ListItemProps & { id: string }>
+        extraProps: {
+            source: { index: number; droppableId: string };
+            destinationIndex: { index: number; droppableId: string };
+            droppableId: string;
+            dataList?: Array<ListItemProps & { id: string }>;
+        }
     ) => void;
     title?: string;
     useDraggableContext?: true;

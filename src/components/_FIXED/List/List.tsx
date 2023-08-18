@@ -25,9 +25,7 @@ const List: React.FC<ListProps> = ({
     hideActionsOnDragAndDropItems,
     insetItems,
     items,
-    onItemBetweenDiffListOrderChange,
     onListOrderChange,
-    onSubListOrderChange,
     title,
     useDraggableContext,
     useTransition,
@@ -47,10 +45,10 @@ const List: React.FC<ListProps> = ({
     const dataList =
         items?.map((item, index) =>
             typeof item === 'string'
-                ? { title: item, id: `${item}-${index}` }
+                ? { title: item, id: item }
                 : {
                       ...item,
-                      id: item[fieldId] ?? `${item.title}-${index}`,
+                      id: item[fieldId] ?? item.title,
                       ...(hideActionsOnDragAndDropItems && dragAndDropItems && { actions: [] }),
                   }
         ) ?? [];
@@ -131,9 +129,7 @@ const List: React.FC<ListProps> = ({
                     dataList={dataList}
                     droppableClassName={droppableId}
                     // disabled={!dragAndDropItems}
-                    onListOrderChange={onListOrderChange}
-                    onItemBetweenDiffListOrderChange={onItemBetweenDiffListOrderChange}
-                    onSubListOrderChange={onSubListOrderChange}
+                    onChange={onListOrderChange}
                     renderValue={(item, index) =>
                         renderValue(
                             {
@@ -174,9 +170,7 @@ List.defaultProps = {
     insetItems: undefined,
     items: [],
     listItemsProps: undefined,
-    onItemBetweenDiffListOrderChange: undefined,
     onListOrderChange: undefined,
-    onSubListOrderChange: undefined,
     title: undefined,
     useDraggableContext: true,
     useTransition: true,
