@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import InputAdornment from '@mui/material/InputAdornment';
 import { TextField as MuiTextField, Stack } from './TextField.styled';
-import { ClickAwayListener } from '@mui/material';
+import { InputAdornment, ClickAwayListener } from '@mui/material';
 import { debounce } from 'lodash-es';
 import type { InputBaseProps } from '../../decs';
 import SVGIcon from '../../SVGIcon/SVGIcon';

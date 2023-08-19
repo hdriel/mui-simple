@@ -1,10 +1,10 @@
 import React from 'react';
 import type { PropsWithChildren } from 'react';
-import { Typography as MuiTypography } from '@mui/material';
-import MuiSlider, { SliderThumb } from '@mui/material/Slider';
+import { Typography as MuiTypography, Slider as MuiSlider } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { sliderStyleIOS, sliderStylePretto, sliderStyleAirBNB, sliderStyleCustomColor } from './Slider.styles';
 import Tooltip from '../Tooltip/Tooltip';
+const { SliderThumb } = MuiSlider;
 
 export { Grid, Box } from '@mui/material';
 
