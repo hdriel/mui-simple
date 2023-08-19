@@ -5,7 +5,7 @@ import List from '../List';
 import { Send as SendIcon, BeachAccess as BeachAccessIcon } from '@mui/icons-material';
 import Button from '../../Button/Button';
 import Checkbox from '../../Checkbox/Checkbox';
-import { nestedList } from './List.mocks';
+import { courseChapters, nestedList } from './List.mocks';
 
 const meta: Meta<typeof List> = {
     title: 'Data-Display/List',
@@ -353,5 +353,29 @@ export const DraggableNestedList = (args) => {
             dragAndDropItems
             droppableId="root"
         />
+    );
+};
+
+export const CourseChapters = (args) => {
+    const [draggable, setDraggable] = useState(true);
+    const [items, setItems] = useState(courseChapters);
+    items.forEach((data) => {
+        if (data?.listItemsProps?.dragAndDropItems !== undefined) {
+            data.listItemsProps.dragAndDropItems = draggable;
+        }
+    });
+
+    return (
+        <>
+            <Checkbox label="Draggable" value={draggable} onChange={(e, checked) => setDraggable(checked)} />
+            <List
+                {...args}
+                title="Draggable Nested List Items"
+                items={items}
+                onListOrderChange={(reorderedItems) => setItems(reorderedItems)}
+                dragAndDropItems={draggable}
+                droppableId="root"
+            />
+        </>
     );
 };

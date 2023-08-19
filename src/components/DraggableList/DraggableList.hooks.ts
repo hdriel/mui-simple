@@ -10,6 +10,7 @@ interface PlaceholderProps {
 }
 
 export const useDragHandlers = ({
+    disabled,
     flexDirection,
     flexGap,
     dataList,
@@ -32,7 +33,7 @@ export const useDragHandlers = ({
     const handleDragStart = (event: any): void => {
         const draggedDOM = getDraggedDom(event.draggableId);
 
-        if (!draggedDOM) {
+        if (!draggedDOM || disabled) {
             return;
         }
 
@@ -78,6 +79,7 @@ export const useDragHandlers = ({
     }): void => {
         setPlaceholderProps({});
         const { destination, source } = result;
+        console.log('handleDragEnd', result);
         if (!destination) return; // dropped outside the list
 
         const extraProps = { source, destination, droppableId, dataList };
@@ -85,6 +87,7 @@ export const useDragHandlers = ({
         const isItemMoveBetweenList = destination.droppableId !== source.droppableId;
         const isSubListChange = !isMainListChange && !isItemMoveBetweenList;
 
+        console.log('handleDragEnd', extraProps);
         switch (true) {
             case isMainListChange: {
                 const items = reorder(dataList, source.index, destination.index);

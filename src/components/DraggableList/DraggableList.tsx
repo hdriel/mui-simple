@@ -7,11 +7,9 @@ import { useTheme } from '@mui/material/styles';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import classNames from 'classnames';
 import { DraggableListUL, DraggableListULItem } from './DraggableList.styled';
-
 import { getDataId, getItemStyle, getListStyle } from './DraggableList.styles';
 import { useDragHandlers } from './DraggableList.hooks';
-import { number } from 'prop-types';
-import { ListItemProps } from '../decs';
+import type { ListItemProps } from '../decs';
 
 interface DataItem {
     id?: string;
@@ -60,6 +58,7 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
     const theme = useTheme();
     const type = draggableListType ?? (useDraggableContext ? droppableClassName : undefined);
     const { handleDragEnd, handleDragStart, handleDragUpdate, placeholderProps } = useDragHandlers({
+        disabled,
         flexDirection,
         droppableId: droppableClassName,
         flexGap,
@@ -68,7 +67,11 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
     });
 
     const content = (
-        <Droppable droppableId={droppableClassName} type={type} isDropDisabled={!!disabled}>
+        <Droppable
+            droppableId={droppableClassName}
+            type={type}
+            direction={flexDirection?.includes('row') ? 'horizontal' : 'vertical'}
+        >
             {(provided, snapshot) => (
                 <DraggableListUL
                     {...rest}
@@ -89,7 +92,8 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
                                 draggableId={id ?? key}
                                 index={index}
                                 isDragDisabled={
-                                    typeof data.disabled === 'function' ? data.disabled(data, index) : data.disabled
+                                    !!disabled ||
+                                    (typeof data.disabled === 'function' ? data.disabled(data, index) : data.disabled)
                                 }
                             >
                                 {(providedItem, snapshot) => (
