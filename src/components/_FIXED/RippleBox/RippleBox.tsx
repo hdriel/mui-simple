@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import type { PropsWithChildren } from 'react';
-import { ButtonBase } from '@mui/material/ButtonBase/TouchRipple';
+import { ButtonBase } from '@mui/material';
 import { Wrapper } from './RippleBox.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import type { RippleBoxProps } from '../../decs';
