@@ -74,6 +74,7 @@ export default [
             babel({
                 babelHelpers: 'bundled',
                 extensions: ['.jsx', '.js', '.ts', '.tsx'],
+                exclude: 'node_modules/**', // only transpile our source code
                 babelrc: true,
             }),
             commonjs({
@@ -91,23 +92,30 @@ export default [
             }),
             json(),
             urlResolve(),
-            ...(isProd ? [terser()] : []),
+            ...(isProd
+                ? [
+                      terser({
+                          keep_fnames: /displayName$/, // Preserve functions/properties ending with "displayName"
+                      }),
+                  ]
+                : []),
             generatePackageJson({
                 outputFolder: 'dist',
                 baseContents: (pkg) => ({
-                    name: pkg.name,
-                    version: pkg.version,
-                    description: pkg.description,
-                    license: pkg.license,
-                    author: pkg.author,
-                    keywords: pkg.keywords,
-                    bugs: pkg.bugs,
-                    homepage: pkg.homepage,
-                    publishConfig: pkg.publishConfig,
-                    peerDependencies: pkg.peerDependencies,
-                    dependencies: pkg.dependencies,
-                    repository: pkg.repository,
-                    type: pkg.type,
+                    // name: pkg.name,
+                    // version: pkg.version,
+                    // description: pkg.description,
+                    // license: pkg.license,
+                    // author: pkg.author,
+                    // keywords: pkg.keywords,
+                    // bugs: pkg.bugs,
+                    // homepage: pkg.homepage,
+                    // publishConfig: pkg.publishConfig,
+                    // peerDependencies: pkg.peerDependencies,
+                    // dependencies: pkg.dependencies,
+                    // repository: pkg.repository,
+                    // type: pkg.type,
+                    ...pkg,
                     module: pkg.module?.replace('dist/', ''),
                     main: pkg.main.replace('dist/', ''),
                     types: pkg.types.replace('dist/', ''),
