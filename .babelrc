@@ -5,6 +5,7 @@
         "@babel/preset-react"
     ],
     "plugins": [
+        "@babel/plugin-transform-react-display-name",
         "@babel/proposal-object-rest-spread",
         ["@babel/plugin-transform-react-jsx", { "extensions": [".jsx", ".js", ".ts", ".tsx"] }]
     ],
