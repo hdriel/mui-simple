@@ -16,11 +16,11 @@ const ToggleButtonGroups: React.FC<PropsWithChildren<ToggleButtonGroupsProps>> =
     const groups = []
         .concat(children)
         .filter((child) => {
-            const isToggleButtonGroup = child?.type?.name === ToggleButtonGroup.displayName;
+            const isToggleButtonGroup = child?.type?.displayName === ToggleButtonGroup.displayName;
             if (!isToggleButtonGroup) {
                 console.error(
                     `Notice for 'ToggleButtonGroups' you can pass as childrens only 'ToggleButtonGroup' components`,
-                    child?.type?.name
+                    child?.type?.displayName ?? child?.type?.type
                 );
             }
 
