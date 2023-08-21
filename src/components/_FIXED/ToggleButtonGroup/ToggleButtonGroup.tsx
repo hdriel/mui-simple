@@ -19,6 +19,7 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
     transparent,
     helperText,
     helperTextAlign,
+    helperTextStyle,
     error,
     sx,
     ...props
@@ -84,7 +85,11 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
                           ))
                     : null}
             </MuiToggleButtonGroup>
-            {helperText && <FormHelperText error={error}>{helperText}</FormHelperText>}
+            {helperText && (
+                <FormHelperText error={error} sx={{ ...helperTextStyle }}>
+                    {helperText}
+                </FormHelperText>
+            )}
         </Container>
     );
 };
@@ -101,6 +106,10 @@ ToggleButtonGroup.defaultProps = {
     onChange: undefined,
     enforceValueSet: undefined,
     transparent: true,
+    error: undefined,
+    helperText: undefined,
+    helperTextAlign: undefined,
+    helperTextStyle: undefined,
     data: [],
 };
 

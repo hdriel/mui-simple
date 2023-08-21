@@ -23,6 +23,8 @@ export const Container = styled(Box, {
     align-items: flex-start;
     justify-content: flex-start;
     width: ${(props) => (props.fullWidth ? '100%' : 'max-content')};
+    position: relative;
+
     & > .MuiFormHelperText-root {
         width: 100%;
         display: flex;

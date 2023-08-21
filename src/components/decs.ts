@@ -961,6 +961,7 @@ export interface ToggleButtonGroupProps {
     enforceValueSet?: boolean;
     helperText?: string;
     helperTextAlign?: AlignType;
+    helperTextStyle?: SxProps;
     error?: boolean;
     data?: Array<{
         value: string;
