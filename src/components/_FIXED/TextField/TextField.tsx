@@ -26,6 +26,8 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
         onBlur,
         onChange,
         onFocus,
+        onEnterKeyPress,
+        onKeyPress,
         readOnly,
         startCmp: _startCmp,
         startCmpExternal: _startCmpExternal,
@@ -85,6 +87,14 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
                         ...InputProps?.sx,
                     },
                 }}
+                onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                        setIsFocused(false);
+                        onEnterKeyPress?.(e);
+                    } else {
+                        onKeyPress?.(e);
+                    }
+                }}
                 {...rest}
             />
         </ClickAwayListener>
@@ -127,6 +137,8 @@ TextField.defaultProps = {
     multiline: undefined,
     name: undefined,
     onChange: undefined,
+    onEnterKeyPress: undefined,
+    onKeyPress: undefined,
     readOnly: undefined,
     required: undefined,
     rows: undefined,

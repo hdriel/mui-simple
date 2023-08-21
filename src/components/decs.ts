@@ -279,6 +279,8 @@ export interface InputBaseProps {
     name?: string;
     onBlur?: (Event) => void;
     onChange?: (Event) => void;
+    onEnterKeyPress?: (Event) => void;
+    onKeyPress?: (Event) => void;
     onFocus?: (Event) => void;
     readOnly?: boolean;
     required?: boolean;
