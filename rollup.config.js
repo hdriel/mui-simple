@@ -95,7 +95,11 @@ export default [
             ...(isProd
                 ? [
                       terser({
-                          keep_fnames: /displayName$/, // Preserve functions/properties ending with "displayName"
+                          mangle: {
+                              properties: {
+                                  regex: /displayName/,
+                              },
+                          }, // Preserve functions/properties ending with "displayName"
                       }),
                   ]
                 : []),
