@@ -153,7 +153,7 @@ export interface DividerProps {
     label?: string | ReactNode;
     light?: boolean;
     orientation?: 'horizontal' | 'vertical';
-    textAlign?: 'center' | 'left' | 'right';
+    textAlign?: AlignType;
     thickness?: number;
     variant?: 'fullWidth' | 'inset' | 'middle';
     [key: string]: any;
@@ -285,7 +285,7 @@ export interface InputBaseProps {
     rows?: number;
     startCmp?: ReactNode | string;
     startCmpExternal?: ReactNode | string;
-    textAlign?: 'start' | 'end' | 'center' | 'left' | 'right' | 'inherit' | 'initial' | 'unset' | 'revert';
+    textAlign?: AlignType;
     type?: string;
     value?: string | any;
     variant?: 'filled' | 'standard' | 'outlined';
@@ -952,18 +952,22 @@ export interface TabsProps {
 export interface ToggleButtonGroupProps {
     orientation?: 'horizontal' | 'vertical';
     size?: 'small' | 'medium' | 'large';
-    value?: string;
+    value?: string | number;
     exclusive?: boolean;
     fullWidth?: boolean;
     disableRipple?: boolean;
-    onChange?: (event: any, newValues: null | string | string[]) => void;
+    onChange?: (event: any, newValues: null | number | number[] | string | string[] | any) => void;
     color?: string;
     enforceValueSet?: boolean;
+    helperText?: string;
+    helperTextAlign?: AlignType;
+    error?: boolean;
     data?: Array<{
         value: string;
         disabled?: boolean;
         component: ReactElement | ReactNode | string | number;
     }>;
+    transparent?: boolean;
     [key: string]: any;
 }
 
@@ -971,6 +975,7 @@ export interface ToggleButtonGroupsProps {
     fullWidth?: boolean;
     disableRipple?: boolean;
     justifyContent?: string;
+    transparent?: boolean;
     [key: string]: any;
 }
 

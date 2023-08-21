@@ -1,8 +1,9 @@
 import React from 'react';
-import { ToggleButton, ToggleButtonGroup as MuiToggleButtonGroup } from './ToggleButtonGroup.styled';
+import { ToggleButton, ToggleButtonGroup as MuiToggleButtonGroup, Container } from './ToggleButtonGroup.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 import type { ToggleButtonGroupProps } from '../../decs';
+import { FormHelperText } from '../RadioButtonsGroup/RadioButtonsGroup.styled';
 
 const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
     value: selectedValue,
@@ -15,6 +16,11 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
     data,
     color,
     fullWidth,
+    transparent,
+    helperText,
+    helperTextAlign,
+    error,
+    sx,
     ...props
 }): React.ReactElement => {
     const [customColor, muiColor] = useCustomColor(color);
@@ -34,42 +40,52 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
     function onButtonClickHandler(value, event): void {
         if (!event.target.value) {
             event.stopPropagation();
-            onChangeHandler?.(event, exclusive ? null : commonsValues.filter((cv) => cv !== value));
+            if (exclusive) {
+                event.target.value = null;
+                onChangeHandler?.(event, event.target.value);
+            } else {
+                event.target.value = commonsValues.filter((cv) => cv !== value);
+                onChangeHandler?.(event, event.target.value);
+            }
         }
     }
 
     return (
-        <MuiToggleButtonGroup
-            color={muiColor as any}
-            customColor={muiColor ? undefined : customColor}
-            orientation={orientation}
-            value={(exclusive ? selectedValue : commonsValues) as string}
-            exclusive={exclusive}
-            size={size}
-            onChange={onChangeHandler}
-            fullWidth={fullWidth}
-            {...props}
-        >
-            {data
-                ? []
-                      .concat(data)
-                      .filter(Boolean)
-                      .map(({ value, disabled, component, ...toggleProps }, index) => (
-                          <ToggleButton
-                              key={index}
-                              name={value}
-                              disableRipple={disableRipple}
-                              value={value}
-                              disabled={disabled}
-                              onClick={onButtonClickHandler.bind(null, value)}
-                              sx={{ ...(fullWidth && { flex: '1 1 auto' }), ...toggleProps.sx }}
-                              {...toggleProps}
-                          >
-                              {typeof component === 'string' ? <SVGIcon>{component}</SVGIcon> : component}
-                          </ToggleButton>
-                      ))
-                : null}
-        </MuiToggleButtonGroup>
+        <Container helperTextAlign={helperTextAlign}>
+            <MuiToggleButtonGroup
+                color={muiColor as any}
+                customColor={muiColor ? undefined : customColor}
+                orientation={orientation}
+                value={(exclusive ? selectedValue : commonsValues) as string}
+                exclusive={exclusive}
+                size={size}
+                onChange={onChangeHandler}
+                fullWidth={fullWidth}
+                sx={{ bgcolor: transparent ? 'transparent' : undefined, ...sx }}
+                {...props}
+            >
+                {data
+                    ? []
+                          .concat(data)
+                          .filter(Boolean)
+                          .map(({ value, disabled, component, ...toggleProps }, index) => (
+                              <ToggleButton
+                                  key={index}
+                                  name={value}
+                                  disableRipple={disableRipple}
+                                  value={value}
+                                  disabled={disabled}
+                                  onClick={onButtonClickHandler.bind(null, value)}
+                                  sx={{ ...(fullWidth && { flex: '1 1 auto' }), ...toggleProps.sx }}
+                                  {...toggleProps}
+                              >
+                                  {typeof component === 'string' ? <SVGIcon>{component}</SVGIcon> : component}
+                              </ToggleButton>
+                          ))
+                    : null}
+            </MuiToggleButtonGroup>
+            {helperText && <FormHelperText error={error}>{helperText}</FormHelperText>}
+        </Container>
     );
 };
 ToggleButtonGroup.displayName = 'ToggleButtonGroup';
@@ -83,6 +99,7 @@ ToggleButtonGroup.defaultProps = {
     disableRipple: undefined,
     onChange: undefined,
     enforceValueSet: undefined,
+    transparent: true,
     data: [],
 };
 
