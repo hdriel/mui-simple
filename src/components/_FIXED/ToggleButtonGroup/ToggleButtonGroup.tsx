@@ -1,6 +1,6 @@
 import React from 'react';
 import { ToggleButton, ToggleButtonGroup as MuiToggleButtonGroup, Container } from './ToggleButtonGroup.styled';
-import { useCustomColor } from '../../../utils/helpers';
+import { setDisplayName, useCustomColor } from '../../../utils/helpers';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 import type { ToggleButtonGroupProps } from '../../decs';
 import { FormHelperText } from '../RadioButtonsGroup/RadioButtonsGroup.styled';
@@ -88,7 +88,8 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
         </Container>
     );
 };
-ToggleButtonGroup.displayName = 'ToggleButtonGroup';
+
+setDisplayName(ToggleButtonGroup, 'ToggleButtonGroup');
 
 ToggleButtonGroup.defaultProps = {
     color: undefined,

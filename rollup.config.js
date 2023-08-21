@@ -92,34 +92,24 @@ export default [
             }),
             json(),
             urlResolve(),
-            ...(isProd
-                ? [
-                      terser({
-                          mangle: {
-                              properties: {
-                                  regex: /displayName/,
-                              },
-                          }, // Preserve functions/properties ending with "displayName"
-                      }),
-                  ]
-                : []),
+            ...(isProd ? [terser({})] : []),
             generatePackageJson({
                 outputFolder: 'dist',
                 baseContents: (pkg) => ({
-                    // name: pkg.name,
-                    // version: pkg.version,
-                    // description: pkg.description,
-                    // license: pkg.license,
-                    // author: pkg.author,
-                    // keywords: pkg.keywords,
-                    // bugs: pkg.bugs,
-                    // homepage: pkg.homepage,
-                    // publishConfig: pkg.publishConfig,
-                    // peerDependencies: pkg.peerDependencies,
-                    // dependencies: pkg.dependencies,
-                    // repository: pkg.repository,
-                    // type: pkg.type,
-                    ...pkg,
+                    name: pkg.name,
+                    version: pkg.version,
+                    description: pkg.description,
+                    license: pkg.license,
+                    author: pkg.author,
+                    keywords: pkg.keywords,
+                    bugs: pkg.bugs,
+                    homepage: pkg.homepage,
+                    publishConfig: pkg.publishConfig,
+                    peerDependencies: pkg.peerDependencies,
+                    dependencies: pkg.dependencies,
+                    repository: pkg.repository,
+                    type: pkg.type,
+                    // ...pkg,
                     module: pkg.module?.replace('dist/', ''),
                     main: pkg.main.replace('dist/', ''),
                     types: pkg.types.replace('dist/', ''),
