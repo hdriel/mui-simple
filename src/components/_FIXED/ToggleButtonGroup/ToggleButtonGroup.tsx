@@ -51,7 +51,7 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
     }
 
     return (
-        <Container helperTextAlign={helperTextAlign}>
+        <Container helperTextAlign={helperTextAlign} fullWidth={fullWidth}>
             <MuiToggleButtonGroup
                 color={muiColor as any}
                 customColor={muiColor ? undefined : customColor}

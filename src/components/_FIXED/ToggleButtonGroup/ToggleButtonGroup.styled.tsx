@@ -22,7 +22,7 @@ export const Container = styled(Box, {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    width: max-content;
+    width: ${(props) => (props.fullWidth ? '100%' : 'max-content')};
     & > .MuiFormHelperText-root {
         width: 100%;
         display: flex;
