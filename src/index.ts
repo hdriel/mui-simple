@@ -131,7 +131,7 @@ export type { SnackbarProps } from './components/_FIXED/Snackbar/Snackbar';
 
 export { default as SpeedDial } from './components/SpeedDial/SpeedDial';
 export { default as Stepper } from './components/Stepper/Stepper';
-export { default as MobileStepper } from './components/Stepper/MobileStepper';
+export { default as MobileStepper, SwipeableViews } from './components/Stepper/MobileStepper';
 export { useSimpleStepper } from './components/Stepper/Stepper.utils';
 export { default as SVGIcon } from './components/SVGIcon/SVGIcon';
 
