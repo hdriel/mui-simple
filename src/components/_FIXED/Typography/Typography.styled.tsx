@@ -48,6 +48,7 @@ export const Typography = styled(MuiTypography, {
     shouldForwardProp: (propName) =>
         ![
             'fontSize',
+            'font',
             'customColor',
             'bold',
             'italic',
@@ -67,6 +68,7 @@ export const Typography = styled(MuiTypography, {
     font-weight: ${(props) => (props.bold && typeof props.bold === 'boolean' ? 'bold' : props.bold)};
     font-size: ${(props) => numberToPx(props.fontSize)};
     font-style: ${(props) => (props.italic ? 'italic' : undefined)};
+    font-family: ${(props) => props.font ?? undefined};
     text-decoration: ${(props) => (props.underline ? 'underline' : undefined)};
     text-decoration: ${(props) => (props.strike ? 'line-through' : undefined)};
     text-transform: ${(props) => ({ upper: 'uppercase', lower: 'lowercase', capital: 'capitalize' }[props.charsCase])};

@@ -11,8 +11,8 @@ import type { ButtonProps } from '../../decs';
 const SIZES = ['small', 'medium', 'large'];
 type SizeType = 'small' | 'medium' | 'large';
 
-const Button: React.FC<PropsWithChildren<ButtonProps>> = forwardRef(
-    (props: PropsWithChildren<ButtonProps>, ref: Ref<HTMLButtonElement>): ReactElement => {
+const Button: React.ForwardRefExoticComponent<React.PropsWithoutRef<any> & React.RefAttributes<HTMLButtonElement>> =
+    forwardRef((props: PropsWithChildren<ButtonProps>, ref: Ref<HTMLButtonElement>): ReactElement => {
         const {
             children,
             color,
@@ -104,8 +104,7 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = forwardRef(
                 </MuiButton>
             </Tooltip>
         );
-    }
-);
+    });
 
 Button.defaultProps = {
     color: undefined,
