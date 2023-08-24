@@ -21,6 +21,7 @@ export const Border = styled(Box, {
 })<TypographyBorderPropsType>`
     width: ${(props) => numberToPx(props.width) ?? (props.autoWidth ? 'auto' : '100%')};
     display: flex;
+    align-items: center;
     border: ${(props) => (props.border && typeof props.border === 'boolean' ? '1px solid black' : props.border)};
     ${ellipsisRows}
     ${ellipsisRow1}

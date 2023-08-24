@@ -54,8 +54,6 @@ interface MobileStepperProps {
     [key: string]: any;
 }
 
-export { SwipeableViews } from './MobileStepper.styled';
-
 export default function MobileStepper(props: PropsWithChildren<MobileStepperProps>): MobileStepperProps {
     const {
         variant,
