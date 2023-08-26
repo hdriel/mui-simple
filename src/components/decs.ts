@@ -860,6 +860,7 @@ export interface TypographyProps {
     strike?: boolean;
     sub?: boolean;
     sup?: boolean;
+    textDirection?: 'ltr' | 'rtl';
     tooltip?: boolean | string;
     tooltipPlacement?: TooltipPlacementType;
     underline?: boolean;

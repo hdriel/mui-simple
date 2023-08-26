@@ -60,6 +60,7 @@ export const Typography = styled(MuiTypography, {
             'sub',
             'monospace',
             'lineHeight',
+            'textDirection',
             'bgColor',
         ].includes(propName as string),
 })<TypographyStyledPropsType>`
@@ -75,6 +76,7 @@ export const Typography = styled(MuiTypography, {
     text-transform: ${(props) => ({ upper: 'uppercase', lower: 'lowercase', capital: 'capitalize' }[props.charsCase])};
     vertical-align: ${(props) => (props.sup ? 'super' : props.sub ? 'sub' : undefined)};
     line-height: ${(props) => props.lineHeight};
+    direction: ${(props) => props.textDirection};
     ${(props) =>
         props.monospace
             ? css`
