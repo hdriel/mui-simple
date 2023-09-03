@@ -5,7 +5,7 @@ import React, { MouseEventHandler } from 'react';
 
 export interface AccordionProps {
     bgColor?: string;
-    bottomSecondaryLabel: string;
+    bottomSecondaryLabel?: string;
     buttonsColor?: string;
     collapsedIcon?: string | ReactNode;
     details?: string;
