@@ -10,7 +10,7 @@ import {
     BeachAccess as BeachAccessIcon,
 } from '@mui/icons-material';
 
-import AppBar from '../AppBar';
+import AppBarOld from '../AppBar.old';
 import Button from '../../_FIXED/Button/Button';
 import List from '../../_FIXED/List/List';
 import Divider from '../../_FIXED/Divider/Divider';
@@ -18,7 +18,7 @@ import ToggleButtonGroup from '../../_FIXED/ToggleButtonGroup/ToggleButtonGroup'
 
 export default {
     title: 'Surfaces/AppBarDrawer',
-    component: AppBar,
+    component: AppBarOld,
     decorators: [
         (Story) => (
             <div
@@ -81,7 +81,7 @@ const list = () => (
 );
 
 export const Default = (props) => {
-    return <AppBar {...props} />;
+    return <AppBarOld {...props} />;
 };
 
 export const OpenDirection = () => {
@@ -95,7 +95,7 @@ export const OpenDirection = () => {
 
     return (
         <Stack spacing={3}>
-            <AppBar
+            <AppBarOld
                 {...(anchor && {
                     menu: anchor ? true : undefined,
                     drawerProps: { openDirection: anchor },
@@ -107,7 +107,7 @@ export const OpenDirection = () => {
                 }
             >
                 {list()}
-            </AppBar>
+            </AppBarOld>
         </Stack>
     );
 };
@@ -123,7 +123,7 @@ export const Variant = () => {
 
     return (
         <Stack spacing={3}>
-            <AppBar
+            <AppBarOld
                 {...(variant && {
                     menu: variant ? true : undefined,
                     drawerProps: { openDirection: 'left', variant },
@@ -135,7 +135,7 @@ export const Variant = () => {
                 }
             >
                 {list()}
-            </AppBar>
+            </AppBarOld>
         </Stack>
     );
 };

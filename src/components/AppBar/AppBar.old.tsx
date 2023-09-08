@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { cloneElement, isValidElement, useState } from 'react';
 import type { ReactElement, PropsWithChildren, ReactNode } from 'react';
-import { AppBar as MuiAppBar, Toolbar } from './AppBar.styled';
+//	import PropTypes from 'prop-types';
+import { Menu as MenuIcon } from '@mui/icons-material';
+
+import { AppBar as MuiAppBar, TitleWrapper, Toolbar, Box } from './AppBar.styled';
 import OnScrollEventWrapper from './OnScrollEventWrapper';
+import Button from '../_FIXED/Button/Button';
+import Typography from '../_FIXED/Typography/Typography';
+import Drawer from '../Drawer/Drawer';
 import { useCustomColor } from '../../utils/helpers';
 
-type Position = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
+const DEFAULT_DRAWER_WIDTH = 240;
 
+type Variant = 'permanent' | 'persistent' | 'temporary';
+type OpenDirection = 'left' | 'right' | 'top' | 'bottom';
+type Position = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
+interface DrawerProps {
+    open: boolean;
+    openDirection?: OpenDirection;
+    variant?: Variant;
+    swipeable?: boolean;
+    drawerWidth?: number;
+    toggleDrawer?: (open: boolean) => void;
+}
 interface AppBarProps {
     menu?: ReactNode | boolean;
     title?: string | ReactNode;
@@ -22,11 +39,10 @@ interface AppBarProps {
     scrollToTop?: ReactNode | boolean;
     scrollToTopProps?: object;
     actions?: ReactNode;
-    drawerWidth?: number;
+    drawerProps?: DrawerProps;
     [key: string]: any;
 }
-
-export default function AppBar(props: PropsWithChildren<AppBarProps>): ReactElement {
+export default function AppBarOld(props: PropsWithChildren<AppBarProps>): ReactElement {
     const {
         position,
         menu,
@@ -43,15 +59,37 @@ export default function AppBar(props: PropsWithChildren<AppBarProps>): ReactElem
         scrollToTop,
         scrollToTopProps,
         actions,
-        drawerWidth,
+        drawerProps,
         children,
         ...rest
     } = props;
 
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const drawerWidth = drawerProps?.drawerWidth ?? DEFAULT_DRAWER_WIDTH;
     const [customColor] = useCustomColor(color);
+
+    // Todo: check if the open param is necessary
+    const toggleDrawer = (open): void => setDrawerOpen((v) => !v);
 
     const isBottom = position === 'fixed-bottom';
     const positionStyle: Position = isBottom ? 'fixed' : position;
+
+    const menuIcon = isValidElement(menu)
+        ? cloneElement(menu, {
+              edge: 'start',
+              size: 'large',
+              onClick: () => toggleDrawer(true),
+          })
+        : menu && (
+              <Button
+                  // muiColor="inherit"
+                  edge="start"
+                  size="large"
+                  icon={<MenuIcon />}
+                  sx={{ mr: 2 }}
+                  onClick={() => toggleDrawer(true)}
+              />
+          );
 
     return (
         <>
@@ -65,7 +103,7 @@ export default function AppBar(props: PropsWithChildren<AppBarProps>): ReactElem
                 scrollToId={toolbarId ?? '#back-to-top-anchor'}
             >
                 <MuiAppBar
-                    drawerWidth={drawerWidth}
+                    drawerWidth={drawerOpen ? drawerWidth : 0}
                     position={hideOnScroll || elevationScroll ? 'fixed' : positionStyle}
                     customColor={customColor}
                     enableColorOnDark={enableColorOnDark}
@@ -73,11 +111,37 @@ export default function AppBar(props: PropsWithChildren<AppBarProps>): ReactElem
                     {...rest}
                 >
                     <Toolbar color="inherit" variant={dense ? 'dense' : undefined} disableGutters={disablePadding}>
-                        {children}
+                        {menuIcon}
+                        <TitleWrapper sx={{ flexGrow: 1 }}>
+                            {isValidElement(title)
+                                ? title
+                                : title && (
+                                      <Typography variant="h6" component="div" wrap={false}>
+                                          {title}
+                                      </Typography>
+                                  )}
+                        </TitleWrapper>
+                        <Box>{actions}</Box>
                     </Toolbar>
                 </MuiAppBar>
             </OnScrollEventWrapper>
             {!isBottom && <Toolbar variant={dense ? 'dense' : undefined} id={toolbarId ?? 'back-to-top-anchor'} />}
+            {drawerProps && Object.keys(drawerProps).length && (
+                <Drawer
+                    open={drawerOpen}
+                    openDirection={drawerProps.openDirection ?? 'left'}
+                    variant={drawerProps.variant ?? 'temporary'}
+                    swipeable={drawerProps.swipeable ?? false}
+                    drawerWidth={drawerWidth}
+                    {...drawerProps}
+                    toggleDrawer={(open) => {
+                        toggleDrawer(open);
+                        drawerProps?.toggleDrawer?.(open);
+                    }}
+                >
+                    {children}
+                </Drawer>
+            )}
         </>
     );
 }
@@ -103,8 +167,8 @@ export default function AppBar(props: PropsWithChildren<AppBarProps>): ReactElem
 //    drawerProps: PropTypes.object,
 //	};
 
-AppBar.defaultProps = {
-    drawerWidth: 0,
+AppBarOld.defaultProps = {
+    menu: undefined,
     position: 'fixed',
     title: undefined,
     color: undefined,
@@ -118,4 +182,5 @@ AppBar.defaultProps = {
     elevation: undefined,
     scrollToTop: undefined,
     scrollToTopProps: undefined,
+    drawerProps: undefined,
 };
