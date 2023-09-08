@@ -61,7 +61,7 @@ export default function AppBar(props: PropsWithChildren<AppBarProps>): ReactElem
                 hideOnScroll={hideOnScroll}
                 elevation={elevation}
                 scrollToTop={scrollToTop}
-                {...scrollToTopProps}
+                scrollToTopProps={scrollToTopProps}
                 scrollToId={toolbarId ?? '#back-to-top-anchor'}
             >
                 <MuiAppBar

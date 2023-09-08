@@ -16,6 +16,7 @@ interface OnScrollEventWrapperProps {
     right?: number;
     left?: number;
     top?: number;
+    zIndex?: number;
     defaultFabProps?: object;
     scrollToTop?: ReactNode | boolean;
     scrollToTopProps?: object;
@@ -30,11 +31,11 @@ export default function OnScrollEventWrapper(props: PropsWithChildren<OnScrollEv
         elevation,
         defaultFabProps,
         scrollToId,
-        left,
-        top,
+        scrollToTopProps,
         children,
     } = props;
-    let { bottom, right } = props;
+    const { left, top, zIndex } = scrollToTopProps;
+    let { bottom, right } = scrollToTopProps;
 
     const trigger = useScrollTrigger({
         target: scrollElement ?? undefined,
@@ -63,6 +64,7 @@ export default function OnScrollEventWrapper(props: PropsWithChildren<OnScrollEv
                     role="presentation"
                     sx={{
                         position: 'fixed',
+                        zIndex,
                         bottom,
                         right,
                         left,
@@ -115,10 +117,6 @@ OnScrollEventWrapper.defaultProps = {
     hideOnScroll: false,
     elevation: undefined,
     scrollToId: undefined,
-    bottom: undefined,
-    right: undefined,
-    left: undefined,
-    top: undefined,
     defaultFabProps: undefined,
     scrollToTop: false,
     scrollToTopProps: undefined,
