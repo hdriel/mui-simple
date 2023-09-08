@@ -28,6 +28,7 @@ interface AppBarProps {
     title?: string | ReactNode;
     position?: Position | 'fixed-bottom';
     color?: string;
+    bgColor?: string;
     enableColorOnDark?: boolean;
     toolbarId?: string;
     scrollElement?: ReactNode | string;
@@ -48,6 +49,7 @@ export default function AppBar(props: PropsWithChildren<AppBarProps>): ReactElem
         menu,
         title,
         color,
+        bgColor,
         enableColorOnDark,
         scrollElement,
         toolbarId,
@@ -109,7 +111,7 @@ export default function AppBar(props: PropsWithChildren<AppBarProps>): ReactElem
                     position={hideOnScroll || elevationScroll ? 'fixed' : positionStyle}
                     customColor={customColor}
                     enableColorOnDark={enableColorOnDark}
-                    sx={{ ...(isBottom && { top: 'auto', bottom: 0 }), ...rest.sx }}
+                    sx={{ ...(isBottom && { top: 'auto', bottom: 0 }), bgcolor: bgColor, ...rest.sx }}
                     {...rest}
                 >
                     <Toolbar color="inherit" variant={dense ? 'dense' : undefined} disableGutters={disablePadding}>
