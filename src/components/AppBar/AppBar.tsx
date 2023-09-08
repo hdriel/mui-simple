@@ -68,7 +68,6 @@ export default function AppBar(props: PropsWithChildren<AppBarProps>): ReactElem
     const drawerWidth = drawerProps?.drawerWidth ?? DEFAULT_DRAWER_WIDTH;
     const [customColor] = useCustomColor(color);
 
-    // Todo: assert this type and its usage logic
     // Todo: check if the open param is necessary
     const toggleDrawer = (open): void => setDrawerOpen((v) => !v);
 

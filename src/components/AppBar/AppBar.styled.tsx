@@ -5,9 +5,7 @@ import { styled } from '@mui/material/styles';
 
 interface AppBarStyledProps {
     drawerWidth?: number;
-    /* Todo: assert this type and its usage logic
-		since the customColor made using function that returns array */
-    customColor?: string[];
+    customColor?: string;
 }
 type AppBarStyledPropsType = AppBarStyledProps & AppBarProps;
 export const AppBar = styled(MuiAppBar, {
@@ -20,6 +18,7 @@ export const AppBar = styled(MuiAppBar, {
             duration: props.theme.transitions.duration.enteringScreen,
         })};
     margin-left: ${(props) => props.drawerWidth}px;
+
     &.MuiPaper-root {
         background-color: ${(props) => props.customColor};
     }
