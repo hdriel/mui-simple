@@ -166,7 +166,7 @@ Typography.defaultProps = {
     italic: undefined,
     lineHeight: undefined,
     monospace: undefined,
-    noWrap: undefined,
+    noWrap: true,
     onEllipsisChange: undefined,
     paragraph: undefined,
     rows: 1,
@@ -176,11 +176,11 @@ Typography.defaultProps = {
     sub: undefined,
     sup: undefined,
     textDirection: undefined,
-    tooltip: undefined,
+    tooltip: false,
     tooltipPlacement: undefined,
     underline: undefined,
     width: undefined,
-    wrap: true,
+    wrap: undefined,
 };
 
 export type { TypographyProps } from '../../decs';
