@@ -57,6 +57,7 @@ export default function Drawer(props: PropsWithChildren<DrawerProps>): ReactNode
             ModalProps={{ keepMounted }}
             isMiniPersistent={isMiniPersistent}
             drawerWidth={drawerWidth}
+            {...rest}
         >
             <DrawerHeader anchor={openDirection}>
                 <Button
