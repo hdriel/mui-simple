@@ -9,6 +9,7 @@ const openedMixin = (theme: Theme, drawerWidth?: number | string): SxProps => ({
         duration: theme.transitions.duration.enteringScreen,
     }),
     overflowX: 'hidden',
+    backgroundImage: 'unset !important',
 });
 
 const closedMixin = (theme: Theme): SxProps => ({
