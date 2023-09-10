@@ -123,11 +123,11 @@ Accordion.defaultProps = {
     hideLabel: 'Hide',
     id: undefined,
     label: undefined,
+    labelColor: undefined,
     onChange: undefined,
     secondaryLabel: undefined,
     showMoreLabel: 'Show More',
     textColor: undefined,
-    labelColor: undefined,
     unmountDetailsOnClose: false,
     useCustomStyle: false,
 };
