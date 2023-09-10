@@ -60,6 +60,11 @@ export default function Drawer(props: PropsWithChildren<DrawerProps>): ReactNode
             isMiniPersistent={isMiniPersistent}
             drawerWidth={drawerWidth}
             bgColor={bgColor}
+            {...rest}
+            PaperProps={{
+                ...rest.PaperProps,
+                sx: { ...rest.PaperProps?.sx, ...(bgColor && { backgroundColor: bgColor }) },
+            }}
         >
             <DrawerHeader anchor={openDirection}>
                 <Button
