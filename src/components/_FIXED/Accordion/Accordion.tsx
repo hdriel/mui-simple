@@ -70,6 +70,7 @@ const Accordion: React.FC<AccordionProps> = function (props): React.ReactElement
                 <Typography
                     tooltip={false}
                     wrap={!secondaryLabel}
+                    color={labelColor}
                     sx={{ ...(secondaryLabel && { width: '33%', flexShrink: 0 }) }}
                 >
                     {label}
