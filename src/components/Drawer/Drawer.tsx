@@ -63,7 +63,7 @@ export default function Drawer(props: PropsWithChildren<DrawerProps>): ReactNode
             {...rest}
             PaperProps={{
                 ...rest.PaperProps,
-                sx: { ...rest.PaperProps?.sx, ...(bgColor && { backgroundColor: bgColor }) },
+                sx: { ...rest.PaperProps?.sx, ...(bgColor && { backgroundColor: bgColor }), backgroundImage: 'unset' },
             }}
         >
             <DrawerHeader anchor={openDirection}>
