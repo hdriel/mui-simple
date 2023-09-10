@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import type { PropsWithChildren } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Accordion as MuiAccordion, AccordionDetails, AccordionSummary, ShowMoreWrapper } from './Accordion.styled';
 import Typography from '../Typography/Typography';
 import Button from '../Button/Button';
@@ -8,7 +7,7 @@ import { useCustomColor } from '../../../utils/helpers';
 import type { AccordionProps } from '../../decs';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 
-const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props): React.ReactElement {
+const Accordion: React.FC<AccordionProps> = function (props): React.ReactElement {
     const {
         bgColor: _bgColor,
         bottomSecondaryLabel,
@@ -18,7 +17,7 @@ const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props):
         details,
         detailsMaxRows,
         disabled,
-        expanded,
+        expanded: _expanded,
         expandedIcon: _expandedIcon,
         hideLabel,
         id,
@@ -27,21 +26,26 @@ const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props):
         secondaryLabel: _secondaryLabel,
         showMoreLabel,
         textColor,
-        titleColor: _titleColor,
+        labelColor: _labelColor,
         unmountDetailsOnClose,
         useCustomStyle,
         ...rest
     } = props;
 
     const [showMore, setShowMore] = useState(false);
+    const [expanded, setExpanded] = useState(_expanded);
     const [isEllipsis, setIsEllipsis] = useState(false);
     const [bgColor] = useCustomColor(_bgColor);
-    const [titleColor] = useCustomColor(_titleColor);
+    const [labelColor] = useCustomColor(typeof _labelColor === 'function' ? _labelColor(expanded) : _labelColor);
     const secondaryLabel = bottomSecondaryLabel || _secondaryLabel;
     const expandedIcon = typeof _expandedIcon === 'string' ? <SVGIcon>{_expandedIcon}</SVGIcon> : _expandedIcon;
     const collapsedIcon = typeof _collapsedIcon === 'string' ? <SVGIcon>{_collapsedIcon}</SVGIcon> : _collapsedIcon;
-    const icon = expanded === undefined || expanded ? expandedIcon : collapsedIcon || expandedIcon;
+    const icon = expanded ? expandedIcon : collapsedIcon || expandedIcon;
     const useCustomStyleIcon = <ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />;
+
+    useEffect(() => {
+        setExpanded(_expanded);
+    }, [_expanded]);
 
     return (
         <MuiAccordion
@@ -49,6 +53,7 @@ const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props):
             expanded={typeof expanded === 'string' ? expanded === id : expanded}
             onChange={(event, isExpanded) => {
                 onChange?.(event, isExpanded ? id ?? isExpanded : false);
+                setExpanded(!expanded);
             }}
             useCustomStyle={useCustomStyle}
             TransitionProps={{ unmountOnExit: unmountDetailsOnClose }}
@@ -58,7 +63,7 @@ const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props):
                 id={id}
                 useCustomStyle={useCustomStyle}
                 bgColor={bgColor}
-                titleColor={titleColor}
+                titleColor={labelColor}
                 expandIcon={useCustomStyle ? useCustomStyleIcon : icon}
                 bottomSecondaryLabel={!!bottomSecondaryLabel}
             >
@@ -122,7 +127,7 @@ Accordion.defaultProps = {
     secondaryLabel: undefined,
     showMoreLabel: 'Show More',
     textColor: undefined,
-    titleColor: undefined,
+    labelColor: undefined,
     unmountDetailsOnClose: false,
     useCustomStyle: false,
 };

@@ -20,7 +20,7 @@ export interface AccordionProps {
     secondaryLabel?: string;
     showMoreLabel?: string;
     textColor?: string;
-    titleColor?: string;
+    labelColor?: ((expanded: boolean | string) => string) | string;
     unmountDetailsOnClose?: boolean;
     useCustomStyle?: boolean;
     [key: string]: any;
