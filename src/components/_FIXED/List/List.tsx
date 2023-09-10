@@ -6,9 +6,11 @@ import MuiListItem from './ListItem';
 import DraggableList from '../../DraggableList/DraggableList';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 import type { ListItemProps, ListProps } from '../../decs';
+import { useCustomColor } from '../../../utils/helpers';
 
 const List: React.FC<ListProps> = ({
     alignItems,
+    bgColor: _bgColor,
     buttonItems,
     component,
     dense,
@@ -32,6 +34,7 @@ const List: React.FC<ListProps> = ({
     width,
     ...props
 }): React.ReactElement => {
+    const [bgColor] = useCustomColor(_bgColor);
     const [open, setOpen] = useState({});
     const onClick = (index, cb, event): void => {
         event.stopPropagation();
@@ -74,7 +77,7 @@ const List: React.FC<ListProps> = ({
         );
 
         return (
-            <div style={{ width: '100%' }} key={item[fieldId] ?? String(item).toString()}>
+            <Box style={{ width: '100%' }} key={item[fieldId] ?? String(item).toString()}>
                 {listItem && (
                     <MuiListItem
                         disablePadding={itemProps.disablePadding ?? disablePaddingItems ?? true}
@@ -107,7 +110,7 @@ const List: React.FC<ListProps> = ({
                     </MuiListItem>
                 )}
                 {divider && <Divider variant="fullWidth" {...divider} component="span" />}
-            </div>
+            </Box>
         );
     };
 
@@ -117,7 +120,7 @@ const List: React.FC<ListProps> = ({
             useTransition={useTransition}
             disablePadding={disablePadding}
             dense={dense}
-            sx={{ width, bgcolor: 'background.paper' }}
+            sx={{ width, bgcolor: bgColor }}
             component={component}
             subheader={title ? <ListSubheader component="span">{title}</ListSubheader> : undefined}
             {...props}
@@ -152,6 +155,7 @@ const List: React.FC<ListProps> = ({
 
 List.defaultProps = {
     alignItems: undefined,
+    bgColor: 'background.paper',
     buttonItems: true,
     component: 'nav',
     dense: undefined,

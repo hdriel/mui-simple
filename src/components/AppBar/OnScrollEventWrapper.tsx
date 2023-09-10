@@ -31,7 +31,7 @@ export default function OnScrollEventWrapper(props: PropsWithChildren<OnScrollEv
         elevation,
         defaultFabProps,
         scrollToId,
-        scrollToTopProps,
+        scrollToTopProps = {},
         children,
     } = props;
     const { left, top, zIndex } = scrollToTopProps;

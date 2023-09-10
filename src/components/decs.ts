@@ -510,6 +510,7 @@ export interface ListItemProps {
 
 export interface ListProps {
     alignItems?: 'flex-start';
+    bgColor?: string;
     buttonItems?: boolean;
     component?: string;
     dense?: boolean;
