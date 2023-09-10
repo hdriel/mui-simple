@@ -2,14 +2,14 @@ import type { PropsWithChildren } from 'react';
 import type { SxProps, Theme } from '@mui/material';
 
 // Todo: check if its should be SxProps type
-const openedMixin = (theme: Theme, drawerWidth?: number | string): SxProps => ({
+const openedMixin = (theme: Theme, drawerWidth?: number | string, bgColor?: string): SxProps => ({
     width: drawerWidth,
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
     }),
     overflowX: 'hidden',
-    backgroundImage: 'unset !important',
+    background: bgColor,
 });
 
 const closedMixin = (theme: Theme): SxProps => ({
@@ -31,7 +31,7 @@ interface DrawerStylesProps {
     drawerWidth?: number | string;
 }
 export function drawerStyles(props: PropsWithChildren<DrawerStylesProps>): SxProps {
-    const { theme, open, isMiniPersistent, drawerWidth = 240 } = props;
+    const { theme, open, isMiniPersistent, drawerWidth = 240, bgColor } = props;
     return {
         width: drawerWidth,
         flexShrink: 0,
@@ -39,7 +39,7 @@ export function drawerStyles(props: PropsWithChildren<DrawerStylesProps>): SxPro
         boxSizing: 'border-box',
         ...(isMiniPersistent &&
             open && {
-                ...openedMixin(theme, drawerWidth),
+                ...openedMixin(theme, drawerWidth, bgColor),
                 '& .MuiDrawer-paper': openedMixin(theme),
             }),
         ...(isMiniPersistent &&

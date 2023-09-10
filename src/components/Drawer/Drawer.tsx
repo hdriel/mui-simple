@@ -9,25 +9,27 @@ import Button from '../_FIXED/Button/Button';
 import Divider from '../_FIXED/Divider/Divider';
 
 interface DrawerProps {
-    openDirection?: 'left' | 'right' | 'top' | 'bottom';
-    variant?: 'permanent' | 'mini-persistent' | 'persistent' | 'temporary';
-    open?: boolean;
-    swipeable?: boolean;
+    bgColor?: string;
+    drawerWidth?: number | string;
     keepMounted?: boolean;
     onClose?: () => void;
+    open?: boolean;
+    openDirection?: 'left' | 'right' | 'top' | 'bottom';
+    swipeable?: boolean;
     // Todo: assert if this type is ok
     toggleDrawer?: (open: boolean) => void;
-    drawerWidth?: number | string;
+    variant?: 'permanent' | 'mini-persistent' | 'persistent' | 'temporary';
 }
 export default function Drawer(props: PropsWithChildren<DrawerProps>): ReactNode {
     const {
+        bgColor,
+        drawerWidth,
+        keepMounted,
         onClose,
         open,
-        swipeable,
-        keepMounted,
         openDirection,
+        swipeable,
         toggleDrawer: _toggleDrawer,
-        drawerWidth,
         children,
         ...rest
     } = props;
@@ -57,7 +59,7 @@ export default function Drawer(props: PropsWithChildren<DrawerProps>): ReactNode
             ModalProps={{ keepMounted }}
             isMiniPersistent={isMiniPersistent}
             drawerWidth={drawerWidth}
-            {...rest}
+            bgColor={bgColor}
         >
             <DrawerHeader anchor={openDirection}>
                 <Button
@@ -90,12 +92,13 @@ export default function Drawer(props: PropsWithChildren<DrawerProps>): ReactNode
 //	};
 
 Drawer.defaultProps = {
-    openDirection: undefined,
-    variant: undefined,
-    open: undefined,
-    swipeable: undefined,
+    bgColor: undefined,
+    drawerWidth: 240,
     keepMounted: undefined,
     onClose: undefined,
+    open: undefined,
+    openDirection: undefined,
+    swipeable: undefined,
     toggleDrawer: undefined,
-    drawerWidth: 240,
+    variant: undefined,
 };

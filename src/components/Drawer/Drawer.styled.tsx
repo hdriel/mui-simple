@@ -5,11 +5,11 @@ import { Drawer as MuiDrawer, SwipeableDrawer as MuiSwipeableDrawer, Box } from 
 import { drawerStyles } from './Drawer.styles';
 
 export const Drawer = styled(MuiDrawer, {
-    shouldForwardProp: (propName) => !['drawerWidth', 'isMiniPersistent'].includes(propName as string),
+    shouldForwardProp: (propName) => !['drawerWidth', 'isMiniPersistent', 'bgColor'].includes(propName as string),
 })(drawerStyles);
 
 export const SwipeableDrawer = styled(MuiSwipeableDrawer, {
-    shouldForwardProp: (propName) => !['drawerWidth', 'isMiniPersistent'].includes(propName as string),
+    shouldForwardProp: (propName) => !['drawerWidth', 'isMiniPersistent', 'bgColor'].includes(propName as string),
 })(drawerStyles);
 
 export const ContentWrapper = styled(
