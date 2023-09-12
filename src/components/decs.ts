@@ -700,7 +700,7 @@ export interface SwitchProps {
     OFF_LABEL?: string;
     onChange?: (event: any, checked?: boolean) => void;
     ON_LABEL?: string;
-    onOffLabelSide: 'right' | 'left';
+    onOffLabelSide?: 'right' | 'left';
     required?: boolean;
     scale?: number;
     size?: 'small' | 'medium';
