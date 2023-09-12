@@ -128,6 +128,21 @@ export interface CircularProgressProps {
     [key: string]: any;
 }
 
+export interface DrawerProps {
+    backdrop?: boolean;
+    bgColor?: string;
+    drawerWidth?: number | string;
+    keepMounted?: boolean;
+    onClose?: () => void;
+    open?: boolean;
+    hideHeader?: boolean;
+    direction?: 'left' | 'right' | 'top' | 'bottom';
+    swipeable?: boolean;
+    toggleDrawer?: (open: boolean) => void;
+    variant?: 'permanent' | 'mini-persistent' | 'persistent' | 'temporary';
+    [key: string]: any;
+}
+
 export interface DialogProps {
     open: boolean;
     onClose?: (value: string) => void;
