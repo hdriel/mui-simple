@@ -90,7 +90,7 @@ export const TemporaryDrawer = () => {
                 <React.Fragment key={anchor}>
                     <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
                     <Drawer
-                        openDirection={anchor}
+                        direction={anchor}
                         variant="temporary"
                         open={state[anchor]}
                         toggleDrawer={toggleDrawer(anchor, false)}
@@ -127,7 +127,7 @@ export const Variant = () => {
                 <React.Fragment key={variant}>
                     <Button onClick={toggleDrawer(variant, true)}>{variant}</Button>
                     <Drawer
-                        openDirection={'right'}
+                        direction={'right'}
                         variant={variant}
                         open={menuOpen}
                         toggleDrawer={toggleDrawer(variant, false)}

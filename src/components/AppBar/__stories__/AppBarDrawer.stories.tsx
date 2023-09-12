@@ -10,7 +10,7 @@ import {
     BeachAccess as BeachAccessIcon,
 } from '@mui/icons-material';
 
-import AppBarOld from '../AppBar.old';
+import AppBar from '../AppBar';
 import Button from '../../_FIXED/Button/Button';
 import List from '../../_FIXED/List/List';
 import Divider from '../../_FIXED/Divider/Divider';
@@ -18,7 +18,7 @@ import ToggleButtonGroup from '../../_FIXED/ToggleButtonGroup/ToggleButtonGroup'
 
 export default {
     title: 'Surfaces/AppBarDrawer',
-    component: AppBarOld,
+    component: AppBar,
     decorators: [
         (Story) => (
             <div
@@ -81,10 +81,10 @@ const list = () => (
 );
 
 export const Default = (props) => {
-    return <AppBarOld {...props} />;
+    return <AppBar {...props} />;
 };
 
-export const OpenDirection = () => {
+export const Direction = () => {
     const [anchor, setAnchor] = useState('left');
     const data = [
         { value: 'left', component: 'LEFT' },
@@ -95,10 +95,10 @@ export const OpenDirection = () => {
 
     return (
         <Stack spacing={3}>
-            <AppBarOld
+            <AppBar
                 {...(anchor && {
                     menu: anchor ? true : undefined,
-                    drawerProps: { openDirection: anchor },
+                    drawerProps: { direction: anchor },
                 })}
                 position="fixed"
                 title={`${anchor} direction`}
@@ -107,7 +107,7 @@ export const OpenDirection = () => {
                 }
             >
                 {list()}
-            </AppBarOld>
+            </AppBar>
         </Stack>
     );
 };
@@ -123,10 +123,10 @@ export const Variant = () => {
 
     return (
         <Stack spacing={3}>
-            <AppBarOld
+            <AppBar
                 {...(variant && {
                     menu: variant ? true : undefined,
-                    drawerProps: { openDirection: 'left', variant },
+                    drawerProps: { direction: 'left', variant },
                 })}
                 position="fixed"
                 title={`${variant} direction`}
@@ -135,7 +135,7 @@ export const Variant = () => {
                 }
             >
                 {list()}
-            </AppBarOld>
+            </AppBar>
         </Stack>
     );
 };

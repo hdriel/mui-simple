@@ -8,7 +8,7 @@ import {
     Fingerprint as FingerprintIcon,
 } from '@mui/icons-material';
 
-import AppBarOld from '../AppBar.old';
+import AppBar from '../AppBar';
 import Button from '../../_FIXED/Button/Button';
 import Avatar from '../../_FIXED/Avatar/Avatar';
 import Typography from '../../_FIXED/Typography/Typography';
@@ -18,7 +18,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 export default {
     title: 'Surfaces/AppBar',
-    component: AppBarOld,
+    component: AppBar,
     decorators: [
         (Story) => (
             <div
@@ -36,7 +36,7 @@ export default {
 };
 
 export const Default = (props) => {
-    return <AppBarOld {...props} />;
+    return <AppBar {...props} />;
 };
 
 export const MenuToolbar = () => {
@@ -47,9 +47,9 @@ export const MenuToolbar = () => {
 
     return (
         <Stack spacing={3}>
-            <AppBarOld position="static" menu={menu} />
-            <AppBarOld position="static" menu />
-            <AppBarOld position="static" />
+            <AppBar position="static" menu={menu} />
+            <AppBar position="static" menu />
+            <AppBar position="static" />
         </Stack>
     );
 };
@@ -57,8 +57,8 @@ export const MenuToolbar = () => {
 export const Title = () => {
     return (
         <Stack spacing={3}>
-            <AppBarOld position="static" title="My Mui Component" />
-            <AppBarOld
+            <AppBar position="static" title="My Mui Component" />
+            <AppBar
                 position="static"
                 menu
                 title={
@@ -68,7 +68,7 @@ export const Title = () => {
                     </>
                 }
             />
-            <AppBarOld position="static" />
+            <AppBar position="static" />
         </Stack>
     );
 };
@@ -76,7 +76,7 @@ export const Title = () => {
 export const Dense = () => {
     return (
         <Stack spacing={3}>
-            <AppBarOld
+            <AppBar
                 position="static"
                 menu
                 dense
@@ -87,7 +87,7 @@ export const Dense = () => {
                     </>
                 }
             />
-            <AppBarOld
+            <AppBar
                 position="static"
                 menu
                 title={
@@ -97,7 +97,7 @@ export const Dense = () => {
                     </>
                 }
             />
-            <AppBarOld
+            <AppBar
                 position="static"
                 menu
                 disablePadding
@@ -108,7 +108,7 @@ export const Dense = () => {
                     </>
                 }
             />
-            <AppBarOld
+            <AppBar
                 position="static"
                 menu
                 dense
@@ -127,7 +127,7 @@ export const Dense = () => {
 export const Actions = () => {
     return (
         <Stack spacing={3}>
-            <AppBarOld
+            <AppBar
                 position="static"
                 menu
                 title={
@@ -146,7 +146,7 @@ export const Actions = () => {
                     <Button color="inherit">Login</Button>,
                 ]}
             />
-            <AppBarOld
+            <AppBar
                 position="static"
                 menu
                 actions={[
@@ -160,7 +160,7 @@ export const Actions = () => {
                 ]}
             />
 
-            <AppBarOld
+            <AppBar
                 position="static"
                 actions={[
                     <Button>Label only</Button>,
@@ -198,7 +198,7 @@ export const ActionMenu = () => {
     ];
 
     return (
-        <AppBarOld
+        <AppBar
             menu
             title="Hello World"
             actions={
@@ -214,11 +214,11 @@ export const ThemedAndColored = () => {
     return (
         <Stack spacing={3}>
             <ThemeProvider theme={createTheme({ palette: { mode: 'light' } })}>
-                <AppBarOld position="static" menu title="light primary" color="primary" />
+                <AppBar position="static" menu title="light primary" color="primary" />
             </ThemeProvider>
             <ThemeProvider theme={createTheme({ palette: { mode: 'dark' } })}>
-                <AppBarOld position="static" menu title="dark primary" color="primary" />
-                <AppBarOld
+                <AppBar position="static" menu title="dark primary" color="primary" />
+                <AppBar
                     position="static"
                     menu
                     title="dark primary with enableColorOnDark"
@@ -226,9 +226,9 @@ export const ThemedAndColored = () => {
                     enableColorOnDark
                 />
             </ThemeProvider>
-            <AppBarOld position="static" menu title="#86950d" color={'#86950d'} />
-            <AppBarOld position="static" menu title="default" />
-            <AppBarOld position="static" />
+            <AppBar position="static" menu title="#86950d" color={'#86950d'} />
+            <AppBar position="static" menu title="default" />
+            <AppBar position="static" />
         </Stack>
     );
 };
@@ -242,7 +242,7 @@ export const Scroller = () => {
     return (
         scrollElement && (
             <>
-                <AppBarOld title="Elevation Scroll" elevationScroll scrollElement={scrollElement} scrollToTop />
+                <AppBar title="Elevation Scroll" elevationScroll scrollElement={scrollElement} scrollToTop />
                 <Container>
                     <Box sx={{ my: 2 }}>
                         {[...new Array(30)]
@@ -269,7 +269,7 @@ export const ElevationScroll = () => {
     return (
         scrollElement && (
             <>
-                <AppBarOld title="Elevation Scroll" elevationScroll scrollElement={scrollElement} />
+                <AppBar title="Elevation Scroll" elevationScroll scrollElement={scrollElement} />
                 <Container>
                     <Box sx={{ my: 2 }}>
                         {[...new Array(30)]
@@ -296,7 +296,7 @@ export const HideOnScroll = () => {
     return (
         scrollElement && (
             <>
-                <AppBarOld title="hide On Scroll" hideOnScroll scrollElement={scrollElement} />
+                <AppBar title="hide On Scroll" hideOnScroll scrollElement={scrollElement} />
                 <Container>
                     <Box sx={{ my: 2 }}>
                         {[...new Array(30)]
@@ -323,7 +323,7 @@ export const BottomAppBar = () => {
     return (
         scrollElement && (
             <>
-                <AppBarOld
+                <AppBar
                     position="fixed-bottom"
                     title="Bottom App Bar"
                     elevationScroll
