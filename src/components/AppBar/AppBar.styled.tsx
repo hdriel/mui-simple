@@ -31,6 +31,8 @@ export const TitleWrapper = styled(MuiBox)<BoxProps>`
     gap: 1em;
 `;
 
-export const Toolbar = MuiToolbar;
+export const Toolbar = styled(MuiToolbar)`
+    padding: 0 0.5em;
+`;
 
 export const Box = MuiBox;
