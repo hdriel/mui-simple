@@ -55,6 +55,7 @@ const Drawer: React.FC<DrawerProps> = ({
                     ...PaperProps?.sx,
                     ...(bgColor && { backgroundColor: bgColor }),
                     backgroundImage: 'unset',
+                    overflowX: 'hidden',
                     transition: theme.transitions.create('width', {
                         easing: theme.transitions.easing.sharp,
                         duration: theme.transitions.duration.enteringScreen,
