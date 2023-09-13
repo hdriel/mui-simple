@@ -46,15 +46,19 @@ const Drawer: React.FC<DrawerProps> = ({
             onClose={toggleDrawer?.(false)}
             ModalProps={{ keepMounted }}
             isMiniPersistent={isMiniPersistent}
-            drawerWidth={width}
             bgColor={bgColor}
             hideBackdrop={!backdrop}
             PaperProps={{
                 ...PaperProps,
                 sx: {
+                    width,
                     ...PaperProps?.sx,
                     ...(bgColor && { backgroundColor: bgColor }),
                     backgroundImage: 'unset',
+                    transition: theme.transitions.create('width', {
+                        easing: theme.transitions.easing.sharp,
+                        duration: theme.transitions.duration.enteringScreen,
+                    }),
                 },
             }}
             {...props}

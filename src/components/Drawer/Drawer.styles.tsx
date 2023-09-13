@@ -18,9 +18,8 @@ interface DrawerStylesProps {
 }
 
 export function drawerStyles(props: PropsWithChildren<DrawerStylesProps>): SxProps {
-    const { theme, drawerWidth = 240, bgColor } = props;
+    const { theme, bgColor } = props;
     return {
-        width: drawerWidth,
         flexShrink: 0,
         whiteSpace: 'nowrap',
         boxSizing: 'border-box',
@@ -30,15 +29,5 @@ export function drawerStyles(props: PropsWithChildren<DrawerStylesProps>): SxPro
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),
-        // ...(isMiniPersistent &&
-        //     open && {
-        //         ...openedMixin(theme, drawerWidth),
-        //         '& .MuiDrawer-paper': openedMixin(theme),
-        //     }),
-        // ...(isMiniPersistent &&
-        //     !open && {
-        //         ...closedMixin(theme),
-        //         '& .MuiDrawer-paper': closedMixin(theme),
-        //     }),
     };
 }
