@@ -11,7 +11,7 @@ import type { DrawerProps } from '../decs';
 const Drawer: React.FC<DrawerProps> = ({
     backdrop,
     bgColor,
-    drawerWidth,
+    width,
     keepMounted,
     onClose,
     open,
@@ -46,7 +46,7 @@ const Drawer: React.FC<DrawerProps> = ({
             onClose={toggleDrawer?.(false)}
             ModalProps={{ keepMounted }}
             isMiniPersistent={isMiniPersistent}
-            drawerWidth={drawerWidth}
+            drawerWidth={width}
             bgColor={bgColor}
             hideBackdrop={!backdrop}
             PaperProps={{
@@ -72,7 +72,7 @@ const Drawer: React.FC<DrawerProps> = ({
             )}
 
             <ContentWrapper
-                drawerWidth={drawerWidth}
+                drawerWidth={width}
                 anchor={direction}
                 onClick={toggleDrawer?.(false)}
                 onKeyDown={toggleDrawer?.(false)}
