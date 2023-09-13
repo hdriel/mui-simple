@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react';
-import type { AppBarProps, BoxProps } from '@mui/material';
+import type { AppBarProps } from '@mui/material';
 import { AppBar as MuiAppBar, Toolbar as MuiToolbar, Box as MuiBox } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -23,13 +23,6 @@ export const AppBar = styled(MuiAppBar, {
         background-color: ${(props) => props.customColor};
     }
 ` as ComponentType<AppBarStyledPropsType>;
-
-export const TitleWrapper = styled(MuiBox)<BoxProps>`
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    gap: 1em;
-`;
 
 export const Toolbar = styled(MuiToolbar)`
     padding: 0 0.5em;

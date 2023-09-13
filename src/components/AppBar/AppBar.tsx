@@ -4,12 +4,12 @@ import { AppBar as MuiAppBar, Toolbar } from './AppBar.styled';
 import OnScrollEventWrapper from './OnScrollEventWrapper';
 import { useCustomColor } from '../../utils/helpers';
 
-type Position = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
+type Position = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative' | 'fixed-bottom';
 
 interface AppBarProps {
     menu?: ReactNode | boolean;
     title?: string | ReactNode;
-    position?: Position | 'fixed-bottom';
+    position?: Position;
     color?: string;
     enableColorOnDark?: boolean;
     toolbarId?: string;
@@ -81,27 +81,6 @@ export default function AppBar(props: PropsWithChildren<AppBarProps>): ReactElem
         </>
     );
 }
-// @todo: consider to all logo field and position like start / center
-// @todo: what about responsive way ?
-
-//	AppBar.propTypes = {
-//    menu: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
-//    title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-//    position: PropTypes.oneOf(['fixed', 'fixed-bottom', 'sticky', 'static']),
-//    color: PropTypes.string,
-//    enableColorOnDark: PropTypes.bool,
-//    toolbarId: PropTypes.string,
-//    scrollElement: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-//    elevationScroll: PropTypes.bool,
-//    hideOnScroll: PropTypes.bool,
-//    dense: PropTypes.bool,
-//    disablePadding: PropTypes.bool,
-//    elevation: PropTypes.oneOf(Array.from({ length: 25 }, (_, i) => i)), // 0-24
-//    scrollToTop: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
-//    scrollToTopProps: PropTypes.object,
-//    actions: PropTypes.node,
-//    drawerProps: PropTypes.object,
-//	};
 
 AppBar.defaultProps = {
     drawerWidth: 0,
