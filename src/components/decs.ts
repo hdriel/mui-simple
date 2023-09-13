@@ -131,7 +131,7 @@ export interface CircularProgressProps {
 export interface DrawerProps {
     backdrop?: boolean;
     bgColor?: string;
-    drawerWidth?: number | string;
+    width?: number | string;
     keepMounted?: boolean;
     onClose?: () => void;
     open?: boolean;

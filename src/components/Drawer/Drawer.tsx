@@ -89,7 +89,7 @@ const Drawer: React.FC<DrawerProps> = ({
 
 Drawer.defaultProps = {
     bgColor: undefined,
-    drawerWidth: 240,
+    width: 240,
     keepMounted: undefined,
     onClose: undefined,
     open: undefined,
