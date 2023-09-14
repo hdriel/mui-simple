@@ -22,6 +22,8 @@ const Card: React.FC<CardProps> = (props): React.ReactElement => {
         children,
         contentPadding,
         flexDirection,
+        justifyContent,
+        contentStyle,
         height,
         image,
         maxHeight,
@@ -52,7 +54,17 @@ const Card: React.FC<CardProps> = (props): React.ReactElement => {
     return (
         <MuiCard {...rest} sx={{ maxWidth, minWidth, width, maxHeight, height, minHeight, ...rest.sx }}>
             {!isMediaOnTop && title ? <CardHeader avatar={avatar} title={title} subheader={subtitle} /> : undefined}
-            <Box sx={{ ...(flexDirection && { flexDirection, display: 'flex', alignItems: 'center' }) }}>
+            <Box
+                sx={{
+                    ...(flexDirection && {
+                        flexDirection,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent,
+                        ...contentStyle,
+                    }),
+                }}
+            >
                 {image
                     ? CardMediaCmp || (
                           <CardMedia

@@ -178,6 +178,7 @@ export interface CardProps {
     actions?: ReactNode | string | ButtonProps | Array<ReactNode | ButtonProps | string>;
     avatar?: ReactNode;
     contentPadding?: number | string;
+    contentStyle?: SxProps;
     flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
     image?:
         | string
@@ -191,6 +192,7 @@ export interface CardProps {
               [key: string]: any;
           };
     height?: number | string;
+    justifyContent?: string;
     maxHeight?: number | string;
     maxWidth?: number | string;
     mediaOnTop?: boolean;

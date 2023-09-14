@@ -70,19 +70,29 @@ export const ExternalComponents: Story = {
     },
 };
 
-export const Colors: Story = {
-    args: {
+export const _Colors = () => {
+    const args = {
         options,
         label: 'colors',
         value: options[0],
         colorActive: '#D001D0',
         colorLabel: 'secondary',
         colorText: 'warning.dark',
-    },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputSelect {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    };
+    const [value, setValue] = useState(args.value);
+    return (
+        <Stack spacing={2}>
+            {['filled', 'standard', 'outlined'].map((variant) => (
+                <InputSelect
+                    {...args}
+                    key={variant}
+                    variant={variant}
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                />
+            ))}{' '}
+        </Stack>
+    );
 };
 
 export const HelperText: Story = {
