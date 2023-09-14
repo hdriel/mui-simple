@@ -47,20 +47,23 @@ const Card: React.FC<CardProps> = (props): React.ReactElement => {
 
     const imageSrc = typeof image === 'object' ? image.src : image;
     const imageProps = typeof image === 'object' ? image : {};
+    const CardMediaCmp = isValidElement(image) ? image : undefined;
 
     return (
         <MuiCard {...rest} sx={{ maxWidth, minWidth, width, maxHeight, height, minHeight, ...rest.sx }}>
             {!isMediaOnTop && title ? <CardHeader avatar={avatar} title={title} subheader={subtitle} /> : undefined}
             <Box sx={{ ...(flexDirection && { flexDirection, display: 'flex', alignItems: 'center' }) }}>
-                {image ? (
-                    <CardMedia
-                        component="img"
-                        image={imageSrc}
-                        alt={imageProps?.title ?? 'card image media'}
-                        sx={{ width: imageProps?.width, objectFit: imageProps?.stretch ?? 'cover' }}
-                        {...imageProps}
-                    />
-                ) : undefined}
+                {image
+                    ? CardMediaCmp || (
+                          <CardMedia
+                              component="img"
+                              image={imageSrc}
+                              alt={imageProps?.title ?? 'card image media'}
+                              sx={{ width: imageProps?.width, objectFit: imageProps?.stretch ?? 'cover' }}
+                              {...imageProps}
+                          />
+                      )
+                    : undefined}
 
                 <Box>
                     {isMediaOnTop && title ? (
