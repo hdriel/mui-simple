@@ -60,6 +60,7 @@ const Card: React.FC<CardProps> = (props): React.ReactElement => {
                         flexDirection,
                         display: 'flex',
                         alignItems: 'center',
+                        height: '100%',
                         justifyContent,
                         ...contentStyle,
                     }),
