@@ -7,7 +7,7 @@ import type { SnackbarProps } from '../../decs';
 
 const transitionStyle = { width: '100%' };
 
-const Snackbar: React.FC<PropsWithChildren<SnackbarProps>> = ({
+const Snackbar: React.FC<SnackbarProps> = ({
     actions,
     animation,
     animationDuration,

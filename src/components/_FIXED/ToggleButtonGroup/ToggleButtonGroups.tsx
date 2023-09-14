@@ -1,10 +1,9 @@
 import React from 'react';
-import type { PropsWithChildren } from 'react';
 import { Divider, ToggleButtonGroups as MuiToggleButtonGroups } from './ToggleButtonGroup.styled';
 import ToggleButtonGroup from './ToggleButtonGroup';
 import type { ToggleButtonGroupsProps } from '../../decs';
 
-const ToggleButtonGroups: React.FC<PropsWithChildren<ToggleButtonGroupsProps>> = ({
+const ToggleButtonGroups: React.FC<ToggleButtonGroupsProps> = ({
     fullWidth,
     disableRipple,
     justifyContent,

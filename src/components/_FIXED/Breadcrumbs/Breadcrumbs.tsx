@@ -1,5 +1,5 @@
 import React from 'react';
-import type { PropsWithChildren, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { Breadcrumbs as MuiBreadcrumbs } from './Breadcrumbs.styled';
 import Link from '../Link/Link';
 import Chip from '../Chip/Chip';
@@ -10,7 +10,7 @@ import type { BreadcrumbsProps } from '../../decs';
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const EMPTY_CB = (): void => {};
 
-const Breadcrumbs: React.FC<PropsWithChildren<BreadcrumbsProps>> = (props): ReactElement => {
+const Breadcrumbs: React.FC<BreadcrumbsProps> = (props): ReactElement => {
     const { maxItems, size, separator: _separator, color, links, chips, children, ...rest } = props;
     const separator = typeof _separator === 'string' ? <SVGIcon>{_separator}</SVGIcon> : _separator;
 

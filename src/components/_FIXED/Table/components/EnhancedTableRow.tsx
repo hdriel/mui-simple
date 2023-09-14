@@ -1,11 +1,10 @@
 import React from 'react';
-import type { PropsWithChildren } from 'react';
 
 import { TableCell, TableRow, Checkbox } from '../Table.styled';
 import { getRowContent } from '../Table.utils';
 import type { EnhancedTableRowProps } from '../Table.desc';
 
-const EnhancedTableRow: React.FC<PropsWithChildren<EnhancedTableRowProps>> = ({
+const EnhancedTableRow: React.FC<EnhancedTableRowProps> = ({
     columns,
     handleClick,
     index,

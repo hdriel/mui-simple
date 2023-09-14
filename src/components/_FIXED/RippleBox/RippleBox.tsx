@@ -1,12 +1,11 @@
 import React, { useRef } from 'react';
-import type { PropsWithChildren } from 'react';
 import { ButtonBase } from '@mui/material';
 import { Wrapper } from './RippleBox.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import type { RippleBoxProps } from '../../decs';
 const { TouchRipple } = ButtonBase;
 
-const RippleBox: React.FC<PropsWithChildren<RippleBoxProps>> = ({ color, children }): React.ReactElement => {
+const RippleBox: React.FC<RippleBoxProps> = ({ color, children }): React.ReactElement => {
     const [customColor, muiColor] = useCustomColor(color ?? 'primary');
 
     const rippleRef = useRef(null);

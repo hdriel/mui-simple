@@ -1,12 +1,12 @@
 import React from 'react';
-import type { ReactElement, PropsWithChildren } from 'react';
+import type { ReactElement } from 'react';
 import Button from './Button';
 import { ButtonGroup as MuiButtonGroup } from './Button.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import type { ButtonGroupProps } from '../../decs';
 import { isFragment } from 'react-is';
 
-const ButtonGroup: React.FC<PropsWithChildren<ButtonGroupProps>> = (props): ReactElement => {
+const ButtonGroup: React.FC<ButtonGroupProps> = (props): ReactElement => {
     const { children, color, disableElevation, ...rest } = props;
     const [customColor, muiColor] = useCustomColor(color);
 

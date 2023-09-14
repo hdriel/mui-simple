@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo } from 'react';
-import type { PropsWithChildren } from 'react';
 import { Border, Typography as MuiTypography } from './Typography.styled';
 import Tooltip from '../Tooltip/Tooltip';
 import { useEllipsisActive } from '../../../hooks/useEllipsisActive';
@@ -51,7 +50,7 @@ function useTooltipMessage({ children, tooltip, showTooltipOnEllipsis, isEllipsi
 }
 
 // todo: add commend to autodocs
-const Typography: React.FC<PropsWithChildren<TypographyProps>> = ({
+const Typography: React.FC<TypographyProps> = ({
     alignCenter,
     alignJustify,
     alignLeft,

@@ -1,10 +1,10 @@
 import React from 'react';
-import type { ReactElement, PropsWithChildren } from 'react';
+import type { ReactElement } from 'react';
 import { Badge as MuiBadge } from './Badge.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import type { BadgeProps } from '../../decs';
 
-const Badge: React.FC<PropsWithChildren<BadgeProps>> = (props): ReactElement => {
+const Badge: React.FC<BadgeProps> = (props): ReactElement => {
     const { variant, color, content, hide, showZero, max, overlap, vertical, horizontal, ...rest } = props;
 
     const [customColor, muiColor] = useCustomColor(color);

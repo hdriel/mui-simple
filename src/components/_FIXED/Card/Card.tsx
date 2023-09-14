@@ -1,5 +1,4 @@
 import React, { cloneElement, isValidElement, Children } from 'react';
-import type { PropsWithChildren } from 'react';
 import { MoreVert as MoreVertIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 import {
     Card as MuiCard,
@@ -16,7 +15,7 @@ import Menu from '../Menu/Menu';
 import { useCardExpandedContent } from './Card.hooks';
 import type { CardProps } from '../../decs';
 
-const Card: React.FC<PropsWithChildren<CardProps>> = (props): React.ReactElement => {
+const Card: React.FC<CardProps> = (props): React.ReactElement => {
     const {
         actions,
         avatar,

@@ -1,5 +1,4 @@
 import React, { isValidElement } from 'react';
-import type { PropsWithChildren } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from '@mui/material/styles';
 
@@ -10,7 +9,7 @@ import TabPanel from './TabPanel';
 import { useCustomColor } from '../../../utils/helpers';
 import type { TabsProps } from '../../decs';
 
-const Tabs: React.FC<PropsWithChildren<TabsProps>> = ({
+const Tabs: React.FC<TabsProps> = ({
     centered,
     fillActiveTab,
     color,
