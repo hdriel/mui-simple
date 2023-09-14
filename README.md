@@ -61,8 +61,14 @@ module.exports = {
 
             return webpackConfig;
         },
-        alias: {
-            react: path.resolve(__dirname, 'node_modules/react'),
+        alias: {            
+            'react': path.resolve(__dirname, '..', 'node_modules/react'),
+            'react-dom': path.resolve(__dirname, '..', 'node_modules/react-dom'),
+            '@babel': path.resolve(__dirname, '..', 'node_modules/@babel'),
+            '@mui/material': path.resolve(__dirname, '..', 'node_modules/@mui/material'),
+            '@mui/icons-material': path.resolve(__dirname, '..', 'node_modules/@mui/icons-material'),
+            'react-beautiful-dnd': path.resolve(__dirname, '..', 'node_modules/react-beautiful-dnd'),
+            'react-draggable': path.resolve(__dirname, '..', 'node_modules/react-draggable'),
         },
     },
 };
@@ -89,7 +95,13 @@ module.exports = {
     resolve: {
         extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
         alias: {
-            react: path.resolve(__dirname, '..', 'node_modules/react'),
+            'react': path.resolve(__dirname, '..', 'node_modules/react'),
+            'react-dom': path.resolve(__dirname, '..', 'node_modules/react-dom'),
+            '@babel': path.resolve(__dirname, '..', 'node_modules/@babel'),
+            '@mui/material': path.resolve(__dirname, '..', 'node_modules/@mui/material'),
+            '@mui/icons-material': path.resolve(__dirname, '..', 'node_modules/@mui/icons-material'),
+            'react-beautiful-dnd': path.resolve(__dirname, '..', 'node_modules/react-beautiful-dnd'),
+            'react-draggable': path.resolve(__dirname, '..', 'node_modules/react-draggable'),
         },
     },
 };
