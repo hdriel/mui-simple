@@ -107,7 +107,13 @@ const Button: React.ForwardRefExoticComponent<React.PropsWithoutRef<any> & React
             </Tooltip>
         );
 
-        return useReactRouterDomLink && link ? <Link to={link}>{cmp}</Link> : cmp;
+        return useReactRouterDomLink && link ? (
+            <Link to={link} style={{ textDecoration: 'none', ...(fullWidth && { width: '100%' }) }}>
+                {cmp}
+            </Link>
+        ) : (
+            cmp
+        );
     });
 
 Button.defaultProps = {

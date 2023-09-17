@@ -66,7 +66,7 @@ const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
     );
 
     return useReactRouterDomLink && item.link ? (
-        <Link to={item.link} style={{ textDecoration: 'none' }}>
+        <Link to={item.link} style={{ textDecoration: 'none', width: '100%' }}>
             {cmp}
         </Link>
     ) : (

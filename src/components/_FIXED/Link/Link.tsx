@@ -32,7 +32,13 @@ const Link: React.FC<LinkProps> = ({
         </MuiLink>
     );
 
-    return useReactRouterDomLink ? <ReactLink to={url}>{cmp}</ReactLink> : cmp;
+    return useReactRouterDomLink ? (
+        <ReactLink to={url} style={{ textDecoration: 'none' }}>
+            {cmp}
+        </ReactLink>
+    ) : (
+        cmp
+    );
 };
 
 Link.defaultProps = {
