@@ -37,7 +37,13 @@ const Fab: React.FC<FabProps> = (props): React.ReactElement => {
         </MuiFab>
     );
 
-    return useReactRouterDomLink && link ? <Link to={link} component={cmp} style={{ textDecoration: 'none' }} /> : cmp;
+    return useReactRouterDomLink && link ? (
+        <Link to={link} style={{ textDecoration: 'none' }}>
+            {cmp}
+        </Link>
+    ) : (
+        cmp
+    );
 };
 
 Fab.defaultProps = {

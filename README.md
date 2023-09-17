@@ -64,6 +64,7 @@ module.exports = {
         alias: {            
             'react': path.resolve(__dirname, '..', 'node_modules/react'),
             'react-dom': path.resolve(__dirname, '..', 'node_modules/react-dom'),
+            'react-router-dom': path.resolve(__dirname, '..', 'node_modules/react-router-dom'),
             '@babel': path.resolve(__dirname, '..', 'node_modules/@babel'),
             '@mui/material': path.resolve(__dirname, '..', 'node_modules/@mui/material'),
             '@mui/icons-material': path.resolve(__dirname, '..', 'node_modules/@mui/icons-material'),
@@ -97,6 +98,7 @@ module.exports = {
         alias: {
             'react': path.resolve(__dirname, '..', 'node_modules/react'),
             'react-dom': path.resolve(__dirname, '..', 'node_modules/react-dom'),
+            'react-router-dom': path.resolve(__dirname, '..', 'node_modules/react-router-dom'),
             '@babel': path.resolve(__dirname, '..', 'node_modules/@babel'),
             '@mui/material': path.resolve(__dirname, '..', 'node_modules/@mui/material'),
             '@mui/icons-material': path.resolve(__dirname, '..', 'node_modules/@mui/icons-material'),
