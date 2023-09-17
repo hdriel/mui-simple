@@ -82,6 +82,7 @@ export interface ButtonProps {
     tooltipProps?: TooltipProps;
     uppercase?: boolean;
     variant?: 'contained' | 'outlined' | 'text';
+    useReactRouterDomLink?: boolean;
     [key: string]: any;
 }
 
@@ -478,6 +479,7 @@ export interface FabProps {
     link?: string;
     size?: 'small' | 'medium' | 'large';
     variant?: 'extended' | 'circular';
+    useReactRouterDomLink?: boolean;
     [key: string]: any;
 }
 
@@ -500,6 +502,7 @@ export interface LinkProps {
     size?: string | number;
     underline?: 'always' | 'hover' | 'none';
     url?: string;
+    useReactRouterDomLink?: boolean;
     [key: string]: any;
 }
 
@@ -555,6 +558,7 @@ export interface ListProps {
     title?: string;
     useDraggableContext?: true;
     useTransition?: boolean;
+    useReactRouterDomLink?: boolean;
     width?: string | number;
     [key: string]: any;
 }

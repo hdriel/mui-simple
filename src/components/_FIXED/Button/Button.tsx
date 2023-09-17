@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import type { Ref, ReactElement, PropsWithChildren } from 'react';
+import { Link } from 'react-router-dom';
 
 import { CircularProgress } from '../Progress';
 import { Button as MuiButton, IconButton as MuiIconButton } from './Button.styled';
@@ -35,6 +36,7 @@ const Button: React.ForwardRefExoticComponent<React.PropsWithoutRef<any> & React
             sx,
             tooltipProps,
             uppercase,
+            useReactRouterDomLink,
             variant,
             ...rest
         } = props;
@@ -54,12 +56,12 @@ const Button: React.ForwardRefExoticComponent<React.PropsWithoutRef<any> & React
             onRightClick?.(event);
         };
 
-        return isIconButton ? (
+        const cmp = isIconButton ? (
             <Tooltip {...tooltipProps}>
                 <MuiIconButton
                     color={muiColor as any}
                     disableRipple={disabled ? true : disableRipple}
-                    href={link}
+                    href={useReactRouterDomLink ? undefined : link}
                     onClick={disabled ? undefined : onClick}
                     onContextMenu={disabled ? undefined : onRightClick ? onRightClickHandler : props.onContextMenu}
                     ref={ref}
@@ -85,7 +87,7 @@ const Button: React.ForwardRefExoticComponent<React.PropsWithoutRef<any> & React
                     disableRipple={isLoading || disableRipple}
                     endIcon={endIconCmp}
                     fullWidth={fullWidth}
-                    href={link}
+                    href={useReactRouterDomLink ? undefined : link}
                     onClick={isLoading ? undefined : onClick}
                     onContextMenu={isLoading ? undefined : onRightClick ? onRightClickHandler : props.onContextMenu}
                     ref={ref}
@@ -104,6 +106,8 @@ const Button: React.ForwardRefExoticComponent<React.PropsWithoutRef<any> & React
                 </MuiButton>
             </Tooltip>
         );
+
+        return useReactRouterDomLink && link ? <Link to={link} component={cmp} /> : cmp;
     });
 
 Button.defaultProps = {
@@ -126,6 +130,7 @@ Button.defaultProps = {
     startIcon: undefined,
     tooltipProps: undefined,
     uppercase: true,
+    useReactRouterDomLink: undefined,
     variant: undefined, // stay it undefined for supporting ButtonGroup component variant
 };
 

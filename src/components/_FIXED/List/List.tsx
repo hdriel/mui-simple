@@ -31,6 +31,7 @@ const List: React.FC<ListProps> = ({
     title,
     useDraggableContext,
     useTransition,
+    useReactRouterDomLink,
     width,
     ...props
 }): React.ReactElement => {
@@ -94,6 +95,7 @@ const List: React.FC<ListProps> = ({
                         isOpen={isOpen}
                         flexDirectionItems={flexDirectionItems}
                         draggable={dragAndDropItems}
+                        useReactRouterDomLink={useReactRouterDomLink}
                     >
                         {useTransition ? (
                             <Collapse
@@ -176,6 +178,7 @@ List.defaultProps = {
     title: undefined,
     useDraggableContext: true,
     useTransition: true,
+    useReactRouterDomLink: undefined,
     width: undefined,
 };
 

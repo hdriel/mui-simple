@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ExpandLess as ExpandLessIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 
 import {
@@ -22,6 +23,7 @@ interface ListItemWrapperProps {
     alignItems: 'flex-start';
     flexDirection: 'row' | 'column';
     draggable: boolean;
+    useReactRouterDomLink: boolean;
 }
 const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
     item,
@@ -32,6 +34,7 @@ const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
     flexDirection,
     draggable,
     children,
+    useReactRouterDomLink,
     ...props
 }) => {
     if (!item) return children;
@@ -42,11 +45,11 @@ const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
         item.align !== 'flex-start' &&
         (item.link ?? item.onClick ?? item.selected ?? item.items?.length ?? item.buttonItem ?? buttonItems);
 
-    return itemButton ? (
+    const cmp = itemButton ? (
         <ListItemButton
             key={key}
-            component={item.link ? 'a' : undefined}
-            href={item.link}
+            component={!useReactRouterDomLink && item.link ? 'a' : undefined}
+            href={!useReactRouterDomLink ? item.link : undefined}
             onClick={item.items?.length ? onClickHandler : item.onClick}
             selected={item.selected}
             padding={item.padding}
@@ -60,6 +63,12 @@ const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
         <ListItemBox key={key} flexDirection={flexDirection} draggable={draggable}>
             {children}
         </ListItemBox>
+    );
+
+    return useReactRouterDomLink && item.link ? (
+        <Link to={item.link} component={cmp} style={{ textDecoration: 'none' }} />
+    ) : (
+        cmp
     );
 };
 
@@ -77,6 +86,7 @@ interface ListItemCmpProps {
     insetItems: boolean;
     enableSubtitle: boolean;
     isOpen: boolean;
+    useReactRouterDomLink: boolean;
     draggable: boolean;
 }
 
@@ -95,6 +105,7 @@ const ListItem: React.FC<ListItemCmpProps> = ({
     isControl,
     isOpen,
     itemProps,
+    useReactRouterDomLink,
     onClick,
     ...props
 }) => {
@@ -114,6 +125,7 @@ const ListItem: React.FC<ListItemCmpProps> = ({
                 index={index}
                 item={itemProps}
                 onClick={onClick}
+                useReactRouterDomLink={useReactRouterDomLink}
             >
                 {itemProps.startIcon &&
                     (isControl && alignControl === 'start' ? (

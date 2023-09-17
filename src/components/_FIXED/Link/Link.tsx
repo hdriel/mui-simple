@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as ReactLink } from 'react-router-dom';
 import { Link as MuiLink } from './Link.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import type { LinkProps } from '../../decs';
@@ -10,15 +11,16 @@ const Link: React.FC<LinkProps> = ({
     size,
     label,
     icon: _icon,
+    useReactRouterDomLink,
     children,
     ...props
 }): React.ReactElement => {
     const [customColor, muiColor] = useCustomColor(color);
     const icon = typeof _icon === 'string' ? <SVGIcon>{_icon}</SVGIcon> : _icon;
 
-    return (
+    const cmp = (
         <MuiLink
-            href={url}
+            href={useReactRouterDomLink ? undefined : url}
             color={muiColor as any}
             customColor={muiColor ? undefined : customColor}
             size={size}
@@ -29,6 +31,8 @@ const Link: React.FC<LinkProps> = ({
             {children}
         </MuiLink>
     );
+
+    return useReactRouterDomLink ? <ReactLink to={url} component={cmp} /> : cmp;
 };
 
 Link.defaultProps = {
@@ -38,6 +42,7 @@ Link.defaultProps = {
     color: undefined,
     underline: undefined,
     size: undefined,
+    useReactRouterDomLink: undefined,
 };
 
 export type { LinkProps } from '../../decs';

@@ -1,19 +1,31 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Fab as MuiFab } from './FloatingActionButton.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 import type { FabProps } from '../../decs';
 
 const Fab: React.FC<FabProps> = (props): React.ReactElement => {
-    const { children, color, disabled, disableRipple, icon: _icon, link, size, variant, ...rest } = props;
+    const {
+        children,
+        color,
+        disabled,
+        disableRipple,
+        icon: _icon,
+        link,
+        size,
+        variant,
+        useReactRouterDomLink,
+        ...rest
+    } = props;
     const [customColor, muiColor] = useCustomColor(color);
     const icon = typeof _icon === 'string' ? <SVGIcon>{_icon}</SVGIcon> : _icon;
 
-    return (
+    const cmp = (
         <MuiFab
             disabled={disabled}
             disableRipple={disableRipple}
-            href={link}
+            href={useReactRouterDomLink ? undefined : link}
             size={size}
             variant={variant}
             customColor={muiColor ? undefined : customColor}
@@ -24,6 +36,8 @@ const Fab: React.FC<FabProps> = (props): React.ReactElement => {
             {children}
         </MuiFab>
     );
+
+    return useReactRouterDomLink && link ? <Link to={link} component={cmp} style={{ textDecoration: 'none' }} /> : cmp;
 };
 
 Fab.defaultProps = {
@@ -34,6 +48,7 @@ Fab.defaultProps = {
     link: undefined,
     size: undefined,
     variant: undefined,
+    useReactRouterDomLink: undefined,
 };
 
 export type { FabProps } from '../../decs';
