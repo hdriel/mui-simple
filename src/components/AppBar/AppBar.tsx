@@ -77,7 +77,7 @@ export default function AppBar(props: PropsWithChildren<AppBarProps>): ReactElem
                     </Toolbar>
                 </MuiAppBar>
             </OnScrollEventWrapper>
-            {!isBottom && <Toolbar variant={dense ? 'dense' : undefined} id={toolbarId ?? 'back-to-top-anchor'} />}
+            {isBottom && <Toolbar variant={dense ? 'dense' : undefined} id={toolbarId ?? 'back-to-top-anchor'} />}
         </>
     );
 }
