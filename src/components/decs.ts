@@ -499,6 +499,9 @@ export interface LinkProps {
     color?: string;
     icon?: string | ReactNode;
     label?: string;
+    preventScrollReset?: boolean;
+    relativeUrl?: string;
+    replaceUrl?: string;
     size?: string | number;
     underline?: 'always' | 'hover' | 'none';
     url?: string;
