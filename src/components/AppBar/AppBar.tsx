@@ -26,7 +26,7 @@ interface AppBarProps {
     [key: string]: any;
 }
 
-const scrollToToolbarStyles = { padding: '0 !important', width: 0, height: 0 };
+const scrollToToolbarStyles = { position: 'absolute' };
 
 const AppBar: React.FC<AppBarProps> = (props): ReactElement => {
     const {
