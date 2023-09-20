@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ReactElement, PropsWithChildren, ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import { AppBar as MuiAppBar, Toolbar } from './AppBar.styled';
 import OnScrollEventWrapper from './OnScrollEventWrapper';
 import { useCustomColor } from '../../utils/helpers';
@@ -26,7 +26,9 @@ interface AppBarProps {
     [key: string]: any;
 }
 
-export default function AppBar(props: PropsWithChildren<AppBarProps>): ReactElement {
+const scrollToToolbarStyles = { padding: '0 !important', width: 0, height: 0 };
+
+const AppBar: React.FC<AppBarProps> = (props): ReactElement => {
     const {
         position,
         menu,
@@ -77,10 +79,16 @@ export default function AppBar(props: PropsWithChildren<AppBarProps>): ReactElem
                     </Toolbar>
                 </MuiAppBar>
             </OnScrollEventWrapper>
-            {isBottom && <Toolbar variant={dense ? 'dense' : undefined} id={toolbarId ?? 'back-to-top-anchor'} />}
+            {!isBottom && (
+                <Toolbar
+                    variant={dense ? 'dense' : undefined}
+                    id={toolbarId ?? 'back-to-top-anchor'}
+                    sx={scrollToToolbarStyles}
+                />
+            )}
         </>
     );
-}
+};
 
 AppBar.defaultProps = {
     drawerWidth: 0,
@@ -98,3 +106,5 @@ AppBar.defaultProps = {
     scrollToTop: undefined,
     scrollToTopProps: undefined,
 };
+
+export default AppBar;
