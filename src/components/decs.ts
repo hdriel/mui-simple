@@ -1,4 +1,4 @@
-import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent } from 'react';
+import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent, Ref } from 'react';
 import type { SxProps } from '@mui/material';
 import { number } from 'prop-types';
 import React, { MouseEventHandler } from 'react';
@@ -480,6 +480,7 @@ export interface FabProps {
     size?: 'small' | 'medium' | 'large';
     variant?: 'extended' | 'circular';
     useReactRouterDomLink?: boolean;
+    innerRef?: Ref<any>;
     [key: string]: any;
 }
 

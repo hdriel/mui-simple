@@ -7,6 +7,7 @@ import type { FabProps } from '../../decs';
 
 const Fab: React.FC<FabProps> = (props): React.ReactElement => {
     const {
+        innerRef,
         children,
         color,
         disabled,
@@ -23,6 +24,7 @@ const Fab: React.FC<FabProps> = (props): React.ReactElement => {
 
     const cmp = (
         <MuiFab
+            ref={innerRef}
             disabled={disabled}
             disableRipple={disableRipple}
             href={useReactRouterDomLink ? undefined : link}
@@ -47,6 +49,7 @@ const Fab: React.FC<FabProps> = (props): React.ReactElement => {
 };
 
 Fab.defaultProps = {
+    innerRef: undefined,
     color: undefined,
     disabled: undefined,
     disableRipple: undefined,
