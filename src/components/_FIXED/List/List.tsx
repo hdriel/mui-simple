@@ -68,10 +68,12 @@ const List: React.FC<ListProps> = ({
         const nestedItems = (
             <Box>
                 <List
+                    bgColor={_bgColor}
                     items={itemProps.items}
                     droppableId={itemProps.title}
                     {...itemProps.listItemsProps}
                     useDraggableContext={false}
+                    useReactRouterDomLink={useReactRouterDomLink}
                 />
                 <Divider variant="fullWidth" {...divider} component="div" />
             </Box>
@@ -124,7 +126,13 @@ const List: React.FC<ListProps> = ({
             dense={dense}
             sx={{ width, bgcolor: bgColor }}
             component={component}
-            subheader={title ? <ListSubheader component="span">{title}</ListSubheader> : undefined}
+            subheader={
+                title ? (
+                    <ListSubheader component="span" sx={{ bgcolor: bgColor }}>
+                        {title}
+                    </ListSubheader>
+                ) : undefined
+            }
             {...props}
         >
             <DraggableList
