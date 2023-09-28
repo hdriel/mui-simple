@@ -1,59 +1,34 @@
 import React from 'react';
-import type { ReactElement, ReactNode } from 'react';
+import type { ReactElement } from 'react';
 import { AppBar as MuiAppBar, Toolbar } from './AppBar.styled';
 import OnScrollEventWrapper from './OnScrollEventWrapper';
 import { useCustomColor } from '../../utils/helpers';
-
-type Position = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative' | 'fixed-bottom';
-
-interface AppBarProps {
-    menu?: ReactNode | boolean;
-    title?: string | ReactNode;
-    position?: Position;
-    color?: string;
-    enableColorOnDark?: boolean;
-    toolbarId?: string;
-    scrollElement?: ReactNode | string;
-    elevationScroll?: boolean;
-    hideOnScroll?: boolean;
-    dense?: boolean;
-    disablePadding?: boolean;
-    elevation?: number; // assuming you want the values to be numbers
-    scrollToTop?: ReactNode | boolean;
-    scrollToTopProps?: object;
-    actions?: ReactNode;
-    drawerWidth?: number;
-    [key: string]: any;
-}
+import type { AppBarProps, AppBarPosition } from '../decs';
 
 const scrollToToolbarStyles = { position: 'absolute' };
+const toolbarStyles = { padding: 0 };
 
-const AppBar: React.FC<AppBarProps> = (props): ReactElement => {
-    const {
-        position,
-        menu,
-        title,
-        color,
-        enableColorOnDark,
-        scrollElement,
-        toolbarId,
-        elevationScroll,
-        elevation,
-        hideOnScroll,
-        dense,
-        disablePadding,
-        scrollToTop,
-        scrollToTopProps,
-        actions,
-        drawerWidth,
-        children,
-        ...rest
-    } = props;
-
+const AppBar: React.FC<AppBarProps> = ({
+    bottom: isBottom,
+    color,
+    dense,
+    disablePadding,
+    drawerWidth,
+    elevation,
+    elevationScroll,
+    enableColorOnDark,
+    hideOnScroll,
+    position,
+    scrollElement,
+    scrollToTop,
+    scrollToTopProps,
+    toolbarId,
+    sx,
+    children,
+    ...props
+}): ReactElement => {
     const [customColor] = useCustomColor(color);
-
-    const isBottom = position === 'fixed-bottom';
-    const positionStyle: Position = isBottom ? 'fixed' : position;
+    const positionStyle: AppBarPosition = isBottom ? 'fixed' : position;
 
     return (
         <>
@@ -71,10 +46,15 @@ const AppBar: React.FC<AppBarProps> = (props): ReactElement => {
                     position={hideOnScroll || elevationScroll ? 'fixed' : positionStyle}
                     customColor={customColor}
                     enableColorOnDark={enableColorOnDark}
-                    sx={{ ...(isBottom && { top: 'auto', bottom: 0 }), ...rest.sx }}
-                    {...rest}
+                    sx={{ ...(isBottom && { top: 'auto', bottom: 0 }), ...sx }}
+                    {...props}
                 >
-                    <Toolbar color="inherit" variant={dense ? 'dense' : undefined} disableGutters={disablePadding}>
+                    <Toolbar
+                        color="inherit"
+                        variant={dense ? 'dense' : undefined}
+                        disableGutters={disablePadding}
+                        sx={toolbarStyles}
+                    >
                         {children}
                     </Toolbar>
                 </MuiAppBar>
@@ -91,20 +71,21 @@ const AppBar: React.FC<AppBarProps> = (props): ReactElement => {
 };
 
 AppBar.defaultProps = {
-    drawerWidth: 0,
-    position: 'fixed',
-    title: undefined,
+    bottom: undefined,
     color: undefined,
-    enableColorOnDark: undefined,
-    scrollElement: undefined,
-    toolbarId: undefined,
-    elevationScroll: undefined,
-    hideOnScroll: undefined,
     dense: undefined,
     disablePadding: undefined,
+    drawerWidth: 0,
     elevation: undefined,
+    elevationScroll: undefined,
+    enableColorOnDark: undefined,
+    hideOnScroll: undefined,
+    position: 'fixed',
+    scrollElement: undefined,
     scrollToTop: undefined,
     scrollToTopProps: undefined,
+    toolbarId: undefined,
 };
 
+export type { AppBarProps } from '../decs';
 export default AppBar;

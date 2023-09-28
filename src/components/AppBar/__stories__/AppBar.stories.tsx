@@ -1,348 +1,190 @@
 import React, { useEffect, useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Stack, Box, Container } from '@mui/material';
-import {
-    Menu as MenuIcon,
-    Close as CloseIcon,
-    Send as SendIcon,
-    Delete as DeleteIcon,
-    Fingerprint as FingerprintIcon,
-} from '@mui/icons-material';
-
 import AppBar from '../AppBar';
-import Button from '../../_FIXED/Button/Button';
-import Avatar from '../../_FIXED/Avatar/Avatar';
-import Typography from '../../_FIXED/Typography/Typography';
-import Menu from '../../_FIXED/Menu/Menu';
-import { action } from '@storybook/addon-actions';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Fab from '../../_FIXED/FloatingActionButton/FloatingActionButton';
 
-export default {
+const meta: Meta<typeof AppBar> = {
     title: 'Surfaces/AppBar',
     component: AppBar,
+    tags: ['autodocs'],
     decorators: [
-        (Story) => (
-            <div
-                id="story"
-                style={{
-                    height: '800px',
-                    backgroundColor: '#f5f2f2',
-                    overflow: 'auto',
-                }}
-            >
-                <Story />
-            </div>
-        ),
+        (Story) => {
+            const [scrollElement, setScrollElement] = useState();
+            useEffect(() => {
+                // @ts-ignore
+                setScrollElement(document.getElementById('story'));
+            }, []);
+
+            return (
+                <div
+                    id="story"
+                    style={{
+                        height: scrollElement ? '800px' : 'auto',
+                        backgroundColor: '#f5f2f2',
+                        overflow: 'auto',
+                    }}
+                >
+                    <Story scrollElement={scrollElement} />
+                </div>
+            );
+        },
     ],
 };
+export default meta;
 
-export const Default = (props) => {
-    return <AppBar {...props} />;
-};
+type Story = StoryObj<typeof AppBar>;
 
-export const MenuToolbar = () => {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const menu = (
-        <Button color="inherit" icon={menuOpen ? <CloseIcon /> : <MenuIcon />} onClick={() => setMenuOpen(!menuOpen)} />
-    );
-
-    return (
-        <Stack spacing={3}>
-            <AppBar position="static" menu={menu} />
-            <AppBar position="static" menu />
-            <AppBar position="static" />
-        </Stack>
-    );
-};
-
-export const Title = () => {
-    return (
-        <Stack spacing={3}>
-            <AppBar position="static" title="My Mui Component" />
-            <AppBar
-                position="static"
-                menu
-                title={
-                    <>
-                        <Avatar image={'1.jpg'} />
-                        <Typography wrap={false}>Hello world</Typography>
-                    </>
-                }
-            />
-            <AppBar position="static" />
-        </Stack>
-    );
-};
-
-export const Dense = () => {
-    return (
-        <Stack spacing={3}>
-            <AppBar
-                position="static"
-                menu
-                dense
-                title={
-                    <>
-                        <Avatar image={'1.jpg'} />
-                        <Typography wrap={false}>With Dense</Typography>
-                    </>
-                }
-            />
-            <AppBar
-                position="static"
-                menu
-                title={
-                    <>
-                        <Avatar image={'1.jpg'} />
-                        <Typography wrap={false}>Without Dense</Typography>
-                    </>
-                }
-            />
-            <AppBar
-                position="static"
-                menu
-                disablePadding
-                title={
-                    <>
-                        <Avatar image={'1.jpg'} />
-                        <Typography wrap={false}>Disable Padding</Typography>
-                    </>
-                }
-            />
-            <AppBar
-                position="static"
-                menu
-                dense
-                disablePadding
-                title={
-                    <>
-                        <Avatar image={'1.jpg'} />
-                        <Typography wrap={false}>Dense & Disable Padding</Typography>
-                    </>
-                }
-            />
-        </Stack>
-    );
-};
-
-export const Actions = () => {
-    return (
-        <Stack spacing={3}>
-            <AppBar
-                position="static"
-                menu
-                title={
-                    <>
-                        <Avatar image={'1.jpg'} />
-                        <Typography wrap={false}>Hello world</Typography>
-                    </>
-                }
-                actions={[
-                    <Button>Label only</Button>,
-                    <Button startIcon={<SendIcon />}>Start Icon</Button>,
-                    <Button color="error" endIcon={<DeleteIcon />}>
-                        , End Icon
-                    </Button>,
-                    <Button color={'#D05010'} icon={<FingerprintIcon />} />,
-                    <Button color="inherit">Login</Button>,
-                ]}
-            />
-            <AppBar
-                position="static"
-                menu
-                actions={[
-                    <Button>Label only</Button>,
-                    <Button startIcon={<SendIcon />}>Start Icon</Button>,
-                    <Button color="error" endIcon={<DeleteIcon />}>
-                        , End Icon
-                    </Button>,
-                    <Button color={'#D05010'} icon={<FingerprintIcon />} />,
-                    <Button color="inherit">Login</Button>,
-                ]}
-            />
-
-            <AppBar
-                position="static"
-                actions={[
-                    <Button>Label only</Button>,
-                    <Button startIcon={<SendIcon />}>Start Icon</Button>,
-                    <Button color="error" endIcon={<DeleteIcon />}>
-                        , End Icon
-                    </Button>,
-                    <Button color={'#D05010'} icon={<FingerprintIcon />} />,
-                    <Button color="inherit">Login</Button>,
-                ]}
-            />
-        </Stack>
-    );
-};
-
-export const ActionMenu = () => {
-    const [open, setOpen] = useState(false);
-
-    const options = [
-        { id: 'o1', label: 'Profile', onClick: action('onClickOption') },
-        { id: 'o2', label: 'My account', onClick: action('onClickOption') },
-        {
-            id: 'o3',
-            label: 'Logout',
-            onClick: action('onClickOption'),
-        },
-        {
-            id: 'o3',
-            label: 'return false',
-            onClick: (event) => {
-                action('onClickOption')(event);
-                return false;
-            },
-        },
-    ];
-
-    return (
-        <AppBar
-            menu
-            title="Hello World"
-            actions={
-                <Menu options={options} open={open} onClose={() => setOpen(false)}>
-                    <Avatar image={'1.jpg'} onClick={() => setOpen(true)} />
-                </Menu>
-            }
-        />
-    );
-};
-
-export const ThemedAndColored = () => {
-    return (
-        <Stack spacing={3}>
-            <ThemeProvider theme={createTheme({ palette: { mode: 'light' } })}>
-                <AppBar position="static" menu title="light primary" color="primary" />
-            </ThemeProvider>
-            <ThemeProvider theme={createTheme({ palette: { mode: 'dark' } })}>
-                <AppBar position="static" menu title="dark primary" color="primary" />
-                <AppBar
-                    position="static"
-                    menu
-                    title="dark primary with enableColorOnDark"
-                    color="primary"
-                    enableColorOnDark
-                />
-            </ThemeProvider>
-            <AppBar position="static" menu title="#86950d" color={'#86950d'} />
-            <AppBar position="static" menu title="default" />
-            <AppBar position="static" />
-        </Stack>
-    );
-};
-
-export const Scroller = () => {
-    const [scrollElement, setScrollElement] = useState();
-    useEffect(() => {
-        setScrollElement(document.getElementById('story'));
-    }, []);
-
-    return (
-        scrollElement && (
-            <>
-                <AppBar title="Elevation Scroll" elevationScroll scrollElement={scrollElement} scrollToTop />
-                <Container>
-                    <Box sx={{ my: 2 }}>
-                        {[...new Array(30)]
-                            .map(
-                                () => `Cras mattis consectetur purus sit amet fermentum.
+const ScrollElementNotFound = () => <span>Scroll Element Not Found</span>;
+const ContentForScrollingView = ({ len = 30 }) => (
+    <Container>
+        <Box sx={{ my: 2 }}>
+            {[...new Array(len)]
+                .map(
+                    () => `Cras mattis consectetur purus sit amet fermentum.
 Cras justo odio, dapibus ac facilisis in, egestas eget quam.
 Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
 Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
-                            )
-                            .join('\n')}
-                    </Box>
-                </Container>
-            </>
-        )
+                )
+                .join('\n')}
+        </Box>
+    </Container>
+);
+
+export const Default: Story = {
+    args: {},
+};
+
+//   enableColorOnDark,
+//   position,
+//   sx,
+
+export const Bottom: Story = {
+    args: {
+        bottom: true,
+        children: 'bottom toolbar',
+    },
+};
+
+export const Color_ = (args) => (
+    <Stack spacing={3}>
+        {['primary', 'secondary.light', 'info.dark', 'success.main', 'error', '#10DDCC'].map((color) => (
+            <AppBar position="static" color={color}>
+                {color} - COLOR
+            </AppBar>
+        ))}
+    </Stack>
+);
+
+export const Dense: Story = {
+    args: {
+        dense: true,
+        children: 'dense toolbar',
+    },
+};
+
+export const DisablePadding: Story = {
+    args: {
+        disablePadding: true,
+        children: 'disable padding toolbar',
+    },
+};
+
+export const DenseDisablePadding: Story = {
+    args: {
+        disablePadding: true,
+        dense: true,
+        children: 'dense and disable padding toolbar',
+    },
+};
+
+export const Elevation: Story = {
+    args: {
+        elevation: 24,
+        children: 'max elevation toolbar',
+    },
+};
+
+export const DrawerWidth: Story = {
+    args: {
+        drawerWidth: 250,
+        children: 'Drawer Width 250',
+    },
+};
+
+export const Position_ = (args) => {
+    const colors = ['primary', 'secondary', 'info', 'success', 'warning', 'error'];
+    return (
+        <Stack spacing={3}>
+            {[undefined, 'fixed', 'sticky', 'static', 'absolute', 'relative'].map((position, index) => (
+                <AppBar bottom={!position} position={position} color={colors[index]}>
+                    {position ?? 'fixed'} - POSITION
+                </AppBar>
+            ))}
+        </Stack>
+    );
+};
+export const ElevationScroll_ = (args) => {
+    return args.scrollElement ? (
+        <>
+            <AppBar elevationScroll {...args}>
+                Elevation Scroll
+            </AppBar>
+            <ContentForScrollingView />
+        </>
+    ) : (
+        <ScrollElementNotFound />
     );
 };
 
-export const ElevationScroll = () => {
-    const [scrollElement, setScrollElement] = useState();
-    useEffect(() => {
-        setScrollElement(document.getElementById('story'));
-    }, []);
-
-    return (
-        scrollElement && (
-            <>
-                <AppBar title="Elevation Scroll" elevationScroll scrollElement={scrollElement} />
-                <Container>
-                    <Box sx={{ my: 2 }}>
-                        {[...new Array(30)]
-                            .map(
-                                () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
-                            )
-                            .join('\n')}
-                    </Box>
-                </Container>
-            </>
-        )
+export const HideOnScroll_ = (args) => {
+    return args.scrollElement ? (
+        <>
+            <AppBar hideOnScroll {...args}>
+                Hide On Scroll
+            </AppBar>
+            <ContentForScrollingView />
+        </>
+    ) : (
+        <ScrollElementNotFound />
     );
 };
 
-export const HideOnScroll = () => {
-    const [scrollElement, setScrollElement] = useState();
-    useEffect(() => {
-        setScrollElement(document.getElementById('story'));
-    }, []);
-
-    return (
-        scrollElement && (
-            <>
-                <AppBar title="hide On Scroll" hideOnScroll scrollElement={scrollElement} />
-                <Container>
-                    <Box sx={{ my: 2 }}>
-                        {[...new Array(30)]
-                            .map(
-                                () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
-                            )
-                            .join('\n')}
-                    </Box>
-                </Container>
-            </>
-        )
+export const ScrollToTop_ = (args) => {
+    return args.scrollElement ? (
+        <>
+            <AppBar scrollToTop {...args}>
+                scroll To Top
+            </AppBar>
+            <ContentForScrollingView />
+        </>
+    ) : (
+        <ScrollElementNotFound />
     );
 };
 
-export const BottomAppBar = () => {
-    const [scrollElement, setScrollElement] = useState();
-    useEffect(() => {
-        setScrollElement(document.getElementById('story'));
-    }, []);
+export const ScrollToTopFab_ = (args) => {
+    return args.scrollElement ? (
+        <>
+            <AppBar scrollToTop={<Fab icon="Person" />} {...args}>
+                scroll To Top
+            </AppBar>
+            <ContentForScrollingView />
+        </>
+    ) : (
+        <ScrollElementNotFound />
+    );
+};
 
-    return (
-        scrollElement && (
-            <>
-                <AppBar
-                    position="fixed-bottom"
-                    title="Bottom App Bar"
-                    elevationScroll
-                    scrollElement={scrollElement}
-                    scrollToTop
-                />
-                <Container>
-                    <Box sx={{ my: 2 }}>
-                        {[...new Array(30)]
-                            .map(
-                                () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
-                            )
-                            .join('\n')}
-                    </Box>
-                </Container>
-            </>
-        )
+export const ScrollToTopProps_ = (args) => {
+    return args.scrollElement ? (
+        <>
+            <AppBar scrollToTop scrollToTopProps={{ right: 0, bottom: 0 }} {...args}>
+                scroll To Top Props
+            </AppBar>
+            <ContentForScrollingView />
+        </>
+    ) : (
+        <ScrollElementNotFound />
     );
 };

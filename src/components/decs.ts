@@ -3,6 +3,27 @@ import type { SxProps } from '@mui/material';
 import { number } from 'prop-types';
 import React, { MouseEventHandler } from 'react';
 
+export type AppBarPosition = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
+
+export interface AppBarProps {
+    actions?: ReactNode;
+    color?: string;
+    dense?: boolean;
+    disablePadding?: boolean;
+    drawerWidth?: number;
+    elevation?: number; // assuming you want the values to be numbers
+    elevationScroll?: boolean;
+    enableColorOnDark?: boolean;
+    hideOnScroll?: boolean;
+    menu?: ReactNode | boolean;
+    position?: AppBarPosition;
+    scrollElement?: ReactNode | string;
+    scrollToTop?: ReactNode | boolean;
+    scrollToTopProps?: object;
+    title?: string | ReactNode;
+    toolbarId?: string;
+    [key: string]: any;
+}
 export interface AccordionProps {
     bgColor?: string;
     bottomSecondaryLabel?: string;
