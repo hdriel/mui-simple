@@ -89,17 +89,17 @@ const Drawer: React.FC<DrawerProps> = ({
 };
 
 Drawer.defaultProps = {
+    backdrop: false,
     bgColor: undefined,
-    width: 240,
+    direction: undefined,
+    hideHeader: false,
     keepMounted: undefined,
     onClose: undefined,
     open: undefined,
-    direction: undefined,
     swipeable: undefined,
     toggleDrawer: undefined,
     variant: undefined,
-    hideHeader: false,
-    backdrop: false,
+    width: 240,
 };
 
 export type { DrawerProps } from '../decs';

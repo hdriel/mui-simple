@@ -13,32 +13,41 @@ import Drawer from '../Drawer';
 import Button from '../../_FIXED/Button/Button';
 import List from '../../_FIXED/List/List';
 import Divider from '../../_FIXED/Divider/Divider';
+import { Meta, StoryObj } from '@storybook/react';
 
-export default {
+const meta: Meta<typeof Drawer> = {
     title: 'Navigation/Drawer',
     component: Drawer,
+    tags: ['autodocs'],
 };
 
-export const Default = (props) => {
-    return <Drawer {...props} />;
-};
+export default meta;
+
+type Story = StoryObj<typeof Drawer>;
+
+/*
+    keepMounted?: boolean;
+ */
 
 const list = () => (
     <div>
         <List
             items={[
                 {
+                    id: 'inbox',
                     startIcon: <InboxIcon />,
                     title: 'Inbox',
                 },
                 {
+                    id: 'Drafts',
                     startIcon: <DraftsIcon />,
                     title: 'Drafts',
                 },
                 {
+                    id: 'divider',
                     divider: true,
                 },
-                { title: 'Trash' },
+                { id: 'Trash', title: 'Trash' },
                 'Spam',
             ]}
         />
@@ -46,18 +55,21 @@ const list = () => (
         <List
             items={[
                 {
+                    id: 'Photos',
                     title: 'Photos',
                     subtitle: 'Jan 9, 2014',
                     avatar: { icon: <ImageIcon /> },
                     actions: [<Button icon={<CommentIcon />} />],
                 },
                 {
+                    id: 'Work',
                     title: 'Work',
                     subtitle: 'Jan 7, 2014',
                     avatar: { icon: <WorkIcon /> },
                     actions: [<Button icon={<SendIcon />} />],
                 },
                 {
+                    id: 'Vacation',
                     title: 'Vacation',
                     subtitle: 'July 20, 2014',
                     avatar: { icon: <BeachAccessIcon /> },
@@ -68,7 +80,103 @@ const list = () => (
     </div>
 );
 
-export const TemporaryDrawer = () => {
+const DrawerState = ({ children }) => {
+    const [open, setOpen] = React.useState<boolean>(false);
+    return (
+        <>
+            <Button onClick={() => setOpen(true)} variant="contained">
+                OPEN DRAWER
+            </Button>
+            {children?.({
+                open,
+                onOpen: () => setOpen(true),
+                onToggle: () => setOpen(!open),
+                onClose: () => setOpen(false),
+            })}
+        </>
+    );
+};
+
+export const Default_ = (args) => {
+    return (
+        <DrawerState>
+            {({ open, onClose, onToggle }) => (
+                <Drawer open={open} onClose={onClose} toggleDrawer={onToggle} {...args}>
+                    {list()}
+                </Drawer>
+            )}
+        </DrawerState>
+    );
+};
+
+export const Backdrop_ = (args) => {
+    return (
+        <DrawerState>
+            {({ open, onClose, onToggle }) => (
+                <Drawer backdrop open={open} onClose={onClose} variant="temporary" toggleDrawer={onToggle} {...args}>
+                    {list()}
+                </Drawer>
+            )}
+        </DrawerState>
+    );
+};
+
+export const BgColor_ = (args) => {
+    return (
+        <DrawerState>
+            {({ open, onClose, onToggle }) => (
+                <Drawer
+                    bgColor="primary"
+                    open={open}
+                    onClose={onClose}
+                    variant="temporary"
+                    toggleDrawer={onToggle}
+                    {...args}
+                >
+                    {list()}
+                </Drawer>
+            )}
+        </DrawerState>
+    );
+};
+
+export const Width_ = (args) => {
+    return (
+        <DrawerState>
+            {({ open, onClose, onToggle }) => (
+                <Drawer width={600} open={open} onClose={onClose} variant="temporary" toggleDrawer={onToggle} {...args}>
+                    {list()}
+                </Drawer>
+            )}
+        </DrawerState>
+    );
+};
+
+export const HideHeader_ = (args) => {
+    return (
+        <DrawerState>
+            {({ open, onClose, onToggle }) => (
+                <Drawer hideHeader open={open} onClose={onClose} variant="temporary" toggleDrawer={onToggle} {...args}>
+                    {list()}
+                </Drawer>
+            )}
+        </DrawerState>
+    );
+};
+
+export const Swipeable_ = (args) => {
+    return (
+        <DrawerState>
+            {({ open, onClose, onToggle }) => (
+                <Drawer swipeable open={open} onClose={onClose} variant="temporary" toggleDrawer={onToggle} {...args}>
+                    {list()}
+                </Drawer>
+            )}
+        </DrawerState>
+    );
+};
+
+export const Direction_ = (args) => {
     const [state, setState] = React.useState({
         top: false,
         left: false,
@@ -94,6 +202,7 @@ export const TemporaryDrawer = () => {
                         variant="temporary"
                         open={state[anchor]}
                         toggleDrawer={toggleDrawer(anchor, false)}
+                        {...args}
                     >
                         {list()}
                     </Drawer>
@@ -103,7 +212,7 @@ export const TemporaryDrawer = () => {
     );
 };
 
-export const Variant = () => {
+export const Variant_ = (args) => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [state, setState] = React.useState({
         permanent: false,
@@ -131,6 +240,7 @@ export const Variant = () => {
                         variant={variant}
                         open={menuOpen}
                         toggleDrawer={toggleDrawer(variant, false)}
+                        {...args}
                     >
                         {list()}
                     </Drawer>
