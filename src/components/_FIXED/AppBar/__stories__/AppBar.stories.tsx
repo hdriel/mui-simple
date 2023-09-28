@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Stack, Box, Container } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AppBar from '../AppBar';
-import Fab from '../../_FIXED/FloatingActionButton/FloatingActionButton';
+import Fab from '../../FloatingActionButton/FloatingActionButton';
 
 const meta: Meta<typeof AppBar> = {
     title: 'Surfaces/AppBar',
@@ -199,4 +200,26 @@ export const ScrollToTopProps_ = (args) => {
     );
 };
 
-// enableColorOnDark,
+export const EnableColorOnDark_ = (args) => {
+    return (
+        <Stack spacing={3}>
+            <ThemeProvider theme={createTheme({ palette: { mode: 'light' } })}>
+                <AppBar position="static" color="primary">
+                    light theme - primary color
+                </AppBar>
+            </ThemeProvider>
+
+            <ThemeProvider theme={createTheme({ palette: { mode: 'dark' } })}>
+                <AppBar position="static" color="primary">
+                    dark theme - primary color
+                </AppBar>
+
+                <AppBar position="static" color="primary" enableColorOnDark>
+                    dark theme - primary color & enableColorOnDark = true
+                    <br />
+                    Notice: the color of AppBar toolbar stay light theme color event the provider is dark theme,
+                </AppBar>
+            </ThemeProvider>
+        </Stack>
+    );
+};

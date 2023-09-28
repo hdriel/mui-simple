@@ -3,8 +3,8 @@ import type { ReactNode, ReactElement } from 'react';
 import type { SxProps } from '@mui/material';
 import { Box, Fade, useScrollTrigger, Slide } from '@mui/material';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@mui/icons-material';
-import Fab from '../_FIXED/FloatingActionButton/FloatingActionButton';
-import { isDefined } from '../../utils/helpers';
+import Fab from '../FloatingActionButton/FloatingActionButton';
+import { isDefined } from '../../../utils/helpers';
 interface OnScrollEventWrapperProps {
     bottom?: number;
     defaultFabProps?: object;

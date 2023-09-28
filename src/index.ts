@@ -4,7 +4,9 @@ export type { AccordionProps } from './components/_FIXED/Accordion/Accordion';
 export { default as Alert } from './components/_FIXED/Alert/Alert';
 export type { AlertProps } from './components/_FIXED/Alert/Alert';
 
-export { default as AppBar } from './components/AppBar/AppBar';
+export { default as AppBar } from './components/_FIXED/AppBar/AppBar';
+export type { AppBarProps } from './components/_FIXED/AppBar/AppBar';
+
 export { default as InputAutocomplete } from './components/Autocomplete/InputAutocomplete';
 export { default as InputAutoCompleteAsync } from './components/Autocomplete/InputAutocompleteAsync';
 export { default as InputAutocompleteMultiple } from './components/Autocomplete/InputAutocompleteMultiple';

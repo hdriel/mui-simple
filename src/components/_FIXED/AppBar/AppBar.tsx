@@ -2,8 +2,8 @@ import React from 'react';
 import type { ReactElement } from 'react';
 import { AppBar as MuiAppBar, Toolbar } from './AppBar.styled';
 import OnScrollEventWrapper from './OnScrollEventWrapper';
-import { useCustomColor } from '../../utils/helpers';
-import type { AppBarProps, AppBarPosition } from '../decs';
+import { useCustomColor } from '../../../utils/helpers';
+import type { AppBarProps, AppBarPosition } from '../../decs';
 
 const scrollToToolbarStyles = { position: 'absolute' };
 const toolbarStyles = { padding: 0 };
@@ -87,5 +87,5 @@ AppBar.defaultProps = {
     toolbarId: undefined,
 };
 
-export type { AppBarProps } from '../decs';
+export type { AppBarProps } from '../../decs';
 export default AppBar;
