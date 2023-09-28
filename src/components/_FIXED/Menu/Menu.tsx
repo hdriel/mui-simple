@@ -1,5 +1,4 @@
 import React, { useState, Children, useCallback } from 'react';
-import type { PropsWithChildren } from 'react';
 import { Check as CheckIcon } from '@mui/icons-material';
 import { ListItemIcon, ListItemText, Menu as MuiMenu, MenuItem, MenuList, MenuWrapper } from './Menu.styled';
 import Typography from '../Typography/Typography';
@@ -9,7 +8,7 @@ import { useAnchorProps, useChildrenComponentBinding } from './Menu.hooks';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 import type { DividerProps, MenuOption, MenuOptionItem, MenuProps } from '../../decs';
 
-const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement => {
+const Menu: React.FC<MenuProps> = (props): React.ReactElement => {
     const {
         alternativeContent,
         anchorElementRef,

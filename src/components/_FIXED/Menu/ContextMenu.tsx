@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import type { PropsWithChildren } from 'react';
 import Menu from './Menu';
 import type { ContextMenuProps } from '../../decs';
 import { ContextMenuWrapper } from './Menu.styled';
 
-const ContextMenu: React.FC<PropsWithChildren<ContextMenuProps>> = ({ children, reopen, ...props }) => {
+const ContextMenu: React.FC<ContextMenuProps> = ({ children, reopen, ...props }) => {
     const [contextMenu, setContextMenu] = useState(null);
 
     const handleClose = (): void => setContextMenu(null);

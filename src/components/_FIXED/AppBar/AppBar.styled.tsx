@@ -1,13 +1,11 @@
 import type { ComponentType } from 'react';
-import type { AppBarProps, BoxProps } from '@mui/material';
+import type { AppBarProps } from '@mui/material';
 import { AppBar as MuiAppBar, Toolbar as MuiToolbar, Box as MuiBox } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 interface AppBarStyledProps {
     drawerWidth?: number;
-    /* Todo: assert this type and its usage logic
-		since the customColor made using function that returns array */
-    customColor?: string[];
+    customColor?: string;
 }
 type AppBarStyledPropsType = AppBarStyledProps & AppBarProps;
 export const AppBar = styled(MuiAppBar, {
@@ -20,18 +18,14 @@ export const AppBar = styled(MuiAppBar, {
             duration: props.theme.transitions.duration.enteringScreen,
         })};
     margin-left: ${(props) => props.drawerWidth}px;
+
     &.MuiPaper-root {
         background-color: ${(props) => props.customColor};
     }
 ` as ComponentType<AppBarStyledPropsType>;
 
-export const TitleWrapper = styled(MuiBox)<BoxProps>`
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    gap: 1em;
+export const Toolbar = styled(MuiToolbar)`
+    padding: 0 0.5em;
 `;
-
-export const Toolbar = MuiToolbar;
 
 export const Box = MuiBox;

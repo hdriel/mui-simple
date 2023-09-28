@@ -74,6 +74,7 @@ export default [
             babel({
                 babelHelpers: 'bundled',
                 extensions: ['.jsx', '.js', '.ts', '.tsx'],
+                exclude: 'node_modules/**', // only transpile our source code
                 babelrc: true,
             }),
             commonjs({
@@ -91,7 +92,7 @@ export default [
             }),
             json(),
             urlResolve(),
-            ...(isProd ? [terser()] : []),
+            ...(isProd ? [terser({})] : []),
             generatePackageJson({
                 outputFolder: 'dist',
                 baseContents: (pkg) => ({
@@ -108,6 +109,7 @@ export default [
                     dependencies: pkg.dependencies,
                     repository: pkg.repository,
                     type: pkg.type,
+                    // ...pkg,
                     module: pkg.module?.replace('dist/', ''),
                     main: pkg.main.replace('dist/', ''),
                     types: pkg.types.replace('dist/', ''),

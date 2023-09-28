@@ -136,6 +136,7 @@ InputPassword.defaultProps = {
     name: undefined,
     onBlur: undefined,
     onChange: undefined,
+    onEnterKeyPress: undefined,
     onFocus: undefined,
     readOnly: undefined,
     required: undefined,

@@ -19,7 +19,7 @@ import {
 } from '@mui/material';
 import Dialog, { DialogContentText } from '../Dialog';
 import Button from '../../Button/Button';
-import { blue } from '@mui/material/colors';
+import { colors } from '@mui/material';
 import { Add as AddIcon, Person as PersonIcon } from '@mui/icons-material';
 
 const meta: Meta<typeof Dialog> = {
@@ -316,7 +316,7 @@ export const SelectedValue_ = (args) => {
                         <ListItem key={email} disableGutters>
                             <ListItemButton onClick={() => handleClose(email)} key={email}>
                                 <ListItemAvatar>
-                                    <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
+                                    <Avatar sx={{ bgcolor: colors.blue[100], color: colors.blue[600] }}>
                                         <PersonIcon />
                                     </Avatar>
                                 </ListItemAvatar>

@@ -21,6 +21,7 @@ export const Border = styled(Box, {
 })<TypographyBorderPropsType>`
     width: ${(props) => numberToPx(props.width) ?? (props.autoWidth ? 'auto' : '100%')};
     display: flex;
+    align-items: center;
     border: ${(props) => (props.border && typeof props.border === 'boolean' ? '1px solid black' : props.border)};
     ${ellipsisRows}
     ${ellipsisRow1}
@@ -48,6 +49,7 @@ export const Typography = styled(MuiTypography, {
     shouldForwardProp: (propName) =>
         ![
             'fontSize',
+            'font',
             'customColor',
             'bold',
             'italic',
@@ -58,6 +60,7 @@ export const Typography = styled(MuiTypography, {
             'sub',
             'monospace',
             'lineHeight',
+            'textDirection',
             'bgColor',
         ].includes(propName as string),
 })<TypographyStyledPropsType>`
@@ -67,11 +70,13 @@ export const Typography = styled(MuiTypography, {
     font-weight: ${(props) => (props.bold && typeof props.bold === 'boolean' ? 'bold' : props.bold)};
     font-size: ${(props) => numberToPx(props.fontSize)};
     font-style: ${(props) => (props.italic ? 'italic' : undefined)};
+    font-family: ${(props) => props.font ?? undefined};
     text-decoration: ${(props) => (props.underline ? 'underline' : undefined)};
     text-decoration: ${(props) => (props.strike ? 'line-through' : undefined)};
     text-transform: ${(props) => ({ upper: 'uppercase', lower: 'lowercase', capital: 'capitalize' }[props.charsCase])};
     vertical-align: ${(props) => (props.sup ? 'super' : props.sub ? 'sub' : undefined)};
     line-height: ${(props) => props.lineHeight};
+    direction: ${(props) => props.textDirection};
     ${(props) =>
         props.monospace
             ? css`

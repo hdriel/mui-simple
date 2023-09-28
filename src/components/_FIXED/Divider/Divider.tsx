@@ -1,5 +1,4 @@
 import React, { isValidElement, cloneElement } from 'react';
-import type { PropsWithChildren } from 'react';
 import { useTheme } from '@mui/material/styles';
 
 import { Divider as MuiDivider } from './Divider.styled';
@@ -7,8 +6,17 @@ import { isDefined, numberToPx, useCustomColor } from '../../../utils/helpers';
 import type { DividerProps } from '../../decs';
 import Chip from '../Chip/Chip';
 
-const Divider: React.FC<PropsWithChildren<DividerProps>> = (props): React.ReactElement => {
-    const { orientation, flexItem, chip: _chip, label, color: _color, thickness, children, ...rest } = props;
+const Divider: React.FC<DividerProps> = ({
+    orientation,
+    flexItem,
+    chip: _chip,
+    label,
+    color: _color,
+    thickness,
+    children,
+    sx,
+    ...rest
+}): React.ReactElement => {
     const theme = useTheme();
     const [color, muiColor] = useCustomColor(_color ?? 'grey');
     const textColor = muiColor ? theme.palette[muiColor]?.contrastText : undefined;
@@ -26,7 +34,7 @@ const Divider: React.FC<PropsWithChildren<DividerProps>> = (props): React.ReactE
     }
 
     const content = [data]
-        .concat((children as any) ?? [])
+        .concat(children ?? [])
         .map((child, index) => {
             return isValidElement(child)
                 ? cloneElement(child, {
@@ -49,6 +57,7 @@ const Divider: React.FC<PropsWithChildren<DividerProps>> = (props): React.ReactE
                     [[undefined, 'horizontal'].includes(orientation) ? 'borderTopWidth' : 'borderLeftWidth']:
                         thicknessValue,
                 }),
+                ...sx,
             }}
             {...rest}
         >

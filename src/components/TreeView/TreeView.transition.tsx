@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Collapse from '@mui/material/Collapse';
+import { Collapse } from '@mui/material';
 import { useSpring, animated } from '@react-spring/web';
 
 export default function TransitionComponent(props) {

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+    Box as MuiBox,
     List as MuiList,
     ListItem as MuiListItem,
     ListItemAvatar as MuiListItemAvatar,
@@ -45,11 +46,21 @@ export const ListItem = styled(MuiListItem, {
 `;
 export const ListItemAvatar = MuiListItemAvatar;
 export const ListItemButton = styled(MuiListItemButton, {
-    shouldForwardProp: (propName) => !['flexDirection'].includes(propName),
+    shouldForwardProp: (propName) => !['flexDirection', 'draggable'].includes(propName),
 })`
     width: 100%;
     padding: ${(props) => props.padding};
     flex-direction: ${(props) => props.flexDirection ?? 'row'};
+    padding-inline-end: ${(props) => (props.draggable ? '3.5em' : undefined)};
+`;
+export const ListItemBox = styled(MuiBox, {
+    shouldForwardProp: (propName) => !['flexDirection', 'draggable'].includes(propName),
+})`
+    width: 100%;
+    display: flex;
+    padding: ${(props) => props.padding};
+    flex-direction: ${(props) => props.flexDirection ?? 'row'};
+    padding-inline-end: ${(props) => (props.draggable ? '3.5em' : undefined)};
 `;
 export const ListItemIcon = MuiListItemIcon;
 export const ListItemSecondaryAction = MuiListItemSecondaryAction;

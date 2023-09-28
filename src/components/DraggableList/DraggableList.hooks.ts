@@ -10,9 +10,11 @@ interface PlaceholderProps {
 }
 
 export const useDragHandlers = ({
+    disabled,
     flexDirection,
     flexGap,
     dataList,
+    droppableId,
     onChange,
 }): {
     placeholderProps: PlaceholderProps;
@@ -31,7 +33,7 @@ export const useDragHandlers = ({
     const handleDragStart = (event: any): void => {
         const draggedDOM = getDraggedDom(event.draggableId);
 
-        if (!draggedDOM) {
+        if (!draggedDOM || disabled) {
             return;
         }
 
@@ -71,16 +73,51 @@ export const useDragHandlers = ({
         });
     };
 
-    const handleDragEnd = (result): void => {
+    const handleDragEnd = (result: {
+        source?: { index: number; droppableId: string };
+        destination?: { index: number; droppableId: string };
+    }): void => {
         setPlaceholderProps({});
-        // dropped outside the list
-        if (!result.destination) {
-            return;
+        const { destination, source } = result;
+        console.log('handleDragEnd', result);
+        if (!destination) return; // dropped outside the list
+
+        const extraProps = { source, destination, droppableId, dataList };
+        const isMainListChange = destination.droppableId === droppableId;
+        const isItemMoveBetweenList = destination.droppableId !== source.droppableId;
+        const isSubListChange = !isMainListChange && !isItemMoveBetweenList;
+
+        console.log('handleDragEnd', extraProps);
+        switch (true) {
+            case isMainListChange: {
+                const items = reorder(dataList, source.index, destination.index);
+                onChange?.(items, extraProps);
+                break;
+            }
+
+            case isItemMoveBetweenList: {
+                const subListSource = dataList.find((list) => list.id === source.droppableId);
+                const subListDestination = dataList.find((list) => list.id === destination.droppableId);
+                if (subListSource?.items && subListDestination?.items) {
+                    const [item] = subListSource?.items?.splice(source.index, 1);
+                    subListDestination?.items?.splice(destination.index, 0, item);
+                    onChange?.(dataList, extraProps);
+                }
+                break;
+            }
+
+            case isSubListChange:
+            default: {
+                const subList = dataList.find(
+                    (list) => list.id === source.droppableId && list.id === destination.droppableId
+                );
+                if (subList?.items) {
+                    subList.items = reorder(subList.items, source.index, destination.index);
+                    onChange?.(dataList, extraProps);
+                }
+                break;
+            }
         }
-
-        const items = reorder(dataList, result.source.index, result.destination.index);
-
-        onChange(items);
     };
 
     const handleDragUpdate = (event): void => {

@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo } from 'react';
-import type { PropsWithChildren } from 'react';
 import { Border, Typography as MuiTypography } from './Typography.styled';
 import Tooltip from '../Tooltip/Tooltip';
 import { useEllipsisActive } from '../../../hooks/useEllipsisActive';
@@ -51,11 +50,12 @@ function useTooltipMessage({ children, tooltip, showTooltipOnEllipsis, isEllipsi
 }
 
 // todo: add commend to autodocs
-const Typography: React.FC<PropsWithChildren<TypographyProps>> = ({
+const Typography: React.FC<TypographyProps> = ({
     alignCenter,
     alignJustify,
     alignLeft,
     alignRight,
+    textDirection,
     autoWidth,
     bgColor,
     bold,
@@ -63,6 +63,7 @@ const Typography: React.FC<PropsWithChildren<TypographyProps>> = ({
     charsCase,
     children,
     color,
+    font,
     component,
     gutterBottom,
     italic,
@@ -99,26 +100,28 @@ const Typography: React.FC<PropsWithChildren<TypographyProps>> = ({
 
     const typographyProps = {
         align,
-        noWrap: !wrap || !rows,
-        rows: typeof rows === 'boolean' ? +rows : rows,
-        gutterBottom,
-        paragraph,
-        component,
-        color: muiColor,
-        customColor,
         bgColor: customBGColor,
-        fontSize: size,
         bold,
-        italic,
-        underline,
-        strike,
         charsCase,
-        sup,
-        sub,
-        monospace,
+        color: muiColor,
+        component,
+        customColor,
+        font,
+        fontSize: size,
+        gutterBottom,
+        italic,
         lineHeight,
-        ...(link && { href: link, component: 'a' }),
+        monospace,
+        noWrap: !wrap || !rows,
+        paragraph,
+        rows: typeof rows === 'boolean' ? +rows : rows,
+        strike,
+        sub,
+        sup,
         target: '_blank',
+        textDirection,
+        underline,
+        ...(link && { href: link, component: 'a' }),
         ...props,
     };
 
@@ -162,7 +165,7 @@ Typography.defaultProps = {
     italic: undefined,
     lineHeight: undefined,
     monospace: undefined,
-    noWrap: undefined,
+    noWrap: true,
     onEllipsisChange: undefined,
     paragraph: undefined,
     rows: 1,
@@ -171,11 +174,12 @@ Typography.defaultProps = {
     strike: undefined,
     sub: undefined,
     sup: undefined,
-    tooltip: undefined,
+    textDirection: undefined,
+    tooltip: false,
     tooltipPlacement: undefined,
     underline: undefined,
     width: undefined,
-    wrap: true,
+    wrap: undefined,
 };
 
 export type { TypographyProps } from '../../decs';

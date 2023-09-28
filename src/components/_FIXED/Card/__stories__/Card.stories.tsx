@@ -19,6 +19,7 @@ import CardExpandedContent from '../CardExpandedContent';
 import MyAvatar from '../../Avatar/Avatar';
 import Typography from '../../Typography/Typography';
 import Button from '../../Button/Button';
+import SVGIcon from '../../../SVGIcon/SVGIcon';
 
 const meta: Meta<typeof Card> = {
     title: 'Surfaces/Card',
@@ -58,6 +59,13 @@ export const Image: Story = {
             height: 150,
             onClick: () => alert('onClick image'),
         },
+    },
+};
+
+export const ImageCmp: Story = {
+    args: {
+        title: 'Image Card',
+        image: <SVGIcon muiIconName="Add" />,
     },
 };
 

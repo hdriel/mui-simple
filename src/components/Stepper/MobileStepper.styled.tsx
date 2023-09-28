@@ -37,8 +37,11 @@ export const Button = MuiButton;
 export const Typography = MuiTypography;
 
 export const KeyboardArrowLeftIcon = KeyboardArrowLeft;
+
 export const KeyboardArrowRightIcon = KeyboardArrowRight;
+
 export const CheckIcon = Check;
 
 export const AutoPlaySwipeableViews = autoPlay(SwipeableViewsBase);
+
 export const SwipeableViews = SwipeableViewsBase;

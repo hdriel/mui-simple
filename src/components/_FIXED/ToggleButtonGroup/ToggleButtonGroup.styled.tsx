@@ -6,11 +6,31 @@ import {
     Paper as MuiPaper,
     alpha,
     Divider as MuiDivider,
+    Box,
 } from '@mui/material';
 import type { ToggleButtonGroupProps, ToggleButtonGroupsProps } from '../../decs';
+import { isDefined } from '../../../utils/helpers';
 
 export const Divider = styled(({ ...props }) => <MuiDivider flexItem orientation="vertical" {...props} />)`
     margin: ${(props) => props.theme.spacing(1, 0.5)};
+`;
+
+export const Container = styled(Box, {
+    shouldForwardProp: (propName) => !['helperTextAlign'].includes(propName as string),
+})`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: ${(props) => (props.fullWidth ? '100%' : 'max-content')};
+    position: relative;
+
+    & > .MuiFormHelperText-root {
+        width: 100%;
+        display: flex;
+        justify-content: ${(props) => (isDefined(props.helperTextAlign) ? props.helperTextAlign : 'flex-start')};
+        padding-inline-start: ${(props) => (props.helperTextAlign ? undefined : '5px')};
+    }
 `;
 
 export const ToggleButtonGroups = styled(({ ...props }) => <MuiPaper elevation={0} {...props} />, {

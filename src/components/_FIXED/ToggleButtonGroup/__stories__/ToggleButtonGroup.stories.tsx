@@ -37,9 +37,9 @@ const data2 = [
 ];
 
 const data3 = [
-    { value: 'web', component: 'Web ' },
-    { value: 'android', component: 'Android ' },
-    { value: 'ios', component: 'iOS ' },
+    { value: 1, component: 'Web ' },
+    { value: 2, component: 'Android ' },
+    { value: 3, component: 'iOS ' },
 ];
 
 type Story = StoryObj<typeof ToggleButtonGroup>;
@@ -80,7 +80,7 @@ export const Exclusive: Story = {
     },
     render: (args) => {
         const [value, setValue] = useState(args.value);
-        return <ToggleButtonGroup {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+        return <ToggleButtonGroup {...args} value={value} onChange={(e, newValue) => setValue(newValue)} />;
     },
 };
 
@@ -122,3 +122,23 @@ export const Data_ = (args) => (
         <ToggleButtonGroup {...args} data={data3} value={data3[0].value} />
     </Box>
 );
+
+export const HelperText_ = (args) => {
+    const [value, setValue] = useState();
+
+    return (
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+            <ToggleButtonGroup {...args} data={data1} value={data1[0].value} helperText="Text justify options" />
+            <ToggleButtonGroup {...args} data={data2} value={data2[0].value} helperText="Text styles option" />
+            <ToggleButtonGroup
+                {...args}
+                data={data3}
+                value={value}
+                onChange={(e, data) => setValue(data)}
+                helperText={!value ? 'platform is required!' : undefined}
+                error={!value}
+                helperTextAlign="center"
+            />
+        </Box>
+    );
+};

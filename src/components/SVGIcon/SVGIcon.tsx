@@ -1,7 +1,5 @@
 import React, { isValidElement } from 'react';
 import type { SxProps } from '@mui/material';
-import type { PropsWithChildren } from 'react';
-// import PropTypes from 'prop-types';
 import MuiIconName from './MuiIconName';
 import { SVG } from './SVGIcon.styled';
 
@@ -15,8 +13,17 @@ interface SVGIconProps {
     sx?: SxProps;
 }
 
-export default function SVGIcon(props: PropsWithChildren<SVGIconProps>): React.ReactElement {
-    const { muiIconName, iconSrc, color, width, height, size, children, sx: _sx, ...rest } = props;
+const SVGIcon: React.FC<SVGIconProps> = ({
+    muiIconName,
+    iconSrc,
+    color,
+    width,
+    height,
+    size,
+    children,
+    sx: _sx,
+    ...props
+}): React.ReactElement => {
     const iconName = muiIconName || (typeof children === 'string' ? children : undefined);
     const sx = { display: 'flex', justifyContent: 'center', alignItems: 'center', ..._sx };
     if (children && isValidElement(children)) {
@@ -24,24 +31,15 @@ export default function SVGIcon(props: PropsWithChildren<SVGIconProps>): React.R
     }
 
     return (
-        <MuiIconName name={iconName} color={color} width={size ?? width} height={size ?? height} sx={sx} {...rest}>
+        <MuiIconName name={iconName} color={color} width={size ?? width} height={size ?? height} sx={sx} {...props}>
             {iconSrc ? (
-                <SVG src={iconSrc} fill={color} width={size ?? width} height={size ?? height} sx={sx} {...rest} />
+                <SVG src={iconSrc} fill={color} width={size ?? width} height={size ?? height} sx={sx} {...props} />
             ) : (
                 children
             )}
         </MuiIconName>
     );
-}
-
-// SVGIcon.propTypes = {
-//     muiIconName: PropTypes.string,
-//     iconSrc: PropTypes.string,
-//     color: PropTypes.string,
-//     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-// };
+};
 
 SVGIcon.defaultProps = {
     muiIconName: undefined,
@@ -51,3 +49,5 @@ SVGIcon.defaultProps = {
     height: undefined,
     size: undefined,
 };
+
+export default SVGIcon;

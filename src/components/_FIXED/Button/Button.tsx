@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import type { Ref, ReactElement, PropsWithChildren } from 'react';
+import { Link } from 'react-router-dom';
 
 import { CircularProgress } from '../Progress';
 import { Button as MuiButton, IconButton as MuiIconButton } from './Button.styled';
@@ -11,8 +12,8 @@ import type { ButtonProps } from '../../decs';
 const SIZES = ['small', 'medium', 'large'];
 type SizeType = 'small' | 'medium' | 'large';
 
-const Button: React.FC<PropsWithChildren<ButtonProps>> = forwardRef(
-    (props: PropsWithChildren<ButtonProps>, ref: Ref<HTMLButtonElement>): ReactElement => {
+const Button: React.ForwardRefExoticComponent<React.PropsWithoutRef<any> & React.RefAttributes<HTMLButtonElement>> =
+    forwardRef((props: PropsWithChildren<ButtonProps>, ref: Ref<HTMLButtonElement>): ReactElement => {
         const {
             children,
             color,
@@ -35,6 +36,7 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = forwardRef(
             sx,
             tooltipProps,
             uppercase,
+            useReactRouterDomLink,
             variant,
             ...rest
         } = props;
@@ -54,12 +56,12 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = forwardRef(
             onRightClick?.(event);
         };
 
-        return isIconButton ? (
+        const cmp = isIconButton ? (
             <Tooltip {...tooltipProps}>
                 <MuiIconButton
                     color={muiColor as any}
                     disableRipple={disabled ? true : disableRipple}
-                    href={link}
+                    href={useReactRouterDomLink ? undefined : link}
                     onClick={disabled ? undefined : onClick}
                     onContextMenu={disabled ? undefined : onRightClick ? onRightClickHandler : props.onContextMenu}
                     ref={ref}
@@ -85,7 +87,7 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = forwardRef(
                     disableRipple={isLoading || disableRipple}
                     endIcon={endIconCmp}
                     fullWidth={fullWidth}
-                    href={link}
+                    href={useReactRouterDomLink ? undefined : link}
                     onClick={isLoading ? undefined : onClick}
                     onContextMenu={isLoading ? undefined : onRightClick ? onRightClickHandler : props.onContextMenu}
                     ref={ref}
@@ -104,8 +106,15 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = forwardRef(
                 </MuiButton>
             </Tooltip>
         );
-    }
-);
+
+        return useReactRouterDomLink && link ? (
+            <Link to={link} style={{ textDecoration: 'none', ...(fullWidth && { width: '100%' }) }}>
+                {cmp}
+            </Link>
+        ) : (
+            cmp
+        );
+    });
 
 Button.defaultProps = {
     color: undefined,
@@ -127,6 +136,7 @@ Button.defaultProps = {
     startIcon: undefined,
     tooltipProps: undefined,
     uppercase: true,
+    useReactRouterDomLink: undefined,
     variant: undefined, // stay it undefined for supporting ButtonGroup component variant
 };
 

@@ -4,6 +4,10 @@ import { useTheme } from '@mui/material/styles';
 
 import toHex from 'colornames-es';
 
+export function setDisplayName(component, name): void {
+    component.displayName = name;
+}
+
 export function getCapitalLetters(str): [string, string?] {
     const chars =
         str

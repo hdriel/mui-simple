@@ -59,7 +59,7 @@ export const StepContent = styled(MuiStepContent, {
 
 export const StepLabel = styled(MuiStepLabel, {
     shouldForwardProp: (propName) => ![].includes(propName as string),
-})<StepLabelProps>`
+})<any>`
     & .MuiStepIcon-root.Mui-active,
     & .MuiStepIcon-root.Mui-completed,
     & .MuiStepLabel-label.Mui-active {
@@ -72,6 +72,36 @@ export const StepLabel = styled(MuiStepLabel, {
 `;
 
 export const Box = styled(MuiBox)<BoxProps>``;
+export const Container = styled(MuiBox)<BoxProps>`
+    width: 100%;
+`;
+
+export const ActionContainer = styled(MuiBox)<BoxProps>`
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+export const FullSpaceBox = styled(MuiBox)<BoxProps>`
+    flex: 1 1 auto;
+`;
+
+export const ContentContainer = styled(MuiBox)<BoxProps>`
+    margin-block-start: 32px;
+    margin-block-end: 16px;
+`;
+
+export const VerticalActionContainer = styled(MuiBox)<BoxProps>`
+    display: flex;
+    flex-direction: row;
+    padding-block-start: 32px;
+`;
+
+export const ActionButton = styled(Button)<BoxProps>`
+    margin-block-start: 16px;
+    margin-inline-end: 16px;
+`;
 
 interface OwnerState {
     completed?: boolean;

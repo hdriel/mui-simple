@@ -2,16 +2,10 @@ import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Box } from '@mui/material';
 import List from '../List';
-import {
-    Send as SendIcon,
-    BeachAccess as BeachAccessIcon,
-    Phone as PhoneIcon,
-    Drafts as DraftsIcon,
-    Inbox as InboxIcon,
-    StarBorder as StarBorderIcon,
-} from '@mui/icons-material';
+import { Send as SendIcon, BeachAccess as BeachAccessIcon } from '@mui/icons-material';
 import Button from '../../Button/Button';
 import Checkbox from '../../Checkbox/Checkbox';
+import { courseChapters, nestedList } from './List.mocks';
 
 const meta: Meta<typeof List> = {
     title: 'Data-Display/List',
@@ -343,56 +337,45 @@ export const SelectedItems: Story = {
     },
 };
 
-export const NestedList = () => {
-    const items = [
-        {
-            startIcon: <SendIcon />,
-            title: 'Sent mail',
-        },
-        {
-            startIcon: <DraftsIcon />,
-            title: 'Drafts',
-        },
-        {
-            startIcon: <InboxIcon />,
-            title: 'Inbox',
-            component: 'div',
-            items: [
-                {
-                    startIcon: <StarBorderIcon />,
-                    title: 'Starred',
-                    items: [
-                        {
-                            startIcon: 'LooksOne',
-                            title: 'Mail One',
-                            inset: true,
-                        },
-                        {
-                            startIcon: 'LooksTwo',
-                            title: 'Mail Two',
-                            inset: true,
-                        },
-                        {
-                            startIcon: 'Looks3',
-                            title: 'Mail 3',
-                            inset: true,
-                            items: [
-                                {
-                                    startIcon: 'ThirtyFpsSelect',
-                                    title: 'something',
-                                    inset: true,
-                                },
-                            ],
-                        },
-                    ],
-                },
-            ],
-        },
-        {
-            startIcon: <PhoneIcon />,
-            title: 'Recents',
-        },
-    ];
+export const NestedList = (args) => {
+    return <List {...args} title="Nested List Items" items={nestedList} />;
+};
 
-    return <List title="Nested List Items" items={items} />;
+export const DraggableNestedList = (args) => {
+    const [items, setItems] = useState(nestedList);
+
+    return (
+        <List
+            {...args}
+            title="Draggable Nested List Items"
+            items={items}
+            onListOrderChange={(reorderedItems) => setItems(reorderedItems)}
+            dragAndDropItems
+            droppableId="root"
+        />
+    );
+};
+
+export const CourseChapters = (args) => {
+    const [draggable, setDraggable] = useState(true);
+    const [items, setItems] = useState(courseChapters);
+    items.forEach((data) => {
+        if (data?.listItemsProps?.dragAndDropItems !== undefined) {
+            data.listItemsProps.dragAndDropItems = draggable;
+        }
+    });
+
+    return (
+        <>
+            <Checkbox label="Draggable" value={draggable} onChange={(e, checked) => setDraggable(checked)} />
+            <List
+                {...args}
+                title="Draggable Nested List Items"
+                items={items}
+                onListOrderChange={(reorderedItems) => setItems(reorderedItems)}
+                dragAndDropItems={draggable}
+                droppableId="root"
+            />
+        </>
+    );
 };

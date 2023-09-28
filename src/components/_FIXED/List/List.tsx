@@ -6,9 +6,11 @@ import MuiListItem from './ListItem';
 import DraggableList from '../../DraggableList/DraggableList';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 import type { ListItemProps, ListProps } from '../../decs';
+import { useCustomColor } from '../../../utils/helpers';
 
 const List: React.FC<ListProps> = ({
     alignItems,
+    bgColor: _bgColor,
     buttonItems,
     component,
     dense,
@@ -17,6 +19,7 @@ const List: React.FC<ListProps> = ({
     disablePaddingItems,
     dragAndDropItems,
     draggableIcon,
+    draggableListType,
     droppableId,
     enableSubtitle,
     fieldId,
@@ -26,10 +29,13 @@ const List: React.FC<ListProps> = ({
     items,
     onListOrderChange,
     title,
+    useDraggableContext,
     useTransition,
+    useReactRouterDomLink,
     width,
     ...props
 }): React.ReactElement => {
+    const [bgColor] = useCustomColor(_bgColor);
     const [open, setOpen] = useState({});
     const onClick = (index, cb, event): void => {
         event.stopPropagation();
@@ -43,13 +49,10 @@ const List: React.FC<ListProps> = ({
     const dataList =
         items?.map((item, index) =>
             typeof item === 'string'
-                ? {
-                      title: item,
-                      id: `${item}-${index}`,
-                  }
+                ? { title: item, id: item }
                 : {
                       ...item,
-                      id: item[fieldId] ?? `${item.title}-${index}`,
+                      id: item[fieldId] ?? item.title,
                       ...(hideActionsOnDragAndDropItems && dragAndDropItems && { actions: [] }),
                   }
         ) ?? [];
@@ -64,13 +67,20 @@ const List: React.FC<ListProps> = ({
 
         const nestedItems = (
             <Box>
-                <List items={itemProps.items} />
+                <List
+                    bgColor={_bgColor}
+                    items={itemProps.items}
+                    droppableId={itemProps.title}
+                    {...itemProps.listItemsProps}
+                    useDraggableContext={false}
+                    useReactRouterDomLink={useReactRouterDomLink}
+                />
                 <Divider variant="fullWidth" {...divider} component="div" />
             </Box>
         );
 
         return (
-            <div style={{ width: '100%' }} key={item[fieldId] ?? String(item).toString()}>
+            <Box style={{ width: '100%' }} key={item[fieldId] ?? String(item).toString()}>
                 {listItem && (
                     <MuiListItem
                         disablePadding={itemProps.disablePadding ?? disablePaddingItems ?? true}
@@ -86,6 +96,8 @@ const List: React.FC<ListProps> = ({
                         enableSubtitle={enableSubtitle}
                         isOpen={isOpen}
                         flexDirectionItems={flexDirectionItems}
+                        draggable={dragAndDropItems}
+                        useReactRouterDomLink={useReactRouterDomLink}
                     >
                         {useTransition ? (
                             <Collapse
@@ -102,7 +114,7 @@ const List: React.FC<ListProps> = ({
                     </MuiListItem>
                 )}
                 {divider && <Divider variant="fullWidth" {...divider} component="span" />}
-            </div>
+            </Box>
         );
     };
 
@@ -112,54 +124,69 @@ const List: React.FC<ListProps> = ({
             useTransition={useTransition}
             disablePadding={disablePadding}
             dense={dense}
-            sx={{ width, bgcolor: 'background.paper' }}
+            sx={{ width, bgcolor: bgColor }}
             component={component}
-            subheader={title ? <ListSubheader component="span">{title}</ListSubheader> : undefined}
+            subheader={
+                title ? (
+                    <ListSubheader component="span" sx={{ bgcolor: bgColor }}>
+                        {title}
+                    </ListSubheader>
+                ) : undefined
+            }
             {...props}
         >
-            {dragAndDropItems ? (
-                <DraggableList
-                    fieldId={fieldId}
-                    dataList={dataList}
-                    droppableClassName={droppableId}
-                    // disabled={!dragAndDropItems}
-                    onChange={onListOrderChange}
-                    renderValue={(item, index) =>
-                        renderValue(
-                            {
-                                ...item,
-                                actions: [
-                                    ...(item?.actions ?? []),
-                                    ...(draggableIcon ? [<Button key="dragable" icon={draggableIcon} />] : []),
-                                ],
-                            },
-                            index
-                        )
-                    }
-                    component="div"
-                />
-            ) : (
-                <Box>{dataList.map((item, index) => renderValue(item, index))}</Box>
-            )}
+            <DraggableList
+                useDraggableContext={useDraggableContext}
+                draggableListType={draggableListType}
+                fieldId={fieldId}
+                dataList={dataList}
+                droppableClassName={droppableId}
+                disabled={!dragAndDropItems}
+                onChange={onListOrderChange}
+                renderValue={(item, index) =>
+                    renderValue(
+                        {
+                            ...item,
+                            actions: [
+                                ...(item?.actions ?? []),
+                                ...(dragAndDropItems && draggableIcon
+                                    ? [<Button key="dragable" icon={draggableIcon} />]
+                                    : []),
+                            ],
+                        },
+                        index
+                    )
+                }
+                component="div"
+            />
         </MuiList>
     );
 };
 
 List.defaultProps = {
     alignItems: undefined,
+    bgColor: 'background.paper',
     buttonItems: true,
     component: 'nav',
     dense: undefined,
+    disableGuttersItems: undefined,
     disablePadding: true,
+    disablePaddingItems: undefined,
     dragAndDropItems: false,
     draggableIcon: 'DragHandle',
+    draggableListType: undefined,
+    droppableId: undefined,
     enableSubtitle: true,
     fieldId: 'id',
     flexDirectionItems: undefined,
     hideActionsOnDragAndDropItems: true,
+    insetItems: undefined,
     items: [],
+    onListOrderChange: undefined,
     title: undefined,
+    useDraggableContext: true,
     useTransition: true,
+    useReactRouterDomLink: undefined,
     width: undefined,
 };
 

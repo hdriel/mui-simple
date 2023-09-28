@@ -1,16 +1,15 @@
 import React, { isValidElement } from 'react';
-import type { PropsWithChildren } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from '@mui/material/styles';
 
-import { Tabs as MuiTabs, Box } from './Tabs.styled';
+import { Tabs as MuiTabs, Box, TabWrapper } from './Tabs.styled';
 import Tab from './Tab';
 import TabItem from './TabItem';
 import TabPanel from './TabPanel';
 import { useCustomColor } from '../../../utils/helpers';
 import type { TabsProps } from '../../decs';
 
-const Tabs: React.FC<PropsWithChildren<TabsProps>> = ({
+const Tabs: React.FC<TabsProps> = ({
     centered,
     fillActiveTab,
     color,
@@ -74,17 +73,7 @@ const Tabs: React.FC<PropsWithChildren<TabsProps>> = ({
     const isScrollableVariant = orientation === 'vertical' || visibleScrollbar || variant === 'scrollable';
 
     return (
-        <Box
-            sx={{
-                width: '100%',
-                display: 'flex',
-                flexDirection: reverse ? 'column-reverse' : 'column',
-                ...(orientation === 'vertical' && {
-                    flexDirection: reverse ? 'row-reverse' : 'row',
-                    maxHeight: verticalMaxFixedHeight ?? 'inherit',
-                }),
-            }}
-        >
+        <TabWrapper reverse={reverse} orientation={orientation} verticalMaxFixedHeight={verticalMaxFixedHeight}>
             <MuiTabs
                 reverse={reverse}
                 centered={isScrollableVariant ? undefined : centered}
@@ -123,14 +112,14 @@ const Tabs: React.FC<PropsWithChildren<TabsProps>> = ({
                         const tabId = filteredChildren[tabIndex]?.props.value;
                         onChange?.(tabId);
                     }}
-                    style={{ width: '100%', height: '100%' }}
+                    style={{ width: '100%', height: '100%', padding: 0 }}
                 >
                     {tabPanels}
                 </SwipeableViews>
             ) : (
                 tabPanels
             )}
-        </Box>
+        </TabWrapper>
     );
 };
 

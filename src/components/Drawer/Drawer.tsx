@@ -1,40 +1,33 @@
 import React from 'react';
-import type { ReactNode, PropsWithChildren } from 'react';
-//	import PropTypes from 'prop-types';
+import type { ReactElement } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { ChevronLeft as ChevronLeftIcon, ChevronRight as ChevronRightIcon } from '@mui/icons-material';
 
 import { Drawer as MuiDrawer, ContentWrapper, SwipeableDrawer, DrawerHeader } from './Drawer.styled';
 import Button from '../_FIXED/Button/Button';
 import Divider from '../_FIXED/Divider/Divider';
+import type { DrawerProps } from '../decs';
 
-interface DrawerProps {
-    openDirection?: 'left' | 'right' | 'top' | 'bottom';
-    variant?: 'permanent' | 'mini-persistent' | 'persistent' | 'temporary';
-    open?: boolean;
-    swipeable?: boolean;
-    keepMounted?: boolean;
-    onClose?: () => void;
-    // Todo: assert if this type is ok
-    toggleDrawer?: (open: boolean) => void;
-    drawerWidth?: number | string;
-}
-export default function Drawer(props: PropsWithChildren<DrawerProps>): ReactNode {
-    const {
-        onClose,
-        open,
-        swipeable,
-        keepMounted,
-        openDirection,
-        toggleDrawer: _toggleDrawer,
-        drawerWidth,
-        children,
-        ...rest
-    } = props;
-    let { variant } = props;
+const Drawer: React.FC<DrawerProps> = ({
+    backdrop,
+    bgColor,
+    width,
+    keepMounted,
+    onClose,
+    open,
+    direction,
+    hideHeader,
+    swipeable,
+    variant: _variant,
+    toggleDrawer: _toggleDrawer,
+    PaperProps,
+    children,
+    ...props
+}): ReactElement => {
     const theme = useTheme();
-    const isMiniPersistent = variant === 'mini-persistent';
-    variant = isMiniPersistent ? 'persistent' : variant;
+    const isMiniPersistent = _variant === 'mini-persistent';
+    const variant = isMiniPersistent ? 'persistent' : _variant;
+    const DrawerCmp = swipeable ? SwipeableDrawer : MuiDrawer;
 
     // Todo: add correct event type here
     const toggleDrawer = (open: boolean) => (event) => {
@@ -45,29 +38,47 @@ export default function Drawer(props: PropsWithChildren<DrawerProps>): ReactNode
         _toggleDrawer?.(open);
     };
 
-    const DrawerCmp = swipeable ? SwipeableDrawer : MuiDrawer;
-
     return (
         <DrawerCmp
-            // 	Todo: check if ...rest should be passed here?
             variant={variant}
-            anchor={openDirection}
+            anchor={direction}
             open={open}
             onClose={toggleDrawer?.(false)}
             ModalProps={{ keepMounted }}
             isMiniPersistent={isMiniPersistent}
-            drawerWidth={drawerWidth}
+            bgColor={bgColor}
+            hideBackdrop={!backdrop}
+            PaperProps={{
+                ...PaperProps,
+                sx: {
+                    width,
+                    ...PaperProps?.sx,
+                    ...(bgColor && { backgroundColor: bgColor }),
+                    backgroundImage: 'unset',
+                    overflowX: 'hidden',
+                    transition: theme.transitions.create('width', {
+                        easing: theme.transitions.easing.sharp,
+                        duration: theme.transitions.duration.enteringScreen,
+                    }),
+                },
+            }}
+            {...props}
         >
-            <DrawerHeader anchor={openDirection}>
-                <Button
-                    onClick={toggleDrawer?.(false)}
-                    icon={theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                />
-            </DrawerHeader>
-            <Divider variant="fullWidth" />
+            {!hideHeader && (
+                <>
+                    <DrawerHeader anchor={direction}>
+                        <Button
+                            onClick={toggleDrawer?.(false)}
+                            icon={theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                        />
+                    </DrawerHeader>
+                    <Divider variant="fullWidth" />
+                </>
+            )}
+
             <ContentWrapper
-                drawerWidth={drawerWidth}
-                anchor={openDirection}
+                drawerWidth={width}
+                anchor={direction}
                 onClick={toggleDrawer?.(false)}
                 onKeyDown={toggleDrawer?.(false)}
             >
@@ -75,26 +86,21 @@ export default function Drawer(props: PropsWithChildren<DrawerProps>): ReactNode
             </ContentWrapper>
         </DrawerCmp>
     );
-}
-
-//	Drawer.propTypes = {
-//    openDirection: PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
-//    variant: PropTypes.oneOf(['permanent', 'mini-persistent', 'persistent', 'temporary']), // mui default "temporary"
-//    open: PropTypes.bool,
-//    swipeable: PropTypes.bool,
-//    keepMounted: PropTypes.bool,
-//    onClose: PropTypes.func,
-//    toggleDrawer: PropTypes.func,
-//    drawerWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-//	};
+};
 
 Drawer.defaultProps = {
-    openDirection: undefined,
-    variant: undefined,
-    open: undefined,
-    swipeable: undefined,
+    bgColor: undefined,
+    width: 240,
     keepMounted: undefined,
     onClose: undefined,
+    open: undefined,
+    direction: undefined,
+    swipeable: undefined,
     toggleDrawer: undefined,
-    drawerWidth: 240,
+    variant: undefined,
+    hideHeader: false,
+    backdrop: false,
 };
+
+export type { DrawerProps } from '../decs';
+export default Drawer;

@@ -154,10 +154,19 @@ export const TextColor: Story = {
     },
 };
 
-export const TitleColor: Story = {
+export const LabelColor: Story = {
     args: {
         label: 'Details Max Rows 3',
-        titleColor: '#10DCCA',
+        labelColor: '#10DCCA',
+        expanded: true,
+        details: smallIpsum,
+    },
+};
+
+export const LabelColorFunc: Story = {
+    args: {
+        label: 'labelColor as function by expanded state',
+        labelColor: (expanded) => (expanded ? '#7e049a' : '#07860d'),
         expanded: true,
         details: smallIpsum,
     },

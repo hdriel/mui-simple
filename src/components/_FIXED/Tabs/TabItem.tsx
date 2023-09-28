@@ -1,11 +1,10 @@
 import React from 'react';
-import type { PropsWithChildren } from 'react';
 import { Tab as MuiTab } from './Tabs.styled';
 import Tooltip from '../Tooltip/Tooltip';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 import type { TabItemProps } from '../../decs';
 
-const TabItem: React.FC<PropsWithChildren<TabItemProps>> = ({
+const TabItem: React.FC<TabItemProps> = ({
     children,
     icon,
     link,

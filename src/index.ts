@@ -4,7 +4,9 @@ export type { AccordionProps } from './components/_FIXED/Accordion/Accordion';
 export { default as Alert } from './components/_FIXED/Alert/Alert';
 export type { AlertProps } from './components/_FIXED/Alert/Alert';
 
-export { default as AppBar } from './components/AppBar/AppBar';
+export { default as AppBar } from './components/_FIXED/AppBar/AppBar';
+export type { AppBarProps } from './components/_FIXED/AppBar/AppBar';
+
 export { default as InputAutocomplete } from './components/Autocomplete/InputAutocomplete';
 export { default as InputAutoCompleteAsync } from './components/Autocomplete/InputAutocompleteAsync';
 export { default as InputAutocompleteMultiple } from './components/Autocomplete/InputAutocompleteMultiple';
@@ -46,6 +48,7 @@ export { default as Divider } from './components/_FIXED/Divider/Divider';
 export type { DividerProps } from './components/_FIXED/Divider/Divider';
 
 export { default as Drawer } from './components/Drawer/Drawer';
+export type { DrawerProps } from './components/Drawer/Drawer';
 
 export { default as Fab } from './components/_FIXED/FloatingActionButton/FloatingActionButton';
 export type { FabProps } from './components/_FIXED/FloatingActionButton/FloatingActionButton';

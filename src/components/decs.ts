@@ -1,11 +1,32 @@
-import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent } from 'react';
+import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent, Ref } from 'react';
 import type { SxProps } from '@mui/material';
 import { number } from 'prop-types';
 import React, { MouseEventHandler } from 'react';
 
+export type AppBarPosition = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
+
+export interface AppBarProps {
+    actions?: ReactNode;
+    color?: string;
+    dense?: boolean;
+    disablePadding?: boolean;
+    drawerWidth?: number;
+    elevation?: number; // assuming you want the values to be numbers
+    elevationScroll?: boolean;
+    enableColorOnDark?: boolean;
+    hideOnScroll?: boolean;
+    menu?: ReactNode | boolean;
+    position?: AppBarPosition;
+    scrollElement?: ReactNode | string;
+    scrollToTop?: ReactNode | boolean;
+    scrollToTopProps?: object;
+    title?: string | ReactNode;
+    toolbarId?: string;
+    [key: string]: any;
+}
 export interface AccordionProps {
     bgColor?: string;
-    bottomSecondaryLabel: string;
+    bottomSecondaryLabel?: string;
     buttonsColor?: string;
     collapsedIcon?: string | ReactNode;
     details?: string;
@@ -20,7 +41,7 @@ export interface AccordionProps {
     secondaryLabel?: string;
     showMoreLabel?: string;
     textColor?: string;
-    titleColor?: string;
+    labelColor?: ((expanded: boolean | string) => string) | string;
     unmountDetailsOnClose?: boolean;
     useCustomStyle?: boolean;
     [key: string]: any;
@@ -82,6 +103,7 @@ export interface ButtonProps {
     tooltipProps?: TooltipProps;
     uppercase?: boolean;
     variant?: 'contained' | 'outlined' | 'text';
+    useReactRouterDomLink?: boolean;
     [key: string]: any;
 }
 
@@ -128,6 +150,21 @@ export interface CircularProgressProps {
     [key: string]: any;
 }
 
+export interface DrawerProps {
+    backdrop?: boolean;
+    bgColor?: string;
+    width?: number | string;
+    keepMounted?: boolean;
+    onClose?: () => void;
+    open?: boolean;
+    hideHeader?: boolean;
+    direction?: 'left' | 'right' | 'top' | 'bottom';
+    swipeable?: boolean;
+    toggleDrawer?: (open: boolean) => void;
+    variant?: 'permanent' | 'mini-persistent' | 'persistent' | 'temporary';
+    [key: string]: any;
+}
+
 export interface DialogProps {
     open: boolean;
     onClose?: (value: string) => void;
@@ -153,7 +190,7 @@ export interface DividerProps {
     label?: string | ReactNode;
     light?: boolean;
     orientation?: 'horizontal' | 'vertical';
-    textAlign?: 'center' | 'left' | 'right';
+    textAlign?: AlignType;
     thickness?: number;
     variant?: 'fullWidth' | 'inset' | 'middle';
     [key: string]: any;
@@ -163,6 +200,7 @@ export interface CardProps {
     actions?: ReactNode | string | ButtonProps | Array<ReactNode | ButtonProps | string>;
     avatar?: ReactNode;
     contentPadding?: number | string;
+    contentStyle?: SxProps;
     flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
     image?:
         | string
@@ -176,6 +214,7 @@ export interface CardProps {
               [key: string]: any;
           };
     height?: number | string;
+    justifyContent?: string;
     maxHeight?: number | string;
     maxWidth?: number | string;
     mediaOnTop?: boolean;
@@ -279,13 +318,15 @@ export interface InputBaseProps {
     name?: string;
     onBlur?: (Event) => void;
     onChange?: (Event) => void;
+    onEnterKeyPress?: (Event) => void;
+    onKeyPress?: (Event) => void;
     onFocus?: (Event) => void;
     readOnly?: boolean;
     required?: boolean;
     rows?: number;
     startCmp?: ReactNode | string;
     startCmpExternal?: ReactNode | string;
-    textAlign?: 'start' | 'end' | 'center' | 'left' | 'right' | 'inherit' | 'initial' | 'unset' | 'revert';
+    textAlign?: AlignType;
     type?: string;
     value?: string | any;
     variant?: 'filled' | 'standard' | 'outlined';
@@ -499,6 +540,8 @@ export interface FabProps {
     link?: string;
     size?: 'small' | 'medium' | 'large';
     variant?: 'extended' | 'circular';
+    useReactRouterDomLink?: boolean;
+    innerRef?: Ref<any>;
     [key: string]: any;
 }
 
@@ -518,9 +561,13 @@ export interface LinkProps {
     color?: string;
     icon?: string | ReactNode;
     label?: string;
+    preventScrollReset?: boolean;
+    relativeUrl?: string;
+    replaceUrl?: string;
     size?: string | number;
     underline?: 'always' | 'hover' | 'none';
     url?: string;
+    useReactRouterDomLink?: boolean;
     [key: string]: any;
 }
 
@@ -534,8 +581,11 @@ export interface ListItemProps {
     divider?: object | boolean;
     inset?: boolean;
     items?: Array<string | ListItemProps>;
+    listItemsProps?: Omit<ListProps, 'items'>;
     link?: string;
     controlType?: 'checkbox' | 'switch';
+    droppableId?: string;
+    draggableListType?: string;
     selected?: boolean;
     startIcon?: ReactNode | string;
     subtitle?: string;
@@ -545,6 +595,7 @@ export interface ListItemProps {
 
 export interface ListProps {
     alignItems?: 'flex-start';
+    bgColor?: string;
     buttonItems?: boolean;
     component?: string;
     dense?: boolean;
@@ -552,16 +603,27 @@ export interface ListProps {
     disablePadding?: boolean;
     disablePaddingItems?: boolean;
     dragAndDropItems?: boolean;
+    draggableListType?: string;
     droppableId?: string;
     enableSubtitle?: boolean;
-    hideActionsOnDragAndDropItems?: boolean;
     fieldId?: string;
     flexDirectionItems?: 'row' | 'column';
+    hideActionsOnDragAndDropItems?: boolean;
     insetItems?: boolean;
     items?: Array<string | ListItemProps>;
-    onListOrderChange?: (items: Array<string | ListItemProps>) => void;
+    onListOrderChange?: (
+        dataItems: Array<ListItemProps & { id: string }>,
+        extraProps: {
+            source: { index: number; droppableId: string };
+            destinationIndex: { index: number; droppableId: string };
+            droppableId: string;
+            dataList?: Array<ListItemProps & { id: string }>;
+        }
+    ) => void;
     title?: string;
+    useDraggableContext?: true;
     useTransition?: boolean;
+    useReactRouterDomLink?: boolean;
     width?: string | number;
     [key: string]: any;
 }
@@ -724,7 +786,7 @@ export interface SwitchProps {
     OFF_LABEL?: string;
     onChange?: (event: any, checked?: boolean) => void;
     ON_LABEL?: string;
-    onOffLabelSide: 'right' | 'left';
+    onOffLabelSide?: 'right' | 'left';
     required?: boolean;
     scale?: number;
     size?: 'small' | 'medium';
@@ -766,6 +828,50 @@ export interface SliderProps {
     range?: Range;
     value?: number;
     valueLabelFormat?: (value: number) => string;
+    [key: string]: any;
+}
+
+export interface StepType {
+    label?: string;
+    optional?: boolean | string;
+    color?: string;
+    error?: boolean;
+    icon?: ReactNode;
+}
+export interface StepperProps {
+    allCompletedCmp?: ReactNode;
+    color?: string;
+    customStyleProps?: {
+        fontSize?: number | string;
+        background?: string;
+        lineColor?: string;
+        padding?: number | string;
+        lineWidth?: number | string;
+        checkIcon?: ReactNode;
+        dotIcon?: ReactNode;
+        marginContent?: number | string;
+        [key: string]: any;
+    };
+    labels?: { next?: string; back?: string; done?: string; skip?: string; optional?: string };
+    onBack?: (stepId: number) => void;
+    onDone?: () => void;
+    onNext?: (stepId: number) => void;
+    onReset?: () => void;
+    onSkip?: (stepId: number) => void;
+    orientation?: 'horizontal' | 'vertical';
+    qontoStyle?: boolean;
+    stepIndex?: number;
+    steps?: Array<StepType | string>;
+    stepsBottomLabel?: boolean;
+    stepsIndexSkipped?: number[];
+    stepsOnlyWithoutComplete?: boolean;
+    unmountOnExit?: boolean;
+    NEXT_LABEL?: string;
+    BACK_LABEL?: string;
+    SKIP_LABEL?: string;
+    DONE_LABEL?: string;
+    OPTIONAL_LABEL?: string;
+
     [key: string]: any;
 }
 
@@ -841,6 +947,7 @@ export interface TypographyProps {
     strike?: boolean;
     sub?: boolean;
     sup?: boolean;
+    textDirection?: 'ltr' | 'rtl';
     tooltip?: boolean | string;
     tooltipPlacement?: TooltipPlacementType;
     underline?: boolean;
@@ -935,18 +1042,23 @@ export interface TabsProps {
 export interface ToggleButtonGroupProps {
     orientation?: 'horizontal' | 'vertical';
     size?: 'small' | 'medium' | 'large';
-    value?: string;
+    value?: string | number;
     exclusive?: boolean;
     fullWidth?: boolean;
     disableRipple?: boolean;
-    onChange?: (event: any, newValues: null | string | string[]) => void;
+    onChange?: (event: any, newValues: null | number | number[] | string | string[] | any) => void;
     color?: string;
     enforceValueSet?: boolean;
+    helperText?: string;
+    helperTextAlign?: AlignType;
+    helperTextStyle?: SxProps;
+    error?: boolean;
     data?: Array<{
         value: string;
         disabled?: boolean;
         component: ReactElement | ReactNode | string | number;
     }>;
+    transparent?: boolean;
     [key: string]: any;
 }
 
@@ -954,6 +1066,7 @@ export interface ToggleButtonGroupsProps {
     fullWidth?: boolean;
     disableRipple?: boolean;
     justifyContent?: string;
+    transparent?: boolean;
     [key: string]: any;
 }
 

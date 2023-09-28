@@ -3,6 +3,7 @@ import { get } from 'lodash-es';
 import { styled, css } from '@mui/material/styles';
 import { Tabs as MuiTabs, Tab as MuiTab, Box as MuiBox } from '@mui/material';
 import type { TabsProps, BoxProps } from '@mui/material';
+import { numberToPx } from '../../../utils/helpers';
 
 interface TabsStyledProps {
     customColor?: string;
@@ -14,9 +15,12 @@ type TabsStyledPropsType = TabsProps & TabsStyledProps & any;
 export const Tabs = styled(MuiTabs, {
     shouldForwardProp: (propName) => !['reverse', 'fillActiveTab', 'customColor'].includes(propName as string),
 })<TabsStyledPropsType>`
+    padding: 0;
+
     & .MuiTabs-indicator {
         background-color: ${(props) => props.customColor};
     }
+
     & .MuiTab-root {
         &.Mui-selected {
             ${(props) => {
@@ -58,7 +62,33 @@ export const TabPanel = styled(MuiBox, {
 })<TabPanelStyledPropsType>`
     width: 100%;
     height: 100%;
+    padding: 0;
     flex-grow: 1;
 ` as ComponentType<TabPanelStyledPropsType>;
 
 export const Box = MuiBox;
+
+interface TabWrapperProps {
+    reverse?: boolean;
+    orientation?: 'vertical' | 'horizontal';
+    verticalMaxFixedHeight?: string;
+}
+
+type TabWrapperType = BoxProps & TabWrapperProps & any;
+
+export const TabWrapper = styled(MuiBox, {
+    shouldForwardProp: (propName) => !['reverse', 'orientation', 'verticalMaxFixedHeight'].includes(propName as string),
+})<TabWrapperType>`
+    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: ${(props) => (props.reverse ? 'column-reverse' : 'column')};
+    ${(props) => {
+        if (props.orientation === 'vertical') {
+            return css`
+                flex-direction: ${props.reverse ? 'row-reverse' : 'row'};
+                max-height: ${numberToPx(props.verticalMaxFixedHeight) ?? 'inherit'};
+            `;
+        }
+    }}
+` as ComponentType<TabWrapperType>;

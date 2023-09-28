@@ -1,27 +1,33 @@
 import React from 'react';
-import { Link as MuiLink } from './Link.styled';
+import { Link as MuiLink, RRDLink } from './Link.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import type { LinkProps } from '../../decs';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 
 const Link: React.FC<LinkProps> = ({
-    url,
     color,
-    size,
-    label,
     icon: _icon,
+    label,
+    preventScrollReset,
+    replaceUrl,
+    relativeUrl,
+    size,
+    url,
+    underline,
+    useReactRouterDomLink,
     children,
     ...props
 }): React.ReactElement => {
     const [customColor, muiColor] = useCustomColor(color);
     const icon = typeof _icon === 'string' ? <SVGIcon>{_icon}</SVGIcon> : _icon;
 
-    return (
+    const cmp = (
         <MuiLink
-            href={url}
+            href={useReactRouterDomLink ? undefined : url}
             color={muiColor as any}
             customColor={muiColor ? undefined : customColor}
             size={size}
+            underline={underline}
             {...props}
         >
             {icon}
@@ -29,15 +35,34 @@ const Link: React.FC<LinkProps> = ({
             {children}
         </MuiLink>
     );
+
+    return useReactRouterDomLink ? (
+        <RRDLink
+            underline={underline}
+            customColor={muiColor ? undefined : customColor}
+            to={relativeUrl || replaceUrl || url}
+            replace={!!replaceUrl}
+            relative={!!relativeUrl}
+            preventScrollReset={preventScrollReset}
+        >
+            {cmp}
+        </RRDLink>
+    ) : (
+        cmp
+    );
 };
 
 Link.defaultProps = {
-    url: undefined,
+    color: undefined,
     icon: undefined,
     label: undefined,
-    color: undefined,
-    underline: undefined,
+    preventScrollReset: false,
+    replaceUrl: undefined,
+    relativeUrl: undefined,
     size: undefined,
+    underline: undefined,
+    url: undefined,
+    useReactRouterDomLink: undefined,
 };
 
 export type { LinkProps } from '../../decs';

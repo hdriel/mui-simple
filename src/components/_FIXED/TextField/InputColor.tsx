@@ -5,7 +5,7 @@ import { ClickAwayListener } from '@mui/material';
 import Input from './TextField';
 import Button from '../Button/Button';
 import Snackbar from '../Snackbar/Snackbar';
-import { copyToClipboard, getCustomColor, useCustomColor } from '../../../utils/helpers';
+import { copyToClipboard, getCustomColor } from '../../../utils/helpers';
 import Slider from '../Slider/Slider';
 import { Box } from './TextField.styled';
 import type { InputColorProps } from '../../decs';

@@ -1,19 +1,10 @@
 import React, { isValidElement } from 'react';
-import type { PropsWithChildren } from 'react';
 import { isForwardRef } from 'react-is';
 import { Tooltip as MuiTooltip, Zoom } from './Tooltip.styled';
 import { CustomChildTooltipWrapper } from './Tooltip.helper';
 import type { TooltipProps } from '../../decs';
 
-const Tooltip: React.FC<PropsWithChildren<TooltipProps>> = ({
-    bgColor,
-    children,
-    color,
-    fontSize,
-    lineHeight,
-    title,
-    ...props
-}) => {
+const Tooltip: React.FC<TooltipProps> = ({ bgColor, children, color, fontSize, lineHeight, title, ...props }) => {
     if (typeof children === 'string') children = <div>{children}</div>;
     const isValidTooltipProps = title && isValidElement(children);
 

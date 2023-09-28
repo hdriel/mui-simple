@@ -1,361 +1,200 @@
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
-import { AddLocation as AddLocationIcon, Send as SendIcon } from '@mui/icons-material';
-
+import type { Meta, StoryObj } from '@storybook/react';
+import { range } from 'lodash-es';
+import { DoneAll as DoneAllIcon } from '@mui/icons-material';
 import Stepper from '../Stepper';
-import { Typography } from '../Stepper.styled';
 import { useSimpleStepper } from '../Stepper.utils';
-import ToggleButtonGroup from '../../_FIXED/ToggleButtonGroup/ToggleButtonGroup';
-import ToggleButtonGroups from '../../_FIXED/ToggleButtonGroup/ToggleButtonGroups';
+import { stepsChildren, stepsStrChildren, stepsStr, steps } from './Stepper.mocks';
 
-export default {
+const meta: Meta<typeof Stepper> = {
     title: 'Navigation/Stepper',
     component: Stepper,
-    decorators: [
-        (Story) => (
-            <div
-                style={{
-                    height: '750px',
-                    width: '750px',
-                    backgroundColor: 'rgba(255,255,255,0.8)',
-                    border: '1px solid black',
-                    padding: '1em',
+    tags: ['autodocs'],
+};
+
+export default meta;
+
+type Story = StoryObj<typeof Stepper>;
+
+export const Default: Story = {
+    args: {},
+};
+
+export const StepsStr: Story = {
+    args: {
+        steps: stepsStr,
+        children: stepsStrChildren,
+    },
+};
+
+export const StepsObj: Story = {
+    args: {
+        steps: steps,
+        children: stepsChildren,
+    },
+};
+
+export const Color: Story = {
+    args: {
+        color: '#d509b9', // todo: not working
+        steps: stepsStr,
+        children: stepsStrChildren,
+    },
+};
+
+export const StepIndex: Story = {
+    args: {
+        steps: stepsStr,
+        stepIndex: 2,
+        children: stepsStrChildren,
+    },
+};
+
+export const StepsIndexSkipped: Story = {
+    args: {
+        steps: stepsStr,
+        stepIndex: stepsStr.length - 1,
+        stepsIndexSkipped: range(1, stepsStr.length - 1),
+        children: stepsStrChildren,
+    },
+};
+
+export const AllCompletedCmp: Story = {
+    args: {
+        allCompletedCmp: <DoneAllIcon />,
+        steps: stepsStr,
+        stepIndex: stepsStr.length,
+        children: stepsStrChildren,
+    },
+};
+
+export const OnChangeEvents: Story = {
+    args: {
+        allCompletedCmp: <DoneAllIcon />,
+        steps: stepsStr,
+        children: stepsStrChildren,
+    },
+    render: (args) => {
+        const [activeStep, setActiveStep] = useState(0);
+        const [skipSteps, setSkipSteps] = useState([]);
+        return (
+            <Stepper
+                {...args}
+                stepsIndexSkipped={skipSteps}
+                stepIndex={activeStep}
+                onNext={(index: number) => {
+                    setSkipSteps((a) => a.filter((i) => i !== index));
+                    setActiveStep(index + 1);
                 }}
-            >
-                <Story />
-            </div>
-        ),
-    ],
+                onBack={(index: number) => setActiveStep(index - 1)}
+                onSkip={(index: number) => {
+                    setSkipSteps((a) => (a.includes(index) ? a : [...a, index]));
+                    setActiveStep(index + 1);
+                }}
+                onDone={() => console.log('Done')}
+                onReset={() => {
+                    /* todo: implement this */
+                }}
+            />
+        );
+    },
 };
 
-const actions = {
-    onClick: action('onClick'),
+export const UseSimpleStepper: Story = {
+    args: {
+        allCompletedCmp: <DoneAllIcon />,
+        steps: stepsStr,
+        stepIndex: stepsStr.length,
+        children: stepsStrChildren,
+    },
+    render: (args) => {
+        const [activeStep, setActiveStep] = useState(0);
+        const [skipSteps, setSkipSteps] = useState([]);
+        return <Stepper {...args} {...useSimpleStepper()} />;
+    },
 };
 
-const steps = [
-    { label: 'Select campaign settings', optional: true, error: true },
-    { label: 'Create an ad group', color: 'secondary' },
-    'Create an ad',
-];
-
-export const Default = () => {
-    return <Stepper {...actions} />;
+export const Labels: Story = {
+    args: {
+        allCompletedCmp: <DoneAllIcon />,
+        steps,
+        BACK_LABEL: 'BBB',
+        NEXT_LABEL: 'NNN',
+        DONE_LABEL: 'DDD',
+        SKIP_LABEL: 'SSS',
+        OPTIONAL_LABEL: 'OOO',
+        children: stepsChildren,
+    },
+    render: (args) => {
+        const [activeStep, setActiveStep] = useState(0);
+        const [skipSteps, setSkipSteps] = useState([]);
+        return <Stepper {...args} {...useSimpleStepper()} />;
+    },
 };
 
-export const SimpleStepper = () => {
-    const stepperProps = useSimpleStepper();
-    const steps = [
-        { label: 'Select campaign settings', optional: true },
-        { label: 'Create an ad group', color: 'secondary' },
-        'Create an ad',
-    ];
-
-    return (
-        <Stepper
-            {...actions}
-            {...stepperProps}
-            steps={steps}
-            onDone={stepperProps.onReset}
-            allCompletedCmp={<Typography sx={{ mt: 2, mb: 1 }}>All steps completed - you&apos;re finished</Typography>}
-        >
-            <div>Step A</div>
-            <div>Step B</div>
-            <div>Step C</div>
-        </Stepper>
-    );
+export const StepsBottomLabel: Story = {
+    args: {
+        steps,
+        stepIndex: 2,
+        StepsBottomLabel: true,
+        children: stepsChildren,
+    },
+};
+export const StepsOnlyWithoutComplete: Story = {
+    args: {
+        allCompletedCmp: <DoneAllIcon />,
+        steps: stepsStr,
+        stepIndex: stepsStr.length,
+        stepsOnlyWithoutComplete: true,
+        children: stepsStrChildren,
+    },
 };
 
-export const StepsBottomLabelStepper = () => {
-    const [activeStep, setActiveStep] = useState(0);
-    const [skipSteps, setSkipSteps] = useState([]);
-
-    return (
-        <Stepper
-            {...actions}
-            steps={steps}
-            stepIndex={activeStep}
-            onReset={(index) => {
-                setSkipSteps([]);
-                setActiveStep(0);
-            }}
-            onNext={(index) => {
-                setSkipSteps((a) => a.filter((i) => i !== index));
-                setActiveStep(index + 1);
-            }}
-            onBack={(index) => setActiveStep(index - 1)}
-            onSkip={(index) => {
-                setSkipSteps((a) => (a.includes(index) ? a : [...a, index]));
-                setActiveStep(index + 1);
-            }}
-            onDone={() => {}}
-            stepsIndexSkipped={skipSteps}
-            stepsBottomLabel
-            allCompletedCmp={<Typography sx={{ mt: 2, mb: 1 }}>All steps completed - you&apos;re finished</Typography>}
-        >
-            <div>Step A</div>
-            <div>Step B</div>
-            <div>Step C</div>
-        </Stepper>
-    );
+export const VerticalOrientation: Story = {
+    args: {
+        steps,
+        stepIndex: 2,
+        orientation: 'vertical',
+        children: stepsChildren,
+    },
 };
 
-export const VerticalStepper = () => {
-    const stepperProps = useSimpleStepper();
-    const steps = [
-        { label: 'Select campaign settings', optional: true },
-        { label: 'Create an ad group', color: 'secondary' },
-        'Create an ad',
-    ];
-
-    return (
-        <Stepper
-            {...actions}
-            {...stepperProps}
-            steps={steps}
-            customStyleProps={{
-                fontSize: 25,
-                background: 'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
-                lineColor: 'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
-                padding: 3,
-                lineWidth: 5,
-                marginContent: 26,
-            }}
-            orientation="vertical"
-            allCompletedCmp={<Typography sx={{ mt: 2, mb: 1 }}>All steps completed - you&apos;re finished</Typography>}
-        >
-            <div>
-                For each ad campaign that you create, you can control how much you're willing to spend on clicks and
-                conversions, which networks and geographical locations you want your ads to show on, and more.
-            </div>
-            <div>An ad group contains one or more ads which target a shared set of keywords.</div>
-            <div>
-                Try out different ad text to see what brings in the most customers, and learn how to enhance your ads
-                using features like ad extensions. If you run into any problems with your ads, find out how to tell if
-                they're running and how to resolve approval issues.
-            </div>
-        </Stepper>
-    );
+export const QontoStyle: Story = {
+    args: {
+        steps,
+        stepIndex: 2,
+        orientation: 'horizontal',
+        qontoStyle: true,
+        children: stepsChildren,
+    },
 };
 
-export const CustomStepper = () => {
-    const data1 = [
-        { value: 'horizontal', component: 'horizontal' },
-        { value: 'vertical', component: 'vertical' },
-    ];
-    const [orientation, setOrientation] = useState('horizontal');
+export const QontoVerticalStyle: Story = {
+    args: {
+        steps,
+        stepIndex: 2,
+        orientation: 'vertical',
+        qontoStyle: true,
+        children: stepsChildren,
+    },
+};
 
-    const data2 = [{ value: true, component: 'alternative labels' }];
-    const [stepsBottomLabel, setStepsBottomLabel] = useState(true);
-
-    const stepperProps = useSimpleStepper();
-    const steps = [
-        {
-            label: 'Select campaign settings',
-            optional: true,
-            icon: <AddLocationIcon />,
+export const CustomStyleProps: Story = {
+    args: {
+        steps,
+        stepIndex: 2,
+        children: stepsChildren,
+        customStyleProps: {
+            fontSize: 20,
+            background: '#DDaa0c',
+            lineColor: '#cd00c0',
+            padding: 20,
+            lineWidth: 5,
+            checkIcon: 'OfflinePin',
+            dotIcon: 'RadioButtonChecked',
+            marginContent: 10,
         },
-        {
-            label: 'Create an ad group',
-            color: 'secondary',
-            icon: <SendIcon />,
-        },
-        'Create an ad',
-    ];
-    const customStyleProps = {
-        fontSize: 25,
-        background: '#D0DD0D',
-        lineColor: '#124962',
-        padding: 3,
-        lineWidth: 5,
-    };
-
-    return (
-        <>
-            <ToggleButtonGroups sx={{ mb: 4 }}>
-                <ToggleButtonGroup
-                    value={orientation}
-                    exclusive
-                    onChange={(value) => setOrientation(value)}
-                    data={data1}
-                />
-                <ToggleButtonGroup
-                    value={stepsBottomLabel}
-                    exclusive
-                    onChange={(value) => setStepsBottomLabel(value)}
-                    data={data2}
-                />
-            </ToggleButtonGroups>
-
-            <Stepper
-                {...actions}
-                {...stepperProps}
-                steps={steps}
-                stepsBottomLabel={stepsBottomLabel}
-                customStyleProps={customStyleProps}
-                orientation={orientation}
-                allCompletedCmp={
-                    <Typography sx={{ mt: 2, mb: 1 }}>All steps completed - you&apos;re finished</Typography>
-                }
-            >
-                <div>
-                    For each ad campaign that you create, you can control how much you're willing to spend on clicks and
-                    conversions, which networks and geographical locations you want your ads to show on, and more.
-                </div>
-                <div>An ad group contains one or more ads which target a shared set of keywords.</div>
-                <div>
-                    Try out different ad text to see what brings in the most customers, and learn how to enhance your
-                    ads using features like ad extensions. If you run into any problems with your ads, find out how to
-                    tell if they're running and how to resolve approval issues.
-                </div>
-            </Stepper>
-        </>
-    );
+    },
 };
 
-export const QontoStepper = () => {
-    const data1 = [
-        { value: 'horizontal', component: 'horizontal' },
-        { value: 'vertical', component: 'vertical' },
-    ];
-    const [orientation, setOrientation] = useState('horizontal');
-
-    const data2 = [{ value: true, component: 'alternative labels' }];
-    const [stepsBottomLabel, setStepsBottomLabel] = useState(true);
-
-    const stepperProps = useSimpleStepper();
-    const steps = [
-        {
-            label: 'Select campaign settings',
-            optional: true,
-            icon: <AddLocationIcon />,
-        },
-        {
-            label: 'Create an ad group',
-            color: 'secondary',
-            icon: <SendIcon />,
-        },
-        'Create an ad',
-    ];
-
-    return (
-        <>
-            <ToggleButtonGroups sx={{ mb: 4 }}>
-                <ToggleButtonGroup
-                    value={orientation}
-                    exclusive
-                    onChange={(value) => setOrientation(value)}
-                    data={data1}
-                />
-                <ToggleButtonGroup
-                    value={stepsBottomLabel}
-                    exclusive
-                    onChange={(value) => setStepsBottomLabel(value)}
-                    data={data2}
-                />
-            </ToggleButtonGroups>
-
-            <Stepper
-                {...actions}
-                {...stepperProps}
-                qontoStyle
-                color="secondary"
-                steps={steps}
-                stepsBottomLabel={stepsBottomLabel}
-                orientation={orientation}
-                allCompletedCmp={
-                    <Typography sx={{ mt: 2, mb: 1 }}>All steps completed - you&apos;re finished</Typography>
-                }
-            >
-                <div>
-                    For each ad campaign that you create, you can control how much you're willing to spend on clicks and
-                    conversions, which networks and geographical locations you want your ads to show on, and more.
-                </div>
-                <div>An ad group contains one or more ads which target a shared set of keywords.</div>
-                <div>
-                    Try out different ad text to see what brings in the most customers, and learn how to enhance your
-                    ads using features like ad extensions. If you run into any problems with your ads, find out how to
-                    tell if they're running and how to resolve approval issues.
-                </div>
-            </Stepper>
-        </>
-    );
-};
-
-export const QontoCustomStepper = () => {
-    const data1 = [
-        { value: 'horizontal', component: 'horizontal' },
-        { value: 'vertical', component: 'vertical' },
-    ];
-    const [orientation, setOrientation] = useState('horizontal');
-
-    const data2 = [{ value: true, component: 'alternative labels' }];
-    const [stepsBottomLabel, setStepsBottomLabel] = useState(true);
-
-    const stepperProps = useSimpleStepper();
-    const steps = [
-        {
-            label: 'Select campaign settings',
-            optional: true,
-            icon: <AddLocationIcon />,
-        },
-        {
-            label: 'Create an ad group',
-            color: 'secondary',
-            icon: <SendIcon />,
-        },
-        'Create an ad',
-    ];
-
-    const customStyleProps = {
-        fontSize: 35,
-        background: '#D0DD0D',
-        lineColor: '#124962',
-        lineWidth: 6,
-        padding: 10,
-        checkIcon: <SendIcon sx={{ fontSize: 35 }} />,
-        dotIcon: <AddLocationIcon sx={{ fontSize: 35 }} />,
-    };
-
-    return (
-        <>
-            <ToggleButtonGroups sx={{ mb: 4 }}>
-                <ToggleButtonGroup
-                    value={orientation}
-                    exclusive
-                    onChange={(value) => setOrientation(value)}
-                    data={data1}
-                />
-                <ToggleButtonGroup
-                    value={stepsBottomLabel}
-                    exclusive
-                    onChange={(value) => setStepsBottomLabel(value)}
-                    data={data2}
-                />
-            </ToggleButtonGroups>
-
-            <Stepper
-                {...actions}
-                {...stepperProps}
-                qontoStyle
-                steps={steps}
-                stepsBottomLabel={stepsBottomLabel}
-                customStyleProps={customStyleProps}
-                orientation={orientation}
-                allCompletedCmp={
-                    <Typography sx={{ mt: 2, mb: 1 }}>All steps completed - you&apos;re finished</Typography>
-                }
-            >
-                <div>
-                    For each ad campaign that you create, you can control how much you're willing to spend on clicks and
-                    conversions, which networks and geographical locations you want your ads to show on, and more.
-                </div>
-                <div>An ad group contains one or more ads which target a shared set of keywords.</div>
-                <div>
-                    Try out different ad text to see what brings in the most customers, and learn how to enhance your
-                    ads using features like ad extensions. If you run into any problems with your ads, find out how to
-                    tell if they're running and how to resolve approval issues.
-                </div>
-            </Stepper>
-        </>
-    );
-};
+// unmountOnExit?: boolean;

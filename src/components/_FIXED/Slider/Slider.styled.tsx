@@ -1,14 +1,13 @@
 import React from 'react';
-import type { PropsWithChildren } from 'react';
-import { Typography as MuiTypography } from '@mui/material';
-import MuiSlider, { SliderThumb } from '@mui/material/Slider';
+import { Typography as MuiTypography, Slider as MuiSlider } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { sliderStyleIOS, sliderStylePretto, sliderStyleAirBNB, sliderStyleCustomColor } from './Slider.styles';
 import Tooltip from '../Tooltip/Tooltip';
+const { SliderThumb } = MuiSlider;
 
 export { Grid, Box } from '@mui/material';
 
-export const ValueLabelComponent: React.FC<PropsWithChildren<{ value: string }>> = (props): React.ReactElement => {
+export const ValueLabelComponent: React.FC<{ value: string }> = (props): React.ReactElement => {
     const { children, value } = props;
 
     return (
@@ -18,7 +17,7 @@ export const ValueLabelComponent: React.FC<PropsWithChildren<{ value: string }>>
     );
 };
 
-export const AirbnbThumbComponent: React.FC<PropsWithChildren<any>> = (props): React.ReactElement => {
+export const AirbnbThumbComponent: React.FC<any> = (props): React.ReactElement => {
     const { children, ...other } = props;
     return (
         <SliderThumb {...other}>

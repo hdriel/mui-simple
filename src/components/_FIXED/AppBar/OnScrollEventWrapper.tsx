@@ -1,40 +1,41 @@
 import React, { cloneElement, isValidElement } from 'react';
-import type { PropsWithChildren, ReactNode, MouseEvent } from 'react';
-//	import PropTypes from 'prop-types';
+import type { ReactNode, ReactElement } from 'react';
+import type { SxProps } from '@mui/material';
 import { Box, Fade, useScrollTrigger, Slide } from '@mui/material';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@mui/icons-material';
-import Fab from '../_FIXED/FloatingActionButton/FloatingActionButton';
-import { isDefined } from '../../utils/helpers';
-
+import Fab from '../FloatingActionButton/FloatingActionButton';
+import { isDefined } from '../../../utils/helpers';
 interface OnScrollEventWrapperProps {
-    scrollElement?: any;
+    bottom?: number;
+    defaultFabProps?: object;
+    elevation?: number; // assuming you want the values to be numbers
     elevationScroll?: boolean;
     hideOnScroll?: boolean;
-    elevation?: number; // assuming you want the values to be numbers
-    scrollToId?: string;
-    bottom?: number;
-    right?: number;
     left?: number;
-    top?: number;
-    defaultFabProps?: object;
+    right?: number;
+    scrollElement?: any;
+    scrollToId?: string;
     scrollToTop?: ReactNode | boolean;
-    scrollToTopProps?: object;
+    scrollToTopProps?: SxProps;
+    top?: number;
+    zIndex?: number;
     [key: string]: any;
 }
-export default function OnScrollEventWrapper(props: PropsWithChildren<OnScrollEventWrapperProps>): ReactNode {
-    const {
-        scrollToTop,
-        elevationScroll,
-        hideOnScroll,
-        scrollElement,
-        elevation,
-        defaultFabProps,
-        scrollToId,
-        left,
-        top,
-        children,
-    } = props;
-    let { bottom, right } = props;
+const OnScrollEventWrapper: React.FC<OnScrollEventWrapperProps> = ({
+    children,
+    defaultFabProps,
+    elevation,
+    elevationScroll,
+    hideOnScroll,
+    scrollElement,
+    scrollToId,
+    scrollToTop,
+    scrollToTopProps,
+}): ReactElement => {
+    // @ts-expect-error
+    const { left, top, zIndex, bottom: _bottom, right: _right } = scrollToTopProps ?? {};
+    const bottom = [top, _bottom].some(isDefined) ? _bottom : 16;
+    const right = [left, _right].some(isDefined) ? _right : 16;
 
     const trigger = useScrollTrigger({
         target: scrollElement ?? undefined,
@@ -46,14 +47,10 @@ export default function OnScrollEventWrapper(props: PropsWithChildren<OnScrollEv
         elevation: elevationScroll ? (trigger ? elevation ?? 4 : 0) : elevation ?? 0,
     });
 
-    const handleClick = (event: MouseEvent): void => {
+    const handleClick = (event: any): void => {
         const anchor = scrollToId && (event.target.ownerDocument || document).querySelector(scrollToId);
-
         anchor?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     };
-
-    bottom = [top, bottom].some(isDefined) ? bottom : 16;
-    right = [left, right].some(isDefined) ? right : 16;
 
     const fab =
         scrollToTop && scrollToId ? (
@@ -63,6 +60,7 @@ export default function OnScrollEventWrapper(props: PropsWithChildren<OnScrollEv
                     role="presentation"
                     sx={{
                         position: 'fixed',
+                        zIndex,
                         bottom,
                         right,
                         left,
@@ -92,34 +90,17 @@ export default function OnScrollEventWrapper(props: PropsWithChildren<OnScrollEv
             {fab}
         </>
     );
-}
-
-//	OnScrollEventWrapper.propTypes = {
-//    scrollElement: PropTypes.any,
-//    elevationScroll: PropTypes.bool,
-//    hideOnScroll: PropTypes.bool,
-//    elevation: PropTypes.oneOf(Array.from({ length: 25 }, (_, i) => i)), // 0-24
-//    scrollToId: PropTypes.string,
-//    bottom: PropTypes.number,
-//    right: PropTypes.number,
-//    left: PropTypes.number,
-//    top: PropTypes.number,
-//    defaultFabProps: PropTypes.object,
-//    scrollToTop: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
-//    scrollToTopProps: PropTypes.object,
-//	};
+};
 
 OnScrollEventWrapper.defaultProps = {
-    scrollElement: undefined,
+    defaultFabProps: undefined,
+    elevation: undefined,
     elevationScroll: false,
     hideOnScroll: false,
-    elevation: undefined,
+    scrollElement: undefined,
     scrollToId: undefined,
-    bottom: undefined,
-    right: undefined,
-    left: undefined,
-    top: undefined,
-    defaultFabProps: undefined,
     scrollToTop: false,
     scrollToTopProps: undefined,
 };
+
+export default OnScrollEventWrapper;
