@@ -9,32 +9,37 @@ const meta: Meta<typeof AppBar> = {
     component: AppBar,
     tags: ['autodocs'],
     decorators: [
-        (Story) => {
-            const [scrollElement, setScrollElement] = useState();
-            useEffect(() => {
-                // @ts-ignore
-                setScrollElement(document.getElementById('story'));
-            }, []);
-
-            return (
-                <div
-                    id="story"
-                    style={{
-                        height: scrollElement ? '800px' : 'auto',
-                        backgroundColor: '#f5f2f2',
-                        overflow: 'auto',
-                    }}
-                >
-                    <Story scrollElement={scrollElement} />
-                </div>
-            );
-        },
+        (Story) => (
+            <div
+                id="story"
+                style={{
+                    height: '800px',
+                    backgroundColor: '#f5f2f2',
+                    overflow: 'auto',
+                    position: 'relative',
+                }}
+            >
+                <Story />
+            </div>
+        ),
     ],
 };
 export default meta;
 
 type Story = StoryObj<typeof AppBar>;
 
+const useScrollElement = () => {
+    const [scrollElement, setScrollElement] = useState();
+
+    useEffect(() => {
+        const element = document.getElementById('story');
+        console.log('element', element);
+        // @ts-ignore
+        setScrollElement(element);
+    }, []);
+
+    return scrollElement;
+};
 const ScrollElementNotFound = () => <span>Scroll Element Not Found</span>;
 const ContentForScrollingView = ({ len = 30 }) => (
     <Container>
@@ -54,10 +59,6 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
 export const Default: Story = {
     args: {},
 };
-
-//   enableColorOnDark,
-//   position,
-//   sx,
 
 export const Bottom: Story = {
     args: {
@@ -125,10 +126,11 @@ export const Position_ = (args) => {
     );
 };
 export const ElevationScroll_ = (args) => {
-    return args.scrollElement ? (
+    const scrollElement = useScrollElement();
+    return scrollElement ? (
         <>
-            <AppBar elevationScroll {...args}>
-                Elevation Scroll
+            <AppBar elevationScroll scrollElement={scrollElement} {...args}>
+                Elevation Scroll (working on private story, not in docs stories)
             </AppBar>
             <ContentForScrollingView />
         </>
@@ -138,10 +140,11 @@ export const ElevationScroll_ = (args) => {
 };
 
 export const HideOnScroll_ = (args) => {
-    return args.scrollElement ? (
+    const scrollElement = useScrollElement();
+    return scrollElement ? (
         <>
-            <AppBar hideOnScroll {...args}>
-                Hide On Scroll
+            <AppBar hideOnScroll scrollElement={scrollElement} {...args}>
+                Hide On Scroll (working on private story, not in docs stories)
             </AppBar>
             <ContentForScrollingView />
         </>
@@ -151,10 +154,11 @@ export const HideOnScroll_ = (args) => {
 };
 
 export const ScrollToTop_ = (args) => {
-    return args.scrollElement ? (
+    const scrollElement = useScrollElement();
+    return scrollElement ? (
         <>
-            <AppBar scrollToTop {...args}>
-                scroll To Top
+            <AppBar scrollToTop scrollElement={scrollElement} {...args}>
+                scroll To Top (working on private story, not in docs stories)
             </AppBar>
             <ContentForScrollingView />
         </>
@@ -164,10 +168,15 @@ export const ScrollToTop_ = (args) => {
 };
 
 export const ScrollToTopFab_ = (args) => {
-    return args.scrollElement ? (
+    const scrollElement = useScrollElement();
+    return scrollElement ? (
         <>
-            <AppBar scrollToTop={<Fab icon="Person" />} {...args}>
-                scroll To Top
+            <AppBar
+                scrollToTop={<Fab icon="VerticalAlignTop" color="primary" />}
+                scrollElement={scrollElement}
+                {...args}
+            >
+                scroll To Top (working on private story, not in docs stories)
             </AppBar>
             <ContentForScrollingView />
         </>
@@ -177,10 +186,11 @@ export const ScrollToTopFab_ = (args) => {
 };
 
 export const ScrollToTopProps_ = (args) => {
-    return args.scrollElement ? (
+    const scrollElement = useScrollElement();
+    return scrollElement ? (
         <>
-            <AppBar scrollToTop scrollToTopProps={{ right: 0, bottom: 0 }} {...args}>
-                scroll To Top Props
+            <AppBar scrollToTop scrollToTopProps={{ right: 0, bottom: 0 }} scrollElement={scrollElement} {...args}>
+                scroll To Top Props (working on private story, not in docs stories)
             </AppBar>
             <ContentForScrollingView />
         </>
@@ -188,3 +198,5 @@ export const ScrollToTopProps_ = (args) => {
         <ScrollElementNotFound />
     );
 };
+
+// enableColorOnDark,
