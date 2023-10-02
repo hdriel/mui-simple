@@ -1,12 +1,12 @@
 import React from 'react';
-import type { ReactElement, PropsWithChildren } from 'react';
+import type { ReactElement } from 'react';
 
 import { Checkbox as MuiCheckbox } from './Checkbox.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import type { CheckboxProps } from '../../decs';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 
-function Checkbox(props: PropsWithChildren<CheckboxProps>): ReactElement {
+const Checkbox: React.FC<CheckboxProps> = (props): ReactElement => {
     const { color, textColor: _textColor, value, checked, checkedIcon, icon, children, label, ...rest } = props;
     const [customColor, muiColor] = useCustomColor(color);
     const [textColor] = useCustomColor(_textColor);
@@ -23,7 +23,7 @@ function Checkbox(props: PropsWithChildren<CheckboxProps>): ReactElement {
             {...rest}
         />
     );
-}
+};
 
 Checkbox.defaultProps = {
     checked: undefined,
