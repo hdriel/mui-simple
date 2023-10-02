@@ -17,17 +17,19 @@ export const Checkbox = styled(
             helperText,
             inputProps,
             label = '',
+            wrapperStyle,
             error,
             labelPlacement,
             muiColor,
             readOnly,
             required,
+            sxLabel,
             sx,
             textColor,
             ...rest
         } = props;
         return (
-            <span>
+            <span style={wrapperStyle}>
                 <FormControlLabel
                     required={required}
                     disabled={disabled}
@@ -37,7 +39,7 @@ export const Checkbox = styled(
                         isValidElement(label) ? (
                             label
                         ) : (
-                            <Typography sx={{ fontSize, color: textColor }}>{label}</Typography>
+                            <Typography sx={{ fontSize, color: textColor, ...sxLabel }}>{label}</Typography>
                         )
                     }
                     sx={{ m: 0, userSelect: 'none', color: textColor }}

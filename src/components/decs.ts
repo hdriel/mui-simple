@@ -240,7 +240,9 @@ export interface CheckboxProps {
     readOnly?: boolean;
     required?: boolean;
     size?: 'small' | 'medium';
+    wrapperStyle?: any;
     sx?: SxProps;
+    sxLabel?: SxProps;
     textColor?: string;
     value?: boolean;
     [key: string]: any;
