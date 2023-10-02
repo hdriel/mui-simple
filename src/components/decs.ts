@@ -883,6 +883,7 @@ export interface TypographyProps {
     gutterBottom?: boolean;
     italic?: boolean;
     lineHeight?: number;
+    link?: string;
     monospace?: boolean;
     noWrap?: boolean;
     onEllipsisChange?: (isEllipsis: boolean) => void;
@@ -894,12 +895,12 @@ export interface TypographyProps {
     sub?: boolean;
     sup?: boolean;
     textDirection?: 'ltr' | 'rtl';
+    textWidth?: number | string;
     tooltip?: boolean | string;
     tooltipPlacement?: TooltipPlacementType;
     underline?: boolean;
     width?: number | string;
     wrap?: boolean;
-    link?: string;
     [key: string]: any;
 }
 

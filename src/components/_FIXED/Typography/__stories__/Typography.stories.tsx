@@ -197,6 +197,8 @@ export const Paragraph: Story = {
 
 export const Rows: Story = {
     args: {
+        wrap: true,
+        tooltip: true,
         rows: 2,
         children: largeIpsum,
     },
@@ -239,6 +241,7 @@ export const Sup: Story = {
 
 export const Tooltip: Story = {
     args: {
+        wrap: true,
         tooltip: 'Lorem Ipsum',
         children: largeIpsum,
     },
@@ -246,6 +249,7 @@ export const Tooltip: Story = {
 
 export const TooltipPlacement: Story = {
     args: {
+        wrap: true,
         tooltip: 'Lorem Ipsum',
         tooltipPlacement: 'right',
         children: largeIpsum,

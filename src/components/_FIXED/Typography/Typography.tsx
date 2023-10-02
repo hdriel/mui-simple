@@ -55,7 +55,6 @@ const Typography: React.FC<TypographyProps> = ({
     alignJustify,
     alignLeft,
     alignRight,
-    textDirection,
     autoWidth,
     bgColor,
     bold,
@@ -63,8 +62,8 @@ const Typography: React.FC<TypographyProps> = ({
     charsCase,
     children,
     color,
-    font,
     component,
+    font,
     gutterBottom,
     italic,
     lineHeight,
@@ -80,6 +79,8 @@ const Typography: React.FC<TypographyProps> = ({
     sub,
     sup,
     sx,
+    textDirection,
+    textWidth,
     tooltip,
     tooltipPlacement,
     underline,
@@ -112,7 +113,7 @@ const Typography: React.FC<TypographyProps> = ({
         italic,
         lineHeight,
         monospace,
-        noWrap: !wrap || !rows,
+        noWrap: noWrap || wrap === false || !rows,
         paragraph,
         rows: typeof rows === 'boolean' ? +rows : rows,
         strike,
@@ -120,22 +121,26 @@ const Typography: React.FC<TypographyProps> = ({
         sup,
         target: '_blank',
         textDirection,
+        textWidth,
         underline,
         ...(link && { href: link, component: 'a' }),
         ...props,
     };
 
-    const cmp = typographyProps.noWrap ? (
-        <MuiTypography ref={ref} sx={sx} {...typographyProps}>
-            {children}&nbsp;
-        </MuiTypography>
-    ) : (
+    let cmp = (
         <Border width={width} rows={rows} border={border} noWrap={noWrap} autoWidth={autoWidth} sx={sx}>
             <MuiTypography ref={ref} {...typographyProps}>
                 {children}&nbsp;
             </MuiTypography>
         </Border>
     );
+    if (typographyProps.noWrap) {
+        cmp = (
+            <MuiTypography ref={ref} display="flex" sx={sx} {...typographyProps}>
+                {children}&nbsp;
+            </MuiTypography>
+        );
+    }
 
     useEffect(() => {
         onEllipsisChange?.(isEllipsis);
@@ -165,7 +170,7 @@ Typography.defaultProps = {
     italic: undefined,
     lineHeight: undefined,
     monospace: undefined,
-    noWrap: true,
+    noWrap: undefined,
     onEllipsisChange: undefined,
     paragraph: undefined,
     rows: 1,
@@ -175,11 +180,12 @@ Typography.defaultProps = {
     sub: undefined,
     sup: undefined,
     textDirection: undefined,
-    tooltip: false,
+    textWidth: undefined,
+    tooltip: undefined,
     tooltipPlacement: undefined,
     underline: undefined,
     width: undefined,
-    wrap: undefined,
+    wrap: true,
 };
 
 export type { TypographyProps } from '../../decs';
