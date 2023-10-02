@@ -7,6 +7,7 @@ import DraggableList from '../../DraggableList/DraggableList';
 import SVGIcon from '../../SVGIcon/SVGIcon';
 import type { ListItemProps, ListProps } from '../../decs';
 import { useCustomColor } from '../../../utils/helpers';
+import { checkForCheckboxItems } from './List.converter';
 
 const List: React.FC<ListProps> = ({
     alignItems,
@@ -47,7 +48,8 @@ const List: React.FC<ListProps> = ({
     };
 
     const dataList =
-        items?.map((item, index) =>
+        checkForCheckboxItems(items, props)?.map((item) =>
+            // items?.map((item) =>
             typeof item === 'string'
                 ? { title: item, id: item }
                 : {
@@ -69,6 +71,7 @@ const List: React.FC<ListProps> = ({
             <Box>
                 <List
                     bgColor={_bgColor}
+                    // items={checkForCheckboxItems(itemProps.items, itemProps.listItemsProps)}
                     items={itemProps.items}
                     droppableId={itemProps.title}
                     {...itemProps.listItemsProps}

@@ -544,13 +544,14 @@ export interface ListItemProps {
     items?: Array<string | ListItemProps>;
     listItemsProps?: Omit<ListProps, 'items'>;
     link?: string;
-    controlType?: 'checkbox' | 'switch';
     droppableId?: string;
     draggableListType?: string;
     selected?: boolean;
     startIcon?: ReactNode | string;
     subtitle?: string;
     title?: string;
+    controlType?: 'checkbox' | 'switch';
+    alignCheck?: 'start' | 'end';
     [key: string]: any;
 }
 
@@ -586,6 +587,8 @@ export interface ListProps {
     useTransition?: boolean;
     useReactRouterDomLink?: boolean;
     width?: string | number;
+    controlType?: 'checkbox' | 'switch';
+    alignCheck?: 'start' | 'end';
     [key: string]: any;
 }
 
