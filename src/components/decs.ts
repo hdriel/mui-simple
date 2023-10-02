@@ -32,6 +32,7 @@ export interface AccordionProps {
     details?: string;
     detailsMaxRows?: number;
     disabled?: boolean;
+    disabledContentPadding?: boolean;
     expanded?: boolean | string;
     expandedIcon?: string | ReactNode;
     hideLabel?: string;

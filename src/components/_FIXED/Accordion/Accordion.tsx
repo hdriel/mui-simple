@@ -17,6 +17,7 @@ const Accordion: React.FC<AccordionProps> = function (props): React.ReactElement
         details,
         detailsMaxRows,
         disabled,
+        disabledContentPadding,
         expanded: _expanded,
         expandedIcon: _expandedIcon,
         hideLabel,
@@ -77,7 +78,7 @@ const Accordion: React.FC<AccordionProps> = function (props): React.ReactElement
                 </Typography>
                 {secondaryLabel && <Typography sx={{ color: 'text.secondary' }}>{secondaryLabel}</Typography>}
             </AccordionSummary>
-            <AccordionDetails useCustomStyle={useCustomStyle}>
+            <AccordionDetails useCustomStyle={useCustomStyle} disabledContentPadding={disabledContentPadding}>
                 {details && (
                     <>
                         <Typography
@@ -119,6 +120,7 @@ Accordion.defaultProps = {
     details: undefined,
     detailsMaxRows: undefined,
     disabled: undefined,
+    disabledContentPadding: undefined,
     expanded: undefined,
     expandedIcon: 'ExpandMore',
     hideLabel: 'Hide',
