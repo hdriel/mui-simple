@@ -439,3 +439,24 @@ export const alignCheckStartCheckbox: Story = {
         ],
     },
 };
+
+export const NestedCheckbox: Story = {
+    args: {
+        controlType: 'checkbox',
+        alignCheck: 'start',
+        items: [
+            {
+                title: 'item 1',
+                subtitle: 'subtitle 1',
+                items: [{ title: 'sub item 1' }, { title: 'sub item 2' }],
+                listItemsProps: { controlType: 'checkbox', alignCheck: 'start' },
+            },
+            {
+                title: 'item 2',
+                subtitle: 'subtitle 2',
+                items: [{ title: 'sub item 1' }, { title: 'sub item 2' }],
+                listItemsProps: { controlType: 'switch', alignCheck: 'end' },
+            },
+        ],
+    },
+};
