@@ -22,29 +22,6 @@ export interface AppBarProps {
     toolbarId?: string;
     [key: string]: any;
 }
-export interface AccordionProps {
-    bgColor?: string;
-    bottomSecondaryLabel?: string;
-    buttonsColor?: string;
-    collapsedIcon?: string | ReactNode;
-    details?: string;
-    detailsMaxRows?: number;
-    disabled?: boolean;
-    disabledContentPadding?: boolean;
-    expanded?: boolean | string;
-    expandedIcon?: string | ReactNode;
-    hideLabel?: string;
-    id?: string;
-    label?: string;
-    onChange?: (event: SyntheticEvent<unknown>, expanded: boolean | string) => void;
-    secondaryLabel?: string;
-    showMoreLabel?: string;
-    textColor?: string;
-    labelColor?: ((expanded: boolean | string) => string) | string;
-    unmountDetailsOnClose?: boolean;
-    useCustomStyle?: boolean;
-    [key: string]: any;
-}
 
 export interface AvatarProps {
     color?: string;
@@ -716,6 +693,90 @@ export type TooltipPlacementType =
     | 'top-start'
     | 'top';
 
+export interface TypographyProps {
+    alignCenter?: boolean;
+    alignJustify?: boolean;
+    alignLeft?: boolean;
+    alignRight?: boolean;
+    autoWidth?: boolean;
+    bgColor?: string;
+    bold?: boolean | string;
+    border?: boolean | string;
+    charsCase?: 'upper' | 'lower' | 'capital';
+    color?: string;
+    component?: string;
+    gutterBottom?: boolean;
+    italic?: boolean;
+    lineHeight?: number;
+    link?: string;
+    monospace?: boolean;
+    noWrap?: boolean;
+    onEllipsisChange?: (isEllipsis: boolean) => void;
+    paragraph?: boolean;
+    rows?: number;
+    showTooltipOnEllipsis?: boolean;
+    size?: number | string;
+    strike?: boolean;
+    sub?: boolean;
+    sup?: boolean;
+    textDirection?: 'ltr' | 'rtl';
+    textWidth?: number | string;
+    tooltip?: boolean | string;
+    tooltipPlacement?: TooltipPlacementType;
+    underline?: boolean;
+    width?: number | string;
+    wrap?: boolean;
+    [key: string]: any;
+}
+
+export interface AccordionProps {
+    bgColor?: string;
+    bottomSecondaryLabel?: string;
+    buttonsColor?: string;
+    collapsedIcon?: string | ReactNode;
+    details?: string;
+    detailsMaxRows?: number;
+    disabled?: boolean;
+    disabledContentPadding?: boolean;
+    expanded?: boolean | string;
+    expandedIcon?: string | ReactNode;
+    hideLabel?: string;
+    id?: string;
+    label?: string;
+    labelProps?: TypographyProps;
+    onChange?: (event: SyntheticEvent<unknown>, expanded: boolean | string) => void;
+    secondaryLabel?: string;
+    showMoreLabel?: string;
+    textColor?: string;
+    labelColor?: ((expanded: boolean | string) => string) | string;
+    unmountDetailsOnClose?: boolean;
+    useCustomStyle?: boolean;
+    [key: string]: any;
+}
+
+export interface CheckboxProps {
+    checked?: boolean;
+    checkedIcon?: ReactNode | string;
+    color?: string;
+    disabled?: boolean;
+    fontSize?: string | number;
+    helperText?: string;
+    icon?: ReactNode | string;
+    label?: string;
+    labelProps?: TypographyProps;
+    labelPlacement?: 'top' | 'start' | 'bottom' | 'end';
+    onChange?: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+    readOnly?: boolean;
+    required?: boolean;
+    size?: 'small' | 'medium';
+    wrapperStyle?: any;
+    sx?: SxProps;
+    sxLabel?: SxProps;
+    textColor?: string;
+    value?: boolean;
+    [key: string]: any;
+}
+
 export interface SwitchProps {
     checked?: boolean;
     color?: string;
@@ -865,65 +926,6 @@ export interface TooltipProps {
     disableHoverListener?: boolean;
     disableTouchListener?: boolean;
     PopperProps?: { disablePortal: boolean; [key: string]: any };
-    [key: string]: any;
-}
-
-export interface TypographyProps {
-    alignCenter?: boolean;
-    alignJustify?: boolean;
-    alignLeft?: boolean;
-    alignRight?: boolean;
-    autoWidth?: boolean;
-    bgColor?: string;
-    bold?: boolean | string;
-    border?: boolean | string;
-    charsCase?: 'upper' | 'lower' | 'capital';
-    color?: string;
-    component?: string;
-    gutterBottom?: boolean;
-    italic?: boolean;
-    lineHeight?: number;
-    link?: string;
-    monospace?: boolean;
-    noWrap?: boolean;
-    onEllipsisChange?: (isEllipsis: boolean) => void;
-    paragraph?: boolean;
-    rows?: number;
-    showTooltipOnEllipsis?: boolean;
-    size?: number | string;
-    strike?: boolean;
-    sub?: boolean;
-    sup?: boolean;
-    textDirection?: 'ltr' | 'rtl';
-    textWidth?: number | string;
-    tooltip?: boolean | string;
-    tooltipPlacement?: TooltipPlacementType;
-    underline?: boolean;
-    width?: number | string;
-    wrap?: boolean;
-    [key: string]: any;
-}
-
-export interface CheckboxProps {
-    checked?: boolean;
-    checkedIcon?: ReactNode | string;
-    color?: string;
-    disabled?: boolean;
-    fontSize?: string | number;
-    helperText?: string;
-    icon?: ReactNode | string;
-    label?: string;
-    labelProps?: TypographyProps;
-    labelPlacement?: 'top' | 'start' | 'bottom' | 'end';
-    onChange?: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
-    readOnly?: boolean;
-    required?: boolean;
-    size?: 'small' | 'medium';
-    wrapperStyle?: any;
-    sx?: SxProps;
-    sxLabel?: SxProps;
-    textColor?: string;
-    value?: boolean;
     [key: string]: any;
 }
 
