@@ -23,6 +23,7 @@ const Accordion: React.FC<AccordionProps> = function (props): React.ReactElement
         hideLabel,
         id,
         label,
+        labelProps,
         onChange,
         secondaryLabel: _secondaryLabel,
         showMoreLabel,
@@ -69,13 +70,13 @@ const Accordion: React.FC<AccordionProps> = function (props): React.ReactElement
                 bottomSecondaryLabel={!!bottomSecondaryLabel}
             >
                 <Typography
-                    tooltip={false}
                     noWrap={secondaryLabel}
                     alignLeft
                     textWidth="auto"
                     wrap={!secondaryLabel}
                     color={labelColor}
-                    sx={{ ...(secondaryLabel && { width: '33%', flexShrink: 0 }) }}
+                    {...labelProps}
+                    sx={{ ...(secondaryLabel && { width: '33%', flexShrink: 0 }), ...labelProps?.sx }}
                 >
                     {label}
                 </Typography>
