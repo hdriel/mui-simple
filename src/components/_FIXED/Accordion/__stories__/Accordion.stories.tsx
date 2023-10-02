@@ -172,6 +172,13 @@ export const LabelColorFunc: Story = {
     },
 };
 
+export const LongLabel: Story = {
+    args: {
+        label: largeIpsum,
+        details: smallIpsum,
+    },
+};
+
 export const ButtonsColor: Story = {
     args: {
         label: 'Details Max Rows 3',

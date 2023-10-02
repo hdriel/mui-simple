@@ -70,10 +70,9 @@ const Accordion: React.FC<AccordionProps> = function (props): React.ReactElement
                 bottomSecondaryLabel={!!bottomSecondaryLabel}
             >
                 <Typography
-                    noWrap={secondaryLabel}
+                    noWrap={!secondaryLabel}
                     alignLeft
-                    textWidth="auto"
-                    wrap={!secondaryLabel}
+                    wrap={secondaryLabel}
                     color={labelColor}
                     {...labelProps}
                     sx={{ ...(secondaryLabel && { width: '33%', flexShrink: 0 }), ...labelProps?.sx }}
