@@ -1,7 +1,5 @@
 import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent, Ref } from 'react';
 import type { SxProps } from '@mui/material';
-import { number } from 'prop-types';
-import React, { MouseEventHandler } from 'react';
 
 export type AppBarPosition = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
 
@@ -343,6 +341,10 @@ export type InputColorProps = InputBaseProps & {
     opacityLabel?: string;
     opacityIcon?: string | ReactNode;
     copyIcon?: string | ReactNode;
+};
+
+export type InputDateTimeProps = InputBaseProps & {
+    value: Date | number | string;
 };
 
 export type InputPatternProps = InputBaseProps & {

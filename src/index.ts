@@ -59,8 +59,8 @@ export type { TextFieldProps } from './components/_FIXED/TextField/TextField';
 export { default as InputColor } from './components/_FIXED/TextField/InputColor';
 export type { InputColorProps } from './components/_FIXED/TextField/InputColor';
 
-export { default as InputDate } from './components/TextField/InputDate';
-export { default as InputDateTime } from './components/TextField/InputDateTime';
+export { default as InputDate } from './components/_FIXED/TextField/InputDate';
+export { default as InputDateTime } from './components/_FIXED/TextField/InputDateTime';
 
 export { default as InputEmail } from './components/_FIXED/TextField/InputEmail';
 export type { InputEmailProps } from './components/_FIXED/TextField/InputEmail';
@@ -85,7 +85,7 @@ export type { InputSearchProps } from './components/_FIXED/TextField/InputSearch
 export { default as InputText } from './components/_FIXED/TextField/InputText';
 export type { InputTextProps } from './components/_FIXED/TextField/InputText';
 
-export { default as InputTime } from './components/TextField/InputTime';
+export { default as InputTime } from './components/_FIXED/TextField/InputTime';
 
 export { default as InputSelect } from './components/_FIXED/Select/InputSelect';
 export type { InputSelectOptions, InputSelectProps } from './components/_FIXED/Select/InputSelect';
