@@ -226,28 +226,6 @@ export interface CardProps {
     [key: string]: any;
 }
 
-export interface CheckboxProps {
-    checked?: boolean;
-    checkedIcon?: ReactNode | string;
-    color?: string;
-    disabled?: boolean;
-    fontSize?: string | number;
-    helperText?: string;
-    icon?: ReactNode | string;
-    label?: string;
-    labelPlacement?: 'top' | 'start' | 'bottom' | 'end';
-    onChange?: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
-    readOnly?: boolean;
-    required?: boolean;
-    size?: 'small' | 'medium';
-    wrapperStyle?: any;
-    sx?: SxProps;
-    sxLabel?: SxProps;
-    textColor?: string;
-    value?: boolean;
-    [key: string]: any;
-}
-
 export interface ChipProps {
     alignEndIcon?: boolean;
     avatar?: ReactElement;
@@ -922,6 +900,29 @@ export interface TypographyProps {
     width?: number | string;
     wrap?: boolean;
     link?: string;
+    [key: string]: any;
+}
+
+export interface CheckboxProps {
+    checked?: boolean;
+    checkedIcon?: ReactNode | string;
+    color?: string;
+    disabled?: boolean;
+    fontSize?: string | number;
+    helperText?: string;
+    icon?: ReactNode | string;
+    label?: string;
+    labelProps?: TypographyProps;
+    labelPlacement?: 'top' | 'start' | 'bottom' | 'end';
+    onChange?: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+    readOnly?: boolean;
+    required?: boolean;
+    size?: 'small' | 'medium';
+    wrapperStyle?: any;
+    sx?: SxProps;
+    sxLabel?: SxProps;
+    textColor?: string;
+    value?: boolean;
     [key: string]: any;
 }
 
