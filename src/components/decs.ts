@@ -500,6 +500,8 @@ export interface ListItemProps {
     disablePadding?: boolean;
     divider?: object | boolean;
     inset?: boolean;
+    openListItems?: boolean;
+    onClick?: (...args: any) => void;
     items?: Array<string | ListItemProps>;
     listItemsProps?: Omit<ListProps, 'items'>;
     link?: string;
@@ -531,6 +533,7 @@ export interface ListProps {
     flexDirectionItems?: 'row' | 'column';
     hideActionsOnDragAndDropItems?: boolean;
     insetItems?: boolean;
+    openListItems?: boolean;
     items?: Array<string | ListItemProps>;
     onListOrderChange?: (
         dataItems: Array<ListItemProps & { id: string }>,

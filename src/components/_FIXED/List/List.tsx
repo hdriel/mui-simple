@@ -62,7 +62,7 @@ const List: React.FC<ListProps> = ({
     const renderValue = (item: ListItemProps, index: number): React.ReactElement => {
         const { divider, component, alignControl, controlType, ...itemProps } = item || {};
         const isControl = ['checkbox', 'switch'].includes(controlType);
-        const isOpen = open[index];
+        const isOpen = item.openListItems || open[index];
         const listItem = !!Object.keys(itemProps).length;
         itemProps.startIcon =
             typeof itemProps.startIcon === 'string' ? <SVGIcon>{itemProps.startIcon}</SVGIcon> : itemProps.startIcon;
@@ -71,12 +71,15 @@ const List: React.FC<ListProps> = ({
             <Box>
                 <List
                     bgColor={_bgColor}
-                    // items={checkForCheckboxItems(itemProps.items, itemProps.listItemsProps)}
                     items={itemProps.items}
                     droppableId={itemProps.title}
                     {...itemProps.listItemsProps}
                     useDraggableContext={false}
-                    useReactRouterDomLink={useReactRouterDomLink}
+                    useReactRouterDomLink={
+                        itemProps.listItemsProps.useReactRouterDomLink === undefined
+                            ? useReactRouterDomLink
+                            : itemProps.listItemsProps.useReactRouterDomLink
+                    }
                 />
                 <Divider variant="fullWidth" {...divider} component="div" />
             </Box>
