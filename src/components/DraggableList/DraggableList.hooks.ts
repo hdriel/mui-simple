@@ -79,7 +79,6 @@ export const useDragHandlers = ({
     }): void => {
         setPlaceholderProps({});
         const { destination, source } = result;
-        console.log('handleDragEnd', result);
         if (!destination) return; // dropped outside the list
 
         const extraProps = { source, destination, droppableId, dataList };
