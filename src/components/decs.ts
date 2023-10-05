@@ -554,6 +554,34 @@ export interface ListProps {
     [key: string]: any;
 }
 
+interface DataItem {
+    id?: string;
+    [key: string]: any;
+}
+
+export interface DraggableListProps {
+    className?: string;
+    component?: string;
+    dataList?: Array<string | DataItem>;
+    disabled?: ((value: string | DataItem, index: number) => boolean) | boolean;
+    droppableClassName?: string;
+    fieldId?: string;
+    flexDirection?: 'row' | 'column';
+    flexGap?: string;
+    useDraggableContext?: boolean;
+    draggableListType?: string;
+    onChange?: (
+        dataItems: Array<ListItemProps & { id: string }>,
+        extraProps: {
+            source: { index: number; droppableId: string };
+            destinationIndex: { index: number; droppableId: string };
+            droppableId: string;
+            dataList?: Array<ListItemProps & { id: string }>;
+        }
+    ) => void;
+    renderValue?: (value: string | DataItem, index: number) => ReactNode;
+}
+
 export type CheckListProps = {
     controlType?: 'checkbox' | 'switch';
     alignCheck?: 'start' | 'end';

@@ -106,6 +106,9 @@ export type { ListProps, ListItemProps } from './components/_FIXED/List/List';
 export { default as CheckList } from './components/_FIXED/List/CheckList';
 export type { CheckListProps } from './components/_FIXED/List/CheckList';
 
+export { default as DraggableList } from './components/DraggableList/DraggableList';
+export type { DraggableListProps } from './components/DraggableList/DraggableList';
+
 export { default as Menu } from './components/_FIXED/Menu/Menu';
 export type { MenuProps, MenuOption } from './components/_FIXED/Menu/Menu';
 
