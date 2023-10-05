@@ -76,9 +76,9 @@ const List: React.FC<ListProps> = ({
                     {...itemProps.listItemsProps}
                     useDraggableContext={false}
                     useReactRouterDomLink={
-                        itemProps.listItemsProps.useReactRouterDomLink === undefined
+                        itemProps.listItemsProps?.useReactRouterDomLink === undefined
                             ? useReactRouterDomLink
-                            : itemProps.listItemsProps.useReactRouterDomLink
+                            : itemProps.listItemsProps?.useReactRouterDomLink
                     }
                 />
                 <Divider variant="fullWidth" {...divider} component="div" />
