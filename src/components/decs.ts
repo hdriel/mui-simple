@@ -1,4 +1,5 @@
 import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent, Ref } from 'react';
+import type { DraggableStateSnapshot } from 'react-beautiful-dnd';
 import type { SxProps } from '@mui/material';
 
 export type AppBarPosition = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
@@ -579,7 +580,7 @@ export interface DraggableListProps {
             dataList?: Array<ListItemProps & { id: string }>;
         }
     ) => void;
-    renderValue?: (value: string | DataItem, index: number) => ReactNode;
+    renderValue?: (value: string | DataItem, index: number, snapshot: DraggableStateSnapshot) => ReactNode;
 }
 
 export type CheckListProps = {

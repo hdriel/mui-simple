@@ -149,7 +149,7 @@ const List: React.FC<ListProps> = ({
                 droppableClassName={droppableId}
                 disabled={!dragAndDropItems}
                 onChange={onListOrderChange}
-                renderValue={(item, index) =>
+                renderValue={(item, index, snapshot) =>
                     renderValue(
                         {
                             ...item,
