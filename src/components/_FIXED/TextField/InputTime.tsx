@@ -1,8 +1,13 @@
 import React from 'react';
 import Input from './TextField';
-import type { InputDateTimeProps } from '../../decs';
+import type { InputTimeProps } from '../../decs';
 
-const InputTime: React.FC<InputDateTimeProps> = ({ value, onChange, ...props }): React.ReactElement => {
+const InputTime: React.FC<InputTimeProps> = ({
+    value,
+    valueType: _valueType,
+    onChange,
+    ...props
+}): React.ReactElement => {
     let valueType = 'string';
     const date = new Date(value);
 
@@ -36,7 +41,15 @@ const InputTime: React.FC<InputDateTimeProps> = ({ value, onChange, ...props }):
         value = 'HH:MM'
             .replace('HH', `${date.getHours()}`.padStart(2, '0'))
             .replace('MM', `${date.getMinutes()}`.padStart(2, '0'));
-        valueType = 'Date';
+        valueType = 'date';
+    }
+
+    if (['seconds', 'milliseconds', 'timestamp', 'date', 'string'].includes(_valueType)) {
+        valueType = _valueType;
+    } else if (_valueType !== undefined) {
+        console.warn(
+            `invalid valueType value supplied for InputTime component, must be one of: ['timestamp', 'date', 'string'], got: ${_valueType}`
+        );
     }
 
     return (
@@ -58,7 +71,7 @@ const InputTime: React.FC<InputDateTimeProps> = ({ value, onChange, ...props }):
                     case 'timestamp':
                         event.target.value = currDate + ms;
                         break;
-                    case 'Date':
+                    case 'date':
                         event.target.value = new Date(currDate + ms);
                         break;
                     case 'string':
@@ -100,5 +113,5 @@ function HHMMToTime(time, inMilliseconds: boolean): number {
 
 InputTime.defaultProps = Input.defaultProps;
 
-export type { InputDateTimeProps as InputTimeProps } from '../../decs';
+export type { InputTimeProps } from '../../decs';
 export default InputTime;

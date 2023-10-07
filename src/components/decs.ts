@@ -303,6 +303,12 @@ export type InputColorProps = InputBaseProps & {
 
 export type InputDateTimeProps = InputBaseProps & {
     value: Date | number | string;
+    valueType: 'timestamp' | 'date' | 'string';
+};
+
+export type InputTimeProps = InputBaseProps & {
+    value: Date | number | string;
+    valueType: 'seconds' | 'milliseconds' | 'timestamp' | 'date' | 'string';
 };
 
 export type InputPatternProps = InputBaseProps & {

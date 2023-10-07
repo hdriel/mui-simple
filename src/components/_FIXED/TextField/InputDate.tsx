@@ -5,14 +5,19 @@ import type { InputDateTimeProps } from '../../decs';
 const EXAMPLE_VALUE = '2023-10-26';
 const EXAMPLE_VALUE_LEN = EXAMPLE_VALUE.length;
 
-const InputDate: React.FC<InputDateTimeProps> = ({ value, onChange, ...props }): React.ReactElement => {
+const InputDate: React.FC<InputDateTimeProps> = ({
+    value,
+    valueType: _valueType,
+    onChange,
+    ...props
+}): React.ReactElement => {
     let valueType;
     if (typeof value === 'number') {
         value = new Date(value)?.toISOString().substring(0, EXAMPLE_VALUE_LEN) ?? '';
-        valueType = 'number';
+        valueType = 'timestamp';
     } else if (value instanceof Date) {
         value = new Date(value)?.toISOString().substring(0, EXAMPLE_VALUE_LEN) ?? '';
-        valueType = 'Date';
+        valueType = 'date';
     } else if (value === undefined || value === null) {
         value = undefined;
         valueType = undefined;
@@ -26,6 +31,14 @@ const InputDate: React.FC<InputDateTimeProps> = ({ value, onChange, ...props }):
         }
     }
 
+    if (['timestamp', 'date', 'string'].includes(_valueType)) {
+        valueType = _valueType;
+    } else if (_valueType !== undefined) {
+        console.warn(
+            `invalid valueType value supplied for InputDate component, must be one of: ['timestamp', 'date', 'string'], got: ${_valueType}`
+        );
+    }
+
     return (
         <Input
             {...props}
@@ -35,10 +48,10 @@ const InputDate: React.FC<InputDateTimeProps> = ({ value, onChange, ...props }):
                 const date = new Date(event.target.value);
 
                 switch (valueType) {
-                    case 'number':
+                    case 'timestamp':
                         event.target.value = date.getTime();
                         break;
-                    case 'Date':
+                    case 'date':
                         event.target.value = date;
                         break;
                     case 'string':
