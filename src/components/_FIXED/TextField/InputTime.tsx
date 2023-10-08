@@ -18,7 +18,7 @@ const InputTime: React.FC<InputTimeProps> = ({
 
     // seconds time
     else if (typeof value === 'number' && value < 86400) {
-        value = timeNumberToHHMM(value, false);
+        value = timeNumberToHHMM(value * (valueType === 'minutes' ? 60 : 1), false);
         valueType = 'seconds';
     }
 
@@ -44,11 +44,11 @@ const InputTime: React.FC<InputTimeProps> = ({
         valueType = 'date';
     }
 
-    if (['seconds', 'milliseconds', 'timestamp', 'date', 'string'].includes(_valueType)) {
+    if (['seconds', 'minutes', 'milliseconds', 'timestamp', 'date', 'string'].includes(_valueType)) {
         valueType = _valueType;
     } else if (_valueType !== undefined) {
         console.warn(
-            `invalid valueType value supplied for InputTime component, must be one of: ['timestamp', 'date', 'string'], got: ${_valueType}`
+            `invalid valueType value supplied for InputTime component, must be one of: ['seconds', 'minutes', 'milliseconds', 'timestamp', 'date', 'string'], got: ${_valueType}`
         );
     }
 
@@ -64,6 +64,9 @@ const InputTime: React.FC<InputTimeProps> = ({
                 switch (valueType) {
                     case 'milliseconds':
                         event.target.value = ms;
+                        break;
+                    case 'minutes':
+                        event.target.value = HHMMToTime(event.target.value, false) / 60;
                         break;
                     case 'seconds':
                         event.target.value = HHMMToTime(event.target.value, false);

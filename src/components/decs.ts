@@ -308,7 +308,7 @@ export type InputDateTimeProps = InputBaseProps & {
 
 export type InputTimeProps = InputBaseProps & {
     value: Date | number | string;
-    valueType: 'seconds' | 'milliseconds' | 'timestamp' | 'date' | 'string';
+    valueType: 'seconds' | 'minutes' | 'milliseconds' | 'timestamp' | 'date' | 'string';
 };
 
 export type InputPatternProps = InputBaseProps & {
