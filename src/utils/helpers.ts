@@ -4,6 +4,10 @@ import { useTheme } from '@mui/material/styles';
 
 import toHex from 'colornames-es';
 
+export function isValidDate(d): null | Date {
+    return d instanceof Date && !isNaN(d) ? d : null;
+}
+
 export function setDisplayName(component, name): void {
     component.displayName = name;
 }

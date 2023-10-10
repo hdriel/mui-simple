@@ -305,15 +305,15 @@ export type InputDateTimeProps = InputBaseProps & {
     value?: Date | number | string;
     valueType?: 'timestamp' | 'date' | 'string';
     includeSeconds?: boolean;
-    minDateTime?: Date;
-    maxDateTime?: Date;
+    minDate?: Date | number | string;
+    maxDate?: Date | number | string;
 };
 
 export type InputDateProps = InputBaseProps & {
     value?: Date | number | string;
     valueType?: 'timestamp' | 'date' | 'string';
-    minDate?: Date;
-    maxDate?: Date;
+    minDate?: Date | number | string;
+    maxDate?: Date | number | string;
 };
 
 export type InputTimeProps = InputBaseProps & {

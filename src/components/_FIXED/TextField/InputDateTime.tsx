@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from './TextField';
 import type { InputDateTimeProps } from '../../decs';
+import { isValidDate } from '../../../utils/helpers';
 
 const EXAMPLE_VALUE = '2023-10-26T15:53';
 const EXAMPLE_VALUE_LEN = EXAMPLE_VALUE.length;
@@ -10,30 +11,26 @@ const InputDateTime: React.FC<InputDateTimeProps> = ({
     valueType: _valueType,
     onChange,
     includeSeconds,
-    minDateTime,
-    maxDateTime,
+    minDate,
+    maxDate,
     inputProps,
     InputLabelProps,
     ...props
 }): React.ReactElement => {
     let valueType;
-    if (typeof value === 'number') {
-        value = new Date(value)?.toISOString().substring(0, EXAMPLE_VALUE_LEN) ?? '';
-        valueType = 'timestamp';
-    } else if (value instanceof Date) {
-        value = new Date(value)?.toISOString().substring(0, EXAMPLE_VALUE_LEN) ?? '';
-        valueType = 'date';
-    } else if (value === undefined || value === null) {
+    if (value === undefined || value === null) {
         value = undefined;
         valueType = undefined;
     } else {
-        try {
-            value = (value && new Date(value)?.toISOString().substring(0, EXAMPLE_VALUE_LEN)) ?? '';
+        if (typeof value === 'number') {
+            valueType = 'timestamp';
+        } else if (value instanceof Date) {
+            valueType = 'date';
+        } else {
             valueType = 'string';
-        } catch (e) {
-            value = undefined;
-            valueType = undefined;
         }
+        const date = new Date(value);
+        value = isValidDate(date)?.toISOString().substring(0, EXAMPLE_VALUE_LEN) ?? '';
     }
 
     if (['timestamp', 'date', 'string'].includes(_valueType)) {
@@ -44,15 +41,18 @@ const InputDateTime: React.FC<InputDateTimeProps> = ({
         );
     }
 
+    const min = isValidDate(new Date(minDate))?.toISOString?.().slice(0, EXAMPLE_VALUE_LEN) ?? undefined;
+    const max = isValidDate(new Date(maxDate))?.toISOString?.().slice(0, EXAMPLE_VALUE_LEN) ?? undefined;
+
     return (
         <Input
             {...props}
             value={value}
             inputProps={{
-                ...inputProps,
                 ...(includeSeconds && { step: 1 }),
-                ...(minDateTime && { min: new Date(minDateTime).toISOString().slice(0, 16) }),
-                ...(maxDateTime && { max: new Date(maxDateTime).toISOString().slice(0, 16) }),
+                ...inputProps,
+                ...{ min },
+                ...{ max },
             }}
             InputLabelProps={{ shrink: true, ...InputLabelProps }}
             onChange={(e) => {
