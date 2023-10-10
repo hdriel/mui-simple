@@ -27,7 +27,7 @@ const InputTime: React.FC<InputTimeProps> = ({
     }
 
     // seconds time
-    else if (typeof value === 'number' && _valueType === 'seconds' && value < totalSecondsInOneDay) {
+    else if (typeof value === 'number' && (_valueType === 'seconds' || value < totalSecondsInOneDay)) {
         const time = value;
         value = timeNumberToHHMM(time, false);
         valueType = 'seconds';
