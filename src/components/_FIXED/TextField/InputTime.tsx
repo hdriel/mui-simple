@@ -11,14 +11,25 @@ const InputTime: React.FC<InputTimeProps> = ({
     let valueType = 'string';
     const date = new Date(value);
 
+    const totalSecondsInOneDay = 60 * 60 * 24;
+    const totalMinutesInOneDay = 60 * 24;
+
     if (value === undefined || value === null) {
         value = undefined;
         valueType = undefined;
     }
 
+    // minutes time
+    else if (typeof value === 'number' && _valueType === 'minutes' && value < totalMinutesInOneDay) {
+        const time = value * 60;
+        value = timeNumberToHHMM(time, false);
+        valueType = 'seconds';
+    }
+
     // seconds time
-    else if (typeof value === 'number' && value < 86400) {
-        value = timeNumberToHHMM(value * (valueType === 'minutes' ? 60 : 1), false);
+    else if (typeof value === 'number' && _valueType === 'seconds' && value < totalSecondsInOneDay) {
+        const time = value;
+        value = timeNumberToHHMM(time, false);
         valueType = 'seconds';
     }
 

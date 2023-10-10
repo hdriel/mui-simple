@@ -66,6 +66,29 @@ export const ValueTimestamp: Story = {
     },
 };
 
+export const ValueMinutes: Story = {
+    args: {
+        label: 'Time',
+        value: 90,
+        valueType: 'minutes',
+    },
+    render: (args) => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const [value, onChange] = useState(args.value);
+        return (
+            <InputTime
+                {...args}
+                value={value}
+                onChange={(e) => {
+                    const value = e.target.value;
+                    console.log(typeof value, value);
+                    onChange(value);
+                }}
+            />
+        );
+    },
+};
+
 export const ValueDate: Story = {
     args: {
         label: 'Time',
