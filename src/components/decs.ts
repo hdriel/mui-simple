@@ -302,13 +302,23 @@ export type InputColorProps = InputBaseProps & {
 };
 
 export type InputDateTimeProps = InputBaseProps & {
-    value: Date | number | string;
-    valueType: 'timestamp' | 'date' | 'string';
+    value?: Date | number | string;
+    valueType?: 'timestamp' | 'date' | 'string';
+    includeSeconds?: boolean;
+    minDateTime?: Date;
+    maxDateTime?: Date;
+};
+
+export type InputDateProps = InputBaseProps & {
+    value?: Date | number | string;
+    valueType?: 'timestamp' | 'date' | 'string';
+    minDate?: Date;
+    maxDate?: Date;
 };
 
 export type InputTimeProps = InputBaseProps & {
-    value: Date | number | string;
-    valueType: 'seconds' | 'minutes' | 'milliseconds' | 'timestamp' | 'date' | 'string';
+    value?: Date | number | string;
+    valueType?: 'seconds' | 'minutes' | 'milliseconds' | 'timestamp' | 'date' | 'string';
 };
 
 export type InputPatternProps = InputBaseProps & {

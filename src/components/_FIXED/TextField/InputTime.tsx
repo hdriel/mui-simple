@@ -6,6 +6,7 @@ const InputTime: React.FC<InputTimeProps> = ({
     value,
     valueType: _valueType,
     onChange,
+    InputLabelProps,
     ...props
 }): React.ReactElement => {
     let valueType = 'string';
@@ -67,6 +68,7 @@ const InputTime: React.FC<InputTimeProps> = ({
         <Input
             {...props}
             value={value}
+            InputLabelProps={{ shrink: true, ...InputLabelProps }}
             onChange={(e) => {
                 const event = { ...e, target: { ...e.target } };
                 const currDate = new Date(date).getTime();
@@ -95,7 +97,6 @@ const InputTime: React.FC<InputTimeProps> = ({
                 }
                 return onChange?.(event);
             }}
-            focused
             type="time"
         />
     );

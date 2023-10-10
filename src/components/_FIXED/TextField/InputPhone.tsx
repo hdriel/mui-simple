@@ -68,7 +68,7 @@ InputPhone.defaultProps = {
     onEnterKeyPress: undefined,
     onKeyPress: undefined,
     overwrite: undefined,
-    showMaskAsPlaceholder: true,
+    showMaskAsPlaceholder: undefined,
     textAlign: undefined,
     unmask: undefined,
     value: '', // stay this value, to prevent from component to be disabled on missing provider value

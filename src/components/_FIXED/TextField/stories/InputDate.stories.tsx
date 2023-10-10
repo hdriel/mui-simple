@@ -250,6 +250,31 @@ export const HelperText: Story = {
     },
 };
 
+export const MinDate: Story = {
+    args: {
+        label: '-3 day as min Date',
+        value: Date.now(),
+        minDate: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3),
+    },
+};
+
+export const MaxDate: Story = {
+    args: {
+        label: '+3 day as max Date',
+        value: Date.now(),
+        maxDate: new Date(Date.now() + 1000 * 60 * 60 * 24 * 3),
+    },
+};
+
+export const MinMaxDate: Story = {
+    args: {
+        label: '-3d,+3d as min-max Date',
+        value: Date.now(),
+        minDate: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3),
+        maxDate: new Date(Date.now() + 1000 * 60 * 60 * 24 * 3),
+    },
+};
+
 export const HideStartActionsOnEmpty_ = (args): ReactElement => (
     <Stack spacing={3}>
         <InputDate

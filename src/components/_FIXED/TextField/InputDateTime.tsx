@@ -9,6 +9,11 @@ const InputDateTime: React.FC<InputDateTimeProps> = ({
     value,
     valueType: _valueType,
     onChange,
+    includeSeconds,
+    minDateTime,
+    maxDateTime,
+    inputProps,
+    InputLabelProps,
     ...props
 }): React.ReactElement => {
     let valueType;
@@ -43,6 +48,13 @@ const InputDateTime: React.FC<InputDateTimeProps> = ({
         <Input
             {...props}
             value={value}
+            inputProps={{
+                ...inputProps,
+                ...(includeSeconds && { step: 1 }),
+                ...(minDateTime && { min: new Date(minDateTime).toISOString().slice(0, 16) }),
+                ...(maxDateTime && { max: new Date(maxDateTime).toISOString().slice(0, 16) }),
+            }}
+            InputLabelProps={{ shrink: true, ...InputLabelProps }}
             onChange={(e) => {
                 const event = { ...e, target: { ...e.target } };
                 const date = new Date(event.target.value);
@@ -62,7 +74,6 @@ const InputDateTime: React.FC<InputDateTimeProps> = ({
 
                 return onChange?.(event);
             }}
-            focused
             type="datetime-local"
         />
     );

@@ -1,14 +1,18 @@
 import React from 'react';
 import Input from './TextField';
-import type { InputDateTimeProps } from '../../decs';
+import type { InputDateProps } from '../../decs';
 
 const EXAMPLE_VALUE = '2023-10-26';
 const EXAMPLE_VALUE_LEN = EXAMPLE_VALUE.length;
 
-const InputDate: React.FC<InputDateTimeProps> = ({
+const InputDate: React.FC<InputDateProps> = ({
     value,
     valueType: _valueType,
     onChange,
+    minDate,
+    maxDate,
+    inputProps,
+    InputLabelProps,
     ...props
 }): React.ReactElement => {
     let valueType;
@@ -43,6 +47,12 @@ const InputDate: React.FC<InputDateTimeProps> = ({
         <Input
             {...props}
             value={value}
+            inputProps={{
+                ...(minDate && { min: new Date(minDate).toISOString().slice(0, 10) }),
+                ...(maxDate && { max: new Date(maxDate).toISOString().slice(0, 10) }),
+                ...inputProps,
+            }}
+            InputLabelProps={{ shrink: true, ...InputLabelProps }}
             onChange={(e) => {
                 const event = { ...e, target: { ...e.target } };
                 const date = new Date(event.target.value);
@@ -62,7 +72,6 @@ const InputDate: React.FC<InputDateTimeProps> = ({
 
                 return onChange?.(event);
             }}
-            focused
             type="date"
         />
     );
@@ -70,5 +79,5 @@ const InputDate: React.FC<InputDateTimeProps> = ({
 
 InputDate.defaultProps = Input.defaultProps;
 
-export type { InputDateTimeProps as InputDateProps } from '../../decs';
+export type { InputDateProps } from '../../decs';
 export default InputDate;
