@@ -46,16 +46,21 @@ const Accordion: React.FC<AccordionProps> = function (props): React.ReactElement
     const useCustomStyleIcon = <ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />;
 
     useEffect(() => {
-        setExpanded(_expanded);
-    }, [_expanded]);
+        if (_expanded !== undefined && expanded !== _expanded) {
+            setExpanded(_expanded);
+        }
+    }, [_expanded, expanded]);
 
     return (
         <MuiAccordion
             disabled={disabled}
             expanded={typeof expanded === 'string' ? expanded === id : expanded}
             onChange={(event, isExpanded) => {
-                onChange?.(event, isExpanded ? id ?? isExpanded : false);
-                setExpanded(!expanded);
+                if (onChange) {
+                    onChange?.(event, isExpanded ? id ?? isExpanded : false);
+                } else {
+                    setExpanded(!expanded);
+                }
             }}
             useCustomStyle={useCustomStyle}
             TransitionProps={{ unmountOnExit: unmountDetailsOnClose }}
