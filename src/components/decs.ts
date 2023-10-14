@@ -792,10 +792,10 @@ export interface AccordionProps {
     expandedIcon?: string | ReactNode;
     hideLabel?: string;
     id?: string;
-    label?: string;
+    label?: string | ReactNode;
     labelProps?: TypographyProps;
     onChange?: (event: SyntheticEvent<unknown>, expanded: boolean | string) => void;
-    secondaryLabel?: string;
+    secondaryLabel?: string | ReactNode;
     showMoreLabel?: string;
     textColor?: string;
     labelColor?: ((expanded: boolean | string) => string) | string;
