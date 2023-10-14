@@ -57,8 +57,10 @@ export const AccordionSummary = styled(({ label, ...props }) => <MuiAccordionSum
 
 type AccordionDetailsStyledPropsType = AccordionDetailsProps & any;
 export const AccordionDetails = styled(MuiAccordionDetails, {
-    shouldForwardProp: (propName) => !['useCustomStyle', 'disabledContentPadding'].includes(propName as string),
+    shouldForwardProp: (propName) =>
+        !['useCustomStyle', 'disabledContentPadding', 'bgColorDetails'].includes(propName as string),
 })<AccordionDetailsStyledPropsType>`
+    background-color: ${(props) => props.bgColorDetails};
     padding-bottom: 1em;
     ${customStyleDetails}
     ${(props) =>

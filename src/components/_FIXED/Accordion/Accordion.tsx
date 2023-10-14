@@ -10,12 +10,14 @@ import SVGIcon from '../../SVGIcon/SVGIcon';
 const Accordion: React.FC<AccordionProps> = function (props): React.ReactElement {
     const {
         bgColor: _bgColor,
+        bgColorDetails: _bgColorDetails,
         bottomSecondaryLabel,
         buttonsColor,
         children,
         collapsedIcon: _collapsedIcon,
         details,
         detailsMaxRows,
+        detailsStyles,
         disabled,
         disabledContentPadding,
         expanded: _expanded,
@@ -23,12 +25,14 @@ const Accordion: React.FC<AccordionProps> = function (props): React.ReactElement
         hideLabel,
         id,
         label,
+        labelColor: _labelColor,
         labelProps,
         onChange,
         secondaryLabel: _secondaryLabel,
         showMoreLabel,
+        summary,
+        summaryStyles,
         textColor,
-        labelColor: _labelColor,
         unmountDetailsOnClose,
         useCustomStyle,
         ...rest
@@ -38,6 +42,7 @@ const Accordion: React.FC<AccordionProps> = function (props): React.ReactElement
     const [expanded, setExpanded] = useState(_expanded);
     const [isEllipsis, setIsEllipsis] = useState(false);
     const [bgColor] = useCustomColor(_bgColor);
+    const [bgColorDetails] = useCustomColor(_bgColorDetails);
     const [labelColor] = useCustomColor(typeof _labelColor === 'function' ? _labelColor(expanded) : _labelColor);
     const secondaryLabel = bottomSecondaryLabel || _secondaryLabel;
     const expandedIcon = typeof _expandedIcon === 'string' ? <SVGIcon>{_expandedIcon}</SVGIcon> : _expandedIcon;
@@ -56,11 +61,8 @@ const Accordion: React.FC<AccordionProps> = function (props): React.ReactElement
             disabled={disabled}
             expanded={typeof expanded === 'string' ? expanded === id : expanded}
             onChange={(event, isExpanded) => {
-                if (onChange) {
-                    onChange?.(event, isExpanded ? id ?? isExpanded : false);
-                } else {
-                    setExpanded(!expanded);
-                }
+                if (onChange) onChange?.(event, isExpanded ? id ?? isExpanded : false);
+                else setExpanded(!expanded);
             }}
             useCustomStyle={useCustomStyle}
             TransitionProps={{ unmountOnExit: unmountDetailsOnClose }}
@@ -73,20 +75,39 @@ const Accordion: React.FC<AccordionProps> = function (props): React.ReactElement
                 titleColor={labelColor}
                 expandIcon={useCustomStyle ? useCustomStyleIcon : icon}
                 bottomSecondaryLabel={!!bottomSecondaryLabel}
+                sx={summaryStyles}
             >
-                <Typography
-                    noWrap={!secondaryLabel}
-                    alignLeft
-                    wrap={secondaryLabel}
-                    color={labelColor}
-                    {...labelProps}
-                    sx={{ ...(secondaryLabel && { width: '33%', flexShrink: 0 }), ...labelProps?.sx }}
-                >
-                    {label}
-                </Typography>
-                {secondaryLabel && <Typography sx={{ color: 'text.secondary' }}>{secondaryLabel}</Typography>}
+                {summary || (
+                    <>
+                        {label && typeof label === 'string' ? (
+                            <Typography
+                                noWrap={!secondaryLabel}
+                                alignLeft
+                                wrap={secondaryLabel}
+                                color={labelColor}
+                                {...labelProps}
+                                sx={{ ...(secondaryLabel && { width: '40%', flexShrink: 0 }), ...labelProps?.sx }}
+                            >
+                                {label}
+                            </Typography>
+                        ) : (
+                            label
+                        )}
+
+                        {secondaryLabel && typeof secondaryLabel === 'string' ? (
+                            <Typography sx={{ color: 'text.secondary' }}>{secondaryLabel}</Typography>
+                        ) : (
+                            secondaryLabel
+                        )}
+                    </>
+                )}
             </AccordionSummary>
-            <AccordionDetails useCustomStyle={useCustomStyle} disabledContentPadding={disabledContentPadding}>
+            <AccordionDetails
+                useCustomStyle={useCustomStyle}
+                bgColorDetails={bgColorDetails}
+                disabledContentPadding={disabledContentPadding}
+                sx={detailsStyles}
+            >
                 {details && (
                     <>
                         <Typography

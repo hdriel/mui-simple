@@ -779,11 +779,13 @@ export interface TypographyProps {
 
 export interface AccordionProps {
     bgColor?: string;
+    bgColorDetails?: string;
     bottomSecondaryLabel?: string;
     buttonsColor?: string;
     collapsedIcon?: string | ReactNode;
     details?: string;
     detailsMaxRows?: number;
+    detailsStyles: SxProps;
     disabled?: boolean;
     disabledContentPadding?: boolean;
     expanded?: boolean | string;
@@ -799,6 +801,8 @@ export interface AccordionProps {
     labelColor?: ((expanded: boolean | string) => string) | string;
     unmountDetailsOnClose?: boolean;
     useCustomStyle?: boolean;
+    summary: ReactNode;
+    summaryStyles: SxProps;
     [key: string]: any;
 }
 

@@ -138,8 +138,17 @@ export const ShowMoreAndHideLabel: Story = {
 
 export const BgColor: Story = {
     args: {
-        label: 'Details Max Rows 3',
+        label: 'background summary',
         bgColor: '#10DCCA',
+        expanded: true,
+        details: smallIpsum,
+    },
+};
+
+export const BgColorDetails: Story = {
+    args: {
+        label: 'background details ',
+        bgColorDetails: '#10DCCA',
         expanded: true,
         details: smallIpsum,
     },
