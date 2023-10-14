@@ -785,7 +785,7 @@ export interface AccordionProps {
     collapsedIcon?: string | ReactNode;
     details?: string;
     detailsMaxRows?: number;
-    detailsStyles: SxProps;
+    detailsStyles?: SxProps;
     disabled?: boolean;
     disabledContentPadding?: boolean;
     expanded?: boolean | string;
@@ -801,8 +801,8 @@ export interface AccordionProps {
     labelColor?: ((expanded: boolean | string) => string) | string;
     unmountDetailsOnClose?: boolean;
     useCustomStyle?: boolean;
-    summary: ReactNode;
-    summaryStyles: SxProps;
+    summary?: ReactNode;
+    summaryStyles?: SxProps;
     [key: string]: any;
 }
 
