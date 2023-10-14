@@ -16,7 +16,7 @@ export const Divider = styled(({ ...props }) => <MuiDivider flexItem orientation
 `;
 
 export const Container = styled(Box, {
-    shouldForwardProp: (propName) => !['helperTextAlign'].includes(propName as string),
+    shouldForwardProp: (propName) => !['helperTextAlign', 'fullWidth'].includes(propName as string),
 })`
     display: flex;
     flex-direction: column;
