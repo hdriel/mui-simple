@@ -62,6 +62,7 @@ export const ToggleButtonGroups = styled(({ ...props }) => <MuiPaper elevation={
 export const ToggleButtonGroup = styled(({ ...props }) => <MuiToggleButtonGroup {...props} />, {
     shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
 })<ToggleButtonGroupProps>`
+    flex-wrap: wrap;
     & .Mui-selected // , & .MuiTouchRipple-root
     {
         color: ${(props) => props.customColor};
