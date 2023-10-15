@@ -21,6 +21,7 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
     helperTextAlign,
     helperTextStyle,
     error,
+    wrap,
     sx,
     ...props
 }): React.ReactElement => {
@@ -62,6 +63,7 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
                 size={size}
                 onChange={onChangeHandler}
                 fullWidth={fullWidth}
+                wrap={wrap}
                 sx={{ bgcolor: transparent ? 'transparent' : undefined, ...sx }}
                 {...props}
             >
@@ -111,6 +113,7 @@ ToggleButtonGroup.defaultProps = {
     helperTextAlign: undefined,
     helperTextStyle: undefined,
     data: [],
+    wrap: false,
 };
 
 export type { ToggleButtonGroupProps } from '../../decs';

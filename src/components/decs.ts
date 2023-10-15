@@ -1082,6 +1082,7 @@ export interface ToggleButtonGroupProps {
         disabled?: boolean;
         component: ReactElement | ReactNode | string | number;
     }>;
+    wrap?: boolean;
     transparent?: boolean;
     [key: string]: any;
 }
