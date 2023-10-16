@@ -205,8 +205,8 @@ export interface CardProps {
     onClick?: (e: any) => void;
     optionsMenu?: MenuProps | Array<MenuOptionItem | DividerProps>;
     parseChildren?: boolean;
-    subtitle?: string;
-    title?: string;
+    subtitle?: ReactNode | string;
+    title?: ReactNode | string;
     width?: number | string;
     [key: string]: any;
 }
