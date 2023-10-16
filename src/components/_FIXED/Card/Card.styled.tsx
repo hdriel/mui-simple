@@ -28,6 +28,16 @@ export const Paper = MuiPaper;
 export const Typography = MuiTypography;
 export const Button = MuiButton;
 
+export const CardMediaWrapper = styled(MuiBox)`
+    height: 100%;
+    width: 100%;
+`;
+
+export const ContentWrapper = styled(MuiBox)`
+    height: 100%;
+    width: 100%;
+`;
+
 interface ExpandMoreStyledProps {
     icon: ReactNode;
     expand: boolean;

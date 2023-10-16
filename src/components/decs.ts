@@ -178,26 +178,33 @@ export interface CardProps {
     avatar?: ReactNode;
     contentPadding?: number | string;
     contentStyle?: SxProps;
+    contentWrapperStyle?: SxProps;
     flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
+    height?: number | string;
     image?:
         | string
         | {
               src?: string;
               title?: string;
               width?: number | string;
+              maxWidth?: number | string;
               height?: number | string;
+              maxHeight?: number | string;
               onClick?: (e: any) => void;
               stretch?: 'cover' | 'contain' | 'none' | 'fill';
+              fullHeight?: boolean;
+              sx?: SxProps;
               [key: string]: any;
           };
-    height?: number | string;
     justifyContent?: string;
     maxHeight?: number | string;
     maxWidth?: number | string;
     mediaOnTop?: boolean;
     minHeight?: number | string;
     minWidth?: number | string;
+    onClick?: (e: any) => void;
     optionsMenu?: MenuProps | Array<MenuOptionItem | DividerProps>;
+    parseChildren?: boolean;
     subtitle?: string;
     title?: string;
     width?: number | string;
