@@ -99,22 +99,20 @@ const Card: React.FC<CardProps> = (props): React.ReactElement => {
             >
                 {image
                     ? CardMediaCmp || (
-                          <CardMediaWrapper>
+                          <CardMediaWrapper sx={{ maxWidth: imageMaxWidth, maxHeight: imageMaxHeight }}>
                               <CardMedia
                                   component="img"
                                   image={imageSrc}
                                   alt={imageTitle ?? 'card image media'}
                                   sx={{
                                       ...imageStyle,
+                                      width: imageWidth,
+                                      objectFit: objectFit ?? 'cover',
                                       height: fullHeight
                                           ? currCardHeight
                                               ? `${currCardHeight}px`
                                               : '100%'
                                           : imageHeight,
-                                      maxHeight: imageMaxHeight,
-                                      width: imageWidth,
-                                      maxWidth: imageMaxWidth,
-                                      objectFit: objectFit ?? 'cover',
                                   }}
                                   {...imageProps}
                               />
