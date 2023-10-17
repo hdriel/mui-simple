@@ -9,7 +9,7 @@ import {
 } from './Slider.styled';
 import { SLIDER_STYLES } from './Slider.consts';
 import { useCustomColor } from '../../../utils/helpers';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 import type { SliderProps } from '../../decs';
 
 const Slider: React.FC<SliderProps> = ({

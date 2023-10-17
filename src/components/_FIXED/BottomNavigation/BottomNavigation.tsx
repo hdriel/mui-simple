@@ -3,7 +3,7 @@ import type { ReactElement } from 'react';
 import { BottomNavigation as MuiBottomNavigation, BottomNavigationAction } from './BottomNavigation.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import type { BottomNavigationProps } from '../../decs';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
 const BottomNavigation: React.FC<BottomNavigationProps> = function (props): ReactElement {
     const {

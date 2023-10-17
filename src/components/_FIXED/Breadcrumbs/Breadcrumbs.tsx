@@ -4,7 +4,7 @@ import { Breadcrumbs as MuiBreadcrumbs } from './Breadcrumbs.styled';
 import Link from '../Link/Link';
 import Chip from '../Chip/Chip';
 import Typography from '../Typography/Typography';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 import type { BreadcrumbsProps } from '../../decs';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function

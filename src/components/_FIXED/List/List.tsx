@@ -4,7 +4,7 @@ import Button from '../Button/Button';
 import { Divider, List as MuiList, ListSubheader, Collapse } from './List.styled';
 import MuiListItem from './ListItem';
 import DraggableList from '../../DraggableList/DraggableList';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 import type { ListItemProps, ListProps } from '../../decs';
 import { useCustomColor } from '../../../utils/helpers';
 import { checkForCheckboxItems } from './List.converter';

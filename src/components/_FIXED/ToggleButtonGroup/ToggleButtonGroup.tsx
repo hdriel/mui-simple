@@ -1,7 +1,7 @@
 import React from 'react';
 import { ToggleButton, ToggleButtonGroup as MuiToggleButtonGroup, Container } from './ToggleButtonGroup.styled';
 import { setDisplayName, useCustomColor } from '../../../utils/helpers';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 import type { ToggleButtonGroupProps } from '../../decs';
 import { FormHelperText } from '../RadioButtonsGroup/RadioButtonsGroup.styled';
 

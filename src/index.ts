@@ -145,7 +145,9 @@ export type { SpeedDialProps } from './components/_FIXED/SpeedDial/SpeedDial';
 export { default as Stepper } from './components/Stepper/Stepper';
 export { default as MobileStepper } from './components/Stepper/MobileStepper';
 export { useSimpleStepper } from './components/Stepper/Stepper.utils';
-export { default as SVGIcon } from './components/SVGIcon/SVGIcon';
+
+export { default as SVGIcon } from './components/_FIXED/SVGIcon/SVGIcon';
+export type { SVGIconProps } from './components/_FIXED/SVGIcon/SVGIcon';
 
 export { default as Switch } from './components/_FIXED/Switch/Switch';
 export type { SwitchProps } from './components/_FIXED/Switch/Switch';

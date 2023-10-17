@@ -4,7 +4,7 @@ import { ClickAwayListener } from '@mui/material';
 import { Select, FormControl, InputLabel, FormHelperText, Stack, Box } from './InputSelect.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import { getOptions, useOptions, useOptionsConverter } from './InputSelect.hooks';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 import type { InputSelectProps } from '../../decs';
 
 const emptyObjectRef = [];

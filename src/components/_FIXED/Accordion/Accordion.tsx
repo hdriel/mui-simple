@@ -5,7 +5,7 @@ import Button from '../Button/Button';
 import { ArrowForwardIosSharp as ArrowForwardIosSharpIcon } from '@mui/icons-material';
 import { useCustomColor } from '../../../utils/helpers';
 import type { AccordionProps } from '../../decs';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
 const Accordion: React.FC<AccordionProps> = function (props): React.ReactElement {
     const {

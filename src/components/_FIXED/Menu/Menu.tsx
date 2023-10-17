@@ -5,7 +5,7 @@ import Typography from '../Typography/Typography';
 import Divider from '../Divider/Divider';
 import { Grow, ClickAwayListener, Box } from '@mui/material';
 import { useAnchorProps, useChildrenComponentBinding } from './Menu.hooks';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 import type { DividerProps, MenuOption, MenuOptionItem, MenuProps } from '../../decs';
 
 const Menu: React.FC<MenuProps> = (props): React.ReactElement => {

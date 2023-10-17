@@ -1,17 +1,7 @@
 import React, { isValidElement } from 'react';
-import type { SxProps } from '@mui/material';
 import MuiIconName from './MuiIconName';
 import { SVG } from './SVGIcon.styled';
-
-interface SVGIconProps {
-    muiIconName?: string;
-    iconSrc?: string;
-    color?: string;
-    width?: string | number;
-    height?: string | number;
-    size?: string | number;
-    sx?: SxProps;
-}
+import type { SVGIconProps } from '../../decs';
 
 const SVGIcon: React.FC<SVGIconProps> = ({
     muiIconName,
@@ -49,5 +39,7 @@ SVGIcon.defaultProps = {
     height: undefined,
     size: undefined,
 };
+
+export type { SVGIconProps } from '../../decs';
 
 export default SVGIcon;

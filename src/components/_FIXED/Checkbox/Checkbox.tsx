@@ -4,7 +4,7 @@ import type { ReactElement } from 'react';
 import { Checkbox as MuiCheckbox } from './Checkbox.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import type { CheckboxProps } from '../../decs';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
 const Checkbox: React.FC<CheckboxProps> = (props): ReactElement => {
     const { color, textColor: _textColor, value, checked, checkedIcon, icon, children, label, ...rest } = props;

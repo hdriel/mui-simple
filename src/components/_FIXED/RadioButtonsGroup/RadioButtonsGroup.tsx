@@ -10,7 +10,7 @@ import {
     Legend,
 } from './RadioButtonsGroup.styled';
 import { useCustomColor } from '../../../utils/helpers';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
 const RadioButtonsGroup: React.FC<RadioButtonsGroupProps> = ({
     checkedIcon,

@@ -8,7 +8,7 @@ import Button from '../../_FIXED/Button/Button';
 import LabelIconTreeItem, { LabelIconTreeItemIcons } from '../TreeItemComponents/LabelIconTreeItem';
 import IndentBorderTreeItem, { IndentBorderTreeItemIcons } from '../TreeItemComponents/IndentBorderTreeItem';
 
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../../_FIXED/SVGIcon/SVGIcon';
 import Typography from '../../_FIXED/Typography/Typography';
 
 export default {

@@ -1144,3 +1144,14 @@ export interface SpeedDialProps {
     top?: string | number;
     [key: string]: any;
 }
+
+export interface SVGIconProps {
+    muiIconName?: string;
+    iconSrc?: string;
+    color?: string;
+    width?: string | number;
+    height?: string | number;
+    size?: string | number;
+    sx?: SxProps;
+    [key: string]: any;
+}

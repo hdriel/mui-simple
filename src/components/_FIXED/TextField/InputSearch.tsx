@@ -2,7 +2,7 @@ import React from 'react';
 
 import Input from './TextField';
 import type { InputSearchProps } from '../../decs';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
 const InputSearch: React.FC<InputSearchProps> = ({ searchIcon: _searchIcon, onChange, ...props }) => {
     const searchIcon = typeof _searchIcon === 'string' ? <SVGIcon>{_searchIcon}</SVGIcon> : _searchIcon;

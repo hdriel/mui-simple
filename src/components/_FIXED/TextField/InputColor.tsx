@@ -9,7 +9,7 @@ import { copyToClipboard, getCustomColor } from '../../../utils/helpers';
 import Slider from '../Slider/Slider';
 import { Box } from './TextField.styled';
 import type { InputColorProps } from '../../decs';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 import { useTheme } from '@mui/material/styles';
 import { HEX_OPACITY_SUFFIX } from '../../../utils/consts';
 

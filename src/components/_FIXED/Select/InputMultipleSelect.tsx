@@ -10,7 +10,7 @@ import { MenuItem } from './InputSelect.styled';
 import { getOptions, useOptionsConverter } from './InputSelect.hooks';
 import ListItem from '../List/ListItem';
 import type { InputMultipleSelectProps } from '../../decs';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 import { InputSelectOption } from '../../decs';
 
 const RenderValuesAsChips = ({ value, option: options }: { value?: any; option?: any }): React.ReactElement => {

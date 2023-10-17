@@ -3,7 +3,7 @@ import type { SxProps } from '@mui/material';
 import type { PropsWithChildren, ReactElement, ReactNode } from 'react';
 // import PropTypes from 'prop-types';
 import * as MUIIcon from '@mui/icons-material';
-import { numberToPx } from '../../utils/helpers';
+import { numberToPx } from '../../../utils/helpers';
 
 interface MuiIconNameProps {
     name: string | ReactNode;

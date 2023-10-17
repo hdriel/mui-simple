@@ -1,7 +1,7 @@
 import React from 'react';
 import Input from './TextField';
 import type { InputTextProps } from '../../decs';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
 const InputText: React.FC<InputTextProps> = function InputText(props): React.ReactElement {
     const { value, showLimitIndicatorFrom, limitIndicator, endCmp, ...rest } = props;

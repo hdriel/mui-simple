@@ -6,7 +6,7 @@ import { CircularProgress } from '../Progress';
 import { Button as MuiButton, IconButton as MuiIconButton } from './Button.styled';
 import Tooltip from '../Tooltip/Tooltip';
 import { useCustomColor } from '../../../utils/helpers';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 import type { ButtonProps } from '../../decs';
 
 const SIZES = ['small', 'medium', 'large'];

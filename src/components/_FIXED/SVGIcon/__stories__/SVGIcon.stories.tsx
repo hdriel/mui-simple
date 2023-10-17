@@ -8,11 +8,11 @@ import twoToneIcons from './twoTone-icons.json';
 import { Stack, Grid, Box } from '@mui/material';
 
 import SVGIcon from '../SVGIcon';
-import ToggleButtonGroup from '../../_FIXED/ToggleButtonGroup/ToggleButtonGroup';
-import Typography from '../../_FIXED/Typography/Typography';
-import ToggleButtonGroups from '../../_FIXED/ToggleButtonGroup/ToggleButtonGroups';
-import InputColor from '../../_FIXED/TextField/InputColor';
-import Slider from '../../_FIXED/Slider/Slider';
+import ToggleButtonGroup from '../../ToggleButtonGroup/ToggleButtonGroup';
+import Typography from '../../Typography/Typography';
+import ToggleButtonGroups from '../../ToggleButtonGroup/ToggleButtonGroups';
+import InputColor from '../../TextField/InputColor';
+import Slider from '../../Slider/Slider';
 
 export default {
     title: 'Data-Display/Icons',

@@ -2,7 +2,7 @@ import type { StepType } from '../../decs';
 import React, { useMemo } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { getCustomColor } from '../../../utils/helpers';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../../_FIXED/SVGIcon/SVGIcon';
 
 interface UseStepperStepsHookProps {
     color: string;

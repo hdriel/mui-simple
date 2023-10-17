@@ -19,7 +19,7 @@ import CardExpandedContent from '../CardExpandedContent';
 import MyAvatar from '../../Avatar/Avatar';
 import Typography from '../../Typography/Typography';
 import Button from '../../Button/Button';
-import SVGIcon from '../../../SVGIcon/SVGIcon';
+import SVGIcon from '../../SVGIcon/SVGIcon';
 
 const meta: Meta<typeof Card> = {
     title: 'Surfaces/Card',
