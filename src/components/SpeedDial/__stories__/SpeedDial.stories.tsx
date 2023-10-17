@@ -126,6 +126,6 @@ export const ShowTooltip: Story = {
         direction: 'left',
         bottom: 16,
         right: 16,
-        showTooltip: true,
+        showTooltip: false,
     },
 };
