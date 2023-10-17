@@ -9,8 +9,8 @@ import {
 import { Stack } from '@mui/material';
 import { Meta, StoryObj } from '@storybook/react';
 import SpeedDial from '../SpeedDial';
-import Button from '../../_FIXED/Button/Button';
-import Chip from '../../_FIXED/Chip/Chip';
+import Button from '../../Button/Button';
+import Chip from '../../Chip/Chip';
 
 const meta: Meta<typeof SpeedDial> = {
     title: 'Navigation/SpeedDial',

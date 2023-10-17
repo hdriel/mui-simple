@@ -139,8 +139,8 @@ export * from './components/_FIXED/Slider';
 export { default as Snackbar } from './components/_FIXED/Snackbar/Snackbar';
 export type { SnackbarProps } from './components/_FIXED/Snackbar/Snackbar';
 
-export { default as SpeedDial } from './components/SpeedDial/SpeedDial';
-export type { SpeedDialProps } from './components/SpeedDial/SpeedDial';
+export { default as SpeedDial } from './components/_FIXED/SpeedDial/SpeedDial';
+export type { SpeedDialProps } from './components/_FIXED/SpeedDial/SpeedDial';
 
 export { default as Stepper } from './components/Stepper/Stepper';
 export { default as MobileStepper } from './components/Stepper/MobileStepper';

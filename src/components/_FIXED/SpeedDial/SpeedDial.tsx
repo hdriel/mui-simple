@@ -2,9 +2,9 @@ import React from 'react';
 import type { ReactElement } from 'react';
 import { Backdrop } from '@mui/material'; // Backdrop must use from @mui/material and not from my custom Backdrop
 import { SpeedDial as MuiSpeedDial, SpeedDialAction as MuiSpeedDialAction, SpeedDialIcon } from './SpeedDial.styled';
-import { useCustomColor } from '../../utils/helpers';
-import SVGIcon from '../SVGIcon/SVGIcon';
-import type { SpeedDialProps } from '../decs';
+import { useCustomColor } from '../../../utils/helpers';
+import SVGIcon from '../../SVGIcon/SVGIcon';
+import type { SpeedDialProps } from '../../decs';
 
 const SpeedDial: React.FC<SpeedDialProps> = (props): ReactElement => {
     const {
@@ -90,5 +90,5 @@ SpeedDial.defaultProps = {
     top: undefined,
 };
 
-export type { SpeedDialProps } from '../decs';
+export type { SpeedDialProps } from '../../decs';
 export default SpeedDial;
