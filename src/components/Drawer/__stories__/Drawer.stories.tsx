@@ -257,6 +257,7 @@ export const KeepMounted = (args) => {
     return (
         <div>
             <Stack>
+                <p>check your console log for each Mounted message</p>
                 <Button onClick={() => setKeepMountedMenuOpen(true)}>Keep Mounted Menu</Button>
                 <Button onClick={() => setMenuOpen(true)}>Menu Open</Button>
             </Stack>
