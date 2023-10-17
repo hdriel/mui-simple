@@ -12,6 +12,7 @@ export const SpeedDialIcon = MuiSpeedDialIcon; // note: styled on MuiSpeedDialIc
 
 interface SpeedDialStyledProps {
     showTooltip?: boolean;
+    position?: { top?: number | string; bottom?: number | string; right?: number | string; left?: number | string };
 }
 
 type SpeedDialStyledPropsType = SpeedDialProps & SpeedDialStyledProps;
