@@ -42,10 +42,10 @@ export const Default: Story = {
 };
 
 const actions = [
-    { icon: <FileCopyIcon />, name: 'Copy' },
+    { icon: 'FileCopy', name: 'Copy' },
     { icon: <SaveIcon />, name: 'Save' },
     { icon: <PrintIcon />, name: 'Print' },
-    { icon: <ShareIcon />, name: 'Share' },
+    { icon: 'Share', name: 'Share' },
 ];
 
 export const ThemedAndColored_ = (args) => {
