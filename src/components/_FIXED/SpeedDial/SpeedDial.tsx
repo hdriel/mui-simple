@@ -34,6 +34,7 @@ const SpeedDial: React.FC<SpeedDialProps> = (props): ReactElement => {
     actions?.forEach((action) => {
         action.icon = typeof action.icon === 'string' ? <SVGIcon>{action.icon}</SVGIcon> : action.icon;
     });
+    const position = { top, bottom, right, left };
 
     return (
         <>
@@ -53,7 +54,8 @@ const SpeedDial: React.FC<SpeedDialProps> = (props): ReactElement => {
                         '&:hover': { bgcolor: customColorHover },
                     },
                 }}
-                sx={{ ...sx, top, bottom, right, left }}
+                sx={{ ...sx, ...position }}
+                position={{ top, bottom, right, left }}
                 {...rest}
             >
                 {actions?.map((action) => (
