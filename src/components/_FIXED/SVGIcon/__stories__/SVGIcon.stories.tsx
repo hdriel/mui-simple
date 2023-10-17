@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
 import filledIcons from './filled-icons.json';
 import outlinedIcons from './outlined-icons.json';
 import roundedIcons from './rounded-icons.json';
@@ -13,21 +12,23 @@ import Typography from '../../Typography/Typography';
 import ToggleButtonGroups from '../../ToggleButtonGroup/ToggleButtonGroups';
 import InputColor from '../../TextField/InputColor';
 import Slider from '../../Slider/Slider';
+import { Meta, StoryObj } from '@storybook/react';
 
-export default {
-    title: 'Data-Display/Icons',
+const meta: Meta<typeof SVGIcon> = {
+    title: 'Data-Display/SVGIcon',
     component: SVGIcon,
+    tags: ['autodocs'],
 };
 
-const actions = {
-    onClick: action('onClick'),
+export default meta;
+
+type Story = StoryObj<typeof SVGIcon>;
+
+export const Default: Story = {
+    args: {},
 };
 
-export const Default = () => {
-    return <SVGIcon {...actions} />;
-};
-
-export const MuiIconNames = () => {
+export const MuiIconNames_ = (args) => {
     const [iconType, setIconType] = useState('filled');
     const [columns, setColumns] = useState(2);
     const [color, setColor] = useState('black');
@@ -59,14 +60,14 @@ export const MuiIconNames = () => {
                 <ToggleButtonGroup
                     value={iconType}
                     exclusive
-                    onChange={(value) => setIconType(value)}
+                    onChange={(event, value) => setIconType(value)}
                     data={dataType}
                 />
 
                 <ToggleButtonGroup
                     value={columns}
                     exclusive
-                    onChange={(value) => setColumns(value)}
+                    onChange={(event, value) => setColumns(value)}
                     data={dataColumns}
                 />
             </ToggleButtonGroups>
@@ -97,7 +98,7 @@ export const MuiIconNames = () => {
     );
 };
 
-export const WidthAndHeight = () => {
+export const WidthAndHeight_ = (args) => {
     const [width, setWidth] = useState(100);
     const [height, setHeight] = useState(100);
 
@@ -167,7 +168,7 @@ export const WidthAndHeight = () => {
     );
 };
 
-export const Sized = () => {
+export const Sized_ = (args) => {
     const [size, setSize] = useState(100);
 
     return (
@@ -196,7 +197,7 @@ export const Sized = () => {
     );
 };
 
-export const SVGFile = () => {
+export const SVGFile_ = (args) => {
     const [size, setSize] = useState(100);
 
     return (

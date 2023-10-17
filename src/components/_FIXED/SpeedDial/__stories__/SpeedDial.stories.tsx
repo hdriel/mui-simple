@@ -10,7 +10,6 @@ import { Stack } from '@mui/material';
 import { Meta, StoryObj } from '@storybook/react';
 import SpeedDial from '../SpeedDial';
 import Button from '../../Button/Button';
-import Chip from '../../Chip/Chip';
 
 const meta: Meta<typeof SpeedDial> = {
     title: 'Navigation/SpeedDial',
@@ -35,7 +34,7 @@ const meta: Meta<typeof SpeedDial> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Chip>;
+type Story = StoryObj<typeof SpeedDial>;
 
 export const Default: Story = {
     args: {},
