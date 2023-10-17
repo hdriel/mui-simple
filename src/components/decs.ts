@@ -1,6 +1,6 @@
-import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent, Ref } from 'react';
+import type { MouseEventHandler, ReactNode, ReactElement, ChangeEvent, SyntheticEvent, Ref } from 'react';
 import type { DraggableStateSnapshot } from 'react-beautiful-dnd';
-import type { SxProps } from '@mui/material';
+import type { CloseReason, OpenReason, SxProps } from '@mui/material';
 
 export type AppBarPosition = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
 
@@ -1112,5 +1112,35 @@ export interface AlertProps {
     title?: string;
     variant?: 'filled' | 'outlined' | 'standard';
     width?: string | number;
+    [key: string]: any;
+}
+
+type DirectionType = 'down' | 'left' | 'right' | 'up';
+
+interface SpeedDialActionProps {
+    name: string;
+    icon: ReactNode;
+    showTooltip: boolean;
+    onClick: MouseEventHandler<HTMLDivElement>;
+}
+
+export interface SpeedDialProps {
+    actions?: SpeedDialActionProps[];
+    ariaLabel?: string;
+    bottom?: string | number;
+    color?: string;
+    direction?: DirectionType;
+    hidden?: boolean;
+    icon?: ReactNode;
+    left?: string | number;
+    onClose?: (event: SyntheticEvent<{}, Event>, reason: CloseReason) => void;
+    onOpen?: (event: SyntheticEvent<{}, Event>, reason: OpenReason) => void;
+    open?: boolean;
+    openIcon?: ReactNode;
+    right?: string | number;
+    showOnBackdrop?: boolean;
+    showTooltip?: boolean;
+    sx?: SxProps;
+    top?: string | number;
     [key: string]: any;
 }

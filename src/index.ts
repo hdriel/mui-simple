@@ -140,6 +140,8 @@ export { default as Snackbar } from './components/_FIXED/Snackbar/Snackbar';
 export type { SnackbarProps } from './components/_FIXED/Snackbar/Snackbar';
 
 export { default as SpeedDial } from './components/SpeedDial/SpeedDial';
+export type { SpeedDialProps } from './components/SpeedDial/SpeedDial';
+
 export { default as Stepper } from './components/Stepper/Stepper';
 export { default as MobileStepper } from './components/Stepper/MobileStepper';
 export { useSimpleStepper } from './components/Stepper/Stepper.utils';
@@ -170,5 +172,3 @@ export type { TypographyProps } from './components/_FIXED/Typography/Typography'
 
 export * from './utils';
 export { default as useElementSize } from './hooks/useElementSize';
-
-// export * from './components/decs';

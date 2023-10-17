@@ -1,43 +1,12 @@
 import React from 'react';
-import type { MouseEventHandler, SyntheticEvent, ReactNode, PropsWithChildren, ReactElement } from 'react';
-//	import PropTypes from 'prop-types';
+import type { ReactElement } from 'react';
 import { Backdrop } from '@mui/material'; // Backdrop must use from @mui/material and not from my custom Backdrop
-import type { CloseReason, OpenReason, SxProps } from '@mui/material';
-
 import { SpeedDial as MuiSpeedDial, SpeedDialAction as MuiSpeedDialAction, SpeedDialIcon } from './SpeedDial.styled';
 import { useCustomColor } from '../../utils/helpers';
+import SVGIcon from '../SVGIcon/SVGIcon';
+import type { SpeedDialProps } from '../decs';
 
-type DirectionType = 'down' | 'left' | 'right' | 'up';
-
-interface SpeedDialActionProps {
-    name: string;
-    icon: ReactNode;
-    showTooltip: boolean;
-    onClick: MouseEventHandler<HTMLDivElement>;
-}
-
-interface SpeedDialProps {
-    actions?: SpeedDialActionProps[];
-    ariaLabel?: string;
-    bottom?: string | number;
-    color?: string;
-    direction?: DirectionType;
-    hidden?: boolean;
-    icon?: ReactNode;
-    left?: string | number;
-    onClose?: (event: SyntheticEvent<{}, Event>, reason: CloseReason) => void;
-    onOpen?: (event: SyntheticEvent<{}, Event>, reason: OpenReason) => void;
-    open?: boolean;
-    openIcon?: ReactNode;
-    right?: string | number;
-    showOnBackdrop?: boolean;
-    showTooltip?: boolean;
-    sx?: SxProps;
-    top?: string | number;
-    [key: string]: any;
-}
-
-export default function SpeedDial(props: PropsWithChildren<SpeedDialProps>): ReactElement {
+const SpeedDial: React.FC<SpeedDialProps> = (props): ReactElement => {
     const {
         ariaLabel,
         actions,
@@ -45,12 +14,12 @@ export default function SpeedDial(props: PropsWithChildren<SpeedDialProps>): Rea
         color,
         direction,
         hidden,
-        icon,
+        icon: _icon,
         left,
         onClose,
         onOpen,
         open,
-        openIcon,
+        openIcon: _openIcon,
         right,
         showOnBackdrop,
         showTooltip,
@@ -60,6 +29,11 @@ export default function SpeedDial(props: PropsWithChildren<SpeedDialProps>): Rea
     } = props;
     const [customColor] = useCustomColor(color);
     const [customColorHover] = useCustomColor(color, { darken: 0.2 });
+    const openIcon = typeof _openIcon === 'string' ? <SVGIcon>{_openIcon}</SVGIcon> : _openIcon;
+    const icon = typeof _icon === 'string' ? <SVGIcon>{_icon}</SVGIcon> : _icon;
+    actions?.forEach((action) => {
+        action.icon = typeof action.icon === 'string' ? <SVGIcon>{action.icon}</SVGIcon> : action.icon;
+    });
 
     return (
         <>
@@ -94,32 +68,7 @@ export default function SpeedDial(props: PropsWithChildren<SpeedDialProps>): Rea
             </MuiSpeedDial>
         </>
     );
-}
-
-//	SpeedDial.propTypes = {
-//			actions: PropTypes.arrayOf(
-//					PropTypes.shape({
-//							name: PropTypes.string,
-//							icon: PropTypes.node,
-//							showTooltip: PropTypes.bool,
-//							onClick: PropTypes.func,
-//					})
-//			),
-//			bottom: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//			color: PropTypes.string,
-//			direction: PropTypes.oneOf(['down', 'left', 'right', 'up']),
-//			hidden: PropTypes.bool,
-//			icon: PropTypes.node,
-//			left: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//			onClose: PropTypes.func,
-//			onOpen: PropTypes.func,
-//			open: PropTypes.bool,
-//			openIcon: PropTypes.node,
-//			right: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//			showOnBackdrop: PropTypes.bool,
-//			showTooltip: PropTypes.bool,
-//			top: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//	};
+};
 
 SpeedDial.defaultProps = {
     actions: [],
@@ -140,3 +89,6 @@ SpeedDial.defaultProps = {
     sx: {},
     top: undefined,
 };
+
+export type { SpeedDialProps } from '../decs';
+export default SpeedDial;

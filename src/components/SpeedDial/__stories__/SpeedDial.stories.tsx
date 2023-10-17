@@ -6,19 +6,22 @@ import {
     Share as ShareIcon,
     Edit as EditIcon,
 } from '@mui/icons-material';
-
+import { Stack } from '@mui/material';
+import { Meta, StoryObj } from '@storybook/react';
 import SpeedDial from '../SpeedDial';
 import Button from '../../_FIXED/Button/Button';
+import Chip from '../../_FIXED/Chip/Chip';
 
-export default {
+const meta: Meta<typeof SpeedDial> = {
     title: 'Navigation/SpeedDial',
     component: SpeedDial,
+    tags: ['autodocs'],
     decorators: [
         (Story) => (
             <div
                 style={{
                     width: '500px',
-                    height: '500px',
+                    height: '400px',
                     position: 'relative',
                     border: '1px solid black',
                     borderRadius: '8px',
@@ -30,27 +33,39 @@ export default {
     ],
 };
 
-export const Default = () => {
-    return <SpeedDial />;
+export default meta;
+
+type Story = StoryObj<typeof Chip>;
+
+export const Default: Story = {
+    args: {},
 };
 
-export const Basic = () => {
-    const actions = [
-        { icon: <FileCopyIcon />, name: 'Copy' },
-        { icon: <SaveIcon />, name: 'Save' },
-        { icon: <PrintIcon />, name: 'Print' },
-        { icon: <ShareIcon />, name: 'Share' },
-    ];
-    return <SpeedDial actions={actions} color="primary" bottom={16} right={16} />;
+const actions = [
+    { icon: <FileCopyIcon />, name: 'Copy' },
+    { icon: <SaveIcon />, name: 'Save' },
+    { icon: <PrintIcon />, name: 'Print' },
+    { icon: <ShareIcon />, name: 'Share' },
+];
+
+export const ThemedAndColored_ = (args) => {
+    return (
+        <Stack direction="row" spacing={2}>
+            {['primary', 'secondary', 'info', 'error', '#D0C00C', 'black'].map((color, index) => (
+                <SpeedDial
+                    {...args}
+                    actions={actions}
+                    color={color}
+                    bottom={16 + index * 60}
+                    right={16}
+                    direction="left"
+                />
+            ))}
+        </Stack>
+    );
 };
 
-export const Direction = () => {
-    const actions = [
-        { icon: <FileCopyIcon />, name: 'Copy' },
-        { icon: <SaveIcon />, name: 'Save' },
-        { icon: <PrintIcon />, name: 'Print' },
-        { icon: <ShareIcon />, name: 'Share' },
-    ];
+export const Direction_ = (args) => {
     return (
         <>
             <SpeedDial actions={actions} direction="left" bottom={16} right={16} open />
@@ -61,14 +76,8 @@ export const Direction = () => {
     );
 };
 
-export const Hidden = () => {
+export const Hidden_ = (args) => {
     const [hidden, setHidden] = useState(false);
-    const actions = [
-        { icon: <FileCopyIcon />, name: 'Copy' },
-        { icon: <SaveIcon />, name: 'Save' },
-        { icon: <PrintIcon />, name: 'Print' },
-        { icon: <ShareIcon />, name: 'Share' },
-    ];
     return (
         <>
             <Button onClick={() => setHidden(!hidden)}>{hidden ? 'Show' : 'Hidden'}</Button>
@@ -77,51 +86,20 @@ export const Hidden = () => {
     );
 };
 
-export const ThemedAndColored = () => {
-    const actions = [
-        { icon: <FileCopyIcon />, name: 'Copy' },
-        { icon: <SaveIcon />, name: 'Save' },
-        { icon: <PrintIcon />, name: 'Print' },
-        { icon: <ShareIcon />, name: 'Share' },
-    ];
-    return (
-        <>
-            <SpeedDial actions={actions} direction="left" bottom={15} right={16} color="primary" />
-            <SpeedDial actions={actions} direction="left" bottom={80} right={16} color="secondary" />
-            <SpeedDial actions={actions} direction="left" bottom={150} right={16} color="error" />
-            <SpeedDial actions={actions} direction="left" bottom={220} right={16} color={'#058460'} />
-        </>
-    );
+export const OpenIcon: Story = {
+    args: {
+        icon: 'Save',
+        openIcon: 'Edit',
+        actions: actions,
+        direction: 'left',
+        bottom: 16,
+        right: 16,
+    },
 };
 
-export const CloseIcon = () => {
-    const actions = [
-        { icon: <FileCopyIcon />, name: 'Copy' },
-        { icon: <ShareIcon />, name: 'Share' },
-    ];
-    return (
-        <>
-            <SpeedDial
-                icon={<SaveIcon />}
-                openIcon={<EditIcon />}
-                actions={actions}
-                direction="left"
-                bottom={16}
-                right={16}
-            />
-        </>
-    );
-};
-
-export const Backdrop = () => {
+export const ShowOnBackdrop_ = () => {
     const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
 
-    const actions = [
-        { icon: <FileCopyIcon />, name: 'Copy' },
-        { icon: <ShareIcon />, name: 'Share' },
-    ];
     return (
         <>
             <SpeedDial
@@ -133,9 +111,21 @@ export const Backdrop = () => {
                 bottom={16}
                 right={16}
                 open={open}
-                onClose={handleClose}
-                onOpen={handleOpen}
+                onClose={() => setOpen(false)}
+                onOpen={() => setOpen(true)}
             />
         </>
     );
+};
+
+export const ShowTooltip: Story = {
+    args: {
+        icon: 'Save',
+        openIcon: 'Edit',
+        actions: actions,
+        direction: 'left',
+        bottom: 16,
+        right: 16,
+        showTooltip: true,
+    },
 };
