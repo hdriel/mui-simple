@@ -47,8 +47,8 @@ export type { DialogProps } from './components/_FIXED/Dialog/Dialog';
 export { default as Divider } from './components/_FIXED/Divider/Divider';
 export type { DividerProps } from './components/_FIXED/Divider/Divider';
 
-export { default as Drawer } from './components/Drawer/Drawer';
-export type { DrawerProps } from './components/Drawer/Drawer';
+export { default as Drawer } from './components/_FIXED/Drawer/Drawer';
+export type { DrawerProps } from './components/_FIXED/Drawer/Drawer';
 
 export { default as Fab } from './components/_FIXED/FloatingActionButton/FloatingActionButton';
 export type { FabProps } from './components/_FIXED/FloatingActionButton/FloatingActionButton';

@@ -10,9 +10,9 @@ import {
 } from '@mui/icons-material';
 import { Stack } from '@mui/material';
 import Drawer from '../Drawer';
-import Button from '../../_FIXED/Button/Button';
-import List from '../../_FIXED/List/List';
-import Divider from '../../_FIXED/Divider/Divider';
+import Button from '../../Button/Button';
+import List from '../../List/List';
+import Divider from '../../Divider/Divider';
 import { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof Drawer> = {

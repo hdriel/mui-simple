@@ -4,9 +4,9 @@ import { useTheme } from '@mui/material/styles';
 import { ChevronLeft as ChevronLeftIcon, ChevronRight as ChevronRightIcon } from '@mui/icons-material';
 
 import { Drawer as MuiDrawer, ContentWrapper, SwipeableDrawer, DrawerHeader } from './Drawer.styled';
-import Button from '../_FIXED/Button/Button';
-import Divider from '../_FIXED/Divider/Divider';
-import type { DrawerProps } from '../decs';
+import Button from '../Button/Button';
+import Divider from '../Divider/Divider';
+import type { DrawerProps } from '../../decs';
 
 const Drawer: React.FC<DrawerProps> = ({
     backdrop,
@@ -102,5 +102,5 @@ Drawer.defaultProps = {
     width: 240,
 };
 
-export type { DrawerProps } from '../decs';
+export type { DrawerProps } from '../../decs';
 export default Drawer;
