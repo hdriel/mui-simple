@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Send as SendIcon,
     Inbox as InboxIcon,
@@ -8,7 +8,7 @@ import {
     Work as WorkIcon,
     BeachAccess as BeachAccessIcon,
 } from '@mui/icons-material';
-
+import { Stack } from '@mui/material';
 import Drawer from '../Drawer';
 import Button from '../../_FIXED/Button/Button';
 import List from '../../_FIXED/List/List';
@@ -24,10 +24,6 @@ const meta: Meta<typeof Drawer> = {
 export default meta;
 
 type Story = StoryObj<typeof Drawer>;
-
-/*
-    keepMounted?: boolean;
- */
 
 const list = () => (
     <div>
@@ -246,6 +242,49 @@ export const Variant_ = (args) => {
                     </Drawer>
                 </React.Fragment>
             ))}
+        </div>
+    );
+};
+
+const ConsoleLog = () => {
+    useEffect(() => console.log('Mounted'), []);
+    return null;
+};
+export const KeepMounted = (args) => {
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [keepMountedMenuOpen, setKeepMountedMenuOpen] = useState(false);
+
+    return (
+        <div>
+            <Stack>
+                <Button onClick={() => setKeepMountedMenuOpen(true)}>Keep Mounted Menu</Button>
+                <Button onClick={() => setMenuOpen(true)}>Menu Open</Button>
+            </Stack>
+
+            <React.Fragment>
+                <Drawer
+                    direction="right"
+                    variant="temporary"
+                    keepMounted={true}
+                    open={menuOpen}
+                    toggleDrawer={() => setKeepMountedMenuOpen(false)}
+                    {...args}
+                >
+                    <ConsoleLog />
+                    {list()}
+                </Drawer>
+                <Drawer
+                    direction="left"
+                    variant="persistent"
+                    keepMounted={false}
+                    open={menuOpen}
+                    toggleDrawer={() => setMenuOpen(false)}
+                    {...args}
+                >
+                    <ConsoleLog />
+                    {list()}
+                </Drawer>
+            </React.Fragment>
         </div>
     );
 };

@@ -93,7 +93,7 @@ Drawer.defaultProps = {
     bgColor: undefined,
     direction: undefined,
     hideHeader: false,
-    keepMounted: undefined,
+    keepMounted: true,
     onClose: undefined,
     open: undefined,
     swipeable: undefined,
