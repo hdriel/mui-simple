@@ -1,152 +1,84 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import type { ReactNode, PropsWithChildren } from 'react';
-//	import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
-
 import {
-    MobileStepper as MuiMobileStepper,
-    Paper,
-    Button,
-    Typography,
-    Box,
     AutoPlaySwipeableViews,
-    SwipeableViews,
+    Box,
+    Button,
+    CheckIcon,
     KeyboardArrowLeftIcon,
     KeyboardArrowRightIcon,
-    CheckIcon,
+    MobileStepper as MuiMobileStepper,
+    Paper,
+    SwipeableViews,
+    Typography,
 } from './MobileStepper.styled';
-import { useCustomColor } from '../../utils/helpers';
+import type { MobileStepperProps } from '../../decs';
+import { useStepperIndexHook, useStepperSteps } from './hooks';
 
-interface StepType {
-    label: string;
-    optional?: boolean | string;
-    color?: string;
-    error?: boolean;
-    icon?: ReactNode;
-    // Todo: assert if the type string actually match the project creator's intention
-    customColor?: string;
-}
-interface Labels {
-    next?: string;
-    back?: string;
-    done?: string;
-    skip?: string;
-    optional?: string;
-}
-interface MobileStepperProps {
-    swipeable?: boolean;
-    autoPlay?: boolean;
-    autoPlayInterval?: number;
-    infiniteLoop?: boolean;
-    variant?: 'text' | 'dots' | 'progress';
-    position?: 'bottom' | 'static' | 'top';
-    steps?: Array<string | StepType>;
-    stepIndex?: number;
-    color?: string;
-    onNext?: (stepId: number) => void;
-    onBack?: (stepId: number) => void;
-    onSkip?: (stepId: number) => void;
-    onDone?: () => void;
-    stepsIndexSkipped?: number[];
-    labels?: Labels;
-    height?: string | number;
-    maxWidth?: string | number;
-    [key: string]: any;
-}
-
-export default function MobileStepper(props: PropsWithChildren<MobileStepperProps>): MobileStepperProps {
+const MobileStepper: React.FC<MobileStepperProps> = (props): React.ReactElement => {
     const {
-        variant,
-        position,
-        steps: _steps,
-        stepIndex: activeStep,
-        color,
-        onNext,
-        onBack,
-        onSkip,
-        onDone,
-        stepsIndexSkipped,
-        labels,
         autoPlay,
         autoPlayInterval,
-        infiniteLoop,
-        swipeable,
-        height,
-        maxWidth,
+        BACK_LABEL,
         children,
+        color,
+        customStyleProps,
+        DONE_LABEL,
+        height,
+        infiniteLoop,
+        labels,
+        maxWidth,
+        NEXT_LABEL,
+        onBack,
+        onDone,
+        onNext,
+        onSkip,
+        OPTIONAL_LABEL,
+        position,
+        SKIP_LABEL,
+        stepIndex: activeStep,
+        steps: _steps,
+        stepsIndexSkipped,
+        swipeable,
+        variant,
         ...rest
     } = props;
-
-    const [customColor] = useCustomColor(color);
-
     const theme = useTheme();
     const [autoPlayState, setAutoPlayState] = useState(autoPlay);
     const isLTR = theme.direction === undefined || theme.direction.toLocaleLowerCase() === 'ltr';
     const forceFixedDirection = variant === 'text';
 
-    const LABELS = {
-        next: labels?.next || 'Next',
-        back: labels?.back || 'Back',
-        skip: labels?.skip || 'Skip',
-        done: labels?.done || 'Done',
-        optional: labels?.optional || 'Optional',
-    };
-
     // Todo: assert if this is the correct type to be as the HandleNext/Back param (number)
-    const handleNext = (activeStep: number): void => onNext?.(activeStep);
-    const handleBack = (activeStep: number): void => onBack?.(activeStep);
+
+    const { steps, icons, iconListSize, isCustomStyleUsed } = useStepperSteps({
+        color,
+        steps: _steps,
+        customStyleProps,
+        OPTIONAL_LABEL,
+    });
+
+    const { handleNext, handleSkip, isStepOptional, isStepSkipped, handleBack } = useStepperIndexHook({
+        steps,
+        activeStep,
+        stepsIndexSkipped,
+        onSkip,
+        onBack,
+        onNext,
+    });
     // const isStepOptional = (index) => steps?.[index]?.optional;
     // const isStepSkipped = (index) => stepsIndexSkipped?.includes(index);
     // const handleSkip = (index) => isStepOptional(index) && onSkip?.(index);
-
-    const steps = useMemo(
-        () =>
-            _steps?.map((step) => {
-                return typeof step === 'string'
-                    ? { label: step, optional: false }
-                    : {
-                          ...step,
-                          color: step.color ?? color ?? (step.error ? 'error' : undefined),
-                          customColorValue: step.customColor ?? customColor,
-                          optional: step.optional
-                              ? typeof step.optional === 'string'
-                                  ? step.optional
-                                  : LABELS.optional
-                              : false,
-                      };
-            }) ?? [],
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [_steps]
-    );
     const maxSteps = steps.length;
 
     const [backIconProp, nextIconProp] = useMemo(() => {
         if (forceFixedDirection && !isLTR) {
-            return [
-                {
-                    endIcon: <KeyboardArrowRightIcon />,
-                },
-                {
-                    startIcon: <KeyboardArrowLeftIcon />,
-                },
-            ];
+            return [{ endIcon: <KeyboardArrowRightIcon /> }, { startIcon: <KeyboardArrowLeftIcon /> }];
         }
         return isLTR
-            ? [
-                  {
-                      startIcon: <KeyboardArrowLeftIcon />,
-                  },
-                  {
-                      endIcon: <KeyboardArrowRightIcon />,
-                  },
-              ]
+            ? [{ startIcon: <KeyboardArrowLeftIcon /> }, { endIcon: <KeyboardArrowRightIcon /> }]
             : [
-                  {
-                      startIcon: isLTR ? <KeyboardArrowLeftIcon /> : <KeyboardArrowRightIcon />,
-                  },
-                  {
-                      endIcon: isLTR ? <KeyboardArrowRightIcon /> : <KeyboardArrowLeftIcon />,
-                  },
+                  { startIcon: isLTR ? <KeyboardArrowLeftIcon /> : <KeyboardArrowRightIcon /> },
+                  { endIcon: isLTR ? <KeyboardArrowRightIcon /> : <KeyboardArrowLeftIcon /> },
               ];
     }, [forceFixedDirection, isLTR]);
 
@@ -161,7 +93,7 @@ export default function MobileStepper(props: PropsWithChildren<MobileStepperProp
                 startIcon={nextIconProp.endIcon ? <CheckIcon /> : undefined}
                 endIcon={nextIconProp.startIcon ? <CheckIcon /> : undefined}
             >
-                {LABELS.done}
+                {DONE_LABEL}
             </Button>
         ) : (
             <Button
@@ -172,7 +104,7 @@ export default function MobileStepper(props: PropsWithChildren<MobileStepperProp
                 sx={{ gap: '8px' }}
                 {...nextIconProp}
             >
-                {LABELS.next}
+                {NEXT_LABEL}
             </Button>
         );
 
@@ -185,7 +117,7 @@ export default function MobileStepper(props: PropsWithChildren<MobileStepperProp
             sx={{ gap: '8px' }}
             {...backIconProp}
         >
-            {LABELS.back}
+            {BACK_LABEL}
         </Button>
     );
 
@@ -263,59 +195,31 @@ export default function MobileStepper(props: PropsWithChildren<MobileStepperProp
             />
         </Box>
     );
-}
-
-//	MobileStepper.propTypes = {
-//	    swipeable: PropTypes.bool,
-//	    autoPlay: PropTypes.bool,
-//	    autoPlayInterval: PropTypes.number,
-//	    infiniteLoop: PropTypes.bool,
-//	    variant: PropTypes.oneOf(['text', 'dots', 'progress']),
-//	    position: PropTypes.oneOf(['bottom', 'static', 'top']),
-//	    steps: PropTypes.arrayOf(
-//	        PropTypes.oneOfType([
-//	            PropTypes.string,
-//	            PropTypes.shape({
-//	                label: PropTypes.string,
-//	                optional: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-//	                color: PropTypes.string,
-//	                error: PropTypes.bool,
-//	                icon: PropTypes.node,
-//	            }),
-//	        ])
-//	    ),
-//	    color: PropTypes.string,
-//	    onNext: PropTypes.func,
-//	    onBack: PropTypes.func,
-//	    onSkip: PropTypes.func,
-//	    onDone: PropTypes.func,
-//	    stepsIndexSkipped: PropTypes.arrayOf(PropTypes.number),
-//	    labels: PropTypes.shape({
-//	        next: PropTypes.string,
-//	        back: PropTypes.string,
-//	        done: PropTypes.string,
-//	        skip: PropTypes.string,
-//	        optional: PropTypes.string,
-//	    }),
-//	    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//	    maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//	};
+};
 
 MobileStepper.defaultProps = {
-    swipeable: true,
     autoPlay: undefined,
     autoPlayInterval: undefined,
-    infiniteLoop: undefined,
-    steps: undefined,
+    BACK_LABEL: 'Back',
     color: undefined,
-    onNext: undefined,
-    onBack: undefined,
-    onSkip: undefined,
-    onDone: undefined,
-    stepsIndexSkipped: undefined,
-    labels: undefined,
-    variant: undefined,
-    position: 'static',
+    DONE_LABEL: 'Done',
     height: 255,
+    infiniteLoop: undefined,
+    labels: undefined,
     maxWidth: 400,
+    NEXT_LABEL: 'Next',
+    onBack: undefined,
+    onDone: undefined,
+    onNext: undefined,
+    onSkip: undefined,
+    OPTIONAL_LABEL: 'Optional',
+    position: 'static',
+    SKIP_LABEL: 'Skip',
+    steps: undefined,
+    stepsIndexSkipped: undefined,
+    swipeable: true,
+    variant: undefined,
 };
+
+export type { MobileStepperProps } from '../../decs';
+export default MobileStepper;

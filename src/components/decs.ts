@@ -898,11 +898,12 @@ export interface SliderProps {
 }
 
 export interface StepType {
-    label?: string;
+    label: string;
     optional?: boolean | string;
     color?: string;
     error?: boolean;
-    icon?: ReactNode;
+    icon?: string | ReactNode;
+    // Todo: assert if the type string actually match the project creator's intention
 }
 export interface StepperProps {
     allCompletedCmp?: ReactNode;
@@ -1155,3 +1156,15 @@ export interface SVGIconProps {
     sx?: SxProps;
     [key: string]: any;
 }
+
+export type MobileStepperProps = StepperProps & {
+    autoPlay?: boolean;
+    autoPlayInterval?: number;
+    height?: string | number;
+    infiniteLoop?: boolean;
+    maxWidth?: string | number;
+    position?: 'bottom' | 'static' | 'top';
+    swipeable?: boolean;
+    variant?: 'text' | 'dots' | 'progress';
+    [key: string]: any;
+};

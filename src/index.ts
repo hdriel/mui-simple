@@ -142,9 +142,12 @@ export type { SnackbarProps } from './components/_FIXED/Snackbar/Snackbar';
 export { default as SpeedDial } from './components/_FIXED/SpeedDial/SpeedDial';
 export type { SpeedDialProps } from './components/_FIXED/SpeedDial/SpeedDial';
 
-export { default as Stepper } from './components/Stepper/Stepper';
-export { default as MobileStepper } from './components/Stepper/MobileStepper';
-export { useSimpleStepper } from './components/Stepper/Stepper.utils';
+export { default as Stepper } from './components/_FIXED/Stepper/Stepper';
+export type { StepperProps } from './components/_FIXED/Stepper/Stepper';
+export { useSimpleStepper } from './components/_FIXED/Stepper/Stepper.utils';
+
+export { default as MobileStepper } from './components/_FIXED/Stepper/MobileStepper';
+export type { MobileStepperProps } from './components/_FIXED/Stepper/MobileStepper';
 
 export { default as SVGIcon } from './components/_FIXED/SVGIcon/SVGIcon';
 export type { SVGIconProps } from './components/_FIXED/SVGIcon/SVGIcon';

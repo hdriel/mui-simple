@@ -1,4 +1,4 @@
-import type { StepType } from '../../decs';
+import type { StepType } from '../../../decs';
 
 interface UseStepperIndexHookProps {
     stepsIndexSkipped: number[];
@@ -11,8 +11,8 @@ interface UseStepperIndexHookProps {
 interface UseStepperIndexHookResponse {
     isStepOptional: (stepperIndex: number) => boolean;
     isStepSkipped: (stepperIndex: number) => boolean;
-    handleNext: () => void;
-    handleBack: () => void;
+    handleNext: (forceNextStepperIndexValue?: number) => void;
+    handleBack: (forceBackStepperIndexValue?: number) => void;
     handleSkip: (stepperIndex: number) => void;
 }
 
@@ -26,8 +26,8 @@ export const useStepperIndexHook = ({
 }: UseStepperIndexHookProps): UseStepperIndexHookResponse => {
     const isStepOptional = (index: number): boolean | undefined => !!steps?.[index]?.optional;
     const isStepSkipped = (index: number): boolean | undefined => stepsIndexSkipped?.includes(index);
-    const handleNext = (): void => onNext?.(activeStep);
-    const handleBack = (): void => onBack?.(activeStep);
+    const handleNext = (forceNextStepperIndexValue): void => onNext?.(forceNextStepperIndexValue ?? activeStep);
+    const handleBack = (forceBackStepperIndexValue): void => onBack?.(forceBackStepperIndexValue ?? activeStep);
     const handleSkip = (index: number): void => {
         if (isStepOptional(index)) onSkip?.(index);
     };

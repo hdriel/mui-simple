@@ -1,22 +1,21 @@
 import React from 'react';
 import type { ReactElement } from 'react';
 import {
-    Typography,
-    Button,
-    Stepper as MuiStepper,
-    Step,
-    StepLabel,
-    StepContent,
-    Box,
-    ActionContainer,
     ActionButton,
+    ActionContainer,
+    Button,
     Container,
-    VerticalActionContainer,
     ContentContainer,
     FullSpaceBox,
+    Step,
+    StepContent,
+    StepLabel,
+    Stepper as MuiStepper,
+    Typography,
+    VerticalActionContainer,
 } from './Stepper.styled';
-import { useCustomColor } from '../../utils/helpers';
-import type { StepperProps, StepType } from '../decs';
+import { useCustomColor } from '../../../utils/helpers';
+import type { StepperProps, StepType } from '../../decs';
 import { useStepperIndexHook, useStepperSteps, useStepperConnector } from './hooks';
 
 const Stepper: React.FC<StepperProps> = ({
@@ -170,28 +169,28 @@ const Stepper: React.FC<StepperProps> = ({
 };
 
 Stepper.defaultProps = {
-    steps: undefined,
-    stepsOnlyWithoutComplete: undefined,
-    stepIndex: undefined,
-    stepsBottomLabel: undefined,
-    color: undefined,
-    orientation: undefined,
-    onReset: undefined,
-    onNext: undefined,
-    onBack: undefined,
-    onSkip: undefined,
-    onDone: undefined,
-    stepsIndexSkipped: undefined,
     allCompletedCmp: undefined,
-    unmountOnExit: true,
-    qontoStyle: undefined,
-    customStyleProps: undefined,
-    NEXT_LABEL: 'Next',
     BACK_LABEL: 'Back',
-    SKIP_LABEL: 'Skip',
+    color: undefined,
+    customStyleProps: undefined,
     DONE_LABEL: 'Done',
+    NEXT_LABEL: 'Next',
+    onBack: undefined,
+    onDone: undefined,
+    onNext: undefined,
+    onReset: undefined,
+    onSkip: undefined,
     OPTIONAL_LABEL: 'Optional',
+    orientation: undefined,
+    qontoStyle: undefined,
+    SKIP_LABEL: 'Skip',
+    stepIndex: undefined,
+    steps: undefined,
+    stepsBottomLabel: undefined,
+    stepsIndexSkipped: undefined,
+    stepsOnlyWithoutComplete: undefined,
+    unmountOnExit: true,
 };
 
-export type { StepperProps } from '../decs';
+export type { StepperProps } from '../../decs';
 export default Stepper;

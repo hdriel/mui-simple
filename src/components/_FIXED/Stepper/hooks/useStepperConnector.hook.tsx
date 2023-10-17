@@ -1,7 +1,7 @@
 import React, { cloneElement, isValidElement, useMemo } from 'react';
 import { Check as CheckIcon } from '@mui/icons-material';
 import { ConnectorStepIconRoot, QontoConnector, QontoStepIconRoot, StepConnector } from '../Stepper.styled';
-import { numberToPx } from '../../../utils/helpers';
+import { numberToPx } from '../../../../utils/helpers';
 
 interface UseStepperConnectorHookProps {
     color: string;

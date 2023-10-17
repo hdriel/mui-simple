@@ -5,8 +5,8 @@ import { AddLocation as AddLocationIcon, Send as SendIcon } from '@mui/icons-mat
 import Stepper from '../Stepper';
 import { Typography } from '../Stepper.styled';
 import { useSimpleStepper } from '../Stepper.utils';
-import ToggleButtonGroup from '../../_FIXED/ToggleButtonGroup/ToggleButtonGroup';
-import ToggleButtonGroups from '../../_FIXED/ToggleButtonGroup/ToggleButtonGroups';
+import ToggleButtonGroup from '../../ToggleButtonGroup/ToggleButtonGroup';
+import ToggleButtonGroups from '../../ToggleButtonGroup/ToggleButtonGroups';
 
 export default {
     title: 'Navigation/StepperOld',
@@ -243,13 +243,13 @@ export const QontoStepper = () => {
                 <ToggleButtonGroup
                     value={orientation}
                     exclusive
-                    onChange={(value) => setOrientation(value)}
+                    onChange={(event, value) => setOrientation(value)}
                     data={data1}
                 />
                 <ToggleButtonGroup
                     value={stepsBottomLabel}
                     exclusive
-                    onChange={(value) => setStepsBottomLabel(value)}
+                    onChange={(event, value) => setStepsBottomLabel(value)}
                     data={data2}
                 />
             </ToggleButtonGroups>
@@ -322,13 +322,13 @@ export const QontoCustomStepper = () => {
                 <ToggleButtonGroup
                     value={orientation}
                     exclusive
-                    onChange={(value) => setOrientation(value)}
+                    onChange={(event, value) => setOrientation(value)}
                     data={data1}
                 />
                 <ToggleButtonGroup
                     value={stepsBottomLabel}
                     exclusive
-                    onChange={(value) => setStepsBottomLabel(value)}
+                    onChange={(event, value) => setStepsBottomLabel(value)}
                     data={data2}
                 />
             </ToggleButtonGroups>

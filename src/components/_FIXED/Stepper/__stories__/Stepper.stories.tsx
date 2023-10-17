@@ -136,7 +136,7 @@ export const StepsBottomLabel: Story = {
     args: {
         steps,
         stepIndex: 2,
-        StepsBottomLabel: true,
+        stepsBottomLabel: true,
         children: stepsChildren,
     },
 };

@@ -1,6 +1,6 @@
 import React from 'react';
-import Typography from '../../_FIXED/Typography/Typography';
-import { StepType } from '../../decs';
+import Typography from '../../Typography/Typography';
+import { StepType } from '../../../decs';
 import { Box } from '@mui/material';
 import { Edit as EditIcon, DoneAll as DoneAllIcon } from '@mui/icons-material';
 

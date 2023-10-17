@@ -6,9 +6,9 @@ import { MobileStepper as MuiMobileStepper, Box as MuiBox } from '@mui/material'
 import type { MobileStepperProps } from '@mui/material';
 import { KeyboardArrowLeft, KeyboardArrowRight, Check } from '@mui/icons-material';
 
-import MuiButton from '../_FIXED/Button/Button';
-import MuiTypography from '../_FIXED/Typography/Typography';
-import MuiPaper from '../_FIXED/Paper/Paper';
+import MuiButton from '../Button/Button';
+import MuiTypography from '../Typography/Typography';
+import MuiPaper from '../Paper/Paper';
 
 interface MobileStepperStyledProps {
     forceFixedDirection?: boolean;
