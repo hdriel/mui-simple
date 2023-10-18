@@ -10,6 +10,7 @@ import { getDataId, getItemStyle, getListStyle } from './DraggableList.styles';
 import { useDragHandlers } from './DraggableList.hooks';
 import type { DraggableListProps } from '../decs';
 
+// https://react-beautiful-dnd.netlify.app/?path=/story/single-vertical-list--basic
 const DraggableList: React.FC<DraggableListProps> = (props): React.ReactElement => {
     const {
         component,

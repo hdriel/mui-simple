@@ -1,30 +1,16 @@
 import React, { useState } from 'react';
-import configureMockStore from 'redux-mock-store';
-import { shallow } from 'enzyme';
-import { Provider } from 'react-redux';
 import type { Meta, StoryObj } from '@storybook/react';
-
 import DraggableList from '../DraggableList';
 import Avatar from '../../_FIXED/Avatar/Avatar';
 import Button from '../../_FIXED/Button/Button';
 
-const mockStore = configureMockStore();
-const store = mockStore({});
-
 // need redux for these stories
+// https://react-beautiful-dnd.netlify.app/?path=/story/single-vertical-list--basic
 // https://storybook.js.org/addons/@dreamworld/addon-redux
 const meta: Meta<typeof DraggableList> = {
     title: 'Wrappers/DraggableList',
     component: DraggableList,
     tags: ['autodocs'],
-    decorators: [
-        (Story) =>
-            shallow(
-                <Provider store={store}>
-                    <Story />
-                </Provider>
-            ),
-    ],
 };
 
 export default meta;
@@ -32,11 +18,14 @@ export default meta;
 type Story = StoryObj<typeof DraggableList>;
 
 export const Default: Story = {
-    args: {},
+    args: {
+        useDraggableContext: true,
+    },
 };
 
 export const AvatarsColumn: Story = {
     args: {
+        useDraggableContext: true,
         dataList: [
             { image: '1.jpg' },
             { image: '2.jpg' },
@@ -60,6 +49,7 @@ export const AvatarsColumn: Story = {
 
 export const AvatarsRow: Story = {
     args: {
+        useDraggableContext: true,
         dataList: [
             { image: '1.jpg' },
             { image: '2.jpg' },
@@ -83,6 +73,7 @@ export const AvatarsRow: Story = {
 
 export const ButtonsColumn: Story = {
     args: {
+        useDraggableContext: true,
         dataList: [
             { startIcon: 'Send', label: 'Send' },
             { startIcon: 'Photo', label: 'Photo' },
@@ -104,6 +95,7 @@ export const ButtonsColumn: Story = {
 
 export const ButtonsRow: Story = {
     args: {
+        useDraggableContext: true,
         dataList: [
             { startIcon: 'Send', label: 'Send' },
             { startIcon: 'Photo', label: 'Photo' },
