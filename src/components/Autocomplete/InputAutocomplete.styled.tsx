@@ -23,16 +23,30 @@ export const GroupItems = styled('ul')`
     padding: 0;
 `;
 
-export type RenderOptionCB = (props: any, option: string, input: { inputValue: string }) => React.ReactNode;
-export const renderHighlightOptionCB = (field: any): RenderOptionCB => {
-    const HighlightOption: RenderOptionCB = (props, option, { inputValue } = { inputValue: '' }) => {
-        const optionValue = typeof field === 'function' ? field(option) : field;
-        const matches = match(optionValue, inputValue);
+export type RenderOptionCB = (
+    props: any,
+    option: string,
+    input: { index: number; inputValue: string; selected: boolean }
+) => React.ReactNode;
+export const renderHighlightOptionCB = (fieldValue: any): RenderOptionCB => {
+    const HighlightOption: RenderOptionCB = (
+        props,
+        option,
+        { inputValue, index, selected } = { inputValue: '', index: 0, selected: false }
+    ) => {
+        const optionValue = typeof fieldValue === 'function' ? fieldValue(option) : fieldValue;
+        const matches = match(optionValue, inputValue?.toLowerCase());
         const parts = parse(optionValue, matches);
 
         return (
-            <li {...props}>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+            // todo: change to ListItem
+            <li {...props} style={{ backgroundColor: index % 2 ? lighten('#C0C0C0', 0.9) : undefined }}>
+                <div
+                    style={{
+                        display: 'inline-block',
+                        alignItems: 'center',
+                    }}
+                >
                     {parts.map((part, index) => (
                         <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
                             {part.text}

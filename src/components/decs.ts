@@ -477,8 +477,15 @@ export type InputMultipleSelectProps = Omit<InputSelectProps, 'value'> & {
 };
 
 export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
-    hideStartActionsOnEmpty?: boolean;
-    renderOption?: () => void;
+    autoComplete?: boolean;
+    autoHighlight?: boolean;
+    blurOnSelect?: boolean;
+    chipProps?: ChipProps | ((props: any) => ChipProps);
+    clearOnPressEscape?: boolean;
+    disableClearableSolo?: boolean;
+    disableCloseOnSelect?: boolean;
+    disableListWrap?: boolean;
+    disablePortal?: boolean;
     filterOptions?:
         | ((...args: any) => ReactNode)
         | {
@@ -489,30 +496,24 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
               stringify?: string | (() => void);
               trim?: boolean;
           };
+    filterSelectedOptions?: boolean;
+    freeSolo?: boolean;
     getOptionLabel?: string | (() => string);
     groupBy?: string | (() => void);
+    hideStartActionsOnEmpty?: boolean;
+    highlightField?: string;
+    highlightSearchResults?: boolean;
+    includeInputInList?: boolean;
+    multiple?: boolean;
+    openOnFocus?: boolean;
+    optionConverter?: (item: any) => { label: string | ReactNode; id: string | number };
+    raiseSelectedToTop?: number;
+    renderOption?: () => void;
+    selectedOption?: any;
+    selectOnFocus?: boolean;
+    setSelectedOption?: () => void;
     sortBy?: string | (() => void);
     sortDir?: boolean | number;
-    selectedOption?: any;
-    setSelectedOption?: () => void;
-    autoComplete?: boolean;
-    freeSolo?: boolean;
-    raiseSelectedToTop?: number;
-    disablePortal?: boolean;
-    disableClearableSolo?: boolean;
-    disableCloseOnSelect?: boolean;
-    clearOnPressEscape?: boolean;
-    includeInputInList?: boolean;
-    openOnFocus?: boolean;
-    disableListWrap?: boolean;
-    autoHighlight?: boolean;
-    blurOnSelect?: boolean;
-    selectOnFocus?: boolean;
-    highlightSearchResults?: boolean;
-    highlightField?: string;
-    multiple?: boolean;
-    filterSelectedOptions?: boolean;
-    chipProps?: ChipProps | ((props: any) => ChipProps);
     [key: string]: any;
 };
 

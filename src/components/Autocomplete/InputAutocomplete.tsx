@@ -8,76 +8,80 @@ import { useAutocompleteOptionsHook } from './hooks/useAutocompleteOptions.hook'
 
 const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
     // inputProps: {
-    id,
-    name,
-    placeholder,
-    variant,
-    onFocus,
-    onBlur,
-    required,
-    margin,
-    focused,
-    colorText,
-    colorLabel,
-    colorActive,
-    startCmpExternal,
-    endCmpExternal,
-    endCmp,
-    cmpSpacing,
     alignActions,
     alignActionsExternal,
-    hideStartActionsOnEmpty,
+    cmpSpacing,
+    colorActive,
+    colorLabel,
+    colorText,
     disabled,
-    helperText,
+    endCmp,
+    endCmpExternal,
     error,
+    focused,
+    helperText,
+    hideStartActionsOnEmpty,
+    id,
+    margin,
+    name,
+    onBlur,
+    onFocus,
+    placeholder,
+    required,
+    startCmpExternal,
+    variant,
     // } = {},
-    width,
-    size,
-    label,
-    onChange,
-    selectedOption,
-    setSelectedOption,
     autoComplete,
-    options: _options,
-    renderOption: _renderOption,
-    raiseSelectedToTop,
-    getOptionLabel: _getOptionLabel,
-    groupBy,
-    sortBy,
-    sortDir,
-    freeSolo,
-    disablePortal,
-    disableClearable,
-    disableCloseOnSelect,
-    clearOnPressEscape,
-    includeInputInList,
-    openOnFocus,
-    disableListWrap,
     autoHighlight,
     blurOnSelect,
-    selectOnFocus,
-    readOnly,
+    chipProps,
+    clearOnPressEscape,
+    disableClearable,
+    disableCloseOnSelect,
+    disableListWrap,
+    disablePortal,
+    filterOptions: _filterOptions,
+    filterSelectedOptions,
+    freeSolo,
+    getOptionLabel: _getOptionLabel,
+    groupBy,
     highlightField,
     highlightSearchResults,
-    filterSelectedOptions,
+    includeInputInList,
+    label,
     multiple,
-    chipProps,
-    filterOptions: _filterOptions,
+    onChange,
+    openOnFocus,
+    options: _options,
+    optionConverter,
+    raiseSelectedToTop,
+    readOnly,
+    renderOption: _renderOption,
+    selectedOption,
+    selectOnFocus,
+    setSelectedOption,
+    size,
+    sortBy,
+    sortDir,
     sx,
+    width,
     ...props
 }): React.ReactElement => {
     const [color] = useCustomColor(colorActive ?? colorLabel);
+
     const { options, filterOptions, getOptionLabel, renderOption } = useAutocompleteOptionsHook({
-        sortDir,
-        sortBy,
-        raiseSelectedToTop,
-        options: _options,
-        getOptionLabel: _getOptionLabel,
         filterOptions: _filterOptions,
+        getOptionLabel: _getOptionLabel,
         highlightField,
         highlightSearchResults,
+        options: _options,
+        optionConverter,
+        raiseSelectedToTop,
         renderOption: _renderOption,
+        sortBy,
+        sortDir,
     });
+    console.log('renderOption', renderOption);
 
     const renderGroup = groupBy
         ? (params) => (
@@ -101,118 +105,119 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
         : undefined;
 
     const inputProps: InputBaseProps = {
-        id,
-        name,
-        placeholder,
-        label,
-        variant,
-        onFocus,
-        onBlur,
-        required,
-        margin,
-        focused,
-        colorText,
-        colorLabel,
-        colorActive,
-        startCmpExternal,
-        endCmpExternal,
-        cmpSpacing,
         alignActions,
         alignActionsExternal,
-        hideStartActionsOnEmpty,
-        helperText,
-        error,
+        cmpSpacing,
+        colorActive,
+        colorLabel,
+        colorText,
         endCmp,
+        endCmpExternal,
+        error,
+        focused,
+        helperText,
+        hideStartActionsOnEmpty,
+        id,
+        label,
+        margin,
+        name,
+        onBlur,
+        onFocus,
+        placeholder,
+        required,
+        startCmpExternal,
+        variant,
     };
 
     return (
         <MuiAutocomplete
-            disablePortal={disablePortal}
-            freeSolo={readOnly || freeSolo}
+            autoComplete={autoComplete}
+            autoHighlight={autoHighlight}
+            blurOnSelect={blurOnSelect}
+            clearOnEscape={clearOnPressEscape}
             disableClearable={disableClearable}
             disableCloseOnSelect={disableCloseOnSelect}
-            clearOnEscape={clearOnPressEscape}
-            includeInputInList={includeInputInList}
-            openOnFocus={openOnFocus}
-            disableListWrap={disableListWrap}
-            blurOnSelect={blurOnSelect}
-            selectOnFocus={selectOnFocus}
             disabled={disabled}
-            readOnly={readOnly}
-            autoComplete={autoComplete}
-            options={options}
-            size={size}
-            sx={{ ...sx, width }}
-            autoHighlight={autoHighlight}
-            getOptionLabel={getOptionLabel}
-            filterSelectedOptions={filterSelectedOptions}
-            multiple={multiple}
-            value={selectedOption}
-            onChange={setSelectedOption}
+            disableListWrap={disableListWrap}
+            disablePortal={disablePortal}
             filterOptions={filterOptions}
+            filterSelectedOptions={filterSelectedOptions}
+            freeSolo={readOnly || freeSolo}
+            getOptionDisabled={(option) => option.disabled}
+            getOptionLabel={getOptionLabel}
+            groupBy={typeof groupBy === 'function' ? groupBy : (option) => option[groupBy]}
+            includeInputInList={includeInputInList}
             isOptionEqualToValue={
                 getOptionLabel ? (option, value) => getOptionLabel?.(option) === getOptionLabel?.(value) : undefined
             }
-            renderInput={(params) => <TextField {...params} {...inputProps} fullWidth />}
-            groupBy={typeof groupBy === 'function' ? groupBy : (option) => option[groupBy]}
-            renderOption={renderOption}
-            getOptionDisabled={(option) => option.disabled}
+            multiple={multiple}
+            onChange={setSelectedOption}
+            openOnFocus={openOnFocus}
+            options={options}
+            readOnly={readOnly}
             renderGroup={renderGroup}
+            renderInput={(params) => <TextField {...params} {...inputProps} fullWidth />}
+            renderOption={renderOption}
             renderTags={renderTags}
+            selectOnFocus={selectOnFocus}
+            size={size}
+            sx={{ ...sx, ...{ width } }}
+            value={selectedOption}
             {...props}
         />
     );
 };
 
 InputAutocomplete.defaultProps = {
-    id: undefined,
-    name: undefined,
-    placeholder: undefined,
-    error: undefined,
-    required: undefined,
-    onChange: undefined,
-    focused: undefined,
-    margin: undefined,
-    helperText: undefined,
-    variant: 'outlined',
-    startCmpExternal: undefined,
-    endCmpExternal: undefined,
-    cmpSpacing: undefined,
-    hideStartActionsOnEmpty: undefined,
     alignActionsExternal: 'baseline',
-    colorText: undefined,
-    colorLabel: undefined,
-    colorActive: 'primary',
-    size: undefined,
-    options: [],
-    label: undefined,
-    filterOptions: undefined,
-    getOptionLabel: 'label',
-    groupBy: undefined,
-    sortBy: undefined,
-    sortDir: true,
-    freeSolo: undefined,
     autoComplete: true,
-    selectedOption: undefined,
-    setSelectedOption: undefined,
-    raiseSelectedToTop: undefined,
-    disablePortal: undefined,
-    disableClearable: undefined,
-    disableCloseOnSelect: true,
-    clearOnPressEscape: true,
-    includeInputInList: true,
-    openOnFocus: true,
-    disableListWrap: true,
     autoHighlight: true,
     blurOnSelect: true,
-    selectOnFocus: false,
-    disabled: undefined,
-    readOnly: undefined,
-    highlightSearchResults: true,
-    highlightField: undefined,
-    multiple: undefined,
-    filterSelectedOptions: true,
     chipProps: undefined,
+    clearOnPressEscape: true,
+    cmpSpacing: undefined,
+    colorActive: 'primary',
+    colorLabel: undefined,
+    colorText: undefined,
+    disableClearable: undefined,
+    disableCloseOnSelect: true,
+    disabled: undefined,
+    disableListWrap: true,
+    disablePortal: undefined,
+    endCmpExternal: undefined,
+    error: undefined,
+    filterOptions: undefined,
+    filterSelectedOptions: true,
+    focused: undefined,
+    freeSolo: undefined,
+    getOptionLabel: 'label',
+    groupBy: undefined,
+    helperText: undefined,
+    hideStartActionsOnEmpty: undefined,
+    highlightField: undefined,
+    highlightSearchResults: true,
+    id: undefined,
+    includeInputInList: true,
+    label: undefined,
+    margin: undefined,
+    multiple: undefined,
+    name: undefined,
+    onChange: undefined,
+    openOnFocus: true,
+    options: [],
+    optionConverter: undefined,
+    placeholder: undefined,
+    raiseSelectedToTop: undefined,
+    readOnly: undefined,
+    required: undefined,
+    selectedOption: undefined,
+    selectOnFocus: false,
+    setSelectedOption: undefined,
+    size: undefined,
+    sortBy: undefined,
+    sortDir: true,
+    startCmpExternal: undefined,
+    variant: 'outlined',
 };
 
 export default InputAutocomplete;

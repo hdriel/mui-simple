@@ -5,18 +5,20 @@ import { renderHighlightOptionCB } from '../InputAutocomplete.styled';
 import type { RenderOptionCB } from '../InputAutocomplete.styled';
 
 export const useAutocompleteOptionsHook = ({
-    raiseSelectedToTop,
+    filterOptions: _filterOptions,
+    getOptionLabel: _getOptionLabel,
+    highlightField,
+    highlightSearchResults,
     options: _options,
+    optionConverter,
+    raiseSelectedToTop,
+    renderOption: _renderOption,
     sortBy,
     sortDir,
-    getOptionLabel: _getOptionLabel,
-    filterOptions: _filterOptions,
-    renderOption: _renderOption,
-    highlightSearchResults,
-    highlightField,
 }): { options: any; filterOptions: any; getOptionLabel: any; renderOption: any } => {
     const options = useMemo(() => {
         let result = _options?.map((option) => {
+            if (typeof optionConverter === 'function') return optionConverter(option);
             return typeof option === 'string' ? { label: option, id: option } : { ...option };
         });
 
@@ -68,9 +70,11 @@ export const useAutocompleteOptionsHook = ({
         }
 
         if (highlightSearchResults) {
-            return renderHighlightOptionCB(highlightField ?? getOptionLabel);
+            const fieldValue = highlightField ?? getOptionLabel?.(args[1]) ?? args[1].label;
+            return renderHighlightOptionCB(fieldValue)(...args);
         }
 
+        console.log('renderOption as undefined');
         return undefined;
     };
 

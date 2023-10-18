@@ -28,12 +28,13 @@ export const FilmOptions = () => {
             {['filled', 'standard', 'outlined'].map((variant) => (
                 <InputAutocomplete
                     key={variant}
+                    // getOptionLabel={(option) => option.title}
                     label="Movie"
+                    optionConverter={(film) => ({ id: film.title, label: `${film.title} (${film.year})` })}
+                    options={top100Films}
                     selectedOption={selectedOption}
                     setSelectedOption={(e, option) => setSelectedOption(option)}
-                    getOptionLabel={(option) => option.title}
                     variant={variant}
-                    options={top100Films}
                 />
             ))}
         </Stack>
