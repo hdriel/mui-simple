@@ -138,8 +138,17 @@ export const ShowMoreAndHideLabel: Story = {
 
 export const BgColor: Story = {
     args: {
-        label: 'Details Max Rows 3',
+        label: 'background summary',
         bgColor: '#10DCCA',
+        expanded: true,
+        details: smallIpsum,
+    },
+};
+
+export const BgColorDetails: Story = {
+    args: {
+        label: 'background details ',
+        bgColorDetails: '#10DCCA',
         expanded: true,
         details: smallIpsum,
     },
@@ -168,6 +177,13 @@ export const LabelColorFunc: Story = {
         label: 'labelColor as function by expanded state',
         labelColor: (expanded) => (expanded ? '#7e049a' : '#07860d'),
         expanded: true,
+        details: smallIpsum,
+    },
+};
+
+export const LongLabel: Story = {
+    args: {
+        label: largeIpsum,
         details: smallIpsum,
     },
 };

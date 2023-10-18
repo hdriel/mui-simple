@@ -3,7 +3,7 @@ import { TextField as MuiTextField, Stack } from './TextField.styled';
 import { InputAdornment, ClickAwayListener } from '@mui/material';
 import { debounce } from 'lodash-es';
 import type { InputBaseProps } from '../../decs';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
 const TextField: React.FC<InputBaseProps> = function TextField(props): React.ReactElement {
     const {

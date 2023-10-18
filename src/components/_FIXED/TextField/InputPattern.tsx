@@ -5,8 +5,14 @@ import Input from './TextField';
 import { isDefined } from '../../../utils/helpers';
 import type { InputPatternProps } from '../../decs';
 
-const MaskedInput: any = IMaskMixin(({ inputRef, ...otherProps }) => {
-    return <Input inputRef={inputRef} {...otherProps} />;
+const MaskedInput: any = IMaskMixin(({ inputRef, showMaskAsPlaceholder, InputLabelProps, ...otherProps }) => {
+    return (
+        <Input
+            inputRef={inputRef}
+            InputLabelProps={{ shrink: showMaskAsPlaceholder, ...InputLabelProps }}
+            {...otherProps}
+        />
+    );
 });
 
 const InputPattern: React.FC<InputPatternProps> = ({
@@ -20,6 +26,7 @@ const InputPattern: React.FC<InputPatternProps> = ({
     onEnterKeyPress,
     onKeyPress,
     onFocus,
+    focused,
     placeholder,
     showMaskAsPlaceholder,
     unmask,
@@ -66,8 +73,9 @@ const InputPattern: React.FC<InputPatternProps> = ({
                     name={name}
                     unmask={unmask}
                     value={value}
-                    focused={!!_value || isOnFocus || showMaskAsPlaceholder}
+                    focused={focused || isOnFocus}
                     lazy={lazy}
+                    showMaskAsPlaceholder={showMaskAsPlaceholder}
                     onFocus={(e) => {
                         setIsOnFocus(true);
                         onFocus?.(e);
@@ -103,7 +111,7 @@ InputPattern.defaultProps = {
     onEnterKeyPress: undefined,
     onKeyPress: undefined,
     overwrite: undefined,
-    showMaskAsPlaceholder: true,
+    showMaskAsPlaceholder: undefined,
     textAlign: undefined,
     unmask: undefined,
     value: '', // stay this value, to prevent from component to be disabled on missing provider value

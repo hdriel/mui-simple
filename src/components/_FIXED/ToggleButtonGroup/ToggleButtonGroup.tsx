@@ -1,7 +1,7 @@
 import React from 'react';
 import { ToggleButton, ToggleButtonGroup as MuiToggleButtonGroup, Container } from './ToggleButtonGroup.styled';
 import { setDisplayName, useCustomColor } from '../../../utils/helpers';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 import type { ToggleButtonGroupProps } from '../../decs';
 import { FormHelperText } from '../RadioButtonsGroup/RadioButtonsGroup.styled';
 
@@ -21,6 +21,7 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
     helperTextAlign,
     helperTextStyle,
     error,
+    wrap,
     sx,
     ...props
 }): React.ReactElement => {
@@ -62,6 +63,7 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
                 size={size}
                 onChange={onChangeHandler}
                 fullWidth={fullWidth}
+                wrap={wrap}
                 sx={{ bgcolor: transparent ? 'transparent' : undefined, ...sx }}
                 {...props}
             >
@@ -111,6 +113,7 @@ ToggleButtonGroup.defaultProps = {
     helperTextAlign: undefined,
     helperTextStyle: undefined,
     data: [],
+    wrap: false,
 };
 
 export type { ToggleButtonGroupProps } from '../../decs';

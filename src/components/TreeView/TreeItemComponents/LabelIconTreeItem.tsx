@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
 import { LabelIconTreeItemStyled } from '../TreeView.styled';
 import Typography from '../../_FIXED/Typography/Typography';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../../_FIXED/SVGIcon/SVGIcon';
 import { ArrowDropDown as ArrowDropDownIcon, ArrowRight as ArrowRightIcon } from '@mui/icons-material';
 
 const LabelIconTreeItem = forwardRef((props, ref) => {

@@ -4,9 +4,10 @@ import Button from '../Button/Button';
 import { Divider, List as MuiList, ListSubheader, Collapse } from './List.styled';
 import MuiListItem from './ListItem';
 import DraggableList from '../../DraggableList/DraggableList';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 import type { ListItemProps, ListProps } from '../../decs';
 import { useCustomColor } from '../../../utils/helpers';
+import { checkForCheckboxItems } from './List.converter';
 
 const List: React.FC<ListProps> = ({
     alignItems,
@@ -47,7 +48,8 @@ const List: React.FC<ListProps> = ({
     };
 
     const dataList =
-        items?.map((item, index) =>
+        checkForCheckboxItems(items, props)?.map((item) =>
+            // items?.map((item) =>
             typeof item === 'string'
                 ? { title: item, id: item }
                 : {
@@ -60,7 +62,7 @@ const List: React.FC<ListProps> = ({
     const renderValue = (item: ListItemProps, index: number): React.ReactElement => {
         const { divider, component, alignControl, controlType, ...itemProps } = item || {};
         const isControl = ['checkbox', 'switch'].includes(controlType);
-        const isOpen = open[index];
+        const isOpen = item.openListItems || open[index];
         const listItem = !!Object.keys(itemProps).length;
         itemProps.startIcon =
             typeof itemProps.startIcon === 'string' ? <SVGIcon>{itemProps.startIcon}</SVGIcon> : itemProps.startIcon;
@@ -73,7 +75,11 @@ const List: React.FC<ListProps> = ({
                     droppableId={itemProps.title}
                     {...itemProps.listItemsProps}
                     useDraggableContext={false}
-                    useReactRouterDomLink={useReactRouterDomLink}
+                    useReactRouterDomLink={
+                        itemProps.listItemsProps?.useReactRouterDomLink === undefined
+                            ? useReactRouterDomLink
+                            : itemProps.listItemsProps?.useReactRouterDomLink
+                    }
                 />
                 <Divider variant="fullWidth" {...divider} component="div" />
             </Box>
@@ -143,7 +149,7 @@ const List: React.FC<ListProps> = ({
                 droppableClassName={droppableId}
                 disabled={!dragAndDropItems}
                 onChange={onListOrderChange}
-                renderValue={(item, index) =>
+                renderValue={(item, index, snapshot) =>
                     renderValue(
                         {
                             ...item,

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Fab as MuiFab } from './FloatingActionButton.styled';
 import { useCustomColor } from '../../../utils/helpers';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 import type { FabProps } from '../../decs';
 
 const Fab: React.FC<FabProps> = (props): React.ReactElement => {

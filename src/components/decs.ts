@@ -1,7 +1,6 @@
-import type { ReactNode, ReactElement, ChangeEvent, SyntheticEvent, Ref } from 'react';
-import type { SxProps } from '@mui/material';
-import { number } from 'prop-types';
-import React, { MouseEventHandler } from 'react';
+import type { MouseEventHandler, ReactNode, ReactElement, ChangeEvent, SyntheticEvent, Ref } from 'react';
+import type { DraggableStateSnapshot } from 'react-beautiful-dnd';
+import type { CloseReason, OpenReason, SxProps } from '@mui/material';
 
 export type AppBarPosition = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
 
@@ -22,28 +21,6 @@ export interface AppBarProps {
     scrollToTopProps?: object;
     title?: string | ReactNode;
     toolbarId?: string;
-    [key: string]: any;
-}
-export interface AccordionProps {
-    bgColor?: string;
-    bottomSecondaryLabel?: string;
-    buttonsColor?: string;
-    collapsedIcon?: string | ReactNode;
-    details?: string;
-    detailsMaxRows?: number;
-    disabled?: boolean;
-    expanded?: boolean | string;
-    expandedIcon?: string | ReactNode;
-    hideLabel?: string;
-    id?: string;
-    label?: string;
-    onChange?: (event: SyntheticEvent<unknown>, expanded: boolean | string) => void;
-    secondaryLabel?: string;
-    showMoreLabel?: string;
-    textColor?: string;
-    labelColor?: ((expanded: boolean | string) => string) | string;
-    unmountDetailsOnClose?: boolean;
-    useCustomStyle?: boolean;
     [key: string]: any;
 }
 
@@ -201,49 +178,36 @@ export interface CardProps {
     avatar?: ReactNode;
     contentPadding?: number | string;
     contentStyle?: SxProps;
+    contentWrapperStyle?: SxProps;
     flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
+    height?: number | string;
     image?:
         | string
         | {
               src?: string;
               title?: string;
               width?: number | string;
+              maxWidth?: number | string;
               height?: number | string;
+              maxHeight?: number | string;
               onClick?: (e: any) => void;
               stretch?: 'cover' | 'contain' | 'none' | 'fill';
+              fullHeight?: boolean;
+              sx?: SxProps;
               [key: string]: any;
           };
-    height?: number | string;
     justifyContent?: string;
     maxHeight?: number | string;
     maxWidth?: number | string;
     mediaOnTop?: boolean;
     minHeight?: number | string;
     minWidth?: number | string;
+    onClick?: (e: any) => void;
     optionsMenu?: MenuProps | Array<MenuOptionItem | DividerProps>;
-    subtitle?: string;
-    title?: string;
+    parseChildren?: boolean;
+    subtitle?: ReactNode | string;
+    title?: ReactNode | string;
     width?: number | string;
-    [key: string]: any;
-}
-
-export interface CheckboxProps {
-    checked?: boolean;
-    checkedIcon?: ReactNode | string;
-    color?: string;
-    disabled?: boolean;
-    fontSize?: string | number;
-    helperText?: string;
-    icon?: ReactNode | string;
-    label?: string;
-    labelPlacement?: 'top' | 'start' | 'bottom' | 'end';
-    onChange?: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
-    readOnly?: boolean;
-    required?: boolean;
-    size?: 'small' | 'medium';
-    sx?: SxProps;
-    textColor?: string;
-    value?: boolean;
     [key: string]: any;
 }
 
@@ -342,6 +306,26 @@ export type InputColorProps = InputBaseProps & {
     opacityLabel?: string;
     opacityIcon?: string | ReactNode;
     copyIcon?: string | ReactNode;
+};
+
+export type InputDateTimeProps = InputBaseProps & {
+    value?: Date | number | string;
+    valueType?: 'timestamp' | 'date' | 'string';
+    includeSeconds?: boolean;
+    minDate?: Date | number | string;
+    maxDate?: Date | number | string;
+};
+
+export type InputDateProps = InputBaseProps & {
+    value?: Date | number | string;
+    valueType?: 'timestamp' | 'date' | 'string';
+    minDate?: Date | number | string;
+    maxDate?: Date | number | string;
+};
+
+export type InputTimeProps = InputBaseProps & {
+    value?: Date | number | string;
+    valueType?: 'seconds' | 'minutes' | 'milliseconds' | 'timestamp' | 'date' | 'string';
 };
 
 export type InputPatternProps = InputBaseProps & {
@@ -580,16 +564,19 @@ export interface ListItemProps {
     disablePadding?: boolean;
     divider?: object | boolean;
     inset?: boolean;
+    openListItems?: boolean;
+    onClick?: (...args: any) => void;
     items?: Array<string | ListItemProps>;
     listItemsProps?: Omit<ListProps, 'items'>;
     link?: string;
-    controlType?: 'checkbox' | 'switch';
     droppableId?: string;
     draggableListType?: string;
     selected?: boolean;
     startIcon?: ReactNode | string;
     subtitle?: string;
     title?: string;
+    controlType?: 'checkbox' | 'switch';
+    alignCheck?: 'start' | 'end';
     [key: string]: any;
 }
 
@@ -610,6 +597,7 @@ export interface ListProps {
     flexDirectionItems?: 'row' | 'column';
     hideActionsOnDragAndDropItems?: boolean;
     insetItems?: boolean;
+    openListItems?: boolean;
     items?: Array<string | ListItemProps>;
     onListOrderChange?: (
         dataItems: Array<ListItemProps & { id: string }>,
@@ -625,7 +613,37 @@ export interface ListProps {
     useTransition?: boolean;
     useReactRouterDomLink?: boolean;
     width?: string | number;
+    controlType?: 'checkbox' | 'switch';
+    alignCheck?: 'start' | 'end';
     [key: string]: any;
+}
+
+interface DataItem {
+    id?: string;
+    [key: string]: any;
+}
+
+export interface DraggableListProps {
+    className?: string;
+    component?: string;
+    dataList?: Array<string | DataItem>;
+    disabled?: ((value: string | DataItem, index: number) => boolean) | boolean;
+    droppableClassName?: string;
+    fieldId?: string;
+    flexDirection?: 'row' | 'column';
+    flexGap?: string;
+    useDraggableContext?: boolean;
+    draggableListType?: string;
+    onChange?: (
+        dataItems: Array<ListItemProps & { id: string }>,
+        extraProps: {
+            source: { index: number; droppableId: string };
+            destinationIndex: { index: number; droppableId: string };
+            droppableId: string;
+            dataList?: Array<ListItemProps & { id: string }>;
+        }
+    ) => void;
+    renderValue?: (value: string | DataItem, index: number, snapshot: DraggableStateSnapshot) => ReactNode;
 }
 
 export type CheckListProps = {
@@ -770,6 +788,94 @@ export type TooltipPlacementType =
     | 'top-start'
     | 'top';
 
+export interface TypographyProps {
+    alignCenter?: boolean;
+    alignJustify?: boolean;
+    alignLeft?: boolean;
+    alignRight?: boolean;
+    autoWidth?: boolean;
+    bgColor?: string;
+    bold?: boolean | string;
+    border?: boolean | string;
+    charsCase?: 'upper' | 'lower' | 'capital';
+    color?: string;
+    component?: string;
+    gutterBottom?: boolean;
+    italic?: boolean;
+    lineHeight?: number;
+    link?: string;
+    monospace?: boolean;
+    noWrap?: boolean;
+    onEllipsisChange?: (isEllipsis: boolean) => void;
+    paragraph?: boolean;
+    rows?: number;
+    showTooltipOnEllipsis?: boolean;
+    size?: number | string;
+    strike?: boolean;
+    sub?: boolean;
+    sup?: boolean;
+    textDirection?: 'ltr' | 'rtl';
+    textWidth?: number | string;
+    tooltip?: boolean | string;
+    tooltipPlacement?: TooltipPlacementType;
+    underline?: boolean;
+    width?: number | string;
+    wrap?: boolean;
+    [key: string]: any;
+}
+
+export interface AccordionProps {
+    bgColor?: string;
+    bgColorDetails?: string;
+    bottomSecondaryLabel?: string;
+    buttonsColor?: string;
+    collapsedIcon?: string | ReactNode;
+    details?: string;
+    detailsMaxRows?: number;
+    detailsStyles?: SxProps;
+    disabled?: boolean;
+    disabledContentPadding?: boolean;
+    expanded?: boolean | string;
+    expandedIcon?: string | ReactNode;
+    hideLabel?: string;
+    id?: string;
+    label?: string | ReactNode;
+    labelProps?: TypographyProps;
+    onChange?: (event: SyntheticEvent<unknown>, expanded: boolean | string) => void;
+    secondaryLabel?: string | ReactNode;
+    showMoreLabel?: string;
+    textColor?: string;
+    labelColor?: ((expanded: boolean | string) => string) | string;
+    unmountDetailsOnClose?: boolean;
+    useCustomStyle?: boolean;
+    summary?: ReactNode;
+    summaryStyles?: SxProps;
+    [key: string]: any;
+}
+
+export interface CheckboxProps {
+    checked?: boolean;
+    checkedIcon?: ReactNode | string;
+    color?: string;
+    disabled?: boolean;
+    fontSize?: string | number;
+    helperText?: string;
+    icon?: ReactNode | string;
+    label?: string;
+    labelProps?: TypographyProps;
+    labelPlacement?: 'top' | 'start' | 'bottom' | 'end';
+    onChange?: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+    readOnly?: boolean;
+    required?: boolean;
+    size?: 'small' | 'medium';
+    wrapperStyle?: any;
+    sx?: SxProps;
+    sxLabel?: SxProps;
+    textColor?: string;
+    value?: boolean;
+    [key: string]: any;
+}
+
 export interface SwitchProps {
     checked?: boolean;
     color?: string;
@@ -832,11 +938,12 @@ export interface SliderProps {
 }
 
 export interface StepType {
-    label?: string;
+    label: string;
     optional?: boolean | string;
     color?: string;
     error?: boolean;
-    icon?: ReactNode;
+    icon?: string | ReactNode;
+    // Todo: assert if the type string actually match the project creator's intention
 }
 export interface StepperProps {
     allCompletedCmp?: ReactNode;
@@ -919,41 +1026,6 @@ export interface TooltipProps {
     disableHoverListener?: boolean;
     disableTouchListener?: boolean;
     PopperProps?: { disablePortal: boolean; [key: string]: any };
-    [key: string]: any;
-}
-
-export interface TypographyProps {
-    alignCenter?: boolean;
-    alignJustify?: boolean;
-    alignLeft?: boolean;
-    alignRight?: boolean;
-    autoWidth?: boolean;
-    bgColor?: string;
-    bold?: boolean | string;
-    border?: boolean | string;
-    charsCase?: 'upper' | 'lower' | 'capital';
-    color?: string;
-    component?: string;
-    gutterBottom?: boolean;
-    italic?: boolean;
-    lineHeight?: number;
-    monospace?: boolean;
-    noWrap?: boolean;
-    onEllipsisChange?: (isEllipsis: boolean) => void;
-    paragraph?: boolean;
-    rows?: number;
-    showTooltipOnEllipsis?: boolean;
-    size?: number | string;
-    strike?: boolean;
-    sub?: boolean;
-    sup?: boolean;
-    textDirection?: 'ltr' | 'rtl';
-    tooltip?: boolean | string;
-    tooltipPlacement?: TooltipPlacementType;
-    underline?: boolean;
-    width?: number | string;
-    wrap?: boolean;
-    link?: string;
     [key: string]: any;
 }
 
@@ -1058,6 +1130,7 @@ export interface ToggleButtonGroupProps {
         disabled?: boolean;
         component: ReactElement | ReactNode | string | number;
     }>;
+    wrap?: boolean;
     transparent?: boolean;
     [key: string]: any;
 }
@@ -1082,3 +1155,56 @@ export interface AlertProps {
     width?: string | number;
     [key: string]: any;
 }
+
+type DirectionType = 'down' | 'left' | 'right' | 'up';
+
+interface SpeedDialActionProps {
+    name: string;
+    icon: ReactNode;
+    showTooltip: boolean;
+    onClick: MouseEventHandler<HTMLDivElement>;
+}
+
+export interface SpeedDialProps {
+    actions?: SpeedDialActionProps[];
+    ariaLabel?: string;
+    bottom?: string | number;
+    color?: string;
+    direction?: DirectionType;
+    hidden?: boolean;
+    icon?: ReactNode;
+    left?: string | number;
+    onClose?: (event: SyntheticEvent<{}, Event>, reason: CloseReason) => void;
+    onOpen?: (event: SyntheticEvent<{}, Event>, reason: OpenReason) => void;
+    open?: boolean;
+    openIcon?: ReactNode;
+    right?: string | number;
+    showOnBackdrop?: boolean;
+    showTooltip?: boolean;
+    sx?: SxProps;
+    top?: string | number;
+    [key: string]: any;
+}
+
+export interface SVGIconProps {
+    muiIconName?: string;
+    iconSrc?: string;
+    color?: string;
+    width?: string | number;
+    height?: string | number;
+    size?: string | number;
+    sx?: SxProps;
+    [key: string]: any;
+}
+
+export type MobileStepperProps = StepperProps & {
+    autoPlay?: boolean;
+    autoPlayInterval?: number;
+    height?: string | number;
+    infiniteLoop?: boolean;
+    maxWidth?: string | number;
+    position?: 'bottom' | 'static' | 'top';
+    swipeable?: boolean;
+    variant?: 'text' | 'dots' | 'progress';
+    [key: string]: any;
+};

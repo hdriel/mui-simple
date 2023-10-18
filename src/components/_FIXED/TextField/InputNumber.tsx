@@ -9,7 +9,7 @@ import Input from './TextField';
 import { getCustomColor, isDefined } from '../../../utils/helpers';
 import { Box, SliderIcon } from './TextField.styled';
 import Slider from '../Slider/Slider';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 import type { InputNumberProps } from '../../decs';
 
 export const TextField = styled((props) => <Input {...props} type="text" />, {

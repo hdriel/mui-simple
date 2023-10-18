@@ -50,6 +50,15 @@ export const LetterSpacing: Story = {
     },
 };
 
+export const ShowMaskAsPlaceholder: Story = {
+    args: {
+        label: 'Show Mask As Placeholder',
+        letterSpacing: '5px',
+        value,
+        showMaskAsPlaceholder: true,
+    },
+};
+
 export const AlignActions: Story = {
     args: {
         alignActions: 'flex-start',

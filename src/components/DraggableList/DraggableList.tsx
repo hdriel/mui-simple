@@ -1,5 +1,4 @@
 import React from 'react';
-import type { ReactNode, PropsWithChildren } from 'react';
 import { isEmpty } from 'lodash-es';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { Box } from '@mui/material';
@@ -9,37 +8,10 @@ import classNames from 'classnames';
 import { DraggableListUL, DraggableListULItem } from './DraggableList.styled';
 import { getDataId, getItemStyle, getListStyle } from './DraggableList.styles';
 import { useDragHandlers } from './DraggableList.hooks';
-import type { ListItemProps } from '../decs';
+import type { DraggableListProps } from '../decs';
 
-interface DataItem {
-    id?: string;
-    [key: string]: any;
-}
-
-interface DraggableListProps {
-    className?: string;
-    component?: string;
-    dataList?: Array<string | DataItem>;
-    disabled?: ((value: string | DataItem, index: number) => boolean) | boolean;
-    droppableClassName?: string;
-    fieldId?: string;
-    flexDirection?: 'row' | 'column';
-    flexGap?: string;
-    useDraggableContext?: boolean;
-    draggableListType?: string;
-    onChange?: (
-        dataItems: Array<ListItemProps & { id: string }>,
-        extraProps: {
-            source: { index: number; droppableId: string };
-            destinationIndex: { index: number; droppableId: string };
-            droppableId: string;
-            dataList?: Array<ListItemProps & { id: string }>;
-        }
-    ) => void;
-    renderValue?: (value: string | DataItem, index: number) => ReactNode;
-}
-
-function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode {
+// https://react-beautiful-dnd.netlify.app/?path=/story/single-vertical-list--basic
+const DraggableList: React.FC<DraggableListProps> = (props): React.ReactElement => {
     const {
         component,
         dataList,
@@ -109,7 +81,7 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
                                             flexDirection,
                                         })}
                                     >
-                                        {renderValue(data, index)}
+                                        {renderValue(data, index, snapshot)}
                                     </DraggableListULItem>
                                 )}
                             </Draggable>
@@ -145,7 +117,7 @@ function DraggableList(props: PropsWithChildren<DraggableListProps>): ReactNode 
     ) : (
         content
     );
-}
+};
 
 DraggableList.defaultProps = {
     className: undefined,
@@ -162,4 +134,5 @@ DraggableList.defaultProps = {
     useDraggableContext: undefined,
 };
 
+export type { DraggableListProps } from '../decs';
 export default DraggableList;

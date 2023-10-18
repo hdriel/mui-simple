@@ -19,7 +19,7 @@ import CardExpandedContent from '../CardExpandedContent';
 import MyAvatar from '../../Avatar/Avatar';
 import Typography from '../../Typography/Typography';
 import Button from '../../Button/Button';
-import SVGIcon from '../../../SVGIcon/SVGIcon';
+import SVGIcon from '../../SVGIcon/SVGIcon';
 
 const meta: Meta<typeof Card> = {
     title: 'Surfaces/Card',
@@ -169,6 +169,31 @@ export const FlexDirection: Story = {
         flexDirection: 'row',
         children:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec nulla iaculis, ultrices lorem non, porta nulla. Nunc viverra nulla vel consequat tincidunt. Maecenas imperdiet porttitor massa in bibendum. In hac habitasse platea dictumst. Sed vel elit et lectus semper egestas. Fusce eu felis nec arcu ultrices commodo eget scelerisque est. Morbi quis nulla est.',
+    },
+};
+
+export const RowCard: Story = {
+    args: {
+        title: 'Just-Like-That Fullstack Web Bootcamp: Your Path to Web Development Excellence!',
+        flexDirection: 'row',
+        maxWidth: 1200,
+        image: {
+            src: 'JLT-dark.png',
+            title: 'just-like-that.co.il',
+            fullHeight: true,
+        },
+        children:
+            'Are you ready to embark on an incredible journey into the world of web development? Look no further than the "Just-Like-That Fullstack Web Bootcamp," a course meticulously crafted to transform your coding aspirations into reality!\n' +
+            '\n' +
+            "🚀 Unleash Your Fullstack Potential: This bootcamp isn't just any coding course; it's a comprehensive fullstack experience. We cover everything from HTML, CSS, and JavaScript to cutting-edge technologies like React, Node, and MongoDB, enabling you to master both front-end and back-end development.\n" +
+            '\n' +
+            "💡 Real-World Skills: Our curriculum is designed by industry experts to ensure you're equipped with the latest skills and frameworks used in the tech world today. You won't just learn to code; you'll build real-world applications and websites from scratch.\n" +
+            '\n' +
+            '🌐 Accessible Learning: Whether you\'re a beginner or looking to level up your skills, "Just-Like-That" welcomes everyone. We offer a supportive community, hands-on projects, and a step-by-step approach that makes learning web development feel, well, just like that!\n' +
+            '\n' +
+            '🎓 Career-Ready: Dream of landing a full-stack developer job without a tech degree or experience? Our bootcamp can get you there, just like it did for many others who followed the path to success.\n' +
+            '\n' +
+            '🔥 Join the Revolution: Don\'t miss out on the opportunity to join our "Just-Like-That Fullstack Web Bootcamp." Your coding journey begins here, and success is just a click away!',
     },
 };
 

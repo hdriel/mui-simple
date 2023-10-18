@@ -16,7 +16,7 @@ export const Divider = styled(({ ...props }) => <MuiDivider flexItem orientation
 `;
 
 export const Container = styled(Box, {
-    shouldForwardProp: (propName) => !['helperTextAlign'].includes(propName as string),
+    shouldForwardProp: (propName) => !['helperTextAlign', 'fullWidth'].includes(propName as string),
 })`
     display: flex;
     flex-direction: column;
@@ -60,8 +60,9 @@ export const ToggleButtonGroups = styled(({ ...props }) => <MuiPaper elevation={
 //     background-color: ${(props) => props.customColor && alpha(props.customColor, 0.2)};
 // }
 export const ToggleButtonGroup = styled(({ ...props }) => <MuiToggleButtonGroup {...props} />, {
-    shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
+    shouldForwardProp: (propName) => !['customColor', 'wrap'].includes(propName as string),
 })<ToggleButtonGroupProps>`
+    flex-wrap: ${(props) => (props.wrap ? 'wrap' : 'unset')};
     & .Mui-selected // , & .MuiTouchRipple-root
     {
         color: ${(props) => props.customColor};

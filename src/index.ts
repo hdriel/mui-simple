@@ -47,8 +47,8 @@ export type { DialogProps } from './components/_FIXED/Dialog/Dialog';
 export { default as Divider } from './components/_FIXED/Divider/Divider';
 export type { DividerProps } from './components/_FIXED/Divider/Divider';
 
-export { default as Drawer } from './components/Drawer/Drawer';
-export type { DrawerProps } from './components/Drawer/Drawer';
+export { default as Drawer } from './components/_FIXED/Drawer/Drawer';
+export type { DrawerProps } from './components/_FIXED/Drawer/Drawer';
 
 export { default as Fab } from './components/_FIXED/FloatingActionButton/FloatingActionButton';
 export type { FabProps } from './components/_FIXED/FloatingActionButton/FloatingActionButton';
@@ -59,8 +59,11 @@ export type { TextFieldProps } from './components/_FIXED/TextField/TextField';
 export { default as InputColor } from './components/_FIXED/TextField/InputColor';
 export type { InputColorProps } from './components/_FIXED/TextField/InputColor';
 
-export { default as InputDate } from './components/TextField/InputDate';
-export { default as InputDateTime } from './components/TextField/InputDateTime';
+export { default as InputDate } from './components/_FIXED/TextField/InputDate';
+export type { InputDateProps } from './components/_FIXED/TextField/InputDate';
+
+export { default as InputDateTime } from './components/_FIXED/TextField/InputDateTime';
+export type { InputDateTimeProps } from './components/_FIXED/TextField/InputDateTime';
 
 export { default as InputEmail } from './components/_FIXED/TextField/InputEmail';
 export type { InputEmailProps } from './components/_FIXED/TextField/InputEmail';
@@ -85,7 +88,8 @@ export type { InputSearchProps } from './components/_FIXED/TextField/InputSearch
 export { default as InputText } from './components/_FIXED/TextField/InputText';
 export type { InputTextProps } from './components/_FIXED/TextField/InputText';
 
-export { default as InputTime } from './components/TextField/InputTime';
+export { default as InputTime } from './components/_FIXED/TextField/InputTime';
+export type { InputTimeProps } from './components/_FIXED/TextField/InputTime';
 
 export { default as InputSelect } from './components/_FIXED/Select/InputSelect';
 export type { InputSelectOptions, InputSelectProps } from './components/_FIXED/Select/InputSelect';
@@ -101,6 +105,9 @@ export type { ListProps, ListItemProps } from './components/_FIXED/List/List';
 
 export { default as CheckList } from './components/_FIXED/List/CheckList';
 export type { CheckListProps } from './components/_FIXED/List/CheckList';
+
+export { default as DraggableList } from './components/DraggableList/DraggableList';
+export type { DraggableListProps } from './components/DraggableList/DraggableList';
 
 export { default as Menu } from './components/_FIXED/Menu/Menu';
 export type { MenuProps, MenuOption } from './components/_FIXED/Menu/Menu';
@@ -132,11 +139,18 @@ export * from './components/_FIXED/Slider';
 export { default as Snackbar } from './components/_FIXED/Snackbar/Snackbar';
 export type { SnackbarProps } from './components/_FIXED/Snackbar/Snackbar';
 
-export { default as SpeedDial } from './components/SpeedDial/SpeedDial';
-export { default as Stepper } from './components/Stepper/Stepper';
-export { default as MobileStepper } from './components/Stepper/MobileStepper';
-export { useSimpleStepper } from './components/Stepper/Stepper.utils';
-export { default as SVGIcon } from './components/SVGIcon/SVGIcon';
+export { default as SpeedDial } from './components/_FIXED/SpeedDial/SpeedDial';
+export type { SpeedDialProps } from './components/_FIXED/SpeedDial/SpeedDial';
+
+export { default as Stepper } from './components/_FIXED/Stepper/Stepper';
+export type { StepperProps } from './components/_FIXED/Stepper/Stepper';
+export { useSimpleStepper } from './components/_FIXED/Stepper/Stepper.utils';
+
+export { default as MobileStepper } from './components/_FIXED/Stepper/MobileStepper';
+export type { MobileStepperProps } from './components/_FIXED/Stepper/MobileStepper';
+
+export { default as SVGIcon } from './components/_FIXED/SVGIcon/SVGIcon';
+export type { SVGIconProps } from './components/_FIXED/SVGIcon/SVGIcon';
 
 export { default as Switch } from './components/_FIXED/Switch/Switch';
 export type { SwitchProps } from './components/_FIXED/Switch/Switch';
@@ -163,5 +177,3 @@ export type { TypographyProps } from './components/_FIXED/Typography/Typography'
 
 export * from './utils';
 export { default as useElementSize } from './hooks/useElementSize';
-
-// export * from './components/decs';

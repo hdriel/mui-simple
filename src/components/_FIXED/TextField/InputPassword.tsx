@@ -5,7 +5,7 @@ import Button from '../Button/Button';
 import { copyToClipboard, generatePassword } from '../../../utils/helpers';
 import Snackbar from '../Snackbar/Snackbar';
 import type { InputPasswordProps } from '../../decs';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
 const InputPassword: React.FC<InputPasswordProps> = ({
     copyAction,

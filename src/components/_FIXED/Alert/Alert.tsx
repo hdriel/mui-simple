@@ -4,7 +4,7 @@ import { Alert as MuiAlert, AlertTitle } from './Alert.styled';
 import Button from '../Button/Button';
 import { useCustomColor } from '../../../utils/helpers';
 import type { AlertProps } from '../../decs';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
 const Alert: React.FC<AlertProps> = forwardRef((props: AlertProps, ref): React.ReactElement => {
     const { actions, children, color, icon, onClose, severity, show: _show, title, variant, width, ...rest } = props;

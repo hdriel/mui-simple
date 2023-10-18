@@ -1,10 +1,13 @@
 import React, { cloneElement, isValidElement, Children } from 'react';
 import { MoreVert as MoreVertIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
+import parser from 'html-react-parser';
 import {
     Card as MuiCard,
     Button,
     CardActions,
     CardMedia,
+    CardMediaWrapper,
+    ContentWrapper,
     CardHeader,
     CardContent,
     Collapse,
@@ -14,6 +17,7 @@ import {
 import Menu from '../Menu/Menu';
 import { useCardExpandedContent } from './Card.hooks';
 import type { CardProps } from '../../decs';
+import useElementSize from '../../../hooks/useElementSize';
 
 const Card: React.FC<CardProps> = (props): React.ReactElement => {
     const {
@@ -35,8 +39,13 @@ const Card: React.FC<CardProps> = (props): React.ReactElement => {
         subtitle,
         title,
         width,
+        onClick,
+        innerRef,
+        parseChildren,
+        contentWrapperStyle,
         ...rest
     } = props;
+    const [ref, { height: currCardHeight }] = useElementSize(image?.fullHeight ?? false);
 
     const { expanded, content, cardContentExpended, isMediaOnTop, handleExpandClick } = useCardExpandedContent({
         mediaOnTop,
@@ -48,11 +57,33 @@ const Card: React.FC<CardProps> = (props): React.ReactElement => {
     const optionsProps = Array.isArray(optionsMenu) ? {} : optionsMenu;
 
     const imageSrc = typeof image === 'object' ? image.src : image;
-    const imageProps = typeof image === 'object' ? image : {};
+    const {
+        sx: imageStyle,
+        title: imageTitle,
+        height: imageHeight,
+        maxHeight: imageMaxHeight,
+        width: imageWidth,
+        maxWidth: imageMaxWidth,
+        stretch: objectFit,
+        fullHeight,
+        ...imageProps
+    } = typeof image === 'object' ? image : {};
     const CardMediaCmp = isValidElement(image) ? image : undefined;
 
+    const childrenContent = Children.toArray(content).map((text) => {
+        if (typeof text === 'string' && parseChildren) {
+            return parser(text.replaceAll(/\n/gi, '<br>'));
+        }
+        return text;
+    });
+
     return (
-        <MuiCard {...rest} sx={{ maxWidth, minWidth, width, maxHeight, height, minHeight, ...rest.sx }}>
+        <MuiCard
+            ref={innerRef}
+            {...rest}
+            sx={{ maxWidth, minWidth, width, maxHeight, height, minHeight, ...rest.sx }}
+            onClick={onClick}
+        >
             {!isMediaOnTop && title ? <CardHeader avatar={avatar} title={title} subheader={subtitle} /> : undefined}
             <Box
                 sx={{
@@ -68,17 +99,28 @@ const Card: React.FC<CardProps> = (props): React.ReactElement => {
             >
                 {image
                     ? CardMediaCmp || (
-                          <CardMedia
-                              component="img"
-                              image={imageSrc}
-                              alt={imageProps?.title ?? 'card image media'}
-                              sx={{ width: imageProps?.width, objectFit: imageProps?.stretch ?? 'cover' }}
-                              {...imageProps}
-                          />
+                          <CardMediaWrapper sx={{ maxWidth: imageMaxWidth, maxHeight: imageMaxHeight }}>
+                              <CardMedia
+                                  component="img"
+                                  image={imageSrc}
+                                  alt={imageTitle ?? 'card image media'}
+                                  sx={{
+                                      ...imageStyle,
+                                      width: imageWidth,
+                                      objectFit: objectFit ?? 'cover',
+                                      height: fullHeight
+                                          ? currCardHeight
+                                              ? `${currCardHeight}px`
+                                              : '100%'
+                                          : imageHeight,
+                                  }}
+                                  {...imageProps}
+                              />
+                          </CardMediaWrapper>
                       )
                     : undefined}
 
-                <Box>
+                <ContentWrapper sx={contentWrapperStyle} ref={innerRef ?? ref}>
                     {isMediaOnTop && title ? (
                         <CardHeader
                             avatar={avatar}
@@ -100,7 +142,7 @@ const Card: React.FC<CardProps> = (props): React.ReactElement => {
                             padding: contentPadding,
                         }}
                     >
-                        {Children.toArray(content)}
+                        {childrenContent}
                     </CardContent>
 
                     <CardActions disableSpacing>
@@ -135,7 +177,7 @@ const Card: React.FC<CardProps> = (props): React.ReactElement => {
                             />
                         ) : undefined}
                     </CardActions>
-                </Box>
+                </ContentWrapper>
             </Box>
             {cardContentExpended ? (
                 <Collapse in={expanded} timeout="auto" unmountOnExit addEndListener={undefined}>
@@ -152,12 +194,15 @@ Card.defaultProps = {
     contentPadding: undefined,
     flexDirection: undefined,
     image: undefined,
+    contentWrapperStyle: undefined,
     maxWidth: 'max-content',
     minWidth: undefined,
     mediaOnTop: undefined,
     optionsMenu: undefined,
     subtitle: undefined,
     title: undefined,
+    onClick: undefined,
+    parseChildren: true,
     width: 'auto',
 };
 

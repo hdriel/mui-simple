@@ -1,7 +1,8 @@
 import React, { isValidElement } from 'react';
 import type { ComponentType } from 'react';
 import { styled } from '@mui/material/styles';
-import { Checkbox as MuiCheckbox, FormControlLabel, FormHelperText, Typography } from '@mui/material';
+import Typography from '../Typography/Typography';
+import { Checkbox as MuiCheckbox, FormControlLabel, FormHelperText } from '@mui/material';
 import type { CheckboxProps as MuiCheckboxProps } from '@mui/material';
 import type { CheckboxProps } from '../../decs';
 
@@ -17,17 +18,20 @@ export const Checkbox = styled(
             helperText,
             inputProps,
             label = '',
+            labelProps,
+            wrapperStyle,
             error,
             labelPlacement,
             muiColor,
             readOnly,
             required,
+            sxLabel,
             sx,
             textColor,
             ...rest
         } = props;
         return (
-            <span>
+            <span style={wrapperStyle}>
                 <FormControlLabel
                     required={required}
                     disabled={disabled}
@@ -37,7 +41,9 @@ export const Checkbox = styled(
                         isValidElement(label) ? (
                             label
                         ) : (
-                            <Typography sx={{ fontSize, color: textColor }}>{label}</Typography>
+                            <Typography sx={{ fontSize, color: textColor, ...sxLabel }} {...labelProps}>
+                                {label}
+                            </Typography>
                         )
                     }
                     sx={{ m: 0, userSelect: 'none', color: textColor }}

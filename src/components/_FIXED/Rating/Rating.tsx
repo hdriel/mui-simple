@@ -2,7 +2,7 @@ import React from 'react';
 import { Box as MuiBox } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import ReactStars from 'react-rating-stars-component';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 import { useCustomColor } from '../../../utils/helpers';
 import type { RatingProps } from '../../decs';
 

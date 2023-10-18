@@ -2,7 +2,7 @@ import React from 'react';
 import { Link as MuiLink, RRDLink } from './Link.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import type { LinkProps } from '../../decs';
-import SVGIcon from '../../SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
 const Link: React.FC<LinkProps> = ({
     color,
