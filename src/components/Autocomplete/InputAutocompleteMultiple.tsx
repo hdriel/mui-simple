@@ -54,7 +54,7 @@ export default function InputAutocompleteMultiple({
             readOnly={readOnly}
             options={options}
             renderOption={(props, option, { selected }) => (
-                <li {...props}>
+                <li {...props} /* onClick={(e) => e.preventDefault()} */>
                     {checkboxStyle ? <Checkbox style={{ marginRight: 2 }} checked={selected} edge="start" /> : null}
                     <Box
                         sx={{
