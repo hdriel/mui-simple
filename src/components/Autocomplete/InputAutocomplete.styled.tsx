@@ -48,7 +48,7 @@ export const renderHighlightOptionCB = (fieldValue: any): RenderOptionCB => {
                     }}
                 >
                     {parts.map((part, index) => (
-                        <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
+                        <span key={index} style={{ fontWeight: selected || part.highlight ? 700 : 400 }}>
                             {part.text}
                         </span>
                     ))}

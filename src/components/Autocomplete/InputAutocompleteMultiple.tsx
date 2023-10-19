@@ -48,6 +48,7 @@ export default function InputAutocompleteMultiple({
             multiple
             raiseSelectedToTop={totalSelectedOptions}
             disableCloseOnSelect
+            blurOnSelect={false}
             limitTags={limitTags}
             filterSelectedOptions={filterSelectedOptions}
             getOptionLabel={getOptionLabel}

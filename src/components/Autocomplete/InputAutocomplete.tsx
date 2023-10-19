@@ -81,7 +81,6 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
         sortBy,
         sortDir,
     });
-    console.log('renderOption', renderOption);
 
     const renderGroup = groupBy
         ? (params) => (
@@ -103,6 +102,10 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
                   />
               ))
         : undefined;
+
+    if (typeof selectedOption === 'string' || typeof selectedOption === 'number') {
+        selectedOption = options.find((o) => o.id === selectedOption);
+    }
 
     const inputProps: InputBaseProps = {
         alignActions,
