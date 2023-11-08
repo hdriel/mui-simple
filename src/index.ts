@@ -8,8 +8,13 @@ export { default as AppBar } from './components/_FIXED/AppBar/AppBar';
 export type { AppBarProps } from './components/_FIXED/AppBar/AppBar';
 
 export { default as InputAutocomplete } from './components/Autocomplete/InputAutocomplete';
+export type { InputAutoCompleteProp } from './components/Autocomplete/InputAutocomplete';
 export { default as InputAutoCompleteAsync } from './components/Autocomplete/InputAutocompleteAsync';
+export type { InputAutocompleteAsyncProps } from './components/Autocomplete/InputAutocompleteAsync';
 export { default as InputAutocompleteMultiple } from './components/Autocomplete/InputAutocompleteMultiple';
+export type { InputAutocompleteMultipleProp } from './components/Autocomplete/InputAutocompleteMultiple';
+export { default as InputAutocompleteMultipleAsync } from './components/Autocomplete/InputAutocompleteMultipleAsync';
+export type { InputAutocompleteMultipleAsyncProps } from './components/Autocomplete/InputAutocompleteMultipleAsync';
 export { default as InputGoogleAddress } from './components/Autocomplete/InputGoogleAddress';
 
 export { default as Avatar } from './components/_FIXED/Avatar/Avatar';

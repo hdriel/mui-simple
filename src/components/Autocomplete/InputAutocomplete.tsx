@@ -223,4 +223,5 @@ InputAutocomplete.defaultProps = {
     variant: 'outlined',
 };
 
+export type { InputAutoCompleteProp } from '../decs';
 export default InputAutocomplete;
