@@ -507,13 +507,34 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     multiple?: boolean;
     openOnFocus?: boolean;
     optionConverter?: (item: any) => { label: string | ReactNode; id: string | number };
-    raiseSelectedToTop?: number;
-    renderOption?: () => void;
+    raiseSelectedToTop?: boolean;
+    renderOption?: (props: object, option: any, { selected }: { selected: boolean }) => ReactNode;
     selectedOption?: any;
     selectOnFocus?: boolean;
-    setSelectedOption?: () => void;
+    setSelectedOption?: (event: any, options: any[], action: string) => void;
     sortBy?: string | (() => void);
     sortDir?: boolean | number;
+    [key: string]: any;
+};
+
+export type InputAutocompleteMultipleProp = Omit<InputAutoCompleteProp, 'selectedOption'> & {
+    selectedOptions: any[];
+    setSelectedOptions: (event: any, options: any[]) => void;
+    limitTags: number;
+    checkboxStyle: boolean;
+    [key: string]: any;
+};
+
+export type InputAutocompleteAsyncProps = InputAutoCompleteProp & {
+    getOptionsPromise: () => void;
+    sleep: number;
+    fetchOptionsOnFocus: boolean;
+    [key: string]: any;
+};
+export type InputAutocompleteMultipleAsyncProps = InputAutocompleteMultipleProp & {
+    getOptionsPromise: () => void;
+    sleep: number;
+    fetchOptionsOnFocus: boolean;
     [key: string]: any;
 };
 
@@ -1175,7 +1196,9 @@ export interface SpeedDialProps {
     hidden?: boolean;
     icon?: ReactNode;
     left?: string | number;
+    // eslint-disable-next-line @typescript-eslint/ban-types
     onClose?: (event: SyntheticEvent<{}, Event>, reason: CloseReason) => void;
+    // eslint-disable-next-line @typescript-eslint/ban-types
     onOpen?: (event: SyntheticEvent<{}, Event>, reason: OpenReason) => void;
     open?: boolean;
     openIcon?: ReactNode;

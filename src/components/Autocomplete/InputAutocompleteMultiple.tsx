@@ -1,13 +1,12 @@
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
-
+import { Check as CheckIcon, Close as CloseIcon } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import MuiAutocomplete from './InputAutocomplete';
 import Chip from '../_FIXED/Chip/Chip';
 import Checkbox from '../_FIXED/Checkbox/Checkbox';
-import { Check as CheckIcon, Close as CloseIcon } from '@mui/icons-material';
-import { Box } from '@mui/material';
+import type { InputAutocompleteMultipleProp } from '../decs';
 
-export default function InputAutocompleteMultiple({
+const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
     selectedOptions,
     setSelectedOptions,
     limitTags,
@@ -20,19 +19,19 @@ export default function InputAutocompleteMultiple({
     readOnly,
     raiseSelectedToTop, // todo: implement this
     ...props
-}) {
+}) => {
     const getOptionLabel = useMemo(
         () => (typeof _getOptionLabel === 'function' ? _getOptionLabel : (option) => option[_getOptionLabel] || ''),
         [_getOptionLabel]
     );
 
-    let totalSelectedOptions = 0;
-    if (raiseSelectedToTop) {
-        options.forEach((option) => {
-            option.selected = !!selectedOptions.find((so) => getOptionLabel(so) === getOptionLabel(option));
-            totalSelectedOptions += option.selected ? 1 : 0;
-        });
-    }
+    // let totalSelectedOptions = 0;
+    // if (raiseSelectedToTop) {
+    //     options.forEach((option) => {
+    //         option.selected = !!selectedOptions.find((so) => getOptionLabel(so) === getOptionLabel(option));
+    //         totalSelectedOptions += option.selected ? 1 : 0;
+    //     });
+    // }
 
     return (
         <MuiAutocomplete
@@ -46,7 +45,7 @@ export default function InputAutocompleteMultiple({
                 }
             }}
             multiple
-            raiseSelectedToTop={totalSelectedOptions}
+            raiseSelectedToTop={raiseSelectedToTop}
             disableCloseOnSelect
             blurOnSelect={false}
             limitTags={limitTags}
@@ -70,41 +69,44 @@ export default function InputAutocompleteMultiple({
                 </li>
             )}
             renderTags={(value, getTagProps) => {
-                return value.map((option, index) => (
-                    <Chip
-                        {...getTagProps({ index })}
-                        {...(typeof chipProps === 'function' ? chipProps(option) : chipProps)}
-                        label={getOptionLabel?.(option) ?? option.label}
-                        disabled={readOnly ? undefined : option.disabled}
-                        onDelete={readOnly || option.disabled ? undefined : getTagProps({ index }).onDelete}
-                    />
-                ));
+                return value.map((option: any, index: number) => {
+                    const label = getOptionLabel?.(option) ?? option.label;
+                    const disabled = readOnly ? undefined : option.disabled;
+                    const onDelete = readOnly || option.disabled ? undefined : getTagProps({ index }).onDelete;
+                    console.log(`getTagProps({ index: ${index} }).onDelete`);
+                    console.log(onDelete);
+
+                    return (
+                        <Chip
+                            key={label}
+                            {...getTagProps({ index })}
+                            {...(typeof chipProps === 'function' ? chipProps(option) : chipProps)}
+                            label={label}
+                            disabled={disabled}
+                            onDelete={(...onDeleteParams) => {
+                                debugger;
+                                onDelete(...onDeleteParams);
+                            }}
+                        />
+                    );
+                });
             }}
             {...props}
         />
     );
-}
-
-InputAutocompleteMultiple.propTypes = {
-    selectedOptions: PropTypes.arrayOf(PropTypes.any),
-    setSelectedOptions: PropTypes.func,
-    filterSelectedOptions: PropTypes.bool,
-    chipProps: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-    limitTags: PropTypes.number,
-    renderOption: PropTypes.func,
-    checkboxStyle: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    raiseSelectedToTop: PropTypes.bool,
 };
 
 InputAutocompleteMultiple.defaultProps = {
+    checkboxStyle: true,
+    chipProps: { rounded: false, endIcon: <CloseIcon /> },
+    filterSelectedOptions: false,
+    limitTags: undefined,
+    raiseSelectedToTop: undefined,
+    readOnly: undefined,
+    renderOption: undefined,
     selectedOptions: [],
     setSelectedOptions: undefined,
-    filterSelectedOptions: false,
-    chipProps: { rounded: false, endIcon: <CloseIcon /> },
-    limitTags: undefined,
-    renderOption: undefined,
-    checkboxStyle: true,
-    readOnly: undefined,
-    raiseSelectedToTop: undefined,
 };
+
+export type { InputAutocompleteMultipleProp } from '../decs';
+export default InputAutocompleteMultiple;

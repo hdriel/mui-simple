@@ -1,18 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import InputAutocompleteMultiple from './InputAutocompleteMultiple';
-import { useAutoCompleteAsync } from './InputAutocompleteAsync';
+import { useAutoCompleteAsync } from './hooks/useAutoCompleteAsync';
+import type { InputAutocompleteMultipleAsyncProps } from '../decs';
 
-export default function InputAutocompleteMultipleAsync(props) {
-    const asyncProps = useAutoCompleteAsync(props);
+const InputAutocompleteMultipleAsync: React.FC<InputAutocompleteMultipleAsyncProps> = ({
+    getOptionsPromise,
+    sleep,
+    getOptionsCallback,
+    fetchOptionsOnFocus,
+    ...props
+}) => {
+    const asyncProps = useAutoCompleteAsync({
+        getOptionsPromise,
+        sleep,
+        getOptionsCallback,
+        fetchOptionsOnFocus,
+    });
+
     return <InputAutocompleteMultiple {...props} {...asyncProps} />;
-}
-
-InputAutocompleteMultipleAsync.propTypes = {
-    getOptionLabel: PropTypes.func,
-    getOptionsPromise: PropTypes.func,
-    sleep: PropTypes.number,
-    fetchOptionsOnFocus: PropTypes.bool,
 };
 
 InputAutocompleteMultipleAsync.defaultProps = {
@@ -21,3 +27,6 @@ InputAutocompleteMultipleAsync.defaultProps = {
     sleep: 1e3,
     fetchOptionsOnFocus: undefined,
 };
+
+export type { InputAutocompleteMultipleAsyncProps } from '../decs';
+export default InputAutocompleteMultipleAsync;

@@ -71,6 +71,7 @@ export const useAutocompleteOptionsHook = ({
 
         if (highlightSearchResults) {
             const fieldValue = highlightField ?? getOptionLabel?.(args[1]) ?? args[1].label;
+            // @ts-expect-error
             return renderHighlightOptionCB(fieldValue)(...args);
         }
 
