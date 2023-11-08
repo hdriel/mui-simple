@@ -73,8 +73,6 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
                     const label = getOptionLabel?.(option) ?? option.label;
                     const disabled = readOnly ? undefined : option.disabled;
                     const onDelete = readOnly || option.disabled ? undefined : getTagProps({ index }).onDelete;
-                    console.log(`getTagProps({ index: ${index} }).onDelete`);
-                    console.log(onDelete);
 
                     return (
                         <Chip
@@ -83,10 +81,7 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
                             {...(typeof chipProps === 'function' ? chipProps(option) : chipProps)}
                             label={label}
                             disabled={disabled}
-                            onDelete={(...onDeleteParams) => {
-                                debugger;
-                                onDelete(...onDeleteParams);
-                            }}
+                            onDelete={onDelete}
                         />
                     );
                 });

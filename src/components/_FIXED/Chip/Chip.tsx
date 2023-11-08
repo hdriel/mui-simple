@@ -26,7 +26,7 @@ function Chip(props: PropsWithChildren<ChipProps>): ReactElement {
     const [textColor] = useCustomColor(_textColor);
     const linkProps = href && { href, component: 'a', clickable: true };
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    const onDeleteHandler = onDelete ?? endIcon ? () => {} : undefined;
+    const onDeleteHandler = onDelete ?? (endIcon ? () => {} : undefined);
 
     return (
         <MuiChip
