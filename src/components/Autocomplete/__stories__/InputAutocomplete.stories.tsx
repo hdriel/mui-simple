@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Box, Stack } from '@mui/material';
-import { Mail as MainIcon } from '@mui/icons-material';
 
 import InputAutocomplete from '../InputAutocomplete';
 import { countries, timeSlots, top100Films, top100FilmsWithFirstLetters } from './InputAutocomplete.mocks';
@@ -20,6 +19,16 @@ export const Default: Story = {
     args: {},
 };
 
+const OPTIONS = [
+    { label: 'The Shawshank Redemption', year: 1994, id: 0 },
+    { label: 'The Godfather', year: 1972, id: 1 },
+    { label: 'The Godfather: Part II', year: 1974, id: 2 },
+    { label: 'The Dark Knight', year: 2008, id: 3 },
+    { label: '12 Angry Men', year: 1957, id: 4 },
+    { label: "Schindler's List", year: 1993, id: 5 },
+    { label: 'Pulp Fiction', year: 1994, id: 6 },
+];
+
 const render = (args) => {
     const [selectedOption, setSelectedOption] = useState(null);
     return (
@@ -35,15 +44,7 @@ export const IncludeInputInList: Story = {
     args: {
         label: 'Movie',
         includeInputInList: false,
-        options: [
-            { label: 'The Shawshank Redemption', year: 1994, id: 0 },
-            { label: 'The Godfather', year: 1972, id: 1 },
-            { label: 'The Godfather: Part II', year: 1974, id: 2 },
-            { label: 'The Dark Knight', year: 2008, id: 3 },
-            { label: '12 Angry Men', year: 1957, id: 4 },
-            { label: "Schindler's List", year: 1993, id: 5 },
-            { label: 'Pulp Fiction', year: 1994, id: 6 },
-        ],
+        options: OPTIONS,
     },
     render,
 };
@@ -51,15 +52,7 @@ export const IncludeInputInList: Story = {
 export const OptionsStringList: Story = {
     args: {
         label: 'Movie',
-        options: [
-            'The Shawshank Redemption',
-            'The Godfather',
-            'The Godfather: Part II',
-            'The Dark Knight',
-            '12 Angry Men',
-            "Schindler's List",
-            'Pulp Fiction',
-        ],
+        options: OPTIONS.map((o) => o.label),
         selectedOption: ['The Dark Knight'],
     },
     render,
@@ -68,15 +61,7 @@ export const OptionsStringList: Story = {
 export const OptionsObjectList: Story = {
     args: {
         label: 'Movie',
-        options: [
-            { title: 'The Shawshank Redemption', year: 1994, id: 0 },
-            { title: 'The Godfather', year: 1972, id: 1 },
-            { title: 'The Godfather: Part II', year: 1974, id: 2 },
-            { title: 'The Dark Knight', year: 2008, id: 3 },
-            { title: '12 Angry Men', year: 1957, id: 4 },
-            { title: "Schindler's List", year: 1993, id: 5 },
-            { title: 'Pulp Fiction', year: 1994, id: 6 },
-        ],
+        options: OPTIONS,
         getOptionLabel: 'title',
     },
     render,
@@ -85,15 +70,7 @@ export const OptionsObjectList: Story = {
 export const OptionsConverter: Story = {
     args: {
         label: 'Movie',
-        options: [
-            { title: 'The Shawshank Redemption', year: 1994, id: 0 },
-            { title: 'The Godfather', year: 1972, id: 1 },
-            { title: 'The Godfather: Part II', year: 1974, id: 2 },
-            { title: 'The Dark Knight', year: 2008, id: 3 },
-            { title: '12 Angry Men', year: 1957, id: 4 },
-            { title: "Schindler's List", year: 1993, id: 5 },
-            { title: 'Pulp Fiction', year: 1990, id: 6 },
-        ],
+        options: OPTIONS,
         optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})` }),
     },
     render,
@@ -102,15 +79,7 @@ export const OptionsConverter: Story = {
 export const Placeholder: Story = {
     args: {
         label: 'Movie',
-        options: [
-            { title: 'The Shawshank Redemption', year: 1994, id: 0 },
-            { title: 'The Godfather', year: 1972, id: 1 },
-            { title: 'The Godfather: Part II', year: 1974, id: 2 },
-            { title: 'The Dark Knight', year: 2008, id: 3 },
-            { title: '12 Angry Men', year: 1957, id: 4 },
-            { title: "Schindler's List", year: 1993, id: 5 },
-            { title: 'Pulp Fiction', year: 1990, id: 6 },
-        ],
+        options: OPTIONS,
         placeholder: 'choose you movie name',
         optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})` }),
     },
@@ -120,15 +89,7 @@ export const Placeholder: Story = {
 export const StartCmpExternal: Story = {
     args: {
         label: 'Movie',
-        options: [
-            { title: 'The Shawshank Redemption', year: 1994, id: 0 },
-            { title: 'The Godfather', year: 1972, id: 1 },
-            { title: 'The Godfather: Part II', year: 1974, id: 2 },
-            { title: 'The Dark Knight', year: 2008, id: 3 },
-            { title: '12 Angry Men', year: 1957, id: 4 },
-            { title: "Schindler's List", year: 1993, id: 5 },
-            { title: 'Pulp Fiction', year: 1990, id: 6 },
-        ],
+        options: OPTIONS,
         startCmpExternal: 'Tv',
         optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})` }),
     },
@@ -138,15 +99,7 @@ export const StartCmpExternal: Story = {
 export const Sort: Story = {
     args: {
         label: 'Movie',
-        options: [
-            { title: 'The Shawshank Redemption', year: 1994, id: 0 },
-            { title: 'The Godfather', year: 1972, id: 1 },
-            { title: 'The Godfather: Part II', year: 1974, id: 2 },
-            { title: 'The Dark Knight', year: 2008, id: 3 },
-            { title: '12 Angry Men', year: 1957, id: 4 },
-            { title: "Schindler's List", year: 1993, id: 5 },
-            { title: 'Pulp Fiction', year: 1990, id: 6 },
-        ],
+        options: OPTIONS,
         sortBy: 'year',
         sortDir: -1,
         optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})` }),
