@@ -20,13 +20,13 @@ export const Default: Story = {
 };
 
 const OPTIONS = [
-    { label: 'The Shawshank Redemption', year: 1994, id: 0 },
-    { label: 'The Godfather', year: 1972, id: 1 },
-    { label: 'The Godfather: Part II', year: 1974, id: 2 },
-    { label: 'The Dark Knight', year: 2008, id: 3 },
-    { label: '12 Angry Men', year: 1957, id: 4 },
-    { label: "Schindler's List", year: 1993, id: 5 },
-    { label: 'Pulp Fiction', year: 1994, id: 6 },
+    { title: 'The Shawshank Redemption', year: 1994, id: 0 },
+    { title: 'The Godfather', year: 1972, id: 1 },
+    { title: 'The Godfather: Part II', year: 1974, id: 2 },
+    { title: 'The Dark Knight', year: 2008, id: 3 },
+    { title: '12 Angry Men', year: 1957, id: 4 },
+    { title: "Schindler's List", year: 1993, id: 5 },
+    { title: 'Pulp Fiction', year: 1994, id: 6 },
 ];
 
 const render = (args) => {
@@ -44,7 +44,7 @@ export const IncludeInputInList: Story = {
     args: {
         label: 'Movie',
         includeInputInList: false,
-        options: OPTIONS,
+        options: OPTIONS.map(({ title, ...item }) => ({ ...item, label: title })),
     },
     render,
 };
@@ -52,7 +52,7 @@ export const IncludeInputInList: Story = {
 export const OptionsStringList: Story = {
     args: {
         label: 'Movie',
-        options: OPTIONS.map((o) => o.label),
+        options: OPTIONS.map((o) => o.title),
         selectedOption: ['The Dark Knight'],
     },
     render,
@@ -71,7 +71,7 @@ export const OptionsConverter: Story = {
     args: {
         label: 'Movie',
         options: OPTIONS,
-        optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})` }),
+        optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})`, year: item.year }),
     },
     render,
 };
@@ -81,7 +81,7 @@ export const Placeholder: Story = {
         label: 'Movie',
         options: OPTIONS,
         placeholder: 'choose you movie name',
-        optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})` }),
+        optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})`, year: item.year }),
     },
     render,
 };
@@ -91,7 +91,7 @@ export const StartCmpExternal: Story = {
         label: 'Movie',
         options: OPTIONS,
         startCmpExternal: 'Tv',
-        optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})` }),
+        optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})`, year: item.year }),
     },
     render,
 };
@@ -102,7 +102,7 @@ export const Sort: Story = {
         options: OPTIONS,
         sortBy: 'year',
         sortDir: -1,
-        optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})` }),
+        optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})`, year: item.year }),
     },
     render,
 };

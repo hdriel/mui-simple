@@ -12,7 +12,7 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
     limitTags,
     filterSelectedOptions,
     chipProps,
-    renderOption,
+    renderOption: _renderOption,
     checkboxStyle,
     getOptionLabel: _getOptionLabel,
     options,
@@ -33,17 +33,58 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
     //     });
     // }
 
+    const setSelectedOption = (event, options, action): void => {
+        if (action === 'clear') {
+            const newOptions = selectedOptions.filter((option) => option.disabled);
+            setSelectedOptions(event, newOptions);
+        } else {
+            setSelectedOptions(event, options);
+        }
+    };
+
+    const renderOption = (props, option, { selected }): React.ReactNode => {
+        const label = _renderOption?.(props, option, { selected }) ?? getOptionLabel?.(option) ?? option;
+
+        return (
+            <li {...props} /* onClick={(e) => e.preventDefault()} */>
+                {checkboxStyle ? <Checkbox style={{ marginRight: 2 }} checked={selected} edge="start" /> : null}
+                <Box
+                    sx={{
+                        width: '100%',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                    }}
+                >
+                    {label}
+                    {!checkboxStyle && selected ? <CheckIcon /> : null}
+                </Box>
+            </li>
+        );
+    };
+
+    const renderTags = (value, getTagProps): React.ReactNode[] => {
+        return value.map((option: any, index: number) => {
+            const label = getOptionLabel?.(option) ?? option.label;
+            const disabled = readOnly ? undefined : option.disabled;
+            const onDelete = readOnly || option.disabled ? undefined : getTagProps({ index }).onDelete;
+
+            return (
+                <Chip
+                    key={label}
+                    {...getTagProps({ index })}
+                    {...(typeof chipProps === 'function' ? chipProps(option) : chipProps)}
+                    label={label}
+                    disabled={disabled}
+                    onDelete={onDelete}
+                />
+            );
+        });
+    };
+
     return (
         <MuiAutocomplete
             selectedOption={[].concat(selectedOptions)}
-            setSelectedOption={(event, options, action) => {
-                if (action === 'clear') {
-                    const newOptions = selectedOptions.filter((option) => option.disabled);
-                    setSelectedOptions(event, newOptions);
-                } else {
-                    setSelectedOptions(event, options);
-                }
-            }}
+            setSelectedOption={setSelectedOption}
             multiple
             raiseSelectedToTop={raiseSelectedToTop}
             disableCloseOnSelect
@@ -53,39 +94,8 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
             getOptionLabel={getOptionLabel}
             readOnly={readOnly}
             options={options}
-            renderOption={(props, option, { selected }) => (
-                <li {...props} /* onClick={(e) => e.preventDefault()} */>
-                    {checkboxStyle ? <Checkbox style={{ marginRight: 2 }} checked={selected} edge="start" /> : null}
-                    <Box
-                        sx={{
-                            width: '100%',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                        }}
-                    >
-                        {renderOption?.(props, option, { selected }) ?? getOptionLabel?.(option) ?? option}
-                        {!checkboxStyle && selected ? <CheckIcon /> : null}
-                    </Box>
-                </li>
-            )}
-            renderTags={(value, getTagProps) => {
-                return value.map((option: any, index: number) => {
-                    const label = getOptionLabel?.(option) ?? option.label;
-                    const disabled = readOnly ? undefined : option.disabled;
-                    const onDelete = readOnly || option.disabled ? undefined : getTagProps({ index }).onDelete;
-
-                    return (
-                        <Chip
-                            key={label}
-                            {...getTagProps({ index })}
-                            {...(typeof chipProps === 'function' ? chipProps(option) : chipProps)}
-                            label={label}
-                            disabled={disabled}
-                            onDelete={onDelete}
-                        />
-                    );
-                });
-            }}
+            renderOption={renderOption}
+            renderTags={renderTags}
             {...props}
         />
     );
@@ -100,6 +110,7 @@ InputAutocompleteMultiple.defaultProps = {
     readOnly: undefined,
     renderOption: undefined,
     selectedOptions: [],
+    getOptionLabel: 'label',
     setSelectedOptions: undefined,
 };
 

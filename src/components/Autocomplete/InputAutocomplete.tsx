@@ -165,7 +165,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
             selectOnFocus={selectOnFocus}
             size={size}
             sx={{ ...sx, ...{ width } }}
-            value={selectedOption}
+            value={selectedOption ?? (multiple ? [] : null)}
             {...props}
         />
     );

@@ -75,7 +75,6 @@ export const useAutocompleteOptionsHook = ({
             return renderHighlightOptionCB(fieldValue)(...args);
         }
 
-        console.log('renderOption as undefined');
         return undefined;
     };
 
