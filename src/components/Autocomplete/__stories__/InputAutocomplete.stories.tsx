@@ -30,7 +30,8 @@ const OPTIONS = [
 ];
 
 const render = (args) => {
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [selectedOption, setSelectedOption] = useState(args.selectedOption ?? null);
+
     return (
         <InputAutocomplete
             {...args}

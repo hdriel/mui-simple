@@ -31,6 +31,7 @@ const OPTIONS = [
 
 const render = (args) => {
     const [selectedOptions, setSelectedOptions] = useState(args.selectedOptions ?? []);
+
     return (
         <InputAutocompleteMultiple
             {...args}
