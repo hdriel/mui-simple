@@ -30,7 +30,7 @@ const OPTIONS = [
 ];
 
 const render = (args) => {
-    const [selectedOptions, setSelectedOptions] = useState([]);
+    const [selectedOptions, setSelectedOptions] = useState(args.selectedOptions ?? []);
     return (
         <InputAutocompleteMultiple
             {...args}
@@ -54,7 +54,7 @@ export const OptionsStringList: Story = {
     args: {
         label: 'Movie',
         options: OPTIONS.map((o) => o.title),
-        selectedOption: ['The Dark Knight'],
+        selectedOptions: OPTIONS.map((o) => o.title).filter((_, i) => i % 4 === 0),
     },
     render,
 };

@@ -19,7 +19,7 @@ export const useAutocompleteOptionsHook = ({
     const options = useMemo(() => {
         let result = _options?.map((option) => {
             if (typeof optionConverter === 'function') return optionConverter(option);
-            return typeof option === 'string' ? { label: option, id: option } : { ...option };
+            return ['string', 'number'].includes(typeof option) ? { label: option, id: option } : { ...option };
         });
 
         if (sortBy || raiseSelectedToTop) {

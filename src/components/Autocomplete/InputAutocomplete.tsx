@@ -103,9 +103,17 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
               ))
         : undefined;
 
-    if (typeof selectedOption === 'string' || typeof selectedOption === 'number') {
+    const isPrimitiveSelectedOption = (option): boolean => ['string', 'number'].includes(typeof option);
+    if (isPrimitiveSelectedOption(selectedOption)) {
         selectedOption = options.find((o) => o.id === selectedOption);
+    } else if (Array.isArray(selectedOption) && selectedOption.length) {
+        selectedOption = selectedOption.map(
+            (option) =>
+                options.find((o) => (isPrimitiveSelectedOption(option) ? o.id === option : o.id === option.id)) ??
+                option
+        );
     }
+    selectedOption = selectedOption ?? (multiple ? [] : null);
 
     const inputProps: InputBaseProps = {
         alignActions,
@@ -165,7 +173,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
             selectOnFocus={selectOnFocus}
             size={size}
             sx={{ ...sx, ...{ width } }}
-            value={selectedOption ?? (multiple ? [] : null)}
+            value={selectedOption}
             {...props}
         />
     );
