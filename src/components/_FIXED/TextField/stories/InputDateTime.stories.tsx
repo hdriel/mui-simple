@@ -7,11 +7,19 @@ import { Stack } from '@mui/material';
 import { Send as SendIcon } from '@mui/icons-material';
 
 import InputDateTime from '../InputDateTime';
+import LocalizationProvider from '../LocalizationProvider';
 
 const meta: Meta<typeof InputDateTime> = {
     title: 'Inputs/Inputs/InputDateTime',
     component: InputDateTime,
     tags: ['autodocs'],
+    decorators: [
+        (Story) => (
+            <LocalizationProvider>
+                <Story />
+            </LocalizationProvider>
+        ),
+    ],
 };
 
 export default meta;

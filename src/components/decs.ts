@@ -1,7 +1,7 @@
 import type { MouseEventHandler, ReactNode, ReactElement, ChangeEvent, SyntheticEvent, Ref } from 'react';
 import type { DraggableStateSnapshot } from 'react-beautiful-dnd';
 import type { CloseReason, OpenReason, SxProps } from '@mui/material';
-
+import type { TIMEZONE } from './timezone';
 export type AppBarPosition = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
 
 export interface AppBarProps {
@@ -308,19 +308,16 @@ export type InputColorProps = InputBaseProps & {
     copyIcon?: string | ReactNode;
 };
 
-export type InputDateTimeProps = InputBaseProps & {
-    value?: Date | number | string;
-    valueType?: 'timestamp' | 'date' | 'string';
-    includeSeconds?: boolean;
-    minDate?: Date | number | string;
-    maxDate?: Date | number | string;
-};
-
 export type InputDateProps = InputBaseProps & {
     value?: Date | number | string;
     valueType?: 'timestamp' | 'date' | 'string';
     minDate?: Date | number | string;
     maxDate?: Date | number | string;
+    timezone?: TIMEZONE;
+};
+
+export type InputDateTimeProps = InputDateProps & {
+    includeSeconds?: boolean;
 };
 
 export type InputTimeProps = InputBaseProps & {

@@ -1,13 +1,12 @@
 import React from 'react';
 import Input from './TextField';
 import type { InputDateTimeProps } from '../../decs';
-import { isValidDate } from '../../../utils/helpers';
+import { onChangeEventDateHandler, useInputDateData } from './InputDate.hooks';
 
 const EXAMPLE_VALUE = '2023-10-26T15:53';
-const EXAMPLE_VALUE_LEN = EXAMPLE_VALUE.length;
 
 const InputDateTime: React.FC<InputDateTimeProps> = ({
-    value,
+    value: _value,
     valueType: _valueType,
     onChange,
     includeSeconds,
@@ -15,34 +14,17 @@ const InputDateTime: React.FC<InputDateTimeProps> = ({
     maxDate,
     inputProps,
     InputLabelProps,
+    timezone,
     ...props
 }): React.ReactElement => {
-    let valueType;
-    if (value === undefined || value === null) {
-        value = undefined;
-        valueType = undefined;
-    } else {
-        if (typeof value === 'number') {
-            valueType = 'timestamp';
-        } else if (value instanceof Date) {
-            valueType = 'date';
-        } else {
-            valueType = 'string';
-        }
-        const date = new Date(value);
-        value = isValidDate(date)?.toISOString().substring(0, EXAMPLE_VALUE_LEN) ?? '';
-    }
-
-    if (['timestamp', 'date', 'string'].includes(_valueType)) {
-        valueType = _valueType;
-    } else if (_valueType !== undefined) {
-        console.warn(
-            `invalid valueType value supplied for InputDateTime component, must be one of: ['timestamp', 'date', 'string'], got: ${_valueType}`
-        );
-    }
-
-    const min = isValidDate(new Date(minDate))?.toISOString?.().slice(0, EXAMPLE_VALUE_LEN) ?? undefined;
-    const max = isValidDate(new Date(maxDate))?.toISOString?.().slice(0, EXAMPLE_VALUE_LEN) ?? undefined;
+    const { min, max, valueType, value } = useInputDateData({
+        maxDate,
+        value: _value,
+        valueType: _valueType,
+        minDate,
+        timezone,
+        validDateStringValueExample: EXAMPLE_VALUE,
+    });
 
     return (
         <Input
@@ -56,22 +38,7 @@ const InputDateTime: React.FC<InputDateTimeProps> = ({
             }}
             InputLabelProps={{ shrink: true, ...InputLabelProps }}
             onChange={(e) => {
-                const event = { ...e, target: { ...e.target } };
-                const date = new Date(event.target.value);
-
-                switch (valueType) {
-                    case 'timestamp':
-                        event.target.value = date.getTime();
-                        break;
-                    case 'date':
-                        event.target.value = date;
-                        break;
-                    case 'string':
-                        break;
-                    default:
-                        break;
-                }
-
+                const event = onChangeEventDateHandler({ event: e, valueType, resetTime: false });
                 return onChange?.(event);
             }}
             type="datetime-local"

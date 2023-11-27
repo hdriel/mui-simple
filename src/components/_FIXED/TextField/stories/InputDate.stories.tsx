@@ -1,17 +1,23 @@
-// @ts-expect-error
 import React, { useState } from 'react';
-// @ts-expect-error
 import type { ReactElement } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Stack } from '@mui/material';
 import { Send as SendIcon } from '@mui/icons-material';
 
 import InputDate from '../InputDate';
+import LocalizationProvider from '../LocalizationProvider';
 
 const meta: Meta<typeof InputDate> = {
     title: 'Inputs/Inputs/InputDate',
     component: InputDate,
     tags: ['autodocs'],
+    decorators: [
+        (Story) => (
+            <LocalizationProvider>
+                <Story />
+            </LocalizationProvider>
+        ),
+    ],
 };
 
 export default meta;
