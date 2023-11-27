@@ -11,13 +11,7 @@ const meta: Meta<typeof InputDate> = {
     title: 'Inputs/Inputs/InputDate',
     component: InputDate,
     tags: ['autodocs'],
-    decorators: [
-        (Story) => (
-            <LocalizationProvider>
-                <Story />
-            </LocalizationProvider>
-        ),
-    ],
+    decorators: [(Story) => <Story />],
 };
 
 export default meta;

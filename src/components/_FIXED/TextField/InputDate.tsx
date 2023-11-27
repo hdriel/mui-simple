@@ -1,8 +1,13 @@
 import React from 'react';
+// https://mui.com/x/react-date-pickers/adapters-locale/
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DateField } from '@mui/x-date-pickers/DateField';
+
 import Input from './TextField';
 import type { InputDateProps } from '../../decs';
 
 import { onChangeEventDateHandler, useInputDateData } from './InputDate.hooks';
+import LocalizationProvider from './LocalizationProvider';
 
 const EXAMPLE_VALUE = '2023-10-26';
 
@@ -12,6 +17,7 @@ const InputDate: React.FC<InputDateProps> = ({
     onChange,
     minDate,
     maxDate,
+    readOnly,
     inputProps,
     InputLabelProps,
     timezone,
@@ -27,21 +33,22 @@ const InputDate: React.FC<InputDateProps> = ({
     });
 
     return (
-        <Input
-            {...props}
-            value={value}
-            inputProps={{
-                ...{ min },
-                ...{ max },
-                ...inputProps,
-            }}
-            InputLabelProps={{ shrink: true, ...InputLabelProps }}
-            onChange={(e) => {
-                const event = onChangeEventDateHandler({ event: e, valueType, resetTime: true });
-                return onChange?.(event);
-            }}
-            type="date"
-        />
+        <LocalizationProvider>
+            {readOnly ? (
+                <DateField value={value} />
+            ) : (
+                <DatePicker
+                    value={value}
+                    // minDate={min}
+                    // maxDate={max}
+                    // renderInput={(params) => <Input {...params} {...inputProps} />}
+                    onChange={(e) => {
+                        const event = onChangeEventDateHandler({ event: e, valueType, resetTime: true });
+                        return onChange?.(event);
+                    }}
+                />
+            )}
+        </LocalizationProvider>
     );
 };
 

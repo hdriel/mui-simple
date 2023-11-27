@@ -1,16 +1,12 @@
 import React from 'react';
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
+import dayjs from 'dayjs-with-plugins';
 import { isValidDate } from '../../../utils/helpers';
 import type { TIMEZONE } from '../../timezone';
 
-dayjs.extend(utc);
-dayjs.extend(timezone);
-
 const getDateByTimezone = (value: Date | string | number, timezone: TIMEZONE): Date | any => {
     const vDate = isValidDate(new Date(value));
-    return vDate && timezone ? dayjs(vDate.getTime()).tz(timezone) : vDate;
+    const result = vDate && dayjs(vDate.getTime());
+    return timezone ? result?.tz(timezone) : result;
 };
 
 type DateType = Date | string | number;
@@ -45,8 +41,7 @@ export const useInputDateData = ({
             valueType = 'string';
         }
         const date = new Date(value);
-        value =
-            getDateByTimezone(date, timezone)?.toISOString().substring(0, validDateStringValueExample?.length) ?? '';
+        value = getDateByTimezone(date, timezone);
     }
 
     if (['timestamp', 'date', 'string'].includes(_valueType)) {
@@ -58,8 +53,8 @@ export const useInputDateData = ({
     }
 
     const [min, max] = [
-        getDateByTimezone(minDate, timezone)?.toISOString?.().slice(0, validDateStringValueExample) ?? undefined,
-        getDateByTimezone(maxDate, timezone)?.toISOString?.().slice(0, validDateStringValueExample) ?? undefined,
+        getDateByTimezone(minDate, timezone) ?? undefined,
+        getDateByTimezone(maxDate, timezone) ?? undefined,
     ];
 
     return { min, max, value: value as string, valueType };
