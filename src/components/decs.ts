@@ -518,23 +518,20 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
 };
 
 export type InputAutocompleteMultipleProp = Omit<InputAutoCompleteProp, 'selectedOption'> & {
-    selectedOptions: any[];
-    setSelectedOptions: (event: any, options: any[]) => void;
-    limitTags: number;
-    checkboxStyle: boolean;
+    selectedOptions?: any[];
+    setSelectedOptions?: (event: any, options: any[]) => void;
+    limitTags?: number;
+    checkboxStyle?: boolean;
     [key: string]: any;
 };
 
 export type InputAutocompleteAsyncProps = InputAutoCompleteProp & {
-    getOptionsPromise: () => void;
-    sleep: number;
-    fetchOptionsOnFocus: boolean;
+    getOptionsPromise?: () => void;
+    sleep?: number;
+    fetchOptionsOnFocus?: boolean;
     [key: string]: any;
 };
-export type InputAutocompleteMultipleAsyncProps = InputAutocompleteMultipleProp & {
-    getOptionsPromise: () => void;
-    sleep: number;
-    fetchOptionsOnFocus: boolean;
+export type InputAutocompleteMultipleAsyncProps = InputAutocompleteAsyncProps & {
     [key: string]: any;
 };
 

@@ -24,7 +24,7 @@ const InputAutocompleteAsync: React.FC<InputAutocompleteAsyncProps> = ({
 InputAutocompleteAsync.defaultProps = {
     getOptionLabel: undefined,
     getOptionsPromise: undefined,
-    sleep: 1e3,
+    sleep: 0,
     fetchOptionsOnFocus: undefined,
 };
 
