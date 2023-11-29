@@ -511,7 +511,7 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     renderOption?: (props: object, option: any, { selected }: { selected: boolean }) => ReactNode;
     selectedOption?: any;
     selectOnFocus?: boolean;
-    setSelectedOption?: (event: any, options: any[], action: string) => void;
+    setSelectedOption?: (event: any, option: any, action: string) => void;
     sortBy?: string | (() => void);
     sortDir?: boolean | number;
     [key: string]: any;
@@ -531,7 +531,10 @@ export type InputAutocompleteAsyncProps = InputAutoCompleteProp & {
     fetchOptionsOnFocus?: boolean;
     [key: string]: any;
 };
-export type InputAutocompleteMultipleAsyncProps = InputAutocompleteAsyncProps & {
+export type InputAutocompleteMultipleAsyncProps = InputAutocompleteMultipleProp & {
+    getOptionsPromise?: () => void;
+    sleep?: number;
+    fetchOptionsOnFocus?: boolean;
     [key: string]: any;
 };
 
