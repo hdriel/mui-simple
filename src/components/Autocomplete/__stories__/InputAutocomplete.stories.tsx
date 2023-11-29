@@ -6,7 +6,7 @@ import InputAutocomplete from '../InputAutocomplete';
 import { countries, timeSlots, top100Films, top100FilmsWithFirstLetters } from './InputAutocomplete.mocks';
 
 const meta: Meta<typeof InputAutocomplete> = {
-    title: 'Inputs/Inputs/InputAutocomplete',
+    title: 'Inputs/Inputs/Autocomplete/InputAutocomplete',
     component: InputAutocomplete,
     tags: ['autodocs'],
 };

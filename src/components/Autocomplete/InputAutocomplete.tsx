@@ -36,6 +36,8 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
     blurOnSelect,
     chipProps,
     clearOnPressEscape,
+    creationAllowed,
+    CREATION_PREFIX_LABEL,
     disableClearable,
     disableCloseOnSelect,
     disableListWrap,
@@ -51,6 +53,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
     includeInputInList,
     label,
     multiple,
+    NO_OPTIONS_LABEL,
     onChange,
     openOnFocus,
     options: _options,
@@ -70,6 +73,8 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
     const [color] = useCustomColor(colorActive ?? colorLabel);
 
     const { options, filterOptions, getOptionLabel, renderOption } = useAutocompleteOptionsHook({
+        CREATION_PREFIX_LABEL,
+        creationAllowed,
         filterOptions: _filterOptions,
         getOptionLabel: _getOptionLabel,
         highlightField,
@@ -190,6 +195,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
                 getOptionLabel ? (option, value) => getOptionLabel?.(option) === getOptionLabel?.(value) : undefined
             }
             multiple={multiple}
+            noOptionsText={NO_OPTIONS_LABEL}
             onChange={setSelectedOption}
             openOnFocus={openOnFocus}
             options={options}
@@ -213,7 +219,11 @@ InputAutocomplete.defaultProps = {
     autoHighlight: true,
     blurOnSelect: true,
     chipProps: undefined,
+    clearOnBlur: true,
     clearOnPressEscape: true,
+    creationAllowed: false,
+    CREATION_PREFIX_LABEL: 'Add',
+    NO_OPTIONS_LABEL: undefined,
     cmpSpacing: undefined,
     colorActive: 'primary',
     colorLabel: undefined,
@@ -232,6 +242,7 @@ InputAutocomplete.defaultProps = {
     freeSolo: undefined,
     getOptionLabel: 'label',
     groupBy: undefined,
+    handleHomeEndKeys: true,
     helperText: undefined,
     hideStartActionsOnEmpty: undefined,
     highlightField: undefined,
@@ -250,7 +261,7 @@ InputAutocomplete.defaultProps = {
     raiseSelectedToTop: undefined,
     readOnly: undefined,
     required: undefined,
-    selectOnFocus: false,
+    selectOnFocus: true,
     size: undefined,
     sortBy: undefined,
     sortDir: true,

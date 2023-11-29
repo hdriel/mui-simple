@@ -481,7 +481,11 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     autoHighlight?: boolean;
     blurOnSelect?: boolean;
     chipProps?: ChipProps | ((props: any) => ChipProps);
+    clearOnBlur?: boolean;
     clearOnPressEscape?: boolean;
+    creationAllowed?: boolean;
+    CREATION_PREFIX_LABEL?: string;
+    NO_OPTIONS_LABEL?: string;
     disableClearableSolo?: boolean;
     disableCloseOnSelect?: boolean;
     disableListWrap?: boolean;
@@ -501,6 +505,7 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     freeSolo?: boolean;
     getOptionLabel?: string | ((option: any) => string);
     groupBy?: string | ((option: any) => any);
+    handleHomeEndKeys?: boolean;
     hideStartActionsOnEmpty?: boolean;
     highlightField?: string;
     highlightSearchResults?: boolean;
@@ -533,12 +538,10 @@ export type InputAutocompleteAsyncProps = InputAutoCompleteProp & {
     getOptionsPromise?: () => void;
     sleep?: number;
     fetchOptionsOnFocus?: boolean;
+    LOADING_LABEL?: string;
     [key: string]: any;
 };
-export type InputAutocompleteMultipleAsyncProps = InputAutocompleteMultipleProp & {
-    getOptionsPromise?: () => void;
-    sleep?: number;
-    fetchOptionsOnFocus?: boolean;
+export type InputAutocompleteMultipleAsyncProps = InputAutocompleteAsyncProps & {
     [key: string]: any;
 };
 

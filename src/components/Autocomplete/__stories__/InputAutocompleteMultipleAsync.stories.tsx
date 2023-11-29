@@ -5,7 +5,7 @@ import InputAutocompleteMultipleAsync from '../InputAutocompleteMultipleAsync';
 import { countries, timeSlots, top100Films, top100FilmsWithFirstLetters } from './InputAutocomplete.mocks';
 
 export default {
-    title: 'Inputs/Inputs/InputAutocompleteMultipleAsync',
+    title: 'Inputs/Inputs/Autocomplete/InputAutocompleteMultipleAsync',
     component: InputAutocompleteMultipleAsync,
     decorators: [
         (Story) => (

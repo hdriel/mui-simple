@@ -6,7 +6,7 @@ import InputAutocompleteMultiple from '../InputAutocompleteMultiple';
 import { countries, timeSlots, top100Films, top100FilmsWithFirstLetters } from './InputAutocomplete.mocks';
 
 const meta: Meta<typeof InputAutocompleteMultiple> = {
-    title: 'Inputs/Inputs/InputAutocompleteMultiple',
+    title: 'Inputs/Inputs/Autocomplete/InputAutocompleteMultiple',
     component: InputAutocompleteMultiple,
     tags: ['autodocs'],
 };
