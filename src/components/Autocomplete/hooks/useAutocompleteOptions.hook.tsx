@@ -17,8 +17,8 @@ export const useAutocompleteOptionsHook = ({
     sortDir,
 }): { options: any; filterOptions: any; getOptionLabel: any; renderOption: any } => {
     const options = useMemo(() => {
-        let result = _options?.map((option) => {
-            if (typeof optionConverter === 'function') return optionConverter(option);
+        let result = _options?.map((option, index) => {
+            if (typeof optionConverter === 'function') return optionConverter(option, index);
             return ['string', 'number'].includes(typeof option) ? { label: option, id: option } : { ...option };
         });
 

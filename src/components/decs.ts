@@ -498,28 +498,31 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
           };
     filterSelectedOptions?: boolean;
     freeSolo?: boolean;
-    getOptionLabel?: string | (() => string);
-    groupBy?: string | (() => void);
+    getOptionLabel?: string | ((option: any) => string);
+    groupBy?: string | ((option: any) => any);
     hideStartActionsOnEmpty?: boolean;
     highlightField?: string;
     highlightSearchResults?: boolean;
     includeInputInList?: boolean;
     multiple?: boolean;
     openOnFocus?: boolean;
-    optionConverter?: (item: any) => { label: string | ReactNode; id: string | number };
+    optionConverter?: (
+        item: any,
+        index?: number
+    ) => { label: string | ReactNode; id: string | number; [key: string]: any };
     raiseSelectedToTop?: boolean;
-    renderOption?: (props: object, option: any, { selected }: { selected: boolean }) => ReactNode;
-    selectedOption?: any;
+    renderOption?: (props: object, option: any, { selected }: { selected: boolean }) => ReactNode | ReactElement;
+    value?: any;
     selectOnFocus?: boolean;
-    setSelectedOption?: (event: any, option: any, action: string) => void;
+    onChange?: (event: any, option: any, action: string) => void;
     sortBy?: string | (() => void);
     sortDir?: boolean | number;
     [key: string]: any;
 };
 
 export type InputAutocompleteMultipleProp = Omit<InputAutoCompleteProp, 'selectedOption'> & {
-    selectedOptions?: any[];
-    setSelectedOptions?: (event: any, options: any[]) => void;
+    value?: any[];
+    onChange?: (event: any, options: any[]) => void;
     limitTags?: number;
     checkboxStyle?: boolean;
     [key: string]: any;

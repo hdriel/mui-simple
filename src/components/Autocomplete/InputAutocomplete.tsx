@@ -57,9 +57,8 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
     raiseSelectedToTop,
     readOnly,
     renderOption: _renderOption,
-    selectedOption,
+    value: selectedOption,
     selectOnFocus,
-    setSelectedOption,
     size,
     sortBy,
     sortDir,
@@ -104,16 +103,19 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
         : undefined;
 
     const isPrimitiveSelectedOption = (option): boolean => ['string', 'number'].includes(typeof option);
-    if (Array.isArray(selectedOption) && selectedOption.length) {
+    if (Array.isArray(selectedOption)) {
         selectedOption = selectedOption.map(
             (option) =>
-                options.find((o) => (isPrimitiveSelectedOption(option) ? o.id === option : o.id === option.id)) ??
-                option
+                options.find(
+                    (o) => o && option && (isPrimitiveSelectedOption(option) ? o.id === option : o.id === option.id)
+                ) ?? option
         );
     } else {
         selectedOption =
             options.find((o) =>
-                isPrimitiveSelectedOption(selectedOption) ? o.id === selectedOption : o.id === selectedOption.id
+                o && selectedOption && isPrimitiveSelectedOption(selectedOption)
+                    ? o.id === selectedOption
+                    : o.id === selectedOption?.id
             ) ?? (multiple ? [] : null);
     }
 
@@ -164,7 +166,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
                 getOptionLabel ? (option, value) => getOptionLabel?.(option) === getOptionLabel?.(value) : undefined
             }
             multiple={multiple}
-            onChange={setSelectedOption}
+            onChange={onChange}
             openOnFocus={openOnFocus}
             options={options}
             readOnly={readOnly}
@@ -223,9 +225,8 @@ InputAutocomplete.defaultProps = {
     raiseSelectedToTop: undefined,
     readOnly: undefined,
     required: undefined,
-    selectedOption: undefined,
+    value: undefined,
     selectOnFocus: false,
-    setSelectedOption: undefined,
     size: undefined,
     sortBy: undefined,
     sortDir: true,
