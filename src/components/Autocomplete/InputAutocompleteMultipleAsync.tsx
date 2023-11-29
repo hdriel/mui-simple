@@ -9,9 +9,11 @@ const InputAutocompleteMultipleAsync: React.FC<InputAutocompleteMultipleAsyncPro
     sleep,
     getOptionsCallback,
     fetchOptionsOnFocus,
+    LOADING_LABEL,
     ...props
 }) => {
     const asyncProps = useAutoCompleteAsync({
+        LOADING_LABEL,
         getOptionsPromise,
         sleep,
         getOptionsCallback,
@@ -26,6 +28,7 @@ InputAutocompleteMultipleAsync.defaultProps = {
     getOptionsPromise: undefined,
     sleep: 0,
     fetchOptionsOnFocus: undefined,
+    LOADING_LABEL: undefined,
 };
 
 export type { InputAutocompleteMultipleAsyncProps } from '../decs';

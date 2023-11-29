@@ -3,6 +3,7 @@ import { sleep } from '../../../utils/helpers';
 import CircularProgress from '../../_FIXED/Progress/CircularProgress/CircularProgress';
 
 interface UseAutoCompleteAsyncReturn {
+    loadingText: string;
     onOpen: () => void;
     onClose: () => void;
     options: any[];
@@ -12,6 +13,7 @@ interface UseAutoCompleteAsyncReturn {
 }
 
 export function useAutoCompleteAsync({
+    LOADING_LABEL,
     getOptionsPromise,
     sleep: _sleep,
     getOptionsCallback,
@@ -56,5 +58,6 @@ export function useAutoCompleteAsync({
         open,
         loading,
         endCmp,
+        loadingText: LOADING_LABEL,
     };
 }

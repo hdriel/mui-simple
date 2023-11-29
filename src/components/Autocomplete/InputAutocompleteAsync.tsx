@@ -13,13 +13,14 @@ const InputAutocompleteAsync: React.FC<InputAutocompleteAsyncProps> = ({
     ...props
 }) => {
     const asyncProps = useAutoCompleteAsync({
+        LOADING_LABEL,
         getOptionsPromise,
         sleep,
         getOptionsCallback,
         fetchOptionsOnFocus,
     });
 
-    return <MuiAutocomplete {...props} {...asyncProps} loadingText={LOADING_LABEL} />;
+    return <MuiAutocomplete {...props} {...asyncProps} />;
 };
 
 InputAutocompleteAsync.defaultProps = {
