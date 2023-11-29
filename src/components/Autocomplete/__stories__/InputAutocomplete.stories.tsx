@@ -30,11 +30,9 @@ const OPTIONS = [
 ];
 
 const render = (args) => {
-    const [selectedOption, setSelectedOption] = useState(args.selectedOption ?? null);
+    const [selectedOption, setSelectedOption] = useState(args.value ?? null);
 
-    return (
-        <InputAutocomplete {...args} value={selectedOption} onChange={(e, option) => setSelectedOption(option.id)} />
-    );
+    return <InputAutocomplete {...args} value={selectedOption} onChange={(e, option) => setSelectedOption(option)} />;
 };
 
 export const IncludeInputInList: Story = {
@@ -165,7 +163,7 @@ export const OptionsWithDisabled: Story = {
     args: {
         id: 'grouped-demo',
         label: 'Disabled options',
-        options: timeSlots.slice(0).map((option, index) => ({ time: option, disabled: index % 4 === 0 })),
+        options: timeSlots.slice(0).map((option, index) => ({ id: index, time: option, disabled: index % 4 === 0 })),
         getOptionLabel: (option) => option.time,
         width: 200,
     },

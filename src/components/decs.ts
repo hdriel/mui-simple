@@ -486,6 +486,7 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     disableCloseOnSelect?: boolean;
     disableListWrap?: boolean;
     disablePortal?: boolean;
+    fieldId?: string;
     filterOptions?:
         | ((...args: any) => ReactNode)
         | {
@@ -508,13 +509,13 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     openOnFocus?: boolean;
     optionConverter?: (
         item: any,
-        index?: number
+        index: number
     ) => { label: string | ReactNode; id: string | number; [key: string]: any };
     raiseSelectedToTop?: boolean;
     renderOption?: (props: object, option: any, { selected }: { selected: boolean }) => ReactNode | ReactElement;
     value?: any;
     selectOnFocus?: boolean;
-    onChange?: (event: any, option: any, action?: string) => void;
+    onChange?: (event: any, optionId: string | number, action?: string) => void;
     sortBy?: string | (() => void);
     sortDir?: boolean | number;
     [key: string]: any;
@@ -522,7 +523,7 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
 
 export type InputAutocompleteMultipleProp = Omit<InputAutoCompleteProp, 'selectedOption'> & {
     value?: any[];
-    onChange?: (event: any, options: any[]) => void;
+    onChange?: (event: any, optionIds: Array<string | number>) => void;
     limitTags?: number;
     checkboxStyle?: boolean;
     [key: string]: any;

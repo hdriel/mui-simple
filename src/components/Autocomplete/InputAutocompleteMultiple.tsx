@@ -5,6 +5,7 @@ import MuiAutocomplete from './InputAutocomplete';
 import Chip from '../_FIXED/Chip/Chip';
 import Checkbox from '../_FIXED/Checkbox/Checkbox';
 import type { InputAutocompleteMultipleProp } from '../decs';
+import { isDefined } from '../../utils/helpers';
 
 const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
     value: selectedOptions,
@@ -13,6 +14,7 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
     limitTags,
     filterSelectedOptions,
     chipProps,
+    fieldId,
     renderOption: _renderOption,
     checkboxStyle,
     getOptionLabel: _getOptionLabel,
@@ -37,15 +39,16 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
     // }
 
     const setSelectedOptions = (event, options, action): void => {
+        const optionIds = options.filter((v) => isDefined(v)).map((o) => o[fieldId] ?? o);
         event.target.name = name;
-        event.target.value = options;
+        event.target.value = optionIds;
 
         if (action === 'clear') {
-            const newOptions = selectedOptions.filter((option) => option.disabled);
-            event.target.value = newOptions;
-            onChange(event, newOptions);
+            const newOptionsIds = selectedOptions.filter((option) => option?.disabled).map((o) => o[fieldId] ?? o);
+            event.target.value = newOptionsIds;
+            onChange(event, newOptionsIds);
         } else {
-            onChange(event, options);
+            onChange(event, optionIds);
         }
     };
 
@@ -71,7 +74,7 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
 
     const renderTags = (value, getTagProps): React.ReactNode[] => {
         return value
-            .filter((v) => v)
+            .filter((v) => v !== undefined)
             .map((option: any, index: number) => {
                 const label = getOptionLabel?.(option) ?? option.label;
                 const disabled = readOnly ? undefined : option.disabled;
@@ -121,6 +124,7 @@ InputAutocompleteMultiple.defaultProps = {
     renderOption: undefined,
     value: [],
     getOptionLabel: 'label',
+    fieldId: 'id',
     onChange: undefined,
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Autocomplete as MuiAutocomplete, GroupHeader, GroupItems } from './InputAutocomplete.styled';
 import TextField from '../_FIXED/TextField/TextField';
-import { useCustomColor } from '../../utils/helpers';
+import { isDefined, useCustomColor } from '../../utils/helpers';
 import Chip from '../_FIXED/Chip/Chip';
 import type { InputAutoCompleteProp, InputBaseProps } from '../decs';
 import { useAutocompleteOptionsHook } from './hooks/useAutocompleteOptions.hook';
@@ -40,6 +40,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
     disableCloseOnSelect,
     disableListWrap,
     disablePortal,
+    fieldId,
     filterOptions: _filterOptions,
     filterSelectedOptions,
     freeSolo,
@@ -103,8 +104,12 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
         : undefined;
 
     const setSelectedOption = (event, option): void => {
+        if (multiple) {
+            onChange?.(event, option);
+            return;
+        }
         event.target.name = name;
-        event.target.value = option;
+        event.target.value = isDefined(option) ? option[fieldId] ?? option : option;
         onChange?.(event, option);
     };
 
@@ -112,17 +117,30 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
     if (Array.isArray(selectedOption)) {
         selectedOption = selectedOption.map(
             (option) =>
-                options.find(
-                    (o) => o && option && (isPrimitiveSelectedOption(option) ? o.id === option : o.id === option.id)
-                ) ?? option
+                options.find((o) => {
+                    if (!isDefined(o) || !isDefined(option)) return false;
+                    if (o === option) return true;
+                    if (!isDefined(o[fieldId])) return false;
+                    return isPrimitiveSelectedOption(option) ? o[fieldId] === option : o[fieldId] === option?.[fieldId];
+                }) ?? option
         );
     } else {
         selectedOption =
-            options.find((o) =>
-                o && selectedOption && isPrimitiveSelectedOption(selectedOption)
-                    ? o.id === selectedOption
-                    : o.id === selectedOption?.id
-            ) ?? (multiple ? [] : null);
+            options.find((o) => {
+                if (!isDefined(o) || !isDefined(selectedOption)) return false;
+                if (o === selectedOption) return true;
+                if (!isDefined(o[fieldId])) return false;
+                return isPrimitiveSelectedOption(selectedOption)
+                    ? o[fieldId] === selectedOption
+                    : o[fieldId] === selectedOption?.[fieldId];
+            }) ??
+            (isDefined(selectedOption)
+                ? multiple
+                    ? [].concat(selectedOption)
+                    : selectedOption
+                : multiple
+                ? []
+                : null);
     }
 
     const inputProps: InputBaseProps = {
@@ -207,6 +225,7 @@ InputAutocomplete.defaultProps = {
     disablePortal: undefined,
     endCmpExternal: undefined,
     error: undefined,
+    fieldId: 'id',
     filterOptions: undefined,
     filterSelectedOptions: true,
     focused: undefined,
@@ -225,18 +244,18 @@ InputAutocomplete.defaultProps = {
     name: undefined,
     onChange: undefined,
     openOnFocus: true,
-    options: [],
     optionConverter: undefined,
+    options: [],
     placeholder: undefined,
     raiseSelectedToTop: undefined,
     readOnly: undefined,
     required: undefined,
-    value: undefined,
     selectOnFocus: false,
     size: undefined,
     sortBy: undefined,
     sortDir: true,
     startCmpExternal: undefined,
+    value: undefined,
     variant: 'outlined',
 };
 
