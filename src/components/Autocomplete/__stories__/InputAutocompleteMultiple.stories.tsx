@@ -36,7 +36,7 @@ const render = (args) => {
         <InputAutocompleteMultiple
             {...args}
             value={selectedOptions}
-            onChange={(e, options) => setSelectedOptions(options)}
+            onChange={(e, options) => setSelectedOptions(options.map((o) => o.id))}
         />
     );
 };

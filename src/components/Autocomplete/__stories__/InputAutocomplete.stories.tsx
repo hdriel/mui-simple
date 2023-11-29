@@ -32,7 +32,9 @@ const OPTIONS = [
 const render = (args) => {
     const [selectedOption, setSelectedOption] = useState(args.selectedOption ?? null);
 
-    return <InputAutocomplete {...args} value={selectedOption} onChange={(e, option) => setSelectedOption(option)} />;
+    return (
+        <InputAutocomplete {...args} value={selectedOption} onChange={(e, option) => setSelectedOption(option.id)} />
+    );
 };
 
 export const IncludeInputInList: Story = {
@@ -48,7 +50,7 @@ export const OptionsStringList: Story = {
     args: {
         label: 'Movie',
         options: OPTIONS.map((o) => o.title),
-        selectedOption: ['The Dark Knight'],
+        value: ['The Dark Knight'],
     },
     render,
 };
