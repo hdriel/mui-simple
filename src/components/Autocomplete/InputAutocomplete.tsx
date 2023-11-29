@@ -104,16 +104,18 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
         : undefined;
 
     const isPrimitiveSelectedOption = (option): boolean => ['string', 'number'].includes(typeof option);
-    if (isPrimitiveSelectedOption(selectedOption)) {
-        selectedOption = options.find((o) => o.id === selectedOption);
-    } else if (Array.isArray(selectedOption) && selectedOption.length) {
+    if (Array.isArray(selectedOption) && selectedOption.length) {
         selectedOption = selectedOption.map(
             (option) =>
                 options.find((o) => (isPrimitiveSelectedOption(option) ? o.id === option : o.id === option.id)) ??
                 option
         );
+    } else {
+        selectedOption =
+            options.find((o) =>
+                isPrimitiveSelectedOption(selectedOption) ? o.id === selectedOption : o.id === selectedOption.id
+            ) ?? (multiple ? [] : null);
     }
-    selectedOption = selectedOption ?? (multiple ? [] : null);
 
     const inputProps: InputBaseProps = {
         alignActions,
