@@ -8,6 +8,7 @@ import type { InputAutocompleteMultipleProp } from '../decs';
 
 const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
     value: selectedOptions,
+    name,
     onChange,
     limitTags,
     filterSelectedOptions,
@@ -36,8 +37,12 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
     // }
 
     const setSelectedOptions = (event, options, action): void => {
+        event.target.name = name;
+        event.target.value = options;
+
         if (action === 'clear') {
             const newOptions = selectedOptions.filter((option) => option.disabled);
+            event.target.value = newOptions;
             onChange(event, newOptions);
         } else {
             onChange(event, options);
@@ -89,6 +94,7 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
         <MuiAutocomplete
             value={selectedOptions}
             onChange={setSelectedOptions}
+            name={name}
             multiple
             raiseSelectedToTop={raiseSelectedToTop}
             disableCloseOnSelect
@@ -113,9 +119,9 @@ InputAutocompleteMultiple.defaultProps = {
     raiseSelectedToTop: undefined,
     readOnly: undefined,
     renderOption: undefined,
-    selectedOptions: [],
+    value: [],
     getOptionLabel: 'label',
-    setSelectedOptions: undefined,
+    onChange: undefined,
 };
 
 export type { InputAutocompleteMultipleProp } from '../decs';

@@ -102,6 +102,12 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
               ))
         : undefined;
 
+    const setSelectedOption = (event, option): void => {
+        event.target.name = name;
+        event.target.value = option;
+        onChange?.(event, option);
+    };
+
     const isPrimitiveSelectedOption = (option): boolean => ['string', 'number'].includes(typeof option);
     if (Array.isArray(selectedOption)) {
         selectedOption = selectedOption.map(
@@ -166,7 +172,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
                 getOptionLabel ? (option, value) => getOptionLabel?.(option) === getOptionLabel?.(value) : undefined
             }
             multiple={multiple}
-            onChange={onChange}
+            onChange={setSelectedOption}
             openOnFocus={openOnFocus}
             options={options}
             readOnly={readOnly}

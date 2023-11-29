@@ -514,7 +514,7 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     renderOption?: (props: object, option: any, { selected }: { selected: boolean }) => ReactNode | ReactElement;
     value?: any;
     selectOnFocus?: boolean;
-    onChange?: (event: any, option: any, action: string) => void;
+    onChange?: (event: any, option: any, action?: string) => void;
     sortBy?: string | (() => void);
     sortDir?: boolean | number;
     [key: string]: any;
