@@ -74,7 +74,7 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
 
     const renderTags = (value, getTagProps): React.ReactNode[] => {
         return value
-            .filter((v) => v !== undefined)
+            .filter((v) => isDefined(v))
             .map((option: any, index: number) => {
                 const label = getOptionLabel?.(option) ?? option.label;
                 const disabled = readOnly ? undefined : option.disabled;

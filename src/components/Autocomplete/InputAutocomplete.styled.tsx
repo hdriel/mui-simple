@@ -13,9 +13,10 @@ export const Stack = MuiStack;
 
 export const GroupHeader = styled('div')(({ theme, color }) => ({
     position: 'sticky',
+    zIndex: 1,
     top: '-8px',
     padding: '4px 10px',
-    color: color,
+    color,
     backgroundColor: theme.palette.mode === 'light' ? color && lighten(color, 0.85) : color && darken(color, 0.8),
 }));
 

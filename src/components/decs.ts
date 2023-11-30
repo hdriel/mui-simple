@@ -542,6 +542,7 @@ export type InputAutocompleteAsyncProps = InputAutoCompleteProp & {
     [key: string]: any;
 };
 export type InputAutocompleteMultipleAsyncProps = InputAutocompleteAsyncProps & {
+    onChange?: (event: any, optionIds: Array<string | number>) => void;
     [key: string]: any;
 };
 

@@ -192,7 +192,9 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
             groupBy={typeof groupBy === 'function' ? groupBy : (option) => option[groupBy]}
             includeInputInList={includeInputInList}
             isOptionEqualToValue={
-                getOptionLabel ? (option, value) => getOptionLabel?.(option) === getOptionLabel?.(value) : undefined
+                getOptionLabel
+                    ? (option, value) => isDefined(option) && getOptionLabel?.(option) === getOptionLabel?.(value)
+                    : undefined
             }
             multiple={multiple}
             noOptionsText={NO_OPTIONS_LABEL}
