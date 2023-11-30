@@ -2,7 +2,7 @@ import React from 'react';
 
 import MuiAutocomplete from './InputAutocomplete';
 import { useAutoCompleteAsync } from './hooks/useAutoCompleteAsync';
-import type { InputAutocompleteAsyncProps } from '../decs';
+import type { InputAutocompleteAsyncProps } from '../../decs';
 
 const InputAutocompleteAsync: React.FC<InputAutocompleteAsyncProps> = ({
     getOptionsPromise,
@@ -31,5 +31,5 @@ InputAutocompleteAsync.defaultProps = {
     LOADING_LABEL: undefined,
 };
 
-export type { InputAutocompleteAsyncProps } from '../decs';
+export type { InputAutocompleteAsyncProps } from '../../decs';
 export default InputAutocompleteAsync;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { sleep } from '../../../utils/helpers';
-import CircularProgress from '../../_FIXED/Progress/CircularProgress/CircularProgress';
+import { sleep } from '../../../../utils/helpers';
+import CircularProgress from '../../Progress/CircularProgress/CircularProgress';
 
 interface UseAutoCompleteAsyncReturn {
     loadingText: string;

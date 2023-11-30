@@ -1,9 +1,9 @@
 import React from 'react';
 import { Autocomplete as MuiAutocomplete, GroupHeader, GroupItems } from './InputAutocomplete.styled';
-import TextField from '../_FIXED/TextField/TextField';
-import { isDefined, useCustomColor } from '../../utils/helpers';
-import Chip from '../_FIXED/Chip/Chip';
-import type { InputAutoCompleteProp, InputBaseProps } from '../decs';
+import TextField from '../TextField/TextField';
+import { isDefined, useCustomColor } from '../../../utils/helpers';
+import Chip from '../Chip/Chip';
+import type { InputAutoCompleteProp, InputBaseProps } from '../../decs';
 import { useAutocompleteOptionsHook } from './hooks/useAutocompleteOptions.hook';
 
 const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
@@ -127,7 +127,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
                     if (o === option) return true;
                     if (!isDefined(o[fieldId])) return false;
                     return isPrimitiveSelectedOption(option) ? o[fieldId] === option : o[fieldId] === option?.[fieldId];
-                }) ?? option
+                }) ?? option // todo: add converted for selectedOption to appropriate option object
         );
     } else {
         selectedOption =
@@ -272,5 +272,5 @@ InputAutocomplete.defaultProps = {
     variant: 'outlined',
 };
 
-export type { InputAutoCompleteProp } from '../decs';
+export type { InputAutoCompleteProp } from '../../decs';
 export default InputAutocomplete;

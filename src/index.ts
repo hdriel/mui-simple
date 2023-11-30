@@ -7,15 +7,15 @@ export type { AlertProps } from './components/_FIXED/Alert/Alert';
 export { default as AppBar } from './components/_FIXED/AppBar/AppBar';
 export type { AppBarProps } from './components/_FIXED/AppBar/AppBar';
 
-export { default as InputAutocomplete } from './components/Autocomplete/InputAutocomplete';
-export type { InputAutoCompleteProp } from './components/Autocomplete/InputAutocomplete';
-export { default as InputAutoCompleteAsync } from './components/Autocomplete/InputAutocompleteAsync';
-export type { InputAutocompleteAsyncProps } from './components/Autocomplete/InputAutocompleteAsync';
-export { default as InputAutocompleteMultiple } from './components/Autocomplete/InputAutocompleteMultiple';
-export type { InputAutocompleteMultipleProp } from './components/Autocomplete/InputAutocompleteMultiple';
-export { default as InputAutocompleteMultipleAsync } from './components/Autocomplete/InputAutocompleteMultipleAsync';
-export type { InputAutocompleteMultipleAsyncProps } from './components/Autocomplete/InputAutocompleteMultipleAsync';
-export { default as InputGoogleAddress } from './components/Autocomplete/InputGoogleAddress';
+export { default as InputAutocomplete } from './components/_FIXED/Autocomplete/InputAutocomplete';
+export type { InputAutoCompleteProp } from './components/_FIXED/Autocomplete/InputAutocomplete';
+export { default as InputAutoCompleteAsync } from './components/_FIXED/Autocomplete/InputAutocompleteAsync';
+export type { InputAutocompleteAsyncProps } from './components/_FIXED/Autocomplete/InputAutocompleteAsync';
+export { default as InputAutocompleteMultiple } from './components/_FIXED/Autocomplete/InputAutocompleteMultiple';
+export type { InputAutocompleteMultipleProp } from './components/_FIXED/Autocomplete/InputAutocompleteMultiple';
+export { default as InputAutocompleteMultipleAsync } from './components/_FIXED/Autocomplete/InputAutocompleteMultipleAsync';
+export type { InputAutocompleteMultipleAsyncProps } from './components/_FIXED/Autocomplete/InputAutocompleteMultipleAsync';
+export { default as InputGoogleAddress } from './components/_FIXED/Autocomplete/InputGoogleAddress';
 
 export { default as Avatar } from './components/_FIXED/Avatar/Avatar';
 export type { AvatarProps } from './components/_FIXED/Avatar/Avatar';

@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { MarkAsUnread as MarkAsUnreadIcon } from '@mui/icons-material';
 
 import Rating from '../Rating';
-import { number } from 'prop-types';
 
 const meta: Meta<typeof Rating> = {
     title: 'Inputs/Rating',

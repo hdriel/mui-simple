@@ -6,8 +6,8 @@ import { Box, Grid, Typography } from '@mui/material';
 import { LocationOn as LocationOnIcon } from '@mui/icons-material';
 
 import { Autocomplete as MuiAutocomplete } from './InputAutocomplete.styled';
-import TextField from '../_FIXED/TextField/TextField';
-import { loadScript } from '../../utils/helpers';
+import TextField from '../TextField/TextField';
+import { loadScript } from '../../../utils/helpers';
 
 const autocompleteService = { current: null };
 
@@ -139,9 +139,9 @@ InputGoogleAddress.propTypes = {
 };
 
 InputGoogleAddress.defaultProps = {
-    // This key was created specifically for the demo in mui.com.
+    // This key was created specifically for the demo in mui.com. // 'AIzaSyC3aviU6KHXAjoSnxcw6qbOhjnFctbxPkE'
     // You need to create a new one for your application.
-    GOOGLE_MAPS_API_KEY: 'AIzaSyC3aviU6KHXAjoSnxcw6qbOhjnFctbxPkE',
+    GOOGLE_MAPS_API_KEY: undefined,
     id: 'google-map-demo',
     label: 'Add a location',
 };
