@@ -1,7 +1,7 @@
 import React from 'react';
 import { Autocomplete as MuiAutocomplete, GroupHeader, GroupItems } from './InputAutocomplete.styled';
 import TextField from '../_FIXED/TextField/TextField';
-import { useCustomColor } from '../../utils/helpers';
+import { isDefined, useCustomColor } from '../../utils/helpers';
 import Chip from '../_FIXED/Chip/Chip';
 import type { InputAutoCompleteProp, InputBaseProps } from '../decs';
 import { useAutocompleteOptionsHook } from './hooks/useAutocompleteOptions.hook';
@@ -36,10 +36,13 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
     blurOnSelect,
     chipProps,
     clearOnPressEscape,
+    creationAllowed,
+    CREATION_PREFIX_LABEL,
     disableClearable,
     disableCloseOnSelect,
     disableListWrap,
     disablePortal,
+    fieldId,
     filterOptions: _filterOptions,
     filterSelectedOptions,
     freeSolo,
@@ -50,6 +53,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
     includeInputInList,
     label,
     multiple,
+    NO_OPTIONS_LABEL,
     onChange,
     openOnFocus,
     options: _options,
@@ -57,9 +61,8 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
     raiseSelectedToTop,
     readOnly,
     renderOption: _renderOption,
-    selectedOption,
+    value: selectedOption,
     selectOnFocus,
-    setSelectedOption,
     size,
     sortBy,
     sortDir,
@@ -70,6 +73,8 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
     const [color] = useCustomColor(colorActive ?? colorLabel);
 
     const { options, filterOptions, getOptionLabel, renderOption } = useAutocompleteOptionsHook({
+        CREATION_PREFIX_LABEL,
+        creationAllowed,
         filterOptions: _filterOptions,
         getOptionLabel: _getOptionLabel,
         highlightField,
@@ -103,17 +108,45 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
               ))
         : undefined;
 
+    const setSelectedOption = (event, option): void => {
+        if (multiple) {
+            onChange?.(event, option);
+            return;
+        }
+        event.target.name = name;
+        event.target.value = isDefined(option) ? option[fieldId] ?? option : option;
+        onChange?.(event, option);
+    };
+
     const isPrimitiveSelectedOption = (option): boolean => ['string', 'number'].includes(typeof option);
-    if (isPrimitiveSelectedOption(selectedOption)) {
-        selectedOption = options.find((o) => o.id === selectedOption);
-    } else if (Array.isArray(selectedOption) && selectedOption.length) {
+    if (Array.isArray(selectedOption)) {
         selectedOption = selectedOption.map(
             (option) =>
-                options.find((o) => (isPrimitiveSelectedOption(option) ? o.id === option : o.id === option.id)) ??
-                option
+                options.find((o) => {
+                    if (!isDefined(o) || !isDefined(option)) return false;
+                    if (o === option) return true;
+                    if (!isDefined(o[fieldId])) return false;
+                    return isPrimitiveSelectedOption(option) ? o[fieldId] === option : o[fieldId] === option?.[fieldId];
+                }) ?? option
         );
+    } else {
+        selectedOption =
+            options.find((o) => {
+                if (!isDefined(o) || !isDefined(selectedOption)) return false;
+                if (o === selectedOption) return true;
+                if (!isDefined(o[fieldId])) return false;
+                return isPrimitiveSelectedOption(selectedOption)
+                    ? o[fieldId] === selectedOption
+                    : o[fieldId] === selectedOption?.[fieldId];
+            }) ??
+            (isDefined(selectedOption)
+                ? multiple
+                    ? [].concat(selectedOption)
+                    : selectedOption
+                : multiple
+                ? []
+                : null);
     }
-    selectedOption = selectedOption ?? (multiple ? [] : null);
 
     const inputProps: InputBaseProps = {
         alignActions,
@@ -162,6 +195,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
                 getOptionLabel ? (option, value) => getOptionLabel?.(option) === getOptionLabel?.(value) : undefined
             }
             multiple={multiple}
+            noOptionsText={NO_OPTIONS_LABEL}
             onChange={setSelectedOption}
             openOnFocus={openOnFocus}
             options={options}
@@ -185,7 +219,11 @@ InputAutocomplete.defaultProps = {
     autoHighlight: true,
     blurOnSelect: true,
     chipProps: undefined,
+    clearOnBlur: true,
     clearOnPressEscape: true,
+    creationAllowed: false,
+    CREATION_PREFIX_LABEL: 'Add',
+    NO_OPTIONS_LABEL: undefined,
     cmpSpacing: undefined,
     colorActive: 'primary',
     colorLabel: undefined,
@@ -197,12 +235,14 @@ InputAutocomplete.defaultProps = {
     disablePortal: undefined,
     endCmpExternal: undefined,
     error: undefined,
+    fieldId: 'id',
     filterOptions: undefined,
     filterSelectedOptions: true,
     focused: undefined,
     freeSolo: undefined,
     getOptionLabel: 'label',
     groupBy: undefined,
+    handleHomeEndKeys: true,
     helperText: undefined,
     hideStartActionsOnEmpty: undefined,
     highlightField: undefined,
@@ -215,19 +255,18 @@ InputAutocomplete.defaultProps = {
     name: undefined,
     onChange: undefined,
     openOnFocus: true,
-    options: [],
     optionConverter: undefined,
+    options: [],
     placeholder: undefined,
     raiseSelectedToTop: undefined,
     readOnly: undefined,
     required: undefined,
-    selectedOption: undefined,
-    selectOnFocus: false,
-    setSelectedOption: undefined,
+    selectOnFocus: true,
     size: undefined,
     sortBy: undefined,
     sortDir: true,
     startCmpExternal: undefined,
+    value: undefined,
     variant: 'outlined',
 };
 

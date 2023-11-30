@@ -5,7 +5,7 @@ import InputAutocompleteAsync from '../InputAutocompleteAsync';
 import { countries, timeSlots, top100Films, top100FilmsWithFirstLetters } from './InputAutocomplete.mocks';
 
 export default {
-    title: 'Inputs/Inputs/InputAutocompleteAsync',
+    title: 'Inputs/Inputs/Autocomplete/InputAutocompleteAsync',
     component: InputAutocompleteAsync,
     decorators: [
         (Story) => (
@@ -29,8 +29,8 @@ export const FilmOptions = () => {
                 <InputAutocompleteAsync
                     key={variant}
                     label="Movie"
-                    selectedOption={selectedOption}
-                    setSelectedOption={(e, option) => setSelectedOption(option)}
+                    value={selectedOption}
+                    onChange={(e, option) => setSelectedOption(option)}
                     fetchOptionsOnFocus
                     getOptionsPromise={async () => top100Films}
                     getOptionLabel={(option) => option.title}
@@ -50,8 +50,8 @@ export const CountrySelect = () => {
                 <InputAutocompleteAsync
                     key={variant}
                     label="Choose a country"
-                    selectedOption={selectedOption}
-                    setSelectedOption={(e, option) => setSelectedOption(option)}
+                    value={selectedOption}
+                    onChange={(e, option) => setSelectedOption(option)}
                     variant={variant}
                     fetchOptionsOnFocus
                     getOptionsPromise={async () => countries}
@@ -85,8 +85,8 @@ export const GroupedByCategories = () => {
                     key={variant}
                     id="grouped-demo"
                     label="With categories"
-                    selectedOption={selectedOption}
-                    setSelectedOption={(e, option) => setSelectedOption(option)}
+                    value={selectedOption}
+                    onChange={(e, option) => setSelectedOption(option)}
                     fetchOptionsOnFocus
                     getOptionsPromise={async () => top100FilmsWithFirstLetters}
                     groupBy={(option) => option.firstLetter}
@@ -112,8 +112,8 @@ export const DisabledOptions = () => {
                     variant={variant}
                     id="grouped-demo"
                     label="Disabled options"
-                    selectedOption={selectedOption}
-                    setSelectedOption={(e, option) => setSelectedOption(option)}
+                    value={selectedOption}
+                    onChange={(e, option) => setSelectedOption(option)}
                     fetchOptionsOnFocus
                     getOptionsPromise={async () => _options}
                     getOptionLabel={(option) => option.time}
@@ -121,5 +121,31 @@ export const DisabledOptions = () => {
                 />
             ))}
         </Stack>
+    );
+};
+
+export const Keys = () => {
+    const [selectedOption, setSelectedOption] = useState(null);
+
+    return (
+        <InputAutocompleteAsync
+            id="grouped-demo"
+            label="Keys"
+            value={selectedOption}
+            onChange={(e, option) => setSelectedOption(option)}
+            fetchOptionsOnFocus
+            getOptionsPromise={async () => [
+                {
+                    key: '37913a6c-5f35-4299-98dc-c1c31b837b30-1701175439414-156418 (1080p).mp4',
+                    Key: 'videos/js-full-power/37913a6c-5f35-4299-98dc-c1c31b837b30-1701175439414-156418 (1080p).mp4',
+                },
+                {
+                    key: 'ab8a3070-e675-43ea-a513-8af858b585d0-1701178267985-download_-_74710 (540p).mp4',
+                    Key: 'videos/js-full-power/ab8a3070-e675-43ea-a513-8af858b585d0-1701178267985-download_-_74710 (540p).mp4',
+                },
+            ]}
+            getOptionLabel="key"
+            fieldId="Key"
+        />
     );
 };

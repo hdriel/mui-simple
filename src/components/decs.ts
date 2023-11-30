@@ -478,11 +478,16 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     autoHighlight?: boolean;
     blurOnSelect?: boolean;
     chipProps?: ChipProps | ((props: any) => ChipProps);
+    clearOnBlur?: boolean;
     clearOnPressEscape?: boolean;
+    creationAllowed?: boolean;
+    CREATION_PREFIX_LABEL?: string;
+    NO_OPTIONS_LABEL?: string;
     disableClearableSolo?: boolean;
     disableCloseOnSelect?: boolean;
     disableListWrap?: boolean;
     disablePortal?: boolean;
+    fieldId?: string;
     filterOptions?:
         | ((...args: any) => ReactNode)
         | {
@@ -495,43 +500,45 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
           };
     filterSelectedOptions?: boolean;
     freeSolo?: boolean;
-    getOptionLabel?: string | (() => string);
-    groupBy?: string | (() => void);
+    getOptionLabel?: string | ((option: any) => string);
+    groupBy?: string | ((option: any) => any);
+    handleHomeEndKeys?: boolean;
     hideStartActionsOnEmpty?: boolean;
     highlightField?: string;
     highlightSearchResults?: boolean;
     includeInputInList?: boolean;
     multiple?: boolean;
     openOnFocus?: boolean;
-    optionConverter?: (item: any) => { label: string | ReactNode; id: string | number };
+    optionConverter?: (
+        item: any,
+        index: number
+    ) => { label: string | ReactNode; id: string | number; [key: string]: any };
     raiseSelectedToTop?: boolean;
-    renderOption?: (props: object, option: any, { selected }: { selected: boolean }) => ReactNode;
-    selectedOption?: any;
+    renderOption?: (props: object, option: any, { selected }: { selected: boolean }) => ReactNode | ReactElement;
+    value?: any;
     selectOnFocus?: boolean;
-    setSelectedOption?: (event: any, options: any[], action: string) => void;
+    onChange?: (event: any, optionId: string | number, action?: string) => void;
     sortBy?: string | (() => void);
     sortDir?: boolean | number;
     [key: string]: any;
 };
 
 export type InputAutocompleteMultipleProp = Omit<InputAutoCompleteProp, 'selectedOption'> & {
-    selectedOptions: any[];
-    setSelectedOptions: (event: any, options: any[]) => void;
-    limitTags: number;
-    checkboxStyle: boolean;
+    value?: any[];
+    onChange?: (event: any, optionIds: Array<string | number>) => void;
+    limitTags?: number;
+    checkboxStyle?: boolean;
     [key: string]: any;
 };
 
 export type InputAutocompleteAsyncProps = InputAutoCompleteProp & {
-    getOptionsPromise: () => void;
-    sleep: number;
-    fetchOptionsOnFocus: boolean;
+    getOptionsPromise?: () => void;
+    sleep?: number;
+    fetchOptionsOnFocus?: boolean;
+    LOADING_LABEL?: string;
     [key: string]: any;
 };
-export type InputAutocompleteMultipleAsyncProps = InputAutocompleteMultipleProp & {
-    getOptionsPromise: () => void;
-    sleep: number;
-    fetchOptionsOnFocus: boolean;
+export type InputAutocompleteMultipleAsyncProps = InputAutocompleteAsyncProps & {
     [key: string]: any;
 };
 

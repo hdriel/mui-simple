@@ -6,7 +6,7 @@ import InputAutocomplete from '../InputAutocomplete';
 import { countries, timeSlots, top100Films, top100FilmsWithFirstLetters } from './InputAutocomplete.mocks';
 
 const meta: Meta<typeof InputAutocomplete> = {
-    title: 'Inputs/Inputs/InputAutocomplete',
+    title: 'Inputs/Inputs/Autocomplete/InputAutocomplete',
     component: InputAutocomplete,
     tags: ['autodocs'],
 };
@@ -30,15 +30,9 @@ const OPTIONS = [
 ];
 
 const render = (args) => {
-    const [selectedOption, setSelectedOption] = useState(args.selectedOption ?? null);
+    const [selectedOption, setSelectedOption] = useState(args.value ?? null);
 
-    return (
-        <InputAutocomplete
-            {...args}
-            selectedOption={selectedOption}
-            setSelectedOption={(e, option) => setSelectedOption(option)}
-        />
-    );
+    return <InputAutocomplete {...args} value={selectedOption} onChange={(e, option) => setSelectedOption(option)} />;
 };
 
 export const IncludeInputInList: Story = {
@@ -54,7 +48,7 @@ export const OptionsStringList: Story = {
     args: {
         label: 'Movie',
         options: OPTIONS.map((o) => o.title),
-        selectedOption: ['The Dark Knight'],
+        value: ['The Dark Knight'],
     },
     render,
 };
@@ -72,7 +66,7 @@ export const OptionsConverter: Story = {
     args: {
         label: 'Movie',
         options: OPTIONS,
-        optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})`, year: item.year }),
+        optionConverter: (item, index) => ({ id: index, label: `${item.title} (${item.year})`, year: item.year }),
     },
     render,
 };
@@ -82,7 +76,7 @@ export const Placeholder: Story = {
         label: 'Movie',
         options: OPTIONS,
         placeholder: 'choose you movie name',
-        optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})`, year: item.year }),
+        optionConverter: (item, index) => ({ id: index, label: `${item.title} (${item.year})`, year: item.year }),
     },
     render,
 };
@@ -92,7 +86,7 @@ export const StartCmpExternal: Story = {
         label: 'Movie',
         options: OPTIONS,
         startCmpExternal: 'Tv',
-        optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})`, year: item.year }),
+        optionConverter: (item, index) => ({ id: index, label: `${item.title} (${item.year})`, year: item.year }),
     },
     render,
 };
@@ -103,7 +97,7 @@ export const Sort: Story = {
         options: OPTIONS,
         sortBy: 'year',
         sortDir: -1,
-        optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})`, year: item.year }),
+        optionConverter: (item, index) => ({ id: index, label: `${item.title} (${item.year})`, year: item.year }),
     },
     render,
 };
@@ -120,8 +114,8 @@ export const FilmOptions = () => {
                     label="Movie"
                     optionConverter={(film) => ({ id: film.title, label: `${film.title} (${film.year})` })}
                     options={top100Films}
-                    selectedOption={selectedOption}
-                    setSelectedOption={(e, option) => setSelectedOption(option)}
+                    value={selectedOption}
+                    onChange={(e, option) => setSelectedOption(option)}
                     variant={variant}
                 />
             ))}
@@ -169,7 +163,7 @@ export const OptionsWithDisabled: Story = {
     args: {
         id: 'grouped-demo',
         label: 'Disabled options',
-        options: timeSlots.slice(0).map((option, index) => ({ time: option, disabled: index % 4 === 0 })),
+        options: timeSlots.slice(0).map((option, index) => ({ id: index, time: option, disabled: index % 4 === 0 })),
         getOptionLabel: (option) => option.time,
         width: 200,
     },

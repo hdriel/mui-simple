@@ -9,9 +9,11 @@ const InputAutocompleteAsync: React.FC<InputAutocompleteAsyncProps> = ({
     sleep,
     getOptionsCallback,
     fetchOptionsOnFocus,
+    LOADING_LABEL,
     ...props
 }) => {
     const asyncProps = useAutoCompleteAsync({
+        LOADING_LABEL,
         getOptionsPromise,
         sleep,
         getOptionsCallback,
@@ -24,8 +26,9 @@ const InputAutocompleteAsync: React.FC<InputAutocompleteAsyncProps> = ({
 InputAutocompleteAsync.defaultProps = {
     getOptionLabel: undefined,
     getOptionsPromise: undefined,
-    sleep: 1e3,
+    sleep: 0,
     fetchOptionsOnFocus: undefined,
+    LOADING_LABEL: undefined,
 };
 
 export type { InputAutocompleteAsyncProps } from '../decs';

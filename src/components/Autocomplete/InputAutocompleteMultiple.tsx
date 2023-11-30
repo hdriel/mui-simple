@@ -5,13 +5,16 @@ import MuiAutocomplete from './InputAutocomplete';
 import Chip from '../_FIXED/Chip/Chip';
 import Checkbox from '../_FIXED/Checkbox/Checkbox';
 import type { InputAutocompleteMultipleProp } from '../decs';
+import { isDefined } from '../../utils/helpers';
 
 const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
-    selectedOptions,
-    setSelectedOptions,
+    value: selectedOptions,
+    name,
+    onChange,
     limitTags,
     filterSelectedOptions,
     chipProps,
+    fieldId,
     renderOption: _renderOption,
     checkboxStyle,
     getOptionLabel: _getOptionLabel,
@@ -20,8 +23,10 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
     raiseSelectedToTop, // todo: implement this
     ...props
 }) => {
+    selectedOptions = [].concat(selectedOptions);
+
     const getOptionLabel = useMemo(
-        () => (typeof _getOptionLabel === 'function' ? _getOptionLabel : (option) => option[_getOptionLabel] || ''),
+        () => (typeof _getOptionLabel === 'function' ? _getOptionLabel : (option) => option?.[_getOptionLabel] || ''),
         [_getOptionLabel]
     );
 
@@ -33,12 +38,17 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
     //     });
     // }
 
-    const setSelectedOption = (event, options, action): void => {
+    const setSelectedOptions = (event, options, action): void => {
+        const optionIds = options.filter((v) => isDefined(v)).map((o) => o[fieldId] ?? o);
+        event.target.name = name;
+        event.target.value = optionIds;
+
         if (action === 'clear') {
-            const newOptions = selectedOptions.filter((option) => option.disabled);
-            setSelectedOptions(event, newOptions);
+            const newOptionsIds = selectedOptions.filter((option) => option?.disabled).map((o) => o[fieldId] ?? o);
+            event.target.value = newOptionsIds;
+            onChange(event, newOptionsIds);
         } else {
-            setSelectedOptions(event, options);
+            onChange(event, optionIds);
         }
     };
 
@@ -63,28 +73,31 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
     };
 
     const renderTags = (value, getTagProps): React.ReactNode[] => {
-        return value.map((option: any, index: number) => {
-            const label = getOptionLabel?.(option) ?? option.label;
-            const disabled = readOnly ? undefined : option.disabled;
-            const onDelete = readOnly || option.disabled ? undefined : getTagProps({ index }).onDelete;
+        return value
+            .filter((v) => v !== undefined)
+            .map((option: any, index: number) => {
+                const label = getOptionLabel?.(option) ?? option.label;
+                const disabled = readOnly ? undefined : option.disabled;
+                const onDelete = readOnly || option.disabled ? undefined : getTagProps({ index }).onDelete;
 
-            return (
-                <Chip
-                    key={label}
-                    {...getTagProps({ index })}
-                    {...(typeof chipProps === 'function' ? chipProps(option) : chipProps)}
-                    label={label}
-                    disabled={disabled}
-                    onDelete={onDelete}
-                />
-            );
-        });
+                return (
+                    <Chip
+                        key={label}
+                        {...getTagProps({ index })}
+                        {...(typeof chipProps === 'function' ? chipProps(option) : chipProps)}
+                        label={label}
+                        disabled={disabled}
+                        onDelete={onDelete}
+                    />
+                );
+            });
     };
 
     return (
         <MuiAutocomplete
-            selectedOption={[].concat(selectedOptions)}
-            setSelectedOption={setSelectedOption}
+            value={selectedOptions}
+            onChange={setSelectedOptions}
+            name={name}
             multiple
             raiseSelectedToTop={raiseSelectedToTop}
             disableCloseOnSelect
@@ -109,9 +122,10 @@ InputAutocompleteMultiple.defaultProps = {
     raiseSelectedToTop: undefined,
     readOnly: undefined,
     renderOption: undefined,
-    selectedOptions: [],
+    value: [],
     getOptionLabel: 'label',
-    setSelectedOptions: undefined,
+    fieldId: 'id',
+    onChange: undefined,
 };
 
 export type { InputAutocompleteMultipleProp } from '../decs';

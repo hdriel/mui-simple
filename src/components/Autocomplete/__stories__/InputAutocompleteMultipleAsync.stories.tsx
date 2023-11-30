@@ -5,7 +5,7 @@ import InputAutocompleteMultipleAsync from '../InputAutocompleteMultipleAsync';
 import { countries, timeSlots, top100Films, top100FilmsWithFirstLetters } from './InputAutocomplete.mocks';
 
 export default {
-    title: 'Inputs/Inputs/InputAutocompleteMultipleAsync',
+    title: 'Inputs/Inputs/Autocomplete/InputAutocompleteMultipleAsync',
     component: InputAutocompleteMultipleAsync,
     decorators: [
         (Story) => (
@@ -30,8 +30,8 @@ export const FilmOptions = () => {
                 <InputAutocompleteMultipleAsync
                     key={variant}
                     label="Movie"
-                    selectedOptions={selectedOptions}
-                    setSelectedOptions={(e, option) => setSelectedOptions(option)}
+                    value={selectedOptions}
+                    onChange={(e, option) => setSelectedOptions(option)}
                     fetchOptionsOnFocus
                     getOptionsPromise={async () => top100Films}
                     getOptionLabel={(option) => option.title}
@@ -51,8 +51,8 @@ export const CountrySelect = () => {
                 <InputAutocompleteMultipleAsync
                     key={variant}
                     label="Choose a country"
-                    selectedOptions={selectedOptions}
-                    setSelectedOptions={(e, option) => setSelectedOptions(option)}
+                    value={selectedOptions}
+                    onChange={(e, option) => setSelectedOptions(option)}
                     variant={variant}
                     fetchOptionsOnFocus
                     getOptionsPromise={async () => countries}
@@ -86,8 +86,8 @@ export const GroupedByCategories = () => {
                     key={variant}
                     id="grouped-demo"
                     label="With categories"
-                    selectedOptions={selectedOptions}
-                    setSelectedOptions={(e, option) => setSelectedOptions(option)}
+                    value={selectedOptions}
+                    onChange={(e, option) => setSelectedOptions(option)}
                     fetchOptionsOnFocus
                     getOptionsPromise={async () => top100FilmsWithFirstLetters}
                     groupBy={(option) => option.firstLetter}
@@ -113,8 +113,8 @@ export const DisabledOptions = () => {
                     variant={variant}
                     id="grouped-demo"
                     label="Disabled options"
-                    selectedOptions={selectedOptions}
-                    setSelectedOptions={(e, options) => setSelectedOptions(options)}
+                    value={selectedOptions}
+                    onChange={(e, options) => setSelectedOptions(options)}
                     fetchOptionsOnFocus
                     getOptionsPromise={async () => _options}
                     getOptionLabel="time"

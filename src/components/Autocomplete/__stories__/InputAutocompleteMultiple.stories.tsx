@@ -6,7 +6,7 @@ import InputAutocompleteMultiple from '../InputAutocompleteMultiple';
 import { countries, timeSlots, top100Films, top100FilmsWithFirstLetters } from './InputAutocomplete.mocks';
 
 const meta: Meta<typeof InputAutocompleteMultiple> = {
-    title: 'Inputs/Inputs/InputAutocompleteMultiple',
+    title: 'Inputs/Inputs/Autocomplete/InputAutocompleteMultiple',
     component: InputAutocompleteMultiple,
     tags: ['autodocs'],
 };
@@ -30,13 +30,13 @@ const OPTIONS = [
 ];
 
 const render = (args) => {
-    const [selectedOptions, setSelectedOptions] = useState(args.selectedOptions ?? []);
+    const [selectedOptions, setSelectedOptions] = useState(args.value ?? []);
 
     return (
         <InputAutocompleteMultiple
             {...args}
-            selectedOptions={selectedOptions}
-            setSelectedOptions={(e, options) => setSelectedOptions(options)}
+            value={selectedOptions}
+            onChange={(e, optionIds) => setSelectedOptions(optionIds)}
         />
     );
 };
@@ -55,7 +55,7 @@ export const OptionsStringList: Story = {
     args: {
         label: 'Movie',
         options: OPTIONS.map((o) => o.title),
-        selectedOptions: OPTIONS.map((o) => o.title).filter((_, i) => i % 4 === 0),
+        value: OPTIONS.map((o) => o.title).filter((_, i) => i % 4 === 0),
     },
     render,
 };
@@ -73,7 +73,7 @@ export const OptionsConverter: Story = {
     args: {
         label: 'Movie',
         options: OPTIONS,
-        optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})`, year: item.year }),
+        optionConverter: (item, index) => ({ id: index, label: `${item.title} (${item.year})`, year: item.year }),
     },
     render,
 };
@@ -83,7 +83,7 @@ export const Placeholder: Story = {
         label: 'Movie',
         options: OPTIONS,
         placeholder: 'choose you movie name',
-        optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})`, year: item.year }),
+        optionConverter: (item, index) => ({ id: index, label: `${item.title} (${item.year})`, year: item.year }),
     },
     render,
 };
@@ -93,7 +93,7 @@ export const StartCmpExternal: Story = {
         label: 'Movie',
         options: OPTIONS,
         startCmpExternal: 'Tv',
-        optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})`, year: item.year }),
+        optionConverter: (item, index) => ({ id: index, label: `${item.title} (${item.year})`, year: item.year }),
     },
     render,
 };
@@ -104,7 +104,7 @@ export const Sort: Story = {
         options: OPTIONS,
         sortBy: 'year',
         sortDir: -1,
-        optionConverter: (item) => ({ id: item.year, label: `${item.title} (${item.year})`, year: item.year }),
+        optionConverter: (item, index) => ({ id: index, label: `${item.title} (${item.year})`, year: item.year }),
     },
     render,
 };
@@ -125,8 +125,8 @@ export const FilmOptions = () => {
                         year: film.year,
                     })}
                     options={top100Films}
-                    selectedOption={selectedOption}
-                    setSelectedOption={(e, option) => setSelectedOption(option)}
+                    value={selectedOption}
+                    onChange={(e, option) => setSelectedOption(option)}
                     variant={variant}
                 />
             ))}
