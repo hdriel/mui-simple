@@ -29,7 +29,7 @@ export interface AvatarProps {
     fallbackImage?: string;
     icon?: ReactNode;
     image?: string;
-    onClick?: () => void;
+    onClick?: (event: any) => void;
     showTooltip?: boolean;
     size?: string;
     tooltipPlacement?: 'top' | 'right' | 'bottom' | 'left';
@@ -41,7 +41,7 @@ export interface AvatarProps {
 export interface BackdropProps {
     color?: string;
     invisible?: boolean;
-    onClick?: () => void;
+    onClick?: (event: any) => void;
     open: boolean;
     [key: string]: any;
 }
@@ -222,8 +222,8 @@ export interface ChipProps {
     link?: string;
     minWidth?: string | number;
     multiLine?: boolean;
-    onClick?: () => void;
-    onDelete?: () => void;
+    onClick?: (event: any) => void;
+    onDelete?: (event: any) => void;
     rounded?: boolean;
     size?: 'small' | 'medium';
     startIcon?: string | ReactNode;
