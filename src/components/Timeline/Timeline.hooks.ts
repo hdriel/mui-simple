@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { format } from 'date-fns';
-import { getTextWidth } from '../../utils/helpers';
+import { getTextWidth, isValidDateValue } from '../../utils/helpers';
 
 export function useMaxWidth({ steps }) {
     const maxTitle = steps
@@ -40,7 +40,7 @@ export function useSteps({
             }
 
             let time = new Date(step.time);
-            time = time.getTime() > 0 ? format(time, timeFormat ?? step.timeFormat ?? 'hh:mm a') : step.time;
+            time = isValidDateValue(time) ? format(time, timeFormat ?? step.timeFormat ?? 'hh:mm a') : step.time;
 
             return {
                 ...step,

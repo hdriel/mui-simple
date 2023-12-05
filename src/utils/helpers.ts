@@ -8,6 +8,10 @@ export function isValidDate(d): null | Date {
     return d instanceof Date && !isNaN(d) ? d : null;
 }
 
+export function isValidDateValue(timestamp: number | Date | string): boolean {
+    return !!new Date(timestamp).getTime();
+}
+
 export function setDisplayName(component, name): void {
     component.displayName = name;
 }
