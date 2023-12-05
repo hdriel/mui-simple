@@ -41,7 +41,7 @@ export const renderHighlightOptionCB = (fieldValue: any): RenderOptionCB => {
 
         return (
             // todo: change to ListItem
-            <li {...props} style={{ backgroundColor: index % 2 ? lighten('#C0C0C0', 0.9) : undefined }}>
+            <li {...props}>
                 <div
                     style={{
                         display: 'inline-block',
