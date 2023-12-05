@@ -4,7 +4,7 @@ import { SORT } from './Table.consts';
 import { getCustomColor, getTextWidth, isDefined } from '../../../utils/helpers';
 import type { ColorsProps, extractColorsProps, getDataRangeProps, TableColumn } from './Table.desc';
 import React, { cloneElement, isValidElement } from 'react';
-import moment from 'moment/moment';
+import { format } from 'date-fns';
 import MuiTypography from '../Typography/Typography';
 import MuiAvatar from '../Avatar/Avatar';
 import MuiPaper from '../Paper/Paper';
@@ -146,7 +146,8 @@ export function getRowContent({ column, data }: { column: TableColumn; data: any
 
     let content;
     if (column.dateFormat && fieldValue) {
-        content = moment(fieldValue).format(column.dateFormat);
+        const dateFormat = column.dateFormat.replaceAll(/Y/g, 'y').replaceAll(/D/g, 'd');
+        content = format(fieldValue, dateFormat);
     } else if (column.image && fieldValue) {
         const { width, height, avatar, alt } =
             typeof column.image === 'boolean' ? ({} as any) : column.image ?? ({} as any);
