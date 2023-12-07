@@ -28,6 +28,7 @@ const Drawer: React.FC<DrawerProps> = ({
     const isMiniPersistent = _variant === 'mini-persistent';
     const variant = isMiniPersistent ? 'persistent' : _variant;
     const DrawerCmp = swipeable ? SwipeableDrawer : MuiDrawer;
+    const drawerWidth = width ?? 240;
 
     // Todo: add correct event type here
     const toggleDrawer = (open: boolean) => (event) => {
@@ -51,7 +52,7 @@ const Drawer: React.FC<DrawerProps> = ({
             PaperProps={{
                 ...PaperProps,
                 sx: {
-                    width,
+                    width: drawerWidth,
                     ...PaperProps?.sx,
                     ...(bgColor && { backgroundColor: bgColor }),
                     backgroundImage: 'unset',
@@ -77,7 +78,7 @@ const Drawer: React.FC<DrawerProps> = ({
             )}
 
             <ContentWrapper
-                drawerWidth={width}
+                drawerWidth={drawerWidth}
                 anchor={direction}
                 onClick={toggleDrawer?.(false)}
                 onKeyDown={toggleDrawer?.(false)}
@@ -99,7 +100,7 @@ Drawer.defaultProps = {
     swipeable: undefined,
     toggleDrawer: undefined,
     variant: undefined,
-    width: 240,
+    width: undefined,
 };
 
 export type { DrawerProps } from '../../decs';
