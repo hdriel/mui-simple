@@ -12,20 +12,13 @@ export const SwipeableDrawer = styled(MuiSwipeableDrawer, {
     shouldForwardProp: (propName) => !['isMiniPersistent', 'bgColor'].includes(propName as string),
 })(drawerStyles);
 
-export const ContentWrapper = styled(
-    ({ drawerWidth = 240, anchor, ...props }) => (
-        <Box
-            sx={{
-                width: ['top', 'bottom'].includes(anchor?.toLowerCase() ?? 'left') ? 'auto' : drawerWidth,
-            }}
-            role="presentation"
-            {...props}
-        />
-    ),
-    {
-        shouldForwardProp: (propName) => !['drawerWidth'].includes(propName as string),
-    }
-)``;
+export const ContentWrapper = styled(({ width, anchor, ...props }) => (
+    <Box
+        sx={{ width: ['top', 'bottom'].includes(anchor?.toLowerCase() ?? 'left') ? 'auto' : width }}
+        role="presentation"
+        {...props}
+    />
+))``;
 
 export const DrawerHeader = styled('div')(({ theme, anchor }) => ({
     display: 'flex',
