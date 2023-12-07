@@ -1,4 +1,12 @@
-import type { MouseEventHandler, ReactNode, ReactElement, ChangeEvent, SyntheticEvent, Ref } from 'react';
+import type {
+    MouseEventHandler,
+    ReactNode,
+    ReactElement,
+    ChangeEvent,
+    SyntheticEvent,
+    Ref,
+    CSSProperties,
+} from 'react';
 import type { DraggableStateSnapshot } from 'react-beautiful-dnd';
 import type { CloseReason, OpenReason, SxProps } from '@mui/material';
 
@@ -415,7 +423,7 @@ export interface InputSelectOption {
     label?: string | ReactNode;
     subtitle?: string | ReactNode;
     disabled?: boolean;
-    chipProps?: object;
+    chipProps?: ChipProps;
     value?: string | number | boolean;
     [key: string]: any;
 }
@@ -589,10 +597,11 @@ export interface ListItemProps {
     actions?: any[];
     align?: 'flex-start';
     alignControl?: 'end' | 'start';
-    avatar?: object;
+    avatar?: AvatarProps;
+    style?: CSSProperties;
     disableGutters?: boolean;
     disablePadding?: boolean;
-    divider?: object | boolean;
+    divider?: DividerProps | boolean;
     inset?: boolean;
     openListItems?: boolean;
     onClick?: (...args: any) => void;
