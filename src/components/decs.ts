@@ -8,6 +8,7 @@ import type {
     CSSProperties,
 } from 'react';
 import type { DraggableStateSnapshot } from 'react-beautiful-dnd';
+import type { DatePickerProps } from '@mui/x-date-pickers/DatePicker';
 import type { CloseReason, OpenReason, SxProps } from '@mui/material';
 import type { TIMEZONE } from './timezone';
 import { LOCALE } from './locales';
@@ -317,16 +318,17 @@ export type InputColorProps = InputBaseProps & {
     copyIcon?: string | ReactNode;
 };
 
-export type InputDateProps = InputBaseProps & {
-    value?: Date | number | string;
-    valueType?: 'timestamp' | 'date' | 'string';
-    minDate?: Date | number | string;
-    maxDate?: Date | number | string;
-    timezone?: TIMEZONE;
-    useLocalizationProvider: boolean;
-    locale?: LOCALE;
-    pickerVariant?: 'static' | 'mobile' | 'desktop';
-};
+export type InputDateProps = InputBaseProps &
+    DatePickerProps<Date> & {
+        value?: Date | number | string;
+        valueType?: 'timestamp' | 'date' | 'string';
+        minDate?: Date | number | string;
+        maxDate?: Date | number | string;
+        timezone?: TIMEZONE;
+        useLocalizationProvider: boolean;
+        locale?: LOCALE;
+        pickerVariant?: 'static' | 'mobile' | 'desktop';
+    };
 
 export type InputDateTimeProps = InputDateProps & {
     includeSeconds?: boolean;

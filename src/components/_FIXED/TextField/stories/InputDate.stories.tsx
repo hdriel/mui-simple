@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import type { ReactElement } from 'react';
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Stack } from '@mui/material';
-import { Send as SendIcon } from '@mui/icons-material';
+import dayjs from 'dayjs';
 
 import InputDate from '../InputDate';
 import LocalizationProvider from '../LocalizationProvider';
@@ -11,7 +10,13 @@ const meta: Meta<typeof InputDate> = {
     title: 'Inputs/Inputs/InputDate',
     component: InputDate,
     tags: ['autodocs'],
-    decorators: [(Story) => <Story />],
+    decorators: [
+        (Story) => (
+            <LocalizationProvider>
+                <Story />
+            </LocalizationProvider>
+        ),
+    ],
 };
 
 export default meta;
@@ -20,12 +25,56 @@ type Story = StoryObj<typeof InputDate>;
 
 export const Default: Story = {
     args: {
-        useLocalizationProvider: true,
+        variant: 'standard',
+    },
+};
+
+export const Variant: Story = {
+    args: {
+        label: 'standard variant field',
+        variant: 'standard',
+    },
+};
+
+export const HelperText: Story = {
+    args: {
+        helperText: 'enter your birthdate',
+    },
+};
+
+export const DateLimits: Story = {
+    args: {
+        minDate: dayjs().startOf('month').toDate(),
+        maxDate: dayjs().endOf('month').toDate(),
+    },
+};
+
+export const DisablePast: Story = {
+    args: {
+        disablePast: true,
+    },
+};
+
+export const DisableFuture: Story = {
+    args: {
+        disableFuture: true,
+    },
+};
+export const DisableOpenPicker: Story = {
+    args: {
+        disableOpenPicker: true,
+    },
+};
+
+export const Required: Story = {
+    args: {
+        label: 'req',
+        required: true,
     },
 };
 
 export const PickerVariant: Story = {
-    args: { useLocalizationProvider: true },
+    args: {},
     render: (args) => {
         return (
             <Stack spacing={2}>
