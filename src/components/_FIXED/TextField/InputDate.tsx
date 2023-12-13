@@ -39,6 +39,7 @@ const InputDate: React.FC<InputDateProps> = ({
     });
 
     const pickerProps = {
+        ...props,
         value,
         minDate: min,
         maxDate: max,
