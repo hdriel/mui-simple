@@ -107,7 +107,7 @@ const InputDate: React.FC<InputDateProps> = ({
     };
 
     const dateCmp = readOnly ? (
-        <DateField value={value} />
+        <DateField value={value} readOnly />
     ) : (
         {
             mobile: <MobileDatePicker {...pickerProps} {...slotProps} />,

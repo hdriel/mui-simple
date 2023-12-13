@@ -9,6 +9,7 @@ import type {
 } from 'react';
 import type { DraggableStateSnapshot } from 'react-beautiful-dnd';
 import type { DatePickerProps } from '@mui/x-date-pickers/DatePicker';
+import type { DatePickerTimeProps } from '@mui/x-date-pickers/DatePickerTimeProps';
 import type { CloseReason, OpenReason, SxProps } from '@mui/material';
 import type { TIMEZONE } from './timezone';
 import { LOCALE } from './locales';
@@ -330,9 +331,17 @@ export type InputDateProps = InputBaseProps &
         pickerVariant?: 'static' | 'mobile' | 'desktop';
     };
 
-export type InputDateTimeProps = InputDateProps & {
-    includeSeconds?: boolean;
-};
+export type InputDateTimeProps = InputDateProps &
+    DatePickerTimeProps<Date> & {
+        value?: Date | number | string;
+        valueType?: 'timestamp' | 'date' | 'string';
+        minDate?: Date | number | string;
+        maxDate?: Date | number | string;
+        timezone?: TIMEZONE;
+        useLocalizationProvider: boolean;
+        locale?: LOCALE;
+        pickerVariant?: 'static' | 'mobile' | 'desktop';
+    };
 
 export type InputTimeProps = InputBaseProps & {
     value?: Date | number | string;
