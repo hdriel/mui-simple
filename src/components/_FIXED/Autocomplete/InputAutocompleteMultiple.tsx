@@ -2,10 +2,10 @@ import React, { useMemo } from 'react';
 import { Check as CheckIcon, Close as CloseIcon } from '@mui/icons-material';
 import { Box } from '@mui/material';
 import MuiAutocomplete from './InputAutocomplete';
-import Chip from '../_FIXED/Chip/Chip';
-import Checkbox from '../_FIXED/Checkbox/Checkbox';
-import type { InputAutocompleteMultipleProp } from '../decs';
-import { isDefined } from '../../utils/helpers';
+import Chip from '../Chip/Chip';
+import Checkbox from '../Checkbox/Checkbox';
+import type { InputAutocompleteMultipleProp } from '../../decs';
+import { isDefined } from '../../../utils/helpers';
 
 const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
     value: selectedOptions,
@@ -74,7 +74,7 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
 
     const renderTags = (value, getTagProps): React.ReactNode[] => {
         return value
-            .filter((v) => v !== undefined)
+            .filter((v) => isDefined(v))
             .map((option: any, index: number) => {
                 const label = getOptionLabel?.(option) ?? option.label;
                 const disabled = readOnly ? undefined : option.disabled;
@@ -128,5 +128,5 @@ InputAutocompleteMultiple.defaultProps = {
     onChange: undefined,
 };
 
-export type { InputAutocompleteMultipleProp } from '../decs';
+export type { InputAutocompleteMultipleProp } from '../../decs';
 export default InputAutocompleteMultiple;

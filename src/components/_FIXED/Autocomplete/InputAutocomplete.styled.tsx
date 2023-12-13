@@ -13,9 +13,10 @@ export const Stack = MuiStack;
 
 export const GroupHeader = styled('div')(({ theme, color }) => ({
     position: 'sticky',
+    zIndex: 1,
     top: '-8px',
     padding: '4px 10px',
-    color: color,
+    color,
     backgroundColor: theme.palette.mode === 'light' ? color && lighten(color, 0.85) : color && darken(color, 0.8),
 }));
 
@@ -40,7 +41,7 @@ export const renderHighlightOptionCB = (fieldValue: any): RenderOptionCB => {
 
         return (
             // todo: change to ListItem
-            <li {...props} style={{ backgroundColor: index % 2 ? lighten('#C0C0C0', 0.9) : undefined }}>
+            <li {...props}>
                 <div
                     style={{
                         display: 'inline-block',

@@ -1,4 +1,12 @@
-import type { MouseEventHandler, ReactNode, ReactElement, ChangeEvent, SyntheticEvent, Ref } from 'react';
+import type {
+    MouseEventHandler,
+    ReactNode,
+    ReactElement,
+    ChangeEvent,
+    SyntheticEvent,
+    Ref,
+    CSSProperties,
+} from 'react';
 import type { DraggableStateSnapshot } from 'react-beautiful-dnd';
 import type { CloseReason, OpenReason, SxProps } from '@mui/material';
 import type { TIMEZONE } from './timezone';
@@ -29,7 +37,7 @@ export interface AvatarProps {
     fallbackImage?: string;
     icon?: ReactNode;
     image?: string;
-    onClick?: () => void;
+    onClick?: (event: any) => void;
     showTooltip?: boolean;
     size?: string;
     tooltipPlacement?: 'top' | 'right' | 'bottom' | 'left';
@@ -41,7 +49,7 @@ export interface AvatarProps {
 export interface BackdropProps {
     color?: string;
     invisible?: boolean;
-    onClick?: () => void;
+    onClick?: (event: any) => void;
     open: boolean;
     [key: string]: any;
 }
@@ -222,8 +230,8 @@ export interface ChipProps {
     link?: string;
     minWidth?: string | number;
     multiLine?: boolean;
-    onClick?: () => void;
-    onDelete?: () => void;
+    onClick?: (event: any) => void;
+    onDelete?: (event: any) => void;
     rounded?: boolean;
     size?: 'small' | 'medium';
     startIcon?: string | ReactNode;
@@ -412,7 +420,7 @@ export interface InputSelectOption {
     label?: string | ReactNode;
     subtitle?: string | ReactNode;
     disabled?: boolean;
-    chipProps?: object;
+    chipProps?: ChipProps;
     value?: string | number | boolean;
     [key: string]: any;
 }
@@ -539,6 +547,7 @@ export type InputAutocompleteAsyncProps = InputAutoCompleteProp & {
     [key: string]: any;
 };
 export type InputAutocompleteMultipleAsyncProps = InputAutocompleteAsyncProps & {
+    onChange?: (event: any, optionIds: Array<string | number>) => void;
     [key: string]: any;
 };
 
@@ -585,10 +594,11 @@ export interface ListItemProps {
     actions?: any[];
     align?: 'flex-start';
     alignControl?: 'end' | 'start';
-    avatar?: object;
+    avatar?: AvatarProps;
+    style?: CSSProperties;
     disableGutters?: boolean;
     disablePadding?: boolean;
-    divider?: object | boolean;
+    divider?: DividerProps | boolean;
     inset?: boolean;
     openListItems?: boolean;
     onClick?: (...args: any) => void;

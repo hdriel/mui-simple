@@ -2,7 +2,7 @@ import React from 'react';
 
 import InputAutocompleteMultiple from './InputAutocompleteMultiple';
 import { useAutoCompleteAsync } from './hooks/useAutoCompleteAsync';
-import type { InputAutocompleteMultipleAsyncProps } from '../decs';
+import type { InputAutocompleteMultipleAsyncProps } from '../../decs';
 
 const InputAutocompleteMultipleAsync: React.FC<InputAutocompleteMultipleAsyncProps> = ({
     getOptionsPromise,
@@ -31,5 +31,5 @@ InputAutocompleteMultipleAsync.defaultProps = {
     LOADING_LABEL: undefined,
 };
 
-export type { InputAutocompleteMultipleAsyncProps } from '../decs';
+export type { InputAutocompleteMultipleAsyncProps } from '../../decs';
 export default InputAutocompleteMultipleAsync;

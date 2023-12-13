@@ -77,7 +77,7 @@ const Drawer: React.FC<DrawerProps> = ({
             )}
 
             <ContentWrapper
-                drawerWidth={width}
+                width={width}
                 anchor={direction}
                 onClick={toggleDrawer?.(false)}
                 onKeyDown={toggleDrawer?.(false)}

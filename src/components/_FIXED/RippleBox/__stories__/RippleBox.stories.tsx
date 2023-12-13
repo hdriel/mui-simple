@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-
+import { Box } from '@mui/material';
 import RippleBox from '../RippleBox';
-import { Box } from '../../../Autocomplete/InputAutocomplete.styled';
 
 const meta: Meta<typeof RippleBox> = {
     title: 'Others/RippleBox',
