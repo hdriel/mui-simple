@@ -10,6 +10,7 @@ import type {
 import type { DraggableStateSnapshot } from 'react-beautiful-dnd';
 import type { CloseReason, OpenReason, SxProps } from '@mui/material';
 import type { TIMEZONE } from './timezone';
+import { LOCALE } from './locales';
 export type AppBarPosition = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
 
 export interface AppBarProps {
@@ -322,6 +323,9 @@ export type InputDateProps = InputBaseProps & {
     minDate?: Date | number | string;
     maxDate?: Date | number | string;
     timezone?: TIMEZONE;
+    useLocalizationProvider: boolean;
+    locale?: LOCALE;
+    pickerVariant?: 'static' | 'mobile' | 'desktop';
 };
 
 export type InputDateTimeProps = InputDateProps & {

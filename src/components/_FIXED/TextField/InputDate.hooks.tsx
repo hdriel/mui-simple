@@ -1,12 +1,28 @@
 import React from 'react';
-import dayjs from 'dayjs-with-plugins';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 import { isValidDate } from '../../../utils/helpers';
 import type { TIMEZONE } from '../../timezone';
+import type { LOCALE } from '../../locales';
 
-const getDateByTimezone = (value: Date | string | number, timezone: TIMEZONE): Date | any => {
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault('Asia/Jerusalem');
+
+const getDateByTimezone = (
+    value: Date | string | number,
+    timezone: TIMEZONE | undefined,
+    locale: LOCALE | undefined
+): Date | any => {
     const vDate = isValidDate(new Date(value));
-    const result = vDate && dayjs(vDate.getTime());
-    return timezone ? result?.tz(timezone) : result;
+    if (!vDate) return null;
+
+    let result = dayjs(vDate.getTime());
+    result = timezone ? result?.tz(timezone) : result;
+    result = locale ? result?.locale(locale) : result;
+
+    return result;
 };
 
 type DateType = Date | string | number;
@@ -18,7 +34,7 @@ interface UseInputDateDataProps {
     minDate?: DateType;
     maxDate?: DateType;
     timezone?: TIMEZONE;
-    validDateStringValueExample: string;
+    locale?: LOCALE;
 }
 export const useInputDateData = ({
     value,
@@ -26,7 +42,7 @@ export const useInputDateData = ({
     minDate,
     maxDate,
     timezone,
-    validDateStringValueExample,
+    locale,
 }: UseInputDateDataProps): { min: string; max: string; value: string; valueType: ValueType } => {
     let valueType;
     if (value === undefined || value === null) {
@@ -41,7 +57,7 @@ export const useInputDateData = ({
             valueType = 'string';
         }
         const date = new Date(value);
-        value = getDateByTimezone(date, timezone);
+        value = getDateByTimezone(date, timezone, locale);
     }
 
     if (['timestamp', 'date', 'string'].includes(_valueType)) {
@@ -53,8 +69,8 @@ export const useInputDateData = ({
     }
 
     const [min, max] = [
-        getDateByTimezone(minDate, timezone) ?? undefined,
-        getDateByTimezone(maxDate, timezone) ?? undefined,
+        getDateByTimezone(minDate, timezone, locale) ?? undefined,
+        getDateByTimezone(maxDate, timezone, locale) ?? undefined,
     ];
 
     return { min, max, value: value as string, valueType };

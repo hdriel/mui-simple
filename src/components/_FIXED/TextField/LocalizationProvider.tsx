@@ -1,40 +1,64 @@
 import React, { useEffect, useState } from 'react';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider as MuiLocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import type { ADAPTER_LOCALE, LOCALE } from '../../locales';
+import 'dayjs/locale/en';
+import 'dayjs/locale/he';
 
 interface LocalizationProviderProps {
     dateAdapter?: any;
-    adapterLocale?: string;
+    locale?: LOCALE;
+    adapterLocale?: ADAPTER_LOCALE;
+    [key: string]: any;
 }
 
-const loadLanguage = async (locale?: string): Promise<void> => {
-    if (!locale || locale === 'en-us') return;
-    const localePath = `dayjs/locale/${locale}`;
-    await import(localePath).then((data) => console.log(`loaded ${localePath} data`, data));
+const loadLanguage = async (locale?: LOCALE): Promise<void> => {
+    if (['en', 'he'].includes(locale)) return;
+
+    const path = `dayjs/locale/${locale}`;
+    await import(path)
+        .then(() => {
+            console.log('loaded locale file', path);
+        })
+        .catch((error) => {
+            console.error('failed to load locale file', path);
+        });
 };
 
-const LocalizationProvider: React.FC<LocalizationProviderProps> = ({ adapterLocale, dateAdapter, ...props }): any => {
+const LocalizationProvider: React.FC<LocalizationProviderProps> = ({
+    adapterLocale,
+    dateAdapter,
+    locale,
+    ...props
+}): any => {
     const [localeLoaded, setLocaleLoaded] = useState(false);
-    // @ts-expect-error
+    const [error, setError] = useState(null);
     const children = props.children;
 
     useEffect(() => {
         setLocaleLoaded(false);
-        loadLanguage(adapterLocale)
+        loadLanguage(locale)
             .then(() => setLocaleLoaded(true))
-            .catch((error) => console.error('failed to load locale adapter file dynamically', error));
+            .catch((error) => {
+                console.error('failed to load locale adapter file dynamically', error);
+                setError(error.message);
+            });
     }, [adapterLocale]);
 
     return localeLoaded && dateAdapter ? (
         <MuiLocalizationProvider dateAdapter={dateAdapter}>{children}</MuiLocalizationProvider>
     ) : (
-        <p>Failed to load adapter and locale for date input</p>
+        <>
+            <p>Failed to load adapter and locale for date input</p>
+            <p>{error}</p>
+        </>
     );
 };
 
 LocalizationProvider.defaultProps = {
     dateAdapter: AdapterDayjs,
-    adapterLocale: 'en-us',
+    adapterLocale: 'he-IL',
+    locale: 'he',
 };
 
 export default LocalizationProvider;

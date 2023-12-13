@@ -79,7 +79,6 @@
         "color": "^4.2.3",
         "colornames-es": "^1.0.7",
         "dayjs": "^1.11.10",
-        "dayjs-with-plugins": "^1.0.3",
         "html-react-parser": "^4.2.3",
         "lodash-es": "^4.17.21",
         "module": "^1.2.5",
