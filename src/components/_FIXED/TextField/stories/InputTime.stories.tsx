@@ -42,10 +42,10 @@ export const HelperText: Story = {
     },
 };
 
-export const DateLimits: Story = {
+export const TimeLimits: Story = {
     args: {
-        minTime: dayjs().startOf('month').toDate(),
-        maxTime: dayjs().endOf('month').toDate(),
+        minTime: dayjs().startOf('day').add(2, 'hours').toDate(),
+        maxTime: dayjs().endOf('day').subtract(2, 'hours').toDate(),
     },
 };
 

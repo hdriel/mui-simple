@@ -122,12 +122,10 @@ InputTime.defaultProps = {
     orientation: 'portrait',
     clearable: true,
     onClearClick: undefined,
-    displayWeekNumber: false,
-    showDaysOutsideCurrentMonth: true,
     openTo: undefined,
     loading: false,
     dateIcon: undefined,
-    format: 'DD-MM-YYYY HH:mm',
+    format: 'HH:mm',
     ampm: false,
     ampmInClock: false,
 };

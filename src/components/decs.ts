@@ -9,10 +9,11 @@ import type {
 } from 'react';
 import type { DraggableStateSnapshot } from 'react-beautiful-dnd';
 import type { DatePickerProps } from '@mui/x-date-pickers/DatePicker';
-import type { DatePickerTimeProps } from '@mui/x-date-pickers/DatePickerTimeProps';
+import type { DateTimePickerProps } from '@mui/x-date-pickers/DateTimePickerProps';
+import type { TimePickerProps } from '@mui/x-date-pickers/TimePickerProps';
 import type { CloseReason, OpenReason, SxProps } from '@mui/material';
 import type { TIMEZONE } from './timezone';
-import { LOCALE } from './locales';
+import type { LOCALE } from './locales';
 export type AppBarPosition = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
 
 export interface AppBarProps {
@@ -332,7 +333,7 @@ export type InputDateProps = InputBaseProps &
     };
 
 export type InputDateTimeProps = InputDateProps &
-    DatePickerTimeProps<Date> & {
+    DateTimePickerProps<Date> & {
         value?: Date | number | string;
         valueType?: 'timestamp' | 'date' | 'string';
         minDate?: Date | number | string;
@@ -343,10 +344,17 @@ export type InputDateTimeProps = InputDateProps &
         pickerVariant?: 'static' | 'mobile' | 'desktop';
     };
 
-export type InputTimeProps = InputBaseProps & {
-    value?: Date | number | string;
-    valueType?: 'seconds' | 'minutes' | 'milliseconds' | 'timestamp' | 'date' | 'string';
-};
+export type InputTimeProps = InputBaseProps &
+    TimePickerProps<Date> & {
+        value?: Date | number | string;
+        valueType?: 'timestamp' | 'date' | 'string';
+        minDate?: Date | number | string;
+        maxDate?: Date | number | string;
+        timezone?: TIMEZONE;
+        useLocalizationProvider: boolean;
+        locale?: LOCALE;
+        pickerVariant?: 'static' | 'mobile' | 'desktop';
+    };
 
 export type InputPatternProps = InputBaseProps & {
     autofix?: boolean;
