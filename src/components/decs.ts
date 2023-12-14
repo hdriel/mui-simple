@@ -348,8 +348,8 @@ export type InputTimeProps = InputBaseProps &
     TimePickerProps<Date> & {
         value?: Date | number | string;
         valueType?: 'timestamp' | 'date' | 'string';
-        minDate?: Date | number | string;
-        maxDate?: Date | number | string;
+        minTime?: Date | number | string;
+        maxTime?: Date | number | string;
         timezone?: TIMEZONE;
         useLocalizationProvider: boolean;
         locale?: LOCALE;
