@@ -5,7 +5,7 @@ import { useTheme } from '@mui/material/styles';
 import toHex from 'colornames-es';
 
 export function isValidDate(d): null | Date {
-    return d instanceof Date && !isNaN(d) ? d : null;
+    return d instanceof Date && +d && !isNaN(+d) ? d : null;
 }
 
 export function isValidDateValue(timestamp: number | Date | string): boolean {

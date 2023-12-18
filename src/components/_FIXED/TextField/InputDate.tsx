@@ -6,13 +6,11 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
-
 // Decide to use dayjs and not date-fns for supporting timezone
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Input from './TextField';
 import type { InputDateProps } from '../../decs';
-
-import { onChangeEventDateHandler, useInputDateData } from './InputDate.hooks';
+import { getSlotsProps, useInputDateData } from './InputDate.hooks';
 import LocalizationProvider from './LocalizationProvider';
 
 const InputDate: React.FC<InputDateProps> = ({
@@ -51,41 +49,24 @@ const InputDate: React.FC<InputDateProps> = ({
     timezone,
     ...props
 }): React.ReactElement => {
-    const { min, max, valueType, value } = useInputDateData({
-        minDate,
-        maxDate,
+    const { min, max, value } = useInputDateData({
+        value: _value,
+        min: minDate,
+        max: maxDate,
         timezone,
         locale,
-        value: _value,
-        valueType: _valueType,
     });
 
-    const slotProps = {
-        slots: {
-            ...props.slots,
-        },
-        slotProps: {
-            ...props.slotProps,
-            textField: {
-                ...props.slotProps?.textField,
-                variant,
-                required,
-                InputProps: {
-                    ...props.slotProps?.inputProps,
-                    name,
-                    className,
-                },
-                helperText,
-                clearable: true,
-                onClear: () => onClearClick?.(),
-            },
-            tabs: {
-                hidden: false,
-                ...props.slotProps?.tabs,
-                dateIcon,
-            },
-        },
-    };
+    const slotProps = getSlotsProps({
+        ...props,
+        variant,
+        required,
+        name,
+        className,
+        helperText,
+        onClearClick,
+        dateIcon,
+    });
 
     const pickerProps = {
         ...props,
@@ -98,11 +79,8 @@ const InputDate: React.FC<InputDateProps> = ({
         showDaysOutsideCurrentMonth,
         openTo,
         loading,
+        onChange,
         renderLoading: () => <DayCalendarSkeleton />,
-        onChange: (e) => {
-            const event = onChangeEventDateHandler({ event: e, valueType, resetTime: true });
-            return onChange?.(event);
-        },
         ...(width && { sx: { width } }),
     };
 

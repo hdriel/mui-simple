@@ -7,7 +7,7 @@ import InputDate from '../InputDate';
 import LocalizationProvider from '../LocalizationProvider';
 
 const meta: Meta<typeof InputDate> = {
-    title: 'Inputs/Inputs/InputDate',
+    title: 'Inputs/Inputs/Pickers/InputDate',
     component: InputDate,
     tags: ['autodocs'],
     decorators: [

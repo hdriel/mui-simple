@@ -4,20 +4,16 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
 import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
 import { StaticTimePicker } from '@mui/x-date-pickers/StaticTimePicker';
-import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
 import { TimeField } from '@mui/x-date-pickers';
-
 // Decide to use dayjs and not date-fns for supporting timezone
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Input from './TextField';
-
 import type { InputTimeProps } from '../../decs';
-import { onChangeEventDateHandler } from './InputDate.hooks';
+import { getSlotsProps, useInputDateData } from './InputDate.hooks';
 import LocalizationProvider from './LocalizationProvider';
 
 const InputTime: React.FC<InputTimeProps> = ({
-    value,
-    valueType: _valueType,
+    value: _value,
     onChange,
     minTime,
     maxTime,
@@ -51,44 +47,33 @@ const InputTime: React.FC<InputTimeProps> = ({
     timezone,
     ...props
 }): React.ReactElement => {
-    const slotProps = {
-        slots: {
-            ...props.slots,
-        },
-        slotProps: {
-            ...props.slotProps,
-            textField: {
-                ...props.slotProps?.textField,
-                variant,
-                required,
-                InputProps: {
-                    ...props.slotProps?.inputProps,
-                    name,
-                    className,
-                },
-                helperText,
-                clearable: true,
-                onClear: () => onClearClick?.(),
-            },
-            tabs: {
-                hidden: false,
-                ...props.slotProps?.tabs,
-                dateIcon,
-            },
-        },
-    };
+    const { min, max, value } = useInputDateData({
+        value: _value,
+        min: minTime,
+        max: maxTime,
+        timezone,
+        locale,
+    });
+
+    const slotProps = getSlotsProps({
+        ...props,
+        variant,
+        required,
+        name,
+        className,
+        helperText,
+        onClearClick,
+        dateIcon,
+    });
 
     const pickerProps = {
         ...props,
         value,
         label,
-        minTime,
-        maxTime,
+        minTime: min,
+        maxTime: max,
         format,
-        onChange: (e) => {
-            const event = onChangeEventDateHandler({ event: e, valueType, resetTime: true });
-            return onChange?.(event);
-        },
+        onChange,
         ...(width && { sx: { width } }),
     };
 
