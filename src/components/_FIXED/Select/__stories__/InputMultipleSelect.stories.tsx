@@ -14,6 +14,11 @@ export default meta;
 
 type Story = StoryObj<typeof InputMultipleSelect>;
 
+const render = (args) => {
+    const [value, setValue] = useState(args.value);
+    return <InputMultipleSelect {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+};
+
 export const Default: Story = {
     args: {},
 };
@@ -22,10 +27,7 @@ const options = ['javascript', 'python', 'C#', 'C++'];
 
 export const AutoWidth: Story = {
     args: {},
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputMultipleSelect {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const Components: Story = {
@@ -40,10 +42,7 @@ export const Components: Story = {
         nullable: true,
         hideStartActionsOnEmpty: true,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputMultipleSelect {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const ExternalComponents: Story = {
@@ -56,10 +55,7 @@ export const ExternalComponents: Story = {
         value: [options[0]],
         cmpSpacing: 3,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputMultipleSelect {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const Colors: Story = {
@@ -71,10 +67,7 @@ export const Colors: Story = {
         colorLabel: 'secondary',
         colorText: 'warning.dark',
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputMultipleSelect {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const HelperText: Story = {
@@ -84,6 +77,7 @@ export const HelperText: Story = {
         value: [options[0]],
         helperText: 'choose you best language',
     },
+    render,
 };
 
 export const Error: Story = {
@@ -94,6 +88,7 @@ export const Error: Story = {
         helperText: 'choose you best language',
         error: true,
     },
+    render,
 };
 
 export const Disabled: Story = {
@@ -103,6 +98,16 @@ export const Disabled: Story = {
         value: [options[0]],
         disabled: true,
     },
+    render,
+};
+
+export const DisabledItems: Story = {
+    args: {
+        options: options.map((item, i) => ({ value: item, label: item, disabled: !i })),
+        label: 'Disabled Items',
+        value: [options[0]],
+    },
+    render,
 };
 
 export const ReadOnly: Story = {
@@ -112,6 +117,7 @@ export const ReadOnly: Story = {
         value: [options[0]],
         readOnly: true,
     },
+    render,
 };
 
 export const Label: Story = {
@@ -120,6 +126,7 @@ export const Label: Story = {
         value: [options[0]],
         label: 'Languages',
     },
+    render,
 };
 
 export const fullWidth: Story = {
@@ -129,6 +136,7 @@ export const fullWidth: Story = {
         label: 'Full Width',
         fullWidth: true,
     },
+    render,
 };
 
 export const Nullable: Story = {
@@ -138,10 +146,7 @@ export const Nullable: Story = {
         label: 'Nullable',
         nullable: true,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputMultipleSelect {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 export const PlaceholderOption: Story = {
     args: {
@@ -151,10 +156,7 @@ export const PlaceholderOption: Story = {
         placeholderOption: 'placeholder option here',
         nullable: true,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputMultipleSelect {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 export const Required: Story = {
     args: {
@@ -163,6 +165,7 @@ export const Required: Story = {
         label: 'Required',
         required: true,
     },
+    render,
 };
 
 export const OnEvents: Story = {
@@ -175,6 +178,7 @@ export const OnEvents: Story = {
         onChange: (event) => console.log('onChange', event),
         onFocus: (event) => console.log('onFocus', event),
     },
+    render,
 };
 
 export const Margin: Story = {
@@ -184,6 +188,7 @@ export const Margin: Story = {
         label: 'Margin',
         margin: 'dense',
     },
+    render,
 };
 
 export const Size_ = (args) => {
@@ -253,10 +258,7 @@ export const Options: Story = {
         value: ['t1'],
         label: 'Options',
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputMultipleSelect {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 export const GroupBy: Story = {
     args: {
@@ -271,10 +273,7 @@ export const GroupBy: Story = {
         label: 'Group By',
         groupBy: 'category',
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputMultipleSelect {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const RenderValue: Story = {
@@ -290,10 +289,7 @@ export const RenderValue: Story = {
         label: 'Render Value',
         renderValue: (value) => value,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputMultipleSelect {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const MultiMax: Story = {
@@ -310,10 +306,7 @@ export const MultiMax: Story = {
         max: 3,
         renderValue: (value) => value,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputMultipleSelect {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const SelectAll: Story = {
@@ -333,10 +326,7 @@ export const SelectAll: Story = {
         placeholderOption: 'Choose from list:',
         renderValue: (value) => value,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputMultipleSelect {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const MultiCheckbox: Story = {
@@ -355,10 +345,7 @@ export const MultiCheckbox: Story = {
         selectAllOption: true,
         renderValue: (value) => value,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputMultipleSelect {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const SelectedIndicator: Story = {
@@ -376,10 +363,7 @@ export const SelectedIndicator: Story = {
         selectedIndicator: false,
         renderValue: (value) => value,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputMultipleSelect {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const Chips: Story = {
@@ -397,10 +381,7 @@ export const Chips: Story = {
         chips: false,
         renderValue: (value) => value,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputMultipleSelect {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const CheckboxMarker: Story = {
@@ -420,10 +401,7 @@ export const CheckboxMarker: Story = {
         chips: false,
         renderValue: (value) => value,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputMultipleSelect {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const SquaredChips: Story = {
@@ -444,10 +422,7 @@ export const SquaredChips: Story = {
         squaredChips: false,
         renderValue: (value) => value,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputMultipleSelect {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 // SELECT_ALL_LABEL: string;

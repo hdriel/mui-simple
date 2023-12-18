@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import { Check as CheckIcon, IndeterminateCheckBox as IndeterminateCheckBoxIcon } from '@mui/icons-material';
-
 import InputSelect from './InputSelect';
 import Chip from '../Chip/Chip';
 import { isDefined } from '../../../utils/helpers';
@@ -9,9 +8,8 @@ import Checkbox from '../Checkbox/Checkbox';
 import { MenuItem } from './InputSelect.styled';
 import { getOptions, useOptionsConverter } from './InputSelect.hooks';
 import ListItem from '../List/ListItem';
-import type { InputMultipleSelectProps } from '../../decs';
+import type { InputMultipleSelectProps, InputSelectOption } from '../../decs';
 import SVGIcon from '../SVGIcon/SVGIcon';
-import { InputSelectOption } from '../../decs';
 
 const RenderValuesAsChips = ({ value, option: options }: { value?: any; option?: any }): React.ReactElement => {
     return (
@@ -70,11 +68,13 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
 
     const handleSelectAllChange = useCallback((): void => {
         setClickAll((isClickedAll) => {
+            const values = Object.values(convertedOptions ?? {});
             const allValues = isClickedAll
-                ? Object.values(convertedOptions ?? {})
+                ? values.flat().map((option) => option.value)
+                : values
                       .flat()
-                      .map((option) => option.value)
-                : [];
+                      .filter((item: InputSelectOption) => item.value && item.disabled)
+                      .map((option) => option.value);
 
             onChange?.({ target: { name, value: allValues } });
 
@@ -149,7 +149,7 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
                                         ? HIDE_ALL_LABEL
                                         : SELECT_ALL_LABEL
                                     : SELECT_ALL_LABEL,
-                                actions: isClickedAll ? checkboxMarker : undefined,
+                                actions: isClickedAll ? [checkboxMarker] : undefined,
                                 bold: true,
                             }}
                             buttonItems
