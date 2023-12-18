@@ -1,6 +1,6 @@
 {
     "name": "mui-simple",
-    "version": "1.9.11",
+    "version": "1.10.0",
     "description": "override mui components to simplify usage",
     "license": "MIT",
     "author": "Hadriel Benjo (https://github.com/hdriel)",
