@@ -46,7 +46,7 @@ interface TypographyStyledProps {
 type TypographyStyledPropsType = Omit<TypographyProps, 'fontSize'> & TypographyStyledProps;
 
 export const Typography = styled(MuiTypography, {
-    shouldForwardProp: (propName) =>
+    shouldForwardProp: (propName: string) =>
         ![
             'fontSize',
             'font',
@@ -63,31 +63,25 @@ export const Typography = styled(MuiTypography, {
             'textDirection',
             'textWidth',
             'bgColor',
-        ].includes(propName as string),
-})<TypographyStyledPropsType>`
-    display: ${(props) => props.display ?? 'unset'};
-    width: ${(props) => props.textWidth ?? '100%'};
-    color: ${(props) => props.customColor};
-    background-color: ${(props) => props.bgColor};
-    font-weight: ${(props) => (props.bold && typeof props.bold === 'boolean' ? 'bold' : props.bold)};
-    font-size: ${(props) => numberToPx(props.fontSize)};
-    font-style: ${(props) => (props.italic ? 'italic' : undefined)};
-    font-family: ${(props) => props.font ?? undefined};
-    text-decoration: ${(props) => (props.underline ? 'underline' : undefined)};
-    text-decoration: ${(props) => (props.strike ? 'line-through' : undefined)};
-    text-transform: ${(props) => ({ upper: 'uppercase', lower: 'lowercase', capital: 'capitalize' }[props.charsCase])};
-    vertical-align: ${(props) => (props.sup ? 'super' : props.sub ? 'sub' : undefined)};
-    line-height: ${(props) => props.lineHeight};
-    direction: ${(props) => props.textDirection};
-    ${(props) =>
-        props.monospace
-            ? css`
-                  font-family: monospace;
-              `
-            : undefined};
-    white-space: normal;
-
-    &:has(:not(:empty)) {
-        display: inherit;
-    }
-` as ComponentType<TypographyStyledPropsType>;
+        ].includes(propName),
+})<TypographyStyledPropsType>((props) => ({
+    display: props.display ?? 'unset',
+    width: props.textWidth ?? '100%',
+    color: props.customColor,
+    backgroundColor: props.bgColor,
+    fontWeight: props.bold && typeof props.bold === 'boolean' ? 'bold' : props.bold,
+    fontSize: numberToPx(props.fontSize),
+    fontStyle: props.italic ? 'italic' : undefined,
+    fontFamily: props.font ?? undefined,
+    textDecoration: props.underline ? 'underline' : undefined,
+    textDecoration: props.strike ? 'line-through' : undefined,
+    textTransform: { upper: 'uppercase', lower: 'lowercase', capital: 'capitalize' }[props.charsCase],
+    verticalAlign: props.sup ? 'super' : props.sub ? 'sub' : undefined,
+    lineHeight: props.lineHeight,
+    direction: props.textDirection,
+    whiteSpace: 'normal',
+    ...(props.monospace && { fontFamily: 'monospace' }),
+    '&:has(:not(:empty))': {
+        display: 'inherit',
+    },
+})) as ComponentType<TypographyStyledPropsType>;

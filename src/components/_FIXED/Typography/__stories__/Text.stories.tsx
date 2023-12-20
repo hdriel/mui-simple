@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Box, Stack } from '@mui/material';
-
-import Typography from '../Typography';
+import Text from '../Text';
 import { action } from '@storybook/addon-actions';
+import ToggleButtonGroup from '../../ToggleButtonGroup/ToggleButtonGroup';
 
-const meta: Meta<typeof Typography> = {
-    title: 'Data-Display/Typography/Typography',
-    component: Typography,
+const meta: Meta<typeof Text> = {
+    title: 'Data-Display/Typography/Text',
+    component: Text,
     tags: ['autodocs'],
 };
 
 export default meta;
 
-type Story = StoryObj<typeof Typography>;
+type Story = StoryObj<typeof Text>;
 
 const smallIpsum = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.';
 const largeIpsum =
@@ -23,35 +23,35 @@ export const Default: Story = {
     args: {},
 };
 
-export const AlignCenter: Story = {
+export const Align: Story = {
     args: {
-        alignCenter: true,
+        align: 'center',
         noWrap: true,
         children: largeIpsum,
     },
-};
+    render: (args) => {
+        const [align, setAlign] = useState<'left' | 'center' | 'right' | 'justify' | 'inherit'>(undefined);
 
-export const AlignJustify: Story = {
-    args: {
-        alignJustify: true,
-        noWrap: true,
-        children: largeIpsum,
-    },
-};
-
-export const AlignLeft: Story = {
-    args: {
-        alignLeft: true,
-        noWrap: true,
-        children: largeIpsum,
-    },
-};
-
-export const AlignRight: Story = {
-    args: {
-        alignRight: true,
-        noWrap: true,
-        children: largeIpsum,
+        return (
+            <Stack spacing={3}>
+                <ToggleButtonGroup
+                    exclusive
+                    onChange={(event, v) => {
+                        event?.stopPropagation();
+                        setAlign(v);
+                    }}
+                    value={align}
+                    data={[
+                        { value: 'left', component: 'FormatAlignLeft' },
+                        { value: 'center', component: 'FormatAlignCenter' },
+                        { value: 'right', component: 'FormatAlignRight' },
+                        { value: 'justify', component: 'FormatAlignJustify' },
+                        { value: 'inherit', component: 'Normal' },
+                    ]}
+                />
+                <Text {...args} align={align} />
+            </Stack>
+        );
     },
 };
 
@@ -85,9 +85,9 @@ export const Border: Story = {
 
 export const CharsCase_ = (args) => (
     <Stack spacing={3}>
-        <Typography charsCase="lower">{largeIpsum}</Typography>
-        <Typography charsCase="upper">{largeIpsum}</Typography>
-        <Typography charsCase="capital">{largeIpsum}</Typography>
+        <Text charsCase="lower">{largeIpsum}</Text>
+        <Text charsCase="upper">{largeIpsum}</Text>
+        <Text charsCase="capital">{largeIpsum}</Text>
     </Stack>
 );
 
@@ -151,16 +151,14 @@ export const Nested: Story = {
     args: {},
     render: (args) => (
         <Box>
-            <Typography border width={'auto'}>
+            <Text border width={'auto'}>
                 Lorem Ipsum is simply dummy{' '}
-                <Typography border noWrap bold>
+                <Text border noWrap bold>
                     text of the
-                </Typography>
+                </Text>
                 printing and typesetting
-            </Typography>
-            <Typography border>
-                industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-            </Typography>
+            </Text>
+            <Text border>industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</Text>
         </Box>
     ),
 };
@@ -170,7 +168,7 @@ export const OnEllipsisChange: Story = {
     render: (args) => {
         const [ellipsisState, setEllipsisState] = useState(false);
         return (
-            <Typography
+            <Text
                 border
                 width={'auto'}
                 bgColor={ellipsisState ? 'primary' : 'secondary'}
@@ -180,7 +178,7 @@ export const OnEllipsisChange: Story = {
                 }}
             >
                 {smallIpsum}
-            </Typography>
+            </Text>
         );
     },
 };
@@ -189,22 +187,6 @@ export const Paragraph: Story = {
     args: {
         paragraph: true,
         children: smallIpsum,
-    },
-};
-
-export const Rows: Story = {
-    args: {
-        wrap: true,
-        tooltip: true,
-        rows: 2,
-        children: largeIpsum,
-    },
-};
-
-export const ShowTooltipOnEllipsis: Story = {
-    args: {
-        showTooltipOnEllipsis: false,
-        children: largeIpsum,
     },
 };
 
@@ -264,12 +246,5 @@ export const Width: Story = {
     args: {
         width: 250,
         children: smallIpsum,
-    },
-};
-
-export const Wrap: Story = {
-    args: {
-        wrap: false,
-        children: largeIpsum,
     },
 };

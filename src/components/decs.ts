@@ -7,6 +7,7 @@ import type {
     Ref,
     CSSProperties,
 } from 'react';
+import type { IconName } from './_FIXED/SVGIcon/icon-names';
 import type { DraggableStateSnapshot } from 'react-beautiful-dnd';
 import type { DatePickerProps } from '@mui/x-date-pickers/DatePicker';
 import type { DateTimePickerProps } from '@mui/x-date-pickers/DateTimePickerProps';
@@ -173,7 +174,7 @@ export interface DialogProps {
 
 export interface DividerProps {
     color?: string;
-    component?: string | ReactNode;
+    component?: IconName | ReactNode;
     chip?: string | boolean;
     flexItem?: boolean;
     label?: string | ReactNode;
@@ -238,7 +239,7 @@ export interface ChipProps {
     onDelete?: (event: any) => void;
     rounded?: boolean;
     size?: 'small' | 'medium';
-    startIcon?: string | ReactNode;
+    startIcon?: IconName | ReactNode;
     sx?: SxProps;
     textColor?: string;
     width?: string | number;
@@ -316,8 +317,8 @@ export type InputColorProps = InputBaseProps & {
     copyMessage?: string;
     copyToClipboard?: boolean;
     opacityLabel?: string;
-    opacityIcon?: string | ReactNode;
-    copyIcon?: string | ReactNode;
+    opacityIcon?: IconName | ReactNode;
+    copyIcon?: IconName | ReactNode;
 };
 
 export type InputDateProps = InputBaseProps &
@@ -387,7 +388,7 @@ export type InputTextProps = InputBaseProps & {
 };
 
 export type InputSearchProps = InputBaseProps & {
-    searchIcon?: string | ReactNode;
+    searchIcon?: IconName | ReactNode;
     [key: string]: any;
 };
 
@@ -410,13 +411,13 @@ export type InputNumberProps = InputBaseProps & {
     onBlur?: (event: any) => void;
     onChange?: (event: any) => void;
     patternChar?: string; // +1 (###) ###-####
-    prefix?: string | ReactNode;
+    prefix?: IconName | string | ReactNode;
     selectAllOnFocus?: boolean;
     slider?: boolean;
     sliderLabel?: string | ((value: string | number) => string);
     sliderTooltip?: string;
     step?: number;
-    suffix?: string | ReactNode;
+    suffix?: IconName | string | ReactNode;
     thousandSeparator?: string | boolean;
     value?: number | string;
     valueIsNumericString?: boolean;
@@ -460,8 +461,8 @@ export interface InputSelectProps {
     colorText?: string;
     convertedOptions?: any;
     disabled?: boolean;
-    endCmp?: string | ReactNode;
-    endCmpExternal?: string | ReactNode;
+    endCmp?: IconName | ReactNode;
+    endCmpExternal?: IconName | ReactNode;
     error?: boolean;
     focused?: boolean;
     fullWidth?: boolean;
@@ -483,8 +484,8 @@ export interface InputSelectProps {
     renderValue?: (value: any, option: InputSelectOption) => any;
     required?: boolean;
     size?: 'medium' | 'small';
-    startCmp?: string | ReactNode;
-    startCmpExternal?: string | ReactNode;
+    startCmp?: IconName | ReactNode;
+    startCmpExternal?: IconName | ReactNode;
     value?: string | number | boolean | Array<string | number | boolean>;
     variant?: 'filled' | 'standard' | 'outlined';
     [key: string]: any;
@@ -578,7 +579,7 @@ export interface FabProps {
     color?: string;
     disabled?: boolean;
     disableRipple?: boolean;
-    icon?: string | ReactNode;
+    icon?: IconName | ReactNode;
     link?: string;
     size?: 'small' | 'medium' | 'large';
     variant?: 'extended' | 'circular';
@@ -601,7 +602,7 @@ export interface LinearProgressProps {
 
 export interface LinkProps {
     color?: string;
-    icon?: string | ReactNode;
+    icon?: IconName | ReactNode;
     label?: string;
     preventScrollReset?: boolean;
     relativeUrl?: string;
@@ -713,7 +714,7 @@ export type CheckListProps = {
 
 export interface MenuOptionItem {
     check?: boolean;
-    icon?: string | ReactNode;
+    icon?: IconName | ReactNode;
     id?: string;
     label?: string | ReactNode;
     onClick?: (Event: any) => void;
@@ -753,7 +754,7 @@ export interface BreadcrumbsProps {
     color?: string;
     links?: Array<string | LinkProps>;
     maxItems?: number;
-    separator?: string | ReactNode;
+    separator?: string | IconName | ReactNode;
     size?: string | number;
     [key: string]: any;
 }
@@ -888,14 +889,14 @@ export interface AccordionProps {
     bgColorDetails?: string;
     bottomSecondaryLabel?: string;
     buttonsColor?: string;
-    collapsedIcon?: string | ReactNode;
+    collapsedIcon?: IconName | ReactNode;
     details?: string;
     detailsMaxRows?: number;
     detailsStyles?: SxProps;
     disabled?: boolean;
     disabledContentPadding?: boolean;
     expanded?: boolean | string;
-    expandedIcon?: string | ReactNode;
+    expandedIcon?: IconName | ReactNode;
     hideLabel?: string;
     id?: string;
     label?: string | ReactNode;
@@ -976,7 +977,7 @@ export interface SliderProps {
     disablePadding?: boolean;
     disableSwap?: boolean;
     displayValue?: 'auto' | 'off' | 'on';
-    endIcon?: string | ReactNode;
+    endIcon?: IconName | ReactNode;
     label?: string;
     min?: number;
     max?: number;
@@ -988,7 +989,7 @@ export interface SliderProps {
     removePadding?: boolean;
     size?: 'small' | 'medium';
     sliderStyle?: 'ios' | 'pretto' | 'tooltip' | 'airbnb';
-    startIcon?: string | ReactNode;
+    startIcon?: IconName | ReactNode;
     trackBarLinePosition?: 'none' | 'inverted' | 'normal';
     range?: Range;
     value?: number;
@@ -1001,7 +1002,7 @@ export interface StepType {
     optional?: boolean | string;
     color?: string;
     error?: boolean;
-    icon?: string | ReactNode;
+    icon?: IconName | ReactNode;
     // Todo: assert if the type string actually match the project creator's intention
 }
 export interface StepperProps {
@@ -1187,7 +1188,7 @@ export interface ToggleButtonGroupProps {
     data?: Array<{
         value: string;
         disabled?: boolean;
-        component: ReactElement | ReactNode | string | number;
+        component: ReactElement | ReactNode | IconName | number;
     }>;
     wrap?: boolean;
     transparent?: boolean;

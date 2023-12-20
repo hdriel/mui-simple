@@ -17,13 +17,13 @@ import type { ListItemProps } from '../../decs';
 
 interface ListItemWrapperProps {
     item: ListItemProps;
-    index: number;
-    onClick: (index: number, cb: any, event: any) => void;
-    buttonItems: boolean;
-    alignItems: 'flex-start';
-    flexDirection: 'row' | 'column';
-    draggable: boolean;
-    useReactRouterDomLink: boolean;
+    index?: number;
+    onClick?: (index: number, cb: any, event: any) => void;
+    buttonItems?: boolean;
+    alignItems?: 'flex-start';
+    flexDirection?: 'row' | 'column';
+    draggable?: boolean;
+    useReactRouterDomLink?: boolean;
 }
 const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
     item,
@@ -75,21 +75,21 @@ const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
 };
 
 interface ListItemCmpProps {
-    disablePadding: boolean;
-    disableGutters: boolean;
-    flexDirectionItems: 'row' | 'column';
-    index: number;
-    itemProps: ListItemProps;
-    onClick: (index: number, cb: any, event: any) => void;
-    buttonItems: boolean;
-    alignItems: 'flex-start';
-    isControl: boolean;
-    alignControl: string;
-    insetItems: boolean;
-    enableSubtitle: boolean;
-    isOpen: boolean;
-    useReactRouterDomLink: boolean;
-    draggable: boolean;
+    disablePadding?: boolean;
+    disableGutters?: boolean;
+    flexDirectionItems?: 'row' | 'column';
+    index?: number;
+    itemProps?: ListItemProps;
+    onClick?: (index: number, cb: any, event: any) => void;
+    buttonItems?: boolean;
+    alignItems?: 'flex-start';
+    isControl?: boolean;
+    alignControl?: string;
+    insetItems?: boolean;
+    enableSubtitle?: boolean;
+    isOpen?: boolean;
+    useReactRouterDomLink?: boolean;
+    draggable?: boolean;
 }
 
 const ListItem: React.FC<ListItemCmpProps> = ({
