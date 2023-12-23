@@ -9,8 +9,8 @@ import type {
 } from 'react';
 import type { DraggableStateSnapshot } from 'react-beautiful-dnd';
 import type { DatePickerProps } from '@mui/x-date-pickers/DatePicker';
-import type { DateTimePickerProps } from '@mui/x-date-pickers/DateTimePickerProps';
-import type { TimePickerProps } from '@mui/x-date-pickers/TimePickerProps';
+import type { DateTimePickerProps } from '@mui/x-date-pickers/DateTimePicker';
+import type { TimePickerProps } from '@mui/x-date-pickers/TimePicker';
 import type { CloseReason, OpenReason, SxProps } from '@mui/material';
 import type { TIMEZONE } from './timezone';
 import type { LOCALE } from './locales';
