@@ -106,7 +106,6 @@
         "@babel/preset-env": "^7.22.5",
         "@babel/preset-react": "^7.22.5",
         "@babel/runtime": "^7.22.5",
-        "@mui/x-date-pickers": "^6.18.2",
         "@rollup/plugin-babel": "^6.0.3",
         "@rollup/plugin-commonjs": "^25.0.2",
         "@rollup/plugin-json": "^6.0.0",
