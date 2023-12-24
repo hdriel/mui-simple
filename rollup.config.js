@@ -5,9 +5,6 @@
 // https://www.codifytools.com/blog/react-npm-package
 
 // https://stackoverflow.com/questions/56788551/material-ui-themeprovider-invalid-hook-call-when-building-an-es6-module-using-ro
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import ReactIs from 'react-is';
 import { builtinModules } from 'module';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import filesize from 'rollup-plugin-filesize';
