@@ -10,8 +10,6 @@ import {
 } from '@mui/material';
 import type { BoxProps, MenuProps } from '@mui/material';
 import { styled, css } from '@mui/material/styles';
-import Paper from '../Paper/Paper';
-import { ELEVATION } from '../../../utils/consts';
 
 export const ContextMenuWrapper = styled(Box)`
     width: 100%;

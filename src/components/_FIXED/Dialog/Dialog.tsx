@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ReactElement, PropsWithChildren } from 'react';
+import type { ReactElement } from 'react';
 import {
     Dialog as MuiDialog,
     DialogTitle as MuiDialogTitle,
@@ -13,7 +13,7 @@ import Button from '../Button/Button';
 import { Transition, PaperComponent } from './Dialog.components';
 import type { DialogProps } from '../../decs';
 
-function Dialog(props: PropsWithChildren<DialogProps>): ReactElement {
+const Dialog: React.FC<DialogProps> = (props): ReactElement => {
     const {
         actions,
         autoContentPadding,
@@ -79,7 +79,7 @@ function Dialog(props: PropsWithChildren<DialogProps>): ReactElement {
             ) : null}
         </MuiDialog>
     );
-}
+};
 
 Dialog.defaultProps = {
     actions: [],

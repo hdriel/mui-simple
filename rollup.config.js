@@ -7,7 +7,7 @@
 // https://stackoverflow.com/questions/56788551/material-ui-themeprovider-invalid-hook-call-when-building-an-es6-module-using-ro
 // import React from 'react';
 // import ReactDOM from 'react-dom';
-import ReactIs from 'react-is';
+// import ReactIs from 'react-is';
 import { builtinModules } from 'module';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import filesize from 'rollup-plugin-filesize';
@@ -45,14 +45,14 @@ export default [
         input: './src/index.ts',
         output: [
             {
-                sourcemap,
+                ...(sourcemap && { sourcemap }),
                 file: packageJson.main,
                 format: 'cjs',
                 interop: 'auto',
             },
             // ES2015 modules version so consumers can tree-shake
             {
-                sourcemap,
+                ...(sourcemap && { sourcemap }),
                 file: packageJson.module,
                 format: 'es',
                 interop: 'esModule',
@@ -70,7 +70,9 @@ export default [
                 browser: true,
                 main: true,
             }),
-            typescript({ tsconfig: 'tsconfig.json' }),
+            typescript({
+                tsconfig: 'tsconfig.json',
+            }),
             babel({
                 babelHelpers: 'bundled',
                 extensions: ['.jsx', '.js', '.ts', '.tsx'],
@@ -79,11 +81,6 @@ export default [
             }),
             commonjs({
                 include: /node_modules/,
-                namedExports: {
-                    'react-is': Object.keys(ReactIs),
-                    // react: Object.keys(React),
-                    // 'react-dom': Object.keys(ReactDOM),
-                },
             }),
             postcss({
                 minimize: true,
