@@ -43,14 +43,16 @@ export default [
         output: [
             {
                 ...(sourceMap && { sourcemap: 'inline' }),
-                file: packageJson.main,
+                // file: packageJson.main,
+                dir: 'dist',
                 format: 'cjs',
                 interop: 'auto',
             },
             // ES2015 modules version so consumers can tree-shake
             {
                 ...(sourceMap && { sourcemap: 'inline' }),
-                file: packageJson.module,
+                // file: packageJson.main,
+                dir: 'dist',
                 format: 'es',
                 interop: 'esModule',
             },
@@ -69,7 +71,7 @@ export default [
             }),
             typescript({
                 tsconfig: 'tsconfig.json',
-                ...(sourceMap && { sourceMap: true }),
+                ...(sourceMap && { sourcemap: true }),
             }),
             babel({
                 babelHelpers: 'bundled',
@@ -108,7 +110,7 @@ export default [
                     module: pkg.module?.replace('dist/', ''),
                     main: pkg.main.replace('dist/', ''),
                     types: pkg.types.replace('dist/', ''),
-                    files: ['bundles/*'],
+                    // files: ['bundles/*'],
                 }),
             }),
             filesize(),
@@ -117,8 +119,8 @@ export default [
         // treeshake: true,
     },
     {
-        input: 'dist/bundles/index.d.ts',
-        output: [{ file: 'dist/bundles/index.d.ts', format: 'es' }],
+        input: 'dist/index.d.ts',
+        output: [{ file: 'dist/index.d.ts', format: 'es' }],
         plugins: [dts()],
         external: [/\.(css|less|scss)$/],
     },
