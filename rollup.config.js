@@ -27,7 +27,7 @@ const requireFile = createRequire(import.meta.url);
 const packageJson = requireFile('./package.json');
 
 const isProd = process.env.NODE_ENV === 'production';
-const sourcemap = isProd ? undefined : 'inline';
+const sourceMap = !!isProd;
 
 const externalDep = [
     ...builtinModules,
@@ -42,14 +42,14 @@ export default [
         input: './src/index.ts',
         output: [
             {
-                ...(sourcemap && { sourcemap }),
+                ...(sourceMap && { sourcemap: 'inline' }),
                 file: packageJson.main,
                 format: 'cjs',
                 interop: 'auto',
             },
             // ES2015 modules version so consumers can tree-shake
             {
-                ...(sourcemap && { sourcemap }),
+                ...(sourceMap && { sourcemap: 'inline' }),
                 file: packageJson.module,
                 format: 'es',
                 interop: 'esModule',
@@ -69,6 +69,7 @@ export default [
             }),
             typescript({
                 tsconfig: 'tsconfig.json',
+                ...(sourceMap && { sourceMap: true }),
             }),
             babel({
                 babelHelpers: 'bundled',
