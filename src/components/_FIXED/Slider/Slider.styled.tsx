@@ -48,6 +48,4 @@ export const Slider = styled(MuiSlider, {
     ${sliderStyleCustomColor}
 `;
 
-export const SliderLabel: any = styled(({ ...props }) => <MuiTypography gutterBottom {...props} />)<
-    PropsWithChildren<string>
->``;
+export const SliderLabel: any = styled(({ ...props }) => <MuiTypography gutterBottom {...props} />)<any>``;

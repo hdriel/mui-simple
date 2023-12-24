@@ -1,12 +1,11 @@
 import React from 'react';
-import type { PropsWithChildren, ReactElement } from 'react';
-
+import type { ReactElement } from 'react';
 import { Chip as MuiChip } from './Chip.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import SVGIcon from '../SVGIcon/SVGIcon';
 import type { ChipProps } from '../../decs';
 
-function Chip(props: PropsWithChildren<ChipProps>): ReactElement {
+const Chip: React.FC<ChipProps> = (props): ReactElement => {
     const {
         children,
         color,
@@ -42,7 +41,7 @@ function Chip(props: PropsWithChildren<ChipProps>): ReactElement {
             {...rest}
         />
     );
-}
+};
 
 Chip.defaultProps = {
     alignEndIcon: undefined,

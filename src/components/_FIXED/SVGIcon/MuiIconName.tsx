@@ -1,7 +1,6 @@
 import { createElement } from 'react';
 import type { SxProps } from '@mui/material';
-import type { PropsWithChildren, ReactElement, ReactNode } from 'react';
-// import PropTypes from 'prop-types';
+import type { FC, PropsWithChildren, ReactElement, ReactNode } from 'react';
 import * as MUIIcon from '@mui/icons-material';
 import { numberToPx } from '../../../utils/helpers';
 
@@ -14,14 +13,14 @@ interface MuiIconNameProps {
 }
 type MuiIconNamePropsType = PropsWithChildren<MuiIconNameProps>;
 
-export default function MuiIconName({
+const MuiIconName: FC<MuiIconNamePropsType> = ({
     name,
     color,
     width,
     height,
     children,
     ...props
-}: MuiIconNamePropsType): ReactElement | any {
+}): ReactElement | any => {
     const Icon = typeof name === 'string' ? MUIIcon[name] : undefined;
 
     return Icon
@@ -30,14 +29,7 @@ export default function MuiIconName({
               style: { width: numberToPx(width), height: numberToPx(height), color },
           })
         : children;
-}
-
-// MuiIconName.propTypes = {
-//     name: PropTypes.string,
-//     color: PropTypes.string,
-//     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-// };
+};
 
 MuiIconName.defaultProps = {
     name: undefined,
@@ -45,3 +37,5 @@ MuiIconName.defaultProps = {
     width: undefined,
     height: undefined,
 };
+
+export default MuiIconName;

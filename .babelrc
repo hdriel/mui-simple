@@ -1,12 +1,12 @@
 {
     "presets": [
-        ["@babel/preset-env", { "targets": { "chrome": 100 } }],
-        "@babel/preset-typescript",
-        "@babel/preset-react"
+        "@babel/preset-react",
+        "@babel/preset-typescript"
     ],
     "plugins": [
         "@babel/plugin-transform-react-display-name",
         "@babel/proposal-object-rest-spread",
+        "@babel/plugin-proposal-class-properties",
         ["@babel/plugin-transform-react-jsx", { "extensions": [".jsx", ".js", ".ts", ".tsx"] }]
     ],
     "exclude": "node_modules/**"

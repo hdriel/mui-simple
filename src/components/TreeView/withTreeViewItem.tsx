@@ -18,8 +18,8 @@ export function withTreeViewItem(Component, TreeItemComponent = TreeItem) {
         const { disabled, expanded, selected, focused, handleExpansion, handleSelection, preventSelection } =
             useTreeItem(nodeId);
 
-        const handleExpansionClick = (event) => handleExpansion?.(event);
-        const handleSelectionClick = (event) => handleSelection?.(event);
+        const handleExpansionClick = (event): void => handleExpansion?.(event);
+        const handleSelectionClick = (event): void => handleSelection?.(event);
 
         return (
             props && (
