@@ -27,7 +27,7 @@ const requireFile = createRequire(import.meta.url);
 const packageJson = requireFile('./package.json');
 
 const isProd = process.env.NODE_ENV === 'production';
-const sourceMap = !!isProd;
+const sourceMap = !isProd;
 
 const externalDep = [
     ...builtinModules,
@@ -42,17 +42,13 @@ export default [
         input: './src/index.ts',
         output: [
             {
-                ...(sourceMap && { sourcemap: 'inline' }),
-                // file: packageJson.main,
-                dir: 'dist',
+                ...(sourceMap ? { sourcemap: 'inline', dir: 'dist' } : { file: packageJson.main }),
                 format: 'cjs',
                 interop: 'auto',
             },
             // ES2015 modules version so consumers can tree-shake
             {
-                ...(sourceMap && { sourcemap: 'inline' }),
-                // file: packageJson.main,
-                dir: 'dist',
+                ...(sourceMap ? { sourcemap: 'inline', dir: 'dist' } : { file: packageJson.main }),
                 format: 'es',
                 interop: 'esModule',
             },
@@ -110,7 +106,7 @@ export default [
                     module: pkg.module?.replace('dist/', ''),
                     main: pkg.main.replace('dist/', ''),
                     types: pkg.types.replace('dist/', ''),
-                    // files: ['bundles/*'],
+                    ...(!sourceMap && { files: ['bundles/*'] }),
                 }),
             }),
             filesize(),
@@ -119,8 +115,13 @@ export default [
         // treeshake: true,
     },
     {
-        input: 'dist/index.d.ts',
-        output: [{ file: 'dist/index.d.ts', format: 'es' }],
+        input: sourceMap ? 'dist/index.d.ts' : 'dist/bundles/index.d.ts',
+        output: [
+            {
+                file: sourceMap ? 'dist/index.d.ts' : 'dist/bundles/index.d.ts',
+                format: 'es',
+            },
+        ],
         plugins: [dts()],
         external: [/\.(css|less|scss)$/],
     },
