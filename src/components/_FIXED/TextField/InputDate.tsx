@@ -12,6 +12,7 @@ import Input from './TextField';
 import type { InputDateProps } from '../../decs';
 import { getSlotsProps, useInputDateData } from './InputDate.hooks';
 import LocalizationProvider from './LocalizationProvider';
+import { isDefined } from '../../../utils/helpers';
 
 const InputDate: React.FC<InputDateProps> = ({
     value: _value,
@@ -68,6 +69,7 @@ const InputDate: React.FC<InputDateProps> = ({
         dateIcon,
     });
 
+    const sxStyles = isDefined(width) && { sx: { ...props.sx, width } };
     const pickerProps = {
         ...props,
         value,
@@ -81,11 +83,11 @@ const InputDate: React.FC<InputDateProps> = ({
         loading,
         onChange,
         renderLoading: () => <DayCalendarSkeleton />,
-        ...(width && { sx: { width } }),
+        ...sxStyles,
     };
 
     const dateCmp = readOnly ? (
-        <DateField value={value} readOnly />
+        <DateField value={value} readOnly format={format} label={label} {...props} {...sxStyles} />
     ) : (
         {
             mobile: <MobileDatePicker {...pickerProps} {...slotProps} />,

@@ -12,6 +12,7 @@ import Input from './TextField';
 import type { InputDateTimeProps } from '../../decs';
 import { getSlotsProps, useInputDateData } from './InputDate.hooks';
 import LocalizationProvider from './LocalizationProvider';
+import { isDefined } from '../../../utils/helpers';
 
 const InputDateTime: React.FC<InputDateTimeProps> = ({
     value: _value,
@@ -68,6 +69,7 @@ const InputDateTime: React.FC<InputDateTimeProps> = ({
         dateIcon,
     });
 
+    const sxStyles = isDefined(width) && { sx: { ...props.sx, width } };
     const pickerProps = {
         ...props,
         value,
@@ -81,11 +83,11 @@ const InputDateTime: React.FC<InputDateTimeProps> = ({
         loading,
         onChange,
         renderLoading: () => <DayCalendarSkeleton />,
-        ...(width && { sx: { width } }),
+        ...sxStyles,
     };
 
     const dateCmp = readOnly ? (
-        <DateTimeField value={value} readOnly />
+        <DateTimeField value={value} readOnly format={format} label={label} {...props} {...sxStyles} />
     ) : (
         {
             mobile: <MobileDateTimePicker {...pickerProps} {...slotProps} />,
