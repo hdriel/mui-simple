@@ -327,7 +327,7 @@ export type InputDateProps = InputBaseProps &
         minDate?: Date | number | string;
         maxDate?: Date | number | string;
         timezone?: TIMEZONE;
-        useLocalizationProvider: boolean;
+        useLocalizationProvider?: boolean;
         locale?: LOCALE;
         pickerVariant?: 'static' | 'mobile' | 'desktop';
     };
@@ -339,7 +339,7 @@ export type InputDateTimeProps = InputDateProps &
         minDate?: Date | number | string;
         maxDate?: Date | number | string;
         timezone?: TIMEZONE;
-        useLocalizationProvider: boolean;
+        useLocalizationProvider?: boolean;
         locale?: LOCALE;
         pickerVariant?: 'static' | 'mobile' | 'desktop';
     };
@@ -351,7 +351,7 @@ export type InputTimeProps = InputBaseProps &
         minTime?: Date | number | string;
         maxTime?: Date | number | string;
         timezone?: TIMEZONE;
-        useLocalizationProvider: boolean;
+        useLocalizationProvider?: boolean;
         locale?: LOCALE;
         pickerVariant?: 'static' | 'mobile' | 'desktop';
     };
@@ -1226,9 +1226,9 @@ type DirectionType = 'down' | 'left' | 'right' | 'up';
 
 interface SpeedDialActionProps {
     name: string;
-    icon: ReactNode;
-    showTooltip: boolean;
-    onClick: MouseEventHandler<HTMLDivElement>;
+    icon?: ReactNode;
+    showTooltip?: boolean;
+    onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
 export interface SpeedDialProps {
