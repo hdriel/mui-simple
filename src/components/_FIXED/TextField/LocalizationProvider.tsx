@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider as MuiLocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import type { ADAPTER_LOCALE, LOCALE } from '../../locales';
+import type { LOCALE } from '../../locales';
+import type { LocalizationProviderProps } from '../../decs';
 import('dayjs/locale/en');
 import('dayjs/locale/he');
-
-interface LocalizationProviderProps {
-    dateAdapter?: any;
-    locale?: LOCALE;
-    adapterLocale?: ADAPTER_LOCALE;
-    [key: string]: any;
-}
 
 const loadLanguage = async (locale?: LOCALE): Promise<boolean> => {
     if (['en', 'he'].includes(locale)) return true;
@@ -62,4 +56,5 @@ LocalizationProvider.defaultProps = {
     locale: 'he',
 };
 
+export type { LocalizationProviderProps } from '../../decs';
 export default LocalizationProvider;

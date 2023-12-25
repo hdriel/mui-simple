@@ -13,7 +13,7 @@ import type { DateTimePickerProps } from '@mui/x-date-pickers/DateTimePicker';
 import type { TimePickerProps } from '@mui/x-date-pickers/TimePicker';
 import type { CloseReason, OpenReason, SxProps } from '@mui/material';
 import type { TIMEZONE } from './timezone';
-import type { LOCALE } from './locales';
+import type { LOCALE, ADAPTER_LOCALE } from './locales';
 export type AppBarPosition = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
 
 export interface AppBarProps {
@@ -674,6 +674,13 @@ export interface ListProps {
     width?: string | number;
     controlType?: 'checkbox' | 'switch';
     alignCheck?: 'start' | 'end';
+    [key: string]: any;
+}
+
+export interface LocalizationProviderProps {
+    dateAdapter?: any;
+    locale?: LOCALE;
+    adapterLocale?: ADAPTER_LOCALE;
     [key: string]: any;
 }
 
