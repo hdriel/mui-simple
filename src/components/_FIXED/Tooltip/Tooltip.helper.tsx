@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import type { PropsWithChildren, Ref, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes } from 'react';
+import type { Ref, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes } from 'react';
 
 const MyCustomChildrenComponent: React.FC<{ innerRef: Ref<any> }> = ({ innerRef, children, ...props }) => {
     return (

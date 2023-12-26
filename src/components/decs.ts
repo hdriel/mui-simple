@@ -10,11 +10,11 @@ import type {
 import type { IconName } from './_FIXED/SVGIcon/icon-names';
 import type { DraggableStateSnapshot } from 'react-beautiful-dnd';
 import type { DatePickerProps } from '@mui/x-date-pickers/DatePicker';
-import type { DateTimePickerProps } from '@mui/x-date-pickers/DateTimePickerProps';
-import type { TimePickerProps } from '@mui/x-date-pickers/TimePickerProps';
+import type { DateTimePickerProps } from '@mui/x-date-pickers/DateTimePicker';
+import type { TimePickerProps } from '@mui/x-date-pickers/TimePicker';
 import type { CloseReason, OpenReason, SxProps } from '@mui/material';
 import type { TIMEZONE } from './timezone';
-import type { LOCALE } from './locales';
+import type { LOCALE, ADAPTER_LOCALE } from './locales';
 export type AppBarPosition = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
 
 export interface AppBarProps {
@@ -328,7 +328,7 @@ export type InputDateProps = InputBaseProps &
         minDate?: Date | number | string;
         maxDate?: Date | number | string;
         timezone?: TIMEZONE;
-        useLocalizationProvider: boolean;
+        useLocalizationProvider?: boolean;
         locale?: LOCALE;
         pickerVariant?: 'static' | 'mobile' | 'desktop';
     };
@@ -340,7 +340,7 @@ export type InputDateTimeProps = InputDateProps &
         minDate?: Date | number | string;
         maxDate?: Date | number | string;
         timezone?: TIMEZONE;
-        useLocalizationProvider: boolean;
+        useLocalizationProvider?: boolean;
         locale?: LOCALE;
         pickerVariant?: 'static' | 'mobile' | 'desktop';
     };
@@ -352,7 +352,7 @@ export type InputTimeProps = InputBaseProps &
         minTime?: Date | number | string;
         maxTime?: Date | number | string;
         timezone?: TIMEZONE;
-        useLocalizationProvider: boolean;
+        useLocalizationProvider?: boolean;
         locale?: LOCALE;
         pickerVariant?: 'static' | 'mobile' | 'desktop';
     };
@@ -675,6 +675,13 @@ export interface ListProps {
     width?: string | number;
     controlType?: 'checkbox' | 'switch';
     alignCheck?: 'start' | 'end';
+    [key: string]: any;
+}
+
+export interface LocalizationProviderProps {
+    dateAdapter?: any;
+    locale?: LOCALE;
+    adapterLocale?: ADAPTER_LOCALE;
     [key: string]: any;
 }
 
@@ -1220,9 +1227,9 @@ type DirectionType = 'down' | 'left' | 'right' | 'up';
 
 interface SpeedDialActionProps {
     name: string;
-    icon: ReactNode;
-    showTooltip: boolean;
-    onClick: MouseEventHandler<HTMLDivElement>;
+    icon?: ReactNode;
+    showTooltip?: boolean;
+    onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
 export interface SpeedDialProps {

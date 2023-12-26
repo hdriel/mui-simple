@@ -11,6 +11,7 @@ import Input from './TextField';
 import type { InputTimeProps } from '../../decs';
 import { getSlotsProps, useInputDateData } from './InputDate.hooks';
 import LocalizationProvider from './LocalizationProvider';
+import { isDefined } from '../../../utils/helpers';
 
 const InputTime: React.FC<InputTimeProps> = ({
     value: _value,
@@ -66,6 +67,7 @@ const InputTime: React.FC<InputTimeProps> = ({
         dateIcon,
     });
 
+    const sxStyles = isDefined(width) && { sx: { ...props.sx, width } };
     const pickerProps = {
         ...props,
         value,
@@ -74,11 +76,11 @@ const InputTime: React.FC<InputTimeProps> = ({
         maxTime: max,
         format,
         onChange,
-        ...(width && { sx: { width } }),
+        ...sxStyles,
     };
 
     const dateCmp = readOnly ? (
-        <TimeField value={value} readOnly />
+        <TimeField value={value} readOnly format={format} label={label} {...props} {...sxStyles} />
     ) : (
         {
             mobile: <MobileTimePicker {...pickerProps} {...slotProps} />,

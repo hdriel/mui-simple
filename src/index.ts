@@ -105,6 +105,9 @@ export type { InputMultipleSelectProps } from './components/_FIXED/Select/InputM
 export { default as Link } from './components/_FIXED/Link/Link';
 export type { LinkProps } from './components/_FIXED/Link/Link';
 
+export { default as LocalizationProvider } from './components/_FIXED/TextField/LocalizationProvider';
+export type { LocalizationProviderProps } from './components/_FIXED/TextField/LocalizationProvider';
+
 export { default as List } from './components/_FIXED/List/List';
 export type { ListProps, ListItemProps } from './components/_FIXED/List/List';
 

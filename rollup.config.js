@@ -5,9 +5,6 @@
 // https://www.codifytools.com/blog/react-npm-package
 
 // https://stackoverflow.com/questions/56788551/material-ui-themeprovider-invalid-hook-call-when-building-an-es6-module-using-ro
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-import ReactIs from 'react-is';
 import { builtinModules } from 'module';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import filesize from 'rollup-plugin-filesize';
@@ -30,7 +27,7 @@ const requireFile = createRequire(import.meta.url);
 const packageJson = requireFile('./package.json');
 
 const isProd = process.env.NODE_ENV === 'production';
-const sourcemap = isProd ? undefined : 'inline';
+const sourceMap = !isProd;
 
 const externalDep = [
     ...builtinModules,
@@ -45,15 +42,17 @@ export default [
         input: './src/index.ts',
         output: [
             {
-                sourcemap,
-                file: packageJson.main,
+                ...(sourceMap
+                    ? { sourcemap: 'inline', dir: 'dist' }
+                    : { file: packageJson.main, inlineDynamicImports: true }),
                 format: 'cjs',
                 interop: 'auto',
             },
             // ES2015 modules version so consumers can tree-shake
             {
-                sourcemap,
-                file: packageJson.module,
+                ...(sourceMap
+                    ? { sourcemap: 'inline', dir: 'dist' }
+                    : { file: packageJson.module, inlineDynamicImports: true }),
                 format: 'es',
                 interop: 'esModule',
             },
@@ -70,7 +69,10 @@ export default [
                 browser: true,
                 main: true,
             }),
-            typescript({ tsconfig: 'tsconfig.json' }),
+            typescript({
+                tsconfig: 'tsconfig.json',
+                ...(sourceMap && { sourceMap: true, inlineSources: true }),
+            }),
             babel({
                 babelHelpers: 'bundled',
                 extensions: ['.jsx', '.js', '.ts', '.tsx'],
@@ -79,11 +81,6 @@ export default [
             }),
             commonjs({
                 include: /node_modules/,
-                namedExports: {
-                    'react-is': Object.keys(ReactIs),
-                    // react: Object.keys(React),
-                    // 'react-dom': Object.keys(ReactDOM),
-                },
             }),
             postcss({
                 minimize: true,
@@ -113,17 +110,20 @@ export default [
                     module: pkg.module?.replace('dist/', ''),
                     main: pkg.main.replace('dist/', ''),
                     types: pkg.types.replace('dist/', ''),
-                    files: ['bundles/*'],
+                    ...(!sourceMap && { files: ['bundles/*'] }),
                 }),
             }),
             filesize(),
         ],
         external: externalDep,
-        // treeshake: true,
+        treeshake: true,
     },
     {
-        input: 'dist/bundles/index.d.ts',
-        output: [{ file: 'dist/bundles/index.d.ts', format: 'es' }],
+        input: sourceMap ? 'dist/index.d.ts' : 'dist/bundles/index.d.ts',
+        output: {
+            file: sourceMap ? 'dist/index.d.ts' : 'dist/bundles/index.d.ts',
+            format: 'es',
+        },
         plugins: [dts()],
         external: [/\.(css|less|scss)$/],
     },

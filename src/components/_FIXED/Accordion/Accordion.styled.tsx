@@ -15,14 +15,13 @@ import type {
 } from '@mui/material';
 import { customStyleAccordion, customStyleDetails, customStyleSummary } from './Accordion.styles';
 
-interface AccordionStyledProps {
+interface AccordionStyledPropsType
+    extends Omit<MuiAccordionProps, 'disabled' | 'expanded' | 'onChange' | 'TransitionProps'> {
     useCustomStyle?: boolean;
 }
-type AccordionStyledPropsType = AccordionStyledProps &
-    Omit<MuiAccordionProps, 'disabled' | 'expanded' | 'onChange' | 'TransitionProps'> &
-    any;
+
 export const Accordion = styled(
-    ({ useCustomStyle, ...props }) => (
+    ({ useCustomStyle, ...props }: AccordionStyledPropsType) => (
         <MuiAccordion {...(useCustomStyle && { disableGutters: true, elevation: 0, square: true })} {...props}>
             {props.children}
         </MuiAccordion>
@@ -30,15 +29,17 @@ export const Accordion = styled(
     {
         shouldForwardProp: (propName) => !['useCustomStyle'].includes(propName as string),
     }
-)<AccordionStyledPropsType>`
-    ${customStyleAccordion}
-` as ComponentType<AccordionStyledPropsType>;
+)`
+    ${customStyleAccordion};
+`;
 
-type AccordionSummaryStyledPropsType = AccordionSummaryProps & any;
-export const AccordionSummary = styled(({ label, ...props }) => <MuiAccordionSummary {...props} />, {
-    shouldForwardProp: (propName) =>
-        !['bottomSecondaryLabel', 'useCustomStyle', 'bgColor', 'titleColor'].includes(propName as string),
-})<AccordionSummaryStyledPropsType>`
+export const AccordionSummary = styled(
+    ({ label, ...props }: AccordionSummaryProps) => <MuiAccordionSummary {...props} />,
+    {
+        shouldForwardProp: (propName) =>
+            !['bottomSecondaryLabel', 'useCustomStyle', 'bgColor', 'titleColor'].includes(propName as string),
+    }
+)`
     ${customStyleSummary};
     &.MuiAccordionSummary-root {
         background-color: ${(props) => props.bgColor};
@@ -53,7 +54,7 @@ export const AccordionSummary = styled(({ label, ...props }) => <MuiAccordionSum
                   `
                 : css``}
     }
-` as ComponentType<AccordionSummaryStyledPropsType>;
+`;
 
 type AccordionDetailsStyledPropsType = AccordionDetailsProps & any;
 export const AccordionDetails = styled(MuiAccordionDetails, {

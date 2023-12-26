@@ -1,5 +1,5 @@
 import React, { useMemo, isValidElement, cloneElement } from 'react';
-import type { PropsWithChildren, ReactNode, ReactElement } from 'react';
+import type { ReactNode, ReactElement } from 'react';
 import { Snackbar as MuiSnackbar, Grow, Slide } from './Snackbar.styled';
 import Button from '../Button/Button';
 import Alert from '../Alert/Alert';
