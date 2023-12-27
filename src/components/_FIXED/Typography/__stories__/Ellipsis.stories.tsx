@@ -6,7 +6,7 @@ import Typography from '../Typography';
 import { action } from '@storybook/addon-actions';
 
 const meta: Meta<typeof Typography> = {
-    title: 'Data-Display/Typography/Typography',
+    title: 'Data-Display/Typography/Ellipsis',
     component: Typography,
     tags: ['autodocs'],
 };
