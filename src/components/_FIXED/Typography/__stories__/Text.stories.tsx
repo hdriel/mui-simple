@@ -55,9 +55,38 @@ export const Align: Story = {
     },
 };
 
+export const AlignCenter: Story = {
+    args: {
+        alignCenter: true,
+        children: largeIpsum,
+    },
+};
+
+export const AlignJustify: Story = {
+    args: {
+        alignJustify: true,
+        children: largeIpsum,
+    },
+};
+
+export const AlignLeft: Story = {
+    args: {
+        alignLeft: true,
+        children: largeIpsum,
+    },
+};
+
+export const AlignRight: Story = {
+    args: {
+        alignRight: true,
+        children: largeIpsum,
+    },
+};
+
 export const AutoWidth: Story = {
     args: {
         autoWidth: true,
+        bgColor: '#ffadad',
         children: smallIpsum,
     },
 };
@@ -76,18 +105,11 @@ export const Bold: Story = {
     },
 };
 
-export const Border: Story = {
-    args: {
-        border: true,
-        children: smallIpsum,
-    },
-};
-
 export const CharsCase_ = (args) => (
     <Stack spacing={3}>
-        <Text charsCase="lower">{largeIpsum}</Text>
-        <Text charsCase="upper">{largeIpsum}</Text>
-        <Text charsCase="capital">{largeIpsum}</Text>
+        <Text charsCase="lower">lower: {largeIpsum}</Text>
+        <Text charsCase="upper">upper: {largeIpsum}</Text>
+        <Text charsCase="capital">capital: {largeIpsum}</Text>
     </Stack>
 );
 
@@ -121,7 +143,8 @@ export const Italic: Story = {
 
 export const LineHeight: Story = {
     args: {
-        lineHeight: 2,
+        lineHeight: '2em',
+        bgColor: '#00ff58',
         children: smallIpsum,
     },
 };
@@ -161,26 +184,6 @@ export const Nested: Story = {
             <Text border>industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</Text>
         </Box>
     ),
-};
-
-export const OnEllipsisChange: Story = {
-    args: {},
-    render: (args) => {
-        const [ellipsisState, setEllipsisState] = useState(false);
-        return (
-            <Text
-                border
-                width={'auto'}
-                bgColor={ellipsisState ? 'primary' : 'secondary'}
-                onEllipsisChange={(value) => {
-                    action('onEllipsisChange')(value);
-                    setEllipsisState(value);
-                }}
-            >
-                {smallIpsum}
-            </Text>
-        );
-    },
 };
 
 export const Paragraph: Story = {

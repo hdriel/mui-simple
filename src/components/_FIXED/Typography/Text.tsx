@@ -24,6 +24,7 @@ const Text: React.FC<TypographyProps> = ({
     lineHeight,
     link,
     monospace,
+    noWrap,
     paragraph,
     size,
     strike,
@@ -44,7 +45,7 @@ const Text: React.FC<TypographyProps> = ({
     const alignItems = getAlign({ alignCenter, alignRight, alignLeft, alignJustify });
 
     const typographyProps = {
-        alignItems,
+        align: alignItems,
         bgColor: customBGColor,
         bold,
         charsCase,
@@ -57,7 +58,7 @@ const Text: React.FC<TypographyProps> = ({
         italic,
         lineHeight,
         monospace,
-        noWrap: !rows,
+        noWrap: noWrap || !rows,
         paragraph,
         rows: typeof rows === 'boolean' ? +rows : rows,
         strike,
@@ -65,21 +66,17 @@ const Text: React.FC<TypographyProps> = ({
         sup,
         target: '_blank',
         textDirection,
-        textWidth,
+        textWidth: textWidth || width,
         underline,
         ...(link && { href: link, component: 'a' }),
         ...props,
     };
 
-    const cmp = (
-        <MuiTypography display="flex" sx={sx} {...typographyProps}>
-            {children}&nbsp;
-        </MuiTypography>
-    );
-
     return (
         <Tooltip title={tooltip} placement={tooltipPlacement}>
-            {cmp}
+            <MuiTypography display="flex" sx={sx} {...typographyProps}>
+                {children}&nbsp;
+            </MuiTypography>
         </Tooltip>
     );
 };

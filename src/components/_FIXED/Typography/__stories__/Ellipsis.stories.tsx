@@ -23,59 +23,6 @@ export const Default: Story = {
     args: {},
 };
 
-export const AlignCenter: Story = {
-    args: {
-        alignCenter: true,
-        noWrap: true,
-        children: largeIpsum,
-    },
-};
-
-export const AlignJustify: Story = {
-    args: {
-        alignJustify: true,
-        noWrap: true,
-        children: largeIpsum,
-    },
-};
-
-export const AlignLeft: Story = {
-    args: {
-        alignLeft: true,
-        noWrap: true,
-        children: largeIpsum,
-    },
-};
-
-export const AlignRight: Story = {
-    args: {
-        alignRight: true,
-        noWrap: true,
-        children: largeIpsum,
-    },
-};
-
-export const AutoWidth: Story = {
-    args: {
-        autoWidth: true,
-        children: smallIpsum,
-    },
-};
-
-export const BgColor: Story = {
-    args: {
-        bgColor: 'warning',
-        children: smallIpsum,
-    },
-};
-
-export const Bold: Story = {
-    args: {
-        bold: true,
-        children: smallIpsum,
-    },
-};
-
 export const Border: Story = {
     args: {
         border: true,
@@ -83,59 +30,9 @@ export const Border: Story = {
     },
 };
 
-export const CharsCase_ = (args) => (
-    <Stack spacing={3}>
-        <Typography charsCase="lower">{largeIpsum}</Typography>
-        <Typography charsCase="upper">{largeIpsum}</Typography>
-        <Typography charsCase="capital">{largeIpsum}</Typography>
-    </Stack>
-);
-
-export const Color: Story = {
+export const AutoWidth: Story = {
     args: {
-        color: '#10cca0',
-        children: smallIpsum,
-    },
-};
-
-export const Component: Story = {
-    args: {
-        component: 'h1',
-        children: smallIpsum,
-    },
-};
-
-export const GutterBottom: Story = {
-    args: {
-        gutterBottom: true,
-        children: smallIpsum,
-    },
-};
-
-export const Italic: Story = {
-    args: {
-        italic: true,
-        children: smallIpsum,
-    },
-};
-
-export const LineHeight: Story = {
-    args: {
-        lineHeight: 2,
-        children: smallIpsum,
-    },
-};
-
-export const Link: Story = {
-    args: {
-        link: 'https://www.lipsum.com/',
-        children: smallIpsum,
-    },
-};
-
-export const Monospace: Story = {
-    args: {
-        monospace: true,
+        autoWidth: true,
         children: smallIpsum,
     },
 };
@@ -185,13 +82,6 @@ export const OnEllipsisChange: Story = {
     },
 };
 
-export const Paragraph: Story = {
-    args: {
-        paragraph: true,
-        children: smallIpsum,
-    },
-};
-
 export const Rows: Story = {
     args: {
         wrap: true,
@@ -215,27 +105,6 @@ export const size: Story = {
     },
 };
 
-export const Strike: Story = {
-    args: {
-        strike: true,
-        children: smallIpsum,
-    },
-};
-
-export const Sub: Story = {
-    args: {
-        sub: true,
-        children: smallIpsum,
-    },
-};
-
-export const Sup: Story = {
-    args: {
-        sup: true,
-        children: smallIpsum,
-    },
-};
-
 export const Tooltip: Story = {
     args: {
         wrap: true,
@@ -250,13 +119,6 @@ export const TooltipPlacement: Story = {
         tooltip: 'Lorem Ipsum',
         tooltipPlacement: 'right',
         children: largeIpsum,
-    },
-};
-
-export const Underline: Story = {
-    args: {
-        underline: true,
-        children: smallIpsum,
     },
 };
 
