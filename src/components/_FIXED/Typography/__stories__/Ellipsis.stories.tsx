@@ -33,6 +33,7 @@ export const Border: Story = {
 export const AutoWidth: Story = {
     args: {
         autoWidth: true,
+        bgColor: '#dccc0c',
         children: smallIpsum,
     },
 };
