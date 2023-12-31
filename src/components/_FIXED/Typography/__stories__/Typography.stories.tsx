@@ -4,7 +4,7 @@ import { Stack, Box } from '@mui/material';
 import Typography from '../Typography';
 
 export default {
-    title: 'Data-Display/Typography',
+    title: 'Data-Display/Typography/Typography',
     component: Typography,
     decorators: [
         (Story) => (
