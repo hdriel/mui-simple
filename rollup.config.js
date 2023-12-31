@@ -61,10 +61,6 @@ export default [
             del({ targets: 'dist/*' }),
             peerDepsExternal(),
             replace({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
-            json({
-                preferConst: true,
-                include: 'node_modules/**',
-            }),
             resolve({
                 extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json'],
                 moduleDirectories: ['node_modules'],
@@ -83,9 +79,9 @@ export default [
                 exclude: 'node_modules/**', // only transpile our source code
                 babelrc: true,
             }),
-            commonjs({
-                include: /node_modules/,
-            }),
+            json(),
+            commonjs(),
+            // commonjs({ include: /node_modules/ }),
             postcss({
                 minimize: true,
                 extensions: ['.css', '.less', '.scss'],
