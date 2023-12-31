@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { Border } from './Typography.styled';
 import Tooltip from '../Tooltip/Tooltip';
 import { useEllipsisActive } from '../../../hooks/useEllipsisActive';
-import type { TypographyProps } from '../../decs';
+import type { TextEllipsisProps } from '../../decs';
 import { useTooltipMessage } from './Typography.hooks';
 import Text from './Text';
 
-const TextEllipsis: React.FC<TypographyProps> = (props): React.ReactElement => {
+const TextEllipsis: React.FC<TextEllipsisProps> = (props): React.ReactElement => {
     const {
         rows,
         showTooltipOnEllipsis,
@@ -78,5 +78,5 @@ TextEllipsis.defaultProps = {
     wrap: true,
 };
 
-export type { TypographyProps } from '../../decs';
+export type { TextEllipsisProps } from '../../decs';
 export default TextEllipsis;

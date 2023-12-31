@@ -2,10 +2,10 @@ import React from 'react';
 import { Typography as MuiTypography } from './Typography.styled';
 import Tooltip from '../Tooltip/Tooltip';
 import { useCustomColor } from '../../../utils/helpers';
-import type { TypographyProps } from '../../decs';
+import type { TextProps } from '../../decs';
 import { getAlign } from './Typography.hooks';
 
-const Text: React.FC<TypographyProps> = ({
+const Text: React.FC<TextProps> = ({
     alignCenter,
     alignJustify,
     alignLeft,
@@ -59,6 +59,7 @@ Text.defaultProps = {
     alignJustify: undefined,
     alignLeft: undefined,
     alignRight: undefined,
+    align: undefined,
     autoWidth: true,
     bgColor: undefined,
     bold: undefined,
@@ -83,5 +84,5 @@ Text.defaultProps = {
     width: undefined,
 };
 
-export type { TypographyProps } from '../../decs';
+export type { TextProps } from '../../decs';
 export default Text;

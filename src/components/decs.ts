@@ -891,6 +891,46 @@ export interface TypographyProps {
     [key: string]: any;
 }
 
+export interface TextProps {
+    alignCenter?: boolean;
+    alignJustify?: boolean;
+    alignLeft?: boolean;
+    alignRight?: boolean;
+    autoWidth?: boolean;
+    bgColor?: string;
+    bold?: boolean | string;
+    border?: boolean | string;
+    charsCase?: 'upper' | 'lower' | 'capital';
+    color?: string;
+    component?: string;
+    gutterBottom?: boolean;
+    italic?: boolean;
+    lineHeight?: number;
+    link?: string;
+    monospace?: boolean;
+    paragraph?: boolean;
+    size?: number | string;
+    strike?: boolean;
+    sub?: boolean;
+    sup?: boolean;
+    textDirection?: 'ltr' | 'rtl';
+    textWidth?: number | string;
+    tooltip?: boolean | string;
+    tooltipPlacement?: TooltipPlacementType;
+    underline?: boolean;
+    width?: number | string;
+    [key: string]: any;
+}
+
+export interface TextEllipsisProps extends TextProps {
+    noWrap?: boolean;
+    onEllipsisChange?: (isEllipsis: boolean) => void;
+    rows?: number;
+    showTooltipOnEllipsis?: boolean;
+    wrap?: boolean;
+    [key: string]: any;
+}
+
 export interface AccordionProps {
     bgColor?: string;
     bgColorDetails?: string;

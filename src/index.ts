@@ -183,5 +183,11 @@ export * from './components/TreeView';
 export { default as Typography } from './components/_FIXED/Typography/Typography';
 export type { TypographyProps } from './components/_FIXED/Typography/Typography';
 
+export { default as Text } from './components/_FIXED/Typography/Text';
+export type { TextProps } from './components/_FIXED/Typography/Text';
+
+export { default as TextEllipsis } from './components/_FIXED/Typography/TextEllipsis';
+export type { TextEllipsisProps } from './components/_FIXED/Typography/TextEllipsis';
+
 export * from './utils';
 export { default as useElementSize } from './hooks/useElementSize';
