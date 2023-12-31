@@ -61,6 +61,10 @@ export default [
             del({ targets: 'dist/*' }),
             peerDepsExternal(),
             replace({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
+            json({
+                preferConst: true,
+                include: 'node_modules/**',
+            }),
             resolve({
                 extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json'],
                 moduleDirectories: ['node_modules'],
@@ -75,7 +79,7 @@ export default [
             }),
             babel({
                 babelHelpers: 'bundled',
-                extensions: ['.jsx', '.js', '.ts', '.tsx'],
+                extensions: ['.jsx', '.js', '.ts', '.tsx', '.json'],
                 exclude: 'node_modules/**', // only transpile our source code
                 babelrc: true,
             }),
@@ -87,7 +91,6 @@ export default [
                 extensions: ['.css', '.less', '.scss'],
                 plugins: [],
             }),
-            json(),
             urlResolve(),
             ...(isProd ? [terser({})] : []),
             generatePackageJson({

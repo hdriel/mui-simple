@@ -7,7 +7,7 @@
         "@babel/plugin-transform-react-display-name",
         "@babel/proposal-object-rest-spread",
         "@babel/plugin-proposal-class-properties",
-        ["@babel/plugin-transform-react-jsx", { "extensions": [".jsx", ".js", ".ts", ".tsx"] }]
+        ["@babel/plugin-transform-react-jsx", { "extensions": [".jsx", ".js", ".ts", ".tsx", ".json"] }]
     ],
     "exclude": "node_modules/**"
 }
