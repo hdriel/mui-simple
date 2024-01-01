@@ -176,7 +176,7 @@ export const Nested: Story = {
         <Box>
             <Text border width={'auto'}>
                 Lorem Ipsum is simply dummy{' '}
-                <Text border noWrap bold>
+                <Text border bold>
                     text of the
                 </Text>
                 printing and typesetting

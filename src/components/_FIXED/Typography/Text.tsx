@@ -24,11 +24,12 @@ const Text: React.FC<TextProps> = ({
     rows,
     tooltipPlacement,
     width,
+    align,
     ...props
 }): React.ReactElement => {
     const [customColor, muiColor] = useCustomColor(color);
     const [customBGColor] = useCustomColor(bgColor);
-    const alignItems = getAlign({ alignCenter, alignRight, alignLeft, alignJustify });
+    const alignItems = getAlign({ alignCenter, alignRight, alignLeft, alignJustify, align });
 
     const typographyProps = {
         align: alignItems,
@@ -37,18 +38,17 @@ const Text: React.FC<TextProps> = ({
         fontSize: size,
         noWrap: noWrap || !rows,
         rows: typeof rows === 'boolean' ? +rows : rows,
-        target: '_blank',
         textWidth: textWidth || width || (autoWidth ? 'fit-content' : undefined),
         customColor,
         textDirection,
-        ...(link && { href: link, component: 'a' }),
+        ...(link && { href: link, component: 'a', target: '_blank' }),
         ...props,
     };
 
     return (
         <Tooltip title={tooltip} placement={tooltipPlacement}>
-            <MuiTypography display="flex" sx={sx} {...typographyProps}>
-                {children}&nbsp;
+            <MuiTypography display="flex" flexDirection="row" sx={sx} {...typographyProps}>
+                <span>{children}</span>&nbsp;
             </MuiTypography>
         </Tooltip>
     );

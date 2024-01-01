@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-export const getAlign = ({ alignCenter, alignJustify, alignLeft, alignRight }): string => {
+export const getAlign = ({ alignCenter, alignJustify, alignLeft, alignRight, align }): string => {
     switch (true) {
         case alignCenter:
             return 'center';
@@ -11,7 +11,7 @@ export const getAlign = ({ alignCenter, alignJustify, alignLeft, alignRight }): 
         case alignRight:
             return 'right';
         default:
-            return 'inherit';
+            return align || 'inherit';
     }
 };
 
