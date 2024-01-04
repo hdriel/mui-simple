@@ -50,8 +50,8 @@ type TypographyStyledPropsType = Omit<TypographyProps, 'fontSize' | 'align' | 'b
     TypographyStyledProps;
 
 export const Typography = styled(
-    ({ className, myClassName, children, ...props }: TypographyStyledPropsType) => (
-        <MuiTypography className={classNames([className, myClassName])} {...props}>
+    ({ className, myClassName, innerRef, children, ...props }: TypographyStyledPropsType) => (
+        <MuiTypography ref={innerRef} className={classNames([className, myClassName])} {...props}>
             {children}
         </MuiTypography>
     ),
@@ -78,7 +78,6 @@ export const Typography = styled(
     // @ts-expect-error
 )<TypographyStyledPropsType>((props) => ({
     display: props.display ?? 'unset',
-    width: props.textWidth ?? '100%',
     color: props.customColor,
     backgroundColor: props.bgColor,
     fontWeight: props.bold && typeof props.bold === 'boolean' ? 'bold' : props.bold,
@@ -89,10 +88,8 @@ export const Typography = styled(
     textTransform: { upper: 'uppercase', lower: 'lowercase', capital: 'capitalize' }[props.charsCase],
     verticalAlign: props.sup ? 'super' : props.sub ? 'sub' : undefined,
     lineHeight: props.lineHeight,
-    direction: props.textDirection,
-    whiteSpace: 'normal',
+    direction: `${props.textDirection} /* @noflip */`,
+    whiteSpace: props.noWrap ? 'nowrap' : 'normal',
+    width: props.textWidth ?? 'inherit',
     ...(props.monospace && { fontFamily: 'monospace' }),
-    '&:has(:not(:empty))': {
-        display: 'inherit',
-    },
 })) as ComponentType<TypographyStyledPropsType>;

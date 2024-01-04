@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Border } from './Typography.styled';
 import { useEllipsisActive } from '../../../hooks/useEllipsisActive';
 import type { TextEllipsisProps } from '../../decs';
-import { useTooltipMessage } from './Typography.hooks';
+import { getAlign, useTooltipMessage } from './Typography.hooks';
 import Text from './Text';
 import { isDefined } from '../../../utils/helpers';
 
@@ -15,9 +15,16 @@ const TextEllipsis: React.FC<TextEllipsisProps> = ({
     showTooltipOnEllipsis,
     tooltip,
     rows,
+    width,
+    noWrap,
+    alignCenter,
+    alignRight,
+    alignLeft,
+    alignJustify,
+    align,
     ...props
 }): React.ReactElement => {
-    const { width, noWrap } = props;
+    const alignItems = getAlign({ alignCenter, alignRight, alignLeft, alignJustify, align });
 
     const [ref, isEllipsis] = useEllipsisActive({
         active: showTooltipOnEllipsis && isDefined(tooltip) && tooltip !== false,
@@ -32,8 +39,16 @@ const TextEllipsis: React.FC<TextEllipsisProps> = ({
     }, [isEllipsis]);
 
     return (
-        <Border width={width} rows={rows} border={border} noWrap={noWrap} autoWidth={autoWidth} sx={borderStyle}>
-            <Text ref={ref} {...props} tooltip={tooltipMessage} noWrap wrap={false} rows={0}>
+        <Border
+            width={width}
+            rows={rows}
+            border={border}
+            noWrap={noWrap}
+            autoWidth={autoWidth}
+            sx={borderStyle}
+            textAlign={alignItems as 'center' | 'right' | 'left'}
+        >
+            <Text innerRef={ref} {...props} tooltip={tooltipMessage} isEllipsis>
                 {children}&nbsp;
             </Text>
         </Border>

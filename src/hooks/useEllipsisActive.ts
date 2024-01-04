@@ -22,9 +22,10 @@ export function useEllipsisActive({ active, text, maxRows }): [any, boolean] {
 function getElementRowCount(element): number {
     if (!element) return 1;
 
-    const style = getComputedStyle(element);
+    const spanElement = (typeof element.children === 'string' ? element.children : element.children?.[0]) ?? element;
+    const style = getComputedStyle(spanElement);
     const lineHeight = parseFloat(style.lineHeight);
-    const { height } = element.getBoundingClientRect();
+    const { height } = spanElement.getBoundingClientRect();
     const rowCount = Math.round(height / lineHeight);
 
     return rowCount;

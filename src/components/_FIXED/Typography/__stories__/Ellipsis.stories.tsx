@@ -29,6 +29,7 @@ export const Default: Story = {
 export const Border: Story = {
     args: {
         border: true,
+        rows: 2,
         children: largeIpsum,
     },
 };
@@ -77,6 +78,7 @@ export const Nested: Story = {
 export const OnEllipsisChange: Story = {
     args: {
         children: largeIpsum,
+        rows: 3,
     },
     render: (args) => {
         const [ellipsisState, setEllipsisState] = useState(false);
@@ -152,7 +154,7 @@ export const Wrap: Story = {
 export const Align: Story = {
     args: {
         align: 'center',
-        noWrap: true,
+        rows: 3,
         children: largeIpsum,
     },
     render: (args) => {

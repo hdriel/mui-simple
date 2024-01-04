@@ -23,35 +23,50 @@ const Text: React.FC<TextProps> = ({
     size,
     sx,
     textDirection,
-    textWidth,
     tooltip,
     tooltipPlacement,
     width,
+    isEllipsis,
     ...props
 }): React.ReactElement => {
-    const [customColor, muiColor] = useCustomColor(color);
+    const [customColor] = useCustomColor(color);
     const [customBGColor] = useCustomColor(bgColor);
     const alignItems = getAlign({ alignCenter, alignRight, alignLeft, alignJustify, align });
 
     const typographyProps = {
+        ...props,
         align: alignItems,
+        color: customColor,
         bgColor: customBGColor,
-        color: muiColor,
-        customColor,
         fontSize: size,
         myClassName: className,
-        noWrap: noWrap || !rows,
+        noWrap: noWrap || rows === 0,
         rows: typeof rows === 'boolean' ? +rows : rows,
         textDirection,
-        textWidth: textWidth || width || (autoWidth ? 'fit-content' : undefined),
+        textWidth: width || (autoWidth ? 'fit-content' : undefined),
+        ...(!isEllipsis && !rows && (width || alignItems) && { display: 'flex' }),
+        ...((isEllipsis || rows) && { display: 'contents' }),
         ...(link && { href: link, component: 'a', target: '_blank' }),
-        ...props,
     };
 
     return (
         <Tooltip title={tooltip as string} placement={tooltipPlacement}>
-            <MuiTypography ref={innerRef} display="flex" flexDirection="row" sx={sx} {...typographyProps}>
-                <span>{children}</span>&nbsp;
+            <MuiTypography innerRef={innerRef} {...typographyProps}>
+                <span
+                    style={{
+                        display: 'contents',
+                        color: customColor,
+                        backgroundColor: customBGColor,
+                        ...(isEllipsis && {
+                            width: 'inherit',
+                            textOverflow: 'ellipsis',
+                            overflow: 'hidden',
+                        }),
+                    }}
+                >
+                    {children}
+                </span>
+                &nbsp;
             </MuiTypography>
         </Tooltip>
     );
@@ -80,11 +95,12 @@ Text.defaultProps = {
     sub: undefined,
     sup: undefined,
     textDirection: undefined,
-    textWidth: undefined,
     tooltip: undefined,
     tooltipPlacement: undefined,
     underline: undefined,
     width: undefined,
+    noWrap: undefined,
+    isEllipsis: undefined,
 };
 
 export type { TextProps } from '../../decs';

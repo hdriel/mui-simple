@@ -914,7 +914,6 @@ export interface TextProps {
     sub?: boolean;
     sup?: boolean;
     textDirection?: 'ltr' | 'rtl';
-    textWidth?: number | string;
     tooltip?: boolean | string;
     tooltipPlacement?: TooltipPlacementType;
     underline?: boolean;
