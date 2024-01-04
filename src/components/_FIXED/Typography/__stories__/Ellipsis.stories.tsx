@@ -87,6 +87,7 @@ export const OnEllipsisChange: Story = {
             <>
                 <TextEllipsis
                     {...args}
+                    tooltip={ellipsisState ? 'is ellipsis text' : undefined}
                     bgColor={ellipsisState ? 'primary' : 'secondary'}
                     onEllipsisChange={(value) => {
                         action('onEllipsisChange')(value);
@@ -94,7 +95,11 @@ export const OnEllipsisChange: Story = {
                     }}
                 />
 
-                {ellipsisState ? <Button>isEllipsis</Button> : <Button>resize screen</Button>}
+                {ellipsisState ? (
+                    <Button variant="contained">ellipsis text</Button>
+                ) : (
+                    <Button variant="outlined">normal text</Button>
+                )}
             </>
         );
     },

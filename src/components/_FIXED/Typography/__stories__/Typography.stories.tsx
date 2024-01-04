@@ -61,21 +61,21 @@ export const Rows = () => {
 export const Align = () => {
     return (
         <Stack spacing={3}>
-            <Typography alignCenter wrap={false} border>
+            <Typography alignCenter border>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
             </Typography>
-            <Typography width={'90%'} alignRight wrap={false} border>
+            <Typography width={'90%'} alignRight border>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                 industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of types
                 simply dummy text of the printing and typesetting industry.
             </Typography>
-            <Typography width={'90%'} alignJustify wrap={false} border>
+            <Typography width={'90%'} alignJustify border>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                 industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
                 scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
                 into electr
             </Typography>
-            <Typography width={'80%'} wrap={false} border>
+            <Typography width={'80%'} border>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                 industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
                 scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap

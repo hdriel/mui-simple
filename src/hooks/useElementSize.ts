@@ -7,14 +7,20 @@ export default function useElementSize(resize = false): [any, { width: number; h
         height: window.innerHeight,
     });
 
-    useEffect(() => {
-        console.log(windowSize);
-    }, [windowSize]);
+    // useEffect(() => {
+    //     console.log(windowSize);
+    // }, [windowSize]);
 
     useEffect(() => {
         function handleResize(): void {
             if (ref.current) {
-                const { width, height } = ref.current?.getBoundingClientRect() ?? {};
+                const spanElement =
+                    (typeof ref.current.children === 'string' ? ref.current.children : ref.current.children?.[0]) ??
+                    ref.current;
+                const display = spanElement.style.display;
+                spanElement.style.display = 'block';
+                const { width, height } = spanElement?.getBoundingClientRect() ?? {};
+                spanElement.style.display = display;
                 setWindowSize({ width, height });
             }
         }
@@ -27,6 +33,7 @@ export default function useElementSize(resize = false): [any, { width: number; h
         return () => {
             resize && window.removeEventListener('resize', handleResize);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ref.current, resize]);
 
     return [ref, { width: windowSize.width, height: windowSize.height }];
