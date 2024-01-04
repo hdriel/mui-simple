@@ -47,12 +47,14 @@ const Text: React.FC<TextProps> = ({
         ...(!isEllipsis && !rows && (width || alignItems) && { display: 'flex' }),
         ...((isEllipsis || rows) && { display: 'contents' }),
         ...(link && { href: link, component: 'a', target: '_blank' }),
+        // innerRef
     };
 
     return (
         <Tooltip title={tooltip as string} placement={tooltipPlacement}>
-            <MuiTypography innerRef={innerRef} {...typographyProps}>
+            <MuiTypography {...typographyProps}>
                 <span
+                    ref={innerRef}
                     style={{
                         display: 'contents',
                         color: customColor,

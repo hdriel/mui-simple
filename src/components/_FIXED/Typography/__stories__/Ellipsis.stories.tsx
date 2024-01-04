@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Box, Stack } from '@mui/material';
+import { Box, Stack, Button } from '@mui/material';
 
 import TextEllipsis from '../TextEllipsis';
 import { action } from '@storybook/addon-actions';
@@ -84,14 +84,18 @@ export const OnEllipsisChange: Story = {
         const [ellipsisState, setEllipsisState] = useState(false);
 
         return (
-            <TextEllipsis
-                {...args}
-                bgColor={ellipsisState ? 'primary' : 'secondary'}
-                onEllipsisChange={(value) => {
-                    action('onEllipsisChange')(value);
-                    setEllipsisState(value);
-                }}
-            />
+            <>
+                <TextEllipsis
+                    {...args}
+                    bgColor={ellipsisState ? 'primary' : 'secondary'}
+                    onEllipsisChange={(value) => {
+                        action('onEllipsisChange')(value);
+                        setEllipsisState(value);
+                    }}
+                />
+
+                {ellipsisState ? <Button>isEllipsis</Button> : <Button>resize screen</Button>}
+            </>
         );
     },
 };

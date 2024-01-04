@@ -24,14 +24,15 @@ const TextEllipsis: React.FC<TextEllipsisProps> = ({
     align,
     ...props
 }): React.ReactElement => {
-    const alignItems = getAlign({ alignCenter, alignRight, alignLeft, alignJustify, align });
-
+    const resize = showTooltipOnEllipsis && isDefined(tooltip) && tooltip !== false;
     const [ref, isEllipsis] = useEllipsisActive({
-        active: showTooltipOnEllipsis && isDefined(tooltip) && tooltip !== false,
+        active: resize,
         text: children,
         maxRows: +rows || 0,
     });
+
     const tooltipMessage = useTooltipMessage({ children, tooltip, isEllipsis, showTooltipOnEllipsis });
+    const alignItems = getAlign({ alignCenter, alignRight, alignLeft, alignJustify, align });
 
     useEffect(() => {
         onEllipsisChange?.(isEllipsis);
