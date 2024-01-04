@@ -32,7 +32,7 @@ export default function useElementSize(resize = false): [any, { width: number; h
     return [ref, { width: windowSize.width, height: windowSize.height }];
 }
 
-export default function useElementSizeOld(resize = false): [any, { width: number; height: number }] {
+export function useElementSizeOld(resize = false): [any, { width: number; height: number }] {
     const ref = useRef<HTMLElement>(null);
 
     const [width, setWidth] = useState(0);
