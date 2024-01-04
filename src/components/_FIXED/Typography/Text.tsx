@@ -47,7 +47,6 @@ const Text: React.FC<TextProps> = ({
         ...(!isEllipsis && !rows && (width || alignItems) && { display: 'flex' }),
         ...((isEllipsis || rows) && { display: 'contents' }),
         ...(link && { href: link, component: 'a', target: '_blank' }),
-        // innerRef
     };
 
     return (
