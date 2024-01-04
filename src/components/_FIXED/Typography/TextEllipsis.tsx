@@ -1,28 +1,26 @@
 import React, { useEffect } from 'react';
 import { Border } from './Typography.styled';
-import Tooltip from '../Tooltip/Tooltip';
 import { useEllipsisActive } from '../../../hooks/useEllipsisActive';
 import type { TextEllipsisProps } from '../../decs';
 import { useTooltipMessage } from './Typography.hooks';
 import Text from './Text';
+import { isDefined } from '../../../utils/helpers';
 
-const TextEllipsis: React.FC<TextEllipsisProps> = (props): React.ReactElement => {
-    const {
-        rows,
-        showTooltipOnEllipsis,
-        tooltipPlacement,
-        children,
-        tooltip,
-        onEllipsisChange,
-        width,
-        border,
-        noWrap,
-        autoWidth,
-        sx,
-    } = props;
+const TextEllipsis: React.FC<TextEllipsisProps> = ({
+    autoWidth,
+    border,
+    borderStyle,
+    children,
+    onEllipsisChange,
+    showTooltipOnEllipsis,
+    tooltip,
+    rows,
+    ...props
+}): React.ReactElement => {
+    const { width, noWrap } = props;
 
     const [ref, isEllipsis] = useEllipsisActive({
-        active: showTooltipOnEllipsis && tooltip !== false,
+        active: showTooltipOnEllipsis && isDefined(tooltip) && tooltip !== false,
         text: children,
         maxRows: +rows || 0,
     });
@@ -34,47 +32,23 @@ const TextEllipsis: React.FC<TextEllipsisProps> = (props): React.ReactElement =>
     }, [isEllipsis]);
 
     return (
-        <Tooltip title={tooltipMessage} placement={tooltipPlacement}>
-            <Border width={width} rows={rows} border={border} noWrap={noWrap} autoWidth={autoWidth} sx={sx}>
-                <Text ref={ref} {...props}>
-                    {children}&nbsp;
-                </Text>
-            </Border>
-        </Tooltip>
+        <Border width={width} rows={rows} border={border} noWrap={noWrap} autoWidth={autoWidth} sx={borderStyle}>
+            <Text ref={ref} {...props} tooltip={tooltipMessage} noWrap wrap={false} rows={0}>
+                {children}&nbsp;
+            </Text>
+        </Border>
     );
 };
 
 TextEllipsis.defaultProps = {
-    alignCenter: undefined,
-    alignJustify: undefined,
-    alignLeft: undefined,
-    alignRight: undefined,
     autoWidth: true,
-    bgColor: undefined,
-    bold: undefined,
     border: undefined,
-    charsCase: undefined,
-    color: undefined,
+    borderStyle: undefined,
     component: 'span',
-    gutterBottom: undefined,
-    italic: undefined,
-    lineHeight: undefined,
-    monospace: undefined,
-    noWrap: undefined,
     onEllipsisChange: undefined,
-    paragraph: undefined,
     rows: 1,
     showTooltipOnEllipsis: true,
-    size: undefined,
-    strike: undefined,
-    sub: undefined,
-    sup: undefined,
-    textDirection: undefined,
-    textWidth: undefined,
-    tooltip: undefined,
-    tooltipPlacement: undefined,
-    underline: undefined,
-    width: undefined,
+    tooltip: true,
     wrap: true,
 };
 

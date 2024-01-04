@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Box, Stack } from '@mui/material';
 import Text from '../Text';
-import { action } from '@storybook/addon-actions';
 import ToggleButtonGroup from '../../ToggleButtonGroup/ToggleButtonGroup';
 
 const meta: Meta<typeof Text> = {
