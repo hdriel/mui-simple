@@ -6,6 +6,7 @@ import type { TextProps } from '../../decs';
 import { getAlign } from './Typography.hooks';
 
 const Text: React.FC<TextProps> = ({
+    align,
     alignCenter,
     alignJustify,
     alignLeft,
@@ -13,18 +14,19 @@ const Text: React.FC<TextProps> = ({
     autoWidth,
     bgColor,
     children,
+    className,
     color,
+    innerRef,
     link,
     noWrap,
+    rows,
     size,
     sx,
     textDirection,
     textWidth,
     tooltip,
-    rows,
     tooltipPlacement,
     width,
-    align,
     ...props
 }): React.ReactElement => {
     const [customColor, muiColor] = useCustomColor(color);
@@ -35,19 +37,20 @@ const Text: React.FC<TextProps> = ({
         align: alignItems,
         bgColor: customBGColor,
         color: muiColor,
+        customColor,
         fontSize: size,
+        myClassName: className,
         noWrap: noWrap || !rows,
         rows: typeof rows === 'boolean' ? +rows : rows,
-        textWidth: textWidth || width || (autoWidth ? 'fit-content' : undefined),
-        customColor,
         textDirection,
+        textWidth: textWidth || width || (autoWidth ? 'fit-content' : undefined),
         ...(link && { href: link, component: 'a', target: '_blank' }),
         ...props,
     };
 
     return (
-        <Tooltip title={tooltip} placement={tooltipPlacement}>
-            <MuiTypography display="flex" flexDirection="row" sx={sx} {...typographyProps}>
+        <Tooltip title={tooltip as string} placement={tooltipPlacement}>
+            <MuiTypography ref={innerRef} display="flex" flexDirection="row" sx={sx} {...typographyProps}>
                 <span>{children}</span>&nbsp;
             </MuiTypography>
         </Tooltip>

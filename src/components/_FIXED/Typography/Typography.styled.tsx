@@ -1,17 +1,19 @@
+import React from 'react';
 import type { ComponentType } from 'react';
 import { Box, Typography as MuiTypography } from '@mui/material';
 import type { TypographyProps, BoxProps } from '@mui/material';
-import { styled, css } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
+import classNames from 'classnames';
 
 import { ellipsisRow1, ellipsisRows } from './Typography.styles';
 import { numberToPx } from '../../../utils/helpers';
 
 interface TypographyBorderProps {
     autoWidth?: boolean;
-    noWrap?: boolean;
-    width?: string | number;
     border?: boolean | string;
+    noWrap?: boolean;
     rows?: number;
+    width?: string | number;
     [key: string]: any;
 }
 type TypographyBorderPropsType = Omit<BoxProps, 'border'> & TypographyBorderProps;
@@ -28,43 +30,53 @@ export const Border = styled(Box, {
 ` as ComponentType<TypographyBorderPropsType>;
 
 interface TypographyStyledProps {
-    customColor?: string;
-    bold?: boolean | string;
-    italic?: boolean;
-    underline?: boolean;
-    strike?: boolean;
-    charsCase?: string;
-    sup?: boolean;
-    sub?: boolean;
-    monospace?: boolean;
-    lineHeight?: number;
     bgColor?: string;
+    bold?: boolean | string;
+    charsCase?: string;
+    customColor?: string;
     fontSize?: number | string;
+    italic?: boolean;
+    lineHeight?: number;
+    monospace?: boolean;
+    myClassName?: string | string[];
+    strike?: boolean;
+    sub?: boolean;
+    sup?: boolean;
+    underline?: boolean;
 
     [key: string]: any;
 }
-type TypographyStyledPropsType = Omit<TypographyProps, 'fontSize'> & TypographyStyledProps;
+type TypographyStyledPropsType = Omit<TypographyProps, 'fontSize' | 'align' | 'border' | 'component'> &
+    TypographyStyledProps;
 
-export const Typography = styled(MuiTypography, {
-    shouldForwardProp: (propName: string) =>
-        ![
-            'fontSize',
-            'font',
-            'customColor',
-            'bold',
-            'italic',
-            'underline',
-            'strike',
-            'charsCase',
-            'sup',
-            'sub',
-            'monospace',
-            'lineHeight',
-            'textDirection',
-            'textWidth',
-            'bgColor',
-        ].includes(propName),
-})<TypographyStyledPropsType>((props) => ({
+export const Typography = styled(
+    ({ className, myClassName, children, ...props }: TypographyStyledPropsType) => (
+        <MuiTypography className={classNames([className, myClassName])} {...props}>
+            {children}
+        </MuiTypography>
+    ),
+    {
+        shouldForwardProp: (propName: string) =>
+            ![
+                'bgColor',
+                'bold',
+                'charsCase',
+                'customColor',
+                'font',
+                'fontSize',
+                'italic',
+                'lineHeight',
+                'monospace',
+                'strike',
+                'sub',
+                'sup',
+                'textDirection',
+                'textWidth',
+                'underline',
+            ].includes(propName),
+    }
+    // @ts-expect-error
+)<TypographyStyledPropsType>((props) => ({
     display: props.display ?? 'unset',
     width: props.textWidth ?? '100%',
     color: props.customColor,

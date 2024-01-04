@@ -193,7 +193,7 @@ export const Paragraph: Story = {
     },
 };
 
-export const size: Story = {
+export const Size: Story = {
     args: {
         size: 30,
         children: smallIpsum,
@@ -249,5 +249,12 @@ export const Width: Story = {
     args: {
         width: 250,
         children: smallIpsum,
+    },
+};
+
+export const ClassName: Story = {
+    args: {
+        className: 'mui-simple',
+        children: largeIpsum,
     },
 };

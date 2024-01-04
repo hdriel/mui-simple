@@ -1,4 +1,5 @@
 import React from 'react';
+import type { ElementType } from 'react';
 import { isEmpty } from 'lodash-es';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { Box } from '@mui/material';
@@ -7,6 +8,7 @@ import { useTheme } from '@mui/material/styles';
 import classNames from 'classnames';
 import { DraggableListUL, DraggableListULItem } from './DraggableList.styled';
 import { getDataId, getItemStyle, getListStyle } from './DraggableList.styles';
+import type { DataItem } from './DraggableList.styles';
 import { useDragHandlers } from './DraggableList.hooks';
 import type { DraggableListProps } from '../decs';
 
@@ -72,7 +74,7 @@ const DraggableList: React.FC<DraggableListProps> = (props): React.ReactElement 
                                     <DraggableListULItem
                                         {...providedItem.draggableProps}
                                         {...providedItem.dragHandleProps}
-                                        component={component}
+                                        component={component as ElementType}
                                         ref={providedItem.innerRef}
                                         style={getItemStyle({
                                             theme,

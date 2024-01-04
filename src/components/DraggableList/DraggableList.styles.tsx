@@ -4,7 +4,7 @@ export const getDataId = (data: any, fieldId: string, index: number): string =>
 
 export const queryAttr = 'data-rbd-drag-handle-draggable-id';
 
-interface DataItem {
+export interface DataItem {
     id?: string;
     [key: string]: any;
 }
