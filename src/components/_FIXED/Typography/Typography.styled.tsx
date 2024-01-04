@@ -50,8 +50,8 @@ type TypographyStyledPropsType = Omit<TypographyProps, 'fontSize' | 'align' | 'b
     TypographyStyledProps;
 
 export const Typography = styled(
-    ({ className, myClassName, innerRef, children, ...props }: TypographyStyledPropsType) => (
-        <MuiTypography ref={innerRef} className={classNames([className, myClassName])} {...props}>
+    ({ className, myClassName, children, ...props }: TypographyStyledPropsType) => (
+        <MuiTypography className={classNames([className, myClassName])} {...props}>
             {children}
         </MuiTypography>
     ),

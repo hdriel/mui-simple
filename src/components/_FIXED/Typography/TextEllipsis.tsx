@@ -35,10 +35,6 @@ const TextEllipsis: React.FC<TextEllipsisProps> = ({
     const alignItems = getAlign({ alignCenter, alignRight, alignLeft, alignJustify, align });
 
     useEffect(() => {
-        console.log('tooltipMessage', tooltipMessage);
-    }, [tooltipMessage]);
-
-    useEffect(() => {
         onEllipsisChange?.(isEllipsis);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isEllipsis]);
