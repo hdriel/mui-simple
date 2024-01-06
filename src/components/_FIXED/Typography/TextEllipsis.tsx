@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Border } from './Typography.styled';
 import { useEllipsisActive } from '../../../hooks/useEllipsisActive';
 import type { TextEllipsisProps } from '../../decs';
-import { getAlign, useTooltipMessage } from './Typography.hooks';
+import { getAlign } from './Typography.hooks';
 import Text from './Text';
 import { isDefined } from '../../../utils/helpers';
 

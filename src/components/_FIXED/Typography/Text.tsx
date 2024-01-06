@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography as MuiTypography, TooltipBox } from './Typography.styled';
+import { Typography as MuiTypography } from './Typography.styled';
 import Tooltip from '../Tooltip/Tooltip';
 import { useCustomColor } from '../../../utils/helpers';
 import type { TextProps } from '../../decs';
