@@ -96,9 +96,9 @@ export const OnEllipsisChange: Story = {
                 />
 
                 {ellipsisState ? (
-                    <Button variant="contained">ellipsis text</Button>
+                    <Button variant="contained">hover ellipsis text</Button>
                 ) : (
-                    <Button variant="outlined">normal text</Button>
+                    <Button variant="outlined">is not ellipsis text</Button>
                 )}
             </>
         );
@@ -107,7 +107,6 @@ export const OnEllipsisChange: Story = {
 
 export const Rows: Story = {
     args: {
-        wrap: true,
         tooltip: true,
         rows: 2,
         children: largeIpsum,
@@ -130,7 +129,6 @@ export const size: Story = {
 
 export const Tooltip: Story = {
     args: {
-        wrap: true,
         tooltip: 'Lorem Ipsum',
         children: largeIpsum,
     },
@@ -138,7 +136,6 @@ export const Tooltip: Story = {
 
 export const TooltipPlacement: Story = {
     args: {
-        wrap: true,
         tooltip: 'Lorem Ipsum',
         tooltipPlacement: 'right',
         children: largeIpsum,

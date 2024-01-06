@@ -4,32 +4,51 @@ import { Tooltip as MuiTooltip, Zoom } from './Tooltip.styled';
 import { CustomChildTooltipWrapper } from './Tooltip.helper';
 import type { TooltipProps } from '../../decs';
 
-const Tooltip: React.FC<TooltipProps> = ({ bgColor, children, color, fontSize, lineHeight, title, ...props }) => {
-    if (typeof children === 'string') children = <div>{children}</div>;
+const Tooltip: React.FC<TooltipProps> = ({
+    spanWrapper,
+    bgColor,
+    children,
+    color,
+    fontSize,
+    lineHeight,
+    title,
+    ...props
+}) => {
+    if (typeof children === 'string') {
+        children = <div>{children}</div>;
+    }
+
     const isValidTooltipProps = title && isValidElement(children);
 
-    return isValidTooltipProps ? (
+    if (!isValidTooltipProps) {
+        return children;
+    }
+
+    const cmp = isForwardRef(children) ? children : <CustomChildTooltipWrapper>{children}</CustomChildTooltipWrapper>;
+
+    return (
         <MuiTooltip
             TransitionComponent={Zoom}
             title={title}
             arrow
+            {...props}
             componentsProps={{
+                ...props.componentsProps,
                 tooltip: {
+                    ...props.componentsProps?.tooltip,
                     sx: {
                         bgcolor: bgColor,
                         color,
                         fontSize,
                         lineHeight,
                         '& .MuiTooltip-arrow': { color: bgColor },
+                        ...props.componentsProps?.tooltip?.sx,
                     },
                 },
             }}
-            {...props}
         >
-            {isForwardRef(children) ? children : <CustomChildTooltipWrapper>{children}</CustomChildTooltipWrapper>}
+            {cmp}
         </MuiTooltip>
-    ) : (
-        children
     );
 };
 

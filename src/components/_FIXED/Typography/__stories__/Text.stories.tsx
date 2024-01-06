@@ -223,15 +223,13 @@ export const Sup: Story = {
 
 export const Tooltip: Story = {
     args: {
-        wrap: true,
-        tooltip: 'Lorem Ipsum',
+        tooltip: largeIpsum,
         children: largeIpsum,
     },
 };
 
 export const TooltipPlacement: Story = {
     args: {
-        wrap: true,
         tooltip: 'Lorem Ipsum',
         tooltipPlacement: 'right',
         children: largeIpsum,

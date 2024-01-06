@@ -8,6 +8,8 @@ import classNames from 'classnames';
 import { ellipsisRow1, ellipsisRows } from './Typography.styles';
 import { numberToPx } from '../../../utils/helpers';
 
+export const TooltipBox = <Box />;
+
 interface TypographyBorderProps {
     autoWidth?: boolean;
     border?: boolean | string;
@@ -51,7 +53,7 @@ type TypographyStyledPropsType = Omit<TypographyProps, 'fontSize' | 'align' | 'b
 
 export const Typography = styled(
     ({ className, myClassName, children, ...props }: TypographyStyledPropsType) => (
-        <MuiTypography className={classNames([className, myClassName])} {...props}>
+        <MuiTypography className={classNames([className, myClassName])} component="span" {...props}>
             {children}
         </MuiTypography>
     ),
@@ -77,6 +79,7 @@ export const Typography = styled(
     }
     // @ts-expect-error
 )<TypographyStyledPropsType>((props) => ({
+    position: 'relative',
     display: props.display ?? 'unset',
     color: props.customColor,
     backgroundColor: props.bgColor,

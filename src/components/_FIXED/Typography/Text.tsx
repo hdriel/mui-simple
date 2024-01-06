@@ -1,9 +1,9 @@
 import React from 'react';
-import { Typography as MuiTypography } from './Typography.styled';
+import { Typography as MuiTypography, TooltipBox } from './Typography.styled';
 import Tooltip from '../Tooltip/Tooltip';
 import { useCustomColor } from '../../../utils/helpers';
 import type { TextProps } from '../../decs';
-import { getAlign } from './Typography.hooks';
+import { getAlign, useTooltipMessage } from './Typography.hooks';
 
 const Text: React.FC<TextProps> = ({
     align,
@@ -27,11 +27,15 @@ const Text: React.FC<TextProps> = ({
     tooltipPlacement,
     width,
     isEllipsis,
+    useEllipsisStyle,
+    showTooltipOnEllipsis,
     ...props
 }): React.ReactElement => {
     const [customColor] = useCustomColor(color);
     const [customBGColor] = useCustomColor(bgColor);
     const alignItems = getAlign({ alignCenter, alignRight, alignLeft, alignJustify, align });
+
+    const tooltipMessage = useTooltipMessage({ children, tooltip, isEllipsis, showTooltipOnEllipsis });
 
     const typographyProps = {
         ...props,
@@ -50,26 +54,40 @@ const Text: React.FC<TextProps> = ({
     };
 
     return (
-        <Tooltip title={tooltip as string} placement={tooltipPlacement}>
-            <MuiTypography {...typographyProps}>
-                <span
-                    ref={innerRef}
-                    style={{
-                        display: 'contents',
-                        color: customColor,
-                        backgroundColor: customBGColor,
-                        ...(isEllipsis && {
-                            width: 'inherit',
-                            textOverflow: 'ellipsis',
-                            overflow: 'hidden',
-                        }),
-                    }}
-                >
-                    {children}
-                </span>
-                &nbsp;
-            </MuiTypography>
-        </Tooltip>
+        <MuiTypography {...typographyProps}>
+            <span
+                ref={innerRef}
+                style={{
+                    display: 'contents',
+                    color: customColor,
+                    backgroundColor: customBGColor,
+                    ...(useEllipsisStyle && {
+                        width: 'inherit',
+                        textOverflow: 'ellipsis',
+                        overflow: 'hidden',
+                    }),
+                }}
+            >
+                {children}
+            </span>
+            &nbsp;
+            {tooltipMessage && (
+                // there is a bug to wrap tooltip around typography component, so this is my hack for that
+                <Tooltip title={tooltipMessage} placement={tooltipPlacement} followCursor>
+                    <span
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                        }}
+                    >
+                        {' '}
+                    </span>
+                </Tooltip>
+            )}
+        </MuiTypography>
     );
 };
 
@@ -101,7 +119,8 @@ Text.defaultProps = {
     underline: undefined,
     width: undefined,
     noWrap: undefined,
-    isEllipsis: undefined,
+    isEllipsis: false,
+    showTooltipOnEllipsis: false,
 };
 
 export type { TextProps } from '../../decs';

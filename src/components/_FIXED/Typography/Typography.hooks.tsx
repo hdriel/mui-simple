@@ -31,6 +31,10 @@ export function useTooltipMessage({ children, tooltip, showTooltipOnEllipsis, is
             return customTooltip ?? childrenTooltip;
         }
 
+        if (showTooltipOnEllipsis === false && isEllipsis === false && !tooltip) {
+            return undefined;
+        }
+
         const result = customTooltip ?? childrenTooltip ?? defaultTooltip;
         return Array.isArray(result) ? result.join('') : result;
     }, [showTooltipOnEllipsis, isEllipsis, tooltip, children]);

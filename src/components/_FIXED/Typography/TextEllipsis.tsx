@@ -31,7 +31,6 @@ const TextEllipsis: React.FC<TextEllipsisProps> = ({
         maxRows: +rows || 0,
     });
 
-    const tooltipMessage = useTooltipMessage({ children, tooltip, isEllipsis, showTooltipOnEllipsis });
     const alignItems = getAlign({ alignCenter, alignRight, alignLeft, alignJustify, align });
 
     useEffect(() => {
@@ -49,7 +48,13 @@ const TextEllipsis: React.FC<TextEllipsisProps> = ({
             sx={borderStyle}
             textAlign={alignItems as 'center' | 'right' | 'left'}
         >
-            <Text innerRef={ref} {...props} tooltip={tooltipMessage} isEllipsis>
+            <Text
+                innerRef={ref}
+                {...props}
+                isEllipsis={isEllipsis}
+                useEllipsisStyle
+                showTooltipOnEllipsis={showTooltipOnEllipsis}
+            >
                 {children}&nbsp;
             </Text>
         </Border>
@@ -64,8 +69,7 @@ TextEllipsis.defaultProps = {
     onEllipsisChange: undefined,
     rows: 1,
     showTooltipOnEllipsis: true,
-    tooltip: true,
-    wrap: true,
+    tooltip: false,
 };
 
 export type { TextEllipsisProps } from '../../decs';
