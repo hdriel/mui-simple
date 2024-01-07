@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import useElementSize from './useElementSize';
-import { getTextWidth } from '../utils/helpers';
 
 const TEXT_ELLIPSIS_GAP = 65;
-export function useEllipsisActive({ active, text, maxRows }): [any, boolean] {
+export function useEllipsisActive({ active, maxRows }): [any, boolean] {
     const [ref, { width: widthText }] = useElementSize(active);
     const [isEllipsis, setIsEllipsis] = useState(false);
 
@@ -25,8 +24,8 @@ export function useEllipsisActive({ active, text, maxRows }): [any, boolean] {
 function getElementRowCount(element): number {
     if (!element) return 1;
 
-    const style = getComputedStyle(element);
-    const lineHeight = parseFloat(style.lineHeight);
+    const style = window?.getComputedStyle(element);
+    const lineHeight = parseFloat(`${style?.lineHeight}`);
 
     const display = element.style.display;
     element.style.display = 'block';
@@ -40,7 +39,7 @@ function getElementRowCount(element): number {
 function getElementLastRowWidth(element): number {
     if (!element) return 0;
 
-    const cursorElement = document.createElement('span');
+    const cursorElement = window?.document.createElement('span');
     element.appendChild(cursorElement);
     const offset = cursorElement.offsetLeft;
     element.removeChild(cursorElement);

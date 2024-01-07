@@ -150,13 +150,6 @@ export const Width: Story = {
     },
 };
 
-export const Wrap: Story = {
-    args: {
-        wrap: false,
-        children: largeIpsum,
-    },
-};
-
 export const Align: Story = {
     args: {
         align: 'center',

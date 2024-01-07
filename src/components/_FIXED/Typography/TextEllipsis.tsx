@@ -4,7 +4,6 @@ import { useEllipsisActive } from '../../../hooks/useEllipsisActive';
 import type { TextEllipsisProps } from '../../decs';
 import { getAlign } from './Typography.hooks';
 import Text from './Text';
-import { isDefined } from '../../../utils/helpers';
 
 const TextEllipsis: React.FC<TextEllipsisProps> = ({
     autoWidth,
@@ -13,10 +12,10 @@ const TextEllipsis: React.FC<TextEllipsisProps> = ({
     children,
     onEllipsisChange,
     showTooltipOnEllipsis,
-    tooltip,
     rows,
     width,
     noWrap,
+    dynamicEllipsis,
     alignCenter,
     alignRight,
     alignLeft,
@@ -24,13 +23,7 @@ const TextEllipsis: React.FC<TextEllipsisProps> = ({
     align,
     ...props
 }): React.ReactElement => {
-    const resize = showTooltipOnEllipsis && isDefined(tooltip) && tooltip !== false;
-    const [ref, isEllipsis] = useEllipsisActive({
-        active: resize,
-        text: children,
-        maxRows: +rows || 0,
-    });
-
+    const [ref, isEllipsis] = useEllipsisActive({ active: !!dynamicEllipsis, maxRows: +rows || 0 });
     const alignItems = getAlign({ alignCenter, alignRight, alignLeft, alignJustify, align });
 
     useEffect(() => {
@@ -49,8 +42,8 @@ const TextEllipsis: React.FC<TextEllipsisProps> = ({
             textAlign={alignItems as 'center' | 'right' | 'left'}
         >
             <Text
-                innerRef={ref}
                 {...props}
+                innerRef={ref}
                 isEllipsis={isEllipsis}
                 useEllipsisStyle
                 showTooltipOnEllipsis={showTooltipOnEllipsis}
@@ -66,6 +59,7 @@ TextEllipsis.defaultProps = {
     border: undefined,
     borderStyle: undefined,
     component: 'span',
+    dynamicEllipsis: true,
     onEllipsisChange: undefined,
     rows: 1,
     showTooltipOnEllipsis: true,

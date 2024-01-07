@@ -887,7 +887,6 @@ export interface TypographyProps {
     tooltipPlacement?: TooltipPlacementType;
     underline?: boolean;
     width?: number | string;
-    wrap?: boolean;
     [key: string]: any;
 }
 
@@ -903,8 +902,10 @@ export interface TextProps {
     charsCase?: 'upper' | 'lower' | 'capital';
     color?: string;
     component?: string;
+    fullWidth?: boolean;
     gutterBottom?: boolean;
     italic?: boolean;
+    justifyContent?: string;
     lineHeight?: number;
     link?: string;
     monospace?: boolean;
@@ -921,14 +922,14 @@ export interface TextProps {
     [key: string]: any;
 }
 
-export interface TextEllipsisProps extends TextProps {
+export type TextEllipsisProps = TextProps & {
+    dynamicEllipsis?: true;
     noWrap?: boolean;
     onEllipsisChange?: (isEllipsis: boolean) => void;
     rows?: number;
     showTooltipOnEllipsis?: boolean;
-    wrap?: boolean;
     [key: string]: any;
-}
+};
 
 export interface AccordionProps {
     bgColor?: string;

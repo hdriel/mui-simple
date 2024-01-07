@@ -89,8 +89,9 @@ export const Typography = styled(
     textTransform: { upper: 'uppercase', lower: 'lowercase', capital: 'capitalize' }[props.charsCase],
     verticalAlign: props.sup ? 'super' : props.sub ? 'sub' : undefined,
     lineHeight: props.lineHeight,
-    direction: `${props.textDirection} /* @noflip */`,
+    direction: props.textDirection ? `${props.textDirection as string} /* @noflip */` : undefined,
     whiteSpace: props.noWrap ? 'nowrap' : 'normal',
     width: props.textWidth ?? 'inherit',
+    ...(props.justifyContent && { justifyContent: props.justifyContent }),
     ...(props.monospace && { fontFamily: 'monospace' }),
 })) as ComponentType<TypographyStyledPropsType>;

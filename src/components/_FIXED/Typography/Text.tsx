@@ -16,26 +16,28 @@ const Text: React.FC<TextProps> = ({
     children,
     className,
     color,
+    fullWidth,
     innerRef,
+    isEllipsis,
+    justifyContent,
     link,
     noWrap,
     rows,
+    showTooltipOnEllipsis,
     size,
     sx,
     textDirection,
     tooltip,
     tooltipPlacement,
-    width,
-    isEllipsis,
     useEllipsisStyle,
-    showTooltipOnEllipsis,
+    width,
     ...props
 }): React.ReactElement => {
     const [customColor] = useCustomColor(color);
     const [customBGColor] = useCustomColor(bgColor);
     const alignItems = getAlign({ alignCenter, alignRight, alignLeft, alignJustify, align });
-
     const tooltipMessage = useTooltipMessage({ children, tooltip, isEllipsis, showTooltipOnEllipsis });
+    width = (fullWidth && '100%') || width;
 
     const typographyProps = {
         ...props,
@@ -47,8 +49,10 @@ const Text: React.FC<TextProps> = ({
         noWrap: noWrap || rows === 0,
         rows: typeof rows === 'boolean' ? +rows : rows,
         textDirection,
+        justifyContent,
         textWidth: width || (autoWidth ? 'fit-content' : undefined),
-        ...(!isEllipsis && !rows && (width || alignItems) && { display: 'flex' }),
+        ...(props.paragraph && { component: 'p' }),
+        ...(!isEllipsis && !rows && (width || alignItems.align) && { display: 'flex' }),
         ...((isEllipsis || rows) && { display: 'contents' }),
         ...(link && { href: link, component: 'a', target: '_blank' }),
     };
@@ -92,11 +96,11 @@ const Text: React.FC<TextProps> = ({
 };
 
 Text.defaultProps = {
+    align: undefined,
     alignCenter: undefined,
     alignJustify: undefined,
     alignLeft: undefined,
     alignRight: undefined,
-    align: undefined,
     autoWidth: true,
     bgColor: undefined,
     bold: undefined,
@@ -104,11 +108,17 @@ Text.defaultProps = {
     charsCase: undefined,
     color: undefined,
     component: 'span',
+    fullWidth: undefined,
     gutterBottom: undefined,
+    isEllipsis: false,
     italic: undefined,
+    justifyContent: undefined,
     lineHeight: undefined,
+    link: undefined,
     monospace: undefined,
+    noWrap: undefined,
     paragraph: undefined,
+    showTooltipOnEllipsis: false,
     size: undefined,
     strike: undefined,
     sub: undefined,
@@ -118,9 +128,6 @@ Text.defaultProps = {
     tooltipPlacement: undefined,
     underline: undefined,
     width: undefined,
-    noWrap: undefined,
-    isEllipsis: false,
-    showTooltipOnEllipsis: false,
 };
 
 export type { TextProps } from '../../decs';
