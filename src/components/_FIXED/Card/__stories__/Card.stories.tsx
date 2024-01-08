@@ -354,7 +354,7 @@ export const UIControls_ = (args) => {
 
     return (
         <Stack spacing={3}>
-            <Card image={{ src: 'live-from-space.jpg', width: 151 }} flexDirection="row-reverse">
+            <Card image={{ src: 'live-from-space.jpg', width: '100%', fullHeight: true }} flexDirection="row-reverse">
                 <Box sx={{ height: 'inherit', display: 'flex', flexDirection: 'column' }}>
                     {artist}
                     <Box
@@ -372,7 +372,7 @@ export const UIControls_ = (args) => {
             </Card>
 
             <Card
-                image={{ src: 'live-from-space.jpg', width: 151 }}
+                image={{ src: 'live-from-space.jpg', width: '100%', fullHeight: true }}
                 flexDirection="row-reverse"
                 title="Live From Space"
                 subtitle="Mac Miller"
