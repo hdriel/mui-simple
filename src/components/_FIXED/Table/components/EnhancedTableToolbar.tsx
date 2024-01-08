@@ -35,17 +35,19 @@ export const EnhancedTableToolbar: React.FC<EnhancedTableToolbarProps> = ({
                 }),
             }}
         >
-            {numSelected > 0 ? (
-                <Typography sx={{ flex: '1 1 100%' }} color="inherit" variant="subtitle1" component="div" fullWidth>
-                    {selectedLabel?.includes('{n}')
-                        ? selectedLabel?.replace('{n}', String(numSelected))
-                        : `${numSelected} ${selectedLabel}`}
-                </Typography>
-            ) : (
-                <Typography sx={{ flex: '1 1 100%' }} variant="h6" id="tableTitle" component="div" fullWidth>
-                    {title}
-                </Typography>
-            )}
+            <div style={{ width: '100%' }}>
+                {numSelected > 0 ? (
+                    <Typography sx={{ flex: '1 1 100%' }} color="inherit" variant="subtitle1" component="div">
+                        {selectedLabel?.includes('{n}')
+                            ? selectedLabel?.replace('{n}', String(numSelected))
+                            : `${numSelected} ${selectedLabel}`}
+                    </Typography>
+                ) : (
+                    <Typography sx={{ flex: '1 1 100%' }} variant="h6" id="tableTitle" component="div">
+                        {title}
+                    </Typography>
+                )}
+            </div>
 
             {filteredActions
                 .filter((action) => isValidElement(action.Cmp))

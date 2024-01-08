@@ -32,6 +32,7 @@ export const ActionColor: Story = {
 
 export const Actions: Story = {
     args: {
+        title: 'Food',
         columns: FITNESS_COLUMNS,
         data: FITNESS_DATA.slice(0, 3),
         actionColor: { background: 'secondary', color: 'secondary' },
@@ -41,6 +42,7 @@ export const Actions: Story = {
 
 export const AddModeAction: Story = {
     args: {
+        title: 'Food',
         columns: FITNESS_COLUMNS,
         data: FITNESS_DATA.slice(0, 3),
         actionColor: { background: 'success', color: 'success' },
@@ -52,6 +54,7 @@ export const AddModeAction: Story = {
 
 export const AddModeActionLabels: Story = {
     args: {
+        title: 'Food',
         columns: FITNESS_COLUMNS,
         data: FITNESS_DATA.slice(0, 3),
         actionColor: { background: 'success', color: 'success' },
@@ -69,6 +72,7 @@ export const AddModeActionLabels: Story = {
 
 export const SelectedActions: Story = {
     args: {
+        title: 'Food',
         columns: FITNESS_COLUMNS,
         data: FITNESS_DATA.slice(0, 3),
         actionColor: { background: 'success', color: 'success' },
