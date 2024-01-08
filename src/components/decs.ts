@@ -17,8 +17,11 @@ import type { TIMEZONE } from './timezone';
 import type { LOCALE, ADAPTER_LOCALE } from './locales';
 export type AppBarPosition = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
 
+type IconType = IconName | ReactNode | ReactElement;
+type ElementType = ReactElement | ReactNode;
+
 export interface AppBarProps {
-    actions?: ReactNode;
+    actions?: ElementType;
     color?: string;
     dense?: boolean;
     disablePadding?: boolean;
@@ -27,12 +30,12 @@ export interface AppBarProps {
     elevationScroll?: boolean;
     enableColorOnDark?: boolean;
     hideOnScroll?: boolean;
-    menu?: ReactNode | boolean;
+    menu?: ElementType | boolean;
     position?: AppBarPosition;
-    scrollElement?: ReactNode | string;
-    scrollToTop?: ReactNode | boolean;
+    scrollElement?: ElementType | string;
+    scrollToTop?: ElementType | boolean;
     scrollToTopProps?: object;
-    title?: string | ReactNode;
+    title?: string | ElementType;
     toolbarId?: string;
     [key: string]: any;
 }
@@ -40,7 +43,7 @@ export interface AppBarProps {
 export interface AvatarProps {
     color?: string;
     fallbackImage?: string;
-    icon?: ReactNode;
+    icon?: IconType;
     image?: string;
     onClick?: (event: any) => void;
     showTooltip?: boolean;
@@ -75,20 +78,20 @@ export interface ButtonProps {
     color?: string;
     disabled?: boolean;
     disableRipple?: boolean;
-    endIcon?: ReactNode | string;
+    endIcon?: IconType;
     fullWidth?: boolean;
-    icon?: ReactNode | string;
+    icon?: IconType;
     isLoading?: boolean;
     label?: string;
     link?: string;
     loadingIconPosition?: 'start' | 'end';
-    loadingCmp?: ReactNode;
+    loadingCmp?: ElementType;
     loadingLabel?: string;
     minWidth?: string | number;
     onClick?: (event: any) => void;
     onRightClick?: (event: any) => void;
     size?: 'small' | 'medium' | 'large' | string | number;
-    startIcon?: ReactNode | string;
+    startIcon?: IconType;
     sx?: SxProps;
     tooltipProps?: TooltipProps;
     uppercase?: boolean;
@@ -111,10 +114,10 @@ export interface ButtonGroupProps {
 
 export interface BottomNavigationProps {
     actions?: Array<{
-        icon?: ReactNode | string;
+        icon?: IconType;
         label?: string;
         showLabel?: boolean;
-        value?: ReactNode;
+        value?: ElementType;
         [key: string]: any;
     }>;
     color?: string;
@@ -159,7 +162,7 @@ export interface DialogProps {
     open: boolean;
     onClose?: (value: string) => void;
     selectedValue?: string;
-    title?: string | ReactNode;
+    title?: string | ElementType;
     titleId?: string;
     contentId?: string;
     fullWidth?: boolean;
@@ -174,10 +177,10 @@ export interface DialogProps {
 
 export interface DividerProps {
     color?: string;
-    component?: IconName | ReactNode;
+    component?: IconType;
     chip?: string | boolean;
     flexItem?: boolean;
-    label?: string | ReactNode;
+    label?: string | ElementType;
     light?: boolean;
     orientation?: 'horizontal' | 'vertical';
     textAlign?: AlignType;
@@ -187,8 +190,8 @@ export interface DividerProps {
 }
 
 export interface CardProps {
-    actions?: ReactNode | string | ButtonProps | Array<ReactNode | ButtonProps | string>;
-    avatar?: ReactNode;
+    actions?: IconType | ButtonProps | Array<IconType | ButtonProps | string>;
+    avatar?: ElementType;
     contentPadding?: number | string;
     contentStyle?: SxProps;
     contentWrapperStyle?: SxProps;
@@ -218,19 +221,19 @@ export interface CardProps {
     onClick?: (e: any) => void;
     optionsMenu?: MenuProps | Array<MenuOptionItem | DividerProps>;
     parseChildren?: boolean;
-    subtitle?: ReactNode | string;
-    title?: ReactNode | string;
+    subtitle?: ElementType | string;
+    title?: ElementType | string;
     width?: number | string;
     [key: string]: any;
 }
 
 export interface ChipProps {
     alignEndIcon?: boolean;
-    avatar?: ReactElement;
+    avatar?: ElementType;
     useStyleBreadCrumb?: boolean;
     color?: string;
     disabled?: boolean;
-    endIcon?: string | ReactElement;
+    endIcon?: IconType;
     label?: string;
     link?: string;
     minWidth?: string | number;
@@ -239,7 +242,7 @@ export interface ChipProps {
     onDelete?: (event: any) => void;
     rounded?: boolean;
     size?: 'small' | 'medium';
-    startIcon?: IconName | ReactNode;
+    startIcon?: IconType;
     sx?: SxProps;
     textColor?: string;
     width?: string | number;
@@ -279,8 +282,8 @@ export interface InputBaseProps {
     debounceDelay?: number;
     direction?: 'ltr' | 'rtl';
     disabled?: boolean;
-    endCmp?: ReactNode | string;
-    endCmpExternal?: ReactNode | string;
+    endCmp?: IconType;
+    endCmpExternal?: IconType;
     error?: boolean;
     focused?: boolean;
     fullWidth?: boolean;
@@ -301,8 +304,8 @@ export interface InputBaseProps {
     readOnly?: boolean;
     required?: boolean;
     rows?: number;
-    startCmp?: ReactNode | string;
-    startCmpExternal?: ReactNode | string;
+    startCmp?: IconType;
+    startCmpExternal?: IconType;
     textAlign?: AlignType;
     type?: string;
     value?: string | any;
@@ -317,8 +320,8 @@ export type InputColorProps = InputBaseProps & {
     copyMessage?: string;
     copyToClipboard?: boolean;
     opacityLabel?: string;
-    opacityIcon?: IconName | ReactNode;
-    copyIcon?: IconName | ReactNode;
+    opacityIcon?: IconType;
+    copyIcon?: IconType;
 };
 
 export type InputDateProps = InputBaseProps &
@@ -388,7 +391,7 @@ export type InputTextProps = InputBaseProps & {
 };
 
 export type InputSearchProps = InputBaseProps & {
-    searchIcon?: IconName | ReactNode;
+    searchIcon?: IconType;
     [key: string]: any;
 };
 
@@ -411,13 +414,13 @@ export type InputNumberProps = InputBaseProps & {
     onBlur?: (event: any) => void;
     onChange?: (event: any) => void;
     patternChar?: string; // +1 (###) ###-####
-    prefix?: IconName | string | ReactNode;
+    prefix?: IconName | string;
     selectAllOnFocus?: boolean;
     slider?: boolean;
     sliderLabel?: string | ((value: string | number) => string);
     sliderTooltip?: string;
     step?: number;
-    suffix?: IconName | string | ReactNode;
+    suffix?: IconName | string;
     thousandSeparator?: string | boolean;
     value?: number | string;
     valueIsNumericString?: boolean;
@@ -441,8 +444,8 @@ export type InputPasswordProps = Omit<InputBaseProps, 'value'> & {
 };
 
 export interface InputSelectOption {
-    label?: string | ReactNode;
-    subtitle?: string | ReactNode;
+    label?: string | ElementType;
+    subtitle?: string | ElementType;
     disabled?: boolean;
     chipProps?: ChipProps;
     value?: string | number | boolean;
@@ -461,8 +464,8 @@ export interface InputSelectProps {
     colorText?: string;
     convertedOptions?: any;
     disabled?: boolean;
-    endCmp?: IconName | ReactNode;
-    endCmpExternal?: IconName | ReactNode;
+    endCmp?: IconType;
+    endCmpExternal?: IconType;
     error?: boolean;
     focused?: boolean;
     fullWidth?: boolean;
@@ -484,8 +487,8 @@ export interface InputSelectProps {
     renderValue?: (value: any, option: InputSelectOption) => any;
     required?: boolean;
     size?: 'medium' | 'small';
-    startCmp?: IconName | ReactNode;
-    startCmpExternal?: IconName | ReactNode;
+    startCmp?: IconType;
+    startCmpExternal?: IconType;
     value?: string | number | boolean | Array<string | number | boolean>;
     variant?: 'filled' | 'standard' | 'outlined';
     [key: string]: any;
@@ -495,7 +498,7 @@ export type InputMultipleSelectProps = Omit<InputSelectProps, 'value'> & {
     value?: Array<string | number | boolean>;
     chips?: boolean;
     squaredChips?: boolean;
-    checkboxMarker?: string | boolean | ReactNode;
+    checkboxMarker?: IconType | boolean;
     max?: number;
     selectedIndicator?: boolean;
     selectAll?: boolean;
@@ -521,7 +524,7 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     disablePortal?: boolean;
     fieldId?: string;
     filterOptions?:
-        | ((...args: any) => ReactNode)
+        | ((...args: any) => ElementType)
         | {
               ignoreAccents?: boolean;
               ignoreCase?: boolean;
@@ -544,9 +547,9 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     optionConverter?: (
         item: any,
         index: number
-    ) => { label: string | ReactNode; id: string | number; [key: string]: any };
+    ) => { label: string | ElementType; id: string | number; [key: string]: any };
     raiseSelectedToTop?: boolean;
-    renderOption?: (props: object, option: any, { selected }: { selected: boolean }) => ReactNode | ReactElement;
+    renderOption?: (props: object, option: any, { selected }: { selected: boolean }) => ElementType;
     value?: any;
     selectOnFocus?: boolean;
     onChange?: (event: any, optionId: string | number, action?: string) => void;
@@ -579,7 +582,7 @@ export interface FabProps {
     color?: string;
     disabled?: boolean;
     disableRipple?: boolean;
-    icon?: IconName | ReactNode;
+    icon?: IconType;
     link?: string;
     size?: 'small' | 'medium' | 'large';
     variant?: 'extended' | 'circular';
@@ -602,7 +605,7 @@ export interface LinearProgressProps {
 
 export interface LinkProps {
     color?: string;
-    icon?: IconName | ReactNode;
+    icon?: IconType;
     label?: string;
     preventScrollReset?: boolean;
     relativeUrl?: string;
@@ -632,7 +635,7 @@ export interface ListItemProps {
     droppableId?: string;
     draggableListType?: string;
     selected?: boolean;
-    startIcon?: ReactNode | string;
+    startIcon?: IconType;
     subtitle?: string;
     title?: string;
     controlType?: 'checkbox' | 'switch';
@@ -710,7 +713,7 @@ export interface DraggableListProps {
             dataList?: Array<ListItemProps & { id: string }>;
         }
     ) => void;
-    renderValue?: (value: string | DataItem, index: number, snapshot: DraggableStateSnapshot) => ReactNode;
+    renderValue?: (value: string | DataItem, index: number, snapshot: DraggableStateSnapshot) => ElementType;
 }
 
 export type CheckListProps = {
@@ -721,11 +724,11 @@ export type CheckListProps = {
 
 export interface MenuOptionItem {
     check?: boolean;
-    icon?: IconName | ReactNode;
+    icon?: IconType;
     id?: string;
-    label?: string | ReactNode;
+    label?: string | ElementType;
     onClick?: (Event: any) => void;
-    shortcut?: ReactNode;
+    shortcut?: ElementType;
     [key: string]: any;
 }
 export type MenuOption = string | MenuOptionItem | DividerProps;
@@ -761,7 +764,7 @@ export interface BreadcrumbsProps {
     color?: string;
     links?: Array<string | LinkProps>;
     maxItems?: number;
-    separator?: string | IconName | ReactNode;
+    separator?: IconType;
     size?: string | number;
     [key: string]: any;
 }
@@ -795,10 +798,10 @@ export interface PaginationProps {
     color?: string;
     disabled?: boolean;
     disabledPages?: number[] | ((page: number) => boolean);
-    IconFirst?: ReactNode | string;
-    IconLast?: ReactNode | string;
-    IconNext?: ReactNode | string;
-    IconPrev?: ReactNode | string;
+    IconFirst?: IconType;
+    IconLast?: IconType;
+    IconNext?: IconType;
+    IconPrev?: IconType;
     label?: string;
     maxBoundaryPagesVisible?: number;
     maxPagesVisible?: number;
@@ -936,38 +939,38 @@ export interface AccordionProps {
     bgColorDetails?: string;
     bottomSecondaryLabel?: string;
     buttonsColor?: string;
-    collapsedIcon?: IconName | ReactNode;
+    collapsedIcon?: IconType;
     details?: string;
     detailsMaxRows?: number;
     detailsStyles?: SxProps;
     disabled?: boolean;
     disabledContentPadding?: boolean;
     expanded?: boolean | string;
-    expandedIcon?: IconName | ReactNode;
+    expandedIcon?: IconType;
     hideLabel?: string;
     id?: string;
-    label?: string | ReactNode;
+    label?: string | ElementType;
     labelProps?: TypographyProps;
     onChange?: (event: SyntheticEvent<unknown>, expanded: boolean | string) => void;
-    secondaryLabel?: string | ReactNode;
+    secondaryLabel?: string | ElementType;
     showMoreLabel?: string;
     textColor?: string;
     labelColor?: ((expanded: boolean | string) => string) | string;
     unmountDetailsOnClose?: boolean;
     useCustomStyle?: boolean;
-    summary?: ReactNode;
+    summary?: ElementType;
     summaryStyles?: SxProps;
     [key: string]: any;
 }
 
 export interface CheckboxProps {
     checked?: boolean;
-    checkedIcon?: ReactNode | string;
+    checkedIcon?: IconType;
     color?: string;
     disabled?: boolean;
     fontSize?: string | number;
     helperText?: string;
-    icon?: ReactNode | string;
+    icon?: IconType;
     label?: string;
     labelProps?: TypographyProps;
     labelPlacement?: 'top' | 'start' | 'bottom' | 'end';
@@ -1024,7 +1027,7 @@ export interface SliderProps {
     disablePadding?: boolean;
     disableSwap?: boolean;
     displayValue?: 'auto' | 'off' | 'on';
-    endIcon?: IconName | ReactNode;
+    endIcon?: IconType;
     label?: string;
     min?: number;
     max?: number;
@@ -1036,7 +1039,7 @@ export interface SliderProps {
     removePadding?: boolean;
     size?: 'small' | 'medium';
     sliderStyle?: 'ios' | 'pretto' | 'tooltip' | 'airbnb';
-    startIcon?: IconName | ReactNode;
+    startIcon?: IconType;
     trackBarLinePosition?: 'none' | 'inverted' | 'normal';
     range?: Range;
     value?: number;
@@ -1049,11 +1052,11 @@ export interface StepType {
     optional?: boolean | string;
     color?: string;
     error?: boolean;
-    icon?: IconName | ReactNode;
+    icon?: IconType;
     // Todo: assert if the type string actually match the project creator's intention
 }
 export interface StepperProps {
-    allCompletedCmp?: ReactNode;
+    allCompletedCmp?: ElementType;
     color?: string;
     customStyleProps?: {
         fontSize?: number | string;
@@ -1061,8 +1064,8 @@ export interface StepperProps {
         lineColor?: string;
         padding?: number | string;
         lineWidth?: number | string;
-        checkIcon?: ReactNode;
-        dotIcon?: ReactNode;
+        checkIcon?: ElementType;
+        dotIcon?: ElementType;
         marginContent?: number | string;
         [key: string]: any;
     };
@@ -1093,9 +1096,9 @@ export interface RatingProps {
     boxSx?: SxProps;
     color?: string;
     disabled?: boolean;
-    emptyIcon?: ReactNode | string;
-    filledIcon?: ReactNode | string;
-    halfIcon?: ReactNode | string;
+    emptyIcon?: IconType;
+    filledIcon?: IconType;
+    halfIcon?: IconType;
     isHalf?: boolean;
     name?: string;
     onChange?: (event: any, newValue: number) => void;
@@ -1144,14 +1147,14 @@ export interface RadioButtonProps {
 }
 
 export interface RadioButtonsGroupProps {
-    checkedIcon?: ReactNode;
+    checkedIcon?: IconType;
     color?: string;
     data?: Array<string | RadioButtonProps>;
     direction?: 'row' | 'column';
     disableRipple?: boolean;
     fullWidth?: boolean;
     helperText?: string;
-    icon?: ReactNode;
+    icon?: IconType;
     ignoreLabelColor?: boolean;
     label?: string;
     name?: string;
@@ -1172,7 +1175,7 @@ export interface TabItemProps {
     wrapped?: boolean;
     disabled?: boolean;
     disableRipple?: boolean;
-    icon?: ReactNode | string;
+    icon?: IconType;
     link?: string;
     onClick?: (event: any, value: string) => void;
     tooltipProps?: TooltipProps;
@@ -1193,7 +1196,7 @@ export interface TabProps {
     wrapped?: boolean;
     disabled?: boolean;
     disableRipple?: boolean;
-    icon?: ReactNode | string;
+    icon?: IconType;
     link?: string;
     onClick?: (event: any, value: string) => void;
     tooltip?: string;
@@ -1235,7 +1238,7 @@ export interface ToggleButtonGroupProps {
     data?: Array<{
         value: string;
         disabled?: boolean;
-        component: ReactElement | ReactNode | IconName | number;
+        component: IconType | number;
     }>;
     wrap?: boolean;
     transparent?: boolean;
@@ -1251,9 +1254,9 @@ export interface ToggleButtonGroupsProps {
 }
 
 export interface AlertProps {
-    actions?: ReactNode | string | ButtonProps | Array<ReactNode | ButtonProps | string>;
+    actions?: IconType | string | ButtonProps | Array<IconType | ButtonProps | string>;
     color?: string;
-    icon?: ReactNode;
+    icon?: IconType;
     onClose?: (event: any) => void;
     severity?: 'error' | 'info' | 'success' | 'warning';
     show?: boolean;
@@ -1267,7 +1270,7 @@ type DirectionType = 'down' | 'left' | 'right' | 'up';
 
 interface SpeedDialActionProps {
     name: string;
-    icon?: ReactNode;
+    icon?: IconType;
     showTooltip?: boolean;
     onClick?: MouseEventHandler<HTMLDivElement>;
 }
@@ -1279,14 +1282,14 @@ export interface SpeedDialProps {
     color?: string;
     direction?: DirectionType;
     hidden?: boolean;
-    icon?: ReactNode;
+    icon?: IconType;
     left?: string | number;
     // eslint-disable-next-line @typescript-eslint/ban-types
     onClose?: (event: SyntheticEvent<{}, Event>, reason: CloseReason) => void;
     // eslint-disable-next-line @typescript-eslint/ban-types
     onOpen?: (event: SyntheticEvent<{}, Event>, reason: OpenReason) => void;
     open?: boolean;
-    openIcon?: ReactNode;
+    openIcon?: IconType;
     right?: string | number;
     showOnBackdrop?: boolean;
     showTooltip?: boolean;
