@@ -57,7 +57,7 @@ export const Image: Story = {
             title: 'profile image',
             width: 300,
             height: 150,
-            onClick: () => alert('onClick image'),
+            onClick: () => window.alert('onClick image'),
         },
     },
 };
@@ -78,7 +78,7 @@ export const ImageStretch: Story = {
             width: 300,
             height: 150,
             stretch: 'fill',
-            onClick: () => alert('onClick image'),
+            onClick: () => window.alert('onClick image'),
         },
     },
 };
@@ -90,7 +90,7 @@ export const ImageBroken: Story = {
             src: null,
             title: 'profile image',
             width: 300,
-            onClick: () => alert('onClick image'),
+            onClick: () => window.alert('onClick image'),
         },
     },
 };
@@ -102,7 +102,7 @@ export const MediaOnTop: Story = {
             src: '1.jpg',
             title: 'profile image',
             width: 300,
-            onClick: () => alert('onClick image'),
+            onClick: () => window.alert('onClick image'),
         },
         mediaOnTop: true,
     },

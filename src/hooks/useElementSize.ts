@@ -1,15 +1,11 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 
-export default function useElementSize(resize = false): [any, { width: number; height: number }] {
+export function useTextElementSize(resize = false): [any, { width: number; height: number }] {
     const ref = useRef<HTMLElement>(null);
     const [windowSize, setWindowSize] = useState<{ width: number; height: number }>({
         width: window.innerWidth,
         height: window.innerHeight,
     });
-
-    // useEffect(() => {
-    //     console.log(windowSize);
-    // }, [windowSize]);
 
     useEffect(() => {
         function handleResize(): void {
@@ -39,7 +35,7 @@ export default function useElementSize(resize = false): [any, { width: number; h
     return [ref, { width: windowSize.width, height: windowSize.height }];
 }
 
-export function useElementSizeOld(resize = false): [any, { width: number; height: number }] {
+export function useElementSize(resize = false): [any, { width: number; height: number }] {
     const ref = useRef<HTMLElement>(null);
 
     const [width, setWidth] = useState(0);

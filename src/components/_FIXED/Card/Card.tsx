@@ -17,7 +17,7 @@ import {
 import Menu from '../Menu/Menu';
 import { useCardExpandedContent } from './Card.hooks';
 import type { CardProps } from '../../decs';
-import useElementSize from '../../../hooks/useElementSize';
+import { useElementSize } from '../../../hooks/useElementSize';
 
 const Card: React.FC<CardProps> = (props): React.ReactElement => {
     const {
@@ -107,7 +107,8 @@ const Card: React.FC<CardProps> = (props): React.ReactElement => {
                                   sx={{
                                       ...imageStyle,
                                       width: imageWidth,
-                                      objectFit: objectFit ?? 'cover',
+                                      objectFit: objectFit ?? 'fill',
+                                      cursor: imageProps.onClick ? 'pointer' : 'default',
                                       height: fullHeight
                                           ? currCardHeight
                                               ? `${currCardHeight}px`
@@ -120,7 +121,7 @@ const Card: React.FC<CardProps> = (props): React.ReactElement => {
                       )
                     : undefined}
 
-                <ContentWrapper sx={contentWrapperStyle} ref={innerRef ?? ref}>
+                <ContentWrapper sx={contentWrapperStyle} ref={ref}>
                     {isMediaOnTop && title ? (
                         <CardHeader
                             avatar={avatar}

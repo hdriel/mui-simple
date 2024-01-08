@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import useElementSize from './useElementSize';
+import { useTextElementSize } from './useElementSize';
 
 const TEXT_ELLIPSIS_GAP = 65;
 export function useEllipsisActive({ active, maxRows }): [any, boolean] {
-    const [ref, { width: widthText }] = useElementSize(active);
+    const [ref, { width: widthText }] = useTextElementSize(active);
     const [isEllipsis, setIsEllipsis] = useState(false);
 
     useEffect(() => {

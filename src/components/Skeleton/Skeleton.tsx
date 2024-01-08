@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Skeleton as MuiSkeleton } from './Skeleton.styled';
-import useElementSize from '../../hooks/useElementSize';
+import { useElementSize } from '../../hooks/useElementSize';
 
 const SKELETON_VARIANT = {
     TEXT: 'text',
