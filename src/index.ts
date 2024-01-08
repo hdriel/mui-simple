@@ -181,7 +181,6 @@ export type { TooltipProps } from './components/_FIXED/Tooltip/Tooltip';
 export * from './components/TreeView';
 
 export { default as Typography } from './components/_FIXED/Typography/Typography';
-export type { TypographyProps } from './components/_FIXED/Typography/Typography';
 
 export { default as Text } from './components/_FIXED/Typography/Text';
 export type { TextProps } from './components/_FIXED/Typography/Text';
@@ -190,4 +189,4 @@ export { default as TextEllipsis } from './components/_FIXED/Typography/TextElli
 export type { TextEllipsisProps } from './components/_FIXED/Typography/TextEllipsis';
 
 export * from './utils';
-export { default as useElementSize } from './hooks/useElementSize';
+export { useElementSize } from './hooks/useElementSize';

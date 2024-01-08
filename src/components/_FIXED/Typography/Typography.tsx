@@ -1,160 +1,19 @@
-import React, { useEffect, useMemo } from 'react';
-import { Border, Typography as MuiTypography } from './Typography.styled';
-import Tooltip from '../Tooltip/Tooltip';
-import { useEllipsisActive } from '../../../hooks/useEllipsisActive';
-import { useCustomColor } from '../../../utils/helpers';
-import type { TypographyProps } from '../../decs';
-
-const getAlign = ({ alignCenter, alignJustify, alignLeft, alignRight }): string => {
-    let align;
-    switch (true) {
-        case alignCenter:
-            align = 'center';
-            break;
-        case alignJustify:
-            align = 'justify';
-            break;
-        case alignLeft:
-            align = 'left';
-            break;
-        case alignRight:
-            align = 'right';
-            break;
-        default:
-            align = 'inherit';
-            break;
-    }
-
-    return align;
-};
-
-function useTooltipMessage({ children, tooltip, showTooltipOnEllipsis, isEllipsis }): string {
-    return useMemo(() => {
-        const [defaultTooltip, childrenTooltip, customTooltip] = [
-            children,
-            tooltip === undefined || (typeof tooltip === 'boolean' && tooltip) ? children : undefined,
-            typeof tooltip === 'string' ? tooltip : undefined,
-        ];
-
-        if (tooltip === false || (showTooltipOnEllipsis && !isEllipsis)) {
-            return undefined;
-        }
-
-        if (showTooltipOnEllipsis && isEllipsis && (tooltip === true || tooltip === undefined)) {
-            return customTooltip ?? childrenTooltip;
-        }
-
-        const result = customTooltip ?? childrenTooltip ?? defaultTooltip;
-        return Array.isArray(result) ? result.join('') : result;
-    }, [showTooltipOnEllipsis, isEllipsis, tooltip, children]);
-}
+import React from 'react';
+import type { TextEllipsisProps } from '../../decs';
+import Text from './Text';
+import TextEllipsis from './TextEllipsis';
 
 // todo: add commend to autodocs
-const Typography: React.FC<TypographyProps> = ({
-    alignCenter,
-    alignJustify,
-    alignLeft,
-    alignRight,
-    autoWidth,
-    bgColor,
-    bold,
-    border,
-    charsCase,
-    children,
-    color,
-    component,
-    font,
-    gutterBottom,
-    italic,
-    lineHeight,
-    link,
-    monospace,
-    noWrap,
-    onEllipsisChange,
-    paragraph,
-    rows,
-    showTooltipOnEllipsis,
-    size,
-    strike,
-    sub,
-    sup,
-    sx,
-    textDirection,
-    textWidth,
-    tooltip,
-    tooltipPlacement,
-    underline,
-    width,
-    wrap,
-    ...props
-}): React.ReactElement => {
-    const [customColor, muiColor] = useCustomColor(color);
-    const [customBGColor] = useCustomColor(bgColor);
-    const align = getAlign({ alignCenter, alignRight, alignLeft, alignJustify });
-    const ellipsisMaxRows = !wrap || noWrap || !rows ? 0 : +rows;
-    const [ref, isEllipsis] = useEllipsisActive({
-        active: showTooltipOnEllipsis && tooltip !== false,
-        text: children,
-        maxRows: ellipsisMaxRows,
-    });
-    const tooltipMessage = useTooltipMessage({ children, tooltip, isEllipsis, showTooltipOnEllipsis });
-
-    const typographyProps = {
-        align,
-        bgColor: customBGColor,
-        bold,
-        charsCase,
-        color: muiColor,
-        component,
-        customColor,
-        font,
-        fontSize: size,
-        gutterBottom,
-        italic,
-        lineHeight,
-        monospace,
-        noWrap: noWrap || wrap === false || !rows,
-        paragraph,
-        rows: typeof rows === 'boolean' ? +rows : rows,
-        strike,
-        sub,
-        sup,
-        target: '_blank',
-        textDirection,
-        textWidth,
-        underline,
-        ...(link && { href: link, component: 'a' }),
-        ...props,
-    };
-
-    let cmp = (
-        <Border width={width} rows={rows} border={border} noWrap={noWrap} autoWidth={autoWidth} sx={sx}>
-            <MuiTypography ref={ref} {...typographyProps}>
-                {children}&nbsp;
-            </MuiTypography>
-        </Border>
-    );
-    if (typographyProps.noWrap) {
-        cmp = (
-            <MuiTypography ref={ref} display="flex" sx={sx} {...typographyProps}>
-                {children}&nbsp;
-            </MuiTypography>
-        );
-    }
-
-    useEffect(() => {
-        onEllipsisChange?.(isEllipsis);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isEllipsis]);
-
-    return (
-        <Tooltip title={tooltipMessage} placement={tooltipPlacement}>
-            {cmp}
-        </Tooltip>
+const Typography: React.FC<TextEllipsisProps> = (props): React.ReactElement => {
+    return [props.showTooltipOnEllipsis, props.onEllipsisChange].some((v) => v) ? (
+        <TextEllipsis {...props} />
+    ) : (
+        <Text {...props} />
     );
 };
 
 Typography.defaultProps = {
+    align: undefined,
     alignCenter: undefined,
     alignJustify: undefined,
     alignLeft: undefined,
@@ -163,30 +22,34 @@ Typography.defaultProps = {
     bgColor: undefined,
     bold: undefined,
     border: undefined,
+    borderStyle: undefined,
     charsCase: undefined,
     color: undefined,
     component: 'span',
+    dynamicEllipsis: true,
+    fullWidth: undefined,
     gutterBottom: undefined,
+    isEllipsis: false,
     italic: undefined,
+    justifyContent: undefined,
     lineHeight: undefined,
+    link: undefined,
     monospace: undefined,
     noWrap: undefined,
     onEllipsisChange: undefined,
     paragraph: undefined,
-    rows: 1,
+    rows: undefined,
     showTooltipOnEllipsis: true,
-    size: undefined,
+    size: 'inherit',
     strike: undefined,
     sub: undefined,
     sup: undefined,
     textDirection: undefined,
-    textWidth: undefined,
-    tooltip: undefined,
+    tooltip: false,
     tooltipPlacement: undefined,
     underline: undefined,
     width: undefined,
-    wrap: true,
 };
 
-export type { TypographyProps } from '../../decs';
+export type { TextEllipsisProps } from '../../decs';
 export default Typography;
