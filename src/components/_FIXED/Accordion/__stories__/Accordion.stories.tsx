@@ -42,8 +42,8 @@ export const OnChangeAcc: Story = {
         details: smallIpsum,
     },
     render: (args) => {
-        const [expanded, setExpended] = useState(false);
-        const onChange = (event, isExpended) => setExpended(isExpended);
+        const [expanded, setExpanded] = useState(false);
+        const onChange = (event, isExpanded) => setExpanded(isExpanded);
         return (
             <Accordion {...args} expanded={expanded} onChange={onChange}>
                 on change event
@@ -102,7 +102,7 @@ export const DetailsMaxRows: Story = {
     },
 };
 
-export const ExpendedAndCollapsedIcon: Story = {
+export const ExpandedAndCollapsedIcon: Story = {
     args: {
         label: 'Accordion Label',
         expandedIcon: 'Send',
@@ -110,13 +110,13 @@ export const ExpendedAndCollapsedIcon: Story = {
         details: smallIpsum,
     },
     render: (args) => {
-        const [expanded, setExpended] = useState(false);
-        const onChange = (event, isExpended) => setExpended(isExpended);
+        const [expanded, setExpanded] = useState(false);
+        const onChange = (event, isExpanded) => setExpanded(isExpanded);
         return <Accordion {...args} expanded={expanded} onChange={onChange} />;
     },
 };
 
-export const ExpendedIcon: Story = {
+export const ExpandedIcon: Story = {
     args: {
         label: 'Accordion Label',
         expandedIcon: 'Home',

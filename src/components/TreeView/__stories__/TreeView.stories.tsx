@@ -97,7 +97,7 @@ export const MultiSelection = () => {
                 nodes={nodes}
                 expandedIds={expanded}
                 selectedIds={selected}
-                onExpended={setExpanded}
+                onExpanded={setExpanded}
                 onSelected={setSelected}
                 multiSelect
             />
@@ -171,7 +171,7 @@ export const GmailCloneStyles = () => {
             nodes={nodes}
             expandedIds={expanded}
             selectedIds={selected}
-            onExpended={setExpanded}
+            onExpanded={setExpanded}
             onSelected={setSelected}
             TreeItemComponent={LabelIconTreeItem}
             {...LabelIconTreeItemIcons}
@@ -241,7 +241,7 @@ export const IndentBorderStyles = () => {
             nodes={nodes}
             expandedIds={expanded}
             selectedIds={selected}
-            onExpended={setExpanded}
+            onExpanded={setExpanded}
             onSelected={setSelected}
             TreeItemComponent={IndentBorderTreeItem}
             {...IndentBorderTreeItemIcons}
@@ -348,7 +348,7 @@ export const CustomItem = () => {
             nodes={nodes}
             expandedIds={expanded}
             selectedIds={selected}
-            onExpended={setExpanded}
+            onExpanded={setExpanded}
             onSelected={setSelected}
             TransitionComponent={null}
             LabelComponent={StyledTreeItemContent}

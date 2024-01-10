@@ -14,7 +14,7 @@ export default function TreeView({
     endIcon,
     multiSelect,
     expandedIds,
-    onExpended,
+    onExpanded,
     selectedIds,
     onSelected,
     useStyle,
@@ -26,9 +26,9 @@ export default function TreeView({
     edgeCornersStyles,
     ...props
 }) {
-    const handleToggle = onExpended
+    const handleToggle = onExpanded
         ? (event, nodeIds) => {
-              onExpended([].concat(nodeIds));
+              onExpanded([].concat(nodeIds));
           }
         : undefined;
 
@@ -88,7 +88,7 @@ TreeView.propTypes = {
     expandIcon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     multiSelect: PropTypes.bool,
     expandedIds: PropTypes.arrayOf(PropTypes.string),
-    onExpended: PropTypes.func,
+    onExpanded: PropTypes.func,
     selectedIds: PropTypes.arrayOf(PropTypes.string),
     onSelected: PropTypes.func,
     useStyle: PropTypes.oneOf(['default', 'LabelIcon', 'IndentBorder']),
@@ -106,7 +106,7 @@ TreeView.defaultProps = {
     endIcon: undefined,
     multiSelect: undefined,
     expandedIds: undefined,
-    onExpended: undefined,
+    onExpanded: undefined,
     selectedIds: undefined,
     onSelected: undefined,
     LabelComponent: undefined,

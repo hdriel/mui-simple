@@ -3,7 +3,7 @@ import type { ReactNode, PropsWithChildren } from 'react';
 
 interface CardExpandedContent {
     expanded?: boolean;
-    cardContentExpended?: ReactNode | string;
+    cardContentExpanded?: ReactNode | string;
     content?: ReactNode[] | string[];
     isMediaOnTop?: boolean;
     handleExpandClick?: () => void;
@@ -22,17 +22,17 @@ export const useCardExpandedContent = (props: PropsWithChildren<UseCardExpandedC
     const isMediaOnTop = mediaOnTop === undefined && ['row', 'row-reverse'].includes(flexDirection) ? true : mediaOnTop;
 
     const content = [].concat(children);
-    const cardContentExpendedIndex = content.findIndex((box) => box?.type?.displayName === 'CardExpandedContent');
-    let cardContentExpended: ReactNode | string;
+    const cardContentExpandedIndex = content.findIndex((box) => box?.type?.displayName === 'CardExpandedContent');
+    let cardContentExpanded: ReactNode | string;
 
-    if (cardContentExpendedIndex >= 0) {
-        const [ContentExpended] = content.splice(cardContentExpendedIndex, 1);
-        cardContentExpended = ContentExpended;
+    if (cardContentExpandedIndex >= 0) {
+        const [ContentExpanded] = content.splice(cardContentExpandedIndex, 1);
+        cardContentExpanded = ContentExpanded;
     }
 
     return {
         expanded,
-        cardContentExpended,
+        cardContentExpanded,
         content,
         isMediaOnTop,
         handleExpandClick,

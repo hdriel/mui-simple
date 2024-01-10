@@ -47,7 +47,7 @@ const Card: React.FC<CardProps> = (props): React.ReactElement => {
     } = props;
     const [ref, { height: currCardHeight }] = useElementSize(image?.fullHeight ?? false);
 
-    const { expanded, content, cardContentExpended, isMediaOnTop, handleExpandClick } = useCardExpandedContent({
+    const { expanded, content, cardContentExpanded, isMediaOnTop, handleExpandClick } = useCardExpandedContent({
         mediaOnTop,
         children,
         flexDirection,
@@ -168,7 +168,7 @@ const Card: React.FC<CardProps> = (props): React.ReactElement => {
                                 ) : undefined;
                             })}
 
-                        {cardContentExpended ? (
+                        {cardContentExpanded ? (
                             <ExpandMore
                                 expand={expanded}
                                 onClick={handleExpandClick}
@@ -180,9 +180,9 @@ const Card: React.FC<CardProps> = (props): React.ReactElement => {
                     </CardActions>
                 </ContentWrapper>
             </Box>
-            {cardContentExpended ? (
+            {cardContentExpanded ? (
                 <Collapse in={expanded} timeout="auto" unmountOnExit addEndListener={undefined}>
-                    <CardContent>{cardContentExpended}</CardContent>
+                    <CardContent>{cardContentExpanded}</CardContent>
                 </Collapse>
             ) : undefined}
         </MuiCard>

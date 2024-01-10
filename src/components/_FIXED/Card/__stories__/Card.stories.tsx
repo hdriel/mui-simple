@@ -211,7 +211,7 @@ export const OptionsMenu: Story = {
 
 export const ExpandedContent: Story = {
     args: {
-        title: 'CardContentExpended Card',
+        title: 'CardContentExpanded Card',
         image: {
             src: '1.jpg',
             title: 'profile image',
