@@ -37,7 +37,7 @@ const List: React.FC<ListProps> = ({
     ...props
 }): React.ReactElement => {
     const [bgColor] = useCustomColor(_bgColor);
-    const [isOpenStateChangeOnce, setIsOpenStateChangeOnce] = useState(false);
+    const [isOpenStateChangedOnce, setIsOpenStateChangedOnce] = useState(false);
     const [open, setOpen] = useState({});
 
     const onClick = (index, cb, event): void => {
@@ -46,7 +46,7 @@ const List: React.FC<ListProps> = ({
             ...o,
             [index]: o[index] === undefined ? true : !o[index],
         }));
-        setIsOpenStateChangeOnce(true);
+        setIsOpenStateChangedOnce(true);
         cb?.(event);
     };
 
@@ -129,7 +129,7 @@ const List: React.FC<ListProps> = ({
 
     useEffect(() => {
         // do this to prevent from multiple render to ignore from defaultExpanded state
-        if (!isOpenStateChangeOnce) {
+        if (!isOpenStateChangedOnce) {
             const openItems =
                 items?.reduce((obj, item, index) => ({ ...obj, ...(item.defaultExpanded && { [index]: true }) }), {}) ??
                 {};
