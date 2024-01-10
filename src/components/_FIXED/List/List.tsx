@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import Button from '../Button/Button';
 import { Divider, List as MuiList, ListSubheader, Collapse } from './List.styled';
@@ -37,15 +37,16 @@ const List: React.FC<ListProps> = ({
     ...props
 }): React.ReactElement => {
     const [bgColor] = useCustomColor(_bgColor);
-    const [open, setOpen] = useState(
-        items?.reduce((obj, item, index) => ({ ...obj, ...(item.defaultExpanded && { [index]: true }) }), {}) ?? {}
-    );
+    const [isOpenStateChangeOnce, setIsOpenStateChangeOnce] = useState(false);
+    const [open, setOpen] = useState({});
+
     const onClick = (index, cb, event): void => {
         event.stopPropagation();
         setOpen((o) => ({
             ...o,
             [index]: o[index] === undefined ? true : !o[index],
         }));
+        setIsOpenStateChangeOnce(true);
         cb?.(event);
     };
 
@@ -125,6 +126,19 @@ const List: React.FC<ListProps> = ({
             </Box>
         );
     };
+
+    useEffect(() => {
+        // do this to prevent from multiple render to ignore from defaultExpanded state
+        if (!isOpenStateChangeOnce) {
+            const openItems =
+                items?.reduce((obj, item, index) => ({ ...obj, ...(item.defaultExpanded && { [index]: true }) }), {}) ??
+                {};
+            if (JSON.stringify(open ?? {}) !== JSON.stringify(openItems)) {
+                setOpen(openItems);
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [items]);
 
     return (
         <MuiList
