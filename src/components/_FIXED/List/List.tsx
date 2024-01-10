@@ -37,7 +37,9 @@ const List: React.FC<ListProps> = ({
     ...props
 }): React.ReactElement => {
     const [bgColor] = useCustomColor(_bgColor);
-    const [open, setOpen] = useState({});
+    const [open, setOpen] = useState(
+        items?.reduce((obj, item, index) => ({ ...obj, ...(item.defaultExpanded && { [index]: true }) }), {}) ?? {}
+    );
     const onClick = (index, cb, event): void => {
         event.stopPropagation();
         setOpen((o) => ({
@@ -62,7 +64,7 @@ const List: React.FC<ListProps> = ({
     const renderValue = (item: ListItemProps, index: number): React.ReactElement => {
         const { divider, component, alignControl, controlType, ...itemProps } = item || {};
         const isControl = ['checkbox', 'switch'].includes(controlType);
-        const isOpen = item.openListItems || open[index];
+        const isOpen = item.expanded || open[index];
         const listItem = !!Object.keys(itemProps).length;
         itemProps.startIcon =
             typeof itemProps.startIcon === 'string' ? <SVGIcon>{itemProps.startIcon}</SVGIcon> : itemProps.startIcon;

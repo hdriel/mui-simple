@@ -379,3 +379,61 @@ export const CourseChapters = (args) => {
         </>
     );
 };
+
+export const DefaultExpandedItem: Story = {
+    args: {
+        items: [
+            {
+                _id: '6403dc6f9575bec0486d3217',
+                title: 'בסיס',
+                order: 1,
+                defaultExpanded: true,
+                items: [
+                    { _id: '6403dc6f9575bec0486d321a', title: 'משתנים', order: 1 },
+                    { _id: '6403dc6f9575bec0486d321b', title: 'אובייקטים', order: 2 },
+                    { _id: '6403dc6f9575bec0486d321c', title: 'פונקציות', order: 3 },
+                    { _id: '6403dc6f9575bec0486d321d', title: 'מערכים', order: 4 },
+                    { _id: '6403dc6f9575bec0486d321e', title: 'map array', order: 5 },
+                ],
+            },
+            {
+                _id: '6403dc6f9575bec0486d3216',
+                title: 'מבוא',
+                order: 2,
+                items: [
+                    { _id: '6403dc6f9575bec0486d3218', title: 'Hello JS', order: 1 },
+                    { _id: '6403dc6f9575bec0486d3219', title: 'דוגמה', order: 2 },
+                ],
+            },
+        ],
+    },
+};
+
+export const ExpandedItem: Story = {
+    args: {
+        items: [
+            {
+                _id: '6403dc6f9575bec0486d3217',
+                title: 'בסיס',
+                order: 1,
+                expanded: true,
+                items: [
+                    { _id: '6403dc6f9575bec0486d321a', title: 'משתנים', order: 1 },
+                    { _id: '6403dc6f9575bec0486d321b', title: 'אובייקטים', order: 2 },
+                    { _id: '6403dc6f9575bec0486d321c', title: 'פונקציות', order: 3 },
+                    { _id: '6403dc6f9575bec0486d321d', title: 'מערכים', order: 4 },
+                    { _id: '6403dc6f9575bec0486d321e', title: 'map array', order: 5 },
+                ],
+            },
+            {
+                _id: '6403dc6f9575bec0486d3216',
+                title: 'מבוא',
+                order: 2,
+                items: [
+                    { _id: '6403dc6f9575bec0486d3218', title: 'Hello JS', order: 1 },
+                    { _id: '6403dc6f9575bec0486d3219', title: 'דוגמה', order: 2 },
+                ],
+            },
+        ],
+    },
+};

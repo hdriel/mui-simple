@@ -627,7 +627,8 @@ export interface ListItemProps {
     disablePadding?: boolean;
     divider?: DividerProps | boolean;
     inset?: boolean;
-    openListItems?: boolean;
+    expanded?: boolean;
+    defaultExpanded?: boolean;
     onClick?: (...args: any) => void;
     items?: Array<string | ListItemProps>;
     listItemsProps?: Omit<ListProps, 'items'>;
@@ -660,7 +661,6 @@ export interface ListProps {
     flexDirectionItems?: 'row' | 'column';
     hideActionsOnDragAndDropItems?: boolean;
     insetItems?: boolean;
-    openListItems?: boolean;
     items?: Array<string | ListItemProps>;
     onListOrderChange?: (
         dataItems: Array<ListItemProps & { id: string }>,
