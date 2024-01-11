@@ -15,7 +15,7 @@ const Paper: React.FC<PaperProps> = ({
     variant,
     width,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const [customColor, muiColor] = useCustomColor(color);
     const [textColor] = useCustomColor(_textColor);
 

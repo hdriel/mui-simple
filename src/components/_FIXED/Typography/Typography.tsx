@@ -4,7 +4,7 @@ import Text from './Text';
 import TextEllipsis from './TextEllipsis';
 
 // todo: add commend to autodocs
-const Typography: React.FC<TextEllipsisProps> = (props): React.ReactElement => {
+const Typography: React.FC<TextEllipsisProps> = (props): React.ReactElement | React.ReactNode => {
     return [props.showTooltipOnEllipsis, props.onEllipsisChange].some((v) => v) ? (
         <TextEllipsis {...props} />
     ) : (

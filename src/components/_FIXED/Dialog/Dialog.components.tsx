@@ -17,7 +17,10 @@ export const Transition = forwardRef(function Transition(
 interface PaperComponentProps {
     titleId?: string | number;
 }
-export const PaperComponent: React.FC<PaperComponentProps> = ({ titleId, ...props }): ReactElement => {
+export const PaperComponent: React.FC<PaperComponentProps> = ({
+    titleId,
+    ...props
+}): ReactElement | React.ReactNode => {
     return (
         <Draggable bounds="body" handle={`#${titleId}`} cancel={'[class*="MuiDialogContent-root"]'}>
             <MuiPaper {...props} />

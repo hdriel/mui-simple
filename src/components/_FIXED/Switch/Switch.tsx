@@ -26,7 +26,7 @@ const Switch: React.FC<SwitchProps> = ({
     switchStyle,
     textColor: _textColor,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const [customColor] = useCustomColor(color);
     const [textColor] = useCustomColor(_textColor);
 

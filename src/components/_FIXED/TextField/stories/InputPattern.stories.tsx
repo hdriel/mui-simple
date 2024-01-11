@@ -125,14 +125,14 @@ export const Disabled: Story = {
     },
 };
 
-export const EndCmp_ = (args): ReactElement => (
+export const EndCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputPattern endCmp="Send" label="End Cmp" value="endCmp with mui icon name or mui icon element" />
         <InputPattern endCmp={<SendIcon />} label="End Cmp" value="endCmp with mui icon name or mui icon element" />
     </Stack>
 );
 
-export const EndCmpExternal_ = (args): ReactElement => (
+export const EndCmpExternal_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputPattern
             endCmpExternal="Send"
@@ -179,7 +179,7 @@ export const HelperText: Story = {
     },
 };
 
-export const HideStartActionsOnEmpty_ = (args): ReactElement => (
+export const HideStartActionsOnEmpty_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputPattern
             hideStartActionsOnEmpty={true}
@@ -202,7 +202,7 @@ export const Label: Story = {
     },
 };
 
-export const Margin_ = (args): ReactElement => (
+export const Margin_ = (args): ReactElement | React.ReactNode => (
     <Stack>
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
         <InputPattern label="None Margin" />
@@ -251,14 +251,14 @@ export const Required: Story = {
     },
 };
 
-export const StartCmp_ = (args): ReactElement => (
+export const StartCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputPattern startCmp="Send" label="Start Cmp" value="with string mui icon name" />
         <InputPattern startCmp={<SendIcon />} label="Start Cmp" value="with mui icon element" />
     </Stack>
 );
 
-export const StartCmpExternal_ = (args): ReactElement => (
+export const StartCmpExternal_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputPattern startCmpExternal="Send" label="Start Cmp External" value="with string mui icon name" />
         <InputPattern startCmpExternal={<SendIcon />} label="Start Cmp External" value="with mui icon element" />
@@ -271,7 +271,7 @@ export const Value: Story = {
     },
 };
 
-export const Variant_ = (args): ReactElement => (
+export const Variant_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputPattern variant="filled" label="filled variant" value="some text here" />
         <InputPattern variant="outlined" label="outlined variant" value="some text here" />
@@ -353,7 +353,7 @@ export const Overwrite: Story = {
     },
 };
 
-export const Lazy_ = (args): React.ReactElement => (
+export const Lazy_ = (args): React.ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputPattern label="ID default Lazy" mask="0 0000000 0" definitions={{ '#': /[1-9]/ }} />
         <InputPattern label="ID true Lazy" mask="0 0000000 0" definitions={{ '#': /[1-9]/ }} lazy />
@@ -361,7 +361,7 @@ export const Lazy_ = (args): React.ReactElement => (
     </Stack>
 );
 
-export const Formik_ = (args): React.ReactElement => {
+export const Formik_ = (args): React.ReactElement | React.ReactNode => {
     return (
         <Formik initialValues={{ phone: '050-000-0000', unmask: false }} onSubmit={(values) => alert(values.phone)}>
             {({ values, touched, setFieldValue, handleChange, errors, handleSubmit }: any) => {

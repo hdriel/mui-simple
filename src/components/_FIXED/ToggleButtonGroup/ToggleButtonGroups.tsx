@@ -11,7 +11,7 @@ const ToggleButtonGroups: React.FC<ToggleButtonGroupsProps> = ({
     sx,
     children,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const groups = []
         .concat(children)
         .filter((child) => {

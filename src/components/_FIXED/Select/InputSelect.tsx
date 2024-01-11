@@ -49,7 +49,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
     value,
     variant,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const [isFocused, setIsFocused] = useState(false);
 
     const optionsObj = useOptionsConverter({

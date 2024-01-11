@@ -101,14 +101,14 @@ export const Disabled: Story = {
     },
 };
 
-export const EndCmp_ = (args): ReactElement => (
+export const EndCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputColor endCmp="Send" label="End Cmp" value={'#ff0f0f'} />
         <InputColor endCmp={<SendIcon />} label="End Cmp" value={'#ff0f0f'} />
     </Stack>
 );
 
-export const EndCmpExternal_ = (args): ReactElement => (
+export const EndCmpExternal_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputColor endCmpExternal="Send" label="End Cmp External" value={'#ff0f0f'} />
         <InputColor endCmpExternal={<SendIcon />} label="End Cmp External" value={'#ff0f0f'} />
@@ -147,7 +147,7 @@ export const HelperText: Story = {
     },
 };
 
-export const HideStartActionsOnEmpty_ = (args): ReactElement => (
+export const HideStartActionsOnEmpty_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputColor
             hideStartActionsOnEmpty={true}
@@ -170,7 +170,7 @@ export const Label: Story = {
     },
 };
 
-export const Margin_ = (args): ReactElement => (
+export const Margin_ = (args): ReactElement | React.ReactNode => (
     <Stack>
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
         <InputColor label="None Margin" />
@@ -235,14 +235,14 @@ export const Rows: Story = {
     },
 };
 
-export const StartCmp_ = (args): ReactElement => (
+export const StartCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputColor startCmp="Send" label="Start Cmp" value={'#ff0f0f'} />
         <InputColor startCmp={<SendIcon />} label="Start Cmp" value={'#ff0f0f'} />
     </Stack>
 );
 
-export const StartCmpExternal_ = (args): ReactElement => (
+export const StartCmpExternal_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputColor startCmpExternal="Send" label="Start Cmp External" value={'#ff0f0f'} />
         <InputColor startCmpExternal={<SendIcon />} label="Start Cmp External" value={'#ff0f0f'} />
@@ -255,7 +255,7 @@ export const Value: Story = {
     },
 };
 
-export const Variant_ = (args): ReactElement => {
+export const Variant_ = (args): ReactElement | React.ReactNode => {
     const [value, setValue] = useState('#ff0f0f');
 
     return (

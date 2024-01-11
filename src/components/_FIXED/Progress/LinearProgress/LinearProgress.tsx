@@ -12,7 +12,7 @@ const LinearProgress: React.FC<LinearProgressProps> = ({
     value,
     valueBuffer,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const [customColor] = useCustomColor(color);
 
     return (

@@ -14,7 +14,7 @@ const TabItem: React.FC<TabItemProps> = ({
     tooltipProps,
     value,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     return (
         <Tooltip
             {...tooltipProps}

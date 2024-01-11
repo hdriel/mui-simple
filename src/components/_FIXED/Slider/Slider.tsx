@@ -35,7 +35,7 @@ const Slider: React.FC<SliderProps> = ({
     value,
     valueLabelFormat,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     let [customColor] = useCustomColor(typeof color === 'object' ? undefined : color);
     const [track] = useCustomColor((color as any)?.track);
     const [thumb] = useCustomColor((color as any)?.thumb);

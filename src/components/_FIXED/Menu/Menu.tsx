@@ -8,7 +8,7 @@ import { useAnchorProps, useChildrenComponentBinding } from './Menu.hooks';
 import SVGIcon from '../SVGIcon/SVGIcon';
 import type { DividerProps, MenuOption, MenuOptionItem, MenuProps } from '../../decs';
 
-const Menu: React.FC<MenuProps> = (props): React.ReactElement => {
+const Menu: React.FC<MenuProps> = (props): React.ReactElement | React.ReactNode => {
     const {
         alternativeContent,
         anchorElementRef,

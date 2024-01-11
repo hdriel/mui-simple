@@ -13,7 +13,7 @@ import Button from '../Button/Button';
 import { Transition, PaperComponent } from './Dialog.components';
 import type { DialogProps } from '../../decs';
 
-const Dialog: React.FC<DialogProps> = (props): ReactElement => {
+const Dialog: React.FC<DialogProps> = (props): ReactElement | React.ReactNode => {
     const {
         actions,
         autoContentPadding,

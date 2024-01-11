@@ -16,7 +16,7 @@ export const EnhancedTableToolbar: React.FC<EnhancedTableToolbarProps> = ({
     actions,
     colorProps,
     fieldId,
-}: EnhancedTableToolbarProps): React.ReactElement => {
+}: EnhancedTableToolbarProps): React.ReactElement | React.ReactNode => {
     const theme = useTheme();
     const numSelected = selected?.length ?? 0;
     const filteredActions = (numSelected > 0 ? selectedActions : actions) || [];

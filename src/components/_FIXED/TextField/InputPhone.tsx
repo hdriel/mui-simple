@@ -14,7 +14,7 @@ const InputPhone: React.FC<InputPhoneProps> = ({
     copyMessage,
     endCmp: _endCmp,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const ref = useRef(null);
     const [showAlert, setShowAlert] = useState(false);
     const endCmp = typeof _endCmp === 'string' ? <SVGIcon>{_endCmp}</SVGIcon> : _endCmp;

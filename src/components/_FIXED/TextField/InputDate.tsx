@@ -49,7 +49,7 @@ const InputDate: React.FC<InputDateProps> = ({
     helperText,
     timezone,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const { min, max, value } = useInputDateData({
         value: _value,
         min: minDate,

@@ -22,7 +22,7 @@ const TextEllipsis: React.FC<TextEllipsisProps> = ({
     alignJustify,
     align,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const [ref, isEllipsis] = useEllipsisActive({ active: !!dynamicEllipsis, maxRows: +rows || 0 });
     const alignItems = getAlign({ alignCenter, alignRight, alignLeft, alignJustify, align });
 

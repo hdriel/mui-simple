@@ -11,7 +11,9 @@ import Button from '../Button/Button';
 export const Stack = MuiStack;
 export const Box = MuiBox;
 
-export const SliderIcon = (props): React.ReactElement => <Button icon={<CommitRoundedIcon />} {...props} />;
+export const SliderIcon = (props): React.ReactElement | React.ReactNode => (
+    <Button icon={<CommitRoundedIcon />} {...props} />
+);
 
 type TextFieldStyledType = InputBaseProps & TextFieldProps & any;
 export const TextField = styled(MuiTextField, {

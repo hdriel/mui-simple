@@ -15,7 +15,7 @@ import {
 import type { MobileStepperProps } from '../../decs';
 import { useStepperIndexHook, useStepperSteps } from './hooks';
 
-const MobileStepper: React.FC<MobileStepperProps> = (props): React.ReactElement => {
+const MobileStepper: React.FC<MobileStepperProps> = (props): React.ReactElement | React.ReactNode => {
     const {
         autoPlay,
         autoPlayInterval,

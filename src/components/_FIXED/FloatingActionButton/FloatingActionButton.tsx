@@ -5,7 +5,7 @@ import { useCustomColor } from '../../../utils/helpers';
 import SVGIcon from '../SVGIcon/SVGIcon';
 import type { FabProps } from '../../decs';
 
-const Fab: React.FC<FabProps> = (props): React.ReactElement => {
+const Fab: React.FC<FabProps> = (props): React.ReactElement | React.ReactNode => {
     const {
         innerRef,
         children,
