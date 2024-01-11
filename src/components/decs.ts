@@ -907,6 +907,7 @@ export interface TextProps {
     component?: string;
     fullWidth?: boolean;
     gutterBottom?: boolean;
+    html?: boolean;
     italic?: boolean;
     justifyContent?: string;
     lineHeight?: number;

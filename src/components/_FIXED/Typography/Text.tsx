@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactHtmlParser from 'html-react-parser';
 import { Typography as MuiTypography } from './Typography.styled';
 import Tooltip from '../Tooltip/Tooltip';
 import { useCustomColor } from '../../../utils/helpers';
@@ -17,6 +18,7 @@ const Text: React.FC<TextProps> = ({
     className,
     color,
     fullWidth,
+    html,
     innerRef,
     isEllipsis,
     justifyContent,
@@ -72,7 +74,7 @@ const Text: React.FC<TextProps> = ({
                     }),
                 }}
             >
-                {children}
+                {html ? ReactHtmlParser(children) : children}
             </span>
             &nbsp;
             {tooltipMessage && (
@@ -110,6 +112,7 @@ Text.defaultProps = {
     component: 'span',
     fullWidth: undefined,
     gutterBottom: undefined,
+    html: undefined,
     isEllipsis: false,
     italic: undefined,
     justifyContent: undefined,

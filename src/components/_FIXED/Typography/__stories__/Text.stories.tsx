@@ -243,6 +243,13 @@ export const Underline: Story = {
     },
 };
 
+export const HTML: Story = {
+    args: {
+        html: true,
+        children: `hello <b>world</b><br>is html code`,
+    },
+};
+
 export const Width: Story = {
     args: {
         width: 250,
