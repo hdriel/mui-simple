@@ -18,7 +18,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
     value: _value,
     trackBarLinePosition,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     minDistance = minDistance || 0;
 
     const handleChangeLocking = (event, newValue, activeThumb): void => {

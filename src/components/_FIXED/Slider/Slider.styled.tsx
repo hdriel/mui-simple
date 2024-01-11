@@ -7,7 +7,7 @@ const { SliderThumb } = MuiSlider;
 
 export { Grid, Box } from '@mui/material';
 
-export const ValueLabelComponent: React.FC<{ value: string }> = (props): React.ReactElement => {
+export const ValueLabelComponent: React.FC<{ value: string }> = (props): React.ReactElement | React.ReactNode => {
     const { children, value } = props;
 
     return (
@@ -17,7 +17,7 @@ export const ValueLabelComponent: React.FC<{ value: string }> = (props): React.R
     );
 };
 
-export const AirbnbThumbComponent: React.FC<any> = (props): React.ReactElement => {
+export const AirbnbThumbComponent: React.FC<any> = (props): React.ReactElement | React.ReactNode => {
     const { children, ...other } = props;
     return (
         <SliderThumb {...other}>

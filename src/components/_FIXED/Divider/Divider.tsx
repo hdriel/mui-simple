@@ -16,7 +16,7 @@ const Divider: React.FC<DividerProps> = ({
     children,
     sx,
     ...rest
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const theme = useTheme();
     const [color, muiColor] = useCustomColor(_color ?? 'grey');
     const textColor = muiColor ? theme.palette[muiColor]?.contrastText : undefined;

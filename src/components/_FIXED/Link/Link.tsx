@@ -17,7 +17,7 @@ const Link: React.FC<LinkProps> = ({
     useReactRouterDomLink,
     children,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const [customColor, muiColor] = useCustomColor(color);
     const icon = typeof _icon === 'string' ? <SVGIcon>{_icon}</SVGIcon> : _icon;
 

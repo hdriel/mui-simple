@@ -43,7 +43,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
     value,
     valueIsNumericString,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const theme = useTheme();
     const ref = useRef<HTMLDivElement>(null);
     const [onFocus, setOnFocus] = useState(false);

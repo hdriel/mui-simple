@@ -5,7 +5,7 @@ import { useCustomColor } from '../../../utils/helpers';
 import type { RippleBoxProps } from '../../decs';
 const { TouchRipple } = ButtonBase;
 
-const RippleBox: React.FC<RippleBoxProps> = ({ color, children }): React.ReactElement => {
+const RippleBox: React.FC<RippleBoxProps> = ({ color, children }): React.ReactElement | React.ReactNode => {
     const [customColor, muiColor] = useCustomColor(color ?? 'primary');
 
     const rippleRef = useRef(null);

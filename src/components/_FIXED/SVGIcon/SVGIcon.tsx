@@ -13,7 +13,7 @@ const SVGIcon: React.FC<SVGIconProps> = ({
     children,
     sx: _sx,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const iconName = muiIconName || (typeof children === 'string' ? children : undefined);
     const sx = { display: 'flex', justifyContent: 'center', alignItems: 'center', ..._sx };
     if (children && isValidElement(children)) {

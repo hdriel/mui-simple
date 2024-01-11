@@ -35,7 +35,7 @@ const List: React.FC<ListProps> = ({
     useReactRouterDomLink,
     width,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const [bgColor] = useCustomColor(_bgColor);
     const [isOpenStateChangeOnce, setIsOpenStateChangeOnce] = useState(false);
     const [open, setOpen] = useState({});
@@ -62,7 +62,7 @@ const List: React.FC<ListProps> = ({
                   }
         ) ?? [];
 
-    const renderValue = (item: ListItemProps, index: number): React.ReactElement => {
+    const renderValue = (item: ListItemProps, index: number): React.ReactElement | React.ReactNode => {
         const { divider, component, alignControl, controlType, ...itemProps } = item || {};
         const isControl = ['checkbox', 'switch'].includes(controlType);
         const isOpen = item.expanded || open[index];

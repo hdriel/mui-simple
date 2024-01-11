@@ -11,7 +11,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
     thickness,
     value,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const [customColor] = useCustomColor(color);
 
     return (

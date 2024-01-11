@@ -69,7 +69,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
     sx,
     width,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const [color] = useCustomColor(colorActive ?? colorLabel);
 
     const { options, filterOptions, getOptionLabel, renderOption } = useAutocompleteOptionsHook({

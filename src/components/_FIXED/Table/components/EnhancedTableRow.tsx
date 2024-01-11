@@ -15,7 +15,7 @@ const EnhancedTableRow: React.FC<EnhancedTableRowProps> = ({
     selected,
     selectionMode,
     children,
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const data: any = children ?? {};
 
     return (

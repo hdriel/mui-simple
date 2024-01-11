@@ -11,7 +11,13 @@ import ListItem from '../List/ListItem';
 import type { InputMultipleSelectProps, InputSelectOption } from '../../decs';
 import SVGIcon from '../SVGIcon/SVGIcon';
 
-const RenderValuesAsChips = ({ value, option: options }: { value?: any; option?: any }): React.ReactElement => {
+const RenderValuesAsChips = ({
+    value,
+    option: options,
+}: {
+    value?: any;
+    option?: any;
+}): React.ReactElement | React.ReactNode => {
     return (
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
             {options?.map(({ value, label }) => (
@@ -20,7 +26,13 @@ const RenderValuesAsChips = ({ value, option: options }: { value?: any; option?:
         </Box>
     );
 };
-const RenderValuesAsSquaredChips = ({ value, option: options }: { value?: any; option?: any }): React.ReactElement => {
+const RenderValuesAsSquaredChips = ({
+    value,
+    option: options,
+}: {
+    value?: any;
+    option?: any;
+}): React.ReactElement | React.ReactNode => {
     return (
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
             {options?.map(({ value, label }) => (
@@ -48,7 +60,7 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
     SELECTED_ITEMS_LABEL,
     checkboxMarker: _checkboxMarker,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const options = getOptions({ options: _options });
     const convertedOptions = useOptionsConverter({ options, groupBy });
     const availableValuesLen = options.filter(

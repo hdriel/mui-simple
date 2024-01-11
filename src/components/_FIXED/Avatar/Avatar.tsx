@@ -6,7 +6,7 @@ import Tooltip from '../Tooltip/Tooltip';
 import type { AvatarProps } from '../../decs';
 import SVGIcon from '../SVGIcon/SVGIcon';
 
-const Avatar: React.FC<AvatarProps> = (props): React.ReactElement => {
+const Avatar: React.FC<AvatarProps> = (props): React.ReactElement | React.ReactNode => {
     const {
         color,
         fallbackImage,

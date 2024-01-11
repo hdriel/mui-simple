@@ -34,7 +34,7 @@ const Text: React.FC<TextProps> = ({
     useEllipsisStyle,
     width,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const [customColor] = useCustomColor(color);
     const [customBGColor] = useCustomColor(bgColor);
     const alignItems = getAlign({ alignCenter, alignRight, alignLeft, alignJustify, align });

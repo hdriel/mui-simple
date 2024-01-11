@@ -27,7 +27,7 @@ export const EnhancedTableHead: React.FC<EnhancedTableHeadProps> = ({
     onSelectAllClick,
     rowCount,
     selectionMode,
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const createSortHandler = (property, nextState) => {
         return (event) => onRequestSort(event, property, nextState);
     };

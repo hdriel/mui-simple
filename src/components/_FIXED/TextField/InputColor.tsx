@@ -31,7 +31,7 @@ const InputColor: React.FC<InputColorProps> = ({
     value: _value,
     variant,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const theme = useTheme();
     const [colorValue] = _value?.startsWith('#') ? [_value] : getCustomColor({ theme, customColor: _value });
     const value = colorValue;

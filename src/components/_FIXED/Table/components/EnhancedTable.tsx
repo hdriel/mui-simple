@@ -53,7 +53,7 @@ const EnhancedTable: React.FC<TableProps> = ({
     stickyHeader,
     tableColor,
     title,
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const theme = useTheme();
     const colorProps = extractColors({ theme, colors: tableColor });
     const actionColorProps =

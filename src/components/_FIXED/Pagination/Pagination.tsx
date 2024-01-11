@@ -47,7 +47,7 @@ const Pagination: React.FC<PaginationProps> = ({
     showLastButton,
     totalPages,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const [customColor, muiColor] = useCustomColor(color);
     const IconFirst = typeof _IconFirst === 'string' ? MUIIcon[_IconFirst] : _IconFirst;
     const IconLast = typeof _IconLast === 'string' ? MUIIcon[_IconLast] : _IconLast;

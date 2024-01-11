@@ -29,7 +29,7 @@ const RadioButtonsGroup: React.FC<RadioButtonsGroupProps> = ({
     variant,
     sx,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const [customColor, muiColor] = useCustomColor(color);
     const label = _label ? <FormLabel>{_label}</FormLabel> : undefined;
     const useLegend = variant === 'outlined';

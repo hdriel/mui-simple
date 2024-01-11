@@ -32,7 +32,7 @@ const InputPattern: React.FC<InputPatternProps> = ({
     unmask,
     value: _value,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     // for example output for mask: '+(972) 50-000-0000'
     const [maskedValue, setMaskedValue] = useState(_value); // for example: '0-000-0000'
     const [unmaskedValue, setUnmaskedValue] = useState(_value); // for example: '0-000-0000'

@@ -353,7 +353,7 @@ export const Overwrite: Story = {
     },
 };
 
-export const Lazy_ = (args): React.ReactElement => (
+export const Lazy_ = (args): React.ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputPattern label="ID default Lazy" mask="0 0000000 0" definitions={{ '#': /[1-9]/ }} />
         <InputPattern label="ID true Lazy" mask="0 0000000 0" definitions={{ '#': /[1-9]/ }} lazy />
@@ -361,7 +361,7 @@ export const Lazy_ = (args): React.ReactElement => (
     </Stack>
 );
 
-export const Formik_ = (args): React.ReactElement => {
+export const Formik_ = (args): React.ReactElement | React.ReactNode => {
     return (
         <Formik initialValues={{ phone: '050-000-0000', unmask: false }} onSubmit={(values) => alert(values.phone)}>
             {({ values, touched, setFieldValue, handleChange, errors, handleSubmit }: any) => {

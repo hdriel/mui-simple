@@ -6,7 +6,7 @@ import { useCustomColor } from '../../../utils/helpers';
 import type { AlertProps } from '../../decs';
 import SVGIcon from '../SVGIcon/SVGIcon';
 
-const Alert: React.FC<AlertProps> = forwardRef((props: AlertProps, ref): React.ReactElement => {
+const Alert: React.FC<AlertProps> = forwardRef((props: AlertProps, ref): React.ReactElement | React.ReactNode => {
     const { actions, children, color, icon, onClose, severity, show: _show, title, variant, width, ...rest } = props;
     const [show, setShow] = useState(_show);
     const [customColor] = useCustomColor(color);

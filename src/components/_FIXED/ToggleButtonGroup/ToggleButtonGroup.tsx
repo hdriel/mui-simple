@@ -24,7 +24,7 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
     wrap,
     sx,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const [customColor, muiColor] = useCustomColor(color);
     const commonsValues = [].concat(selectedValue);
 

@@ -19,7 +19,7 @@ import { useCardExpandedContent } from './Card.hooks';
 import type { CardProps } from '../../decs';
 import { useElementSize } from '../../../hooks/useElementSize';
 
-const Card: React.FC<CardProps> = (props): React.ReactElement => {
+const Card: React.FC<CardProps> = (props): React.ReactElement | React.ReactNode => {
     const {
         actions,
         avatar,

@@ -296,7 +296,7 @@ export const CopyAction: Story = {
     },
 };
 
-export const Formik_ = (args): React.ReactElement => {
+export const Formik_ = (args): React.ReactElement | React.ReactNode => {
     return (
         <Formik
             initialValues={{ phone: '050-000-0124', unmask: false }}

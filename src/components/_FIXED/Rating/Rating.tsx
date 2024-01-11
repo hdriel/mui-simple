@@ -46,7 +46,7 @@ const Rating: React.FC<RatingProps> = ({
     stars,
     value,
     ...props
-}): React.ReactElement => {
+}): React.ReactElement | React.ReactNode => {
     const theme = useTheme();
     const [color] = useCustomColor(_color);
     const [activeColor] = useCustomColor(_activeColor);
