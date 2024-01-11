@@ -5,7 +5,7 @@ import { useCustomColor } from '../../../utils/helpers';
 import SVGIcon from '../SVGIcon/SVGIcon';
 import type { ChipProps } from '../../decs';
 
-const Chip: React.FC<ChipProps> = (props): ReactElement => {
+const Chip: React.FC<ChipProps> = (props): ReactElement | React.ReactNode => {
     const {
         children,
         color,

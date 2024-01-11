@@ -26,7 +26,7 @@ const AppBar: React.FC<AppBarProps> = ({
     sx,
     children,
     ...props
-}): ReactElement => {
+}): ReactElement | React.ReactNode => {
     const [customColor] = useCustomColor(color);
     const positionStyle: AppBarPosition = isBottom ? 'fixed' : position;
 

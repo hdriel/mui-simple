@@ -6,7 +6,7 @@ import { useCustomColor } from '../../../utils/helpers';
 import SVGIcon from '../SVGIcon/SVGIcon';
 import type { SpeedDialProps } from '../../decs';
 
-const SpeedDial: React.FC<SpeedDialProps> = (props): ReactElement => {
+const SpeedDial: React.FC<SpeedDialProps> = (props): ReactElement | React.ReactNode => {
     const {
         ariaLabel,
         actions,

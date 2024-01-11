@@ -13,7 +13,7 @@ const SIZES = ['small', 'medium', 'large'];
 type SizeType = 'small' | 'medium' | 'large';
 
 const Button: React.ForwardRefExoticComponent<React.PropsWithoutRef<any> & React.RefAttributes<HTMLButtonElement>> =
-    forwardRef((props: PropsWithChildren<ButtonProps>, ref: Ref<HTMLButtonElement>): ReactElement => {
+    forwardRef((props: PropsWithChildren<ButtonProps>, ref: Ref<HTMLButtonElement>): ReactElement | React.ReactNode => {
         const {
             children,
             color,

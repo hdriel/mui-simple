@@ -133,14 +133,14 @@ export const Disabled: Story = {
     },
 };
 
-export const EndCmp_ = (args): ReactElement => (
+export const EndCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputPhone endCmp="Send" label="End Cmp" value="endCmp with mui icon name or mui icon element" />
         <InputPhone endCmp={<SendIcon />} label="End Cmp" value="endCmp with mui icon name or mui icon element" />
     </Stack>
 );
 
-export const EndCmpExternal_ = (args): ReactElement => (
+export const EndCmpExternal_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputPhone
             endCmpExternal="Send"
@@ -187,7 +187,7 @@ export const HelperText: Story = {
     },
 };
 
-export const HideStartActionsOnEmpty_ = (args): ReactElement => (
+export const HideStartActionsOnEmpty_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputPhone
             hideStartActionsOnEmpty={true}
@@ -210,7 +210,7 @@ export const Label: Story = {
     },
 };
 
-export const Margin_ = (args): ReactElement => (
+export const Margin_ = (args): ReactElement | React.ReactNode => (
     <Stack>
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
         <InputPhone label="None Margin" />
@@ -259,14 +259,14 @@ export const Required: Story = {
     },
 };
 
-export const StartCmp_ = (args): ReactElement => (
+export const StartCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputPhone startCmp="Send" label="Start Cmp" value="with string mui icon name" />
         <InputPhone startCmp={<SendIcon />} label="Start Cmp" value="with mui icon element" />
     </Stack>
 );
 
-export const StartCmpExternal_ = (args): ReactElement => (
+export const StartCmpExternal_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputPhone startCmpExternal="Send" label="Start Cmp External" value="with string mui icon name" />
         <InputPhone startCmpExternal={<SendIcon />} label="Start Cmp External" value="with mui icon element" />
@@ -279,7 +279,7 @@ export const Value: Story = {
     },
 };
 
-export const Variant_ = (args): ReactElement => (
+export const Variant_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputPhone variant="filled" label="filled variant" value="some text here" />
         <InputPhone variant="outlined" label="outlined variant" value="some text here" />

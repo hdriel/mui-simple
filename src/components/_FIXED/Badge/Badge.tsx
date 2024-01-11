@@ -4,7 +4,7 @@ import { Badge as MuiBadge } from './Badge.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import type { BadgeProps } from '../../decs';
 
-const Badge: React.FC<BadgeProps> = (props): ReactElement => {
+const Badge: React.FC<BadgeProps> = (props): ReactElement | React.ReactNode => {
     const { variant, color, content, hide, showZero, max, overlap, vertical, horizontal, ...rest } = props;
 
     const [customColor, muiColor] = useCustomColor(color);

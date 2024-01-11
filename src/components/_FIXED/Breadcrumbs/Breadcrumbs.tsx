@@ -10,7 +10,7 @@ import type { BreadcrumbsProps } from '../../decs';
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const EMPTY_CB = (): void => {};
 
-const Breadcrumbs: React.FC<BreadcrumbsProps> = (props): ReactElement => {
+const Breadcrumbs: React.FC<BreadcrumbsProps> = (props): ReactElement | React.ReactNode => {
     const { maxItems, size, separator: _separator, color, links, chips, children, ...rest } = props;
     const separator = typeof _separator === 'string' ? <SVGIcon>{_separator}</SVGIcon> : _separator;
 

@@ -23,7 +23,7 @@ const Drawer: React.FC<DrawerProps> = ({
     PaperProps,
     children,
     ...props
-}): ReactElement => {
+}): ReactElement | React.ReactNode => {
     const theme = useTheme();
     const isMiniPersistent = _variant === 'mini-persistent';
     const variant = isMiniPersistent ? 'persistent' : _variant;

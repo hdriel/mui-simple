@@ -41,7 +41,7 @@ const Stepper: React.FC<StepperProps> = ({
     OPTIONAL_LABEL,
     children,
     ...rest
-}): ReactElement => {
+}): ReactElement | React.ReactNode => {
     const [customColor] = useCustomColor(color);
 
     const { steps, icons, iconListSize, isCustomStyleUsed } = useStepperSteps({

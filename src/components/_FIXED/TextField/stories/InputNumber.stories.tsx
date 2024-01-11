@@ -109,14 +109,14 @@ export const Disabled: Story = {
     },
 };
 
-export const EndCmp_ = (args): ReactElement => (
+export const EndCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputNumber endCmp="Send" label="End Cmp" value="endCmp with mui icon name or mui icon element" />
         <InputNumber endCmp={<SendIcon />} label="End Cmp" value="endCmp with mui icon name or mui icon element" />
     </Stack>
 );
 
-export const EndCmpExternal_ = (args): ReactElement => (
+export const EndCmpExternal_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputNumber endCmpExternal="Send" label="End Cmp External" value={808080} />
         <InputNumber endCmpExternal={<SendIcon />} label="End Cmp External" value={840840} />
@@ -155,7 +155,7 @@ export const HelperText: Story = {
     },
 };
 
-export const HideStartActionsOnEmpty_ = (args): ReactElement => (
+export const HideStartActionsOnEmpty_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputNumber
             hideStartActionsOnEmpty={true}
@@ -178,7 +178,7 @@ export const Label: Story = {
     },
 };
 
-export const Margin_ = (args): ReactElement => (
+export const Margin_ = (args): ReactElement | React.ReactNode => (
     <Stack>
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
         <InputNumber label="None Margin" />
@@ -218,14 +218,14 @@ export const Required: Story = {
     },
 };
 
-export const StartCmp_ = (args): ReactElement => (
+export const StartCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputNumber startCmp="Send" label="Start Cmp" value={10005} />
         <InputNumber startCmp={<SendIcon />} label="Start Cmp" value={10005} />
     </Stack>
 );
 
-export const StartCmpExternal_ = (args): ReactElement => (
+export const StartCmpExternal_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputNumber startCmpExternal="Send" label="Start Cmp External" value={4804} />
         <InputNumber startCmpExternal={<SendIcon />} label="Start Cmp External" value={4804} />
@@ -246,7 +246,7 @@ export const Value: Story = {
     },
 };
 
-export const Variant_ = (args): ReactElement => {
+export const Variant_ = (args): ReactElement | React.ReactNode => {
     const [value, setValue] = useState(1500);
 
     return (

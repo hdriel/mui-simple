@@ -31,7 +31,7 @@ const OnScrollEventWrapper: React.FC<OnScrollEventWrapperProps> = ({
     scrollToId,
     scrollToTop,
     scrollToTopProps,
-}): ReactElement => {
+}): ReactElement | React.ReactNode => {
     // @ts-expect-error
     const { left, top, zIndex, bottom: _bottom, right: _right } = scrollToTopProps ?? {};
     const bottom = [top, _bottom].some(isDefined) ? _bottom : 16;

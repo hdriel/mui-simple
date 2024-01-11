@@ -27,7 +27,7 @@ const Snackbar: React.FC<SnackbarProps> = ({
     variant,
     vertical,
     ...props
-}): ReactElement => {
+}): ReactElement | React.ReactNode => {
     const action = useMemo(
         () =>
             []
