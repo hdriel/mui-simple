@@ -102,6 +102,10 @@ const Menu: React.FC<MenuProps> = (props): React.ReactElement => {
     // }, [wasSeen]);
     // (bindRef || (anchorProps as any).anchorEl || contextMenu) && (
 
+    if (!options?.length) {
+        return children;
+    }
+
     return (
         <>
             {Children.toArray(boundingChildren)}
