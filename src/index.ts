@@ -167,7 +167,8 @@ export * from './components/_FIXED/Table/Table';
 
 export * from './components/_FIXED/Tabs';
 
-export { default as Timeline } from './components/Timeline/Timeline';
+export { default as Timeline } from './components/_FIXED/Timeline/Timeline';
+export type { TimelineProps, TimelineItemProps } from './components/_FIXED/Timeline/Timeline';
 
 export { default as ToggleButtonGroup } from './components/_FIXED/ToggleButtonGroup/ToggleButtonGroup';
 export type { ToggleButtonGroupProps } from './components/_FIXED/ToggleButtonGroup/ToggleButtonGroup';

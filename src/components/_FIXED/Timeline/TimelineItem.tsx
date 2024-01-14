@@ -1,6 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
 import {
     TimelineConnector,
     TimelineContent,
@@ -9,10 +7,11 @@ import {
     TimelineSeparator,
     TimelineOppositeContent,
 } from './Timeline.styled';
-import Typography from '../_FIXED/Typography/Typography';
-import { useCustomColor } from '../../utils/helpers';
+import Typography from '../Typography/Typography';
+import { useCustomColor } from '../../../utils/helpers';
+import type { TimelineItemProps } from '../../decs';
 
-export default function TimelineItem({
+const TimelineItem: React.FC<TimelineItemProps> = ({
     variant,
     color,
     connectorColor,
@@ -25,8 +24,9 @@ export default function TimelineItem({
     connector,
     timeWidth,
     titleWidth,
+    position,
     ...props
-}) {
+}) => {
     const [customColor, muiColor] = useCustomColor(color);
     const [customColorConnector] = useCustomColor(connectorColor);
 
@@ -68,6 +68,7 @@ export default function TimelineItem({
                     py: 'px',
                     px: 2,
                     minWidth: titleWidth,
+                    ...(position !== 'alternate' && { flex: 'unset' }),
                 }}
             >
                 {title && (
@@ -80,20 +81,6 @@ export default function TimelineItem({
             </TimelineContent>
         </MuiTimelineItem>
     );
-}
-
-TimelineItem.propTypes = {
-    variant: PropTypes.oneOf(['filled', 'outlined']),
-    color: PropTypes.string,
-    icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    title: PropTypes.string,
-    subtitle: PropTypes.string,
-    time: PropTypes.string,
-    timeFormat: PropTypes.string,
-    connector: PropTypes.bool,
-    connectorColor: PropTypes.string,
-    connectorHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    connectorWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 TimelineItem.defaultProps = {
@@ -109,3 +96,5 @@ TimelineItem.defaultProps = {
     connectorHeight: undefined,
     connectorWidth: undefined,
 };
+
+export default TimelineItem;

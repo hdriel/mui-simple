@@ -15,6 +15,7 @@ import type { TimePickerProps } from '@mui/x-date-pickers/TimePicker';
 import type { CloseReason, OpenReason, SxProps } from '@mui/material';
 import type { TIMEZONE } from './timezone';
 import type { LOCALE, ADAPTER_LOCALE } from './locales';
+import React from 'react';
 export type AppBarPosition = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
 
 type IconType = IconName | ReactNode | ReactElement;
@@ -1321,3 +1322,37 @@ export type MobileStepperProps = StepperProps & {
     variant?: 'text' | 'dots' | 'progress';
     [key: string]: any;
 };
+
+export interface TimelineItemProps {
+    variant?: 'filled' | 'outlined';
+    color?: string;
+    icon?: IconType;
+    title?: string;
+    subtitle?: string;
+    time?: string;
+    timeFormat?: string;
+    connector?: boolean;
+    connectorColor?: string;
+    connectorHeight?: string | number;
+    connectorWidth?: string | number;
+    timeWidth?: string | number;
+    titleWidth?: string | number;
+    position?: 'right' | 'left' | 'alternate';
+}
+
+export interface TimelineProps {
+    variant?: 'filled' | 'outlined';
+    color?: string;
+    connectorColor?: string;
+    border?: string | boolean;
+    connectorHeight?: string | number;
+    connectorWidth?: string | number;
+    connectorStyle?: string;
+    timeFormat?: string;
+    position?: 'right' | 'left' | 'alternate';
+    right?: boolean;
+    left?: boolean;
+    zigzag?: boolean;
+    align?: 'right' | 'left' | 'center';
+    steps?: Array<string | TimelineItemProps>;
+}

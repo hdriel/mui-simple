@@ -1,8 +1,12 @@
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { format } from 'date-fns';
-import { getTextWidth, isValidDateValue } from '../../utils/helpers';
+import { getTextWidth, isValidDateValue } from '../../../utils/helpers';
+import type { TimelineProps, TimelineItemProps } from '../../decs';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
-export function useMaxWidth({ steps }) {
+export const useMaxWidth = ({
+    steps,
+}: Pick<TimelineProps, 'steps'>): { titleWidth: string | number; timeWidth: string | number } => {
     const maxTitle = steps
         .map(({ title, subtitle }) => ((title?.length ?? 0) > (subtitle?.length ?? 0) ? title : subtitle || ''))
         .reduce((maxTitle, title) => (maxTitle.length > title.length ? maxTitle : title), '');
@@ -22,9 +26,9 @@ export function useMaxWidth({ steps }) {
     }, [maxTime]);
 
     return { titleWidth: maxTitleWidth, timeWidth: maxTimeWidth };
-}
+};
 
-export function useSteps({
+export const useSteps = ({
     steps: _steps,
     timeFormat,
     variant,
@@ -32,15 +36,13 @@ export function useSteps({
     connectorHeight,
     connectorWidth,
     color,
-}) {
+}): TimelineItemProps[] => {
     const steps =
         _steps?.map((step, index, arr) => {
-            if (typeof step === 'string') {
-                step = { title: step };
-            }
-
+            if (typeof step === 'string') step = { title: step };
             let time = new Date(step.time);
             time = isValidDateValue(time) ? format(time, timeFormat ?? step.timeFormat ?? 'hh:mm a') : step.time;
+            const icon = typeof step.icon === 'string' ? <SVGIcon>{step.icon}</SVGIcon> : step.icon;
 
             return {
                 ...step,
@@ -49,7 +51,7 @@ export function useSteps({
                 connectorColor: step.connectorColor ?? connectorColor,
                 connectorHeight: step.connectorHeight ?? connectorHeight,
                 connectorWidth: step.connectorWidth ?? connectorWidth,
-                icon: step.icon,
+                icon,
                 title: step.title,
                 subtitle: step.subtitle,
                 connector: index !== arr.length - 1,
@@ -58,4 +60,4 @@ export function useSteps({
         }) ?? [];
 
     return steps;
-}
+};
