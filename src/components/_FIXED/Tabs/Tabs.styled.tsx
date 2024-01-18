@@ -13,7 +13,7 @@ interface TabsStyledProps {
 type TabsStyledPropsType = TabsProps & TabsStyledProps & any;
 
 export const Tabs = styled(MuiTabs, {
-    shouldForwardProp: (propName) => !['reverse', 'fillActiveTab', 'customColor'].includes(propName as string),
+    shouldForwardProp: (propName) => !['wrap', 'reverse', 'fillActiveTab', 'customColor'].includes(propName as string),
 })<TabsStyledPropsType>`
     padding: 0;
 
@@ -22,6 +22,8 @@ export const Tabs = styled(MuiTabs, {
     }
 
     & .MuiTab-root {
+        position: relative;
+
         &.Mui-selected {
             ${(props) => {
                 const color = props.customColor ?? get(props, `theme.palette.primary.main`);
@@ -44,6 +46,31 @@ export const Tabs = styled(MuiTabs, {
                       `
                     : css``;
             }};
+
+            ${(props) => {
+                const color = props.customColor ?? get(props, `theme.palette.primary.main`);
+                return props.wrap
+                    ? css`
+                          ::after {
+                              position: absolute;
+                              content: ' ';
+                              background-color: ${color};
+                              ${props.orientation === 'vertical'
+                                  ? {
+                                        left: props.reverse ? 0 : 'unset',
+                                        right: props.reverse ? 'unset' : 0,
+                                        width: '2px',
+                                        height: '100%',
+                                    }
+                                  : {
+                                        bottom: 0,
+                                        width: '100%',
+                                        height: '2px',
+                                    }}
+                          }
+                      `
+                    : css``;
+            }}
         }
     }
 ` as ComponentType<TabsStyledPropsType>;

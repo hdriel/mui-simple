@@ -13,6 +13,8 @@ const TabItem: React.FC<TabItemProps> = ({
     orientation,
     tooltipProps,
     value,
+    reverse,
+    verticalTabWidth,
     ...props
 }): React.ReactElement | React.ReactNode => {
     return (
@@ -32,6 +34,7 @@ const TabItem: React.FC<TabItemProps> = ({
                 hidden={!open}
                 id={`simple-tabpanel-${value}`}
                 aria-labelledby={`simple-tab-${value}`}
+                icon={icon && <SVGIcon>{icon}</SVGIcon>}
                 {...(link && {
                     href: link,
                     component: 'a',
@@ -40,7 +43,18 @@ const TabItem: React.FC<TabItemProps> = ({
                         onClick?.(event, value);
                     },
                 })}
-                icon={icon && <SVGIcon>{icon}</SVGIcon>}
+                sx={{
+                    ...(orientation === 'vertical' && {
+                        ...(reverse ? { borderLeft: 1 } : { borderRight: 1 }),
+                        borderColor: 'divider',
+                        minWidth: 'fit-content',
+                        width: verticalTabWidth,
+                    }),
+                    ...((orientation === undefined || orientation === 'horizontal') && {
+                        borderBottom: 1,
+                        borderColor: 'divider',
+                    }),
+                }}
                 {...props}
             />
         </Tooltip>

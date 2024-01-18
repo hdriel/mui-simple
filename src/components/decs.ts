@@ -1219,6 +1219,7 @@ export interface TabsProps {
     verticalMaxFixedHeight?: string | number;
     verticalTabWidth?: string | number;
     reverse?: boolean;
+    wrap?: boolean;
     [key: string]: any;
 }
 

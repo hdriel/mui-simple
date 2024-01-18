@@ -15,7 +15,7 @@ export default meta;
 
 type Story = StoryObj<typeof Tabs>;
 
-const tabs = (totalTabs?: number) =>
+const tabs = (totalTabs = 12) =>
     [
         { value: '1', label: 'Item ' },
         { value: '2', label: 'Item ' },
@@ -29,6 +29,14 @@ const tabs = (totalTabs?: number) =>
         { value: '10', label: 'Item ' },
         { value: '11', label: 'Item ' },
         { value: '12', label: 'Item ' },
+        { value: '13', label: 'Item ' },
+        { value: '14', label: 'Item ' },
+        { value: '15', label: 'Item ' },
+        { value: '16', label: 'Item ' },
+        { value: '17', label: 'Item ' },
+        { value: '18', label: 'Item ' },
+        { value: '19', label: 'Item ' },
+        { value: '20', label: 'Item ' },
     ]
         .slice(0, totalTabs)
         .map((tabProps, index) => (
@@ -46,7 +54,7 @@ const render = (args) => {
     const [value, setValue] = useState<string | number>(args.value ?? '2');
     return (
         <Tabs {...args} value={value} onChange={(tabId) => setValue(tabId as string)}>
-            {tabs(5)}
+            {args.children ?? tabs(5)}
         </Tabs>
     );
 };
@@ -87,10 +95,20 @@ export const OnChange: Story = {
     },
     render,
 };
+
 export const OrientationVertical: Story = {
     args: {
         orientation: 'vertical',
         children: tabs(5),
+    },
+    render,
+};
+
+export const Wrap: Story = {
+    args: {
+        orientation: 'horizontal',
+        children: tabs(19),
+        wrap: true,
     },
     render,
 };

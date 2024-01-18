@@ -24,6 +24,7 @@ const Tabs: React.FC<TabsProps> = ({
     verticalMaxFixedHeight,
     verticalTabWidth,
     reverse,
+    wrap,
     children,
     ...props
 }) => {
@@ -63,6 +64,8 @@ const Tabs: React.FC<TabsProps> = ({
                 icon={props.icon}
                 tooltipProps={props.tooltipProps}
                 orientation={orientation}
+                reverse={reverse}
+                verticalTabWidth={verticalTabWidth}
             />
         );
     });
@@ -87,19 +90,16 @@ const Tabs: React.FC<TabsProps> = ({
                 visibleScrollbar={visibleScrollbar}
                 allowScrollButtonsMobile
                 scrollButtons={visibleScrollButtons}
-                sx={{
-                    ...(orientation === 'vertical' && {
-                        ...(reverse ? { borderLeft: 1 } : { borderRight: 1 }),
-                        borderColor: 'divider',
-                        minWidth: 'fit-content',
-                        width: verticalTabWidth,
-                    }),
-                    ...((orientation === undefined || orientation === 'horizontal') && {
-                        borderBottom: 1,
-                        borderColor: 'divider',
-                    }),
-                }}
+                wrap={wrap}
+                TabIndicatorProps={{ hidden: wrap }}
                 {...props}
+                sx={{
+                    ...(wrap && {
+                        '.MuiTabs-flexContainer':
+                            orientation === 'vertical' ? { flexFlow: 'wrap' } : { flexWrap: 'wrap' },
+                    }),
+                    ...props.sx,
+                }}
             >
                 {tabs}
             </MuiTabs>
@@ -138,6 +138,7 @@ Tabs.defaultProps = {
     verticalMaxFixedHeight: undefined,
     verticalTabWidth: undefined,
     reverse: undefined,
+    wrap: undefined,
 };
 
 export type { TabsProps } from '../../decs';
