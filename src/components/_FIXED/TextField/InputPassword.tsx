@@ -110,7 +110,7 @@ InputPassword.defaultProps = {
     colorActive: undefined,
     colorLabel: undefined,
     colorText: undefined,
-    copyAction: true,
+    copyAction: true, // undefined - probably not always we want this action
     copyCmp: 'ContentCopy',
     copyMessage: 'Copied to clipboard',
     copyTooltip: 'Copy',
@@ -123,7 +123,7 @@ InputPassword.defaultProps = {
     fullWidth: undefined,
     generatePasswordTooltip: 'generate new password',
     generateRandom: 8,
-    generateRandomAction: true,
+    generateRandomAction: true, // undefined - probably not always we want this action
     generateRandomCmp: 'LockReset',
     helperText: undefined,
     hidePasswordOnClickAway: true,
