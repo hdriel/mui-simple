@@ -16,6 +16,20 @@ export default meta;
 
 type Story = StoryObj<typeof Checkbox>;
 
+const render = (args) => {
+    const [value, onChange] = useState(args.checked);
+    return (
+        <Checkbox
+            {...args}
+            value={value}
+            onChange={(e, v) => {
+                args.onChange?.(e, v);
+                onChange(v);
+            }}
+        />
+    );
+};
+
 export const Default: Story = {
     args: {
         children: 'checkbox',
@@ -27,6 +41,7 @@ export const Checked: Story = {
         checked: true,
         children: 'Checked',
     },
+    render,
 };
 
 export const OnChange: Story = {
@@ -34,10 +49,7 @@ export const OnChange: Story = {
         checked: true,
         children: 'on change event',
     },
-    render: (args) => {
-        const [value, onChange] = useState(args.checked);
-        return <Checkbox {...args} value={value} onChange={(e, v) => onChange(v)} />;
-    },
+    render,
 };
 export const CheckedIcon: Story = {
     args: {
@@ -60,13 +72,13 @@ export const CheckedIcon: Story = {
 
 export const Color_ = (args) => (
     <Stack direction="row" spacing={3}>
-        <Checkbox checked color={'#00ab92'}>
+        <Checkbox {...args} checked color={'#00ab92'}>
             #00ab92
         </Checkbox>
-        <Checkbox checked color={'primary'}>
+        <Checkbox {...args} checked color={'primary'}>
             Primary
         </Checkbox>
-        <Checkbox checked color={'secondary'}>
+        <Checkbox {...args} checked color={'secondary'}>
             Secondary
         </Checkbox>
     </Stack>
@@ -77,6 +89,7 @@ export const Disabled: Story = {
         disabled: true,
         children: 'disabled checkbox',
     },
+    render,
 };
 
 export const FontSize: Story = {
@@ -84,6 +97,7 @@ export const FontSize: Story = {
         fontSize: 35,
         children: 'FontSize checkbox',
     },
+    render,
 };
 
 export const HelperText: Story = {
@@ -91,6 +105,7 @@ export const HelperText: Story = {
         helperText: 'some helper text here',
         children: 'checkbox with helper text',
     },
+    render,
 };
 
 export const Icon: Story = {
@@ -99,20 +114,30 @@ export const Icon: Story = {
         checkedIcon: <SendIcon />,
         children: 'checkbox with icons',
     },
+    render,
 };
 
 export const Label: Story = {
     args: {
         label: 'some label',
     },
+    render,
 };
 
 export const LabelPlacement_ = (args) => (
     <Stack direction="row" spacing={4}>
-        <Checkbox labelPlacement="top">top label</Checkbox>
-        <Checkbox labelPlacement="start">start label</Checkbox>
-        <Checkbox labelPlacement="bottom">bottom label</Checkbox>
-        <Checkbox labelPlacement="end">end label</Checkbox>
+        <Checkbox {...args} labelPlacement="top">
+            top label
+        </Checkbox>
+        <Checkbox {...args} labelPlacement="start">
+            start label
+        </Checkbox>
+        <Checkbox {...args} labelPlacement="bottom">
+            bottom label
+        </Checkbox>
+        <Checkbox {...args} labelPlacement="end">
+            end label
+        </Checkbox>
     </Stack>
 );
 
@@ -122,6 +147,7 @@ export const ReadOnly: Story = {
         checked: true,
         children: 'readOnly checkbox',
     },
+    render,
 };
 
 export const Required: Story = {
@@ -129,12 +155,17 @@ export const Required: Story = {
         required: true,
         children: 'required checkbox',
     },
+    render,
 };
 
 export const Size_ = (args) => (
     <Stack direction="row" spacing={3}>
-        <Checkbox size="small">small checkbox</Checkbox>
-        <Checkbox size="medium">medium checkbox</Checkbox>
+        <Checkbox {...args} size="small">
+            small checkbox
+        </Checkbox>
+        <Checkbox {...args} size="medium">
+            medium checkbox
+        </Checkbox>
     </Stack>
 );
 
@@ -143,4 +174,5 @@ export const TextColor: Story = {
         textColor: '#FF0000',
         children: 'red text',
     },
+    render,
 };

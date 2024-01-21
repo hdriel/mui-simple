@@ -22,6 +22,7 @@ export const Checkbox = styled(
             wrapperStyle,
             error,
             labelPlacement,
+            onChange,
             muiColor,
             readOnly,
             required,
@@ -49,11 +50,11 @@ export const Checkbox = styled(
                     sx={{ m: 0, userSelect: 'none', color: textColor }}
                     control={
                         <MuiCheckbox
-                            color={muiColor as MuiColor}
+                            color={muiColor}
+                            onChange={readOnly ? undefined : onChange}
                             inputProps={{
                                 ...inputProps,
                                 'aria-label': ariaLabel,
-                                readOnly,
                             }}
                             sx={{
                                 ...sx,
