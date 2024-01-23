@@ -9,6 +9,7 @@ import { Formik } from 'formik';
 import InputPhone from '../InputPhone';
 import Checkbox from '../../Checkbox/Checkbox';
 import Typography from '../../Typography/Typography';
+import InputPattern from '../InputPattern';
 
 const meta: Meta<typeof InputPhone> = {
     title: 'Inputs/Inputs/InputPhone',
@@ -20,10 +21,25 @@ export default meta;
 
 type Story = StoryObj<typeof InputPhone>;
 
+const render = (args) => {
+    const [value, setValue] = useState(args.value);
+    return (
+        <InputPattern
+            {...args}
+            value={value}
+            onChange={(e) => {
+                args.onChange?.(e);
+                setValue(e.target.value);
+            }}
+        />
+    );
+};
+
 const value = '0512345678';
 
 export const Default: Story = {
     args: {},
+    render,
 };
 
 export const TextAlign: Story = {
@@ -32,6 +48,7 @@ export const TextAlign: Story = {
         textAlign: 'center',
         value,
     },
+    render,
 };
 
 export const Direction: Story = {
@@ -40,6 +57,7 @@ export const Direction: Story = {
         direction: 'rtl',
         value,
     },
+    render,
 };
 
 export const LetterSpacing: Story = {
@@ -48,6 +66,7 @@ export const LetterSpacing: Story = {
         letterSpacing: '5px',
         value,
     },
+    render,
 };
 
 export const ShowMaskAsPlaceholder: Story = {
@@ -57,6 +76,7 @@ export const ShowMaskAsPlaceholder: Story = {
         value,
         showMaskAsPlaceholder: true,
     },
+    render,
 };
 
 export const AlignActions: Story = {
@@ -68,6 +88,7 @@ export const AlignActions: Story = {
         label: 'Align Actions',
         value,
     },
+    render,
 };
 
 export const AlignActionsExternal: Story = {
@@ -79,6 +100,7 @@ export const AlignActionsExternal: Story = {
         label: 'Align Actions External',
         value,
     },
+    render,
 };
 
 export const AutoComplete: Story = {
@@ -87,6 +109,7 @@ export const AutoComplete: Story = {
         name: 'phone',
         label: 'Auto Complete',
     },
+    render,
 };
 
 export const CmpSpacing: Story = {
@@ -98,6 +121,7 @@ export const CmpSpacing: Story = {
         label: 'Cmp Spacing',
         value,
     },
+    render,
 };
 
 export const ColorActive: Story = {
@@ -106,6 +130,7 @@ export const ColorActive: Story = {
         label: 'Color Active',
         value,
     },
+    render,
 };
 
 export const ColorLabel: Story = {
@@ -114,6 +139,7 @@ export const ColorLabel: Story = {
         label: 'Color Label',
         value,
     },
+    render,
 };
 
 export const ColorText: Story = {
@@ -122,6 +148,7 @@ export const ColorText: Story = {
         label: 'Color Text',
         value,
     },
+    render,
 };
 
 export const Disabled: Story = {
@@ -131,23 +158,31 @@ export const Disabled: Story = {
         disabled: true,
         value,
     },
+    render,
 };
 
 export const EndCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputPhone endCmp="Send" label="End Cmp" value="endCmp with mui icon name or mui icon element" />
-        <InputPhone endCmp={<SendIcon />} label="End Cmp" value="endCmp with mui icon name or mui icon element" />
+        <InputPhone {...args} endCmp="Send" label="End Cmp" value="endCmp with mui icon name or mui icon element" />
+        <InputPhone
+            {...args}
+            endCmp={<SendIcon />}
+            label="End Cmp"
+            value="endCmp with mui icon name or mui icon element"
+        />
     </Stack>
 );
 
 export const EndCmpExternal_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputPhone
+            {...args}
             endCmpExternal="Send"
             label="End Cmp External"
             value="endCmpExternal with mui icon name or mui icon element"
         />
         <InputPhone
+            {...args}
             endCmpExternal={<SendIcon />}
             label="End Cmp External"
             value="endCmpExternal with mui icon name or mui icon element"
@@ -161,6 +196,7 @@ export const Error: Story = {
         label: 'With Error',
         value,
     },
+    render,
 };
 
 export const Focused: Story = {
@@ -169,6 +205,7 @@ export const Focused: Story = {
         label: 'Focused',
         value,
     },
+    render,
 };
 
 export const FullWidth: Story = {
@@ -177,6 +214,7 @@ export const FullWidth: Story = {
         label: 'Not FullWidth',
         value,
     },
+    render,
 };
 
 export const HelperText: Story = {
@@ -185,17 +223,20 @@ export const HelperText: Story = {
         label: 'HelperText',
         value,
     },
+    render,
 };
 
 export const HideStartActionsOnEmpty_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputPhone
+            {...args}
             hideStartActionsOnEmpty={true}
             startCmp="Send"
             endCmp="Fingerprint"
             label="Hide Start Actions OnEmpty"
         />
         <InputPhone
+            {...args}
             hideStartActionsOnEmpty={false}
             startCmp="Send"
             endCmp="Fingerprint"
@@ -208,16 +249,17 @@ export const Label: Story = {
     args: {
         label: 'Some Label Input',
     },
+    render,
 };
 
 export const Margin_ = (args): ReactElement | React.ReactNode => (
     <Stack>
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <InputPhone label="None Margin" />
+        <InputPhone {...args} label="None Margin" />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <InputPhone margin="dense" label="Dense Margin" />
+        <InputPhone {...args} margin="dense" label="Dense Margin" />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <InputPhone margin="normal" label="Normal Margin" />
+        <InputPhone {...args} margin="normal" label="Normal Margin" />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
     </Stack>
 );
@@ -226,30 +268,16 @@ export const OnChangeText: Story = {
     args: {
         label: 'text field state',
     },
-    render: (args) => {
-        const [value, setValue] = useState('');
-        return (
-            <InputPhone
-                {...args}
-                value={value}
-                onChange={(e) => {
-                    setValue(e.target.value);
-                    action('onChange')(e.target.value);
-                }}
-            />
-        );
-    },
+    render,
 };
 
 export const ReadOnly: Story = {
     args: {
         readOnly: true,
         label: 'Read Only',
+        value: 'some text for show only',
     },
-    render: (args) => {
-        const [value, setValue] = useState('some text for show only');
-        return <InputPhone {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const Required: Story = {
@@ -257,19 +285,25 @@ export const Required: Story = {
         required: true,
         label: 'Required field',
     },
+    render,
 };
 
 export const StartCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputPhone startCmp="Send" label="Start Cmp" value="with string mui icon name" />
-        <InputPhone startCmp={<SendIcon />} label="Start Cmp" value="with mui icon element" />
+        <InputPhone {...args} startCmp="Send" label="Start Cmp" value="with string mui icon name" />
+        <InputPhone {...args} startCmp={<SendIcon />} label="Start Cmp" value="with mui icon element" />
     </Stack>
 );
 
 export const StartCmpExternal_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputPhone startCmpExternal="Send" label="Start Cmp External" value="with string mui icon name" />
-        <InputPhone startCmpExternal={<SendIcon />} label="Start Cmp External" value="with mui icon element" />
+        <InputPhone {...args} startCmpExternal="Send" label="Start Cmp External" value="with string mui icon name" />
+        <InputPhone
+            {...args}
+            startCmpExternal={<SendIcon />}
+            label="Start Cmp External"
+            value="with mui icon element"
+        />
     </Stack>
 );
 
@@ -277,13 +311,14 @@ export const Value: Story = {
     args: {
         value: '0501234567',
     },
+    render,
 };
 
 export const Variant_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputPhone variant="filled" label="filled variant" value="some text here" />
-        <InputPhone variant="outlined" label="outlined variant" value="some text here" />
-        <InputPhone variant="standard" label="standard variant" value="some text here" />
+        <InputPhone {...args} variant="filled" label="filled variant" value="some text here" />
+        <InputPhone {...args} variant="outlined" label="outlined variant" value="some text here" />
+        <InputPhone {...args} variant="standard" label="standard variant" value="some text here" />
     </Stack>
 );
 
@@ -294,6 +329,7 @@ export const CopyAction: Story = {
         copyMessage: 'COPIED!',
         copyTooltip: 'copy tooltip',
     },
+    render,
 };
 
 export const Formik_ = (args): React.ReactElement | React.ReactNode => {

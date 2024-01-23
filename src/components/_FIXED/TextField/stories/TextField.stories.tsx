@@ -6,7 +6,6 @@ import { Send as SendIcon } from '@mui/icons-material';
 import { Stack } from '@mui/material';
 
 import TextField from '../TextField';
-import InputSearch from '../InputSearch';
 
 const meta: Meta<typeof TextField> = {
     title: 'Inputs/TextField',
@@ -18,8 +17,23 @@ export default meta;
 
 type Story = StoryObj<typeof TextField>;
 
+const render = (args) => {
+    const [value, setValue] = useState(args.value);
+    return (
+        <TextField
+            {...args}
+            value={value}
+            onChange={(e) => {
+                args.onChange?.(e);
+                setValue(e.target.value);
+            }}
+        />
+    );
+};
+
 export const Default: Story = {
     args: {},
+    render,
 };
 
 export const TextAlign: Story = {
@@ -28,6 +42,7 @@ export const TextAlign: Story = {
         textAlign: 'center',
         value: 'center text',
     },
+    render,
 };
 
 export const Direction: Story = {
@@ -36,6 +51,7 @@ export const Direction: Story = {
         direction: 'rtl',
         value: 'right to left direction',
     },
+    render,
 };
 
 export const LetterSpacing: Story = {
@@ -44,6 +60,7 @@ export const LetterSpacing: Story = {
         letterSpacing: '5px',
         value: 'letter spacing',
     },
+    render,
 };
 
 export const AlignActions: Story = {
@@ -55,6 +72,7 @@ export const AlignActions: Story = {
         label: 'Align Actions',
         value: 'text...\ntext...\ntext...',
     },
+    render,
 };
 
 export const AlignActionsExternal: Story = {
@@ -66,6 +84,7 @@ export const AlignActionsExternal: Story = {
         label: 'Align Actions External',
         value: 'text...\ntext...\ntext...',
     },
+    render,
 };
 
 export const AutoComplete: Story = {
@@ -74,6 +93,7 @@ export const AutoComplete: Story = {
         name: 'email',
         label: 'Auto Complete',
     },
+    render,
 };
 
 export const CmpSpacing: Story = {
@@ -85,6 +105,7 @@ export const CmpSpacing: Story = {
         label: 'Cmp Spacing',
         value: 'some text to see spacing...',
     },
+    render,
 };
 
 export const ColorActive: Story = {
@@ -93,6 +114,7 @@ export const ColorActive: Story = {
         label: 'Color Active',
         value: 'color active with palette and custom color',
     },
+    render,
 };
 
 export const ColorLabel: Story = {
@@ -101,6 +123,7 @@ export const ColorLabel: Story = {
         label: 'Color Label',
         value: 'color label with palette and custom color',
     },
+    render,
 };
 
 export const ColorText: Story = {
@@ -109,6 +132,7 @@ export const ColorText: Story = {
         label: 'Color Text',
         value: 'color text with palette and custom color',
     },
+    render,
 };
 
 export const Disabled: Story = {
@@ -118,23 +142,31 @@ export const Disabled: Story = {
         value: 'disabled text',
         disabled: true,
     },
+    render,
 };
 
 export const EndCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <TextField endCmp="Send" label="End Cmp" value="endCmp with mui icon name or mui icon element" />
-        <TextField endCmp={<SendIcon />} label="End Cmp" value="endCmp with mui icon name or mui icon element" />
+        <TextField {...args} endCmp="Send" label="End Cmp" value="endCmp with mui icon name or mui icon element" />
+        <TextField
+            {...args}
+            endCmp={<SendIcon />}
+            label="End Cmp"
+            value="endCmp with mui icon name or mui icon element"
+        />
     </Stack>
 );
 
 export const EndCmpExternal_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <TextField
+            {...args}
             endCmpExternal="Send"
             label="End Cmp External"
             value="endCmpExternal with mui icon name or mui icon element"
         />
         <TextField
+            {...args}
             endCmpExternal={<SendIcon />}
             label="End Cmp External"
             value="endCmpExternal with mui icon name or mui icon element"
@@ -148,6 +180,7 @@ export const Error: Story = {
         label: 'With Error',
         value: 'some text with error',
     },
+    render,
 };
 
 export const Focused: Story = {
@@ -156,6 +189,7 @@ export const Focused: Story = {
         label: 'Focused',
         value: 'focused text',
     },
+    render,
 };
 
 export const FullWidth: Story = {
@@ -164,6 +198,7 @@ export const FullWidth: Story = {
         label: 'Not FullWidth',
         value: 'text field is default with fullWidth',
     },
+    render,
 };
 
 export const HelperText: Story = {
@@ -172,17 +207,20 @@ export const HelperText: Story = {
         label: 'HelperText',
         value: 'some text...',
     },
+    render,
 };
 
 export const HideStartActionsOnEmpty_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <TextField
+            {...args}
             hideStartActionsOnEmpty={true}
             startCmp="Send"
             endCmp="Fingerprint"
             label="Hide Start Actions OnEmpty"
         />
         <TextField
+            {...args}
             hideStartActionsOnEmpty={false}
             startCmp="Send"
             endCmp="Fingerprint"
@@ -195,16 +233,17 @@ export const Label: Story = {
     args: {
         label: 'Some Label Input',
     },
+    render,
 };
 
 export const Margin_ = (args): ReactElement | React.ReactNode => (
     <Stack>
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <TextField label="None Margin" />
+        <TextField {...args} label="None Margin" />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <TextField margin="normal" label="Normal Margin" />
+        <TextField {...args} margin="normal" label="Normal Margin" />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <TextField margin="dense" label="Dense Margin" />
+        <TextField {...args} margin="dense" label="Dense Margin" />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
     </Stack>
 );
@@ -214,6 +253,7 @@ export const maxRows: Story = {
         maxRows: 3,
         label: 'MaxRows 3',
     },
+    render,
 };
 
 export const Multiline: Story = {
@@ -221,38 +261,33 @@ export const Multiline: Story = {
         multiline: true,
         label: 'Multiline field',
     },
+    render,
 };
 
 export const OnChangeText: Story = {
     args: {
         label: 'text field state',
+        value: '',
     },
-    render: (args) => {
-        const [value, setValue] = useState('');
-        return <TextField {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const DebounceDelay: Story = {
     args: {
         label: 'Debounce Delay',
         debounceDelay: 400,
+        value: '',
     },
-    render: (args) => {
-        const [value, setValue] = useState('');
-        return <TextField {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const ReadOnly: Story = {
     args: {
         readOnly: true,
         label: 'Read Only',
+        value: 'some text for show only',
     },
-    render: (args) => {
-        const [value, setValue] = useState('some text for show only');
-        return <TextField {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const Required: Story = {
@@ -260,6 +295,7 @@ export const Required: Story = {
         required: true,
         label: 'Required field',
     },
+    render,
 };
 
 export const Rows: Story = {
@@ -267,19 +303,20 @@ export const Rows: Story = {
         rows: 3,
         label: 'Rows 3',
     },
+    render,
 };
 
 export const StartCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <TextField startCmp="Send" label="Start Cmp" value="with string mui icon name" />
-        <TextField startCmp={<SendIcon />} label="Start Cmp" value="with mui icon element" />
+        <TextField {...args} startCmp="Send" label="Start Cmp" value="with string mui icon name" />
+        <TextField {...args} startCmp={<SendIcon />} label="Start Cmp" value="with mui icon element" />
     </Stack>
 );
 
 export const StartCmpExternal_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <TextField startCmpExternal="Send" label="Start Cmp External" value="with string mui icon name" />
-        <TextField startCmpExternal={<SendIcon />} label="Start Cmp External" value="with mui icon element" />
+        <TextField {...args} startCmpExternal="Send" label="Start Cmp External" value="with string mui icon name" />
+        <TextField {...args} startCmpExternal={<SendIcon />} label="Start Cmp External" value="with mui icon element" />
     </Stack>
 );
 
@@ -289,12 +326,14 @@ export const Type: Story = {
         label: 'Type Password',
         value: 'mui simple is the best library package forever',
     },
+    render,
 };
 
 export const Value: Story = {
     args: {
         value: 'text value here',
     },
+    render,
 };
 
 export const Variant_ = (args): ReactElement | React.ReactNode => (

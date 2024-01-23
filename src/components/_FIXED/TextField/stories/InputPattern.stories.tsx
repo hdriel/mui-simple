@@ -23,8 +23,23 @@ export default meta;
 
 type Story = StoryObj<typeof InputPattern>;
 
+const render = (args) => {
+    const [value, setValue] = useState(args.value);
+    return (
+        <InputPattern
+            {...args}
+            value={value}
+            onChange={(e) => {
+                args.onChange?.(e);
+                setValue(e.target.value);
+            }}
+        />
+    );
+};
+
 export const Default: Story = {
     args: {},
+    render,
 };
 
 export const TextAlign: Story = {
@@ -33,6 +48,7 @@ export const TextAlign: Story = {
         textAlign: 'center',
         value: 'center text',
     },
+    render,
 };
 
 export const Direction: Story = {
@@ -41,6 +57,7 @@ export const Direction: Story = {
         direction: 'rtl',
         value: 'right to left direction',
     },
+    render,
 };
 
 export const LetterSpacing: Story = {
@@ -49,6 +66,7 @@ export const LetterSpacing: Story = {
         letterSpacing: '5px',
         value: 'letter spacing',
     },
+    render,
 };
 
 export const AlignActions: Story = {
@@ -60,6 +78,7 @@ export const AlignActions: Story = {
         label: 'Align Actions',
         value: 'text...\ntext...\ntext...',
     },
+    render,
 };
 
 export const AlignActionsExternal: Story = {
@@ -71,6 +90,7 @@ export const AlignActionsExternal: Story = {
         label: 'Align Actions External',
         value: 'text...\ntext...\ntext...',
     },
+    render,
 };
 
 export const AutoComplete: Story = {
@@ -79,6 +99,7 @@ export const AutoComplete: Story = {
         name: 'email',
         label: 'Auto Complete',
     },
+    render,
 };
 
 export const CmpSpacing: Story = {
@@ -90,6 +111,7 @@ export const CmpSpacing: Story = {
         label: 'Cmp Spacing',
         value: 'some text to see spacing...',
     },
+    render,
 };
 
 export const ColorActive: Story = {
@@ -98,6 +120,7 @@ export const ColorActive: Story = {
         label: 'Color Active',
         value: 'color active with palette and custom color',
     },
+    render,
 };
 
 export const ColorLabel: Story = {
@@ -106,6 +129,7 @@ export const ColorLabel: Story = {
         label: 'Color Label',
         value: 'color label with palette and custom color',
     },
+    render,
 };
 
 export const ColorText: Story = {
@@ -114,6 +138,7 @@ export const ColorText: Story = {
         label: 'Color Text',
         value: 'color text with palette and custom color',
     },
+    render,
 };
 
 export const Disabled: Story = {
@@ -123,6 +148,7 @@ export const Disabled: Story = {
         value: 'disabled text',
         disabled: true,
     },
+    render,
 };
 
 export const EndCmp_ = (args): ReactElement | React.ReactNode => (
@@ -153,6 +179,7 @@ export const Error: Story = {
         label: 'With Error',
         value: 'some text with error',
     },
+    render,
 };
 
 export const Focused: Story = {
@@ -161,6 +188,7 @@ export const Focused: Story = {
         label: 'Focused',
         value: 'focused text',
     },
+    render,
 };
 
 export const FullWidth: Story = {
@@ -169,6 +197,7 @@ export const FullWidth: Story = {
         label: 'Not FullWidth',
         value: 'text field is default with fullWidth',
     },
+    render,
 };
 
 export const HelperText: Story = {
@@ -177,6 +206,7 @@ export const HelperText: Story = {
         label: 'HelperText',
         value: 'some text...',
     },
+    render,
 };
 
 export const HideStartActionsOnEmpty_ = (args): ReactElement | React.ReactNode => (
@@ -200,6 +230,7 @@ export const Label: Story = {
     args: {
         label: 'Some Label Input',
     },
+    render,
 };
 
 export const Margin_ = (args): ReactElement | React.ReactNode => (
@@ -218,30 +249,16 @@ export const OnChangeText: Story = {
     args: {
         label: 'text field state',
     },
-    render: (args) => {
-        const [value, setValue] = useState('');
-        return (
-            <InputPattern
-                {...args}
-                value={value}
-                onChange={(e) => {
-                    setValue(e.target.value);
-                    action('onChange')(e.target.value);
-                }}
-            />
-        );
-    },
+    render,
 };
 
 export const ReadOnly: Story = {
     args: {
         readOnly: true,
         label: 'Read Only',
+        value: 'some text for show only',
     },
-    render: (args) => {
-        const [value, setValue] = useState('some text for show only');
-        return <InputPattern {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const Required: Story = {
@@ -249,19 +266,25 @@ export const Required: Story = {
         required: true,
         label: 'Required field',
     },
+    render,
 };
 
 export const StartCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputPattern startCmp="Send" label="Start Cmp" value="with string mui icon name" />
-        <InputPattern startCmp={<SendIcon />} label="Start Cmp" value="with mui icon element" />
+        <InputPattern {...args} startCmp="Send" label="Start Cmp" value="with string mui icon name" />
+        <InputPattern {...args} startCmp={<SendIcon />} label="Start Cmp" value="with mui icon element" />
     </Stack>
 );
 
 export const StartCmpExternal_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputPattern startCmpExternal="Send" label="Start Cmp External" value="with string mui icon name" />
-        <InputPattern startCmpExternal={<SendIcon />} label="Start Cmp External" value="with mui icon element" />
+        <InputPattern {...args} startCmpExternal="Send" label="Start Cmp External" value="with string mui icon name" />
+        <InputPattern
+            {...args}
+            startCmpExternal={<SendIcon />}
+            label="Start Cmp External"
+            value="with mui icon element"
+        />
     </Stack>
 );
 
@@ -269,45 +292,46 @@ export const Value: Story = {
     args: {
         value: 'some text without mask',
     },
+    render,
 };
 
 export const Variant_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputPattern variant="filled" label="filled variant" value="some text here" />
-        <InputPattern variant="outlined" label="outlined variant" value="some text here" />
-        <InputPattern variant="standard" label="standard variant" value="some text here" />
+        <InputPattern {...args} variant="filled" label="filled variant" value="some text here" />
+        <InputPattern {...args} variant="outlined" label="outlined variant" value="some text here" />
+        <InputPattern {...args} variant="standard" label="standard variant" value="some text here" />
     </Stack>
 );
 
 export const MaskPhone: Story = {
     args: {
-        label: 'Phone',
+        label: 'mask Phone',
         mask: '+(972) 50-000-0000',
         definitions: { '#': /[1-9]/ },
         unmask: false,
-        onChange: (e) => alert('mask value: ' + e.target.value),
     },
+    render,
 };
 
 export const UnmaskPhoneValue: Story = {
     args: {
-        label: 'Phone',
+        label: 'unmask Phone',
         mask: '+(972) 50-000-0000',
         definitions: { '#': /[1-9]/ },
         unmask: true,
-        onChange: (e) => alert('unmask value: ' + e.target.value),
     },
+    render,
 };
 
 export const ShowMaskAsPlaceholder: Story = {
     args: {
-        label: 'Phone',
+        label: 'unmask Phone',
         mask: '+(972) 50-000-0000',
         definitions: { '#': /[1-9]/ },
         unmask: true,
         showMaskAsPlaceholder: false,
-        onChange: (e) => alert('unmask value: ' + e.target.value),
     },
+    render,
 };
 
 export const MaskTime: Story = {
@@ -331,8 +355,8 @@ export const MaskTime: Story = {
                 maxLength: 2,
             },
         },
-        onChange: (e) => alert(e.target.value),
     },
+    render,
 };
 
 export const MaskID: Story = {
@@ -340,8 +364,8 @@ export const MaskID: Story = {
         label: 'ID',
         mask: '0 0000000 0',
         definitions: { '#': /[1-9]/ },
-        onChange: (e) => alert(e.target.value),
     },
+    render,
 };
 
 export const Overwrite: Story = {
@@ -351,13 +375,14 @@ export const Overwrite: Story = {
         definitions: { '#': /[1-9]/ },
         overwrite: true,
     },
+    render,
 };
 
 export const Lazy_ = (args): React.ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputPattern label="ID default Lazy" mask="0 0000000 0" definitions={{ '#': /[1-9]/ }} />
-        <InputPattern label="ID true Lazy" mask="0 0000000 0" definitions={{ '#': /[1-9]/ }} lazy />
-        <InputPattern label="ID false Lazy" mask="0 0000000 0" definitions={{ '#': /[1-9]/ }} lazy={false} />
+        <InputPattern {...args} label="ID default Lazy" mask="0 0000000 0" definitions={{ '#': /[1-9]/ }} />
+        <InputPattern {...args} label="ID true Lazy" mask="0 0000000 0" definitions={{ '#': /[1-9]/ }} lazy />
+        <InputPattern {...args} label="ID false Lazy" mask="0 0000000 0" definitions={{ '#': /[1-9]/ }} lazy={false} />
     </Stack>
 );
 

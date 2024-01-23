@@ -23,7 +23,6 @@ const InputPattern: React.FC<InputPatternProps> = ({
     name,
     onAccept,
     onChange,
-    onEnterKeyPress,
     onKeyPress,
     onFocus,
     focused,
@@ -85,14 +84,6 @@ const InputPattern: React.FC<InputPatternProps> = ({
                         setUnmaskedValue(mask._unmaskedValue);
                         const value = unmask ? mask._unmaskedValue : mask._value;
                         onChange?.({ target: { name, value } });
-                    }}
-                    onKeyPress={(e) => {
-                        if (e.key === 'Enter') {
-                            setIsOnFocus(false);
-                            onEnterKeyPress?.();
-                        } else {
-                            onKeyPress?.(e);
-                        }
                     }}
                 />
                 {helperText && <FormHelperText error={error}>{helperText}</FormHelperText>}

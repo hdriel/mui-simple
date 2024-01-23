@@ -88,7 +88,7 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
                     },
                 }}
                 onKeyPress={(e) => {
-                    if (e.key === 'Enter') {
+                    if (e.key === 'Enter' || +e.keyCode === 13) {
                         setIsFocused(false);
                         onEnterKeyPress?.(e);
                     } else {

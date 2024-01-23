@@ -17,8 +17,23 @@ export default meta;
 
 type Story = StoryObj<typeof InputNumber>;
 
+const render = (args) => {
+    const [value, setValue] = useState(args.value);
+    return (
+        <InputNumber
+            {...args}
+            value={value}
+            onChange={(e) => {
+                args.onChange?.(e);
+                setValue(e.target.value);
+            }}
+        />
+    );
+};
+
 export const Default: Story = {
     args: {},
+    render,
 };
 
 export const TextAlign: Story = {
@@ -27,6 +42,7 @@ export const TextAlign: Story = {
         textAlign: 'center',
         value: 15453,
     },
+    render,
 };
 
 export const Direction: Story = {
@@ -35,6 +51,7 @@ export const Direction: Story = {
         direction: 'rtl',
         value: 15453,
     },
+    render,
 };
 
 export const LetterSpacing: Story = {
@@ -43,6 +60,7 @@ export const LetterSpacing: Story = {
         letterSpacing: '5px',
         value: 111111,
     },
+    render,
 };
 
 export const AlignActions: Story = {
@@ -53,6 +71,7 @@ export const AlignActions: Story = {
         label: 'Align Actions',
         value: 15548789,
     },
+    render,
 };
 
 export const AlignActionsExternal: Story = {
@@ -63,6 +82,7 @@ export const AlignActionsExternal: Story = {
         label: 'Align Actions External',
         value: 5080484,
     },
+    render,
 };
 
 export const CmpSpacing: Story = {
@@ -74,6 +94,7 @@ export const CmpSpacing: Story = {
         label: 'Cmp Spacing',
         value: 10550,
     },
+    render,
 };
 
 export const ColorActive: Story = {
@@ -82,6 +103,7 @@ export const ColorActive: Story = {
         label: 'Color Active',
         value: 99708,
     },
+    render,
 };
 
 export const ColorLabel: Story = {
@@ -90,6 +112,7 @@ export const ColorLabel: Story = {
         label: 'Color Label',
         value: 880015,
     },
+    render,
 };
 
 export const ColorText: Story = {
@@ -98,6 +121,7 @@ export const ColorText: Story = {
         label: 'Color Text',
         value: 200303,
     },
+    render,
 };
 
 export const Disabled: Story = {
@@ -107,19 +131,25 @@ export const Disabled: Story = {
         value: 6650480,
         disabled: true,
     },
+    render,
 };
 
 export const EndCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputNumber endCmp="Send" label="End Cmp" value="endCmp with mui icon name or mui icon element" />
-        <InputNumber endCmp={<SendIcon />} label="End Cmp" value="endCmp with mui icon name or mui icon element" />
+        <InputNumber {...args} endCmp="Send" label="End Cmp" value="endCmp with mui icon name or mui icon element" />
+        <InputNumber
+            {...args}
+            endCmp={<SendIcon />}
+            label="End Cmp"
+            value="endCmp with mui icon name or mui icon element"
+        />
     </Stack>
 );
 
 export const EndCmpExternal_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputNumber endCmpExternal="Send" label="End Cmp External" value={808080} />
-        <InputNumber endCmpExternal={<SendIcon />} label="End Cmp External" value={840840} />
+        <InputNumber {...args} endCmpExternal="Send" label="End Cmp External" value={808080} />
+        <InputNumber {...args} endCmpExternal={<SendIcon />} label="End Cmp External" value={840840} />
     </Stack>
 );
 
@@ -129,6 +159,7 @@ export const Error: Story = {
         label: 'With Error',
         value: 0,
     },
+    render,
 };
 
 export const Focused: Story = {
@@ -137,6 +168,7 @@ export const Focused: Story = {
         label: 'Focused',
         value: 58000,
     },
+    render,
 };
 
 export const FullWidth: Story = {
@@ -145,6 +177,7 @@ export const FullWidth: Story = {
         label: 'Not FullWidth',
         value: 998989,
     },
+    render,
 };
 
 export const HelperText: Story = {
@@ -153,17 +186,20 @@ export const HelperText: Story = {
         label: 'HelperText',
         value: 770807,
     },
+    render,
 };
 
 export const HideStartActionsOnEmpty_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputNumber
+            {...args}
             hideStartActionsOnEmpty={true}
             startCmp="Send"
             endCmp="Fingerprint"
             label="Hide Start Actions OnEmpty"
         />
         <InputNumber
+            {...args}
             hideStartActionsOnEmpty={false}
             startCmp="Send"
             endCmp="Fingerprint"
@@ -176,39 +212,36 @@ export const Label: Story = {
     args: {
         label: 'Some Label Input',
     },
+    render,
 };
 
 export const Margin_ = (args): ReactElement | React.ReactNode => (
     <Stack>
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <InputNumber label="None Margin" />
+        <InputNumber {...args} label="None Margin" />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <InputNumber margin="normal" label="Normal Margin" />
+        <InputNumber {...args} margin="normal" label="Normal Margin" />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <InputNumber margin="dense" label="Dense Margin" />
+        <InputNumber {...args} margin="dense" label="Dense Margin" />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
     </Stack>
 );
 
-export const OnChangeText: Story = {
+export const OnChangeNumber: Story = {
     args: {
         label: 'text field state',
+        value: 0,
     },
-    render: (args) => {
-        const [value, setValue] = useState('');
-        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const ReadOnly: Story = {
     args: {
         readOnly: true,
         label: 'Read Only',
+        value: 15050,
     },
-    render: (args) => {
-        const [value, setValue] = useState(15050);
-        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const Required: Story = {
@@ -216,19 +249,20 @@ export const Required: Story = {
         required: true,
         label: 'Required field',
     },
+    render,
 };
 
 export const StartCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputNumber startCmp="Send" label="Start Cmp" value={10005} />
-        <InputNumber startCmp={<SendIcon />} label="Start Cmp" value={10005} />
+        <InputNumber {...args} startCmp="Send" label="Start Cmp" value={10005} />
+        <InputNumber {...args} startCmp={<SendIcon />} label="Start Cmp" value={10005} />
     </Stack>
 );
 
 export const StartCmpExternal_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputNumber startCmpExternal="Send" label="Start Cmp External" value={4804} />
-        <InputNumber startCmpExternal={<SendIcon />} label="Start Cmp External" value={4804} />
+        <InputNumber {...args} startCmpExternal="Send" label="Start Cmp External" value={4804} />
+        <InputNumber {...args} startCmpExternal={<SendIcon />} label="Start Cmp External" value={4804} />
     </Stack>
 );
 
@@ -238,12 +272,14 @@ export const Type: Story = {
         label: 'Type Password',
         value: 50,
     },
+    render,
 };
 
 export const Value: Story = {
     args: {
         value: 1e5,
     },
+    render,
 };
 
 export const Variant_ = (args): ReactElement | React.ReactNode => {
@@ -253,6 +289,7 @@ export const Variant_ = (args): ReactElement | React.ReactNode => {
         <Stack spacing={3}>
             {['filled', 'outlined', 'standard'].map((variant) => (
                 <InputNumber
+                    {...args}
                     key={variant}
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
@@ -272,10 +309,8 @@ export const Min: Story = {
         value: 150,
         min: 100,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+
+    render,
 };
 
 export const Max: Story = {
@@ -284,10 +319,8 @@ export const Max: Story = {
         value: 150,
         max: 200,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+
+    render,
 };
 
 export const Range: Story = {
@@ -297,10 +330,8 @@ export const Range: Story = {
         min: 100,
         max: 200,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+
+    render,
 };
 
 export const StepRange: Story = {
@@ -311,10 +342,8 @@ export const StepRange: Story = {
         max: 200,
         step: 20,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+
+    render,
 };
 
 export const Prefix: Story = {
@@ -323,6 +352,7 @@ export const Prefix: Story = {
         prefix: '$',
         value: 50,
     },
+    render,
 };
 
 export const Suffix: Story = {
@@ -331,36 +361,56 @@ export const Suffix: Story = {
         suffix: ' KG',
         value: 60,
     },
+    render,
 };
 
 export const ThousandSeparator_ = (args) => (
     <Stack spacing={3}>
-        <InputNumber label="without thousand separator" thousandSeparator={false} value={4054407} />
-        <InputNumber label="with thousand separator" thousandSeparator={true} value={4054407} />
-        <InputNumber label="space thousand separator" thousandSeparator={' '} value={4054407} />
-        <InputNumber label="# thousand separator" thousandSeparator={'#'} value={4054407} />
+        <InputNumber {...args} label="without thousand separator" thousandSeparator={false} value={4054407} />
+        <InputNumber {...args} label="with thousand separator" thousandSeparator={true} value={4054407} />
+        <InputNumber {...args} label="space thousand separator" thousandSeparator={' '} value={4054407} />
+        <InputNumber {...args} label="# thousand separator" thousandSeparator={'#'} value={4054407} />
     </Stack>
 );
 
 export const DecimalSeparator_ = (args) => (
     <Stack spacing={3}>
         <InputNumber
+            {...args}
             label="without decimal separator"
             decimalSeparator={false}
             value={'50407.458'}
             valueIsNumericString
         />
-        <InputNumber label="with decimal separator" decimalSeparator={true} value={'50407.458'} valueIsNumericString />
-        <InputNumber label="space decimal separator" decimalSeparator={' '} value={'50407.458'} valueIsNumericString />
-        <InputNumber label="# decimal separator" decimalSeparator={'#'} value={'50407.458'} valueIsNumericString />
+        <InputNumber
+            {...args}
+            label="with decimal separator"
+            decimalSeparator={true}
+            value={'50407.458'}
+            valueIsNumericString
+        />
+        <InputNumber
+            {...args}
+            label="space decimal separator"
+            decimalSeparator={' '}
+            value={'50407.458'}
+            valueIsNumericString
+        />
+        <InputNumber
+            {...args}
+            label="# decimal separator"
+            decimalSeparator={'#'}
+            value={'50407.458'}
+            valueIsNumericString
+        />
     </Stack>
 );
 
 export const Decimal_ = (args) => (
     <Stack spacing={3}>
-        <InputNumber label="without decimal separator" value={407.458897} decimal={5} />
-        <InputNumber label="with decimal separator" value={407.458897} />
-        <InputNumber label="# decimal separator" value={407.458897} decimal={0} />
+        <InputNumber {...args} label="without decimal separator" value={407.458897} decimal={5} />
+        <InputNumber {...args} label="with decimal separator" value={407.458897} />
+        <InputNumber {...args} label="# decimal separator" value={407.458897} decimal={0} />
     </Stack>
 );
 
@@ -370,10 +420,8 @@ export const ValueIsNumericString: Story = {
         value: '155',
         valueIsNumericString: true,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+
+    render,
 };
 
 export const Mask: Story = {
@@ -383,10 +431,8 @@ export const Mask: Story = {
         mask: '#',
         format: '# ## ### ####',
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+
+    render,
 };
 
 export const Format: Story = {
@@ -397,10 +443,8 @@ export const Format: Story = {
         format: '#### #### #### ####',
         mask: '_',
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+
+    render,
 };
 
 export const PatternChar: Story = {
@@ -410,10 +454,8 @@ export const PatternChar: Story = {
         format: '+1 (@@@) @@@-@@@@',
         patternChar: '@',
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+
+    render,
 };
 
 export const FixedDecimalScale: Story = {
@@ -422,10 +464,8 @@ export const FixedDecimalScale: Story = {
         value: 155.1051,
         fixedDecimalScale: false,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+
+    render,
 };
 
 export const AllowEmptyFormatting: Story = {
@@ -434,10 +474,8 @@ export const AllowEmptyFormatting: Story = {
         value: 155.1051,
         allowEmptyFormatting: false,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+
+    render,
 };
 
 export const EmptyFormatPlaceholder: Story = {
@@ -447,10 +485,8 @@ export const EmptyFormatPlaceholder: Story = {
         format: '+1 (###) ###-####',
         emptyFormatPlaceholder: 'phone number in format: +1 (###) ###-####',
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+
+    render,
 };
 
 export const Slider: Story = {
@@ -461,10 +497,8 @@ export const Slider: Story = {
         max: 200,
         slider: false,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+
+    render,
 };
 
 export const SliderTooltip: Story = {
@@ -476,10 +510,8 @@ export const SliderTooltip: Story = {
         slider: true,
         sliderTooltip: 'slider tooltip here',
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+
+    render,
 };
 
 export const SliderLabel: Story = {
@@ -491,10 +523,8 @@ export const SliderLabel: Story = {
         slider: true,
         sliderLabel: (n) => `Slider Label '${n}' value`,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+
+    render,
 };
 
 export const SelectAllOnFocus: Story = {
@@ -503,8 +533,6 @@ export const SelectAllOnFocus: Story = {
         value: 150,
         selectAllOnFocus: false,
     },
-    render: (args) => {
-        const [value, setValue] = useState(args.value);
-        return <InputNumber {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+
+    render,
 };

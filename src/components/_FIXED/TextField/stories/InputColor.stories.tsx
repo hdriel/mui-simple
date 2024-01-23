@@ -17,8 +17,23 @@ export default meta;
 
 type Story = StoryObj<typeof InputColor>;
 
+const render = (args) => {
+    const [value, setValue] = useState(args.value);
+    return (
+        <InputColor
+            {...args}
+            value={value}
+            onChange={(e) => {
+                args.onChange?.(e);
+                setValue(e.target.value);
+            }}
+        />
+    );
+};
+
 export const Default: Story = {
     args: {},
+    render,
 };
 
 export const Direction: Story = {
@@ -27,6 +42,7 @@ export const Direction: Story = {
         direction: 'rtl',
         value: 'right to left direction',
     },
+    render,
 };
 
 export const AlignActions: Story = {
@@ -37,6 +53,7 @@ export const AlignActions: Story = {
         label: 'Align Actions',
         value: '#F0F0F0',
     },
+    render,
 };
 
 export const AlignActionsExternal: Story = {
@@ -47,6 +64,7 @@ export const AlignActionsExternal: Story = {
         label: 'Align Actions External',
         value: '#F0F0F0',
     },
+    render,
 };
 
 export const AutoComplete: Story = {
@@ -55,6 +73,7 @@ export const AutoComplete: Story = {
         name: 'email',
         label: 'Auto Complete',
     },
+    render,
 };
 
 export const CmpSpacing: Story = {
@@ -66,6 +85,7 @@ export const CmpSpacing: Story = {
         label: 'Cmp Spacing',
         value: '#F0F0F0',
     },
+    render,
 };
 
 export const ColorActive: Story = {
@@ -74,6 +94,7 @@ export const ColorActive: Story = {
         label: 'Color Active',
         value: '#F0F0F0',
     },
+    render,
 };
 
 export const ColorLabel: Story = {
@@ -82,6 +103,7 @@ export const ColorLabel: Story = {
         label: 'Color Label',
         value: '#F0F0F0',
     },
+    render,
 };
 
 export const ColorText: Story = {
@@ -90,6 +112,7 @@ export const ColorText: Story = {
         label: 'Color Text',
         value: '#F0F0F0',
     },
+    render,
 };
 
 export const Disabled: Story = {
@@ -99,19 +122,20 @@ export const Disabled: Story = {
         value: '#F0F0F0',
         disabled: true,
     },
+    render,
 };
 
 export const EndCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputColor endCmp="Send" label="End Cmp" value={'#ff0f0f'} />
-        <InputColor endCmp={<SendIcon />} label="End Cmp" value={'#ff0f0f'} />
+        <InputColor {...args} endCmp="Send" label="End Cmp" value={'#ff0f0f'} />
+        <InputColor {...args} endCmp={<SendIcon />} label="End Cmp" value={'#ff0f0f'} />
     </Stack>
 );
 
 export const EndCmpExternal_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputColor endCmpExternal="Send" label="End Cmp External" value={'#ff0f0f'} />
-        <InputColor endCmpExternal={<SendIcon />} label="End Cmp External" value={'#ff0f0f'} />
+        <InputColor {...args} endCmpExternal="Send" label="End Cmp External" value={'#ff0f0f'} />
+        <InputColor {...args} endCmpExternal={<SendIcon />} label="End Cmp External" value={'#ff0f0f'} />
     </Stack>
 );
 
@@ -121,6 +145,7 @@ export const Error: Story = {
         label: 'With Error',
         value: '#F0F0F0',
     },
+    render,
 };
 
 export const Focused: Story = {
@@ -129,6 +154,7 @@ export const Focused: Story = {
         label: 'Focused',
         value: '#F0F0F0',
     },
+    render,
 };
 
 export const FullWidth: Story = {
@@ -137,6 +163,7 @@ export const FullWidth: Story = {
         label: 'Not FullWidth',
         value: '#F0F0F0',
     },
+    render,
 };
 
 export const HelperText: Story = {
@@ -145,17 +172,20 @@ export const HelperText: Story = {
         label: 'HelperText',
         value: '#F0F0F0',
     },
+    render,
 };
 
 export const HideStartActionsOnEmpty_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputColor
+            {...args}
             hideStartActionsOnEmpty={true}
             startCmp="Send"
             endCmp="Fingerprint"
             label="Hide Start Actions OnEmpty"
         />
         <InputColor
+            {...args}
             hideStartActionsOnEmpty={false}
             startCmp="Send"
             endCmp="Fingerprint"
@@ -168,16 +198,17 @@ export const Label: Story = {
     args: {
         label: 'Some Label Input',
     },
+    render,
 };
 
 export const Margin_ = (args): ReactElement | React.ReactNode => (
     <Stack>
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <InputColor label="None Margin" />
+        <InputColor {...args} label="None Margin" />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <InputColor margin="normal" label="Normal Margin" />
+        <InputColor {...args} margin="normal" label="Normal Margin" />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <InputColor margin="dense" label="Dense Margin" />
+        <InputColor {...args} margin="dense" label="Dense Margin" />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
     </Stack>
 );
@@ -187,38 +218,33 @@ export const maxRows: Story = {
         maxRows: 3,
         label: 'MaxRows 3',
     },
+    render,
 };
 
 export const OnChangeColor: Story = {
     args: {
         label: 'color field state',
+        value: '',
     },
-    render: (args) => {
-        const [value, setValue] = useState('');
-        return <InputColor {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const DebounceDelay: Story = {
     args: {
         label: 'Debounce Delay',
         debounceDelay: 400,
+        value: 'warning.main',
     },
-    render: (args) => {
-        const [value, setValue] = useState('warning.main');
-        return <InputColor {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const ReadOnly: Story = {
     args: {
         readOnly: true,
         label: 'Read Only',
+        value: 'secondary',
     },
-    render: (args) => {
-        const [value, setValue] = useState('secondary');
-        return <InputColor {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const Required: Story = {
@@ -226,6 +252,7 @@ export const Required: Story = {
         required: true,
         label: 'Required field',
     },
+    render,
 };
 
 export const Rows: Story = {
@@ -233,19 +260,20 @@ export const Rows: Story = {
         rows: 3,
         label: 'Rows 3',
     },
+    render,
 };
 
 export const StartCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputColor startCmp="Send" label="Start Cmp" value={'#ff0f0f'} />
-        <InputColor startCmp={<SendIcon />} label="Start Cmp" value={'#ff0f0f'} />
+        <InputColor {...args} startCmp="Send" label="Start Cmp" value={'#ff0f0f'} />
+        <InputColor {...args} startCmp={<SendIcon />} label="Start Cmp" value={'#ff0f0f'} />
     </Stack>
 );
 
 export const StartCmpExternal_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputColor startCmpExternal="Send" label="Start Cmp External" value={'#ff0f0f'} />
-        <InputColor startCmpExternal={<SendIcon />} label="Start Cmp External" value={'#ff0f0f'} />
+        <InputColor {...args} startCmpExternal="Send" label="Start Cmp External" value={'#ff0f0f'} />
+        <InputColor {...args} startCmpExternal={<SendIcon />} label="Start Cmp External" value={'#ff0f0f'} />
     </Stack>
 );
 
@@ -253,6 +281,7 @@ export const Value: Story = {
     args: {
         value: '#F0F0F0',
     },
+    render,
 };
 
 export const Variant_ = (args): ReactElement | React.ReactNode => {
@@ -278,12 +307,14 @@ export const CopyMessage: Story = {
     args: {
         copyMessage: 'Hi copy you color to clipboard',
     },
+    render,
 };
 
 export const OpacityAction: Story = {
     args: {
         opacityAction: false,
     },
+    render,
 };
 
 export const OpacityLabel: Story = {
@@ -291,22 +322,22 @@ export const OpacityLabel: Story = {
         opacityAction: true,
         opacityLabel: 'Change color opacity action',
     },
+    render,
 };
 export const OpacityIcon: Story = {
     args: {
         opacityAction: true,
         opacityIcon: 'AcUnit',
     },
+    render,
 };
 
 export const CopyAction: Story = {
     args: {
         copyAction: false,
+        value: '',
     },
-    render: (args) => {
-        const [value, setValue] = useState('');
-        return <InputColor {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
-    },
+    render,
 };
 
 export const CopyIcon: Story = {
@@ -314,4 +345,5 @@ export const CopyIcon: Story = {
         copyAction: true,
         copyIcon: 'ContentCut',
     },
+    render,
 };

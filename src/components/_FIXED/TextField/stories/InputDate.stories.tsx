@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Stack } from '@mui/material';
 import dayjs from 'dayjs';
@@ -23,10 +23,25 @@ export default meta;
 
 type Story = StoryObj<typeof InputDate>;
 
+const render = (args) => {
+    const [value, setValue] = useState(args.value);
+    return (
+        <InputDate
+            {...args}
+            value={value}
+            onChange={(e) => {
+                args.onChange?.(e);
+                setValue(e.target.value);
+            }}
+        />
+    );
+};
+
 export const Default: Story = {
     args: {
         variant: 'standard',
     },
+    render,
 };
 
 export const Variant: Story = {
@@ -34,12 +49,14 @@ export const Variant: Story = {
         label: 'standard variant field',
         variant: 'standard',
     },
+    render,
 };
 
 export const HelperText: Story = {
     args: {
         helperText: 'enter your birthdate',
     },
+    render,
 };
 
 export const DateLimits: Story = {
@@ -47,23 +64,27 @@ export const DateLimits: Story = {
         minDate: dayjs().startOf('month').toDate(),
         maxDate: dayjs().endOf('month').toDate(),
     },
+    render,
 };
 
 export const DisablePast: Story = {
     args: {
         disablePast: true,
     },
+    render,
 };
 
 export const DisableFuture: Story = {
     args: {
         disableFuture: true,
     },
+    render,
 };
 export const DisableOpenPicker: Story = {
     args: {
         disableOpenPicker: true,
     },
+    render,
 };
 
 export const Required: Story = {
@@ -71,6 +92,7 @@ export const Required: Story = {
         label: 'req',
         required: true,
     },
+    render,
 };
 
 export const PickerVariant: Story = {
