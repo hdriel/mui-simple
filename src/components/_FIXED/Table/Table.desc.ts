@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import type { Theme } from '@mui/material';
-import type { AvatarProps } from '../../decs';
+import type { AvatarProps, PaginationProps } from '../../decs';
 
 export type SORT_TYPE = '1' | '-1';
 export interface TableColumn {
@@ -175,7 +175,7 @@ export interface TableProps {
     paginationAlign?: 'start' | 'center' | 'end';
     PaginationComponent?: ReactNode;
     EmptyResultCmp?: ReactNode | string | JSX.Element;
-    paginationProps?: Record<string, any>;
+    paginationProps?: PaginationProps;
     selectedActions?: ToolbarAction[];
     SELECTION_MODE_TOOLTIP_LABEL?: string;
     selectionMode?: boolean;

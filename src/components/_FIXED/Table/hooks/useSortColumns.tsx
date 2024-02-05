@@ -62,6 +62,13 @@ export function useSortColumns({
         setSortColumns([...sortColumns]);
     };
 
+    console.table({
+        menuWidth,
+        menuHeight,
+        hide,
+        menuOpen,
+    });
+
     const cmp = !hide && (
         <Menu
             width={menuWidth}
@@ -94,7 +101,7 @@ export function useSortColumns({
                 />
             }
         >
-            <div onClick={() => setMenuOpen((o) => !o)}>
+            <div onClick={() => setMenuOpen(!menuOpen)}>
                 <Tooltip title={tooltip}>
                     <Checkbox
                         color={colors?.background}

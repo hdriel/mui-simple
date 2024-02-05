@@ -276,6 +276,9 @@ export const TableWithPaginationCmp: Story = {
         DEFAULT_EMPTY_ROW_HEIGHT: 40,
         EmptyResultCmp: 'Noting was found here...',
         PaginationComponent: Pagination,
+        addFilterColumnsAction: true,
+        addSortColumnsAction: true,
+        addSelectionModeAction: true,
         PaginationProps: {
             color: 'primary',
             variant: 'outlined',
