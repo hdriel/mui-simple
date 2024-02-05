@@ -149,8 +149,8 @@ const EnhancedTable: React.FC<TableProps> = ({
                             onRequestSort={handleRequestSort}
                             headerColor={(headerColor ?? colorProps) as ColorsProps}
                             rowCount={rows}
-                            onSelectAllClick={handleSelectAllClick}
                             selectionMode={selectionMode}
+                            onSelectAllClick={handleSelectAllClick}
                             actionColor={actionColorProps ?? colorProps}
                         />
 
