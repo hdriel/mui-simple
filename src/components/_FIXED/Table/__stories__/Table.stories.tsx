@@ -281,7 +281,7 @@ export const TableWithPaginationCmp: Story = {
         PaginationProps: {
             color: 'primary',
             variant: 'outlined',
-            totalPages: 3,
+            // totalPages: 3, // Work also without this prop, it supply the total correct even the data is not same as total size
         },
     },
 };
