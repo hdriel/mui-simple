@@ -81,6 +81,7 @@ export interface ButtonProps {
     endIcon?: IconType;
     fullWidth?: boolean;
     icon?: IconType;
+    innerRef?: any;
     isLoading?: boolean;
     label?: string;
     link?: string;
