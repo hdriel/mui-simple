@@ -5,7 +5,6 @@ import { FITNESS_DATA, FITNESS_COLUMNS, PERSON_DATA, PERSON_COLUMNS } from './Ta
 import { Table } from '../Table';
 import Button from '../../Button/Button';
 import Pagination from '../../Pagination/Pagination';
-import Typography from '../../Typography/Typography';
 
 const meta: Meta<typeof Table> = {
     title: 'Data-Display/Table',
@@ -265,5 +264,24 @@ export const EmptyResultCmp: Story = {
         // EmptyResultCmp: <Typography size={25}>Noting was found here...</Typography>, // work
         EmptyResultCmp: 'Noting was found here...', // work
         // EmptyResultCmp: () => <Typography size={25}>Noting was found here...</Typography>, // work
+    },
+};
+
+export const TableWithPaginationCmp: Story = {
+    args: {
+        columns: FITNESS_COLUMNS,
+        data: FITNESS_DATA.slice(0, 5),
+        pagination: { page: 0, rowsPerPage: 5, total: 15 },
+        paginationAlign: 'center',
+        DEFAULT_EMPTY_ROW_HEIGHT: 40,
+        // EmptyResultCmp: <Typography size={25}>Noting was found here...</Typography>, // work
+        EmptyResultCmp: 'Noting was found here...', // work
+        // EmptyResultCmp: () => <Typography size={25}>Noting was found here...</Typography>, // work
+        PaginationComponent: Pagination,
+        PaginationProps: {
+            color: 'primary',
+            variant: 'outlined',
+            totalPages: 3,
+        },
     },
 };
