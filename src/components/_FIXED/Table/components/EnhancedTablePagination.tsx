@@ -13,6 +13,7 @@ export function EnhancedTablePagination({
     orderBy,
 }: EnhancedTablePaginationProps): React.ReactElement {
     const { total, rowsPerPage, rowsPerPageList, page } = usePaginationDetails({ pagination, rows });
+    const totalPages = paginationProps?.totalPages || Math.ceil(total / rowsPerPage);
 
     const handleChangePage = (event, newPage): void => {
         if (typeof event === 'number') newPage = event;
@@ -37,7 +38,7 @@ export function EnhancedTablePagination({
         >
             {PaginationComponent ? (
                 <PaginationComponent
-                    totalPages={total}
+                    totalPages={totalPages}
                     page={!total || total <= 0 ? 0 : page}
                     onChange={handleChangePage}
                     {...paginationProps}
@@ -46,7 +47,7 @@ export function EnhancedTablePagination({
                 <TablePagination
                     component="div"
                     rowsPerPageOptions={rowsPerPageList}
-                    count={total}
+                    count={totalPages}
                     rowsPerPage={rowsPerPage}
                     page={!total || total <= 0 ? 0 : page}
                     onPageChange={handleChangePage}
