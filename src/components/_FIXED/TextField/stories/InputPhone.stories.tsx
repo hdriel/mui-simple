@@ -9,7 +9,6 @@ import { Formik } from 'formik';
 import InputPhone from '../InputPhone';
 import Checkbox from '../../Checkbox/Checkbox';
 import Typography from '../../Typography/Typography';
-import InputPattern from '../InputPattern';
 
 const meta: Meta<typeof InputPhone> = {
     title: 'Inputs/Inputs/InputPhone',
