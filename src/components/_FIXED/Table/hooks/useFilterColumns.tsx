@@ -76,7 +76,7 @@ export function useFilterColumns({
                         title: column.label ?? column.field,
                         checked: filters[column.field] ?? false,
                         onClick: onClickFilterItem(column.field),
-                        padding: '0.5em 0',
+                        padding: '0.5em 1em',
                         actions: [<DragHandleIcon key={`${column.field}-${index}`} />],
                         data: column,
                     }))}

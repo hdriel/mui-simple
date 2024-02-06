@@ -102,7 +102,7 @@ const Menu: React.FC<MenuProps> = (props): React.ReactElement | React.ReactNode 
     // }, [wasSeen]);
     // (bindRef || (anchorProps as any).anchorEl || contextMenu) && (
 
-    if (!options?.length) {
+    if (!options?.length && !alternativeContent) {
         return children;
     }
 

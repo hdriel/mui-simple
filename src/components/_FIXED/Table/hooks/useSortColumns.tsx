@@ -79,7 +79,7 @@ export function useSortColumns({
                         color: 'rgba(0, 0, 0, 0.87)',
                         checked: column.orderBy === SORT.UP,
                         checkedIcon: <NorthIcon />,
-                        padding: '0.5em 0',
+                        padding: '0.5em 1em',
                         icon: column.orderBy === SORT.DOWN ? <SouthIcon /> : <ImportExportIcon />,
                         onClick: onClickItem(column.field, getNextOrderBy(column.orderBy)),
                         actions: [<DragHandleIcon key={`${column.field}-${index}`} />],
