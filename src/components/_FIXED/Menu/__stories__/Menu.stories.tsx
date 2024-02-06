@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Image as MuiImage } from 'mui-image';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Box, Stack } from '@mui/material';
-import Menu, { MenuOption } from '../Menu';
+import Menu from '../Menu';
 import Button from '../../Button/Button';
 import ToggleButtonGroup from '../../ToggleButtonGroup/ToggleButtonGroup';
 import { shortcutOptions, optionLongList, options } from './Menu.mocks';
@@ -17,22 +17,27 @@ export default meta;
 
 type Story = StoryObj<typeof Menu>;
 
+const render = ({ menuLabel = 'Menu Button', ...args }) => {
+    const [open, setOpen] = useState(args.open ?? false);
+
+    const onCloseHandler = (event) => {
+        args.onClose?.(event);
+        setOpen(false);
+        return true;
+    };
+
+    return (
+        <Menu {...args} open={open} onClose={onCloseHandler}>
+            <Button onClick={() => setOpen(true)}>menuLabel</Button>
+        </Menu>
+    );
+};
+
 export const Default: Story = {
     args: {
         options,
     },
-    render: (args) => {
-        const [open, setOpen] = useState(false);
-        const onCloseHandler = () => {
-            setOpen(false);
-            return true;
-        };
-        return (
-            <Menu {...args} open={open} onClose={onCloseHandler}>
-                <Button onClick={() => setOpen(true)}>Open Menu</Button>
-            </Menu>
-        );
-    },
+    render,
 };
 
 export const AlternativeContent: Story = {
@@ -40,18 +45,7 @@ export const AlternativeContent: Story = {
         options,
         alternativeContent: <MuiImage src="1.jpg" width={400} height={400} />,
     },
-    render: (args) => {
-        const [open, setOpen] = useState(false);
-        const onCloseHandler = () => {
-            setOpen(false);
-            return true;
-        };
-        return (
-            <Menu {...args} open={open} onClose={onCloseHandler}>
-                <Button onClick={() => setOpen(true)}>Open Menu</Button>
-            </Menu>
-        );
-    },
+    render,
 };
 
 export const AnchorElementRef: Story = {
@@ -77,23 +71,33 @@ export const AnchorElementRef: Story = {
     },
 };
 
+export const IconButtonMenu: Story = {
+    args: {
+        options,
+    },
+    render: (args) => {
+        const [open, setOpen] = useState(args.open ?? false);
+
+        const onCloseHandler = (event) => {
+            args.onClose?.(event);
+            setOpen(false);
+            return true;
+        };
+
+        return (
+            <Menu {...args} open={open} onClose={onCloseHandler}>
+                <Button onClick={() => setOpen(true)} icon="Menu" tooltipProps={{ title: 'tooltip' }} />
+            </Menu>
+        );
+    },
+};
+
 export const AnchorPosition: Story = {
     args: {
         options,
         anchorPosition: { vertical: 'top', horizontal: 'right' },
     },
-    render: (args) => {
-        const [open, setOpen] = useState(false);
-        const onCloseHandler = () => {
-            setOpen(false);
-            return true;
-        };
-        return (
-            <Menu {...args} open={open} onClose={onCloseHandler}>
-                <Button onClick={() => setOpen(true)}>Open Menu</Button>
-            </Menu>
-        );
-    },
+    render,
 };
 
 export const Arrow: Story = {
@@ -101,18 +105,7 @@ export const Arrow: Story = {
         options,
         arrow: true,
     },
-    render: (args) => {
-        const [open, setOpen] = useState(false);
-        const onCloseHandler = () => {
-            setOpen(false);
-            return true;
-        };
-        return (
-            <Menu {...args} open={open} onClose={onCloseHandler}>
-                <Button onClick={() => setOpen(true)}>Open Menu</Button>
-            </Menu>
-        );
-    },
+    render,
 };
 
 export const BoundChildrenId: Story = {
@@ -160,18 +153,7 @@ export const Dense: Story = {
         options,
         dense: true,
     },
-    render: (args) => {
-        const [open, setOpen] = useState(false);
-        const onCloseHandler = () => {
-            setOpen(false);
-            return true;
-        };
-        return (
-            <Menu {...args} open={open} onClose={onCloseHandler}>
-                <Button onClick={() => setOpen(true)}>Open Menu</Button>
-            </Menu>
-        );
-    },
+    render,
 };
 
 export const DisableRipple: Story = {
@@ -179,18 +161,7 @@ export const DisableRipple: Story = {
         options,
         disableRipple: true,
     },
-    render: (args) => {
-        const [open, setOpen] = useState(false);
-        const onCloseHandler = () => {
-            setOpen(false);
-            return true;
-        };
-        return (
-            <Menu {...args} open={open} onClose={onCloseHandler}>
-                <Button onClick={() => setOpen(true)}>Open Menu</Button>
-            </Menu>
-        );
-    },
+    render,
 };
 
 export const Elevation: Story = {
@@ -198,18 +169,7 @@ export const Elevation: Story = {
         options,
         elevation: 0,
     },
-    render: (args) => {
-        const [open, setOpen] = useState(false);
-        const onCloseHandler = () => {
-            setOpen(false);
-            return true;
-        };
-        return (
-            <Menu {...args} open={open} onClose={onCloseHandler}>
-                <Button onClick={() => setOpen(true)}>Open Menu</Button>
-            </Menu>
-        );
-    },
+    render,
 };
 
 export const Height: Story = {
@@ -217,18 +177,7 @@ export const Height: Story = {
         options: optionLongList,
         height: 400,
     },
-    render: (args) => {
-        const [open, setOpen] = useState(false);
-        const onCloseHandler = () => {
-            setOpen(false);
-            return true;
-        };
-        return (
-            <Menu {...args} open={open} onClose={onCloseHandler}>
-                <Button onClick={() => setOpen(true)}>Open Menu</Button>
-            </Menu>
-        );
-    },
+    render,
 };
 
 export const MaxHeight: Story = {
@@ -236,18 +185,7 @@ export const MaxHeight: Story = {
         options: optionLongList,
         maxHeight: 200,
     },
-    render: (args) => {
-        const [open, setOpen] = useState(false);
-        const onCloseHandler = () => {
-            setOpen(false);
-            return true;
-        };
-        return (
-            <Menu {...args} open={open} onClose={onCloseHandler}>
-                <Button onClick={() => setOpen(true)}>Open Menu</Button>
-            </Menu>
-        );
-    },
+    render,
 };
 
 export const DisableScrollLock: Story = {
@@ -256,13 +194,7 @@ export const DisableScrollLock: Story = {
         disableScrollLock: true,
         children: <Button>Open Menu</Button>,
     },
-    render: (args) => {
-        return (
-            <Menu {...args} open>
-                <Button>Open Menu</Button>
-            </Menu>
-        );
-    },
+    render,
 };
 
 export const Width: Story = {
@@ -298,12 +230,11 @@ export const Options: Story = {
 };
 
 export const OptionsDirectionRow: Story = {
-    args: {},
-    render: (args) => {
-        return (
-            <Menu {...args} open options={optionLongList} optionsDirection="row">
-                <Button>String List</Button>
-            </Menu>
-        );
+    args: {
+        options: optionLongList,
+        optionsDirection: 'row',
+        open: true,
+        menuLabel: 'String List',
     },
+    render,
 };

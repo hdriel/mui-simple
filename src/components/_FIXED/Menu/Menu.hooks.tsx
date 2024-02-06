@@ -28,8 +28,8 @@ export function useChildrenComponentBinding({
             ...(((!boundChildrenIndex && isDefined(boundChildrenId) && boundChildrenId === (child.props as any).id) ||
                 (!boundChildrenId && isDefined(boundChildrenIndex) && boundChildrenIndex === validIndex++)) && {
                 ref,
+                innerRef: ref,
                 onClick: (event, ...args) => {
-                    debugger;
                     setAnchorEl(event?.currentTarget);
                     onClickControlled?.(event);
                     (child.props as any).onClick?.(event, ...args);
