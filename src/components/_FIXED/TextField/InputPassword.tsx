@@ -11,7 +11,7 @@ const InputPassword: React.FC<InputPasswordProps> = ({
     copyAction,
     copyMessage,
     copyTooltip,
-    copyCmp,
+    copyIcon: _copyIcon,
     disabled,
     generatePasswordTooltip,
     generateRandom,
@@ -49,7 +49,7 @@ const InputPassword: React.FC<InputPasswordProps> = ({
         typeof showPasswordOnCmp === 'string' ? <SVGIcon>{showPasswordOnCmp}</SVGIcon> : showPasswordOnCmp;
     const showPasswordOffIcon =
         typeof showPasswordOffCmp === 'string' ? <SVGIcon>{showPasswordOffCmp}</SVGIcon> : showPasswordOffCmp;
-    const copyIcon = typeof copyCmp === 'string' ? <SVGIcon>{copyCmp}</SVGIcon> : copyCmp;
+    const copyIcon = typeof _copyIcon === 'string' ? <SVGIcon>{_copyIcon}</SVGIcon> : _copyIcon;
     const generateRandomIcon =
         typeof generateRandomCmp === 'string' ? <SVGIcon>{generateRandomCmp}</SVGIcon> : generateRandomCmp;
 
@@ -111,7 +111,7 @@ InputPassword.defaultProps = {
     colorLabel: undefined,
     colorText: undefined,
     copyAction: true, // undefined - probably not always we want this action
-    copyCmp: 'ContentCopy',
+    copyIcon: 'ContentCopy',
     copyMessage: 'Copied to clipboard',
     copyTooltip: 'Copy',
     debounceDelay: undefined,

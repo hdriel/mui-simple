@@ -23,14 +23,21 @@ type Story = StoryObj<typeof InputPhone>;
 
 const render = (args) => {
     const [value, setValue] = useState(args.value);
+
     return (
-        <InputPattern
+        <InputPhone
             {...args}
             value={value}
+            copyAction
             onChange={(e) => {
                 args.onChange?.(e);
                 setValue(e.target.value);
             }}
+            // OR
+            // onAccept={(value, mask) => {
+            //     args.onAccept?.(value, mask);
+            //     setValue(value);
+            // }}
         />
     );
 };

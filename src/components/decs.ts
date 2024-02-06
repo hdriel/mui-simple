@@ -431,6 +431,7 @@ export type InputPasswordProps = Omit<InputBaseProps, 'value'> & {
     copyAction?: boolean;
     copyMessage?: string;
     copyTooltip?: string;
+    copyIcon?: IconType | string;
     disabled?: boolean;
     generatePasswordTooltip?: string;
     generateRandom?:

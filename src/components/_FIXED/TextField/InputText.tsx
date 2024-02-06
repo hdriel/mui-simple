@@ -4,13 +4,14 @@ import type { InputTextProps } from '../../decs';
 import SVGIcon from '../SVGIcon/SVGIcon';
 
 const InputText: React.FC<InputTextProps> = function InputText(props): React.ReactElement {
-    const { value, showLimitIndicatorFrom, limitIndicator, endCmp, ...rest } = props;
+    const { value, showLimitIndicatorFrom, limitIndicator, endCmp, copyAction, ...rest } = props;
     const count: number = value?.length ?? 0;
 
     return (
         <Input
             {...rest}
             value={value}
+            type="text"
             endCmp={
                 <span style={{ ...(count > limitIndicator && { color: 'red' }) }}>
                     {(!showLimitIndicatorFrom || showLimitIndicatorFrom < count) && limitIndicator
@@ -19,7 +20,6 @@ const InputText: React.FC<InputTextProps> = function InputText(props): React.Rea
                     {typeof endCmp === 'string' ? <SVGIcon>{endCmp}</SVGIcon> : endCmp}
                 </span>
             }
-            type="text"
         />
     );
 };
