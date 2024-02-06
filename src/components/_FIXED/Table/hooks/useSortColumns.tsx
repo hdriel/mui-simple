@@ -7,11 +7,10 @@ import {
     DragHandle as DragHandleIcon,
     ImportExport as ImportExportIcon,
     North as NorthIcon,
-    SortByAlpha as SortByAlphaIcon,
     South as SouthIcon,
 } from '@mui/icons-material';
-import { Checkbox, Tooltip } from '../Table.styled';
 import type { TableColumn, useSortColumnsProps, useSortColumnsResult } from '../Table.desc';
+import Button from '../../Button/Button';
 
 export function useSortColumns({
     firstItem,
@@ -94,16 +93,13 @@ export function useSortColumns({
                 />
             }
         >
-            <div onClick={() => setMenuOpen(!menuOpen)}>
-                <Tooltip title={tooltip}>
-                    <Checkbox
-                        color={colors?.background}
-                        checkedIcon={<SortByAlphaIcon />}
-                        icon={<SortByAlphaIcon />}
-                        checked={sortColumns.some((column) => column.orderBy)}
-                    />
-                </Tooltip>
-            </div>
+            <Button
+                onClick={() => setMenuOpen((o) => !o)}
+                tooltipProps={{ title: tooltip }}
+                color={colors?.background}
+                label={'filters'}
+                icon={sortColumns.some((column) => column.orderBy) ? 'SortByAlpha' : 'SortByAlpha'}
+            />
         </Menu>
     );
 

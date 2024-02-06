@@ -1,14 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import {
-    DragHandle as DragHandleIcon,
-    FilterAlt as FilterAltIcon,
-    FilterAltOff as FilterAltOffIcon,
-} from '@mui/icons-material';
+import { DragHandle as DragHandleIcon } from '@mui/icons-material';
 import { getColumn, getMenuSizes } from '../Table.utils';
 import Menu from '../../Menu/Menu';
 import CheckList from '../../List/CheckList';
-import { Checkbox, Tooltip } from '../Table.styled';
 import type { TableColumn, useFilterColumnsProps } from '../Table.desc';
+import Button from '../../Button/Button';
 
 export function useFilterColumns({
     firstItem = {},
@@ -64,8 +60,13 @@ export function useFilterColumns({
             width={menuWidth}
             height={menuHeight}
             open={menuOpen}
-            onClick={() => false}
-            onClose={() => setMenuOpen(false)}
+            onClick={() => {
+                return false;
+            }}
+            onClose={() => {
+                setMenuOpen(false);
+                return true;
+            }}
             alternativeContent={
                 <CheckList
                     droppableId="filter-menu"
@@ -87,16 +88,13 @@ export function useFilterColumns({
                 />
             }
         >
-            <div onClick={() => setMenuOpen((o) => !o)}>
-                <Tooltip title={tooltip}>
-                    <Checkbox
-                        color={colors?.background}
-                        checkedIcon={<FilterAltOffIcon />}
-                        icon={<FilterAltIcon />}
-                        checked={checked}
-                    />
-                </Tooltip>
-            </div>
+            <Button
+                onClick={() => setMenuOpen(!menuOpen)}
+                tooltipProps={{ title: tooltip }}
+                color={colors?.background}
+                label={'filters'}
+                icon={checked ? 'FilterAltOff' : 'FilterAlt'}
+            />
         </Menu>
     );
 
