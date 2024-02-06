@@ -62,13 +62,6 @@ export function useSortColumns({
         setSortColumns([...sortColumns]);
     };
 
-    console.table({
-        menuWidth,
-        menuHeight,
-        hide,
-        menuOpen,
-    });
-
     const cmp = !hide && (
         <Menu
             width={menuWidth}
