@@ -280,6 +280,10 @@ export interface InputBaseProps {
     colorActive?: string;
     colorLabel?: string;
     colorText?: string;
+    copyTooltipProps?: TooltipProps;
+    copyMessage?: string;
+    copyAction?: boolean;
+    copyValueHandler?: (value: string | number | any) => string | number | any;
     debounceDelay?: number;
     direction?: 'ltr' | 'rtl';
     disabled?: boolean;
@@ -362,6 +366,10 @@ export type InputTimeProps = InputBaseProps &
     };
 
 export type InputPatternProps = InputBaseProps & {
+    copyTooltipProps?: TooltipProps;
+    copyMessage?: string;
+    copyAction?: boolean;
+    copyValueHandler?: (value: string, unmaskvalue: string) => string;
     autofix?: boolean;
     blocks?: object;
     definitions?: object;
