@@ -36,8 +36,7 @@ export const checkForCheckboxItems = (
 
         switch (alignControl) {
             case 'end':
-                item.actions = [].concat(item.actions);
-                item.actions.push(checkbox);
+                item.actions = [].concat(item.actions, checkbox);
                 break;
             case 'start':
                 item.startIcon = checkbox;

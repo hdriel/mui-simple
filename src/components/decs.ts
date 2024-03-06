@@ -682,7 +682,8 @@ export interface ListProps {
         }
     ) => void;
     title?: string;
-    useDraggableContext?: true;
+    unmountSubListOnClose?: boolean;
+    useDraggableContext?: boolean;
     useTransition?: boolean;
     useReactRouterDomLink?: boolean;
     width?: string | number;
