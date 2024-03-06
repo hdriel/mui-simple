@@ -221,3 +221,35 @@ export const SVGFile_ = (args) => {
         </Grid>
     );
 };
+
+const IconContainer = ({ label, children }) => (
+    <Box display="flex" flexDirection="column" alignItems="center">
+        {children}
+        {label}
+    </Box>
+);
+export const Color_ = (args) => {
+    return (
+        <Stack direction="column">
+            <IconContainer label="mui icon - named color">
+                <SVGIcon muiIconName="HourglassBottomRounded" color="green" size={100} />
+            </IconContainer>
+            <IconContainer label="mui icon - hex color">
+                <SVGIcon muiIconName="HourglassBottomRounded" color={'#007E00'} size={100} />
+            </IconContainer>
+            <IconContainer label="mui icon - mui color">
+                <SVGIcon muiIconName="HourglassBottomRounded" color="success" size={100} />
+            </IconContainer>
+
+            <IconContainer label="svg icon - named color">
+                <SVGIcon iconSrc="hashtag-icon.svg" color="green" size={100} />
+            </IconContainer>
+            <IconContainer label="svg icon - hex color">
+                <SVGIcon iconSrc="hashtag-icon.svg" color={'#007E00'} size={100} />
+            </IconContainer>
+            <IconContainer label="svg icon - mui color">
+                <SVGIcon iconSrc="hashtag-icon.svg" color="success" size={100} />
+            </IconContainer>
+        </Stack>
+    );
+};
