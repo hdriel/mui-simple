@@ -518,6 +518,12 @@ export type InputMultipleSelectProps = Omit<InputSelectProps, 'value'> & {
     [key: string]: any;
 };
 
+interface InputAutoCompleteOptionItem {
+    label: string | ElementType;
+    id: string | number; // todo: change to value instead of id as InputSelect options
+    [key: string]: any;
+}
+
 export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     autoComplete?: boolean;
     autoHighlight?: boolean;
@@ -554,10 +560,8 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     includeInputInList?: boolean;
     multiple?: boolean;
     openOnFocus?: boolean;
-    optionConverter?: (
-        item: any,
-        index: number
-    ) => { label: string | ElementType; id: string | number; [key: string]: any };
+    options?: Array<string | number | InputAutoCompleteOptionItem>;
+    optionConverter?: (item: any, index: number) => InputAutoCompleteOptionItem;
     raiseSelectedToTop?: boolean;
     renderOption?: (props: object, option: any, { selected }: { selected: boolean }) => ElementType;
     value?: any;
