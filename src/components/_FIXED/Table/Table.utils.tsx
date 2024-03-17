@@ -37,13 +37,11 @@ export function extractColors({ theme, colors }: extractColorsProps): undefined 
     });
     const [background] = getCustomColor({ theme, customColor: _background });
 
-    const textColor = isThemeColor && background ? get(theme, `palette.${background as string}.contrastText`) : color;
+    const textColor: string = isThemeColor && background ? get(theme, `palette.${background}.contrastText`) : color;
 
     const bgColor = background;
 
-    return isDefined(textColor) || isDefined(bgColor)
-        ? { color: textColor as string, background: bgColor as string }
-        : undefined;
+    return isDefined(textColor) || isDefined(bgColor) ? { color: textColor, background: bgColor } : undefined;
 }
 
 export function getColumn(row: any, column: TableColumn): TableColumn {
@@ -133,7 +131,7 @@ export function getMenuSizes({ columns, title }: { columns: any[]; title: string
 }
 
 export function getRowContent({ column, data }: { column: TableColumn; data: any }): React.ReactElement {
-    const fieldValue = data[column.field];
+    const fieldValue: any = get(data, column.field);
 
     const props = typeof column.props === 'function' ? column.props(data) : column.props;
 

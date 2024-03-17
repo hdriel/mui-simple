@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { FITNESS_DATA, FITNESS_COLUMNS, PERSON_DATA, PERSON_COLUMNS } from './Table.mocks';
+import {
+    FITNESS_DATA,
+    FITNESS_COLUMNS,
+    PERSON_DATA,
+    PERSON_COLUMNS,
+    OBJECT_PERSON_COLUMNS,
+    OBJECT_PERSON_DATA,
+} from './Table.mocks';
 
 import { Table } from '../Table';
 import Button from '../../Button/Button';
@@ -251,6 +258,13 @@ export const StickyHeader: Story = {
         data: PERSON_DATA.slice(0, 5),
         maxHeight: 300,
         stickyHeader: false,
+    },
+};
+
+export const NestedFields: Story = {
+    args: {
+        columns: OBJECT_PERSON_COLUMNS,
+        data: OBJECT_PERSON_DATA.slice(0, 5),
     },
 };
 

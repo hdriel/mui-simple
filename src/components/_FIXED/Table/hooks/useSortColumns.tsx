@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { get } from 'lodash-es';
 import { SORT } from '../Table.consts';
 import { getMenuSizes, getNextOrderBy } from '../Table.utils';
 import Menu from '../../Menu/Menu';
@@ -28,7 +29,7 @@ export function useSortColumns({
                     field: column.field,
                     orderBy: [SORT.DOWN, SORT.UP].includes(column.orderBy as string) ? column.orderBy : false,
                     label: column.label,
-                    type: typeof firstItem?.[column.field],
+                    type: typeof get(firstItem, column.field),
                 } ?? {}) as TableColumn)
         )
     );

@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { get } from 'lodash-es';
 import { SORT } from '../Table.consts';
 import type { useDataProps } from '../Table.desc';
 
@@ -19,9 +20,10 @@ export function useData({
                     data = data.sort((item1, item2) => {
                         const [a, b] =
                             sortColumn.orderBy === SORT.UP
-                                ? [item1[sortColumn.field], item2[sortColumn.field]]
-                                : [item2[sortColumn.field], item1[sortColumn.field]];
+                                ? [get(item1, sortColumn.field), get(item2, sortColumn.field)]
+                                : [get(item2, sortColumn.field), get(item1, sortColumn.field)];
 
+                        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
                         return sortColumn.type === 'number' ? a - b : `${a}`.localeCompare(`${b}`);
                     });
                 });

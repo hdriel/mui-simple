@@ -146,3 +146,72 @@ export const PERSON_DATA = [
             'Accumsan sit amet nulla facilisi morbi. Amet dictum sit amet justo donec enim diam vulputate ut. Pellentesque habitant morbi tristique senectus. Velit aliquet sagittis id consectetur purus ut. Consequat id porta nibh venenatis cras sed felis eget. Viverra orci sagittis eu volutpat odio facilisis mauris. Egestas quis ipsum suspendisse ultrices gravida dictum fusce. Ornare aenean euismod elementum nisi quis. Aenean pharetra magna ac placerat vestibulum lectus. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere.',
     },
 ];
+
+export const OBJECT_PERSON_COLUMNS: TableColumn[] = [
+    {
+        field: 'name',
+        align: 'left',
+        label: 'Name',
+        numeric: true,
+    },
+    {
+        field: 'address.city',
+        align: 'left',
+        label: 'City',
+        numeric: true,
+    },
+    {
+        field: 'static.stars',
+        align: 'left',
+        label: 'Stars',
+        numeric: true,
+    },
+];
+
+export const OBJECT_PERSON_DATA = [
+    {
+        name: 'Osmund Slite',
+        static: {
+            stars: 12015045,
+        },
+        address: {
+            city: 'Liuhe',
+        },
+    },
+    {
+        name: 'Felicity Levay',
+        static: {
+            stars: 90015045,
+        },
+        address: {
+            city: 'Sugihwaras',
+        },
+    },
+    {
+        name: 'Marcellus Cushe',
+        static: {
+            stars: 15045,
+        },
+        address: {
+            city: 'Blawi',
+        },
+    },
+    {
+        name: 'Selena Juliano',
+        static: {
+            stars: 115045,
+        },
+        address: {
+            city: 'Kolsko',
+        },
+    },
+    {
+        name: 'Peggi Southerell',
+        static: {
+            stars: 145,
+        },
+        address: {
+            city: 'San Vicente',
+        },
+    },
+];
