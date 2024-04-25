@@ -1350,11 +1350,12 @@ export interface TreeViewProps {
     borderedStyles?: boolean;
     closeIconFadeStyles?: boolean;
     collapseIcon?: IconType;
+    CustomComponent?: ElementType | string;
     edgeCornersStyles?: boolean;
     endIcon?: IconType;
     expandedIds?: string[];
     expandIcon?: IconType;
-    ItemComponent?: ElementType | string;
+    externalItemProps?: Record<string, any>;
     fieldId?: string;
     fieldLabel?: string;
     maxWidth?: string | number;

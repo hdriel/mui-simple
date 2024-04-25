@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import { useTreeItem } from '@mui/lab';
 import { TreeItem } from './TreeView.styled';
 
-export function withTreeViewItem(Component, TreeItemComponent = TreeItem) {
+export function withTreeViewItem(Component, TreeItemComponent = TreeItem, externalItemProps = {}) {
     // eslint-disable-next-line react/display-name
     const CustomTreeItemChild = forwardRef((props, ref) => {
         const {
@@ -37,6 +37,7 @@ export function withTreeViewItem(Component, TreeItemComponent = TreeItem) {
                     label={
                         <Component
                             {...restProps}
+                            {...externalItemProps}
                             nodeId={nodeId}
                             itemDisabled={disabled}
                             itemExpanded={expanded}
