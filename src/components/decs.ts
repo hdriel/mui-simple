@@ -15,6 +15,7 @@ import type { TimePickerProps } from '@mui/x-date-pickers/TimePicker';
 import type { CloseReason, OpenReason, SxProps } from '@mui/material';
 import type { TIMEZONE } from './timezone';
 import type { LOCALE, ADAPTER_LOCALE } from './locales';
+import React from 'react';
 export type AppBarPosition = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
 
 type IconType = IconName | ReactNode | ReactElement;
@@ -1337,3 +1338,31 @@ export type MobileStepperProps = StepperProps & {
     variant?: 'text' | 'dots' | 'progress';
     [key: string]: any;
 };
+
+export interface TreeViewNodeProps {
+    id: string;
+    label: string;
+    children?: TreeViewNodeProps[];
+    [key: string]: any;
+}
+
+export interface TreeViewProps {
+    borderedStyles?: boolean;
+    closeIconFadeStyles?: boolean;
+    collapseIcon?: IconType;
+    edgeCornersStyles?: boolean;
+    endIcon?: IconType;
+    expandedIds?: string[];
+    expandIcon?: IconType;
+    LabelComponent?: ElementType | string;
+    maxWidth?: string | number;
+    multiSelect?: boolean;
+    nodes?: TreeViewNodeProps[];
+    onExpanded?: (expandedIds: string[]) => void;
+    onSelected?: (selectedItemIds: string[]) => void;
+    selectedIds?: string[];
+    TransitionComponent?: ElementType | string;
+    TreeItemComponent?: ElementType | string;
+    useStyle?: 'default' | 'LabelIcon' | 'IndentBorder';
+    [key: string]: any;
+}

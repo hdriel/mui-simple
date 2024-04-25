@@ -1,9 +1,17 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { IndentBorderTreeItemStyled } from '../TreeView.styled';
 import { CloseSquare, MinusSquare, PlusSquare } from '../TreeView.icons';
 
-const IndentBorderTreeItem = forwardRef((props, ref) => {
+interface IndentBorderTreeItemProps {
+    bgColor?: string;
+    color?: string;
+    label: string;
+}
+
+const IndentBorderTreeItem: React.ForwardRefExoticComponent<
+    React.PropsWithoutRef<IndentBorderTreeItemProps> & React.RefAttributes<unknown>
+    // eslint-disable-next-line react/display-name
+> = forwardRef((props, ref) => {
     const { bgColor, color, icon, label, ...other } = props ?? {};
 
     return (
@@ -20,12 +28,6 @@ const IndentBorderTreeItem = forwardRef((props, ref) => {
         )
     );
 });
-
-IndentBorderTreeItem.propTypes = {
-    bgColor: PropTypes.string,
-    color: PropTypes.string,
-    label: PropTypes.string.isRequired,
-};
 
 IndentBorderTreeItem.defaultProps = {
     bgColor: undefined,

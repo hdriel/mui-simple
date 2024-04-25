@@ -1,13 +1,24 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
 import { LabelIconTreeItemStyled } from '../TreeView.styled';
-import Typography from '../../_FIXED/Typography/Typography';
-import SVGIcon from '../../_FIXED/SVGIcon/SVGIcon';
+import Typography from '../../Typography/Typography';
+import SVGIcon from '../../SVGIcon/SVGIcon';
 import { ArrowDropDown as ArrowDropDownIcon, ArrowRight as ArrowRightIcon } from '@mui/icons-material';
 
-const LabelIconTreeItem = forwardRef((props, ref) => {
-    const { bgColor, color, icon: labelIcon, info: labelInfo, label: labelText, ...other } = props ?? {};
+interface LabelIconTreeItemProps {
+    bgColor?: string;
+    color?: string;
+    icon?: string | React.ReactNode | React.ReactElement;
+    info?: string;
+    label: string;
+}
+
+const LabelIconTreeItem: React.ForwardRefExoticComponent<
+    React.PropsWithoutRef<LabelIconTreeItemProps> & React.RefAttributes<unknown>
+    // eslint-disable-next-line react/display-name
+> = forwardRef((props, ref) => {
+    const { bgColor, color, icon: _labelIcon, info: labelInfo, label: labelText, ...other } = props ?? {};
+    const labelIcon = typeof _labelIcon === 'string' ? <SVGIcon>{_labelIcon}</SVGIcon> : _labelIcon;
 
     return (
         props && (
@@ -18,7 +29,7 @@ const LabelIconTreeItem = forwardRef((props, ref) => {
                     <Box sx={{ display: 'flex', alignItems: 'center', p: 0.5, pr: 0 }}>
                         {labelIcon && (
                             <Box color="inherit" sx={{ mr: 1, display: 'flex', alignItems: 'center' }}>
-                                <SVGIcon muiIconName={labelIcon}>{labelIcon}</SVGIcon>
+                                {labelIcon}
                             </Box>
                         )}
                         {labelText && (
@@ -41,14 +52,6 @@ const LabelIconTreeItem = forwardRef((props, ref) => {
         )
     );
 });
-
-LabelIconTreeItem.propTypes = {
-    bgColor: PropTypes.string,
-    color: PropTypes.string,
-    icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.any]),
-    info: PropTypes.string,
-    label: PropTypes.string.isRequired,
-};
 
 LabelIconTreeItem.defaultProps = {
     bgColor: undefined,

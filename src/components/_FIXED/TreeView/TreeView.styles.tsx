@@ -1,7 +1,8 @@
 import { alpha, css } from '@mui/material/styles';
 import { treeItemClasses } from '@mui/lab/TreeItem';
+import type { SerializedStyles } from '@emotion/serialize';
 
-export function borderedStyles(props) {
+export function borderedStyles(props): SerializedStyles {
     if (!props.bordered) return css``;
 
     return css`
@@ -13,7 +14,7 @@ export function borderedStyles(props) {
     `;
 }
 
-export function closeIconFade(props) {
+export function closeIconFade(props): SerializedStyles {
     if (!props.closeIconFade) return css``;
 
     return css`
@@ -25,7 +26,7 @@ export function closeIconFade(props) {
     `;
 }
 
-export function selectedColor(props) {
+export function selectedColor(props): SerializedStyles {
     return css`
         color: ${props.theme.palette.text.secondary};
         & .${treeItemClasses.content} {
@@ -45,7 +46,7 @@ export function selectedColor(props) {
     `;
 }
 
-export function edgeCorners(props) {
+export function edgeCorners(props): SerializedStyles {
     if (!props.edgeCorners) return css``;
 
     return css`

@@ -3,6 +3,7 @@ import { useTreeItem } from '@mui/lab';
 import { TreeItem } from './TreeView.styled';
 
 export function withTreeViewItem(Component, TreeItemComponent = TreeItem) {
+    // eslint-disable-next-line react/display-name
     const CustomTreeItemChild = forwardRef((props, ref) => {
         const {
             nodeId,

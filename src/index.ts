@@ -178,7 +178,7 @@ export type { ToggleButtonGroupsProps } from './components/_FIXED/ToggleButtonGr
 export { default as Tooltip } from './components/_FIXED/Tooltip/Tooltip';
 export type { TooltipProps } from './components/_FIXED/Tooltip/Tooltip';
 
-export * from './components/TreeView';
+export * from './components/_FIXED/TreeView';
 
 export { default as Typography } from './components/_FIXED/Typography/Typography';
 

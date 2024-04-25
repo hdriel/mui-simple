@@ -17,6 +17,11 @@ export default meta;
 
 type Story = StoryObj<typeof DraggableList>;
 
+const render = (args) => {
+    const [items, setItems] = useState(args.dataList);
+    return <DraggableList {...args} dataList={items} onChange={setItems} />;
+};
+
 export const Default: Story = {
     args: {
         useDraggableContext: true,
@@ -41,10 +46,7 @@ export const AvatarsColumn: Story = {
         droppableClassName: 'images',
         renderValue: (props) => <Avatar {...props} />,
     },
-    render: (args) => {
-        const [items, setItems] = useState(args.dataList);
-        return <DraggableList {...args} dataList={items} onChange={setItems} />;
-    },
+    render,
 };
 
 export const AvatarsRow: Story = {
@@ -65,10 +67,7 @@ export const AvatarsRow: Story = {
         droppableClassName: 'images',
         renderValue: (props) => <Avatar {...props} />,
     },
-    render: (args) => {
-        const [items, setItems] = useState(args.dataList);
-        return <DraggableList {...args} dataList={items} onChange={setItems} />;
-    },
+    render,
 };
 
 export const ButtonsColumn: Story = {
@@ -87,10 +86,7 @@ export const ButtonsColumn: Story = {
         droppableClassName: 'images',
         renderValue: (props) => <Button {...props} />,
     },
-    render: (args) => {
-        const [items, setItems] = useState(args.dataList);
-        return <DraggableList {...args} dataList={items} onChange={setItems} />;
-    },
+    render,
 };
 
 export const ButtonsRow: Story = {
@@ -109,8 +105,5 @@ export const ButtonsRow: Story = {
         droppableClassName: 'images',
         renderValue: (props) => <Button {...props} />,
     },
-    render: (args) => {
-        const [items, setItems] = useState(args.dataList);
-        return <DraggableList {...args} dataList={items} onChange={setItems} />;
-    },
+    render,
 };

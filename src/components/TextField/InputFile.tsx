@@ -1,9 +1,11 @@
 import React from 'react';
 import Input from '../_FIXED/TextField/TextField';
+import type { InputBaseProps } from '../decs';
 
-export default function InputFile(props) {
+const InputFile: React.FC<InputBaseProps> = (props) => {
     return <Input {...props} type="file" />;
-}
+};
 
-InputFile.propTypes = Input.propTypes;
 InputFile.defaultProps = Input.defaultProps;
+
+export default InputFile;

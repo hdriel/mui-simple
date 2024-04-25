@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Collapse } from '@mui/material';
 import { useSpring, animated } from '@react-spring/web';
 
-export default function TransitionComponent(props) {
+function TransitionComponent(props): React.ReactNode | React.ReactElement {
     const style = useSpring({
         from: {
             opacity: 0,
@@ -28,3 +28,5 @@ TransitionComponent.propTypes = {
      */
     in: PropTypes.bool,
 };
+
+export default TransitionComponent;
