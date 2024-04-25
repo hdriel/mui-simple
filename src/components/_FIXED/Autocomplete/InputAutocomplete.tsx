@@ -1,5 +1,5 @@
 import React from 'react';
-import { GroupHeader, GroupItems } from './InputAutocomplete.styled';
+import { Autocomplete as MuiAutocomplete, GroupHeader, GroupItems } from './InputAutocomplete.styled';
 import TextField from '../TextField/TextField';
 import { isDefined, useCustomColor } from '../../../utils/helpers';
 import Chip from '../Chip/Chip';
@@ -174,7 +174,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
     };
 
     return (
-        <MuiAutocomcolorActiveplete
+        <MuiAutocomplete
             autoComplete={autoComplete}
             autoHighlight={autoHighlight}
             blurOnSelect={blurOnSelect}
