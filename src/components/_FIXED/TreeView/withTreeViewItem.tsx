@@ -48,8 +48,8 @@ export function withTreeViewItem(Component, TreeItemComponent = TreeItem) {
                         />
                     }
                     style={{
-                        '--tree-view-color': restProps.color,
-                        '--tree-view-bg-color': restProps.bgColor,
+                        ...(restProps.color && { '--tree-view-color': restProps.color }),
+                        ...(restProps.bgColor && { '--tree-view-bg-color': restProps.bgColor }),
                     }}
                 >
                     {[].concat(children ?? [])?.map(({ props: treeItemProps }, index) => {

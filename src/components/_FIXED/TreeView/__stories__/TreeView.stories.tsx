@@ -373,7 +373,7 @@ export const CustomItem: Story = {
                 onExpanded={setExpanded}
                 onSelected={setSelected}
                 TransitionComponent={null}
-                LabelComponent={StyledTreeItemContent}
+                ItemComponent={StyledTreeItemContent}
             />
         );
     },

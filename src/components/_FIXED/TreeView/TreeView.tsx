@@ -15,7 +15,9 @@ const TreeView: React.FC<TreeViewProps> = ({
     endIcon: _endIcon,
     expandedIds,
     expandIcon: _expandIcon,
-    LabelComponent,
+    fieldId,
+    fieldLabel,
+    ItemComponent,
     maxWidth,
     multiSelect,
     nodes,
@@ -34,15 +36,15 @@ const TreeView: React.FC<TreeViewProps> = ({
     const handleToggle = onExpanded ? (event, nodeIds) => onExpanded([].concat(nodeIds)) : undefined;
     const handleSelect = onSelected ? (event, nodeIds) => onSelected([].concat(nodeIds)) : undefined;
 
-    const CustomTreeItem = LabelComponent ? withTreeViewItem(LabelComponent, TreeItemStyled) : TreeItemComponent;
+    const CustomTreeItem = ItemComponent ? withTreeViewItem(ItemComponent, TreeItemStyled) : TreeItemComponent;
 
     const renderTree = (nodes): any[] =>
         nodes?.map(({ id, label, ...node }) => (
             <CustomTreeItem
-                key={id}
-                id={id}
-                nodeId={id}
-                label={label}
+                key={node[fieldId] ?? id}
+                id={node[fieldId] ?? id}
+                nodeId={node[fieldId] ?? id}
+                label={node[fieldLabel] ?? label}
                 TransitionComponent={TransitionComponent}
                 {...node}
             >
@@ -74,11 +76,13 @@ TreeView.defaultProps = {
     borderedStyles: false,
     closeIconFadeStyles: false,
     collapseIcon: 'ExpandMore',
+    fieldId: undefined,
+    fieldLabel: undefined,
     edgeCornersStyles: false,
     endIcon: undefined,
     expandedIds: undefined,
     expandIcon: 'ChevronRight',
-    LabelComponent: undefined,
+    ItemComponent: undefined,
     maxWidth: 400,
     multiSelect: undefined,
     nodes: [],

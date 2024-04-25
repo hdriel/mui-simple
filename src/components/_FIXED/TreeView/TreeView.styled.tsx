@@ -63,12 +63,12 @@ export const IndentBorderTreeItemStyled = styled(MuiTreeItem)(({ theme }) => ({
 export const TreeItemStyled = styled(MuiTreeItem, {
     shouldForwardProp: (propName) => !['bordered', 'closeIconFade'].includes(propName as string),
 })`
-    ${closeIconFade}
-    ${borderedStyles}
-  ${selectedColor}
-  ${edgeCorners}
+    ${closeIconFade};
+    ${borderedStyles};
+    ${selectedColor};
+    ${edgeCorners};
 
-  & .${treeItemClasses.content} {
+    & .${treeItemClasses.content} {
         width: auto;
 
         padding-right: ${(props) => props.theme.spacing(1)};

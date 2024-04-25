@@ -1354,7 +1354,9 @@ export interface TreeViewProps {
     endIcon?: IconType;
     expandedIds?: string[];
     expandIcon?: IconType;
-    LabelComponent?: ElementType | string;
+    ItemComponent?: ElementType | string;
+    fieldId?: string;
+    fieldLabel?: string;
     maxWidth?: string | number;
     multiSelect?: boolean;
     nodes?: TreeViewNodeProps[];
