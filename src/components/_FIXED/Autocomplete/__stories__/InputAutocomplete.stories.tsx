@@ -53,6 +53,18 @@ export const OptionsStringList: Story = {
     render,
 };
 
+export const EndIcon: Story = {
+    args: {
+        label: 'Movie',
+        options: OPTIONS.map((o) => o.title),
+        value: ['The Dark Knight'],
+        endCmp: 'Person',
+        freeSolo: true,
+        padding: 0,
+    },
+    render,
+};
+
 export const OptionsObjectList: Story = {
     args: {
         label: 'Movie',

@@ -564,6 +564,7 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     openOnFocus?: boolean;
     options?: Array<string | number | InputAutoCompleteOptionItem>;
     optionConverter?: (item: any, index: number) => InputAutoCompleteOptionItem;
+    padding?: string | number;
     raiseSelectedToTop?: boolean;
     renderOption?: (props: object, option: any, { selected }: { selected: boolean }) => ElementType;
     value?: any;

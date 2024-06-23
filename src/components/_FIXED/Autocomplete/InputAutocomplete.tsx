@@ -58,6 +58,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
     openOnFocus,
     options: _options,
     optionConverter,
+    padding,
     raiseSelectedToTop,
     readOnly,
     renderOption: _renderOption,
@@ -158,6 +159,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
         endCmp,
         endCmpExternal,
         error,
+        padding,
         focused,
         helperText,
         hideStartActionsOnEmpty,
@@ -270,6 +272,7 @@ InputAutocomplete.defaultProps = {
     startCmpExternal: undefined,
     value: undefined,
     variant: 'outlined',
+    padding: undefined,
 };
 
 export type { InputAutoCompleteProp } from '../../decs';
