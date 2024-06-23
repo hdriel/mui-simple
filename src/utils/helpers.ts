@@ -136,7 +136,7 @@ export function generatePassword({
 
     let password = '';
 
-    for (let i = 0; i <= length; i++) {
+    for (let i = 0; i < length; i++) {
         const randomNumber = Math.floor(Math.random() * chars.length);
         password += chars.substring(randomNumber, randomNumber + 1);
     }

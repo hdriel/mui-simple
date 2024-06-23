@@ -54,7 +54,7 @@ export const OnChange: Story = {
 export const CheckedIcon: Story = {
     args: {
         checked: true,
-        children: 'on change event',
+        label: 'on change event',
     },
     render: (args) => {
         const [value, onChange] = useState(args.checked);
@@ -75,10 +75,24 @@ export const Color_ = (args) => (
         <Checkbox {...args} checked color={'#00ab92'}>
             #00ab92
         </Checkbox>
-        <Checkbox {...args} checked color={'primary'}>
+        <Checkbox {...args} checked color="primary">
             Primary
         </Checkbox>
-        <Checkbox {...args} checked color={'secondary'}>
+        <Checkbox {...args} checked color="secondary">
+            Secondary
+        </Checkbox>
+    </Stack>
+);
+
+export const Margin_ = (args) => (
+    <Stack direction="column" spacing={3}>
+        <Checkbox {...args} checked label="margin 0" margin={0} wrapperStyle={{ border: '1px solid black' }}>
+            #00ab92
+        </Checkbox>
+        <Checkbox {...args} checked label="margin 5px 10px" margin="5px 10px">
+            Primary
+        </Checkbox>
+        <Checkbox {...args} checked label="margin default" wrapperStyle={{ border: '1px solid black' }}>
             Secondary
         </Checkbox>
     </Stack>

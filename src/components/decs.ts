@@ -989,7 +989,7 @@ export interface CheckboxProps {
     fontSize?: string | number;
     helperText?: string;
     icon?: IconType;
-    label?: string;
+    label?: string | ElementType;
     labelProps?: TypographyProps;
     labelPlacement?: 'top' | 'start' | 'bottom' | 'end';
     onChange?: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
@@ -997,6 +997,7 @@ export interface CheckboxProps {
     required?: boolean;
     size?: 'small' | 'medium';
     wrapperStyle?: any;
+    margin?: string | number;
     sx?: SxProps;
     sxLabel?: SxProps;
     textColor?: string;

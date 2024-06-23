@@ -7,6 +7,7 @@ import SVGIcon from '../SVGIcon/SVGIcon';
 import Button from '../Button/Button';
 import { copyToClipboard } from '../../../utils';
 import Snackbar from '../Snackbar/Snackbar';
+import { isDefined } from '../../../utils/helpers';
 
 const TextField: React.FC<InputBaseProps> = function TextField(props): React.ReactElement {
     const {
@@ -85,7 +86,7 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
                         readOnly,
                         style: {
                             ...InputProps?.style,
-                            ...(padding && { padding: `${padding} !important` }),
+                            ...(isDefined(padding) && { padding: `${padding} !important` }),
                         },
                         ...(showActions &&
                             startCmp && {

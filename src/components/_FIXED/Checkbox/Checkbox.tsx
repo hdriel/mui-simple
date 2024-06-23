@@ -2,14 +2,28 @@ import React from 'react';
 import type { ReactElement } from 'react';
 
 import { Checkbox as MuiCheckbox } from './Checkbox.styled';
-import { useCustomColor } from '../../../utils/helpers';
+import { isDefined, useCustomColor } from '../../../utils/helpers';
 import type { CheckboxProps } from '../../decs';
 import SVGIcon from '../SVGIcon/SVGIcon';
 
 const Checkbox: React.FC<CheckboxProps> = (props): ReactElement | React.ReactNode => {
-    const { color, textColor: _textColor, value, checked, checkedIcon, icon, children, label, ...rest } = props;
+    const {
+        color,
+        textColor: _textColor,
+        value,
+        checked,
+        checkedIcon,
+        icon,
+        children,
+        label,
+        wrapperStyle: _wrapperStyle,
+        margin,
+        ...rest
+    } = props;
     const [customColor, muiColor] = useCustomColor(color);
     const [textColor] = useCustomColor(_textColor);
+
+    const wrapperStyle = { ..._wrapperStyle, ...(isDefined(margin) && { margin }) };
 
     return (
         <MuiCheckbox
@@ -20,6 +34,7 @@ const Checkbox: React.FC<CheckboxProps> = (props): ReactElement | React.ReactNod
             label={label ?? children}
             muiColor={muiColor}
             textColor={textColor}
+            wrapperStyle={wrapperStyle}
             {...rest}
         />
     );
