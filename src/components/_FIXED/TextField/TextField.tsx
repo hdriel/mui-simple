@@ -16,6 +16,11 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
         colorActive,
         colorLabel,
         colorText,
+        copyAction,
+        copyIcon: _copyIcon,
+        copyMessage,
+        copyTooltipProps,
+        copyValueHandler,
         debounceDelay,
         direction,
         endCmp: _endCmp,
@@ -28,18 +33,14 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
         letterSpacing,
         onBlur,
         onChange,
-        onFocus,
         onEnterKeyPress,
+        onFocus,
         onKeyPress,
+        padding,
         readOnly,
         startCmp: _startCmp,
         startCmpExternal: _startCmpExternal,
         value,
-        copyTooltipProps,
-        copyAction,
-        copyIcon: _copyIcon,
-        copyMessage,
-        copyValueHandler,
         ...rest
     } = props;
     const [showAlert, setShowAlert] = useState(false);
@@ -82,6 +83,10 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
                     InputProps={{
                         ...InputProps,
                         readOnly,
+                        style: {
+                            ...InputProps?.style,
+                            ...(padding && { padding: `${padding} !important` }),
+                        },
                         ...(showActions &&
                             startCmp && {
                                 startAdornment: (

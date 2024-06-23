@@ -281,9 +281,9 @@ export interface InputBaseProps {
     colorActive?: string;
     colorLabel?: string;
     colorText?: string;
-    copyTooltipProps?: TooltipProps;
-    copyMessage?: string;
     copyAction?: boolean;
+    copyMessage?: string;
+    copyTooltipProps?: TooltipProps;
     copyValueHandler?: (value: string | number | any) => string | number | any;
     debounceDelay?: number;
     direction?: 'ltr' | 'rtl';
@@ -305,8 +305,9 @@ export interface InputBaseProps {
     onBlur?: (Event) => void;
     onChange?: (Event) => void;
     onEnterKeyPress?: (Event) => void;
-    onKeyPress?: (Event) => void;
     onFocus?: (Event) => void;
+    onKeyPress?: (Event) => void;
+    padding?: number | string;
     readOnly?: boolean;
     required?: boolean;
     rows?: number;

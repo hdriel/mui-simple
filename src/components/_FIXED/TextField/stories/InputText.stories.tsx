@@ -92,6 +92,17 @@ export const AlignActions: Story = {
     render,
 };
 
+export const Padding: Story = {
+    args: {
+        alignActions: 'flex-start',
+        startCmp: 'Email',
+        label: 'padding',
+        value: 'custom padding input',
+        padding: '8px 5px',
+    },
+    render,
+};
+
 export const AlignActionsExternal: Story = {
     args: {
         alignActions: 'flex-start',
