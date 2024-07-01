@@ -923,6 +923,7 @@ export interface TextProps {
     charsCase?: 'upper' | 'lower' | 'capital';
     color?: string;
     component?: string;
+    followCursor?: boolean;
     fullWidth?: boolean;
     gutterBottom?: boolean;
     html?: boolean;

@@ -115,7 +115,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
             return;
         }
         event.target.name = name;
-        event.target.value = isDefined(option) ? option[fieldId] ?? option : option;
+        event.target.value = isDefined(option) ? option.value ?? option[fieldId] ?? option : option;
         onChange?.(event, option);
     };
 

@@ -17,6 +17,7 @@ const Text: React.FC<TextProps> = ({
     children,
     className,
     color,
+    followCursor,
     fullWidth,
     html,
     innerRef,
@@ -79,7 +80,7 @@ const Text: React.FC<TextProps> = ({
             &nbsp;
             {tooltipMessage && (
                 // there is a bug to wrap tooltip around typography component, so this is my hack for that
-                <Tooltip title={tooltipMessage} placement={tooltipPlacement} followCursor>
+                <Tooltip title={tooltipMessage} placement={tooltipPlacement} followCursor={followCursor}>
                     <span
                         style={{
                             width: '100%',
@@ -110,6 +111,7 @@ Text.defaultProps = {
     charsCase: undefined,
     color: undefined,
     component: 'span',
+    followCursor: undefined,
     fullWidth: undefined,
     gutterBottom: undefined,
     html: undefined,

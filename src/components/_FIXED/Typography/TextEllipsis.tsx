@@ -59,6 +59,7 @@ TextEllipsis.defaultProps = {
     border: undefined,
     borderStyle: undefined,
     component: 'span',
+    followCursor: undefined,
     dynamicEllipsis: true,
     onEllipsisChange: undefined,
     rows: 1,
