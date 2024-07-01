@@ -86,19 +86,21 @@ export interface ButtonProps {
     isLoading?: boolean;
     label?: string;
     link?: string;
-    loadingIconPosition?: 'start' | 'end';
     loadingCmp?: ElementType;
+    loadingIconPosition?: 'start' | 'end';
     loadingLabel?: string;
+    margin?: string | number;
     minWidth?: string | number;
     onClick?: (event: any) => void;
     onRightClick?: (event: any) => void;
+    padding?: string | number;
     size?: 'small' | 'medium' | 'large' | string | number;
     startIcon?: IconType;
     sx?: SxProps;
     tooltipProps?: TooltipProps;
     uppercase?: boolean;
-    variant?: 'contained' | 'outlined' | 'text';
     useReactRouterDomLink?: boolean;
+    variant?: 'contained' | 'outlined' | 'text';
     [key: string]: any;
 }
 
