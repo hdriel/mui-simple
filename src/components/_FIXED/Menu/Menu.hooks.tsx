@@ -44,7 +44,7 @@ interface AnchorPositionMouse {
     top: number;
 }
 interface AnchorPositionRelative {
-    vertical: 'top' | 'bottom';
+    vertical: 'top' | 'center' | 'bottom';
     horizontal: 'left' | 'center' | 'right';
 }
 
