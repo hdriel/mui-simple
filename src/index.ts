@@ -129,6 +129,9 @@ export type { PaginationProps } from './components/_FIXED/Pagination/Pagination'
 export { default as Paper } from './components/_FIXED/Paper/Paper';
 export type { PaperProps } from './components/_FIXED/Paper/Paper';
 
+export { default as Popover } from './components/_FIXED/Popover/Popover';
+export type { PopoverProps } from './components/_FIXED/Popover/Popover';
+
 export * from './components/_FIXED/Progress';
 
 export { default as RadioButtonsGroup } from './components/_FIXED/RadioButtonsGroup/RadioButtonsGroup';

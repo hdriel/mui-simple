@@ -1375,3 +1375,25 @@ export interface TreeViewProps {
     useStyle?: 'default' | 'LabelIcon' | 'IndentBorder';
     [key: string]: any;
 }
+
+export interface PopoverProps {
+    content: ElementType;
+    anchorEl?: any;
+    anchorOrigin?: {
+        horizontal: 'center' | 'left' | 'right' | number;
+        vertical: 'bottom' | 'center' | 'top' | number;
+    };
+    anchorPosition?: { left: number; top: number };
+    anchorReference?: 'anchorEl' | 'anchorPosition' | 'none';
+    container?: any;
+    disableScrollLock?: boolean;
+    disableRestoreFocus?: boolean;
+    elevation?: number;
+    open?: boolean;
+    showOnHover?: boolean;
+    transformOrigin?: {
+        horizontal: 'center' | 'left' | 'right' | number;
+        vertical: 'bottom' | 'center' | 'top' | number;
+    };
+    [key: string]: any;
+}

@@ -57,7 +57,8 @@ const Menu: React.FC<MenuProps> = (props): React.ReactElement | React.ReactNode 
         children,
         setAnchorEl,
         // ref,
-        onClickControlled: open === undefined ? () => setOpenControlled(true) : undefined,
+        setOpenControlled:
+            open === undefined ? (_event, openControlled) => setOpenControlled(openControlled) : undefined,
     });
 
     const handleClose = useCallback(

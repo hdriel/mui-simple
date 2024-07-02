@@ -7,7 +7,8 @@ export function useChildrenComponentBinding({
     children,
     setAnchorEl,
     ref,
-    onClickControlled,
+    setOpenControlled,
+    showOnHover,
 }: {
     open?: boolean;
     boundChildrenId?: string;
@@ -16,13 +17,17 @@ export function useChildrenComponentBinding({
     setAnchorEl?: (event: any) => void;
     anchorElementRef?: any;
     ref?: any;
-    onClickControlled?: (event: any) => void;
+    setOpenControlled?: (event: any, open?: boolean) => void;
+    showOnHover?: boolean;
 }): any[] {
     const elementChildren = [].concat(children).filter((v) => v);
     let validIndex = 0;
 
     return elementChildren.map((child, index) => {
-        if (!isValidElement(child)) return child;
+        if (!isValidElement(child)) {
+            return child;
+        }
+
         return cloneElement(child, {
             key: index,
             ...(((!boundChildrenIndex && isDefined(boundChildrenId) && boundChildrenId === (child.props as any).id) ||
@@ -31,9 +36,21 @@ export function useChildrenComponentBinding({
                 innerRef: ref,
                 onClick: (event, ...args) => {
                     setAnchorEl(event?.currentTarget);
-                    onClickControlled?.(event);
+                    setOpenControlled?.(event, true);
                     (child.props as any).onClick?.(event, ...args);
                 },
+                ...(showOnHover && {
+                    onMouseEnter: (event, ...args) => {
+                        setAnchorEl(event?.currentTarget);
+                        setOpenControlled?.(event, true);
+                        (child.props as any).onMouseEnter?.(event, ...args);
+                    },
+                    onMouseLeave: (event, ...args) => {
+                        setAnchorEl(null);
+                        setOpenControlled?.(event, false);
+                        (child.props as any).onMouseLeave?.(event, ...args);
+                    },
+                }),
             }),
         });
     });
@@ -58,7 +75,7 @@ interface AnchorProps {
 interface UseAnchorProps {
     contextMenu?: any;
     anchorElementRef?: any;
-    anchorPosition?: Partial<AnchorPositionRelative>;
+    anchorPosition?: Partial<AnchorPositionRelative | AnchorPositionMouse>;
 }
 interface UseAnchorPropsResponse {
     setAnchorEl: (value: any) => void;
