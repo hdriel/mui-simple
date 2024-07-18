@@ -4,7 +4,6 @@ import { Box } from '@mui/material';
 
 import MobileStepper from '../MobileStepper';
 import { useSimpleStepper } from '../Stepper.utils';
-import { DirectionWrapper } from '../../../../../.storybook/direction.wrapper';
 
 export default {
     title: 'Navigation/MobileStepper',
@@ -44,20 +43,20 @@ export const DirectionLTR = () => {
     ];
 
     return (
-        <DirectionWrapper direction={'ltr'}>
-            <MobileStepper {...actions} {...stepperProps} direction={'ltr'} steps={steps} orientation="vertical">
-                <div>
-                    For each ad campaign that you create, you can control how much you're willing to spend on clicks and
-                    conversions, which networks and geographical locations you want your ads to show on, and more.
-                </div>
-                <div>An ad group contains one or more ads which target a shared set of keywords.</div>
-                <div>
-                    Try out different ad text to see what brings in the most customers, and learn how to enhance your
-                    ads using features like ad extensions. If you run into any problems with your ads, find out how to
-                    tell if they're running and how to resolve approval issues.
-                </div>
-            </MobileStepper>
-        </DirectionWrapper>
+        // <DirectionWrapper direction={'ltr'}>
+        <MobileStepper {...actions} {...stepperProps} direction={'ltr'} steps={steps} orientation="vertical">
+            <div>
+                For each ad campaign that you create, you can control how much you're willing to spend on clicks and
+                conversions, which networks and geographical locations you want your ads to show on, and more.
+            </div>
+            <div>An ad group contains one or more ads which target a shared set of keywords.</div>
+            <div>
+                Try out different ad text to see what brings in the most customers, and learn how to enhance your ads
+                using features like ad extensions. If you run into any problems with your ads, find out how to tell if
+                they're running and how to resolve approval issues.
+            </div>
+        </MobileStepper>
+        // </DirectionWrapper>
     );
 };
 

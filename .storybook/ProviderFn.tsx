@@ -1,8 +1,9 @@
 import React from 'react';
-import { DirectionWrapper } from './direction.wrapper';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { DirectionWrapper } from './_direction.wrapper';
 
-export default function ProviderFn({ theme, children }) {
+// Wrapper and Providers for all stories
+function ProviderFn({ theme, children }) {
     const muiTheme = createTheme(theme);
 
     return (
@@ -11,3 +12,5 @@ export default function ProviderFn({ theme, children }) {
         </DirectionWrapper>
     );
 }
+
+export default ProviderFn;
