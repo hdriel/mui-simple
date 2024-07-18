@@ -1,13 +1,13 @@
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import filesize from 'rollup-plugin-filesize';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import json from '@rollup/plugin-json';
+import terser from '@rollup/plugin-terser';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
+import filesize from 'rollup-plugin-filesize';
 import dts from 'rollup-plugin-dts';
 import del from 'rollup-plugin-delete';
-import { terser } from 'rollup-plugin-terser';
 // import { builtinModules } from 'module';
 // import generatePackageJson from 'rollup-plugin-generate-package-json';
 // import { babel } from '@rollup/plugin-babel';
@@ -39,7 +39,7 @@ export default [
             },
         ],
         plugins: [
-            del({ targets: 'dist/*' }),
+            del({ targets: 'lib/*' }),
             json(),
             peerDepsExternal(),
             resolve(),
