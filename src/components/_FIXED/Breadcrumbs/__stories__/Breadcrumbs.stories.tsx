@@ -1,7 +1,5 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Box, Stack } from '@mui/material';
-import { Mail as MainIcon } from '@mui/icons-material';
 
 import Breadcrumbs from '../Breadcrumbs';
 import { action } from '@storybook/addon-actions';

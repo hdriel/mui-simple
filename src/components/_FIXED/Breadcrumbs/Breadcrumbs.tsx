@@ -56,15 +56,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = (props): ReactElement | React.Re
         </MuiBreadcrumbs>
     );
 };
-
-Breadcrumbs.defaultProps = {
-    chips: undefined,
-    color: undefined,
-    links: undefined,
-    maxItems: undefined,
-    separator: undefined,
-    size: undefined,
-};
+Breadcrumbs.displayName = 'Breadcrumbs';
 
 export type { BreadcrumbsProps } from '../../decs';
 export default Breadcrumbs;

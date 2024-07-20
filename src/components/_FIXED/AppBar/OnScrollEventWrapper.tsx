@@ -1,10 +1,11 @@
 import React, { cloneElement, isValidElement } from 'react';
-import type { ReactNode, ReactElement } from 'react';
+import type { ReactNode, ReactElement, PropsWithChildren } from 'react';
 import type { SxProps } from '@mui/material';
 import { Box, Fade, useScrollTrigger, Slide } from '@mui/material';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@mui/icons-material';
 import Fab from '../FloatingActionButton/FloatingActionButton';
 import { isDefined } from '../../../utils/helpers';
+
 interface OnScrollEventWrapperProps {
     bottom?: number;
     defaultFabProps?: object;
@@ -21,15 +22,16 @@ interface OnScrollEventWrapperProps {
     zIndex?: number;
     [key: string]: any;
 }
-const OnScrollEventWrapper: React.FC<OnScrollEventWrapperProps> = ({
+
+const OnScrollEventWrapper: React.FC<PropsWithChildren<OnScrollEventWrapperProps>> = ({
     children,
     defaultFabProps,
     elevation,
-    elevationScroll,
-    hideOnScroll,
+    elevationScroll = false,
+    hideOnScroll = false,
     scrollElement,
     scrollToId,
-    scrollToTop,
+    scrollToTop = false,
     scrollToTopProps,
 }): ReactElement | React.ReactNode => {
     // @ts-expect-error
@@ -48,8 +50,8 @@ const OnScrollEventWrapper: React.FC<OnScrollEventWrapperProps> = ({
     });
 
     const handleClick = (event: any): void => {
-        const anchor = scrollToId && (event.target.ownerDocument || document).querySelector(scrollToId);
-        anchor?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const anchor = scrollToId && (event.target.ownerDocument || document)?.querySelector?.(scrollToId);
+        anchor?.scrollIntoView?.({ behavior: 'smooth', block: 'center' });
     };
 
     const fab =
@@ -90,17 +92,6 @@ const OnScrollEventWrapper: React.FC<OnScrollEventWrapperProps> = ({
             {fab}
         </>
     );
-};
-
-OnScrollEventWrapper.defaultProps = {
-    defaultFabProps: undefined,
-    elevation: undefined,
-    elevationScroll: false,
-    hideOnScroll: false,
-    scrollElement: undefined,
-    scrollToId: undefined,
-    scrollToTop: false,
-    scrollToTopProps: undefined,
 };
 
 export default OnScrollEventWrapper;

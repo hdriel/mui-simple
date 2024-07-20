@@ -564,7 +564,7 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     includeInputInList?: boolean;
     multiple?: boolean;
     openOnFocus?: boolean;
-    options?: Array<string | number | InputAutoCompleteOptionItem>;
+    options?: Array<string | number | InputAutoCompleteOptionItem | Record<string, any>>;
     optionConverter?: (item: any, index: number) => InputAutoCompleteOptionItem;
     padding?: string | number;
     raiseSelectedToTop?: boolean;
@@ -574,6 +574,17 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     onChange?: (event: any, optionId: string | number, action?: string) => void;
     sortBy?: string | (() => void);
     sortDir?: boolean | number;
+    [key: string]: any;
+};
+
+export type InputGoogleAddressProps = Omit<InputAutoCompleteProp, 'selectedOption'> & {
+    GOOGLE_MAPS_API_KEY: string;
+    id?: string;
+    label?: string;
+    value?: any;
+    inputValue?: string;
+    onInputChange?: (event: any) => void;
+    onChange?: (event: any) => void;
     [key: string]: any;
 };
 

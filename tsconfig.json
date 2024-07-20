@@ -2,7 +2,7 @@
     "compilerOptions": {
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
-        "baseUrl": ".",
+        "baseUrl": "./",
         "declaration": true,
         "declarationDir": "lib", // Output TypeScript declarations here
         "declarationMap": true,

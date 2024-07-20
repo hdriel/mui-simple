@@ -1,5 +1,4 @@
 import React, { useMemo, useRef, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { throttle } from 'lodash-es';
 import parse from 'autosuggest-highlight/parse';
 import { Box, Grid, Typography } from '@mui/material';
@@ -8,6 +7,7 @@ import { LocationOn as LocationOnIcon } from '@mui/icons-material';
 import { Autocomplete as MuiAutocomplete } from './InputAutocomplete.styled';
 import TextField from '../TextField/TextField';
 import { loadScript } from '../../../utils/helpers';
+import type { InputGoogleAddressProps } from '../../decs';
 
 const autocompleteService = { current: null };
 
@@ -39,15 +39,17 @@ const renderMapAddressOption = (props, option) => {
     );
 };
 
-export default function InputGoogleAddress({
-    id,
+const InputGoogleAddress: React.FC<InputGoogleAddressProps> = ({
+    id = 'google-map',
     value: inputValue,
-    label,
+    label = 'Add a location',
     onInputChange,
     onChange,
+    // This key was created specifically for the demo in mui.com. // 'AIzaSyC3aviU6KHXAjoSnxcw6qbOhjnFctbxPkE'
+    // You need to create a new one for your application.
     GOOGLE_MAPS_API_KEY,
     ...props
-}) {
+}) => {
     const [optionValue, setOptionValue] = useState(null);
     const [options, setOptions] = useState([]);
     const loaded = useRef(false);
@@ -76,7 +78,7 @@ export default function InputGoogleAddress({
             return undefined;
         }
 
-        fetch({ input: inputValue }, (results) => {
+        fetch?.({ input: inputValue }, (results) => {
             if (active) {
                 let newOptions = [];
                 if (optionValue) newOptions = [optionValue];
@@ -126,22 +128,8 @@ export default function InputGoogleAddress({
             renderOption={renderMapAddressOption}
         />
     );
-}
-
-InputGoogleAddress.propTypes = {
-    GOOGLE_MAPS_API_KEY: PropTypes.string.isRequired,
-    id: PropTypes.string,
-    label: PropTypes.string,
-    value: PropTypes.any,
-    inputValue: PropTypes.string,
-    onInputChange: PropTypes.func,
-    onChange: PropTypes.func,
 };
+InputGoogleAddress.displayName = 'InputGoogleAddress';
 
-InputGoogleAddress.defaultProps = {
-    // This key was created specifically for the demo in mui.com. // 'AIzaSyC3aviU6KHXAjoSnxcw6qbOhjnFctbxPkE'
-    // You need to create a new one for your application.
-    GOOGLE_MAPS_API_KEY: undefined,
-    id: 'google-map-demo',
-    label: 'Add a location',
-};
+export type { InputGoogleAddressProps } from '../../decs';
+export default InputGoogleAddress;

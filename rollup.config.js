@@ -19,7 +19,6 @@ import generatePackageJson from 'rollup-plugin-generate-package-json';
 import { terser } from 'rollup-plugin-terser';
 import { babel } from '@rollup/plugin-babel';
 import urlResolve from 'rollup-plugin-url-resolve';
-import replace from '@rollup/plugin-replace';
 
 // import package json file
 import { createRequire } from 'node:module';
@@ -27,7 +26,7 @@ const requireFile = createRequire(import.meta.url);
 const packageJson = requireFile('./package.json');
 
 const isProd = process.env.NODE_ENV === 'production';
-const sourceMap = !isProd;
+const sourcemap = sProd ? false : 'inline';
 
 const externalDep = [
     ...builtinModules,
@@ -43,22 +42,23 @@ export default [
         output: [
             {
                 dir: 'lib',
-                ...(sourceMap ? { sourcemap: 'inline' } : { inlineDynamicImports: true }),
                 format: 'cjs',
                 interop: 'auto',
+                exports: 'auto', // Specify the export mode if needed
+                sourcemap,
             },
             // ES2015 modules version so consumers can tree-shake
             {
                 dir: 'lib',
-                ...(sourceMap ? { sourcemap: 'inline' } : { inlineDynamicImports: true }),
                 format: 'es',
-                interop: 'esModule',
+                sourcemap,
             },
         ],
         plugins: [
-            del({ targets: 'lib/*' }),
+            del({ targets: ['lib/*', 'esm/*'] }),
+            json(),
             peerDepsExternal(),
-            replace({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
+            // resolve(),
             resolve({
                 extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json'],
                 moduleDirectories: ['node_modules'],
@@ -67,23 +67,20 @@ export default [
                 browser: true,
                 main: true,
             }),
+            commonjs(),
             typescript({
                 tsconfig: 'tsconfig.json',
-                ...(sourceMap && { sourceMap: true, inlineSources: true }),
+                ...(sourcemap && { sourceMap: true, inlineSources: true }),
             }),
-            babel({
+            /*babel({
                 babelHelpers: 'bundled',
                 extensions: ['.jsx', '.js', '.ts', '.tsx', '.json'],
                 exclude: 'node_modules/**', // only transpile our source code
                 babelrc: true,
-            }),
-            json(),
-            commonjs(),
-            // commonjs({ include: /node_modules/ }),
+            }),*/
             postcss({
-                minimize: true,
+                ...(sourcemap && { minimize: true }),
                 extensions: ['.css', '.less', '.scss'],
-                plugins: [],
             }),
             urlResolve(),
             ...(isProd ? [terser({})] : []),
@@ -116,9 +113,9 @@ export default [
         treeshake: true,
     },
     {
-        input: sourceMap ? 'lib/index.d.ts' : 'lib/index.d.ts',
+        input: 'lib/src/index.d.ts',
         output: {
-            file: sourceMap ? 'lib/index.d.ts' : 'lib/index.d.ts',
+            file: 'lib/src/index.d.ts',
             format: 'es',
         },
         plugins: [dts()],

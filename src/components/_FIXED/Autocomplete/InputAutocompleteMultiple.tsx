@@ -8,19 +8,19 @@ import type { InputAutocompleteMultipleProp } from '../../decs';
 import { isDefined } from '../../../utils/helpers';
 
 const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
-    value: selectedOptions,
+    checkboxStyle = true,
+    chipProps = { rounded: false, endIcon: <CloseIcon /> },
+    fieldId = 'id',
+    filterSelectedOptions = false,
+    getOptionLabel: _getOptionLabel = 'label',
+    limitTags,
     name,
     onChange,
-    limitTags,
-    filterSelectedOptions,
-    chipProps,
-    fieldId,
-    renderOption: _renderOption,
-    checkboxStyle,
-    getOptionLabel: _getOptionLabel,
     options,
-    readOnly,
     raiseSelectedToTop, // todo: implement this
+    readOnly,
+    renderOption: _renderOption,
+    value: selectedOptions = [],
     ...props
 }) => {
     selectedOptions = [].concat(selectedOptions);
@@ -113,20 +113,7 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
         />
     );
 };
-
-InputAutocompleteMultiple.defaultProps = {
-    checkboxStyle: true,
-    chipProps: { rounded: false, endIcon: <CloseIcon /> },
-    filterSelectedOptions: false,
-    limitTags: undefined,
-    raiseSelectedToTop: undefined,
-    readOnly: undefined,
-    renderOption: undefined,
-    value: [],
-    getOptionLabel: 'label',
-    fieldId: 'id',
-    onChange: undefined,
-};
+InputAutocompleteMultiple.displayName = 'InputAutocompleteMultiple';
 
 export type { InputAutocompleteMultipleProp } from '../../decs';
 export default InputAutocompleteMultiple;
