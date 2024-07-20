@@ -1,8 +1,5 @@
 {
-    "presets": [
-        "@babel/preset-react",
-        "@babel/preset-typescript"
-    ],
+    "presets": ["@babel/preset-react", "@babel/preset-typescript"],
     "plugins": [
         "@babel/plugin-transform-react-display-name",
         "@babel/proposal-object-rest-spread",

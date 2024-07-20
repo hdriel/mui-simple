@@ -42,23 +42,21 @@ export default [
         input: './src/index.ts',
         output: [
             {
-                ...(sourceMap
-                    ? { sourcemap: 'inline', dir: 'dist' }
-                    : { file: packageJson.main, inlineDynamicImports: true }),
+                dir: 'lib',
+                ...(sourceMap ? { sourcemap: 'inline' } : { inlineDynamicImports: true }),
                 format: 'cjs',
                 interop: 'auto',
             },
             // ES2015 modules version so consumers can tree-shake
             {
-                ...(sourceMap
-                    ? { sourcemap: 'inline', dir: 'dist' }
-                    : { file: packageJson.module, inlineDynamicImports: true }),
+                dir: 'lib',
+                ...(sourceMap ? { sourcemap: 'inline' } : { inlineDynamicImports: true }),
                 format: 'es',
                 interop: 'esModule',
             },
         ],
         plugins: [
-            del({ targets: 'dist/*' }),
+            del({ targets: 'lib/*' }),
             peerDepsExternal(),
             replace({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
             resolve({
@@ -90,7 +88,7 @@ export default [
             urlResolve(),
             ...(isProd ? [terser({})] : []),
             generatePackageJson({
-                outputFolder: 'dist',
+                outputFolder: 'lib',
                 baseContents: (pkg) => ({
                     name: pkg.name,
                     version: pkg.version,
@@ -105,11 +103,11 @@ export default [
                     dependencies: pkg.dependencies,
                     repository: pkg.repository,
                     type: pkg.type,
-                    // ...pkg,
-                    module: pkg.module?.replace('dist/', ''),
-                    main: pkg.main.replace('dist/', ''),
-                    types: pkg.types.replace('dist/', ''),
-                    ...(!sourceMap && { files: ['bundles/*'] }),
+                    ...pkg,
+                    module: pkg.module?.replace('lib/', ''),
+                    main: pkg.main.replace('lib/', ''),
+                    types: pkg.types.replace('lib/', ''),
+                    // ...(!sourceMap && { files: ['*'] }),
                 }),
             }),
             filesize(),
@@ -118,9 +116,9 @@ export default [
         treeshake: true,
     },
     {
-        input: sourceMap ? 'dist/index.d.ts' : 'dist/bundles/index.d.ts',
+        input: sourceMap ? 'lib/index.d.ts' : 'lib/index.d.ts',
         output: {
-            file: sourceMap ? 'dist/index.d.ts' : 'dist/bundles/index.d.ts',
+            file: sourceMap ? 'lib/index.d.ts' : 'lib/index.d.ts',
             format: 'es',
         },
         plugins: [dts()],

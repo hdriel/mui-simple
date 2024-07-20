@@ -13,7 +13,7 @@ import { Meta, StoryObj } from '@storybook/react';
 const meta: Meta<typeof SVGIcon> = {
     title: 'Data-Display/SVGIcon',
     component: SVGIcon,
-    tags: ['autodocs'],
+    // tags: ['autodocs'], // hide because make bug on Docs page for multiple stories in one page
 };
 
 export default meta;

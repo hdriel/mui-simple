@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Box } from '@mui/material';
 import RippleBox from '../RippleBox';
@@ -36,7 +36,6 @@ export const Default: Story = {
 
 export const Color: Story = {
     args: {
-        open: true,
         color: '#D0CC0C',
         children: BOX,
     },

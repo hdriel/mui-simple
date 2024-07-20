@@ -5,8 +5,9 @@ get a lot of features to use mui, like custom-color that you can send any color 
 or more customized way to use component easier way, and less code bugs homemade. <br/>
 
 #### Demo: [storybook link](https://hdriel.github.io/mui-simple/)
-#####NOTE: 
-To run storybook locally, because peer dependencies not installed in package npm install, you need to wrap this project with package.json that include this peed in there node_modules. 
+
+#####NOTE:
+To run storybook locally, because peer dependencies not installed in package npm install, you need to wrap this project with package.json that include this peed in there node_modules.
 there for, cut all git repo into the wrapper-repo directory and run `npm install` and run the `npm run storybook` in script's file: wrapper-repo/mui-simple/package.json
 
 ## Install
@@ -61,20 +62,20 @@ module.exports = {
 
             return webpackConfig;
         },
-        alias: {            
-            "@emotion/cache": path.resolve(__dirname, '..', 'node_modules/@emotion/cache'),
-            "@emotion/react": path.resolve(__dirname, '..', 'node_modules/@emotion/react'),
-            "@emotion/styled": path.resolve(__dirname, '..', 'node_modules/@emotion/styled'),             
-            "@mui/styles": path.resolve(__dirname, '..', 'node_modules/@mui/styles'),
-            "@mui/system": path.resolve(__dirname, '..', 'node_modules/@mui/system'),
-            "@mui/x-date-pickers": path.resolve(__dirname, '..', 'node_modules/@mui/x-date-pickers'),
-            "stylis": path.resolve(__dirname, '..', 'node_modules/stylis'),
-            "stylis-plugin-rtl": path.resolve(__dirname, '..', 'node_modules/stylis-plugin-rtl'),
+        alias: {
+            '@emotion/cache': path.resolve(__dirname, '..', 'node_modules/@emotion/cache'),
+            '@emotion/react': path.resolve(__dirname, '..', 'node_modules/@emotion/react'),
+            '@emotion/styled': path.resolve(__dirname, '..', 'node_modules/@emotion/styled'),
+            '@mui/styles': path.resolve(__dirname, '..', 'node_modules/@mui/styles'),
+            '@mui/system': path.resolve(__dirname, '..', 'node_modules/@mui/system'),
+            '@mui/x-date-pickers': path.resolve(__dirname, '..', 'node_modules/@mui/x-date-pickers'),
+            stylis: path.resolve(__dirname, '..', 'node_modules/stylis'),
+            'stylis-plugin-rtl': path.resolve(__dirname, '..', 'node_modules/stylis-plugin-rtl'),
             '@babel': path.resolve(__dirname, '..', 'node_modules/@babel'),
             '@mui/icons-material': path.resolve(__dirname, '..', 'node_modules/@mui/icons-material'),
             '@mui/material': path.resolve(__dirname, '..', 'node_modules/@mui/material'),
             '@mui/utils': path.resolve(__dirname, '..', 'node_modules/@mui/utils'),
-            'react': path.resolve(__dirname, '..', 'node_modules/react'),
+            react: path.resolve(__dirname, '..', 'node_modules/react'),
             'react-beautiful-dnd': path.resolve(__dirname, '..', 'node_modules/react-beautiful-dnd'),
             'react-dom': path.resolve(__dirname, '..', 'node_modules/react-dom'),
             'react-draggable': path.resolve(__dirname, '..', 'node_modules/react-draggable'),
@@ -106,19 +107,19 @@ module.exports = {
     resolve: {
         extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
         alias: {
-            "@emotion/cache": path.resolve(__dirname, '..', 'node_modules/@emotion/cache'),
-            "@emotion/react": path.resolve(__dirname, '..', 'node_modules/@emotion/react'),
-            "@emotion/styled": path.resolve(__dirname, '..', 'node_modules/@emotion/styled'),             
-            "@mui/styles": path.resolve(__dirname, '..', 'node_modules/@mui/styles'),
-            "@mui/system": path.resolve(__dirname, '..', 'node_modules/@mui/system'),
-            "@mui/x-date-pickers": path.resolve(__dirname, '..', 'node_modules/@mui/x-date-pickers'),
-            "stylis": path.resolve(__dirname, '..', 'node_modules/stylis'),
-            "stylis-plugin-rtl": path.resolve(__dirname, '..', 'node_modules/stylis-plugin-rtl'),
+            '@emotion/cache': path.resolve(__dirname, '..', 'node_modules/@emotion/cache'),
+            '@emotion/react': path.resolve(__dirname, '..', 'node_modules/@emotion/react'),
+            '@emotion/styled': path.resolve(__dirname, '..', 'node_modules/@emotion/styled'),
+            '@mui/styles': path.resolve(__dirname, '..', 'node_modules/@mui/styles'),
+            '@mui/system': path.resolve(__dirname, '..', 'node_modules/@mui/system'),
+            '@mui/x-date-pickers': path.resolve(__dirname, '..', 'node_modules/@mui/x-date-pickers'),
+            stylis: path.resolve(__dirname, '..', 'node_modules/stylis'),
+            'stylis-plugin-rtl': path.resolve(__dirname, '..', 'node_modules/stylis-plugin-rtl'),
             '@babel': path.resolve(__dirname, '..', 'node_modules/@babel'),
             '@mui/icons-material': path.resolve(__dirname, '..', 'node_modules/@mui/icons-material'),
             '@mui/material': path.resolve(__dirname, '..', 'node_modules/@mui/material'),
             '@mui/utils': path.resolve(__dirname, '..', 'node_modules/@mui/utils'),
-            'react': path.resolve(__dirname, '..', 'node_modules/react'),
+            react: path.resolve(__dirname, '..', 'node_modules/react'),
             'react-beautiful-dnd': path.resolve(__dirname, '..', 'node_modules/react-beautiful-dnd'),
             'react-dom': path.resolve(__dirname, '..', 'node_modules/react-dom'),
             'react-draggable': path.resolve(__dirname, '..', 'node_modules/react-draggable'),

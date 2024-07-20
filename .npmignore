@@ -4,7 +4,7 @@ rollup.*
 .cz.toml
 .eslintignore
 .eslintrc
-.prettierrc
+.prettierrc.cjs
 tsconfig.json
 public
 .storybook

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { ArrowForwardIosSharp as ArrowForwardIosSharpIcon } from '@mui/icons-material';
 import { Accordion as MuiAccordion, AccordionDetails, AccordionSummary, ShowMoreWrapper } from './Accordion.styled';
 import Typography from '../Typography/Typography';
 import Button from '../Button/Button';
-import { ArrowForwardIosSharp as ArrowForwardIosSharpIcon } from '@mui/icons-material';
 import { useCustomColor } from '../../../utils/helpers';
 import type { AccordionProps } from '../../decs';
 import SVGIcon from '../SVGIcon/SVGIcon';

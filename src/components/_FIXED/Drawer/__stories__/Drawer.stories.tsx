@@ -18,7 +18,7 @@ import { Meta, StoryObj } from '@storybook/react';
 const meta: Meta<typeof Drawer> = {
     title: 'Navigation/Drawer',
     component: Drawer,
-    tags: ['autodocs'],
+    // tags: ['autodocs'], // hide because make bug on Docs page for multiple stories in one page
 };
 
 export default meta;

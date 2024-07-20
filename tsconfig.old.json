@@ -4,28 +4,39 @@
         "allowSyntheticDefaultImports": true,
         "baseUrl": ".",
         "declaration": true,
-        "declarationDir": "lib", // Output TypeScript declarations here
+        "declarationDir": "dist",
         "declarationMap": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "isolatedModules": true,
         "jsx": "react",
-        "lib": ["dom", "esnext", "dom.iterable"],
+        "lib": ["dom", "es2015", "dom.iterable", "esnext"],
         "module": "esnext",
         "moduleResolution": "node",
         "noEmit": false,
         "noEmitOnError": false,
-        "outDir": "lib", // Output JavaScript here, matching Rollup 'dir'
-        "resolveJsonModule": true,
-        "rootDir": ".",
-        "skipLibCheck": true,
         "noImplicitAny": false,
+        "outDir": "dist",
+        "resolveJsonModule": true,
+        "rootDir": "src",
+        "skipLibCheck": true,
         "sourceMap": true,
         "strict": false,
         "strictNullChecks": false,
         "target": "esnext",
         "typeRoots": ["./src/@types"]
     },
-    "include": ["src", ".storybook"],
-    "exclude": [".idea", ".git", "build", "node_modules", "lib", "dist", "storybook-static"]
+    "include": ["src"],
+    "exclude": [
+        ".idea",
+        ".git",
+        "build",
+        "node_modules",
+        "lib",
+        "dist",
+        ".storybook",
+        "storybook-static",
+        "public",
+        "src/**/__stories__"
+    ]
 }
