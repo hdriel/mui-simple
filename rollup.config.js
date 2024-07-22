@@ -5,6 +5,7 @@
 // https://www.codifytools.com/blog/react-npm-package
 
 // https://stackoverflow.com/questions/56788551/material-ui-themeprovider-invalid-hook-call-when-building-an-es6-module-using-ro
+import path from 'path';
 import { builtinModules } from 'module';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import filesize from 'rollup-plugin-filesize';
@@ -19,14 +20,18 @@ import generatePackageJson from 'rollup-plugin-generate-package-json';
 import { terser } from 'rollup-plugin-terser';
 import { babel } from '@rollup/plugin-babel';
 import urlResolve from 'rollup-plugin-url-resolve';
+import sourcemaps from 'rollup-plugin-sourcemaps';
+import multiInput from 'rollup-plugin-multi-input';
 
 // import package json file
 import { createRequire } from 'node:module';
+import { fileURLToPath } from 'url';
 const requireFile = createRequire(import.meta.url);
 const packageJson = requireFile('./package.json');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const isProd = process.env.NODE_ENV === 'production';
-const sourcemap = sProd ? false : 'inline';
+const sourcemap = isProd ? false : 'inline';
 
 const externalDep = [
     ...builtinModules,
@@ -38,52 +43,49 @@ const externalDep = [
 export default [
     {
         // watch: { include: 'src/**' },
-        input: './src/index.ts',
+        input: ['./src/index.ts', './src/MuiSimpleExports/Core.ts'],
         output: [
-            {
-                dir: 'lib',
-                format: 'cjs',
-                interop: 'auto',
-                exports: 'auto', // Specify the export mode if needed
-                sourcemap,
-            },
             // ES2015 modules version so consumers can tree-shake
             {
+                format: 'esm',
                 dir: 'lib',
-                format: 'es',
                 sourcemap,
             },
         ],
+        external: externalDep,
         plugins: [
-            del({ targets: ['lib/*', 'esm/*'] }),
-            json(),
+            del({ targets: 'lib/*' }),
+            multiInput.default(),
+            isProd && sourcemaps(),
             peerDepsExternal(),
-            // resolve(),
             resolve({
-                extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json'],
-                moduleDirectories: ['node_modules'],
-                dedupe: externalDep,
-                preferBuiltins: true,
-                browser: true,
-                main: true,
+                extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+                // moduleDirectories: ['node_modules'],
+                // dedupe: externalDep,
+                // preferBuiltins: true,
+                // browser: true,
+                // main: true,
             }),
             commonjs(),
             typescript({
+                sourceMap: false,
+                inlineSourceMap: !isProd,
                 tsconfig: 'tsconfig.json',
-                ...(sourcemap && { sourceMap: true, inlineSources: true }),
             }),
-            /*babel({
-                babelHelpers: 'bundled',
-                extensions: ['.jsx', '.js', '.ts', '.tsx', '.json'],
-                exclude: 'node_modules/**', // only transpile our source code
-                babelrc: true,
-            }),*/
             postcss({
                 ...(sourcemap && { minimize: true }),
                 extensions: ['.css', '.less', '.scss'],
             }),
+            babel({
+                babelHelpers: 'runtime',
+                exclude: 'node_modules/**', // only transpile our source code
+                extensions: ['.jsx', '.js', '.ts', '.tsx', '.json'],
+                skipPreflightCheck: isProd,
+                babelrc: true,
+            }),
             urlResolve(),
-            ...(isProd ? [terser({})] : []),
+            json(),
+            isProd && terser(),
             generatePackageJson({
                 outputFolder: 'lib',
                 baseContents: (pkg) => ({
@@ -101,23 +103,21 @@ export default [
                     repository: pkg.repository,
                     type: pkg.type,
                     ...pkg,
-                    module: pkg.module?.replace('lib/', ''),
                     main: pkg.main.replace('lib/', ''),
+                    module: pkg.module?.replace('lib/', ''),
                     types: pkg.types.replace('lib/', ''),
+                    typings: pkg.types.replace('lib/', ''),
                     // ...(!sourceMap && { files: ['*'] }),
+                    // exports: remove all libs,
                 }),
             }),
             filesize(),
         ],
-        external: externalDep,
         treeshake: true,
     },
     {
         input: 'lib/src/index.d.ts',
-        output: {
-            file: 'lib/src/index.d.ts',
-            format: 'es',
-        },
+        output: { file: 'lib/src/index.d.ts', format: 'es' },
         plugins: [dts()],
         external: [/\.(css|less|scss)$/],
     },
