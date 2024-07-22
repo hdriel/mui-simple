@@ -55,7 +55,7 @@ export default [
         external: externalDep,
         plugins: [
             del({ targets: 'lib/*' }),
-            multiInput.default(),
+            multiInput(),
             isProd && sourcemaps(),
             peerDepsExternal(),
             resolve({

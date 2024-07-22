@@ -10,22 +10,29 @@
         "forceConsistentCasingInFileNames": true,
         "isolatedModules": true,
         "jsx": "react",
-        "lib": ["dom", "esnext", "dom.iterable"],
-        "module": "esnext",
+        "lib": ["es6", "ES2020", "dom", "dom.iterable"],
+        "module": "es2020",
         "moduleResolution": "node",
         "noEmit": false,
         "noEmitOnError": false,
-        "outDir": "lib", // Output JavaScript here, matching Rollup 'dir'
+        "outDir": "./lib", // Output JavaScript here, matching Rollup 'dir'
         "resolveJsonModule": true,
-        "rootDir": ".",
+        "rootDir": "./",
         "skipLibCheck": true,
         "noImplicitAny": false,
+        "noImplicitReturns": true,
         "sourceMap": true,
         "strict": false,
         "strictNullChecks": false,
-        "target": "esnext",
-        "typeRoots": ["./src/@types"]
+        "target": "es6",
+        "typeRoots": ["./src/@types"],
+        "paths": {
+            "src/*": ["./src/*"]
+        },
+        "plugins": [{ "transform": "typescript-transform-paths", "afterDeclarations": true }],
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
     },
     "include": ["src", ".storybook"],
-    "exclude": [".idea", ".git", "build", "node_modules", "lib", "dist", "storybook-static"]
+    "exclude": [".idea", ".git", "build", "node_modules", "lib", "dist", "storybook-static", "rollup.config.js"]
 }
