@@ -26,10 +26,20 @@
         "test": ""
     },
     "exports": {
-        "./core": {
-            "import": "./lib/MuiSimpleExports/Core.js",
-            "require": "./lib/MuiSimpleExports/Core.js",
-            "types": "./lib/src/MuiSimpleExports/Core.d.ts"
+        "./": {
+            "import": "./lib/index.js",
+            "require": "./lib/index.js",
+            "types": "./lib/src/index.d.ts"
+        },
+        "./Inputs": {
+            "import": "./lib/src/entries/Inputs.js",
+            "require": "./lib/src/entries/Inputs.js",
+            "types": "./lib/src/entries/Inputs.d.ts"
+        },
+        "./Buttons": {
+            "import": "./lib/src/entries/Buttons.js",
+            "require": "./lib/src/entries/Buttons.js",
+            "types": "./lib/src/entries/Buttons.d.ts"
         }
     },
     "lint-staged": {

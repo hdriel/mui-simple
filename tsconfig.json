@@ -33,6 +33,6 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true
     },
-    "include": ["src", ".storybook"],
+    "include": ["src", ".storybook", "./global.d.ts"],
     "exclude": [".idea", ".git", "build", "node_modules", "lib", "dist", "storybook-static", "rollup.config.js"]
 }

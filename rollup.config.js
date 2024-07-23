@@ -43,7 +43,7 @@ const externalDep = [
 export default [
     {
         // watch: { include: 'src/**' },
-        input: ['./src/index.ts', './src/MuiSimpleExports/Core.ts'],
+        input: ['./src/index.ts', './src/entries/Inputs.ts', './src/entries/Buttons.ts'],
         output: [
             // ES2015 modules version so consumers can tree-shake
             {
@@ -61,7 +61,7 @@ export default [
             resolve({
                 extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
                 // moduleDirectories: ['node_modules'],
-                // dedupe: externalDep,
+                dedupe: externalDep,
                 // preferBuiltins: true,
                 // browser: true,
                 // main: true,
@@ -107,8 +107,18 @@ export default [
                     module: pkg.module?.replace('lib/', ''),
                     types: pkg.types.replace('lib/', ''),
                     typings: pkg.types.replace('lib/', ''),
-                    // ...(!sourceMap && { files: ['*'] }),
-                    // exports: remove all libs,
+                    ...(!sourcemap && { files: ['*'] }),
+                    exports: Object.keys(pkg.exports).reduce(
+                        (obj, key) => ({
+                            ...obj,
+                            [key]: {
+                                import: pkg.exports[key].import.replace('./lib/', './'),
+                                require: pkg.exports[key].require.replace('./lib/', './'),
+                                types: pkg.exports[key].types.replace('./lib/', './'),
+                            },
+                        }),
+                        {}
+                    ),
                 }),
             }),
             filesize(),
