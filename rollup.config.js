@@ -43,16 +43,20 @@ const externalDep = [
 export default [
     {
         // watch: { include: 'src/**' },
-        input: ['./src/index.ts', './src/entries/Inputs.ts', './src/entries/Buttons.ts'],
+        input: [
+            './src/index.ts',
+            ...Object.values(packageJson.exports).map((entry) => entry.import.replace('./lib/', './')),
+        ],
         output: [
             // ES2015 modules version so consumers can tree-shake
             {
                 format: 'esm',
                 dir: 'lib',
                 sourcemap,
+                external: externalDep,
             },
         ],
-        external: externalDep,
+        // external: externalDep,
         plugins: [
             del({ targets: 'lib/*' }),
             multiInput(),
