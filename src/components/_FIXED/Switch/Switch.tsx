@@ -16,13 +16,13 @@ const Switch: React.FC<SwitchProps> = ({
     labelPadding,
     labelPlacement,
     name,
-    OFF_LABEL,
+    OFF_LABEL = 'off',
     onChange,
     onOffLabelSide,
-    ON_LABEL,
+    ON_LABEL = 'on',
     required,
     scale,
-    size,
+    size = 'medium',
     switchStyle,
     textColor: _textColor,
     ...props
@@ -95,29 +95,6 @@ const Switch: React.FC<SwitchProps> = ({
             {helperText ? <FormHelperText error={error}>{helperText}</FormHelperText> : null}
         </>
     );
-};
-
-Switch.defaultProps = {
-    checked: undefined,
-    color: undefined,
-    defaultChecked: undefined,
-    disabled: undefined,
-    error: undefined,
-    fontSize: undefined,
-    helperText: undefined,
-    isOnOff: undefined,
-    label: undefined,
-    labelPadding: undefined,
-    labelPlacement: undefined,
-    name: undefined,
-    OFF_LABEL: 'off',
-    onChange: undefined,
-    ON_LABEL: 'on',
-    onOffLabelSide: undefined,
-    required: undefined,
-    scale: undefined,
-    size: 'medium',
-    textColor: undefined,
 };
 
 export type { SwitchProps } from '../../decs';

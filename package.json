@@ -84,7 +84,6 @@
     },
     "dependencies": {
         "@emotion/is-prop-valid": "^1.2.2",
-        "@mui/styles": "5.14.1",
         "@mui/system": "^5.8.0",
         "@mui/utils": "^5.15.1",
         "@react-spring/web": "^9.7.3",
@@ -131,7 +130,7 @@
         "@mui/icons-material": "^5.16.4",
         "@mui/lab": "5.0.0-alpha.134",
         "@mui/material": "^5.16.4",
-        "@mui/styles": "^5.16.4",
+        "@mui/styles": "5.16.4",
         "@mui/system": "^5.16.4",
         "@mui/utils": "^5.16.4",
         "@mui/x-date-pickers": "^7.10.0",

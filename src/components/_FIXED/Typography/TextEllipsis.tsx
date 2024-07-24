@@ -6,21 +6,23 @@ import { getAlign } from './Typography.hooks';
 import Text from './Text';
 
 const TextEllipsis: React.FC<TextEllipsisProps> = ({
-    autoWidth,
+    autoWidth = true,
     border,
     borderStyle,
     children,
     onEllipsisChange,
-    showTooltipOnEllipsis,
-    rows,
+    showTooltipOnEllipsis = true,
+    rows = 1,
     width,
     noWrap,
-    dynamicEllipsis,
+    dynamicEllipsis = true,
     alignCenter,
     alignRight,
     alignLeft,
     alignJustify,
     align,
+    component = 'span',
+    tooltip = true,
     ...props
 }): React.ReactElement | React.ReactNode => {
     const [ref, isEllipsis] = useEllipsisActive({ active: !!dynamicEllipsis, maxRows: +rows || 0 });
@@ -43,6 +45,8 @@ const TextEllipsis: React.FC<TextEllipsisProps> = ({
         >
             <Text
                 {...props}
+                tooltip={tooltip}
+                component={component}
                 innerRef={ref}
                 isEllipsis={isEllipsis}
                 useEllipsisStyle
@@ -52,19 +56,6 @@ const TextEllipsis: React.FC<TextEllipsisProps> = ({
             </Text>
         </Border>
     );
-};
-
-TextEllipsis.defaultProps = {
-    autoWidth: true,
-    border: undefined,
-    borderStyle: undefined,
-    component: 'span',
-    followCursor: undefined,
-    dynamicEllipsis: true,
-    onEllipsisChange: undefined,
-    rows: 1,
-    showTooltipOnEllipsis: true,
-    tooltip: false,
 };
 
 export type { TextEllipsisProps } from '../../decs';

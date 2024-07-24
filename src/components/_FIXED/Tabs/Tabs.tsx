@@ -18,7 +18,7 @@ const Tabs: React.FC<TabsProps> = ({
     variant,
     value,
     visibleScrollbar,
-    visibleScrollButtons,
+    visibleScrollButtons = true,
     swipeable,
     autoNavigateByArrowKeyboard,
     verticalMaxFixedHeight,
@@ -121,24 +121,6 @@ const Tabs: React.FC<TabsProps> = ({
             )}
         </TabWrapper>
     );
-};
-
-Tabs.defaultProps = {
-    centered: undefined,
-    fillActiveTab: undefined,
-    color: undefined,
-    onChange: undefined,
-    orientation: undefined,
-    variant: undefined,
-    value: undefined,
-    visibleScrollbar: undefined,
-    visibleScrollButtons: true,
-    swipeable: undefined,
-    autoNavigateByArrowKeyboard: undefined,
-    verticalMaxFixedHeight: undefined,
-    verticalTabWidth: undefined,
-    reverse: undefined,
-    wrap: undefined,
 };
 
 export type { TabsProps } from '../../decs';

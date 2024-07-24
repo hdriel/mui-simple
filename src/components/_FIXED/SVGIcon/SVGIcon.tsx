@@ -47,15 +47,6 @@ const SVGIcon: React.FC<SVGIconProps> = ({
     );
 };
 
-SVGIcon.defaultProps = {
-    muiIconName: undefined,
-    iconSrc: undefined,
-    color: undefined,
-    width: undefined,
-    height: undefined,
-    size: undefined,
-};
-
 export type { SVGIconProps } from '../../decs';
 
 export default SVGIcon;

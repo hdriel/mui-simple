@@ -13,15 +13,15 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
     orientation,
     disableRipple,
     enforceValueSet,
-    data,
+    data = [],
     color,
     fullWidth,
-    transparent,
+    transparent = true,
     helperText,
     helperTextAlign,
     helperTextStyle,
     error,
-    wrap,
+    wrap = false,
     sx,
     ...props
 }): React.ReactElement | React.ReactNode => {
@@ -97,24 +97,6 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
 };
 
 setDisplayName(ToggleButtonGroup, 'ToggleButtonGroup');
-
-ToggleButtonGroup.defaultProps = {
-    color: undefined,
-    orientation: undefined,
-    size: undefined,
-    exclusive: undefined,
-    fullWidth: undefined,
-    disableRipple: undefined,
-    onChange: undefined,
-    enforceValueSet: undefined,
-    transparent: true,
-    error: undefined,
-    helperText: undefined,
-    helperTextAlign: undefined,
-    helperTextStyle: undefined,
-    data: [],
-    wrap: false,
-};
 
 export type { ToggleButtonGroupProps } from '../../decs';
 export default ToggleButtonGroup;

@@ -61,18 +61,4 @@ const TabItem: React.FC<TabItemProps> = ({
     );
 };
 
-TabItem.defaultProps = {
-    disabled: undefined,
-    disableRipple: undefined,
-    icon: undefined,
-    iconPosition: undefined,
-    label: undefined,
-    link: undefined,
-    onClick: undefined,
-    open: undefined,
-    tooltipProps: undefined,
-    value: undefined,
-    wrapped: undefined,
-};
-
 export default TabItem;

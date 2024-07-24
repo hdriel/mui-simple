@@ -7,7 +7,7 @@ const ToggleButtonGroups: React.FC<ToggleButtonGroupsProps> = ({
     fullWidth,
     disableRipple,
     justifyContent,
-    transparent,
+    transparent = true,
     sx,
     children,
     ...props
@@ -41,13 +41,6 @@ const ToggleButtonGroups: React.FC<ToggleButtonGroupsProps> = ({
             {groups}
         </MuiToggleButtonGroups>
     );
-};
-
-ToggleButtonGroups.defaultProps = {
-    fullWidth: undefined,
-    disableRipple: undefined,
-    justifyContent: undefined,
-    transparent: true,
 };
 
 export type { ToggleButtonGroupsProps } from '../../decs';

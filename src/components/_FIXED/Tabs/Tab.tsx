@@ -6,19 +6,5 @@ const Tab: React.FC<TabProps> = (props): React.ReactElement | React.ReactNode =>
 
 Tab.displayName = 'Tab';
 
-Tab.defaultProps = {
-    iconPosition: undefined,
-    label: undefined,
-    value: undefined,
-    open: undefined,
-    wrapped: undefined,
-    disabled: undefined,
-    disableRipple: undefined,
-    icon: undefined,
-    link: undefined,
-    onClick: undefined,
-    tooltip: undefined,
-};
-
 export type { TabProps } from '../../decs';
 export default Tab;
