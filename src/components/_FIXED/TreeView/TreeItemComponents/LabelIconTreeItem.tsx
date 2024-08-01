@@ -53,14 +53,6 @@ const LabelIconTreeItem: React.ForwardRefExoticComponent<
     );
 });
 
-LabelIconTreeItem.defaultProps = {
-    bgColor: undefined,
-    color: undefined,
-    icon: undefined,
-    info: undefined,
-    label: undefined,
-};
-
 export default LabelIconTreeItem;
 
 export const LabelIconTreeItemIcons = {

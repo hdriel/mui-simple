@@ -28,12 +28,12 @@ export const Paper = MuiPaper;
 export const Typography = MuiTypography;
 export const Button = MuiButton;
 
-export const CardMediaWrapper = styled(MuiBox)`
+export const CardMediaWrapper: any = styled(MuiBox)`
     height: 100%;
     width: 100%;
 `;
 
-export const ContentWrapper = styled(MuiBox)`
+export const ContentWrapper: any = styled(MuiBox)`
     height: 100%;
     width: 100%;
 `;
@@ -46,7 +46,7 @@ interface ExpandMoreStyledProps {
 type ExpandMoreStyledPropsType = ButtonProps & ExpandMoreStyledProps;
 
 export const ExpandMore = styled(MuiButton, {
-    shouldForwardProp: (propName) => !['expand'].includes(propName),
+    shouldForwardProp: (propName: string) => !['expand'].includes(propName),
 })<ExpandMoreStyledPropsType>(({ theme, expand }) => ({
     transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
     marginLeft: 'auto',

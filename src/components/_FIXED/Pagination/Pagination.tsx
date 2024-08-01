@@ -22,7 +22,7 @@ const pageToLinkHandler = (page, pageToLink): string | undefined => {
         case 'function':
             return pageToLink?.(page);
         case 'string':
-            return isDefined(page) ? pageToLink.replaceAll(/\{page\}/gi, page) : undefined;
+            return isDefined(page) ? pageToLink.replace(/\{page\}/gi, page) : undefined;
         default:
             return undefined;
     }
@@ -40,25 +40,28 @@ const Pagination: React.FC<PaginationProps> = ({
     maxBoundaryPagesVisible,
     maxPagesVisible,
     onChange,
-    orientation,
+    orientation = 'horizontal',
     page,
     pageToLink,
+    shape = 'rounded',
     showFirstButton,
     showLastButton,
     totalPages,
     ...props
 }): React.ReactElement | React.ReactNode => {
     const [customColor, muiColor] = useCustomColor(color);
-    const IconFirst = typeof _IconFirst === 'string' ? MUIIcon[_IconFirst] : _IconFirst;
-    const IconLast = typeof _IconLast === 'string' ? MUIIcon[_IconLast] : _IconLast;
-    const IconNext = typeof _IconNext === 'string' ? MUIIcon[_IconNext] : _IconNext;
-    const IconPrev = typeof _IconPrev === 'string' ? MUIIcon[_IconPrev] : _IconPrev;
+    const [IconFirst, IconLast, IconNext, IconPrev] = [
+        typeof _IconFirst === 'string' ? MUIIcon[_IconFirst] : _IconFirst,
+        typeof _IconLast === 'string' ? MUIIcon[_IconLast] : _IconLast,
+        typeof _IconNext === 'string' ? MUIIcon[_IconNext] : _IconNext,
+        typeof _IconPrev === 'string' ? MUIIcon[_IconPrev] : _IconPrev,
+    ];
 
     return (
         <Stack spacing={1} sx={{ width: orientation === 'vertical' ? 'min-content' : 'max-content' }}>
             {label && (
                 <Typography wrap={false}>
-                    {isDefined(page) ? label?.replaceAll(/\{page\}/gi, String(page)) : label}
+                    {isDefined(page) ? label?.replace(/\{page\}/gi, String(page)) : label}
                 </Typography>
             )}
 
@@ -73,6 +76,7 @@ const Pagination: React.FC<PaginationProps> = ({
                 boundaryCount={maxBoundaryPagesVisible || undefined}
                 page={page}
                 onChange={(event, nextPage) => onChange?.(nextPage)}
+                shape={shape}
                 renderItem={(item) => {
                     return (
                         <PaginationItem
@@ -100,28 +104,7 @@ const Pagination: React.FC<PaginationProps> = ({
     );
 };
 
-Pagination.defaultProps = {
-    color: undefined,
-    disabled: undefined,
-    disabledPages: undefined,
-    label: undefined,
-    IconFirst: undefined,
-    IconPrev: undefined,
-    IconNext: undefined,
-    IconLast: undefined,
-    maxBoundaryPagesVisible: undefined,
-    maxPagesVisible: undefined,
-    onChange: undefined,
-    orientation: 'horizontal',
-    page: undefined,
-    pageToLink: undefined,
-    shape: 'rounded',
-    showFirstButton: undefined,
-    showLastButton: undefined,
-    size: undefined,
-    totalPages: undefined,
-    variant: undefined,
-};
+Pagination.displayName = 'Pagination';
 
 export type { PaginationProps } from '../../decs';
 export default Pagination;

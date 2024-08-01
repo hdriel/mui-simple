@@ -2,8 +2,11 @@ import React from 'react';
 import Input from './TextField';
 import type { InputTextProps } from '../../decs';
 import SVGIcon from '../SVGIcon/SVGIcon';
+import { setDefaultValue } from 'src/utils/helpers';
 
 const InputText: React.FC<InputTextProps> = function InputText(props): React.ReactElement {
+    setDefaultValue(props, 'type', 'text');
+
     const { value, showLimitIndicatorFrom, limitIndicator, endCmp, copyAction, ...rest } = props;
     const count: number = value?.length ?? 0;
 
@@ -24,43 +27,7 @@ const InputText: React.FC<InputTextProps> = function InputText(props): React.Rea
     );
 };
 
-InputText.defaultProps = {
-    alignActions: undefined,
-    alignActionsExternal: undefined,
-    autoComplete: undefined,
-    cmpSpacing: undefined,
-    colorActive: undefined,
-    colorLabel: undefined,
-    colorText: undefined,
-    debounceDelay: undefined,
-    disabled: undefined,
-    endCmp: undefined,
-    endCmpExternal: undefined,
-    error: undefined,
-    focused: undefined,
-    fullWidth: undefined,
-    helperText: undefined,
-    hideStartActionsOnEmpty: undefined,
-    id: undefined,
-    label: undefined,
-    limitIndicator: undefined,
-    margin: undefined,
-    maxRows: undefined,
-    multiline: undefined,
-    name: undefined,
-    onBlur: undefined,
-    onChange: undefined,
-    onFocus: undefined,
-    readOnly: undefined,
-    required: undefined,
-    rows: undefined,
-    showLimitIndicatorFrom: undefined,
-    startCmp: undefined,
-    startCmpExternal: undefined,
-    type: 'text',
-    value: undefined,
-    variant: undefined,
-};
+InputText.displayName = 'InputText';
 
 export type { InputTextProps } from '../../decs';
 export default InputText;

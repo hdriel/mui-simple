@@ -100,5 +100,7 @@ const Text: React.FC<TextProps> = ({
     );
 };
 
+Text.displayName = 'Text';
+
 export type { TextProps } from '../../decs';
 export default Text;

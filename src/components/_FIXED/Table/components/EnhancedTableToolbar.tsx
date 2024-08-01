@@ -5,17 +5,17 @@ import { Toolbar, Tooltip, Typography } from '../Table.styled';
 import type { EnhancedTableToolbarProps } from '../Table.desc';
 
 export const EnhancedTableToolbar: React.FC<EnhancedTableToolbarProps> = ({
-    selectedLabel,
-    selected,
+    actions = [],
+    colorProps,
     data,
-    title,
+    fieldId,
     filterAction,
+    selected,
+    selectedActions = [],
+    selectedLabel = '{n} selected',
     selectionModeAction,
     sortColumnsAction,
-    selectedActions,
-    actions,
-    colorProps,
-    fieldId,
+    title = '',
 }: EnhancedTableToolbarProps): React.ReactElement | React.ReactNode => {
     const theme = useTheme();
     const numSelected = selected?.length ?? 0;
@@ -71,18 +71,4 @@ export const EnhancedTableToolbar: React.FC<EnhancedTableToolbarProps> = ({
             {!numSelected && filterAction}
         </Toolbar>
     );
-};
-
-EnhancedTableToolbar.defaultProps = {
-    selectedLabel: '{n} selected',
-    title: '',
-    selectedActions: [],
-    actions: [],
-    filterAction: undefined,
-    selectionModeAction: undefined,
-    sortColumnsAction: undefined,
-    data: undefined,
-    selected: undefined,
-    colorProps: undefined,
-    fieldId: undefined,
 };

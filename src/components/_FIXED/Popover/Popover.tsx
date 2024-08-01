@@ -1,11 +1,11 @@
 import React, { Children, useState } from 'react';
-import type { ReactElement } from 'react';
+import type { ReactElement, PropsWithChildren } from 'react';
 import { Popover as MuiPopover } from './Popover.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import type { PopoverProps } from '../../decs';
 import { useAnchorProps, useChildrenComponentBinding } from '../Menu/Menu.hooks';
 
-const Popover: React.FC<PopoverProps> = (props): ReactElement | React.ReactNode => {
+const Popover: React.FC<PropsWithChildren<PopoverProps>> = (props): ReactElement | React.ReactNode => {
     const {
         color,
         content,
@@ -13,13 +13,14 @@ const Popover: React.FC<PopoverProps> = (props): ReactElement | React.ReactNode 
         anchorElementRef,
         anchorPosition,
         boundChildrenId,
-        boundChildrenIndex,
+        boundChildrenIndex = 0,
         children,
         vertical,
         horizontal,
         onClick,
         onClose,
         anchorEl,
+        showOnHover = true,
         ...rest
     } = props;
     const [customColor, muiColor] = useCustomColor(color);
@@ -38,7 +39,7 @@ const Popover: React.FC<PopoverProps> = (props): ReactElement | React.ReactNode 
         setAnchorEl,
         ref: anchorElementRef,
         setOpenControlled: open === undefined ? (event, openControl) => setOpenControlled(openControl) : undefined,
-        showOnHover: true,
+        showOnHover,
     });
 
     const _anchorEl = anchorEl ?? (anchorProps as any)?.anchorEl;
@@ -78,20 +79,7 @@ const Popover: React.FC<PopoverProps> = (props): ReactElement | React.ReactNode 
     );
 };
 
-Popover.defaultProps = {
-    open: undefined,
-    anchorEl: undefined,
-    anchorOrigin: undefined,
-    anchorPosition: undefined,
-    anchorReference: undefined,
-    boundChildrenIndex: 0,
-    container: undefined,
-    disableScrollLock: undefined,
-    disableRestoreFocus: undefined,
-    elevation: undefined,
-    transformOrigin: undefined,
-    showOnHover: true,
-};
+Popover.displayName = 'Popover';
 
 export type { PopoverProps } from '../../decs';
 export default Popover;

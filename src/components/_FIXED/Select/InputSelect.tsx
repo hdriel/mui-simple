@@ -10,11 +10,11 @@ import type { InputSelectProps } from '../../decs';
 const emptyObjectRef = [];
 
 const InputSelect: React.FC<InputSelectProps> = ({
-    alignActions,
-    alignActionsExternal,
-    autoWidth,
+    alignActions = 'baseline',
+    alignActionsExternal = 'baseline',
+    autoWidth = 'off',
     checkbox,
-    cmpSpacing,
+    cmpSpacing = 2,
     colorActive: _colorActive,
     colorLabel: _colorLabel,
     colorText: _colorText,
@@ -23,10 +23,10 @@ const InputSelect: React.FC<InputSelectProps> = ({
     endCmp: _endCmp,
     endCmpExternal: _endCmpExternal,
     error,
-    fullWidth,
+    fullWidth = true,
     groupBy,
     helperText,
-    hideStartActionsOnEmpty,
+    hideStartActionsOnEmpty = true,
     id,
     label,
     margin,
@@ -43,11 +43,11 @@ const InputSelect: React.FC<InputSelectProps> = ({
     required,
     selectAll,
     selectAllOption,
-    size,
+    size = 'medium',
     startCmp: _startCmp,
     startCmpExternal: _startCmpExternal,
     value,
-    variant,
+    variant = 'outlined',
     ...props
 }): React.ReactElement | React.ReactNode => {
     const [isFocused, setIsFocused] = useState(false);
@@ -176,39 +176,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
     return component;
 };
 
-InputSelect.defaultProps = {
-    alignActions: 'baseline',
-    alignActionsExternal: 'baseline',
-    autoComplete: 'off',
-    autoWidth: undefined,
-    cmpSpacing: 2,
-    colorActive: undefined,
-    colorLabel: undefined,
-    colorText: undefined,
-    endCmp: undefined,
-    endCmpExternal: undefined,
-    error: undefined,
-    fullWidth: true,
-    groupBy: undefined, // (option) => option?.label[0].toUpperCase()
-    helperText: undefined,
-    hideStartActionsOnEmpty: true,
-    id: undefined,
-    label: undefined,
-    margin: undefined,
-    name: undefined,
-    nullable: undefined,
-    onChange: undefined,
-    options: undefined,
-    placeholderOption: undefined,
-    readOnly: undefined,
-    renderValue: undefined,
-    required: undefined,
-    size: 'medium',
-    startCmp: undefined,
-    startCmpExternal: undefined,
-    value: undefined,
-    variant: 'outlined',
-};
+InputSelect.displayName = 'InputSelect';
 
 export type { InputSelectProps, InputSelectOptions } from '../../decs';
 export default InputSelect;

@@ -1,4 +1,5 @@
 import React, { isValidElement, cloneElement } from 'react';
+import type { PropsWithChildren } from 'react';
 import { useTheme } from '@mui/material/styles';
 
 import { Divider as MuiDivider } from './Divider.styled';
@@ -6,15 +7,16 @@ import { isDefined, numberToPx, useCustomColor } from '../../../utils/helpers';
 import type { DividerProps } from '../../decs';
 import Chip from '../Chip/Chip';
 
-const Divider: React.FC<DividerProps> = ({
-    orientation,
-    flexItem,
-    chip: _chip,
-    label,
-    color: _color,
-    thickness,
+const Divider: React.FC<PropsWithChildren<DividerProps>> = ({
     children,
+    chip: _chip,
+    color: _color,
+    flexItem,
+    label,
+    orientation,
     sx,
+    thickness,
+    variant = 'middle',
     ...rest
 }): React.ReactElement | React.ReactNode => {
     const theme = useTheme();
@@ -51,6 +53,7 @@ const Divider: React.FC<DividerProps> = ({
             flexItem={flexItem ?? (orientation === 'vertical' ? true : undefined)}
             color={color}
             thickness={thickness}
+            variant={variant}
             sx={{
                 ...(!content.length && {
                     bgcolor: color,
@@ -66,18 +69,7 @@ const Divider: React.FC<DividerProps> = ({
     );
 };
 
-Divider.defaultProps = {
-    orientation: undefined,
-    light: undefined,
-    flexItem: undefined,
-    textAlign: undefined,
-    variant: 'middle',
-    component: undefined,
-    label: undefined,
-    chip: undefined,
-    thickness: undefined,
-    color: undefined,
-};
+Divider.displayName = 'Divider';
 
 export type { DividerProps } from '../../decs';
 export default Divider;

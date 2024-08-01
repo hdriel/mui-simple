@@ -54,5 +54,7 @@ const Tooltip: React.FC<TooltipProps> = ({
     );
 };
 
+Tooltip.displayName = 'Tooltip';
+
 export type { TooltipProps } from '../../decs';
 export default Tooltip;

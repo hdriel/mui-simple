@@ -6,7 +6,7 @@ import type { CircularProgressProps } from '../../../decs';
 const CircularProgress: React.FC<CircularProgressProps> = ({
     color,
     disableShrink,
-    showProgress,
+    showProgress = true,
     size,
     thickness,
     value,
@@ -28,15 +28,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
     );
 };
 
-CircularProgress.defaultProps = {
-    color: undefined,
-    disableShrink: undefined,
-    showProgress: true,
-    size: undefined,
-    thickness: undefined,
-    value: undefined,
-    variant: undefined,
-};
+CircularProgress.displayName = 'CircularProgress';
 
 export type { CircularProgressProps } from '../../../decs';
 export default CircularProgress;

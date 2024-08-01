@@ -193,6 +193,19 @@ export interface DividerProps {
     [key: string]: any;
 }
 
+export interface CardImageProps {
+    src?: string;
+    title?: string;
+    width?: number | string;
+    maxWidth?: number | string;
+    height?: number | string;
+    maxHeight?: number | string;
+    onClick?: (e: any) => void;
+    stretch?: 'cover' | 'contain' | 'none' | 'fill';
+    fullHeight?: boolean;
+    sx?: SxProps;
+    [key: string]: any;
+}
 export interface CardProps {
     actions?: IconType | ButtonProps | Array<IconType | ButtonProps | string>;
     avatar?: ElementType;
@@ -201,21 +214,7 @@ export interface CardProps {
     contentWrapperStyle?: SxProps;
     flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
     height?: number | string;
-    image?:
-        | string
-        | {
-              src?: string;
-              title?: string;
-              width?: number | string;
-              maxWidth?: number | string;
-              height?: number | string;
-              maxHeight?: number | string;
-              onClick?: (e: any) => void;
-              stretch?: 'cover' | 'contain' | 'none' | 'fill';
-              fullHeight?: boolean;
-              sx?: SxProps;
-              [key: string]: any;
-          };
+    image?: string | CardImageProps;
     justifyContent?: string;
     maxHeight?: number | string;
     maxWidth?: number | string;
@@ -334,7 +333,7 @@ export type InputColorProps = InputBaseProps & {
 };
 
 export type InputDateProps = InputBaseProps &
-    DatePickerProps<Date> & {
+    DatePickerProps<any> & {
         value?: Date | number | string;
         valueType?: 'timestamp' | 'date' | 'string';
         minDate?: Date | number | string;
@@ -346,7 +345,7 @@ export type InputDateProps = InputBaseProps &
     };
 
 export type InputDateTimeProps = InputDateProps &
-    DateTimePickerProps<Date> & {
+    DateTimePickerProps<any> & {
         value?: Date | number | string;
         valueType?: 'timestamp' | 'date' | 'string';
         minDate?: Date | number | string;
@@ -358,7 +357,7 @@ export type InputDateTimeProps = InputDateProps &
     };
 
 export type InputTimeProps = InputBaseProps &
-    TimePickerProps<Date> & {
+    TimePickerProps<any> & {
         value?: Date | number | string;
         valueType?: 'timestamp' | 'date' | 'string';
         minTime?: Date | number | string;

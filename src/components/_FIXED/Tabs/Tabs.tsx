@@ -2,7 +2,7 @@ import React, { isValidElement } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from '@mui/material/styles';
 
-import { Tabs as MuiTabs, Box, TabWrapper } from './Tabs.styled';
+import { Tabs as MuiTabs, TabWrapper } from './Tabs.styled';
 import Tab from './Tab';
 import TabItem from './TabItem';
 import TabPanel from './TabPanel';
@@ -122,6 +122,8 @@ const Tabs: React.FC<TabsProps> = ({
         </TabWrapper>
     );
 };
+
+Tabs.displayName = 'Tabs';
 
 export type { TabsProps } from '../../decs';
 export default Tabs;

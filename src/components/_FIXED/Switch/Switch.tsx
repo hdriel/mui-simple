@@ -97,5 +97,7 @@ const Switch: React.FC<SwitchProps> = ({
     );
 };
 
+Switch.displayName = 'Switch';
+
 export type { SwitchProps } from '../../decs';
 export default Switch;

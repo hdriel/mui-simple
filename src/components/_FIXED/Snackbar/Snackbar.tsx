@@ -1,5 +1,5 @@
 import React, { useMemo, isValidElement, cloneElement } from 'react';
-import type { ReactNode, ReactElement } from 'react';
+import type { ReactNode, ReactElement, PropsWithChildren } from 'react';
 import { Snackbar as MuiSnackbar, Grow, Slide } from './Snackbar.styled';
 import Button from '../Button/Button';
 import Alert from '../Alert/Alert';
@@ -7,7 +7,7 @@ import type { SnackbarProps } from '../../decs';
 
 const transitionStyle = { width: '100%' };
 
-const Snackbar: React.FC<SnackbarProps> = ({
+const Snackbar: React.FC<PropsWithChildren<SnackbarProps>> = ({
     actions,
     animation,
     animationDuration,
@@ -120,25 +120,7 @@ const Snackbar: React.FC<SnackbarProps> = ({
     );
 };
 
-Snackbar.defaultProps = {
-    actions: undefined,
-    animation: undefined,
-    animationDuration: undefined,
-    animationProps: undefined,
-    autoHideDuration: undefined,
-    fullWidth: undefined,
-    horizontal: undefined,
-    message: undefined,
-    messageId: undefined,
-    onClickAway: undefined,
-    onClose: undefined,
-    open: undefined,
-    resumeHideDuration: undefined,
-    slideDirection: undefined,
-    title: undefined,
-    variant: undefined,
-    vertical: undefined,
-};
+Snackbar.displayName = 'Snackbar';
 
 export type { SnackbarProps } from '../../decs';
 export default Snackbar;

@@ -5,12 +5,12 @@ import type { EnhancedTablePaginationProps } from '../Table.desc';
 
 export function EnhancedTablePagination({
     onChangePagination,
-    rows,
+    orderBy,
     pagination,
-    paginationProps,
     paginationAlign,
     PaginationComponent,
-    orderBy,
+    paginationProps,
+    rows,
 }: EnhancedTablePaginationProps): React.ReactElement {
     const { total, rowsPerPage, rowsPerPageList, page } = usePaginationDetails({ pagination, rows });
     const totalPages = paginationProps?.totalPages || Math.ceil(total / rowsPerPage);

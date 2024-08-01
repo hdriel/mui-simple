@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ReactElement } from 'react';
+import type { ReactElement, PropsWithChildren } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { ChevronLeft as ChevronLeftIcon, ChevronRight as ChevronRightIcon } from '@mui/icons-material';
 
@@ -8,20 +8,20 @@ import Button from '../Button/Button';
 import Divider from '../Divider/Divider';
 import type { DrawerProps } from '../../decs';
 
-const Drawer: React.FC<DrawerProps> = ({
-    backdrop,
+const Drawer: React.FC<PropsWithChildren<DrawerProps>> = ({
+    backdrop = false,
     bgColor,
-    width,
-    keepMounted,
+    children,
+    direction,
+    hideHeader = false,
+    keepMounted = true,
     onClose,
     open,
-    direction,
-    hideHeader,
-    swipeable,
-    variant: _variant,
-    toggleDrawer: _toggleDrawer,
     PaperProps,
-    children,
+    swipeable,
+    toggleDrawer: _toggleDrawer,
+    variant: _variant,
+    width = 240,
     ...props
 }): ReactElement | React.ReactNode => {
     const theme = useTheme();
@@ -88,19 +88,7 @@ const Drawer: React.FC<DrawerProps> = ({
     );
 };
 
-Drawer.defaultProps = {
-    backdrop: false,
-    bgColor: undefined,
-    direction: undefined,
-    hideHeader: false,
-    keepMounted: true,
-    onClose: undefined,
-    open: undefined,
-    swipeable: undefined,
-    toggleDrawer: undefined,
-    variant: undefined,
-    width: 240,
-};
+Drawer.displayName = 'Drawer';
 
 export type { DrawerProps } from '../../decs';
 export default Drawer;

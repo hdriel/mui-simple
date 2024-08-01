@@ -29,12 +29,6 @@ const IndentBorderTreeItem: React.ForwardRefExoticComponent<
     );
 });
 
-IndentBorderTreeItem.defaultProps = {
-    bgColor: undefined,
-    color: undefined,
-    label: undefined,
-};
-
 export default IndentBorderTreeItem;
 
 export const IndentBorderTreeItemIcons = {

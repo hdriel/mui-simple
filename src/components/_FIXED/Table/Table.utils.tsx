@@ -144,7 +144,7 @@ export function getRowContent({ column, data }: { column: TableColumn; data: any
 
     let content;
     if (column.dateFormat && fieldValue) {
-        const dateFormat = column.dateFormat.replaceAll(/Y/g, 'y').replaceAll(/D/g, 'd');
+        const dateFormat = column.dateFormat.replace(/Y/g, 'y').replace(/D/g, 'd');
         if (isValidDateValue(fieldValue)) {
             content = format(new Date(fieldValue), dateFormat);
         }

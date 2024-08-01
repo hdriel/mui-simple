@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ReactElement } from 'react';
+import type { ReactElement, PropsWithChildren } from 'react';
 import {
     ActionButton,
     ActionContainer,
@@ -18,28 +18,28 @@ import { useCustomColor } from '../../../utils/helpers';
 import type { StepperProps, StepType } from '../../decs';
 import { useStepperIndexHook, useStepperSteps, useStepperConnector } from './hooks';
 
-const Stepper: React.FC<StepperProps> = ({
-    steps: _steps,
-    stepIndex: activeStep,
-    stepsBottomLabel,
-    color,
-    orientation,
-    onNext,
-    onBack,
-    onSkip,
-    onDone,
-    stepsIndexSkipped,
+const Stepper: React.FC<PropsWithChildren<StepperProps>> = ({
     allCompletedCmp,
-    stepsOnlyWithoutComplete,
-    unmountOnExit,
-    qontoStyle,
-    customStyleProps,
-    NEXT_LABEL,
-    BACK_LABEL,
-    SKIP_LABEL,
-    DONE_LABEL,
-    OPTIONAL_LABEL,
+    BACK_LABEL = 'Back',
     children,
+    color,
+    customStyleProps,
+    DONE_LABEL = 'Done',
+    NEXT_LABEL = 'Next',
+    onBack,
+    onDone,
+    onNext,
+    onSkip,
+    OPTIONAL_LABEL = 'Optional',
+    orientation,
+    qontoStyle,
+    SKIP_LABEL = 'Skip',
+    stepIndex: activeStep,
+    steps: _steps,
+    stepsBottomLabel,
+    stepsIndexSkipped,
+    stepsOnlyWithoutComplete,
+    unmountOnExit = true,
     ...rest
 }): ReactElement | React.ReactNode => {
     const [customColor] = useCustomColor(color);
@@ -166,30 +166,6 @@ const Stepper: React.FC<StepperProps> = ({
             ) : undefined}
         </Container>
     );
-};
-
-Stepper.defaultProps = {
-    allCompletedCmp: undefined,
-    BACK_LABEL: 'Back',
-    color: undefined,
-    customStyleProps: undefined,
-    DONE_LABEL: 'Done',
-    NEXT_LABEL: 'Next',
-    onBack: undefined,
-    onDone: undefined,
-    onNext: undefined,
-    onReset: undefined,
-    onSkip: undefined,
-    OPTIONAL_LABEL: 'Optional',
-    orientation: undefined,
-    qontoStyle: undefined,
-    SKIP_LABEL: 'Skip',
-    stepIndex: undefined,
-    steps: undefined,
-    stepsBottomLabel: undefined,
-    stepsIndexSkipped: undefined,
-    stepsOnlyWithoutComplete: undefined,
-    unmountOnExit: true,
 };
 
 export type { StepperProps } from '../../decs';

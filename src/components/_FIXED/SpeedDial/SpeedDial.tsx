@@ -6,41 +6,42 @@ import { useCustomColor } from '../../../utils/helpers';
 import SVGIcon from '../SVGIcon/SVGIcon';
 import type { SpeedDialProps } from '../../decs';
 
-const SpeedDial: React.FC<SpeedDialProps> = (props): ReactElement | React.ReactNode => {
-    const {
-        ariaLabel,
-        actions,
-        bottom,
-        color,
-        direction,
-        hidden,
-        icon: _icon,
-        left,
-        onClose,
-        onOpen,
-        open,
-        openIcon: _openIcon,
-        right,
-        showOnBackdrop,
-        showTooltip,
-        top,
-        sx,
-        ...rest
-    } = props;
+const SpeedDial: React.FC<SpeedDialProps> = ({
+    ariaLabel,
+    actions = [],
+    bottom,
+    color,
+    direction,
+    hidden,
+    icon: _icon,
+    left,
+    onClose,
+    onOpen,
+    open,
+    openIcon: _openIcon,
+    right,
+    showOnBackdrop,
+    showTooltip = true,
+    top,
+    sx,
+    ...rest
+}): ReactElement | React.ReactNode => {
     const [customColor] = useCustomColor(color);
     const [customColorHover] = useCustomColor(color, { darken: 0.2 });
     const openIcon = typeof _openIcon === 'string' ? <SVGIcon>{_openIcon}</SVGIcon> : _openIcon;
     const icon = typeof _icon === 'string' ? <SVGIcon>{_icon}</SVGIcon> : _icon;
+
     actions?.forEach((action) => {
         action.icon = typeof action.icon === 'string' ? <SVGIcon>{action.icon}</SVGIcon> : action.icon;
     });
+
     const position = { top, bottom, right, left };
 
     return (
         <>
             {showOnBackdrop && <Backdrop open={open} />}
             <MuiSpeedDial
-                ariaLabel={props.ariaLabel ?? ''}
+                ariaLabel={ariaLabel ?? ''}
                 hidden={hidden}
                 direction={direction}
                 onClose={onClose}
@@ -72,25 +73,7 @@ const SpeedDial: React.FC<SpeedDialProps> = (props): ReactElement | React.ReactN
     );
 };
 
-SpeedDial.defaultProps = {
-    actions: [],
-    ariaLabel: undefined,
-    bottom: undefined,
-    color: undefined,
-    direction: undefined,
-    hidden: undefined,
-    icon: undefined,
-    left: undefined,
-    onClose: undefined,
-    onOpen: undefined,
-    open: undefined,
-    openIcon: undefined,
-    right: undefined,
-    showOnBackdrop: undefined,
-    showTooltip: true,
-    sx: {},
-    top: undefined,
-};
+SpeedDial.displayName = 'SpeedDial';
 
 export type { SpeedDialProps } from '../../decs';
 export default SpeedDial;

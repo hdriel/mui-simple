@@ -1,20 +1,21 @@
 import React from 'react';
+import type { PropsWithChildren } from 'react';
 
 import { TableCell, TableRow, Checkbox } from '../Table.styled';
 import { getRowContent } from '../Table.utils';
 import type { EnhancedTableRowProps } from '../Table.desc';
 
-const EnhancedTableRow: React.FC<EnhancedTableRowProps> = ({
+const EnhancedTableRow: React.FC<PropsWithChildren<EnhancedTableRowProps>> = ({
+    actionColor,
+    children,
     columns,
+    evenRowsColor,
     handleClick,
     index,
-    evenRowsColor,
     oddRowsColor,
-    actionColor,
     onSelect,
     selected,
     selectionMode,
-    children,
 }): React.ReactElement | React.ReactNode => {
     const data: any = children ?? {};
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import type { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
 import { ExpandLess as ExpandLessIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 
@@ -25,7 +26,7 @@ interface ListItemWrapperProps {
     draggable?: boolean;
     useReactRouterDomLink?: boolean;
 }
-const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
+const ListItemWrapper: React.FC<PropsWithChildren<ListItemWrapperProps>> = ({
     item,
     index,
     onClick,
@@ -170,22 +171,6 @@ const ListItem: React.FC<ListItemCmpProps> = ({
             {children}
         </MuiListItem>
     );
-};
-
-ListItem.defaultProps = {
-    disablePadding: undefined,
-    disableGutters: undefined,
-    flexDirectionItems: undefined,
-    index: undefined,
-    itemProps: undefined,
-    onClick: undefined,
-    buttonItems: undefined,
-    alignItems: undefined,
-    isControl: undefined,
-    alignControl: undefined,
-    insetItems: undefined,
-    enableSubtitle: undefined,
-    isOpen: undefined,
 };
 
 export default ListItem;

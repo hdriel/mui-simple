@@ -18,7 +18,7 @@ const ToggleButtonGroups: React.FC<ToggleButtonGroupsProps> = ({
             const isToggleButtonGroup = child?.type?.displayName === ToggleButtonGroup.displayName;
             if (!isToggleButtonGroup) {
                 console.error(
-                    `Notice for 'ToggleButtonGroups' you can pass as childrens only 'ToggleButtonGroup' components`,
+                    `NOTICE for 'ToggleButtonGroups' you can pass as children only 'ToggleButtonGroup' components`,
                     child?.type?.displayName ?? child?.type?.type
                 );
             }
@@ -42,6 +42,8 @@ const ToggleButtonGroups: React.FC<ToggleButtonGroupsProps> = ({
         </MuiToggleButtonGroups>
     );
 };
+
+ToggleButtonGroups.displayName = 'ToggleButtonGroups';
 
 export type { ToggleButtonGroupsProps } from '../../decs';
 export default ToggleButtonGroups;

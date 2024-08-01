@@ -33,5 +33,7 @@ const RippleBox: React.FC<PropsWithChildren<RippleBoxProps>> = ({
     );
 };
 
+RippleBox.displayName = 'RippleBox';
+
 export type { RippleBoxProps } from '../../decs';
 export default RippleBox;

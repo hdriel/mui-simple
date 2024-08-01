@@ -7,12 +7,38 @@ import SVGIcon from '../SVGIcon/SVGIcon';
 import Button from '../Button/Button';
 import { copyToClipboard } from '../../../utils';
 import Snackbar from '../Snackbar/Snackbar';
-import { isDefined } from '../../../utils/helpers';
+import { isDefined, setDefaultValue } from '../../../utils/helpers';
 
+/*
+hideStartActionsOnEmpty = true,
+        direction = 'ltr',
+        copyIcon: _copyIcon = 'ContentCopy',
+        copyMessage = 'Copied!',
+        alignActions = 'baseline',
+        alignActionsExternal = 'baseline',
+        cmpSpacing = 2,
+        autoComplete = 'off',
+        fullWidth = true,
+        type = 'text',
+        variant = 'outlined',
+ */
 const TextField: React.FC<InputBaseProps> = function TextField(props): React.ReactElement {
+    setDefaultValue(props, 'alignActions', 'baseline');
+    setDefaultValue(props, 'alignActionsExternal', 'baseline');
+    setDefaultValue(props, 'autoComplete', 'off');
+    setDefaultValue(props, 'cmpSpacing', 2);
+    setDefaultValue(props, 'copyIcon', 'ContentCopy');
+    setDefaultValue(props, 'copyMessage', 'Copied!');
+    setDefaultValue(props, 'direction', 'ltr');
+    setDefaultValue(props, 'fullWidth', true);
+    setDefaultValue(props, 'hideStartActionsOnEmpty', true);
+    setDefaultValue(props, 'type', 'text');
+    setDefaultValue(props, 'variant', 'outlined');
+
     const {
         alignActions,
         alignActionsExternal,
+        autoComplete,
         cmpSpacing,
         colorActive,
         colorLabel,
@@ -28,6 +54,7 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
         endCmpExternal: _endCmpExternal,
         focused,
         FormHelperTextProps,
+        fullWidth,
         hideStartActionsOnEmpty,
         InputLabelProps,
         InputProps,
@@ -41,9 +68,12 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
         readOnly,
         startCmp: _startCmp,
         startCmpExternal: _startCmpExternal,
+        type,
         value,
+        variant,
         ...rest
     } = props;
+
     const [showAlert, setShowAlert] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
     const onFocusHandler = (e): void => {
@@ -81,6 +111,10 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
                     onFocus={onFocusHandler}
                     value={value}
                     direction={direction}
+                    autoComplete={autoComplete}
+                    fullWidth={fullWidth}
+                    type={type}
+                    variant={variant}
                     InputProps={{
                         ...InputProps,
                         readOnly,
@@ -154,48 +188,7 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
     return component;
 };
 
-TextField.defaultProps = {
-    alignActions: 'baseline',
-    alignActionsExternal: 'baseline',
-    autoComplete: 'off',
-    cmpSpacing: 2,
-    colorActive: undefined,
-    colorLabel: undefined,
-    colorText: undefined,
-    direction: 'ltr',
-    copyTooltipProps: undefined,
-    copyMessage: 'Copied',
-    copyAction: undefined,
-    copyValueHandler: undefined,
-    copyIcon: 'ContentCopy',
-    disabled: undefined,
-    endCmp: undefined,
-    endCmpExternal: undefined,
-    error: undefined,
-    focused: undefined,
-    fullWidth: true,
-    helperText: undefined,
-    hideStartActionsOnEmpty: true,
-    id: undefined,
-    label: undefined,
-    margin: undefined,
-    maxRows: undefined,
-    multiline: undefined,
-    name: undefined,
-    onChange: undefined,
-    onEnterKeyPress: undefined,
-    onKeyPress: undefined,
-    readOnly: undefined,
-    required: undefined,
-    rows: undefined,
-    startCmp: undefined,
-    startCmpExternal: undefined,
-    textAlign: undefined,
-    type: 'text',
-    value: undefined,
-    variant: 'outlined',
-    letterSpacing: undefined,
-};
+TextField.displayName = 'TextField';
 
 export type { InputBaseProps as TextFieldProps } from '../../decs';
 export default TextField;

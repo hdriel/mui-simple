@@ -6,7 +6,7 @@ import { styled, useTheme } from '@mui/material/styles';
 import { debounce } from 'lodash-es';
 
 import Input from './TextField';
-import { getCustomColor, isDefined } from '../../../utils/helpers';
+import { getCustomColor, isDefined, setDefaultValue } from '../../../utils/helpers';
 import { Box, SliderIcon } from './TextField.styled';
 import Slider from '../Slider/Slider';
 import SVGIcon from '../SVGIcon/SVGIcon';
@@ -19,31 +19,45 @@ export const TextField = styled((props) => <Input {...props} type="text" />, {
         ),
 })`` as ComponentType<InputNumberProps>;
 
-const InputNumber: React.FC<InputNumberProps> = ({
-    colorActive,
-    debounceDelay,
-    decimalSeparator,
-    disabled,
-    emptyFormatPlaceholder,
-    endCmp: _endCmp,
-    format,
-    label,
-    mask,
-    max,
-    min,
-    name,
-    onBlur,
-    onChange,
-    selectAllOnFocus,
-    slider,
-    sliderLabel,
-    sliderTooltip,
-    step,
-    thousandSeparator,
-    value,
-    valueIsNumericString,
-    ...props
-}): React.ReactElement | React.ReactNode => {
+const InputNumber: React.FC<InputNumberProps> = (props): React.ReactElement | React.ReactNode => {
+    setDefaultValue(props, 'allowEmptyFormatting', true);
+    setDefaultValue(props, 'colorActive', 'primary');
+    setDefaultValue(props, 'decimal', 2);
+    setDefaultValue(props, 'fixedDecimalScale', true);
+    setDefaultValue(props, 'mask', '_');
+    setDefaultValue(props, 'patternChar', '#');
+    setDefaultValue(props, 'selectAllOnFocus', true);
+    setDefaultValue(props, 'slider', true);
+    setDefaultValue(props, 'sliderTooltip', 'slider');
+    setDefaultValue(props, 'thousandSeparator', true);
+    setDefaultValue(props, 'valueIsNumericString', true);
+
+    const {
+        colorActive,
+        debounceDelay,
+        decimalSeparator,
+        disabled,
+        emptyFormatPlaceholder,
+        endCmp: _endCmp,
+        format,
+        label,
+        mask,
+        max,
+        min,
+        name,
+        onBlur,
+        onChange,
+        selectAllOnFocus,
+        slider,
+        sliderLabel,
+        sliderTooltip,
+        step,
+        thousandSeparator,
+        value,
+        valueIsNumericString,
+        ...rest
+    } = props;
+
     const theme = useTheme();
     const ref = useRef<HTMLDivElement>(null);
     const [onFocus, setOnFocus] = useState(false);
@@ -101,7 +115,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
         >
             <Box sx={{ position: 'relative', width: '100%' }} ref={ref}>
                 <CMP
-                    {...props}
+                    {...rest}
                     label={label}
                     value={typeof decimalSeparator === 'boolean' && !decimalSeparator ? String(~~value) : String(value)}
                     name={name}
@@ -178,33 +192,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
     );
 };
 
-InputNumber.defaultProps = {
-    allowEmptyFormatting: true,
-    colorActive: 'primary',
-    decimal: 2,
-    decimalSeparator: undefined,
-    disabled: undefined,
-    emptyFormatPlaceholder: undefined,
-    fixedDecimalScale: true,
-    format: undefined,
-    mask: '_',
-    max: undefined,
-    min: undefined,
-    name: undefined,
-    onBlur: undefined,
-    onChange: undefined,
-    patternChar: '#',
-    prefix: undefined,
-    selectAllOnFocus: true,
-    slider: true,
-    sliderLabel: undefined,
-    sliderTooltip: 'slider',
-    step: undefined,
-    suffix: undefined,
-    thousandSeparator: true,
-    value: undefined,
-    valueIsNumericString: true,
-};
+InputNumber.displayName = 'InputNumber';
 
 export type { InputNumberProps } from '../../decs';
 export default InputNumber;

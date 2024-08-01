@@ -7,6 +7,4 @@ function CardExpandedContent({ ...props }): React.ReactElement {
 
 CardExpandedContent.displayName = 'CardExpandedContent';
 
-CardExpandedContent.defaultProps = {};
-
 export default CardExpandedContent;

@@ -58,5 +58,7 @@ const TextEllipsis: React.FC<TextEllipsisProps> = ({
     );
 };
 
+TextEllipsis.displayName = 'TextEllipsis';
+
 export type { TextEllipsisProps } from '../../decs';
 export default TextEllipsis;

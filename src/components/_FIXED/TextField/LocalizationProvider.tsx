@@ -21,9 +21,9 @@ const loadLanguage = async (locale?: LOCALE): Promise<boolean> => {
 };
 
 const LocalizationProvider: React.FC<LocalizationProviderProps> = ({
-    adapterLocale,
-    dateAdapter,
-    locale,
+    dateAdapter = AdapterDayjs,
+    adapterLocale = 'he-IL',
+    locale = 'he',
     ...props
 }): any => {
     const [localeLoaded, setLocaleLoaded] = useState(false);
@@ -48,12 +48,6 @@ const LocalizationProvider: React.FC<LocalizationProviderProps> = ({
             <p>{error}</p>
         </>
     );
-};
-
-LocalizationProvider.defaultProps = {
-    dateAdapter: AdapterDayjs,
-    adapterLocale: 'he-IL',
-    locale: 'he',
 };
 
 export type { LocalizationProviderProps } from '../../decs';
