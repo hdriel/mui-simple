@@ -27,9 +27,14 @@
     },
     "exports": {
         "./": {
-            "import": "./lib/index.js",
-            "require": "./lib/index.js",
+            "import": "./lib/src/index.js",
+            "require": "./lib/src/index.js",
             "types": "./lib/src/index.d.ts"
+        },
+        "./components/*": {
+            "import": "./lib/src/components/_FIXED/*.js",
+            "require": "./lib/src/components/_FIXED/*.js",
+            "types": "./lib/src/components/_FIXED/*.d.ts"
         },
         "./Inputs": {
             "import": "./lib/src/entries/Inputs.js",

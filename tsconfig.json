@@ -4,7 +4,7 @@
         "allowSyntheticDefaultImports": true,
         "baseUrl": "./",
         "declaration": true,
-        "declarationDir": "lib", // Output TypeScript declarations here
+        "declarationDir": "dist", // Output TypeScript declarations here
         "declarationMap": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
@@ -15,7 +15,7 @@
         "moduleResolution": "node",
         "noEmit": false,
         "noEmitOnError": false,
-        "outDir": "./lib", // Output JavaScript here, matching Rollup 'dir'
+        "outDir": "./dist", // Output JavaScript here, matching Rollup 'dir'
         "resolveJsonModule": true,
         "rootDir": "./",
         "skipLibCheck": true,
