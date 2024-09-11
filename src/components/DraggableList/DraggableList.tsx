@@ -15,12 +15,12 @@ import type { DraggableListProps } from '../decs';
 // https://react-beautiful-dnd.netlify.app/?path=/story/single-vertical-list--basic
 const DraggableList: React.FC<DraggableListProps> = (props): React.ReactElement | React.ReactNode => {
     const {
-        component,
-        dataList,
-        disabled,
-        droppableClassName,
-        fieldId,
-        flexDirection,
+        component = 'li',
+        dataList = [],
+        disabled = false,
+        droppableClassName = 'droppableId',
+        fieldId = 'id',
+        flexDirection = 'column',
         flexGap,
         onChange,
         renderValue,
@@ -119,21 +119,6 @@ const DraggableList: React.FC<DraggableListProps> = (props): React.ReactElement 
     ) : (
         content
     );
-};
-
-DraggableList.defaultProps = {
-    className: undefined,
-    component: 'li',
-    dataList: [],
-    disabled: false,
-    draggableListType: undefined,
-    droppableClassName: 'droppableId',
-    fieldId: 'id',
-    flexDirection: 'column',
-    flexGap: undefined,
-    onChange: undefined,
-    renderValue: undefined,
-    useDraggableContext: undefined,
 };
 
 export type { DraggableListProps } from '../decs';

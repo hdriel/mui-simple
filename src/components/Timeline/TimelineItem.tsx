@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import {
     TimelineConnector,
@@ -12,7 +11,21 @@ import {
 import Typography from '../_FIXED/Typography/Typography';
 import { useCustomColor } from '../../utils/helpers';
 
-export default function TimelineItem({
+interface TimeLineItemProps {
+    variant: 'filled' | 'outlined';
+    color: string;
+    icon: string | React.ReactNode | React.ReactElement;
+    title: string;
+    subtitle: string;
+    time: string;
+    timeFormat: string;
+    connector: boolean;
+    connectorColor: string;
+    connectorHeight: string | number;
+    connectorWidth: string | number;
+}
+
+const TimelineItem: React.FC<TimeLineItemProps> = ({
     variant,
     color,
     connectorColor,
@@ -26,7 +39,7 @@ export default function TimelineItem({
     timeWidth,
     titleWidth,
     ...props
-}) {
+}) => {
     const [customColor, muiColor] = useCustomColor(color);
     const [customColorConnector] = useCustomColor(connectorColor);
 
@@ -80,32 +93,6 @@ export default function TimelineItem({
             </TimelineContent>
         </MuiTimelineItem>
     );
-}
-
-TimelineItem.propTypes = {
-    variant: PropTypes.oneOf(['filled', 'outlined']),
-    color: PropTypes.string,
-    icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    title: PropTypes.string,
-    subtitle: PropTypes.string,
-    time: PropTypes.string,
-    timeFormat: PropTypes.string,
-    connector: PropTypes.bool,
-    connectorColor: PropTypes.string,
-    connectorHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    connectorWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-TimelineItem.defaultProps = {
-    variant: undefined,
-    color: undefined,
-    icon: undefined,
-    title: undefined,
-    subtitle: undefined,
-    time: undefined,
-    timeFormat: undefined,
-    connector: undefined,
-    connectorColor: undefined,
-    connectorHeight: undefined,
-    connectorWidth: undefined,
-};
+export default TimelineItem;
