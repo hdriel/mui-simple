@@ -2,7 +2,7 @@ import React from 'react';
 import Input from './TextField';
 import type { InputTextProps } from '../../decs';
 import SVGIcon from '../SVGIcon/SVGIcon';
-import { setDefaultValue } from 'src/utils/helpers';
+import { setDefaultValue } from '../../../utils/helpers';
 
 const InputText: React.FC<InputTextProps> = function InputText(props): React.ReactElement {
     setDefaultValue(props, 'type', 'text');

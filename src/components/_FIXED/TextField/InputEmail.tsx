@@ -1,7 +1,7 @@
 import React from 'react';
 import Input from './TextField';
 import type { InputBaseProps } from '../../decs';
-import { setDefaultValue } from 'src/utils/helpers';
+import { setDefaultValue } from '../../../utils/helpers';
 
 const InputEmail: React.FC<InputBaseProps> = function ({ hideCmpOnEmpty, ...props }) {
     setDefaultValue(props, 'hideStartActionsOnEmpty', true);

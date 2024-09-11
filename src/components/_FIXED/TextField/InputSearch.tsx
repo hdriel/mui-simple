@@ -3,7 +3,7 @@ import React from 'react';
 import Input from './TextField';
 import type { InputSearchProps } from '../../decs';
 import SVGIcon from '../SVGIcon/SVGIcon';
-import { setDefaultValue } from 'src/utils/helpers';
+import { setDefaultValue } from '../../../utils/helpers';
 
 const InputSearch: React.FC<InputSearchProps> = ({ searchIcon: _searchIcon, onChange, ...props }) => {
     setDefaultValue(props, 'debounceDelay', 500);

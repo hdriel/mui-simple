@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import InputPattern from './InputPattern';
 import type { InputPhoneProps } from '../../decs';
-import { setDefaultValue } from 'src/utils/helpers';
+import { setDefaultValue } from '../../../utils/helpers';
 
 const InputPhone: React.FC<InputPhoneProps> = ({ innerRef, ...props }): React.ReactElement | React.ReactNode => {
     setDefaultValue(props, 'definitions', { '#': /[1-9]/ });
