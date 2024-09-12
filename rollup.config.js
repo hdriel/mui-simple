@@ -5,34 +5,29 @@
 // https://www.codifytools.com/blog/react-npm-package
 
 // https://stackoverflow.com/questions/56788551/material-ui-themeprovider-invalid-hook-call-when-building-an-es6-module-using-ro
-import path from 'path';
 import { builtinModules } from 'module';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import filesize from 'rollup-plugin-filesize';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import json from '@rollup/plugin-json';
-import filesize from 'rollup-plugin-filesize';
-import { babel } from '@rollup/plugin-babel';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import { terser } from 'rollup-plugin-terser';
+import postcss from 'rollup-plugin-postcss';
 import dts from 'rollup-plugin-dts';
 import del from 'rollup-plugin-delete';
-import replace from '@rollup/plugin-replace';
 import generatePackageJson from 'rollup-plugin-generate-package-json';
-import postcss from 'rollup-plugin-postcss';
+import { terser } from 'rollup-plugin-terser';
+import { babel } from '@rollup/plugin-babel';
 import urlResolve from 'rollup-plugin-url-resolve';
-import sourcemaps from 'rollup-plugin-sourcemaps';
-import multiInput from 'rollup-plugin-multi-input';
+import replace from '@rollup/plugin-replace';
 
 // import package json file
 import { createRequire } from 'node:module';
-import { fileURLToPath } from 'url';
 const requireFile = createRequire(import.meta.url);
 const packageJson = requireFile('./package.json');
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const isProd = process.env.NODE_ENV === 'production';
-const sourcemap = isProd ? false : 'inline';
+const sourceMap = !isProd;
 
 const externalDep = [
     ...builtinModules,
@@ -44,31 +39,26 @@ const externalDep = [
 export default [
     {
         // watch: { include: 'src/**' },
-        input: [
-            './src/index.ts',
-            // ...Object.values(packageJson.exports ?? {}).map((entry) => entry.import.replace('./lib/', './')),
-        ],
+        input: './src/index.ts',
         output: [
+            {
+                ...(sourceMap
+                    ? { sourcemap: 'inline', dir: 'dist' }
+                    : { file: packageJson.main, inlineDynamicImports: true }),
+                format: 'cjs',
+                interop: 'auto',
+            },
             // ES2015 modules version so consumers can tree-shake
             {
-                ...(sourcemap ? { sourcemap: 'inline' } : { inlineDynamicImports: true /*file: packageJson.module*/ }),
-                dir: 'dist',
+                ...(sourceMap
+                    ? { sourcemap: 'inline', dir: 'dist' }
+                    : { file: packageJson.module, inlineDynamicImports: true }),
                 format: 'es',
                 interop: 'esModule',
-                external: externalDep,
             },
-            // {
-            //     format: 'esm',
-            //     dir: 'lib',
-            //     sourcemap,
-            //     external: externalDep,
-            // },
         ],
-
         plugins: [
             del({ targets: 'dist/*' }),
-            multiInput(),
-            isProd && sourcemaps(),
             peerDepsExternal(),
             replace({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
             resolve({
@@ -79,28 +69,26 @@ export default [
                 browser: true,
                 main: true,
             }),
-            commonjs(),
             typescript({
-                sourceMap: false,
-                inlineSourceMap: !isProd,
                 tsconfig: 'tsconfig.json',
-                ...(sourcemap && { sourceMap: true, inlineSources: true }),
-            }),
-            postcss({
-                ...(sourcemap && { minimize: true }),
-                extensions: ['.css', '.less', '.scss'],
+                ...(sourceMap && { sourceMap: true, inlineSources: true }),
             }),
             babel({
                 babelHelpers: 'bundled',
-                // babelHelpers: 'runtime',
-                exclude: 'node_modules/**', // only transpile our source code
                 extensions: ['.jsx', '.js', '.ts', '.tsx', '.json'],
-                skipPreflightCheck: isProd,
+                exclude: 'node_modules/**', // only transpile our source code
                 babelrc: true,
             }),
-            urlResolve(),
             json(),
-            isProd && terser(),
+            commonjs(),
+            // commonjs({ include: /node_modules/ }),
+            postcss({
+                minimize: true,
+                extensions: ['.css', '.less', '.scss'],
+                plugins: [],
+            }),
+            urlResolve(),
+            ...(isProd ? [terser({})] : []),
             generatePackageJson({
                 outputFolder: 'dist',
                 baseContents: (pkg) => ({
@@ -118,23 +106,10 @@ export default [
                     repository: pkg.repository,
                     type: pkg.type,
                     // ...pkg,
-                    main: pkg.main.replace('dist/', ''),
                     module: pkg.module?.replace('dist/', ''),
+                    main: pkg.main.replace('dist/', ''),
                     types: pkg.types.replace('dist/', ''),
-                    typings: pkg.types.replace('dist/', ''),
-                    ...(!sourcemap && { files: ['bundles/*'] }),
-                    // ...(!sourcemap && { files: ['*'] }), // runtime
-                    // exports: Object.keys(pkg.exports).reduce(
-                    //     (obj, key) => ({
-                    //         ...obj,
-                    //         [key]: {
-                    //             import: pkg.exports[key].import.replace('./lib/', './'),
-                    //             require: pkg.exports[key].require.replace('./lib/', './'),
-                    //             types: pkg.exports[key].types.replace('./lib/', './'),
-                    //         },
-                    //     }),
-                    //     {}
-                    // ),
+                    ...(!sourceMap && { files: ['bundles/*'] }),
                 }),
             }),
             filesize(),
@@ -143,10 +118,11 @@ export default [
         treeshake: true,
     },
     {
-        input: sourcemap ? 'dist/src/index.d.ts' : 'dist/src/index.d.ts',
-        // input: 'lib/src/index.d.ts',
-        output: { file: sourcemap ? 'dist/src/index.d.ts' : 'dist/src/index.d.ts', format: 'es' },
-        // output: { file: 'lib/src/index.d.ts', format: 'es' },
+        input: sourceMap ? 'dist/index.d.ts' : 'dist/bundles/index.d.ts',
+        output: {
+            file: sourceMap ? 'dist/index.d.ts' : 'dist/bundles/index.d.ts',
+            format: 'es',
+        },
         plugins: [dts()],
         external: [/\.(css|less|scss)$/],
     },
