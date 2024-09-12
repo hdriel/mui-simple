@@ -2,7 +2,7 @@ import React, { isValidElement } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from '@mui/material/styles';
 
-import { Tabs as MuiTabs, Box, TabWrapper } from './Tabs.styled';
+import { Tabs as MuiTabs, TabWrapper } from './Tabs.styled';
 import Tab from './Tab';
 import TabItem from './TabItem';
 import TabPanel from './TabPanel';
@@ -18,7 +18,7 @@ const Tabs: React.FC<TabsProps> = ({
     variant,
     value,
     visibleScrollbar,
-    visibleScrollButtons,
+    visibleScrollButtons = true,
     swipeable,
     autoNavigateByArrowKeyboard,
     verticalMaxFixedHeight,
@@ -123,23 +123,7 @@ const Tabs: React.FC<TabsProps> = ({
     );
 };
 
-Tabs.defaultProps = {
-    centered: undefined,
-    fillActiveTab: undefined,
-    color: undefined,
-    onChange: undefined,
-    orientation: undefined,
-    variant: undefined,
-    value: undefined,
-    visibleScrollbar: undefined,
-    visibleScrollButtons: true,
-    swipeable: undefined,
-    autoNavigateByArrowKeyboard: undefined,
-    verticalMaxFixedHeight: undefined,
-    verticalTabWidth: undefined,
-    reverse: undefined,
-    wrap: undefined,
-};
+Tabs.displayName = 'Tabs';
 
 export type { TabsProps } from '../../decs';
 export default Tabs;

@@ -5,4 +5,7 @@ node_modules
 coverage
 .vscode
 .idea
-.gitgub
+.husky
+.github
+temp-workflows
+wrapper-repo

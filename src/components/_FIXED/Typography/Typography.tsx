@@ -5,6 +5,14 @@ import TextEllipsis from './TextEllipsis';
 
 // todo: add commend to autodocs
 const Typography: React.FC<TextEllipsisProps> = (props): React.ReactElement | React.ReactNode => {
+    props.autoWidth = props.autoWidth === undefined ? true : props.autoWidth;
+    props.component = props.component === undefined ? 'span' : props.component;
+    props.dynamicEllipsis = props.dynamicEllipsis === undefined ? true : props.dynamicEllipsis;
+    props.isEllipsis = props.isEllipsis === undefined ? false : props.isEllipsis;
+    props.showTooltipOnEllipsis = props.showTooltipOnEllipsis === undefined ? true : props.showTooltipOnEllipsis;
+    props.size = props.size === undefined ? 'inherit' : props.size;
+    props.tooltip = props.tooltip === undefined ? false : props.tooltip;
+
     return [props.showTooltipOnEllipsis, props.onEllipsisChange].some((v) => v) ? (
         <TextEllipsis {...props} />
     ) : (
@@ -12,44 +20,7 @@ const Typography: React.FC<TextEllipsisProps> = (props): React.ReactElement | Re
     );
 };
 
-Typography.defaultProps = {
-    align: undefined,
-    alignCenter: undefined,
-    alignJustify: undefined,
-    alignLeft: undefined,
-    alignRight: undefined,
-    autoWidth: true,
-    bgColor: undefined,
-    bold: undefined,
-    border: undefined,
-    borderStyle: undefined,
-    charsCase: undefined,
-    color: undefined,
-    component: 'span',
-    dynamicEllipsis: true,
-    fullWidth: undefined,
-    gutterBottom: undefined,
-    isEllipsis: false,
-    italic: undefined,
-    justifyContent: undefined,
-    lineHeight: undefined,
-    link: undefined,
-    monospace: undefined,
-    noWrap: undefined,
-    onEllipsisChange: undefined,
-    paragraph: undefined,
-    rows: undefined,
-    showTooltipOnEllipsis: true,
-    size: 'inherit',
-    strike: undefined,
-    sub: undefined,
-    sup: undefined,
-    textDirection: undefined,
-    tooltip: false,
-    tooltipPlacement: undefined,
-    underline: undefined,
-    width: undefined,
-};
+Typography.displayName = 'Typography';
 
 export type { TextEllipsisProps } from '../../decs';
 export default Typography;

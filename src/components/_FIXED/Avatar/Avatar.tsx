@@ -17,7 +17,7 @@ const Avatar: React.FC<AvatarProps> = (props): React.ReactElement | React.ReactN
         size,
         tooltipPlacement,
         username,
-        variant,
+        variant = 'circular',
         ...rest
     } = props;
 
@@ -48,19 +48,7 @@ const Avatar: React.FC<AvatarProps> = (props): React.ReactElement | React.ReactN
         </Tooltip>
     );
 };
-
-Avatar.defaultProps = {
-    color: undefined,
-    fallbackImage: undefined,
-    icon: undefined,
-    image: undefined,
-    onClick: undefined,
-    showTooltip: false,
-    size: undefined,
-    tooltipPlacement: undefined,
-    username: undefined,
-    variant: 'circular',
-};
+Avatar.displayName = 'Avatar';
 
 export type { AvatarProps } from '../../decs';
 export default Avatar;

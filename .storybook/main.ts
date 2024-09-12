@@ -1,18 +1,7 @@
-import path from 'path';
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
+import type { StorybookConfig } from '@storybook/react-webpack5';
 
-const config = {
+const config: StorybookConfig = {
     stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
-    framework: {
-        name: '@storybook/react-webpack5',
-        options: {},
-    },
-    core: { disableTelemetry: true },
-    // core: { builder: 'webpack5' },
-    docs: { autodocs: 'tag' },
-    // basePath: '/storybook/',
-    staticDirs: ['../public'],
     addons: [
         '@storybook/addon-links',
         '@storybook/addon-styling',
@@ -20,35 +9,36 @@ const config = {
         '@storybook/addon-essentials',
         '@storybook/addon-interactions',
         '@storybook/blocks',
-        {
-            name: '@storybook/addon-docs',
-            options: {
-                configureJSX: true,
-            },
-        },
-        // '@storybook/preset-create-react-app',
-        {
-            name: '@storybook/addon-storysource',
-            options: {
-                loaderOptions: {
-                    injectStoryParameters: false,
-                },
-            },
-        },
+        '@storybook/addon-storysource',
+        // {
+        //     name: '@storybook/addon-docs',
+        //     options: {
+        //         configureJSX: true,
+        //     },
+        // },
     ],
-    typescript: {
-        check: false,
-        // fork-ts-checker-webpack-plugin
-        checkOptions: {
-            // eslint: true,
-        },
-        reactDocgen: 'react-docgen-typescript',
-        reactDocgenTypescriptOptions: {
-            shouldExtractLiteralValuesFromEnum: true,
-            propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
-        },
-        // skipBabel?: boolean;
+    framework: {
+        name: '@storybook/react-webpack5',
+        options: {},
     },
+    docs: { autodocs: 'tag' },
+    staticDirs: ['../public'],
+    // typescript: {
+    //     check: false,
+    //     // fork-ts-checker-webpack-plugin
+    //     checkOptions: {
+    //         // eslint: true,
+    //     },
+    //     reactDocgen: 'react-docgen-typescript',
+    //     reactDocgenTypescriptOptions: {
+    //         shouldExtractLiteralValuesFromEnum: true,
+    //         propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
+    //     },
+    //     // skipBabel?: boolean;
+    // },
+    // webpackFinal: async (config) => {
+    //     return config;
+    // },
     // webpackFinal: async (config) => {
     //     config.resolve.extensions.push('.ts', '.tsx');
     //

@@ -1,3 +1,6 @@
+const { version } = require('../package.json');
+console.log(`mui-simple v${version}`);
+
 export { default as Accordion } from './components/_FIXED/Accordion/Accordion';
 export type { AccordionProps } from './components/_FIXED/Accordion/Accordion';
 
@@ -9,13 +12,18 @@ export type { AppBarProps } from './components/_FIXED/AppBar/AppBar';
 
 export { default as InputAutocomplete } from './components/_FIXED/Autocomplete/InputAutocomplete';
 export type { InputAutoCompleteProp } from './components/_FIXED/Autocomplete/InputAutocomplete';
+
 export { default as InputAutoCompleteAsync } from './components/_FIXED/Autocomplete/InputAutocompleteAsync';
 export type { InputAutocompleteAsyncProps } from './components/_FIXED/Autocomplete/InputAutocompleteAsync';
+
 export { default as InputAutocompleteMultiple } from './components/_FIXED/Autocomplete/InputAutocompleteMultiple';
 export type { InputAutocompleteMultipleProp } from './components/_FIXED/Autocomplete/InputAutocompleteMultiple';
+
 export { default as InputAutocompleteMultipleAsync } from './components/_FIXED/Autocomplete/InputAutocompleteMultipleAsync';
 export type { InputAutocompleteMultipleAsyncProps } from './components/_FIXED/Autocomplete/InputAutocompleteMultipleAsync';
+
 export { default as InputGoogleAddress } from './components/_FIXED/Autocomplete/InputGoogleAddress';
+export type { InputGoogleAddressProps } from 'src/components/_FIXED/Autocomplete/InputGoogleAddress';
 
 export { default as Avatar } from './components/_FIXED/Avatar/Avatar';
 export type { AvatarProps } from './components/_FIXED/Avatar/Avatar';
@@ -181,7 +189,7 @@ export type { ToggleButtonGroupsProps } from './components/_FIXED/ToggleButtonGr
 export { default as Tooltip } from './components/_FIXED/Tooltip/Tooltip';
 export type { TooltipProps } from './components/_FIXED/Tooltip/Tooltip';
 
-export * from './components/_FIXED/TreeView';
+// export * from './components/_FIXED/TreeView';
 
 export { default as Typography } from './components/_FIXED/Typography/Typography';
 

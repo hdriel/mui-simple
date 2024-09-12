@@ -14,7 +14,7 @@ import Button from '../../Button/Button';
 const meta: Meta<typeof SpeedDial> = {
     title: 'Navigation/SpeedDial',
     component: SpeedDial,
-    tags: ['autodocs'],
+    // tags: ['autodocs'], // hide because make bug on Docs page for multiple stories in one page
     decorators: [
         (Story) => (
             <div

@@ -9,7 +9,7 @@ import { shortcutOptions, optionLongList, options } from './Menu.mocks';
 const meta: Meta<typeof ContextMenu> = {
     title: 'Navigation/ContextMenu',
     component: ContextMenu,
-    tags: ['autodocs'],
+    // tags: ['autodocs'], // hide because make bug on Docs page for multiple stories in one page
 };
 
 export default meta;

@@ -2,14 +2,12 @@
 import React, { useState } from 'react';
 import type { ReactElement } from 'react';
 import { Formik } from 'formik';
+import { IMask } from 'react-imask';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Send as SendIcon } from '@mui/icons-material';
-import { Box, Stack } from '@mui/material';
-
-import InputPattern from '../InputPattern';
-import { IMask } from 'react-imask';
 import { action } from '@storybook/addon-actions';
-import { values } from 'lodash-es';
+import { Box, Stack } from '@mui/material';
+import InputPattern from '../InputPattern';
 import Typography from '../../Typography/Typography';
 import Checkbox from '../../Checkbox/Checkbox';
 
@@ -21,10 +19,13 @@ const meta: Meta<typeof InputPattern> = {
 
 export default meta;
 
+const onChangeAction = action('onChange');
+
 type Story = StoryObj<typeof InputPattern>;
 
 const render = (args) => {
     const [value, setValue] = useState(args.value);
+
     return (
         <InputPattern
             {...args}
@@ -38,7 +39,9 @@ const render = (args) => {
 };
 
 export const Default: Story = {
-    args: {},
+    args: {
+        onChange: onChangeAction,
+    },
     render,
 };
 
@@ -47,6 +50,7 @@ export const TextAlign: Story = {
         label: 'Text Align',
         textAlign: 'center',
         value: 'center text',
+        onChange: onChangeAction,
     },
     render,
 };
@@ -56,6 +60,7 @@ export const Direction: Story = {
         label: 'RTL Direction',
         direction: 'rtl',
         value: 'right to left direction',
+        onChange: onChangeAction,
     },
     render,
 };
@@ -65,6 +70,7 @@ export const LetterSpacing: Story = {
         label: 'Letter Spacing',
         letterSpacing: '5px',
         value: 'letter spacing',
+        onChange: onChangeAction,
     },
     render,
 };
@@ -77,6 +83,7 @@ export const AlignActions: Story = {
         multiline: true,
         label: 'Align Actions',
         value: 'text...\ntext...\ntext...',
+        onChange: onChangeAction,
     },
     render,
 };
@@ -89,6 +96,7 @@ export const AlignActionsExternal: Story = {
         multiline: true,
         label: 'Align Actions External',
         value: 'text...\ntext...\ntext...',
+        onChange: onChangeAction,
     },
     render,
 };
@@ -98,6 +106,7 @@ export const AutoComplete: Story = {
         autoComplete: 'email',
         name: 'email',
         label: 'Auto Complete',
+        onChange: onChangeAction,
     },
     render,
 };
@@ -110,6 +119,7 @@ export const CmpSpacing: Story = {
         cmpSpacing: 6,
         label: 'Cmp Spacing',
         value: 'some text to see spacing...',
+        onChange: onChangeAction,
     },
     render,
 };
@@ -119,6 +129,7 @@ export const ColorActive: Story = {
         colorActive: 'warning',
         label: 'Color Active',
         value: 'color active with palette and custom color',
+        onChange: onChangeAction,
     },
     render,
 };
@@ -128,6 +139,7 @@ export const ColorLabel: Story = {
         colorLabel: 'success',
         label: 'Color Label',
         value: 'color label with palette and custom color',
+        onChange: onChangeAction,
     },
     render,
 };
@@ -137,6 +149,7 @@ export const ColorText: Story = {
         colorText: '#D10DAA',
         label: 'Color Text',
         value: 'color text with palette and custom color',
+        onChange: onChangeAction,
     },
     render,
 };
@@ -147,25 +160,33 @@ export const Disabled: Story = {
         label: 'Disabled',
         value: 'disabled text',
         disabled: true,
+        onChange: onChangeAction,
     },
     render,
 };
 
 export const EndCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputPattern endCmp="Send" label="End Cmp" value="endCmp with mui icon name or mui icon element" />
-        <InputPattern endCmp={<SendIcon />} label="End Cmp" value="endCmp with mui icon name or mui icon element" />
+        <InputPattern {...args} endCmp="Send" label="End Cmp" value="endCmp with mui icon name or mui icon element" />
+        <InputPattern
+            {...args}
+            endCmp={<SendIcon />}
+            label="End Cmp"
+            value="endCmp with mui icon name or mui icon element"
+        />
     </Stack>
 );
 
 export const EndCmpExternal_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputPattern
+            {...args}
             endCmpExternal="Send"
             label="End Cmp External"
             value="endCmpExternal with mui icon name or mui icon element"
         />
         <InputPattern
+            {...args}
             endCmpExternal={<SendIcon />}
             label="End Cmp External"
             value="endCmpExternal with mui icon name or mui icon element"
@@ -178,6 +199,7 @@ export const Error: Story = {
         error: true,
         label: 'With Error',
         value: 'some text with error',
+        onChange: onChangeAction,
     },
     render,
 };
@@ -187,6 +209,7 @@ export const Focused: Story = {
         focused: true,
         label: 'Focused',
         value: 'focused text',
+        onChange: onChangeAction,
     },
     render,
 };
@@ -196,6 +219,7 @@ export const FullWidth: Story = {
         fullWidth: false,
         label: 'Not FullWidth',
         value: 'text field is default with fullWidth',
+        onChange: onChangeAction,
     },
     render,
 };
@@ -205,6 +229,7 @@ export const HelperText: Story = {
         helperText: 'some helperText',
         label: 'HelperText',
         value: 'some text...',
+        onChange: onChangeAction,
     },
     render,
 };
@@ -212,12 +237,14 @@ export const HelperText: Story = {
 export const HideStartActionsOnEmpty_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
         <InputPattern
+            {...args}
             hideStartActionsOnEmpty={true}
             startCmp="Send"
             endCmp="Fingerprint"
             label="Hide Start Actions OnEmpty"
         />
         <InputPattern
+            {...args}
             hideStartActionsOnEmpty={false}
             startCmp="Send"
             endCmp="Fingerprint"
@@ -229,6 +256,7 @@ export const HideStartActionsOnEmpty_ = (args): ReactElement | React.ReactNode =
 export const Label: Story = {
     args: {
         label: 'Some Label Input',
+        onChange: onChangeAction,
     },
     render,
 };
@@ -236,11 +264,11 @@ export const Label: Story = {
 export const Margin_ = (args): ReactElement | React.ReactNode => (
     <Stack>
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <InputPattern label="None Margin" />
+        <InputPattern {...args} label="None Margin" />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <InputPattern margin="dense" label="Dense Margin" />
+        <InputPattern {...args} margin="dense" label="Dense Margin" />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <InputPattern margin="normal" label="Normal Margin" />
+        <InputPattern {...args} margin="normal" label="Normal Margin" />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
     </Stack>
 );
@@ -248,6 +276,7 @@ export const Margin_ = (args): ReactElement | React.ReactNode => (
 export const OnChangeText: Story = {
     args: {
         label: 'text field state',
+        onChange: onChangeAction,
     },
     render,
 };
@@ -257,6 +286,7 @@ export const ReadOnly: Story = {
         readOnly: true,
         label: 'Read Only',
         value: 'some text for show only',
+        onChange: onChangeAction,
     },
     render,
 };
@@ -265,6 +295,7 @@ export const Required: Story = {
     args: {
         required: true,
         label: 'Required field',
+        onChange: onChangeAction,
     },
     render,
 };
@@ -291,6 +322,7 @@ export const StartCmpExternal_ = (args): ReactElement | React.ReactNode => (
 export const Value: Story = {
     args: {
         value: 'some text without mask',
+        onChange: onChangeAction,
     },
     render,
 };
@@ -309,6 +341,7 @@ export const MaskPhone: Story = {
         mask: '+(972) 50-000-0000',
         definitions: { '#': /[1-9]/ },
         unmask: false,
+        onChange: onChangeAction,
     },
     render,
 };
@@ -319,6 +352,7 @@ export const UnmaskPhoneValue: Story = {
         mask: '+(972) 50-000-0000',
         definitions: { '#': /[1-9]/ },
         unmask: true,
+        onChange: onChangeAction,
     },
     render,
 };
@@ -330,6 +364,7 @@ export const ShowMaskAsPlaceholder: Story = {
         definitions: { '#': /[1-9]/ },
         unmask: true,
         showMaskAsPlaceholder: false,
+        onChange: onChangeAction,
     },
     render,
 };
@@ -355,6 +390,7 @@ export const MaskTime: Story = {
                 maxLength: 2,
             },
         },
+        onChange: onChangeAction,
     },
     render,
 };
@@ -364,6 +400,7 @@ export const MaskID: Story = {
         label: 'ID',
         mask: '0 0000000 0',
         definitions: { '#': /[1-9]/ },
+        onChange: onChangeAction,
     },
     render,
 };
@@ -374,6 +411,7 @@ export const Overwrite: Story = {
         mask: '0 0000000 0',
         definitions: { '#': /[1-9]/ },
         overwrite: true,
+        onChange: onChangeAction,
     },
     render,
 };

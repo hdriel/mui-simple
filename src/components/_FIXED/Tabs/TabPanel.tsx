@@ -15,9 +15,4 @@ const TabPanel: React.FC<TabPanelProps> = ({
     ) : null;
 };
 
-TabPanel.defaultProps = {
-    open: undefined,
-    swipeable: undefined,
-};
-
 export default TabPanel;

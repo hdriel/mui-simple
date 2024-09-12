@@ -1,22 +1,23 @@
 import React from 'react';
+import type { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
 import { Fab as MuiFab } from './FloatingActionButton.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import SVGIcon from '../SVGIcon/SVGIcon';
 import type { FabProps } from '../../decs';
 
-const Fab: React.FC<FabProps> = (props): React.ReactElement | React.ReactNode => {
+const Fab: React.FC<PropsWithChildren<FabProps>> = (props): React.ReactElement | React.ReactNode => {
     const {
-        innerRef,
         children,
         color,
         disabled,
         disableRipple,
         icon: _icon,
+        innerRef,
         link,
         size,
-        variant,
         useReactRouterDomLink,
+        variant,
         ...rest
     } = props;
     const [customColor, muiColor] = useCustomColor(color);
@@ -48,17 +49,7 @@ const Fab: React.FC<FabProps> = (props): React.ReactElement | React.ReactNode =>
     );
 };
 
-Fab.defaultProps = {
-    innerRef: undefined,
-    color: undefined,
-    disabled: undefined,
-    disableRipple: undefined,
-    icon: undefined,
-    link: undefined,
-    size: undefined,
-    variant: undefined,
-    useReactRouterDomLink: undefined,
-};
+Fab.displayName = 'Fab';
 
 export type { FabProps } from '../../decs';
 export default Fab;

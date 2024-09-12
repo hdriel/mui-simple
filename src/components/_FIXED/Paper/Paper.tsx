@@ -7,8 +7,8 @@ const Paper: React.FC<PaperProps> = ({
     color,
     elevation,
     height,
-    imageLayout,
-    imageOpacity,
+    imageLayout = 'cover',
+    imageOpacity = 1,
     imageSrc,
     square,
     textColor: _textColor,
@@ -37,16 +37,7 @@ const Paper: React.FC<PaperProps> = ({
     );
 };
 
-Paper.defaultProps = {
-    color: undefined,
-    elevation: undefined,
-    imageLayout: 'cover',
-    imageOpacity: 1,
-    imageSrc: undefined,
-    square: undefined,
-    textColor: undefined,
-    variant: undefined,
-};
+Paper.displayName = 'Paper';
 
 export type { PaperProps } from '../../decs';
 

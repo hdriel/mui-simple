@@ -1,4 +1,5 @@
 import React, { useState, Children, useCallback } from 'react';
+import type { PropsWithChildren } from 'react';
 import { Check as CheckIcon } from '@mui/icons-material';
 import { ListItemIcon, ListItemText, Menu as MuiMenu, MenuItem, MenuList, MenuWrapper } from './Menu.styled';
 import Typography from '../Typography/Typography';
@@ -8,19 +9,20 @@ import { useAnchorProps, useChildrenComponentBinding } from './Menu.hooks';
 import SVGIcon from '../SVGIcon/SVGIcon';
 import type { DividerProps, MenuOption, MenuOptionItem, MenuProps } from '../../decs';
 
-const Menu: React.FC<MenuProps> = (props): React.ReactElement | React.ReactNode => {
+const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement | React.ReactNode => {
     const {
         alternativeContent,
         anchorElementRef,
         anchorPosition,
         arrow,
         boundChildrenId,
-        boundChildrenIndex,
+        boundChildrenIndex = 0,
         children,
         contextMenu,
         dense,
         disableRipple,
-        fieldId,
+        elevation = 7,
+        fieldId = 'id',
         hide,
         onClick,
         onClose,
@@ -112,7 +114,13 @@ const Menu: React.FC<MenuProps> = (props): React.ReactElement | React.ReactNode 
             {Children.toArray(boundingChildren)}
             {((anchorProps as any).anchorEl || contextMenu) && (
                 <MenuWrapper arrow={arrow}>
-                    <MuiMenu open={open ?? openControlled} TransitionComponent={Grow} {...anchorProps} {...rest}>
+                    <MuiMenu
+                        open={open ?? openControlled}
+                        TransitionComponent={Grow}
+                        elevation={elevation}
+                        {...anchorProps}
+                        {...rest}
+                    >
                         <ClickAwayListener onClickAway={handleClose}>
                             {alternativeContent ? (
                                 <Box>{alternativeContent}</Box>
@@ -127,11 +135,9 @@ const Menu: React.FC<MenuProps> = (props): React.ReactElement | React.ReactNode 
                                             return <Divider key={index} variant="fullWidth" {...dividerOption} />;
                                         }
 
-                                        const option =
-                                            typeof item === 'string'
-                                                ? // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-                                                  ({ label: item, id: index } as MenuOptionItem)
-                                                : (item as MenuOptionItem) ?? {};
+                                        const option: MenuOptionItem =
+                                            typeof item === 'string' ? { label: item, id: index } : item ?? {};
+
                                         const optionId = (options as any)?.[fieldId] as string;
 
                                         return (
@@ -166,24 +172,7 @@ const Menu: React.FC<MenuProps> = (props): React.ReactElement | React.ReactNode 
     );
 };
 
-Menu.defaultProps = {
-    width: undefined,
-    maxHeight: undefined,
-    id: undefined,
-    boundChildrenId: undefined,
-    boundChildrenIndex: 0,
-    dense: undefined,
-    disableScrollLock: undefined,
-    fieldId: 'id',
-    open: undefined,
-    onClose: undefined,
-    onClick: undefined,
-    elevation: 7,
-    options: undefined,
-    anchorPosition: undefined,
-    anchorElementRef: undefined,
-    optionsDirection: undefined,
-};
+Menu.displayName = 'Menu';
 
 export type { MenuOption, MenuProps } from '../../decs';
 export default Menu;

@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ReactElement } from 'react';
+import type { ReactElement, PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
 
 import { CircularProgress } from '../Progress';
@@ -14,37 +14,35 @@ type SizeType = 'small' | 'medium' | 'large';
 
 // const Button: React.ForwardRefExoticComponent<React.PropsWithoutRef<any> & React.RefAttributes<HTMLButtonElement>> =
 //     forwardRef((props: PropsWithChildren<ButtonProps>, ref: Ref<HTMLButtonElement>): ReactElement | React.ReactNode => {
-const Button: React.FC<ButtonProps> = (props): ReactElement | React.ReactNode => {
-    const {
-        children,
-        color,
-        disabled,
-        disableRipple,
-        endIcon: _endIcon,
-        fullWidth,
-        icon: _icon,
-        innerRef,
-        isLoading,
-        label: _label,
-        link,
-        loadingCmp,
-        loadingIconPosition,
-        loadingLabel,
-        margin,
-        minWidth,
-        onClick,
-        onRightClick,
-        padding,
-        size,
-        startIcon: _startIcon,
-        sx,
-        tooltipProps,
-        uppercase,
-        useReactRouterDomLink,
-        variant,
-        ...rest
-    } = props;
-
+const Button: React.FC<PropsWithChildren<ButtonProps>> = ({
+    children,
+    color,
+    disabled,
+    disableRipple,
+    endIcon: _endIcon,
+    fullWidth,
+    icon: _icon,
+    innerRef,
+    isLoading,
+    label: _label,
+    link,
+    loadingCmp = <CircularProgress color="inherit" size={15} />,
+    loadingIconPosition,
+    loadingLabel,
+    margin,
+    minWidth,
+    onClick,
+    onRightClick,
+    padding,
+    size,
+    startIcon: _startIcon,
+    sx,
+    tooltipProps,
+    uppercase = true,
+    useReactRouterDomLink,
+    variant = undefined, // stay it undefined for supporting ButtonGroup component variant
+    ...rest
+}): ReactElement | React.ReactNode => {
     const [customColor, muiColor] = useCustomColor(color);
     const startIcon = typeof _startIcon === 'string' ? <SVGIcon>{_startIcon}</SVGIcon> : _startIcon;
     const endIcon = typeof _endIcon === 'string' ? <SVGIcon>{_endIcon}</SVGIcon> : _endIcon;
@@ -67,7 +65,7 @@ const Button: React.FC<ButtonProps> = (props): ReactElement | React.ReactNode =>
                 disableRipple={disabled ? true : disableRipple}
                 href={useReactRouterDomLink ? undefined : link}
                 onClick={disabled ? undefined : onClick}
-                onContextMenu={disabled ? undefined : onRightClick ? onRightClickHandler : props.onContextMenu}
+                onContextMenu={disabled ? undefined : onRightClick ? onRightClickHandler : rest.onContextMenu}
                 ref={innerRef}
                 size={SIZES.includes(size as string) ? (size as SizeType) : undefined}
                 sx={{
@@ -95,7 +93,7 @@ const Button: React.FC<ButtonProps> = (props): ReactElement | React.ReactNode =>
                 fullWidth={fullWidth}
                 href={useReactRouterDomLink ? undefined : link}
                 onClick={isLoading ? undefined : onClick}
-                onContextMenu={isLoading ? undefined : onRightClick ? onRightClickHandler : props.onContextMenu}
+                onContextMenu={isLoading ? undefined : onRightClick ? onRightClickHandler : rest.onContextMenu}
                 ref={innerRef}
                 size={SIZES.includes(size as string) ? (size as SizeType) : undefined}
                 startIcon={startIconCmp}
@@ -124,32 +122,6 @@ const Button: React.FC<ButtonProps> = (props): ReactElement | React.ReactNode =>
     );
     // });
 };
-
-Button.defaultProps = {
-    color: undefined,
-    disabled: undefined,
-    disableElevation: undefined,
-    disableRipple: undefined,
-    endIcon: undefined,
-    fullWidth: undefined,
-    innerRef: undefined,
-    icon: undefined,
-    isLoading: undefined,
-    link: undefined,
-    loadingIconPosition: undefined,
-    loadingLabel: undefined,
-    loadingCmp: <CircularProgress color="inherit" size={15} />,
-    minWidth: undefined,
-    onClick: undefined,
-    onRightClick: undefined,
-    size: undefined,
-    startIcon: undefined,
-    tooltipProps: undefined,
-    uppercase: true,
-    useReactRouterDomLink: undefined,
-    variant: undefined, // stay it undefined for supporting ButtonGroup component variant
-};
-
 Button.displayName = 'Button';
 
 export type { ButtonProps } from '../../decs';

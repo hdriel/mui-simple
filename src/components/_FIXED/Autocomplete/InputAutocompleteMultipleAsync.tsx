@@ -6,7 +6,7 @@ import type { InputAutocompleteMultipleAsyncProps } from '../../decs';
 
 const InputAutocompleteMultipleAsync: React.FC<InputAutocompleteMultipleAsyncProps> = ({
     getOptionsPromise,
-    sleep,
+    sleep = 0,
     getOptionsCallback,
     fetchOptionsOnFocus,
     LOADING_LABEL,
@@ -22,14 +22,7 @@ const InputAutocompleteMultipleAsync: React.FC<InputAutocompleteMultipleAsyncPro
 
     return <InputAutocompleteMultiple {...props} {...asyncProps} />;
 };
-
-InputAutocompleteMultipleAsync.defaultProps = {
-    getOptionLabel: undefined,
-    getOptionsPromise: undefined,
-    sleep: 0,
-    fetchOptionsOnFocus: undefined,
-    LOADING_LABEL: undefined,
-};
+InputAutocompleteMultipleAsync.displayName = 'InputAutocompleteMultipleAsync';
 
 export type { InputAutocompleteMultipleAsyncProps } from '../../decs';
 export default InputAutocompleteMultipleAsync;

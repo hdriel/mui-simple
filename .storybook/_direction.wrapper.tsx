@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
+import rtlPlugin from 'stylis-plugin-rtl';
 import { StyledEngineProvider } from '@mui/material/styles';
-import rltPlugin from 'stylis-plugin-rtl';
 import { prefixer } from 'stylis';
 
-const cacheRTL = createCache({ key: 'muirtl', stylisPlugins: [prefixer, rltPlugin] });
+const cacheRTL = createCache({ key: 'muirtl', stylisPlugins: [prefixer, rtlPlugin] });
 const cacheLRT = createCache({ key: 'muiltr' });
 
-export function DirectionWrapper({ direction, ...props }) {
+export function DirectionWrapper({ direction, className = undefined, ...props }) {
     const dir = ['rtl', 'ltr'].includes(direction) ? direction : 'ltr';
 
     useEffect(() => {
@@ -16,8 +16,10 @@ export function DirectionWrapper({ direction, ...props }) {
     }, [dir]);
 
     return (
-        <StyledEngineProvider>
-            <CacheProvider value={dir === 'rtl' ? cacheRTL : cacheLRT}>{props.children}</CacheProvider>
+        <StyledEngineProvider injectFirst>
+            <CacheProvider value={dir === 'rtl' ? cacheRTL : cacheLRT}>
+                <div className={className}>{props.children}</div>
+            </CacheProvider>
         </StyledEngineProvider>
     );
 }

@@ -16,19 +16,19 @@ import { HEX_OPACITY_SUFFIX } from '../../../utils/consts';
 const VALUE_FORMAT = { hex: 'rgba', rgba: 'hsl', hsl: 'hex' };
 
 const InputColor: React.FC<InputColorProps> = ({
-    copyAction,
-    copyIcon,
-    copyMessage,
+    copyAction = true,
+    copyIcon = 'ContentCopy',
+    copyMessage = 'Copied to clipboard',
     debounceDelay,
     disabled,
     endCmp: _endCmp,
     name,
     onChange,
-    opacityAction,
-    opacityIcon,
-    opacityLabel,
+    opacityAction = true,
+    opacityIcon = 'Opacity',
+    opacityLabel = 'opacity',
     readOnly,
-    value: _value,
+    value: _value = '#FFFFFF',
     variant,
     ...props
 }): React.ReactElement | React.ReactNode => {
@@ -168,15 +168,7 @@ const InputColor: React.FC<InputColorProps> = ({
     );
 };
 
-InputColor.defaultProps = {
-    value: '#FFFFFF',
-    copyMessage: 'Copied to clipboard',
-    opacityAction: true,
-    copyAction: true,
-    opacityLabel: 'opacity',
-    opacityIcon: 'Opacity',
-    copyIcon: 'ContentCopy',
-};
+InputColor.displayName = 'InputColor';
 
 export type { InputColorProps } from '../../decs';
 export default InputColor;

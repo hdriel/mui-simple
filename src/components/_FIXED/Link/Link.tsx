@@ -1,23 +1,24 @@
 import React from 'react';
+import type { PropsWithChildren, ReactElement, ReactNode } from 'react';
 import { Link as MuiLink, RRDLink } from './Link.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import type { LinkProps } from '../../decs';
 import SVGIcon from '../SVGIcon/SVGIcon';
 
-const Link: React.FC<LinkProps> = ({
+const Link: React.FC<PropsWithChildren<LinkProps>> = ({
+    children,
     color,
     icon: _icon,
     label,
-    preventScrollReset,
-    replaceUrl,
+    preventScrollReset = false,
     relativeUrl,
+    replaceUrl,
     size,
-    url,
     underline,
+    url,
     useReactRouterDomLink,
-    children,
     ...props
-}): React.ReactElement | React.ReactNode => {
+}): ReactElement | ReactNode => {
     const [customColor, muiColor] = useCustomColor(color);
     const icon = typeof _icon === 'string' ? <SVGIcon>{_icon}</SVGIcon> : _icon;
 
@@ -52,18 +53,7 @@ const Link: React.FC<LinkProps> = ({
     );
 };
 
-Link.defaultProps = {
-    color: undefined,
-    icon: undefined,
-    label: undefined,
-    preventScrollReset: false,
-    replaceUrl: undefined,
-    relativeUrl: undefined,
-    size: undefined,
-    underline: undefined,
-    url: undefined,
-    useReactRouterDomLink: undefined,
-};
+Link.displayName = 'Link';
 
 export type { LinkProps } from '../../decs';
 export default Link;

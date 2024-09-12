@@ -1,40 +1,41 @@
 import React, { useEffect, useState } from 'react';
+import type { PropsWithChildren } from 'react';
+import { ArrowForwardIosSharp as ArrowForwardIosSharpIcon } from '@mui/icons-material';
 import { Accordion as MuiAccordion, AccordionDetails, AccordionSummary, ShowMoreWrapper } from './Accordion.styled';
 import Typography from '../Typography/Typography';
 import Button from '../Button/Button';
-import { ArrowForwardIosSharp as ArrowForwardIosSharpIcon } from '@mui/icons-material';
 import { useCustomColor } from '../../../utils/helpers';
 import type { AccordionProps } from '../../decs';
 import SVGIcon from '../SVGIcon/SVGIcon';
 
-const Accordion: React.FC<AccordionProps> = function (props): React.ReactElement {
+const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props): React.ReactElement {
     const {
         bgColor: _bgColor,
         bgColorDetails: _bgColorDetails,
         bottomSecondaryLabel,
         buttonsColor,
         children,
-        collapsedIcon: _collapsedIcon,
+        collapsedIcon: _collapsedIcon = 'ExpandMore',
         details,
         detailsMaxRows,
         detailsStyles,
         disabled,
         disabledContentPadding,
         expanded: _expanded,
-        expandedIcon: _expandedIcon,
-        hideLabel,
+        expandedIcon: _expandedIcon = 'ExpandMore',
+        hideLabel = 'Hide',
         id,
         label,
         labelColor: _labelColor,
         labelProps,
         onChange,
         secondaryLabel: _secondaryLabel,
-        showMoreLabel,
+        showMoreLabel = 'Show More',
         summary,
         summaryStyles,
         textColor,
-        unmountDetailsOnClose,
-        useCustomStyle,
+        unmountDetailsOnClose = false,
+        useCustomStyle = false,
         ...rest
     } = props;
 
@@ -140,29 +141,7 @@ const Accordion: React.FC<AccordionProps> = function (props): React.ReactElement
         </MuiAccordion>
     );
 };
-
-Accordion.defaultProps = {
-    bgColor: undefined,
-    bottomSecondaryLabel: undefined,
-    buttonsColor: undefined,
-    collapsedIcon: 'ExpandMore',
-    details: undefined,
-    detailsMaxRows: undefined,
-    disabled: undefined,
-    disabledContentPadding: undefined,
-    expanded: undefined,
-    expandedIcon: 'ExpandMore',
-    hideLabel: 'Hide',
-    id: undefined,
-    label: undefined,
-    labelColor: undefined,
-    onChange: undefined,
-    secondaryLabel: undefined,
-    showMoreLabel: 'Show More',
-    textColor: undefined,
-    unmountDetailsOnClose: false,
-    useCustomStyle: false,
-};
+Accordion.displayName = 'Accordion';
 
 export type { AccordionProps } from '../../decs';
 export default Accordion;

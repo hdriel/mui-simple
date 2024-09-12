@@ -32,19 +32,32 @@ import type { RatingProps } from '../../decs';
 // `;
 
 const Rating: React.FC<RatingProps> = ({
+    activeColor: _activeColor = '#ffd700',
     boxSx,
-    color: _color,
-    activeColor: _activeColor,
-    disabled,
-    emptyIcon: _emptyIcon,
-    filledIcon: _filledIcon,
-    halfIcon: _halfIcon,
+    color: _color = '#ffd700',
+    disabled = false,
+    emptyIcon: _emptyIcon = 'StarBorder',
+    filledIcon: _filledIcon = 'Star',
+    halfIcon: _halfIcon = 'StarHalf',
+    isHalf = true,
     name,
     onChange,
-    SCORE_LABELS,
-    showLabel,
-    stars,
-    value,
+    showLabel = true,
+    size = 30,
+    stars = 5,
+    SCORE_LABELS = {
+        0.5: 'Useless',
+        1: 'Useless+',
+        1.5: 'Poor',
+        2: 'Poor+',
+        2.5: 'Ok',
+        3: 'Ok+',
+        3.5: 'Good',
+        4: 'Good+',
+        4.5: 'Excellent',
+        5: 'Excellent+',
+    },
+    value = 0,
     ...props
 }): React.ReactElement | React.ReactNode => {
     const theme = useTheme();
@@ -94,6 +107,8 @@ const Rating: React.FC<RatingProps> = ({
                 filledIcon={filledIcon}
                 color={color}
                 activeColor={activeColor}
+                isHalf={isHalf}
+                size={size}
                 {...props}
             />
             {showLabel && value !== null && SCORE_LABELS?.[value] && (
@@ -103,32 +118,7 @@ const Rating: React.FC<RatingProps> = ({
     );
 };
 
-Rating.defaultProps = {
-    color: '#ffd700',
-    activeColor: '#ffd700',
-    disabled: false,
-    emptyIcon: 'StarBorder',
-    filledIcon: 'Star',
-    halfIcon: 'StarHalf',
-    isHalf: true,
-    onChange: undefined,
-    SCORE_LABELS: {
-        0.5: 'Useless',
-        1: 'Useless+',
-        1.5: 'Poor',
-        2: 'Poor+',
-        2.5: 'Ok',
-        3: 'Ok+',
-        3.5: 'Good',
-        4: 'Good+',
-        4.5: 'Excellent',
-        5: 'Excellent+',
-    },
-    showLabel: true,
-    size: 30,
-    stars: 5,
-    value: 0,
-};
+Rating.displayName = 'Rating';
 
 export type { RatingProps } from '../../decs';
 export default Rating;

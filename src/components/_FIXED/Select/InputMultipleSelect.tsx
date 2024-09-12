@@ -44,21 +44,21 @@ const RenderValuesAsSquaredChips = ({
 
 const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
     value,
-    chips,
+    chips = true,
     renderValue,
     onChange,
     max,
     name,
     label: _label,
-    squaredChips,
-    selectedIndicator,
-    selectAll,
+    squaredChips = true,
+    selectedIndicator = true,
+    selectAll = true,
     options: _options,
     groupBy,
-    SELECT_ALL_LABEL,
-    HIDE_ALL_LABEL,
-    SELECTED_ITEMS_LABEL,
-    checkboxMarker: _checkboxMarker,
+    SELECT_ALL_LABEL = 'Select All',
+    HIDE_ALL_LABEL = 'Hide All',
+    SELECTED_ITEMS_LABEL = '({n} selected)',
+    checkboxMarker: _checkboxMarker = <CheckIcon />,
     ...props
 }): React.ReactElement | React.ReactNode => {
     const options = getOptions({ options: _options });
@@ -177,18 +177,7 @@ const InputMultipleSelect: React.FC<InputMultipleSelectProps> = ({
     );
 };
 
-InputMultipleSelect.defaultProps = {
-    value: undefined,
-    chips: true,
-    squaredChips: true,
-    checkboxMarker: <CheckIcon />,
-    max: undefined,
-    selectedIndicator: true,
-    selectAll: true,
-    SELECT_ALL_LABEL: 'Select All',
-    HIDE_ALL_LABEL: 'Hide All',
-    SELECTED_ITEMS_LABEL: '({n} selected)',
-};
+InputMultipleSelect.displayName = 'InputMultipleSelect';
 
 export type { InputMultipleSelectProps } from '../../decs';
 export default InputMultipleSelect;

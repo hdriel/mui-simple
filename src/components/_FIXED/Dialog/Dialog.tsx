@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ReactElement } from 'react';
+import type { ReactElement, PropsWithChildren } from 'react';
 import {
     Dialog as MuiDialog,
     DialogTitle as MuiDialogTitle,
@@ -13,20 +13,21 @@ import Button from '../Button/Button';
 import { Transition, PaperComponent } from './Dialog.components';
 import type { DialogProps } from '../../decs';
 
-const Dialog: React.FC<DialogProps> = (props): ReactElement | React.ReactNode => {
+const Dialog: React.FC<PropsWithChildren<DialogProps>> = (props): ReactElement | React.ReactNode => {
     const {
-        actions,
-        autoContentPadding,
+        actions = [],
+        autoContentPadding = true,
         children,
         contentId,
-        dividers,
-        draggable, // todo: draggable not working, hide the dialog
-        fullScreen,
+        dividers = false,
+        draggable = false, // todo: draggable not working, hide the dialog
+        fullScreen = false,
+        maxWidth = false,
         onClose,
-        open,
+        open = true,
         selectedValue,
-        title,
-        titleId,
+        title = '',
+        titleId = 'dialog-title-id',
         ...rest
     } = props;
     const theme = useTheme();
@@ -46,6 +47,7 @@ const Dialog: React.FC<DialogProps> = (props): ReactElement | React.ReactNode =>
             aria-describedby={contentId}
             PaperComponent={draggable ? (props) => <PaperComponent titleId={titleId} {...rest} /> : undefined}
             fullScreen={typeof fullScreen === 'boolean' ? fullScreen : fullScreenBreakPoint}
+            maxWidth={maxWidth}
             {...rest}
         >
             {title && (
@@ -81,21 +83,7 @@ const Dialog: React.FC<DialogProps> = (props): ReactElement | React.ReactNode =>
     );
 };
 
-Dialog.defaultProps = {
-    actions: [],
-    autoContentPadding: true,
-    contentId: undefined,
-    dividers: false,
-    draggable: false,
-    fullScreen: false,
-    fullWidth: false,
-    maxWidth: false,
-    onClose: undefined,
-    open: false,
-    selectedValue: undefined,
-    title: '',
-    titleId: 'dialog-title-id',
-};
+Dialog.displayName = 'Dialog';
 
 export type { DialogProps } from '../../decs';
 export const DialogContentText = MuiDialogContentText;

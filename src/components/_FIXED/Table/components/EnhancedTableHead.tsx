@@ -6,27 +6,27 @@ import { getNextOrderBy } from '../Table.utils';
 import type { ColorsProps, TableColumn, SORT_VALUE_TYPE } from '../Table.desc';
 
 interface EnhancedTableHeadProps {
-    columns: TableColumn[];
-    sortColumns: TableColumn[];
-    onRequestSort: (event: any, property: string, nextState: string) => void;
-    headerColor: ColorsProps;
     actionColor: ColorsProps;
+    columns: TableColumn[];
+    headerColor: ColorsProps;
     numSelected: number;
+    onRequestSort: (event: any, property: string, nextState: string) => void;
     onSelectAllClick: (event: any) => void;
     rowCount: number;
     selectionMode: boolean;
+    sortColumns: TableColumn[];
 }
 
 export const EnhancedTableHead: React.FC<EnhancedTableHeadProps> = ({
-    columns,
-    sortColumns,
-    onRequestSort,
-    headerColor,
     actionColor,
+    columns,
+    headerColor,
     numSelected,
+    onRequestSort,
     onSelectAllClick,
     rowCount,
     selectionMode,
+    sortColumns,
 }): React.ReactElement | React.ReactNode => {
     const createSortHandler = (property, nextState) => {
         return (event) => onRequestSort(event, property, nextState);

@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ReactElement } from 'react';
+import type { ReactElement, PropsWithChildren } from 'react';
 import { Breadcrumbs as MuiBreadcrumbs } from './Breadcrumbs.styled';
 import Link from '../Link/Link';
 import Chip from '../Chip/Chip';
@@ -10,8 +10,16 @@ import type { BreadcrumbsProps } from '../../decs';
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const EMPTY_CB = (): void => {};
 
-const Breadcrumbs: React.FC<BreadcrumbsProps> = (props): ReactElement | React.ReactNode => {
-    const { maxItems, size, separator: _separator, color, links, chips, children, ...rest } = props;
+const Breadcrumbs: React.FC<PropsWithChildren<BreadcrumbsProps>> = ({
+    maxItems,
+    size,
+    separator: _separator,
+    color,
+    links,
+    chips,
+    children,
+    ...rest
+}): ReactElement | React.ReactNode => {
     const separator = typeof _separator === 'string' ? <SVGIcon>{_separator}</SVGIcon> : _separator;
 
     return (
@@ -56,15 +64,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = (props): ReactElement | React.Re
         </MuiBreadcrumbs>
     );
 };
-
-Breadcrumbs.defaultProps = {
-    chips: undefined,
-    color: undefined,
-    links: undefined,
-    maxItems: undefined,
-    separator: undefined,
-    size: undefined,
-};
+Breadcrumbs.displayName = 'Breadcrumbs';
 
 export type { BreadcrumbsProps } from '../../decs';
 export default Breadcrumbs;

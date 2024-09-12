@@ -7,7 +7,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
     disabled,
     disableSwap: _disableSwap,
     displayValue,
-    defaultValue,
+    defaultValue = [0, 0],
     fromValue,
     minDistance,
     onChange,
@@ -98,32 +98,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
     );
 };
 
-RangeSlider.defaultProps = {
-    chooseFromMarksList: undefined,
-    color: undefined,
-    disabled: undefined,
-    disablePadding: undefined,
-    disableSwap: undefined,
-    displayValue: undefined,
-    endIcon: undefined,
-    label: undefined,
-    marks: undefined,
-    max: undefined,
-    min: undefined,
-    minDistance: undefined,
-    onChange: undefined,
-    orientation: undefined,
-    range: undefined,
-    removePadding: undefined,
-    size: undefined,
-    sliderStyle: undefined,
-    startIcon: undefined,
-    step: undefined,
-    trackBarLinePosition: undefined,
-    value: undefined,
-    valueLabelFormat: undefined,
-    defaultValue: [0, 0],
-};
+RangeSlider.displayName = 'RangeSlider';
 
 export type { RangeSliderProps } from '../../decs';
 export default RangeSlider;

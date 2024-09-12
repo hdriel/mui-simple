@@ -29,12 +29,10 @@ const render = (args) => {
             value={value}
             copyAction
             onChange={(e) => {
-                args.onChange?.(e);
                 setValue(e.target.value);
             }}
             // OR
             // onAccept={(value, mask) => {
-            //     args.onAccept?.(value, mask);
             //     setValue(value);
             // }}
         />

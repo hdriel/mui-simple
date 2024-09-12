@@ -8,6 +8,7 @@ interface AppBarStyledProps {
     customColor?: string;
 }
 type AppBarStyledPropsType = AppBarStyledProps & AppBarProps;
+
 export const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (propName) => !['drawerWidth', 'customColor'].includes(propName as string),
 })<AppBarStyledPropsType>`

@@ -8,25 +8,25 @@ import SVGIcon from '../SVGIcon/SVGIcon';
 import type { TreeViewProps } from '../../decs';
 
 const TreeView: React.FC<TreeViewProps> = ({
-    borderedStyles,
-    closeIconFadeStyles,
-    collapseIcon: _collapseIcon,
+    borderedStyles = false,
+    closeIconFadeStyles = false,
+    collapseIcon: _collapseIcon = 'ExpandMore',
     CustomComponent,
-    edgeCornersStyles,
+    edgeCornersStyles = false,
     endIcon: _endIcon,
     expandedIds,
-    expandIcon: _expandIcon,
-    externalItemProps,
+    expandIcon: _expandIcon = 'ChevronRight',
+    externalItemProps = {},
     fieldId,
     fieldLabel,
     maxWidth,
     multiSelect,
-    nodes,
+    nodes = [],
     onExpanded,
     onSelected,
     selectedIds,
-    TransitionComponent,
-    TreeItemComponent,
+    TransitionComponent = MuiTransitionComponent,
+    TreeItemComponent = TreeItem,
     useStyle,
     ...props
 }) => {
@@ -73,28 +73,6 @@ const TreeView: React.FC<TreeViewProps> = ({
             </MuiTreeView>
         </Box>
     );
-};
-
-TreeView.defaultProps = {
-    borderedStyles: false,
-    closeIconFadeStyles: false,
-    collapseIcon: 'ExpandMore',
-    CustomComponent: undefined,
-    edgeCornersStyles: false,
-    endIcon: undefined,
-    expandedIds: undefined,
-    expandIcon: 'ChevronRight',
-    externalItemProps: {},
-    fieldId: undefined,
-    fieldLabel: undefined,
-    maxWidth: undefined,
-    multiSelect: undefined,
-    nodes: [],
-    onExpanded: undefined,
-    onSelected: undefined,
-    selectedIds: undefined,
-    TransitionComponent: MuiTransitionComponent,
-    TreeItemComponent: TreeItem,
 };
 
 export default TreeView;

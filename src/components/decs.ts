@@ -193,6 +193,19 @@ export interface DividerProps {
     [key: string]: any;
 }
 
+export interface CardImageProps {
+    src?: string;
+    title?: string;
+    width?: number | string;
+    maxWidth?: number | string;
+    height?: number | string;
+    maxHeight?: number | string;
+    onClick?: (e: any) => void;
+    stretch?: 'cover' | 'contain' | 'none' | 'fill';
+    fullHeight?: boolean;
+    sx?: SxProps;
+    [key: string]: any;
+}
 export interface CardProps {
     actions?: IconType | ButtonProps | Array<IconType | ButtonProps | string>;
     avatar?: ElementType;
@@ -201,21 +214,7 @@ export interface CardProps {
     contentWrapperStyle?: SxProps;
     flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
     height?: number | string;
-    image?:
-        | string
-        | {
-              src?: string;
-              title?: string;
-              width?: number | string;
-              maxWidth?: number | string;
-              height?: number | string;
-              maxHeight?: number | string;
-              onClick?: (e: any) => void;
-              stretch?: 'cover' | 'contain' | 'none' | 'fill';
-              fullHeight?: boolean;
-              sx?: SxProps;
-              [key: string]: any;
-          };
+    image?: string | CardImageProps;
     justifyContent?: string;
     maxHeight?: number | string;
     maxWidth?: number | string;
@@ -334,7 +333,7 @@ export type InputColorProps = InputBaseProps & {
 };
 
 export type InputDateProps = InputBaseProps &
-    DatePickerProps<Date> & {
+    DatePickerProps<any> & {
         value?: Date | number | string;
         valueType?: 'timestamp' | 'date' | 'string';
         minDate?: Date | number | string;
@@ -346,7 +345,7 @@ export type InputDateProps = InputBaseProps &
     };
 
 export type InputDateTimeProps = InputDateProps &
-    DateTimePickerProps<Date> & {
+    DateTimePickerProps<any> & {
         value?: Date | number | string;
         valueType?: 'timestamp' | 'date' | 'string';
         minDate?: Date | number | string;
@@ -358,7 +357,7 @@ export type InputDateTimeProps = InputDateProps &
     };
 
 export type InputTimeProps = InputBaseProps &
-    TimePickerProps<Date> & {
+    TimePickerProps<any> & {
         value?: Date | number | string;
         valueType?: 'timestamp' | 'date' | 'string';
         minTime?: Date | number | string;
@@ -564,7 +563,7 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     includeInputInList?: boolean;
     multiple?: boolean;
     openOnFocus?: boolean;
-    options?: Array<string | number | InputAutoCompleteOptionItem>;
+    options?: Array<string | number | InputAutoCompleteOptionItem | Record<string, any>>;
     optionConverter?: (item: any, index: number) => InputAutoCompleteOptionItem;
     padding?: string | number;
     raiseSelectedToTop?: boolean;
@@ -574,6 +573,17 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     onChange?: (event: any, optionId: string | number, action?: string) => void;
     sortBy?: string | (() => void);
     sortDir?: boolean | number;
+    [key: string]: any;
+};
+
+export type InputGoogleAddressProps = Omit<InputAutoCompleteProp, 'selectedOption'> & {
+    GOOGLE_MAPS_API_KEY: string;
+    id?: string;
+    label?: string;
+    value?: any;
+    inputValue?: string;
+    onInputChange?: (event: any) => void;
+    onChange?: (event: any) => void;
     [key: string]: any;
 };
 

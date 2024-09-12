@@ -1,12 +1,12 @@
 import React from 'react';
-import type { ReactElement } from 'react';
+import type { ReactElement, PropsWithChildren } from 'react';
 
 import { Checkbox as MuiCheckbox } from './Checkbox.styled';
 import { isDefined, useCustomColor } from '../../../utils/helpers';
 import type { CheckboxProps } from '../../decs';
 import SVGIcon from '../SVGIcon/SVGIcon';
 
-const Checkbox: React.FC<CheckboxProps> = (props): ReactElement | React.ReactNode => {
+const Checkbox: React.FC<PropsWithChildren<CheckboxProps>> = (props): ReactElement | React.ReactNode => {
     const {
         color,
         textColor: _textColor,
@@ -40,23 +40,7 @@ const Checkbox: React.FC<CheckboxProps> = (props): ReactElement | React.ReactNod
     );
 };
 
-Checkbox.defaultProps = {
-    checked: undefined,
-    checkedIcon: undefined,
-    color: undefined,
-    disabled: undefined,
-    fontSize: undefined,
-    helperText: undefined,
-    icon: undefined,
-    label: undefined,
-    labelPlacement: undefined,
-    onChange: undefined,
-    readOnly: undefined,
-    required: undefined,
-    size: undefined,
-    textColor: undefined,
-    value: undefined,
-};
+Checkbox.displayName = 'Checkbox';
 
 export type { CheckboxProps } from '../../decs';
 export default Checkbox;

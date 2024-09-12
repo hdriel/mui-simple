@@ -1,25 +1,51 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Timeline as MuiTimeline } from './Timeline.styled';
 import TimelineItem from './TimelineItem';
 import { Box } from '@mui/material';
 import { useMaxWidth, useSteps } from './Timeline.hooks';
 
-export default function Timeline({
+interface TimeLineProps {
+    variant: 'filled' | 'outlined';
+    color: string;
+    connectorColor: string;
+    connectorHeight: string | number;
+    connectorWidth: string | number;
+    connectorStyle: string;
+    timeFormat: string;
+    right: boolean;
+    left: boolean;
+    zigzag: boolean;
+    align: 'right' | 'left' | 'center';
+    steps: Array<
+        | string
+        | {
+              variant: 'filled' | 'outlined';
+              color: string;
+              connectorColor: string;
+              icon: string | React.ReactNode | React.ReactElement;
+              title: string;
+              subtitle: string;
+              time: string;
+              timeFormat: string;
+          }
+    >;
+}
+
+const Timeline: React.FC<TimeLineProps> = ({
     color,
     connectorColor,
     connectorHeight,
     connectorWidth,
     variant,
-    steps: _steps,
-    timeFormat,
-    right,
-    left,
-    zigzag,
+    steps: _steps = [],
+    timeFormat = 'HH:mm',
+    right = false,
+    left = false,
+    zigzag = false,
     position: _position,
-    align,
+    align = 'center',
     ...props
-}) {
+}) => {
     const steps = useSteps({
         steps: _steps,
         variant,
@@ -48,47 +74,6 @@ export default function Timeline({
             </MuiTimeline>
         </Box>
     );
-}
-
-Timeline.propTypes = {
-    variant: PropTypes.oneOf(['filled', 'outlined']),
-    color: PropTypes.string,
-    connectorColor: PropTypes.string,
-    connectorHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    connectorWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    connectorStyle: PropTypes.string,
-    timeFormat: PropTypes.string,
-    right: PropTypes.bool,
-    left: PropTypes.bool,
-    zigzag: PropTypes.bool,
-    align: PropTypes.oneOf(['right', 'left', 'center']),
-    steps: PropTypes.arrayOf(
-        PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.shape({
-                variant: PropTypes.oneOf(['filled', 'outlined']),
-                color: PropTypes.string,
-                connectorColor: PropTypes.string,
-                icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-                title: PropTypes.string,
-                subtitle: PropTypes.string,
-                time: PropTypes.string,
-                timeFormat: PropTypes.string,
-            }),
-        ])
-    ),
 };
 
-Timeline.defaultProps = {
-    variant: undefined,
-    color: undefined,
-    connectorColor: undefined,
-    connectorHeight: undefined,
-    connectorWidth: undefined,
-    timeFormat: 'HH:mm',
-    right: false,
-    left: false,
-    zigzag: false,
-    steps: [],
-    align: 'center',
-};
+export default Timeline;

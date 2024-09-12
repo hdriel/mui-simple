@@ -1,4 +1,5 @@
 import React, { cloneElement, isValidElement, Children } from 'react';
+import type { PropsWithChildren } from 'react';
 import { MoreVert as MoreVertIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 import parser from 'html-react-parser';
 import {
@@ -16,10 +17,10 @@ import {
 } from './Card.styled';
 import Menu from '../Menu/Menu';
 import { useCardExpandedContent } from './Card.hooks';
-import type { CardProps } from '../../decs';
+import type { CardProps, CardImageProps } from '../../decs';
 import { useElementSize } from '../../../hooks/useElementSize';
 
-const Card: React.FC<CardProps> = (props): React.ReactElement | React.ReactNode => {
+const Card: React.FC<PropsWithChildren<CardProps>> = (props): React.ReactElement | React.ReactNode => {
     const {
         actions,
         avatar,
@@ -31,21 +32,21 @@ const Card: React.FC<CardProps> = (props): React.ReactElement | React.ReactNode 
         height,
         image,
         maxHeight,
-        maxWidth,
+        maxWidth = 'max-content',
         mediaOnTop,
         minHeight,
         minWidth,
         optionsMenu,
         subtitle,
         title,
-        width,
+        width = 'auto',
         onClick,
         innerRef,
-        parseChildren,
+        parseChildren = true,
         contentWrapperStyle,
         ...rest
     } = props;
-    const [ref, { height: currCardHeight }] = useElementSize(image?.fullHeight ?? false);
+    const [ref, { height: currCardHeight }] = useElementSize((image as CardImageProps)?.fullHeight ?? false);
 
     const { expanded, content, cardContentExpanded, isMediaOnTop, handleExpandClick } = useCardExpandedContent({
         mediaOnTop,
@@ -67,12 +68,12 @@ const Card: React.FC<CardProps> = (props): React.ReactElement | React.ReactNode 
         stretch: objectFit,
         fullHeight,
         ...imageProps
-    } = typeof image === 'object' ? image : {};
+    } = (typeof image === 'object' ? image : {}) as CardImageProps;
     const CardMediaCmp = isValidElement(image) ? image : undefined;
 
-    const childrenContent = Children.toArray(content).map((text) => {
+    const childrenContent: any = Children.toArray(content).map((text) => {
         if (typeof text === 'string' && parseChildren) {
-            return parser(text.replaceAll(/\n/gi, '<br>'));
+            return parser((text as string).replace(/\n/gi, '<br>'));
         }
         return text;
     });
@@ -188,24 +189,7 @@ const Card: React.FC<CardProps> = (props): React.ReactElement | React.ReactNode 
         </MuiCard>
     );
 };
-
-Card.defaultProps = {
-    actions: undefined,
-    avatar: undefined,
-    contentPadding: undefined,
-    flexDirection: undefined,
-    image: undefined,
-    contentWrapperStyle: undefined,
-    maxWidth: 'max-content',
-    minWidth: undefined,
-    mediaOnTop: undefined,
-    optionsMenu: undefined,
-    subtitle: undefined,
-    title: undefined,
-    onClick: undefined,
-    parseChildren: true,
-    width: 'auto',
-};
+Card.displayName = 'Card';
 
 export type { CardProps } from '../../decs';
 export default Card;

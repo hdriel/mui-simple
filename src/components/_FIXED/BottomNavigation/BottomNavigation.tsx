@@ -5,20 +5,19 @@ import { useCustomColor } from '../../../utils/helpers';
 import type { BottomNavigationProps } from '../../decs';
 import SVGIcon from '../SVGIcon/SVGIcon';
 
-const BottomNavigation: React.FC<BottomNavigationProps> = function (props): ReactElement {
-    const {
-        actions,
-        color,
-        elevation,
-        fixedToBottom,
-        fixedToTop,
-        onChange,
-        position,
-        showLabels,
-        value,
-        width,
-        ...rest
-    } = props;
+const BottomNavigation: React.FC<BottomNavigationProps> = function ({
+    actions = [],
+    color,
+    elevation,
+    fixedToBottom,
+    fixedToTop,
+    onChange,
+    position,
+    showLabels,
+    value,
+    width,
+    ...rest
+}): ReactElement {
     const [customColor] = useCustomColor(color);
 
     return (
@@ -48,19 +47,7 @@ const BottomNavigation: React.FC<BottomNavigationProps> = function (props): Reac
         </MuiBottomNavigation>
     );
 };
-
-BottomNavigation.defaultProps = {
-    actions: [],
-    color: undefined,
-    elevation: undefined,
-    fixedToBottom: undefined,
-    fixedToTop: undefined,
-    onChange: undefined,
-    position: undefined,
-    showLabels: undefined,
-    value: undefined,
-    width: undefined,
-};
+BottomNavigation.displayName = 'BottomNavigation';
 
 export type { BottomNavigationProps } from '../../decs';
 export default BottomNavigation;

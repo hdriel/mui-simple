@@ -12,44 +12,70 @@ import Input from './TextField';
 import type { InputDateProps } from '../../decs';
 import { getSlotsProps, useInputDateData } from './InputDate.hooks';
 import LocalizationProvider from './LocalizationProvider';
-import { isDefined } from '../../../utils/helpers';
+import { isDefined, setDefaultValue } from '../../../utils/helpers';
 
-const InputDate: React.FC<InputDateProps> = ({
-    value: _value,
-    valueType: _valueType,
-    onChange,
-    minDate,
-    maxDate,
-    readOnly,
-    useLocalizationProvider,
-    locale,
-    adapterLocale,
-    inputProps,
-    pickerVariant,
-    InputLabelProps,
-    clearable,
-    onClearClick,
-    name,
-    label,
-    required,
-    className,
-    direction,
-    endCmp,
-    endCmpExternal,
-    startCmpExternal,
-    startCmp,
-    variant,
-    width,
-    dateIcon,
-    format,
-    displayWeekNumber,
-    showDaysOutsideCurrentMonth,
-    loading,
-    openTo,
-    helperText,
-    timezone,
-    ...props
-}): React.ReactElement | React.ReactNode => {
+const InputDate: React.FC<InputDateProps> = (props): React.ReactElement | React.ReactNode => {
+    setDefaultValue(props, 'alignActions', 'baseline');
+    setDefaultValue(props, 'alignActionsExternal', 'baseline');
+    setDefaultValue(props, 'autoComplete', 'off');
+    setDefaultValue(props, 'cmpSpacing', 2);
+    setDefaultValue(props, 'copyIcon', 'ContentCopy');
+    setDefaultValue(props, 'copyMessage', 'Copied!');
+    setDefaultValue(props, 'direction', 'ltr');
+    setDefaultValue(props, 'fullWidth', true);
+    setDefaultValue(props, 'hideStartActionsOnEmpty', true);
+    setDefaultValue(props, 'type', 'date');
+    setDefaultValue(props, 'variant', 'outlined');
+    setDefaultValue(props, 'useLocalizationProvider', false);
+    setDefaultValue(props, 'timezone', 'Asia/Jerusalem');
+    setDefaultValue(props, 'locale', 'he');
+    setDefaultValue(props, 'adapterLocale', AdapterDayjs);
+    setDefaultValue(props, 'pickerVariant', 'desktop');
+    setDefaultValue(props, 'views', ['year', 'month', 'day']);
+    setDefaultValue(props, 'orientation', 'portrait');
+    setDefaultValue(props, 'clearable', true);
+    setDefaultValue(props, 'displayWeekNumber', false);
+    setDefaultValue(props, 'showDaysOutsideCurrentMonth', true);
+    setDefaultValue(props, 'loading', false);
+    setDefaultValue(props, 'format', 'DD-MM-YYYY');
+
+    const {
+        value: _value,
+        valueType: _valueType,
+        onChange,
+        minDate,
+        maxDate,
+        readOnly,
+        useLocalizationProvider,
+        locale,
+        adapterLocale,
+        inputProps,
+        pickerVariant,
+        InputLabelProps,
+        clearable,
+        onClearClick,
+        name,
+        label,
+        required,
+        className,
+        direction,
+        endCmp,
+        endCmpExternal,
+        startCmpExternal,
+        startCmp,
+        variant,
+        width,
+        dateIcon,
+        format,
+        displayWeekNumber,
+        showDaysOutsideCurrentMonth,
+        loading,
+        openTo,
+        helperText,
+        timezone,
+        ...rest
+    } = props;
+
     const { min, max, value } = useInputDateData({
         value: _value,
         min: minDate,
@@ -59,7 +85,7 @@ const InputDate: React.FC<InputDateProps> = ({
     });
 
     const slotProps = getSlotsProps({
-        ...props,
+        ...rest,
         variant,
         required,
         name,
@@ -69,9 +95,9 @@ const InputDate: React.FC<InputDateProps> = ({
         dateIcon,
     });
 
-    const sxStyles = isDefined(width) && { sx: { ...props.sx, width } };
+    const sxStyles = isDefined(width) && { sx: { ...rest.sx, width } };
     const pickerProps = {
-        ...props,
+        ...rest,
         value,
         label,
         minDate: min,
@@ -87,7 +113,7 @@ const InputDate: React.FC<InputDateProps> = ({
     };
 
     const dateCmp = readOnly ? (
-        <DateField value={value} readOnly format={format} label={label} {...props} {...sxStyles} />
+        <DateField value={value} readOnly format={format} label={label} {...rest} {...sxStyles} />
     ) : (
         {
             mobile: <MobileDatePicker {...pickerProps} {...slotProps} />,
@@ -103,25 +129,6 @@ const InputDate: React.FC<InputDateProps> = ({
     ) : (
         dateCmp
     );
-};
-
-InputDate.defaultProps = {
-    ...Input.defaultProps,
-    useLocalizationProvider: false,
-    timezone: 'Asia/Jerusalem',
-    locale: 'he',
-    adapterLocale: AdapterDayjs,
-    pickerVariant: 'desktop',
-    views: ['year', 'month', 'day'],
-    orientation: 'portrait',
-    clearable: true,
-    onClearClick: undefined,
-    displayWeekNumber: false,
-    showDaysOutsideCurrentMonth: true,
-    openTo: undefined,
-    loading: false,
-    dateIcon: undefined,
-    format: 'DD-MM-YYYY',
 };
 
 export type { InputDateProps } from '../../decs';

@@ -1,12 +1,21 @@
 import React from 'react';
-import type { ReactElement } from 'react';
+import type { ReactElement, PropsWithChildren } from 'react';
 import { Badge as MuiBadge } from './Badge.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import type { BadgeProps } from '../../decs';
 
-const Badge: React.FC<BadgeProps> = (props): ReactElement | React.ReactNode => {
-    const { variant, color, content, hide, showZero, max, overlap, vertical, horizontal, ...rest } = props;
-
+const Badge: React.FC<PropsWithChildren<BadgeProps>> = ({
+    variant,
+    color = 'primary',
+    content = 0,
+    hide,
+    showZero,
+    max,
+    overlap,
+    vertical,
+    horizontal,
+    ...rest
+}): ReactElement | React.ReactNode => {
     const [customColor, muiColor] = useCustomColor(color);
 
     return (
@@ -29,18 +38,7 @@ const Badge: React.FC<BadgeProps> = (props): ReactElement | React.ReactNode => {
         />
     );
 };
-
-Badge.defaultProps = {
-    color: 'primary',
-    content: 0,
-    hide: undefined,
-    horizontal: undefined,
-    max: undefined,
-    overlap: undefined,
-    showZero: undefined,
-    variant: undefined,
-    vertical: undefined,
-};
+Badge.displayName = 'Badge';
 
 export type { BadgeProps } from '../../decs';
 export default Badge;

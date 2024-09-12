@@ -9,9 +9,10 @@ const Tooltip: React.FC<TooltipProps> = ({
     bgColor,
     children,
     color,
-    fontSize,
-    lineHeight,
+    fontSize = 16,
+    lineHeight = 1.2,
     title,
+    placement = 'bottom',
     ...props
 }) => {
     if (typeof children === 'string') {
@@ -31,6 +32,7 @@ const Tooltip: React.FC<TooltipProps> = ({
             TransitionComponent={Zoom}
             title={title}
             arrow
+            placement={placement}
             {...props}
             componentsProps={{
                 ...props.componentsProps,
@@ -52,15 +54,7 @@ const Tooltip: React.FC<TooltipProps> = ({
     );
 };
 
-Tooltip.defaultProps = {
-    bgColor: undefined,
-    color: undefined,
-    followCursor: undefined,
-    fontSize: 16,
-    lineHeight: 1.2,
-    placement: 'bottom',
-    title: undefined,
-};
+Tooltip.displayName = 'Tooltip';
 
 export type { TooltipProps } from '../../decs';
 export default Tooltip;

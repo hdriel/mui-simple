@@ -7,47 +7,71 @@ import { StaticTimePicker } from '@mui/x-date-pickers/StaticTimePicker';
 import { TimeField } from '@mui/x-date-pickers';
 // Decide to use dayjs and not date-fns for supporting timezone
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import Input from './TextField';
 import type { InputTimeProps } from '../../decs';
 import { getSlotsProps, useInputDateData } from './InputDate.hooks';
 import LocalizationProvider from './LocalizationProvider';
-import { isDefined } from '../../../utils/helpers';
+import { isDefined, setDefaultValue } from '../../../utils/helpers';
 
-const InputTime: React.FC<InputTimeProps> = ({
-    value: _value,
-    onChange,
-    minTime,
-    maxTime,
-    readOnly,
-    useLocalizationProvider,
-    locale,
-    adapterLocale,
-    inputProps,
-    pickerVariant,
-    InputLabelProps,
-    clearable,
-    onClearClick,
-    name,
-    label,
-    required,
-    className,
-    direction,
-    endCmp,
-    endCmpExternal,
-    startCmpExternal,
-    startCmp,
-    variant,
-    width,
-    dateIcon,
-    format,
-    displayWeekNumber,
-    showDaysOutsideCurrentMonth,
-    loading,
-    openTo,
-    helperText,
-    timezone,
-    ...props
-}): React.ReactElement | React.ReactNode => {
+const InputTime: React.FC<InputTimeProps> = (props): React.ReactElement | React.ReactNode => {
+    setDefaultValue(props, 'adapterLocale', AdapterDayjs);
+    setDefaultValue(props, 'alignActions', 'baseline');
+    setDefaultValue(props, 'alignActionsExternal', 'baseline');
+    setDefaultValue(props, 'ampm', false);
+    setDefaultValue(props, 'ampmInClock', false);
+    setDefaultValue(props, 'autoComplete', 'off');
+    setDefaultValue(props, 'clearable', true);
+    setDefaultValue(props, 'cmpSpacing', 2);
+    setDefaultValue(props, 'copyIcon', 'ContentCopy');
+    setDefaultValue(props, 'copyMessage', 'Copied!');
+    setDefaultValue(props, 'direction', 'ltr');
+    setDefaultValue(props, 'format', 'HH:mm');
+    setDefaultValue(props, 'fullWidth', true);
+    setDefaultValue(props, 'hideStartActionsOnEmpty', true);
+    setDefaultValue(props, 'loading', false);
+    setDefaultValue(props, 'locale', 'he');
+    setDefaultValue(props, 'orientation', 'portrait');
+    setDefaultValue(props, 'pickerVariant', 'desktop');
+    setDefaultValue(props, 'timezone', 'Asia/Jerusalem');
+    setDefaultValue(props, 'useLocalizationProvider', false);
+    setDefaultValue(props, 'variant', 'outlined');
+
+    const {
+        // views=['year', 'month', 'day'],
+        value: _value,
+        onChange,
+        minTime,
+        maxTime,
+        readOnly,
+        useLocalizationProvider,
+        locale,
+        adapterLocale,
+        inputProps,
+        pickerVariant,
+        InputLabelProps,
+        clearable,
+        onClearClick,
+        name,
+        label,
+        required,
+        className,
+        direction,
+        endCmp,
+        endCmpExternal,
+        startCmpExternal,
+        startCmp,
+        variant,
+        width,
+        dateIcon,
+        format,
+        displayWeekNumber,
+        showDaysOutsideCurrentMonth,
+        loading,
+        openTo,
+        helperText,
+        timezone,
+        ...rest
+    } = props;
+
     const { min, max, value } = useInputDateData({
         value: _value,
         min: minTime,
@@ -57,7 +81,7 @@ const InputTime: React.FC<InputTimeProps> = ({
     });
 
     const slotProps = getSlotsProps({
-        ...props,
+        ...rest,
         variant,
         required,
         name,
@@ -67,9 +91,9 @@ const InputTime: React.FC<InputTimeProps> = ({
         dateIcon,
     });
 
-    const sxStyles = isDefined(width) && { sx: { ...props.sx, width } };
+    const sxStyles = isDefined(width) && { sx: { ...rest.sx, width } };
     const pickerProps = {
-        ...props,
+        ...rest,
         value,
         label,
         minTime: min,
@@ -80,7 +104,7 @@ const InputTime: React.FC<InputTimeProps> = ({
     };
 
     const dateCmp = readOnly ? (
-        <TimeField value={value} readOnly format={format} label={label} {...props} {...sxStyles} />
+        <TimeField value={value} readOnly format={format} label={label} {...rest} {...sxStyles} />
     ) : (
         {
             mobile: <MobileTimePicker {...pickerProps} {...slotProps} />,
@@ -98,24 +122,7 @@ const InputTime: React.FC<InputTimeProps> = ({
     );
 };
 
-InputTime.defaultProps = {
-    ...Input.defaultProps,
-    useLocalizationProvider: false,
-    timezone: 'Asia/Jerusalem',
-    locale: 'he',
-    adapterLocale: AdapterDayjs,
-    pickerVariant: 'desktop',
-    // views: ['year', 'month', 'day'],
-    orientation: 'portrait',
-    clearable: true,
-    onClearClick: undefined,
-    openTo: undefined,
-    loading: false,
-    dateIcon: undefined,
-    format: 'HH:mm',
-    ampm: false,
-    ampmInClock: false,
-};
+InputTime.displayName = 'InputTime';
 
 export type { InputTimeProps } from '../../decs';
 export default InputTime;

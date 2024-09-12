@@ -10,7 +10,7 @@ import { shortcutOptions, optionLongList, options } from './Menu.mocks';
 const meta: Meta<typeof Menu> = {
     title: 'Navigation/Menu',
     component: Menu,
-    tags: ['autodocs'],
+    // tags: ['autodocs'], // hide because make bug on Docs page for multiple stories in one page
 };
 
 export default meta;

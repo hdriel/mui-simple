@@ -1,6 +1,6 @@
 import { createElement } from 'react';
-import type { SxProps } from '@mui/material';
 import type { FC, PropsWithChildren, ReactElement, ReactNode } from 'react';
+import type { SxProps } from '@mui/material';
 import * as MUIIcon from '@mui/icons-material';
 import { numberToPx } from '../../../utils/helpers';
 
@@ -29,13 +29,6 @@ const MuiIconName: FC<MuiIconNamePropsType> = ({
               style: { width: numberToPx(width), height: numberToPx(height), color },
           })
         : children;
-};
-
-MuiIconName.defaultProps = {
-    name: undefined,
-    color: undefined,
-    width: undefined,
-    height: undefined,
 };
 
 export default MuiIconName;

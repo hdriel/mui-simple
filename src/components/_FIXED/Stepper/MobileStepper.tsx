@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import type { PropsWithChildren } from 'react';
 import { useTheme } from '@mui/material/styles';
 import {
     AutoPlaySwipeableViews,
@@ -15,34 +16,33 @@ import {
 import type { MobileStepperProps } from '../../decs';
 import { useStepperIndexHook, useStepperSteps } from './hooks';
 
-const MobileStepper: React.FC<MobileStepperProps> = (props): React.ReactElement | React.ReactNode => {
-    const {
-        autoPlay,
-        autoPlayInterval,
-        BACK_LABEL,
-        children,
-        color,
-        customStyleProps,
-        DONE_LABEL,
-        height,
-        infiniteLoop,
-        labels,
-        maxWidth,
-        NEXT_LABEL,
-        onBack,
-        onDone,
-        onNext,
-        onSkip,
-        OPTIONAL_LABEL,
-        position,
-        SKIP_LABEL,
-        stepIndex: activeStep,
-        steps: _steps,
-        stepsIndexSkipped,
-        swipeable,
-        variant,
-        ...rest
-    } = props;
+const MobileStepper: React.FC<PropsWithChildren<MobileStepperProps>> = ({
+    autoPlay,
+    autoPlayInterval,
+    BACK_LABEL = 'Back',
+    children,
+    color,
+    customStyleProps,
+    DONE_LABEL = 'Done',
+    height,
+    infiniteLoop,
+    labels,
+    maxWidth = 400,
+    NEXT_LABEL = 'Next',
+    onBack,
+    onDone,
+    onNext,
+    onSkip,
+    OPTIONAL_LABEL = 'Optional',
+    position = 'static',
+    SKIP_LABEL = 'Skip',
+    stepIndex: activeStep,
+    steps: _steps,
+    stepsIndexSkipped,
+    swipeable = true,
+    variant,
+    ...rest
+}): React.ReactElement | React.ReactNode => {
     const theme = useTheme();
     const [autoPlayState, setAutoPlayState] = useState(autoPlay);
     const isLTR = theme.direction === undefined || theme.direction.toLocaleLowerCase() === 'ltr';
@@ -197,29 +197,7 @@ const MobileStepper: React.FC<MobileStepperProps> = (props): React.ReactElement 
     );
 };
 
-MobileStepper.defaultProps = {
-    autoPlay: undefined,
-    autoPlayInterval: undefined,
-    BACK_LABEL: 'Back',
-    color: undefined,
-    DONE_LABEL: 'Done',
-    height: 255,
-    infiniteLoop: undefined,
-    labels: undefined,
-    maxWidth: 400,
-    NEXT_LABEL: 'Next',
-    onBack: undefined,
-    onDone: undefined,
-    onNext: undefined,
-    onSkip: undefined,
-    OPTIONAL_LABEL: 'Optional',
-    position: 'static',
-    SKIP_LABEL: 'Skip',
-    steps: undefined,
-    stepsIndexSkipped: undefined,
-    swipeable: true,
-    variant: undefined,
-};
+MobileStepper.displayName = 'MobileStepper';
 
 export type { MobileStepperProps } from '../../decs';
 export default MobileStepper;

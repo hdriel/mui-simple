@@ -13,12 +13,12 @@ const AppBar: React.FC<AppBarProps> = ({
     color,
     dense,
     disablePadding,
-    drawerWidth,
+    drawerWidth = 0,
     elevation,
     elevationScroll,
     enableColorOnDark,
     hideOnScroll,
-    position,
+    position = 'fixed',
     scrollElement,
     scrollToTop,
     scrollToTopProps,
@@ -69,23 +69,7 @@ const AppBar: React.FC<AppBarProps> = ({
         </>
     );
 };
-
-AppBar.defaultProps = {
-    bottom: undefined,
-    color: undefined,
-    dense: undefined,
-    disablePadding: undefined,
-    drawerWidth: 0,
-    elevation: undefined,
-    elevationScroll: undefined,
-    enableColorOnDark: undefined,
-    hideOnScroll: undefined,
-    position: 'fixed',
-    scrollElement: undefined,
-    scrollToTop: undefined,
-    scrollToTopProps: undefined,
-    toolbarId: undefined,
-};
+AppBar.displayName = 'AppBar';
 
 export type { AppBarProps } from '../../decs';
 export default AppBar;

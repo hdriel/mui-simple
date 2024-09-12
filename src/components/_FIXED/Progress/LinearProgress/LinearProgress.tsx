@@ -6,7 +6,7 @@ import type { LinearProgressProps } from '../../../decs';
 const LinearProgress: React.FC<LinearProgressProps> = ({
     color,
     disableShrink,
-    showProgress,
+    showProgress = true,
     size,
     thickness,
     value,
@@ -28,16 +28,7 @@ const LinearProgress: React.FC<LinearProgressProps> = ({
     );
 };
 
-LinearProgress.defaultProps = {
-    color: undefined,
-    disableShrink: undefined,
-    showProgress: true,
-    size: undefined,
-    thickness: undefined,
-    value: undefined,
-    valueBuffer: undefined,
-    variant: undefined,
-};
+LinearProgress.displayName = 'LinearProgress';
 
 export type { LinearProgressProps } from '../../../decs';
 export default LinearProgress;

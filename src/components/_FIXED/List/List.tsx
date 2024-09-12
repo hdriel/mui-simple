@@ -11,28 +11,28 @@ import { checkForCheckboxItems } from './List.converter';
 
 const List: React.FC<ListProps> = ({
     alignItems,
-    bgColor: _bgColor,
-    buttonItems,
-    component,
+    bgColor: _bgColor = 'background.paper',
+    buttonItems = true,
+    component = 'nav',
     dense,
     disableGuttersItems,
-    disablePadding,
+    disablePadding = 'nav',
     disablePaddingItems,
-    dragAndDropItems,
-    draggableIcon,
+    dragAndDropItems = false,
+    draggableIcon = 'DragHandle',
     draggableListType,
     droppableId,
-    enableSubtitle,
-    fieldId,
+    enableSubtitle = true,
+    fieldId = 'id',
     flexDirectionItems,
-    hideActionsOnDragAndDropItems,
+    hideActionsOnDragAndDropItems = true,
     insetItems,
-    items,
+    items = [],
     onListOrderChange,
     title,
-    unmountSubListOnClose,
-    useDraggableContext,
-    useTransition,
+    unmountSubListOnClose = false,
+    useDraggableContext = true,
+    useTransition = true,
     useReactRouterDomLink,
     width,
     ...props
@@ -166,6 +166,7 @@ const List: React.FC<ListProps> = ({
                 droppableClassName={droppableId}
                 disabled={!dragAndDropItems}
                 onChange={onListOrderChange}
+                component="div"
                 renderValue={(item, index, snapshot) =>
                     renderValue(
                         {
@@ -180,39 +181,12 @@ const List: React.FC<ListProps> = ({
                         index
                     )
                 }
-                component="div"
             />
         </MuiList>
     );
 };
 
-List.defaultProps = {
-    alignItems: undefined,
-    bgColor: 'background.paper',
-    buttonItems: true,
-    component: 'nav',
-    dense: undefined,
-    disableGuttersItems: undefined,
-    disablePadding: true,
-    disablePaddingItems: undefined,
-    dragAndDropItems: false,
-    draggableIcon: 'DragHandle',
-    draggableListType: undefined,
-    droppableId: undefined,
-    enableSubtitle: true,
-    fieldId: 'id',
-    flexDirectionItems: undefined,
-    hideActionsOnDragAndDropItems: true,
-    insetItems: undefined,
-    items: [],
-    onListOrderChange: undefined,
-    title: undefined,
-    unmountSubListOnClose: false,
-    useDraggableContext: true,
-    useTransition: true,
-    useReactRouterDomLink: undefined,
-    width: undefined,
-};
+List.displayName = 'List';
 
 export type { ListItemProps, ListProps } from '../../decs';
 export default List;

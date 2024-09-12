@@ -2,32 +2,47 @@ import React, { useState } from 'react';
 import { Box, ClickAwayListener } from '@mui/material';
 import Input from './TextField';
 import Button from '../Button/Button';
-import { copyToClipboard, generatePassword } from '../../../utils/helpers';
+import { copyToClipboard, generatePassword, setDefaultValue } from '../../../utils/helpers';
 import Snackbar from '../Snackbar/Snackbar';
 import type { InputPasswordProps } from '../../decs';
 import SVGIcon from '../SVGIcon/SVGIcon';
 
-const InputPassword: React.FC<InputPasswordProps> = ({
-    copyAction,
-    copyMessage,
-    copyTooltip,
-    copyIcon: _copyIcon,
-    disabled,
-    generatePasswordTooltip,
-    generateRandom,
-    generateRandomAction,
-    generateRandomCmp,
-    hidePasswordOnClickAway,
-    name,
-    endCmp,
-    onChange,
-    showPasswordAction,
-    showPasswordTooltip,
-    showPasswordOnCmp,
-    showPasswordOffCmp,
-    value,
-    ...props
-}) => {
+const InputPassword: React.FC<InputPasswordProps> = (props) => {
+    setDefaultValue(props, 'copyAction', true); // undefined - probably not always we want this action
+    setDefaultValue(props, 'copyIcon', 'ContentCopy');
+    setDefaultValue(props, 'copyMessage', 'Copied to clipboard');
+    setDefaultValue(props, 'copyTooltip', 'Copy');
+    setDefaultValue(props, 'generatePasswordTooltip', 'generate new password');
+    setDefaultValue(props, 'generateRandom', 8);
+    setDefaultValue(props, 'generateRandomAction', true); // undefined - probably not always we want this action
+    setDefaultValue(props, 'generateRandomCmp', 'LockReset');
+    setDefaultValue(props, 'hidePasswordOnClickAway', true);
+    setDefaultValue(props, 'showPasswordAction', true);
+    setDefaultValue(props, 'showPasswordOnCmp', 'VisibilityOff');
+    setDefaultValue(props, 'showPasswordOffCmp', 'Visibility');
+    setDefaultValue(props, 'type', 'password');
+
+    const {
+        copyAction,
+        copyMessage,
+        copyTooltip,
+        copyIcon: _copyIcon,
+        disabled,
+        generatePasswordTooltip,
+        generateRandom,
+        generateRandomAction,
+        generateRandomCmp,
+        hidePasswordOnClickAway,
+        name,
+        endCmp,
+        onChange,
+        showPasswordAction,
+        showPasswordTooltip,
+        showPasswordOnCmp,
+        showPasswordOffCmp,
+        value,
+        ...rest
+    } = props;
     const [showPassword, setShowPassword] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const handleClickShowPassword = (): void => {
@@ -57,7 +72,7 @@ const InputPassword: React.FC<InputPasswordProps> = ({
         <ClickAwayListener onClickAway={() => hidePasswordOnClickAway && setShowPassword(false)}>
             <Box>
                 <Input
-                    {...props}
+                    {...rest}
                     name={name}
                     value={showPasswordAction ? value : '*'.repeat(value.length)}
                     onChange={(e) => showPasswordAction && onChange?.(e)}
@@ -102,55 +117,7 @@ const InputPassword: React.FC<InputPasswordProps> = ({
     );
 };
 
-InputPassword.defaultProps = {
-    alignActions: undefined,
-    alignActionsExternal: undefined,
-    autoComplete: undefined,
-    cmpSpacing: undefined,
-    colorActive: undefined,
-    colorLabel: undefined,
-    colorText: undefined,
-    copyAction: true, // undefined - probably not always we want this action
-    copyIcon: 'ContentCopy',
-    copyMessage: 'Copied to clipboard',
-    copyTooltip: 'Copy',
-    debounceDelay: undefined,
-    disabled: undefined,
-    endCmp: undefined,
-    endCmpExternal: undefined,
-    error: undefined,
-    focused: undefined,
-    fullWidth: undefined,
-    generatePasswordTooltip: 'generate new password',
-    generateRandom: 8,
-    generateRandomAction: true, // undefined - probably not always we want this action
-    generateRandomCmp: 'LockReset',
-    helperText: undefined,
-    hidePasswordOnClickAway: true,
-    hideStartActionsOnEmpty: undefined,
-    id: undefined,
-    label: undefined,
-    margin: undefined,
-    maxRows: undefined,
-    multiline: undefined,
-    name: undefined,
-    onBlur: undefined,
-    onChange: undefined,
-    onEnterKeyPress: undefined,
-    onFocus: undefined,
-    readOnly: undefined,
-    required: undefined,
-    rows: undefined,
-    showPasswordAction: true,
-    showPasswordTooltip: undefined,
-    showPasswordOnCmp: 'VisibilityOff',
-    showPasswordOffCmp: 'Visibility',
-    startCmp: undefined,
-    startCmpExternal: undefined,
-    type: 'password',
-    value: undefined,
-    variant: undefined,
-};
+InputPassword.displayName = 'InputPassword';
 
 export type { InputPasswordProps } from '../../decs';
 export default InputPassword;

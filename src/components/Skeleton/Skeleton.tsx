@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Skeleton as MuiSkeleton } from './Skeleton.styled';
 import { useElementSize } from '../../hooks/useElementSize';
 
@@ -10,7 +9,14 @@ const SKELETON_VARIANT = {
     ROUNDED: 'rounded',
     NONE: undefined,
 };
-export default function Skeleton({ loading, animation, variant, children, ...props }) {
+
+interface SkeletonProps {
+    loading: boolean;
+    animation: 'pulse' | 'wave' | false;
+    variant: 'circular' | 'rectangular' | 'rounded' | 'text';
+}
+
+const Skeleton: React.FC<SkeletonProps> = ({ loading, animation, variant, children, ...props }) => {
     const [ref, { width, height }] = useElementSize(true);
     const [mounted, setMounted] = useState(false);
 
@@ -69,16 +75,6 @@ export default function Skeleton({ loading, animation, variant, children, ...pro
             {component}
         </MuiSkeleton>
     );
-}
-
-Skeleton.propTypes = {
-    loading: PropTypes.bool,
-    animation: PropTypes.oneOf(['pulse', 'wave', false]),
-    variant: PropTypes.oneOf(['circular', 'rectangular', 'rounded', 'text']),
 };
 
-Skeleton.defaultProps = {
-    loading: undefined,
-    animation: undefined,
-    variant: undefined,
-};
+export default Skeleton;

@@ -1,7 +1,5 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Send as SendIcon, Fingerprint as FingerprintIcon } from '@mui/icons-material';
-import { action } from '@storybook/addon-actions';
 import { Stack } from '@mui/material';
 
 import Accordion from '../Accordion';

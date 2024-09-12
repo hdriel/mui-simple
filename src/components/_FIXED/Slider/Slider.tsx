@@ -128,29 +128,7 @@ const Slider: React.FC<SliderProps> = ({
     );
 };
 
-Slider.defaultProps = {
-    chooseFromMarksList: undefined,
-    color: undefined,
-    disabled: undefined,
-    disablePadding: undefined,
-    displayValue: undefined,
-    endIcon: undefined,
-    label: undefined,
-    marks: undefined,
-    min: undefined,
-    max: undefined,
-    onChange: undefined,
-    orientation: undefined,
-    range: undefined,
-    removePadding: undefined,
-    step: undefined,
-    size: undefined,
-    sliderStyle: undefined,
-    startIcon: undefined,
-    trackBarLinePosition: undefined,
-    value: undefined,
-    valueLabelFormat: undefined,
-};
+Slider.displayName = 'Slider';
 
 export type { SliderProps } from '../../decs';
 export default Slider;

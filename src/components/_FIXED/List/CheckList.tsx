@@ -5,7 +5,7 @@ import type { CheckListProps } from '../../decs';
 import { checkForCheckboxItems } from './List.converter';
 
 const CheckList: React.FC<CheckListProps> = ({
-    controlType,
+    controlType = 'checkbox',
     alignCheck,
     items,
     ...props
@@ -16,11 +16,6 @@ const CheckList: React.FC<CheckListProps> = ({
     });
 
     return <List {...props} items={checklistItems} />;
-};
-
-CheckList.defaultProps = {
-    controlType: 'checkbox',
-    alignCheck: undefined,
 };
 
 export type { CheckListProps } from '../../decs';

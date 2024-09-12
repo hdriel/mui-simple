@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { IMaskMixin } from 'react-imask';
 import { ClickAwayListener, Box, FormHelperText } from '@mui/material';
 import Input from './TextField';
-import { copyToClipboard, isDefined } from '../../../utils/helpers';
+import { copyToClipboard, isDefined, setDefaultValue } from '../../../utils/helpers';
 import type { InputPatternProps } from '../../decs';
 import Snackbar from '../Snackbar/Snackbar';
 import Button from '../Button/Button';
@@ -44,25 +44,33 @@ const MaskedInput: any = IMaskMixin(
     }
 );
 
-const InputPattern: React.FC<InputPatternProps> = ({
-    error,
-    helperText,
-    inputRef,
-    lazy: _lazy,
-    name,
-    onAccept,
-    onChange,
-    onKeyPress,
-    onFocus,
-    focused,
-    placeholder,
-    showMaskAsPlaceholder,
-    unmask,
-    value: _value,
-    copyMessage,
-    copyValueHandler,
-    ...props
-}): React.ReactElement | React.ReactNode => {
+const InputPattern: React.FC<InputPatternProps> = (props): React.ReactElement | React.ReactNode => {
+    setDefaultValue(props, 'direction', 'ltr');
+    setDefaultValue(props, 'copyMessage', 'Copied');
+    setDefaultValue(props, 'copyIcon', 'ContentCopy');
+    setDefaultValue(props, 'copyValueHandler', (value, unmaskvalue) => unmaskvalue);
+    setDefaultValue(props, 'value', ''); // stay this value, to prevent from component to be disabled on missing provider value
+
+    const {
+        copyMessage,
+        copyValueHandler,
+        error,
+        focused,
+        helperText,
+        inputRef,
+        lazy: _lazy,
+        name,
+        onAccept,
+        onChange,
+        onFocus,
+        onKeyPress,
+        placeholder,
+        showMaskAsPlaceholder,
+        unmask,
+        value: _value,
+        ...rest
+    } = props;
+
     // for example output for mask: '+(972) 50-000-0000'
     const [maskedValue, setMaskedValue] = useState(_value); // for example: '0-000-0000'
     const [unmaskedValue, setUnmaskedValue] = useState(_value); // for example: '0-000-0000'
@@ -107,7 +115,7 @@ const InputPattern: React.FC<InputPatternProps> = ({
         <ClickAwayListener onClickAway={() => setIsOnFocus(false)}>
             <Box>
                 <MaskedInput
-                    {...props}
+                    {...rest}
                     inputRef={inputRef}
                     name={name}
                     unmask={unmask}
@@ -130,7 +138,7 @@ const InputPattern: React.FC<InputPatternProps> = ({
                 />
                 {helperText && <FormHelperText error={error}>{helperText}</FormHelperText>}
 
-                {props.copyAction && copyMessage && (
+                {rest.copyAction && copyMessage && (
                     <Snackbar
                         open={showAlert}
                         onClose={() => setShowAlert(false)}
@@ -143,27 +151,7 @@ const InputPattern: React.FC<InputPatternProps> = ({
     );
 };
 
-InputPattern.defaultProps = {
-    autofix: undefined,
-    blocks: undefined,
-    definitions: undefined,
-    direction: 'ltr',
-    copyTooltipProps: undefined,
-    copyMessage: 'Copied',
-    copyAction: undefined,
-    copyValueHandler: (value, unmaskvalue) => unmaskvalue,
-    copyIcon: 'ContentCopy',
-    lazy: undefined,
-    mask: undefined,
-    onEnterKeyPress: undefined,
-    onKeyPress: undefined,
-    overwrite: undefined,
-    showMaskAsPlaceholder: undefined,
-    textAlign: undefined,
-    unmask: undefined,
-    onAccept: undefined,
-    value: '', // stay this value, to prevent from component to be disabled on missing provider value
-};
+InputPattern.displayName = 'InputPattern';
 
 export type { InputPatternProps } from '../../decs';
 export default InputPattern;

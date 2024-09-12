@@ -11,7 +11,7 @@ import {
 import type { BoxProps, MenuProps } from '@mui/material';
 import { styled, css } from '@mui/material/styles';
 
-export const ContextMenuWrapper = styled(Box)`
+export const ContextMenuWrapper: any = styled(Box)`
     width: 100%;
     height: 100%;
 `;
@@ -24,7 +24,7 @@ type ManuWrapperStyledPropsType = ManuWrapperStyledProps & BoxProps & any;
 
 export const MenuWrapper = styled(Box, {
     label: 'arrow-test',
-    shouldForwardProp: (propName) => !['arrow'].includes(propName),
+    shouldForwardProp: (propName: string) => !['arrow'].includes(propName),
 })<ManuWrapperStyledPropsType>`
     position: relative;
     overflow: visible;
@@ -59,23 +59,37 @@ interface ManuStyledProps {
 }
 type MenuStyledPropsType = PropsWithChildren<Omit<MenuProps, 'onClick'> & ManuStyledProps & any>;
 
-export const Menu = styled(({ height, width, maxHeight, elevation, ...props }) => (
-    <MuiMenu
-        open
-        PaperProps={{
-            elevation,
-            sx: {
-                height,
-                width,
-                maxHeight,
-                overflowY: 'auto',
-                '& > .MuiList-root': { pt: 0, pb: 0 },
-                '& .MuiAvatar-root': { width: 32, height: 32, ml: -0.5, mr: 1 },
-            },
-        }}
-        {...props}
-    />
-))<MenuStyledPropsType>`
+export const Menu = styled(
+    ({
+        height,
+        width,
+        maxHeight,
+        elevation,
+        ...props
+    }: {
+        height?: string | number;
+        width?: string | number;
+        maxHeight?: string | number;
+        elevation?: number;
+        [key: string]: any;
+    }) => (
+        <MuiMenu
+            open
+            PaperProps={{
+                elevation,
+                sx: {
+                    height,
+                    width,
+                    maxHeight,
+                    overflowY: 'auto',
+                    '& > .MuiList-root': { pt: 0, pb: 0 },
+                    '& .MuiAvatar-root': { width: 32, height: 32, ml: -0.5, mr: 1 },
+                },
+            }}
+            {...props}
+        />
+    )
+)<MenuStyledPropsType>`
     max-width: 100%;
     & .MuiList-root:focus-visible {
         outline: none;

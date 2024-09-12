@@ -1,16 +1,21 @@
 import React from 'react';
-import type { ReactElement } from 'react';
+import type { ReactElement, PropsWithChildren, ReactNode, JSX } from 'react';
+import { isFragment } from 'react-is';
 import Button from './Button';
 import { ButtonGroup as MuiButtonGroup } from './Button.styled';
 import { useCustomColor } from '../../../utils/helpers';
 import type { ButtonGroupProps } from '../../decs';
-import { isFragment } from 'react-is';
 
-const ButtonGroup: React.FC<ButtonGroupProps> = (props): ReactElement | React.ReactNode => {
-    const { children, color, disableElevation, ...rest } = props;
+const ButtonGroup: React.FC<PropsWithChildren<ButtonGroupProps>> = ({
+    children,
+    color,
+    disableElevation,
+    disabled = false,
+    ...rest
+}): ReactElement | ReactNode => {
     const [customColor, muiColor] = useCustomColor(color);
 
-    const buttons = []
+    const buttons = ([] as any)
         .concat(isFragment(children) ? children.props.children : children ?? [])
         .filter((child) => child?.type?.displayName === Button.displayName)
         .map((child, index, arr) => {
@@ -24,9 +29,10 @@ const ButtonGroup: React.FC<ButtonGroupProps> = (props): ReactElement | React.Re
 
     return (
         <MuiButtonGroup
-            color={muiColor}
+            color={muiColor as any}
             customColor={muiColor ? undefined : customColor}
             disableElevation={disableElevation}
+            disabled={disabled}
             {...rest}
         >
             {buttons}
@@ -34,16 +40,7 @@ const ButtonGroup: React.FC<ButtonGroupProps> = (props): ReactElement | React.Re
     );
 };
 
-ButtonGroup.defaultProps = {
-    variant: undefined,
-    disabled: false,
-    color: undefined,
-    size: undefined,
-    orientation: undefined,
-    disableElevation: undefined,
-    disableRipple: undefined,
-    fullWidth: undefined,
-};
+ButtonGroup.displayName = 'ButtonGroup';
 
 export type { ButtonGroupProps } from '../../decs';
 export default ButtonGroup;

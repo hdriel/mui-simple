@@ -15,19 +15,19 @@ import SVGIcon from '../SVGIcon/SVGIcon';
 const RadioButtonsGroup: React.FC<RadioButtonsGroupProps> = ({
     checkedIcon,
     color,
-    data: _data,
-    direction,
-    disableRipple,
+    data: _data = [],
+    direction = 'column',
+    disableRipple = true,
     error,
+    fullWidth = true,
     helperText,
     icon,
+    ignoreLabelColor = false,
     label: _label,
-    ignoreLabelColor,
     size,
-    value: selectedValue,
-    fullWidth,
-    variant,
     sx,
+    value: selectedValue,
+    variant,
     ...props
 }): React.ReactElement | React.ReactNode => {
     const [customColor, muiColor] = useCustomColor(color);
@@ -78,24 +78,7 @@ const RadioButtonsGroup: React.FC<RadioButtonsGroupProps> = ({
     );
 };
 
-RadioButtonsGroup.defaultProps = {
-    checkedIcon: undefined,
-    color: undefined,
-    data: [],
-    direction: 'column',
-    fullWidth: true,
-    disableRipple: true,
-    helperText: undefined,
-    icon: undefined,
-    ignoreLabelColor: false,
-    label: undefined,
-    name: undefined,
-    onChange: undefined,
-    row: undefined,
-    size: undefined,
-    value: undefined,
-    variant: undefined,
-};
+RadioButtonsGroup.displayName = 'RadioButtonsGroup';
 
 export type { RadioButtonsGroupProps } from '../../decs';
 export default RadioButtonsGroup;

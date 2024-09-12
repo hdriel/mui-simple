@@ -6,6 +6,4 @@ const InputFile: React.FC<InputBaseProps> = (props) => {
     return <Input {...props} type="file" />;
 };
 
-InputFile.defaultProps = Input.defaultProps;
-
 export default InputFile;

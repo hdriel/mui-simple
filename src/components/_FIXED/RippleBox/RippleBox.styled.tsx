@@ -6,7 +6,6 @@ import type { BoxProps } from '@mui/material';
 
 type WrapperStyledPropsType = BoxProps;
 
-// @ts-expect-error
 export const Wrapper = styled(({ ...props }) => <MuiBox type="button" {...props} />)<WrapperStyledPropsType>`
     display: inline-block;
     position: relative;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { filledIcons, outlinedIcons, roundedIcons, sharpIcons, twoToneIcons } from '../icon-names';
 import { Stack, Grid, Box } from '@mui/material';
+import { Meta, StoryObj } from '@storybook/react';
 
 import SVGIcon from '../SVGIcon';
 import ToggleButtonGroup from '../../ToggleButtonGroup/ToggleButtonGroup';
@@ -8,12 +9,11 @@ import Typography from '../../Typography/Typography';
 import ToggleButtonGroups from '../../ToggleButtonGroup/ToggleButtonGroups';
 import InputColor from '../../TextField/InputColor';
 import Slider from '../../Slider/Slider';
-import { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof SVGIcon> = {
     title: 'Data-Display/SVGIcon',
     component: SVGIcon,
-    tags: ['autodocs'],
+    // tags: ['autodocs'], // hide because make bug on Docs page for multiple stories in one page
 };
 
 export default meta;

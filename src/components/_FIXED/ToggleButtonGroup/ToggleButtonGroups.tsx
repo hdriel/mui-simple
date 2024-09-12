@@ -7,7 +7,7 @@ const ToggleButtonGroups: React.FC<ToggleButtonGroupsProps> = ({
     fullWidth,
     disableRipple,
     justifyContent,
-    transparent,
+    transparent = true,
     sx,
     children,
     ...props
@@ -18,7 +18,7 @@ const ToggleButtonGroups: React.FC<ToggleButtonGroupsProps> = ({
             const isToggleButtonGroup = child?.type?.displayName === ToggleButtonGroup.displayName;
             if (!isToggleButtonGroup) {
                 console.error(
-                    `Notice for 'ToggleButtonGroups' you can pass as childrens only 'ToggleButtonGroup' components`,
+                    `NOTICE for 'ToggleButtonGroups' you can pass as children only 'ToggleButtonGroup' components`,
                     child?.type?.displayName ?? child?.type?.type
                 );
             }
@@ -43,12 +43,7 @@ const ToggleButtonGroups: React.FC<ToggleButtonGroupsProps> = ({
     );
 };
 
-ToggleButtonGroups.defaultProps = {
-    fullWidth: undefined,
-    disableRipple: undefined,
-    justifyContent: undefined,
-    transparent: true,
-};
+ToggleButtonGroups.displayName = 'ToggleButtonGroups';
 
 export type { ToggleButtonGroupsProps } from '../../decs';
 export default ToggleButtonGroups;
