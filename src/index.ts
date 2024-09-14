@@ -1,6 +1,3 @@
-import { version } from '../package.json';
-console.log(`mui-simple v${version}`);
-
 export { default as Accordion } from './components/_FIXED/Accordion/Accordion';
 export type { AccordionProps } from './components/_FIXED/Accordion/Accordion';
 
