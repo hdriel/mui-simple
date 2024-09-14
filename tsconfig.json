@@ -18,7 +18,7 @@
         "noEmit": false,
         "noEmitOnError": false,
         "noImplicitAny": false,
-        "noImplicitReturns": true,
+        "noImplicitReturns": false,
         "outDir": "./dist",
         "paths": { "src/*": ["./src/*"] },
         "plugins": [{ "transform": "typescript-transform-paths", "afterDeclarations": true }],
