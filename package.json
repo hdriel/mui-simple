@@ -18,7 +18,7 @@
         "build:ts-watch": "cross-env NODE_OPTIONS=--max-old-space-size=8192 tsc -p tsconfig.json -w",
         "deploy": "gh-pages -d storybook-static",
         "install-deps": "npm install --ignore-scripts --force",
-        "predeploy": "npm run build-storybook",
+        "predeploy": "npm run build:storybook",
         "prepare": "husky install",
         "prettier": "prettier --write .",
         "storybook": "storybook dev -p 6006",
