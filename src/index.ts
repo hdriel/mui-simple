@@ -1,4 +1,4 @@
-const { version } = require('../package.json');
+import { version } from '../package.json';
 console.log(`mui-simple v${version}`);
 
 export { default as Accordion } from './components/_FIXED/Accordion/Accordion';
