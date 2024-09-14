@@ -1,14 +1,14 @@
 {
     "name": "mui-simple",
-    "version": "2.0.0",
-    "description": "override mui components to simplify usage",
-    "main": "lib/index.js",
-    "module": "lib/index.js",
-    "types": "lib/src/index.d.ts",
-    "typings": "lib/src/index.d.ts",
+    "version": "1.13.0",
+    "description": "Override mui components to simplify usage",
+    "module": "dist/bundles/bundle.esm.js",
+    "main": "dist/bundles/bundle.js",
+    "types": "dist/bundles/index.d.ts",
+    "typings": "dist/src/index.d.ts",
     "type": "module",
     "files": [
-        "lib/*"
+        "dist/*"
     ],
     "scripts": {
         "build": "cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=8192 rollup -c rollup.config.js",
@@ -24,28 +24,6 @@
         "storybook": "storybook dev -p 6006",
         "storybook-static-serve": "serve -s storybook-static -p 6007",
         "test": ""
-    },
-    "exports": {
-        "./": {
-            "import": "./lib/src/index.js",
-            "require": "./lib/src/index.js",
-            "types": "./lib/src/index.d.ts"
-        },
-        "./components/*": {
-            "import": "./lib/src/components/_FIXED/*.js",
-            "require": "./lib/src/components/_FIXED/*.js",
-            "types": "./lib/src/components/_FIXED/*.d.ts"
-        },
-        "./Inputs": {
-            "import": "./lib/src/entries/Inputs.js",
-            "require": "./lib/src/entries/Inputs.js",
-            "types": "./lib/src/entries/Inputs.d.ts"
-        },
-        "./Buttons": {
-            "import": "./lib/src/entries/Buttons.js",
-            "require": "./lib/src/entries/Buttons.js",
-            "types": "./lib/src/entries/Buttons.d.ts"
-        }
     },
     "lint-staged": {
         "src/**/*.{js,jsx,ts,tsx,html.css}": "prettier --write .",
