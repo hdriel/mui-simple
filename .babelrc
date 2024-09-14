@@ -1,8 +1,9 @@
 {
-    "sourceType": "unambiguous",
-    "presets": ["@babel/preset-typescript", "@babel/preset-react"],
+    "presets": [
+        "@babel/preset-react",
+        "@babel/preset-typescript"
+    ],
     "plugins": [
-        "@babel/plugin-transform-runtime",
         "@babel/plugin-transform-react-display-name",
         "@babel/proposal-object-rest-spread",
         "@babel/plugin-proposal-class-properties",

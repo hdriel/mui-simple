@@ -2,36 +2,33 @@
     "compilerOptions": {
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
-        "baseUrl": "./",
+        "baseUrl": ".",
         "declaration": true,
-        "declarationDir": "dist", // Output TypeScript declarations here
+        "declarationDir": "dist",
         "declarationMap": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "isolatedModules": true,
         "jsx": "react",
-        "lib": ["es6", "ES2020", "dom", "dom.iterable"],
-        "module": "es2020",
+        "lib": ["dom", "es2015", "dom.iterable", "esnext"],
+        "module": "esnext",
         "moduleResolution": "node",
         "noEmit": false,
         "noEmitOnError": false,
-        "outDir": "./dist", // Output JavaScript here, matching Rollup 'dir'
-        "resolveJsonModule": true,
-        "rootDir": "./",
-        "skipLibCheck": true,
         "noImplicitAny": false,
-        "noImplicitReturns": true,
+        "outDir": "dist",
+        "resolveJsonModule": true,
+        "rootDir": "src",
+        "skipLibCheck": true,
         "sourceMap": true,
         "strict": false,
         "strictNullChecks": false,
-        "target": "es6",
+        "target": "esnext",
         "typeRoots": ["./src/@types"],
         "paths": {
             "src/*": ["./src/*"]
         },
-        "plugins": [{ "transform": "typescript-transform-paths", "afterDeclarations": true }],
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true
+        "plugins": [{ "transform": "typescript-transform-paths", "afterDeclarations": true }]
     },
     "include": ["src", ".storybook", "./global.d.ts"],
     "exclude": [".idea", ".git", "build", "node_modules", "lib", "dist", "storybook-static", "rollup.config.js"]
