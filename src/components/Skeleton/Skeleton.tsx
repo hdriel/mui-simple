@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import type { PropsWithChildren } from 'react';
 import { Skeleton as MuiSkeleton } from './Skeleton.styled';
 import { useElementSize } from '../../hooks/useElementSize';
 
-const SKELETON_VARIANT = {
+const SKELETON_VARIANT: Record<string, 'circular' | 'rectangular' | 'rounded' | 'text' | undefined> = {
     TEXT: 'text',
     CIRCULAR: 'circular',
     RECTANGULAR: 'rectangular',
@@ -11,12 +12,13 @@ const SKELETON_VARIANT = {
 };
 
 interface SkeletonProps {
-    loading: boolean;
-    animation: 'pulse' | 'wave' | false;
-    variant: 'circular' | 'rectangular' | 'rounded' | 'text';
+    loading?: boolean;
+    animation?: 'pulse' | 'wave' | false;
+    variant?: 'circular' | 'rectangular' | 'rounded' | 'text' | undefined;
+    [key: string]: any
 }
 
-const Skeleton: React.FC<SkeletonProps> = ({ loading, animation, variant, children, ...props }) => {
+const Skeleton: React.FC<PropsWithChildren<SkeletonProps>> = ({ loading, animation, variant, children, ...props }) => {
     const [ref, { width, height }] = useElementSize(true);
     const [mounted, setMounted] = useState(false);
 
@@ -44,11 +46,13 @@ const Skeleton: React.FC<SkeletonProps> = ({ loading, animation, variant, childr
         );
 
     const component = React.isValidElement(children)
-        ? React.cloneElement(children, { children: null })
+        ? // @ts-ignore
+          React.cloneElement(children, { children: null })
         : typeof children === 'string'
         ? null
         : children;
 
+    // @ts-ignore
     const type = children?.type?.name ?? children?.type?.render?.name ?? 'string';
     const avatarProps = { animation, width, height, variant };
 

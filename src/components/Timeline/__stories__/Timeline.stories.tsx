@@ -1,6 +1,4 @@
 import React from 'react';
-import { action } from '@storybook/addon-actions';
-// import { Send as SendIcon } from "@mui/icons-material";
 import { Stack, Box } from '@mui/material';
 import {
     Fastfood as FastfoodIcon,
@@ -9,27 +7,30 @@ import {
     Repeat as RepeatIcon,
 } from '@mui/icons-material';
 
-import Timeline from '../Timeline';
+import Timeline, { TimeLineStepProps } from '../Timeline';
+import type { TimeLineStepState } from '../Timeline';
 import Typography from '../../_FIXED/Typography/Typography';
 import Divider from '../../_FIXED/Divider/Divider';
+import type { Meta, StoryObj } from '@storybook/react';
 
-export default {
+const meta: Meta<typeof Timeline> = {
     title: 'Lab/Timeline',
     component: Timeline,
+    tags: ['autodocs'],
 };
 
-const actions = {
-    onClick: action('onClick'),
-};
+export default meta;
 
-export const Default = () => {
-    return <Timeline {...actions} />;
+type Story = StoryObj<typeof Timeline>;
+
+export const Default: Story = {
+    args: {},
 };
 
 export const Variant = () => {
     return (
         <Stack direction="row" spacing={5}>
-            {['filled', 'outlined'].map((variant) => (
+            {['filled', 'outlined'].map((variant: 'filled' | 'outlined') => (
                 <Timeline key={variant} variant={variant} steps={['Eat', 'Code', 'Sleep', 'Repeat']} />
             ))}
         </Stack>
@@ -40,7 +41,7 @@ export const ThemedAndColored = () => {
     return (
         <Stack spacing={5}>
             {['filled', 'outlined']
-                .map((variant, index) => (
+                .map((variant: 'filled' | 'outlined', index) => (
                     <Box key={index} sx={{ display: 'flex', flexDirection: 'column', gap: '2em' }}>
                         <Stack key={`${variant}-${index}`} direction="row" spacing={5}>
                             {[undefined, 'primary', 'secondary', 'info', 'success', 'error', '#df01fd'].map(
@@ -75,7 +76,7 @@ export const ThemedAndColored = () => {
 };
 
 export const Icon = () => {
-    const steps = [
+    const steps: TimeLineStepProps[] = [
         { title: 'Eat', icon: <FastfoodIcon /> },
         { title: 'Code', icon: <LaptopMacIcon />, color: 'primary' },
         {
@@ -96,7 +97,7 @@ export const Icon = () => {
 };
 
 export const Connector = () => {
-    const steps = [
+    const steps: TimeLineStepProps[] = [
         { title: 'Eat', icon: <FastfoodIcon /> },
         { title: 'Code', icon: <LaptopMacIcon />, color: 'primary' },
         {
@@ -120,7 +121,7 @@ export const Connector = () => {
 };
 
 export const ZigZag = () => {
-    const steps = [
+    const steps: TimeLineStepProps[] = [
         { title: 'Eat', icon: <FastfoodIcon /> },
         { title: 'Code', icon: <LaptopMacIcon />, color: 'primary' },
         {

@@ -23,13 +23,13 @@ export const TimelineConnector = MuiTimelineConnector;
 
 export const TimelineContent = MuiTimelineContent;
 
-export const TimelineDot = styled(MuiTimelineDot, {
+export const TimelineDot: any = styled(MuiTimelineDot, {
     shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
 })`
-    background-color: ${(props) => props.customColor};
+    background-color: ${(props: any) => props.customColor};
     &.MuiTimelineDot-outlined {
         background-color: unset;
-        border-color: ${(props) => props.customColor};
+        border-color: ${(props: any) => props.customColor};
     }
 `;
 

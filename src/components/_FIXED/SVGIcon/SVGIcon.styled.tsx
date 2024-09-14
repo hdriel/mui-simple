@@ -9,6 +9,6 @@ export const SVG = styled(InlineSVG, {
     justify-content: center;
 
     svg {
-        ${(props) => ({ ...props })}
+        ${(props: any) => ({ ...props })}
     }
 `;

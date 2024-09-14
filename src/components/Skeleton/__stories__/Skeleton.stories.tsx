@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { MoreVert as MoreVertIcon } from '@mui/icons-material';
 import { Box, Card, CardContent, CardHeader, CardMedia, Grid, Stack } from '@mui/material';
 
 import Avatar from '../../_FIXED/Avatar/Avatar';
-
-import Skeleton from '../Skeleton';
 import Typography from '../../_FIXED/Typography/Typography';
 import Button from '../../_FIXED/Button/Button';
+import Skeleton from '../Skeleton';
 
-export default {
+const meta: Meta<typeof Skeleton> = {
     title: 'Feedback/Skeleton',
     component: Skeleton,
+    tags: ['autodocs'],
     decorators: [
         (Story) => (
             <div
@@ -27,41 +28,49 @@ export default {
     ],
 };
 
-export const Default = () => {
-    return <Skeleton loading />;
+export default meta;
+
+type Story = StoryObj<typeof Skeleton>;
+
+export const Default: Story = {
+    args: {
+        loading: true,
+    },
 };
 
-export const TextSkeleton = () => {
+export const TextSkeleton_ = (args) => {
     return (
         <Stack spacing={3} direction={'row'}>
-            <Skeleton loading>
+            <Skeleton {...args} loading>
                 <Typography>Typography text</Typography>
             </Skeleton>
-            <Skeleton loading>original text</Skeleton>
-            <Skeleton loading>
+            <Skeleton {...args} loading>
+                original text
+            </Skeleton>
+            <Skeleton {...args} loading>
                 <span>span text</span>
             </Skeleton>
         </Stack>
     );
 };
 
-export const AvatarSkeleton = () => {
+export const AvatarSkeleton_ = (args) => {
     return (
         <Stack spacing={3} direction={'row'}>
-            <Skeleton loading>
+            <Skeleton {...args} loading>
                 <Avatar size={'50px'} />
             </Skeleton>
-            <Skeleton loading>
+            <Skeleton {...args} loading>
                 <Avatar size={'100px'} />
             </Skeleton>
-            <Skeleton loading>
+            <Skeleton {...args} loading>
                 <Avatar />
             </Skeleton>
         </Stack>
     );
 };
 
-export const Dynamic = () => {
+export const Dynamic_ = (args) => {
     const [loading, setLoading] = useState(false);
 
     return (
@@ -71,15 +80,15 @@ export const Dynamic = () => {
             </Grid>
             <Grid item container xs={12}>
                 <Grid item xs>
-                    <Skeleton loading={loading}>
+                    <Skeleton {...args} loading={loading}>
                         <Avatar size={'50px'} />
                     </Skeleton>
                 </Grid>
                 <Grid item xs={10}>
-                    <Skeleton loading={loading}>
+                    <Skeleton {...args} loading={loading}>
                         <Typography>Typography text</Typography>
                     </Skeleton>
-                    <Skeleton loading={loading}>
+                    <Skeleton {...args} loading={loading}>
                         <Typography>a long long long long text text text text text</Typography>
                     </Skeleton>
                 </Grid>
@@ -88,7 +97,7 @@ export const Dynamic = () => {
     );
 };
 
-export const Timeout = () => {
+export const Timeout_ = (args) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -99,15 +108,15 @@ export const Timeout = () => {
         <Grid container>
             <Grid item container xs={12}>
                 <Grid item xs>
-                    <Skeleton loading={loading}>
+                    <Skeleton {...args} loading={loading}>
                         <Avatar size={'50px'} />
                     </Skeleton>
                 </Grid>
                 <Grid item xs={10}>
-                    <Skeleton loading={loading}>
+                    <Skeleton {...args} loading={loading}>
                         <Typography>Typography text</Typography>
                     </Skeleton>
-                    <Skeleton loading={loading}>
+                    <Skeleton {...args} loading={loading}>
                         <Typography>a long long long long text text text text text</Typography>
                     </Skeleton>
                 </Grid>
@@ -116,14 +125,14 @@ export const Timeout = () => {
     );
 };
 
-export const FullCardExample = () => {
-    return (
-        <Box>
-            <CardExample loading />
-            <CardExample />
-        </Box>
-    );
-};
+// export const FullCardExample_ = () => {
+//     return (
+//         <Box>
+//             <CardExample loading />
+//             <CardExample />
+//         </Box>
+//     );
+// };
 
 // const CardExample = ({ loading }) => (
 //   <Skeleton animation="wave" width="100%" loading={loading}>
@@ -135,11 +144,11 @@ export const FullCardExample = () => {
 //     />
 //   </Skeleton>
 // );
-const CardExample = ({ loading }) => (
+const CardExample_ = ({ loading, ...args }) => (
     <Card sx={{ maxWidth: 345, m: 2 }}>
         <CardHeader
             avatar={
-                <Skeleton animation="wave" loading={loading}>
+                <Skeleton {...args} animation="wave" loading={loading}>
                     <Avatar
                         alt="Ted talk"
                         src="https://pbs.twimg.com/profile_images/877631054525472768/Xp5FAPD5_reasonably_small.jpg"
@@ -148,17 +157,24 @@ const CardExample = ({ loading }) => (
             }
             action={loading ? null : <Button icon={<MoreVertIcon />} />}
             title={
-                <Skeleton animation="wave" height={10} width="80%" style={{ marginBottom: 6 }} loading={loading}>
+                <Skeleton
+                    {...args}
+                    animation="wave"
+                    height={10}
+                    width="80%"
+                    style={{ marginBottom: 6 }}
+                    loading={loading}
+                >
                     Ted
                 </Skeleton>
             }
             subheader={
-                <Skeleton animation="wave" height={10} width="40%" loading={loading}>
+                <Skeleton {...args} animation="wave" height={10} width="40%" loading={loading}>
                     5 hours ago
                 </Skeleton>
             }
         />
-        <Skeleton animation="wave" width="100%" loading={loading}>
+        <Skeleton {...args} animation="wave" width="100%" loading={loading}>
             <CardMedia
                 component="img"
                 height="140"
@@ -169,7 +185,7 @@ const CardExample = ({ loading }) => (
 
         <CardContent>
             <React.Fragment>
-                <Skeleton animation="wave" style={{ marginBottom: 6 }} width={'90%'} loading={loading}>
+                <Skeleton {...args} animation="wave" style={{ marginBottom: 6 }} width={'90%'} loading={loading}>
                     <Typography
                         variant="body2"
                         muiColor="text.secondary"
@@ -182,7 +198,7 @@ const CardExample = ({ loading }) => (
                         success
                     </Typography>
                 </Skeleton>
-                <Skeleton animation="wave" height={10} width="80%" />
+                <Skeleton {...args} animation="wave" height={10} width="80%" />
             </React.Fragment>
         </CardContent>
     </Card>

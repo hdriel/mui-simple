@@ -12,17 +12,20 @@ import Typography from '../_FIXED/Typography/Typography';
 import { useCustomColor } from '../../utils/helpers';
 
 interface TimeLineItemProps {
-    variant: 'filled' | 'outlined';
-    color: string;
-    icon: string | React.ReactNode | React.ReactElement;
-    title: string;
-    subtitle: string;
-    time: string;
-    timeFormat: string;
-    connector: boolean;
-    connectorColor: string;
-    connectorHeight: string | number;
-    connectorWidth: string | number;
+    variant?: 'filled' | 'outlined';
+    color?: string;
+    icon?: string | React.ReactNode | React.ReactElement;
+    title?: string;
+    subtitle?: string;
+    timeWidth?: string | number;
+    titleWidth?: string | number;
+    time?: string;
+    timeFormat?: string;
+    connector?: boolean;
+    connectorColor?: string;
+    connectorHeight?: string | number;
+    connectorWidth?: string | number;
+    [key: string]: any;
 }
 
 const TimelineItem: React.FC<TimeLineItemProps> = ({
@@ -60,7 +63,7 @@ const TimelineItem: React.FC<TimeLineItemProps> = ({
             }
 
             <TimelineSeparator>
-                <TimelineDot variant={variant} color={muiColor} customColor={muiColor ? undefined : customColor}>
+                <TimelineDot variant={variant} color={muiColor as any} customColor={muiColor ? undefined : customColor}>
                     {icon}
                 </TimelineDot>
                 {connector && (

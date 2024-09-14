@@ -39,7 +39,8 @@ const Snackbar: React.FC<PropsWithChildren<SnackbarProps>> = ({
                 )
                 ?.map((action, index) =>
                     isValidElement(action) ? (
-                        cloneElement(action, { key: index, color: action.props.color ?? 'inherit' })
+                        // @ts-ignore
+                        cloneElement(action, { key: index, color: action.props?.color ?? 'inherit' })
                     ) : (
                         <Button
                             key={index}

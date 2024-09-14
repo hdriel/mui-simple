@@ -3,5 +3,5 @@ lib
 **/__stories__
 public
 dist
-.eslintrc*
+.eslintrc.js
 !.storybook

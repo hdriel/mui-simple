@@ -3,7 +3,7 @@ src
 rollup.*
 .cz.toml
 .eslintignore
-.eslintrc
+.eslintrc.js
 .prettierrc.cjs
 tsconfig.json
 public

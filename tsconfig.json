@@ -24,6 +24,7 @@
         "strict": false,
         "strictNullChecks": false,
         "target": "esnext",
+        "suppressImplicitAnyIndexErrors": true,
         "typeRoots": ["./src/@types"],
         "paths": {
             "src/*": ["./src/*"]

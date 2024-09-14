@@ -34,7 +34,15 @@ export const Accordion = styled(
 `;
 
 export const AccordionSummary = styled(
-    ({ label, ...props }: AccordionSummaryProps) => <MuiAccordionSummary {...props} />,
+    ({
+        label,
+        ...props
+    }: AccordionSummaryProps & {
+        label?: string;
+        bgColor?: string;
+        titleColor?: string;
+        bottomSecondaryLabel?: boolean;
+    }) => <MuiAccordionSummary {...props} />,
     {
         shouldForwardProp: (propName) =>
             !['bottomSecondaryLabel', 'useCustomStyle', 'bgColor', 'titleColor'].includes(propName as string),

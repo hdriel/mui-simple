@@ -9,12 +9,12 @@ const Chip: React.FC<PropsWithChildren<ChipProps>> = (props): ReactElement | Rea
     const {
         children,
         color,
-        endIcon,
+        endIcon: _endIcon,
         label,
         link: href,
         minWidth,
         onDelete,
-        startIcon,
+        startIcon: _startIcon,
         sx,
         textColor: _textColor,
         width,
@@ -24,7 +24,10 @@ const Chip: React.FC<PropsWithChildren<ChipProps>> = (props): ReactElement | Rea
 
     const [customColor, muiColor] = useCustomColor(color);
     const [textColor] = useCustomColor(_textColor);
-    const linkProps = href && { href, component: 'a', clickable: true };
+    const linkProps: any = href && { href, component: 'a', clickable: true };
+    const startIcon = typeof _startIcon === 'string' ? <SVGIcon>{_startIcon}</SVGIcon> : (_startIcon as any);
+    const endIcon = typeof _endIcon === 'string' ? <SVGIcon>{_endIcon}</SVGIcon> : (_endIcon as any);
+
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     const onDeleteHandler = onDelete ?? (endIcon ? () => {} : undefined);
 
@@ -32,8 +35,8 @@ const Chip: React.FC<PropsWithChildren<ChipProps>> = (props): ReactElement | Rea
         <MuiChip
             color={muiColor as any}
             customColor={muiColor ? undefined : customColor}
-            deleteIcon={typeof endIcon === 'string' ? <SVGIcon>{endIcon}</SVGIcon> : (endIcon as any)}
-            icon={typeof startIcon === 'string' ? <SVGIcon>{startIcon}</SVGIcon> : (startIcon as any)}
+            deleteIcon={endIcon}
+            icon={startIcon}
             label={label ?? children}
             onDelete={onDeleteHandler}
             sx={{ ...sx, minWidth, width: width ?? 'auto' }}

@@ -4,31 +4,35 @@ import TimelineItem from './TimelineItem';
 import { Box } from '@mui/material';
 import { useMaxWidth, useSteps } from './Timeline.hooks';
 
+export interface TimeLineStepProps {
+    variant?: 'filled' | 'outlined';
+    color?: string;
+    connectorColor?: string;
+    connectorHeight?: number;
+    connectorWidth?: number;
+    icon?: string | React.ReactNode | React.ReactElement;
+    title?: string;
+    subtitle?: string;
+    time?: string;
+    timeFormat?: string;
+}
+
+export type TimeLineStepState = string | TimeLineStepProps;
+
 interface TimeLineProps {
-    variant: 'filled' | 'outlined';
-    color: string;
-    connectorColor: string;
-    connectorHeight: string | number;
-    connectorWidth: string | number;
-    connectorStyle: string;
-    timeFormat: string;
-    right: boolean;
-    left: boolean;
-    zigzag: boolean;
-    align: 'right' | 'left' | 'center';
-    steps: Array<
-        | string
-        | {
-              variant: 'filled' | 'outlined';
-              color: string;
-              connectorColor: string;
-              icon: string | React.ReactNode | React.ReactElement;
-              title: string;
-              subtitle: string;
-              time: string;
-              timeFormat: string;
-          }
-    >;
+    variant?: 'filled' | 'outlined';
+    color?: string;
+    connectorColor?: string;
+    connectorHeight?: string | number;
+    connectorWidth?: string | number;
+    connectorStyle?: string;
+    timeFormat?: string;
+    right?: boolean;
+    left?: boolean;
+    zigzag?: boolean;
+    align?: 'right' | 'left' | 'center';
+    position?: any;
+    steps?: Array<TimeLineStepState>;
 }
 
 const Timeline: React.FC<TimeLineProps> = ({
@@ -37,7 +41,7 @@ const Timeline: React.FC<TimeLineProps> = ({
     connectorHeight,
     connectorWidth,
     variant,
-    steps: _steps = [],
+    steps: _steps = [] as Array<TimeLineStepState>,
     timeFormat = 'HH:mm',
     right = false,
     left = false,
@@ -63,7 +67,7 @@ const Timeline: React.FC<TimeLineProps> = ({
     return (
         <Box sx={{ display: 'flex', border: '1px solid', justifyContent: align }}>
             <MuiTimeline position={position} {...props} sx={{ maxWidth: 'max-content' }}>
-                {steps.map((step, index) => (
+                {steps.map((step: TimeLineStepProps, index: number) => (
                     <TimelineItem
                         key={index}
                         {...step}
