@@ -6,9 +6,9 @@ import { borderedStyles, closeIconFade, edgeCorners, selectedColor } from './Tre
 export const TreeView = styled(MuiTreeView, {
     shouldForwardProp: (propName) => !['maxWidth', 'height'].includes(propName as string),
 })`
-    height: ${(props) => props.height};
+    height: ${(props: any) => props.height};
     flex-grow: 1;
-    max-width: ${(props) => (props.maxWidth ? `${props.maxWidth}px` : undefined)};
+    max-width: ${(props: any) => (props.maxWidth ? `${props.maxWidth}px` : undefined)};
     overflow-y: auto;
     overflow-x: hidden;
 `;

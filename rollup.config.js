@@ -60,7 +60,10 @@ export default [
         plugins: [
             del({ targets: 'dist/*' }),
             peerDepsExternal(),
-            replace({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
+            replace({
+                'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+                preventAssignment: true,
+            }),
             resolve({
                 extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json'],
                 moduleDirectories: ['node_modules'],
@@ -71,7 +74,8 @@ export default [
             }),
             typescript({
                 tsconfig: 'tsconfig.json',
-                ...(sourceMap && { sourceMap: true, inlineSources: true }),
+                sourceMap: sourceMap, // Ensure source maps are enabled for TypeScript
+                inlineSources: sourceMap,
             }),
             babel({
                 babelHelpers: 'bundled',
@@ -81,7 +85,6 @@ export default [
             }),
             json(),
             commonjs(),
-            // commonjs({ include: /node_modules/ }),
             postcss({
                 minimize: true,
                 extensions: ['.css', '.less', '.scss'],
@@ -116,6 +119,13 @@ export default [
         ],
         external: externalDep,
         treeshake: true,
+        onwarn(warning, warn) {
+            // Ignore "use client" warnings
+            if (warning.code === 'MODULE_LEVEL_DIRECTIVE') return;
+            // Ignore "TS5102" warnings
+            // if (warning.code === 'CIRCULAR_DEPENDENCY') return;
+            warn(warning);
+        },
     },
     {
         input: sourceMap ? 'dist/index.d.ts' : 'dist/bundles/index.d.ts',

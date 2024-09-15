@@ -1,6 +1,6 @@
 {
     "name": "mui-simple",
-    "version": "1.13.0",
+    "version": "1.13.3",
     "description": "Override mui components to simplify usage",
     "module": "dist/bundles/bundle.esm.js",
     "main": "dist/bundles/bundle.js",
@@ -13,9 +13,9 @@
     "scripts": {
         "build": "cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=8192 rollup -c rollup.config.js",
         "build:debug": "cross-env NODE_ENV=development NODE_OPTIONS=--max-old-space-size=8192 rollup -c rollup.config.js",
-        "build:storybook": "storybook build",
         "build:ts": "cross-env NODE_OPTIONS=--max-old-space-size=8192 tsc -p tsconfig.json",
         "build:ts-watch": "cross-env NODE_OPTIONS=--max-old-space-size=8192 tsc -p tsconfig.json -w",
+        "build-storybook": "storybook build",
         "deploy": "gh-pages -d storybook-static",
         "install-deps": "npm install --ignore-scripts --force",
         "predeploy": "npm run build-storybook",
@@ -68,6 +68,7 @@
         "@emotion/is-prop-valid": "^1.2.2",
         "@mui/system": "^5.8.0",
         "@mui/utils": "^5.15.1",
+        "@mui/lab": "5.0.0-alpha.134",
         "@react-spring/web": "^9.7.3",
         "@testing-library/jest-dom": "^6.4.6",
         "@testing-library/react": "^16.0.0",
