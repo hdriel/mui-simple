@@ -168,6 +168,15 @@ export const PaginationFeature: Story = {
     },
 };
 
+export const PaginationOnePage: Story = {
+    args: {
+        columns: FITNESS_COLUMNS,
+        data: FITNESS_DATA.slice(0, 1),
+        pagination: { page: 0, rowsPerPage: 5, total: 1 },
+        paginationAlign: 'center',
+    },
+};
+
 export const PaginationAlign: Story = {
     args: {
         columns: FITNESS_COLUMNS,
