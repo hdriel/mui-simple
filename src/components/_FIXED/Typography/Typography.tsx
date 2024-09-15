@@ -2,16 +2,17 @@ import React from 'react';
 import type { TextEllipsisProps } from '../../decs';
 import Text from './Text';
 import TextEllipsis from './TextEllipsis';
+import { setDefaultValue } from '../../../utils/helpers';
 
 // todo: add commend to autodocs
 const Typography: React.FC<TextEllipsisProps> = (props): React.ReactElement | React.ReactNode => {
-    props.autoWidth = props.autoWidth === undefined ? true : props.autoWidth;
-    props.component = props.component === undefined ? 'span' : props.component;
-    props.dynamicEllipsis = props.dynamicEllipsis === undefined ? true : props.dynamicEllipsis;
-    props.isEllipsis = props.isEllipsis === undefined ? false : props.isEllipsis;
-    props.showTooltipOnEllipsis = props.showTooltipOnEllipsis === undefined ? true : props.showTooltipOnEllipsis;
-    props.size = props.size === undefined ? 'inherit' : props.size;
-    props.tooltip = props.tooltip === undefined ? false : props.tooltip;
+    props = setDefaultValue(props, 'autoWidth', true);
+    props = setDefaultValue(props, 'component', 'span');
+    props = setDefaultValue(props, 'dynamicEllipsis', true);
+    props = setDefaultValue(props, 'isEllipsis', false);
+    props = setDefaultValue(props, 'showTooltipOnEllipsis', true);
+    props = setDefaultValue(props, 'size', 'inherit');
+    props = setDefaultValue(props, 'tooltip', false);
 
     return [props.showTooltipOnEllipsis, props.onEllipsisChange].some((v) => v) ? (
         <TextEllipsis {...props} />
