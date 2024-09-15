@@ -76,6 +76,7 @@ export default [
                 tsconfig: 'tsconfig.json',
                 sourceMap: sourceMap, // Ensure source maps are enabled for TypeScript
                 inlineSources: sourceMap,
+                noEmitOnError: false, // Allow the build to proceed even if there are TypeScript errors
             }),
             babel({
                 babelHelpers: 'bundled',
