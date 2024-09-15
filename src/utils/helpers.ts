@@ -16,8 +16,11 @@ export function setDisplayName(component, name): void {
     component.displayName = name;
 }
 
-export function setDefaultValue(obj: Record<string, any>, propName: string, defaultValue: any): void {
-    obj[propName] = obj[propName] === undefined ? defaultValue : obj[propName];
+export function setDefaultValue(obj: Record<string, any>, propName: string, defaultValue: any): Record<string, any> {
+    return {
+        ...obj,
+        [propName]: obj[propName] === undefined ? defaultValue : obj[propName],
+    };
 }
 
 export function getCapitalLetters(str): [string, string?] {

@@ -20,17 +20,17 @@ export const TextField = styled((props) => <Input {...props} type="text" />, {
 })`` as ComponentType<InputNumberProps>;
 
 const InputNumber: React.FC<InputNumberProps> = (props): React.ReactElement | React.ReactNode => {
-    setDefaultValue(props, 'allowEmptyFormatting', true);
-    setDefaultValue(props, 'colorActive', 'primary');
-    setDefaultValue(props, 'decimal', 2);
-    setDefaultValue(props, 'fixedDecimalScale', true);
-    setDefaultValue(props, 'mask', '_');
-    setDefaultValue(props, 'patternChar', '#');
-    setDefaultValue(props, 'selectAllOnFocus', true);
-    setDefaultValue(props, 'slider', true);
-    setDefaultValue(props, 'sliderTooltip', 'slider');
-    setDefaultValue(props, 'thousandSeparator', true);
-    setDefaultValue(props, 'valueIsNumericString', true);
+    props = setDefaultValue(props, 'allowEmptyFormatting', true);
+    props = setDefaultValue(props, 'colorActive', 'primary');
+    props = setDefaultValue(props, 'decimal', 2);
+    props = setDefaultValue(props, 'fixedDecimalScale', true);
+    props = setDefaultValue(props, 'mask', '_');
+    props = setDefaultValue(props, 'patternChar', '#');
+    props = setDefaultValue(props, 'selectAllOnFocus', true);
+    props = setDefaultValue(props, 'slider', true);
+    props = setDefaultValue(props, 'sliderTooltip', 'slider');
+    props = setDefaultValue(props, 'thousandSeparator', true);
+    props = setDefaultValue(props, 'valueIsNumericString', true);
 
     const {
         colorActive,

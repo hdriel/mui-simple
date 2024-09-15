@@ -5,7 +5,7 @@ import SVGIcon from '../SVGIcon/SVGIcon';
 import { setDefaultValue } from '../../../utils/helpers';
 
 const InputText: React.FC<InputTextProps> = function InputText(props): React.ReactElement {
-    setDefaultValue(props, 'type', 'text');
+    props = props = setDefaultValue(props, 'type', 'text');
 
     const { value, showLimitIndicatorFrom, limitIndicator, endCmp, copyAction, ...rest } = props;
     const count: number = value?.length ?? 0;

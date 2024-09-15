@@ -64,8 +64,9 @@ const InputGoogleAddress: React.FC<InputGoogleAddressProps> = ({
 
     useEffect(() => {
         let active = true;
-
+        // @ts-ignore
         if (!autocompleteService.current && window.google) {
+            // @ts-ignore
             autocompleteService.current = new window.google.maps.places.AutocompleteService();
         }
 

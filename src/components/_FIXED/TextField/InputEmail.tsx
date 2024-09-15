@@ -4,9 +4,9 @@ import type { InputBaseProps } from '../../decs';
 import { setDefaultValue } from '../../../utils/helpers';
 
 const InputEmail: React.FC<InputBaseProps> = function ({ hideCmpOnEmpty, ...props }) {
-    setDefaultValue(props, 'hideStartActionsOnEmpty', true);
-    setDefaultValue(props, 'placeholder', 'Email');
-    setDefaultValue(props, 'type', 'email');
+    props = setDefaultValue(props, 'hideStartActionsOnEmpty', true);
+    props = setDefaultValue(props, 'placeholder', 'Email');
+    props = setDefaultValue(props, 'type', 'email');
 
     return <Input {...props} type="email" />;
 };

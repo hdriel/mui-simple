@@ -13,27 +13,27 @@ import LocalizationProvider from './LocalizationProvider';
 import { isDefined, setDefaultValue } from '../../../utils/helpers';
 
 const InputTime: React.FC<InputTimeProps> = (props): React.ReactElement | React.ReactNode => {
-    setDefaultValue(props, 'adapterLocale', AdapterDayjs);
-    setDefaultValue(props, 'alignActions', 'baseline');
-    setDefaultValue(props, 'alignActionsExternal', 'baseline');
-    setDefaultValue(props, 'ampm', false);
-    setDefaultValue(props, 'ampmInClock', false);
-    setDefaultValue(props, 'autoComplete', 'off');
-    setDefaultValue(props, 'clearable', true);
-    setDefaultValue(props, 'cmpSpacing', 2);
-    setDefaultValue(props, 'copyIcon', 'ContentCopy');
-    setDefaultValue(props, 'copyMessage', 'Copied!');
-    setDefaultValue(props, 'direction', 'ltr');
-    setDefaultValue(props, 'format', 'HH:mm');
-    setDefaultValue(props, 'fullWidth', true);
-    setDefaultValue(props, 'hideStartActionsOnEmpty', true);
-    setDefaultValue(props, 'loading', false);
-    setDefaultValue(props, 'locale', 'he');
-    setDefaultValue(props, 'orientation', 'portrait');
-    setDefaultValue(props, 'pickerVariant', 'desktop');
-    setDefaultValue(props, 'timezone', 'Asia/Jerusalem');
-    setDefaultValue(props, 'useLocalizationProvider', false);
-    setDefaultValue(props, 'variant', 'outlined');
+    props = setDefaultValue(props, 'adapterLocale', AdapterDayjs);
+    props = setDefaultValue(props, 'alignActions', 'baseline');
+    props = setDefaultValue(props, 'alignActionsExternal', 'baseline');
+    props = setDefaultValue(props, 'ampm', false);
+    props = setDefaultValue(props, 'ampmInClock', false);
+    props = setDefaultValue(props, 'autoComplete', 'off');
+    props = setDefaultValue(props, 'clearable', true);
+    props = setDefaultValue(props, 'cmpSpacing', 2);
+    props = setDefaultValue(props, 'copyIcon', 'ContentCopy');
+    props = setDefaultValue(props, 'copyMessage', 'Copied!');
+    props = setDefaultValue(props, 'direction', 'ltr');
+    props = setDefaultValue(props, 'format', 'HH:mm');
+    props = setDefaultValue(props, 'fullWidth', true);
+    props = setDefaultValue(props, 'hideStartActionsOnEmpty', true);
+    props = setDefaultValue(props, 'loading', false);
+    props = setDefaultValue(props, 'locale', 'he');
+    props = setDefaultValue(props, 'orientation', 'portrait');
+    props = setDefaultValue(props, 'pickerVariant', 'desktop');
+    props = setDefaultValue(props, 'timezone', 'Asia/Jerusalem');
+    props = setDefaultValue(props, 'useLocalizationProvider', false);
+    props = setDefaultValue(props, 'variant', 'outlined');
 
     const {
         // views=['year', 'month', 'day'],

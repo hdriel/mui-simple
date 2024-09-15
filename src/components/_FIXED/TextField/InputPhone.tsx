@@ -4,10 +4,10 @@ import type { InputPhoneProps } from '../../decs';
 import { setDefaultValue } from '../../../utils/helpers';
 
 const InputPhone: React.FC<InputPhoneProps> = ({ innerRef, ...props }): React.ReactElement | React.ReactNode => {
-    setDefaultValue(props, 'definitions', { '#': /[1-9]/ });
-    setDefaultValue(props, 'direction', 'ltr');
-    setDefaultValue(props, 'value', '');
-    setDefaultValue(props, 'mask', '000-000-0000');
+    props = setDefaultValue(props, 'definitions', { '#': /[1-9]/ });
+    props = setDefaultValue(props, 'direction', 'ltr');
+    props = setDefaultValue(props, 'value', '');
+    props = setDefaultValue(props, 'mask', '000-000-0000');
 
     const ref = useRef(null);
     return <InputPattern inputRef={innerRef} type="tel" {...props} />;

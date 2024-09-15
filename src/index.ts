@@ -1,6 +1,3 @@
-const { version } = require('../package.json');
-console.log(`mui-simple v${version}`);
-
 export { default as Accordion } from './components/_FIXED/Accordion/Accordion';
 export type { AccordionProps } from './components/_FIXED/Accordion/Accordion';
 
@@ -189,7 +186,7 @@ export type { ToggleButtonGroupsProps } from './components/_FIXED/ToggleButtonGr
 export { default as Tooltip } from './components/_FIXED/Tooltip/Tooltip';
 export type { TooltipProps } from './components/_FIXED/Tooltip/Tooltip';
 
-// export * from './components/_FIXED/TreeView';
+export * from './components/_FIXED/TreeView';
 
 export { default as Typography } from './components/_FIXED/Typography/Typography';
 

@@ -45,11 +45,11 @@ const MaskedInput: any = IMaskMixin(
 );
 
 const InputPattern: React.FC<InputPatternProps> = (props): React.ReactElement | React.ReactNode => {
-    setDefaultValue(props, 'direction', 'ltr');
-    setDefaultValue(props, 'copyMessage', 'Copied');
-    setDefaultValue(props, 'copyIcon', 'ContentCopy');
-    setDefaultValue(props, 'copyValueHandler', (value, unmaskvalue) => unmaskvalue);
-    setDefaultValue(props, 'value', ''); // stay this value, to prevent from component to be disabled on missing provider value
+    props = setDefaultValue(props, 'direction', 'ltr');
+    props = setDefaultValue(props, 'copyMessage', 'Copied');
+    props = setDefaultValue(props, 'copyIcon', 'ContentCopy');
+    props = setDefaultValue(props, 'copyValueHandler', (value, unmaskvalue) => unmaskvalue);
+    props = setDefaultValue(props, 'value', ''); // stay this value, to prevent from component to be disabled on missing provider value
 
     const {
         copyMessage,

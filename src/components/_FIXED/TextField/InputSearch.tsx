@@ -6,11 +6,11 @@ import SVGIcon from '../SVGIcon/SVGIcon';
 import { setDefaultValue } from '../../../utils/helpers';
 
 const InputSearch: React.FC<InputSearchProps> = ({ searchIcon: _searchIcon, onChange, ...props }) => {
-    setDefaultValue(props, 'debounceDelay', 500);
-    setDefaultValue(props, 'placeholder', 'Search...');
-    setDefaultValue(props, 'searchIcon', 'Search');
-    setDefaultValue(props, 'type', 'search');
-    setDefaultValue(props, 'hideStartActionsOnEmpty', true);
+    props = setDefaultValue(props, 'debounceDelay', 500);
+    props = setDefaultValue(props, 'placeholder', 'Search...');
+    props = setDefaultValue(props, 'searchIcon', 'Search');
+    props = setDefaultValue(props, 'type', 'search');
+    props = setDefaultValue(props, 'hideStartActionsOnEmpty', true);
 
     const searchIcon = typeof _searchIcon === 'string' ? <SVGIcon>{_searchIcon}</SVGIcon> : _searchIcon;
     const onChangeHandler = (event): void => onChange?.(event);

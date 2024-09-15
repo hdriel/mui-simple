@@ -15,29 +15,29 @@ import LocalizationProvider from './LocalizationProvider';
 import { isDefined, setDefaultValue } from '../../../utils/helpers';
 
 const InputDate: React.FC<InputDateProps> = (props): React.ReactElement | React.ReactNode => {
-    setDefaultValue(props, 'alignActions', 'baseline');
-    setDefaultValue(props, 'alignActionsExternal', 'baseline');
-    setDefaultValue(props, 'autoComplete', 'off');
-    setDefaultValue(props, 'cmpSpacing', 2);
-    setDefaultValue(props, 'copyIcon', 'ContentCopy');
-    setDefaultValue(props, 'copyMessage', 'Copied!');
-    setDefaultValue(props, 'direction', 'ltr');
-    setDefaultValue(props, 'fullWidth', true);
-    setDefaultValue(props, 'hideStartActionsOnEmpty', true);
-    setDefaultValue(props, 'type', 'date');
-    setDefaultValue(props, 'variant', 'outlined');
-    setDefaultValue(props, 'useLocalizationProvider', false);
-    setDefaultValue(props, 'timezone', 'Asia/Jerusalem');
-    setDefaultValue(props, 'locale', 'he');
-    setDefaultValue(props, 'adapterLocale', AdapterDayjs);
-    setDefaultValue(props, 'pickerVariant', 'desktop');
-    setDefaultValue(props, 'views', ['year', 'month', 'day']);
-    setDefaultValue(props, 'orientation', 'portrait');
-    setDefaultValue(props, 'clearable', true);
-    setDefaultValue(props, 'displayWeekNumber', false);
-    setDefaultValue(props, 'showDaysOutsideCurrentMonth', true);
-    setDefaultValue(props, 'loading', false);
-    setDefaultValue(props, 'format', 'DD-MM-YYYY');
+    props = setDefaultValue(props, 'alignActions', 'baseline');
+    props = setDefaultValue(props, 'alignActionsExternal', 'baseline');
+    props = setDefaultValue(props, 'autoComplete', 'off');
+    props = setDefaultValue(props, 'cmpSpacing', 2);
+    props = setDefaultValue(props, 'copyIcon', 'ContentCopy');
+    props = setDefaultValue(props, 'copyMessage', 'Copied!');
+    props = setDefaultValue(props, 'direction', 'ltr');
+    props = setDefaultValue(props, 'fullWidth', true);
+    props = setDefaultValue(props, 'hideStartActionsOnEmpty', true);
+    props = setDefaultValue(props, 'type', 'date');
+    props = setDefaultValue(props, 'variant', 'outlined');
+    props = setDefaultValue(props, 'useLocalizationProvider', false);
+    props = setDefaultValue(props, 'timezone', 'Asia/Jerusalem');
+    props = setDefaultValue(props, 'locale', 'he');
+    props = setDefaultValue(props, 'adapterLocale', AdapterDayjs);
+    props = setDefaultValue(props, 'pickerVariant', 'desktop');
+    props = setDefaultValue(props, 'views', ['year', 'month', 'day']);
+    props = setDefaultValue(props, 'orientation', 'portrait');
+    props = setDefaultValue(props, 'clearable', true);
+    props = setDefaultValue(props, 'displayWeekNumber', false);
+    props = setDefaultValue(props, 'showDaysOutsideCurrentMonth', true);
+    props = setDefaultValue(props, 'loading', false);
+    props = setDefaultValue(props, 'format', 'DD-MM-YYYY');
 
     const {
         value: _value,

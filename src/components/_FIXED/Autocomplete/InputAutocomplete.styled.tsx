@@ -36,7 +36,8 @@ export const renderHighlightOptionCB = (fieldValue: any): RenderOptionCB => {
         { inputValue, index, selected } = { inputValue: '', index: 0, selected: false }
     ) => {
         const optionValue = typeof fieldValue === 'function' ? fieldValue(option) : fieldValue;
-        const matches = match(optionValue, inputValue?.toLowerCase());
+
+        const matches = (optionValue && match(optionValue, inputValue?.toLowerCase())) || [];
         const parts = parse(optionValue, matches);
 
         return (

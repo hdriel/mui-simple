@@ -8,19 +8,19 @@ import type { InputPasswordProps } from '../../decs';
 import SVGIcon from '../SVGIcon/SVGIcon';
 
 const InputPassword: React.FC<InputPasswordProps> = (props) => {
-    setDefaultValue(props, 'copyAction', true); // undefined - probably not always we want this action
-    setDefaultValue(props, 'copyIcon', 'ContentCopy');
-    setDefaultValue(props, 'copyMessage', 'Copied to clipboard');
-    setDefaultValue(props, 'copyTooltip', 'Copy');
-    setDefaultValue(props, 'generatePasswordTooltip', 'generate new password');
-    setDefaultValue(props, 'generateRandom', 8);
-    setDefaultValue(props, 'generateRandomAction', true); // undefined - probably not always we want this action
-    setDefaultValue(props, 'generateRandomCmp', 'LockReset');
-    setDefaultValue(props, 'hidePasswordOnClickAway', true);
-    setDefaultValue(props, 'showPasswordAction', true);
-    setDefaultValue(props, 'showPasswordOnCmp', 'VisibilityOff');
-    setDefaultValue(props, 'showPasswordOffCmp', 'Visibility');
-    setDefaultValue(props, 'type', 'password');
+    props = setDefaultValue(props, 'copyAction', true); // undefined - probably not always we want this action
+    props = setDefaultValue(props, 'copyIcon', 'ContentCopy');
+    props = setDefaultValue(props, 'copyMessage', 'Copied to clipboard');
+    props = setDefaultValue(props, 'copyTooltip', 'Copy');
+    props = setDefaultValue(props, 'generatePasswordTooltip', 'generate new password');
+    props = setDefaultValue(props, 'generateRandom', 8);
+    props = setDefaultValue(props, 'generateRandomAction', true); // undefined - probably not always we want this action
+    props = setDefaultValue(props, 'generateRandomCmp', 'LockReset');
+    props = setDefaultValue(props, 'hidePasswordOnClickAway', true);
+    props = setDefaultValue(props, 'showPasswordAction', true);
+    props = setDefaultValue(props, 'showPasswordOnCmp', 'VisibilityOff');
+    props = setDefaultValue(props, 'showPasswordOffCmp', 'Visibility');
+    props = setDefaultValue(props, 'type', 'password');
 
     const {
         copyAction,

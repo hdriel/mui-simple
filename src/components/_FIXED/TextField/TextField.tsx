@@ -23,17 +23,17 @@ hideStartActionsOnEmpty = true,
         variant = 'outlined',
  */
 const TextField: React.FC<InputBaseProps> = function TextField(props): React.ReactElement {
-    setDefaultValue(props, 'alignActions', 'baseline');
-    setDefaultValue(props, 'alignActionsExternal', 'baseline');
-    setDefaultValue(props, 'autoComplete', 'off');
-    setDefaultValue(props, 'cmpSpacing', 2);
-    setDefaultValue(props, 'copyIcon', 'ContentCopy');
-    setDefaultValue(props, 'copyMessage', 'Copied!');
-    setDefaultValue(props, 'direction', 'ltr');
-    setDefaultValue(props, 'fullWidth', true);
-    setDefaultValue(props, 'hideStartActionsOnEmpty', true);
-    setDefaultValue(props, 'type', 'text');
-    setDefaultValue(props, 'variant', 'outlined');
+    props = setDefaultValue(props, 'alignActions', 'baseline');
+    props = setDefaultValue(props, 'alignActionsExternal', 'baseline');
+    props = setDefaultValue(props, 'autoComplete', 'off');
+    props = setDefaultValue(props, 'cmpSpacing', 2);
+    props = setDefaultValue(props, 'copyIcon', 'ContentCopy');
+    props = setDefaultValue(props, 'copyMessage', 'Copied!');
+    props = setDefaultValue(props, 'direction', 'ltr');
+    props = setDefaultValue(props, 'fullWidth', true);
+    props = setDefaultValue(props, 'hideStartActionsOnEmpty', true);
+    props = setDefaultValue(props, 'type', 'text');
+    props = setDefaultValue(props, 'variant', 'outlined');
 
     const {
         alignActions,
