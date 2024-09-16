@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { useTreeItem } from '@mui/lab';
+import { useTreeItem } from '@mui/x-tree-view/TreeItem';
 import { TreeItem } from './TreeView.styled';
 
 export function withTreeViewItem(Component: any, TreeItemComponent: any = TreeItem, externalItemProps: any = {}) {

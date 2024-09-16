@@ -86,6 +86,7 @@ export default [
             }),
             json(),
             commonjs(),
+            // commonjs({ include: /node_modules/ }),
             postcss({
                 minimize: true,
                 extensions: ['.css', '.less', '.scss'],
