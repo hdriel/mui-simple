@@ -13,11 +13,13 @@ import type { DatePickerProps } from '@mui/x-date-pickers/DatePicker';
 import type { DateTimePickerProps } from '@mui/x-date-pickers/DateTimePicker';
 import type { TimePickerProps } from '@mui/x-date-pickers/TimePicker';
 import type { CloseReason, OpenReason, SxProps } from '@mui/material';
+import SvgIcon from '@mui/material/SvgIcon';
 import type { TIMEZONE } from './timezone';
 import type { LOCALE, ADAPTER_LOCALE } from './locales';
 export type AppBarPosition = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
 
-type IconType = IconName | ReactNode | ReactElement;
+type SvgIconComponent = typeof SvgIcon;
+type IconType = IconName | ReactNode | ReactElement | SvgIconComponent;
 type ElementType = React.ForwardRefExoticComponent<any> | ReactElement | ReactNode;
 
 export interface AppBarProps {
@@ -1044,7 +1046,7 @@ export interface SwitchProps {
 }
 
 type Range =
-    | [number, number, number, number] // [min, max, step, marksRange]
+    | [number, number, number?, number?] // [min, max, step, marksRange]
     | {
           min?: number;
           max?: number;

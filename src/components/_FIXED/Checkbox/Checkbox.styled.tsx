@@ -43,7 +43,7 @@ export const Checkbox = styled(
                             label
                         ) : (
                             <Typography sx={{ fontSize, color: textColor, ...sxLabel }} {...labelProps}>
-                                {label}
+                                {label as React.ReactNode}
                             </Typography>
                         )
                     }

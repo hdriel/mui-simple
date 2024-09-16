@@ -6,7 +6,7 @@ import { Divider as MuiDivider } from './Divider.styled';
 import { isDefined, numberToPx, useCustomColor } from '../../../utils/helpers';
 import type { DividerProps } from '../../decs';
 import Chip from '../Chip/Chip';
-import SVGIcon from 'src/components/_FIXED/SVGIcon/SVGIcon';
+import SVGIcon from '../SVGIcon/SVGIcon';
 
 const Divider: React.FC<PropsWithChildren<DividerProps>> = ({
     children,
