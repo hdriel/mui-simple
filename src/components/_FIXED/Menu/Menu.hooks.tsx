@@ -104,7 +104,7 @@ export function useAnchorProps({
         }
 
         if (anchorElementRef?.current ?? anchorEl) {
-            const { vertical, horizontal } = anchorPosition ?? {};
+            const { vertical, horizontal } = (anchorPosition ?? {}) as any;
 
             const position =
                 vertical || horizontal

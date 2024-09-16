@@ -92,7 +92,7 @@ const InputTime: React.FC<InputTimeProps> = (props): React.ReactElement | React.
     });
 
     const sxStyles = isDefined(width) && { sx: { ...rest.sx, width } };
-    const pickerProps = {
+    const pickerProps: any = {
         ...rest,
         value,
         label,

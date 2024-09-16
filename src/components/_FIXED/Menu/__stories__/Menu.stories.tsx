@@ -212,7 +212,7 @@ export const Options: Story = {
     render: (args) => {
         return (
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                <Menu {...args} open options={options.map((option) => ({ ...option, check: true }))}>
+                <Menu {...args} open options={options.map((option: any) => ({ ...option, check: true }))}>
                     <Button>Checked List</Button>
                 </Menu>
                 <Menu {...args} open options={optionLongList}>

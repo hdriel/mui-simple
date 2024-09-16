@@ -53,11 +53,11 @@ export const CircularProgress = styled(
         </BoxWrapper>
     ),
     {
-        shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
+        shouldForwardProp: (propName: string) => !['customColor'].includes(propName as string),
     }
 )`
     &.MuiCircularProgress-root {
-        color: ${(props) => props.customColor};
+        color: ${(props: any) => props.customColor};
     }
     //animation-duration: 760ms;
 ` as ComponentType<CircularProgressStyledPropsType>;

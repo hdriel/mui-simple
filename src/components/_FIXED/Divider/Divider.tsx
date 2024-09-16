@@ -6,6 +6,13 @@ import { Divider as MuiDivider } from './Divider.styled';
 import { isDefined, numberToPx, useCustomColor } from '../../../utils/helpers';
 import type { DividerProps } from '../../decs';
 import Chip from '../Chip/Chip';
+import SVGIcon from '../SVGIcon/SVGIcon';
+
+function isTagName(tag: string) {
+    if (typeof tag !== 'string') return false;
+    const element = document.createElement(tag);
+    return !(element instanceof HTMLUnknownElement);
+}
 
 const Divider: React.FC<PropsWithChildren<DividerProps>> = ({
     children,
@@ -16,12 +23,19 @@ const Divider: React.FC<PropsWithChildren<DividerProps>> = ({
     orientation,
     sx,
     thickness,
+    component: _component,
     variant = 'middle',
     ...rest
 }): React.ReactElement | React.ReactNode => {
     const theme = useTheme();
     const [color, muiColor] = useCustomColor(_color ?? 'grey');
     const textColor = muiColor ? theme.palette[muiColor]?.contrastText : undefined;
+    const component =
+        typeof _component === 'string' && !isTagName(_component as string) ? (
+            <SVGIcon>{_component}</SVGIcon>
+        ) : (
+            (_component as any)
+        );
 
     const thicknessValue = (thickness !== undefined && numberToPx(thickness)) || 'thin';
     let data: string | React.ReactNode | React.ReactElement | any;
@@ -54,6 +68,7 @@ const Divider: React.FC<PropsWithChildren<DividerProps>> = ({
             color={color}
             thickness={thickness}
             variant={variant}
+            component={component}
             sx={{
                 ...(!content.length && {
                     bgcolor: color,

@@ -8,7 +8,7 @@ import type { AlertProps } from '../../decs';
 import SVGIcon from '../SVGIcon/SVGIcon';
 
 const Alert: React.FC<PropsWithChildren<AlertProps>> = forwardRef(
-    (props: AlertProps, ref): React.ReactElement | React.ReactNode => {
+    (props: AlertProps, ref: any): React.ReactElement | React.ReactNode => {
         const {
             actions,
             children,

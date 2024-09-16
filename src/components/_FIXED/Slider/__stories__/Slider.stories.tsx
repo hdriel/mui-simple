@@ -51,7 +51,7 @@ export const DisablePadding: Story = {
 
 export const DisplayValue_ = (args) => (
     <Stack>
-        {['on', 'off', 'auto'].map((displayValue) => (
+        {['on', 'off', 'auto'].map((displayValue: 'on' | 'off' | 'auto') => (
             <Slider key={displayValue} displayValue={displayValue} label={displayValue} />
         ))}
     </Stack>
@@ -96,16 +96,16 @@ export const OrientationVertical: Story = {
 
 export const Size_ = (args) => (
     <Stack>
-        {['small', 'medium'].map((size) => (
-            <Slider key={size} size={size} label={size} />
+        {['small', 'medium'].map((size: 'small' | 'medium') => (
+            <Slider {...args} key={size} size={size} label={size} />
         ))}
     </Stack>
 );
 
 export const Styles_ = (args) => (
     <Stack>
-        {['ios', 'pretto', 'tooltip', 'airbnb'].map((sliderStyle) => (
-            <Slider key={sliderStyle} sliderStyle={sliderStyle} label={`'${sliderStyle}' styles`} />
+        {['ios', 'pretto', 'tooltip', 'airbnb'].map((sliderStyle: 'ios' | 'pretto' | 'tooltip' | 'airbnb') => (
+            <Slider {...args} key={sliderStyle} sliderStyle={sliderStyle} label={`'${sliderStyle}' styles`} />
         ))}
     </Stack>
 );
@@ -148,8 +148,9 @@ export const RemovePadding: Story = {
 
 export const TrackBarLinePosition_ = (args) => (
     <Stack>
-        {['normal', 'none', 'inverted'].map((trackBarLinePosition) => (
+        {['normal', 'none', 'inverted'].map((trackBarLinePosition: 'normal' | 'none' | 'inverted') => (
             <Slider
+                {...args}
                 key={trackBarLinePosition}
                 trackBarLinePosition={trackBarLinePosition}
                 label={trackBarLinePosition}
@@ -161,7 +162,7 @@ export const TrackBarLinePosition_ = (args) => (
 export const Range_ = (args) => (
     <Stack>
         {[[150, 200], { min: 150, max: 200 }, [-10, 10, 2], { min: -10, max: 10, step: 2 }].map((range) => (
-            <Slider key={range} range={range} />
+            <Slider {...args} key={JSON.stringify(range)} range={range} />
         ))}
     </Stack>
 );
@@ -193,7 +194,7 @@ export const RangeMarks_ = (args) => (
                 ],
             },
         ].map((range) => (
-            <Slider key={range} range={range} />
+            <Slider {...args} key={range} range={range} />
         ))}
     </Stack>
 );
@@ -230,7 +231,7 @@ export const InputCmp: Story = {
     args: {},
     render: (args) => {
         const [value, setValue] = useState(30);
-        const handleChange = (event, newValue) => {
+        const handleChange = (event, newValue?) => {
             setValue(newValue);
             action('onChangeInput')(newValue);
         };

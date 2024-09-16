@@ -126,14 +126,14 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
                             startCmp && {
                                 startAdornment: (
                                     <InputAdornment position="start" sx={{ margin: 'auto', paddingInlineEnd: '8px' }}>
-                                        {startCmp}
+                                        {startCmp as React.ReactNode}
                                     </InputAdornment>
                                 ),
                             }),
                         ...((endCmp || copyAction) && {
                             endAdornment: (
                                 <InputAdornment position="end" sx={{ margin: 'auto' }}>
-                                    {endCmp}
+                                    {endCmp as React.ReactNode}
 
                                     {copyAction && (
                                         <Button
@@ -178,9 +178,9 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
     if (startCmpExternal || endCmpExternal) {
         return (
             <Stack direction="row" spacing={cmpSpacing} alignItems={alignActionsExternal}>
-                {startCmpExternal}
+                {startCmpExternal as React.ReactNode}
                 {component}
-                {endCmpExternal}
+                {endCmpExternal as React.ReactNode}
             </Stack>
         );
     }

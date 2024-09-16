@@ -93,7 +93,7 @@ interface ListItemCmpProps {
     draggable?: boolean;
 }
 
-const ListItem: React.FC<ListItemCmpProps> = ({
+const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
     alignControl,
     alignItems,
     buttonItems,
@@ -132,9 +132,9 @@ const ListItem: React.FC<ListItemCmpProps> = ({
             >
                 {itemProps.startIcon &&
                     (isControl && alignControl === 'start' ? (
-                        itemProps.startIcon
+                        (itemProps.startIcon as React.ReactNode)
                     ) : (
-                        <ListItemIcon>{itemProps.startIcon}</ListItemIcon>
+                        <ListItemIcon>{itemProps.startIcon as React.ReactNode}</ListItemIcon>
                     ))}
 
                 {itemProps.avatar && (

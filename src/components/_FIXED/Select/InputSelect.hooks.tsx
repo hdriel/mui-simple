@@ -23,7 +23,7 @@ export const useOptionsConverter = ({
     groupBy,
 }: {
     options: InputSelectOption[];
-    convertedOptions?: Record<string, InputSelectOptions>;
+    convertedOptions?: Record<string, InputSelectOptions[]>;
     groupBy?: string | ((row: any) => string);
 }): Record<string, InputSelectOption[]> => {
     if (isDefined(convertedOptions)) return convertedOptions;
@@ -64,7 +64,7 @@ export const useOptions = ({
 
                         return (
                             <MenuItem
-                                key={option.value}
+                                key={String(option.value)}
                                 value={option.value}
                                 disabled={option.disabled || (!selected && isDefined(max) && value?.length >= max)}
                             >
@@ -77,8 +77,8 @@ export const useOptions = ({
                                     disableGutters={true}
                                     index={0}
                                     itemProps={{
-                                        title: option.label,
-                                        subtitle: option.subtitle,
+                                        title: option.label as string,
+                                        subtitle: option.subtitle as string,
                                         actions: selected && typeof checkbox !== 'boolean' && checkbox,
                                     }}
                                     buttonItems

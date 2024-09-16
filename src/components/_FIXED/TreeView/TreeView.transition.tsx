@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Collapse } from '@mui/material';
 import { useSpring, animated } from '@react-spring/web';
 
@@ -21,12 +20,5 @@ function TransitionComponent(props): React.ReactNode | React.ReactElement {
         </animated.div>
     );
 }
-
-TransitionComponent.propTypes = {
-    /**
-     * Show the component; triggers the enter or exit states
-     */
-    in: PropTypes.bool,
-};
 
 export default TransitionComponent;

@@ -1,3 +1,4 @@
+import React from 'react';
 import type { ComponentType } from 'react';
 import { styled, css } from '@mui/material/styles';
 import { Alert as MuiAlert, AlertTitle as MuiAlertTitle, alpha } from '@mui/material';
@@ -10,20 +11,20 @@ interface AlertStyledProps {
     width?: string | number;
 }
 type AlertStyledPropsType = AlertStyledProps & AlertProps;
-export const Alert = styled(MuiAlert, {
-    shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
+export const Alert: React.FC<AlertStyledPropsType> = styled(MuiAlert, {
+    shouldForwardProp: (propName: string) => !['customColor'].includes(propName as string),
 })<AlertStyledPropsType>`
     &.MuiAlert-root {
         min-width: 200px;
     }
-    width: ${(props) => numberToPx(props.width)};
+    width: ${(props: any) => numberToPx(props.width)};
 
     & .MuiAlert-icon,
     & .MuiAlert-message {
-        color: ${(props) => props.customColor};
+        color: ${(props: any) => props.customColor};
     }
 
-    ${(props) =>
+    ${(props: any) =>
         !props.title &&
         css`
             & .MuiAlert-action {
@@ -32,8 +33,8 @@ export const Alert = styled(MuiAlert, {
         `}
 
     &.MuiPaper-root {
-        background-color: ${(props) => props.customColor && alpha(props.customColor, 0.15)};
+        background-color: ${(props: any) => props.customColor && alpha(props.customColor, 0.15)};
     }
-` as ComponentType<AlertStyledPropsType>;
+`;
 
 export const AlertTitle = MuiAlertTitle;

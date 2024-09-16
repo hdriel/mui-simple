@@ -6,6 +6,7 @@ import {
     ListItem as MuiListItem,
     ListItemAvatar as MuiListItemAvatar,
     ListItemButton as MuiListItemButton,
+    ListItemButtonProps,
     ListItemIcon as MuiListItemIcon,
     ListItemSecondaryAction as MuiListItemSecondaryAction,
     ListItemText as MuiListItemText,
@@ -15,11 +16,13 @@ import {
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { styled } from '@mui/material/styles';
 import MuiDivider from '../Divider/Divider';
+import { numberToPx } from '../../../utils/helpers';
+import { FlexDirectionType } from '../../decs';
 
 export const Divider = MuiDivider;
 export const Collapse = MuiCollapse;
 
-export const List = styled(({ useTransition, children, ...props }) => (
+export const List = styled(({ useTransition, children, ...props }: any) => (
     <MuiList {...props}>
         {useTransition && children ? (
             <TransitionGroup>
@@ -34,7 +37,7 @@ export const List = styled(({ useTransition, children, ...props }) => (
 `;
 
 export const ListItem = styled(MuiListItem, {
-    shouldForwardProp: (propName) => !['flexDirectionItems'].includes(propName as string),
+    shouldForwardProp: (propName: string) => !['flexDirectionItems'].includes(propName as string),
 })`
     width: 100%;
     display: flex;
@@ -45,22 +48,24 @@ export const ListItem = styled(MuiListItem, {
     }
 `;
 export const ListItemAvatar = MuiListItemAvatar;
-export const ListItemButton = styled(MuiListItemButton, {
-    shouldForwardProp: (propName) => !['flexDirection', 'draggable'].includes(propName),
+export const ListItemButton: React.FC<
+    ListItemButtonProps & { href?: string; padding?: string | number; flexDirection?: FlexDirectionType }
+> = styled(MuiListItemButton, {
+    shouldForwardProp: (propName: string) => !['flexDirection', 'draggable'].includes(propName),
 })`
     width: 100%;
-    padding: ${(props) => props.padding};
-    flex-direction: ${(props) => props.flexDirection ?? 'row'};
-    padding-inline-end: ${(props) => (props.draggable ? '3.5em' : undefined)};
+    padding: ${(props: any) => numberToPx(props.padding)};
+    flex-direction: ${(props: any) => props.flexDirection ?? 'row'};
+    padding-inline-end: ${(props: any) => (props.draggable ? '3.5em' : undefined)};
 `;
 export const ListItemBox = styled(MuiBox, {
-    shouldForwardProp: (propName) => !['flexDirection', 'draggable'].includes(propName),
+    shouldForwardProp: (propName: string) => !['flexDirection', 'draggable'].includes(propName),
 })`
     width: 100%;
     display: flex;
-    padding: ${(props) => props.padding};
-    flex-direction: ${(props) => props.flexDirection ?? 'row'};
-    padding-inline-end: ${(props) => (props.draggable ? '3.5em' : undefined)};
+    padding: ${(props: any) => props.padding};
+    flex-direction: ${(props: any) => props.flexDirection ?? 'row'};
+    padding-inline-end: ${(props: any) => (props.draggable ? '3.5em' : undefined)};
 `;
 export const ListItemIcon = MuiListItemIcon;
 export const ListItemSecondaryAction = MuiListItemSecondaryAction;

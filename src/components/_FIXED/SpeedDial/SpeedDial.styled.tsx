@@ -19,17 +19,17 @@ type SpeedDialStyledPropsType = SpeedDialProps & SpeedDialStyledProps;
 
 // TODO: FIX THE  & .MuiSpeedDialAction-staticTooltipLabel position for right and left direction - not getting the top/bottom values
 export const SpeedDial = styled(MuiSpeedDial, {
-    shouldForwardProp: (propName) =>
+    shouldForwardProp: (propName: string) =>
         !['muiColor', 'customColor', 'showTooltip', 'position'].includes(propName as string),
 })<SpeedDialStyledPropsType>`
     position: absolute;
 
     & .MuiSpeedDial-actions {
-        gap: ${(props) => (props.showTooltip && ['right', 'left'].includes(props.direction) ? '20px' : undefined)};
+        gap: ${(props: any) => (props.showTooltip && ['right', 'left'].includes(props.direction) ? '20px' : undefined)};
     }
 
     & .MuiSpeedDialAction-staticTooltipLabel {
-        ${(props) => {
+        ${(props: any) => {
             switch (props.direction) {
                 case 'right':
                     return css`

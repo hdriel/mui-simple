@@ -18,41 +18,42 @@ import { customStyleAccordion, customStyleDetails, customStyleSummary } from './
 interface AccordionStyledPropsType
     extends Omit<MuiAccordionProps, 'disabled' | 'expanded' | 'onChange' | 'TransitionProps'> {
     useCustomStyle?: boolean;
+    [key: string]: any;
 }
 
-export const Accordion = styled(
+export const Accordion: React.FC<AccordionStyledPropsType> = styled(
     ({ useCustomStyle, ...props }: AccordionStyledPropsType) => (
         <MuiAccordion {...(useCustomStyle && { disableGutters: true, elevation: 0, square: true })} {...props}>
             {props.children}
         </MuiAccordion>
     ),
     {
-        shouldForwardProp: (propName) => !['useCustomStyle'].includes(propName as string),
+        shouldForwardProp: (propName: string) => !['useCustomStyle'].includes(propName as string),
     }
 )`
     ${customStyleAccordion};
 `;
 
-export const AccordionSummary = styled(
-    ({
-        label,
-        ...props
-    }: AccordionSummaryProps & {
-        label?: string;
-        bgColor?: string;
-        titleColor?: string;
-        bottomSecondaryLabel?: boolean;
-    }) => <MuiAccordionSummary {...props} />,
+type _AccordionSummaryProps = AccordionSummaryProps & {
+    label?: string;
+    bgColor?: string;
+    titleColor?: string;
+    bottomSecondaryLabel?: boolean;
+    [key: string]: any;
+};
+
+export const AccordionSummary: React.FC<_AccordionSummaryProps> = styled(
+    ({ label, ...props }: _AccordionSummaryProps) => <MuiAccordionSummary {...props} />,
     {
-        shouldForwardProp: (propName) =>
+        shouldForwardProp: (propName: string) =>
             !['bottomSecondaryLabel', 'useCustomStyle', 'bgColor', 'titleColor'].includes(propName as string),
     }
 )`
     ${customStyleSummary};
     &.MuiAccordionSummary-root {
-        background-color: ${(props) => props.bgColor};
-        color: ${(props) => props.titleColor};
-        ${(props) =>
+        background-color: ${(props: any) => props.bgColor};
+        color: ${(props: any) => props.titleColor};
+        ${(props: any) =>
             props.bottomSecondaryLabel
                 ? css`
                       & > div {
@@ -66,13 +67,13 @@ export const AccordionSummary = styled(
 
 type AccordionDetailsStyledPropsType = AccordionDetailsProps & any;
 export const AccordionDetails = styled(MuiAccordionDetails, {
-    shouldForwardProp: (propName) =>
+    shouldForwardProp: (propName: string) =>
         !['useCustomStyle', 'disabledContentPadding', 'bgColorDetails'].includes(propName as string),
 })<AccordionDetailsStyledPropsType>`
-    background-color: ${(props) => props.bgColorDetails};
+    background-color: ${(props: any) => props.bgColorDetails};
     padding-bottom: 1em;
     ${customStyleDetails}
-    ${(props) =>
+    ${(props: any) =>
         props.disabledContentPadding
             ? css`
                   padding: 0;

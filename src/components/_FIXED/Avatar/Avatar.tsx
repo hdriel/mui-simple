@@ -43,7 +43,7 @@ const Avatar: React.FC<AvatarProps> = (props): React.ReactElement | React.ReactN
                 onClick={onClick}
                 {...rest}
             >
-                {!url && (icon ?? getCapitalLetters(username))}
+                {!url && ((icon ?? getCapitalLetters(username)) as React.ReactNode)}
             </MuiAvatar>
         </Tooltip>
     );

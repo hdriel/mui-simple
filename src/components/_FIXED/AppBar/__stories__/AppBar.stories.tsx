@@ -118,7 +118,7 @@ export const Position_ = (args) => {
     const colors = ['primary', 'secondary', 'info', 'success', 'warning', 'error'];
     return (
         <Stack spacing={3}>
-            {[undefined, 'fixed', 'sticky', 'static', 'absolute', 'relative'].map((position, index) => (
+            {[undefined, 'fixed', 'sticky', 'static', 'absolute', 'relative'].map((position: any, index) => (
                 <AppBar bottom={!position} position={position} color={colors[index]}>
                     {position ?? 'fixed'} - POSITION
                 </AppBar>

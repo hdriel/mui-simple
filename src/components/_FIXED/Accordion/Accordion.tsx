@@ -74,11 +74,11 @@ const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props):
                 useCustomStyle={useCustomStyle}
                 bgColor={bgColor}
                 titleColor={labelColor}
-                expandIcon={useCustomStyle ? useCustomStyleIcon : icon}
+                expandIcon={(useCustomStyle ? useCustomStyleIcon : icon) as React.ReactNode}
                 bottomSecondaryLabel={!!bottomSecondaryLabel}
                 sx={summaryStyles}
             >
-                {summary || (
+                {(summary as any) || (
                     <>
                         {label && typeof label === 'string' ? (
                             <Typography

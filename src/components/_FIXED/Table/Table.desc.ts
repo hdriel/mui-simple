@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactNode, ReactElement, ElementType } from 'react';
 import type { Theme } from '@mui/material';
 import type { AvatarProps, PaginationProps } from '../../decs';
 
@@ -13,7 +13,7 @@ export interface TableColumn {
     format?: ((content: any, data: any) => string) | string;
     dateFormat?: string;
     props?: object | any;
-    cmp?: ReactNode | string;
+    cmp?: ReactElement | ReactNode | string;
     image?: boolean | (Partial<AvatarProps> & { width?: string | number; height?: string | number; avatar?: boolean });
     orderBy?: SORT_TYPE;
     type?: string;
@@ -173,7 +173,7 @@ export interface TableProps {
     orderBy?: Record<string, string | number>;
     pagination?: Pagination;
     paginationAlign?: 'start' | 'center' | 'end';
-    PaginationComponent?: ReactNode;
+    PaginationComponent?: ElementType;
     EmptyResultCmp?: ReactNode | string | JSX.Element;
     paginationProps?: PaginationProps;
     selectedActions?: ToolbarAction[];

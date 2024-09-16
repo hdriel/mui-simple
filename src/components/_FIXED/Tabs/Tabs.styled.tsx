@@ -13,19 +13,20 @@ interface TabsStyledProps {
 type TabsStyledPropsType = TabsProps & TabsStyledProps & any;
 
 export const Tabs = styled(MuiTabs, {
-    shouldForwardProp: (propName) => !['wrap', 'reverse', 'fillActiveTab', 'customColor'].includes(propName as string),
+    shouldForwardProp: (propName: string) =>
+        !['wrap', 'reverse', 'fillActiveTab', 'customColor'].includes(propName as string),
 })<TabsStyledPropsType>`
     padding: 0;
 
     & .MuiTabs-indicator {
-        background-color: ${(props) => props.customColor};
+        background-color: ${(props: any) => props.customColor};
     }
 
     & .MuiTab-root {
         position: relative;
 
         &.Mui-selected {
-            ${(props) => {
+            ${(props: any) => {
                 const color = props.customColor ?? get(props, `theme.palette.primary.main`);
                 const borderLeft = props.orientation === 'vertical' && props.reverse;
 
@@ -38,7 +39,7 @@ export const Tabs = styled(MuiTabs, {
                           color: ${color};
                       `;
             }};
-            ${(props) => {
+            ${(props: any) => {
                 return props.orientation === 'vertical'
                     ? css`
                           border-left: ${props.reverse ? '2px solid' : 'unset'};
@@ -47,7 +48,7 @@ export const Tabs = styled(MuiTabs, {
                     : css``;
             }};
 
-            ${(props) => {
+            ${(props: any) => {
                 const color = props.customColor ?? get(props, `theme.palette.primary.main`);
                 return props.wrap
                     ? css`
@@ -85,7 +86,7 @@ interface TabPanelStyledProps {
 type TabPanelStyledPropsType = BoxProps & TabPanelStyledProps & any;
 
 export const TabPanel = styled(MuiBox, {
-    shouldForwardProp: (propName) => !['iconPosition', 'disableRipple'].includes(propName as string),
+    shouldForwardProp: (propName: string) => !['iconPosition', 'disableRipple'].includes(propName as string),
 })<TabPanelStyledPropsType>`
     width: 100%;
     height: 100%;
@@ -104,13 +105,14 @@ interface TabWrapperProps {
 type TabWrapperType = BoxProps & TabWrapperProps & any;
 
 export const TabWrapper = styled(MuiBox, {
-    shouldForwardProp: (propName) => !['reverse', 'orientation', 'verticalMaxFixedHeight'].includes(propName as string),
+    shouldForwardProp: (propName: string) =>
+        !['reverse', 'orientation', 'verticalMaxFixedHeight'].includes(propName as string),
 })<TabWrapperType>`
     width: 100%;
     padding: 0;
     display: flex;
-    flex-direction: ${(props) => (props.reverse ? 'column-reverse' : 'column')};
-    ${(props) => {
+    flex-direction: ${(props: any) => (props.reverse ? 'column-reverse' : 'column')};
+    ${(props: any) => {
         if (props.orientation === 'vertical') {
             return css`
                 flex-direction: ${props.reverse ? 'row-reverse' : 'row'};

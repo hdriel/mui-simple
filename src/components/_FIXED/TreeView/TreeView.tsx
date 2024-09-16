@@ -37,11 +37,11 @@ const TreeView: React.FC<TreeViewProps> = ({
     const handleToggle = onExpanded ? (event, nodeIds) => onExpanded([].concat(nodeIds)) : undefined;
     const handleSelect = onSelected ? (event, nodeIds) => onSelected([].concat(nodeIds)) : undefined;
 
-    const CustomTreeItem = CustomComponent
+    const CustomTreeItem: any = CustomComponent
         ? withTreeViewItem(CustomComponent, TreeItemStyled, externalItemProps)
         : TreeItemComponent;
 
-    const renderTree = (nodes): any[] =>
+    const renderTree = (nodes: any[]): any[] =>
         nodes?.map(({ id, label, ...node }) => (
             <CustomTreeItem
                 key={node[fieldId] ?? id}
@@ -58,15 +58,15 @@ const TreeView: React.FC<TreeViewProps> = ({
     return (
         <Box>
             <MuiTreeView
-                defaultCollapseIcon={collapseIcon}
-                defaultExpandIcon={expandIcon}
-                defaultEndIcon={endIcon}
-                multiSelect={multiSelect}
+                defaultCollapseIcon={collapseIcon as React.ReactNode}
+                defaultExpandIcon={expandIcon as React.ReactNode}
+                defaultEndIcon={endIcon as React.ReactNode}
                 expanded={expandedIds}
                 selected={selectedIds}
                 onNodeToggle={handleToggle}
                 onNodeSelect={handleSelect}
                 maxWidth={maxWidth}
+                {...(multiSelect && { multiSelect })}
                 {...props}
             >
                 {CustomTreeItem && renderTree(nodes)}

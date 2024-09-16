@@ -31,9 +31,9 @@ interface FormControlProps {
     [key: string]: any;
 }
 export const FormControl = styled(MuiFormControl, {
-    shouldForwardProp: (propName) => !['colorText', 'colorLabel', 'colorActive'].includes(propName as string),
+    shouldForwardProp: (propName: string) => !['colorText', 'colorLabel', 'colorActive'].includes(propName as string),
 })<FormControlProps>`
-    ${(props) => {
+    ${(props: any) => {
         const colorText = getCustomColor(props, { field: 'colorText' });
         const colorLabel = getCustomColor(props, { field: 'colorLabel' });
         const hoverColorLabel = getCustomColor(props, {

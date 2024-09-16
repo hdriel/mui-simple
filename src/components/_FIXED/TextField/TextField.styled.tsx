@@ -17,10 +17,10 @@ export const SliderIcon = (props): React.ReactElement | React.ReactNode => (
 
 type TextFieldStyledType = InputBaseProps & TextFieldProps & any;
 export const TextField = styled(MuiTextField, {
-    shouldForwardProp: (propName) =>
+    shouldForwardProp: (propName: string) =>
         !['colorText', 'colorLabel', 'colorActive', 'textAlign', 'direction'].includes(propName as string),
 })<TextFieldStyledType>`
-    ${(props) => {
+    ${(props: any) => {
         const direction = props.direction as 'rtl' | 'ltr';
         const [colorText] = getCustomColor(props, { field: 'colorText' });
         const [colorLabel] = getCustomColor(props, { field: 'colorLabel' });

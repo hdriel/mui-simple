@@ -1,4 +1,4 @@
-import type {
+import React, {
     MouseEventHandler,
     ReactNode,
     ReactElement,
@@ -13,13 +13,15 @@ import type { DatePickerProps } from '@mui/x-date-pickers/DatePicker';
 import type { DateTimePickerProps } from '@mui/x-date-pickers/DateTimePicker';
 import type { TimePickerProps } from '@mui/x-date-pickers/TimePicker';
 import type { CloseReason, OpenReason, SxProps } from '@mui/material';
+import SvgIcon from '@mui/material/SvgIcon';
 import type { TIMEZONE } from './timezone';
 import type { LOCALE, ADAPTER_LOCALE } from './locales';
-import React from 'react';
 export type AppBarPosition = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
 
-type IconType = IconName | ReactNode | ReactElement;
-type ElementType = ReactElement | ReactNode;
+export type FlexDirectionType = 'row' | 'row-reverse' | 'column' | 'column-reverse';
+type SvgIconComponent = typeof SvgIcon;
+type IconType = IconName | ReactNode | ReactElement | SvgIconComponent;
+type ElementType = React.ForwardRefExoticComponent<any> | ReactElement | ReactNode;
 
 export interface AppBarProps {
     actions?: ElementType;
@@ -36,7 +38,7 @@ export interface AppBarProps {
     scrollElement?: ElementType | string;
     scrollToTop?: ElementType | boolean;
     scrollToTopProps?: object;
-    title?: string | ElementType;
+    title?: ElementType | string;
     toolbarId?: string;
     [key: string]: any;
 }
@@ -48,7 +50,7 @@ export interface AvatarProps {
     image?: string;
     onClick?: (event: any) => void;
     showTooltip?: boolean;
-    size?: string;
+    size?: string | number;
     tooltipPlacement?: 'top' | 'right' | 'bottom' | 'left';
     username?: string;
     variant?: 'circular' | 'rounded' | 'square';
@@ -187,7 +189,7 @@ export interface DividerProps {
     label?: string | ElementType;
     light?: boolean;
     orientation?: 'horizontal' | 'vertical';
-    textAlign?: AlignType;
+    textAlign?: 'left' | 'right' | 'center';
     thickness?: number;
     variant?: 'fullWidth' | 'inset' | 'middle';
     [key: string]: any;
@@ -461,7 +463,7 @@ export interface InputSelectOption {
     subtitle?: string | ElementType;
     disabled?: boolean;
     chipProps?: ChipProps;
-    value?: string | number | boolean;
+    value?: string | number;
     [key: string]: any;
 }
 
@@ -941,7 +943,7 @@ export interface TextProps {
     html?: boolean;
     italic?: boolean;
     justifyContent?: string;
-    lineHeight?: number;
+    lineHeight?: number | string;
     link?: string;
     monospace?: boolean;
     paragraph?: boolean;
@@ -1045,7 +1047,7 @@ export interface SwitchProps {
 }
 
 type Range =
-    | [number, number, number, number] // [min, max, step, marksRange]
+    | [number, number, number?, number?] // [min, max, step, marksRange]
     | {
           min?: number;
           max?: number;
@@ -1066,7 +1068,7 @@ export interface SliderProps {
     max?: number;
     step?: number;
     marks?: boolean | Array<{ label: string; value: number }>;
-    onChange?: (event: any) => void;
+    onChange?: (event: any, newValue?: number) => void;
     onChangeCommitted?: (event: any, newValue: number) => void;
     orientation?: 'vertical' | 'horizontal';
     removePadding?: boolean;
@@ -1258,7 +1260,7 @@ export interface TabsProps {
 export interface ToggleButtonGroupProps {
     orientation?: 'horizontal' | 'vertical';
     size?: 'small' | 'medium' | 'large';
-    value?: string | number;
+    value?: string | number | boolean;
     exclusive?: boolean;
     fullWidth?: boolean;
     disableRipple?: boolean;
@@ -1270,7 +1272,7 @@ export interface ToggleButtonGroupProps {
     helperTextStyle?: SxProps;
     error?: boolean;
     data?: Array<{
-        value: string;
+        value: string | number | boolean;
         disabled?: boolean;
         component: IconType | number;
     }>;

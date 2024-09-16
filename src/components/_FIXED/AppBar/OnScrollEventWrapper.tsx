@@ -16,7 +16,7 @@ interface OnScrollEventWrapperProps {
     right?: number;
     scrollElement?: any;
     scrollToId?: string;
-    scrollToTop?: ReactNode | boolean;
+    scrollToTop?: ReactElement | ReactNode | boolean;
     scrollToTopProps?: SxProps;
     top?: number;
     zIndex?: number;
@@ -45,7 +45,7 @@ const OnScrollEventWrapper: React.FC<PropsWithChildren<OnScrollEventWrapperProps
         disableHysteresis: true,
     });
 
-    const content = cloneElement(children, {
+    const content = cloneElement(children as any, {
         elevation: elevationScroll ? (trigger ? elevation ?? 4 : 0) : elevation ?? 0,
     });
 

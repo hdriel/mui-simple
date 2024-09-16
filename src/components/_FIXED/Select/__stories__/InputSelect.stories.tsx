@@ -82,7 +82,7 @@ export const _Colors = () => {
     const [value, setValue] = useState(args.value);
     return (
         <Stack spacing={2}>
-            {['filled', 'standard', 'outlined'].map((variant) => (
+            {['filled', 'standard', 'outlined'].map((variant: 'filled' | 'standard' | 'outlined') => (
                 <InputSelect
                     {...args}
                     key={variant}

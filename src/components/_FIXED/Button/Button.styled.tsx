@@ -13,16 +13,16 @@ import type { ButtonProps, ButtonGroupProps } from '../../decs';
 type ButtonStyledPropsType = MuiButtonProps &
     Omit<ButtonProps, 'endIcon' | 'startIcon'> & { endIcon: any; startIcon: any };
 export const Button = styled(MuiButton, {
-    shouldForwardProp: (propName) => !['disableElevation', 'customColor'].includes(propName as string),
+    shouldForwardProp: (propName: string) => !['disableElevation', 'customColor'].includes(propName as string),
 })<ButtonStyledPropsType>`
-    width: ${(props) => (props.fullWidth ? '100%' : 'max-content')};
+    width: ${(props: any) => (props.fullWidth ? '100%' : 'max-content')};
     &:not(.MuiButton-contained) {
-        color: ${(props) => props.customColor} !important;
-        border-color: ${(props) => props.customColor && alpha(props.customColor, 0.5)} !important;
+        color: ${(props: any) => props.customColor} !important;
+        border-color: ${(props: any) => props.customColor && alpha(props.customColor, 0.5)} !important;
     }
 
     &.MuiButton-contained {
-        background-color: ${(props) => props.customColor} !important;
+        background-color: ${(props: any) => props.customColor} !important;
         color: white;
         &:not(:last-of-type) {
             border-color: white;
@@ -33,7 +33,7 @@ export const Button = styled(MuiButton, {
 // ### IconButton
 type IconButtonStyledPropsType = IconButtonProps & ButtonProps;
 export const IconButton = styled(MuiIconButton, {
-    shouldForwardProp: (propName) => !['disableElevation', 'customColor'].includes(propName as string),
+    shouldForwardProp: (propName: string) => !['disableElevation', 'customColor'].includes(propName as string),
 })<IconButtonStyledPropsType>`
     box-sizing: border-box;
 ` as ComponentType<IconButtonStyledPropsType>;
@@ -41,17 +41,17 @@ export const IconButton = styled(MuiIconButton, {
 // ### ButtonGroup
 type ButtonGroupStyledPropsType = ButtonGroupProps & MuiButtonGroupProps;
 export const ButtonGroup = styled(MuiButtonGroup, {
-    shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
+    shouldForwardProp: (propName: string) => !['customColor'].includes(propName as string),
 })<ButtonGroupStyledPropsType>`
-    width: ${(props) => (props.fullWidth ? '100%' : 'max-content')};
+    width: ${(props: any) => (props.fullWidth ? '100%' : 'max-content')};
     & .MuiButtonGroup-grouped {
         &:not(.MuiButton-contained) {
-            color: ${(props) => props.customColor};
-            border-color: ${(props) => props.customColor && alpha(props.customColor, 0.5)};
+            color: ${(props: any) => props.customColor};
+            border-color: ${(props: any) => props.customColor && alpha(props.customColor, 0.5)};
         }
 
         &.MuiButton-contained {
-            background-color: ${(props) => props.customColor};
+            background-color: ${(props: any) => props.customColor};
             color: white;
             &:not(:last-of-type) {
                 border-color: white;
@@ -60,4 +60,4 @@ export const ButtonGroup = styled(MuiButtonGroup, {
     }
 ` as ComponentType<ButtonGroupStyledPropsType>;
 
-// background-color: ${(props) => props.variant !== "contained" && props.customColor};
+// background-color: ${(props: any) => props.variant !== "contained" && props.customColor};

@@ -41,7 +41,7 @@ export const Disabled: Story = {
 export const DisabledPages: Story = {
     args: {
         totalPages: 10,
-        disabledPages: (page) => page % 2,
+        disabledPages: (page) => !!(page % 2),
     },
 };
 

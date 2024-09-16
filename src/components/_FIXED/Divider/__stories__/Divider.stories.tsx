@@ -99,11 +99,17 @@ export const OrientationVertical_ = (args) => (
 export const TextAlign_ = (args) => (
     <Stack spacing={3}>
         <Text />
-        <Divider textAlign="left">left</Divider>
+        <Divider {...args} textAlign="left">
+            left
+        </Divider>
         <Text />
-        <Divider textAlign="center">center</Divider>
+        <Divider {...args} textAlign="center">
+            center
+        </Divider>
         <Text />
-        <Divider textAlign="right">right</Divider>
+        <Divider {...args} textAlign="right">
+            right
+        </Divider>
         <Text />
     </Stack>
 );

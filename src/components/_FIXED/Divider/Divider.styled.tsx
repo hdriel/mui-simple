@@ -11,7 +11,7 @@ interface DividerStyledProps {
 type DividerStyledPropsType = Omit<DividerProps, 'thickness'> & DividerStyledProps;
 
 export const Divider = styled(MuiDivider, {
-    shouldForwardProp: (propName) => !['color', 'thickness'].includes(propName as string),
+    shouldForwardProp: (propName: string) => !['color', 'thickness'].includes(propName as string),
 })<DividerStyledPropsType>`
     ${verticalStyle}
     ${horizontalStyle}

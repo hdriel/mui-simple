@@ -31,12 +31,12 @@ function alignEndIconStyle(props: ChipStyledPropsType): SerializedStyles {
 }
 
 export const Chip = styled(MuiChip, {
-    shouldForwardProp: (propName) =>
+    shouldForwardProp: (propName: string) =>
         !['textColor', 'customColor', 'multiLine', 'rounded', 'alignEndIcon'].includes(propName as string),
 })<ChipStyledPropsType>`
-    border-radius: ${(props) => (props.rounded ? undefined : '4px')};
-    background-color: ${(props) => props.customColor};
-    color: ${(props) => props.textColor};
+    border-radius: ${(props: any) => (props.rounded ? undefined : '4px')};
+    background-color: ${(props: any) => props.customColor};
+    color: ${(props: any) => props.textColor};
     ${multiLineStyle}
     ${alignEndIconStyle}
 ` as ComponentType<ChipStyledPropsType>;

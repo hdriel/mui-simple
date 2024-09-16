@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react';
+import React from 'react';
 import type { AppBarProps } from '@mui/material';
 import { AppBar as MuiAppBar, Toolbar as MuiToolbar, Box as MuiBox } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -9,21 +9,21 @@ interface AppBarStyledProps {
 }
 type AppBarStyledPropsType = AppBarStyledProps & AppBarProps;
 
-export const AppBar = styled(MuiAppBar, {
-    shouldForwardProp: (propName) => !['drawerWidth', 'customColor'].includes(propName as string),
+export const AppBar: React.FC<AppBarStyledPropsType> = styled(MuiAppBar, {
+    shouldForwardProp: (propName: string) => !['drawerWidth', 'customColor'].includes(propName as string),
 })<AppBarStyledPropsType>`
-    width: calc(100% - ${(props) => props.drawerWidth}px);
-    transition: ${(props) =>
+    width: calc(100% - ${(props: any) => props.drawerWidth}px);
+    transition: ${(props: any) =>
         props.theme.transitions.create('width', {
             easing: props.theme.transitions.easing.sharp,
             duration: props.theme.transitions.duration.enteringScreen,
         })};
-    margin-left: ${(props) => props.drawerWidth}px;
+    margin-left: ${(props: any) => props.drawerWidth}px;
 
     &.MuiPaper-root {
-        background-color: ${(props) => props.customColor};
+        background-color: ${(props: any) => props.customColor};
     }
-` as ComponentType<AppBarStyledPropsType>;
+`;
 
 export const Toolbar = styled(MuiToolbar)`
     padding: 0 0.5em;

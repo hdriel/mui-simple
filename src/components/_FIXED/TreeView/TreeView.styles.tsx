@@ -1,5 +1,5 @@
 import { alpha, css } from '@mui/material/styles';
-import { treeItemClasses } from '@mui/lab/TreeItem';
+import { treeItemClasses } from '@mui/x-tree-view/TreeItem';
 import type { SerializedStyles } from '@emotion/serialize';
 
 export function borderedStyles(props): SerializedStyles {

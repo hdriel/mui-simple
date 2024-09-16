@@ -64,7 +64,7 @@ const List: React.FC<ListProps> = ({
         ) ?? [];
 
     const renderValue = (item: ListItemProps, index: number): React.ReactElement | React.ReactNode => {
-        const { divider, component, alignControl, controlType, ...itemProps } = item || {};
+        const { divider, component, alignControl, controlType, ...itemProps } = item || ({} as any);
         const isControl = ['checkbox', 'switch'].includes(controlType);
         const isOpen = item.expanded || open[index];
         const listItem = !!Object.keys(itemProps).length;
@@ -132,8 +132,13 @@ const List: React.FC<ListProps> = ({
         // do this to prevent from multiple render to ignore from defaultExpanded state
         if (!isOpenStateChangedOnce) {
             const openItems =
-                items?.reduce((obj, item, index) => ({ ...obj, ...(item.defaultExpanded && { [index]: true }) }), {}) ??
-                {};
+                items?.reduce(
+                    (obj: Record<string, any>, item: any, index) => ({
+                        ...obj,
+                        ...(item.defaultExpanded && { [index]: true }),
+                    }),
+                    {}
+                ) ?? {};
             if (JSON.stringify(open ?? {}) !== JSON.stringify(openItems)) {
                 setOpen(openItems);
             }
@@ -167,7 +172,7 @@ const List: React.FC<ListProps> = ({
                 disabled={!dragAndDropItems}
                 onChange={onListOrderChange}
                 component="div"
-                renderValue={(item, index, snapshot) =>
+                renderValue={(item: any, index, snapshot) =>
                     renderValue(
                         {
                             ...item,

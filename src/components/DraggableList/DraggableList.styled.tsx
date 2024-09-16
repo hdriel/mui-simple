@@ -1,18 +1,18 @@
 import { styled, css } from '@mui/material/styles';
 import { Box } from '@mui/material';
+import { FlexDirectionType } from '../decs';
 
-type FlexDirectionType = 'row' | 'row-reverse' | 'column' | 'column-reverse';
 interface DraggableListULProps {
     flexGap?: number | string;
     flexDirection?: FlexDirectionType;
 }
 export const DraggableListUL = styled('ul')<DraggableListULProps>`
     display: flex;
-    gap: ${(props) => props.flexGap};
+    gap: ${(props: any) => props.flexGap};
     list-style-type: none;
     margin: 0;
     padding: 0;
-    ${(props) =>
+    ${(props: any) =>
         props.flexDirection === 'row'
             ? css`
                   flex-direction: row;

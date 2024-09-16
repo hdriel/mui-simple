@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import toPx from 'to-px';
 import { queryAttr, reorder } from './DraggableList.styles';
 
@@ -25,7 +25,7 @@ export const useDragHandlers = ({
     const [placeholderProps, setPlaceholderProps] = useState<PlaceholderProps>({});
     const gapPx = toPx(flexGap);
 
-    const getDraggedDom = (draggableId: string): JSX.Element => {
+    const getDraggedDom = (draggableId: string): (Element & { parentNode: Element }) | undefined => {
         const domQuery = `[${queryAttr}='${draggableId}']`;
         return document.querySelector(domQuery);
     };
@@ -37,12 +37,12 @@ export const useDragHandlers = ({
             return;
         }
 
-        const { clientHeight, clientWidth } = draggedDOM;
+        const { clientHeight, clientWidth, parentNode } = draggedDOM;
         const sourceIndex = event.source.index;
         const clientY =
-            parseFloat(window.getComputedStyle(draggedDOM.parentNode).paddingTop) +
+            parseFloat(window.getComputedStyle(parentNode).paddingTop) +
             // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-            [...draggedDOM.parentNode.children].slice(0, sourceIndex).reduce((total, curr) => {
+            [...parentNode.children].slice(0, sourceIndex).reduce((total, curr: any) => {
                 const style = curr.currentStyle || window.getComputedStyle(curr);
                 const marginBottom = parseFloat(style.marginBottom);
                 // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
@@ -50,9 +50,9 @@ export const useDragHandlers = ({
             }, 0);
 
         const clientX =
-            parseFloat(window.getComputedStyle(draggedDOM.parentNode).paddingLeft) +
+            parseFloat(window.getComputedStyle(parentNode).paddingLeft) +
             // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-            [...draggedDOM.parentNode.children].slice(0, sourceIndex).reduce((total, curr) => {
+            [...parentNode.children].slice(0, sourceIndex).reduce((total, curr: any) => {
                 const style = curr.currentStyle || window.getComputedStyle(curr);
                 const paddingLeft = parseFloat(style.paddingLeft);
                 // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
@@ -63,13 +63,8 @@ export const useDragHandlers = ({
             clientHeight,
             clientWidth,
             clientY:
-                flexDirection === 'column'
-                    ? clientY
-                    : parseFloat(window.getComputedStyle(draggedDOM.parentNode).marginBottom),
-            clientX:
-                flexDirection === 'row'
-                    ? clientX
-                    : parseFloat(window.getComputedStyle(draggedDOM.parentNode).paddingLeft),
+                flexDirection === 'column' ? clientY : parseFloat(window.getComputedStyle(parentNode).marginBottom),
+            clientX: flexDirection === 'row' ? clientX : parseFloat(window.getComputedStyle(parentNode).paddingLeft),
         });
     };
 
@@ -149,7 +144,7 @@ export const useDragHandlers = ({
         const clientY =
             parseFloat(window.getComputedStyle(draggedDOM.parentNode).paddingTop) +
             // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-            updatedArray.slice(0, destinationIndex).reduce((total, curr) => {
+            updatedArray.slice(0, destinationIndex).reduce((total, curr: any) => {
                 const style = curr.currentStyle || window.getComputedStyle(curr);
                 const marginBottom = parseFloat(style.marginBottom);
                 // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
@@ -159,7 +154,7 @@ export const useDragHandlers = ({
         const clientX =
             parseFloat(window.getComputedStyle(draggedDOM.parentNode).paddingLeft) +
             // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-            [...draggedDOM.parentNode.children].slice(0, sourceIndex).reduce((total, curr) => {
+            [...draggedDOM.parentNode.children].slice(0, sourceIndex).reduce((total, curr: any) => {
                 const style = curr.currentStyle || window.getComputedStyle(curr);
                 const paddingLeft = parseFloat(style.paddingLeft);
                 // eslint-disable-next-line @typescript-eslint/restrict-plus-operands

@@ -12,7 +12,7 @@ import {
 export const Timeline = MuiTimeline;
 
 export const TimelineItem = styled(MuiTimelineItem, {
-    shouldForwardProp: (propName) => !['timeFormat'].includes(propName as string),
+    shouldForwardProp: (propName: string) => !['timeFormat'].includes(propName as string),
 })`
     width: max-content;
 `;
@@ -24,7 +24,7 @@ export const TimelineConnector = MuiTimelineConnector;
 export const TimelineContent = MuiTimelineContent;
 
 export const TimelineDot: any = styled(MuiTimelineDot, {
-    shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
+    shouldForwardProp: (propName: string) => !['customColor'].includes(propName as string),
 })`
     background-color: ${(props: any) => props.customColor};
     &.MuiTimelineDot-outlined {

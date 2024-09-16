@@ -32,7 +32,7 @@ export const MenuWrapper = styled(Box, {
     width: 0;
 
     &::before {
-        ${(props) =>
+        ${(props: any) =>
             props.arrow &&
             css`
                 background-color: ${props.theme.palette.background.paper};

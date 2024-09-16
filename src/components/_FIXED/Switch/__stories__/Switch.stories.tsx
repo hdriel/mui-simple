@@ -73,7 +73,7 @@ export const OnOffLabelSide: Story = {
 
         return (
             <Stack spacing={3} alignItems="flex-start">
-                {['left', 'right'].map((onOffLabelSide) => (
+                {['left', 'right'].map((onOffLabelSide: 'left' | 'right') => (
                     <Switch
                         {...args}
                         checked={value}
@@ -110,7 +110,7 @@ export const Required: Story = {
 
 export const LabelPlacement_ = () => (
     <Stack spacing={3} alignItems="flex-start">
-        {['top', 'start', 'bottom', 'end'].map((labelPlacement) => (
+        {['top', 'start', 'bottom', 'end'].map((labelPlacement: 'top' | 'start' | 'bottom' | 'end') => (
             <Switch key={labelPlacement} labelPlacement={labelPlacement} label={`${labelPlacement} label checkbox`} />
         ))}
     </Stack>
@@ -140,7 +140,7 @@ export const TextColor: Story = {
 
 export const SwitchStyle_ = () => (
     <Stack spacing={3}>
-        {['ant', 'android12', 'ios', 'mui'].map((switchStyle) => (
+        {['ant', 'android12', 'ios', 'mui'].map((switchStyle: 'ant' | 'android12' | 'ios' | 'mui') => (
             <Switch key={switchStyle} switchStyle={switchStyle} label={`'${switchStyle}' styles`} />
         ))}
     </Stack>

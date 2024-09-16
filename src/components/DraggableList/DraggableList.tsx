@@ -83,7 +83,7 @@ const DraggableList: React.FC<DraggableListProps> = (props): React.ReactElement 
                                             flexDirection,
                                         })}
                                     >
-                                        {renderValue(data, index, snapshot)}
+                                        {renderValue(data, index, snapshot) as React.ReactNode}
                                     </DraggableListULItem>
                                 )}
                             </Draggable>

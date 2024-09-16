@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ReactElement } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import { AppBar as MuiAppBar, Toolbar } from './AppBar.styled';
 import OnScrollEventWrapper from './OnScrollEventWrapper';
 import { useCustomColor } from '../../../utils/helpers';
@@ -25,6 +25,7 @@ const AppBar: React.FC<AppBarProps> = ({
     toolbarId,
     sx,
     children,
+    title,
     ...props
 }): ReactElement | React.ReactNode => {
     const [customColor] = useCustomColor(color);
@@ -37,7 +38,7 @@ const AppBar: React.FC<AppBarProps> = ({
                 elevationScroll={elevationScroll}
                 hideOnScroll={hideOnScroll}
                 elevation={elevation}
-                scrollToTop={scrollToTop}
+                scrollToTop={scrollToTop as ReactNode}
                 scrollToTopProps={scrollToTopProps}
                 scrollToId={toolbarId ?? '#back-to-top-anchor'}
             >
@@ -47,6 +48,7 @@ const AppBar: React.FC<AppBarProps> = ({
                     customColor={customColor}
                     enableColorOnDark={enableColorOnDark}
                     sx={{ ...(isBottom && { top: 'auto', bottom: 0 }), ...sx }}
+                    title={title as string}
                     {...props}
                 >
                     <Toolbar

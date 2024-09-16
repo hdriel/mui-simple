@@ -372,7 +372,7 @@ export const CourseChapters = (args) => {
                 {...args}
                 title="Draggable Nested List Items"
                 items={items}
-                onListOrderChange={(reorderedItems) => setItems(reorderedItems)}
+                onListOrderChange={(reorderedItems: any) => setItems(reorderedItems)}
                 dragAndDropItems={draggable}
                 droppableId="root"
             />

@@ -1,12 +1,13 @@
-import { Snackbar as MuiSnackbar } from '@mui/material';
+import React from 'react';
+import { Snackbar as MuiSnackbar, SnackbarProps } from '@mui/material';
 import { styled, css } from '@mui/material/styles';
 
 export { Fade, Grow, Slide } from '@mui/material';
 
-export const Snackbar = styled(MuiSnackbar, {
-    shouldForwardProp: (propName) => !['fullWidth'].includes(propName as string),
+export const Snackbar: React.FC<SnackbarProps & { fullWidth?: boolean }> = styled(MuiSnackbar, {
+    shouldForwardProp: (propName: string) => !['fullWidth'].includes(propName as string),
 })`
-    ${(props) =>
+    ${(props: any) =>
         props.fullWidth
             ? css`
                   width: 100%;

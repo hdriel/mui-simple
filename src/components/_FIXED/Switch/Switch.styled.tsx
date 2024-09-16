@@ -26,12 +26,12 @@ export const Switch = styled(
             !['textColor', 'fontSize', 'helperText', 'switchStyle', 'labelPlacement'].includes(prop),
     }
 )`
-    ${(props) => customColor(props)}
-    ${(props) => antSwitchStyle(props)}
-    ${(props) => androidSwitchStyle(props)}
-    ${(props) => iosSwitchStyle(props)}
+    ${(props: any) => customColor(props)}
+    ${(props: any) => antSwitchStyle(props)}
+    ${(props: any) => androidSwitchStyle(props)}
+    ${(props: any) => iosSwitchStyle(props)}
     &.MuiSwitch-root {
-        scale: ${(props) => props.scale};
+        scale: ${(props: any) => props.scale};
     }
 `;
 

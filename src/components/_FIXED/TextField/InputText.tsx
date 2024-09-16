@@ -7,8 +7,9 @@ import { setDefaultValue } from '../../../utils/helpers';
 const InputText: React.FC<InputTextProps> = function InputText(props): React.ReactElement {
     props = props = setDefaultValue(props, 'type', 'text');
 
-    const { value, showLimitIndicatorFrom, limitIndicator, endCmp, copyAction, ...rest } = props;
+    const { value, showLimitIndicatorFrom, limitIndicator, endCmp: _endCmp, copyAction, ...rest } = props;
     const count: number = value?.length ?? 0;
+    const endCmp = typeof _endCmp === 'string' ? <SVGIcon>{_endCmp}</SVGIcon> : _endCmp;
 
     return (
         <Input
@@ -20,7 +21,7 @@ const InputText: React.FC<InputTextProps> = function InputText(props): React.Rea
                     {(!showLimitIndicatorFrom || showLimitIndicatorFrom < count) && limitIndicator
                         ? `${count} / ${limitIndicator}`
                         : ''}
-                    {typeof endCmp === 'string' ? <SVGIcon>{endCmp}</SVGIcon> : endCmp}
+                    {endCmp as React.ReactNode}
                 </span>
             }
         />

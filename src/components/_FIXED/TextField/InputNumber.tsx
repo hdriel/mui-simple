@@ -13,7 +13,7 @@ import SVGIcon from '../SVGIcon/SVGIcon';
 import type { InputNumberProps } from '../../decs';
 
 export const TextField = styled((props) => <Input {...props} type="text" />, {
-    shouldForwardProp: (propName) =>
+    shouldForwardProp: (propName: string) =>
         !['patternChar', 'allowEmptyFormatting', 'thousandSeparator', 'fixedDecimalScale', 'decimalSeparator'].includes(
             propName as string
         ),
@@ -70,8 +70,8 @@ const InputNumber: React.FC<InputNumberProps> = (props): React.ReactElement | Re
 
     const handleOnChange = debounceDelay ? debounce(onChange, debounceDelay) : onChange;
 
-    const handleChangeSlider = (event, newValue): void => {
-        onChange?.({ target: { name, value: newValue } });
+    const handleChangeSlider = (event, newValue?): void => {
+        onChange?.({ target: { name, value: newValue ?? event.target.value } });
     };
 
     const [sliderLabelDebounce] = useState(() =>
@@ -104,7 +104,7 @@ const InputNumber: React.FC<InputNumberProps> = (props): React.ReactElement | Re
 
     const [color] = getCustomColor({ theme, customColor: colorActive });
 
-    const CMP = format ? PatternFormat : NumericFormat;
+    const CMP: any = format ? PatternFormat : NumericFormat;
 
     return (
         <ClickAwayListener
@@ -136,7 +136,7 @@ const InputNumber: React.FC<InputNumberProps> = (props): React.ReactElement | Re
                     autoComplete="off"
                     onBlur={onBlurHandler}
                     customInput={TextField as any}
-                    type="number"
+                    // type="number"
                     endCmp={
                         <>
                             {endCmp}
@@ -156,7 +156,7 @@ const InputNumber: React.FC<InputNumberProps> = (props): React.ReactElement | Re
                     onValueChange={(values) => {
                         const { floatValue: value } = values;
                         const event = { target: { name, value } };
-                        // @ts-expect-error
+                        // @ts-ignore
                         handleOnChange?.(event);
                     }}
                 />
