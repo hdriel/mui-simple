@@ -23,7 +23,7 @@ const Breadcrumbs: React.FC<PropsWithChildren<BreadcrumbsProps>> = ({
     const separator = typeof _separator === 'string' ? <SVGIcon>{_separator}</SVGIcon> : _separator;
 
     return (
-        <MuiBreadcrumbs size={size} maxItems={maxItems} separator={separator} {...rest}>
+        <MuiBreadcrumbs size={size} maxItems={maxItems} separator={separator as React.ReactNode} {...rest}>
             {links?.map((link, index) => {
                 return typeof link === 'string' ? (
                     <Typography key={`${link}-${index}`} color={color} tooltip={false} size={size}>

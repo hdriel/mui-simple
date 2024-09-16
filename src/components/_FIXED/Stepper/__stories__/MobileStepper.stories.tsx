@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 
 import MobileStepper from '../MobileStepper';
 import { useSimpleStepper } from '../Stepper.utils';
-import { DirectionWrapper } from '../../../../../.storybook/_direction.wrapper';
+import { DirectionWrapper } from '../../../../_direction.wrapper';
 
 export default {
     title: 'Navigation/MobileStepper',

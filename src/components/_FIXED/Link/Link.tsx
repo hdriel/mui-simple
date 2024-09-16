@@ -31,7 +31,7 @@ const Link: React.FC<PropsWithChildren<LinkProps>> = ({
             underline={underline}
             {...props}
         >
-            {icon}
+            {icon as ReactNode}
             {label}
             {children}
         </MuiLink>

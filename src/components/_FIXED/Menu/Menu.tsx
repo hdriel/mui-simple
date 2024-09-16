@@ -148,7 +148,8 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
                                             >
                                                 {option.icon || option.check ? (
                                                     <ListItemIcon>
-                                                        {option.icon || (option.check ? <CheckIcon /> : undefined)}
+                                                        {(option.icon as React.ReactNode | undefined) ||
+                                                            (option.check ? <CheckIcon /> : undefined)}
                                                     </ListItemIcon>
                                                 ) : undefined}
 
