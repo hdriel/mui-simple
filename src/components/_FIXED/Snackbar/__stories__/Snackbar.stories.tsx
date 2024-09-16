@@ -159,7 +159,7 @@ export const SlideDirection: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
-        const [slideDirection, setSlideDirection] = useState<'up' | 'right' | 'left' | 'down'>('up');
+        const [slideDirection, setSlideDirection] = useState<null | 'up' | 'right' | 'left' | 'down'>('up');
 
         return (
             <Stack direction="row" spacing={3}>
@@ -186,7 +186,7 @@ export const SlideDirection: Story = {
                     onClose={() => setOpen(!!slideDirection)}
                     onClickAway={() => {
                         setOpen(false);
-                        setSlideDirection(null as unknown as string);
+                        setSlideDirection(null);
                     }}
                 />
             </Stack>

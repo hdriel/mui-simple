@@ -92,7 +92,7 @@ const Slider: React.FC<SliderProps> = ({
                             pl: `${orientation === 'vertical' ? 3 : 8}px !important`,
                         }}
                     >
-                        {startIcon}
+                        {startIcon as React.ReactNode}
                     </Grid>
                 )}
                 <Grid item xs sx={{ height: 'inherit' }}>
@@ -120,7 +120,7 @@ const Slider: React.FC<SliderProps> = ({
                 </Grid>
                 {endIcon && (
                     <Grid item sx={{ pt: '8px !important', pl: `${orientation === 'vertical' ? 3 : 8}px !important` }}>
-                        {endIcon}
+                        {endIcon as React.ReactNode}
                     </Grid>
                 )}
             </Grid>

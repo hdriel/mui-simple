@@ -34,6 +34,7 @@ const Tabs: React.FC<TabsProps> = ({
 
     const filteredChildren = []
         .concat(children)
+        // @ts-ignore
         .filter((child) => isValidElement(child) && child?.type?.displayName === Tab.displayName)
         .filter((v) => v);
 

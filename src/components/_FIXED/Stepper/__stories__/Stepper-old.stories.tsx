@@ -217,7 +217,7 @@ export const QontoStepper = () => {
         { value: 'horizontal', component: 'horizontal' },
         { value: 'vertical', component: 'vertical' },
     ];
-    const [orientation, setOrientation] = useState('horizontal');
+    const [orientation, setOrientation] = useState<'horizontal' | 'vertical'>('horizontal');
 
     const data2 = [{ value: true, component: 'alternative labels' }];
     const [stepsBottomLabel, setStepsBottomLabel] = useState(true);
@@ -286,7 +286,7 @@ export const QontoCustomStepper = () => {
         { value: 'horizontal', component: 'horizontal' },
         { value: 'vertical', component: 'vertical' },
     ];
-    const [orientation, setOrientation] = useState('horizontal');
+    const [orientation, setOrientation] = useState<'horizontal' | 'vertical'>('horizontal');
 
     const data2 = [{ value: true, component: 'alternative labels' }];
     const [stepsBottomLabel, setStepsBottomLabel] = useState(true);

@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Typography as MuiTypography, Slider as MuiSlider } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { sliderStyleIOS, sliderStylePretto, sliderStyleAirBNB, sliderStyleCustomColor } from './Slider.styles';
 import Tooltip from '../Tooltip/Tooltip';
-const { SliderThumb } = MuiSlider;
+const { SliderThumb }: any = MuiSlider;
 
 export { Grid, Box } from '@mui/material';
 
-export const ValueLabelComponent: React.FC<{ value: string }> = (props): React.ReactElement | React.ReactNode => {
+export const ValueLabelComponent: React.FC<PropsWithChildren<{ value: string }>> = (
+    props
+): React.ReactElement | React.ReactNode => {
     const { children, value } = props;
 
     return (

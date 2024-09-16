@@ -15,7 +15,6 @@ import type { StepperProps, StepContentProps, StepLabelProps, BoxProps, StepConn
 import MuiTypography from '../Typography/Typography';
 import MuiButton from '../Button/Button';
 import { numberToPx } from '../../../utils/helpers';
-import { PropsWithChildren } from 'react';
 
 export const Typography = MuiTypography;
 

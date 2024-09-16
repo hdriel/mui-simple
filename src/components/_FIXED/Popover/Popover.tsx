@@ -73,7 +73,7 @@ const Popover: React.FC<PropsWithChildren<PopoverProps>> = (props): ReactElement
                 }
                 {...rest}
             >
-                {content}
+                {content as React.ReactNode}
             </MuiPopover>
         </>
     );

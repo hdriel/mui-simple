@@ -150,7 +150,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
                                     {showActions && startCmp}
                                     {_value}
                                 </Box>
-                                {endCmp}
+                                {endCmp as React.ReactNode}
                             </Box>
                         );
                     }}

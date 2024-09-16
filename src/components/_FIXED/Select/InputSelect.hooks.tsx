@@ -23,7 +23,7 @@ export const useOptionsConverter = ({
     groupBy,
 }: {
     options: InputSelectOption[];
-    convertedOptions?: Record<string, InputSelectOptions>;
+    convertedOptions?: Record<string, InputSelectOptions[]>;
     groupBy?: string | ((row: any) => string);
 }): Record<string, InputSelectOption[]> => {
     if (isDefined(convertedOptions)) return convertedOptions;
