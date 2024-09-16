@@ -6,7 +6,7 @@ import type { TabItemProps } from '../../decs';
 
 const TabItem: React.FC<TabItemProps> = ({
     children,
-    icon,
+    icon: _icon,
     link,
     onClick,
     open,
@@ -17,6 +17,8 @@ const TabItem: React.FC<TabItemProps> = ({
     verticalTabWidth,
     ...props
 }): React.ReactElement | React.ReactNode => {
+    const icon = typeof _icon === 'string' ? <SVGIcon>{_icon}</SVGIcon> : _icon;
+
     return (
         <Tooltip
             {...tooltipProps}
@@ -34,7 +36,7 @@ const TabItem: React.FC<TabItemProps> = ({
                 hidden={!open}
                 id={`simple-tabpanel-${value}`}
                 aria-labelledby={`simple-tab-${value}`}
-                icon={icon && <SVGIcon>{icon}</SVGIcon>}
+                icon={icon as React.ReactElement}
                 {...(link && {
                     href: link,
                     component: 'a',

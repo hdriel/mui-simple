@@ -159,7 +159,7 @@ export const SlideDirection: Story = {
     },
     render: (args) => {
         const [open, setOpen] = useState(false);
-        const [slideDirection, setSlideDirection] = useState('up');
+        const [slideDirection, setSlideDirection] = useState<'up' | 'right' | 'left' | 'down'>('up');
 
         return (
             <Stack direction="row" spacing={3}>
@@ -169,7 +169,7 @@ export const SlideDirection: Story = {
                     exclusive
                     onChange={(event, v) => {
                         event?.stopPropagation();
-                        setSlideDirection(v as string);
+                        setSlideDirection(v as 'up' | 'right' | 'left' | 'down');
                         setOpen(!!v);
                     }}
                     data={[

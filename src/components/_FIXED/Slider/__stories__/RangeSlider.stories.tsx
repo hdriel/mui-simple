@@ -179,7 +179,7 @@ export const Range_ = (args) => (
     <Stack>
         {[[150, 200], { min: 150, max: 200 }, [-10, 10, 2], { min: -10, max: 10, step: 2 }].map((range) => (
             <RangeSlider
-                key={range}
+                key={JSON.stringify(range)}
                 range={range}
                 defaultValue={[(range[0] ?? (range as any).min) + 2, (range[0] ?? (range as any).min) + 5]}
             />
@@ -215,7 +215,7 @@ export const RangeMarks_ = (args) => (
             },
         ].map((range) => (
             <RangeSlider
-                key={range}
+                key={JSON.stringify(range)}
                 range={range}
                 defaultValue={[(range[0] ?? (range as any).min) + 2, (range[0] ?? (range as any).min) + 5]}
             />

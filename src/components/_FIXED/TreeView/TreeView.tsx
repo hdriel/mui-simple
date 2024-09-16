@@ -58,9 +58,9 @@ const TreeView: React.FC<TreeViewProps> = ({
     return (
         <Box>
             <MuiTreeView
-                defaultCollapseIcon={collapseIcon}
-                defaultExpandIcon={expandIcon}
-                defaultEndIcon={endIcon}
+                defaultCollapseIcon={collapseIcon as React.ReactNode}
+                defaultExpandIcon={expandIcon as React.ReactNode}
+                defaultEndIcon={endIcon as React.ReactNode}
                 expanded={expandedIds}
                 selected={selectedIds}
                 onNodeToggle={handleToggle}

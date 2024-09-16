@@ -156,7 +156,7 @@ const InputNumber: React.FC<InputNumberProps> = (props): React.ReactElement | Re
                     onValueChange={(values) => {
                         const { floatValue: value } = values;
                         const event = { target: { name, value } };
-                        // @ts-expect-error
+                        // @ts-ignore
                         handleOnChange?.(event);
                     }}
                 />

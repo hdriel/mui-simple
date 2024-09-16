@@ -65,7 +65,7 @@ const InputColor: React.FC<InputColorProps> = ({
 
     const opacityLabelTooltip = (opacity): string => `${opacityLabel}: ${opacity / 100}`;
     const showOpacityHandler = (): void => setShowOpacitySlider(!showOpacitySlider);
-    const handleOpacityChange = (event, newValue): void => setOpacity(newValue);
+    const handleOpacityChange = (event, newValue?): void => setOpacity(newValue);
     const handleOpacityChanged = (event, newValue): void => setOpacity(newValue);
     const handleClick = (): void => {
         const copied = copyToClipboard(valueLabel);

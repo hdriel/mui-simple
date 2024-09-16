@@ -145,7 +145,6 @@ const EnhancedTable: React.FC<TableProps> = ({
                             numSelected={selected.length}
                             columns={columns}
                             sortColumns={sortColumns}
-                            orderBy={orderBy}
                             onRequestSort={handleRequestSort}
                             headerColor={(headerColor ?? colorProps) as ColorsProps}
                             rowCount={rows}
@@ -187,15 +186,14 @@ const EnhancedTable: React.FC<TableProps> = ({
                                     rowSpan={emptyRows}
                                 >
                                     <TableCell colSpan={columns?.length || undefined} centerContent={isEmpty}>
-                                        {isEmpty && EmptyResultCmp ? (
-                                            isValidElement(EmptyResultCmp) ? (
-                                                React.cloneElement(EmptyResultCmp)
-                                            ) : typeof EmptyResultCmp === 'string' ? (
-                                                EmptyResultCmp
-                                            ) : (
-                                                <EmptyResultCmp />
-                                            )
-                                        ) : null}
+                                        {isEmpty && EmptyResultCmp
+                                            ? isValidElement(EmptyResultCmp)
+                                                ? React.cloneElement(EmptyResultCmp)
+                                                : typeof EmptyResultCmp === 'string'
+                                                ? EmptyResultCmp
+                                                : // <EmptyResultCmp />
+                                                  null
+                                            : null}
                                     </TableCell>
                                 </TableRow>
                             )}

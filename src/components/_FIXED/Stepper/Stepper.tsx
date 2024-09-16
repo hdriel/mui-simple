@@ -136,7 +136,7 @@ const Stepper: React.FC<PropsWithChildren<StepperProps>> = ({
             {steps?.length ? (
                 activeStep === steps?.length ? (
                     <>
-                        <ContentContainer>{allCompletedCmp}</ContentContainer>
+                        <ContentContainer>{allCompletedCmp as React.ReactNode}</ContentContainer>
                         <VerticalActionContainer>
                             <FullSpaceBox />
                             <Button onClick={onDone}>{DONE_LABEL}</Button>

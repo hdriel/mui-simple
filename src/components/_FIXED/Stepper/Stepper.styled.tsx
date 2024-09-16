@@ -1,3 +1,4 @@
+import React, { PropsWithChildren } from 'react';
 import { get } from 'lodash-es';
 import { styled } from '@mui/material/styles';
 import {
@@ -14,6 +15,7 @@ import type { StepperProps, StepContentProps, StepLabelProps, BoxProps, StepConn
 import MuiTypography from '../Typography/Typography';
 import MuiButton from '../Button/Button';
 import { numberToPx } from '../../../utils/helpers';
+import { PropsWithChildren } from 'react';
 
 export const Typography = MuiTypography;
 
@@ -87,7 +89,7 @@ export const FullSpaceBox = styled(MuiBox)<BoxProps>`
     flex: 1 1 auto;
 `;
 
-export const ContentContainer = styled(MuiBox)<BoxProps>`
+export const ContentContainer: React.FC<PropsWithChildren<BoxProps>> = styled(MuiBox)<BoxProps>`
     margin-block-start: 32px;
     margin-block-end: 16px;
 `;

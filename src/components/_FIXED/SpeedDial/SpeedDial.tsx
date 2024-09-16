@@ -48,7 +48,7 @@ const SpeedDial: React.FC<SpeedDialProps> = ({
                 onOpen={onOpen}
                 open={open}
                 showTooltip={showTooltip}
-                icon={<SpeedDialIcon openIcon={openIcon} icon={icon} />}
+                icon={<SpeedDialIcon openIcon={openIcon as React.ReactNode} icon={icon as React.ReactNode} />}
                 FabProps={{
                     sx: {
                         bgcolor: customColor,
@@ -62,7 +62,7 @@ const SpeedDial: React.FC<SpeedDialProps> = ({
                 {actions?.map((action) => (
                     <MuiSpeedDialAction
                         key={action.name}
-                        icon={action.icon}
+                        icon={action.icon as React.ReactNode}
                         tooltipTitle={action.name}
                         tooltipOpen={showTooltip}
                         onClick={action.onClick}

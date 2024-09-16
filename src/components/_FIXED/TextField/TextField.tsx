@@ -126,14 +126,14 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
                             startCmp && {
                                 startAdornment: (
                                     <InputAdornment position="start" sx={{ margin: 'auto', paddingInlineEnd: '8px' }}>
-                                        {startCmp}
+                                        {startCmp as React.ReactNode}
                                     </InputAdornment>
                                 ),
                             }),
                         ...((endCmp || copyAction) && {
                             endAdornment: (
                                 <InputAdornment position="end" sx={{ margin: 'auto' }}>
-                                    {endCmp}
+                                    {endCmp as React.ReactNode}
 
                                     {copyAction && (
                                         <Button
