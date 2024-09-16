@@ -166,9 +166,9 @@ const InputSelect: React.FC<InputSelectProps> = ({
     if (startCmpExternal || endCmpExternal) {
         return (
             <Stack direction="row" spacing={cmpSpacing} alignItems={alignActionsExternal}>
-                {startCmpExternal}
+                {startCmpExternal as React.ReactNode}
                 {component}
-                {endCmpExternal}
+                {endCmpExternal as React.ReactNode}
             </Stack>
         );
     }

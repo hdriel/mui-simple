@@ -40,9 +40,9 @@ const TabItem: React.FC<TabItemProps> = ({
                 {...(link && {
                     href: link,
                     component: 'a',
-                    onClick(event, value) {
+                    onClick(event, _value?) {
                         event.preventDefault();
-                        onClick?.(event, value);
+                        onClick?.(event, _value ?? value);
                     },
                 })}
                 sx={{

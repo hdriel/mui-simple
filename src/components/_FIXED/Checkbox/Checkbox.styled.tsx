@@ -40,7 +40,7 @@ export const Checkbox = styled(
                     error={error}
                     label={
                         isValidElement(label) ? (
-                            label
+                            (label as React.ReactNode)
                         ) : (
                             <Typography sx={{ fontSize, color: textColor, ...sxLabel }} {...labelProps}>
                                 {label as React.ReactNode}
@@ -56,14 +56,16 @@ export const Checkbox = styled(
                                 ...inputProps,
                                 'aria-label': ariaLabel,
                             }}
-                            sx={{
-                                ...sx,
-                                ...(fontSize && { '& .MuiSvgIcon-root': { fontSize } }),
-                                ...(customColor && {
-                                    color: customColor,
-                                    '&.Mui-checked': { color: customColor },
-                                }),
-                            }}
+                            sx={
+                                {
+                                    ...sx,
+                                    ...(fontSize && { '& .MuiSvgIcon-root': { fontSize } }),
+                                    ...(customColor && {
+                                        color: customColor,
+                                        '&.Mui-checked': { color: customColor },
+                                    }),
+                                } as Record<string, any>
+                            }
                             {...rest}
                         />
                     }
