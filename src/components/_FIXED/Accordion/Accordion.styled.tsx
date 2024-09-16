@@ -18,9 +18,10 @@ import { customStyleAccordion, customStyleDetails, customStyleSummary } from './
 interface AccordionStyledPropsType
     extends Omit<MuiAccordionProps, 'disabled' | 'expanded' | 'onChange' | 'TransitionProps'> {
     useCustomStyle?: boolean;
+    [key: string]: any;
 }
 
-export const Accordion = styled(
+export const Accordion: React.FC<AccordionStyledPropsType> = styled(
     ({ useCustomStyle, ...props }: AccordionStyledPropsType) => (
         <MuiAccordion {...(useCustomStyle && { disableGutters: true, elevation: 0, square: true })} {...props}>
             {props.children}
@@ -33,16 +34,16 @@ export const Accordion = styled(
     ${customStyleAccordion};
 `;
 
-export const AccordionSummary = styled(
-    ({
-        label,
-        ...props
-    }: AccordionSummaryProps & {
-        label?: string;
-        bgColor?: string;
-        titleColor?: string;
-        bottomSecondaryLabel?: boolean;
-    }) => <MuiAccordionSummary {...props} />,
+type _AccordionSummaryProps = AccordionSummaryProps & {
+    label?: string;
+    bgColor?: string;
+    titleColor?: string;
+    bottomSecondaryLabel?: boolean;
+    [key: string]: any;
+};
+
+export const AccordionSummary: React.FC<_AccordionSummaryProps> = styled(
+    ({ label, ...props }: _AccordionSummaryProps) => <MuiAccordionSummary {...props} />,
     {
         shouldForwardProp: (propName) =>
             !['bottomSecondaryLabel', 'useCustomStyle', 'bgColor', 'titleColor'].includes(propName as string),

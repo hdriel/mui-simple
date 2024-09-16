@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import type { TextEllipsisProps } from '../../decs';
 import Text from './Text';
 import TextEllipsis from './TextEllipsis';
 import { setDefaultValue } from '../../../utils/helpers';
 
 // todo: add commend to autodocs
-const Typography: React.FC<TextEllipsisProps> = (props): React.ReactElement | React.ReactNode => {
+const Typography: React.FC<PropsWithChildren<TextEllipsisProps>> = (props): React.ReactElement | React.ReactNode => {
     props = setDefaultValue(props, 'autoWidth', true);
     props = setDefaultValue(props, 'component', 'span');
     props = setDefaultValue(props, 'dynamicEllipsis', true);

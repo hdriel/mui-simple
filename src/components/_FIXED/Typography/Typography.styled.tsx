@@ -36,7 +36,7 @@ interface TypographyStyledProps {
     customColor?: string;
     fontSize?: number | string;
     italic?: boolean;
-    lineHeight?: number;
+    lineHeight?: string | number;
     monospace?: boolean;
     myClassName?: string | string[];
     strike?: boolean;

@@ -44,7 +44,7 @@ export const AutoWidth: Story = {
 
 export const Width100: Story = {
     args: {
-        width: true,
+        width: 100,
         bgColor: '#dccc0c',
         children: smallIpsum,
     },

@@ -225,7 +225,7 @@ export const MaxWidth_ = () => {
                                 id: 'max-width',
                             }}
                         >
-                            <MenuItem value={false as string}>false</MenuItem>
+                            <MenuItem value={false as unknown as string}>false</MenuItem>
                             <MenuItem value="xs">xs</MenuItem>
                             <MenuItem value="sm">sm</MenuItem>
                             <MenuItem value="md">md</MenuItem>

@@ -20,10 +20,12 @@ const IndentBorderTreeItem: React.ForwardRefExoticComponent<
                 ref={ref}
                 {...other}
                 label={label}
-                style={{
-                    '--tree-view-color': color,
-                    '--tree-view-bg-color': bgColor,
-                }}
+                style={
+                    {
+                        '--tree-view-color': color,
+                        '--tree-view-bg-color': bgColor,
+                    } as Record<string, any>
+                }
             />
         )
     );

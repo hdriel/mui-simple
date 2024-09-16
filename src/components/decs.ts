@@ -1,4 +1,4 @@
-import type {
+import React, {
     MouseEventHandler,
     ReactNode,
     ReactElement,
@@ -15,11 +15,10 @@ import type { TimePickerProps } from '@mui/x-date-pickers/TimePicker';
 import type { CloseReason, OpenReason, SxProps } from '@mui/material';
 import type { TIMEZONE } from './timezone';
 import type { LOCALE, ADAPTER_LOCALE } from './locales';
-import React from 'react';
 export type AppBarPosition = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
 
 type IconType = IconName | ReactNode | ReactElement;
-type ElementType = ReactElement | ReactNode;
+type ElementType = React.ForwardRefExoticComponent<any> | ReactElement | ReactNode;
 
 export interface AppBarProps {
     actions?: ElementType;
@@ -48,7 +47,7 @@ export interface AvatarProps {
     image?: string;
     onClick?: (event: any) => void;
     showTooltip?: boolean;
-    size?: string;
+    size?: string | number;
     tooltipPlacement?: 'top' | 'right' | 'bottom' | 'left';
     username?: string;
     variant?: 'circular' | 'rounded' | 'square';
@@ -941,7 +940,7 @@ export interface TextProps {
     html?: boolean;
     italic?: boolean;
     justifyContent?: string;
-    lineHeight?: number;
+    lineHeight?: number | string;
     link?: string;
     monospace?: boolean;
     paragraph?: boolean;

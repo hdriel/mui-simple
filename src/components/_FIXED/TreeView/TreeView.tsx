@@ -37,11 +37,11 @@ const TreeView: React.FC<TreeViewProps> = ({
     const handleToggle = onExpanded ? (event, nodeIds) => onExpanded([].concat(nodeIds)) : undefined;
     const handleSelect = onSelected ? (event, nodeIds) => onSelected([].concat(nodeIds)) : undefined;
 
-    const CustomTreeItem = CustomComponent
+    const CustomTreeItem: any = CustomComponent
         ? withTreeViewItem(CustomComponent, TreeItemStyled, externalItemProps)
         : TreeItemComponent;
 
-    const renderTree = (nodes): any[] =>
+    const renderTree = (nodes: any[]): any[] =>
         nodes?.map(({ id, label, ...node }) => (
             <CustomTreeItem
                 key={node[fieldId] ?? id}

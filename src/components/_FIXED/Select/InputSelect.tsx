@@ -12,7 +12,7 @@ const emptyObjectRef = [];
 const InputSelect: React.FC<InputSelectProps> = ({
     alignActions = 'baseline',
     alignActionsExternal = 'baseline',
-    autoWidth = 'off',
+    autoWidth = false,
     checkbox,
     cmpSpacing = 2,
     colorActive: _colorActive,
@@ -156,7 +156,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
                     }}
                 >
                     {options.length ? selectAllOption : undefined}
-                    {options.map((option) => (typeof option === 'function' ? option({ value, max }) : option))}
+                    {options.map((option: any) => (typeof option === 'function' ? option({ value, max }) : option))}
                 </Select>
                 {helperText && <FormHelperText error={error}>{helperText}</FormHelperText>}
             </FormControl>

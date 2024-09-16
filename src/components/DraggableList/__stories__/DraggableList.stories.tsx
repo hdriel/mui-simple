@@ -44,7 +44,7 @@ export const AvatarsColumn: Story = {
         flexDirection: 'column',
         flexGap: '10px',
         droppableClassName: 'images',
-        renderValue: (props) => <Avatar {...props} />,
+        renderValue: (props: any) => <Avatar {...props} />,
     },
     render,
 };
@@ -65,7 +65,7 @@ export const AvatarsRow: Story = {
         flexDirection: 'row',
         flexGap: '10px',
         droppableClassName: 'images',
-        renderValue: (props) => <Avatar {...props} />,
+        renderValue: (props: any) => <Avatar {...props} />,
     },
     render,
 };
@@ -84,7 +84,7 @@ export const ButtonsColumn: Story = {
         flexDirection: 'column',
         flexGap: '10px',
         droppableClassName: 'images',
-        renderValue: (props) => <Button {...props} />,
+        renderValue: (props: any) => <Button {...props} />,
     },
     render,
 };
@@ -103,7 +103,7 @@ export const ButtonsRow: Story = {
         flexDirection: 'row',
         flexGap: '10px',
         droppableClassName: 'images',
-        renderValue: (props) => <Button {...props} />,
+        renderValue: (props: any) => <Button {...props} />,
     },
     render,
 };

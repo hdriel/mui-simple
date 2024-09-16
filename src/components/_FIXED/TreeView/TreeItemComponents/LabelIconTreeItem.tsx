@@ -16,8 +16,18 @@ interface LabelIconTreeItemProps {
 const LabelIconTreeItem: React.ForwardRefExoticComponent<
     React.PropsWithoutRef<LabelIconTreeItemProps> & React.RefAttributes<unknown>
     // eslint-disable-next-line react/display-name
-> = forwardRef((props, ref) => {
-    const { bgColor, color, icon: _labelIcon, info: labelInfo, label: labelText, ...other } = props ?? {};
+> = forwardRef((props: any, ref) => {
+    const {
+        nodeId,
+        id,
+        fieldId,
+        bgColor,
+        color,
+        icon: _labelIcon,
+        info: labelInfo,
+        label: labelText,
+        ...other
+    } = props ?? {};
     const labelIcon = typeof _labelIcon === 'string' ? <SVGIcon>{_labelIcon}</SVGIcon> : _labelIcon;
 
     return (
@@ -25,6 +35,7 @@ const LabelIconTreeItem: React.ForwardRefExoticComponent<
             <LabelIconTreeItemStyled
                 ref={ref}
                 {...other}
+                nodeId={props[fieldId] || nodeId || id}
                 label={
                     <Box sx={{ display: 'flex', alignItems: 'center', p: 0.5, pr: 0 }}>
                         {labelIcon && (
@@ -44,10 +55,12 @@ const LabelIconTreeItem: React.ForwardRefExoticComponent<
                         )}
                     </Box>
                 }
-                style={{
-                    '--tree-view-color': color,
-                    '--tree-view-bg-color': bgColor,
-                }}
+                style={
+                    {
+                        '--tree-view-color': color,
+                        '--tree-view-bg-color': bgColor,
+                    } as Record<string, any>
+                }
             />
         )
     );

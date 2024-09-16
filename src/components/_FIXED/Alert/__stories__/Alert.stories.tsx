@@ -95,7 +95,7 @@ export const Title: Story = {
 
 export const Variant_ = (args) => (
     <Stack spacing={3}>
-        {['filled', 'outlined', 'standard'].map((variant) => (
+        {['filled', 'outlined', 'standard'].map((variant: 'filled' | 'outlined' | 'standard') => (
             <>
                 <Alert key={`${variant}-success`} variant={variant} severity="success">
                     success - {variant} Variant

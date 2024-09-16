@@ -106,6 +106,7 @@ export const LoadingCmp: Story = {
         isLoading: true,
         loadingLabel: 'is loading please wait',
         loadingIconPosition: 'end',
+        // @ts-ignore
         loadingCmp: <SendIcon size={15} />,
         children: 'Button',
     },

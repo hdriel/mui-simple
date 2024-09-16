@@ -2,9 +2,9 @@ import React, { forwardRef } from 'react';
 import { useTreeItem } from '@mui/lab';
 import { TreeItem } from './TreeView.styled';
 
-export function withTreeViewItem(Component, TreeItemComponent = TreeItem, externalItemProps = {}) {
+export function withTreeViewItem(Component: any, TreeItemComponent: any = TreeItem, externalItemProps: any = {}) {
     // eslint-disable-next-line react/display-name
-    const CustomTreeItemChild = forwardRef((props, ref) => {
+    const CustomTreeItemChild: any = forwardRef((props, ref) => {
         const {
             nodeId,
             TransitionComponent,
@@ -14,7 +14,7 @@ export function withTreeViewItem(Component, TreeItemComponent = TreeItem, extern
             borderedStyles,
             edgeCornersStyles,
             ...restProps
-        } = props ?? {};
+        } = props ?? ({} as any);
 
         const { disabled, expanded, selected, focused, handleExpansion, handleSelection, preventSelection } =
             useTreeItem(nodeId);
@@ -48,10 +48,12 @@ export function withTreeViewItem(Component, TreeItemComponent = TreeItem, extern
                             preventSelectItem={preventSelection}
                         />
                     }
-                    style={{
-                        ...(restProps.color && { '--tree-view-color': restProps.color }),
-                        ...(restProps.bgColor && { '--tree-view-bg-color': restProps.bgColor }),
-                    }}
+                    style={
+                        {
+                            ...(restProps.color && { '--tree-view-color': restProps.color }),
+                            ...(restProps.bgColor && { '--tree-view-bg-color': restProps.bgColor }),
+                        } as Record<string, any>
+                    }
                 >
                     {[].concat(children ?? [])?.map(({ props: treeItemProps }, index) => {
                         return <CustomTreeItemChild key={treeItemProps?.nodeId ?? index} {...treeItemProps} />;

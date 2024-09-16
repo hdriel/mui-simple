@@ -2,13 +2,14 @@ import { styled, alpha } from '@mui/material/styles';
 import { TreeView as MuiTreeView } from '@mui/lab';
 import MuiTreeItem, { treeItemClasses } from '@mui/lab/TreeItem';
 import { borderedStyles, closeIconFade, edgeCorners, selectedColor } from './TreeView.styles';
+import { numberToPx } from '../../../utils/helpers';
 
 export const TreeView = styled(MuiTreeView, {
     shouldForwardProp: (propName) => !['maxWidth', 'height'].includes(propName as string),
 })`
     height: ${(props: any) => props.height};
     flex-grow: 1;
-    max-width: ${(props: any) => (props.maxWidth ? `${props.maxWidth}px` : undefined)};
+    max-width: ${(props: any) => (props.maxWidth ? numberToPx(props.maxWidth) : undefined)};
     overflow-y: auto;
     overflow-x: hidden;
 `;
