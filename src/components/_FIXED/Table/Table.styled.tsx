@@ -45,7 +45,7 @@ export const TableCell = styled(MuiTableCell, {
     padding-left: 1em;
     padding-right: 1em;
 
-    ${(props) => {
+    ${(props: any) => {
         const { colors, theme } = props;
         const { color, background } = extractColors({ theme, colors }) ?? {};
 
@@ -55,7 +55,7 @@ export const TableCell = styled(MuiTableCell, {
         `;
     }};
 
-    ${(props) => {
+    ${(props: any) => {
         return props.centerContent
             ? css`
                   width: 100%;

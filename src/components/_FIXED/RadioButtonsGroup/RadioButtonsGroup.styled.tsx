@@ -19,8 +19,8 @@ export const FormHelperText = MuiFormHelperText;
 export const RadioGroup = MuiRadioGroup;
 export const Legend = styled('legend')`
     display: block;
-    padding-left: ${(props) => (props.children ? '10px' : 0)};
-    padding-right: ${(props) => (props.children ? '10px' : 0)};
+    padding-left: ${(props: any) => (props.children ? '10px' : 0)};
+    padding-right: ${(props: any) => (props.children ? '10px' : 0)};
 `;
 
 // #### Radio
@@ -47,7 +47,7 @@ export const RadioControlled = styled(
         <FormControlLabel label={label} sx={{ userSelect: 'none' }} {...props} />
     ),
     {
-        shouldForwardProp: (propName) =>
+        shouldForwardProp: (propName: string) =>
             !['textColor', 'muiColor', 'fontSize', 'helperText', 'ignoreLabelColor'].includes(propName as string),
     }
 )(({ theme, color, muiColor, checked, ignoreLabelColor }) => ({

@@ -8,11 +8,11 @@ interface DraggableListULProps {
 }
 export const DraggableListUL = styled('ul')<DraggableListULProps>`
     display: flex;
-    gap: ${(props) => props.flexGap};
+    gap: ${(props: any) => props.flexGap};
     list-style-type: none;
     margin: 0;
     padding: 0;
-    ${(props) =>
+    ${(props: any) =>
         props.flexDirection === 'row'
             ? css`
                   flex-direction: row;

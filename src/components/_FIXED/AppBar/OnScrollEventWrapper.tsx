@@ -16,7 +16,7 @@ interface OnScrollEventWrapperProps {
     right?: number;
     scrollElement?: any;
     scrollToId?: string;
-    scrollToTop?: ReactNode | boolean;
+    scrollToTop?: ReactElement | ReactNode | boolean;
     scrollToTopProps?: SxProps;
     top?: number;
     zIndex?: number;

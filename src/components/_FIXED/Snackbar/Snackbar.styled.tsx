@@ -4,9 +4,9 @@ import { styled, css } from '@mui/material/styles';
 export { Fade, Grow, Slide } from '@mui/material';
 
 export const Snackbar = styled(MuiSnackbar, {
-    shouldForwardProp: (propName) => !['fullWidth'].includes(propName as string),
+    shouldForwardProp: (propName: string) => !['fullWidth'].includes(propName as string),
 })`
-    ${(props) =>
+    ${(props: any) =>
         props.fullWidth
             ? css`
                   width: 100%;

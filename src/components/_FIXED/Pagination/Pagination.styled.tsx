@@ -2,10 +2,10 @@ import { Pagination as MuiPagination, PaginationItem as MuiPaginationItem } from
 import { styled } from '@mui/material/styles';
 
 export const Pagination = styled(MuiPagination, {
-    shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
+    shouldForwardProp: (propName: string) => !['customColor'].includes(propName as string),
 })<{ customColor: string }>`
     .MuiPaginationItem-root.Mui-selected {
-        background-color: ${(props) => props.customColor};
+        background-color: ${(props: any) => props.customColor};
     }
 `;
 

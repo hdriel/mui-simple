@@ -52,7 +52,7 @@ export function getColumn(row: any, column: TableColumn): TableColumn {
         id: column?.id ?? field,
         field,
         label: isString ? column : column.label,
-        numeric: isString ? typeof row?.[field] === 'number' ?? false : column.numeric,
+        numeric: isString ? typeof row?.[field] === 'number' : column.numeric,
         disablePadding: isString ? false : column.disablePadding ?? false,
         align: isString ? (typeof row?.[field] === 'number' ? 'right' : 'left') : column.align,
         format: undefined,
@@ -138,7 +138,7 @@ export function getRowContent({ column, data }: { column: TableColumn; data: any
     if (isValidElement(column.cmp)) {
         return cloneElement(column.cmp, { ...props });
     } else if (column.cmp) {
-        const { cmp: Cmp } = column;
+        const { cmp: Cmp }: any = column;
         return <Cmp {...data} />;
     }
 

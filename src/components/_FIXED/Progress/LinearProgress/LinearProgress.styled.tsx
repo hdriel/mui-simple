@@ -19,8 +19,8 @@ const ContentWrapper = styled(MuiBox)`
 
 const ProgressWrapper = styled(MuiBox)`
     width: 100%;
-    margin-right: ${(props) => props.theme.spacing(1)};
-    margin-left: ${(props) => props.theme.spacing(1)};
+    margin-right: ${(props: any) => props.theme.spacing(1)};
+    margin-left: ${(props: any) => props.theme.spacing(1)};
 `;
 
 const IndicatorWrapper = styled(MuiBox)`
@@ -47,18 +47,18 @@ export const LinearProgress = styled(
         </ContentWrapper>
     ),
     {
-        shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
+        shouldForwardProp: (propName: string) => !['customColor'].includes(propName as string),
     }
 )<LinearProgressStyledProps>`
     &.${linearProgressClasses.root} {
-        background-color: ${(props) => alpha(props.customColor ?? 'rgba(0,0,0,0.3)', 0.2)} !important;
+        background-color: ${(props: any) => alpha(props.customColor ?? 'rgba(0,0,0,0.3)', 0.2)} !important;
     }
 
     &.${linearProgressClasses.bar} {
-        background-color: ${(props) => props.customColor};
+        background-color: ${(props: any) => props.customColor};
     }
 
-    height: ${(props) => `${numberToPx(props.thickness)}` || '5px'};
+    height: ${(props: any) => `${numberToPx(props.thickness)}` || '5px'};
     border-radius: 5px;
 
     &.${linearProgressClasses.colorPrimary} {
@@ -67,11 +67,11 @@ export const LinearProgress = styled(
 
     & .${linearProgressClasses.bar} {
         border-radius: 5px;
-        background-color: ${(props) => props.customColor};
+        background-color: ${(props: any) => props.customColor};
     }
 
     & .${linearProgressClasses.dashed} {
-        background-image: ${(props) => {
+        background-image: ${(props: any) => {
             const color = alpha(props.customColor ?? 'rgba(0,0,0,0.3)', 0.2);
             return `radial-gradient(${color} 0%, ${color} 16%, transparent 42%)`;
         }};

@@ -99,11 +99,11 @@ export const OrientationVertical_ = (args) => (
 export const TextAlign_ = (args) => (
     <Stack spacing={3}>
         <Text />
-        <Divider textAlign="left">left</Divider>
+        <Divider textAlign="start">left</Divider>
         <Text />
         <Divider textAlign="center">center</Divider>
         <Text />
-        <Divider textAlign="right">right</Divider>
+        <Divider textAlign="end">right</Divider>
         <Text />
     </Stack>
 );
@@ -202,7 +202,7 @@ export const ComplexExample_ = () => {
                 variant="middle"
                 orientation="horizontal"
                 label="secondary"
-                textAlign="left"
+                textAlign="start"
                 color="secondary"
                 thickness={4}
             />
@@ -210,7 +210,7 @@ export const ComplexExample_ = () => {
                 variant="middle"
                 orientation="horizontal"
                 label="default"
-                textAlign="right"
+                textAlign="end"
                 light
                 color={'#5019c9'}
                 thickness={5}
@@ -218,7 +218,7 @@ export const ComplexExample_ = () => {
 
             <Box sx={{ my: 1, display: 'flex' }}>
                 <Text sx={{ mr: 1 }} />
-                <Divider variant="fullWidth" orientation="vertical" textAlign="left" color="primary" thickness={3}>
+                <Divider variant="fullWidth" orientation="vertical" textAlign="start" color="primary" thickness={3}>
                     primary
                 </Divider>
                 <Text sx={{ ml: 2 }} />

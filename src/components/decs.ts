@@ -35,7 +35,7 @@ export interface AppBarProps {
     scrollElement?: ElementType | string;
     scrollToTop?: ElementType | boolean;
     scrollToTopProps?: object;
-    title?: string | ElementType;
+    title?: ElementType | string;
     toolbarId?: string;
     [key: string]: any;
 }
@@ -1269,7 +1269,7 @@ export interface ToggleButtonGroupProps {
     helperTextStyle?: SxProps;
     error?: boolean;
     data?: Array<{
-        value: string;
+        value: string | number;
         disabled?: boolean;
         component: IconType | number;
     }>;

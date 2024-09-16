@@ -18,7 +18,7 @@ const MaskedInput: any = IMaskMixin(
         InputLabelProps,
         endCmp,
         ...otherProps
-    }) => {
+    }: any) => {
         return (
             <Input
                 inputRef={inputRef}

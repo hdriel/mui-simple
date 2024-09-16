@@ -13,7 +13,7 @@ import SVGIcon from '../SVGIcon/SVGIcon';
 import type { InputNumberProps } from '../../decs';
 
 export const TextField = styled((props) => <Input {...props} type="text" />, {
-    shouldForwardProp: (propName) =>
+    shouldForwardProp: (propName: string) =>
         !['patternChar', 'allowEmptyFormatting', 'thousandSeparator', 'fixedDecimalScale', 'decimalSeparator'].includes(
             propName as string
         ),

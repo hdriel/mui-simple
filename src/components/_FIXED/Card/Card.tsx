@@ -1,5 +1,5 @@
 import React, { cloneElement, isValidElement, Children } from 'react';
-import type { PropsWithChildren } from 'react';
+import type { PropsWithChildren, ReactNode } from 'react';
 import { MoreVert as MoreVertIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 import parser from 'html-react-parser';
 import {
@@ -85,7 +85,9 @@ const Card: React.FC<PropsWithChildren<CardProps>> = (props): React.ReactElement
             sx={{ maxWidth, minWidth, width, maxHeight, height, minHeight, ...rest.sx }}
             onClick={onClick}
         >
-            {!isMediaOnTop && title ? <CardHeader avatar={avatar} title={title} subheader={subtitle} /> : undefined}
+            {!isMediaOnTop && title ? (
+                <CardHeader avatar={avatar as ReactNode} title={title as ReactNode} subheader={subtitle as ReactNode} />
+            ) : undefined}
             <Box
                 sx={{
                     ...(flexDirection && {
@@ -125,9 +127,9 @@ const Card: React.FC<PropsWithChildren<CardProps>> = (props): React.ReactElement
                 <ContentWrapper sx={contentWrapperStyle} ref={ref}>
                     {isMediaOnTop && title ? (
                         <CardHeader
-                            avatar={avatar}
-                            title={title}
-                            subheader={subtitle}
+                            avatar={avatar as ReactNode}
+                            title={title as ReactNode}
+                            subheader={subtitle as ReactNode}
                             action={
                                 options?.length ? (
                                     <Menu options={options} {...optionsProps} open>

@@ -15,10 +15,10 @@ interface MobileStepperStyledProps {
 }
 type MobileStepperStyledPropsType = MobileStepperStyledProps & MobileStepperProps;
 export const MobileStepper = styled(MuiMobileStepper, {
-    shouldForwardProp: (propName) => !['forceFixedDirection'].includes(propName as string),
+    shouldForwardProp: (propName: string) => !['forceFixedDirection'].includes(propName as string),
 })<MobileStepperStyledPropsType>`
     &.MuiMobileStepper-root {
-        ${(props) =>
+        ${(props: any) =>
             props.forceFixedDirection
                 ? css`
                       /* @noflip */

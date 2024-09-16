@@ -1,18 +1,30 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import { Drawer as MuiDrawer, SwipeableDrawer as MuiSwipeableDrawer, Box } from '@mui/material';
+import {
+    Drawer as MuiDrawer,
+    DrawerProps,
+    SwipeableDrawer as MuiSwipeableDrawer,
+    SwipeableDrawerProps,
+    Box,
+    BoxProps,
+} from '@mui/material';
 
 import { drawerStyles } from './Drawer.styles';
 
-export const Drawer = styled(MuiDrawer, {
-    shouldForwardProp: (propName) => !['isMiniPersistent', 'bgColor'].includes(propName as string),
-})(drawerStyles);
+export const Drawer: React.FC<DrawerProps & { isMiniPersistent?: boolean; bgColor?: string }> = styled(MuiDrawer, {
+    shouldForwardProp: (propName: string) => !['isMiniPersistent', 'bgColor'].includes(propName as string),
+})((props) => ({
+    ...drawerStyles(props),
+}));
 
-export const SwipeableDrawer = styled(MuiSwipeableDrawer, {
-    shouldForwardProp: (propName) => !['isMiniPersistent', 'bgColor'].includes(propName as string),
-})(drawerStyles);
+export const SwipeableDrawer: React.FC<SwipeableDrawerProps & { isMiniPersistent?: boolean; bgColor?: string }> =
+    styled(MuiSwipeableDrawer, {
+        shouldForwardProp: (propName: string) => !['isMiniPersistent', 'bgColor'].includes(propName as string),
+    })((props) => ({
+        ...drawerStyles(props),
+    }));
 
-export const ContentWrapper = styled(({ width, anchor, ...props }) => (
+export const ContentWrapper = styled(({ width, anchor, ...props }: any) => (
     <Box
         sx={{ width: ['top', 'bottom'].includes(anchor?.toLowerCase() ?? 'left') ? 'auto' : width }}
         role="presentation"
@@ -20,7 +32,7 @@ export const ContentWrapper = styled(({ width, anchor, ...props }) => (
     />
 ))``;
 
-export const DrawerHeader = styled('div')(({ theme, anchor }) => ({
+export const DrawerHeader: React.FC<BoxProps & { anchor?: string }> = styled(Box)(({ theme, anchor }: any) => ({
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(0, 1),

@@ -11,7 +11,7 @@ interface IndentBorderTreeItemProps {
 const IndentBorderTreeItem: React.ForwardRefExoticComponent<
     React.PropsWithoutRef<IndentBorderTreeItemProps> & React.RefAttributes<unknown>
     // eslint-disable-next-line react/display-name
-> = forwardRef((props, ref) => {
+> = forwardRef((props: any, ref) => {
     const { bgColor, color, icon, label, ...other } = props ?? {};
 
     return (

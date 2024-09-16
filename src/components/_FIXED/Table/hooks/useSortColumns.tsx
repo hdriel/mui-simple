@@ -25,12 +25,12 @@ export function useSortColumns({
     const [sortColumns, setSortColumns] = useState<TableColumn[]>(
         columns?.map(
             (column) =>
-                (({
+                ({
                     field: column.field,
                     orderBy: [SORT.DOWN, SORT.UP].includes(column.orderBy as string) ? column.orderBy : false,
                     label: column.label,
                     type: typeof get(firstItem, column.field),
-                } ?? {}) as TableColumn)
+                } as TableColumn)
         )
     );
 
@@ -68,7 +68,10 @@ export function useSortColumns({
             height={menuHeight}
             open={menuOpen}
             onClick={() => false}
-            onClose={() => setMenuOpen(false)}
+            onClose={() => {
+                setMenuOpen(false);
+                return true;
+            }}
             alternativeContent={
                 <CheckList
                     disableGuttersItems

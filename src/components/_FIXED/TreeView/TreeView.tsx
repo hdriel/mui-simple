@@ -61,12 +61,12 @@ const TreeView: React.FC<TreeViewProps> = ({
                 defaultCollapseIcon={collapseIcon}
                 defaultExpandIcon={expandIcon}
                 defaultEndIcon={endIcon}
-                multiSelect={multiSelect}
                 expanded={expandedIds}
                 selected={selectedIds}
                 onNodeToggle={handleToggle}
                 onNodeSelect={handleSelect}
                 maxWidth={maxWidth}
+                {...(multiSelect && { multiSelect })}
                 {...props}
             >
                 {CustomTreeItem && renderTree(nodes)}

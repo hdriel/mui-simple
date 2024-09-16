@@ -39,7 +39,7 @@ interface SliderStyledProps {
 }
 
 export const Slider = styled(MuiSlider, {
-    shouldForwardProp: (propName) =>
+    shouldForwardProp: (propName: string) =>
         !['startIcon', 'endIcon', 'customColor', 'sliderStyle'].includes(propName as string),
 })<SliderStyledProps & any>`
     ${sliderStyleIOS}

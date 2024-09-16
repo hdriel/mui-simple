@@ -47,11 +47,11 @@ export const BottomNavigation = styled(
         </Paper>
     ),
     {
-        shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
+        shouldForwardProp: (propName: string) => !['customColor'].includes(propName as string),
     }
 )<BottomNavigationStyledPropsType>`
     & .MuiBottomNavigationAction-root.Mui-selected {
-        color: ${(props) => props.customColor}
+        color: ${(props: any) => props.customColor}
 ` as ComponentType<BottomNavigationStyledPropsType>;
 
 export const BottomNavigationAction: any = MuiBottomNavigationAction;

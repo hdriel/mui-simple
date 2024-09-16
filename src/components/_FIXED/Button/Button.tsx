@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ReactElement, PropsWithChildren } from 'react';
+import type { ReactElement, ReactNode, PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
 
 import { CircularProgress } from '../Progress';
@@ -42,7 +42,7 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = ({
     useReactRouterDomLink,
     variant = undefined, // stay it undefined for supporting ButtonGroup component variant
     ...rest
-}): ReactElement | React.ReactNode => {
+}): ReactElement | ReactNode => {
     const [customColor, muiColor] = useCustomColor(color);
     const startIcon = typeof _startIcon === 'string' ? <SVGIcon>{_startIcon}</SVGIcon> : _startIcon;
     const endIcon = typeof _endIcon === 'string' ? <SVGIcon>{_endIcon}</SVGIcon> : _endIcon;
@@ -79,7 +79,7 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = ({
                 }}
                 {...rest}
             >
-                {isLoading ? loadingCmp : icon}
+                {(isLoading ? loadingCmp : icon) as ReactNode}
             </MuiIconButton>
         </Tooltip>
     ) : (
@@ -89,14 +89,14 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = ({
                 customColor={muiColor ? undefined : customColor}
                 disabled={disabled}
                 disableRipple={isLoading || disableRipple}
-                endIcon={endIconCmp}
+                endIcon={endIconCmp as ReactNode}
                 fullWidth={fullWidth}
                 href={useReactRouterDomLink ? undefined : link}
                 onClick={isLoading ? undefined : onClick}
                 onContextMenu={isLoading ? undefined : onRightClick ? onRightClickHandler : rest.onContextMenu}
                 ref={innerRef}
                 size={SIZES.includes(size as string) ? (size as SizeType) : undefined}
-                startIcon={startIconCmp}
+                startIcon={startIconCmp as ReactNode}
                 variant={variant}
                 sx={{
                     minWidth,

@@ -8,6 +8,6 @@ type BreadcrumbsStyledProps = BreadcrumbsProps & { size: string | number };
 
 export const Breadcrumbs = styled(MuiBreadcrumbs)<BreadcrumbsStyledProps>`
     & .MuiBreadcrumbs-separator {
-        font-size: ${(props) => numberToPx(props.size)};
+        font-size: ${(props: any) => numberToPx(props.size)};
     }
 ` as ComponentType<BreadcrumbsStyledProps>;

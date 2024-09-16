@@ -26,7 +26,7 @@ export const Default: Story = {
 
 export const MuiIconNames_ = (args) => {
     const [iconType, setIconType] = useState('filled');
-    const [columns, setColumns] = useState(2);
+    const [columns, setColumns] = useState(String(2));
     const [color, setColor] = useState('black');
 
     const dataType = [
@@ -38,16 +38,16 @@ export const MuiIconNames_ = (args) => {
     ];
 
     const dataColumns = [
-        { value: 12 / 1, component: '1' },
-        { value: 12 / 2, component: '2' },
-        { value: 12 / 3, component: '3' },
-        { value: 12 / 4, component: '4' },
-        { value: 12 / 5, component: '5' },
-        { value: 12 / 6, component: '6' },
-        { value: 12 / 7, component: '7' },
-        { value: 12 / 8, component: '8' },
-        { value: 12 / 9, component: '9' },
-        { value: 12 / 10, component: '10' },
+        { value: String(12 / 1), component: '1' },
+        { value: String(12 / 2), component: '2' },
+        { value: String(12 / 3), component: '3' },
+        { value: String(12 / 4), component: '4' },
+        { value: String(12 / 5), component: '5' },
+        { value: String(12 / 6), component: '6' },
+        { value: String(12 / 7), component: '7' },
+        { value: String(12 / 8), component: '8' },
+        { value: String(12 / 9), component: '9' },
+        { value: String(12 / 10), component: '10' },
     ];
 
     return (
@@ -82,7 +82,7 @@ export const MuiIconNames_ = (args) => {
                     sharp: sharpIcons,
                     twoTone: twoToneIcons,
                 }[iconType]?.map((muiIconName) => (
-                    <Grid key={muiIconName} item xs={columns} flex>
+                    <Grid key={muiIconName} item display="flex">
                         <Stack alignItems="center" spacing={2}>
                             <SVGIcon muiIconName={muiIconName} size={40} color={color} />
                             <Typography tooltip={false}>{muiIconName}</Typography>
@@ -101,7 +101,7 @@ export const WidthAndHeight_ = (args) => {
     return (
         <Grid container spacing={5} sx={{ width: 1200 }}>
             <Grid item xs={6}>
-                <Grid item xs flex>
+                <Grid item xs display="flex">
                     <Stack direction="row">
                         <Box
                             sx={{
@@ -131,7 +131,7 @@ export const WidthAndHeight_ = (args) => {
                 </Grid>
             </Grid>
             <Grid item xs={6}>
-                <Grid item xs flex>
+                <Grid item xs display="flex">
                     <Stack direction="row">
                         <Box
                             sx={{
@@ -169,7 +169,7 @@ export const Sized_ = (args) => {
 
     return (
         <Grid container spacing={3} sx={{ width: 500 }}>
-            <Grid item xs flex>
+            <Grid item xs display="flex">
                 <Stack direction="row">
                     <Box
                         sx={{
@@ -198,7 +198,7 @@ export const SVGFile_ = (args) => {
 
     return (
         <Grid container spacing={3} sx={{ width: 500 }}>
-            <Grid item xs flex>
+            <Grid item xs display="flex">
                 <Stack direction="row">
                     <Box
                         sx={{

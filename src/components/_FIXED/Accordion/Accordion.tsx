@@ -78,7 +78,7 @@ const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props):
                 bottomSecondaryLabel={!!bottomSecondaryLabel}
                 sx={summaryStyles}
             >
-                {summary || (
+                {(summary as any) || (
                     <>
                         {label && typeof label === 'string' ? (
                             <Typography

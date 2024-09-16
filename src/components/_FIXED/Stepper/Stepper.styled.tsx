@@ -26,7 +26,7 @@ interface StepperStyledProps {
 }
 type StepperStyledPropsType = StepperStyledProps & StepperProps;
 export const Stepper = styled(MuiStepper, {
-    shouldForwardProp: (propName) => !['lineWidth', 'lineColor', 'marginContent'].includes(propName as string),
+    shouldForwardProp: (propName: string) => !['lineWidth', 'lineColor', 'marginContent'].includes(propName as string),
 })<StepperStyledPropsType>`
     &.MuiStepper-root.MuiStepper-vertical.MuiStepper-alternativeLabel {
         gap: 1.5em;
@@ -35,7 +35,7 @@ export const Stepper = styled(MuiStepper, {
         width: 100%;
     }
     & .MuiStepConnector-vertical {
-        margin-left: ${(props) => numberToPx(props.marginContent)};
+        margin-left: ${(props: any) => numberToPx(props.marginContent)};
     }
 `;
 
@@ -48,22 +48,22 @@ interface StepContentStyledProps {
 }
 type StepContentStyledPropsType = StepContentStyledProps & StepContentProps;
 export const StepContent = styled(MuiStepContent, {
-    shouldForwardProp: (propName) => !['lineWidth', 'lineColor', 'marginContent'].includes(propName as string),
+    shouldForwardProp: (propName: string) => !['lineWidth', 'lineColor', 'marginContent'].includes(propName as string),
 })<StepContentStyledPropsType>`
     &.MuiStepContent-root {
-        border-width: ${(props) => numberToPx(props.lineWidth) ?? '3px'};
-        border-color: ${(props) => props.lineColor ?? '#eaeaf0'};
-        margin-left: ${(props) => numberToPx(props.marginContent)};
+        border-width: ${(props: any) => numberToPx(props.lineWidth) ?? '3px'};
+        border-color: ${(props: any) => props.lineColor ?? '#eaeaf0'};
+        margin-left: ${(props: any) => numberToPx(props.marginContent)};
     }
 `;
 
 export const StepLabel = styled(MuiStepLabel, {
-    shouldForwardProp: (propName) => ![].includes(propName as string),
+    shouldForwardProp: (propName: string) => ![].includes(propName as string),
 })<any>`
     & .MuiStepIcon-root.Mui-active,
     & .MuiStepIcon-root.Mui-completed,
     & .MuiStepLabel-label.Mui-active {
-        color: ${(props) => props.color};
+        color: ${(props: any) => props.color};
 
         .MuiStepIcon-text {
             fill: #ffffff;

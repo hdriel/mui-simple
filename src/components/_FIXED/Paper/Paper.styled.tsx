@@ -40,18 +40,18 @@ interface PaperStylesProps {
     imageLayout: string;
 }
 export const Paper = styled(MuiPaper, {
-    shouldForwardProp: (propName) =>
+    shouldForwardProp: (propName: string) =>
         !['muiColor', 'customColor', 'textColor', 'imageSrc', 'imageOpacity', 'imageLayout'].includes(
             propName as string
         ),
 })<PaperStylesProps>`
-    width: ${(props) => numberToPx(props.width)};
+    width: ${(props: any) => numberToPx(props.width)};
 
-    height: ${(props) => numberToPx(props.height)};
+    height: ${(props: any) => numberToPx(props.height)};
 
-    background-color: ${(props) => props.customColor};
+    background-color: ${(props: any) => props.customColor};
 
-    color: ${(props) => props.textColor ?? get(props, `theme.palette.${props.muiColor}.contrastText`)};
+    color: ${(props: any) => props.textColor ?? get(props, `theme.palette.${props.muiColor}.contrastText`)};
 
     position: relative;
 

@@ -22,7 +22,7 @@ export function useSelectionMode({
     const cmp = !hide && (
         <Tooltip title={tooltip}>
             <Checkbox
-                color={colors?.color ?? colors?.background ?? (colors as string)}
+                color={typeof colors === 'string' ? colors : colors?.color ?? colors?.background}
                 checkedIcon={<LibraryAddCheckIcon />}
                 icon={<LibraryAddCheckOutlinedIcon />}
                 checked={selectionMode}

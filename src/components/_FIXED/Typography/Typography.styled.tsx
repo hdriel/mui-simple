@@ -19,12 +19,12 @@ interface TypographyBorderProps {
 type TypographyBorderPropsType = Omit<BoxProps, 'border'> & TypographyBorderProps;
 
 export const Border = styled(Box, {
-    shouldForwardProp: (propName) => !['autoWidth', 'noWrap', 'border', 'rows'].includes(propName as string),
+    shouldForwardProp: (propName: string) => !['autoWidth', 'noWrap', 'border', 'rows'].includes(propName as string),
 })<TypographyBorderPropsType>`
-    width: ${(props) => numberToPx(props.width) ?? (props.autoWidth ? 'auto' : '100%')};
+    width: ${(props: any) => numberToPx(props.width) ?? (props.autoWidth ? 'auto' : '100%')};
     display: flex;
     align-items: center;
-    border: ${(props) => (props.border && typeof props.border === 'boolean' ? '1px solid black' : props.border)};
+    border: ${(props: any) => (props.border && typeof props.border === 'boolean' ? '1px solid black' : props.border)};
     ${ellipsisRows}
     ${ellipsisRow1}
 ` as ComponentType<TypographyBorderPropsType>;

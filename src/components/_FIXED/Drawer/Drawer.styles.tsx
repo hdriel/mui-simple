@@ -13,11 +13,12 @@ import type { SxProps, Theme } from '@mui/material';
 interface DrawerStylesProps {
     theme?: Theme;
     open?: boolean;
+    bgColor?: string;
     isMiniPersistent?: boolean;
     drawerWidth?: number | string;
 }
 
-export function drawerStyles(props: PropsWithChildren<DrawerStylesProps>): SxProps {
+export function drawerStyles(props: DrawerStylesProps): SxProps {
     const { theme, bgColor } = props;
     return {
         flexShrink: 0,

@@ -12,19 +12,19 @@ interface AlertStyledProps {
 }
 type AlertStyledPropsType = AlertStyledProps & AlertProps;
 export const Alert: React.FC<AlertStyledPropsType> = styled(MuiAlert, {
-    shouldForwardProp: (propName) => !['customColor'].includes(propName as string),
+    shouldForwardProp: (propName: string) => !['customColor'].includes(propName as string),
 })<AlertStyledPropsType>`
     &.MuiAlert-root {
         min-width: 200px;
     }
-    width: ${(props) => numberToPx(props.width)};
+    width: ${(props: any) => numberToPx(props.width)};
 
     & .MuiAlert-icon,
     & .MuiAlert-message {
-        color: ${(props) => props.customColor};
+        color: ${(props: any) => props.customColor};
     }
 
-    ${(props) =>
+    ${(props: any) =>
         !props.title &&
         css`
             & .MuiAlert-action {
@@ -33,7 +33,7 @@ export const Alert: React.FC<AlertStyledPropsType> = styled(MuiAlert, {
         `}
 
     &.MuiPaper-root {
-        background-color: ${(props) => props.customColor && alpha(props.customColor, 0.15)};
+        background-color: ${(props: any) => props.customColor && alpha(props.customColor, 0.15)};
     }
 `;
 
