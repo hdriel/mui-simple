@@ -136,7 +136,7 @@ const InputNumber: React.FC<InputNumberProps> = (props): React.ReactElement | Re
                     autoComplete="off"
                     onBlur={onBlurHandler}
                     customInput={TextField as any}
-                    type="number"
+                    // type="number"
                     endCmp={
                         <>
                             {endCmp}

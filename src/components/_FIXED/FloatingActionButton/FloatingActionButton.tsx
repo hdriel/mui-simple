@@ -35,7 +35,7 @@ const Fab: React.FC<PropsWithChildren<FabProps>> = (props): React.ReactElement |
             color={muiColor as any}
             {...rest}
         >
-            {icon}
+            {icon as React.ReactNode}
             {children}
         </MuiFab>
     );

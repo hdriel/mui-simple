@@ -1067,7 +1067,7 @@ export interface SliderProps {
     max?: number;
     step?: number;
     marks?: boolean | Array<{ label: string; value: number }>;
-    onChange?: (event: any) => void;
+    onChange?: (event: any, newValue?: number) => void;
     onChangeCommitted?: (event: any, newValue: number) => void;
     orientation?: 'vertical' | 'horizontal';
     removePadding?: boolean;

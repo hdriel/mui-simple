@@ -231,7 +231,7 @@ export const InputCmp: Story = {
     args: {},
     render: (args) => {
         const [value, setValue] = useState(30);
-        const handleChange = (event, newValue) => {
+        const handleChange = (event, newValue?) => {
             setValue(newValue);
             action('onChangeInput')(newValue);
         };
