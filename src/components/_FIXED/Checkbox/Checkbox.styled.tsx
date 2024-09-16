@@ -37,7 +37,6 @@ export const Checkbox = styled(
                     required={required}
                     disabled={disabled}
                     labelPlacement={labelPlacement}
-                    error={error}
                     label={
                         isValidElement(label) ? (
                             (label as React.ReactNode)
