@@ -1,11 +1,14 @@
 import React from 'react';
 import { styled, alpha } from '@mui/material/styles';
-import { TreeView as MuiTreeView, TreeViewProps } from '@mui/x-tree-view/TreeView';
-import { TreeItem as MuiTreeItem, treeItemClasses } from '@mui/x-tree-view/TreeItem';
+// import { TreeView as MuiTreeView, TreeViewProps } from '@mui/x-tree-view/TreeView';
+import { TreeView as MuiTreeView, TreeViewProps } from '@mui/lab';
+// import { TreeItem as MuiTreeItem, treeItemClasses } from '@mui/x-tree-view/TreeItem';
+import { TreeItem as MuiTreeItem, treeItemClasses } from '@mui/lab';
 import { borderedStyles, closeIconFade, edgeCorners, selectedColor } from './TreeView.styles';
 import { numberToPx } from '../../../utils/helpers';
 
-export const TreeView: React.FC<TreeViewProps<any> & { maxWidth?: string | number; height?: string | number }> = styled(
+// export const TreeView: React.FC<TreeViewProps<any> & { maxWidth?: string | number; height?: string | number }> = styled(
+export const TreeView: React.FC<TreeViewProps & { maxWidth?: string | number; height?: string | number }> = styled(
     MuiTreeView,
     {
         shouldForwardProp: (propName: string) => !['maxWidth', 'height'].includes(propName as string),
