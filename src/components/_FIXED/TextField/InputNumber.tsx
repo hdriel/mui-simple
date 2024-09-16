@@ -104,7 +104,7 @@ const InputNumber: React.FC<InputNumberProps> = (props): React.ReactElement | Re
 
     const [color] = getCustomColor({ theme, customColor: colorActive });
 
-    const CMP = format ? PatternFormat : NumericFormat;
+    const CMP: any = format ? PatternFormat : NumericFormat;
 
     return (
         <ClickAwayListener

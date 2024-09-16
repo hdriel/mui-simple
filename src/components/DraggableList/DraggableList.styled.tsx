@@ -1,7 +1,7 @@
 import { styled, css } from '@mui/material/styles';
 import { Box } from '@mui/material';
+import { FlexDirectionType } from '../decs';
 
-type FlexDirectionType = 'row' | 'row-reverse' | 'column' | 'column-reverse';
 interface DraggableListULProps {
     flexGap?: number | string;
     flexDirection?: FlexDirectionType;

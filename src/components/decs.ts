@@ -18,6 +18,7 @@ import type { TIMEZONE } from './timezone';
 import type { LOCALE, ADAPTER_LOCALE } from './locales';
 export type AppBarPosition = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
 
+export type FlexDirectionType = 'row' | 'row-reverse' | 'column' | 'column-reverse';
 type SvgIconComponent = typeof SvgIcon;
 type IconType = IconName | ReactNode | ReactElement | SvgIconComponent;
 type ElementType = React.ForwardRefExoticComponent<any> | ReactElement | ReactNode;
