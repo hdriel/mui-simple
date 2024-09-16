@@ -70,7 +70,10 @@ const MobileStepper: React.FC<PropsWithChildren<MobileStepperProps>> = ({
     // const handleSkip = (index) => isStepOptional(index) && onSkip?.(index);
     const maxSteps = steps.length;
 
-    const [backIconProp, nextIconProp] = useMemo(() => {
+    const [backIconProp, nextIconProp] = useMemo((): [
+        { startIcon?: any; endIcon?: any },
+        { startIcon?: any; endIcon?: any }
+    ] => {
         if (forceFixedDirection && !isLTR) {
             return [{ endIcon: <KeyboardArrowRightIcon /> }, { startIcon: <KeyboardArrowLeftIcon /> }];
         }

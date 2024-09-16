@@ -43,7 +43,7 @@ const Link: React.FC<PropsWithChildren<LinkProps>> = ({
             customColor={muiColor ? undefined : customColor}
             to={relativeUrl || replaceUrl || url}
             replace={!!replaceUrl}
-            relative={!!relativeUrl}
+            relative={relativeUrl ? 'path' : 'route'}
             preventScrollReset={preventScrollReset}
         >
             {cmp}

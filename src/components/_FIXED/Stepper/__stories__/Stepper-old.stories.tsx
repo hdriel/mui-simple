@@ -74,7 +74,7 @@ export const StepsBottomLabelStepper = () => {
             {...actions}
             steps={steps}
             stepIndex={activeStep}
-            onReset={(index) => {
+            onReset={() => {
                 setSkipSteps([]);
                 setActiveStep(0);
             }}
@@ -173,7 +173,7 @@ export const CustomStepper = () => {
         <>
             <ToggleButtonGroups sx={{ mb: 4 }}>
                 <ToggleButtonGroup
-                    value={orientation}
+                    value={orientation as 'horizontal' | 'vertical'}
                     exclusive
                     onChange={(event, value) => setOrientation(value)}
                     data={data1}
@@ -192,7 +192,7 @@ export const CustomStepper = () => {
                 steps={steps}
                 stepsBottomLabel={stepsBottomLabel}
                 customStyleProps={customStyleProps}
-                orientation={orientation}
+                orientation={orientation as 'horizontal' | 'vertical'}
                 allCompletedCmp={
                     <Typography sx={{ mt: 2, mb: 1 }}>All steps completed - you&apos;re finished</Typography>
                 }

@@ -51,9 +51,7 @@ const Dialog: React.FC<PropsWithChildren<DialogProps>> = (props): ReactElement |
             {...rest}
         >
             {title && (
-                <MuiDialogTitle style={{ ...(draggable && { cursor: 'move' }) }} id={titleId}>
-                    {title}
-                </MuiDialogTitle>
+                <MuiDialogTitle style={{ ...(draggable && { cursor: 'move' }) }} id={titleId} title={title as string} />
             )}
 
             <MuiDialogContent sx={{ ...(!autoContentPadding && { padding: 0 }) }} dividers={dividers}>

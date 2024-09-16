@@ -93,7 +93,7 @@ interface ListItemCmpProps {
     draggable?: boolean;
 }
 
-const ListItem: React.FC<ListItemCmpProps> = ({
+const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
     alignControl,
     alignItems,
     buttonItems,

@@ -186,7 +186,7 @@ export interface DividerProps {
     label?: string | ElementType;
     light?: boolean;
     orientation?: 'horizontal' | 'vertical';
-    textAlign?: AlignType;
+    textAlign?: 'left' | 'right' | 'center';
     thickness?: number;
     variant?: 'fullWidth' | 'inset' | 'middle';
     [key: string]: any;
@@ -1257,7 +1257,7 @@ export interface TabsProps {
 export interface ToggleButtonGroupProps {
     orientation?: 'horizontal' | 'vertical';
     size?: 'small' | 'medium' | 'large';
-    value?: string | number;
+    value?: string | number | boolean;
     exclusive?: boolean;
     fullWidth?: boolean;
     disableRipple?: boolean;
@@ -1269,7 +1269,7 @@ export interface ToggleButtonGroupProps {
     helperTextStyle?: SxProps;
     error?: boolean;
     data?: Array<{
-        value: string | number;
+        value: string | number | boolean;
         disabled?: boolean;
         component: IconType | number;
     }>;

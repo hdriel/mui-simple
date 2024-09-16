@@ -16,7 +16,7 @@ export const Link = styled(MuiLink, {
 
 export const RRDLink = styled(ReactLink, {
     shouldForwardProp: (propName: string) => !['customColor', 'underline'].includes(propName as string),
-})<LinkProps & { customColor: string; size: string | number; underline: string }>`
+})<LinkProps & { customColor?: string; size?: string | number; underline?: string }>`
     display: flex;
     align-items: center;
     gap: 5px;
