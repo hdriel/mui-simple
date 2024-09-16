@@ -110,11 +110,19 @@ const Stepper: React.FC<PropsWithChildren<StepperProps>> = ({
                                 {[].concat(children)[index]}
                                 <ActionContainer>
                                     <div>
-                                        <ActionButton variant="contained" onClick={handleNext} color={step.color}>
+                                        <ActionButton
+                                            variant="contained"
+                                            onClick={() => handleNext()}
+                                            color={step.color}
+                                        >
                                             {NEXT_LABEL}
                                         </ActionButton>
                                         {index !== 0 && (
-                                            <ActionButton color="inherit" disabled={index === 0} onClick={handleBack}>
+                                            <ActionButton
+                                                color="inherit"
+                                                disabled={index === 0}
+                                                onClick={() => handleBack()}
+                                            >
                                                 {BACK_LABEL}
                                             </ActionButton>
                                         )}
@@ -147,7 +155,7 @@ const Stepper: React.FC<PropsWithChildren<StepperProps>> = ({
                         <ContentContainer>{[].concat(children)[activeStep]}</ContentContainer>
 
                         <VerticalActionContainer>
-                            <ActionButton color="inherit" onClick={handleBack} disabled={activeStep === 0}>
+                            <ActionButton color="inherit" onClick={() => handleBack()} disabled={activeStep === 0}>
                                 {BACK_LABEL}
                             </ActionButton>
 
@@ -159,7 +167,7 @@ const Stepper: React.FC<PropsWithChildren<StepperProps>> = ({
                                 </ActionButton>
                             )}
 
-                            <ActionButton onClick={handleNext}>{NEXT_LABEL}</ActionButton>
+                            <ActionButton onClick={() => handleNext()}>{NEXT_LABEL}</ActionButton>
                         </VerticalActionContainer>
                     </>
                 )

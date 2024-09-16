@@ -71,7 +71,7 @@ const InputNumber: React.FC<InputNumberProps> = (props): React.ReactElement | Re
     const handleOnChange = debounceDelay ? debounce(onChange, debounceDelay) : onChange;
 
     const handleChangeSlider = (event, newValue?): void => {
-        onChange?.({ target: { name, value: newValue } });
+        onChange?.({ target: { name, value: newValue ?? event.target.value } });
     };
 
     const [sliderLabelDebounce] = useState(() =>

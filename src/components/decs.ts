@@ -462,7 +462,7 @@ export interface InputSelectOption {
     subtitle?: string | ElementType;
     disabled?: boolean;
     chipProps?: ChipProps;
-    value?: string | number | boolean;
+    value?: string | number;
     [key: string]: any;
 }
 

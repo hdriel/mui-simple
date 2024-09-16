@@ -153,11 +153,13 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
                                                     </ListItemIcon>
                                                 ) : undefined}
 
-                                                {option.label ? <ListItemText>{option.label}</ListItemText> : undefined}
+                                                {option.label ? (
+                                                    <ListItemText>{option.label as React.ReactNode}</ListItemText>
+                                                ) : undefined}
 
                                                 {option.shortcut ? (
                                                     <Typography variant="body2" color="text.secondary">
-                                                        {option.shortcut}
+                                                        {option.shortcut as React.ReactNode}
                                                     </Typography>
                                                 ) : undefined}
                                             </MenuItem>

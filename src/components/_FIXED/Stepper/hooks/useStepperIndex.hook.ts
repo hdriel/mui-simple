@@ -26,8 +26,8 @@ export const useStepperIndexHook = ({
 }: UseStepperIndexHookProps): UseStepperIndexHookResponse => {
     const isStepOptional = (index: number): boolean | undefined => !!steps?.[index]?.optional;
     const isStepSkipped = (index: number): boolean | undefined => stepsIndexSkipped?.includes(index);
-    const handleNext = (forceNextStepperIndexValue): void => onNext?.(forceNextStepperIndexValue ?? activeStep);
-    const handleBack = (forceBackStepperIndexValue): void => onBack?.(forceBackStepperIndexValue ?? activeStep);
+    const handleNext = (forceNextStepperIndexValue: number): void => onNext?.(forceNextStepperIndexValue ?? activeStep);
+    const handleBack = (forceBackStepperIndexValue: number): void => onBack?.(forceBackStepperIndexValue ?? activeStep);
     const handleSkip = (index: number): void => {
         if (isStepOptional(index)) onSkip?.(index);
     };
