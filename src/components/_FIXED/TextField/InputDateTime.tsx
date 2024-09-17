@@ -108,28 +108,28 @@ const InputDateTime: React.FC<InputDateTimeProps> = (props): React.ReactElement 
         displayWeekNumber,
         showDaysOutsideCurrentMonth,
         openTo,
+        readOnly,
         loading,
         onChange,
         renderLoading: () => <DayCalendarSkeleton />,
         ...sxStyles,
     };
 
-    const dateCmp = readOnly ? (
-        <DateTimeField value={value} readOnly format={format} label={label} {...rest} {...sxStyles} />
-    ) : (
-        {
-            mobile: <MobileDateTimePicker {...pickerProps} {...slotProps} />,
-            desktop: <DesktopDateTimePicker {...pickerProps} {...slotProps} />,
-            static: <StaticDateTimePicker {...pickerProps} />,
-        }[pickerVariant] ?? <DateTimePicker {...pickerProps} {...slotProps} />
-    );
+    // const dateCmp = readOnly ? (
+    //     <DateTimeField value={value} readOnly format={format} label={label} {...rest} {...sxStyles} />
+    // ) : (
+    const dateTimeCmp = {
+        mobile: <MobileDateTimePicker {...pickerProps} {...slotProps} />,
+        desktop: <DesktopDateTimePicker {...pickerProps} {...slotProps} />,
+        static: <StaticDateTimePicker {...pickerProps} />,
+    }[pickerVariant] ?? <DateTimePicker {...pickerProps} {...slotProps} />;
 
     return useLocalizationProvider ? (
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={adapterLocale} locale={locale}>
-            {dateCmp}
+            {dateTimeCmp}
         </LocalizationProvider>
     ) : (
-        dateCmp
+        dateTimeCmp
     );
 };
 

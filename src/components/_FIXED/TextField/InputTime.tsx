@@ -95,6 +95,7 @@ const InputTime: React.FC<InputTimeProps> = (props): React.ReactElement | React.
     const pickerProps: any = {
         ...rest,
         value,
+        readOnly,
         label,
         minTime: min,
         maxTime: max,
@@ -103,22 +104,21 @@ const InputTime: React.FC<InputTimeProps> = (props): React.ReactElement | React.
         ...sxStyles,
     };
 
-    const dateCmp = readOnly ? (
-        <TimeField value={value} readOnly format={format} label={label} {...rest} {...sxStyles} />
-    ) : (
-        {
-            mobile: <MobileTimePicker {...pickerProps} {...slotProps} />,
-            desktop: <DesktopTimePicker {...pickerProps} {...slotProps} />,
-            static: <StaticTimePicker {...pickerProps} />,
-        }[pickerVariant] ?? <TimePicker {...pickerProps} {...slotProps} />
-    );
+    // const dateCmp = readOnly ? (
+    //     <TimeField value={value} readOnly format={format} label={label} {...rest} {...sxStyles} />
+    // ) : (
+    const timeCmp = {
+        mobile: <MobileTimePicker {...pickerProps} {...slotProps} />,
+        desktop: <DesktopTimePicker {...pickerProps} {...slotProps} />,
+        static: <StaticTimePicker {...pickerProps} />,
+    }[pickerVariant] ?? <TimePicker {...pickerProps} {...slotProps} />;
 
     return useLocalizationProvider ? (
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={adapterLocale} locale={locale}>
-            {dateCmp}
+            {timeCmp}
         </LocalizationProvider>
     ) : (
-        dateCmp
+        timeCmp
     );
 };
 

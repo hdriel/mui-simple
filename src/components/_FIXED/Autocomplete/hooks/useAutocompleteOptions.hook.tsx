@@ -90,19 +90,22 @@ export const useAutocompleteOptionsHook = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [creationAllowed, _filterOptions, getOptionLabel]);
 
-    const renderOption = (...args): ReactNode | RenderOptionCB => {
-        if (typeof _renderOption === 'function') {
-            return _renderOption(...args);
-        }
+    const renderOption =
+        typeof _renderOption === 'function' || highlightSearchResults
+            ? (...args): ReactNode | RenderOptionCB => {
+                  if (typeof _renderOption === 'function') {
+                      return _renderOption(...args);
+                  }
 
-        if (highlightSearchResults) {
-            const fieldValue = highlightField ?? getOptionLabel?.(args[1]) ?? args[1].label;
-            // @ts-expect-error
-            return renderHighlightOptionCB(fieldValue)(...args);
-        }
+                  if (highlightSearchResults) {
+                      const fieldValue = highlightField ?? getOptionLabel?.(args[1]) ?? args[1].label;
+                      // @ts-expect-error
+                      return renderHighlightOptionCB(fieldValue)(...args);
+                  }
 
-        return undefined;
-    };
+                  return undefined;
+              }
+            : undefined;
 
     return { options, getOptionLabel, renderOption, filterOptions };
 };

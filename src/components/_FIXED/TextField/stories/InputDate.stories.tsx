@@ -107,3 +107,20 @@ export const PickerVariant: Story = {
         );
     },
 };
+
+export const Value: Story = {
+    args: {
+        label: 'Date',
+        value: new Date(),
+    },
+    render,
+};
+
+export const ReadOnly: Story = {
+    args: {
+        readOnly: true,
+        label: 'Date',
+        value: new Date(),
+    },
+    render,
+};

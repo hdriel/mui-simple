@@ -11,6 +11,9 @@ dependencies:
   '@mui/lab':
     specifier: 5.0.0-alpha.134
     version: 5.0.0-alpha.134(@emotion/react@11.13.3)(@emotion/styled@11.13.0)(@mui/material@5.16.7)(@types/react@18.3.6)(react-dom@18.3.1)(react@18.3.1)
+  '@mui/x-date-pickers':
+    specifier: ^6.20.2
+    version: 6.20.2(@emotion/react@11.13.3)(@emotion/styled@11.13.0)(@mui/material@5.16.7)(@mui/system@5.16.7)(@types/react@18.3.6)(dayjs@1.11.5)(react-dom@18.3.1)(react@18.3.1)
   '@react-spring/web':
     specifier: ^9.7.2
     version: 9.7.4(react-dom@18.3.1)(react@18.3.1)
@@ -39,8 +42,8 @@ dependencies:
     specifier: ^1.0.7
     version: 1.0.7
   dayjs:
-    specifier: ^1.11.10
-    version: 1.11.13
+    specifier: ^1.11.5
+    version: 1.11.5
   html-react-parser:
     specifier: ^4.2.3
     version: 4.2.10(react@18.3.1)
@@ -139,9 +142,6 @@ devDependencies:
   '@mui/utils':
     specifier: ^5.15.1
     version: 5.16.6(@types/react@18.3.6)(react@18.3.1)
-  '@mui/x-date-pickers':
-    specifier: ^6.18.6
-    version: 6.20.2(@emotion/react@11.13.3)(@emotion/styled@11.13.0)(@mui/material@5.16.7)(@mui/system@5.16.7)(@types/react@18.3.6)(dayjs@1.11.13)(react-dom@18.3.1)(react@18.3.1)
   '@rollup/plugin-babel':
     specifier: ^6.0.3
     version: 6.0.4(@babel/core@7.25.2)(rollup@3.29.4)
@@ -2557,14 +2557,12 @@ packages:
     resolution: {integrity: sha512-7XJ9cPU+yI2QeLS+FCSlqNFZJq8arvswefkZrYI1yQBbftw6FyrZOxYSh+9S7z7TpeWlRt9zJ5IhM1WIL334jA==}
     dependencies:
       '@floating-ui/utils': 0.2.8
-    dev: true
 
   /@floating-ui/dom@1.6.11:
     resolution: {integrity: sha512-qkMCxSR24v2vGkhYDo/UzxfJN3D4syqSjyuTFz6C7XcpU1pASPRieNI0Kj5VP3/503mOfYiGY891ugBX1GlABQ==}
     dependencies:
       '@floating-ui/core': 1.6.8
       '@floating-ui/utils': 0.2.8
-    dev: true
 
   /@floating-ui/react-dom@2.1.2(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-06okr5cgPzMNBy+Ycse2A6udMi4bqwW/zgBF/rwjcNqWkyr82Mcg8b0vjX8OJpZFy/FKjJmw6wV7t44kK6kW7A==}
@@ -2575,11 +2573,9 @@ packages:
       '@floating-ui/dom': 1.6.11
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-    dev: true
 
   /@floating-ui/utils@0.2.8:
     resolution: {integrity: sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==}
-    dev: true
 
   /@gar/promisify@1.1.3:
     resolution: {integrity: sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==}
@@ -3018,7 +3014,7 @@ packages:
       prop-types: 15.8.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-    dev: true
+    dev: false
 
   /@mui/core-downloads-tracker@5.16.7:
     resolution: {integrity: sha512-RtsCt4Geed2/v74sbihWzzRs+HsIQCfclHeORh5Ynu2fS4icIKozcSubwuG7vtzq2uW3fOR1zITSP84TNt2GoQ==}
@@ -3235,7 +3231,7 @@ packages:
       react: 18.3.1
       react-is: 18.3.1
 
-  /@mui/x-date-pickers@6.20.2(@emotion/react@11.13.3)(@emotion/styled@11.13.0)(@mui/material@5.16.7)(@mui/system@5.16.7)(@types/react@18.3.6)(dayjs@1.11.13)(react-dom@18.3.1)(react@18.3.1):
+  /@mui/x-date-pickers@6.20.2(@emotion/react@11.13.3)(@emotion/styled@11.13.0)(@mui/material@5.16.7)(@mui/system@5.16.7)(@types/react@18.3.6)(dayjs@1.11.5)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-x1jLg8R+WhvkmUETRfX2wC+xJreMii78EXKLl6r3G+ggcAZlPyt0myID1Amf6hvJb9CtR7CgUo8BwR+1Vx9Ggw==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -3281,14 +3277,14 @@ packages:
       '@mui/utils': 5.16.6(@types/react@18.3.6)(react@18.3.1)
       '@types/react-transition-group': 4.4.11
       clsx: 2.1.1
-      dayjs: 1.11.13
+      dayjs: 1.11.5
       prop-types: 15.8.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-transition-group: 4.4.5(react-dom@18.3.1)(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
-    dev: true
+    dev: false
 
   /@ndelangen/get-tarball@3.0.9:
     resolution: {integrity: sha512-9JKTEik4vq+yGosHYhZ1tiH/3WpUS0Nh0kej4Agndhox8pAdWhEx5knFVRcb/ya9knCRCs1rPxNrSXTDdfVqpA==}
@@ -6857,6 +6853,7 @@ packages:
   /ansi-styles@3.2.1:
     resolution: {integrity: sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA==}
     engines: {node: '>=4'}
+    requiresBuild: true
     dependencies:
       color-convert: 1.9.3
 
@@ -7965,6 +7962,7 @@ packages:
 
   /color-convert@1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
+    requiresBuild: true
     dependencies:
       color-name: 1.1.3
 
@@ -7976,6 +7974,7 @@ packages:
 
   /color-name@1.1.3:
     resolution: {integrity: sha512-72fSenhMw2HZMTVHeCA9KCmpEIbzWiQsjN+BHcBbS9vr1mtt+vJjPdksIBNUmKAW8TFUDPJK5SUU3QhE9NEXDw==}
+    requiresBuild: true
 
   /color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
@@ -8589,8 +8588,9 @@ packages:
     resolution: {integrity: sha512-6K33+I8fQ5otvHgLIvKK1xmMbLAh0pduyrx7dwMXKiGYeoWhmk6M3Zoak9n7bXHMJQlHq1yqmdGy1QxKddJjUA==}
     dev: true
 
-  /dayjs@1.11.13:
-    resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
+  /dayjs@1.11.5:
+    resolution: {integrity: sha512-CAdX5Q3YW3Gclyo5Vpqkgpj8fSdLQcRuzfX6mC6Phy0nfJ0eGYOeS7m4mt2plDWLAtA4TqTakvbboHvUxfe4iA==}
+    dev: false
 
   /debug-fabulous@0.0.4:
     resolution: {integrity: sha512-mmVKpY/O4UIl6ZDn5Owf8jEauO6uQiuF4Jz9iTuflSmvqNm6/64xARk/qCq5ZJxu141Ic2lCmL1TSMHIYoyiTw==}
@@ -11060,6 +11060,7 @@ packages:
   /has-flag@3.0.0:
     resolution: {integrity: sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==}
     engines: {node: '>=4'}
+    requiresBuild: true
 
   /has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
@@ -17835,6 +17836,7 @@ packages:
   /supports-color@5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}
     engines: {node: '>=4'}
+    requiresBuild: true
     dependencies:
       has-flag: 3.0.0
 

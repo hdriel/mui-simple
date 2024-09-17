@@ -8,7 +8,6 @@ import { DateField } from '@mui/x-date-pickers/DateField';
 import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
 // Decide to use dayjs and not date-fns for supporting timezone
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import Input from './TextField';
 import type { InputDateProps } from '../../decs';
 import { getSlotsProps, useInputDateData } from './InputDate.hooks';
 import LocalizationProvider from './LocalizationProvider';
@@ -108,19 +107,19 @@ const InputDate: React.FC<InputDateProps> = (props): React.ReactElement | React.
         openTo,
         loading,
         onChange,
+        readOnly,
         renderLoading: () => <DayCalendarSkeleton />,
         ...sxStyles,
     };
 
-    const dateCmp = readOnly ? (
-        <DateField value={value} readOnly format={format} label={label} {...rest} {...sxStyles} />
-    ) : (
-        {
-            mobile: <MobileDatePicker {...pickerProps} {...slotProps} />,
-            desktop: <DesktopDatePicker {...pickerProps} {...slotProps} />,
-            static: <StaticDatePicker {...pickerProps} />,
-        }[pickerVariant] ?? <DatePicker {...pickerProps} {...slotProps} />
-    );
+    // const dateCmp = readOnly ? (
+    //     <DateField value={value} readOnly format={format} label={label} {...rest} {...sxStyles} />
+    // ) : (
+    const dateCmp = {
+        mobile: <MobileDatePicker {...pickerProps} {...slotProps} />,
+        desktop: <DesktopDatePicker {...pickerProps} {...slotProps} />,
+        static: <StaticDatePicker {...pickerProps} />,
+    }[pickerVariant] ?? <DatePicker {...pickerProps} {...slotProps} />;
 
     return useLocalizationProvider ? (
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={adapterLocale} locale={locale}>
