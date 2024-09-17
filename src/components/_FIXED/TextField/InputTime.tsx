@@ -34,6 +34,7 @@ const InputTime: React.FC<InputTimeProps> = (props): React.ReactElement | React.
     props = setDefaultValue(props, 'timezone', 'Asia/Jerusalem');
     props = setDefaultValue(props, 'useLocalizationProvider', false);
     props = setDefaultValue(props, 'variant', 'outlined');
+    props = setDefaultValue(props, 'width', '100%');
 
     const {
         // views=['year', 'month', 'day'],
