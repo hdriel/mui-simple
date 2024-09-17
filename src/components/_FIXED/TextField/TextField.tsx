@@ -59,6 +59,9 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
         InputLabelProps,
         InputProps,
         letterSpacing,
+        maxRows,
+        minRows,
+        multiline,
         onBlur,
         onChange,
         onEnterKeyPress,
@@ -66,6 +69,7 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
         onKeyPress,
         padding,
         readOnly,
+        rows,
         startCmp: _startCmp,
         startCmpExternal: _startCmpExternal,
         type,
@@ -94,7 +98,11 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
     const endCmpExternal = typeof _endCmpExternal === 'string' ? <SVGIcon>{_endCmpExternal}</SVGIcon> : _endCmpExternal;
     const copyIcon = typeof _copyIcon === 'string' ? <SVGIcon>{_copyIcon}</SVGIcon> : _copyIcon;
     const showActions = !hideStartActionsOnEmpty || value || (!value && isFocused);
-    const handleOnChange = debounceDelay ? debounce(onChange, debounceDelay) : onChange;
+    const onChangeTemp = (e) => {
+        console.log('onChangeTemp e', e.target.value, e);
+        onChange(e);
+    };
+    const handleOnChange = debounceDelay ? debounce(onChangeTemp, debounceDelay) : onChangeTemp;
 
     const component = (
         <>
@@ -115,6 +123,10 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
                     fullWidth={fullWidth}
                     type={type}
                     variant={variant}
+                    maxRows={maxRows}
+                    minRows={minRows}
+                    multiline={!!(multiline || maxRows > 1 || minRows > 1 || rows > 1)}
+                    rows={rows}
                     InputProps={{
                         ...InputProps,
                         readOnly,
@@ -153,14 +165,16 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
                             ...InputProps?.sx,
                         },
                     }}
-                    onKeyPress={(e) => {
-                        if (e.key === 'Enter' || +e.keyCode === 13) {
-                            setIsFocused(false);
-                            onEnterKeyPress?.(e);
-                        } else {
-                            onKeyPress?.(e);
-                        }
-                    }}
+                    // onKeyPress={(e) => {
+                    //     if (e.key === 'Enter' || +e.keyCode === 13) {
+                    //         setIsFocused(false);
+                    //         onEnterKeyPress?.(e);
+                    //     } else {
+                    //         onKeyPress?.(e);
+                    //     }
+                    //
+                    //     if (!onEnterKeyPress) return e;
+                    // }}
                     {...rest}
                 />
             </ClickAwayListener>

@@ -302,6 +302,7 @@ export interface InputBaseProps {
     label?: string;
     letterSpacing?: number | string;
     margin?: 'normal' | 'dense';
+    minRows?: number;
     maxRows?: number;
     multiline?: boolean;
     name?: string;
@@ -942,6 +943,7 @@ export interface TextProps {
     gutterBottom?: boolean;
     html?: boolean;
     italic?: boolean;
+    multiline?: boolean;
     justifyContent?: string;
     lineHeight?: number | string;
     link?: string;
@@ -955,6 +957,7 @@ export interface TextProps {
     tooltip?: boolean | string;
     tooltipPlacement?: TooltipPlacementType;
     underline?: boolean;
+    whiteSpace?: string;
     width?: number | string;
     [key: string]: any;
 }

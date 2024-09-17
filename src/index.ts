@@ -19,8 +19,8 @@ export type { InputAutocompleteMultipleProp } from './components/_FIXED/Autocomp
 export { default as InputAutocompleteMultipleAsync } from './components/_FIXED/Autocomplete/InputAutocompleteMultipleAsync';
 export type { InputAutocompleteMultipleAsyncProps } from './components/_FIXED/Autocomplete/InputAutocompleteMultipleAsync';
 
-export { default as InputGoogleAddress } from './components/_FIXED/Autocomplete/InputGoogleAddress';
-export type { InputGoogleAddressProps } from 'src/components/_FIXED/Autocomplete/InputGoogleAddress';
+// export { default as InputGoogleAddress } from './components/_FIXED/Autocomplete/InputGoogleAddress';
+// export type { InputGoogleAddressProps } from 'src/components/_FIXED/Autocomplete/InputGoogleAddress';
 
 export { default as Avatar } from './components/_FIXED/Avatar/Avatar';
 export type { AvatarProps } from './components/_FIXED/Avatar/Avatar';
