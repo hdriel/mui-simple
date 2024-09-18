@@ -2,7 +2,7 @@
     "compilerOptions": {
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
-        "baseUrl": ".",
+        "baseUrl": "./",
         "declaration": true,
         "declarationDir": "dist",
         "declarationMap": true,
@@ -24,11 +24,7 @@
         "strict": false,
         "strictNullChecks": false,
         "target": "esnext",
-        "typeRoots": ["./src/@types"],
-        "paths": {
-            "src/*": ["./src/*"]
-        },
-        "plugins": [{ "transform": "typescript-transform-paths", "afterDeclarations": true }]
+        "typeRoots": ["./src/@types"]
     },
     "include": ["src", ".storybook", "./global.d.ts"],
     "exclude": [".idea", ".git", "build", "node_modules", "lib", "dist", "storybook-static", "rollup.config.js"]

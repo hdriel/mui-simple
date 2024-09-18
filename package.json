@@ -22,7 +22,7 @@
         "prepare": "husky install",
         "prettier": "prettier --write .",
         "storybook": "storybook dev -p 6006",
-        "storybook-static-serve": "serve -s storybook-static -p 6007",
+        "storybook-static-serve": "serve storybook-static -p 6007",
         "test": ""
     },
     "lint-staged": {

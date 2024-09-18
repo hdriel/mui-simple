@@ -2,6 +2,7 @@ import { Preview } from '@storybook/react';
 import { withThemeFromJSXProvider } from '@storybook/addon-styling';
 import { CssBaseline } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
+// @ts-ignore
 import ProviderFn from './ProviderFn';
 
 const preview = {
