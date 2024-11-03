@@ -35,6 +35,8 @@ const List: React.FC<ListProps> = ({
     useTransition = true,
     useReactRouterDomLink,
     width,
+    sx,
+    sxTitle,
     ...props
 }): React.ReactElement | React.ReactNode => {
     const [bgColor] = useCustomColor(_bgColor);
@@ -152,11 +154,11 @@ const List: React.FC<ListProps> = ({
             useTransition={useTransition}
             disablePadding={disablePadding}
             dense={dense}
-            sx={{ width, bgcolor: bgColor }}
+            sx={{ width, bgcolor: bgColor, ...sx }}
             component={component}
             subheader={
                 title ? (
-                    <ListSubheader component="span" sx={{ bgcolor: bgColor }}>
+                    <ListSubheader component="span" sx={{ bgcolor: bgColor, ...sxTitle }}>
                         {title}
                     </ListSubheader>
                 ) : undefined

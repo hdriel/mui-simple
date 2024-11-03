@@ -147,21 +147,22 @@ const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
                     inset={itemProps.inset ?? insetItems}
                     primary={itemProps.title}
                     primaryTypographyProps={{
-                        style: { ...(itemProps.bold && { fontWeight: 'bold' }), ...itemProps.style },
+                        sx: {
+                            ...(itemProps.bold && { fontWeight: 'bold' }),
+                            ...itemProps.style,
+                        },
                     }}
                     secondary={
                         enableSubtitle && itemProps.subtitle ? (
-                            <Typography
-                                rows={itemProps.rows ?? 2}
-                                component="span"
-                                variant="body2"
-                                color="text.primary"
-                            >
-                                {itemProps.subtitle}
-                            </Typography>
+                            <Typography rows={itemProps.rows ?? 2}>{itemProps.subtitle}</Typography>
                         ) : undefined
                     }
-                    secondaryTypographyProps={{ component: 'div' as any }}
+                    secondaryTypographyProps={{
+                        component: 'span',
+                        variant: 'body2',
+                        color: 'text.primary',
+                        sx: { ...itemProps.subtitleStyle },
+                    }}
                 />
 
                 {itemProps.items?.length ? isOpen ? <ExpandLessIcon /> : <ExpandMoreIcon /> : undefined}

@@ -437,3 +437,42 @@ export const ExpandedItem: Story = {
         ],
     },
 };
+
+export const ItemsStyles: Story = {
+    args: {
+        // sx: { width: '80%' },
+        title: 'Custom styles',
+        sxTitle: { fontSize: '20px', fontWeight: 'bold', color: '#dd6f00' },
+
+        bgColor: 'primary.light',
+        items: [
+            {
+                title: 'Brunch this weekend?',
+                subtitle: "Ali Connors — I'll be in your neighborhood doing errands this",
+                avatar: { username: 'Ali Connors', image: '1.jpg' },
+                actions: [<Button key="a1" icon="Phone" />, <Button key="a2" icon="Comment" />],
+                divider: { variant: 'inset' },
+                style: { fontSize: '20px', fontWeight: 'bold' },
+                subtitleStyle: { fontSize: '18px', fontWeight: 'bold', width: '80%' },
+            },
+            {
+                title: 'Summer BBQ',
+                subtitle: "to Scott, Alex, Jennifer — Wish I could come, but I'm out of town this",
+                avatar: { image: '2.jpg' },
+                actions: [<Button key="a1" icon="Send" />],
+                divider: true,
+                style: { fontWeight: 'bold' },
+                subtitleStyle: { fontWeight: 'bold', width: '80%' },
+            },
+            {
+                title: 'Oui Oui',
+                subtitle: 'Sandra Adams — Do you have Paris recommendations? Have you ever seen something like this?',
+                avatar: { username: 'Sandra Adams', image: '3.jpg' },
+                actions: [<Button key="a1" icon="Send" />],
+                divider: {},
+                style: { fontSize: '20px' },
+                subtitleStyle: { fontSize: '18px', width: '80%' },
+            },
+        ],
+    },
+};
