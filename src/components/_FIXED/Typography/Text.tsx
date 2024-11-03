@@ -81,7 +81,7 @@ const Text: React.FC<TextProps> = ({
                     }),
                 }}
             >
-                {html ? ReactHtmlParser(children) : children}
+                {html && !!children ? ReactHtmlParser(children) : children}
             </span>
             &nbsp;
             {tooltipMessage && (
