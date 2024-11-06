@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="update list styles">
+    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="fixing rangeSlider valueLabelFormat">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Typography/Text.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Typography/Text.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Slider/RangeSlider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Slider/RangeSlider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Slider/__stories__/RangeSlider.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Slider/__stories__/RangeSlider.stories.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/decs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/decs.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +21,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
@@ -29,22 +36,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.storybook.executor": "Run",
-    "prettierjs.PrettierConfiguration.Package": "C:\\dev\\mui-simple\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "settings.javascript.prettier",
-    "ts.external.directory.path": "C:\\dev\\mui-simple\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;fixing-text-empty-html-bug&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.storybook.executor&quot;: &quot;Run&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\dev\\mui-simple\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\dev\\mui-simple\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="storybook" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -86,7 +93,9 @@
       <workItem from="1729808257434" duration="2130000" />
       <workItem from="1729811071599" duration="1554000" />
       <workItem from="1730599170752" duration="73000" />
-      <workItem from="1730639587151" duration="3197000" />
+      <workItem from="1730639587151" duration="3254000" />
+      <workItem from="1730924611861" duration="777000" />
+      <workItem from="1730928337246" duration="1708000" />
     </task>
     <task id="LOCAL-00001" summary="update list styles">
       <option name="closed" value="true" />
@@ -96,7 +105,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730641171304</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fixing html empty parse exception">
+      <option name="closed" value="true" />
+      <created>1730663027664</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1730663027664</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -104,6 +121,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update list styles" />
-    <option name="LAST_COMMIT_MESSAGE" value="update list styles" />
+    <MESSAGE value="fixing html empty parse exception" />
+    <MESSAGE value="fixing rangeSlider valueLabelFormat" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing rangeSlider valueLabelFormat" />
   </component>
 </project>

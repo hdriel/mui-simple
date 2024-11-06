@@ -1148,7 +1148,7 @@ export interface RatingProps {
     [key: string]: any;
 }
 
-export type RangeSliderProps = Omit<SliderProps, 'value' | 'onChange' | 'onChangeCommitted'> & {
+export type RangeSliderProps = Omit<SliderProps, 'value' | 'onChange' | 'onChangeCommitted' | 'valueLabelFormat'> & {
     disableSwap?: 'locking' | 'trailing';
     fromValue?: number;
     minDistance?: number;
@@ -1158,6 +1158,7 @@ export type RangeSliderProps = Omit<SliderProps, 'value' | 'onChange' | 'onChang
     onChangeToValue?: (event: any, toValue: number) => void;
     toValue?: number;
     value?: number[];
+    valueLabelFormat?: (singleValue: number, fromIndex: number) => string;
 };
 
 export interface TooltipProps {
