@@ -10,7 +10,7 @@ export type { AppBarProps } from './components/_FIXED/AppBar/AppBar';
 export { default as InputAutocomplete } from './components/_FIXED/Autocomplete/InputAutocomplete';
 export type { InputAutoCompleteProp } from './components/_FIXED/Autocomplete/InputAutocomplete';
 
-export { default as InputAutoCompleteAsync } from './components/_FIXED/Autocomplete/InputAutocompleteAsync';
+export { default as InputAutocompleteAsync } from './components/_FIXED/Autocomplete/InputAutocompleteAsync';
 export type { InputAutocompleteAsyncProps } from './components/_FIXED/Autocomplete/InputAutocompleteAsync';
 
 export { default as InputAutocompleteMultiple } from './components/_FIXED/Autocomplete/InputAutocompleteMultiple';

@@ -178,6 +178,8 @@ export const OptionsWithDisabled: Story = {
         id: 'grouped-demo',
         label: 'Disabled options',
         fetchOptionsOnFocus: true,
+        value: [1, 2],
+        fieldId: 'id',
         sleep: 1e3,
         getOptionsPromise: async () =>
             timeSlots.slice(0).map((option, index) => ({ id: index, time: option, disabled: index % 4 === 0 })),

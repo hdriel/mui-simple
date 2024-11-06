@@ -155,8 +155,8 @@ const InputSelect: React.FC<InputSelectProps> = ({
                         );
                     }}
                 >
-                    {options.length ? selectAllOption : undefined}
-                    {options.map((option: any) => (typeof option === 'function' ? option({ value, max }) : option))}
+                    {options?.length ? selectAllOption : undefined}
+                    {options?.map((option: any) => (typeof option === 'function' ? option({ value, max }) : option))}
                 </Select>
                 {helperText && <FormHelperText error={error}>{helperText}</FormHelperText>}
             </FormControl>

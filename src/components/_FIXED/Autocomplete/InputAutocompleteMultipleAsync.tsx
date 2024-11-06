@@ -18,6 +18,8 @@ const InputAutocompleteMultipleAsync: React.FC<InputAutocompleteMultipleAsyncPro
         sleep,
         getOptionsCallback,
         fetchOptionsOnFocus,
+        value: props.value,
+        fieldId: props.fieldId,
     });
 
     return <InputAutocompleteMultiple {...props} {...asyncProps} />;

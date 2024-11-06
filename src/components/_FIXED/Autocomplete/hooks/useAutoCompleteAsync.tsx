@@ -18,6 +18,8 @@ export function useAutoCompleteAsync({
     sleep: _sleep,
     getOptionsCallback,
     fetchOptionsOnFocus,
+    value,
+    fieldId,
 }): UseAutoCompleteAsyncReturn {
     const [open, setOpen] = useState(false);
     const [options, setOptions] = useState([]);
@@ -25,13 +27,13 @@ export function useAutoCompleteAsync({
 
     useEffect(() => {
         let active = true;
-        if (!open || options.length) return undefined;
+        if (!value?.length && (!open || options?.length)) return undefined;
 
         if (getOptionsPromise) {
             setLoading(true);
             getOptionsPromise()
-                .then(async (options) => {
-                    await sleep(_sleep);
+                .then(async (options: any[]) => {
+                    _sleep && (await sleep(_sleep));
                     return options;
                 })
                 .then(async (options) => getOptionsCallback?.() ?? [...options])
@@ -43,10 +45,11 @@ export function useAutoCompleteAsync({
             active = false;
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open]);
+    }, [open, value?.length]);
 
     useEffect(() => {
-        if (!open && fetchOptionsOnFocus) setOptions([]);
+        if (!open && fetchOptionsOnFocus)
+            setOptions((state) => state?.filter((item) => value?.includes?.(item?.[fieldId] ?? item)) ?? []);
     }, [open, fetchOptionsOnFocus]);
 
     const endCmp = loading ? <CircularProgress color="inherit" size={20} /> : null;

@@ -18,6 +18,8 @@ const InputAutocompleteAsync: React.FC<InputAutocompleteAsyncProps> = ({
         sleep,
         getOptionsCallback,
         fetchOptionsOnFocus,
+        value: props.value,
+        fieldId: props.fieldId,
     });
 
     return <MuiAutocomplete {...props} {...asyncProps} />;
