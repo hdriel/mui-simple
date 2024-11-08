@@ -75,10 +75,21 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
     const renderTags = (value, getTagProps): React.ReactNode[] => {
         return value
             .filter((v) => isDefined(v))
+            .map(
+                (optionId: string) =>
+                    options?.find(
+                        (option: any) => (typeof option === 'object' ? option[fieldId] : option) === optionId
+                    ) ?? optionId
+            )
             .map((option: any, index: number) => {
-                const label = getOptionLabel?.(option) ?? option.label;
-                const disabled = readOnly ? undefined : option.disabled;
-                const onDelete = readOnly || option.disabled ? undefined : getTagProps({ index }).onDelete;
+                const optionLabel = getOptionLabel?.(option) ?? option.label;
+                const label = typeof option === 'string' ? option : optionLabel ? optionLabel : JSON.stringify(option);
+                if (!optionLabel) {
+                    console.debug(`getOptionLabel error: could not find label on option`, option);
+                }
+
+                const disabled = readOnly ? undefined : option?.disabled;
+                const onDelete = readOnly || option?.disabled ? undefined : getTagProps({ index })?.onDelete;
 
                 return (
                     <Chip
@@ -90,12 +101,19 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
                         onDelete={onDelete}
                     />
                 );
-            });
+            })
+            .filter((v) => v);
     };
+
+    const autocompleValues = selectedOptions?.map(
+        (optionId) =>
+            options?.find((option: any) => (typeof option === 'object' ? option[fieldId] : option) === optionId) ??
+            optionId
+    );
 
     return (
         <MuiAutocomplete
-            value={selectedOptions}
+            value={autocompleValues}
             onChange={setSelectedOptions}
             name={name}
             multiple

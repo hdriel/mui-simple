@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="fixing rangeSlider valueLabelFormat">
+    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="fixing some bugs, v1.15.5">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocompleteAsync.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocompleteAsync.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocompleteMultiple.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocompleteMultiple.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocompleteMultipleAsync.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocompleteMultipleAsync.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/__stories__/InputAutocompleteMultipleAsync.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/__stories__/InputAutocompleteMultipleAsync.stories.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/hooks/useAutoCompleteAsync.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/hooks/useAutoCompleteAsync.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Select/InputSelect.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Select/InputSelect.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +39,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;fixing-text-empty-html-bug&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -99,6 +96,7 @@
       <workItem from="1730639587151" duration="3254000" />
       <workItem from="1730924611861" duration="777000" />
       <workItem from="1730928337246" duration="3652000" />
+      <workItem from="1731021548947" duration="3584000" />
     </task>
     <task id="LOCAL-00001" summary="update list styles">
       <option name="closed" value="true" />
@@ -124,7 +122,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730930240321</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fixing some bugs, v1.15.5">
+      <option name="closed" value="true" />
+      <created>1730934916750</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1730934916750</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,6 +142,7 @@
     <MESSAGE value="update list styles" />
     <MESSAGE value="fixing html empty parse exception" />
     <MESSAGE value="fixing rangeSlider valueLabelFormat" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing rangeSlider valueLabelFormat" />
+    <MESSAGE value="fixing some bugs, v1.15.5" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing some bugs, v1.15.5" />
   </component>
 </project>

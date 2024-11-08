@@ -236,3 +236,37 @@ export const GroupByCategories: Story = {
     },
     render,
 };
+
+const USERS = [
+    {
+        isAdminUser: true,
+        role: 'aaaaaaaaaaaaaa',
+        fullName: 'Hadriel Benjo',
+        _id: '11111111111111111',
+    },
+    {
+        isAdminUser: false,
+        role: 'bbbbbbbbbbbbbb',
+        fullName: 'שירה שירן',
+        _id: '22222222222222222',
+    },
+    {
+        isAdminUser: false,
+        role: 'bbbbbbbbbbbbbb',
+        fullName: 'דוד דוידן',
+        _id: '33333333333333333',
+    },
+];
+
+export const InitialValuesByIds: Story = {
+    args: {
+        id: 'initial_values_by_ids',
+        label: 'user options',
+        value: ['11111111111111111', '22222222222222222'],
+        fieldId: '_id',
+        getOptionsPromise: async () => USERS,
+        getOptionLabel: (option) => option.fullName,
+        width: 400,
+    },
+    render,
+};
