@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="fixing some table bugs, v1.15.7">
+    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="fixing some autocomplete bugs, v1.15.8">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocomplete.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocomplete.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocompleteMultiple.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocompleteMultiple.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocompleteMultipleAsync.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocompleteMultipleAsync.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/TextField/TextField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/TextField/TextField.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +99,7 @@
       <workItem from="1731072565089" duration="1002000" />
       <workItem from="1731242974306" duration="8002000" />
       <workItem from="1731272496288" duration="187000" />
-      <workItem from="1731276790103" duration="384000" />
+      <workItem from="1731276790103" duration="840000" />
     </task>
     <task id="LOCAL-00001" summary="update list styles">
       <option name="closed" value="true" />
@@ -150,7 +149,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731264673444</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fixing some autocomplete bugs, v1.15.8">
+      <option name="closed" value="true" />
+      <created>1731277229787</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1731277229787</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,6 +172,7 @@
     <MESSAGE value="fixing some bugs, v1.15.5" />
     <MESSAGE value="fixing some bugs, v1.15.6" />
     <MESSAGE value="fixing some table bugs, v1.15.7" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing some table bugs, v1.15.7" />
+    <MESSAGE value="fixing some autocomplete bugs, v1.15.8" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing some autocomplete bugs, v1.15.8" />
   </component>
 </project>

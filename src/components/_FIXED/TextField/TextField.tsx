@@ -98,10 +98,7 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
     const endCmpExternal = typeof _endCmpExternal === 'string' ? <SVGIcon>{_endCmpExternal}</SVGIcon> : _endCmpExternal;
     const copyIcon = typeof _copyIcon === 'string' ? <SVGIcon>{_copyIcon}</SVGIcon> : _copyIcon;
     const showActions = !hideStartActionsOnEmpty || value || (!value && isFocused);
-    const onChangeTemp = (e) => {
-        console.log('onChangeTemp e', e.target.value, e);
-        onChange(e);
-    };
+    const onChangeTemp = (e) => onChange?.(e);
     const handleOnChange = debounceDelay ? debounce(onChangeTemp, debounceDelay) : onChangeTemp;
 
     const component = (
@@ -165,16 +162,20 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
                             ...InputProps?.sx,
                         },
                     }}
-                    // onKeyPress={(e) => {
-                    //     if (e.key === 'Enter' || +e.keyCode === 13) {
-                    //         setIsFocused(false);
-                    //         onEnterKeyPress?.(e);
-                    //     } else {
-                    //         onKeyPress?.(e);
-                    //     }
-                    //
-                    //     if (!onEnterKeyPress) return e;
-                    // }}
+                    onKeyPress={
+                        onEnterKeyPress
+                            ? (e) => {
+                                  if (e.key === 'Enter' || +e.keyCode === 13) {
+                                      if (onEnterKeyPress) {
+                                          setIsFocused(false);
+                                          onEnterKeyPress?.(e);
+                                      }
+                                  }
+                                  onKeyPress?.(e);
+                                  return e;
+                              }
+                            : onKeyPress
+                    }
                     {...rest}
                 />
             </ClickAwayListener>
