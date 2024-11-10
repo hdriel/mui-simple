@@ -17,17 +17,6 @@ export const Paper = MuiPaper;
 export const Checkbox = MuiCheckbox;
 export const Tooltip = MuiTooltip;
 
-export function getDataRange({ rows, total, page, rowsPerPage }: getDataRangeProps): [number, number] {
-    // case that got full data as total
-    if (rows === total) {
-        const from = page * rowsPerPage;
-        return [from, from + rowsPerPage];
-    }
-
-    // case that got partial data from server pagination side
-    return [0, rowsPerPage];
-}
-
 export function extractColors({ theme, colors }: extractColorsProps): undefined | ColorsProps {
     const { background: _background, color: _color } = typeof colors === 'object' ? colors : { background: colors };
     const [color] = getCustomColor({ theme, customColor: _color });

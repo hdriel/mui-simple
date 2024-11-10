@@ -56,6 +56,7 @@ export interface Pagination {
 export interface usePaginationDetailsProps {
     rows: number;
     pagination: Pagination;
+    rowsPerPageOptions: number[];
 }
 export interface usePaginationDetailsResult {
     independentData: boolean;
@@ -155,6 +156,7 @@ export interface TableProps {
     addSortColumnsAction?: boolean;
     columns?: TableColumn[];
     data?: any[];
+    rowsPerPageOptions?: number[];
     DEFAULT_EMPTY_ROW_HEIGHT?: number;
     dense?: boolean;
     elevation?: number;

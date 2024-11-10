@@ -23,6 +23,13 @@ export default meta;
 
 type Story = StoryObj<typeof Table>;
 
+const render = (args) => {
+    const [pagination, setPagination] = useState(args.pagination);
+    return (
+        <Table {...args} pagination={pagination} onChangePagination={({ pagination }) => setPagination(pagination)} />
+    );
+};
+
 export const Default: Story = {
     args: {},
 };
@@ -154,18 +161,7 @@ export const PaginationFeature: Story = {
         data: FITNESS_DATA,
         pagination: { page: 0, rowsPerPage: 3, total: FITNESS_DATA.length },
     },
-    render: (args) => {
-        const [pagination, setPagination] = useState(args.pagination);
-        return (
-            <Table
-                {...args}
-                pagination={pagination}
-                onChangePagination={({ pagination }) => {
-                    setPagination({ ...pagination });
-                }}
-            />
-        );
-    },
+    render,
 };
 
 export const PaginationOnePage: Story = {
@@ -175,6 +171,7 @@ export const PaginationOnePage: Story = {
         pagination: { page: 0, rowsPerPage: 5, total: 1 },
         paginationAlign: 'center',
     },
+    render,
 };
 
 export const PaginationAlign: Story = {
@@ -184,16 +181,7 @@ export const PaginationAlign: Story = {
         pagination: { page: 0, rowsPerPage: 3, total: FITNESS_DATA.length },
         paginationAlign: 'center',
     },
-    render: (args) => {
-        const [pagination, setPagination] = useState(args.pagination);
-        return (
-            <Table
-                {...args}
-                pagination={pagination}
-                onChangePagination={({ pagination }) => setPagination(pagination)}
-            />
-        );
-    },
+    render,
 };
 
 export const defaultEmptyRowHeight: Story = {
@@ -204,16 +192,7 @@ export const defaultEmptyRowHeight: Story = {
         paginationAlign: 'center',
         DEFAULT_EMPTY_ROW_HEIGHT: 40,
     },
-    render: (args) => {
-        const [pagination, setPagination] = useState(args.pagination);
-        return (
-            <Table
-                {...args}
-                pagination={pagination}
-                onChangePagination={({ pagination }) => setPagination(pagination)}
-            />
-        );
-    },
+    render,
 };
 
 export const PaginationComponent: Story = {
@@ -224,16 +203,7 @@ export const PaginationComponent: Story = {
         PaginationComponent: Pagination,
         paginationProps: { variant: 'outlined' },
     },
-    render: (args) => {
-        const [pagination, setPagination] = useState(args.pagination);
-        return (
-            <Table
-                {...args}
-                pagination={pagination}
-                onChangePagination={({ pagination }) => setPagination(pagination)}
-            />
-        );
-    },
+    render,
 };
 
 export const OnClickRow: Story = {
@@ -288,6 +258,7 @@ export const EmptyResultCmp: Story = {
         EmptyResultCmp: 'Noting was found here...', // work
         // EmptyResultCmp: () => <Typography size={25}>Noting was found here...</Typography>, // work
     },
+    render,
 };
 
 export const TableWithPaginationCmp: Story = {
@@ -308,4 +279,5 @@ export const TableWithPaginationCmp: Story = {
             // totalPages: 3, // Work also without this prop, it supply the total correct even the data is not same as total size
         },
     },
+    render,
 };

@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="fixing some bugs, v1.15.5">
+    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="fixing some bugs, v1.15.6">
+      <change beforePath="$PROJECT_DIR$/.idea/mui-simple.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mui-simple.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocompleteMultiple.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocompleteMultiple.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocompleteMultipleAsync.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocompleteMultipleAsync.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/__stories__/InputAutocompleteMultipleAsync.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/__stories__/InputAutocompleteMultipleAsync.stories.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Table/Table.desc.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Table/Table.desc.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Table/Table.utils.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Table/Table.utils.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Table/__stories__/Table.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Table/__stories__/Table.stories.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Table/components/EnhancedTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Table/components/EnhancedTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Table/hooks/usePaginationDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Table/hooks/usePaginationDetails.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +100,9 @@
       <workItem from="1730639587151" duration="3254000" />
       <workItem from="1730924611861" duration="777000" />
       <workItem from="1730928337246" duration="3652000" />
-      <workItem from="1731021548947" duration="3584000" />
+      <workItem from="1731021548947" duration="3643000" />
+      <workItem from="1731072565089" duration="1002000" />
+      <workItem from="1731242974306" duration="7328000" />
     </task>
     <task id="LOCAL-00001" summary="update list styles">
       <option name="closed" value="true" />
@@ -130,7 +136,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730934916750</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fixing some bugs, v1.15.6">
+      <option name="closed" value="true" />
+      <created>1731025396721</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1731025396721</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,6 +157,7 @@
     <MESSAGE value="fixing html empty parse exception" />
     <MESSAGE value="fixing rangeSlider valueLabelFormat" />
     <MESSAGE value="fixing some bugs, v1.15.5" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing some bugs, v1.15.5" />
+    <MESSAGE value="fixing some bugs, v1.15.6" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing some bugs, v1.15.6" />
   </component>
 </project>

@@ -27,8 +27,8 @@ const EnhancedTable: React.FC<TableProps> = ({
     DEFAULT_EMPTY_ROW_HEIGHT = 57,
     dense,
     elevation = 10,
-    evenRowsColor,
     EmptyResultCmp = 'EMPTY RESULT',
+    evenRowsColor,
     fieldId = 'id',
     FILTER_MENU_TITLE_LABEL = 'Filter Columns order',
     FILTER_TOOLTIP_LABEL = 'Filter Columns',
@@ -45,6 +45,7 @@ const EnhancedTable: React.FC<TableProps> = ({
     paginationAlign,
     PaginationComponent,
     paginationProps,
+    rowsPerPageOptions = [5, 10, 20],
     selectedActions,
     SELECTION_MODE_TOOLTIP_LABEL = 'Enable Selection Mode',
     selectionMode: _selectionMode,
@@ -69,6 +70,7 @@ const EnhancedTable: React.FC<TableProps> = ({
     const { emptyRows, sliceFrom, sliceTo, independentData, page } = usePaginationDetails({
         rows,
         pagination,
+        rowsPerPageOptions,
     });
 
     const [columns, filterActionCmp] = useFilterColumns({
