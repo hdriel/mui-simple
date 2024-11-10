@@ -22,8 +22,6 @@ const InputAutocompleteMultipleAsync: React.FC<InputAutocompleteMultipleAsyncPro
         fieldId: props.fieldId,
     });
 
-    console.log(asyncProps);
-
     return <InputAutocompleteMultiple {...props} {...asyncProps} />;
 };
 InputAutocompleteMultipleAsync.displayName = 'InputAutocompleteMultipleAsync';

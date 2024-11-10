@@ -25,10 +25,8 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
 }) => {
     selectedOptions = [].concat(selectedOptions);
 
-    const getOptionLabel = useMemo(
-        () => (typeof _getOptionLabel === 'function' ? _getOptionLabel : (option) => option?.[_getOptionLabel] || ''),
-        [_getOptionLabel]
-    );
+    const getOptionLabel =
+        typeof _getOptionLabel === 'function' ? _getOptionLabel : (option: any) => option?.[_getOptionLabel] || '';
 
     // let totalSelectedOptions = 0;
     // if (raiseSelectedToTop) {
@@ -39,16 +37,17 @@ const InputAutocompleteMultiple: React.FC<InputAutocompleteMultipleProp> = ({
     // }
 
     const setSelectedOptions = (event, options, action): void => {
-        const optionIds = options.filter((v) => isDefined(v)).map((o) => o[fieldId] ?? o);
+        const optionIds = options?.filter((v) => isDefined(v)).map((o) => o[fieldId] ?? o) ?? [];
         event.target.name = name;
         event.target.value = optionIds;
 
         if (action === 'clear') {
-            const newOptionsIds = selectedOptions.filter((option) => option?.disabled).map((o) => o[fieldId] ?? o);
+            const newOptionsIds =
+                selectedOptions?.filter((option) => option?.disabled).map((o) => o[fieldId] ?? o) ?? [];
             event.target.value = newOptionsIds;
-            onChange(event, newOptionsIds);
+            onChange?.(event, newOptionsIds);
         } else {
-            onChange(event, optionIds);
+            onChange?.(event, optionIds);
         }
     };
 

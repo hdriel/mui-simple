@@ -106,7 +106,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
                   <Chip
                       key={option}
                       label={option}
-                      {...getTagProps({ index })}
+                      {...getTagProps?.({ index })}
                       {...(typeof chipProps === 'function' ? chipProps(option) : chipProps)}
                   />
               ))
