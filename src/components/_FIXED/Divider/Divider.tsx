@@ -70,6 +70,7 @@ const Divider: React.FC<PropsWithChildren<DividerProps>> = ({
             variant={variant}
             component={component}
             sx={{
+                display: 'flex',
                 ...(!content.length && {
                     bgcolor: color,
                     [[undefined, 'horizontal'].includes(orientation) ? 'borderTopWidth' : 'borderLeftWidth']:
