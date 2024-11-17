@@ -124,6 +124,8 @@ const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
     itemProps,
     useReactRouterDomLink,
     onClick,
+    onMouseEnter,
+    onMouseLeave,
     ...props
 }) => {
     return (
@@ -144,6 +146,8 @@ const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
                 item={itemProps}
                 style={itemProps.style}
                 onClick={onClick}
+                onMouseEnter={onMouseEnter ? (event) => onMouseEnter?.(event, itemProps) : undefined}
+                onMouseLeave={onMouseLeave ? (event) => onMouseLeave?.(event, itemProps) : undefined}
                 useReactRouterDomLink={useReactRouterDomLink}
             >
                 {itemProps.startIcon &&

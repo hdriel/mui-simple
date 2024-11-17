@@ -34,6 +34,8 @@ const List: React.FC<ListProps> = ({
     useDraggableContext = true,
     useTransition = true,
     useReactRouterDomLink,
+    onMouseEnter,
+    onMouseLeave,
     width,
     sx,
     sxTitle,
@@ -110,6 +112,8 @@ const List: React.FC<ListProps> = ({
                         flexDirectionItems={flexDirectionItems}
                         draggable={dragAndDropItems}
                         useReactRouterDomLink={useReactRouterDomLink}
+                        onMouseEnter={onMouseEnter}
+                        onMouseLeave={onMouseLeave}
                     >
                         {useTransition ? (
                             <Collapse

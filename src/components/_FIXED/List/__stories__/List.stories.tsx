@@ -477,3 +477,31 @@ export const ItemsStyles: Story = {
         ],
     },
 };
+
+export const MouseEvents: Story = {
+    args: {
+        title: 'Custom styles',
+        onMouseEnter: (event, item) => console.log('onMouseEnter', event, item),
+        onMouseLeave: (event, item) => console.log('onMouseLeave', event, item),
+        items: [
+            {
+                title: 'Brunch this weekend?',
+                subtitle: "Ali Connors — I'll be in your neighborhood doing errands this",
+                avatar: { username: 'Ali Connors', image: '1.jpg' },
+                actions: [<Button key="a1" icon="Phone" />, <Button key="a2" icon="Comment" />],
+            },
+            {
+                title: 'Summer BBQ',
+                subtitle: "to Scott, Alex, Jennifer — Wish I could come, but I'm out of town this",
+                avatar: { image: '2.jpg' },
+                actions: [<Button key="a1" icon="Send" />],
+            },
+            {
+                title: 'Oui Oui',
+                subtitle: 'Sandra Adams — Do you have Paris recommendations? Have you ever seen something like this?',
+                avatar: { username: 'Sandra Adams', image: '3.jpg' },
+                actions: [<Button key="a1" icon="Send" />],
+            },
+        ],
+    },
+};
