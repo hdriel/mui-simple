@@ -15,6 +15,7 @@ import {
 import Avatar from '../Avatar/Avatar';
 import Typography from '../Typography/Typography';
 import type { ListItemProps } from '../../decs';
+import { useCustomColor } from '../../../utils/helpers';
 
 interface ListItemWrapperProps {
     item: ListItemProps;
@@ -25,6 +26,7 @@ interface ListItemWrapperProps {
     flexDirection?: 'row' | 'column';
     draggable?: boolean;
     useReactRouterDomLink?: boolean;
+    [key: string]: any;
 }
 const ListItemWrapper: React.FC<PropsWithChildren<ListItemWrapperProps>> = ({
     item,
@@ -36,9 +38,13 @@ const ListItemWrapper: React.FC<PropsWithChildren<ListItemWrapperProps>> = ({
     draggable,
     children,
     useReactRouterDomLink,
+    style,
     ...props
 }) => {
     if (!item) return children;
+    const [customColor] = useCustomColor(
+        style?.background ?? style?.backgroundColor ?? style?.bgcolor ?? style?.bgColor
+    );
     const key = `${item.title}-${index}`;
     const onClickHandler = onClick?.bind(null, index, item.onClick);
     const itemButton =
@@ -57,11 +63,18 @@ const ListItemWrapper: React.FC<PropsWithChildren<ListItemWrapperProps>> = ({
             flexDirection={flexDirection}
             draggable={draggable}
             {...props}
+            sx={{ ...props.sx, ...style, ...(customColor && { background: customColor }) }}
         >
             {children}
         </ListItemButton>
     ) : (
-        <ListItemBox key={key} flexDirection={flexDirection} draggable={draggable}>
+        <ListItemBox
+            key={key}
+            flexDirection={flexDirection}
+            draggable={draggable}
+            {...props}
+            sx={{ ...props.sx, ...style, ...(customColor && { background: customColor }) }}
+        >
             {children}
         </ListItemBox>
     );
@@ -91,6 +104,7 @@ interface ListItemCmpProps {
     isOpen?: boolean;
     useReactRouterDomLink?: boolean;
     draggable?: boolean;
+    [key: string]: any;
 }
 
 const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
@@ -118,6 +132,7 @@ const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
             disableGutters={disableGutters}
             alignItems={itemProps.align ?? alignItems}
             {...props}
+            sx={{ ...props.sx, ...itemProps.style }}
             key={`${index}`}
         >
             <ListItemWrapper
@@ -127,6 +142,7 @@ const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
                 flexDirection={flexDirectionItems}
                 index={index}
                 item={itemProps}
+                style={itemProps.style}
                 onClick={onClick}
                 useReactRouterDomLink={useReactRouterDomLink}
             >
@@ -149,7 +165,7 @@ const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
                     primaryTypographyProps={{
                         sx: {
                             ...(itemProps.bold && { fontWeight: 'bold' }),
-                            ...itemProps.style,
+                            ...itemProps.titleStyle,
                         },
                     }}
                     secondary={

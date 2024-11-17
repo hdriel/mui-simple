@@ -443,7 +443,6 @@ export const ItemsStyles: Story = {
         // sx: { width: '80%' },
         title: 'Custom styles',
         sxTitle: { fontSize: '20px', fontWeight: 'bold', color: '#dd6f00' },
-
         bgColor: 'primary.light',
         items: [
             {
@@ -452,7 +451,7 @@ export const ItemsStyles: Story = {
                 avatar: { username: 'Ali Connors', image: '1.jpg' },
                 actions: [<Button key="a1" icon="Phone" />, <Button key="a2" icon="Comment" />],
                 divider: { variant: 'inset' },
-                style: { fontSize: '20px', fontWeight: 'bold' },
+                titleStyle: { fontSize: '20px', fontWeight: 'bold' },
                 subtitleStyle: { fontSize: '18px', fontWeight: 'bold', width: '80%' },
             },
             {
@@ -461,7 +460,8 @@ export const ItemsStyles: Story = {
                 avatar: { image: '2.jpg' },
                 actions: [<Button key="a1" icon="Send" />],
                 divider: true,
-                style: { fontWeight: 'bold' },
+                style: { background: 'error.light' },
+                titleStyle: { fontWeight: 'bold' },
                 subtitleStyle: { fontWeight: 'bold', width: '80%' },
             },
             {
@@ -470,7 +470,8 @@ export const ItemsStyles: Story = {
                 avatar: { username: 'Sandra Adams', image: '3.jpg' },
                 actions: [<Button key="a1" icon="Send" />],
                 divider: {},
-                style: { fontSize: '20px' },
+                style: { background: '#10dd00' },
+                titleStyle: { fontSize: '20px' },
                 subtitleStyle: { fontSize: '18px', width: '80%' },
             },
         ],
