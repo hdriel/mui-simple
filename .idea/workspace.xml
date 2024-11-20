@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="fixing some bugs (list item style) v1.15.11">
+    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="fixing some bugs (list item mouse events) v1.15.12">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/List/List.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/List/List.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/List/ListItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/List/ListItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/List/__stories__/List.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/List/__stories__/List.stories.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +102,11 @@
       <workItem from="1731276790103" duration="1148000" />
       <workItem from="1731532850603" duration="1523000" />
       <workItem from="1731564435764" duration="601000" />
-      <workItem from="1731801328025" duration="7783000" />
+      <workItem from="1731801328025" duration="8376000" />
+      <workItem from="1731944897263" duration="3259000" />
+      <workItem from="1731996131791" duration="625000" />
+      <workItem from="1732038492803" duration="715000" />
+      <workItem from="1732099634278" duration="166000" />
     </task>
     <task id="LOCAL-00001" summary="update list styles">
       <option name="closed" value="true" />
@@ -185,7 +188,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731872099713</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fixing some bugs (list item mouse events) v1.15.12">
+      <option name="closed" value="true" />
+      <created>1731877716832</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1731877716832</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,6 +215,7 @@
     <MESSAGE value="fixing some input bugs, v1.15.8" />
     <MESSAGE value="fixing some bugs (divider) v1.15.10" />
     <MESSAGE value="fixing some bugs (list item style) v1.15.11" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing some bugs (list item style) v1.15.11" />
+    <MESSAGE value="fixing some bugs (list item mouse events) v1.15.12" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing some bugs (list item mouse events) v1.15.12" />
   </component>
 </project>
