@@ -21,42 +21,31 @@ export const useAutocompleteOptionsHook = ({
     sortBy,
     sortDir,
 }): { options: any; filterOptions: any; getOptionLabel: any; renderOption: any } => {
-    const options = useMemo(() => {
-        let result = _options?.map((option, index) => {
-            if (typeof optionConverter === 'function') return optionConverter(option, index);
-            return ['string', 'number'].includes(typeof option) ? { label: option, id: option } : { ...option };
+    const options = _options?.map((option, index) => {
+        if (typeof optionConverter === 'function') return optionConverter(option, index);
+        return ['string', 'number'].includes(typeof option) ? { label: option, id: option } : { ...option };
+    });
+
+    if (sortBy || raiseSelectedToTop) {
+        options.sort((a, b) => {
+            const optionFieldA = typeof sortBy === 'function' ? sortBy(a) : a[sortBy];
+            const optionFieldB = typeof sortBy === 'function' ? sortBy(b) : b[sortBy];
+            const asc = typeof sortDir === 'boolean' ? sortDir : sortDir > 0;
+            const [A, B] = asc ? [optionFieldA, optionFieldB] : [optionFieldB, optionFieldA];
+
+            const selectedComparator = +b.selected - +a.selected;
+            if (raiseSelectedToTop && selectedComparator !== 0) {
+                return selectedComparator;
+            }
+
+            return typeof optionFieldA === 'string' ? A.localeCompare(B) : A - B;
         });
+    }
 
-        if (sortBy || raiseSelectedToTop) {
-            result =
-                result.sort((a, b) => {
-                    const optionFieldA = typeof sortBy === 'function' ? sortBy(a) : a[sortBy];
-
-                    const optionFieldB = typeof sortBy === 'function' ? sortBy(b) : b[sortBy];
-
-                    const asc = typeof sortDir === 'boolean' ? sortDir : sortDir > 0;
-                    const [A, B] = asc ? [optionFieldA, optionFieldB] : [optionFieldB, optionFieldA];
-
-                    const selectedComparator = +b.selected - +a.selected;
-                    if (raiseSelectedToTop && selectedComparator !== 0) {
-                        return selectedComparator;
-                    }
-
-                    return typeof optionFieldA === 'string' ? A.localeCompare(B) : A - B;
-                }) ?? [];
-        }
-
-        return result;
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [sortBy, sortDir, _options, raiseSelectedToTop]);
-
-    const getOptionLabel = useMemo(
-        () =>
-            typeof _getOptionLabel === 'function'
-                ? _getOptionLabel
-                : (option) => option?.[_getOptionLabel] || option?.inputValue || '',
-        [_getOptionLabel]
-    );
+    const getOptionLabel =
+        typeof _getOptionLabel === 'function'
+            ? _getOptionLabel
+            : (option) => option?.[_getOptionLabel] || option?.inputValue || '';
 
     const filterOptions = useMemo(() => {
         if (typeof _filterOptions === 'function') return _filterOptions;

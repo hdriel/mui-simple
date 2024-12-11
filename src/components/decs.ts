@@ -564,6 +564,8 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     highlightField?: string;
     highlightSearchResults?: boolean;
     includeInputInList?: boolean;
+    inputValue?: string;
+    onInputChange?: (event: any, newInputValue: string) => void;
     multiple?: boolean;
     openOnFocus?: boolean;
     options?: Array<string | number | InputAutoCompleteOptionItem | Record<string, any>>;

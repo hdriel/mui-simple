@@ -216,3 +216,28 @@ export const Keys = () => {
         />
     );
 };
+
+export const OnInputChange: Story = {
+    args: {
+        id: 'grouped-demo',
+        label: 'on input change',
+        clearOnBlur: false,
+        getOptionsPromise: async () =>
+            timeSlots.slice(0).map((option, index) => ({ id: index, time: option, disabled: index % 4 === 0 })),
+        getOptionLabel: (option) => option.time,
+        width: 200,
+    },
+    render: (args) => {
+        const [search, setSearch] = useState('');
+        return (
+            <InputAutocompleteAsync
+                {...args}
+                inputValue={search}
+                onInputChange={(event, newInputValue) => {
+                    console.log('new input value', newInputValue);
+                    setSearch(newInputValue);
+                }}
+            />
+        );
+    },
+};
