@@ -34,8 +34,8 @@ const TreeView: React.FC<TreeViewProps> = ({
     const expandIcon = typeof _expandIcon === 'string' ? <SVGIcon>{_expandIcon}</SVGIcon> : _expandIcon;
     const endIcon = typeof _endIcon === 'string' ? <SVGIcon>{_endIcon}</SVGIcon> : _endIcon;
 
-    const handleToggle = onExpanded ? (event, nodeIds) => onExpanded([].concat(nodeIds)) : undefined;
-    const handleSelect = onSelected ? (event, nodeIds) => onSelected([].concat(nodeIds)) : undefined;
+    const handleToggle = onExpanded ? (_event, nodeIds) => onExpanded([].concat(nodeIds)) : undefined;
+    const handleSelect = onSelected ? (_event, nodeIds) => onSelected([].concat(nodeIds)) : undefined;
 
     const CustomTreeItem: any = CustomComponent
         ? withTreeViewItem(CustomComponent, TreeItemStyled, externalItemProps)
@@ -44,27 +44,36 @@ const TreeView: React.FC<TreeViewProps> = ({
     const renderTree = (nodes: any[]): any[] =>
         nodes?.map(({ id, label, ...node }) => (
             <CustomTreeItem
-                key={node[fieldId] ?? id}
-                id={node[fieldId] ?? id}
-                nodeId={node[fieldId] ?? id}
+                key={(fieldId && node[fieldId]) ?? id}
                 label={node[fieldLabel] ?? label}
                 TransitionComponent={TransitionComponent}
                 {...node}
+                id={(fieldId && node[fieldId]) ?? id}
+                nodeId={(fieldId && node[fieldId]) ?? id}
+                itemId={(fieldId && node[fieldId]) ?? id}
             >
                 {renderTree(node.children)}
             </CustomTreeItem>
         ));
 
+    console.log('nodes', nodes);
+
     return (
         <Box>
             <MuiTreeView
+                // slots={{
+                //     collapseIcon: collapseIcon as React.ReactNode,
+                //     expandIcon: expandIcon as React.ReactNode,
+                //     endIcon: endIcon as React.ReactNode,
+                // }}
                 defaultCollapseIcon={collapseIcon as React.ReactNode}
                 defaultExpandIcon={expandIcon as React.ReactNode}
                 defaultEndIcon={endIcon as React.ReactNode}
                 expanded={expandedIds}
                 selected={selectedIds}
-                onNodeToggle={handleToggle}
-                onNodeSelect={handleSelect}
+                onItemSelectionToggle={handleToggle}
+                onItemExpansionToggle={handleToggle}
+                onSelect={handleSelect}
                 maxWidth={maxWidth}
                 {...(multiSelect && { multiSelect })}
                 {...props}

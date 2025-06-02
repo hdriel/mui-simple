@@ -1,13 +1,13 @@
 import { alpha, css } from '@mui/material/styles';
 // import { treeItemClasses } from '@mui/x-tree-view/TreeItem';
-import { treeItemClasses } from '@mui/lab';
+import { treeItemClasses } from '@mui/x-tree-view';
 import type { SerializedStyles } from '@emotion/serialize';
 
 export function borderedStyles(props): SerializedStyles {
     if (!props.bordered) return css``;
 
     return css`
-        & .${treeItemClasses.group} {
+        & .${treeItemClasses.groupTransition} {
             margin-left: 15px;
             padding-left: 18px;
             border-left: 1px dashed ${alpha(props.theme.palette.text.primary, 0.4)};

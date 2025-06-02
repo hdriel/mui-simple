@@ -1,14 +1,14 @@
 import React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 // import { TreeView as MuiTreeView, TreeViewProps } from '@mui/x-tree-view/TreeView';
-import { TreeView as MuiTreeView, TreeViewProps } from '@mui/lab';
+import { SimpleTreeView as MuiTreeView, SimpleTreeViewProps as TreeViewProps } from '@mui/x-tree-view';
 // import { TreeItem as MuiTreeItem, treeItemClasses } from '@mui/x-tree-view/TreeItem';
-import { TreeItem as MuiTreeItem, treeItemClasses } from '@mui/lab';
+import { TreeItem as MuiTreeItem, treeItemClasses } from '@mui/x-tree-view';
 import { borderedStyles, closeIconFade, edgeCorners, selectedColor } from './TreeView.styles';
 import { numberToPx } from '../../../utils/helpers';
 
 // export const TreeView: React.FC<TreeViewProps<any> & { maxWidth?: string | number; height?: string | number }> = styled(
-export const TreeView: React.FC<TreeViewProps & { maxWidth?: string | number; height?: string | number }> = styled(
+export const TreeView: React.FC<TreeViewProps<any> & { maxWidth?: string | number; height?: string | number }> = styled(
     MuiTreeView,
     {
         shouldForwardProp: (propName: string) => !['maxWidth', 'height'].includes(propName as string),
@@ -47,7 +47,7 @@ export const LabelIconTreeItemStyled = styled(MuiTreeItem)(({ theme }) => ({
             color: 'inherit',
         },
     },
-    [`& .${treeItemClasses.group}`]: {
+    [`& .${treeItemClasses.groupTransition}`]: {
         marginLeft: 0,
         [`& .${treeItemClasses.content}`]: {
             paddingLeft: theme.spacing(2),
@@ -61,7 +61,7 @@ export const IndentBorderTreeItemStyled = styled(MuiTreeItem)(({ theme }) => ({
             opacity: 0.3,
         },
     },
-    [`& .${treeItemClasses.group}`]: {
+    [`& .${treeItemClasses.groupTransition}`]: {
         marginLeft: 15,
         paddingLeft: 18,
         borderLeft: `1px dashed ${alpha(theme.palette.text.primary, 0.4)}`,
@@ -92,7 +92,7 @@ export const TreeItemStyled = styled(MuiTreeItem, {
         }
     }
 
-    & .${treeItemClasses.group} {
+    & .${treeItemClasses.groupTransition} {
         margin-left: 0;
 
         & .${treeItemClasses.content} {
