@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Box } from '@mui/material';
 import { Image as MuiImage } from 'mui-image';
 import ContextMenu from '../ContextMenu';
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-webpack5';
 import Button from '../../Button/Button';
 import { shortcutOptions, optionLongList, options } from './Menu.mocks';
 

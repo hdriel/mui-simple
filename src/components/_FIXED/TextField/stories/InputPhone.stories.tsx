@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from 'react';
 import type { ReactElement } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { Send as SendIcon } from '@mui/icons-material';
 import { Box, Stack } from '@mui/material';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Formik } from 'formik';
 import InputPhone from '../InputPhone';
 import Checkbox from '../../Checkbox/Checkbox';

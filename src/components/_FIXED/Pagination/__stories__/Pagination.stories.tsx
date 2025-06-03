@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { Box, Stack } from '@mui/material';
 import { FlutterDash as FlutterDashIcon } from '@mui/icons-material';
 

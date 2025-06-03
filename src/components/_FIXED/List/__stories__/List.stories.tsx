@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { Box } from '@mui/material';
 import List from '../List';
 import { Send as SendIcon, BeachAccess as BeachAccessIcon } from '@mui/icons-material';

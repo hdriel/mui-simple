@@ -1,8 +1,8 @@
 import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 
 import Breadcrumbs from '../Breadcrumbs';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 const meta: Meta<typeof Breadcrumbs> = {
     title: 'Navigation/Breadcrumbs',

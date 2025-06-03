@@ -13,7 +13,7 @@ import Drawer from '../Drawer';
 import Button from '../../Button/Button';
 import List from '../../List/List';
 import Divider from '../../Divider/Divider';
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-webpack5';
 
 const meta: Meta<typeof Drawer> = {
     title: 'Navigation/Drawer',

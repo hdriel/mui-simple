@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { Send as SendIcon, Fingerprint as FingerprintIcon } from '@mui/icons-material';
 import { Box } from '@mui/material';
 

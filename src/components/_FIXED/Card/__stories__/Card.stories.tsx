@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { useTheme } from '@mui/material/styles';
 import { Box, Stack } from '@mui/material';
 import {
@@ -13,7 +13,7 @@ import {
     SkipNext as SkipNextIcon,
     SkipPrevious as SkipPreviousIcon,
 } from '@mui/icons-material';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import Card from '../Card';
 import CardExpandedContent from '../CardExpandedContent';
 import MyAvatar from '../../Avatar/Avatar';

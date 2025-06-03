@@ -11,7 +11,7 @@ import Timeline, { TimeLineStepProps } from '../Timeline';
 import type { TimeLineStepState } from '../Timeline';
 import Typography from '../../_FIXED/Typography/Typography';
 import Divider from '../../_FIXED/Divider/Divider';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 
 const meta: Meta<typeof Timeline> = {
     title: 'Lab/Timeline',

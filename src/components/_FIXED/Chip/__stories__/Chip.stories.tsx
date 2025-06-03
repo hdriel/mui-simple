@@ -1,7 +1,7 @@
 import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { Send as SendIcon, Fingerprint as FingerprintIcon } from '@mui/icons-material';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Stack } from '@mui/material';
 
 import Chip from '../Chip';

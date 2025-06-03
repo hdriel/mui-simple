@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { range } from 'lodash-es';
 import { DoneAll as DoneAllIcon } from '@mui/icons-material';
 import Stepper from '../Stepper';

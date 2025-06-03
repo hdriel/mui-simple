@@ -1,6 +1,6 @@
 // @ts-ignore
 import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { Box, Stack, Typography } from '@mui/material';
 
 import Divider from '../Divider';

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { Box, Stack, Button } from '@mui/material';
+import { fn } from '@storybook/test';
 
 import TextEllipsis from '../TextEllipsis';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import ToggleButtonGroup from '../../ToggleButtonGroup/ToggleButtonGroup';
 
 const meta: Meta<typeof TextEllipsis> = {
@@ -23,6 +24,7 @@ const largeIpsum =
 export const Default: Story = {
     args: {
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -31,6 +33,7 @@ export const Border: Story = {
         border: true,
         rows: 2,
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -39,6 +42,7 @@ export const AutoWidth: Story = {
         autoWidth: true,
         bgColor: '#dccc0c',
         children: smallIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -47,6 +51,7 @@ export const Width100: Story = {
         width: 100,
         bgColor: '#dccc0c',
         children: smallIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -54,6 +59,7 @@ export const NoWrap: Story = {
     args: {
         noWrap: true,
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -110,6 +116,7 @@ export const Rows: Story = {
         tooltip: true,
         rows: 2,
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -117,6 +124,7 @@ export const ShowTooltipOnEllipsis: Story = {
     args: {
         showTooltipOnEllipsis: false,
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -124,6 +132,7 @@ export const size: Story = {
     args: {
         size: 30,
         children: smallIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -131,6 +140,7 @@ export const Tooltip: Story = {
     args: {
         tooltip: 'Lorem Ipsum',
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -139,6 +149,7 @@ export const TooltipPlacement: Story = {
         tooltip: 'Lorem Ipsum',
         tooltipPlacement: 'right',
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -147,6 +158,7 @@ export const Width: Story = {
         border: true,
         width: 250,
         children: smallIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -155,6 +167,7 @@ export const Align: Story = {
         align: 'center',
         rows: 3,
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
     render: (args) => {
         const [align, setAlign] = useState<'left' | 'center' | 'right' | 'justify' | 'inherit'>(undefined);
@@ -187,6 +200,7 @@ export const AlignCenter: Story = {
         alignCenter: true,
         children: largeIpsum,
         rows: 3,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -195,6 +209,7 @@ export const AlignJustify: Story = {
         alignJustify: true,
         children: largeIpsum,
         rows: 3,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -203,6 +218,7 @@ export const AlignLeft: Story = {
         alignLeft: true,
         children: largeIpsum,
         rows: 3,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -211,6 +227,7 @@ export const AlignRight: Story = {
         alignRight: true,
         children: largeIpsum,
         rows: 3,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -218,6 +235,7 @@ export const BgColor: Story = {
     args: {
         bgColor: 'warning',
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -225,6 +243,7 @@ export const Bold: Story = {
     args: {
         bold: true,
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -240,6 +259,7 @@ export const Color: Story = {
     args: {
         color: '#10cca0',
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -247,6 +267,7 @@ export const Component: Story = {
     args: {
         component: 'h1',
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -254,6 +275,7 @@ export const GutterBottom: Story = {
     args: {
         gutterBottom: true,
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -261,6 +283,7 @@ export const Italic: Story = {
     args: {
         italic: true,
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -269,6 +292,7 @@ export const LineHeight: Story = {
         lineHeight: '2em',
         bgColor: '#00ff58',
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -276,6 +300,7 @@ export const Link: Story = {
     args: {
         link: 'https://www.lipsum.com/',
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -283,6 +308,7 @@ export const Monospace: Story = {
     args: {
         monospace: true,
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -290,6 +316,7 @@ export const Paragraph: Story = {
     args: {
         paragraph: true,
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -297,6 +324,7 @@ export const Size: Story = {
     args: {
         size: 30,
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -304,6 +332,7 @@ export const Strike: Story = {
     args: {
         strike: true,
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -311,6 +340,7 @@ export const Sub: Story = {
     args: {
         sub: true,
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -318,6 +348,7 @@ export const Sup: Story = {
     args: {
         sup: true,
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -325,6 +356,7 @@ export const Underline: Story = {
     args: {
         underline: true,
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };
 
@@ -332,5 +364,6 @@ export const ClassName: Story = {
     args: {
         className: 'mui-simple',
         children: largeIpsum,
+        onEllipsisChange: fn(),
     },
 };

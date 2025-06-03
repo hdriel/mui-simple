@@ -4,18 +4,13 @@ const config: StorybookConfig = {
     framework: '@storybook/react-webpack5',
     core: { builder: '@storybook/builder-webpack5' },
     stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+
     addons: [
         '@storybook/addon-links',
-        '@storybook/addon-styling',
-        '@storybook/addon-actions',
-        '@storybook/addon-essentials',
-        '@storybook/addon-interactions',
-        '@storybook/blocks',
-        '@storybook/addon-storysource',
+        '@storybook/addon-docs/blocks',
         { name: '@storybook/addon-docs', options: { configureJSX: true } },
     ],
-    docs: { autodocs: 'tag' },
-    staticDirs: ['../public'],
+
     // typescript: {
     //     check: false,
     //     // fork-ts-checker-webpack-plugin
@@ -29,6 +24,7 @@ const config: StorybookConfig = {
     //     },
     //     // skipBabel?: boolean;
     // },
+    staticDirs: ['../public'],
 };
 
 export default config;

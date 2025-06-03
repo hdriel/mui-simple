@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { AddLocation as AddLocationIcon, Send as SendIcon } from '@mui/icons-material';
 
 import Stepper from '../Stepper';

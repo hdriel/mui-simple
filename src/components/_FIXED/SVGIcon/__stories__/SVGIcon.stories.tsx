@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { filledIcons, outlinedIcons, roundedIcons, sharpIcons, twoToneIcons } from '../icon-names';
 import { Stack, Grid, Box } from '@mui/material';
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-webpack5';
 
 import SVGIcon from '../SVGIcon';
 import ToggleButtonGroup from '../../ToggleButtonGroup/ToggleButtonGroup';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import LabelIconTreeItem, { LabelIconTreeItemIcons } from '../TreeItemComponents/LabelIconTreeItem';
 import IndentBorderTreeItem, { IndentBorderTreeItemIcons } from '../TreeItemComponents/IndentBorderTreeItem';
 import { Box } from '@mui/material';

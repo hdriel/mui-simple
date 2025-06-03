@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { MoreVert as MoreVertIcon } from '@mui/icons-material';
 import { Box, Card, CardContent, CardHeader, CardMedia, Grid, Stack } from '@mui/material';
 

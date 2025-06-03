@@ -7,7 +7,7 @@ import {
     Edit as EditIcon,
 } from '@mui/icons-material';
 import { Stack } from '@mui/material';
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-webpack5';
 import SpeedDial from '../SpeedDial';
 import Button from '../../Button/Button';
 

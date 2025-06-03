@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { Box, Stack } from '@mui/material';
 import { VolumeUp as VolumeUpIcon } from '@mui/icons-material';
 
 import RangeSlider from '../RangeSlider';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import TextField from '../../TextField/TextField';
 
 const meta: Meta<typeof RangeSlider> = {
