@@ -2125,4 +2125,4 @@ export default [
     'ZoomInMap',
     'ZoomOut',
     'ZoomOutMap',
-];
+] as const;

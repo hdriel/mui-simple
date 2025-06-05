@@ -7,7 +7,7 @@ import React, {
     Ref,
     CSSProperties,
 } from 'react';
-import type { IconName } from './_FIXED/SVGIcon/icon-names';
+import type { IconName as Icons } from './_FIXED/SVGIcon/icon-names';
 import type { DraggableStateSnapshot } from 'react-beautiful-dnd';
 import type { DatePickerProps } from '@mui/x-date-pickers/DatePicker';
 import type { DateTimePickerProps } from '@mui/x-date-pickers/DateTimePicker';
@@ -18,6 +18,7 @@ import type { TIMEZONE } from './timezone';
 import type { LOCALE, ADAPTER_LOCALE } from './locales';
 export type AppBarPosition = 'fixed' | 'sticky' | 'static' | 'absolute' | 'relative';
 
+export type IconName = Icons;
 export type FlexDirectionType = 'row' | 'row-reverse' | 'column' | 'column-reverse';
 type SvgIconComponent = typeof SvgIcon;
 type IconType = IconName | ReactNode | ReactElement | SvgIconComponent;

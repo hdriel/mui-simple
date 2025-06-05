@@ -2121,4 +2121,4 @@ export default [
     'ZoomInRounded',
     'ZoomOutMapRounded',
     'ZoomOutRounded',
-];
+] as const;

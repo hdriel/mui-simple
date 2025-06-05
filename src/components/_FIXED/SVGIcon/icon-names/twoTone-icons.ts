@@ -2118,4 +2118,4 @@ export default [
     'ZoomInTwoTone',
     'ZoomOutMapTwoTone',
     'ZoomOutTwoTone',
-];
+] as const;
