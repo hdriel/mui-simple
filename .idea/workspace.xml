@@ -4,21 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="split accordion stories">
-      <change afterPath="$PROJECT_DIR$/pnpm-workspace.yaml" afterDir="false" />
+    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="update versions and components">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.storybook/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/.storybook/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Accordion/Accordion.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Accordion/Accordion.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Accordion/__stories__/Styles.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Accordion/__stories__/Styles.stories.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Alert/Alert.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Alert/Alert.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/List/List.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/List/List.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/List/ListItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/List/ListItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Slider/Slider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Slider/Slider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/ToggleButtonGroup/__stories__/ToggleButtonGroups.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/ToggleButtonGroup/__stories__/ToggleButtonGroups.stories.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/decs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/decs.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Slider/Slider.styled.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Slider/Slider.styled.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Slider/Slider.styles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Slider/Slider.styles.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Slider/__stories__/Slider.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Slider/__stories__/Slider.stories.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +170,7 @@
       <workItem from="1749158979758" duration="5419000" />
       <workItem from="1749226159243" duration="1112000" />
       <workItem from="1749808695122" duration="2148000" />
-      <workItem from="1749939640161" duration="10638000" />
+      <workItem from="1749939640161" duration="11333000" />
     </task>
     <task id="LOCAL-00001" summary="update list styles">
       <option name="closed" value="true" />
@@ -302,7 +292,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749163163559</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="update versions and components">
+      <option name="closed" value="true" />
+      <created>1749990456725</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1749990456725</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,6 +324,7 @@
     <MESSAGE value="upgrade v7" />
     <MESSAGE value="upgrade mui v7 and storybook v9" />
     <MESSAGE value="split accordion stories" />
-    <option name="LAST_COMMIT_MESSAGE" value="split accordion stories" />
+    <MESSAGE value="update versions and components" />
+    <option name="LAST_COMMIT_MESSAGE" value="update versions and components" />
   </component>
 </project>

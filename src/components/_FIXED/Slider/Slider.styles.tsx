@@ -99,10 +99,11 @@ export function sliderStylePretto(props): SerializedStyles {
 
     const { theme, customColor } = props;
     const primary = get(theme, `palette.primary.main`);
-    const color = customColor ?? primary;
+    const trackColor = typeof customColor === 'string' ? customColor : customColor?.track ?? primary;
+    const labelColor = typeof customColor === 'string' ? customColor : customColor?.thumb ?? primary;
 
     return css`
-        color: ${color};
+        color: ${trackColor};
         height: 8px;
         & .MuiSlider-track {
             border: none;
@@ -131,7 +132,7 @@ export function sliderStylePretto(props): SerializedStyles {
             width: 32px;
             height: 32px;
             border-radius: 50% 50% 50% 0;
-            background-color: ${color};
+            background-color: ${labelColor};
             transform-origin: bottom left;
             transform: translate(50%, -100%) rotate(-45deg) scale(0);
             &:before {
