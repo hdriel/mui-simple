@@ -121,7 +121,7 @@ const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
     insetItems,
     isControl,
     isOpen,
-    itemProps,
+    itemProps = {},
     useReactRouterDomLink,
     onClick,
     onMouseEnter,

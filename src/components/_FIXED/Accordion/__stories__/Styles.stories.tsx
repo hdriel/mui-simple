@@ -222,3 +222,18 @@ export const UseCustomStyle_ = (args) => (
         </Accordion>
     </Stack>
 );
+
+export const CustomColor: Story = {
+    args: {
+        // summary: 'SOME SUMMARY TEXT',
+        label: 'Some colorize accordion component',
+        secondaryLabel: 'you can use hex color or from palette colors',
+        textColor: '#f30055',
+        bgColorDetails: '#1c2222',
+        bgColor: '#1039dc',
+        labelColor: '#ffffff',
+        buttonsColor: '#43dc10',
+        expanded: true,
+        details: LARGE_IPSUM,
+    },
+};

@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo, isValidElement, cloneElement, useState, useCallback, useEffect } from 'react';
+import React, { forwardRef, isValidElement, cloneElement, useState, useCallback, useEffect } from 'react';
 import type { PropsWithChildren } from 'react';
 
 import { Alert as MuiAlert, AlertTitle } from './Alert.styled';
@@ -37,30 +37,28 @@ const Alert: React.FC<PropsWithChildren<AlertProps>> = forwardRef(
             setShow(_show);
         }, [_show]);
 
-        const actionCmp = useMemo(() => {
-            const actionList = []
-                .concat(actions)
-                .filter((v) => v)
-                .map((action, index) => {
-                    return isValidElement(action) ? (
-                        cloneElement(action, { key: index })
-                    ) : (
-                        <Button
-                            key={index}
-                            color="inherit"
-                            size="small"
-                            icon={action?.icon}
-                            tooltipProps={{ tooltip: action?.tooltip }}
-                            onClick={(event) => action?.onClick?.(event) ?? onCloseHandler?.(event)}
-                            {...(typeof action === 'object' ? action : undefined)}
-                        >
-                            {typeof action === 'string' ? action : action?.label}
-                        </Button>
-                    );
-                });
+        const actionList = []
+            .concat(actions)
+            .filter((v) => v)
+            .map((action, index) => {
+                return isValidElement(action) ? (
+                    cloneElement(action, { key: index })
+                ) : (
+                    <Button
+                        key={index}
+                        color="inherit"
+                        size="small"
+                        icon={action?.icon}
+                        tooltipProps={{ tooltip: action?.tooltip }}
+                        onClick={(event) => action?.onClick?.(event) ?? onCloseHandler?.(event)}
+                        {...(typeof action === 'object' ? action : undefined)}
+                    >
+                        {typeof action === 'string' ? action : action?.label}
+                    </Button>
+                );
+            });
 
-            return actionList.length ? actionList : undefined;
-        }, [actions, onCloseHandler]);
+        const actionCmp = actionList.length ? actionList : undefined;
 
         return show ? (
             <MuiAlert

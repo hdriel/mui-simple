@@ -130,7 +130,7 @@ const Accordion: React.FC<PropsWithChildren<AccordionProps>> = function (props):
                                     onClick={() => setShowMore((v) => !v)}
                                     sx={{ float: 'right' }}
                                 >
-                                    {showMore ? hideLabel : showMoreLabel}
+                                    {showMore ? showMoreLabel : hideLabel}
                                 </Button>
                             </ShowMoreWrapper>
                         ) : undefined}

@@ -989,7 +989,7 @@ export interface AccordionProps {
     expandedIcon?: IconType;
     hideLabel?: string;
     id?: string;
-    label?: string | ElementType;
+    label?: string;
     labelProps?: TypographyProps;
     onChange?: (event: SyntheticEvent<unknown>, expanded: boolean | string) => void;
     secondaryLabel?: string | ElementType;

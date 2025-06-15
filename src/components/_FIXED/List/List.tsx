@@ -99,7 +99,7 @@ const List: React.FC<ListProps> = ({
                     <MuiListItem
                         disablePadding={itemProps.disablePadding ?? disablePaddingItems ?? true}
                         disableGutters={itemProps.disableGutters ?? disableGuttersItems}
-                        alignItems={itemProps.align ?? alignItems}
+                        alignItems={itemProps?.align ?? alignItems}
                         index={index}
                         itemProps={itemProps}
                         onClick={onClick}

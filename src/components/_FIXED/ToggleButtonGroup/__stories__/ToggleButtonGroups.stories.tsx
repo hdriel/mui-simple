@@ -45,10 +45,11 @@ const data3 = [
 
 type Story = StoryObj<typeof ToggleButtonGroups>;
 
-const toggleButtonsA = <ToggleButtonGroup data={data1} value={data1[0].value} />;
-const toggleButtonsB = <ToggleButtonGroup data={data2} value={data2[1].value} />;
-const toggleButtonsC = <ToggleButtonGroup data={data3} value={data3[1].value} />;
-const children = [toggleButtonsA, toggleButtonsB, toggleButtonsC];
+const children = [
+    <ToggleButtonGroup data={data1} value={data1[0].value} />,
+    <ToggleButtonGroup data={data2} value={data2[1].value} />,
+    <ToggleButtonGroup data={data3} value={data3[1].value} />,
+];
 
 export const Default: Story = {
     args: {

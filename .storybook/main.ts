@@ -1,16 +1,23 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
 
 const config: StorybookConfig = {
-    framework: '@storybook/react-webpack5',
-    core: { builder: '@storybook/builder-webpack5' },
-    stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
-
+    stories: ['../src/**/*.mdx', '../src/**/*.stories.@(ts|tsx|js|jsx|mjs|cjs)'],
     addons: [
         '@storybook/addon-links',
-        '@storybook/addon-docs/blocks',
+        // '@storybook/addon-docs/blocks',
+        // '@storybook/addon-docs',
+        // '@storybook/addon-essentials',
         { name: '@storybook/addon-docs', options: { configureJSX: true } },
     ],
-
+    framework: {
+        name: '@storybook/react-webpack5',
+        // name: '@storybook/react-vite',
+        options: {},
+    },
+    // docs: {
+    //     builder: '@storybook/builder-webpack5',
+    //     autodocs: 'tag',
+    // },
     // typescript: {
     //     check: false,
     //     // fork-ts-checker-webpack-plugin

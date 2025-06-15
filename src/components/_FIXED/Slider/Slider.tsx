@@ -95,7 +95,7 @@ const Slider: React.FC<SliderProps> = ({
                         {startIcon as React.ReactNode}
                     </Grid>
                 )}
-                <Grid item xs sx={{ height: 'inherit' }}>
+                <Grid item sx={{ height: 'inherit' }} size="grow">
                     <MuiSlider
                         startIcon={startIcon}
                         endIcon={endIcon}
