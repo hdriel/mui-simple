@@ -25,22 +25,22 @@ const StringChildren = 'Hover Me';
 const Template = (tooltipProps) => {
     return (
         <Grid container spacing={3}>
-            <Grid item xs={4}>
+            <Grid item size={4}>
                 MuiChildren
             </Grid>
-            <Grid item xs={4}>
+            <Grid item size={4}>
                 NativeChildren
             </Grid>
-            <Grid item xs={3}>
+            <Grid item size={3}>
                 StringChildren
             </Grid>
-            <Grid item xs={4}>
+            <Grid item size={4}>
                 <Tooltip {...tooltipProps}>{MuiChildren}</Tooltip>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item size={4}>
                 <Tooltip {...tooltipProps}>{NativeChildren}</Tooltip>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item size={4}>
                 <Tooltip {...tooltipProps}>{StringChildren}</Tooltip>
             </Grid>
         </Grid>
@@ -78,7 +78,7 @@ export const Placement_ = (args) => {
 };
 
 export const Title_ = (args) => {
-    const tooltipProps = { title: '' };
+    const tooltipProps = { title: 'some tooltip here' };
     return <Template {...tooltipProps} />;
 };
 
