@@ -863,7 +863,6 @@ export interface SnackbarProps {
     actions?: Array<string | ButtonProps>;
     animation?: 'grow' | 'fade' | 'slide';
     animationDuration?: number | object;
-    animationProps?: object;
     autoHideDuration?: number;
     fullWidth?: boolean;
     horizontal?: 'left' | 'center' | 'right';
@@ -872,6 +871,7 @@ export interface SnackbarProps {
     onClickAway?: (event: any, reason?: string) => void;
     onClose?: (event: any, reason?: string) => void;
     open?: boolean;
+    preventDefaultClickAwayEvent?: boolean;
     resumeHideDuration?: number;
     slideDirection?: 'left' | 'up' | 'right' | 'down';
     title?: string;

@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="update versions and components">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Tooltip/__stories__/Tooltip.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Tooltip/__stories__/Tooltip.stories.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Snackbar/Snackbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Snackbar/Snackbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Snackbar/__stories__/Snackbar.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Snackbar/__stories__/Snackbar.stories.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Stepper/hooks/useStepperSteps.hook.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Stepper/hooks/useStepperSteps.hook.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/decs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/decs.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +171,7 @@
       <workItem from="1749158979758" duration="5419000" />
       <workItem from="1749226159243" duration="1112000" />
       <workItem from="1749808695122" duration="2148000" />
-      <workItem from="1749939640161" duration="11539000" />
+      <workItem from="1749939640161" duration="12360000" />
     </task>
     <task id="LOCAL-00001" summary="update list styles">
       <option name="closed" value="true" />
@@ -306,7 +309,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749991204042</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="update versions and components">
+      <option name="closed" value="true" />
+      <created>1749991380659</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1749991380659</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

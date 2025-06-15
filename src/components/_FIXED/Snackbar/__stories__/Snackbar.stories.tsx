@@ -237,6 +237,28 @@ export const Variant: Story = {
     },
 };
 
+export const PreventDefaultClickAwayEvent: Story = {
+    args: {
+        variant: 'success',
+        children: 'preventDefaultClickAwayEvent',
+        preventDefaultClickAwayEvent: true,
+    },
+    render: (args) => {
+        const [open, setOpen] = useState(false);
+        const onClickHandler = (event) => {
+            event.stopPropagation();
+            setOpen(!open);
+        };
+
+        return (
+            <>
+                <Button fullWidth variant="outlined" onClick={onClickHandler} label={open ? 'Close' : 'Open'} />
+                <Snackbar {...args} open={open} onClose={() => setOpen(false)} />
+            </>
+        );
+    },
+};
+
 export const Vertical: Story = {
     args: {
         vertical: 'top',

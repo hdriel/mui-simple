@@ -11,7 +11,6 @@ const Snackbar: React.FC<PropsWithChildren<SnackbarProps>> = ({
     actions,
     animation,
     animationDuration,
-    animationProps,
     autoHideDuration,
     children,
     fullWidth,
@@ -26,33 +25,28 @@ const Snackbar: React.FC<PropsWithChildren<SnackbarProps>> = ({
     title,
     variant,
     vertical,
+    preventDefaultClickAwayEvent,
     ...props
 }): ReactElement | React.ReactNode => {
-    const action = useMemo(
-        () =>
-            []
-                .concat(
-                    actions,
-                    onClose
-                        ? [<Button key="onCloseAction" color="inherit" size="small" icon="Close" onClick={onClose} />]
-                        : []
-                )
-                ?.map((action, index) =>
-                    isValidElement(action) ? (
-                        // @ts-ignore
-                        cloneElement(action, { key: index, color: action.props?.color ?? 'inherit' })
-                    ) : (
-                        <Button
-                            key={index}
-                            color={action?.color ?? 'inherit'}
-                            {...(typeof action === 'object' ? action : undefined)}
-                        >
-                            {action?.label ?? action}
-                        </Button>
-                    )
-                ),
-        [actions, onClose]
-    );
+    const action = []
+        .concat(
+            actions,
+            onClose ? [<Button key="onCloseAction" color="inherit" size="small" icon="Close" onClick={onClose} />] : []
+        )
+        ?.map((action, index) =>
+            isValidElement(action) ? (
+                // @ts-ignore
+                cloneElement(action, { key: index, color: action.props?.color ?? 'inherit' })
+            ) : (
+                <Button
+                    key={index}
+                    color={action?.color ?? 'inherit'}
+                    {...(typeof action === 'object' ? action : undefined)}
+                >
+                    {action?.label ?? action}
+                </Button>
+            )
+        );
 
     const transition = useMemo(() => {
         const SlideTransition = (props): ReactNode => (
@@ -100,10 +94,19 @@ const Snackbar: React.FC<PropsWithChildren<SnackbarProps>> = ({
             message={msg}
             title={title}
             fullWidth={fullWidth}
-            TransitionComponent={transition}
+            slots={{ transition: transition }}
             transitionDuration={animationDuration ?? (animation !== 'slide' ? 1000 : undefined)}
-            TransitionProps={animationProps}
             {...props}
+            slotProps={{
+                clickAwayListener: {
+                    onClickAway: (event) => {
+                        if (preventDefaultClickAwayEvent) {
+                            // @ts-ignore
+                            event.defaultMuiPrevented = true;
+                        }
+                    },
+                },
+            }}
             action={action} // 'action' end after props, to prevent bugs from storybook, that any props has storybook action field
         >
             {['success', 'error', 'warning', 'info'].includes(variant) ? (

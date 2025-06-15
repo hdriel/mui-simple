@@ -25,41 +25,34 @@ export const useStepperSteps = ({
 }: UseStepperStepsHookProps): UseStepperStepsHookResponse => {
     const theme = useTheme();
 
-    const steps = useMemo(
-        () =>
-            _steps?.map((step: StepType) => {
-                const [stepColor] = getCustomColor({ theme, customColor: step?.color });
-                const [errorColor] = getCustomColor({
-                    theme,
-                    customColor: step?.error ? 'error' : step?.error,
-                });
-                const scolor = stepColor ?? color ?? errorColor;
-                const icon = typeof step?.icon === 'string' ? <SVGIcon>{step.icon}</SVGIcon> : step?.icon;
+    const steps =
+        _steps?.map((step: StepType) => {
+            const [stepColor] = getCustomColor({ theme, customColor: step?.color });
+            const [errorColor] = getCustomColor({
+                theme,
+                customColor: step?.error ? 'error' : step?.error,
+            });
+            const scolor = stepColor ?? color ?? errorColor;
+            const icon = typeof step?.icon === 'string' ? <SVGIcon>{step.icon}</SVGIcon> : step?.icon;
 
-                return typeof step === 'string'
-                    ? { label: step, optional: false, icon }
-                    : {
-                          ...step,
-                          color: scolor,
-                          icon,
-                          optional: step.optional
-                              ? typeof step.optional === 'string'
-                                  ? step.optional
-                                  : OPTIONAL_LABEL
-                              : false,
-                      };
-            }) ?? [],
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [_steps]
-    );
+            return typeof step === 'string'
+                ? { label: step, optional: false, icon }
+                : {
+                      ...step,
+                      color: scolor,
+                      icon,
+                      optional: step.optional
+                          ? typeof step.optional === 'string'
+                              ? step.optional
+                              : OPTIONAL_LABEL
+                          : false,
+                  };
+        }) ?? [];
 
-    const icons = useMemo(
-        () =>
-            steps
-                .map((step: StepType) => step.icon)
-                .reduce((obj, icon) => ({ ...obj, [Object.keys(obj).length + 1]: icon }), {}),
-        [steps]
-    );
+    const icons = steps
+        .map((step: StepType) => step.icon)
+        .reduce((obj, icon) => ({ ...obj, [Object.keys(obj).length + 1]: icon }), {});
+
     const iconListSize = Object.values(icons).filter(Boolean).length;
     const isCustomStyleUsed = Object.values(customStyleProps ?? {}).filter(Boolean).length;
 
