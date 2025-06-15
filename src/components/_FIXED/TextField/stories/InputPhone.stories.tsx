@@ -5,6 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { Send as SendIcon } from '@mui/icons-material';
 import { Box, Stack } from '@mui/material';
 import { action } from 'storybook/actions';
+import { fn } from '@storybook/test';
 import { Formik } from 'formik';
 import InputPhone from '../InputPhone';
 import Checkbox from '../../Checkbox/Checkbox';
@@ -28,13 +29,11 @@ const render = (args) => {
             {...args}
             value={value}
             copyAction
-            onChange={(e) => {
-                setValue(e.target.value);
-            }}
+            onChange={fn()}
+            // onChange={(e) => { setValue(e.target.value); return fn(); }
             // OR
-            // onAccept={(value, mask) => {
-            //     setValue(value);
-            // }}
+            onAccept={fn()}
+            // onAccept={(value, mask) => { setValue(value); return fn(); }}
         />
     );
 };
@@ -167,12 +166,21 @@ export const Disabled: Story = {
 
 export const EndCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputPhone {...args} endCmp="Send" label="End Cmp" value="endCmp with mui icon name or mui icon element" />
+        <InputPhone
+            {...args}
+            endCmp="Send"
+            label="End Cmp"
+            value="endCmp with mui icon name or mui icon element"
+            onAccept={fn()}
+            onChange={fn()}
+        />
         <InputPhone
             {...args}
             endCmp={<SendIcon />}
             label="End Cmp"
             value="endCmp with mui icon name or mui icon element"
+            onAccept={fn()}
+            onChange={fn()}
         />
     </Stack>
 );
@@ -184,12 +192,16 @@ export const EndCmpExternal_ = (args): ReactElement | React.ReactNode => (
             endCmpExternal="Send"
             label="End Cmp External"
             value="endCmpExternal with mui icon name or mui icon element"
+            onAccept={fn()}
+            onChange={fn()}
         />
         <InputPhone
             {...args}
             endCmpExternal={<SendIcon />}
             label="End Cmp External"
             value="endCmpExternal with mui icon name or mui icon element"
+            onAccept={fn()}
+            onChange={fn()}
         />
     </Stack>
 );
@@ -238,6 +250,8 @@ export const HideStartActionsOnEmpty_ = (args): ReactElement | React.ReactNode =
             startCmp="Send"
             endCmp="Fingerprint"
             label="Hide Start Actions OnEmpty"
+            onAccept={fn()}
+            onChange={fn()}
         />
         <InputPhone
             {...args}
@@ -245,6 +259,8 @@ export const HideStartActionsOnEmpty_ = (args): ReactElement | React.ReactNode =
             startCmp="Send"
             endCmp="Fingerprint"
             label="Not Hide Start Actions OnEmpty"
+            onAccept={fn()}
+            onChange={fn()}
         />
     </Stack>
 );
@@ -259,11 +275,11 @@ export const Label: Story = {
 export const Margin_ = (args): ReactElement | React.ReactNode => (
     <Stack>
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <InputPhone {...args} label="None Margin" />
+        <InputPhone {...args} label="None Margin" onAccept={fn()} onChange={fn()} />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <InputPhone {...args} margin="dense" label="Dense Margin" />
+        <InputPhone {...args} margin="dense" label="Dense Margin" onAccept={fn()} onChange={fn()} />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
-        <InputPhone {...args} margin="normal" label="Normal Margin" />
+        <InputPhone {...args} margin="normal" label="Normal Margin" onAccept={fn()} onChange={fn()} />
         <div style={{ backgroundColor: '#8d8773', textAlign: 'center' }}>some text for see the margin</div>
     </Stack>
 );
@@ -294,19 +310,42 @@ export const Required: Story = {
 
 export const StartCmp_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputPhone {...args} startCmp="Send" label="Start Cmp" value="with string mui icon name" />
-        <InputPhone {...args} startCmp={<SendIcon />} label="Start Cmp" value="with mui icon element" />
+        <InputPhone
+            {...args}
+            startCmp="Send"
+            label="Start Cmp"
+            value="with string mui icon name"
+            onAccept={fn()}
+            onChange={fn()}
+        />
+        <InputPhone
+            {...args}
+            startCmp={<SendIcon />}
+            label="Start Cmp"
+            value="with mui icon element"
+            onAccept={fn()}
+            onChange={fn()}
+        />
     </Stack>
 );
 
 export const StartCmpExternal_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputPhone {...args} startCmpExternal="Send" label="Start Cmp External" value="with string mui icon name" />
+        <InputPhone
+            {...args}
+            startCmpExternal="Send"
+            label="Start Cmp External"
+            value="with string mui icon name"
+            onAccept={fn()}
+            onChange={fn()}
+        />
         <InputPhone
             {...args}
             startCmpExternal={<SendIcon />}
             label="Start Cmp External"
             value="with mui icon element"
+            onAccept={fn()}
+            onChange={fn()}
         />
     </Stack>
 );
@@ -320,9 +359,30 @@ export const Value: Story = {
 
 export const Variant_ = (args): ReactElement | React.ReactNode => (
     <Stack spacing={3}>
-        <InputPhone {...args} variant="filled" label="filled variant" value="some text here" />
-        <InputPhone {...args} variant="outlined" label="outlined variant" value="some text here" />
-        <InputPhone {...args} variant="standard" label="standard variant" value="some text here" />
+        <InputPhone
+            {...args}
+            variant="filled"
+            label="filled variant"
+            value="some text here"
+            onAccept={fn()}
+            onChange={fn()}
+        />
+        <InputPhone
+            {...args}
+            variant="outlined"
+            label="outlined variant"
+            value="some text here"
+            onAccept={fn()}
+            onChange={fn()}
+        />
+        <InputPhone
+            {...args}
+            variant="standard"
+            label="standard variant"
+            value="some text here"
+            onAccept={fn()}
+            onChange={fn()}
+        />
     </Stack>
 );
 
@@ -355,6 +415,7 @@ export const Formik_ = (args): React.ReactElement | React.ReactNode => {
                             error={!!(touched.error && errors.phone)}
                             value={values.phone}
                             unmask={values.unmask}
+                            onAccept={fn()}
                             onChange={handleChange}
                             showMaskAsPlaceholder={touched.phone}
                             onEnterKeyPress={handleSubmit}
