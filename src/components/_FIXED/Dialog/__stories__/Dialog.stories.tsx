@@ -25,7 +25,7 @@ import { Add as AddIcon, Person as PersonIcon } from '@mui/icons-material';
 const meta: Meta<typeof Dialog> = {
     title: 'Feedback/Dialog',
     component: Dialog,
-    tags: ['autodocs'],
+    // tags: ['autodocs'], // hide because make page stack
 };
 
 export default meta;

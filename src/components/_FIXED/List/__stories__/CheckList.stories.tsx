@@ -17,7 +17,7 @@ import Checkbox from '../../Checkbox/Checkbox';
 const meta: Meta<typeof CheckList> = {
     title: 'Data-Display/CheckList',
     component: CheckList,
-    tags: ['autodocs'],
+    // tags: ['autodocs'], // hide because make page stack
 };
 
 export default meta;
