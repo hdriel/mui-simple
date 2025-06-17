@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 // import { useTreeItem } from '@mui/x-tree-view/TreeItem';
-import { useTreeItem } from '@mui/x-tree-view';
+import { useTreeItem, useTreeItemUtils } from '@mui/x-tree-view';
 import { TreeItem } from './TreeView.styled';
 
 export function withTreeViewItem(Component: any, TreeItemComponent: any = TreeItem, externalItemProps: any = {}) {
@@ -17,8 +17,10 @@ export function withTreeViewItem(Component: any, TreeItemComponent: any = TreeIt
             ...restProps
         } = props ?? ({} as any);
 
-        const { disabled, expanded, selected, focused, handleExpansion, handleSelection, preventSelection } =
-            useTreeItem(nodeId);
+        const {
+            status: { disabled, expanded, selected, focused, expandable } = {},
+            interactions: { handleExpansion, handleSelection },
+        } = useTreeItemUtils({ itemId: nodeId });
 
         const handleExpansionClick = (event): void => handleExpansion?.(event);
         const handleSelectionClick = (event): void => handleSelection?.(event);
@@ -46,7 +48,7 @@ export function withTreeViewItem(Component: any, TreeItemComponent: any = TreeIt
                             itemFocused={focused}
                             onExpandedItem={handleExpansionClick}
                             onSelectedItem={handleSelectionClick}
-                            preventSelectItem={preventSelection}
+                            preventSelectItem={!expandable}
                         />
                     }
                     style={

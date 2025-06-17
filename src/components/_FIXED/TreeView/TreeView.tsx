@@ -7,6 +7,15 @@ import { withTreeViewItem } from './withTreeViewItem';
 import SVGIcon from '../SVGIcon/SVGIcon';
 import type { TreeViewProps } from '../../decs';
 
+function removeDuplicates(arr: string[]) {
+    const countMap: Record<string, number> = arr.reduce((acc, val) => {
+        acc[val] = (acc[val] || 0) + 1;
+        return acc;
+    }, {});
+
+    return arr.filter((val) => countMap[val] === 1);
+}
+
 const TreeView: React.FC<TreeViewProps> = ({
     borderedStyles = false,
     closeIconFadeStyles = false,
@@ -34,8 +43,24 @@ const TreeView: React.FC<TreeViewProps> = ({
     const expandIcon = typeof _expandIcon === 'string' ? <SVGIcon>{_expandIcon}</SVGIcon> : _expandIcon;
     const endIcon = typeof _endIcon === 'string' ? <SVGIcon>{_endIcon}</SVGIcon> : _endIcon;
 
-    const handleToggle = onExpanded ? (_event, nodeIds) => onExpanded([].concat(nodeIds)) : undefined;
-    const handleSelect = onSelected ? (_event, nodeIds) => onSelected([].concat(nodeIds)) : undefined;
+    const handleToggle = onExpanded
+        ? (event, nodeIds: string | string[]) => {
+              event.stopPropagation();
+              const expendedItems = removeDuplicates([].concat(expandedIds, nodeIds));
+              onExpanded(expendedItems);
+          }
+        : undefined;
+    const handleSelect = onSelected
+        ? (event, nodeIds) => {
+              event.stopPropagation();
+              if (multiSelect) {
+                  const selectedItems = removeDuplicates([].concat(selectedIds, nodeIds));
+                  onSelected(selectedItems);
+              } else {
+                  onSelected([].concat(nodeIds));
+              }
+          }
+        : undefined;
 
     const CustomTreeItem: any = CustomComponent
         ? withTreeViewItem(CustomComponent, TreeItemStyled, externalItemProps)
@@ -56,25 +81,22 @@ const TreeView: React.FC<TreeViewProps> = ({
             </CustomTreeItem>
         ));
 
-    console.log('nodes', nodes);
-
     return (
         <Box>
             <MuiTreeView
-                // slots={{
-                //     collapseIcon: collapseIcon as React.ReactNode,
-                //     expandIcon: expandIcon as React.ReactNode,
-                //     endIcon: endIcon as React.ReactNode,
-                // }}
-                defaultCollapseIcon={collapseIcon as React.ReactNode}
-                defaultExpandIcon={expandIcon as React.ReactNode}
-                defaultEndIcon={endIcon as React.ReactNode}
-                expanded={expandedIds}
-                selected={selectedIds}
-                onItemSelectionToggle={handleToggle}
+                slots={{
+                    collapseIcon: collapseIcon as any,
+                    expandIcon: expandIcon as any,
+                    endIcon: endIcon as any,
+                }}
+                // defaultCollapseIcon={collapseIcon as React.ReactNode}
+                // defaultExpandIcon={expandIcon as React.ReactNode}
+                // defaultEndIcon={endIcon as React.ReactNode}
+                expandedItems={expandedIds}
+                onItemSelectionToggle={handleSelect}
                 onItemExpansionToggle={handleToggle}
-                onSelect={handleSelect}
                 maxWidth={maxWidth}
+                selectedItems={selectedIds}
                 {...(multiSelect && { multiSelect })}
                 {...props}
             >
