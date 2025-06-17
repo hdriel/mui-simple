@@ -1,5 +1,4 @@
 import { alpha, css } from '@mui/material/styles';
-// import { treeItemClasses } from '@mui/x-tree-view/TreeItem';
 import { treeItemClasses } from '@mui/x-tree-view';
 import type { SerializedStyles } from '@emotion/serialize';
 

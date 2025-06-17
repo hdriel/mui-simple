@@ -75,16 +75,16 @@ export const Dynamic_ = (args) => {
 
     return (
         <Grid container>
-            <Grid item xs={12}>
+            <Grid item size={12}>
                 <Button onClick={() => setLoading(!loading)}>{loading ? 'Hide' : 'Show'} Skeleton</Button>
             </Grid>
-            <Grid item container xs={12}>
-                <Grid item xs>
+            <Grid item container size={12}>
+                <Grid item size="auto">
                     <Skeleton {...args} loading={loading}>
                         <Avatar size={'50px'} />
                     </Skeleton>
                 </Grid>
-                <Grid item xs={10}>
+                <Grid item size={10}>
                     <Skeleton {...args} loading={loading}>
                         <Typography>Typography text</Typography>
                     </Skeleton>
@@ -106,13 +106,13 @@ export const Timeout_ = (args) => {
 
     return (
         <Grid container>
-            <Grid item container xs={12}>
-                <Grid item xs>
+            <Grid item container size={12}>
+                <Grid item size="auto">
                     <Skeleton {...args} loading={loading}>
                         <Avatar size={'50px'} />
                     </Skeleton>
                 </Grid>
-                <Grid item xs={10}>
+                <Grid item size={10}>
                     <Skeleton {...args} loading={loading}>
                         <Typography>Typography text</Typography>
                     </Skeleton>

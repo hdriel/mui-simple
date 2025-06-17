@@ -26,8 +26,10 @@ import { createRequire } from 'node:module';
 const requireFile = createRequire(import.meta.url);
 const packageJson = requireFile('./package.json');
 
-const isProd = process.env.NODE_ENV === 'production';
+const NODE_ENV = process.env.NODE_ENV;
+const isProd = NODE_ENV === 'production';
 const sourceMap = !isProd;
+console.log('NODE_ENV', NODE_ENV, isProd);
 
 const externalDep = [
     ...builtinModules,
@@ -67,10 +69,10 @@ export default [
             resolve({
                 extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json'],
                 moduleDirectories: ['node_modules'],
-                dedupe: externalDep,
                 preferBuiltins: true,
                 browser: true,
                 main: true,
+                dedupe: externalDep,
             }),
             typescript({
                 tsconfig: 'tsconfig.json',
@@ -81,12 +83,11 @@ export default [
             babel({
                 babelHelpers: 'bundled',
                 extensions: ['.jsx', '.js', '.ts', '.tsx', '.json'],
-                exclude: 'node_modules/**', // only transpile our source code
                 babelrc: true,
+                exclude: 'node_modules/**',
             }),
             json(),
             commonjs(),
-            // commonjs({ include: /node_modules/ }),
             postcss({
                 minimize: true,
                 extensions: ['.css', '.less', '.scss'],
@@ -114,6 +115,12 @@ export default [
                     module: pkg.module?.replace('dist/', ''),
                     main: pkg.main.replace('dist/', ''),
                     types: pkg.types.replace('dist/', ''),
+                    exports: {
+                        '.': {
+                            import: pkg.main.replace('dist/', ''),
+                            types: pkg.types.replace('dist/', ''),
+                        },
+                    },
                     ...(!sourceMap && { files: ['bundles/*'] }),
                 }),
             }),

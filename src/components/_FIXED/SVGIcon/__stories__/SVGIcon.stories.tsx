@@ -100,8 +100,8 @@ export const WidthAndHeight_ = (args) => {
 
     return (
         <Grid container spacing={5} sx={{ width: 1200 }}>
-            <Grid item xs={6}>
-                <Grid item xs display="flex">
+            <Grid item size={6}>
+                <Grid item size="auto" display="flex">
                     <Stack direction="row">
                         <Box
                             sx={{
@@ -126,12 +126,12 @@ export const WidthAndHeight_ = (args) => {
                         />
                     </Stack>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item size={12}>
                     <Slider value={width} onChange={(e) => setWidth(e.target.value)} min={100} max={500} />
                 </Grid>
             </Grid>
-            <Grid item xs={6}>
-                <Grid item xs display="flex">
+            <Grid item size={6}>
+                <Grid item size="auto" display="flex">
                     <Stack direction="row">
                         <Box
                             sx={{
@@ -156,7 +156,7 @@ export const WidthAndHeight_ = (args) => {
                         />
                     </Stack>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item size={12}>
                     <Slider value={width} onChange={(e) => setWidth(e.target.value)} min={100} max={500} />
                 </Grid>
             </Grid>
@@ -169,7 +169,7 @@ export const Sized_ = (args) => {
 
     return (
         <Grid container spacing={3} sx={{ width: 500 }}>
-            <Grid item xs display="flex">
+            <Grid item size="auto" display="flex">
                 <Stack direction="row">
                     <Box
                         sx={{
@@ -186,7 +186,7 @@ export const Sized_ = (args) => {
                     </Box>
                 </Stack>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item size={12}>
                 <Slider value={size} onChange={(e) => setSize(e.target.value)} min={100} max={500} />
             </Grid>
         </Grid>
@@ -198,7 +198,7 @@ export const SVGFile_ = (args) => {
 
     return (
         <Grid container spacing={3} sx={{ width: 500 }}>
-            <Grid item xs display="flex">
+            <Grid item size="auto" display="flex">
                 <Stack direction="row">
                     <Box
                         sx={{
@@ -215,7 +215,7 @@ export const SVGFile_ = (args) => {
                     </Box>
                 </Stack>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item size={12}>
                 <Slider value={size} onChange={(e) => setSize(e.target.value)} min={100} max={500} />
             </Grid>
         </Grid>

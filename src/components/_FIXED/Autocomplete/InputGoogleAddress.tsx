@@ -24,7 +24,7 @@ const renderMapAddressOption = (props, option) => {
                 <Grid item>
                     <Box component={LocationOnIcon} sx={{ color: 'text.secondary', mr: 2 }} />
                 </Grid>
-                <Grid item xs>
+                <Grid item size="auto">
                     {parts.map((part, index) => (
                         <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
                             {part.text}

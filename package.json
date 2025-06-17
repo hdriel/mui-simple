@@ -13,7 +13,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=8192 rollup -c rollup.config.js",
     "build:debug": "cross-env NODE_ENV=development NODE_OPTIONS=--max-old-space-size=8192 rollup -c rollup.config.js",
-    "yalc:debug": "npm run build:debug & yalc publish",
+    "yalc:debug": "npm run build:debug & npm run yalc:publish",
     "yalc:publish": "yalc publish",
     "build:ts": "cross-env NODE_OPTIONS=--max-old-space-size=8192 tsc -p tsconfig.json",
     "build:ts-watch": "cross-env NODE_OPTIONS=--max-old-space-size=8192 tsc -p tsconfig.json -w",
@@ -72,6 +72,7 @@
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.0",
+    "@emotion/serialize": "^1.3.3",
     "@mui/lab": "^7.0.0-beta.13",
     "@mui/x-date-pickers": "^8.5.0",
     "@mui/x-tree-view": "^8.5.0",

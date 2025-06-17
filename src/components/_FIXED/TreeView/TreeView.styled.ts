@@ -1,8 +1,6 @@
 import React from 'react';
 import { styled, alpha } from '@mui/material/styles';
-// import { TreeView as MuiTreeView, TreeViewProps } from '@mui/x-tree-view/TreeView';
 import { SimpleTreeView as MuiTreeView, SimpleTreeViewProps as TreeViewProps } from '@mui/x-tree-view';
-// import { TreeItem as MuiTreeItem, treeItemClasses } from '@mui/x-tree-view/TreeItem';
 import { TreeItem as MuiTreeItem, treeItemClasses } from '@mui/x-tree-view';
 import { borderedStyles, closeIconFade, edgeCorners, selectedColor } from './TreeView.styles';
 import { numberToPx } from '../../../utils/helpers';
