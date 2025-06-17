@@ -56,6 +56,10 @@ export const LabelIconTreeItemStyled = styled(MuiTreeItem)(({ theme }) => ({
 }));
 
 export const IndentBorderTreeItemStyled = styled(MuiTreeItem)(({ theme }) => ({
+    [`& .${treeItemClasses.content}`]: {
+        padding: theme.spacing(0.5, 1),
+        margin: theme.spacing(0.2, 0),
+    },
     [`& .${treeItemClasses.iconContainer}`]: {
         '& .close': {
             opacity: 0.3,

@@ -34,7 +34,7 @@ const IndentBorderTreeItem: React.ForwardRefExoticComponent<
 export default IndentBorderTreeItem;
 
 export const IndentBorderTreeItemIcons = {
-    collapseIcon: 'MinusSquare',
+    collapseIcon: 'Email',
     expandIcon: <PlusSquare />,
     endIcon: <CloseSquare />,
 };

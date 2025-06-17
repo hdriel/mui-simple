@@ -85,9 +85,9 @@ const TreeView: React.FC<TreeViewProps> = ({
         <Box>
             <MuiTreeView
                 slots={{
-                    collapseIcon: collapseIcon as any,
-                    expandIcon: expandIcon as any,
-                    endIcon: endIcon as any,
+                    ...(collapseIcon && { collapseIcon: (props) => React.cloneElement(collapseIcon as any, props) }),
+                    ...(expandIcon && { expandIcon: (props) => React.cloneElement(expandIcon as any, props) }),
+                    ...(endIcon && { endIcon: (props) => React.cloneElement(endIcon as any, props) }),
                 }}
                 // defaultCollapseIcon={collapseIcon as React.ReactNode}
                 // defaultExpandIcon={expandIcon as React.ReactNode}

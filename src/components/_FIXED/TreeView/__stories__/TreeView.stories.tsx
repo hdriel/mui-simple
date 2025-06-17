@@ -10,7 +10,7 @@ import Typography from '../../Typography/Typography';
 import TreeView from '../TreeView';
 
 const meta: Meta<typeof TreeView> = {
-    title: 'Lab/TreeView',
+    title: 'Mui-X/TreeView',
     component: TreeView,
     tags: ['autodocs'],
 };
