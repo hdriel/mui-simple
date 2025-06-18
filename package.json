@@ -2,19 +2,17 @@
   "name": "mui-simple",
   "version": "2.0.0",
   "description": "Override mui components to simplify usage",
-  "module": "dist/bundles/bundle.esm.js",
-  "main": "dist/bundles/bundle.js",
-  "types": "dist/bundles/index.d.ts",
-  "typings": "dist/src/index.d.ts",
+  "module": "lib/index.esm.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "type": "module",
   "files": [
-    "dist/*"
+    "lib/*"
   ],
   "scripts": {
     "build": "cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=8192 rollup -c rollup.config.js",
     "build:debug": "cross-env NODE_ENV=development NODE_OPTIONS=--max-old-space-size=8192 rollup -c rollup.config.js",
-    "yalc:debug": "npm run build:debug & npm run yalc:publish",
-    "yalc:publish": "yalc publish",
+    "build:yalc": "npm run build:debug & yalc publish --push",
     "build:ts": "cross-env NODE_OPTIONS=--max-old-space-size=8192 tsc -p tsconfig.json",
     "build:ts-watch": "cross-env NODE_OPTIONS=--max-old-space-size=8192 tsc -p tsconfig.json -w",
     "build-storybook": "storybook build",
@@ -77,6 +75,7 @@
     "@mui/x-date-pickers": "^8.5.0",
     "@mui/x-tree-view": "^8.5.0",
     "@react-spring/web": "^9.7.2",
+    "@rollup/plugin-terser": "^0.4.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
