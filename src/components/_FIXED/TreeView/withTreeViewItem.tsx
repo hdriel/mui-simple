@@ -1,12 +1,14 @@
 import React, { forwardRef } from 'react';
 import { useTreeItemUtils } from '@mui/x-tree-view';
 import { TreeItem } from './TreeView.styled';
+import uuid from 'react-uuid';
 
 export function withTreeViewItem(Component: any, TreeItemComponent: any = TreeItem, externalItemProps: any = {}) {
     // eslint-disable-next-line react/display-name
     const CustomTreeItemChild: any = forwardRef((props: any, ref) => {
         const {
             nodeId,
+            fieldId,
             TransitionComponent,
             children,
             closeIconFade,
@@ -24,12 +26,15 @@ export function withTreeViewItem(Component: any, TreeItemComponent: any = TreeIt
         const handleExpansionClick = (event): void => handleExpansion?.(event);
         const handleSelectionClick = (event): void => handleSelection?.(event);
 
+        const key = (fieldId && restProps[fieldId]) ?? (restProps.id || uuid());
         return (
             props && (
                 <TreeItemComponent
-                    key={nodeId}
+                    key={key}
                     ref={ref}
-                    nodeId={nodeId}
+                    id={key}
+                    nodeId={key}
+                    itemId={key}
                     TransitionComponent={TransitionComponent}
                     closeIconFade={closeIconFade}
                     bordered={borderedStyles}

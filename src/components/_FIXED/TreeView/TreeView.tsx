@@ -1,5 +1,6 @@
 import React from 'react';
 import uuid from 'react-uuid';
+import { get } from 'lodash-es';
 import { Box } from '@mui/material';
 
 import { TreeView as MuiTreeView, TreeItem, TreeItemStyled } from './TreeView.styled';
@@ -64,14 +65,23 @@ const TreeView: React.FC<TreeViewProps> = ({
         : undefined;
 
     const CustomTreeItem: any = CustomComponent
-        ? withTreeViewItem(CustomComponent, TreeItemStyled, externalItemProps)
+        ? withTreeViewItem(CustomComponent, TreeItemStyled, {
+              ...externalItemProps,
+              fieldId: externalItemProps?.fieldId ?? fieldId,
+          })
         : TreeItemComponent;
 
     const renderTree = (nodes: any[]): any[] =>
         nodes?.map(({ id, label, ...node }) => (
             <CustomTreeItem
                 key={(fieldId && node[fieldId]) ?? (id || uuid())}
-                label={node[fieldLabel as string] ?? label}
+                label={
+                    typeof fieldLabel === 'function'
+                        ? fieldLabel(node)
+                        : fieldLabel
+                        ? get(node, fieldLabel as string, label)
+                        : label
+                }
                 TransitionComponent={TransitionComponent}
                 {...node}
                 id={(fieldId && node[fieldId]) || id || uuid()}

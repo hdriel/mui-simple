@@ -1382,7 +1382,7 @@ export interface TreeViewProps {
     expandIcon?: IconType;
     externalItemProps?: Record<string, any>;
     fieldId?: string;
-    fieldLabel?: string;
+    fieldLabel?: string | ((node: any) => string);
     maxWidth?: string | number;
     multiSelect?: boolean;
     nodes?: TreeViewNodeProps[];
