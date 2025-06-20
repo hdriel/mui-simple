@@ -1,4 +1,5 @@
 import React from 'react';
+import uuid from 'react-uuid';
 import { Box } from '@mui/material';
 
 import { TreeView as MuiTreeView, TreeItem, TreeItemStyled } from './TreeView.styled';
@@ -46,7 +47,7 @@ const TreeView: React.FC<TreeViewProps> = ({
     const handleToggle = onExpanded
         ? (event, nodeIds: string | string[]) => {
               event.stopPropagation();
-              const expendedItems = removeDuplicates([].concat(expandedIds, nodeIds));
+              const expendedItems = removeDuplicates(([] as string[]).concat(expandedIds as string[], nodeIds));
               onExpanded(expendedItems);
           }
         : undefined;
@@ -54,7 +55,7 @@ const TreeView: React.FC<TreeViewProps> = ({
         ? (event, nodeIds) => {
               event.stopPropagation();
               if (multiSelect) {
-                  const selectedItems = removeDuplicates([].concat(selectedIds, nodeIds));
+                  const selectedItems = removeDuplicates(([] as string[]).concat(selectedIds as string[], nodeIds));
                   onSelected(selectedItems);
               } else {
                   onSelected([].concat(nodeIds));
@@ -69,13 +70,13 @@ const TreeView: React.FC<TreeViewProps> = ({
     const renderTree = (nodes: any[]): any[] =>
         nodes?.map(({ id, label, ...node }) => (
             <CustomTreeItem
-                key={(fieldId && node[fieldId]) ?? id}
-                label={node[fieldLabel] ?? label}
+                key={(fieldId && node[fieldId]) ?? (id || uuid())}
+                label={node[fieldLabel as string] ?? label}
                 TransitionComponent={TransitionComponent}
                 {...node}
-                id={(fieldId && node[fieldId]) ?? id}
-                nodeId={(fieldId && node[fieldId]) ?? id}
-                itemId={(fieldId && node[fieldId]) ?? id}
+                id={(fieldId && node[fieldId]) || id || uuid()}
+                nodeId={(fieldId && node[fieldId]) || id || uuid()}
+                itemId={(fieldId && node[fieldId]) || id || uuid()}
             >
                 {renderTree(node.children)}
             </CustomTreeItem>
@@ -89,9 +90,6 @@ const TreeView: React.FC<TreeViewProps> = ({
                     ...(expandIcon && { expandIcon: (props) => React.cloneElement(expandIcon as any, props) }),
                     ...(endIcon && { endIcon: (props) => React.cloneElement(endIcon as any, props) }),
                 }}
-                // defaultCollapseIcon={collapseIcon as React.ReactNode}
-                // defaultExpandIcon={expandIcon as React.ReactNode}
-                // defaultEndIcon={endIcon as React.ReactNode}
                 expandedItems={expandedIds}
                 onItemSelectionToggle={handleSelect}
                 onItemExpansionToggle={handleToggle}

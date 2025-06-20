@@ -5,6 +5,7 @@
 // https://www.codifytools.com/blog/react-npm-package
 
 // https://stackoverflow.com/questions/56788551/material-ui-themeprovider-invalid-hook-call-when-building-an-es6-module-using-ro
+import { builtinModules } from 'module';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import filesize from 'rollup-plugin-filesize';
 import resolve from '@rollup/plugin-node-resolve';
@@ -30,6 +31,14 @@ const isProd = NODE_ENV === 'production';
 const sourcemap = isProd ? false : 'inline';
 
 console.log('NODE_ENV', NODE_ENV, isProd);
+
+const externalDep = [
+    ...builtinModules,
+    ...Object.keys(packageJson.devDependencies),
+    ...Object.keys(packageJson.peerDependencies),
+    'tslib',
+    'hoist-non-react-statics',
+];
 
 export default [
     {
@@ -74,6 +83,8 @@ export default [
             ...(isProd ? [terser({})] : []),
             filesize(),
         ],
+        external: externalDep,
+        treeshake: true,
         onwarn(warning, warn) {
             // Ignore "use client" warnings
             if (warning.code === 'MODULE_LEVEL_DIRECTIVE') return;

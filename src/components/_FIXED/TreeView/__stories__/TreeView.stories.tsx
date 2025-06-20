@@ -85,19 +85,23 @@ export const MultiSelection: Story = {
         const [selected, setSelected] = useState(args.selectedIds);
 
         const handleExpandClick = () => {
-            setExpanded((oldExpanded) => (oldExpanded.length === 0 ? ['1', '5', '6', '7'] : []));
+            setExpanded((oldExpanded) => (oldExpanded?.length === 0 ? ['1', '5', '6', '7'] : []));
         };
         const handleSelectClick = () => {
             setSelected((oldSelected) =>
-                oldSelected.length === 0 ? ['1', '2', '3', '4', '5', '6', '7', '8', '9'] : []
+                oldSelected?.length === 0 ? ['1', '2', '3', '4', '5', '6', '7', '8', '9'] : []
             );
         };
 
         return (
             <Box sx={{ height: 270, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}>
                 <Box sx={{ mb: 1 }}>
-                    <Button onClick={handleExpandClick}>{expanded.length === 0 ? 'Expand all' : 'Collapse all'}</Button>
-                    <Button onClick={handleSelectClick}>{selected.length === 0 ? 'Select all' : 'Unselect all'}</Button>
+                    <Button onClick={handleExpandClick}>
+                        {expanded?.length === 0 ? 'Expand all' : 'Collapse all'}
+                    </Button>
+                    <Button onClick={handleSelectClick}>
+                        {selected?.length === 0 ? 'Select all' : 'Unselect all'}
+                    </Button>
                 </Box>
 
                 <TreeView

@@ -4,7 +4,7 @@ import { TreeItem } from './TreeView.styled';
 
 export function withTreeViewItem(Component: any, TreeItemComponent: any = TreeItem, externalItemProps: any = {}) {
     // eslint-disable-next-line react/display-name
-    const CustomTreeItemChild: any = forwardRef((props, ref) => {
+    const CustomTreeItemChild: any = forwardRef((props: any, ref) => {
         const {
             nodeId,
             TransitionComponent,
@@ -57,7 +57,7 @@ export function withTreeViewItem(Component: any, TreeItemComponent: any = TreeIt
                         } as Record<string, any>
                     }
                 >
-                    {[].concat(children ?? [])?.map(({ props: treeItemProps }, index) => {
+                    {[].concat(children ?? [])?.map(({ props: treeItemProps }: any, index) => {
                         return <CustomTreeItemChild key={treeItemProps?.nodeId ?? index} {...treeItemProps} />;
                     })}
                 </TreeItemComponent>
