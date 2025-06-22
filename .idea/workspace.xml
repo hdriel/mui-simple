@@ -7,9 +7,8 @@
     <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="update configuration">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/TreeView/TreeView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/TreeView/TreeView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/TreeView/withTreeViewItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/TreeView/withTreeViewItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/decs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/decs.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-workspace.yaml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +36,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;hdriel&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/hdriel/mui-simple.git&quot;,
+    &quot;accountId&quot;: &quot;0d6550f8-561d-425a-a224-2d079336c0d6&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -45,29 +56,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;new-rollup-build&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/dev/mui-simple/src/components/_FIXED/Accordion/__stories__&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.build.executor&quot;: &quot;Run&quot;,
-    &quot;npm.build:debug.executor&quot;: &quot;Run&quot;,
-    &quot;npm.build:yalc.executor&quot;: &quot;Run&quot;,
-    &quot;npm.storybook.executor&quot;: &quot;Run&quot;,
-    &quot;npm.yalc:debug.executor&quot;: &quot;Run&quot;,
-    &quot;npm.yalc:publish.executor&quot;: &quot;Run&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\dev\\mui-simple\\node_modules\\prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\dev\\mui-simple\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "new-rollup-build",
+    "last_opened_file_path": "C:/dev/mui-simple/src/components/_FIXED/Accordion/__stories__",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.build.executor": "Run",
+    "npm.build:debug.executor": "Run",
+    "npm.build:yalc.executor": "Run",
+    "npm.storybook.executor": "Run",
+    "npm.yalc:debug.executor": "Run",
+    "npm.yalc:publish.executor": "Run",
+    "prettierjs.PrettierConfiguration.Package": "C:\\dev\\mui-simple\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "ts.external.directory.path": "D:\\dev-JustLikeThat\\mui-simple\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\dev\mui-simple\src\components\_FIXED\Accordion\__stories__" />
@@ -75,7 +87,7 @@
       <recent name="C:\dev\mui-simple\src" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.build:yalc">
+  <component name="RunManager" selected="npm.yalc:publish">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -116,11 +128,11 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="yalc:debug" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="yalc:publish" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="yalc:debug" />
+        <script value="yalc:publish" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -128,18 +140,18 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.yalc:publish" />
         <item itemvalue="npm.build:yalc" />
         <item itemvalue="npm.storybook" />
         <item itemvalue="npm.build:debug" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.yalc:debug" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-WS-243.26053.12" />
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-WS-251.26094.131" />
       </set>
     </attachedChunks>
   </component>
@@ -203,7 +215,9 @@
       <workItem from="1750287684939" duration="974000" />
       <workItem from="1750343676703" duration="949000" />
       <workItem from="1750376113541" duration="672000" />
-      <workItem from="1750418869932" duration="4291000" />
+      <workItem from="1750418869932" duration="4659000" />
+      <workItem from="1750602898323" duration="1077000" />
+      <workItem from="1750620673857" duration="4431000" />
     </task>
     <task id="LOCAL-00001" summary="update list styles">
       <option name="closed" value="true" />
@@ -413,7 +427,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750430015694</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="update configuration">
+      <option name="closed" value="true" />
+      <created>1750433455834</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1750433455834</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
