@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="update configuration">
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="update to mui 7" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -440,7 +438,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750634641204</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="update to mui 7">
+      <option name="closed" value="true" />
+      <created>1750716160411</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1750716160411</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -467,6 +473,7 @@
     <MESSAGE value="update versions and components" />
     <MESSAGE value="update stories" />
     <MESSAGE value="update configuration" />
-    <option name="LAST_COMMIT_MESSAGE" value="update configuration" />
+    <MESSAGE value="update to mui 7" />
+    <option name="LAST_COMMIT_MESSAGE" value="update to mui 7" />
   </component>
 </project>
