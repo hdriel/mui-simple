@@ -52,7 +52,7 @@ export default [
                 inlineDynamicImports: true,
             },
             {
-                file: packageJson.main,
+                file: packageJson.module,
                 format: 'esm',
                 sourcemap,
                 inlineDynamicImports: true,
