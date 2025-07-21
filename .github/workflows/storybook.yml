@@ -15,7 +15,8 @@ jobs:
 
             - name: Install Peer & Dependencies 🔧
               run: | # Install npm packages and build the Storybook files
-                  npm ci --force
+                  npm i -g pnpm
+                  pnpm install
                   npm i -D @emotion/cache@11.10.5 @emotion/react@11.11.1 @emotion/styled@11.11.0 @mui/icons-material@5.14.1 @mui/material@5.14.2 @mui/styles@5.14.1 react@18.2.0 react-router-dom@6.16.0 react-beautiful-dnd@13.1.1 react-dom@18.2.0 react-draggable@4.4.5 stylis@4.1.3 stylis-plugin-rtl@2.0.2
 
             - name: Build 🔧
