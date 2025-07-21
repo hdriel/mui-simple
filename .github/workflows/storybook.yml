@@ -6,7 +6,7 @@ on:
 
 jobs:
     build-and-deploy-storybook-to-gh-pages:
-        if: "!contains(github.event.head_commit.message, 'no-build-storybook')" # skip if 'no-build' is present
+        if: "!contains(github.event.head_commit.message, 'no-storybook')" # skip if 'no-build' is present
         runs-on: ubuntu-latest
         steps:
             - name: Checkout 🛎️

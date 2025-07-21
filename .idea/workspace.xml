@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="update workflow to pnpm node version">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.npmrc" beforeDir="false" afterPath="$PROJECT_DIR$/.npmrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="update workflow to pnpm node version no-build-storybook">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/storybook.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/storybook.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,7 +223,7 @@
       <workItem from="1751321088726" duration="386000" />
       <workItem from="1751321521511" duration="599000" />
       <workItem from="1752098530511" duration="730000" />
-      <workItem from="1753130190662" duration="4630000" />
+      <workItem from="1753130190662" duration="4696000" />
     </task>
     <task id="LOCAL-00001" summary="update list styles">
       <option name="closed" value="true" />
@@ -515,7 +513,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753134596077</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="update workflow to pnpm node version no-build-storybook">
+      <option name="closed" value="true" />
+      <created>1753135058125</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1753135058125</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -548,6 +554,7 @@
     <MESSAGE value="update peer dep" />
     <MESSAGE value="update workflow to pnpm" />
     <MESSAGE value="update workflow to pnpm node version" />
-    <option name="LAST_COMMIT_MESSAGE" value="update workflow to pnpm node version" />
+    <MESSAGE value="update workflow to pnpm node version no-build-storybook" />
+    <option name="LAST_COMMIT_MESSAGE" value="update workflow to pnpm node version no-build-storybook" />
   </component>
 </project>
