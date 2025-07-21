@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="update workflow to pnpm node version">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.npmignore" beforeDir="false" afterPath="$PROJECT_DIR$/.npmignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.npmrc" beforeDir="false" afterPath="$PROJECT_DIR$/.npmrc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,6 +70,7 @@
     "npm.build.executor": "Run",
     "npm.build:debug.executor": "Run",
     "npm.build:yalc.executor": "Run",
+    "npm.install-deps.executor": "Run",
     "npm.storybook.executor": "Run",
     "npm.yalc:debug.executor": "Run",
     "npm.yalc:publish.executor": "Run",
@@ -86,17 +87,7 @@
       <recent name="C:\dev\mui-simple\src" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.yalc:publish">
-    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="build" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="npm.install-deps">
     <configuration name="build:debug" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -112,6 +103,16 @@
       <command value="run" />
       <scripts>
         <script value="build:yalc" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="install-deps" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="install-deps" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -139,11 +140,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.install-deps" />
         <item itemvalue="npm.yalc:publish" />
         <item itemvalue="npm.storybook" />
         <item itemvalue="npm.build:yalc" />
         <item itemvalue="npm.build:debug" />
-        <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
   </component>
@@ -224,7 +225,7 @@
       <workItem from="1751321088726" duration="386000" />
       <workItem from="1751321521511" duration="599000" />
       <workItem from="1752098530511" duration="730000" />
-      <workItem from="1753130190662" duration="4169000" />
+      <workItem from="1753130190662" duration="4630000" />
     </task>
     <task id="LOCAL-00001" summary="update list styles">
       <option name="closed" value="true" />
@@ -506,7 +507,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753133938899</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="update workflow to pnpm node version">
+      <option name="closed" value="true" />
+      <created>1753134596077</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1753134596077</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
