@@ -1,6 +1,6 @@
 {
   "name": "mui-simple",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "Override mui-v7 components to simplify usage",
   "module": "lib/index.esm.js",
   "main": "lib/index.js",
@@ -44,7 +44,8 @@
   "homepage": "https://github.com/hdriel/mui-simple",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "git-checks": false
   },
   "repository": {
     "type": "git",
