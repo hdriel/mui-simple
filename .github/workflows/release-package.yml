@@ -39,10 +39,5 @@ jobs:
               run: | # build lib output before publish
                   pnpm run build
 
-            - name: Authenticate to npm
-              run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-              env:
-                NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-
             - name: publish step
-              run: pnpm publish --no-git-checks
+              run: npm publish
