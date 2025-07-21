@@ -18,3 +18,4 @@ temp-workflows
 wrapper-repo
 doctor-storybook.log
 kill-port-process.bat
+.npmrc
