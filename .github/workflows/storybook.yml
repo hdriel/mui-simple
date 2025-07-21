@@ -6,6 +6,7 @@ on:
 
 jobs:
     build-and-deploy-storybook-to-gh-pages:
+        if: "!contains(github.event.head_commit.message, 'no-build-storybook')" # skip if 'no-build' is present
         runs-on: ubuntu-latest
         steps:
             - name: Checkout 🛎️
@@ -16,11 +17,10 @@ jobs:
             - name: Install Peer & Dependencies 🔧
               run: | # Install npm packages and build the Storybook files
                   npm i -g pnpm
-                  pnpm install
-                  npm i -D @emotion/cache@11.10.5 @emotion/react@11.11.1 @emotion/styled@11.11.0 @mui/icons-material@5.14.1 @mui/material@5.14.2 @mui/styles@5.14.1 react@18.2.0 react-router-dom@6.16.0 react-beautiful-dnd@13.1.1 react-dom@18.2.0 react-draggable@4.4.5 stylis@4.1.3 stylis-plugin-rtl@2.0.2
+                  pnpm install --frozen-lockfile --ignore-scripts       
 
             - name: Build 🔧
-              run: npm run build-storybook
+              run: pnpm run build-storybook
 
             - name: Deploy 🚀
               uses: JamesIves/github-pages-deploy-action@3.6.2

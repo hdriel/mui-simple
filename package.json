@@ -12,13 +12,13 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=8192 rollup -c rollup.config.js",
     "build:debug": "cross-env NODE_ENV=development NODE_OPTIONS=--max-old-space-size=8192 rollup -c rollup.config.js",
-    "yalc:publish": "npm run build:debug & yalc publish --push",
+    "yalc:publish": "pnpm run build:debug & yalc publish --push",
     "build:ts": "cross-env NODE_OPTIONS=--max-old-space-size=8192 tsc -p tsconfig.json",
     "build:ts-watch": "cross-env NODE_OPTIONS=--max-old-space-size=8192 tsc -p tsconfig.json -w",
     "build-storybook": "storybook build",
     "deploy": "gh-pages -d storybook-static",
-    "install-deps": "npm install --ignore-scripts --force",
-    "predeploy": "npm run build-storybook",
+    "install-deps": "pnpm install --frozen-lockfile --prod --ignore-scripts",
+    "predeploy": "pnpm run build-storybook",
     "prepare": "husky install",
     "prettier": "prettier --write .",
     "storybook": "storybook dev -p 6006",
@@ -43,7 +43,7 @@
   },
   "homepage": "https://github.com/hdriel/mui-simple",
   "publishConfig": {
-    "registery": "https://registry.npmjs.org/@hdriel/",
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "repository": {
@@ -202,5 +202,9 @@
   },
   "overrides": {
     "storybook": "$storybook"
+  },
+  "engines": {
+    "pnpm": ">=10.13.1",
+    "npm": "please-use-pnpm"
   }
 }

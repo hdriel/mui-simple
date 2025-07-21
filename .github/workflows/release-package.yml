@@ -25,21 +25,21 @@ jobs:
             - name: setup node
               uses: actions/setup-node@v3
               with:
-                  node-version: 16
+                  node-version: 18
                   registry-url: https://registry.npmjs.org/
                   scope: '@hdriel'
 
             - name: installing packages
               run: | # Install npm packages
                   npm i -g pnpm
-                  pnpm install --prod
+                  pnpm install --frozen-lockfile --prod --ignore-scripts
                   pnpm i cross-env
 
             - name: building package
               run: | # build lib output before publish
-                  npm run build
+                  pnpm run build
 
             - name: publish step
-              run: npm publish
+              run: pnpm publish
               env:
                   NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
