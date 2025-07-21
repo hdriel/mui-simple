@@ -1,7 +1,7 @@
 import React from 'react';
 import type { ElementType } from 'react';
 import { isEmpty } from 'lodash-es';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 // eslint-disable-next-line import/no-extraneous-dependencies

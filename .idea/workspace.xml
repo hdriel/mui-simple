@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="update version 3.0.1 no-storybook">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DraggableList/DraggableList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DraggableList/DraggableList.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,31 +56,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/dev/mui-simple/src/components/_FIXED/Accordion/__stories__",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.build.executor": "Run",
-    "npm.build:debug.executor": "Run",
-    "npm.build:yalc.executor": "Run",
-    "npm.install-deps.executor": "Run",
-    "npm.storybook.executor": "Run",
-    "npm.yalc:debug.executor": "Run",
-    "npm.yalc:publish.executor": "Run",
-    "prettierjs.PrettierConfiguration.Package": "D:\\dev-JustLikeThat\\mui-simple\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "settings.javascript.prettier",
-    "ts.external.directory.path": "D:\\dev-JustLikeThat\\mui-simple\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/dev/mui-simple/src/components/_FIXED/Accordion/__stories__&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.build:debug.executor&quot;: &quot;Run&quot;,
+    &quot;npm.build:yalc.executor&quot;: &quot;Run&quot;,
+    &quot;npm.install-deps.executor&quot;: &quot;Run&quot;,
+    &quot;npm.storybook.executor&quot;: &quot;Run&quot;,
+    &quot;npm.yalc:debug.executor&quot;: &quot;Run&quot;,
+    &quot;npm.yalc:publish.executor&quot;: &quot;Run&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;D:\\dev-JustLikeThat\\mui-simple\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\dev-JustLikeThat\\mui-simple\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\dev\mui-simple\src\components\_FIXED\Accordion\__stories__" />
@@ -85,7 +88,7 @@
       <recent name="C:\dev\mui-simple\src" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.install-deps">
+  <component name="RunManager" selected="npm.storybook">
     <configuration name="build:debug" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -138,9 +141,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.storybook" />
         <item itemvalue="npm.install-deps" />
         <item itemvalue="npm.yalc:publish" />
-        <item itemvalue="npm.storybook" />
         <item itemvalue="npm.build:yalc" />
         <item itemvalue="npm.build:debug" />
       </list>
@@ -223,7 +226,9 @@
       <workItem from="1751321088726" duration="386000" />
       <workItem from="1751321521511" duration="599000" />
       <workItem from="1752098530511" duration="730000" />
-      <workItem from="1753130190662" duration="6488000" />
+      <workItem from="1753130190662" duration="7213000" />
+      <workItem from="1753137652124" duration="13000" />
+      <workItem from="1753137801871" duration="186000" />
     </task>
     <task id="LOCAL-00001" summary="update list styles">
       <option name="closed" value="true" />
@@ -577,7 +582,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753136837196</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="update version 3.0.1 no-storybook">
+      <option name="closed" value="true" />
+      <created>1753136909359</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1753136909359</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
