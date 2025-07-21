@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="update version 3.0.1 no-storybook" />
+    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="update version 3.0.1 no-storybook">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -221,7 +223,7 @@
       <workItem from="1751321088726" duration="386000" />
       <workItem from="1751321521511" duration="599000" />
       <workItem from="1752098530511" duration="730000" />
-      <workItem from="1753130190662" duration="6417000" />
+      <workItem from="1753130190662" duration="6488000" />
     </task>
     <task id="LOCAL-00001" summary="update list styles">
       <option name="closed" value="true" />
@@ -567,7 +569,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753136820520</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="update version 3.0.1 no-storybook">
+      <option name="closed" value="true" />
+      <created>1753136837196</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1753136837196</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
