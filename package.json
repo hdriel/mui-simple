@@ -44,8 +44,7 @@
   "homepage": "https://github.com/hdriel/mui-simple",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/@hdriel/",
-    "access": "public",
-    "git-checks": false
+    "access": "public"
   },
   "repository": {
     "type": "git",
