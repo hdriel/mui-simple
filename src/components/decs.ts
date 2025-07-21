@@ -8,7 +8,7 @@ import React, {
     CSSProperties,
 } from 'react';
 import type { IconName as Icons } from './_FIXED/SVGIcon/icon-names';
-import type { DraggableStateSnapshot } from 'react-beautiful-dnd';
+import type { DraggableStateSnapshot } from '@hello-pangea/dnd';
 import type { DatePickerProps } from '@mui/x-date-pickers/DatePicker';
 import type { DateTimePickerProps } from '@mui/x-date-pickers/DateTimePicker';
 import type { TimePickerProps } from '@mui/x-date-pickers/TimePicker';

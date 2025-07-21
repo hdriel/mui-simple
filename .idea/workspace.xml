@@ -4,11 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="update version 3.0.1 no-storybook">
+    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="update version 3.0.2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/DraggableList/DraggableList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DraggableList/DraggableList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DraggableList/__stories__/DraggableList.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DraggableList/__stories__/DraggableList.stories.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/decs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/decs.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wrapper-repo/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wrapper-repo/.npmrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wrapper-repo/mui-simple/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wrapper-repo/package.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +95,7 @@
       <recent name="C:\dev\mui-simple\src" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.storybook">
+  <component name="RunManager" selected="npm.yalc:publish">
     <configuration name="build:debug" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -141,9 +148,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.yalc:publish" />
         <item itemvalue="npm.storybook" />
         <item itemvalue="npm.install-deps" />
-        <item itemvalue="npm.yalc:publish" />
         <item itemvalue="npm.build:yalc" />
         <item itemvalue="npm.build:debug" />
       </list>
@@ -228,7 +235,7 @@
       <workItem from="1752098530511" duration="730000" />
       <workItem from="1753130190662" duration="7213000" />
       <workItem from="1753137652124" duration="13000" />
-      <workItem from="1753137801871" duration="186000" />
+      <workItem from="1753137801871" duration="915000" />
     </task>
     <task id="LOCAL-00001" summary="update list styles">
       <option name="closed" value="true" />
@@ -590,7 +597,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753136909359</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="update version 3.0.2">
+      <option name="closed" value="true" />
+      <created>1753138130959</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1753138130959</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -599,7 +614,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixing some bugs, v1.15.5" />
     <MESSAGE value="fixing some bugs, v1.15.6" />
     <MESSAGE value="fixing some table bugs, v1.15.7" />
     <MESSAGE value="fixing some autocomplete bugs, v1.15.8" />
@@ -624,6 +638,7 @@
     <MESSAGE value="update workflow to pnpm node version no-storybook" />
     <MESSAGE value="update version no-storybook" />
     <MESSAGE value="update version 3.0.1 no-storybook" />
-    <option name="LAST_COMMIT_MESSAGE" value="update version 3.0.1 no-storybook" />
+    <MESSAGE value="update version 3.0.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="update version 3.0.2" />
   </component>
 </project>

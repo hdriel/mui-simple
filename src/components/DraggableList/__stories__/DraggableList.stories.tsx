@@ -5,7 +5,7 @@ import Avatar from '../../_FIXED/Avatar/Avatar';
 import Button from '../../_FIXED/Button/Button';
 
 // need redux for these stories
-// https://react-beautiful-dnd.netlify.app/?path=/story/single-vertical-list--basic
+// https://dnd.hellopangea.com/?path=/story/examples-single-vertical-list--basic
 // https://storybook.js.org/addons/@dreamworld/addon-redux
 const meta: Meta<typeof DraggableList> = {
     title: 'Wrappers/DraggableList',

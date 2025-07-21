@@ -24,13 +24,13 @@ legacy-peer-deps=true
 install peer dependencies first:
 
 ```npm
-$ npm install react react-dom @emotion/react@^11.14.0 @emotion/styled@^11.14.0 @mui/material@^7.1.1 react-draggable@4.4.5 react-beautiful-dnd@13.1.1 react-router-dom@^6.16.0
+    npm install react react-dom @emotion/react@^11.14.0 @emotion/styled@^11.14.0 @mui/material@^7.1.1 react-router-dom@^6.16.0
 ```
 
 then install the mui-simple package
 
 ```npm
-$ npm install mui-simple 
+    npm install mui-simple 
 ```
 
 
