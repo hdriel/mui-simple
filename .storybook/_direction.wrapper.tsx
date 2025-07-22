@@ -8,7 +8,7 @@ import { prefixer } from 'stylis';
 const cacheRTL = createCache({ key: 'muirtl', stylisPlugins: [prefixer, rtlPlugin] });
 const cacheLRT = createCache({ key: 'muiltr' });
 
-export function DirectionWrapper({ direction, className = undefined, ...props }) {
+export function DirectionProvider({ direction, className = undefined, ...props }) {
     const dir = ['rtl', 'ltr'].includes(direction) ? direction : 'ltr';
 
     useEffect(() => {

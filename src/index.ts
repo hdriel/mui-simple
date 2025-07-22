@@ -199,4 +199,4 @@ export type { TextEllipsisProps } from './components/_FIXED/Typography/TextEllip
 export * from './utils';
 export { useElementSize } from './hooks/useElementSize';
 
-console.log('MUI-SIMPLE LINK');
+export { DirectionProvider } from './DirectionProvider';

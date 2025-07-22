@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 
 import MobileStepper from '../MobileStepper';
 import { useSimpleStepper } from '../Stepper.utils';
-import { DirectionWrapper } from '../../../../_direction.wrapper';
+import { DirectionProvider } from '../../../../DirectionProvider';
 
 export default {
     title: 'Navigation/MobileStepper',
@@ -44,7 +44,7 @@ export const DirectionLTR = () => {
     ];
 
     return (
-        // <DirectionWrapper direction={'ltr'}>
+        // <DirectionProvider direction={'ltr'}>
         <MobileStepper {...actions} {...stepperProps} direction={'ltr'} steps={steps} orientation="vertical">
             <div>
                 For each ad campaign that you create, you can control how much you're willing to spend on clicks and
@@ -57,7 +57,7 @@ export const DirectionLTR = () => {
                 they're running and how to resolve approval issues.
             </div>
         </MobileStepper>
-        // </DirectionWrapper>
+        // </DirectionProvider>
     );
 };
 
@@ -73,7 +73,7 @@ export const DirectionRLT = () => {
     ];
 
     return (
-        <DirectionWrapper direction={'rtl'}>
+        <DirectionProvider direction={'rtl'}>
             <MobileStepper {...actions} {...stepperProps} steps={steps} orientation="vertical">
                 <div>
                     {`For each ad campaign that you create, you can control how much you're
@@ -87,7 +87,7 @@ export const DirectionRLT = () => {
                     tell if they're running and how to resolve approval issues.
                 </div>
             </MobileStepper>
-        </DirectionWrapper>
+        </DirectionProvider>
     );
 };
 
@@ -117,12 +117,12 @@ export const AutoScrollImages = () => {
     ];
 
     return (
-        <DirectionWrapper direction={'ltr'}>
+        <DirectionProvider direction={'ltr'}>
             <MobileStepper {...actions} {...stepperProps} steps={steps} orientation="vertical">
                 {steps.map((step, index) => (
                     <Box component={'img'} key={index} src={step.imgPath} alt={step.label} />
                 ))}
             </MobileStepper>
-        </DirectionWrapper>
+        </DirectionProvider>
     );
 };

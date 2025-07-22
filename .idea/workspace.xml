@@ -5,17 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="update version 3.0.2">
+      <change afterPath="$PROJECT_DIR$/src/DirectionProvider.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.storybook/ProviderFn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/.storybook/ProviderFn.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.storybook/_direction.wrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/.storybook/_direction.wrapper.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/DraggableList/DraggableList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DraggableList/DraggableList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/DraggableList/__stories__/DraggableList.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DraggableList/__stories__/DraggableList.stories.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/decs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/decs.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wrapper-repo/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wrapper-repo/.npmrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wrapper-repo/mui-simple/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wrapper-repo/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/_direction.wrapper.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Stepper/__stories__/MobileStepper.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Stepper/__stories__/MobileStepper.stories.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +93,7 @@
       <recent name="C:\dev\mui-simple\src" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.yalc:publish">
+  <component name="RunManager" selected="npm.storybook">
     <configuration name="build:debug" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -148,8 +146,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.yalc:publish" />
         <item itemvalue="npm.storybook" />
+        <item itemvalue="npm.yalc:publish" />
         <item itemvalue="npm.install-deps" />
         <item itemvalue="npm.build:yalc" />
         <item itemvalue="npm.build:debug" />
@@ -235,7 +233,11 @@
       <workItem from="1752098530511" duration="730000" />
       <workItem from="1753130190662" duration="7213000" />
       <workItem from="1753137652124" duration="13000" />
-      <workItem from="1753137801871" duration="915000" />
+      <workItem from="1753137801871" duration="1434000" />
+      <workItem from="1753139463828" duration="123000" />
+      <workItem from="1753196912058" duration="371000" />
+      <workItem from="1753203989950" duration="1855000" />
+      <workItem from="1753218648636" duration="762000" />
     </task>
     <task id="LOCAL-00001" summary="update list styles">
       <option name="closed" value="true" />
@@ -605,11 +607,42 @@
       <option name="project" value="LOCAL" />
       <updated>1753138130959</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="update version 3.0.2">
+      <option name="closed" value="true" />
+      <created>1753138747698</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1753138747698</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
