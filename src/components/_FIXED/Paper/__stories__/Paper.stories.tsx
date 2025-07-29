@@ -35,6 +35,13 @@ export const Height: Story = {
     },
 };
 
+export const Draggable: Story = {
+    args: {
+        children: <p id={'draggableId'}>draggable here</p>,
+        draggableId: 'draggableId',
+    },
+};
+
 export const Elevation_ = () => {
     return (
         <Box

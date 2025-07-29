@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="update version 3.0.2">
-      <change afterPath="$PROJECT_DIR$/src/DirectionProvider.tsx" afterDir="false" />
+    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="update version 3.0.4 DirectionProvider">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.storybook/ProviderFn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/.storybook/ProviderFn.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.storybook/_direction.wrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/.storybook/_direction.wrapper.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/_direction.wrapper.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Stepper/__stories__/MobileStepper.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Stepper/__stories__/MobileStepper.stories.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Paper/Paper.styled.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Paper/Paper.styled.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Paper/Paper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Paper/Paper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Paper/__stories__/Paper.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Paper/__stories__/Paper.stories.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/decs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/decs.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/helpers.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +91,7 @@
       <recent name="C:\dev\mui-simple\src" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.storybook">
+  <component name="RunManager" selected="npm.yalc:publish">
     <configuration name="build:debug" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -146,8 +144,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.storybook" />
         <item itemvalue="npm.yalc:publish" />
+        <item itemvalue="npm.storybook" />
         <item itemvalue="npm.install-deps" />
         <item itemvalue="npm.build:yalc" />
         <item itemvalue="npm.build:debug" />
@@ -237,7 +235,9 @@
       <workItem from="1753139463828" duration="123000" />
       <workItem from="1753196912058" duration="371000" />
       <workItem from="1753203989950" duration="1855000" />
-      <workItem from="1753218648636" duration="762000" />
+      <workItem from="1753218648636" duration="1495000" />
+      <workItem from="1753304094830" duration="584000" />
+      <workItem from="1753826391734" duration="3341000" />
     </task>
     <task id="LOCAL-00001" summary="update list styles">
       <option name="closed" value="true" />
@@ -615,7 +615,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753138747698</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="update version 3.0.4 DirectionProvider">
+      <option name="closed" value="true" />
+      <created>1753219509505</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1753219509505</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -647,7 +655,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixing some bugs, v1.15.6" />
     <MESSAGE value="fixing some table bugs, v1.15.7" />
     <MESSAGE value="fixing some autocomplete bugs, v1.15.8" />
     <MESSAGE value="fixing some input bugs, v1.15.8" />
@@ -672,6 +679,7 @@
     <MESSAGE value="update version no-storybook" />
     <MESSAGE value="update version 3.0.1 no-storybook" />
     <MESSAGE value="update version 3.0.2" />
-    <option name="LAST_COMMIT_MESSAGE" value="update version 3.0.2" />
+    <MESSAGE value="update version 3.0.4 DirectionProvider" />
+    <option name="LAST_COMMIT_MESSAGE" value="update version 3.0.4 DirectionProvider" />
   </component>
 </project>

@@ -1,7 +1,7 @@
 import { get } from 'lodash-es';
 import { Paper as MuiPaper } from '@mui/material';
 import { styled, css } from '@mui/material/styles';
-import { numberToPx } from '../../../utils/helpers';
+import { numberToEm, numberToPx } from '../../../utils/helpers';
 import type { ComponentType } from 'react';
 import type { SerializedStyles } from '@emotion/serialize';
 
@@ -27,27 +27,31 @@ function imageStyle(props): SerializedStyles {
 }
 
 interface PaperStylesProps {
-    width: string | number;
-    height: string | number;
+    width?: string | number;
+    height?: string | number;
+    padding?: string | number;
     muiColor: string;
-    square: boolean;
-    variant: string;
+    square?: boolean;
+    variant?: string;
     customColor: string;
     textColor: string;
-    imageSrc: string;
+    imageSrc?: string;
     imageOpacity: number;
-    elevation: number;
+    elevation?: number;
+    id?: string;
     imageLayout: string;
 }
 export const Paper = styled(MuiPaper, {
     shouldForwardProp: (propName: string) =>
-        !['muiColor', 'customColor', 'textColor', 'imageSrc', 'imageOpacity', 'imageLayout'].includes(
-            propName as string
-        ),
+        !['muiColor', 'customColor', 'textColor', 'imageSrc', 'imageOpacity', 'imageLayout', 'padding'].includes(
+            propName
+        ) || propName === 'id',
 })<PaperStylesProps>`
     width: ${(props: any) => numberToPx(props.width)};
 
     height: ${(props: any) => numberToPx(props.height)};
+
+    padding: ${(props: any) => numberToEm(props.padding, true)};
 
     background-color: ${(props: any) => props.customColor};
 

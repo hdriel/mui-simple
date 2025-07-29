@@ -62,6 +62,10 @@ export function numberToPx(field): string {
     return typeof field === 'number' ? `${field}px` : field;
 }
 
+export function numberToEm(field, rem = false): string {
+    return typeof field === 'number' ? `${field}${rem ? 'rem' : 'em'}` : field;
+}
+
 export function isDefined(value): boolean {
     return value !== undefined && value !== null;
 }

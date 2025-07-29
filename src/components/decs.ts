@@ -809,6 +809,7 @@ export interface PaperProps {
     color?: string;
     elevation?: number;
     height?: number | string;
+    padding?: number | string;
     imageLayout?:
         | 'contain'
         | 'cover'
@@ -824,6 +825,8 @@ export interface PaperProps {
     imageSrc?: string;
     square?: boolean;
     textColor?: string;
+    draggableId?: string;
+    cancelDraggableOnClassNames?: string | string[];
     variant?: 'elevation' | 'outlined';
     width?: number | string;
 
