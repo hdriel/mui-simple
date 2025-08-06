@@ -672,8 +672,8 @@ export interface ListItemProps {
     draggableListType?: string;
     selected?: boolean;
     startIcon?: IconType;
-    subtitle?: string;
-    title?: string;
+    subtitle?: string | ReactNode;
+    title?: string | ReactNode;
     controlType?: 'checkbox' | 'switch';
     alignCheck?: 'start' | 'end';
     [key: string]: any;
@@ -706,7 +706,7 @@ export interface ListProps {
             dataList?: Array<ListItemProps & { id: string }>;
         }
     ) => void;
-    title?: string;
+    title?: string | ReactNode;
     unmountSubListOnClose?: boolean;
     useDraggableContext?: boolean;
     useTransition?: boolean;

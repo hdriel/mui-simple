@@ -69,7 +69,7 @@ const List: React.FC<ListProps> = ({
 
     const renderValue = (item: ListItemProps, index: number): React.ReactElement | React.ReactNode => {
         const { divider, component, alignControl, controlType, ...itemProps } = item || ({} as any);
-        const isControl = ['checkbox', 'switch'].includes(controlType);
+        const isControl = ['checkbox', 'switch'].includes(controlType as string);
         const isOpen = item.expanded || open[index];
         const listItem = !!Object.keys(itemProps).length;
         itemProps.startIcon =
@@ -80,7 +80,7 @@ const List: React.FC<ListProps> = ({
                 <List
                     bgColor={_bgColor}
                     items={itemProps.items}
-                    droppableId={itemProps.title}
+                    droppableId={itemProps.title as string}
                     {...itemProps.listItemsProps}
                     useDraggableContext={false}
                     useReactRouterDomLink={
@@ -162,7 +162,10 @@ const List: React.FC<ListProps> = ({
             component={component}
             subheader={
                 title ? (
-                    <ListSubheader component="span" sx={{ bgcolor: bgColor, ...sxTitle }}>
+                    <ListSubheader
+                        component="span"
+                        sx={{ bgcolor: bgColor, display: 'flex', width: '100%', padding: 0, ...sxTitle }}
+                    >
                         {title}
                     </ListSubheader>
                 ) : undefined
