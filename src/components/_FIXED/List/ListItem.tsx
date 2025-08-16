@@ -149,7 +149,9 @@ const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
                     (isControl && alignControl === 'start' ? (
                         (itemProps.startIcon as React.ReactNode)
                     ) : (
-                        <ListItemIcon>{itemProps.startIcon as React.ReactNode}</ListItemIcon>
+                        <ListItemIcon {...itemProps.startIconProps}>
+                            {itemProps.startIcon as React.ReactNode}
+                        </ListItemIcon>
                     ))}
 
                 {itemProps.avatar && (

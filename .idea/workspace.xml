@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="no-build no-storybook update List">
+    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="no-build no-storybook V3.0.6">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/_FIXED/List/ListItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/List/ListItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/List/__stories__/List.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/List/__stories__/List.stories.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Tooltip/Tooltip.helper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Tooltip/Tooltip.helper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Tooltip/Tooltip.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Tooltip/Tooltip.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Typography/Text.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Typography/Text.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Typography/TextEllipsis.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Typography/TextEllipsis.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/decs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/decs.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -242,15 +240,7 @@
       <workItem from="1754256261564" duration="884000" />
       <workItem from="1754517119001" duration="569000" />
       <workItem from="1754774165265" duration="624000" />
-      <workItem from="1755364762404" duration="8133000" />
-    </task>
-    <task id="LOCAL-00003" summary="fixing rangeSlider valueLabelFormat">
-      <option name="closed" value="true" />
-      <created>1730930240321</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1730930240321</updated>
+      <workItem from="1755364762404" duration="9832000" />
     </task>
     <task id="LOCAL-00004" summary="fixing some bugs, v1.15.5">
       <option name="closed" value="true" />
@@ -636,7 +626,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755374406703</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="no-build no-storybook V3.0.6">
+      <option name="closed" value="true" />
+      <created>1755379460391</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1755379460391</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -668,7 +666,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixing some input bugs, v1.15.8" />
     <MESSAGE value="fixing some bugs (divider) v1.15.10" />
     <MESSAGE value="fixing some bugs (list item style) v1.15.11" />
     <MESSAGE value="fixing some bugs (list item mouse events) v1.15.12" />
@@ -693,6 +690,7 @@
     <MESSAGE value="update version 3.0.4 DirectionProvider" />
     <MESSAGE value="no-build no-storybook update paper draggableId" />
     <MESSAGE value="no-build no-storybook update List" />
-    <option name="LAST_COMMIT_MESSAGE" value="no-build no-storybook update List" />
+    <MESSAGE value="no-build no-storybook V3.0.6" />
+    <option name="LAST_COMMIT_MESSAGE" value="no-build no-storybook V3.0.6" />
   </component>
 </project>

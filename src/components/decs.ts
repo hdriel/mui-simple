@@ -12,7 +12,7 @@ import type { DraggableStateSnapshot } from '@hello-pangea/dnd';
 import type { DatePickerProps } from '@mui/x-date-pickers/DatePicker';
 import type { DateTimePickerProps } from '@mui/x-date-pickers/DateTimePicker';
 import type { TimePickerProps } from '@mui/x-date-pickers/TimePicker';
-import type { CloseReason, OpenReason, StackProps, SxProps } from '@mui/material';
+import type { CloseReason, ListItemIconProps, OpenReason, StackProps, SxProps } from '@mui/material';
 import SvgIcon from '@mui/material/SvgIcon';
 import type { TIMEZONE } from './timezone';
 import type { LOCALE, ADAPTER_LOCALE } from './locales';
@@ -675,6 +675,7 @@ export interface ListItemProps {
     rows?: number;
     selected?: boolean;
     startIcon?: IconType;
+    startIconProps?: ListItemIconProps;
     style?: CSSProperties;
     subtitle?: string | ReactNode;
     subtitleStyle?: SxProps;

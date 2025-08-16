@@ -52,7 +52,8 @@ const TextEllipsis: React.FC<TextEllipsisProps> = ({
                 useEllipsisStyle
                 showTooltipOnEllipsis={showTooltipOnEllipsis}
             >
-                {children}&nbsp;
+                {children}
+                {/*&nbsp;*/}
             </Text>
         </Border>
     );

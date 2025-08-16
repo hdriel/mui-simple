@@ -83,7 +83,7 @@ const Text: React.FC<TextProps> = ({
             >
                 {html && !!children ? ReactHtmlParser(children) : children}
             </span>
-            &nbsp;
+            {/*&nbsp;*/}
             {tooltipMessage && (
                 // there is a bug to wrap tooltip around typography component, so this is my hack for that
                 <Tooltip title={tooltipMessage} placement={tooltipPlacement} followCursor={followCursor}>
