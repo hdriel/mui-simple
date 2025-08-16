@@ -12,7 +12,7 @@ import type { DraggableStateSnapshot } from '@hello-pangea/dnd';
 import type { DatePickerProps } from '@mui/x-date-pickers/DatePicker';
 import type { DateTimePickerProps } from '@mui/x-date-pickers/DateTimePicker';
 import type { TimePickerProps } from '@mui/x-date-pickers/TimePicker';
-import type { CloseReason, OpenReason, SxProps } from '@mui/material';
+import type { CloseReason, OpenReason, StackProps, SxProps } from '@mui/material';
 import SvgIcon from '@mui/material/SvgIcon';
 import type { TIMEZONE } from './timezone';
 import type { LOCALE, ADAPTER_LOCALE } from './locales';
@@ -654,6 +654,8 @@ export interface LinkProps {
 
 export interface ListItemProps {
     actions?: any[];
+    underlineActionsStackProps?: StackProps;
+    underlineActions?: any[];
     align?: 'flex-start';
     alignControl?: 'end' | 'start';
     avatar?: AvatarProps;
@@ -676,6 +678,11 @@ export interface ListItemProps {
     title?: string | ReactNode;
     controlType?: 'checkbox' | 'switch';
     alignCheck?: 'start' | 'end';
+    titleStyle?: SxProps;
+    subtitleStyle?: SxProps;
+    bold?: boolean;
+    rows?: number;
+    tooltipProps?: TooltipProps;
     [key: string]: any;
 }
 

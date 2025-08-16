@@ -16,6 +16,8 @@ import Avatar from '../Avatar/Avatar';
 import Typography from '../Typography/Typography';
 import type { ListItemProps } from '../../decs';
 import { useCustomColor } from '../../../utils/helpers';
+import { Stack } from '@mui/material';
+import Tooltip from '../Tooltip/Tooltip';
 
 interface ListItemWrapperProps {
     item: ListItemProps;
@@ -46,7 +48,7 @@ const ListItemWrapper: React.FC<PropsWithChildren<ListItemWrapperProps>> = ({
         style?.background ?? style?.backgroundColor ?? style?.bgcolor ?? style?.bgColor
     );
     const key = `${item.title}-${index}`;
-    const onClickHandler = onClick?.bind(null, index, item.onClick);
+    const onClickHandler = onClick?.bind(null, index as number, item.onClick);
     const itemButton =
         alignItems !== 'flex-start' &&
         item.align !== 'flex-start' &&
@@ -128,7 +130,7 @@ const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
     onMouseLeave,
     ...props
 }) => {
-    return (
+    const cmp = (
         <MuiListItem
             disablePadding={disablePadding}
             disableGutters={disableGutters}
@@ -166,32 +168,50 @@ const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
                 <ListItemText
                     inset={itemProps.inset ?? insetItems}
                     primary={itemProps.title}
-                    primaryTypographyProps={{
-                        sx: {
-                            ...(itemProps.bold && { fontWeight: 'bold' }),
-                            ...itemProps.titleStyle,
-                        },
-                    }}
                     secondary={
                         enableSubtitle && itemProps.subtitle ? (
                             <Typography rows={itemProps.rows ?? 2}>{itemProps.subtitle}</Typography>
                         ) : undefined
                     }
-                    secondaryTypographyProps={{
-                        component: 'span',
-                        variant: 'body2',
-                        color: 'text.primary',
-                        sx: { ...itemProps.subtitleStyle },
+                    slotProps={{
+                        primary: {
+                            ...(itemProps.bold && { fontWeight: 'bold' }),
+                            ...itemProps.titleStyle,
+                        },
+                        secondary: {
+                            component: 'span',
+                            variant: 'body2',
+                            color: 'text.primary',
+                            sx: { ...itemProps.subtitleStyle },
+                        },
                     }}
                 />
 
                 {itemProps.items?.length ? isOpen ? <ExpandLessIcon /> : <ExpandMoreIcon /> : undefined}
 
-                <ListItemSecondaryAction>{itemProps.actions}</ListItemSecondaryAction>
+                {itemProps.actions?.length ? (
+                    <ListItemSecondaryAction>{itemProps.actions}</ListItemSecondaryAction>
+                ) : null}
             </ListItemWrapper>
+            {itemProps.underlineActions?.length ? (
+                <Stack
+                    direction="row"
+                    width="100%"
+                    spacing={2}
+                    justifyContent="flex-end"
+                    {...itemProps.underlineActionsStackProps}
+                >
+                    {itemProps.underlineActions}
+                </Stack>
+            ) : null}
             {children}
         </MuiListItem>
     );
+
+    if (Object.keys(itemProps.tooltipProps ?? {}).length) {
+        return <Tooltip {...itemProps.tooltipProps}>{cmp}</Tooltip>;
+    }
+    return cmp;
 };
 
 export default ListItem;

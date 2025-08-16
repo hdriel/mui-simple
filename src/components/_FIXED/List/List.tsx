@@ -89,7 +89,7 @@ const List: React.FC<ListProps> = ({
                             : itemProps.listItemsProps?.useReactRouterDomLink
                     }
                 />
-                <Divider variant="fullWidth" {...divider} component="div" />
+                <Divider variant="fullWidth" {...(typeof divider === 'object' ? divider : {})} component="div" />
             </Box>
         );
 
@@ -129,7 +129,9 @@ const List: React.FC<ListProps> = ({
                         )}
                     </MuiListItem>
                 )}
-                {divider && <Divider variant="fullWidth" {...divider} component="span" />}
+                {divider && (
+                    <Divider variant="fullWidth" {...(typeof divider === 'object' ? divider : {})} component="span" />
+                )}
             </Box>
         );
     };
@@ -164,7 +166,14 @@ const List: React.FC<ListProps> = ({
                 title ? (
                     <ListSubheader
                         component="span"
-                        sx={{ bgcolor: bgColor, display: 'flex', width: '100%', padding: 0, ...sxTitle }}
+                        sx={{
+                            bgcolor: bgColor,
+                            display: 'flex',
+                            width: '100%',
+                            padding: 0,
+                            lineHeight: 'unset',
+                            ...sxTitle,
+                        }}
                     >
                         {title}
                     </ListSubheader>
