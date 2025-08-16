@@ -7,7 +7,7 @@
 .storybook/*.d.ts*
 storybook-config-entry.d.ts*
 storybook-stories.d.ts*
-
+.idea
 # testing
 /coverage
 
