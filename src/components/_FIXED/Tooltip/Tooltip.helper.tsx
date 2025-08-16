@@ -1,13 +1,14 @@
 import React, { forwardRef } from 'react';
 import type { Ref, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes, PropsWithChildren } from 'react';
 
-const MyCustomChildrenComponent: React.FC<PropsWithChildren<{ innerRef: Ref<any> }>> = ({
+const MyCustomChildrenComponent: React.FC<PropsWithChildren<{ wrapperWidth?: string; innerRef: Ref<any> }>> = ({
     innerRef,
     children,
+    wrapperWidth,
     ...props
 }) => {
     return (
-        <div {...props} ref={innerRef} style={{ width: 'max-content' }}>
+        <div {...props} ref={innerRef} style={{ width: wrapperWidth }}>
             {children}
         </div>
     );

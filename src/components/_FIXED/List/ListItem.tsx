@@ -131,14 +131,7 @@ const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
     ...props
 }) => {
     const cmp = (
-        <MuiListItem
-            disablePadding={disablePadding}
-            disableGutters={disableGutters}
-            alignItems={itemProps.align ?? alignItems}
-            {...props}
-            sx={{ ...props.sx, ...itemProps.style }}
-            key={`${index}`}
-        >
+        <>
             <ListItemWrapper
                 alignItems={alignItems}
                 buttonItems={buttonItems}
@@ -175,14 +168,18 @@ const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
                     }
                     slotProps={{
                         primary: {
-                            ...(itemProps.bold && { fontWeight: 'bold' }),
-                            ...itemProps.titleStyle,
+                            sx: {
+                                ...itemProps.titleStyle,
+                                ...(itemProps.boldTitle && { fontWeight: 'bold' }),
+                            },
                         },
                         secondary: {
                             component: 'span',
                             variant: 'body2',
                             color: 'text.primary',
-                            sx: { ...itemProps.subtitleStyle },
+                            sx: {
+                                ...itemProps.subtitleStyle,
+                            },
                         },
                     }}
                 />
@@ -205,13 +202,27 @@ const ListItem: React.FC<PropsWithChildren<ListItemCmpProps>> = ({
                 </Stack>
             ) : null}
             {children}
-        </MuiListItem>
+        </>
     );
 
-    if (Object.keys(itemProps.tooltipProps ?? {}).length) {
-        return <Tooltip {...itemProps.tooltipProps}>{cmp}</Tooltip>;
-    }
-    return cmp;
+    return (
+        <MuiListItem
+            disablePadding={disablePadding}
+            disableGutters={disableGutters}
+            alignItems={itemProps.align ?? alignItems}
+            {...props}
+            sx={{ ...props.sx, ...itemProps.style }}
+            key={`${index}`}
+        >
+            {itemProps.tooltipProps?.title ? (
+                <Tooltip wrapperWidth="100%" {...itemProps.tooltipProps}>
+                    {cmp}
+                </Tooltip>
+            ) : (
+                cmp
+            )}
+        </MuiListItem>
+    );
 };
 
 export default ListItem;

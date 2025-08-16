@@ -284,6 +284,81 @@ export const ActionsItems: Story = {
     },
 };
 
+export const UnderlineActionsItems: Story = {
+    args: {
+        buttonItems: false,
+        disablePaddingItems: false,
+        alignItems: 'flex-start',
+        items: [
+            {
+                title: 'Brunch this weekend?',
+                subtitle: "Ali Connors — I'll be in your neighborhood doing errands this",
+                avatar: { username: 'Ali Connors', image: '1.jpg' },
+                underlineActions: [<Button key="a1" icon="Phone" />, <Button key="a2" icon="Comment" />],
+                divider: { variant: 'inset' },
+            },
+            {
+                title: 'Summer BBQ',
+                subtitle: "to Scott, Alex, Jennifer — Wish I could come, but I'm out of town this",
+                avatar: { image: '2.jpg' },
+                underlineActions: [<Button key="a1" icon="Send" />],
+                divider: true,
+            },
+            {
+                title: 'Oui Oui',
+                subtitle: 'Sandra Adams — Do you have Paris recommendations? Have you ever seen something like this?',
+                avatar: { username: 'Sandra Adams', image: '3.jpg' },
+                underlineActions: [<Button key="a1" icon="Send" />],
+                divider: {},
+            },
+        ],
+    },
+};
+
+export const TooltipItems: Story = {
+    args: {
+        buttonItems: false,
+        disablePaddingItems: false,
+        alignItems: 'flex-start',
+        items: [
+            {
+                title: 'Brunch this weekend?',
+                boldTitle: true,
+                subtitle: "Ali Connors — I'll be in your neighborhood doing errands this",
+                avatar: { username: 'Ali Connors', image: '1.jpg' },
+                underlineActions: [<Button key="a1" icon="Phone" />, <Button key="a2" icon="Comment" />],
+                divider: { variant: 'inset' },
+                tooltipProps: {
+                    title: 'Brunch this weekend?',
+                },
+            },
+            {
+                title: 'Summer BBQ',
+                subtitle: "to Scott, Alex, Jennifer — Wish I could come, but I'm out of town this",
+                avatar: { image: '2.jpg' },
+                underlineActions: [<Button key="a1" icon="Send" />],
+                divider: true,
+                tooltipProps: {
+                    title: "to Scott, Alex, Jennifer — Wish I could come, but I'm out of town this",
+                    placement: 'top',
+                },
+            },
+            {
+                title: 'Oui Oui',
+                subtitle: 'Sandra Adams — Do you have Paris recommendations? Have you ever seen something like this?',
+                avatar: { username: 'Sandra Adams', image: '3.jpg' },
+                underlineActions: [<Button key="a1" icon="Send" />],
+                divider: {},
+                tooltipProps: {
+                    bgColor: '#10DD00',
+                    title: <Box sx={{ color: 'black' }}>Hello world</Box>,
+                    placement: 'bottom-end',
+                },
+            },
+        ],
+    },
+};
+
 export const ActionsDraggableItems: Story = {
     args: {
         buttonItems: false,

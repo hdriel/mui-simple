@@ -654,35 +654,35 @@ export interface LinkProps {
 
 export interface ListItemProps {
     actions?: any[];
-    underlineActionsStackProps?: StackProps;
-    underlineActions?: any[];
     align?: 'flex-start';
+    alignCheck?: 'start' | 'end';
     alignControl?: 'end' | 'start';
     avatar?: AvatarProps;
-    style?: CSSProperties;
+    boldTitle?: boolean;
+    controlType?: 'checkbox' | 'switch';
+    defaultExpanded?: boolean;
     disableGutters?: boolean;
     disablePadding?: boolean;
     divider?: DividerProps | boolean;
-    inset?: boolean;
-    expanded?: boolean;
-    defaultExpanded?: boolean;
-    onClick?: (...args: any) => void;
-    items?: Array<string | ListItemProps>;
-    listItemsProps?: Omit<ListProps, 'items'>;
-    link?: string;
-    droppableId?: string;
     draggableListType?: string;
+    droppableId?: string;
+    expanded?: boolean;
+    inset?: boolean;
+    items?: Array<string | ListItemProps>;
+    link?: string;
+    listItemsProps?: Omit<ListProps, 'items'>;
+    onClick?: (...args: any) => void;
+    rows?: number;
     selected?: boolean;
     startIcon?: IconType;
+    style?: CSSProperties;
     subtitle?: string | ReactNode;
-    title?: string | ReactNode;
-    controlType?: 'checkbox' | 'switch';
-    alignCheck?: 'start' | 'end';
-    titleStyle?: SxProps;
     subtitleStyle?: SxProps;
-    bold?: boolean;
-    rows?: number;
+    title?: string | ReactNode;
+    titleStyle?: SxProps;
     tooltipProps?: TooltipProps;
+    underlineActions?: any[];
+    underlineActionsStackProps?: StackProps;
     [key: string]: any;
 }
 
@@ -1177,17 +1177,18 @@ export type RangeSliderProps = Omit<SliderProps, 'value' | 'onChange' | 'onChang
 export interface TooltipProps {
     bgColor?: string;
     color?: string;
-    followCursor?: boolean;
-    fontSize?: string | number;
-    lineHeight?: string | number;
-    placement?: TooltipPlacementType;
-    title?: string;
-    onClose?: (Event: any) => void;
-    open?: boolean;
     disableFocusListener?: boolean;
     disableHoverListener?: boolean;
     disableTouchListener?: boolean;
+    followCursor?: boolean;
+    fontSize?: string | number;
+    lineHeight?: string | number;
+    onClose?: (Event: any) => void;
+    open?: boolean;
+    placement?: TooltipPlacementType;
     PopperProps?: { disablePortal: boolean; [key: string]: any };
+    title?: string | ReactNode;
+    wrapperWidth?: string;
     [key: string]: any;
 }
 

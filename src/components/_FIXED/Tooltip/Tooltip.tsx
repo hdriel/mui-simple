@@ -13,6 +13,7 @@ const Tooltip: React.FC<TooltipProps> = ({
     lineHeight = 1.2,
     title,
     placement = 'bottom',
+    wrapperWidth = 'max-content',
     ...props
 }) => {
     if (typeof children === 'string') {
@@ -25,7 +26,11 @@ const Tooltip: React.FC<TooltipProps> = ({
         return children;
     }
 
-    const cmp = isForwardRef(children) ? children : <CustomChildTooltipWrapper>{children}</CustomChildTooltipWrapper>;
+    const cmp = isForwardRef(children) ? (
+        children
+    ) : (
+        <CustomChildTooltipWrapper wrapperWidth={wrapperWidth}>{children}</CustomChildTooltipWrapper>
+    );
 
     return (
         <MuiTooltip

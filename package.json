@@ -1,6 +1,6 @@
 {
   "name": "mui-simple",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "Override mui-v7 components to simplify usage",
   "module": "lib/index.esm.js",
   "main": "lib/index.js",
