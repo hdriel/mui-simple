@@ -31,6 +31,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
     startCmpExternal,
     variant = 'outlined',
     // } = {},
+    inputRef,
     autoComplete = true,
     autoHighlight = true,
     blurOnSelect = true,
@@ -194,7 +195,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
             freeSolo={readOnly || freeSolo}
             getOptionDisabled={(option) => option.disabled}
             getOptionLabel={getOptionLabel}
-            groupBy={typeof groupBy === 'function' ? groupBy : (option) => option[groupBy]}
+            groupBy={typeof groupBy === 'function' ? groupBy : (option) => groupBy && option[groupBy]}
             includeInputInList={includeInputInList}
             isOptionEqualToValue={
                 getOptionLabel
@@ -208,7 +209,7 @@ const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
             options={options}
             readOnly={readOnly}
             renderGroup={renderGroup}
-            renderInput={(params) => <TextField {...params} {...inputProps} fullWidth />}
+            renderInput={(params) => <TextField inputRef={inputRef} {...params} {...inputProps} fullWidth />}
             renderOption={renderOption}
             renderTags={renderTags}
             selectOnFocus={selectOnFocus}

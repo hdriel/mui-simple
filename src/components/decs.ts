@@ -300,6 +300,7 @@ export interface InputBaseProps {
     helperText?: string;
     hideStartActionsOnEmpty?: boolean;
     id?: string;
+    inputRef?: any;
     label?: string;
     letterSpacing?: number | string;
     margin?: 'normal' | 'dense';
@@ -490,6 +491,7 @@ export interface InputSelectProps {
     helperText?: string;
     hideStartActionsOnEmpty?: boolean;
     id?: string;
+    inputRef?: any;
     label?: string;
     margin?: 'normal' | 'dense';
     name?: string;
@@ -566,6 +568,7 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     highlightSearchResults?: boolean;
     includeInputInList?: boolean;
     inputValue?: string;
+    inputRef?: any;
     onInputChange?: (event: any, newInputValue: string) => void;
     multiple?: boolean;
     openOnFocus?: boolean;

@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="no-build no-storybook V3.0.6">
+    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment=" V3.0.6">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/List/ListItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/List/ListItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Typography/Text.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Typography/Text.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Typography/TextEllipsis.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Typography/TextEllipsis.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocomplete.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocomplete.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Select/InputSelect.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Select/InputSelect.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/TextField/TextField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/TextField/TextField.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/decs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/decs.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +89,7 @@
       <recent name="C:\dev\mui-simple\src" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.yalc:publish">
+  <component name="RunManager" selected="npm.storybook">
     <configuration name="build:debug" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -142,8 +142,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.yalc:publish" />
         <item itemvalue="npm.storybook" />
+        <item itemvalue="npm.yalc:publish" />
         <item itemvalue="npm.install-deps" />
         <item itemvalue="npm.build:yalc" />
         <item itemvalue="npm.build:debug" />
@@ -241,14 +241,7 @@
       <workItem from="1754517119001" duration="569000" />
       <workItem from="1754774165265" duration="624000" />
       <workItem from="1755364762404" duration="9832000" />
-    </task>
-    <task id="LOCAL-00004" summary="fixing some bugs, v1.15.5">
-      <option name="closed" value="true" />
-      <created>1730934916750</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1730934916750</updated>
+      <workItem from="1755455465416" duration="5635000" />
     </task>
     <task id="LOCAL-00005" summary="fixing some bugs, v1.15.6">
       <option name="closed" value="true" />
@@ -634,7 +627,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755379460391</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary=" V3.0.6">
+      <option name="closed" value="true" />
+      <created>1755381348067</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1755381348067</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -666,7 +667,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixing some bugs (divider) v1.15.10" />
     <MESSAGE value="fixing some bugs (list item style) v1.15.11" />
     <MESSAGE value="fixing some bugs (list item mouse events) v1.15.12" />
     <MESSAGE value="export useCustomColor hook v1.15.13" />
@@ -691,6 +691,7 @@
     <MESSAGE value="no-build no-storybook update paper draggableId" />
     <MESSAGE value="no-build no-storybook update List" />
     <MESSAGE value="no-build no-storybook V3.0.6" />
-    <option name="LAST_COMMIT_MESSAGE" value="no-build no-storybook V3.0.6" />
+    <MESSAGE value=" V3.0.6" />
+    <option name="LAST_COMMIT_MESSAGE" value=" V3.0.6" />
   </component>
 </project>
