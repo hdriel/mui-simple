@@ -178,7 +178,7 @@ export interface DialogProps {
     draggable?: boolean;
     maxWidth?: false | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     fullScreen?: false | true | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-    actions?: ButtonProps[];
+    actions?: (ButtonProps | ElementType)[];
     [key: string]: any;
 }
 
@@ -300,6 +300,7 @@ export interface InputBaseProps {
     helperText?: string;
     hideStartActionsOnEmpty?: boolean;
     id?: string;
+    inputRef?: any;
     label?: string;
     letterSpacing?: number | string;
     margin?: 'normal' | 'dense';
@@ -490,6 +491,7 @@ export interface InputSelectProps {
     helperText?: string;
     hideStartActionsOnEmpty?: boolean;
     id?: string;
+    inputRef?: any;
     label?: string;
     margin?: 'normal' | 'dense';
     name?: string;
@@ -525,7 +527,7 @@ export type InputMultipleSelectProps = Omit<InputSelectProps, 'value'> & {
     [key: string]: any;
 };
 
-interface InputAutoCompleteOptionItem {
+export interface InputAutoCompleteOptionItem {
     label: string | ElementType;
     id: string | number; // todo: change to value instead of id as InputSelect options
     [key: string]: any;
@@ -566,6 +568,7 @@ export type InputAutoCompleteProp = Omit<InputBaseProps, 'autoComplete'> & {
     highlightSearchResults?: boolean;
     includeInputInList?: boolean;
     inputValue?: string;
+    inputRef?: any;
     onInputChange?: (event: any, newInputValue: string) => void;
     multiple?: boolean;
     openOnFocus?: boolean;

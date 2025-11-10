@@ -58,6 +58,7 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
         hideStartActionsOnEmpty,
         InputLabelProps,
         InputProps,
+        inputRef,
         letterSpacing,
         maxRows,
         minRows,
@@ -122,10 +123,18 @@ const TextField: React.FC<InputBaseProps> = function TextField(props): React.Rea
                     variant={variant}
                     maxRows={maxRows}
                     minRows={minRows}
-                    multiline={!!(multiline || maxRows > 1 || minRows > 1 || rows > 1)}
+                    multiline={
+                        !!(
+                            multiline ||
+                            (maxRows !== undefined && maxRows > 1) ||
+                            (minRows !== undefined && minRows > 1) ||
+                            (rows !== undefined && rows > 1)
+                        )
+                    }
                     rows={rows}
                     InputProps={{
                         ...InputProps,
+                        inputRef: inputRef ?? InputProps?.inputRef,
                         readOnly,
                         style: {
                             ...InputProps?.style,

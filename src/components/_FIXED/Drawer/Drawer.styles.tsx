@@ -26,9 +26,9 @@ export function drawerStyles(props: DrawerStylesProps): SxProps {
         boxSizing: 'border-box',
         background: bgColor,
         overflowX: 'hidden',
-        transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
+        transition: theme?.transitions.create('width', {
+            easing: theme?.transitions.easing.sharp,
+            duration: theme?.transitions.duration.enteringScreen,
         }),
     };
 }

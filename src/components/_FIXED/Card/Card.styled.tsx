@@ -50,7 +50,7 @@ export const ExpandMore = styled(MuiButton, {
 })<ExpandMoreStyledPropsType>(({ theme, expand }) => ({
     transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
     marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest,
+    transition: theme?.transitions.create('transform', {
+        duration: theme?.transitions.duration.shortest,
     }),
 })) as ComponentType<ExpandMoreStyledPropsType>;

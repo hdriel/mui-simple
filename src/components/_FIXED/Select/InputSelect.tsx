@@ -28,6 +28,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
     helperText,
     hideStartActionsOnEmpty = true,
     id,
+    inputRef,
     label,
     margin,
     max,
@@ -53,7 +54,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
     const [isFocused, setIsFocused] = useState(false);
 
     const optionsObj = useOptionsConverter({
-        options: _convertedOptions ? emptyObjectRef : getOptions({ options: _options }),
+        options: _convertedOptions ? emptyObjectRef : _options ? getOptions({ options: _options }) : [],
         convertedOptions: _convertedOptions,
         groupBy,
     });
@@ -92,15 +93,16 @@ const InputSelect: React.FC<InputSelectProps> = ({
                 error={error}
                 disabled={disabled}
                 required={required}
-                colorText={_colorText}
-                colorLabel={_colorLabel}
-                colorActive={_colorActive}
-                margin={['dense', 'normal'].includes(margin) ? margin : undefined}
+                colorText={_colorText as string}
+                colorLabel={_colorLabel as string}
+                colorActive={_colorActive as string}
+                margin={['dense', 'normal'].includes(margin as string) ? margin : undefined}
             >
                 {label && <InputLabel>{label}</InputLabel>}
                 <Select
                     {...props}
                     id={id}
+                    ref={inputRef}
                     name={name}
                     value={value}
                     label={label}
