@@ -6,10 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment=" V3.0.6">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocomplete.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Autocomplete/InputAutocomplete.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Select/InputSelect.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Select/InputSelect.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/TextField/TextField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/TextField/TextField.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Dialog/Dialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Dialog/Dialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/Typography/Text.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/Typography/Text.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/decs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/decs.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/helpers.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +92,7 @@
       <recent name="C:\dev\mui-simple\src" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.storybook">
+  <component name="RunManager" selected="npm.yalc:publish">
     <configuration name="build:debug" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -142,8 +145,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.storybook" />
         <item itemvalue="npm.yalc:publish" />
+        <item itemvalue="npm.storybook" />
         <item itemvalue="npm.install-deps" />
         <item itemvalue="npm.build:yalc" />
         <item itemvalue="npm.build:debug" />
@@ -242,6 +245,17 @@
       <workItem from="1754774165265" duration="624000" />
       <workItem from="1755364762404" duration="9832000" />
       <workItem from="1755455465416" duration="5635000" />
+      <workItem from="1756757886694" duration="2335000" />
+      <workItem from="1756923966963" duration="119000" />
+      <workItem from="1759267677207" duration="9000" />
+      <workItem from="1759680205126" duration="1450000" />
+      <workItem from="1759702777761" duration="603000" />
+      <workItem from="1760025384137" duration="3005000" />
+      <workItem from="1760290234701" duration="1008000" />
+      <workItem from="1760343308287" duration="665000" />
+      <workItem from="1760483589914" duration="667000" />
+      <workItem from="1760546364868" duration="14000" />
+      <workItem from="1762811102363" duration="3042000" />
     </task>
     <task id="LOCAL-00005" summary="fixing some bugs, v1.15.6">
       <option name="closed" value="true" />

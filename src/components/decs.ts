@@ -178,7 +178,7 @@ export interface DialogProps {
     draggable?: boolean;
     maxWidth?: false | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     fullScreen?: false | true | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-    actions?: ButtonProps[];
+    actions?: (ButtonProps | ElementType)[];
     [key: string]: any;
 }
 
@@ -527,7 +527,7 @@ export type InputMultipleSelectProps = Omit<InputSelectProps, 'value'> & {
     [key: string]: any;
 };
 
-interface InputAutoCompleteOptionItem {
+export interface InputAutoCompleteOptionItem {
     label: string | ElementType;
     id: string | number; // todo: change to value instead of id as InputSelect options
     [key: string]: any;

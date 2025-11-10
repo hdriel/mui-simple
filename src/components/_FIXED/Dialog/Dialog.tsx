@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { cloneElement, isValidElement } from 'react';
 import type { ReactElement, PropsWithChildren } from 'react';
 import {
     Dialog as MuiDialog,
@@ -33,7 +33,25 @@ const Dialog: React.FC<PropsWithChildren<DialogProps>> = (props): ReactElement |
     const theme = useTheme();
     const fullScreenBreakPoint = useMediaQuery(theme.breakpoints.down(fullScreen as any));
 
-    const handleClose = (): void => onClose?.(selectedValue);
+    const handleClose = (): void => onClose?.(selectedValue as string);
+
+    const actionsCmps = ([] as any[])
+        .concat(actions)
+        .filter((v) => v)
+        .map((action, index) => {
+            return isValidElement(action) ? (
+                cloneElement(action, { key: index })
+            ) : (
+                <Button
+                    key={index}
+                    {...action}
+                    onClick={action.onClick}
+                    autoFocus={action.autoFocus}
+                    variant={action.variant ?? 'text'}
+                    label={action.label}
+                />
+            );
+        });
 
     return (
         <MuiDialog
@@ -51,7 +69,9 @@ const Dialog: React.FC<PropsWithChildren<DialogProps>> = (props): ReactElement |
             {...rest}
         >
             {title && (
-                <MuiDialogTitle style={{ ...(draggable && { cursor: 'move' }) }} id={titleId} title={title as string} />
+                <MuiDialogTitle style={{ ...(draggable && { cursor: 'move' }) }} id={titleId + '222'}>
+                    {title as string}
+                </MuiDialogTitle>
             )}
 
             <MuiDialogContent sx={{ ...(!autoContentPadding && { padding: 0 }) }} dividers={dividers}>
@@ -62,21 +82,7 @@ const Dialog: React.FC<PropsWithChildren<DialogProps>> = (props): ReactElement |
                 )}
             </MuiDialogContent>
 
-            {actions?.length ? (
-                <MuiDialogActions>
-                    {actions.map((action, index) => (
-                        <Button
-                            key={index}
-                            {...action}
-                            onClick={action.onClick}
-                            autoFocus={action.autoFocus}
-                            variant={action.variant ?? 'text'}
-                        >
-                            {action.label}
-                        </Button>
-                    ))}
-                </MuiDialogActions>
-            ) : null}
+            {actions?.length ? <MuiDialogActions>{actionsCmps}</MuiDialogActions> : null}
         </MuiDialog>
     );
 };

@@ -59,7 +59,7 @@ const Text: React.FC<TextProps> = ({
         justifyContent,
         textWidth: width || (autoWidth ? 'fit-content' : undefined),
         ...(props.paragraph && { component: 'p' }),
-        ...(!isEllipsis && !rows && (width || alignItems) && { display: 'flex' }),
+        ...(!isEllipsis && !rows && (width || alignItems) && { display: 'flex !important' }),
         ...((isEllipsis || rows) && { display: 'contents' }),
         ...(link && { href: link, component: 'a', target: '_blank' }),
     };

@@ -6,7 +6,7 @@ import { numberToPx } from '../../../utils/helpers';
 
 export const Link = styled(MuiLink, {
     shouldForwardProp: (propName: string) => !['customColor'].includes(propName as string),
-})<LinkProps & { customColor: string; size: string | number }>`
+})<LinkProps & { customColor?: string; size?: string | number }>`
     display: flex;
     align-items: center;
     gap: 5px;

@@ -23,7 +23,7 @@ export function setDefaultValue(obj: Record<string, any>, propName: string, defa
     };
 }
 
-export function getCapitalLetters(str): [string, string?] {
+export function getCapitalLetters(str): undefined | [string, string?] {
     const chars =
         str
             ?.split(' ')
@@ -36,7 +36,7 @@ export function getCapitalLetters(str): [string, string?] {
     return chars.length > 1 ? [firstChar, secondChar] : [firstChar];
 }
 
-export function stringToColor(string): string {
+export function stringToColor(string): string | undefined {
     if (!string) return undefined;
 
     let hash = 0;
@@ -70,7 +70,7 @@ export function isDefined(value): boolean {
     return value !== undefined && value !== null;
 }
 
-export function useCustomColor(color, options?): [string, string] {
+export function useCustomColor(color, options?): [string | undefined, string | undefined] {
     const theme = useTheme();
     return getCustomColor({ theme, customColor: color }, options);
 }
@@ -92,8 +92,8 @@ export function getCustomColor(
         darken: _darken,
         lighten: _lighten,
     }: getCustomColorOptionsProps = {}
-): [string, string] {
-    const customColor = props?.[field] ?? props?.customColor;
+): [string | undefined, string | undefined] {
+    const customColor = (field && props?.[field]) ?? props?.customColor;
     if (!customColor) return [undefined, undefined];
     if (Array.isArray(customColor)) return customColor as [string, string];
     if (customColor === 'inherit') return [undefined, 'inherit'];
@@ -174,6 +174,6 @@ export function getTextWidth(text): { offsetWidth: number; scrollWidth: number }
     element.textContent = text;
     document.body.appendChild(element);
     const { offsetWidth, scrollWidth } = element;
-    element.parentElement.removeChild(element);
+    element.parentElement?.removeChild(element);
     return { offsetWidth, scrollWidth };
 }

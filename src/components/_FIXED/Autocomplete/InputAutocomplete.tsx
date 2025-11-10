@@ -6,6 +6,8 @@ import Chip from '../Chip/Chip';
 import type { InputAutoCompleteProp, InputBaseProps } from '../../decs';
 import { useAutocompleteOptionsHook } from './hooks/useAutocompleteOptions.hook';
 
+export type { InputAutoCompleteOptionItem } from '../../decs';
+
 const InputAutocomplete: React.FC<InputAutoCompleteProp> = ({
     // inputProps: {
     alignActions,
