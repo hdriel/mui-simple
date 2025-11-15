@@ -33,15 +33,16 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
     } = props;
     const [openControlled, setOpenControlled] = useState(false);
 
-    options?.forEach((option: MenuOptionItem) => {
-        if (option.icon) {
-            option.icon =
-                typeof option.icon === 'string' ? (
-                    <SVGIcon>{option.icon}</SVGIcon>
-                ) : React.isValidElement(option.icon) ? (
-                    React.cloneElement(option.icon, { fontSize: 'small' } as any)
+    options?.forEach((option: MenuOption) => {
+        const optionItem = option as MenuOptionItem;
+        if (optionItem?.icon) {
+            optionItem.icon =
+                typeof optionItem.icon === 'string' ? (
+                    <SVGIcon>{optionItem.icon}</SVGIcon>
+                ) : React.isValidElement(optionItem.icon) ? (
+                    React.cloneElement(optionItem.icon, { fontSize: 'small' } as any)
                 ) : (
-                    option.icon
+                    optionItem.icon
                 );
         }
     });
@@ -60,7 +61,7 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
         setAnchorEl,
         // ref,
         setOpenControlled:
-            open === undefined ? (_event, openControlled) => setOpenControlled(openControlled) : undefined,
+            open === undefined ? (_event, openControlled) => setOpenControlled(!!openControlled) : undefined,
     });
 
     const handleClose = useCallback(
@@ -129,14 +130,15 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
                                     dense={dense}
                                     sx={{ display: 'flex', flexDirection: optionsDirection ?? 'column' }}
                                 >
-                                    {options?.map((item: MenuOption, index) => {
+                                    {options?.map((item: MenuOption | React.ReactNode, index) => {
                                         const { divider, ...dividerOption } = (item as DividerProps) ?? {};
                                         if (divider) {
                                             return <Divider key={index} variant="fullWidth" {...dividerOption} />;
                                         }
 
-                                        const option: MenuOptionItem =
-                                            typeof item === 'string' ? { label: item, id: index } : item ?? {};
+                                        const option = (
+                                            typeof item === 'string' ? { label: item, id: index } : item ?? {}
+                                        ) as MenuOptionItem;
 
                                         const optionId = (options as any)?.[fieldId] as string;
 
