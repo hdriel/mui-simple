@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="update dialog">
+    <list default="true" id="587beb55-dc7d-45ef-98ef-da308539865a" name="Changes" comment="remove unused dep">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/_FIXED/RippleBox/RippleBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/_FIXED/RippleBox/RippleBox.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/helpers.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,10 +141,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.yalc:publish" />
+        <item itemvalue="npm.build:debug" />
         <item itemvalue="npm.storybook" />
         <item itemvalue="npm.install-deps" />
         <item itemvalue="npm.build:yalc" />
-        <item itemvalue="npm.build:debug" />
       </list>
     </recent_temporary>
   </component>
@@ -238,15 +239,8 @@
       <workItem from="1754517119001" duration="569000" />
       <workItem from="1754774165265" duration="624000" />
       <workItem from="1755364762404" duration="9832000" />
-      <workItem from="1762985201716" duration="58000" />
-    </task>
-    <task id="LOCAL-00004" summary="fixing some bugs, v1.15.5">
-      <option name="closed" value="true" />
-      <created>1730934916750</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1730934916750</updated>
+      <workItem from="1762985201716" duration="998000" />
+      <workItem from="1763242543284" duration="1545000" />
     </task>
     <task id="LOCAL-00005" summary="fixing some bugs, v1.15.6">
       <option name="closed" value="true" />
@@ -632,7 +626,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755379460391</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="remove unused dep">
+      <option name="closed" value="true" />
+      <created>1762986755043</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1762986755043</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -664,7 +666,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fixing some bugs (divider) v1.15.10" />
     <MESSAGE value="fixing some bugs (list item style) v1.15.11" />
     <MESSAGE value="fixing some bugs (list item mouse events) v1.15.12" />
     <MESSAGE value="export useCustomColor hook v1.15.13" />
@@ -689,6 +690,7 @@
     <MESSAGE value="no-build no-storybook update paper draggableId" />
     <MESSAGE value="no-build no-storybook update List" />
     <MESSAGE value="no-build no-storybook V3.0.6" />
-    <option name="LAST_COMMIT_MESSAGE" value="no-build no-storybook V3.0.6" />
+    <MESSAGE value="remove unused dep" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove unused dep" />
   </component>
 </project>

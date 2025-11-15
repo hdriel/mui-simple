@@ -66,9 +66,9 @@ export function numberToEm(field, rem = false): string {
     return typeof field === 'number' ? `${field}${rem ? 'rem' : 'em'}` : field;
 }
 
-export function isDefined(value): boolean {
+export const isDefined = <T>(value: T | undefined | null): value is T => {
     return value !== undefined && value !== null;
-}
+};
 
 export function useCustomColor(color, options?): [string | undefined, string | undefined] {
     const theme = useTheme();

@@ -3,7 +3,7 @@ import type { PropsWithChildren } from 'react';
 import { Wrapper } from './RippleBox.styled';
 import type { RippleBoxProps } from '../../decs';
 import { useCustomColor } from '../../../utils/helpers';
-import TouchRipple from '@mui/material/ButtonBase/TouchRipple';
+import TouchRipple, { type TouchRippleActions } from '@mui/material/ButtonBase/TouchRipple';
 
 const RippleBox: React.FC<PropsWithChildren<RippleBoxProps>> = ({
     color = undefined,
@@ -11,18 +11,18 @@ const RippleBox: React.FC<PropsWithChildren<RippleBoxProps>> = ({
 }): React.ReactElement | React.ReactNode => {
     const [customColor, muiColor] = useCustomColor(color ?? 'primary');
 
-    const rippleRef = useRef(null);
+    const rippleRef = useRef<TouchRippleActions>(null);
 
     const onRippleStart = (e): void => {
         e.preventDefault();
         e.stopPropagation();
-        rippleRef.current.start(e);
+        rippleRef.current?.start(e);
     };
 
     const onRippleStop = (e): void => {
         e.preventDefault();
         e.stopPropagation();
-        rippleRef.current.stop(e);
+        rippleRef.current?.stop(e);
     };
 
     return (
