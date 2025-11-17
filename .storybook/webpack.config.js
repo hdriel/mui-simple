@@ -1,12 +1,14 @@
-const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+import path from 'path';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+
+const __dirname = import.meta.dirname;
 
 const STORYBOOK_PATH = path.join(__dirname);
 const SRC_PATH = path.join(__dirname, '..', 'src');
 const TSCONFIG_PATH = path.join(__dirname, '..', 'tsconfig.json');
 const PUBLIC_PATH = path.join(__dirname, '..', 'public');
 
-module.exports = ({ config }) => {
+export default ({ config }) => {
     // config.plugins?.push(
     //     new ESLintPlugin({
     //         context: path.resolve(__dirname, '..', 'src'),
@@ -43,7 +45,7 @@ module.exports = ({ config }) => {
 
     config.module.rules.unshift({
         test: /\.(ts|tsx|js|jsx)$/,
-        loader: require.resolve('ts-loader'),
+        loader: 'ts-loader',
         include: [SRC_PATH, STORYBOOK_PATH],
         exclude: /node_modules\/.*/,
         options: {

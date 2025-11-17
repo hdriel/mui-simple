@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { Box, Stack, Button } from '@mui/material';
-import { fn } from '@storybook/test';
+import { fn } from 'storybook/test';
 
 import TextEllipsis from '../TextEllipsis';
 import { action } from 'storybook/actions';

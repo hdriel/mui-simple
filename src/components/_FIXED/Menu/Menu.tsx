@@ -131,6 +131,9 @@ const Menu: React.FC<PropsWithChildren<MenuProps>> = (props): React.ReactElement
                                     sx={{ display: 'flex', flexDirection: optionsDirection ?? 'column' }}
                                 >
                                     {options?.map((item: MenuOption | React.ReactNode, index) => {
+                                        // dont put inside MenuList only inside Menu
+                                        // if ((item as MenuOptionItem)?.cmp) return (item as MenuOptionItem).cmp;
+
                                         const { divider, ...dividerOption } = (item as DividerProps) ?? {};
                                         if (divider) {
                                             return <Divider key={index} variant="fullWidth" {...dividerOption} />;

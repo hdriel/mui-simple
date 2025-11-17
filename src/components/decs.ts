@@ -776,6 +776,7 @@ export interface MenuOptionItem {
     label?: string | ElementType;
     onClick?: (Event: any) => void;
     shortcut?: ElementType;
+    cmp?: ReactNode;
     [key: string]: any;
 }
 export type MenuOption = string | MenuOptionItem | DividerProps;

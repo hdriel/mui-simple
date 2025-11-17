@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import { Send as SendIcon } from '@mui/icons-material';
 import { Box, Stack } from '@mui/material';
 import { action } from 'storybook/actions';
-import { fn } from '@storybook/test';
+import { fn } from 'storybook/test';
 import { Formik } from 'formik';
 import InputPhone from '../InputPhone';
 import Checkbox from '../../Checkbox/Checkbox';

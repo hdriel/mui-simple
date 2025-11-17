@@ -1,7 +1,7 @@
 import { userEvent } from '@storybook/testing-library';
 import { within } from '@testing-library/react';
 import meta, { Story } from './_meta';
-import { expect, fn } from '@storybook/test';
+import { expect, fn } from 'storybook/test';
 
 export default {
     ...meta,

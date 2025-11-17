@@ -212,18 +212,30 @@ export const Options: Story = {
     render: (args) => {
         return (
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                <Menu {...args} open options={options.map((option: any) => ({ ...option, check: true }))}>
-                    <Button>Checked List</Button>
+                {/*<Menu {...args} open options={options.map((option: any) => ({ ...option, check: true }))}>*/}
+                {/*    <Button>Checked List</Button>*/}
+                {/*</Menu>*/}
+                {/*<Menu {...args} open options={optionLongList}>*/}
+                {/*    <Button>String List</Button>*/}
+                {/*</Menu>*/}
+                {/*<Menu {...args} open options={shortcutOptions} width={200}>*/}
+                {/*    <Button>Shortcut & icons</Button>*/}
+                {/*</Menu>*/}
+                <Menu
+                    {...args}
+                    open
+                    options={[
+                        { cmp: <Button>Checked List</Button> },
+                        { label: 'test cmp' },
+                        { cmp: <Button>Checked List 2</Button> },
+                    ]}
+                    width={200}
+                >
+                    <Button>cmp</Button>
                 </Menu>
-                <Menu {...args} open options={optionLongList}>
-                    <Button>String List</Button>
-                </Menu>
-                <Menu {...args} open options={shortcutOptions} width={200}>
-                    <Button>Shortcut & icons</Button>
-                </Menu>
-                <Menu {...args} open alternativeContent={<MuiImage src="1.jpg" width={200} height={300} />}>
-                    <Button>Alternative Content</Button>
-                </Menu>
+                {/*<Menu {...args} open alternativeContent={<MuiImage src="1.jpg" width={200} height={300} />}>*/}
+                {/*    <Button>Alternative Content</Button>*/}
+                {/*</Menu>*/}
             </Box>
         );
     },
